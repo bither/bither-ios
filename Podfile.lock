@@ -74,7 +74,7 @@ PODS:
   - ZBarSDK (1.3.1)
 
 DEPENDENCIES:
-  - Bitheri (from `git@gitlab.com:bither/bitheri.git`, branch `develop`)
+  - Bitheri (from `git@github.com:bither/bitheri.git`, branch `develop`)
   - KSCrash (~> 0.0.3)
   - MKNetworkKit (~> 0.87)
   - RegexKitLite (~> 4.0)
@@ -83,10 +83,10 @@ DEPENDENCIES:
 EXTERNAL SOURCES:
   Bitheri:
     :branch: develop
-    :git: git@gitlab.com:bither/bitheri.git
+    :git: git@github.com:bither/bitheri.git
 
 SPEC CHECKSUMS:
-  Bitheri: 310188a9bb5035ad336568733fb1456cd510faca
+  Bitheri: ef6d2cb8331b4fd0047e7a1232b00d6f823b506b
   CocoaLumberjack: 94accd5749f5c5d15134c8d50f34a973aed8ef69
   FMDB: 31ec26773c7f7b7890a6038235a1f2bbd933a7cb
   KSCrash: c0a693b2d83ced5c15a40d4e916833c655475e6a
