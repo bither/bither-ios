@@ -1,0 +1,94 @@
+//  OptionHotViewController.m
+//  bither-ios
+//
+//  Copyright 2014 http://Bither.net
+//
+//  Licensed under the Apache License, Version 2.0 (the "License");
+//  you may not use this file except in compliance with the License.
+//  You may obtain a copy of the License at
+//
+//    http://www.apache.org/licenses/LICENSE-2.0
+//
+//  Unless required by applicable law or agreed to in writing, software
+//  distributed under the License is distributed on an "AS IS" BASIS,
+//  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+//  See the License for the specific language governing permissions and
+//  limitations under the License.
+
+
+#import "OptionHotViewController.h"
+#import "UserDefaultsUtil.h"
+#import "SettingListCell.h"
+#import "SelectViewController.h"
+#import "AppDelegate.h"
+#import "UIViewController+PiShowBanner.h"
+#import "DialogEditPassword.h"
+#import "BitherSetting.h"
+#import "UIViewController+ConfigureTableView.h"
+
+
+@interface OptionHotViewController ()<UITableViewDataSource,UITableViewDelegate>
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
+
+@property (strong, nonatomic) NSArray * settings;
+
+
+@end
+
+@implementation OptionHotViewController
+
+-(void)viewDidLoad{
+    [super viewDidLoad];
+    self.tableView.dataSource=self;
+    self.tableView.delegate=self;
+    [self configureHeaderAndFooter:self.tableView background:ColorBg isHot:YES];
+    [self reload];
+}
+-(void)reload{
+    self.settings=[Setting hotSettings];
+    [self.tableView reloadData];
+}
+
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    [self reload];
+}
+
+
+-(void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+}
+
+-(void)viewDidDisappear:(BOOL)animated{
+    [super viewDidDisappear:animated];
+}
+
+-(void)showMsg:(NSString *)msg{
+    [self showBannerWithMessage:msg belowView:nil belowTop:0 autoHideIn:1 withCompletion:nil];
+}
+
+//tableview delgate
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    return self.settings.count;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    SettingListCell *cell = (SettingListCell*)[tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
+    [cell setSetting:[self.settings objectAtIndex:indexPath.row]];
+    return cell;
+}
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
+    return 1;
+}
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    Setting *setting=[self.settings objectAtIndex:indexPath.row];
+    if (setting.selectBlock) {
+        setting.selectBlock(self);
+    }
+    [tableView deselectRowAtIndexPath:indexPath animated:NO];
+}
+
+@end

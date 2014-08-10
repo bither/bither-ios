@@ -1,0 +1,99 @@
+PODS:
+  - Bitheri (0.0.1):
+    - CocoaLumberjack
+    - FMDB
+    - OpenSSL (= 1.0.1)
+    - Reachability
+  - CocoaLumberjack (1.9.1):
+    - CocoaLumberjack/Extensions
+  - CocoaLumberjack/Core (1.9.1)
+  - CocoaLumberjack/Extensions (1.9.1):
+    - CocoaLumberjack/Core
+  - FMDB (2.3):
+    - FMDB/standard
+  - FMDB/common (2.3)
+  - FMDB/standard (2.3):
+    - FMDB/common
+  - KSCrash (0.0.3):
+    - KSCrash/Installations
+    - KSCrash/Recording
+    - KSCrash/Reporting
+  - KSCrash/Installations (0.0.3):
+    - KSCrash/Recording
+    - KSCrash/Reporting
+  - KSCrash/Recording (0.0.3)
+  - KSCrash/Reporting (0.0.3):
+    - KSCrash/Recording
+    - KSCrash/Reporting/Filters
+    - KSCrash/Reporting/Sinks
+    - KSCrash/Reporting/Tools
+  - KSCrash/Reporting/Filters (0.0.3):
+    - KSCrash/Recording
+    - KSCrash/Reporting/Filters/Alert
+    - KSCrash/Reporting/Filters/AppleFmt
+    - KSCrash/Reporting/Filters/Base
+    - KSCrash/Reporting/Filters/Basic
+    - KSCrash/Reporting/Filters/GZip
+    - KSCrash/Reporting/Filters/JSON
+    - KSCrash/Reporting/Filters/Sets
+  - KSCrash/Reporting/Filters/Alert (0.0.3):
+    - KSCrash/Recording
+    - KSCrash/Reporting/Filters/Base
+  - KSCrash/Reporting/Filters/AppleFmt (0.0.3):
+    - KSCrash/Recording
+    - KSCrash/Reporting/Filters/Base
+  - KSCrash/Reporting/Filters/Base (0.0.3):
+    - KSCrash/Recording
+  - KSCrash/Reporting/Filters/Basic (0.0.3):
+    - KSCrash/Recording
+    - KSCrash/Reporting/Filters/Base
+  - KSCrash/Reporting/Filters/GZip (0.0.3):
+    - KSCrash/Recording
+    - KSCrash/Reporting/Filters/Base
+  - KSCrash/Reporting/Filters/JSON (0.0.3):
+    - KSCrash/Recording
+    - KSCrash/Reporting/Filters/Base
+  - KSCrash/Reporting/Filters/Sets (0.0.3):
+    - KSCrash/Recording
+    - KSCrash/Reporting/Filters/AppleFmt
+    - KSCrash/Reporting/Filters/Base
+    - KSCrash/Reporting/Filters/Basic
+    - KSCrash/Reporting/Filters/GZip
+    - KSCrash/Reporting/Filters/JSON
+  - KSCrash/Reporting/Sinks (0.0.3):
+    - KSCrash/Recording
+    - KSCrash/Reporting/Filters
+    - KSCrash/Reporting/Tools
+  - KSCrash/Reporting/Tools (0.0.3):
+    - KSCrash/Recording
+  - MKNetworkKit (0.87):
+    - Reachability (~> 3.1.0)
+  - OpenSSL (1.0.1)
+  - Reachability (3.1.1)
+  - RegexKitLite (4.0)
+  - ZBarSDK (1.3.1)
+
+DEPENDENCIES:
+  - Bitheri (from `git@gitlab.com:bither/bitheri.git`, branch `develop`)
+  - KSCrash (~> 0.0.3)
+  - MKNetworkKit (~> 0.87)
+  - RegexKitLite (~> 4.0)
+  - ZBarSDK (~> 1.3.1)
+
+EXTERNAL SOURCES:
+  Bitheri:
+    :branch: develop
+    :git: git@gitlab.com:bither/bitheri.git
+
+SPEC CHECKSUMS:
+  Bitheri: 310188a9bb5035ad336568733fb1456cd510faca
+  CocoaLumberjack: 94accd5749f5c5d15134c8d50f34a973aed8ef69
+  FMDB: 31ec26773c7f7b7890a6038235a1f2bbd933a7cb
+  KSCrash: c0a693b2d83ced5c15a40d4e916833c655475e6a
+  MKNetworkKit: 83e6296a8d42e98a71880424a889773654846d74
+  OpenSSL: 59f42fe6ca33b17cd407ae688ef57b763741c116
+  Reachability: 8e9635e3cb4f98e7f825e51147f677ecc694d0e7
+  RegexKitLite: 761b4944f23cb8fe20697b2e47be0689fd832c09
+  ZBarSDK: 3ed560856963f765b66d834f464590bd6ba13b44
+
+COCOAPODS: 0.33.1

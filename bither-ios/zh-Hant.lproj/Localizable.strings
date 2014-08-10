@@ -1,0 +1,384 @@
+/* No comment provided by engineer. */
+"Address copied." = "地址已復制";
+
+/* No comment provided by engineer. */
+"Amount:" = "金額:";
+
+/* No comment provided by engineer. */
+"Back up private key" = "備份私鑰";
+
+/* No comment provided by engineer. */
+"Bither Cold Watch Only QR Code" = "冷錢包監控二維碼";
+
+/* No comment provided by engineer. */
+"Buy: %@" = "買一: %@";
+
+/* No comment provided by engineer. */
+"Change Password" = "修改密碼";
+
+/* No comment provided by engineer. */
+"Change password failed" = "修改密碼失敗";
+
+/* No comment provided by engineer. */
+"Change password success" = "修改密碼成功";
+
+/* No comment provided by engineer. */
+"Changing password\nDo not turn off the screen" = "正在修改密碼\n請不要關閉屏幕";
+
+/* No comment provided by engineer. */
+"Check Private Keys" = "一鍵檢查私鑰";
+
+/* No comment provided by engineer. */
+"Checking Cellular Data" = "正在檢查數據網絡";
+
+/* No comment provided by engineer. */
+"Checking password…" = "正在檢查密碼…";
+
+/* No comment provided by engineer. */
+"Checking private keys..." = "正在檢查私鑰...";
+
+/* No comment provided by engineer. */
+"Checking WIFI" = "正在檢查WIFI";
+
+/* No comment provided by engineer. */
+"Clone failed." = "克隆失敗";
+
+/* No comment provided by engineer. */
+"clone QR code" = "克隆二維碼";
+
+/* No comment provided by engineer. */
+"Clone success." = "克隆成功";
+
+/* No comment provided by engineer. */
+"Cloning..." = "正在克隆...";
+
+/* No comment provided by engineer. */
+"Cold Wallet Address" = "冷錢包地址";
+
+/* No comment provided by engineer. */
+"Cold Wallet Clone" = "冷錢包克隆";
+
+/* No comment provided by engineer. */
+"Cold Wallet Clone QR Code" = "冷錢包克隆二維碼";
+
+/* No comment provided by engineer. */
+"Confirm New Password" = "確認新密碼";
+
+/* No comment provided by engineer. */
+"Confirmation: %d" = "確認: %d";
+
+/* No comment provided by engineer. */
+"Confirmation: 100+" = "確認: 100+";
+
+/* No comment provided by engineer. */
+"Enter original password" = "請輸入原密碼";
+
+/* No comment provided by engineer. */
+"Enter Password" = "請輸入密碼";
+
+/* No comment provided by engineer. */
+"Enter source password" = "請輸入克隆源的密碼";
+
+/* No comment provided by engineer. */
+"Fee:" = "手續費:";
+
+/* No comment provided by engineer. */
+"Finish" = "完成";
+
+/* No comment provided by engineer. */
+"Give up signing?" = "放棄簽名?\n用冷錢包掃描簽名";
+
+/* No comment provided by engineer. */
+"Hot Wallet Address" = "熱錢包地址";
+
+/* No comment provided by engineer. */
+"Invalid password" = "密碼錯誤";
+
+/* No comment provided by engineer. */
+"Length: 6 - 30" = "長度: 6 - 30";
+
+/* No comment provided by engineer. */
+"Me" = "我的地址";
+
+/* No comment provided by engineer. */
+"Monitor Bither Cold failed." = "監控冷錢包失敗";
+
+/* No comment provided by engineer. */
+"New Password" = "新密碼";
+
+/* No comment provided by engineer. */
+"New passwords not same" = "新密碼不符";
+
+/* No comment provided by engineer. */
+"Next Page" = "下一頁";
+
+/* No comment provided by engineer. */
+"No private keys" = "您還沒有添加私鑰";
+
+/* dialogAlertConfirm */
+"OK" = "確認";
+
+/* No comment provided by engineer. */
+"Old Password" = "原密碼";
+
+/* No comment provided by engineer. */
+"Password" = "密碼";
+
+/* No comment provided by engineer. */
+"Password Confirm" = "確認密碼";
+
+/* No comment provided by engineer. */
+"Password wrong." = "密碼錯誤";
+
+/* No comment provided by engineer. */
+"Passwords not same." = "密碼不符";
+
+/* No comment provided by engineer. */
+"Pay to" = "發送給";
+
+/* No comment provided by engineer. */
+"Please turn off Cellular Data" = "請關閉數據網絡";
+
+/* No comment provided by engineer. */
+"Please turn off WIFI" = "請關閉WIFI";
+
+/* No comment provided by engineer. */
+"Please wait…" = "請稍候…";
+
+/* No comment provided by engineer. */
+"private key" = "私鑰";
+
+/* No comment provided by engineer. */
+"Private key of %@" = "%@的私鑰";
+
+/* No comment provided by engineer. */
+"Private Key QR Code" = "私鑰二維碼";
+
+/* No comment provided by engineer. */
+"Private keys are safe." = "私鑰很安全";
+
+/* No comment provided by engineer. */
+"Private keys in danger." = "私鑰有危險";
+
+/* No comment provided by engineer. */
+"QR Code" = "二維碼";
+
+/* No comment provided by engineer. */
+"QR Code saved." = "二維碼已保存";
+
+/* No comment provided by engineer. */
+"Received" = "收到";
+
+/* No comment provided by engineer. */
+"Received:" = "收到:";
+
+/* No comment provided by engineer. */
+"Scan %@" = "掃描%@";
+
+/* No comment provided by engineer. */
+"Scan %@\nPage %d, Total %d" = "掃描%1$@\n第%2$d頁, 共%3$d頁";
+
+/* No comment provided by engineer. */
+"Scan Bitcoin Address" = "掃描比特幣地址";
+
+/* No comment provided by engineer. */
+"Scan Bither Cold to sign" = "掃描冷錢包完成簽名";
+
+/* No comment provided by engineer. */
+"Scan by clone destination" = "使用克隆目的錢包掃描";
+
+/* No comment provided by engineer. */
+"Scan Private Key QR Code" = "掃描私鑰二維碼";
+
+/* No comment provided by engineer. */
+"Scan QR Code for Bitcoin address" = "掃描地址二維碼";
+
+/* No comment provided by engineer. */
+"Scan The Clone Source" = "掃描克隆源";
+
+/* No comment provided by engineer. */
+"Scan to watch Bither Cold" = "掃描來監控冷錢包";
+
+/* No comment provided by engineer. */
+"Scan unsigned transaction failed" = "掃描未簽名交易失敗";
+
+/* No comment provided by engineer. */
+"Scan Unsigned TX" = "掃描未簽名交易";
+
+/* No comment provided by engineer. */
+"Scan with Bither Cold" = "使用冷錢包掃描";
+
+/* No comment provided by engineer. */
+"Scan with Bither Hot to sign tx" = "使用熱錢包掃描完成簽名";
+
+/* No comment provided by engineer. */
+"Scan with Bither Hot to watch Bither Cold" = "使用熱錢包掃描來監控冷錢包";
+
+/* No comment provided by engineer. */
+"Sell: %@" = "賣一: %@";
+
+/* No comment provided by engineer. */
+"Send" = "發送";
+
+/* No comment provided by engineer. */
+"Send failed." = "發送失敗";
+
+/* No comment provided by engineer. */
+"Send success." = "發送成功";
+
+/* No comment provided by engineer. */
+"Send:" = "發送:";
+
+/* No comment provided by engineer. */
+"Sent" = "發出";
+
+/* No comment provided by engineer. */
+"Set Avatar" = "設置頭像";
+
+/* No comment provided by engineer. */
+"Set Password" = "設置密碼";
+
+/* No comment provided by engineer. */
+"Sign Transaction" = "簽名交易";
+
+/* No comment provided by engineer. */
+"Sign Trasaction" = "簽名交易";
+
+/* No comment provided by engineer. */
+"Signed Transaction" = "已簽名交易";
+
+/* No comment provided by engineer. */
+"Signing Transaction" = "正在簽名交易";
+
+/* No comment provided by engineer. */
+"Stop Monitoring" = "停止監控";
+
+/* No comment provided by engineer. */
+"Sure to stop monitoring this address?" = "確認停止監控這個地址?";
+
+/* No comment provided by engineer. */
+"Thank you for donating." = "感謝您的捐贈";
+
+/* No comment provided by engineer. */
+"Unknown Address" = "地址不詳";
+
+/* No comment provided by engineer. */
+"unsigned tx QR code" = "未簽名交易二維碼";
+
+/* No comment provided by engineer. */
+"View on Blockchain.info" = "在Blockchain.info上查看";
+
+/* No comment provided by engineer. */
+"Watch Only QR Code" = "監控二維碼";
+
+/* No comment provided by engineer. */
+"You will send to:" = "將要發送給:";
+
+"Signed TX QR Code" = "已簽名交易二維碼";
+
+"Page %d, Total %ld" = "第%1$d頁, 共%2$d頁";
+
+"No transactions found for this address,\nit has probably not been used on the network yet." = "沒有找到這個地址的交易,\n它可能還沒有在網絡上使用過.";
+
+
+
+"HUOBI"="火幣網";
+"CHBTC"="中國比特幣";
+"BTCChina"="比特幣中國";
+
+"QR Code Style"="二維碼風格";
+"Yellow"="黃";
+"Green"="綠";
+"Red"="紅";
+"Blue"="藍";
+"Purple"="紫";
+"Black"="黑";
+
+
+"Send:"="發送:";
+"Received:"="收到:";
+"Cancel"="取消";
+
+//setting
+
+"Check Private Keys"="一鍵檢查私鑰";
+"Default Currency"="默認貨幣";
+"Default Exchange"="默認交易所";
+"Network Setting"="網絡設置";
+"Sync over wifi only"="只在wifi下同步";
+"Sync always"="一直同步";
+"Default Transaction Fee"="默認手續費";
+"Normal"="正常";
+"Low"="較低";
+"fast confirmation"="較快確認";
+"slow confirmation"="較慢確認";
+"Donate"="捐贈";
+"Thank you for donating."="謝謝您的捐贈";
+"Sure to set low transaction fee as default?\nThis may cause slow confirmation."="確認默認使用低手續費模式?\n這會導致較慢的交易確認";
+"The last backup is within 1 hour. Sure to backup again?"="一個小時內剛剛進行過備份，確認要再次備份嗎?";
+"Set Avatar"="設置頭像";
+"From Camera"="來自相機";
+"From Gallery"="來自圖庫";
+"Change Password"="修改密碼";
+"Import Private Key"="導入私鑰";
+"From Private Key QR Code"="來自私鑰二維碼";
+"From Private Key Text"="來自私鑰明文";
+"Enter your private key text"="輸入私鑰明文";
+"Not match private key format"="不符合私鑰格式";
+"Scan Private Key QR Code"="掃描私鑰二維碼";
+"Enter original password"="輸入原密碼";
+"Import success."="導入成功";
+"Import failed."="導入失敗";
+"Can\'t import Bither Cold private key."="不能導入冷錢包私鑰";
+"This private key already exists."="私鑰已存在";
+"Importing…"="正在導入…";
+"Password of the private key to import is different from ours. Import failed."="導入私鑰的密碼與已有密碼不同, 無法導入";
+
+
+"Scan Private Key QR Code"="掃描私鑰二維碼";
+"Scan QR code No.1 provided by Bither"="請掃描比太提供的第1張二維碼";
+"Not match private key format"="不符合私鑰格式";
+"Enter your private key text"="輸入私鑰明文";
+"private key"="私鑰";
+"Only supports the compressed format of private key"="只支持壓縮格式的私鑰";
+
+//donate
+"Select an address to donate"="請選擇用來捐贈的地址";
+"No bitcoins available for donation."="您沒有可以用來捐贈的比特幣";
+"Donate to developers"="捐贈給開發者";
+"Donate"="捐贈";
+
+"Private Key QR Code (Encrypted)"="私鑰二維碼 (加密)";
+"Private Key QR Code (Decrypted)"="私鑰二維碼 (解密)";
+"Private Key"="私鑰明文";
+
+"choose_mode_cold_confirm" = "模式設置後不能切換.\n冷錢包應該運行在離線的備用手機上.\n確認以冷錢包模式運行?";
+"choose_mode_warm_confirm" = "模式設置後不能切換.\n熱錢包可以方便的在線發送交易.\n確認以熱錢包模式運行?";
+
+"balance_detail_transaction_count" = "交易數";
+"balance_detail_total_incoming" = "總收入";
+"balance_detail_total_outgoing" = "總支出";
+
+/* network error */
+"Network failure." = "網絡錯誤";
+
+"Cannot monitor address with large amount of transactions."="此地址有太多交易 ,不能監控";
+"Cannot monitor address with special transactions."="此地址有特殊交易 ,不能監控";
+"Cannot import private key with large amount of transactions."="此私鑰有太多交易 ,不能導入";
+"Cannot import private key with special transactions."="此私鑰有特殊交易 ,不能導入";
+
+"Can\'t import Bither Cold private key."="不能導入冷錢包私鑰";
+"This private key already exists."="私鑰已存在";
+
+"Advance Options"="高級選項";
+
+
+"Send failed. Sending coins this few will be igored."="發送失敗. 這樣小額的交易會被忽略.";
+"%@ BTC to be confirmed."="%@ BTC 正在等待確認.";
+"Send failed. You don\'t have enough coins available for transaction fee."="發送失敗. 可用余額不足以支付手續費.";
+"Send failed. You don\'t have enough coins available."="發送失敗. 可用余額不足.";
+"Send failed. Lack of %@ BTC."="發送失敗. 可用余額中缺少 %@ BTC. ";
+"Please wait for another confirmation."="請等待壹個新的確認後再交易.";
+
+"Total BTC prefix"="总计: ";
+

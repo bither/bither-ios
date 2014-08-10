@@ -1,0 +1,40 @@
+{
+  "images" : [
+    {
+      "resizing" : {
+        "mode" : "3-part-horizontal",
+        "center" : {
+          "mode" : "stretch",
+          "width" : 1
+        },
+        "capInsets" : {
+          "right" : 150,
+          "left" : 149
+        }
+      },
+      "idiom" : "universal",
+      "filename" : "list_item_card_shadow_top.png",
+      "scale" : "1x"
+    },
+    {
+      "resizing" : {
+        "mode" : "3-part-horizontal",
+        "center" : {
+          "mode" : "stretch",
+          "width" : 1
+        },
+        "capInsets" : {
+          "right" : 300,
+          "left" : 299
+        }
+      },
+      "idiom" : "universal",
+      "filename" : "list_item_card_shadow_top@2x.png",
+      "scale" : "2x"
+    }
+  ],
+  "info" : {
+    "version" : 1,
+    "author" : "xcode"
+  }
+}
