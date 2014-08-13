@@ -1352,8 +1352,16 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="0.00" minimumFontSize="17" background="textfield_activated_holo_light" clearButtonMode="whileEditing" id="1pu-fA-kTl">
-                                <rect key="frame" x="10" y="136" width="300" height="36"/>
+                                <rect key="frame" x="10" y="136" width="144" height="36"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <rect key="contentStretch" x="0.0" y="0.0" width="0.5" height="1"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" keyboardType="decimalPad" returnKeyType="next" enablesReturnKeyAutomatically="YES"/>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="0.00" minimumFontSize="17" background="textfield_activated_holo_light" clearButtonMode="whileEditing" id="Yo9-av-E4b">
+                                <rect key="frame" x="166" y="136" width="144" height="36"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <rect key="contentStretch" x="0.0" y="0.0" width="0.5" height="1"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" keyboardType="decimalPad" returnKeyType="next" enablesReturnKeyAutomatically="YES"/>
                             </textField>
@@ -1439,6 +1447,12 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ufk-XF-QnD" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <customObject id="SYZ-Ik-nmW" customClass="CurrencyCaculatorLink">
+                    <connections>
+                        <outlet property="tfBtc" destination="1pu-fA-kTl" id="WZh-ZD-rEM"/>
+                        <outlet property="tfCurrency" destination="Yo9-av-E4b" id="bQL-cA-bLX"/>
+                    </connections>
+                </customObject>
             </objects>
             <point key="canvasLocation" x="1878" y="-53"/>
         </scene>

@@ -60,10 +60,8 @@
     [super viewDidLoad];
     [self configureBalance];
     self.tfAddress.delegate = self;
-    self.tfAmount.delegate = self;
     self.tfPassword.delegate = self;
     [self configureTextField:self.tfAddress];
-    [self configureTextField:self.tfAmount];
     [self configureTextField:self.tfPassword];
     if(self.toAddress){
         self.tfAddress.text = self.toAddress;
