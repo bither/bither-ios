@@ -119,17 +119,7 @@
     }else{
         self.lblBalanceMoney.text=@"--";
     }
-    if(!self.ivSymbolBtc.image){
-        self.ivSymbolBtc.image = [[UIImage imageNamed:@"symbol_btc_slim"] renderToColor:self.lblBalanceBtc.textColor];
-        frame = self.ivSymbolBtc.frame;
-        CGFloat height = frame.size.height;
-        width = frame.size.height / self.ivSymbolBtc.image.size.height * self.ivSymbolBtc.image.size.width;
-        CGFloat x = frame.origin.x - (width - frame.size.width);
-        frame.origin.x = x;
-        frame.size.width = width;
-        frame.size.height = height;
-        self.ivSymbolBtc.frame = frame;
-    }
+   
 }
 
 -(CGFloat)widthForLabel:(UILabel*)lbl maxWidth:(CGFloat)maxWidth{

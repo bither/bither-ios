@@ -802,7 +802,7 @@
                                                                         <action selector="addressFullPressed:" destination="yT2-Bw-ljg" eventType="touchUpInside" id="hze-7K-aE9"/>
                                                                     </connections>
                                                                 </button>
-                                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="S4M-Q7-ULL">
+                                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="symbol_btc_slim_black" id="S4M-Q7-ULL">
                                                                     <rect key="frame" x="236" y="8" width="14" height="20"/>
                                                                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
                                                                 </imageView>
@@ -2123,7 +2123,7 @@
                                                         <size key="shadowOffset" width="0.0" height="4"/>
                                                     </label>
                                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="%" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="1MG-Ff-Ctm">
-                                                        <rect key="frame" x="136.99999998849214" y="36" width="32" height="31"/>
+                                                        <rect key="frame" x="137" y="36" width="32" height="31"/>
                                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" heightSizable="YES"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
@@ -2479,6 +2479,7 @@
         <image name="scan_button_resizable_normal" width="45" height="45"/>
         <image name="scan_button_resizable_pressed" width="45" height="45"/>
         <image name="symbol_btc" width="17" height="24"/>
+        <image name="symbol_btc_slim_black" width="17" height="24"/>
         <image name="textfield_activated_holo_light" width="26" height="32"/>
         <image name="title_bar_back" width="20" height="20"/>
         <image name="title_bar_option_icon" width="25" height="20"/>
