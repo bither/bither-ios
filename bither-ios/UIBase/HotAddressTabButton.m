@@ -79,6 +79,7 @@
     frame.origin.x = CGRectGetMaxX(self.iv.frame) + kLabelLeftGap;
     frame.origin.y = 0;
     frame.size.height = self.frame.size.height;
+    frame.size.width = lableWidth;
     self.lbl.frame = frame;
     
     frame = self.ivArrow.frame;
