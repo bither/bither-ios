@@ -46,8 +46,6 @@
     lbl.text = symbol;
     lbl.font = [UIFont systemFontOfSize:16];
     [self.tfCurrency.leftView addSubview:lbl];
-    
-    
 }
 
 -(void)setTfBtc:(UITextField *)tfBtc{
@@ -88,8 +86,10 @@
             return NO;
         }
         if([self isZeroText:text]){
-            _amount = 0;
-            [self convertAmount2Currency];
+            if([StringUtil isEmpty:self.tfCurrency.text]){
+                _amount = 0;
+                [self convertAmount2Currency];
+            }
         }else{
             u_int64_t amount = [StringUtil amountForString:text];
             if(amount > 0){
@@ -107,7 +107,9 @@
             if(pointRange.length > 0 && text.length > (pointRange.location + 2)){
                 return NO;
             }
-            [self convertCurrency2Amount:0];
+            if([StringUtil isEmpty:self.tfBtc.text]){
+                [self convertCurrency2Amount:0];
+            }
         }else{
             double currency = [self getCurrencyFromText:text];
             if(currency <= 0){
@@ -120,6 +122,9 @@
 }
 
 -(void)convertAmount2Currency{
+    if(self.delegate && [self.delegate respondsToSelector:@selector(textField:shouldChangeCharactersInRange:replacementString:)]){
+        [self.delegate textField:self.tfBtc shouldChangeCharactersInRange:NSMakeRange(0, 0) replacementString:nil];
+    }
     if(_amount > 0 || [StringUtil isEmpty:self.tfCurrency.text]){
         self.tfCurrency.text = @"";
         self.tfBtc.placeholder = @"0.00";
@@ -132,6 +137,9 @@
 }
 
 -(void)convertCurrency2Amount:(double)currency{
+    if(self.delegate && [self.delegate respondsToSelector:@selector(textField:shouldChangeCharactersInRange:replacementString:)]){
+        [self.delegate textField:self.tfCurrency shouldChangeCharactersInRange:NSMakeRange(0, 0) replacementString:nil];
+    }
     if(currency > 0 || [StringUtil isEmpty:self.tfBtc.text]){
         self.tfBtc.text = @"";
         self.tfCurrency.placeholder = @"0.00";
@@ -145,6 +153,9 @@
 }
 
 -(void)textFieldDidEndEditing:(UITextField *)textField{
+    if(self.delegate && [self.delegate respondsToSelector:@selector(textFieldDidEndEditing:)]){
+        [self.delegate textFieldDidEndEditing:textField];
+    }
     if(![StringUtil isEmpty:self.tfBtc.text] && [StringUtil amountForString:self.tfBtc.text] > 0){
         _amount = [StringUtil amountForString:self.tfBtc.text];
         [self convertAmount2Currency];
@@ -159,6 +170,9 @@
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField{
+    if(self.delegate && [self.delegate respondsToSelector:@selector(textFieldShouldReturn:)]){
+        [self.delegate textFieldShouldReturn:textField];
+    }
     return YES;
 }
 
@@ -206,6 +220,35 @@
         return YES;
     }
     return NO;
+}
+
+-(void)becomeFirstResponder{
+    if(self.tfBtc && ![StringUtil isEmpty:self.tfBtc.text]){
+        [self.tfBtc becomeFirstResponder];
+        return;
+    }
+    if(self.tfCurrency && ![StringUtil isEmpty:self.tfCurrency.text]){
+        [self.tfCurrency becomeFirstResponder];
+        return;
+    }
+    if(self.tfBtc){
+        [self.tfBtc becomeFirstResponder];
+        return;
+    }
+}
+
+
+-(BOOL)isFirstResponder{
+    return (self.tfBtc && self.tfBtc.isFirstResponder) || (self.tfCurrency && self.tfCurrency.isFirstResponder);
+}
+
+-(void)resignFirstResponder{
+    if(self.tfBtc){
+        [self.tfBtc resignFirstResponder];
+    }
+    if(self.tfCurrency){
+        [self.tfCurrency resignFirstResponder];
+    }
 }
 
 -(BOOL)isLinked:(UITextField*)textField{

@@ -1436,12 +1436,12 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <connections>
+                        <outlet property="amtLink" destination="SYZ-Ik-nmW" id="uZP-zh-ItX"/>
                         <outlet property="btnSend" destination="rFx-au-8Hm" id="4Vp-A3-NLv"/>
                         <outlet property="lblBalance" destination="bq1-3M-RqW" id="6YX-yn-d8z"/>
                         <outlet property="lblBalancePrefix" destination="GbZ-iW-rIX" id="Cx6-Nr-X2T"/>
                         <outlet property="lblPayTo" destination="4lI-QI-HQr" id="j9L-uT-evY"/>
                         <outlet property="tfAddress" destination="6Td-u4-E0s" id="04R-Fz-Aln"/>
-                        <outlet property="tfAmount" destination="1pu-fA-kTl" id="6Qv-aB-MJ1"/>
                         <outlet property="tfPassword" destination="xmg-Xg-1Ns" id="E2u-e6-EnR"/>
                         <outlet property="vTopBar" destination="JSB-pY-z3J" id="Gug-C7-4TZ"/>
                     </connections>
