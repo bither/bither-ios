@@ -31,6 +31,7 @@
 #import "QRCodeTxTransport.h"
 #import "PeerUtil.h"
 #import "TransactionsUtil.h"
+#import "CurrencyCalculatorLink.h"
 #import <Bitheri/BTAddressManager.h>
 #import <Bitheri/BTSettings.h>
 #import <Bitheri/BTPeerManager.h>
@@ -43,7 +44,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *lblBalance;
 @property (weak, nonatomic) IBOutlet UILabel *lblPayTo;
 @property (weak, nonatomic) IBOutlet UITextField *tfAddress;
-@property (weak, nonatomic) IBOutlet UITextField *tfAmount;
+@property (strong, nonatomic) IBOutlet CurrencyCalculatorLink *amtLink;
 @property (weak, nonatomic) IBOutlet UIButton *btnSend;
 @property (weak, nonatomic) IBOutlet UIView *vTopBar;
 
@@ -69,14 +70,13 @@
     [self.btnSend addSubview:ivSendQr];
     [self configureBalance];
     self.tfAddress.delegate = self;
-    self.tfAmount.delegate = self;
+    self.amtLink.delegate = self;
     [self configureTextField:self.tfAddress];
-    [self configureTextField:self.tfAmount];
     if(self.toAddress){
         self.tfAddress.text = self.toAddress;
         self.tfAddress.enabled = NO;
         if(self.amount > 0){
-            self.tfAmount.text = [StringUtil stringForAmount:self.amount];
+            self.amtLink.amount = self.amount;
         }
     }
     [self check];
@@ -85,7 +85,7 @@
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     [BTSettings instance].feeBase = ([[UserDefaultsUtil instance] getTransactionFeeMode] == Low ? 1000 : 10000);
-    if(self.tx){
+    if(self.tx && ![self.tx verifySignatures]){
         self.btnSend.enabled = YES;
     }
     if (![[BTPeerManager sharedInstance] connected]) {
@@ -99,7 +99,7 @@
         if(self.tfAddress.enabled){
             [self.tfAddress becomeFirstResponder];
         }else{
-            [self.tfAmount becomeFirstResponder];
+            [self.amtLink becomeFirstResponder];
         }
     }
 }
@@ -111,7 +111,7 @@
         DialogProgress *dp = [[DialogProgress alloc]initWithMessage:NSLocalizedString(@"Please wait…", nil)];
         [dp showInWindow:self.view.window completion:^{
             dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
-                u_int64_t value = [StringUtil amountForString:self.tfAmount.text];
+                u_int64_t value = self.amtLink.amount;
                 NSError * error;
                 self.tx = [self.address txForAmounts:@[@(value)] andAddress:@[self.tfAddress.text] andError:&error];
                 if (error) {
@@ -213,7 +213,7 @@
                 [reader vibrate];
                 self.tfAddress.text = result;
                 [self check];
-                [self.tfAmount becomeFirstResponder];
+                [self.amtLink becomeFirstResponder];
             }
         }else{
             self.btnSend.enabled = NO;
@@ -242,7 +242,10 @@
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField{
-    if(textField == self.tfAmount){
+    if(textField == self.tfAddress){
+        [self.amtLink becomeFirstResponder];
+    }
+    if([self.amtLink isLinked:textField]){
         [self sendPressed:self.btnSend];
     }
     return YES;
@@ -250,7 +253,7 @@
 
 -(BOOL)checkValues{
     BOOL validAddress = [self.tfAddress.text isValidBitcoinAddress];
-    int64_t amount = [StringUtil amountForString:self.tfAmount.text];
+    int64_t amount = self.amtLink.amount;
     return validAddress && amount > 0;
 }
 
@@ -276,8 +279,8 @@
     if(self.tfAddress.isFirstResponder){
         [self.tfAddress resignFirstResponder];
     }
-    if(self.tfAmount.isFirstResponder){
-        [self.tfAmount resignFirstResponder];
+    if(self.amtLink.isFirstResponder){
+        [self.amtLink resignFirstResponder];
     }
 }
 
@@ -304,14 +307,14 @@
 
 -(void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event{
     UITouch *touch = touches.anyObject;
-    if(touch.view != self.tfAddress && touch.view != self.tfAmount){
+    if(touch.view != self.tfAddress && touch.view != self.amtLink.tfBtc && touch.view != self.amtLink.tfCurrency){
         [self hideKeyboard];
     }
 }
 
 -(void)touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event{
     UITouch *touch = touches.anyObject;
-    if(touch.view != self.tfAddress && touch.view != self.tfAmount){
+    if(touch.view != self.tfAddress && touch.view != self.amtLink.tfBtc && touch.view != self.amtLink.tfCurrency){
         [self hideKeyboard];
     }
 }
