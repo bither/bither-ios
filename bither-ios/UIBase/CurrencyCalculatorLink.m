@@ -6,20 +6,20 @@
 //  Copyright (c) 2014年 noname. All rights reserved.
 //
 
-#import "CurrencyCaculatorLink.h"
+#import "CurrencyCalculatorLink.h"
 #import "UserDefaultsUtil.h"
 #import "BitherSetting.h"
 #import "StringUtil.h"
 #import "MarketUtil.h"
 
-@interface CurrencyCaculatorLink()<UITextFieldDelegate>{
+@interface CurrencyCalculatorLink()<UITextFieldDelegate>{
     __weak UITextField *_tfBtc;
     __weak UITextField *_tfCurrency;
     u_int64_t _amount;
 }
 
 @end
-@implementation CurrencyCaculatorLink
+@implementation CurrencyCalculatorLink
 
 
 -(void)firstConfigure{

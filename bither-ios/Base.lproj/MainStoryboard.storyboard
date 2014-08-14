@@ -1447,7 +1447,7 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ufk-XF-QnD" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <customObject id="SYZ-Ik-nmW" customClass="CurrencyCaculatorLink">
+                <customObject id="SYZ-Ik-nmW" customClass="CurrencyCalculatorLink">
                     <connections>
                         <outlet property="tfBtc" destination="1pu-fA-kTl" id="WZh-ZD-rEM"/>
                         <outlet property="tfCurrency" destination="Yo9-av-E4b" id="bQL-cA-bLX"/>
@@ -2137,7 +2137,7 @@
                                                         <size key="shadowOffset" width="0.0" height="4"/>
                                                     </label>
                                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="%" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="1MG-Ff-Ctm">
-                                                        <rect key="frame" x="137" y="36" width="32" height="31"/>
+                                                        <rect key="frame" x="137.00000015923962" y="36" width="32" height="31"/>
                                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" heightSizable="YES"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>

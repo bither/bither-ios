@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface CurrencyCaculatorLink : NSObject<UITextFieldDelegate>
+@interface CurrencyCalculatorLink : NSObject<UITextFieldDelegate>
 @property (weak, nonatomic) IBOutlet UITextField *tfBtc;
 @property (weak, nonatomic) IBOutlet UITextField *tfCurrency;
 @property u_int64_t amount;
