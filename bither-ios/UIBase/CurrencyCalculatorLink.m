@@ -146,7 +146,15 @@
         double price = [MarketUtil getDefaultNewPrice];
         if(price > 0){
             _amount = currency * pow(10, 8)/price;
-            _amount = _amount - (_amount % (u_int32_t)pow(10, 4));
+            u_int32_t minimal = (u_int32_t)pow(10, 4);
+            if(_amount > minimal){
+                u_int64_t extra = (_amount % minimal);
+                if(extra < minimal / 2){
+                    _amount = _amount - extra;
+                }else{
+                    _amount = _amount - extra + minimal;
+                }
+            }
             self.tfBtc.placeholder = [StringUtil stringForAmount:_amount];
         }
     }
