@@ -30,6 +30,7 @@
 #import "UserDefaultsUtil.h"
 #import "PeerUtil.h"
 #import "TransactionsUtil.h"
+#import "CurrencyCalculatorLink.h"
 
 #define kBalanceFontSize (15)
 
@@ -38,7 +39,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *lblBalance;
 @property (weak, nonatomic) IBOutlet UILabel *lblPayTo;
 @property (weak, nonatomic) IBOutlet UITextField *tfAddress;
-@property (weak, nonatomic) IBOutlet UITextField *tfAmount;
+@property (weak, nonatomic) IBOutlet CurrencyCalculatorLink *amtLink;
 @property (weak, nonatomic) IBOutlet UITextField *tfPassword;
 @property (weak, nonatomic) IBOutlet UIButton *btnSend;
 @property (weak, nonatomic) IBOutlet UIView *vTopBar;
@@ -60,16 +61,15 @@
     [super viewDidLoad];
     [self configureBalance];
     self.tfAddress.delegate = self;
-    self.tfAmount.delegate = self;
     self.tfPassword.delegate = self;
+    self.amtLink.delegate = self;
     [self configureTextField:self.tfAddress];
-    [self configureTextField:self.tfAmount];
     [self configureTextField:self.tfPassword];
     if(self.toAddress){
         self.tfAddress.text = self.toAddress;
         self.tfAddress.enabled = NO;
         if(self.amount > 0){
-            self.tfAmount.text = [StringUtil stringForAmount:self.amount];
+            self.amtLink.amount = self.amount;
         }
     }
     [self check];
@@ -88,7 +88,7 @@
     if([StringUtil isEmpty:self.tfAddress.text]){
         [self.tfAddress becomeFirstResponder];
     }else{
-        [self.tfAmount becomeFirstResponder];
+        [self.amtLink becomeFirstResponder];
     }
 }
 
@@ -102,7 +102,7 @@
                     [self showSendResult:NSLocalizedString(@"Password wrong.", nil) dialog:dp];
                     return;
                 }
-                u_int64_t value = [StringUtil amountForString:self.tfAmount.text];
+                u_int64_t value = self.amtLink.amount;
                 NSError * error;
                 BTTx* tx = [self.address txForAmounts:@[@(value)] andAddress:@[self.tfAddress.text] andError:&error];
                 if (error) {
@@ -173,7 +173,7 @@
         self.tfAddress.text = result;
         [reader dismissViewControllerAnimated:YES completion:^{
             [self check];
-            [self.tfAmount becomeFirstResponder];
+            [self.amtLink becomeFirstResponder];
         }];
     }
 }
@@ -189,6 +189,12 @@
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField{
+    if(textField == self.tfAddress){
+        [self.amtLink becomeFirstResponder];
+    }
+    if([self.amtLink isLinked:textField]){
+        [self.tfPassword becomeFirstResponder];
+    }
     if(textField == self.tfPassword){
         [self sendPressed:self.btnSend];
     }
@@ -198,7 +204,7 @@
 -(BOOL)checkValues{
     BOOL validPassword = [StringUtil validPassword:self.tfPassword.text];
     BOOL validAddress = [self.tfAddress.text isValidBitcoinAddress];
-    int64_t amount = [StringUtil amountForString:self.tfAmount.text];
+    int64_t amount = self.amtLink.amount;
     return validAddress && validPassword && amount > 0;
 }
 
@@ -224,8 +230,8 @@
     if(self.tfAddress.isFirstResponder){
         [self.tfAddress resignFirstResponder];
     }
-    if(self.tfAmount.isFirstResponder){
-        [self.tfAmount resignFirstResponder];
+    if(self.amtLink.isFirstResponder){
+        [self.amtLink resignFirstResponder];
     }
     if(self.tfPassword.isFirstResponder){
         [self.tfPassword resignFirstResponder];
@@ -256,14 +262,14 @@
 
 -(void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event{
     UITouch *touch = touches.anyObject;
-    if(touch.view != self.tfAddress && touch.view != self.tfAmount && touch.view != self.tfPassword){
+    if(touch.view != self.tfAddress && touch.view != self.amtLink.tfCurrency && touch.view != self.amtLink.tfBtc && touch.view != self.tfPassword){
         [self hideKeyboard];
     }
 }
 
 -(void)touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event{
     UITouch *touch = touches.anyObject;
-    if(touch.view != self.tfAddress && touch.view != self.tfAmount && touch.view != self.tfPassword){
+    if(touch.view != self.tfAddress && touch.view != self.amtLink.tfCurrency && touch.view != self.amtLink.tfBtc && touch.view != self.tfPassword){
         [self hideKeyboard];
     }
 }
