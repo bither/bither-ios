@@ -89,6 +89,7 @@
         }
         if([self isZeroText:text]){
             _amount = 0;
+            [self convertAmount2Currency];
         }else{
             u_int64_t amount = [StringUtil amountForString:text];
             if(amount > 0){
@@ -106,6 +107,7 @@
             if(pointRange.length > 0 && text.length > (pointRange.location + 2)){
                 return NO;
             }
+            [self convertCurrency2Amount:0];
         }else{
             double currency = [self getCurrencyFromText:text];
             if(currency <= 0){
@@ -118,19 +120,42 @@
 }
 
 -(void)convertAmount2Currency{
-    if(_amount <= 0){
-        return;
-    }
-    self.tfCurrency.text = @"";
-    if ([MarketUtil getDefaultNewPrice]>0) {
-        double money=([MarketUtil getDefaultNewPrice]*_amount)/pow(10, 8);
-        self.tfCurrency.placeholder = [StringUtil formatPrice:money];
+    if(_amount > 0 || [StringUtil isEmpty:self.tfCurrency.text]){
+        self.tfCurrency.text = @"";
+        self.tfBtc.placeholder = @"0.00";
+        double price = [MarketUtil getDefaultNewPrice];
+        if (price > 0) {
+            double money = (price * _amount)/pow(10, 8);
+            self.tfCurrency.placeholder = [NSString stringWithFormat:@"%.2f", money];
+        }
     }
 }
 
 -(void)convertCurrency2Amount:(double)currency{
+    if(currency > 0 || [StringUtil isEmpty:self.tfBtc.text]){
+        self.tfBtc.text = @"";
+        self.tfCurrency.placeholder = @"0.00";
+        double price = [MarketUtil getDefaultNewPrice];
+        if(price > 0){
+            _amount = currency * pow(10, 8)/price;
+            _amount = _amount - (_amount % (u_int32_t)pow(10, 4));
+            self.tfBtc.placeholder = [StringUtil stringForAmount:_amount];
+        }
+    }
+}
+
+-(void)textFieldDidEndEditing:(UITextField *)textField{
+    if(![StringUtil isEmpty:self.tfBtc.text] && [StringUtil amountForString:self.tfBtc.text] > 0){
+        _amount = [StringUtil amountForString:self.tfBtc.text];
+        [self convertAmount2Currency];
+        return;
+    }
+    if(![StringUtil isEmpty:self.tfCurrency.text] && [self getCurrencyFromText:self.tfCurrency.text] > 0){
+        [self convertCurrency2Amount:[self getCurrencyFromText:self.tfCurrency.text]];
+        return;
+    }
     self.tfBtc.text = @"";
-    
+    self.tfCurrency.text = @"";
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField{
@@ -143,6 +168,8 @@
 
 -(void)setAmount:(u_int64_t)amount{
     _amount = amount;
+    self.tfBtc.text = [StringUtil stringForAmount:_amount];
+    [self convertAmount2Currency];
 }
 
 -(double)getCurrencyFromText:(NSString*)text{
@@ -197,10 +224,13 @@
 
 -(void)clearBtc:(id)sender{
     self.tfBtc.text = @"";
+    _amount = 0;
+    [self convertAmount2Currency];
 }
 
 -(void)clearCurrency:(id)sender{
     self.tfCurrency.text = @"";
+    [self convertCurrency2Amount:0];
 }
 
 -(UITextField*)tfBtc{
