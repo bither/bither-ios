@@ -802,7 +802,7 @@
                                                                         <action selector="addressFullPressed:" destination="yT2-Bw-ljg" eventType="touchUpInside" id="hze-7K-aE9"/>
                                                                     </connections>
                                                                 </button>
-                                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="S4M-Q7-ULL">
+                                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="symbol_btc_slim_black" id="S4M-Q7-ULL">
                                                                     <rect key="frame" x="236" y="8" width="14" height="20"/>
                                                                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
                                                                 </imageView>
@@ -1352,8 +1352,16 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="0.00" minimumFontSize="17" background="textfield_activated_holo_light" clearButtonMode="whileEditing" id="1pu-fA-kTl">
-                                <rect key="frame" x="10" y="136" width="300" height="36"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <rect key="frame" x="10" y="136" width="144" height="36"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <rect key="contentStretch" x="0.0" y="0.0" width="0.5" height="1"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" keyboardType="decimalPad" returnKeyType="next" enablesReturnKeyAutomatically="YES"/>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="0.00" minimumFontSize="17" background="textfield_activated_holo_light" clearButtonMode="whileEditing" id="Yo9-av-E4b">
+                                <rect key="frame" x="166" y="136" width="144" height="36"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxY="YES"/>
+                                <rect key="contentStretch" x="0.0" y="0.0" width="0.5" height="1"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" keyboardType="decimalPad" returnKeyType="next" enablesReturnKeyAutomatically="YES"/>
                             </textField>
@@ -1428,17 +1436,23 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <connections>
+                        <outlet property="amtLink" destination="SYZ-Ik-nmW" id="uZP-zh-ItX"/>
                         <outlet property="btnSend" destination="rFx-au-8Hm" id="4Vp-A3-NLv"/>
                         <outlet property="lblBalance" destination="bq1-3M-RqW" id="6YX-yn-d8z"/>
                         <outlet property="lblBalancePrefix" destination="GbZ-iW-rIX" id="Cx6-Nr-X2T"/>
                         <outlet property="lblPayTo" destination="4lI-QI-HQr" id="j9L-uT-evY"/>
                         <outlet property="tfAddress" destination="6Td-u4-E0s" id="04R-Fz-Aln"/>
-                        <outlet property="tfAmount" destination="1pu-fA-kTl" id="6Qv-aB-MJ1"/>
                         <outlet property="tfPassword" destination="xmg-Xg-1Ns" id="E2u-e6-EnR"/>
                         <outlet property="vTopBar" destination="JSB-pY-z3J" id="Gug-C7-4TZ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ufk-XF-QnD" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <customObject id="SYZ-Ik-nmW" customClass="CurrencyCalculatorLink">
+                    <connections>
+                        <outlet property="tfBtc" destination="1pu-fA-kTl" id="WZh-ZD-rEM"/>
+                        <outlet property="tfCurrency" destination="Yo9-av-E4b" id="bQL-cA-bLX"/>
+                    </connections>
+                </customObject>
             </objects>
             <point key="canvasLocation" x="1878" y="-53"/>
         </scene>
@@ -1482,8 +1496,16 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="0.00" minimumFontSize="17" background="textfield_activated_holo_light" clearButtonMode="whileEditing" id="MAT-xt-p4f">
-                                <rect key="frame" x="10" y="136" width="300" height="36"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <rect key="frame" x="10" y="136" width="144" height="36"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <rect key="contentStretch" x="0.0" y="0.0" width="0.5" height="1"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" keyboardType="decimalPad" returnKeyType="next" enablesReturnKeyAutomatically="YES"/>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="0.00" minimumFontSize="17" background="textfield_activated_holo_light" clearButtonMode="whileEditing" id="xBU-Zh-e2V">
+                                <rect key="frame" x="166" y="136" width="144" height="36"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxY="YES"/>
+                                <rect key="contentStretch" x="0.0" y="0.0" width="0.5" height="1"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" keyboardType="decimalPad" returnKeyType="next" enablesReturnKeyAutomatically="YES"/>
                             </textField>
@@ -1552,16 +1574,22 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <connections>
+                        <outlet property="amtLink" destination="vGE-ge-Zvm" id="SXD-cd-awT"/>
                         <outlet property="btnSend" destination="OlL-T9-SKL" id="riG-7y-tkD"/>
                         <outlet property="lblBalance" destination="bKW-aE-gcw" id="ksA-3h-B8q"/>
                         <outlet property="lblBalancePrefix" destination="uiN-WE-JlS" id="bHV-V4-poT"/>
                         <outlet property="lblPayTo" destination="F4n-lA-Ige" id="rl7-D1-BLd"/>
                         <outlet property="tfAddress" destination="7eD-5T-1F7" id="hPP-Hb-qTA"/>
-                        <outlet property="tfAmount" destination="MAT-xt-p4f" id="dDV-bm-QOL"/>
                         <outlet property="vTopBar" destination="wVS-Li-HQH" id="b6g-5w-RW9"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tdd-gr-zBH" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <customObject id="vGE-ge-Zvm" customClass="CurrencyCalculatorLink">
+                    <connections>
+                        <outlet property="tfBtc" destination="MAT-xt-p4f" id="rXw-QW-TTe"/>
+                        <outlet property="tfCurrency" destination="xBU-Zh-e2V" id="bCx-rL-Dbs"/>
+                    </connections>
+                </customObject>
             </objects>
             <point key="canvasLocation" x="2256" y="-53"/>
         </scene>
@@ -2123,7 +2151,7 @@
                                                         <size key="shadowOffset" width="0.0" height="4"/>
                                                     </label>
                                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="%" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="1MG-Ff-Ctm">
-                                                        <rect key="frame" x="136.99999998849214" y="36" width="32" height="31"/>
+                                                        <rect key="frame" x="137.00000015923962" y="36" width="32" height="31"/>
                                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" heightSizable="YES"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
@@ -2479,6 +2507,7 @@
         <image name="scan_button_resizable_normal" width="45" height="45"/>
         <image name="scan_button_resizable_pressed" width="45" height="45"/>
         <image name="symbol_btc" width="17" height="24"/>
+        <image name="symbol_btc_slim_black" width="17" height="24"/>
         <image name="textfield_activated_holo_light" width="26" height="32"/>
         <image name="title_bar_back" width="20" height="20"/>
         <image name="title_bar_option_icon" width="25" height="20"/>

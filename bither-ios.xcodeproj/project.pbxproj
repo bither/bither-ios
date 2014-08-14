@@ -81,6 +81,7 @@
 		AC33088E1955668D00D8F621 /* HotAddressListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AC33088D1955668D00D8F621 /* HotAddressListCell.m */; };
 		AC33089119556AB800D8F621 /* HotAddressListSectionHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = AC33089019556AB800D8F621 /* HotAddressListSectionHeader.m */; };
 		AC33089519556F7A00D8F621 /* UIImage+ImageWithColor.m in Sources */ = {isa = PBXBuildFile; fileRef = AC33089419556F7A00D8F621 /* UIImage+ImageWithColor.m */; };
+		AC3C2623199B58750055FF5E /* TrendingGraphicData.m in Sources */ = {isa = PBXBuildFile; fileRef = AC3C2622199B58750055FF5E /* TrendingGraphicData.m */; };
 		AC3CDB5B1962A3C800C74B4C /* TransactionConfidenceView.m in Sources */ = {isa = PBXBuildFile; fileRef = AC3CDB5A1962A3C800C74B4C /* TransactionConfidenceView.m */; };
 		AC3CDB5E1962AFF000C74B4C /* DialogAddressQrCode.m in Sources */ = {isa = PBXBuildFile; fileRef = AC3CDB5D1962AFF000C74B4C /* DialogAddressQrCode.m */; };
 		AC45AA3519879C96006314D5 /* DialogPrivateKeyDecryptedQrCode.m in Sources */ = {isa = PBXBuildFile; fileRef = AC45AA3419879C96006314D5 /* DialogPrivateKeyDecryptedQrCode.m */; };
@@ -133,6 +134,7 @@
 		ACDDDC3819483D210008A79D /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ACDDDC3719483D210008A79D /* QuartzCore.framework */; };
 		ACE4ED5B198A298100C8862C /* ScanPrivateKeyDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = ACE4ED5A198A298100C8862C /* ScanPrivateKeyDelegate.m */; };
 		ACE4ED5E198A3AE600C8862C /* AdvanceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ACE4ED5D198A3AE600C8862C /* AdvanceViewController.m */; };
+		ACEEB703199B40FE008E06AA /* CurrencyCalculatorLink.m in Sources */ = {isa = PBXBuildFile; fileRef = ACEEB702199B40FE008E06AA /* CurrencyCalculatorLink.m */; };
 		ACF4B17419668D5700CE24FD /* MarketListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = ACF4B17319668D5700CE24FD /* MarketListCell.m */; };
 		CE2C53C791F4479AADAD9EB2 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FED7A4051DB45218112FAC0 /* libPods.a */; };
 		DA641E8A196E7BC20095DF42 /* CrashLog.m in Sources */ = {isa = PBXBuildFile; fileRef = DA641E83196E7BC20095DF42 /* CrashLog.m */; };
@@ -297,6 +299,8 @@
 		AC33089019556AB800D8F621 /* HotAddressListSectionHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HotAddressListSectionHeader.m; path = Cells/HotAddressListSectionHeader.m; sourceTree = "<group>"; };
 		AC33089319556F7A00D8F621 /* UIImage+ImageWithColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+ImageWithColor.h"; sourceTree = "<group>"; };
 		AC33089419556F7A00D8F621 /* UIImage+ImageWithColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+ImageWithColor.m"; sourceTree = "<group>"; };
+		AC3C2621199B58750055FF5E /* TrendingGraphicData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TrendingGraphicData.h; sourceTree = "<group>"; };
+		AC3C2622199B58750055FF5E /* TrendingGraphicData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TrendingGraphicData.m; sourceTree = "<group>"; };
 		AC3CDB591962A3C800C74B4C /* TransactionConfidenceView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TransactionConfidenceView.h; sourceTree = "<group>"; };
 		AC3CDB5A1962A3C800C74B4C /* TransactionConfidenceView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TransactionConfidenceView.m; sourceTree = "<group>"; };
 		AC3CDB5C1962AFF000C74B4C /* DialogAddressQrCode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DialogAddressQrCode.h; sourceTree = "<group>"; };
@@ -398,6 +402,8 @@
 		ACE4ED5A198A298100C8862C /* ScanPrivateKeyDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScanPrivateKeyDelegate.m; sourceTree = "<group>"; };
 		ACE4ED5C198A3AE600C8862C /* AdvanceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdvanceViewController.h; sourceTree = "<group>"; };
 		ACE4ED5D198A3AE600C8862C /* AdvanceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AdvanceViewController.m; sourceTree = "<group>"; };
+		ACEEB701199B40FE008E06AA /* CurrencyCalculatorLink.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CurrencyCalculatorLink.h; sourceTree = "<group>"; };
+		ACEEB702199B40FE008E06AA /* CurrencyCalculatorLink.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CurrencyCalculatorLink.m; sourceTree = "<group>"; };
 		ACF4B17219668D5700CE24FD /* MarketListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MarketListCell.h; path = Cells/MarketListCell.h; sourceTree = "<group>"; };
 		ACF4B17319668D5700CE24FD /* MarketListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MarketListCell.m; path = Cells/MarketListCell.m; sourceTree = "<group>"; };
 		DA641E82196E7BC20095DF42 /* CrashLog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CrashLog.h; path = CrashLog/CrashLog.h; sourceTree = "<group>"; };
@@ -440,6 +446,8 @@
 		4217A36E1951233500063746 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				AC3C2621199B58750055FF5E /* TrendingGraphicData.h */,
+				AC3C2622199B58750055FF5E /* TrendingGraphicData.m */,
 				4217A3711951235D00063746 /* Depth.h */,
 				4217A3721951235D00063746 /* Depth.m */,
 				427CF4C01953D6DF0081869C /* QRCodeTransportPage.h */,
@@ -794,6 +802,8 @@
 				ACBB5F55198B468E00B19F4B /* UIViewController+ConfigureTableView.m */,
 				ACCA274F198F2A68000E6A32 /* PieChartView.h */,
 				ACCA2750198F2A68000E6A32 /* PieChartView.m */,
+				ACEEB701199B40FE008E06AA /* CurrencyCalculatorLink.h */,
+				ACEEB702199B40FE008E06AA /* CurrencyCalculatorLink.m */,
 			);
 			path = UIBase;
 			sourceTree = "<group>";
@@ -1094,12 +1104,14 @@
 				ACE4ED5E198A3AE600C8862C /* AdvanceViewController.m in Sources */,
 				4269FF7E195AB6F9001213B9 /* MarketUtil.m in Sources */,
 				AC2F329E195D19C2001B7439 /* DialogSendTxConfirm.m in Sources */,
+				AC3C2623199B58750055FF5E /* TrendingGraphicData.m in Sources */,
 				DA641E8C196E7BC20095DF42 /* GCCrashReportFilterTrim.m in Sources */,
 				ACDDDC2319480DE00008A79D /* UIViewController+PiShowBanner.m in Sources */,
 				ACCA274B1989FACC000E6A32 /* HotAddressTabButton.m in Sources */,
 				ACE4ED5B198A298100C8862C /* ScanPrivateKeyDelegate.m in Sources */,
 				AC1715871969213800337AB5 /* DialogAddressOptions.m in Sources */,
 				4269FF7B195A948A001213B9 /* CacheUtil.m in Sources */,
+				ACEEB703199B40FE008E06AA /* CurrencyCalculatorLink.m in Sources */,
 				ACD6DFD8196BF98B009D8031 /* DialogAddressFull.m in Sources */,
 				4254086B1946CD17007AF99C /* NSDictionary+Fromat.m in Sources */,
 				AC2F329B195D1930001B7439 /* UnsignedTransactionViewController.m in Sources */,

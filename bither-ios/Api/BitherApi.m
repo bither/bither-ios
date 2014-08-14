@@ -53,6 +53,19 @@ static BitherApi *piApi;
     }];
 
 }
+-(void)getExchangeTrend:(MarketType) marketType callback:(ArrayResponseBlock) callback andErrorCallBack:(ErrorHandler)errorCallback{
+    NSString  *url=[NSString stringWithFormat:BITHER_TREND_URL ,marketType];
+    [self get:url withParams:nil networkType:BitherStats completed:^(MKNetworkOperation *completedOperation) {
+        if (callback) {
+            callback(completedOperation.responseJSON);
+        }
+        
+    } andErrorCallback:^(MKNetworkOperation *errorOp, NSError *error) {
+        if (errorCallback) {
+            errorCallback(errorOp,error);
+        }
+    }];
+}
 -(void)getExchangeDepth:(MarketType) marketType callback:(ArrayResponseBlock) callback andErrorCallBack:(ErrorHandler)errorCallback{
     //[];
 }

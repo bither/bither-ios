@@ -35,5 +35,6 @@
 -(void)getExchangeTicker:(VoidBlock) callback andErrorCallBack:(ErrorHandler)errorCallback;
 - (void)uploadCrash:(NSString *)data callback:(DictResponseBlock)callback andErrorCallBack:(ErrorHandler)errorCallback;
 
+-(void)getExchangeTrend:(MarketType) marketType callback:(ArrayResponseBlock) callback andErrorCallBack:(ErrorHandler)errorCallback;
 
 @end

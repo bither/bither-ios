@@ -1,13 +1,13 @@
 PODS:
-  - Bitheri (0.0.1):
-    - CocoaLumberjack
-    - FMDB
+  - Bitheri (1.0.2):
+    - CocoaLumberjack (~> 1.9.1)
+    - FMDB (~> 2.3)
     - OpenSSL (= 1.0.1)
-    - Reachability
-  - CocoaLumberjack (1.9.1):
+    - Reachability (~> 3.1.1)
+  - CocoaLumberjack (1.9.2):
     - CocoaLumberjack/Extensions
-  - CocoaLumberjack/Core (1.9.1)
-  - CocoaLumberjack/Extensions (1.9.1):
+  - CocoaLumberjack/Core (1.9.2)
+  - CocoaLumberjack/Extensions (1.9.2):
     - CocoaLumberjack/Core
   - FMDB (2.3):
     - FMDB/standard
@@ -86,8 +86,8 @@ EXTERNAL SOURCES:
     :git: git@github.com:bither/bitheri.git
 
 SPEC CHECKSUMS:
-  Bitheri: ef6d2cb8331b4fd0047e7a1232b00d6f823b506b
-  CocoaLumberjack: 94accd5749f5c5d15134c8d50f34a973aed8ef69
+  Bitheri: 3c3a990d81f959884a294558c8c094491855d40a
+  CocoaLumberjack: 205769c032b5fef85b92472046bcc8b7e7c8a817
   FMDB: 31ec26773c7f7b7890a6038235a1f2bbd933a7cb
   KSCrash: c0a693b2d83ced5c15a40d4e916833c655475e6a
   MKNetworkKit: 83e6296a8d42e98a71880424a889773654846d74

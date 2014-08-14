@@ -41,6 +41,7 @@
 #import "CrashLog/CrashLog.h"
 #import "AddressDetailViewController.h"
 #import "Reachability.h"
+#import "TrendingGraphicData.h"
 
 @interface AppDelegate()
 @end
