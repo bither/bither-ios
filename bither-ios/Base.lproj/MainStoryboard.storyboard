@@ -1353,14 +1353,14 @@
                             </label>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="0.00" minimumFontSize="17" background="textfield_activated_holo_light" clearButtonMode="whileEditing" id="1pu-fA-kTl">
                                 <rect key="frame" x="10" y="136" width="144" height="36"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <rect key="contentStretch" x="0.0" y="0.0" width="0.5" height="1"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" keyboardType="decimalPad" returnKeyType="next" enablesReturnKeyAutomatically="YES"/>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="0.00" minimumFontSize="17" background="textfield_activated_holo_light" clearButtonMode="whileEditing" id="Yo9-av-E4b">
                                 <rect key="frame" x="166" y="136" width="144" height="36"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxY="YES"/>
                                 <rect key="contentStretch" x="0.0" y="0.0" width="0.5" height="1"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" keyboardType="decimalPad" returnKeyType="next" enablesReturnKeyAutomatically="YES"/>
@@ -1496,8 +1496,16 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="0.00" minimumFontSize="17" background="textfield_activated_holo_light" clearButtonMode="whileEditing" id="MAT-xt-p4f">
-                                <rect key="frame" x="10" y="136" width="300" height="36"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <rect key="frame" x="10" y="136" width="144" height="36"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <rect key="contentStretch" x="0.0" y="0.0" width="0.5" height="1"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" keyboardType="decimalPad" returnKeyType="next" enablesReturnKeyAutomatically="YES"/>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="0.00" minimumFontSize="17" background="textfield_activated_holo_light" clearButtonMode="whileEditing" id="xBU-Zh-e2V">
+                                <rect key="frame" x="166" y="136" width="144" height="36"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxY="YES"/>
+                                <rect key="contentStretch" x="0.0" y="0.0" width="0.5" height="1"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" keyboardType="decimalPad" returnKeyType="next" enablesReturnKeyAutomatically="YES"/>
                             </textField>
@@ -1566,16 +1574,22 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <connections>
+                        <outlet property="amtLink" destination="vGE-ge-Zvm" id="SXD-cd-awT"/>
                         <outlet property="btnSend" destination="OlL-T9-SKL" id="riG-7y-tkD"/>
                         <outlet property="lblBalance" destination="bKW-aE-gcw" id="ksA-3h-B8q"/>
                         <outlet property="lblBalancePrefix" destination="uiN-WE-JlS" id="bHV-V4-poT"/>
                         <outlet property="lblPayTo" destination="F4n-lA-Ige" id="rl7-D1-BLd"/>
                         <outlet property="tfAddress" destination="7eD-5T-1F7" id="hPP-Hb-qTA"/>
-                        <outlet property="tfAmount" destination="MAT-xt-p4f" id="dDV-bm-QOL"/>
                         <outlet property="vTopBar" destination="wVS-Li-HQH" id="b6g-5w-RW9"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tdd-gr-zBH" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <customObject id="vGE-ge-Zvm" customClass="CurrencyCalculatorLink">
+                    <connections>
+                        <outlet property="tfBtc" destination="MAT-xt-p4f" id="rXw-QW-TTe"/>
+                        <outlet property="tfCurrency" destination="xBU-Zh-e2V" id="bCx-rL-Dbs"/>
+                    </connections>
+                </customObject>
             </objects>
             <point key="canvasLocation" x="2256" y="-53"/>
         </scene>
