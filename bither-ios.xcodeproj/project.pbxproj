@@ -135,6 +135,9 @@
 		ACE4ED5B198A298100C8862C /* ScanPrivateKeyDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = ACE4ED5A198A298100C8862C /* ScanPrivateKeyDelegate.m */; };
 		ACE4ED5E198A3AE600C8862C /* AdvanceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ACE4ED5D198A3AE600C8862C /* AdvanceViewController.m */; };
 		ACEEB703199B40FE008E06AA /* CurrencyCalculatorLink.m in Sources */ = {isa = PBXBuildFile; fileRef = ACEEB702199B40FE008E06AA /* CurrencyCalculatorLink.m */; };
+		ACEEB8DE19B46EB900F2789C /* NetworkMonitorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ACEEB8DD19B46EB900F2789C /* NetworkMonitorViewController.m */; };
+		ACEEB8E119B46EC600F2789C /* PeerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ACEEB8E019B46EC600F2789C /* PeerViewController.m */; };
+		ACEEB8E419B46ED200F2789C /* BlockViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ACEEB8E319B46ED200F2789C /* BlockViewController.m */; };
 		ACF4B17419668D5700CE24FD /* MarketListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = ACF4B17319668D5700CE24FD /* MarketListCell.m */; };
 		CE2C53C791F4479AADAD9EB2 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FED7A4051DB45218112FAC0 /* libPods.a */; };
 		DA641E8A196E7BC20095DF42 /* CrashLog.m in Sources */ = {isa = PBXBuildFile; fileRef = DA641E83196E7BC20095DF42 /* CrashLog.m */; };
@@ -404,6 +407,12 @@
 		ACE4ED5D198A3AE600C8862C /* AdvanceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AdvanceViewController.m; sourceTree = "<group>"; };
 		ACEEB701199B40FE008E06AA /* CurrencyCalculatorLink.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CurrencyCalculatorLink.h; sourceTree = "<group>"; };
 		ACEEB702199B40FE008E06AA /* CurrencyCalculatorLink.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CurrencyCalculatorLink.m; sourceTree = "<group>"; };
+		ACEEB8DC19B46EB900F2789C /* NetworkMonitorViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetworkMonitorViewController.h; sourceTree = "<group>"; };
+		ACEEB8DD19B46EB900F2789C /* NetworkMonitorViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NetworkMonitorViewController.m; sourceTree = "<group>"; };
+		ACEEB8DF19B46EC600F2789C /* PeerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PeerViewController.h; sourceTree = "<group>"; };
+		ACEEB8E019B46EC600F2789C /* PeerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PeerViewController.m; sourceTree = "<group>"; };
+		ACEEB8E219B46ED200F2789C /* BlockViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BlockViewController.h; sourceTree = "<group>"; };
+		ACEEB8E319B46ED200F2789C /* BlockViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BlockViewController.m; sourceTree = "<group>"; };
 		ACF4B17219668D5700CE24FD /* MarketListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MarketListCell.h; path = Cells/MarketListCell.h; sourceTree = "<group>"; };
 		ACF4B17319668D5700CE24FD /* MarketListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MarketListCell.m; path = Cells/MarketListCell.m; sourceTree = "<group>"; };
 		DA641E82196E7BC20095DF42 /* CrashLog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CrashLog.h; path = CrashLog/CrashLog.h; sourceTree = "<group>"; };
@@ -481,6 +490,7 @@
 		421B03B419495AEF003A45F1 /* Hot */ = {
 			isa = PBXGroup;
 			children = (
+				ACEEB8DB19B46EB900F2789C /* NetworkMonitor */,
 				421B03B519495AEF003A45F1 /* HotViewController.h */,
 				AC0135D7194FDCDF00E3BB95 /* HotAddressAddPrivateKeyViewController.h */,
 				421B03B619495AEF003A45F1 /* HotViewController.m */,
@@ -853,6 +863,19 @@
 			path = Dialog;
 			sourceTree = "<group>";
 		};
+		ACEEB8DB19B46EB900F2789C /* NetworkMonitor */ = {
+			isa = PBXGroup;
+			children = (
+				ACEEB8DC19B46EB900F2789C /* NetworkMonitorViewController.h */,
+				ACEEB8DD19B46EB900F2789C /* NetworkMonitorViewController.m */,
+				ACEEB8DF19B46EC600F2789C /* PeerViewController.h */,
+				ACEEB8E019B46EC600F2789C /* PeerViewController.m */,
+				ACEEB8E219B46ED200F2789C /* BlockViewController.h */,
+				ACEEB8E319B46ED200F2789C /* BlockViewController.m */,
+			);
+			path = NetworkMonitor;
+			sourceTree = "<group>";
+		};
 		DA641E81196E7B750095DF42 /* CrashLog */ = {
 			isa = PBXGroup;
 			children = (
@@ -1046,6 +1069,7 @@
 				ACD6DFCF196B99BF009D8031 /* DialogBlackQrCode.m in Sources */,
 				ACD6DFD5196BDC9F009D8031 /* NSAttributedString+Size.m in Sources */,
 				427CF4C21953D6DF0081869C /* QRCodeTransportPage.m in Sources */,
+				ACEEB8E419B46ED200F2789C /* BlockViewController.m in Sources */,
 				ACF4B17419668D5700CE24FD /* MarketListCell.m in Sources */,
 				ACD6DFD2196BA83B009D8031 /* ColdAddressAddViewController.m in Sources */,
 				425408581946A219007AF99C /* DateUtil.m in Sources */,
@@ -1103,6 +1127,8 @@
 				AC8F0DCA196CF4E400CCD0F9 /* SelectViewController.m in Sources */,
 				ACE4ED5E198A3AE600C8862C /* AdvanceViewController.m in Sources */,
 				4269FF7E195AB6F9001213B9 /* MarketUtil.m in Sources */,
+				ACEEB8E119B46EC600F2789C /* PeerViewController.m in Sources */,
+				ACEEB8DE19B46EB900F2789C /* NetworkMonitorViewController.m in Sources */,
 				AC2F329E195D19C2001B7439 /* DialogSendTxConfirm.m in Sources */,
 				AC3C2623199B58750055FF5E /* TrendingGraphicData.m in Sources */,
 				DA641E8C196E7BC20095DF42 /* GCCrashReportFilterTrim.m in Sources */,

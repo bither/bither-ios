@@ -52,6 +52,8 @@
     lblVersion.font = [UIFont systemFontOfSize:12];
     if (isHot) {
        lblVersion.text = [NSString stringWithFormat:@"Bither Hot %@", [[[NSBundle mainBundle]infoDictionary]objectForKey:(NSString*)kCFBundleVersionKey]];
+       
+        
     }else{
         lblVersion.text = [NSString stringWithFormat:@"Bither Cold %@", [[[NSBundle mainBundle]infoDictionary]objectForKey:(NSString*)kCFBundleVersionKey]];
     
@@ -74,9 +76,17 @@
     [footer addSubview:ivLogo];
     lblVersion.frame = CGRectMake((footer.frame.size.width - lblVersion.frame.size.width)/2, CGRectGetMaxY(ivLogo.frame) + logoBottomMargin, lblVersion.frame.size.width, lblVersion.frame.size.height);
     [footer addSubview:lblVersion];
+    if (isHot) {
+        ivLogo.userInteractionEnabled=YES;
+        UITapGestureRecognizer *tapGestureTel = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(toNetworkMonitor)];
+        [ivLogo addGestureRecognizer:tapGestureTel];
+    }
     tableView.tableFooterView = footer;
 }
-
+-(void)toNetworkMonitor{
+    UIViewController *viewController = [self.storyboard instantiateViewControllerWithIdentifier:@"NetworkMonitorViewController"];
+    [self.navigationController pushViewController:viewController animated:YES];
+}
 
 -(void)configureHeaderAndFooterNoLogo :(UITableView * )tableView background:(UIColor *)colorBg{
     UIImageView *ivTop = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"list_item_card_shadow_top"]];
@@ -117,5 +127,6 @@
    
     tableView.tableFooterView = footer;
 }
+
 
 @end
