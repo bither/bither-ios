@@ -68,6 +68,7 @@
     
     CGFloat bottom = CGRectGetMaxY(ivForeground.frame);
     
+    NSString * symbol=[BitherSetting getExchangeSymbol:[[UserDefaultsUtil instance] getDefaultExchangeType]];
     if(hot > 0){
         UILabel* lbl = [[UILabel alloc]initWithFrame:CGRectMake(kBottomHorizontalMargin, bottom + kVerticalGap, self.frame.size.width - kBottomHorizontalMargin * 2, kBottomLabelFontSize * 1.2)];
         lbl.font = [UIFont systemFontOfSize:kBottomLabelFontSize];
@@ -90,7 +91,7 @@
             lbl.font = [UIFont systemFontOfSize:kBottomLabelFontSize];
             lbl.textColor = [UIColor whiteColor];
             lbl.textAlignment = NSTextAlignmentRight;
-            lbl.text = [StringUtil formatPrice:(price * hot)/pow(10, 8)];
+            lbl.text = [NSString stringWithFormat:@"%@ %.2f", symbol ,(price * hot)/pow(10, 8)];
             [self addSubview:lbl];
             
             bottom = CGRectGetMaxY(lbl.frame);
@@ -119,7 +120,7 @@
             lbl.font = [UIFont systemFontOfSize:kBottomLabelFontSize];
             lbl.textColor = [UIColor whiteColor];
             lbl.textAlignment = NSTextAlignmentRight;
-            lbl.text = [StringUtil formatPrice:(price * cold)/pow(10, 8)];
+            lbl.text = [NSString stringWithFormat:@"%@ %.2f", symbol ,(price * cold)/pow(10, 8)];
             [self addSubview:lbl];
             
             bottom = CGRectGetMaxY(lbl.frame);

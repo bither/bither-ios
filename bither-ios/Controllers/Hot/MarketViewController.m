@@ -21,6 +21,7 @@
 #import "StringUtil.h"
 #import "NSString+Size.h"
 #import "BitherTime.h"
+#import "TrendingGraphicView.h"
 
 #define DEFAULT_DISPALY_PRICE @"--"
 
@@ -44,6 +45,7 @@
 @property (weak, nonatomic) IBOutlet UIView *vRightContainer;
 @property (weak, nonatomic) IBOutlet UILabel *lbl24H;
 @property (weak, nonatomic) IBOutlet UIImageView *ivProgress;
+@property (weak, nonatomic) IBOutlet TrendingGraphicView *vTrending;
 
 
 @property (weak, nonatomic) Market * market;
@@ -86,7 +88,7 @@
     if (_isCheckAnimation) {
         [self moveProgress];
     }
-    
+    self.vTrending.marketType = self.market.marketType;
 }
 -(void)viewDidDisappear:(BOOL)animated{
     [super viewDidDisappear:animated];
@@ -150,6 +152,8 @@
     frame.origin.x = frame.origin.x - (width - frame.size.width);
     frame.size.width = width;
     self.vRightContainer.frame = frame;
+    
+    self.vTrending.frame = CGRectMake(CGRectGetMaxX(self.vLeftContainer.frame) + 2, self.vLeftContainer.frame.origin.y, self.vRightContainer.frame.origin.x - CGRectGetMaxX(self.vLeftContainer.frame) + 4, self.vLeftContainer.frame.size.height);
 }
 
 -(void)moveProgress{
@@ -183,6 +187,7 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     self.market=[[MarketUtil getMarkets] objectAtIndex:indexPath.row];
+    self.vTrending.marketType = self.market.marketType;
     [self reload];
 }
 
