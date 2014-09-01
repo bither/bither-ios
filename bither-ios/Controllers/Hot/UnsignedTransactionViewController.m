@@ -85,9 +85,6 @@
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     [BTSettings instance].feeBase = ([[UserDefaultsUtil instance] getTransactionFeeMode] == Low ? 1000 : 10000);
-    if(self.tx && ![self.tx verifySignatures]){
-        self.btnSend.enabled = YES;
-    }
     if (![[BTPeerManager sharedInstance] connected]) {
         [[PeerUtil instance] startPeer];
     }
@@ -101,6 +98,8 @@
         }else{
             [self.amtLink becomeFirstResponder];
         }
+    }else{
+        self.btnSend.enabled = YES;
     }
 }
 
