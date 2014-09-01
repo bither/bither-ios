@@ -78,6 +78,7 @@
 		AC2F3298195C1D53001B7439 /* SendViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AC2F3297195C1D53001B7439 /* SendViewController.m */; };
 		AC2F329B195D1930001B7439 /* UnsignedTransactionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AC2F329A195D1930001B7439 /* UnsignedTransactionViewController.m */; };
 		AC2F329E195D19C2001B7439 /* DialogSendTxConfirm.m in Sources */ = {isa = PBXBuildFile; fileRef = AC2F329D195D19C2001B7439 /* DialogSendTxConfirm.m */; };
+		AC31E92F19B4533F00EFDDF1 /* TrendingGraphicView.m in Sources */ = {isa = PBXBuildFile; fileRef = AC31E92E19B4533F00EFDDF1 /* TrendingGraphicView.m */; };
 		AC33088E1955668D00D8F621 /* HotAddressListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AC33088D1955668D00D8F621 /* HotAddressListCell.m */; };
 		AC33089119556AB800D8F621 /* HotAddressListSectionHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = AC33089019556AB800D8F621 /* HotAddressListSectionHeader.m */; };
 		AC33089519556F7A00D8F621 /* UIImage+ImageWithColor.m in Sources */ = {isa = PBXBuildFile; fileRef = AC33089419556F7A00D8F621 /* UIImage+ImageWithColor.m */; };
@@ -293,6 +294,8 @@
 		AC2F329A195D1930001B7439 /* UnsignedTransactionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UnsignedTransactionViewController.m; sourceTree = "<group>"; };
 		AC2F329C195D19C2001B7439 /* DialogSendTxConfirm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DialogSendTxConfirm.h; sourceTree = "<group>"; };
 		AC2F329D195D19C2001B7439 /* DialogSendTxConfirm.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DialogSendTxConfirm.m; sourceTree = "<group>"; };
+		AC31E92D19B4533F00EFDDF1 /* TrendingGraphicView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TrendingGraphicView.h; sourceTree = "<group>"; };
+		AC31E92E19B4533F00EFDDF1 /* TrendingGraphicView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TrendingGraphicView.m; sourceTree = "<group>"; };
 		AC33088C1955668D00D8F621 /* HotAddressListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HotAddressListCell.h; path = Cells/HotAddressListCell.h; sourceTree = "<group>"; };
 		AC33088D1955668D00D8F621 /* HotAddressListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HotAddressListCell.m; path = Cells/HotAddressListCell.m; sourceTree = "<group>"; };
 		AC33088F19556AB800D8F621 /* HotAddressListSectionHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HotAddressListSectionHeader.h; path = Cells/HotAddressListSectionHeader.h; sourceTree = "<group>"; };
@@ -804,6 +807,8 @@
 				ACCA2750198F2A68000E6A32 /* PieChartView.m */,
 				ACEEB701199B40FE008E06AA /* CurrencyCalculatorLink.h */,
 				ACEEB702199B40FE008E06AA /* CurrencyCalculatorLink.m */,
+				AC31E92D19B4533F00EFDDF1 /* TrendingGraphicView.h */,
+				AC31E92E19B4533F00EFDDF1 /* TrendingGraphicView.m */,
 			);
 			path = UIBase;
 			sourceTree = "<group>";
@@ -1065,6 +1070,7 @@
 				ACB9B9C9195AD27300019216 /* TransactionCell.m in Sources */,
 				AC0135D0194ED8B800E3BB95 /* HotAddressAddViewController.m in Sources */,
 				AC17158D1969359900337AB5 /* DialogPrivateKeyEncryptedQrCode.m in Sources */,
+				AC31E92F19B4533F00EFDDF1 /* TrendingGraphicView.m in Sources */,
 				4254084119469D5A007AF99C /* BitherSetting.m in Sources */,
 				421B03BD19495AEF003A45F1 /* MarketViewController.m in Sources */,
 				AC2F3292195BF35E001B7439 /* QrUtil.m in Sources */,

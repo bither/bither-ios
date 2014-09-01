@@ -507,6 +507,11 @@
                                                 <color key="shadowColor" white="0.0" alpha="0.20000000000000001" colorSpace="calibratedWhite"/>
                                                 <size key="shadowOffset" width="0.0" height="3"/>
                                             </label>
+                                            <view contentMode="scaleToFill" id="N4n-J3-Nec" customClass="TrendingGraphicView">
+                                                <rect key="frame" x="90" y="100" width="120" height="68"/>
+                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                            </view>
                                             <view contentMode="scaleToFill" id="YcQ-RR-Q9s">
                                                 <rect key="frame" x="12" y="100" width="74" height="68"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" heightSizable="YES"/>
@@ -672,6 +677,7 @@
                         <outlet property="vAmountContainer" destination="RGu-7C-tXF" id="92M-BW-FOq"/>
                         <outlet property="vLeftContainer" destination="YcQ-RR-Q9s" id="3nS-Pf-jai"/>
                         <outlet property="vRightContainer" destination="AQo-J7-3YQ" id="zh0-eJ-baw"/>
+                        <outlet property="vTrending" destination="N4n-J3-Nec" id="3t3-Y3-zuU"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="prt-uW-ygq" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -2151,7 +2157,7 @@
                                                         <size key="shadowOffset" width="0.0" height="4"/>
                                                     </label>
                                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="%" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="1MG-Ff-Ctm">
-                                                        <rect key="frame" x="137.00000015923962" y="36" width="32" height="31"/>
+                                                        <rect key="frame" x="137" y="36" width="32" height="31"/>
                                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" heightSizable="YES"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
