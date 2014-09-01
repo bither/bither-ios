@@ -78,7 +78,7 @@ static PeerUtil * peerUtil;
             [self getMyTx:addresses index:index callback:callback andErrorCallBack:errorCallback];
         }
     }else{
-        uint32_t storeHeight=[[BTBlockChain instance] lastBlock].height;
+        uint32_t storeHeight=[[BTBlockChain instance] lastBlock].blockNo;
         [[BitherApi instance] getMyTransactionApi:address.address callback:^(NSDictionary * dict) {
             NSArray *txs=[TransactionsUtil getTransactions:dict storeBlockHeight:storeHeight];
             uint32_t apiBlockCount=[dict getIntFromDict:BLOCK_COUNT];
