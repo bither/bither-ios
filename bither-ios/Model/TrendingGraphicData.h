@@ -19,7 +19,8 @@
 @property (strong,nonatomic) NSArray * prices;
 @property (strong,nonatomic) NSMutableArray * rates;
 
-
 +(void)getTrendingGraphicData:(MarketType ) marketType callback:(IdResponseBlock)callback andErrorCallback:(ErrorBlock)errorCallback;
+
++(instancetype)getEmptyData;
 
 @end

@@ -71,7 +71,8 @@ static NSMutableDictionary * tgds;
     [tgd setCreateTime:[[NSDate new] timeIntervalSince1970]];
     return tgd;
 }
-+(TrendingGraphicData *)getEmptyData{
+
++(instancetype)getEmptyData{
     
     if (_emptyData==nil) {
         _emptyData=[[TrendingGraphicData alloc] init];
@@ -91,8 +92,6 @@ static NSMutableDictionary * tgds;
 +(void)getTrendingGraphicData:(MarketType ) marketType callback:(IdResponseBlock)callback andErrorCallback:(ErrorBlock)errorCallback{
     if (tgds==nil) {
         tgds=[NSMutableDictionary new];
-       
-    
     }
     
     if (tgds.count>marketType) {
