@@ -63,6 +63,7 @@
     UIButton *btn = [[UIButton alloc]initWithFrame:CGRectMake(0, self.frame.size.height - kShareBottomHeight, 0, kShareBottomHeight)];
     [btn setTitle:NSLocalizedString(@"Back up private key", nil) forState:UIControlStateNormal];
     [btn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [btn setTitleColor:[UIColor colorWithWhite:1 alpha:0.5] forState:UIControlStateHighlighted];
     btn.contentEdgeInsets = UIEdgeInsetsMake(0, kShareBottomHeight + kShareBottomImageMargin, 0, 0);
     btn.titleLabel.font = [UIFont systemFontOfSize:kShareBottomFontSize];
     UIImageView *iv = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, kShareBottomHeight, kShareBottomHeight)];
