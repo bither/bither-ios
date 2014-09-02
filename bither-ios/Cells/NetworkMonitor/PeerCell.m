@@ -40,7 +40,7 @@
     // Configure the view for the selected state
 }
 -(void)setPeer:(BTPeer *)peer{
-    self.lbAddress.text=@"af";
+    //self.lbAddress.text=peer.peerServices;
 }
 
 @end
