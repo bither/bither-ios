@@ -103,8 +103,8 @@
             NSString * timeStr=[txDict getStringFromDict:TX_TIME];
             uint32_t time =[[DateUtil getDateFormStringWithTimeZone:timeStr] timeIntervalSince1970];
             [tx setTxHash:txHash];
-            [tx setVersion:version];
-            [tx setBlockHeight:blockNo];
+            [tx setTxVer:version];
+            [tx setBlockNo:blockNo];
             [tx setTxTime:time];
             if ([[txDict allKeys] containsObject:TX_OUT]) {
                 NSArray * outArray=[txDict objectForKey:TX_OUT];
@@ -132,7 +132,7 @@
                 
             }
             for(BTTx * temp in array){
-                if (temp.blockHeight==tx.blockHeight) {
+                if (temp.blockNo==tx.blockNo) {
                     if ([[temp inputHashes] containsObject:tx.txHash]) {
                         [tx setTxTime:temp.txTime-1];
                     }else if([[tx inputHashes]containsObject:temp.txHash]){
@@ -145,8 +145,8 @@
         }
     }
     [array sortUsingComparator:^NSComparisonResult(id obj1, id obj2) {
-        if ([obj1 blockHeight] > [obj2 blockHeight]) return NSOrderedDescending;
-        if ([obj1 blockHeight] < [obj2 blockHeight]) return NSOrderedAscending;
+        if ([obj1 blockNo] > [obj2 blockNo]) return NSOrderedDescending;
+        if ([obj1 blockNo] < [obj2 blockNo]) return NSOrderedAscending;
         if ([obj1 txTime] >[obj2 txTime]) return NSOrderedDescending;
         if ([obj1 txTime] <[obj2 txTime]) return NSOrderedAscending;
         NSLog(@"NSOrderedSame");
