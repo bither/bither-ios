@@ -70,8 +70,8 @@
     self.tableView.delegate=self;
     self.tableView.tableFooterView = [[UIView alloc]initWithFrame:CGRectZero];
     self.market=[MarketUtil getDefaultMarket];
-    [self.vTrending setData:nil];
     [self reload];
+    [self.vTrending setData:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(notificationReload) name:BitherMarketUpdateNotification object:nil];
     _isCheckAnimation=NO;
     
