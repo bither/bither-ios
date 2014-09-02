@@ -8,7 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import "Market.h"
+#import "TrendingGraphicData.h"
 
 @interface TrendingGraphicView : UIView
 @property MarketType marketType;
+-(void)setData:(TrendingGraphicData*)data;
 @end

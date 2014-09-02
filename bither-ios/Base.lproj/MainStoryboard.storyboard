@@ -553,7 +553,7 @@
                                 <rect key="frame" x="10" y="10" width="300" height="460"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <subviews>
-                                    <view contentMode="scaleToFill" id="KVs-BE-qNW">
+                                    <view contentMode="scaleToFill" id="KVs-BE-qNW" customClass="BackgroundTransitionView">
                                         <rect key="frame" x="0.0" y="0.0" width="300" height="180"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                         <subviews>

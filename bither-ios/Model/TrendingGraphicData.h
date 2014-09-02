@@ -18,6 +18,7 @@
 @property (readwrite,nonatomic) double low;
 @property (strong,nonatomic) NSArray * prices;
 @property (strong,nonatomic) NSMutableArray * rates;
+@property MarketType marketType;
 
 +(void)getTrendingGraphicData:(MarketType ) marketType callback:(IdResponseBlock)callback andErrorCallback:(ErrorBlock)errorCallback;
 

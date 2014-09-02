@@ -7,7 +7,6 @@
 //
 
 #import "TrendingGraphicView.h"
-#import "TrendingGraphicData.h"
 #import <QuartzCore/QuartzCore.h>
 
 #define kTransformDuration (0.3)
@@ -63,6 +62,7 @@
     [self.layer addSublayer:self.shapeLayer];
     self.shapeLayer.lineWidth = 2;
     self.shapeLayer.strokeColor = [UIColor whiteColor].CGColor;
+    self.shapeLayer.fillColor = nil;
     self.shapeLayer.lineCap = @"round";
     self.shapeLayer.lineJoin = @"round";
 }
@@ -78,13 +78,23 @@
 -(void)getTrendingGraphicData{
     [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(getTrendingGraphicData) object:nil];
     [TrendingGraphicData getTrendingGraphicData:self.marketType callback:^(id response) {
-        [self setData:response];
+        if([response isKindOfClass:[TrendingGraphicData class]]){
+            TrendingGraphicData* data = response;
+            if(data.marketType == self.marketType){
+                [self setData:data];
+            }
+        }
     } andErrorCallback:^(NSError *error) {
         [self performSelector:@selector(getTrendingGraphicData) withObject:nil afterDelay:30];
     }];
 }
 
 -(void)setData:(TrendingGraphicData*)data{
+    if(!self.animation && !data){
+        data = [TrendingGraphicData getEmptyData];
+        [self drawCurrent:[[RateAnimation alloc] initWithStartRates:data.rates endRates:data.rates]];
+        return;
+    }
     if(!data){
         data = [TrendingGraphicData getEmptyData];
     }
@@ -210,7 +220,6 @@
 
 -(void)invalidate{
     if(displayLink){
-        NSLog(@"Invalidate rates animation");
         [displayLink invalidate];
         displayLink = nil;
     }

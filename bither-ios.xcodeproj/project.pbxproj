@@ -79,6 +79,7 @@
 		AC2F329B195D1930001B7439 /* UnsignedTransactionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AC2F329A195D1930001B7439 /* UnsignedTransactionViewController.m */; };
 		AC2F329E195D19C2001B7439 /* DialogSendTxConfirm.m in Sources */ = {isa = PBXBuildFile; fileRef = AC2F329D195D19C2001B7439 /* DialogSendTxConfirm.m */; };
 		AC31E92F19B4533F00EFDDF1 /* TrendingGraphicView.m in Sources */ = {isa = PBXBuildFile; fileRef = AC31E92E19B4533F00EFDDF1 /* TrendingGraphicView.m */; };
+		AC31E93219B477E400EFDDF1 /* BackgroundTransitionView.m in Sources */ = {isa = PBXBuildFile; fileRef = AC31E93119B477E400EFDDF1 /* BackgroundTransitionView.m */; };
 		AC33088E1955668D00D8F621 /* HotAddressListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AC33088D1955668D00D8F621 /* HotAddressListCell.m */; };
 		AC33089119556AB800D8F621 /* HotAddressListSectionHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = AC33089019556AB800D8F621 /* HotAddressListSectionHeader.m */; };
 		AC33089519556F7A00D8F621 /* UIImage+ImageWithColor.m in Sources */ = {isa = PBXBuildFile; fileRef = AC33089419556F7A00D8F621 /* UIImage+ImageWithColor.m */; };
@@ -299,6 +300,8 @@
 		AC2F329D195D19C2001B7439 /* DialogSendTxConfirm.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DialogSendTxConfirm.m; sourceTree = "<group>"; };
 		AC31E92D19B4533F00EFDDF1 /* TrendingGraphicView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TrendingGraphicView.h; sourceTree = "<group>"; };
 		AC31E92E19B4533F00EFDDF1 /* TrendingGraphicView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TrendingGraphicView.m; sourceTree = "<group>"; };
+		AC31E93019B477E400EFDDF1 /* BackgroundTransitionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BackgroundTransitionView.h; sourceTree = "<group>"; };
+		AC31E93119B477E400EFDDF1 /* BackgroundTransitionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BackgroundTransitionView.m; sourceTree = "<group>"; };
 		AC33088C1955668D00D8F621 /* HotAddressListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HotAddressListCell.h; path = Cells/HotAddressListCell.h; sourceTree = "<group>"; };
 		AC33088D1955668D00D8F621 /* HotAddressListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HotAddressListCell.m; path = Cells/HotAddressListCell.m; sourceTree = "<group>"; };
 		AC33088F19556AB800D8F621 /* HotAddressListSectionHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HotAddressListSectionHeader.h; path = Cells/HotAddressListSectionHeader.h; sourceTree = "<group>"; };
@@ -819,6 +822,8 @@
 				ACEEB702199B40FE008E06AA /* CurrencyCalculatorLink.m */,
 				AC31E92D19B4533F00EFDDF1 /* TrendingGraphicView.h */,
 				AC31E92E19B4533F00EFDDF1 /* TrendingGraphicView.m */,
+				AC31E93019B477E400EFDDF1 /* BackgroundTransitionView.h */,
+				AC31E93119B477E400EFDDF1 /* BackgroundTransitionView.m */,
 			);
 			path = UIBase;
 			sourceTree = "<group>";
@@ -1161,6 +1166,7 @@
 				ACDDDC2D19480ECF0008A79D /* DialogCentered.m in Sources */,
 				4268FE2B194ACD57007A4C30 /* CheckViewController.m in Sources */,
 				ACDDDC2219480DE00008A79D /* UIBaseUtil.m in Sources */,
+				AC31E93219B477E400EFDDF1 /* BackgroundTransitionView.m in Sources */,
 				AC202AD3196BD97A00033EC1 /* SettingListCell.m in Sources */,
 				4269FF78195A92BE001213B9 /* ExchangeUtil.m in Sources */,
 				4254085B1946A219007AF99C /* JRSwizzle.m in Sources */,

@@ -97,6 +97,7 @@ static NSMutableDictionary * tgds;
     if (tgds.count>marketType) {
         TrendingGraphicData * tgd=[tgds objectForKey:@(marketType)];
         if (tgd&&![tgd isExpired]) {
+            tgd.marketType = marketType;
             if (callback) {
                 callback(tgd);
                 return;
@@ -108,6 +109,7 @@ static NSMutableDictionary * tgds;
             TrendingGraphicData * tgd=[TrendingGraphicData format:array];
             [tgds setObject:tgd forKey:@(marketType)];
             dispatch_async(dispatch_get_main_queue(), ^{
+                tgd.marketType = marketType;
                 if (callback) {
                     callback(tgd);
                 }
