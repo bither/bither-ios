@@ -7,8 +7,12 @@
 //
 
 #import "BlockViewController.h"
+#import "BlockCell.h"
+#import "BTBlockChain.h"
 
-@interface BlockViewController ()
+@interface BlockViewController ()<UITableViewDataSource,UITableViewDelegate>
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (strong,nonatomic) NSArray * blocks;
 
 @end
 
@@ -26,6 +30,9 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.blocks=[[BTBlockChain instance] getAllBlocks];
+    self.tableView.dataSource=self;
+    self.tableView.delegate=self;
     // Do any additional setup after loading the view.
 }
 
@@ -35,15 +42,27 @@
     // Dispose of any resources that can be recreated.
 }
 
-/*
-#pragma mark - Navigation
+//tableview delgate
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    return self.blocks.count;
 }
-*/
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    BlockCell *cell = (BlockCell*)[tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
+    [cell setBlock:[self.blocks objectAtIndex:indexPath.row]];
+    return cell;
+}
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
+    return 1;
+}
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+
+    [self.tableView deselectRowAtIndexPath:indexPath animated:NO];
+}
+
 
 @end

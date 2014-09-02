@@ -9,6 +9,7 @@
 #import "PeerViewController.h"
 
 @interface PeerViewController ()
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
 
 @end
 

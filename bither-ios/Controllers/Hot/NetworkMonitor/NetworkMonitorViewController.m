@@ -7,8 +7,13 @@
 //
 
 #import "NetworkMonitorViewController.h"
+#import "PiPageViewController.h"
 
-@interface NetworkMonitorViewController ()
+@interface NetworkMonitorViewController ()<PiPageViewControllerDelegate>
+
+@property (strong, nonatomic)PiPageViewController *page;
+@property (weak, nonatomic) IBOutlet UISegmentedControl *vTab;
+@property (weak, nonatomic) IBOutlet UIView *vTopBar;
 
 @end
 
@@ -26,7 +31,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    [self configurePage];
 }
 
 - (void)didReceiveMemoryWarning
@@ -34,16 +39,43 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+- (IBAction)back:(id)sender {
+    [self.navigationController popViewControllerAnimated:YES];
 }
-*/
 
+
+-(void)configurePage{
+    self.page = [[PiPageViewController alloc]initWithStoryboard:self.storyboard andViewControllerIdentifiers:[[NSArray alloc] initWithObjects:@"PeerViewController", @"BlockViewController", nil]];
+    self.page.pageDelegate = self;
+    [self addChildViewController:self.page];
+    self.page.view.frame = CGRectMake(0, CGRectGetMaxY(self.vTopBar.frame), self.view.frame.size.width, self.view.frame.size.height - CGRectGetMaxY(self.vTopBar.frame));
+    [self.view insertSubview:self.page.view atIndex:0];
+    self.vTab.selectedSegmentIndex = 0;
+}
+
+
+-(void)pageIndexChanged:(int) index{
+    self.vTab.selectedSegmentIndex = index;
+}
+
+- (IBAction)tabChanged:(id)sender {
+    if(self.vTab.selectedSegmentIndex != self.page.index){
+        [self.page setIndex:(int)self.vTab.selectedSegmentIndex animated:YES];
+    }
+}
 @end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

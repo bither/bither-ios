@@ -73,6 +73,7 @@
 		AC202AD0196B8B7A00033EC1 /* Setting.m in Sources */ = {isa = PBXBuildFile; fileRef = AC202ACF196B8B7A00033EC1 /* Setting.m */; };
 		AC202AD3196BD97A00033EC1 /* SettingListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AC202AD2196BD97A00033EC1 /* SettingListCell.m */; };
 		AC229A70196A40B500A7FB5E /* update_storyboard_strings.sh in Resources */ = {isa = PBXBuildFile; fileRef = AC229A6F196A40B500A7FB5E /* update_storyboard_strings.sh */; };
+		AC275EE419B59B0100F1C02F /* BlockCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AC275EE319B59B0100F1C02F /* BlockCell.m */; };
 		AC2F3292195BF35E001B7439 /* QrUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = AC2F3291195BF35E001B7439 /* QrUtil.m */; };
 		AC2F3295195C02C3001B7439 /* AmountButton.m in Sources */ = {isa = PBXBuildFile; fileRef = AC2F3294195C02C3001B7439 /* AmountButton.m */; };
 		AC2F3298195C1D53001B7439 /* SendViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AC2F3297195C1D53001B7439 /* SendViewController.m */; };
@@ -288,6 +289,8 @@
 		AC229A7A196A466400A7FB5E /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/MainStoryboard.strings"; sourceTree = "<group>"; };
 		AC229A7B196A466900A7FB5E /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/MainStoryboard.strings"; sourceTree = "<group>"; };
 		AC229A7C196A466E00A7FB5E /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/MainStoryboard.strings; sourceTree = "<group>"; };
+		AC275EE219B59B0100F1C02F /* BlockCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BlockCell.h; sourceTree = "<group>"; };
+		AC275EE319B59B0100F1C02F /* BlockCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BlockCell.m; sourceTree = "<group>"; };
 		AC2F3290195BF35E001B7439 /* QrUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QrUtil.h; sourceTree = "<group>"; };
 		AC2F3291195BF35E001B7439 /* QrUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QrUtil.m; sourceTree = "<group>"; };
 		AC2F3293195C02C3001B7439 /* AmountButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AmountButton.h; sourceTree = "<group>"; };
@@ -723,9 +726,20 @@
 			path = sh;
 			sourceTree = "<group>";
 		};
+		AC275EE119B59B0100F1C02F /* NetworkMonitor */ = {
+			isa = PBXGroup;
+			children = (
+				AC275EE219B59B0100F1C02F /* BlockCell.h */,
+				AC275EE319B59B0100F1C02F /* BlockCell.m */,
+			);
+			name = NetworkMonitor;
+			path = Cells/NetworkMonitor;
+			sourceTree = "<group>";
+		};
 		AC33088B1955665500D8F621 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
+				AC275EE119B59B0100F1C02F /* NetworkMonitor */,
 				AC202AD1196BD97A00033EC1 /* SettingListCell.h */,
 				AC202AD2196BD97A00033EC1 /* SettingListCell.m */,
 				AC33088C1955668D00D8F621 /* HotAddressListCell.h */,
@@ -1095,6 +1109,7 @@
 				ACBEC0241970E46C004301E0 /* SignTransactionViewController.m in Sources */,
 				421B03C019495C1F003A45F1 /* HotAddressViewController.m in Sources */,
 				ACDDDC3619483A840008A79D /* UIColor+Util.m in Sources */,
+				AC275EE419B59B0100F1C02F /* BlockCell.m in Sources */,
 				AC0135D6194FDCCD00E3BB95 /* HotAddressAddWatchOnlyViewController.m in Sources */,
 				ACB9B9C9195AD27300019216 /* TransactionCell.m in Sources */,
 				AC0135D0194ED8B800E3BB95 /* HotAddressAddViewController.m in Sources */,
