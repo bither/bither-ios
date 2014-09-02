@@ -81,13 +81,13 @@
         lbl.font = [UIFont systemFontOfSize:kBottomLabelFontSize];
         lbl.textColor = [UIColor whiteColor];
         lbl.textAlignment = NSTextAlignmentRight;
-        lbl.attributedText = [StringUtil attributedStringWithSymbolForAmount:hot withFontSize:kBottomLabelFontSize color:lbl.textColor];
+        lbl.attributedText = [StringUtil stringWithSymbolForAmount:hot withFontSize:kBottomLabelFontSize color:lbl.textColor];
         [self addSubview:lbl];
         
         bottom = CGRectGetMaxY(lbl.frame);
         
         if(price > 0){
-            lbl = [[UILabel alloc]initWithFrame:CGRectMake(kBottomHorizontalMargin, bottom + kVerticalGap / 2, self.frame.size.width - kBottomHorizontalMargin * 2, kBottomLabelFontSize * 1.2)];
+            lbl = [[UILabel alloc]initWithFrame:CGRectMake(kBottomHorizontalMargin, bottom + kVerticalGap - 4, self.frame.size.width - kBottomHorizontalMargin * 2, kBottomLabelFontSize * 1.2)];
             lbl.font = [UIFont systemFontOfSize:kBottomLabelFontSize];
             lbl.textColor = [UIColor whiteColor];
             lbl.textAlignment = NSTextAlignmentRight;
@@ -110,13 +110,13 @@
         lbl.font = [UIFont systemFontOfSize:kBottomLabelFontSize];
         lbl.textColor = [UIColor whiteColor];
         lbl.textAlignment = NSTextAlignmentRight;
-        lbl.attributedText = [StringUtil attributedStringWithSymbolForAmount:cold withFontSize:kBottomLabelFontSize color:lbl.textColor];
+        lbl.attributedText = [StringUtil stringWithSymbolForAmount:cold withFontSize:kBottomLabelFontSize color:lbl.textColor];
         [self addSubview:lbl];
         
         bottom = CGRectGetMaxY(lbl.frame);
         
         if(price > 0){
-            lbl = [[UILabel alloc]initWithFrame:CGRectMake(kBottomHorizontalMargin, bottom + kVerticalGap / 2, self.frame.size.width - kBottomHorizontalMargin * 2, kBottomLabelFontSize * 1.2)];
+            lbl = [[UILabel alloc]initWithFrame:CGRectMake(kBottomHorizontalMargin, bottom + kVerticalGap - 4, self.frame.size.width - kBottomHorizontalMargin * 2, kBottomLabelFontSize * 1.2)];
             lbl.font = [UIFont systemFontOfSize:kBottomLabelFontSize];
             lbl.textColor = [UIColor whiteColor];
             lbl.textAlignment = NSTextAlignmentRight;
