@@ -59,6 +59,7 @@ static StatusBarNotificationWindow* notificationWindow;
     
     [[BTAddressManager sharedInstance] initAddress];
     [CrashLog initCrashLog];
+    [[BTSettings instance] openBitheriConsole];
     UIStoryboard *storyboard = self.window.rootViewController.storyboard;
     if(![[BTSettings instance]needChooseMode]){
         IOS7ContainerViewController *container = [[IOS7ContainerViewController alloc]init];
@@ -201,7 +202,7 @@ static StatusBarNotificationWindow* notificationWindow;
     UIApplicationState state = [UIApplication sharedApplication].applicationState;
     if (state==UIApplicationStateBackground) {
         if ([[BTPeerManager sharedInstance] connected]) {
-            [[BTPeerManager sharedInstance] disconnect];
+            [[BTPeerManager sharedInstance] stop];
         }
         
     }

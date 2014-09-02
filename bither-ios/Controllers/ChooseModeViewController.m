@@ -135,7 +135,7 @@
     [[[DialogAlert alloc]initWithAttributedMessage:[self getAttributedWarningMessage:NSLocalizedString(@"choose_mode_warm_confirm", nil)] confirm:^{
         [[BTSettings instance ] setAppMode:HOT];
         [[UIApplication sharedApplication] setMinimumBackgroundFetchInterval:UIApplicationBackgroundFetchIntervalMinimum];
-        [[BTPeerManager sharedInstance] connect];
+        [[BTPeerManager sharedInstance] start];
         [[BitherTime instance] start];
         self.vHotProgress.hidden = NO;
         self.vHotRetry.hidden = YES;

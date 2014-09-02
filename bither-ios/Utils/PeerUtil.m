@@ -115,7 +115,7 @@ static PeerUtil * peerUtil;
                 [self syncSpvFromBitcoinDone];
             }else{
                 if (![[BTPeerManager sharedInstance] connected]) {
-                    [[BTPeerManager sharedInstance] connect];
+                    [[BTPeerManager sharedInstance] start];
                 }
                 [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(syncSpvFromBitcoinDone) name:BTPeerManagerSyncFromSPVFinishedNotification object:nil];
                 addObserver=YES;
@@ -131,7 +131,7 @@ static PeerUtil * peerUtil;
         [[NSNotificationCenter defaultCenter] removeObserver:self name:BTPeerManagerSyncFromSPVFinishedNotification object:nil];
     }
     if ([[BTPeerManager sharedInstance] connected]) {
-        [[BTPeerManager sharedInstance] disconnect];
+        [[BTPeerManager sharedInstance] stop];
     }
     if (!isRunning) {
         isRunning=YES;
@@ -152,12 +152,12 @@ static PeerUtil * peerUtil;
         BTPeerManager * peerManager=[BTPeerManager sharedInstance];
         if (downloadSpvFinish && walletIsSyncComplete && hasAddress) {
             if (![peerManager connected]) {
-                [peerManager connect];
+                [peerManager start];
             }
             
         }else{
             if ([peerManager connected]) {
-                [peerManager disconnect];
+                [peerManager stop];
             }
         }
         isRunning=NO;

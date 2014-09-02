@@ -26,7 +26,7 @@
 
 @implementation KeyUtil
 +(void)addPrivateKeyByRandomWithPassphras:(NSString *)password count:(int) count{
-    [[BTPeerManager sharedInstance] disconnect];
+    [[BTPeerManager sharedInstance] stop];
     for (int i=0; i<count; i++) {
         BTAddress *btAddress=[[BTAddress alloc] initWithPassphrase:password];
         if (![[[BTAddressManager sharedInstance] privKeyAddresses] containsObject:btAddress]) {
@@ -41,7 +41,7 @@
 
 }
 +(BOOL)addBitcoinjKey:(NSArray *)array withPassphrase:(NSString *)passphrase error:(NSError **)aError{
-    [[BTPeerManager sharedInstance] disconnect];
+    [[BTPeerManager sharedInstance] stop];
     for(NSString * encryptPrivKey in array){
         BTAddress *btAddress=[[BTAddress alloc] initWithBitcoinjKey:encryptPrivKey withPassphrase:passphrase];
         if (!btAddress) {
@@ -62,7 +62,7 @@
     return YES; 
 }
 +(void) addWatckOnly:(NSArray *)pubKeys{
-    [[BTPeerManager sharedInstance] disconnect];
+    [[BTPeerManager sharedInstance] stop];
     for (NSString * pubKey in pubKeys) {
         BTKey *key = [BTKey keyWithPublicKey:[pubKey hexToData] ];
         BTAddress *btAddress = [[BTAddress alloc] initWithKey:key encryptPrivKey:nil];
@@ -76,7 +76,7 @@
 }
 
 +(void)stopMonitor:(BTAddress *)address{
-    [[BTPeerManager sharedInstance] disconnect];
+    [[BTPeerManager sharedInstance] stop];
     [[BTAddressManager sharedInstance] stopMonitor:address];
     [[NSNotificationCenter defaultCenter] postNotificationName:BitherBalanceChangedNotification
                                                         object:@[address.address, @(-address.balance),[NSNull null], [NSNull null]]];
