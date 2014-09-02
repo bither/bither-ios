@@ -278,6 +278,9 @@
 
 "Page %d, Total %ld" = "第%1$d页, 共%2$d页";
 
+
+"yesterday %@" = "昨天 %@";
+
 "No transactions found for this address,\nit has probably not been used on the network yet." = "没有找到这个地址的交易,\n它可能还没有在网络上使用过.";
 
 "HUOBI"="火币网";

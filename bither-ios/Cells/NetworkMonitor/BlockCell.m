@@ -8,6 +8,7 @@
 
 #import "BlockCell.h"
 #import "NSString+Base58.h"
+#import "DateUtil.h"
 
 @interface BlockCell()
 @property (weak, nonatomic) IBOutlet UILabel *lbBlockNo;
@@ -40,7 +41,9 @@
 }
 
 -(void)setBlock:(BTBlock *)block{
-    self.lbBlockNo.text=[NSString stringWithFormat:@"d%",block.blockNo];
-    self.lbBlockHash.text=[NSString hexWithHash:block.blockHash];
+    self.lbBlockNo.text=[NSString stringWithFormat:@"%d",block.blockNo];
+    NSString * blockHash=[NSString hexWithHash:block.blockHash];
+    self.lbBlockHash.text=blockHash;
+    self.lbTime.text=[DateUtil getRelativeDate:[NSDate dateWithTimeIntervalSince1970:block.blockTime]];
 }
 @end

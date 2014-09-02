@@ -281,6 +281,8 @@
 "No transactions found for this address,\nit has probably not been used on the network yet." = "沒有找到這個地址的交易,\n它可能還沒有在網絡上使用過.";
 
 
+"yesterday %@" = "昨天 %@";
+
 
 "HUOBI"="火幣網";
 "CHBTC"="中國比特幣";
