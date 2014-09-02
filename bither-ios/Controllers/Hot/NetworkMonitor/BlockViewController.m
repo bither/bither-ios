@@ -9,6 +9,7 @@
 #import "BlockViewController.h"
 #import "BlockCell.h"
 #import "BTBlockChain.h"
+#import "BTSettings.h"
 
 @interface BlockViewController ()<UITableViewDataSource,UITableViewDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -17,6 +18,7 @@
 @end
 
 @implementation BlockViewController
+
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -27,14 +29,27 @@
     return self;
 }
 
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     self.blocks=[[BTBlockChain instance] getAllBlocks];
     self.tableView.dataSource=self;
     self.tableView.delegate=self;
+    [[NSNotificationCenter defaultCenter ] addObserver:self selector:@selector(receivedNotifications) name:BTPeerManagerLastBlockChangedNotification object:nil];
     // Do any additional setup after loading the view.
 }
+-(void)dealloc{
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:BTPeerManagerLastBlockChangedNotification object:nil];
+}
+
+-(void) receivedNotifications{
+    self.blocks=[[BTBlockChain instance] getAllBlocks];
+    if (self.tableView) {
+        [self.tableView reloadData];
+    }
+}
+
 
 - (void)didReceiveMemoryWarning
 {
@@ -60,9 +75,10 @@
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-
+    
     [self.tableView deselectRowAtIndexPath:indexPath animated:NO];
 }
+
 
 
 @end

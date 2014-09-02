@@ -7,9 +7,13 @@
 //
 
 #import "PeerViewController.h"
+#import "BTPeerManager.h"
+#import "BTSettings.h"
+#import "PeerCell.h"
 
-@interface PeerViewController ()
+@interface PeerViewController ()<UITableViewDataSource,UITableViewDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (strong,nonatomic) NSMutableArray * peers;
 
 @end
 
@@ -27,7 +31,27 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    self.peers=[NSMutableArray new];
+    for(BTPeer * peer in  [BTPeerManager sharedInstance].connectedPeers){
+        [self.peers addObject:peer];
+    }
+    self.tableView.delegate=self;
+    self.tableView.dataSource=self;
+    [[NSNotificationCenter defaultCenter ] addObserver:self selector:@selector(receivedNotifications) name:BTPeerManagerSyncFromSPVFinishedNotification object:nil];
+    
+}
+
+-(void)dealloc{
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:BTPeerManagerSyncFromSPVFinishedNotification object:nil];
+}
+-(void) receivedNotifications{
+    [self.peers removeAllObjects];
+    for(BTPeer * peer in  [BTPeerManager sharedInstance].connectedPeers){
+        [self.peers addObject:peer];
+    }
+    if (self.tableView) {
+        [self.tableView reloadData];
+    }
 }
 
 - (void)didReceiveMemoryWarning
@@ -36,15 +60,27 @@
     // Dispose of any resources that can be recreated.
 }
 
-/*
-#pragma mark - Navigation
+//tableview delgate
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    return self.peers.count;
 }
-*/
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    PeerCell *cell = (PeerCell*)[tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
+    [cell setPeer:[self.peers objectAtIndex:indexPath.row]];
+    return cell;
+}
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
+    return 1;
+}
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    [self.tableView deselectRowAtIndexPath:indexPath animated:NO];
+}
+
 
 @end
