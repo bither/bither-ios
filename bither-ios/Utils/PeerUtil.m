@@ -26,7 +26,7 @@
 #import "NetworkUtil.h"
 #import "NSDictionary+Fromat.h"
 
-#define BLOCK_COUNT  @"block_count"
+
 
 static BOOL isRunning=NO;
 static BOOL addObserver=NO;
@@ -43,69 +43,6 @@ static PeerUtil * peerUtil;
     return peerUtil;
 }
 
-
--(void) syncWallet:(VoidBlock) voidBlock andErrorCallBack:(ErrorHandler)errorCallback{
-    NSArray * addresses=[[BTAddressManager instance] allAddresses];
-    if (addresses.count==0) {
-        errorCallback(nil,nil);
-        return;
-    }
-    if ([[BTAddressManager instance] allSyncComplete]) {
-        if (voidBlock) {
-            voidBlock();
-        }
-        return;
-    }
-    __block  NSInteger index=0;
-    addresses=[addresses reverseObjectEnumerator].allObjects;
-    [self getMyTx:addresses index:index callback:^{
-        if (voidBlock) {
-            voidBlock();
-        }
-    } andErrorCallBack:errorCallback];
-    
-}
-
--(void)getMyTx:(NSArray *)addresses  index:(NSInteger)index  callback:(VoidBlock)callback andErrorCallBack:(ErrorHandler)errorCallback{
-    BTAddress * address=[addresses objectAtIndex:index];
-    index=index+1;
-    if (address.isSyncComplete) {
-        if (index==addresses.count) {
-            if (callback) {
-                callback();
-            }
-        }else{
-            [self getMyTx:addresses index:index callback:callback andErrorCallBack:errorCallback];
-        }
-    }else{
-        uint32_t storeHeight=[[BTBlockChain instance] lastBlock].blockNo;
-        [[BitherApi instance] getMyTransactionApi:address.address callback:^(NSDictionary * dict) {
-            NSArray *txs=[TransactionsUtil getTransactions:dict storeBlockHeight:storeHeight];
-            uint32_t apiBlockCount=[dict getIntFromDict:BLOCK_COUNT];
-            [address initTxs:txs];
-            [address setIsSyncComplete:YES];
-            [address updateAddress];
-            //TODO 100?
-            if (apiBlockCount<storeHeight&&storeHeight-apiBlockCount<100) {
-                [[BTBlockChain instance] rollbackBlock:apiBlockCount];
-            }
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [[NSNotificationCenter defaultCenter] postNotificationName:BitherAddressNotification object:address.address];
-            });
-            if (index==addresses.count) {
-                if (callback) {
-                    callback();
-                }
-            }else{
-                [self getMyTx:addresses index:index callback:callback andErrorCallBack:errorCallback];
-            }
-        } andErrorCallBack:^(MKNetworkOperation *errorOp, NSError *error) {
-            NSLog(@"get my transcation api %@",errorOp.responseString);
-            isRunning=NO;
-        }];
-    }
-    
-}
 
 -(void)startPeer{
     if ([[BTSettings instance] getAppMode]!=COLD) {
@@ -135,8 +72,9 @@ static PeerUtil * peerUtil;
     }
     if (!isRunning) {
         isRunning=YES;
-        [self syncWallet:^{
+        [TransactionsUtil syncWallet:^{
             [self connectPeer];
+            isRunning=NO;
         } andErrorCallBack:^(MKNetworkOperation *errorOp, NSError *error) {
             isRunning=NO;
         }];
@@ -160,7 +98,7 @@ static PeerUtil * peerUtil;
                 [peerManager stop];
             }
         }
-        isRunning=NO;
+        
     });
     
 }

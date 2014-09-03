@@ -36,6 +36,7 @@
 #import "DialogAlert.h"
 #import "BTTxProvider.h"
 #import "PeerUtil.h"
+#import "TransactionsUtil.h"
 
 @interface SignTransactionScanDelegate : Setting<ScanQrCodeDelegate>
 -(instancetype)init;
@@ -60,7 +61,7 @@
 @end
 
 @interface ReloadTxSetting : Setting<DialogPasswordDelegate>
--(instancetype)init;
+-(void)showDialogPassword;
 @property (weak)UIViewController *controller;
 @end
 
@@ -80,7 +81,7 @@ static Setting* CloneScanSetting;
 static Setting* CloneQrSetting;
 static Setting* ColdMonitorSetting;
 static Setting* AdvanceSetting;
-static Setting* reloadTxsSetting;
+static ReloadTxSetting* reloadTxsSetting;
 
 -(instancetype)initWithName:(NSString *)name  icon:(NSString *)icon {
     self=[super init];
@@ -410,22 +411,21 @@ static Setting* reloadTxsSetting;
 
 +(Setting *)getReloadTxsSetting{
     if (!reloadTxsSetting) {
-        reloadTxsSetting=[[Setting alloc] initWithName:NSLocalizedString(@"Reload Transactions data", nil) icon:nil];
+     reloadTxsSetting=[[ReloadTxSetting alloc] initWithName:NSLocalizedString(@"Reload Transactions data", nil) icon:nil];
+
         [reloadTxsSetting setSelectBlock:^(UIViewController * controller){
             DialogAlert *dialogAlert=[[DialogAlert alloc] initWithMessage:NSLocalizedString(@"Reload Transactions data?\nNeed long time.\nConsume network data.\nRecommand trying only with wrong data.", nil) confirm:^{
-                dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-                   
-                    dispatch_async(dispatch_get_main_queue(), ^{
-                        
-                    });
-                });
+                reloadTxsSetting.controller=controller;
+                [reloadTxsSetting showDialogPassword];
                
+                
             } cancel:^{
                 
             }];
             [dialogAlert showInWindow:controller.view.window];
 
         }];
+       
         
     }
     return reloadTxsSetting;
@@ -599,13 +599,9 @@ static Setting* reloadTxsSetting;
 
 @implementation ReloadTxSetting
 
-- (instancetype)init
-{
-    self = [super init];
-    if (self) {
-        
-    }
-    return self;
+-(void)showDialogPassword{
+    DialogPassword *dialog = [[DialogPassword alloc]initWithDelegate:self];
+    [dialog showInWindow:self.controller.view.window];
 }
 -(void)onPasswordEntered:(NSString *)password{
     DialogProgress *dialogProgrees=[[DialogProgress alloc] initWithMessage:NSLocalizedString(@"Please wait…", nil)];
@@ -616,10 +612,22 @@ static Setting* reloadTxsSetting;
             [address setIsSyncComplete:NO];
             [address updateAddress];
         }
-        
         [[BTTxProvider instance] clearAllTx];
-        //todo get transcation
-        [[PeerUtil instance] startPeer];
+        [TransactionsUtil syncWallet:^{
+             [[PeerUtil instance] startPeer];
+            [dialogProgrees dismiss];
+            if([self.controller respondsToSelector:@selector(showMsg:)]){
+                [self.controller performSelector:@selector(showMsg:) withObject:NSLocalizedString(@"Reload transactions data success", nil)];
+            }
+            
+        } andErrorCallBack:^(MKNetworkOperation *errorOp, NSError *error) {
+            [dialogProgrees dismiss];
+            if([self.controller respondsToSelector:@selector(showMsg:)]){
+                [self.controller performSelector:@selector(showMsg:) withObject:NSLocalizedString(@"Network failure.", nil)];
+            }
+            
+        }];
+       
         dispatch_async(dispatch_get_main_queue(), ^{
             [dialogProgrees dismiss];
         });
