@@ -52,7 +52,7 @@
 
 -(void)refresh{
     [self.addresses removeAllObjects];
-    [self.addresses addObjectsFromArray:[BTAddressManager sharedInstance].privKeyAddresses];
+    [self.addresses addObjectsFromArray:[BTAddressManager instance].privKeyAddresses];
     [self.tableView reloadData];
     self.ivNoAddress.hidden = !(self.addresses.count == 0);
 }

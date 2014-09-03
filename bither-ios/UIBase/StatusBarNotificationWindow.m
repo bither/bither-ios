@@ -87,7 +87,7 @@
     if([topVc isKindOfClass:[AddressDetailViewController class]] && [StringUtil compareString:self.notificationAddress compare:[(AddressDetailViewController*)topVc address].address]){
         
     }else{
-        NSArray* addresses = [BTAddressManager sharedInstance].allAddresses;
+        NSArray* addresses = [BTAddressManager instance].allAddresses;
         for(BTAddress *address in addresses){
             if([StringUtil compareString:address.address compare:self.notificationAddress]){
                 AddressDetailViewController* detail = [nav.storyboard instantiateViewControllerWithIdentifier:@"AddressDetail"];
