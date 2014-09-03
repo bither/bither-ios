@@ -43,7 +43,7 @@
     cold = 0;
     total = 0;
     price = [MarketUtil getDefaultNewPrice];
-    NSArray* allAddresses = [BTAddressManager sharedInstance].allAddresses;
+    NSArray* allAddresses = [BTAddressManager instance].allAddresses;
     for(BTAddress* a in allAddresses){
         if(a.hasPrivKey){
             hot+= a.balance;

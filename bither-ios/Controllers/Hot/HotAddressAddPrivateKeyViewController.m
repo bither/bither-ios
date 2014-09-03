@@ -92,7 +92,7 @@
 }
 
 - (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component{
-    NSUInteger preCount =[BTAddressManager sharedInstance].privKeyAddresses.count;
+    NSUInteger preCount =[BTAddressManager instance].privKeyAddresses.count;
     return self.limit - preCount;
 }
 

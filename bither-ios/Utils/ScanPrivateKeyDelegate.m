@@ -148,13 +148,13 @@ static ScanPrivateKeyDelegate * scanPrivateKeyDelegate;
         BTKey *key=[BTKey keyWithBitcoinj:keyStr andPassphrase:password];
         [array addObject:key.address];
         BTAddress *address=[[BTAddress alloc] initWithKey:key encryptPrivKey:nil];
-        if ([[[BTAddressManager sharedInstance] privKeyAddresses] containsObject:address]){
+        if ([[[BTAddressManager instance] privKeyAddresses] containsObject:address]){
             dispatch_async(dispatch_get_main_queue(), ^{
                 [self showMsg:NSLocalizedString(@"This private key already exists.", nil)];
                 [dp dismiss];
                 
             });
-        }else if([[[BTAddressManager sharedInstance] watchOnlyAddresses] containsObject:address]){
+        }else if([[[BTAddressManager instance] watchOnlyAddresses] containsObject:address]){
             dispatch_async(dispatch_get_main_queue(), ^{
                 [self showMsg:NSLocalizedString(@"Can\'t import Bither Cold private key.", nil)];
                 [dp dismiss];
@@ -204,12 +204,12 @@ static CheckPasswordDelegate *checkPasswordDelegate;
         NSMutableArray * array=[NSMutableArray new];
         [array addObject:key.address];
         BTAddress *address=[[BTAddress alloc] initWithKey:key encryptPrivKey:nil];
-        if ([[[BTAddressManager sharedInstance] privKeyAddresses] containsObject:address]){
+        if ([[[BTAddressManager instance] privKeyAddresses] containsObject:address]){
             dispatch_async(dispatch_get_main_queue(), ^{
                 [self showMsg:NSLocalizedString(@"This private key already exists.", nil)];
                 
             });
-        }else if([[[BTAddressManager sharedInstance] watchOnlyAddresses] containsObject:address]){
+        }else if([[[BTAddressManager instance] watchOnlyAddresses] containsObject:address]){
             dispatch_async(dispatch_get_main_queue(), ^{
                 [self showMsg:NSLocalizedString(@"Can\'t import Bither Cold private key.", nil)];
             });
