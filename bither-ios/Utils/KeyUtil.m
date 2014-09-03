@@ -26,11 +26,11 @@
 
 @implementation KeyUtil
 +(void)addPrivateKeyByRandomWithPassphras:(NSString *)password count:(int) count{
-    [[BTPeerManager sharedInstance] stop];
+    [[PeerUtil instance] stopPeer];
     for (int i=0; i<count; i++) {
         BTAddress *btAddress=[[BTAddress alloc] initWithPassphrase:password];
-        if (![[[BTAddressManager sharedInstance] privKeyAddresses] containsObject:btAddress]) {
-            [[BTAddressManager sharedInstance] addAddress:btAddress];
+        if (![[[BTAddressManager instance] privKeyAddresses] containsObject:btAddress]) {
+            [[BTAddressManager instance] addAddress:btAddress];
             if (![[UserDefaultsUtil instance] getPasswordSeed]) {
                 BTPasswordSeed * passwordSeed=[[BTPasswordSeed alloc] initWithBTAddress:btAddress];
                 [[UserDefaultsUtil instance] setPasswordSeed:passwordSeed];
@@ -41,7 +41,7 @@
 
 }
 +(BOOL)addBitcoinjKey:(NSArray *)array withPassphrase:(NSString *)passphrase error:(NSError **)aError{
-    [[BTPeerManager sharedInstance] stop];
+    [[PeerUtil instance] stopPeer];
     for(NSString * encryptPrivKey in array){
         BTAddress *btAddress=[[BTAddress alloc] initWithBitcoinjKey:encryptPrivKey withPassphrase:passphrase];
         if (!btAddress) {
@@ -50,8 +50,8 @@
             }
             return NO;
         }
-        if (![[[BTAddressManager sharedInstance]  privKeyAddresses] containsObject:btAddress]&&![[[BTAddressManager sharedInstance] watchOnlyAddresses] containsObject:btAddress]) {
-            [[BTAddressManager sharedInstance] addAddress:btAddress];
+        if (![[[BTAddressManager instance]  privKeyAddresses] containsObject:btAddress]&&![[[BTAddressManager instance] watchOnlyAddresses] containsObject:btAddress]) {
+            [[BTAddressManager instance] addAddress:btAddress];
             if (![[UserDefaultsUtil instance] getPasswordSeed]) {
                 BTPasswordSeed * passwordSeed=[[BTPasswordSeed alloc] initWithBTAddress:btAddress];
                 [[UserDefaultsUtil instance] setPasswordSeed:passwordSeed];
@@ -62,12 +62,12 @@
     return YES; 
 }
 +(void) addWatckOnly:(NSArray *)pubKeys{
-    [[BTPeerManager sharedInstance] stop];
+    [[PeerUtil instance] stopPeer];
     for (NSString * pubKey in pubKeys) {
         BTKey *key = [BTKey keyWithPublicKey:[pubKey hexToData] ];
         BTAddress *btAddress = [[BTAddress alloc] initWithKey:key encryptPrivKey:nil];
-        if (![[[BTAddressManager sharedInstance] watchOnlyAddresses] containsObject:btAddress]&&![[[BTAddressManager sharedInstance] privKeyAddresses] containsObject:btAddress]) {
-            [[BTAddressManager sharedInstance] addAddress:btAddress];
+        if (![[[BTAddressManager instance] watchOnlyAddresses] containsObject:btAddress]&&![[[BTAddressManager instance] privKeyAddresses] containsObject:btAddress]) {
+            [[BTAddressManager instance] addAddress:btAddress];
         }
 
     }
@@ -76,8 +76,8 @@
 }
 
 +(void)stopMonitor:(BTAddress *)address{
-    [[BTPeerManager sharedInstance] stop];
-    [[BTAddressManager sharedInstance] stopMonitor:address];
+    [[PeerUtil instance] stopPeer];
+    [[BTAddressManager instance] stopMonitor:address];
     [[NSNotificationCenter defaultCenter] postNotificationName:BitherBalanceChangedNotification
                                                         object:@[address.address, @(-address.balance),[NSNull null], [NSNull null]]];
     [[PeerUtil instance]startPeer];

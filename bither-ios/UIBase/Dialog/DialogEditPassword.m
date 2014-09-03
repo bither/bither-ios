@@ -100,10 +100,10 @@
             });
         }else{
             BOOL success = NO;
-            if([BTAddressManager sharedInstance].privKeyAddresses.count > 0){
-                success = [[BTAddressManager sharedInstance] changePassphraseWithOldPassphrase:p andNewPassphrase:nP];
+            if([BTAddressManager instance].privKeyAddresses.count > 0){
+                success = [[BTAddressManager instance] changePassphraseWithOldPassphrase:p andNewPassphrase:nP];
                 if(success){
-                    [[UserDefaultsUtil instance]setPasswordSeed:[[BTPasswordSeed alloc] initWithBTAddress:[BTAddressManager sharedInstance].privKeyAddresses[0]]];
+                    [[UserDefaultsUtil instance]setPasswordSeed:[[BTPasswordSeed alloc] initWithBTAddress:[BTAddressManager instance].privKeyAddresses[0]]];
                 }
             }
             dispatch_async(dispatch_get_main_queue(), ^{

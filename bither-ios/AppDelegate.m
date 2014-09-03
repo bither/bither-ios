@@ -57,7 +57,7 @@ static StatusBarNotificationWindow* notificationWindow;
         [[UIApplication sharedApplication] setMinimumBackgroundFetchInterval:UIApplicationBackgroundFetchIntervalMinimum];
     }
     
-    [[BTAddressManager sharedInstance] initAddress];
+    [[BTAddressManager instance] initAddress];
     [CrashLog initCrashLog];
     [[BTSettings instance] openBitheriConsole];
     UIStoryboard *storyboard = self.window.rootViewController.storyboard;

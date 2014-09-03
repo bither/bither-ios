@@ -301,7 +301,7 @@ static Setting* reloadTxsSetting;
     if(!CheckSetting){
         Setting * setting=[[Setting alloc] initWithName:NSLocalizedString(@"Check Private Keys", nil) icon:@"check_button_icon" ];
         [setting setSelectBlock:^(UIViewController * controller){
-            if([BTAddressManager sharedInstance].privKeyAddresses.count == 0){
+            if([BTAddressManager instance].privKeyAddresses.count == 0){
                 if([controller respondsToSelector:@selector(showMsg:)]){
                     [controller performSelector:@selector(showMsg:) withObject:NSLocalizedString(@"No private keys", nil)];
                 }
@@ -323,7 +323,7 @@ static Setting* reloadTxsSetting;
     if(!EditPasswordSetting){
         Setting * setting=[[Setting alloc] initWithName:NSLocalizedString(@"Change Password", nil) icon:@"edit_password_button_icon" ];
         [setting setSelectBlock:^(UIViewController * controller){
-            if([BTAddressManager sharedInstance].privKeyAddresses.count == 0){
+            if([BTAddressManager instance].privKeyAddresses.count == 0){
                 if([controller respondsToSelector:@selector(showMsg:)]){
                     [controller performSelector:@selector(showMsg:) withObject:NSLocalizedString(@"No private keys", nil)];
                 }
@@ -376,7 +376,7 @@ static Setting* reloadTxsSetting;
 }
 
 +(Setting*)getCloneSetting{
-    if([BTAddressManager sharedInstance].privKeyAddresses.count > 0){
+    if([BTAddressManager instance].privKeyAddresses.count > 0){
         if(!CloneQrSetting){
             CloneQrSetting = [[CloneQrCodeSetting alloc]init];
         }
@@ -393,7 +393,7 @@ static Setting* reloadTxsSetting;
     if(!ColdMonitorSetting){
         ColdMonitorSetting = [[Setting alloc]initWithName:NSLocalizedString(@"Watch Only QR Code", nil) icon:@"qr_code_button_icon"];
         [ColdMonitorSetting setSelectBlock:^(UIViewController * controller){
-            NSArray* addresses = [BTAddressManager sharedInstance].privKeyAddresses;
+            NSArray* addresses = [BTAddressManager instance].privKeyAddresses;
             NSMutableArray* pubKeys = [[NSMutableArray alloc]init];
             for(BTAddress* a in addresses){
                 [pubKeys addObject:[NSString hexWithData:a.pubKey].uppercaseString];
@@ -448,7 +448,7 @@ static Setting* reloadTxsSetting;
     NSMutableArray *array = [NSMutableArray new];
     [array addObject:[Setting getSignTransactionSetting]];
     [array addObject:[Setting getCloneSetting]];
-    if([BTAddressManager sharedInstance].privKeyAddresses.count > 0){
+    if([BTAddressManager instance].privKeyAddresses.count > 0){
         [array addObject:[Setting getColdMonitorSetting]];
     }
     [array addObject:[Setting getAdvanceSetting]];
@@ -583,7 +583,7 @@ static Setting* reloadTxsSetting;
 }
 
 -(void)onPasswordEntered:(NSString *)password{
-    NSArray *addresses = [BTAddressManager sharedInstance].privKeyAddresses;
+    NSArray *addresses = [BTAddressManager instance].privKeyAddresses;
     NSMutableArray* keys = [[NSMutableArray alloc]init];
     for(BTAddress* a in addresses){
         [keys addObject:a.encryptPrivKey];
@@ -608,10 +608,20 @@ static Setting* reloadTxsSetting;
     return self;
 }
 -(void)onPasswordEntered:(NSString *)password{
+    DialogProgress *dialogProgrees=[[DialogProgress alloc] initWithMessage:NSLocalizedString(@"Please wait…", nil)];
+    [dialogProgrees showInWindow:self.controller.view.window];
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-       // [Peer];
+        [[PeerUtil instance] stopPeer];
+        for(BTAddress * address in [[BTAddressManager instance]allAddresses]){
+            [address setIsSyncComplete:NO];
+            [address updateAddress];
+        }
+        
+        [[BTTxProvider instance] clearAllTx];
+        //todo get transcation
+        [[PeerUtil instance] startPeer];
         dispatch_async(dispatch_get_main_queue(), ^{
-            
+            [dialogProgrees dismiss];
         });
     });
 
@@ -635,13 +645,13 @@ static Setting* reloadTxsSetting;
 
 -(void)show{
     self.addresses = [[NSMutableArray alloc]init];
-    NSArray* as = [BTAddressManager sharedInstance].privKeyAddresses;
+    NSArray* as = [BTAddressManager instance].privKeyAddresses;
     for(BTAddress * a in as){
         if(a.balance > 0){
             [self.addresses addObject:a];
         }
     }
-    as = [BTAddressManager sharedInstance].watchOnlyAddresses;
+    as = [BTAddressManager instance].watchOnlyAddresses;
     for(BTAddress *a in as){
         if(a.balance > 0){
             [self.addresses addObject:a];

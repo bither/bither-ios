@@ -32,7 +32,7 @@
 {
     [super viewDidLoad];
     self.peers=[NSMutableArray new];
-    for(BTPeer * peer in  [BTPeerManager sharedInstance].connectedPeers){
+    for(BTPeer * peer in  [BTPeerManager instance].connectedPeers){
         [self.peers addObject:peer];
     }
     self.tableView.delegate=self;
@@ -46,7 +46,7 @@
 }
 -(void) receivedNotifications{
     [self.peers removeAllObjects];
-    for(BTPeer * peer in  [BTPeerManager sharedInstance].connectedPeers){
+    for(BTPeer * peer in  [BTPeerManager instance].connectedPeers){
         [self.peers addObject:peer];
     }
     if (self.tableView) {

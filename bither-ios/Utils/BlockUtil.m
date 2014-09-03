@@ -81,7 +81,7 @@ static BlockUtil *blockUtil;
 
 -(void)syncSpvBlock{
     [self dowloadSpvBlock:^{
-        if ([[BTPeerManager sharedInstance] doneSyncFromSPV]) {
+        if ([[BTPeerManager instance] doneSyncFromSPV]) {
             if ([self.delegate respondsToSelector:@selector(success)]) {
                 [self.delegate success];
             }

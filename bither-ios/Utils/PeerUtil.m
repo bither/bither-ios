@@ -45,12 +45,12 @@ static PeerUtil * peerUtil;
 
 
 -(void) syncWallet:(VoidBlock) voidBlock andErrorCallBack:(ErrorHandler)errorCallback{
-    NSArray * addresses=[[BTAddressManager sharedInstance] allAddresses];
+    NSArray * addresses=[[BTAddressManager instance] allAddresses];
     if (addresses.count==0) {
         errorCallback(nil,nil);
         return;
     }
-    if ([[BTAddressManager sharedInstance] allSyncComplete]) {
+    if ([[BTAddressManager instance] allSyncComplete]) {
         if (voidBlock) {
             voidBlock();
         }
@@ -145,9 +145,9 @@ static PeerUtil * peerUtil;
 
 -(void) connectPeer{
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0),^{
-        BOOL hasAddress=[[BTAddressManager sharedInstance] allAddresses].count>0;
+        BOOL hasAddress=[[BTAddressManager instance] allAddresses].count>0;
         BOOL downloadSpvFinish=[[UserDefaultsUtil instance ] getDownloadSpvFinish]&&[[BTPeerManager instance] doneSyncFromSPV];
-        BOOL walletIsSyncComplete=[[BTAddressManager sharedInstance] allSyncComplete];
+        BOOL walletIsSyncComplete=[[BTAddressManager instance] allSyncComplete];
        // BOOL netWorkState=[NetworkUtil isEnableWIFI]||![[UserDefaultsUtil instance] getSyncBlockOnlyWifi];
         BTPeerManager * peerManager=[BTPeerManager instance];
         if (downloadSpvFinish && walletIsSyncComplete && hasAddress) {
