@@ -33,6 +33,9 @@
 #import "UnsignedTransactionViewController.h"
 #import "BTSettings.h"
 #import "AdvanceViewController.h"
+#import "DialogAlert.h"
+#import "BTTxProvider.h"
+#import "PeerUtil.h"
 
 @interface SignTransactionScanDelegate : Setting<ScanQrCodeDelegate>
 -(instancetype)init;
@@ -56,7 +59,13 @@
 @property NSMutableArray* addresses;
 @end
 
+@interface ReloadTxSetting : Setting<DialogPasswordDelegate>
+-(instancetype)init;
+@property (weak)UIViewController *controller;
+@end
+
 @implementation Setting
+
 static Setting* ExchangeSetting;
 static Setting* MarketSetting;
 static Setting* TransactionFeeSetting;
@@ -71,6 +80,7 @@ static Setting* CloneScanSetting;
 static Setting* CloneQrSetting;
 static Setting* ColdMonitorSetting;
 static Setting* AdvanceSetting;
+static Setting* reloadTxsSetting;
 
 -(instancetype)initWithName:(NSString *)name  icon:(NSString *)icon {
     self=[super init];
@@ -398,6 +408,29 @@ static Setting* AdvanceSetting;
     return ColdMonitorSetting;
 }
 
++(Setting *)getReloadTxsSetting{
+    if (!reloadTxsSetting) {
+        reloadTxsSetting=[[Setting alloc] initWithName:NSLocalizedString(@"Reload Transactions data", nil) icon:nil];
+        [reloadTxsSetting setSelectBlock:^(UIViewController * controller){
+            DialogAlert *dialogAlert=[[DialogAlert alloc] initWithMessage:NSLocalizedString(@"Reload Transactions data?\nNeed long time.\nConsume network data.\nRecommand trying only with wrong data.", nil) confirm:^{
+                dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+                   
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        
+                    });
+                });
+               
+            } cancel:^{
+                
+            }];
+            [dialogAlert showInWindow:controller.view.window];
+
+        }];
+        
+    }
+    return reloadTxsSetting;
+}
+
 +(NSArray *)hotSettings{
     NSMutableArray * array=[NSMutableArray new];
     [array addObject:[Setting getExchangeSetting]];
@@ -419,16 +452,19 @@ static Setting* AdvanceSetting;
         [array addObject:[Setting getColdMonitorSetting]];
     }
     [array addObject:[Setting getAdvanceSetting]];
-    return array;
+    return array; 
 }
 +(NSArray*)advanceSettings{
     NSMutableArray *array = [NSMutableArray new];
-    //if ([[BTSettings instance] getAppMode]==COLD) {
-    //}
+    
     [array addObject:[Setting getEditPasswordSetting]];
     [array addObject:[Setting getImportPrivateKeySetting]];
+    if ([[BTSettings instance] getAppMode]==HOT) {
+        [array addObject:[Setting getReloadTxsSetting]];
+    }
     return array;
 }
+
 @end
 
 
@@ -557,6 +593,28 @@ static Setting* AdvanceSetting;
     qrController.qrCodeTitle = NSLocalizedString(@"Cold Wallet Clone QR Code", nil);
     qrController.qrCodeMsg = NSLocalizedString(@"Scan by clone destination", nil);
     [self.controller.navigationController pushViewController:qrController animated:YES];
+}
+
+@end
+
+@implementation ReloadTxSetting
+
+- (instancetype)init
+{
+    self = [super init];
+    if (self) {
+        
+    }
+    return self;
+}
+-(void)onPasswordEntered:(NSString *)password{
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+       // [Peer];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            
+        });
+    });
+
 }
 
 @end

@@ -108,7 +108,7 @@ static StatusBarNotificationWindow* notificationWindow;
 {
     [self callInHot:^{
         [[BitherTime instance] resume];
-        if (![[BTPeerManager sharedInstance] connected]) {
+        if (![[BTPeerManager instance] connected]) {
             [[PeerUtil instance] startPeer];
         }
     }];
@@ -144,7 +144,7 @@ static StatusBarNotificationWindow* notificationWindow;
     DDLogDebug(@"performFetc begin");
     __block id  syncFailedObserver = nil;
     __block void (^completion)(UIBackgroundFetchResult) = completionHandler;
-    BTPeerManager *m = [BTPeerManager sharedInstance];
+    BTPeerManager *m = [BTPeerManager instance];
     
     if (m.syncProgress >= 1.0) {
         if (completion) completion(UIBackgroundFetchResultNoData);
@@ -201,8 +201,8 @@ static StatusBarNotificationWindow* notificationWindow;
 -(void)stopPeerWithFetch{
     UIApplicationState state = [UIApplication sharedApplication].applicationState;
     if (state==UIApplicationStateBackground) {
-        if ([[BTPeerManager sharedInstance] connected]) {
-            [[BTPeerManager sharedInstance] stop];
+        if ([[BTPeerManager instance] connected]) {
+            [[BTPeerManager instance] stop];
         }
         
     }

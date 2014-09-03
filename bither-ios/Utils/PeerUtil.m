@@ -84,7 +84,7 @@ static PeerUtil * peerUtil;
             uint32_t apiBlockCount=[dict getIntFromDict:BLOCK_COUNT];
             [address initTxs:txs];
             [address setIsSyncComplete:YES];
-            [[BTAddressManager sharedInstance] updateAddressWithSyncTx:address];
+            [address updateAddress];
             //TODO 100?
             if (apiBlockCount<storeHeight&&storeHeight-apiBlockCount<100) {
                 [[BTBlockChain instance] rollbackBlock:apiBlockCount];
@@ -111,11 +111,11 @@ static PeerUtil * peerUtil;
     if ([[BTSettings instance] getAppMode]!=COLD) {
         
         if ([[BlockUtil instance] syncSpvFinish]) {
-            if ([[BTPeerManager sharedInstance] doneSyncFromSPV]) {
+            if ([[BTPeerManager instance] doneSyncFromSPV]) {
                 [self syncSpvFromBitcoinDone];
             }else{
-                if (![[BTPeerManager sharedInstance] connected]) {
-                    [[BTPeerManager sharedInstance] start];
+                if (![[BTPeerManager instance] connected]) {
+                    [[BTPeerManager instance] start];
                 }
                 [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(syncSpvFromBitcoinDone) name:BTPeerManagerSyncFromSPVFinishedNotification object:nil];
                 addObserver=YES;
@@ -130,8 +130,8 @@ static PeerUtil * peerUtil;
     if (addObserver) {
         [[NSNotificationCenter defaultCenter] removeObserver:self name:BTPeerManagerSyncFromSPVFinishedNotification object:nil];
     }
-    if ([[BTPeerManager sharedInstance] connected]) {
-        [[BTPeerManager sharedInstance] stop];
+    if ([[BTPeerManager instance] connected]) {
+        [[BTPeerManager instance] stop];
     }
     if (!isRunning) {
         isRunning=YES;
@@ -146,10 +146,10 @@ static PeerUtil * peerUtil;
 -(void) connectPeer{
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0),^{
         BOOL hasAddress=[[BTAddressManager sharedInstance] allAddresses].count>0;
-        BOOL downloadSpvFinish=[[UserDefaultsUtil instance ] getDownloadSpvFinish]&&[[BTPeerManager sharedInstance] doneSyncFromSPV];
+        BOOL downloadSpvFinish=[[UserDefaultsUtil instance ] getDownloadSpvFinish]&&[[BTPeerManager instance] doneSyncFromSPV];
         BOOL walletIsSyncComplete=[[BTAddressManager sharedInstance] allSyncComplete];
        // BOOL netWorkState=[NetworkUtil isEnableWIFI]||![[UserDefaultsUtil instance] getSyncBlockOnlyWifi];
-        BTPeerManager * peerManager=[BTPeerManager sharedInstance];
+        BTPeerManager * peerManager=[BTPeerManager instance];
         if (downloadSpvFinish && walletIsSyncComplete && hasAddress) {
             if (![peerManager connected]) {
                 [peerManager start];
@@ -165,6 +165,10 @@ static PeerUtil * peerUtil;
     
 }
 
+
+-(void)stopPeer{
+    [[BTPeerManager instance] stop];
+}
 
 
 

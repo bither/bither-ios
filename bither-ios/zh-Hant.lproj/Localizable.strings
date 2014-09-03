@@ -384,3 +384,10 @@
 
 "Total BTC prefix"="总计: ";
 
+
+"Reload Transactions data"="重載交易數據";
+"Reload Transactions data?\nNeed long time.\nConsume network data.\nRecommand trying only with wrong data."="確認重載交易數據 ?\n需要較長時間\n消耗網絡流量\n建議只在數據出錯時嘗試";
+"Reload transactions data failed , Please retry again."="重載交易數據失敗 , 請重試 .";
+"Reload transactions data success"="重載交易數據成功 ";
+"You can only reload transactions data in a hour.."="一個小時內只能重載交易數據一次.";
+
