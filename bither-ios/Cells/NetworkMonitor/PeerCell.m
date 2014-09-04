@@ -41,10 +41,11 @@
 }
 -(void)setPeer:(BTPeer *)peer{
     self.lbAddress.text=peer.host;
-    self.lbProtocol.text= peer.userAgent;
-    self.lbBlocks.text=[NSString stringWithFormat:@"%x blocks",peer.versionLastBlock];
-    self.lbPing.text=[NSString stringWithFormat:@"%f ms",peer.pingTime*1000];
-    self.lbVersion.text=[NSString stringWithFormat:@""];
+    self.lbVersion.text= peer.userAgent;
+    self.lbProtocol.text=[NSString stringWithFormat:@"protocol: %d",(int)peer.version];
+    self.lbBlocks.text=[NSString stringWithFormat:@"%d blocks",(int)peer.versionLastBlock];
+    self.lbPing.text=[NSString stringWithFormat:@"⇆ %ld ms",(long)(peer.pingTime*1000)];
+    
     
 }
 
