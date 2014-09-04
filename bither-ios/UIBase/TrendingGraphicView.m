@@ -19,9 +19,11 @@
     NSArray *endRates;
     CADisplayLink *displayLink;
 }
+
 -(instancetype)initWithStartRates:(NSArray*)startRates endRates:(NSArray*)endRates;
 @property (readonly) NSArray* currentRates;
 -(void)invalidate;
+
 @end
 
 @protocol RateAnimationDelegate <NSObject>
@@ -200,8 +202,7 @@
     }
     double progress = [self getProgress];
     if(progress >= 1 && displayLink){
-        [displayLink invalidate];
-        displayLink = nil;
+        [self invalidate];
     }
 }
 
