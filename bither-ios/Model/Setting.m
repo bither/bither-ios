@@ -83,6 +83,8 @@ static Setting* ColdMonitorSetting;
 static Setting* AdvanceSetting;
 static ReloadTxSetting* reloadTxsSetting;
 
+static double reloadTime;
+
 -(instancetype)initWithName:(NSString *)name  icon:(NSString *)icon {
     self=[super init];
     if (self) {
@@ -414,15 +416,23 @@ static ReloadTxSetting* reloadTxsSetting;
      reloadTxsSetting=[[ReloadTxSetting alloc] initWithName:NSLocalizedString(@"Reload Transactions data", nil) icon:nil];
 
         [reloadTxsSetting setSelectBlock:^(UIViewController * controller){
-            DialogAlert *dialogAlert=[[DialogAlert alloc] initWithMessage:NSLocalizedString(@"Reload Transactions data?\nNeed long time.\nConsume network data.\nRecommand trying only with wrong data.", nil) confirm:^{
-                reloadTxsSetting.controller=controller;
-                [reloadTxsSetting showDialogPassword];
-               
+            if (reloadTime>0&&reloadTime+60*60>(double)[[NSDate new]timeIntervalSince1970]) {
+                if([controller respondsToSelector:@selector(showMsg:)]){
+                    [controller performSelector:@selector(showMsg:) withObject:NSLocalizedString(@"You can only reload transactions data in a hour..", nil)];
+                }
                 
-            } cancel:^{
-                
-            }];
-            [dialogAlert showInWindow:controller.view.window];
+            }else{
+                reloadTime=[[NSDate new] timeIntervalSince1970];
+                DialogAlert *dialogAlert=[[DialogAlert alloc] initWithMessage:NSLocalizedString(@"Reload Transactions data?\nNeed long time.\nConsume network data.\nRecommand trying only with wrong data.", nil) confirm:^{
+                    reloadTxsSetting.controller=controller;
+                    [reloadTxsSetting showDialogPassword];
+                    
+                    
+                } cancel:^{
+                    
+                }];
+                [dialogAlert showInWindow:controller.view.window];
+            }
 
         }];
        
