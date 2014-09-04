@@ -10,6 +10,8 @@
 #import "BTPeerManager.h"
 #import "BTSettings.h"
 #import "PeerCell.h"
+#import "UIViewController+ConfigureTableView.h"
+#import "BitherSetting.h"
 
 @interface PeerViewController ()<UITableViewDataSource,UITableViewDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -38,6 +40,7 @@
     self.tableView.delegate=self;
     self.tableView.dataSource=self;
     [[NSNotificationCenter defaultCenter ] addObserver:self selector:@selector(receivedNotifications) name:BTPeerManagerSyncFromSPVFinishedNotification object:nil];
+    [self configureHeaderAndFooterNoLogo:self.tableView background:ColorBg];
     
 }
 

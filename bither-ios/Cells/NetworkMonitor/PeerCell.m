@@ -40,7 +40,13 @@
     // Configure the view for the selected state
 }
 -(void)setPeer:(BTPeer *)peer{
-    //self.lbAddress.text=peer.peerServices;
+    self.lbAddress.text=peer.host;
+    self.lbVersion.text= peer.userAgent;
+    self.lbProtocol.text=[NSString stringWithFormat:@"protocol: %d",(int)peer.version];
+    self.lbBlocks.text=[NSString stringWithFormat:@"%d blocks",(int)peer.versionLastBlock];
+    self.lbPing.text=[NSString stringWithFormat:@"⇆ %ld ms",(long)(peer.pingTime*1000)];
+    
+    
 }
 
 @end

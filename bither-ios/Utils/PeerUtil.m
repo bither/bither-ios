@@ -83,12 +83,12 @@ static PeerUtil * peerUtil;
 
 -(void) connectPeer{
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0),^{
-        BOOL hasAddress=[[BTAddressManager instance] allAddresses].count>0;
+       
         BOOL downloadSpvFinish=[[UserDefaultsUtil instance ] getDownloadSpvFinish]&&[[BTPeerManager instance] doneSyncFromSPV];
         BOOL walletIsSyncComplete=[[BTAddressManager instance] allSyncComplete];
        // BOOL netWorkState=[NetworkUtil isEnableWIFI]||![[UserDefaultsUtil instance] getSyncBlockOnlyWifi];
         BTPeerManager * peerManager=[BTPeerManager instance];
-        if (downloadSpvFinish && walletIsSyncComplete && hasAddress) {
+        if (downloadSpvFinish && walletIsSyncComplete ) {
             if (![peerManager connected]) {
                 [peerManager start];
             }

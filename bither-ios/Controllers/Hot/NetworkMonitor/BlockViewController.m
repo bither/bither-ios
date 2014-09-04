@@ -37,7 +37,7 @@
     self.blocks=[[BTBlockChain instance] getAllBlocks];
     self.tableView.dataSource=self;
     self.tableView.delegate=self;
-    [self.tableView reloadData];
+   
     [[NSNotificationCenter defaultCenter ] addObserver:self selector:@selector(receivedNotifications) name:BTPeerManagerLastBlockChangedNotification object:nil];
      [self configureHeaderAndFooterNoLogo:self.tableView background:ColorBg];
     // Do any additional setup after loading the view.
