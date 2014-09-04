@@ -58,7 +58,7 @@
 @implementation TransactionsUtil
 +(void)checkAddress:(NSArray *) addressList callback:(IdResponseBlock)callback andErrorCallback:(ErrorBlock)errorBlcok{
     NSInteger index=0;
-    [self getAddressState:addressList index:index callback:callback andErrorCallback:errorBlcok];
+    [TransactionsUtil getAddressState:addressList index:index callback:callback andErrorCallback:errorBlcok];
 }
 +(void)getAddressState:(NSArray *)addressList index:(NSInteger) index callback:(IdResponseBlock)callback andErrorCallback:(ErrorBlock)errorBlcok{
     if (index==addressList.count) {
@@ -194,38 +194,50 @@
                 callback();
             }
         }else{
-            [self getMyTx:addresses index:index callback:callback andErrorCallBack:errorCallback];
+            [TransactionsUtil getMyTx:addresses index:index callback:callback andErrorCallBack:errorCallback];
         }
     }else{
-        uint32_t storeHeight=[[BTBlockChain instance] lastBlock].blockNo;
-        [[BitherApi instance] getMyTransactionApi:address.address callback:^(NSDictionary * dict) {
-            NSArray *txs=[TransactionsUtil getTransactions:dict storeBlockHeight:storeHeight];
-            uint32_t apiBlockCount=[dict getIntFromDict:BLOCK_COUNT];
-            [address initTxs:txs];
-            [address setIsSyncComplete:YES];
-            [address updateAddress];
-            //TODO 100?
-            if (apiBlockCount<storeHeight&&storeHeight-apiBlockCount<100) {
-                [[BTBlockChain instance] rollbackBlock:apiBlockCount];
-            }
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [[NSNotificationCenter defaultCenter] postNotificationName:BitherAddressNotification object:address.address];
-            });
+        [TransactionsUtil getTxs:address callback:^{
             if (index==addresses.count) {
                 if (callback) {
                     callback();
                 }
             }else{
-                [self getMyTx:addresses index:index callback:callback andErrorCallBack:errorCallback];
+                [TransactionsUtil getMyTx:addresses index:index callback:callback andErrorCallBack:errorCallback];
             }
         } andErrorCallBack:^(MKNetworkOperation *errorOp, NSError *error) {
             if (errorCallback) {
                 errorCallback(errorOp,error);
             }
-            NSLog(@"get my transcation api %@",errorOp.responseString);
         }];
     }
     
+}
++(void)getTxs:(BTAddress *) address callback:(VoidBlock)callback andErrorCallBack:(ErrorHandler)errorCallback{
+    
+    [[BitherApi instance] getMyTransactionApi:address.address callback:^(NSDictionary * dict) {
+        uint32_t storeHeight=[[BTBlockChain instance] lastBlock].blockNo;
+        NSArray *txs=[TransactionsUtil getTransactions:dict storeBlockHeight:storeHeight];
+        uint32_t apiBlockCount=[dict getIntFromDict:BLOCK_COUNT];
+        [address initTxs:txs];
+        [address setIsSyncComplete:YES];
+        [address updateAddress];
+        //TODO 100?
+        if (apiBlockCount<storeHeight&&storeHeight-apiBlockCount<100) {
+            [[BTBlockChain instance] rollbackBlock:apiBlockCount];
+        }
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [[NSNotificationCenter defaultCenter] postNotificationName:BitherAddressNotification object:address.address];
+        });
+        if (callback) {
+            callback();
+        }
+    } andErrorCallBack:^(MKNetworkOperation *errorOp, NSError *error) {
+        if (errorCallback) {
+            errorCallback(errorOp,error);
+        }
+        NSLog(@"get my transcation api %@",errorOp.responseString);
+    }];
 }
 
 +(NSString *)getCompleteTxForError:(NSError *) error{
@@ -233,7 +245,6 @@
     switch (error.code) {
         case ERR_TX_DUST_OUT_CODE:
             msg=NSLocalizedString(@"Send failed. Sending coins this few will be igored.", nil);
-
             break;
         case ERR_TX_NOT_ENOUGH_MONEY_CODE:
              msg= [NSString stringWithFormat: NSLocalizedString(@"Send failed. Lack of %@ BTC.", nil),[StringUtil stringForAmount:[error.userInfo getLongLongFromDict:ERR_TX_NOT_ENOUGH_MONEY_LACK]]];
