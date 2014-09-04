@@ -166,7 +166,7 @@
 +(void) syncWallet:(VoidBlock) voidBlock andErrorCallBack:(ErrorHandler)errorCallback{
     NSArray * addresses=[[BTAddressManager instance] allAddresses];
     if (addresses.count==0) {
-        errorCallback(nil,nil);
+        voidBlock();
         return;
     }
     if ([[BTAddressManager instance] allSyncComplete]) {
