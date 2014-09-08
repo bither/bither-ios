@@ -94,7 +94,7 @@ static NSMutableDictionary * tgds;
         tgds=[NSMutableDictionary new];
     }
     
-    if (tgds.count>marketType) {
+    if (tgds.count >= marketType) {
         TrendingGraphicData * tgd=[tgds objectForKey:@(marketType)];
         if (tgd&&![tgd isExpired]) {
             tgd.marketType = marketType;
