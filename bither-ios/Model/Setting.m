@@ -422,10 +422,10 @@ static double reloadTime;
                 }
                 
             }else{
-                reloadTime=[[NSDate new] timeIntervalSince1970];
                 DialogAlert *dialogAlert=[[DialogAlert alloc] initWithMessage:NSLocalizedString(@"Reload Transactions data?\nNeed long time.\nConsume network data.\nRecommand trying only with wrong data.", nil) confirm:^{
                     reloadTxsSetting.controller=controller;
                     [reloadTxsSetting showDialogPassword];
+                   
                     
                     
                 } cancel:^{
@@ -615,33 +615,34 @@ static double reloadTime;
 }
 -(void)onPasswordEntered:(NSString *)password{
     DialogProgress *dialogProgrees=[[DialogProgress alloc] initWithMessage:NSLocalizedString(@"Please wait…", nil)];
-    [dialogProgrees showInWindow:self.controller.view.window];
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        [[PeerUtil instance] stopPeer];
-        for(BTAddress * address in [[BTAddressManager instance]allAddresses]){
-            [address setIsSyncComplete:NO];
-            [address updateAddress];
-        }
-        [[BTTxProvider instance] clearAllTx];
-        [TransactionsUtil syncWallet:^{
-             [[PeerUtil instance] startPeer];
-            [dialogProgrees dismiss];
-            if([self.controller respondsToSelector:@selector(showMsg:)]){
-                [self.controller performSelector:@selector(showMsg:) withObject:NSLocalizedString(@"Reload transactions data success", nil)];
+    [dialogProgrees showInWindow:self.controller.view.window completion:^{
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+            reloadTime=[[NSDate new] timeIntervalSince1970];
+            [[PeerUtil instance] stopPeer];
+            for(BTAddress * address in [[BTAddressManager instance]allAddresses]){
+                [address setIsSyncComplete:NO];
+                [address updateAddress];
             }
+            [[BTTxProvider instance] clearAllTx];
+            [TransactionsUtil syncWallet:^{
+                [[PeerUtil instance] startPeer];
+                [dialogProgrees dismiss];
+                if([self.controller respondsToSelector:@selector(showMsg:)]){
+                    [self.controller performSelector:@selector(showMsg:) withObject:NSLocalizedString(@"Reload transactions data success", nil)];
+                }
+                
+            } andErrorCallBack:^(MKNetworkOperation *errorOp, NSError *error) {
+                [dialogProgrees dismiss];
+                if([self.controller respondsToSelector:@selector(showMsg:)]){
+                    [self.controller performSelector:@selector(showMsg:) withObject:NSLocalizedString(@"Network failure.", nil)];
+                }
+                
+            }];
             
-        } andErrorCallBack:^(MKNetworkOperation *errorOp, NSError *error) {
-            [dialogProgrees dismiss];
-            if([self.controller respondsToSelector:@selector(showMsg:)]){
-                [self.controller performSelector:@selector(showMsg:) withObject:NSLocalizedString(@"Network failure.", nil)];
-            }
-            
-        }];
-       
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [dialogProgrees dismiss];
+           
         });
-    });
+    }];
+    
 
 }
 
