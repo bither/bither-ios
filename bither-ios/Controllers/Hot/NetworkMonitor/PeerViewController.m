@@ -26,6 +26,7 @@
 @interface PeerViewController ()<UITableViewDataSource,UITableViewDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (strong,nonatomic) NSMutableArray * peers;
+@property (readwrite,nonatomic) BOOL needRefresh;
 
 @end
 
@@ -49,15 +50,31 @@
     }
     self.tableView.delegate=self;
     self.tableView.dataSource=self;
-    [[NSNotificationCenter defaultCenter ] addObserver:self selector:@selector(receivedNotifications) name:BTPeerManagerSyncFromSPVFinishedNotification object:nil];
     [self configureHeaderAndFooterNoLogo:self.tableView background:ColorBg];
     
 }
-
--(void)dealloc{
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:BTPeerManagerSyncFromSPVFinishedNotification object:nil];
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    self.needRefresh=YES;
+    [self refresh];
 }
--(void) receivedNotifications{
+-(void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+    self.needRefresh=NO;
+}
+
+
+
+-(void)refresh{
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+      
+        [self loadPeerData];
+        if (self.needRefresh) {
+            [self refresh];
+        }
+    });
+}
+-(void) loadPeerData{
     [self.peers removeAllObjects];
     for(BTPeer * peer in  [BTPeerManager instance].connectedPeers){
         [self.peers addObject:peer];

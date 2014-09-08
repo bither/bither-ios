@@ -44,11 +44,11 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.blocks=[[BTBlockChain instance] getAllBlocks];
+   
     self.tableView.dataSource=self;
     self.tableView.delegate=self;
-   
-    [[NSNotificationCenter defaultCenter ] addObserver:self selector:@selector(receivedNotifications) name:BTPeerManagerLastBlockChangedNotification object:nil];
+    [self reloadBlockData];
+    [[NSNotificationCenter defaultCenter ] addObserver:self selector:@selector(reloadBlockData) name:BTPeerManagerLastBlockChangedNotification object:nil];
      [self configureHeaderAndFooterNoLogo:self.tableView background:ColorBg];
     // Do any additional setup after loading the view.
 }
@@ -56,11 +56,16 @@
     [[NSNotificationCenter defaultCenter] removeObserver:self name:BTPeerManagerLastBlockChangedNotification object:nil];
 }
 
--(void) receivedNotifications{
-    self.blocks=[[BTBlockChain instance] getAllBlocks];
-    if (self.tableView) {
-        [self.tableView reloadData];
-    }
+-(void)reloadBlockData{
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0),^{
+        self.blocks=[[BTBlockChain instance] getAllBlocks];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.tableView reloadData];
+        });
+        
+    });
+    
+    
 }
 
 
