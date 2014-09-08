@@ -53,17 +53,6 @@
     seperator.backgroundColor = [UIColor colorWithWhite:1 alpha:0.5];
     [self addSubview:seperator];
     bottom += 1;
-    if(hasPrivateKey){
-      //  bottom = [self createButtonWithText:NSLocalizedString(@"Private Key QR Code", nil) top:bottom action:@selector(privateKeyQrCodePressed:)];
-    }else{
-        bottom = [self createButtonWithText:NSLocalizedString(@"Stop Monitoring", nil) top:bottom action:@selector(stopMonitorPressed:)];
-        seperator = [[UIView alloc]initWithFrame:CGRectMake(0, bottom, self.frame.size.width, 1)];
-        seperator.autoresizingMask = UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleWidth;
-        seperator.backgroundColor = [UIColor colorWithWhite:1 alpha:0.5];
-        [self addSubview:seperator];
-        bottom += 1;
-    }
-   
     bottom = [self createButtonWithText:NSLocalizedString(@"Cancel", nil) top:bottom action:@selector(cancelPressed:)];
     CGRect frame = self.frame;
     frame.size.height = bottom;
