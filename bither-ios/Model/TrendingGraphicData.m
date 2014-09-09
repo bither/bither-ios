@@ -94,16 +94,15 @@ static NSMutableDictionary * tgds;
         tgds=[NSMutableDictionary new];
     }
     
-    if (tgds.count >= marketType) {
-        TrendingGraphicData * tgd=[tgds objectForKey:@(marketType)];
-        if (tgd&&![tgd isExpired]) {
-            tgd.marketType = marketType;
-            if (callback) {
-                callback(tgd);
-                return;
-            }
+    TrendingGraphicData * tgd=[tgds objectForKey:@(marketType)];
+    if (tgd&&![tgd isExpired]) {
+        tgd.marketType = marketType;
+        if (callback) {
+            callback(tgd);
+            return;
         }
     }
+    
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0),^{
         [[BitherApi instance] getExchangeTrend:marketType callback:^(NSArray *array) {
             TrendingGraphicData * tgd=[TrendingGraphicData format:array];
