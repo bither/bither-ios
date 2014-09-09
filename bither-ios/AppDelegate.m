@@ -155,8 +155,9 @@ static StatusBarNotificationWindow* notificationWindow;
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 25*NSEC_PER_SEC), dispatch_get_main_queue(), ^{
         if (syncFailedObserver) [[NSNotificationCenter defaultCenter] removeObserver:syncFailedObserver];
         syncFailedObserver = nil;
+        double syncProgress = m.syncProgress;
         [self stopPeerWithFetch];
-        if (m.syncProgress > 0.1) {
+        if (syncProgress > 0.1) {
             DDLogDebug(@"perform fetch 25sec UIBackgroundFetchResultNewData");
             if (completion) completion(UIBackgroundFetchResultNewData);
         } else {
