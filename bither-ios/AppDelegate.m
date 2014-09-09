@@ -161,7 +161,7 @@ static StatusBarNotificationWindow* notificationWindow;
             if (completion) completion(UIBackgroundFetchResultNewData);
         } else {
             if (completion) completion(UIBackgroundFetchResultNoData);
-            DDLogDebug(@"perform fetch 25sec UIBackgroundFetchResultFailed");
+            DDLogDebug(@"perform fetch 25sec UIBackgroundFetchResultNoData");
         }
         completion = nil;
         
