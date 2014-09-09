@@ -141,15 +141,15 @@ static StatusBarNotificationWindow* notificationWindow;
         completionHandler(UIBackgroundFetchResultNoData);
         return;
     }
-    DDLogDebug(@"performFetc begin");
+    DDLogDebug(@"perform fetch begin");
     __block id  syncFailedObserver = nil;
     __block void (^completion)(UIBackgroundFetchResult) = completionHandler;
     BTPeerManager *m = [BTPeerManager instance];
     
-    if (m.syncProgress >= 1.0) {
-        if (completion) completion(UIBackgroundFetchResultNoData);
-        return;
-    }
+//    if (m.syncProgress >= 1.0) {
+//        if (completion) completion(UIBackgroundFetchResultNoData);
+//        return;
+//    }
     
     // timeout after 25 seconds
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 25*NSEC_PER_SEC), dispatch_get_main_queue(), ^{
@@ -157,11 +157,12 @@ static StatusBarNotificationWindow* notificationWindow;
         syncFailedObserver = nil;
         [self stopPeerWithFetch];
         if (m.syncProgress > 0.1) {
-            DDLogDebug(@"performFetc 25sec UIBackgroundFetchResultNewData");
+            DDLogDebug(@"perform fetch 25sec UIBackgroundFetchResultNewData");
             if (completion) completion(UIBackgroundFetchResultNewData);
+        } else {
+            if (completion) completion(UIBackgroundFetchResultNoData);
+            DDLogDebug(@"perform fetch 25sec UIBackgroundFetchResultFailed");
         }
-        else if (completion) completion(UIBackgroundFetchResultFailed);
-         DDLogDebug(@"performFetc 25sec UIBackgroundFetchResultFailed");
         completion = nil;
         
       //  if (syncFinishedObserver) [[NSNotificationCenter defaultCenter] removeObserver:syncFinishedObserver];
@@ -185,7 +186,7 @@ static StatusBarNotificationWindow* notificationWindow;
     syncFailedObserver =
     [[NSNotificationCenter defaultCenter] addObserverForName:BTPeerManagerSyncFailedNotification object:nil
                                                        queue:nil usingBlock:^(NSNotification *note) {
-                                                               DDLogDebug(@"performFetc BTPeerManagerSyncFailedNotification");
+                                                               DDLogDebug(@"perform fetch BTPeerManagerSyncFailedNotification");
                                                            [self stopPeerWithFetch];
                                                            if (syncFailedObserver) [[NSNotificationCenter defaultCenter] removeObserver:syncFailedObserver];
                                                            // syncFinishedObserver = syncFailedObserver = nil;
