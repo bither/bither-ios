@@ -130,6 +130,12 @@
     CGRect frame = self.frame;
     frame.size.height = bottom;
     self.frame = frame;
+    
+    UIButton *dismissBtn = [[UIButton alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(self.chart.frame), self.frame.size.width, self.frame.size.height - CGRectGetMaxY(self.chart.frame))];
+    [dismissBtn setBackgroundImage:nil forState:UIControlStateNormal];
+    dismissBtn.adjustsImageWhenHighlighted = NO;
+    [self addSubview:dismissBtn];
+    [dismissBtn addTarget:self action:@selector(dismissPressed:) forControlEvents:UIControlEventTouchUpInside];
 }
 
 -(void)dialogDidShow{
@@ -143,6 +149,10 @@
     if(self.listener && [self.listener respondsToSelector:@selector(dialogDismissed)]){
         [self.listener dialogDismissed];
     }
+}
+
+-(void)dismissPressed:(id)sender{
+    [self dismiss];
 }
 
 -(NSAttributedString*)stringAddDotColor:(UIColor*)color string:(NSString*)str{
