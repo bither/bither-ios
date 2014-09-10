@@ -75,11 +75,19 @@
 -(void) loadPeerData{
     [self.peers removeAllObjects];
     for(BTPeer * peer in  [BTPeerManager instance].connectedPeers){
-        if (peer.status==BTPeerStatusConnected) {
-            [self.peers addObject:peer];
-        }
-       
+       [self.peers addObject:peer];
     }
+    [self.peers sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {
+        BTPeer * peer1=obj1;
+        BTPeer * peer2=obj2;
+        if (peer1.peerAddress>peer2.peerAddress) {
+            return NSOrderedAscending;
+        }else if(peer1.peerAddress==peer2.peerAddress){
+            return  NSOrderedSame;
+        }else{
+            return NSOrderedDescending;
+        }
+    }];
     if (self.tableView) {
         [self.tableView reloadData];
     }

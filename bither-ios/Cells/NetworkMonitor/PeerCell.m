@@ -51,10 +51,20 @@
 }
 -(void)setPeer:(BTPeer *)peer{
     self.lbAddress.text=peer.host;
-    self.lbVersion.text= peer.userAgent;
-    self.lbProtocol.text=[NSString stringWithFormat:@"protocol: %d",(int)peer.version];
-    self.lbBlocks.text=[NSString stringWithFormat:@"%d blocks",(int)peer.versionLastBlock];
-    self.lbPing.text=[NSString stringWithFormat:@"⇆ %ld ms",(long)(peer.pingTime*1000)];
+   
+    if (peer.status==BTPeerStatusConnected) {
+        self.lbVersion.text= peer.userAgent;
+        self.lbProtocol.text=[NSString stringWithFormat:@"protocol: %d",(int)peer.version];
+        self.lbBlocks.text=[NSString stringWithFormat:@"%d blocks",(int)peer.versionLastBlock];
+        self.lbPing.text=[NSString stringWithFormat:@"⇆ %ld ms",(long)(peer.pingTime*1000)];
+        
+    }else{
+        self.lbVersion.text=@"----";
+        self.lbProtocol.text=[NSString stringWithFormat:@"protocol: %@",@"--"];
+        self.lbBlocks.text=[NSString stringWithFormat:@"%@ blocks",@"--"];
+        self.lbPing.text=[NSString stringWithFormat:@"%@ ms",@"--"];
+        
+    }
     
     
 }
