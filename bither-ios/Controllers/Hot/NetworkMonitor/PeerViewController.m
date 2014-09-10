@@ -45,12 +45,10 @@
 {
     [super viewDidLoad];
     self.peers=[NSMutableArray new];
-    for(BTPeer * peer in  [BTPeerManager instance].connectedPeers){
-        [self.peers addObject:peer];
-    }
     self.tableView.delegate=self;
     self.tableView.dataSource=self;
     [self configureHeaderAndFooterNoLogo:self.tableView background:ColorBg];
+    [self loadPeerData];
     
 }
 -(void)viewWillAppear:(BOOL)animated{
@@ -77,7 +75,10 @@
 -(void) loadPeerData{
     [self.peers removeAllObjects];
     for(BTPeer * peer in  [BTPeerManager instance].connectedPeers){
-        [self.peers addObject:peer];
+        if (peer.status==BTPeerStatusConnected) {
+            [self.peers addObject:peer];
+        }
+       
     }
     if (self.tableView) {
         [self.tableView reloadData];
