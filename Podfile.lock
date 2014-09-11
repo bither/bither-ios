@@ -74,7 +74,7 @@ PODS:
   - ZBarSDK (1.3.1)
 
 DEPENDENCIES:
-  - Bitheri (from `git@github.com:bither/bitheri.git`, tag `v1.0.3`)
+  - Bitheri (from `git@github.com:bither/bitheri.git`, branch `develop`)
   - KSCrash (~> 0.0.3)
   - MKNetworkKit (~> 0.87)
   - RegexKitLite (~> 4.0)
@@ -82,8 +82,8 @@ DEPENDENCIES:
 
 EXTERNAL SOURCES:
   Bitheri:
+    :branch: develop
     :git: git@github.com:bither/bitheri.git
-    :tag: v1.0.3
 
 SPEC CHECKSUMS:
   Bitheri: 0c317bbc1ce0e7cdc6d32666ce4ac4600ff62353
