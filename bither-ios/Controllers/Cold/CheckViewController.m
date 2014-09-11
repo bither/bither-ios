@@ -68,7 +68,7 @@
 }
 
 - (IBAction)checkPressed:(id)sender {
-    if([BTAddressManager sharedInstance].privKeyAddresses.count > 0){
+    if([BTAddressManager instance].privKeyAddresses.count > 0){
         if(!self.checking){
             [[[DialogPassword alloc]initWithDelegate:self]showInWindow:self.view.window];
         }
@@ -173,7 +173,7 @@
 }
 -(void)refreshPrivateKeys{
     [privateKeys removeAllObjects];
-    [privateKeys addObjectsFromArray:[BTAddressManager sharedInstance].privKeyAddresses];
+    [privateKeys addObjectsFromArray:[BTAddressManager instance].privKeyAddresses];
     [dangerKeys removeAllObjects];
     [self.tableView reloadData];
 }

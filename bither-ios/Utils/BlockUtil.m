@@ -81,7 +81,7 @@ static BlockUtil *blockUtil;
 
 -(void)syncSpvBlock{
     [self dowloadSpvBlock:^{
-        if ([[BTPeerManager sharedInstance] doneSyncFromSPV]) {
+        if ([[BTPeerManager instance] doneSyncFromSPV]) {
             if ([self.delegate respondsToSelector:@selector(success)]) {
                 [self.delegate success];
             }
@@ -101,7 +101,7 @@ static BlockUtil *blockUtil;
     }else{
         [[BitherApi instance] getSpvBlock:^(NSDictionary *dict) {
             BTBlock * block=[BlockUtil formatBlcok:dict];
-            if (block.height%2016!=0) {
+            if (block.blockNo%2016!=0) {
                 if ([self.delegate respondsToSelector:@selector(error)]) {
                     [self.delegate error];
                 }

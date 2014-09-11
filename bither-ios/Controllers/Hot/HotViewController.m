@@ -98,7 +98,7 @@
 
 - (void)viewWillAppear:(BOOL)animated;{
     [self.navigationController setNavigationBarHidden:YES animated:NO];
-    if (![[BTPeerManager sharedInstance] connected]) {
+    if (![[BTPeerManager instance] connected]) {
         [[PeerUtil instance] startPeer];
     }
    

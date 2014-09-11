@@ -42,8 +42,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    _privateKeys = [[NSMutableArray alloc]initWithArray:[[BTAddressManager sharedInstance]privKeyAddresses]];
-    _watchOnlys = [[NSMutableArray alloc]initWithArray:[[BTAddressManager sharedInstance]watchOnlyAddresses]];
+    _privateKeys = [[NSMutableArray alloc]initWithArray:[[BTAddressManager instance]privKeyAddresses]];
+    _watchOnlys = [[NSMutableArray alloc]initWithArray:[[BTAddressManager instance]watchOnlyAddresses]];
     _foldedSections = [NSMutableIndexSet indexSet];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
@@ -61,8 +61,8 @@
 -(void)reload{
     [_privateKeys removeAllObjects];
     [_watchOnlys removeAllObjects];
-    [_privateKeys addObjectsFromArray:[[BTAddressManager sharedInstance]privKeyAddresses]];
-    [_watchOnlys addObjectsFromArray:[[BTAddressManager sharedInstance]watchOnlyAddresses]];
+    [_privateKeys addObjectsFromArray:[[BTAddressManager instance]privKeyAddresses]];
+    [_watchOnlys addObjectsFromArray:[[BTAddressManager instance]watchOnlyAddresses]];
     [self.tableView reloadData];
     self.ivNoAddress.hidden = !(_privateKeys.count == 0 && _watchOnlys.count == 0);
 }

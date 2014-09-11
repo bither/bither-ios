@@ -278,6 +278,9 @@
 
 "Page %d, Total %ld" = "第%1$d页, 共%2$d页";
 
+
+"yesterday %@" = "昨天 %@";
+
 "No transactions found for this address,\nit has probably not been used on the network yet." = "没有找到这个地址的交易,\n它可能还没有在网络上使用过.";
 
 "HUOBI"="火币网";
@@ -379,4 +382,11 @@
 "Please wait for another confirmation."="请等待一个新的确认后再交易.";
 
 "Total BTC prefix"="总计: ";
+
+
+"Reload Transactions data"="重载交易数据";
+"Reload Transactions data?\nNeed long time.\nConsume network data.\nRecommand trying only with wrong data."="确认重载交易数据 ?\n需要较长时间\n消耗网络流量\n建议只在数据出错时尝试";
+"Reload transactions data failed , Please retry again."="重载交易数据失败 , 请重试 .";
+"Reload transactions data success"="重载交易数据成功 ";
+"You can only reload transactions data in a hour.."="一个小时内只能重载交易数据一次.";
 

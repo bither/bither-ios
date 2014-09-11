@@ -33,6 +33,10 @@
 #import "UnsignedTransactionViewController.h"
 #import "BTSettings.h"
 #import "AdvanceViewController.h"
+#import "DialogAlert.h"
+#import "BTTxProvider.h"
+#import "PeerUtil.h"
+#import "TransactionsUtil.h"
 
 @interface SignTransactionScanDelegate : Setting<ScanQrCodeDelegate>
 -(instancetype)init;
@@ -56,7 +60,13 @@
 @property NSMutableArray* addresses;
 @end
 
+@interface ReloadTxSetting : Setting<DialogPasswordDelegate>
+-(void)showDialogPassword;
+@property (weak)UIViewController *controller;
+@end
+
 @implementation Setting
+
 static Setting* ExchangeSetting;
 static Setting* MarketSetting;
 static Setting* TransactionFeeSetting;
@@ -71,6 +81,9 @@ static Setting* CloneScanSetting;
 static Setting* CloneQrSetting;
 static Setting* ColdMonitorSetting;
 static Setting* AdvanceSetting;
+static ReloadTxSetting* reloadTxsSetting;
+
+static double reloadTime;
 
 -(instancetype)initWithName:(NSString *)name  icon:(NSString *)icon {
     self=[super init];
@@ -291,7 +304,7 @@ static Setting* AdvanceSetting;
     if(!CheckSetting){
         Setting * setting=[[Setting alloc] initWithName:NSLocalizedString(@"Check Private Keys", nil) icon:@"check_button_icon" ];
         [setting setSelectBlock:^(UIViewController * controller){
-            if([BTAddressManager sharedInstance].privKeyAddresses.count == 0){
+            if([BTAddressManager instance].privKeyAddresses.count == 0){
                 if([controller respondsToSelector:@selector(showMsg:)]){
                     [controller performSelector:@selector(showMsg:) withObject:NSLocalizedString(@"No private keys", nil)];
                 }
@@ -313,7 +326,7 @@ static Setting* AdvanceSetting;
     if(!EditPasswordSetting){
         Setting * setting=[[Setting alloc] initWithName:NSLocalizedString(@"Change Password", nil) icon:@"edit_password_button_icon" ];
         [setting setSelectBlock:^(UIViewController * controller){
-            if([BTAddressManager sharedInstance].privKeyAddresses.count == 0){
+            if([BTAddressManager instance].privKeyAddresses.count == 0){
                 if([controller respondsToSelector:@selector(showMsg:)]){
                     [controller performSelector:@selector(showMsg:) withObject:NSLocalizedString(@"No private keys", nil)];
                 }
@@ -366,7 +379,7 @@ static Setting* AdvanceSetting;
 }
 
 +(Setting*)getCloneSetting{
-    if([BTAddressManager sharedInstance].privKeyAddresses.count > 0){
+    if([BTAddressManager instance].privKeyAddresses.count > 0){
         if(!CloneQrSetting){
             CloneQrSetting = [[CloneQrCodeSetting alloc]init];
         }
@@ -383,7 +396,7 @@ static Setting* AdvanceSetting;
     if(!ColdMonitorSetting){
         ColdMonitorSetting = [[Setting alloc]initWithName:NSLocalizedString(@"Watch Only QR Code", nil) icon:@"qr_code_button_icon"];
         [ColdMonitorSetting setSelectBlock:^(UIViewController * controller){
-            NSArray* addresses = [BTAddressManager sharedInstance].privKeyAddresses;
+            NSArray* addresses = [BTAddressManager instance].privKeyAddresses;
             NSMutableArray* pubKeys = [[NSMutableArray alloc]init];
             for(BTAddress* a in addresses){
                 [pubKeys addObject:[NSString hexWithData:a.pubKey].uppercaseString];
@@ -396,6 +409,36 @@ static Setting* AdvanceSetting;
         }];
     }
     return ColdMonitorSetting;
+}
+
++(Setting *)getReloadTxsSetting{
+    if (!reloadTxsSetting) {
+     reloadTxsSetting=[[ReloadTxSetting alloc] initWithName:NSLocalizedString(@"Reload Transactions data", nil) icon:nil];
+
+        [reloadTxsSetting setSelectBlock:^(UIViewController * controller){
+            if (reloadTime>0&&reloadTime+60*60>(double)[[NSDate new]timeIntervalSince1970]) {
+                if([controller respondsToSelector:@selector(showMsg:)]){
+                    [controller performSelector:@selector(showMsg:) withObject:NSLocalizedString(@"You can only reload transactions data in a hour..", nil)];
+                }
+                
+            }else{
+                DialogAlert *dialogAlert=[[DialogAlert alloc] initWithMessage:NSLocalizedString(@"Reload Transactions data?\nNeed long time.\nConsume network data.\nRecommand trying only with wrong data.", nil) confirm:^{
+                    reloadTxsSetting.controller=controller;
+                    [reloadTxsSetting showDialogPassword];
+                   
+                    
+                    
+                } cancel:^{
+                    
+                }];
+                [dialogAlert showInWindow:controller.view.window];
+            }
+
+        }];
+       
+        
+    }
+    return reloadTxsSetting;
 }
 
 +(NSArray *)hotSettings{
@@ -415,20 +458,23 @@ static Setting* AdvanceSetting;
     NSMutableArray *array = [NSMutableArray new];
     [array addObject:[Setting getSignTransactionSetting]];
     [array addObject:[Setting getCloneSetting]];
-    if([BTAddressManager sharedInstance].privKeyAddresses.count > 0){
+    if([BTAddressManager instance].privKeyAddresses.count > 0){
         [array addObject:[Setting getColdMonitorSetting]];
     }
     [array addObject:[Setting getAdvanceSetting]];
-    return array;
+    return array; 
 }
 +(NSArray*)advanceSettings{
     NSMutableArray *array = [NSMutableArray new];
-    //if ([[BTSettings instance] getAppMode]==COLD) {
-    //}
+    
     [array addObject:[Setting getEditPasswordSetting]];
     [array addObject:[Setting getImportPrivateKeySetting]];
+    if ([[BTSettings instance] getAppMode]==HOT) {
+        [array addObject:[Setting getReloadTxsSetting]];
+    }
     return array;
 }
+
 @end
 
 
@@ -547,7 +593,7 @@ static Setting* AdvanceSetting;
 }
 
 -(void)onPasswordEntered:(NSString *)password{
-    NSArray *addresses = [BTAddressManager sharedInstance].privKeyAddresses;
+    NSArray *addresses = [BTAddressManager instance].privKeyAddresses;
     NSMutableArray* keys = [[NSMutableArray alloc]init];
     for(BTAddress* a in addresses){
         [keys addObject:a.encryptPrivKey];
@@ -557,6 +603,47 @@ static Setting* AdvanceSetting;
     qrController.qrCodeTitle = NSLocalizedString(@"Cold Wallet Clone QR Code", nil);
     qrController.qrCodeMsg = NSLocalizedString(@"Scan by clone destination", nil);
     [self.controller.navigationController pushViewController:qrController animated:YES];
+}
+
+@end
+
+@implementation ReloadTxSetting
+
+-(void)showDialogPassword{
+    DialogPassword *dialog = [[DialogPassword alloc]initWithDelegate:self];
+    [dialog showInWindow:self.controller.view.window];
+}
+-(void)onPasswordEntered:(NSString *)password{
+    DialogProgress *dialogProgrees=[[DialogProgress alloc] initWithMessage:NSLocalizedString(@"Please wait…", nil)];
+    [dialogProgrees showInWindow:self.controller.view.window completion:^{
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+            reloadTime=[[NSDate new] timeIntervalSince1970];
+            [[PeerUtil instance] stopPeer];
+            for(BTAddress * address in [[BTAddressManager instance]allAddresses]){
+                [address setIsSyncComplete:NO];
+                [address updateAddress];
+            }
+            [[BTTxProvider instance] clearAllTx];
+            [TransactionsUtil syncWallet:^{
+                [[PeerUtil instance] startPeer];
+                [dialogProgrees dismiss];
+                if([self.controller respondsToSelector:@selector(showMsg:)]){
+                    [self.controller performSelector:@selector(showMsg:) withObject:NSLocalizedString(@"Reload transactions data success", nil)];
+                }
+                
+            } andErrorCallBack:^(MKNetworkOperation *errorOp, NSError *error) {
+                [dialogProgrees dismiss];
+                if([self.controller respondsToSelector:@selector(showMsg:)]){
+                    [self.controller performSelector:@selector(showMsg:) withObject:NSLocalizedString(@"Network failure.", nil)];
+                }
+                
+            }];
+            
+           
+        });
+    }];
+    
+
 }
 
 @end
@@ -577,13 +664,13 @@ static Setting* AdvanceSetting;
 
 -(void)show{
     self.addresses = [[NSMutableArray alloc]init];
-    NSArray* as = [BTAddressManager sharedInstance].privKeyAddresses;
+    NSArray* as = [BTAddressManager instance].privKeyAddresses;
     for(BTAddress * a in as){
         if(a.balance > 0){
             [self.addresses addObject:a];
         }
     }
-    as = [BTAddressManager sharedInstance].watchOnlyAddresses;
+    as = [BTAddressManager instance].watchOnlyAddresses;
     for(BTAddress *a in as){
         if(a.balance > 0){
             [self.addresses addObject:a];

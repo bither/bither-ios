@@ -21,6 +21,8 @@
 #import "StringUtil.h"
 #import "NSString+Size.h"
 #import "BitherTime.h"
+#import "TrendingGraphicView.h"
+#import "BackgroundTransitionView.h"
 
 #define DEFAULT_DISPALY_PRICE @"--"
 
@@ -37,13 +39,14 @@
 @property (weak, nonatomic) IBOutlet UILabel *lbAmount;
 @property (weak, nonatomic) IBOutlet UILabel *lbBuy;
 @property (weak, nonatomic) IBOutlet UILabel *lbSell;
-@property (weak, nonatomic) IBOutlet UIView *matketDetailView;
+@property (weak, nonatomic) IBOutlet BackgroundTransitionView *matketDetailView;
 @property (weak, nonatomic) IBOutlet UILabel *lbSymbol;
 @property (weak, nonatomic) IBOutlet UIView *vAmountContainer;
 @property (weak, nonatomic) IBOutlet UIView *vLeftContainer;
 @property (weak, nonatomic) IBOutlet UIView *vRightContainer;
 @property (weak, nonatomic) IBOutlet UILabel *lbl24H;
 @property (weak, nonatomic) IBOutlet UIImageView *ivProgress;
+@property (weak, nonatomic) IBOutlet TrendingGraphicView *vTrending;
 
 
 @property (weak, nonatomic) Market * market;
@@ -68,10 +71,12 @@
     self.tableView.tableFooterView = [[UIView alloc]initWithFrame:CGRectZero];
     self.market=[MarketUtil getDefaultMarket];
     [self reload];
+    [self.vTrending setData:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(notificationReload) name:BitherMarketUpdateNotification object:nil];
     _isCheckAnimation=NO;
     
 }
+
 -(void)viewWillAppear:(BOOL)animated{
     if (self.market.ticker==nil) {
         [[BitherTime instance] resume];
@@ -80,18 +85,21 @@
     [super viewWillAppear:animated];
 
 }
+
 -(void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
     _isAppear=YES;
     if (_isCheckAnimation) {
         [self moveProgress];
     }
-    
+    self.vTrending.marketType = self.market.marketType;
 }
+
 -(void)viewDidDisappear:(BOOL)animated{
     [super viewDidDisappear:animated];
     _isAppear=NO;
 }
+
 -(void)notificationReload{
     [self reload];
     _isCheckAnimation=YES;
@@ -99,10 +107,15 @@
         [self moveProgress];
     }
 }
+
 -(void)reload{
     [self.tableView reloadData];
     self.lbMarketName.text=[self.market getName];
-    self.matketDetailView.backgroundColor=[BitherSetting getMarketColor:self.market.marketType];
+    if(_isAppear){
+        self.matketDetailView.backgroundColor=[BitherSetting getMarketColor:self.market.marketType];
+    }else{
+        [self.matketDetailView setBackgroundColorWithoutTransition:[BitherSetting getMarketColor:self.market.marketType]];
+    }
     if (self.market.ticker) {
         Ticker * ticker=self.market.ticker;
         self.lbSymbol.text= [BitherSetting getExchangeSymbol:[[UserDefaultsUtil instance] getDefaultExchangeType]];
@@ -122,6 +135,9 @@
         self.lbSell.text=DEFAULT_DISPALY_PRICE;
     }
     [self positionViews];
+    if(_isAppear){
+        self.vTrending.marketType = self.market.marketType;
+    }
   
 }
 
@@ -150,6 +166,8 @@
     frame.origin.x = frame.origin.x - (width - frame.size.width);
     frame.size.width = width;
     self.vRightContainer.frame = frame;
+    
+    self.vTrending.frame = CGRectMake(CGRectGetMaxX(self.vLeftContainer.frame) + 8, self.vLeftContainer.frame.origin.y, self.vRightContainer.frame.origin.x - CGRectGetMaxX(self.vLeftContainer.frame) - 16, self.vLeftContainer.frame.size.height);
 }
 
 -(void)moveProgress{

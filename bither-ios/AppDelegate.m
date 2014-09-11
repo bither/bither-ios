@@ -57,8 +57,9 @@ static StatusBarNotificationWindow* notificationWindow;
         [[UIApplication sharedApplication] setMinimumBackgroundFetchInterval:UIApplicationBackgroundFetchIntervalMinimum];
     }
     
-    [[BTAddressManager sharedInstance] initAddress];
+    [[BTAddressManager instance] initAddress];
     [CrashLog initCrashLog];
+    [[BTSettings instance] openBitheriConsole];
     UIStoryboard *storyboard = self.window.rootViewController.storyboard;
     if(![[BTSettings instance]needChooseMode]){
         IOS7ContainerViewController *container = [[IOS7ContainerViewController alloc]init];
@@ -73,7 +74,7 @@ static StatusBarNotificationWindow* notificationWindow;
     }
     [self.window makeKeyAndVisible];
     
-    NSLog(@"h %d",[[BTBlockChain instance] lastBlock].height);
+    NSLog(@"h %d",[[BTBlockChain instance] lastBlock].blockNo);
     [self callInHot:^{
         [[PeerUtil instance] startPeer];
         [[BitherTime instance] start];
@@ -107,7 +108,7 @@ static StatusBarNotificationWindow* notificationWindow;
 {
     [self callInHot:^{
         [[BitherTime instance] resume];
-        if (![[BTPeerManager sharedInstance] connected]) {
+        if (![[BTPeerManager instance] connected]) {
             [[PeerUtil instance] startPeer];
         }
     }];
@@ -140,27 +141,29 @@ static StatusBarNotificationWindow* notificationWindow;
         completionHandler(UIBackgroundFetchResultNoData);
         return;
     }
-    DDLogDebug(@"performFetc begin");
+    DDLogDebug(@"perform fetch begin");
     __block id  syncFailedObserver = nil;
     __block void (^completion)(UIBackgroundFetchResult) = completionHandler;
-    BTPeerManager *m = [BTPeerManager sharedInstance];
+    BTPeerManager *m = [BTPeerManager instance];
     
-    if (m.syncProgress >= 1.0) {
-        if (completion) completion(UIBackgroundFetchResultNoData);
-        return;
-    }
+//    if (m.syncProgress >= 1.0) {
+//        if (completion) completion(UIBackgroundFetchResultNoData);
+//        return;
+//    }
     
     // timeout after 25 seconds
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 25*NSEC_PER_SEC), dispatch_get_main_queue(), ^{
         if (syncFailedObserver) [[NSNotificationCenter defaultCenter] removeObserver:syncFailedObserver];
         syncFailedObserver = nil;
+        double syncProgress = m.syncProgress;
         [self stopPeerWithFetch];
-        if (m.syncProgress > 0.1) {
-            DDLogDebug(@"performFetc 25sec UIBackgroundFetchResultNewData");
+        if (syncProgress > 0.1) {
+            DDLogDebug(@"perform fetch 25sec UIBackgroundFetchResultNewData");
             if (completion) completion(UIBackgroundFetchResultNewData);
+        } else {
+            if (completion) completion(UIBackgroundFetchResultNoData);
+            DDLogDebug(@"perform fetch 25sec UIBackgroundFetchResultNoData");
         }
-        else if (completion) completion(UIBackgroundFetchResultFailed);
-         DDLogDebug(@"performFetc 25sec UIBackgroundFetchResultFailed");
         completion = nil;
         
       //  if (syncFinishedObserver) [[NSNotificationCenter defaultCenter] removeObserver:syncFinishedObserver];
@@ -184,7 +187,7 @@ static StatusBarNotificationWindow* notificationWindow;
     syncFailedObserver =
     [[NSNotificationCenter defaultCenter] addObserverForName:BTPeerManagerSyncFailedNotification object:nil
                                                        queue:nil usingBlock:^(NSNotification *note) {
-                                                               DDLogDebug(@"performFetc BTPeerManagerSyncFailedNotification");
+                                                               DDLogDebug(@"perform fetch BTPeerManagerSyncFailedNotification");
                                                            [self stopPeerWithFetch];
                                                            if (syncFailedObserver) [[NSNotificationCenter defaultCenter] removeObserver:syncFailedObserver];
                                                            // syncFinishedObserver = syncFailedObserver = nil;
@@ -200,8 +203,8 @@ static StatusBarNotificationWindow* notificationWindow;
 -(void)stopPeerWithFetch{
     UIApplicationState state = [UIApplication sharedApplication].applicationState;
     if (state==UIApplicationStateBackground) {
-        if ([[BTPeerManager sharedInstance] connected]) {
-            [[BTPeerManager sharedInstance] disconnect];
+        if ([[BTPeerManager instance] connected]) {
+            [[BTPeerManager instance] stop];
         }
         
     }

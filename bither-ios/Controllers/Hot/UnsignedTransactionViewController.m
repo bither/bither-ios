@@ -85,10 +85,7 @@
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     [BTSettings instance].feeBase = ([[UserDefaultsUtil instance] getTransactionFeeMode] == Low ? 1000 : 10000);
-    if(self.tx && ![self.tx verifySignatures]){
-        self.btnSend.enabled = YES;
-    }
-    if (![[BTPeerManager sharedInstance] connected]) {
+    if (![[BTPeerManager instance] connected]) {
         [[PeerUtil instance] startPeer];
     }
 }
@@ -101,6 +98,8 @@
         }else{
             [self.amtLink becomeFirstResponder];
         }
+    }else{
+        self.btnSend.enabled = YES;
     }
 }
 
@@ -170,7 +169,7 @@
 -(void)finalSend{
     DialogProgress *dp = [[DialogProgress alloc]initWithMessage:NSLocalizedString(@"Please wait…", nil)];
     [dp showInWindow:self.view.window completion:^{
-        [[BTPeerManager sharedInstance] publishTransaction:self.tx completion:^(NSError *error) {
+        [[BTPeerManager instance] publishTransaction:self.tx completion:^(NSError *error) {
             if(!error){
                 dispatch_async(dispatch_get_main_queue(), ^{
                     [dp dismissWithCompletion:^{

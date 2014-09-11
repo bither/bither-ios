@@ -158,7 +158,7 @@
 }
 
 -(void)balanceChanged{
-    NSArray* addresses = [BTAddressManager sharedInstance].allAddresses;
+    NSArray* addresses = [BTAddressManager instance].allAddresses;
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         int64_t balance = 0;
         for(BTAddress *a in addresses){

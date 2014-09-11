@@ -2,9 +2,19 @@
 //  TrendingGraphicData.m
 //  bither-ios
 //
-//  Created by noname on 14-8-13.
-//  Copyright (c) 2014年 noname. All rights reserved.
+//  Copyright 2014 http://Bither.net
 //
+//  Licensed under the Apache License, Version 2.0 (the "License");
+//  you may not use this file except in compliance with the License.
+//  You may obtain a copy of the License at
+//
+//    http://www.apache.org/licenses/LICENSE-2.0
+//
+//  Unless required by applicable law or agreed to in writing, software
+//  distributed under the License is distributed on an "AS IS" BASIS,
+//  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+//  See the License for the specific language governing permissions and
+//  limitations under the License.
 
 #import "TrendingGraphicData.h"
 #import "ExchangeUtil.h"
@@ -71,7 +81,8 @@ static NSMutableDictionary * tgds;
     [tgd setCreateTime:[[NSDate new] timeIntervalSince1970]];
     return tgd;
 }
-+(TrendingGraphicData *)getEmptyData{
+
++(instancetype)getEmptyData{
     
     if (_emptyData==nil) {
         _emptyData=[[TrendingGraphicData alloc] init];
@@ -91,24 +102,23 @@ static NSMutableDictionary * tgds;
 +(void)getTrendingGraphicData:(MarketType ) marketType callback:(IdResponseBlock)callback andErrorCallback:(ErrorBlock)errorCallback{
     if (tgds==nil) {
         tgds=[NSMutableDictionary new];
-       
-    
     }
     
-    if (tgds.count>marketType) {
-        TrendingGraphicData * tgd=[tgds objectForKey:@(marketType)];
-        if (tgd&&![tgd isExpired]) {
-            if (callback) {
-                callback(tgd);
-                return;
-            }
+    TrendingGraphicData * tgd=[tgds objectForKey:@(marketType)];
+    if (tgd&&![tgd isExpired]) {
+        tgd.marketType = marketType;
+        if (callback) {
+            callback(tgd);
+            return;
         }
     }
+    
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0),^{
         [[BitherApi instance] getExchangeTrend:marketType callback:^(NSArray *array) {
             TrendingGraphicData * tgd=[TrendingGraphicData format:array];
             [tgds setObject:tgd forKey:@(marketType)];
             dispatch_async(dispatch_get_main_queue(), ^{
+                tgd.marketType = marketType;
                 if (callback) {
                     callback(tgd);
                 }
@@ -128,28 +138,3 @@ static NSMutableDictionary * tgds;
 }
 
 @end
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

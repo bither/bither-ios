@@ -26,7 +26,7 @@
 #import "NetworkUtil.h"
 #import "NSDictionary+Fromat.h"
 
-#define BLOCK_COUNT  @"block_count"
+
 
 static BOOL isRunning=NO;
 static BOOL addObserver=NO;
@@ -44,78 +44,15 @@ static PeerUtil * peerUtil;
 }
 
 
--(void) syncWallet:(VoidBlock) voidBlock andErrorCallBack:(ErrorHandler)errorCallback{
-    NSArray * addresses=[[BTAddressManager sharedInstance] allAddresses];
-    if (addresses.count==0) {
-        errorCallback(nil,nil);
-        return;
-    }
-    if ([[BTAddressManager sharedInstance] allSyncComplete]) {
-        if (voidBlock) {
-            voidBlock();
-        }
-        return;
-    }
-    __block  NSInteger index=0;
-    addresses=[addresses reverseObjectEnumerator].allObjects;
-    [self getMyTx:addresses index:index callback:^{
-        if (voidBlock) {
-            voidBlock();
-        }
-    } andErrorCallBack:errorCallback];
-    
-}
-
--(void)getMyTx:(NSArray *)addresses  index:(NSInteger)index  callback:(VoidBlock)callback andErrorCallBack:(ErrorHandler)errorCallback{
-    BTAddress * address=[addresses objectAtIndex:index];
-    index=index+1;
-    if (address.isSyncComplete) {
-        if (index==addresses.count) {
-            if (callback) {
-                callback();
-            }
-        }else{
-            [self getMyTx:addresses index:index callback:callback andErrorCallBack:errorCallback];
-        }
-    }else{
-        uint32_t storeHeight=[[BTBlockChain instance] lastBlock].height;
-        [[BitherApi instance] getMyTransactionApi:address.address callback:^(NSDictionary * dict) {
-            NSArray *txs=[TransactionsUtil getTransactions:dict storeBlockHeight:storeHeight];
-            uint32_t apiBlockCount=[dict getIntFromDict:BLOCK_COUNT];
-            [address initTxs:txs];
-            [address setIsSyncComplete:YES];
-            [[BTAddressManager sharedInstance] updateAddressWithSyncTx:address];
-            //TODO 100?
-            if (apiBlockCount<storeHeight&&storeHeight-apiBlockCount<100) {
-                [[BTBlockChain instance] rollbackBlock:apiBlockCount];
-            }
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [[NSNotificationCenter defaultCenter] postNotificationName:BitherAddressNotification object:address.address];
-            });
-            if (index==addresses.count) {
-                if (callback) {
-                    callback();
-                }
-            }else{
-                [self getMyTx:addresses index:index callback:callback andErrorCallBack:errorCallback];
-            }
-        } andErrorCallBack:^(MKNetworkOperation *errorOp, NSError *error) {
-            NSLog(@"get my transcation api %@",errorOp.responseString);
-            isRunning=NO;
-        }];
-    }
-    
-}
-
 -(void)startPeer{
     if ([[BTSettings instance] getAppMode]!=COLD) {
         
         if ([[BlockUtil instance] syncSpvFinish]) {
-            if ([[BTPeerManager sharedInstance] doneSyncFromSPV]) {
+            if ([[BTPeerManager instance] doneSyncFromSPV]) {
                 [self syncSpvFromBitcoinDone];
             }else{
-                if (![[BTPeerManager sharedInstance] connected]) {
-                    [[BTPeerManager sharedInstance] connect];
+                if (![[BTPeerManager instance] connected]) {
+                    [[BTPeerManager instance] start];
                 }
                 [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(syncSpvFromBitcoinDone) name:BTPeerManagerSyncFromSPVFinishedNotification object:nil];
                 addObserver=YES;
@@ -130,13 +67,14 @@ static PeerUtil * peerUtil;
     if (addObserver) {
         [[NSNotificationCenter defaultCenter] removeObserver:self name:BTPeerManagerSyncFromSPVFinishedNotification object:nil];
     }
-    if ([[BTPeerManager sharedInstance] connected]) {
-        [[BTPeerManager sharedInstance] disconnect];
+    if ([[BTPeerManager instance] connected]) {
+        [[BTPeerManager instance] stop];
     }
     if (!isRunning) {
         isRunning=YES;
-        [self syncWallet:^{
+        [TransactionsUtil syncWallet:^{
             [self connectPeer];
+            isRunning=NO;
         } andErrorCallBack:^(MKNetworkOperation *errorOp, NSError *error) {
             isRunning=NO;
         }];
@@ -145,26 +83,30 @@ static PeerUtil * peerUtil;
 
 -(void) connectPeer{
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0),^{
-        BOOL hasAddress=[[BTAddressManager sharedInstance] allAddresses].count>0;
-        BOOL downloadSpvFinish=[[UserDefaultsUtil instance ] getDownloadSpvFinish]&&[[BTPeerManager sharedInstance] doneSyncFromSPV];
-        BOOL walletIsSyncComplete=[[BTAddressManager sharedInstance] allSyncComplete];
+       
+        BOOL downloadSpvFinish=[[UserDefaultsUtil instance ] getDownloadSpvFinish]&&[[BTPeerManager instance] doneSyncFromSPV];
+        BOOL walletIsSyncComplete=[[BTAddressManager instance] allSyncComplete];
        // BOOL netWorkState=[NetworkUtil isEnableWIFI]||![[UserDefaultsUtil instance] getSyncBlockOnlyWifi];
-        BTPeerManager * peerManager=[BTPeerManager sharedInstance];
-        if (downloadSpvFinish && walletIsSyncComplete && hasAddress) {
+        BTPeerManager * peerManager=[BTPeerManager instance];
+        if (downloadSpvFinish && walletIsSyncComplete ) {
             if (![peerManager connected]) {
-                [peerManager connect];
+                [peerManager start];
             }
             
         }else{
             if ([peerManager connected]) {
-                [peerManager disconnect];
+                [peerManager stop];
             }
         }
-        isRunning=NO;
+        
     });
     
 }
 
+
+-(void)stopPeer{
+    [[BTPeerManager instance] stop];
+}
 
 
 

@@ -157,6 +157,15 @@
     [btnCancel setImage:[UIImage imageNamed:@"scan_cancel_pressed"] forState:UIControlStateHighlighted];
     [self.cameraOverlayView addSubview:btnCancel];
     
+    UIButton *btnFlash = [[UIButton alloc]initWithFrame:CGRectMake(self.view.frame.size.width - kCancelButtonWidth - kCancelButtonOffset, kCancelButtonOffset, kCancelButtonWidth, kCancelButtonHeight)];
+    btnFlash.autoresizingMask = UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleLeftMargin;
+    [btnFlash addTarget:self action:@selector(flashClick:) forControlEvents:UIControlEventTouchUpInside];
+    [btnFlash setImage:[UIImage imageNamed:@"flash_on"] forState:UIControlStateSelected];
+    [btnFlash setImage:[UIImage imageNamed:@"flash_off"] forState:UIControlStateNormal];
+    [btnFlash setBackgroundImage:[UIImage imageNamed:@"scan_overlay_button"] forState:UIControlStateNormal];
+    [btnFlash setBackgroundImage:[UIImage imageNamed:@"scan_overlay_button_pressed"] forState:UIControlStateHighlighted];
+    [self.cameraOverlayView addSubview:btnFlash];
+    
     self.lblTitle = [[UILabel alloc]initWithFrame:CGRectMake(kHorizontalMargin, kTitleFromTop, self.cameraOverlayView.frame.size.width - 2 * kHorizontalMargin, 0)];
     self.lblTitle.font = [UIFont boldSystemFontOfSize:kTitleFontSize];
     self.lblTitle.textColor = [UIColor colorWithWhite:1 alpha:kTitleAlpha];
@@ -218,6 +227,15 @@
 
 -(void)cancelClick:(id)sender{
     [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+-(void)flashClick:(UIButton*)sender{
+    sender.selected = !sender.selected;
+    if(sender.selected){
+        self.cameraFlashMode = UIImagePickerControllerCameraFlashModeOn;
+    }else{
+        self.cameraFlashMode = UIImagePickerControllerCameraFlashModeOff;
+    }
 }
 
 @end

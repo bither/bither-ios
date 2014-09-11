@@ -25,7 +25,13 @@
 #import "BitherApi.h"
 #import "StringUtil.h"
 #import "NSDictionary+Fromat.h"
+#import "BTAddressManager.h"
+#import "BitherApi.h"
+#import "BTBlockChain.h"
+#import "NSDictionary+Fromat.h"
 
+
+#define BLOCK_COUNT  @"block_count"
 
 #define TX_VER @"ver"
 #define TX_IN @"in"
@@ -52,7 +58,7 @@
 @implementation TransactionsUtil
 +(void)checkAddress:(NSArray *) addressList callback:(IdResponseBlock)callback andErrorCallback:(ErrorBlock)errorBlcok{
     NSInteger index=0;
-    [self getAddressState:addressList index:index callback:callback andErrorCallback:errorBlcok];
+    [TransactionsUtil getAddressState:addressList index:index callback:callback andErrorCallback:errorBlcok];
 }
 +(void)getAddressState:(NSArray *)addressList index:(NSInteger) index callback:(IdResponseBlock)callback andErrorCallback:(ErrorBlock)errorBlcok{
     if (index==addressList.count) {
@@ -103,8 +109,8 @@
             NSString * timeStr=[txDict getStringFromDict:TX_TIME];
             uint32_t time =[[DateUtil getDateFormStringWithTimeZone:timeStr] timeIntervalSince1970];
             [tx setTxHash:txHash];
-            [tx setVersion:version];
-            [tx setBlockHeight:blockNo];
+            [tx setTxVer:version];
+            [tx setBlockNo:blockNo];
             [tx setTxTime:time];
             if ([[txDict allKeys] containsObject:TX_OUT]) {
                 NSArray * outArray=[txDict objectForKey:TX_OUT];
@@ -132,7 +138,7 @@
                 
             }
             for(BTTx * temp in array){
-                if (temp.blockHeight==tx.blockHeight) {
+                if (temp.blockNo==tx.blockNo) {
                     if ([[temp inputHashes] containsObject:tx.txHash]) {
                         [tx setTxTime:temp.txTime-1];
                     }else if([[tx inputHashes]containsObject:temp.txHash]){
@@ -145,8 +151,8 @@
         }
     }
     [array sortUsingComparator:^NSComparisonResult(id obj1, id obj2) {
-        if ([obj1 blockHeight] > [obj2 blockHeight]) return NSOrderedDescending;
-        if ([obj1 blockHeight] < [obj2 blockHeight]) return NSOrderedAscending;
+        if ([obj1 blockNo] > [obj2 blockNo]) return NSOrderedDescending;
+        if ([obj1 blockNo] < [obj2 blockNo]) return NSOrderedAscending;
         if ([obj1 txTime] >[obj2 txTime]) return NSOrderedDescending;
         if ([obj1 txTime] <[obj2 txTime]) return NSOrderedAscending;
         NSLog(@"NSOrderedSame");
@@ -155,12 +161,90 @@
     return array;
 }
 
+
+
++(void) syncWallet:(VoidBlock) voidBlock andErrorCallBack:(ErrorHandler)errorCallback{
+    NSArray * addresses=[[BTAddressManager instance] allAddresses];
+    if (addresses.count==0) {
+        voidBlock();
+        return;
+    }
+    if ([[BTAddressManager instance] allSyncComplete]) {
+        if (voidBlock) {
+            voidBlock();
+        }
+        return;
+    }
+    __block  NSInteger index=0;
+    addresses=[addresses reverseObjectEnumerator].allObjects;
+    [TransactionsUtil getMyTx:addresses index:index callback:^{
+        if (voidBlock) {
+            voidBlock();
+        }
+    } andErrorCallBack:errorCallback];
+    
+}
+
++(void)getMyTx:(NSArray *)addresses  index:(NSInteger)index  callback:(VoidBlock)callback andErrorCallBack:(ErrorHandler)errorCallback{
+    BTAddress * address=[addresses objectAtIndex:index];
+    index=index+1;
+    if (address.isSyncComplete) {
+        if (index==addresses.count) {
+            if (callback) {
+                callback();
+            }
+        }else{
+            [TransactionsUtil getMyTx:addresses index:index callback:callback andErrorCallBack:errorCallback];
+        }
+    }else{
+        [TransactionsUtil getTxs:address callback:^{
+            if (index==addresses.count) {
+                if (callback) {
+                    callback();
+                }
+            }else{
+                [TransactionsUtil getMyTx:addresses index:index callback:callback andErrorCallBack:errorCallback];
+            }
+        } andErrorCallBack:^(MKNetworkOperation *errorOp, NSError *error) {
+            if (errorCallback) {
+                errorCallback(errorOp,error);
+            }
+        }];
+    }
+    
+}
++(void)getTxs:(BTAddress *) address callback:(VoidBlock)callback andErrorCallBack:(ErrorHandler)errorCallback{
+    
+    [[BitherApi instance] getMyTransactionApi:address.address callback:^(NSDictionary * dict) {
+        uint32_t storeHeight=[[BTBlockChain instance] lastBlock].blockNo;
+        NSArray *txs=[TransactionsUtil getTransactions:dict storeBlockHeight:storeHeight];
+        uint32_t apiBlockCount=[dict getIntFromDict:BLOCK_COUNT];
+        [address initTxs:txs];
+        [address setIsSyncComplete:YES];
+        [address updateAddress];
+        //TODO 100?
+        if (apiBlockCount<storeHeight&&storeHeight-apiBlockCount<100) {
+            [[BTBlockChain instance] rollbackBlock:apiBlockCount];
+        }
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [[NSNotificationCenter defaultCenter] postNotificationName:BitherAddressNotification object:address.address];
+        });
+        if (callback) {
+            callback();
+        }
+    } andErrorCallBack:^(MKNetworkOperation *errorOp, NSError *error) {
+        if (errorCallback) {
+            errorCallback(errorOp,error);
+        }
+        NSLog(@"get my transcation api %@",errorOp.responseString);
+    }];
+}
+
 +(NSString *)getCompleteTxForError:(NSError *) error{
     NSString * msg=@"";
     switch (error.code) {
         case ERR_TX_DUST_OUT_CODE:
             msg=NSLocalizedString(@"Send failed. Sending coins this few will be igored.", nil);
-
             break;
         case ERR_TX_NOT_ENOUGH_MONEY_CODE:
              msg= [NSString stringWithFormat: NSLocalizedString(@"Send failed. Lack of %@ BTC.", nil),[StringUtil stringForAmount:[error.userInfo getLongLongFromDict:ERR_TX_NOT_ENOUGH_MONEY_LACK]]];

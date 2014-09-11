@@ -10,6 +10,7 @@
 #import <Bitheri/BTAddressManager.h>
 #import "PieChartView.h"
 #import "StringUtil.h"
+#import "MarketUtil.h"
 #import "UIImage+ImageRenderToColor.h"
 
 #define kForegroundInsetsRate (0.05f)
@@ -17,12 +18,13 @@
 #define kTopLabelFontSize (18)
 #define kVerticalGap (5)
 #define kBottomLabelFontSize (13)
-#define kBottomHorizontalMargin (30)
+#define kBottomHorizontalMargin (15)
 
 @interface DialogTotalBalance (){
     int64_t total;
     int64_t hot;
     int64_t cold;
+    double price;
 }
 @property PieChartView* chart;
 @end
@@ -40,7 +42,8 @@
     hot = 0;
     cold = 0;
     total = 0;
-    NSArray* allAddresses = [BTAddressManager sharedInstance].allAddresses;
+    price = [MarketUtil getDefaultNewPrice];
+    NSArray* allAddresses = [BTAddressManager instance].allAddresses;
     for(BTAddress* a in allAddresses){
         if(a.hasPrivKey){
             hot+= a.balance;
@@ -65,6 +68,7 @@
     
     CGFloat bottom = CGRectGetMaxY(ivForeground.frame);
     
+    NSString * symbol=[BitherSetting getExchangeSymbol:[[UserDefaultsUtil instance] getDefaultExchangeType]];
     if(hot > 0){
         UILabel* lbl = [[UILabel alloc]initWithFrame:CGRectMake(kBottomHorizontalMargin, bottom + kVerticalGap, self.frame.size.width - kBottomHorizontalMargin * 2, kBottomLabelFontSize * 1.2)];
         lbl.font = [UIFont systemFontOfSize:kBottomLabelFontSize];
@@ -77,10 +81,21 @@
         lbl.font = [UIFont systemFontOfSize:kBottomLabelFontSize];
         lbl.textColor = [UIColor whiteColor];
         lbl.textAlignment = NSTextAlignmentRight;
-        lbl.text = [StringUtil stringForAmount:hot];
+        lbl.attributedText = [StringUtil stringWithSymbolForAmount:hot withFontSize:kBottomLabelFontSize color:lbl.textColor];
         [self addSubview:lbl];
         
         bottom = CGRectGetMaxY(lbl.frame);
+        
+        if(price > 0){
+            lbl = [[UILabel alloc]initWithFrame:CGRectMake(kBottomHorizontalMargin, bottom + kVerticalGap - 4, self.frame.size.width - kBottomHorizontalMargin * 2, kBottomLabelFontSize * 1.2)];
+            lbl.font = [UIFont systemFontOfSize:kBottomLabelFontSize];
+            lbl.textColor = [UIColor whiteColor];
+            lbl.textAlignment = NSTextAlignmentRight;
+            lbl.text = [NSString stringWithFormat:@"%@ %.2f", symbol ,(price * hot)/pow(10, 8)];
+            [self addSubview:lbl];
+            
+            bottom = CGRectGetMaxY(lbl.frame);
+        }
     }
     
     if(cold > 0){
@@ -95,15 +110,32 @@
         lbl.font = [UIFont systemFontOfSize:kBottomLabelFontSize];
         lbl.textColor = [UIColor whiteColor];
         lbl.textAlignment = NSTextAlignmentRight;
-        lbl.text = [StringUtil stringForAmount:cold];
+        lbl.attributedText = [StringUtil stringWithSymbolForAmount:cold withFontSize:kBottomLabelFontSize color:lbl.textColor];
         [self addSubview:lbl];
         
         bottom = CGRectGetMaxY(lbl.frame);
+        
+        if(price > 0){
+            lbl = [[UILabel alloc]initWithFrame:CGRectMake(kBottomHorizontalMargin, bottom + kVerticalGap - 4, self.frame.size.width - kBottomHorizontalMargin * 2, kBottomLabelFontSize * 1.2)];
+            lbl.font = [UIFont systemFontOfSize:kBottomLabelFontSize];
+            lbl.textColor = [UIColor whiteColor];
+            lbl.textAlignment = NSTextAlignmentRight;
+            lbl.text = [NSString stringWithFormat:@"%@ %.2f", symbol ,(price * cold)/pow(10, 8)];
+            [self addSubview:lbl];
+            
+            bottom = CGRectGetMaxY(lbl.frame);
+        }
     }
     
     CGRect frame = self.frame;
     frame.size.height = bottom;
     self.frame = frame;
+    
+    UIButton *dismissBtn = [[UIButton alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(self.chart.frame), self.frame.size.width, self.frame.size.height - CGRectGetMaxY(self.chart.frame))];
+    [dismissBtn setBackgroundImage:nil forState:UIControlStateNormal];
+    dismissBtn.adjustsImageWhenHighlighted = NO;
+    [self addSubview:dismissBtn];
+    [dismissBtn addTarget:self action:@selector(dismissPressed:) forControlEvents:UIControlEventTouchUpInside];
 }
 
 -(void)dialogDidShow{
@@ -117,6 +149,10 @@
     if(self.listener && [self.listener respondsToSelector:@selector(dialogDismissed)]){
         [self.listener dialogDismissed];
     }
+}
+
+-(void)dismissPressed:(id)sender{
+    [self dismiss];
 }
 
 -(NSAttributedString*)stringAddDotColor:(UIColor*)color string:(NSString*)str{

@@ -107,8 +107,8 @@
 /* Class = "IBUIButton"; normalTitle = "Retry"; ObjectID = "XCg-Ta-A0q"; */
 "XCg-Ta-A0q.normalTitle" = "Retry";
 
-/* Class = "IBUILabel"; text = "Building Wallet…"; ObjectID = "YDg-IR-7hP"; */
-"YDg-IR-7hP.text" = "Building Wallet…";
+/* Class = "IBUILabel"; text = "Loading…"; ObjectID = "YDg-IR-7hP"; */
+"YDg-IR-7hP.text" = "Loading…";
 
 /* Class = "IBUIButton"; normalTitle = "Send"; ObjectID = "Z5W-Ua-Lm5"; */
 "Z5W-Ua-Lm5.normalTitle" = "Send";

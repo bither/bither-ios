@@ -106,8 +106,8 @@
 /* Class = "IBUIButton"; normalTitle = "Retry"; ObjectID = "XCg-Ta-A0q"; */
 "XCg-Ta-A0q.normalTitle" = "重试";
 
-/* Class = "IBUILabel"; text = "Building Wallet…"; ObjectID = "YDg-IR-7hP"; */
-"YDg-IR-7hP.text" = "正在创建钱包…";
+/* Class = "IBUILabel"; text = "Initializing…"; ObjectID = "YDg-IR-7hP"; */
+"YDg-IR-7hP.text" = "加载中…";
 
 /* Class = "IBUIButton"; normalTitle = "Send"; ObjectID = "Z5W-Ua-Lm5"; */
 "Z5W-Ua-Lm5.normalTitle" = "发送";

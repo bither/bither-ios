@@ -26,7 +26,7 @@
 #import "ColdModeCheckConnectionView.h"
 #import "NetworkUtil.h"
 #import "BitherSetting.h"
-#import "BTPeerManager.h"
+#import "PeerUtil.h"
 #import <QuartzCore/QuartzCore.h>
 #import "BitherTime.h"
 #import "DialogAlert.h"
@@ -135,7 +135,6 @@
     [[[DialogAlert alloc]initWithAttributedMessage:[self getAttributedWarningMessage:NSLocalizedString(@"choose_mode_warm_confirm", nil)] confirm:^{
         [[BTSettings instance ] setAppMode:HOT];
         [[UIApplication sharedApplication] setMinimumBackgroundFetchInterval:UIApplicationBackgroundFetchIntervalMinimum];
-        [[BTPeerManager sharedInstance] connect];
         [[BitherTime instance] start];
         self.vHotProgress.hidden = NO;
         self.vHotRetry.hidden = YES;
@@ -297,6 +296,8 @@
     [self showHotIconWithCompletion:^{
         [self toHotView];
     }];
+    [[PeerUtil instance] startPeer];
+    
 }
 -(void)error{
     self.vHotRetry.hidden = NO;

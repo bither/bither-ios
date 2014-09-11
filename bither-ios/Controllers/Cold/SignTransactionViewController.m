@@ -53,7 +53,7 @@
     self.lblTo.text = self.tx.toAddress;
     self.lblAmount.attributedText = [StringUtil attributedStringForAmount:self.tx.to withFontSize:14];
     self.lblFee.attributedText = [StringUtil attributedStringForAmount:self.tx.fee withFontSize:14];
-    NSArray *privKeys = [BTAddressManager sharedInstance].privKeyAddresses;
+    NSArray *privKeys = [BTAddressManager instance].privKeyAddresses;
     address = nil;
     for(BTAddress *a in privKeys){
         if([StringUtil compareString:a.address compare:self.tx.myAddress]){
