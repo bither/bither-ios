@@ -1,5 +1,5 @@
 PODS:
-  - Bitheri (1.0.3):
+  - Bitheri (1.1.0):
     - CocoaLumberjack (~> 1.9.1)
     - FMDB (~> 2.3)
     - OpenSSL (= 1.0.1)
@@ -86,7 +86,7 @@ EXTERNAL SOURCES:
     :git: git@github.com:bither/bitheri.git
 
 SPEC CHECKSUMS:
-  Bitheri: 0c317bbc1ce0e7cdc6d32666ce4ac4600ff62353
+  Bitheri: 5547a5329cc667674a850c994d55e6f459832d05
   CocoaLumberjack: 205769c032b5fef85b92472046bcc8b7e7c8a817
   FMDB: 31ec26773c7f7b7890a6038235a1f2bbd933a7cb
   KSCrash: c0a693b2d83ced5c15a40d4e916833c655475e6a
