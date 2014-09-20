@@ -67,10 +67,15 @@
 }
 
 -(void)refresh{
-    [_txs removeAllObjects];
-    [_txs addObjectsFromArray:[self.address txs]];
-    [self.tableView reloadData];
-    self.tableView.tableFooterView.hidden = (_txs.count > 0);
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        NSArray *txs = [self.address txs];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [_txs removeAllObjects];
+            [_txs addObjectsFromArray:txs];
+            [self.tableView reloadData];
+            self.tableView.tableFooterView.hidden = (_txs.count > 0);
+        });
+    });
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
