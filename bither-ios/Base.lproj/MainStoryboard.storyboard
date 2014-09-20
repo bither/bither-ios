@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5056" systemVersion="13E28" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="kY0-Iw-Q6e">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6245" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="kY0-Iw-Q6e">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
+        <deployment defaultVersion="1792" identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
     </dependencies>
     <scenes>
         <!--Choose Mode View Controller-->
@@ -17,7 +18,6 @@
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <view clipsSubviews="YES" contentMode="scaleToFill" id="tw3-eW-EMl" userLabel="ColdCheck">
-                                        <rect key="frame" x="0.0" y="284" width="320" height="0.0"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" id="us7-H5-MAX" customClass="ColdModeCheckConnectionView">
@@ -60,7 +60,6 @@
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" heightSizable="YES"/>
                                 <subviews>
                                     <view clipsSubviews="YES" contentMode="scaleToFill" id="sxA-d1-aDL" userLabel="HotWait">
-                                        <rect key="frame" x="0.0" y="0.0" width="320" height="0.0"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                         <subviews>
                                             <view hidden="YES" clipsSubviews="YES" contentMode="scaleToFill" id="DnG-sI-vTx" userLabel="HotRetry">
@@ -1090,7 +1089,7 @@
                                                                                     <rect key="frame" x="0.0" y="15" width="12" height="12"/>
                                                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                                                                 </imageView>
-                                                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="DbI-lX-jWY">
+                                                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="DbI-lX-jWY">
                                                                                     <rect key="frame" x="18" y="10" width="114" height="21"/>
                                                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                                                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
@@ -2388,7 +2387,7 @@
                                                         <size key="shadowOffset" width="0.0" height="4"/>
                                                     </label>
                                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="%" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="1MG-Ff-Ctm">
-                                                        <rect key="frame" x="137" y="36" width="32" height="31"/>
+                                                        <rect key="frame" x="137.0000000782311" y="36" width="32" height="31"/>
                                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" heightSizable="YES"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
@@ -2716,9 +2715,9 @@
         <image name="app_mode_warm_icon_pressed" width="130" height="130"/>
         <image name="button_check_bg_normal" width="45" height="42"/>
         <image name="button_check_bg_pressed" width="45" height="42"/>
-        <image name="button_lightblue" width="82" height="60"/>
-        <image name="button_lightblue_pressed" width="82" height="60"/>
-        <image name="button_small_blue_normal" width="20" height="36"/>
+        <image name="button_lightblue" width="81" height="60"/>
+        <image name="button_lightblue_pressed" width="81" height="60"/>
+        <image name="button_small_blue_normal" width="19" height="36"/>
         <image name="button_small_blue_pressed" width="20" height="36"/>
         <image name="card_foreground_pressed" width="1" height="1"/>
         <image name="check_failed" width="40" height="40"/>
@@ -2745,7 +2744,7 @@
         <image name="scan_button_resizable_pressed" width="45" height="45"/>
         <image name="symbol_btc" width="17" height="24"/>
         <image name="symbol_btc_slim_black" width="17" height="24"/>
-        <image name="textfield_activated_holo_light" width="26" height="32"/>
+        <image name="textfield_activated_holo_light" width="18" height="32"/>
         <image name="title_bar_back" width="20" height="20"/>
         <image name="title_bar_option_icon" width="25" height="20"/>
         <image name="title_bar_seperator" width="3" height="48"/>
