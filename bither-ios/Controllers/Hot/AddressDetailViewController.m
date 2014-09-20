@@ -74,6 +74,8 @@
             [_txs addObjectsFromArray:txs];
             [self.tableView reloadData];
             self.tableView.tableFooterView.hidden = (_txs.count > 0);
+            [((UIView *)[self.tableView.tableFooterView.subviews objectAtIndex:0]) setHidden:NO];
+            [((UIActivityIndicatorView *)[self.tableView.tableFooterView.subviews objectAtIndex:1]) stopAnimating];
         });
     });
 }
@@ -178,7 +180,14 @@
     CGRect frame = lbl.frame;
     frame.size.height = height;
     lbl.frame = frame;
+    lbl.hidden = YES;
     [self.tableView.tableFooterView addSubview:lbl];
-    self.tableView.tableFooterView.hidden = YES;
+    
+    UIActivityIndicatorView *indicatorView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+    indicatorView.frame = frame;
+    [self.tableView.tableFooterView addSubview:indicatorView];
+    [indicatorView startAnimating];
+
+    self.tableView.tableFooterView.hidden = NO;
 }
 @end
