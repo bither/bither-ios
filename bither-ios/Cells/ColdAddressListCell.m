@@ -19,7 +19,7 @@
 #import "ColdAddressListCell.h"
 #import "UIBaseUtil.h"
 #import "StringUtil.h"
-#import "QrUtil.h"
+#import "QRCodeUtil.h"
 #import "NSString+Size.h"
 #import "DialogBlackQrCode.h"
 #import "ColdAddressViewController.h"
@@ -72,7 +72,7 @@
         [self.ivType addGestureRecognizer:self.longPress];
     }
     [self configureAddressFrame];
-    self.ivQr.image = [QrUtil qrCodeOfContent:address.address andSize:self.ivQr.frame.size.width withTheme:[QrCodeTheme black]];
+    self.ivQr.image = [QRCodeUtil qrCodeOfContent:address.address andSize:self.ivQr.frame.size.width withTheme:[QRCodeTheme black]];
 }
 
 -(void)configureAddressFrame{

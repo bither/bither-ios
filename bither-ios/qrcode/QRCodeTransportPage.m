@@ -17,12 +17,14 @@
 //  limitations under the License.
 
 #import "QRCodeTransportPage.h"
+#import "QRCodeEncodeUtil.h"
+#import "BitherSetting.h"
 #import "StringUtil.h"
-#import  "BitherSetting.h"
+#import "QRCodeEncodeUtil.h"
 
 @implementation QRCodeTransportPage
 +(QRCodeTransportPage *)formatQrCodeString:(NSString *)text{
-    if (![StringUtil verifyQrcodeTransport:text]) {
+    if (![QRCodeEncodeUtil verifyQrcodeTransport:text]) {
         return nil;
     }
     QRCodeTransportPage * qrCodePage=[[QRCodeTransportPage alloc] init];
@@ -49,14 +51,14 @@
            transportString= [transportString stringByAppendingString:[qrPage content]];
         }
     }
-    return [StringUtil decodeQrCodeString:transportString];
+    return [QRCodeEncodeUtil decodeQrCodeString:transportString];
     
 }
 
 +(NSArray *) getQrCodeStringList:(NSString *)str{
-    str=[StringUtil encodeQrCodeString:str];
+    str=[QRCodeEncodeUtil encodeQrCodeString:str];
     NSMutableArray *array=[NSMutableArray new];
-    NSInteger num=[StringUtil getNumOfQrCodeString:str.length];
+    NSInteger num=[QRCodeEncodeUtil getNumOfQrCodeString:str.length];
     NSInteger sumLength=str.length+num*6;
     NSInteger pageSize=sumLength/num;
     for (NSInteger i=0; i<num; i++) {

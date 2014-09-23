@@ -18,7 +18,7 @@
 
 #import "DialogPrivateKeyEncryptedQrCode.h"
 #import "UIImage+ImageWithColor.h"
-#import "QrUtil.h"
+#import "QRCodeUtil.h"
 #import "StringUtil.h"
 #import "FileUtil.h"
 #import "UIBaseUtil.h"
@@ -57,7 +57,7 @@
     self.bgInsets = UIEdgeInsetsMake(10, 0, 10, 0);
     self.dimAmount = 0.8f;
     self.iv = [[UIImageView alloc]initWithFrame:CGRectMake(0, kShareBottomDistance + kShareBottomHeight, self.frame.size.width, self.frame.size.width)];
-    self.iv.image = [QrUtil qrCodeOfContent:_encrytedPrivateKey andSize:self.frame.size.width withTheme:[QrCodeTheme black]];
+    self.iv.image = [QRCodeUtil qrCodeOfContent:_encrytedPrivateKey andSize:self.frame.size.width withTheme:[QRCodeTheme black]];
     [self addSubview:self.iv];
     
     UIButton *btn = [[UIButton alloc]initWithFrame:CGRectMake(0, self.frame.size.height - kShareBottomHeight, 0, kShareBottomHeight)];

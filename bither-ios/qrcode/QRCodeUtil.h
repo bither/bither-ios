@@ -18,24 +18,24 @@
 
 #import <Foundation/Foundation.h>
 
-@interface QrCodeTheme : NSObject
+@interface QRCodeTheme : NSObject
 -(instancetype)initWithFg:(UIColor*)fg bg:(UIColor*)bg;
 @property UIColor* fg;
 @property UIColor* bg;
-+(QrCodeTheme*)yellow;
-+(QrCodeTheme*)green;
-+(QrCodeTheme*)blue;
-+(QrCodeTheme*)red;
-+(QrCodeTheme*)purple;
-+(QrCodeTheme*)black;
++(QRCodeTheme*)yellow;
++(QRCodeTheme*)green;
++(QRCodeTheme*)blue;
++(QRCodeTheme*)red;
++(QRCodeTheme*)purple;
++(QRCodeTheme*)black;
 +(NSArray*)themes;
-+(NSInteger)indexOfTheme:(QrCodeTheme*)theme;
++(NSInteger)indexOfTheme:(QRCodeTheme*)theme;
 @end
 
-@interface QrUtil : NSObject
+@interface QRCodeUtil : NSObject
 
-+(UIImage*)qrCodeOfContent:(NSString*)content andSize:(CGFloat)size withTheme:(QrCodeTheme*)theme;
-+(UIImage*)qrCodeOfContent:(NSString*)content andSize:(CGFloat)size margin:(CGFloat)margin withTheme:(QrCodeTheme*)theme;
++(UIImage*)qrCodeOfContent:(NSString*)content andSize:(CGFloat)size withTheme:(QRCodeTheme*)theme;
++(UIImage*)qrCodeOfContent:(NSString*)content andSize:(CGFloat)size margin:(CGFloat)margin withTheme:(QRCodeTheme*)theme;
 
 @end
 

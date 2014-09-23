@@ -16,13 +16,13 @@
 //  See the License for the specific language governing permissions and
 //  limitations under the License.
 
-#import "QrUtil.h"
+#import "QRCodeUtil.h"
 #import "UIImage+ImageWithColor.h"
 #import "UIColor+Util.h"
 
-@implementation QrUtil
+@implementation QRCodeUtil
 
-+(UIImage*)qrCodeOfContent:(NSString*)content andSize:(CGFloat)size margin:(CGFloat)margin withTheme:(QrCodeTheme*)theme{
++(UIImage*)qrCodeOfContent:(NSString*)content andSize:(CGFloat)size margin:(CGFloat)margin withTheme:(QRCodeTheme*)theme{
     CGFloat marginRatio = margin/size;
     CIFilter *filter = [CIFilter filterWithName:@"CIQRCodeGenerator"];
     [filter setDefaults];
@@ -58,14 +58,14 @@
     return image;
 }
 
-+(UIImage*)qrCodeOfContent:(NSString*)content andSize:(CGFloat)size withTheme:(QrCodeTheme*)theme{
-    return [QrUtil qrCodeOfContent:content andSize:size margin:0 withTheme:theme];
++(UIImage*)qrCodeOfContent:(NSString*)content andSize:(CGFloat)size withTheme:(QRCodeTheme*)theme{
+    return [QRCodeUtil qrCodeOfContent:content andSize:size margin:0 withTheme:theme];
 }
 @end
 
 static NSMutableArray* themes;
 
-@implementation QrCodeTheme
+@implementation QRCodeTheme
 
 -(instancetype)initWithFg:(UIColor*)fg bg:(UIColor*)bg{
     self = [super init];
@@ -81,62 +81,62 @@ static NSMutableArray* themes;
         themes = [[NSMutableArray alloc]init];
         
         // yellow
-        [themes addObject:[[QrCodeTheme alloc] initWithFg:[UIColor parseColor:0x835229] bg:[UIColor parseColor:0xe7e1c7]]];
+        [themes addObject:[[QRCodeTheme alloc] initWithFg:[UIColor parseColor:0x835229] bg:[UIColor parseColor:0xe7e1c7]]];
         
         //green
-        [themes addObject:[[QrCodeTheme alloc] initWithFg:[UIColor parseColor:0x486804] bg:[UIColor parseColor:0xfcfdf9]]];
+        [themes addObject:[[QRCodeTheme alloc] initWithFg:[UIColor parseColor:0x486804] bg:[UIColor parseColor:0xfcfdf9]]];
         
         //blue
-        [themes addObject:[[QrCodeTheme alloc] initWithFg:[UIColor parseColor:0x025c7f] bg:[UIColor parseColor:0xeff4f7]]];
+        [themes addObject:[[QRCodeTheme alloc] initWithFg:[UIColor parseColor:0x025c7f] bg:[UIColor parseColor:0xeff4f7]]];
         
         //red
-        [themes addObject:[[QrCodeTheme alloc] initWithFg:[UIColor parseColor:0x922c15] bg:[UIColor parseColor:0xfefaf9]]];
+        [themes addObject:[[QRCodeTheme alloc] initWithFg:[UIColor parseColor:0x922c15] bg:[UIColor parseColor:0xfefaf9]]];
         
         //purple
-        [themes addObject:[[QrCodeTheme alloc] initWithFg:[UIColor parseColor:0x8f127f] bg:[UIColor parseColor:0xe2f5ee]]];
+        [themes addObject:[[QRCodeTheme alloc] initWithFg:[UIColor parseColor:0x8f127f] bg:[UIColor parseColor:0xe2f5ee]]];
         
         //black
-        [themes addObject:[[QrCodeTheme alloc] initWithFg:[UIColor blackColor] bg:[UIColor whiteColor]]];
+        [themes addObject:[[QRCodeTheme alloc] initWithFg:[UIColor blackColor] bg:[UIColor whiteColor]]];
     }
 }
 
-+(QrCodeTheme*)yellow{
-    [QrCodeTheme firstInitArray];
++(QRCodeTheme*)yellow{
+    [QRCodeTheme firstInitArray];
     return [themes objectAtIndex:0];
 }
 
-+(QrCodeTheme*)green{
-    [QrCodeTheme firstInitArray];
++(QRCodeTheme*)green{
+    [QRCodeTheme firstInitArray];
     return [themes objectAtIndex:1];
 }
 
-+(QrCodeTheme*)blue{
-    [QrCodeTheme firstInitArray];
++(QRCodeTheme*)blue{
+    [QRCodeTheme firstInitArray];
     return [themes objectAtIndex:2];
 }
 
-+(QrCodeTheme*)red{
-    [QrCodeTheme firstInitArray];
++(QRCodeTheme*)red{
+    [QRCodeTheme firstInitArray];
     return [themes objectAtIndex:3];
 }
 
-+(QrCodeTheme*)purple{
-    [QrCodeTheme firstInitArray];
++(QRCodeTheme*)purple{
+    [QRCodeTheme firstInitArray];
     return [themes objectAtIndex:4];
 }
 
-+(QrCodeTheme*)black{
-    [QrCodeTheme firstInitArray];
++(QRCodeTheme*)black{
+    [QRCodeTheme firstInitArray];
     return [themes objectAtIndex:5];
 }
 
 +(NSArray*)themes{
-    [QrCodeTheme firstInitArray];
+    [QRCodeTheme firstInitArray];
     return themes;
 }
 
-+(NSInteger)indexOfTheme:(QrCodeTheme*)theme{
-    [QrCodeTheme firstInitArray];
++(NSInteger)indexOfTheme:(QRCodeTheme*)theme{
+    [QRCodeTheme firstInitArray];
     return [themes indexOfObject:theme];
 }
 

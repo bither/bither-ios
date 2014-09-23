@@ -18,7 +18,7 @@
 
 #import "DialogAddressQrCode.h"
 #import "UIImage+ImageWithColor.h"
-#import "QrUtil.h"
+#import "QRCodeUtil.h"
 #import "UserDefaultsUtil.h"
 #import "UIBaseUtil.h"
 #import "FileUtil.h"
@@ -56,9 +56,9 @@
     self.dimAmount = 0.8f;
     self.sv = [[UIScrollView alloc]initWithFrame:CGRectMake(0, kButtonSize + kButtonBottomDistance, self.frame.size.width, self.frame.size.width)];
     self.sv.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
-    NSArray *themes = [QrCodeTheme themes];
+    NSArray *themes = [QRCodeTheme themes];
     for(int i = 0; i < themes.count; i++){
-        UIImageView *iv = [[UIImageView alloc]initWithImage:[QrUtil qrCodeOfContent:self.address andSize:self.sv.frame.size.width margin:kQrCodeMargin withTheme:[themes objectAtIndex:i]]];
+        UIImageView *iv = [[UIImageView alloc]initWithImage:[QRCodeUtil qrCodeOfContent:self.address andSize:self.sv.frame.size.width margin:kQrCodeMargin withTheme:[themes objectAtIndex:i]]];
         iv.frame = CGRectMake(i * self.sv.frame.size.width, 0, self.sv.frame.size.width, self.sv.frame.size.height);
         [self.sv addSubview:iv];
     }
@@ -139,7 +139,7 @@
     if(index != [defaults getQrCodeTheme]){
         [defaults setQrCodeTheme:index];
         if(self.delegate && [self.delegate respondsToSelector:@selector(qrCodeThemeChanged:)]){
-            [self.delegate qrCodeThemeChanged:[[QrCodeTheme themes] objectAtIndex:index]];
+            [self.delegate qrCodeThemeChanged:[[QRCodeTheme themes] objectAtIndex:index]];
         }
     }
 }

@@ -19,7 +19,7 @@
 #import "AddressDetailCell.h"
 #import "UIBaseUtil.h"
 #import "StringUtil.h"
-#import "QrUtil.h"
+#import "QRCodeUtil.h"
 #import "AmountButton.h"
 #import "SendViewController.h"
 #import "AddressDetailViewController.h"
@@ -64,7 +64,7 @@
     self.address = address;
     self.lblAddress.text = [StringUtil formatAddress:address.address groupSize:kAddressGroupSize lineSize:kAddressLineSize];
     [self configureAddressFrame];
-    self.ivQr.image = [QrUtil qrCodeOfContent:address.address andSize:self.ivQr.frame.size.width withTheme:[[QrCodeTheme themes] objectAtIndex:[[UserDefaultsUtil instance] getQrCodeTheme]]];
+    self.ivQr.image = [QRCodeUtil qrCodeOfContent:address.address andSize:self.ivQr.frame.size.width withTheme:[[QRCodeTheme themes] objectAtIndex:[[UserDefaultsUtil instance] getQrCodeTheme]]];
     [self.btnAmount setAmount:address.balance];
     self.btnAmount.frameChangeListener = self;
     
@@ -111,8 +111,8 @@
     self.vQr.frame = CGRectMake(CGRectGetMaxX(self.vAddressContainer.frame) + gap, self.vAddressContainer.frame.origin.y, size, size);
 }
 
--(void)qrCodeThemeChanged:(QrCodeTheme*)theme{
-    self.ivQr.image = [QrUtil qrCodeOfContent:self.address.address andSize:self.ivQr.frame.size.width withTheme:theme];
+-(void)qrCodeThemeChanged:(QRCodeTheme*)theme{
+    self.ivQr.image = [QRCodeUtil qrCodeOfContent:self.address.address andSize:self.ivQr.frame.size.width withTheme:theme];
 }
 
 - (IBAction)sendPressed:(id)sender {
