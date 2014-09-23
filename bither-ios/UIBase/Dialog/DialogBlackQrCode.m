@@ -18,7 +18,7 @@
 
 #import "DialogBlackQrCode.h"
 #import "UIImage+ImageWithColor.h"
-#import "QRCodeUtil.h"
+#import "QRCodeThemeUtil.h"
 
 @implementation DialogBlackQrCode
 
@@ -30,7 +30,7 @@
         self.dimAmount = 0.8f;
         UIImageView* iv = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, self.frame.size.width, self.frame.size.width)];
         iv.autoresizingMask = UIViewAutoresizingFlexibleHeight| UIViewAutoresizingFlexibleWidth;
-        iv.image = [QRCodeUtil qrCodeOfContent:content andSize:iv.frame.size.width withTheme:[QRCodeTheme black]];
+        iv.image = [QRCodeThemeUtil qrCodeOfContent:content andSize:iv.frame.size.width withTheme:[QRCodeTheme black]];
         [self addSubview:iv];
     }
     return self;

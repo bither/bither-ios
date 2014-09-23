@@ -19,7 +19,7 @@
 #import "AddressDetailCell.h"
 #import "UIBaseUtil.h"
 #import "StringUtil.h"
-#import "QRCodeUtil.h"
+#import "QRCodeThemeUtil.h"
 #import "AmountButton.h"
 #import "SendViewController.h"
 #import "AddressDetailViewController.h"
@@ -64,7 +64,7 @@
     self.address = address;
     self.lblAddress.text = [StringUtil formatAddress:address.address groupSize:kAddressGroupSize lineSize:kAddressLineSize];
     [self configureAddressFrame];
-    self.ivQr.image = [QRCodeUtil qrCodeOfContent:address.address andSize:self.ivQr.frame.size.width withTheme:[[QRCodeTheme themes] objectAtIndex:[[UserDefaultsUtil instance] getQrCodeTheme]]];
+    self.ivQr.image = [QRCodeThemeUtil qrCodeOfContent:address.address andSize:self.ivQr.frame.size.width withTheme:[[QRCodeTheme themes] objectAtIndex:[[UserDefaultsUtil instance] getQrCodeTheme]]];
     [self.btnAmount setAmount:address.balance];
     self.btnAmount.frameChangeListener = self;
     
@@ -112,7 +112,7 @@
 }
 
 -(void)qrCodeThemeChanged:(QRCodeTheme*)theme{
-    self.ivQr.image = [QRCodeUtil qrCodeOfContent:self.address.address andSize:self.ivQr.frame.size.width withTheme:theme];
+    self.ivQr.image = [QRCodeThemeUtil qrCodeOfContent:self.address.address andSize:self.ivQr.frame.size.width withTheme:theme];
 }
 
 - (IBAction)sendPressed:(id)sender {

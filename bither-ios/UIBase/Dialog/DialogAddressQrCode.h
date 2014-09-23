@@ -18,7 +18,7 @@
 
 #import "DialogCentered.h"
 #import "Bitheri/BTAddress.h"
-#import "QRCodeUtil.h"
+#import "QRCodeThemeUtil.h"
 @protocol DialogAddressQrCodeDelegate<NSObject>
 -(void)qrCodeThemeChanged:(QRCodeTheme*)theme;
 @end

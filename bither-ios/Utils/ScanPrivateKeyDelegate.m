@@ -29,7 +29,7 @@
 #import "TransactionsUtil.h"
 #import "Bitheri/BTKey+Bitcoinj.h"
 #import "BTAddressManager.h"
-#import "BTQRCodeEncodeUtil.h"
+#import "BTQRCodeUtil.h"
 
 @interface CheckPasswordDelegate : NSObject<DialogPasswordDelegate>
 @property(nonatomic,strong) UIViewController *controller;
@@ -101,7 +101,7 @@ static ScanPrivateKeyDelegate * scanPrivateKeyDelegate;
 }
 
 -(void)handleResult:(NSString *)result byReader:(ScanQrCodeViewController *)reader{
-    if ([BTQRCodeEncodeUtil verifyQrcodeTransport:result]&&[[BTQRCodeEncodeUtil splitQRCode:result] count]==3) {
+    if ([BTQRCodeUtil verifyQrcodeTransport:result]&&[[BTQRCodeUtil splitQRCode:result] count]==3) {
         self.result=result;
         [reader playSuccessSound];
         [reader vibrate];

@@ -20,7 +20,7 @@
 #import "StringUtil.h"
 #import "DialogAlert.h"
 #import "QRCodeTransportPage.h"
-#import "QRCodeUtil.h"
+#import "QRCodeThemeUtil.h"
 
 #define kQrCodeTopMarginThreshold (10)
 
@@ -84,7 +84,7 @@
         v.backgroundColor = [UIColor clearColor];
         
         UIImageView* ivQr = [[UIImageView alloc]initWithFrame:CGRectMake((v.frame.size.width - qrSize)/2, 0, qrSize, qrSize)];
-        ivQr.image = [QRCodeUtil qrCodeOfContent:[strs objectAtIndex:i] andSize:ivQr.frame.size.width withTheme:[QRCodeTheme black]];
+        ivQr.image = [QRCodeThemeUtil qrCodeOfContent:[strs objectAtIndex:i] andSize:ivQr.frame.size.width withTheme:[QRCodeTheme black]];
         
         UILabel *lbl = [[UILabel alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(ivQr.frame) + margin, v.frame.size.width, kPageHeight)];
         lbl.font = [UIFont systemFontOfSize:kPageFontSize];

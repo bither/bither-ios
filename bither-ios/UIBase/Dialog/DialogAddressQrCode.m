@@ -18,7 +18,7 @@
 
 #import "DialogAddressQrCode.h"
 #import "UIImage+ImageWithColor.h"
-#import "QRCodeUtil.h"
+#import "QRCodeThemeUtil.h"
 #import "UserDefaultsUtil.h"
 #import "UIBaseUtil.h"
 #import "FileUtil.h"
@@ -58,7 +58,7 @@
     self.sv.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
     NSArray *themes = [QRCodeTheme themes];
     for(int i = 0; i < themes.count; i++){
-        UIImageView *iv = [[UIImageView alloc]initWithImage:[QRCodeUtil qrCodeOfContent:self.address andSize:self.sv.frame.size.width margin:kQrCodeMargin withTheme:[themes objectAtIndex:i]]];
+        UIImageView *iv = [[UIImageView alloc]initWithImage:[QRCodeThemeUtil qrCodeOfContent:self.address andSize:self.sv.frame.size.width margin:kQrCodeMargin withTheme:[themes objectAtIndex:i]]];
         iv.frame = CGRectMake(i * self.sv.frame.size.width, 0, self.sv.frame.size.width, self.sv.frame.size.height);
         [self.sv addSubview:iv];
     }

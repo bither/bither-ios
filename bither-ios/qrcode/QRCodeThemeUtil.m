@@ -16,11 +16,11 @@
 //  See the License for the specific language governing permissions and
 //  limitations under the License.
 
-#import "QRCodeUtil.h"
+#import "QRCodeThemeUtil.h"
 #import "UIImage+ImageWithColor.h"
 #import "UIColor+Util.h"
 
-@implementation QRCodeUtil
+@implementation QRCodeThemeUtil
 
 +(UIImage*)qrCodeOfContent:(NSString*)content andSize:(CGFloat)size margin:(CGFloat)margin withTheme:(QRCodeTheme*)theme{
     CGFloat marginRatio = margin/size;
@@ -59,7 +59,7 @@
 }
 
 +(UIImage*)qrCodeOfContent:(NSString*)content andSize:(CGFloat)size withTheme:(QRCodeTheme*)theme{
-    return [QRCodeUtil qrCodeOfContent:content andSize:size margin:0 withTheme:theme];
+    return [QRCodeThemeUtil qrCodeOfContent:content andSize:size margin:0 withTheme:theme];
 }
 @end
 

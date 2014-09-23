@@ -24,7 +24,7 @@
 #import "UIViewController+PiShowBanner.h"
 #import "DialogPassword.h"
 #import "QrCodeViewController.h"
-#import "BTQRCodeEncodeUtil.h"
+#import "BTQRCodeUtil.h"
 
 @interface SignTransactionViewController ()<DialogPasswordDelegate>{
     BTAddress *address;
@@ -91,7 +91,7 @@
             }
             dispatch_async(dispatch_get_main_queue(), ^{
                 QrCodeViewController* controller = [self.storyboard instantiateViewControllerWithIdentifier:@"QrCode"];
-                controller.content = [BTQRCodeEncodeUtil joinedQRCode:strHashes];
+                controller.content = [BTQRCodeUtil joinedQRCode:strHashes];
                 controller.qrCodeMsg = NSLocalizedString(@"Scan with Bither Hot to sign tx", nil);
                 controller.qrCodeTitle = NSLocalizedString(@"Signed Transaction", nil);
                 [dp dismissWithCompletion:^{

@@ -32,7 +32,7 @@
 +(NSInteger)indexOfTheme:(QRCodeTheme*)theme;
 @end
 
-@interface QRCodeUtil : NSObject
+@interface QRCodeThemeUtil : NSObject
 
 +(UIImage*)qrCodeOfContent:(NSString*)content andSize:(CGFloat)size withTheme:(QRCodeTheme*)theme;
 +(UIImage*)qrCodeOfContent:(NSString*)content andSize:(CGFloat)size margin:(CGFloat)margin withTheme:(QRCodeTheme*)theme;
