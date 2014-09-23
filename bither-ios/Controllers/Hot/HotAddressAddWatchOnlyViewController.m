@@ -24,7 +24,7 @@
 #import "DialogProgress.h"
 #import "KeyUtil.h"
 #import "TransactionsUtil.h"
-#import "QRCodeEncodeUtil.h"
+#import "BTQRCodeEncodeUtil.h"
 
 @interface HotAddressAddWatchOnlyViewController ()<ScanQrCodeDelegate>
 
@@ -74,7 +74,7 @@
     }
 }
 -(void)processQrCodeContent:(NSString*)content dp:(DialogProgress * ) dp{
-    NSArray *strs = [QRCodeEncodeUtil splitQRCode:content];
+    NSArray *strs = [BTQRCodeEncodeUtil splitQRCode:content];
     NSMutableArray * addressList=[NSMutableArray new];
     for(NSString * pubStr in strs){
         BTKey * key=[BTKey keyWithPublicKey:[pubStr hexToData]];
@@ -112,7 +112,7 @@
 }
 
 -(BOOL)checkQrCodeContent:(NSString*)content{
-    NSArray *strs = [QRCodeEncodeUtil splitQRCode:content];
+    NSArray *strs = [BTQRCodeEncodeUtil splitQRCode:content];
     for (NSString* str in strs) {
         if (str.length != 66) {
             return NO;

@@ -103,7 +103,6 @@
 		AC9BC5E719D127C2003B88B5 /* ScanQrCodeTransportViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AC9BC5E319D127C2003B88B5 /* ScanQrCodeTransportViewController.m */; };
 		AC9BC5E819D127C2003B88B5 /* ScanQrCodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AC9BC5E519D127C2003B88B5 /* ScanQrCodeViewController.m */; };
 		AC9BC5EB19D1283D003B88B5 /* QRCodeUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = AC9BC5EA19D1283D003B88B5 /* QRCodeUtil.m */; };
-		AC9BC5F019D12AC0003B88B5 /* BTQRCodeEncodeUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = AC9BC5EF19D12AC0003B88B5 /* BTQRCodeEncodeUtil.m */; };
 		ACA9D70319540E0F002D1E3A /* PlaySoundUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = ACA9D70219540E0F002D1E3A /* PlaySoundUtil.m */; };
 		ACA9D70A195410FF002D1E3A /* qr_code_scanned.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = ACA9D709195410FF002D1E3A /* qr_code_scanned.mp3 */; };
 		ACA9D70C195415B0002D1E3A /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ACA9D70B195415B0002D1E3A /* AudioToolbox.framework */; };
@@ -350,8 +349,6 @@
 		AC9BC5E519D127C2003B88B5 /* ScanQrCodeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScanQrCodeViewController.m; sourceTree = "<group>"; };
 		AC9BC5E919D1283D003B88B5 /* QRCodeUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QRCodeUtil.h; sourceTree = "<group>"; };
 		AC9BC5EA19D1283D003B88B5 /* QRCodeUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QRCodeUtil.m; sourceTree = "<group>"; };
-		AC9BC5EE19D12AC0003B88B5 /* BTQRCodeEncodeUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BTQRCodeEncodeUtil.h; sourceTree = "<group>"; };
-		AC9BC5EF19D12AC0003B88B5 /* BTQRCodeEncodeUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BTQRCodeEncodeUtil.m; sourceTree = "<group>"; };
 		ACA9D70119540E0F002D1E3A /* PlaySoundUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlaySoundUtil.h; sourceTree = "<group>"; };
 		ACA9D70219540E0F002D1E3A /* PlaySoundUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlaySoundUtil.m; sourceTree = "<group>"; };
 		ACA9D709195410FF002D1E3A /* qr_code_scanned.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = qr_code_scanned.mp3; sourceTree = "<group>"; };
@@ -779,8 +776,6 @@
 				AC9BC5CB19D12765003B88B5 /* QRCodeTransportPage.m */,
 				AC9BC5CC19D12765003B88B5 /* QRCodeTxTransport.h */,
 				AC9BC5CD19D12765003B88B5 /* QRCodeTxTransport.m */,
-				AC9BC5EE19D12AC0003B88B5 /* BTQRCodeEncodeUtil.h */,
-				AC9BC5EF19D12AC0003B88B5 /* BTQRCodeEncodeUtil.m */,
 			);
 			path = qrcode;
 			sourceTree = "<group>";
@@ -1095,7 +1090,6 @@
 				AC6BAC6F196FA3410013B9E8 /* HotCheckPrivateKeyViewController.m in Sources */,
 				ACDDDC2419480DE00008A79D /* UIViewController+SwipeRightToPop.m in Sources */,
 				ACBEC018196D422D004301E0 /* BalanceButton.m in Sources */,
-				AC9BC5F019D12AC0003B88B5 /* BTQRCodeEncodeUtil.m in Sources */,
 				ACBEC021196FDC1E004301E0 /* DialogEditPassword.m in Sources */,
 				4254085F1946A219007AF99C /* UserDefaultsUtil.m in Sources */,
 				ACD6DFCF196B99BF009D8031 /* DialogBlackQrCode.m in Sources */,
