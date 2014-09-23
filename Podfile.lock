@@ -86,7 +86,7 @@ EXTERNAL SOURCES:
     :git: git@github.com:bither/bitheri.git
 
 SPEC CHECKSUMS:
-  Bitheri: 012aa918e4e77d49c1ae25bae608d9383d158a3f
+  Bitheri: 7187300cbeb0c3f1ac20b9362104e835fae2656b
   CocoaLumberjack: 205769c032b5fef85b92472046bcc8b7e7c8a817
   FMDB: 31ec26773c7f7b7890a6038235a1f2bbd933a7cb
   KSCrash: c0a693b2d83ced5c15a40d4e916833c655475e6a
