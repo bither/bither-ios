@@ -35,7 +35,7 @@
 #import <Bitheri/BTAddressManager.h>
 #import <Bitheri/BTSettings.h>
 #import <Bitheri/BTPeerManager.h>
-#import "QRCodeEncodeUtil.h"
+#import "BTQRCodeEncodeUtil.h"
 
 #define kBalanceFontSize (15)
 #define kSendButtonQrIconSize (20)
@@ -217,7 +217,7 @@
             }
         }else{
             self.btnSend.enabled = NO;
-            NSArray *strs =[QRCodeEncodeUtil splitQRCode:result];
+            NSArray *strs =[BTQRCodeEncodeUtil splitQRCode:result];
             NSMutableArray *sigs = [[NSMutableArray alloc]init];
             for(NSString *s in strs){
                 [sigs addObject:[s hexToData]];

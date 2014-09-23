@@ -17,18 +17,18 @@
 //  limitations under the License.
 
 #import "QRCodeTransportPage.h"
-#import "QRCodeEncodeUtil.h"
+#import "BTQRCodeEncodeUtil.h"
 #import "BitherSetting.h"
 #import "StringUtil.h"
-#import "QRCodeEncodeUtil.h"
+#import "BTQRCodeEncodeUtil.h"
 
 @implementation QRCodeTransportPage
 +(QRCodeTransportPage *)formatQrCodeString:(NSString *)text{
-    if (![QRCodeEncodeUtil verifyQrcodeTransport:text]) {
+    if (![BTQRCodeEncodeUtil verifyQrcodeTransport:text]) {
         return nil;
     }
     QRCodeTransportPage * qrCodePage=[[QRCodeTransportPage alloc] init];
-    NSArray * strArray=[QRCodeEncodeUtil splitQRCode:text];;
+    NSArray * strArray=[BTQRCodeEncodeUtil splitQRCode:text];;
     if ([StringUtil isPureLongLong:[strArray objectAtIndex:0]]) {
         NSString * sumPageStr=strArray[0];
         NSString * currentPageStr=strArray[1];
@@ -51,14 +51,14 @@
            transportString= [transportString stringByAppendingString:[qrPage content]];
         }
     }
-    return [QRCodeEncodeUtil decodeQrCodeString:transportString];
+    return [BTQRCodeEncodeUtil decodeQrCodeString:transportString];
     
 }
 
 +(NSArray *) getQrCodeStringList:(NSString *)str{
-    str=[QRCodeEncodeUtil encodeQrCodeString:str];
+    str=[BTQRCodeEncodeUtil encodeQrCodeString:str];
     NSMutableArray *array=[NSMutableArray new];
-    NSInteger num=[QRCodeEncodeUtil getNumOfQrCodeString:str.length];
+    NSInteger num=[BTQRCodeEncodeUtil getNumOfQrCodeString:str.length];
     NSInteger sumLength=str.length+num*6;
     NSInteger pageSize=sumLength/num;
     for (NSInteger i=0; i<num; i++) {

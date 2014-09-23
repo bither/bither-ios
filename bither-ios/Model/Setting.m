@@ -37,7 +37,7 @@
 #import "BTTxProvider.h"
 #import "PeerUtil.h"
 #import "TransactionsUtil.h"
-#import "QRCodeEncodeUtil.h"
+#import "BTQRCodeEncodeUtil.h"
 
 @interface SignTransactionScanDelegate : Setting<ScanQrCodeDelegate>
 -(instancetype)init;
@@ -403,7 +403,7 @@ static double reloadTime;
                 [pubKeys addObject:[NSString hexWithData:a.pubKey].uppercaseString];
             }
             QrCodeViewController* qrCtr = [controller.storyboard instantiateViewControllerWithIdentifier:@"QrCode"];
-            qrCtr.content =[QRCodeEncodeUtil joinedQRCode:pubKeys];
+            qrCtr.content =[BTQRCodeEncodeUtil joinedQRCode:pubKeys];
             qrCtr.qrCodeTitle = NSLocalizedString(@"Watch Only QR Code", nil);
             qrCtr.qrCodeMsg = NSLocalizedString(@"Scan with Bither Hot to watch Bither Cold", nil);
             [controller.navigationController pushViewController:qrCtr animated:YES];
@@ -531,7 +531,7 @@ static double reloadTime;
 
 -(void)handleResult:(NSString *)result byReader:(ScanQrCodeViewController *)reader{
     [reader dismissViewControllerAnimated:YES completion:^{
-        if([QRCodeEncodeUtil splitQRCode:result].count % 3 == 0){
+        if([BTQRCodeEncodeUtil splitQRCode:result].count % 3 == 0){
             self.scanContent = result;
             DialogPassword *dialog = [[DialogPassword alloc]initWithDelegate:self];
             [dialog showInWindow:self.controller.view.window];
@@ -545,10 +545,10 @@ static double reloadTime;
     DialogProgress* dp = [[DialogProgress alloc]initWithMessage:NSLocalizedString(@"Cloning...", nil)];
     [dp showInWindow:self.controller.view.window completion:^{
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-            NSArray *commponent =[QRCodeEncodeUtil splitQRCode:self.scanContent];
+            NSArray *commponent =[BTQRCodeEncodeUtil splitQRCode:self.scanContent];
             NSMutableArray* keys = [[NSMutableArray alloc]init];
             for(int i = 0; i < commponent.count; i+=3){
-                NSString* s =[QRCodeEncodeUtil joinedQRCode:[commponent subarrayWithRange:NSMakeRange(i, 3)]];                [keys addObject:s];
+                NSString* s =[BTQRCodeEncodeUtil joinedQRCode:[commponent subarrayWithRange:NSMakeRange(i, 3)]];                [keys addObject:s];
             }
             BOOL result = [KeyUtil addBitcoinjKey:[keys reverseObjectEnumerator].allObjects withPassphrase:password error:nil];
             dispatch_async(dispatch_get_main_queue(), ^{
@@ -599,7 +599,7 @@ static double reloadTime;
         [keys addObject:a.encryptPrivKey];
     }
     QrCodeViewController* qrController = [self.controller.storyboard instantiateViewControllerWithIdentifier:@"QrCode"];
-    qrController.content =[QRCodeEncodeUtil joinedQRCode:keys];
+    qrController.content =[BTQRCodeEncodeUtil joinedQRCode:keys];
     qrController.qrCodeTitle = NSLocalizedString(@"Cold Wallet Clone QR Code", nil);
     qrController.qrCodeMsg = NSLocalizedString(@"Scan by clone destination", nil);
     [self.controller.navigationController pushViewController:qrController animated:YES];

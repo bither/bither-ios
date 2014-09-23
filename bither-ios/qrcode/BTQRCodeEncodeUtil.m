@@ -16,13 +16,13 @@
 //  See the License for the specific language governing permissions and
 //  limitations under the License.
 
-#import "QRCodeEncodeUtil.h"
+#import "BTQRCodeEncodeUtil.h"
 
 #define MAX_QRCODE_SIZE 328
 #define QR_CODE_LETTER @"*"
 #define QR_CODE_SPLIT @":"
 
-@implementation QRCodeEncodeUtil
+@implementation BTQRCodeEncodeUtil
 
 +(NSArray * )splitQRCode:(NSString * )content{
     return [content componentsSeparatedByString:QR_CODE_SPLIT];
