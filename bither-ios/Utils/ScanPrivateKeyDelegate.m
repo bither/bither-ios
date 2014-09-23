@@ -101,7 +101,7 @@ static ScanPrivateKeyDelegate * scanPrivateKeyDelegate;
 }
 
 -(void)handleResult:(NSString *)result byReader:(ScanQrCodeViewController *)reader{
-    if ([QRCodeEncodeUtil verifyQrcodeTransport:result]&&[[result componentsSeparatedByString:QR_CODE_SPLIT] count]==3) {
+    if ([QRCodeEncodeUtil verifyQrcodeTransport:result]&&[[QRCodeEncodeUtil splitQRCode:result] count]==3) {
         self.result=result;
         [reader playSuccessSound];
         [reader vibrate];

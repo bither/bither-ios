@@ -19,14 +19,11 @@
 #import <Foundation/Foundation.h>
 
 @interface QRCodeEncodeUtil : NSObject
-
-
-
-+(NSString *) encodeQrCodeString :(NSString* )text;
++(NSArray * )splitQRCode:(NSString * )content;
++(NSString * )joinedQRCode:(NSArray * )array;
++(NSString *)encodeQrCodeString:(NSString* )text;
 +(NSString *)decodeQrCodeString:(NSString *)text;
 +(BOOL)verifyQrcodeTransport:(NSString *)text;
 +(NSInteger)getNumOfQrCodeString:(NSInteger )length;
-
-
 
 @end

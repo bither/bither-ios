@@ -28,7 +28,7 @@
         return nil;
     }
     QRCodeTransportPage * qrCodePage=[[QRCodeTransportPage alloc] init];
-    NSArray * strArray=[text componentsSeparatedByString:QR_CODE_SPLIT];
+    NSArray * strArray=[QRCodeEncodeUtil splitQRCode:text];;
     if ([StringUtil isPureLongLong:[strArray objectAtIndex:0]]) {
         NSString * sumPageStr=strArray[0];
         NSString * currentPageStr=strArray[1];

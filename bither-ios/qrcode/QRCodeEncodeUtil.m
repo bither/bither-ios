@@ -20,8 +20,17 @@
 
 #define MAX_QRCODE_SIZE 328
 #define QR_CODE_LETTER @"*"
+#define QR_CODE_SPLIT @":"
 
 @implementation QRCodeEncodeUtil
+
++(NSArray * )splitQRCode:(NSString * )content{
+    return [content componentsSeparatedByString:QR_CODE_SPLIT];
+}
+
++(NSString * )joinedQRCode:(NSArray * )array{
+    return [array componentsJoinedByString:QR_CODE_SPLIT];
+}
 
 +(NSString *) encodeQrCodeString :(NSString* )text{
     NSError *error;

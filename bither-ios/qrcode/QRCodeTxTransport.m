@@ -20,11 +20,12 @@
 #import "BitherSetting.h"
 #import "StringUtil.h"
 #import "NSString+Base58.h"
+#import "QRCodeEncodeUtil.h"
 
 @implementation QRCodeTxTransport
 +(QRCodeTxTransport*)formatQRCodeTransport:(NSString *)str{
     QRCodeTxTransport * qrCodeTx=[[QRCodeTxTransport alloc] init];
-    NSArray * strArray=[str componentsSeparatedByString:QR_CODE_SPLIT];
+    NSArray * strArray=[QRCodeEncodeUtil splitQRCode:str];;
     if(strArray.count < 5){
         return nil;
     }
@@ -50,13 +51,7 @@
     NSString * preSignString=@"%@:%@:%@:%@:";
     preSignString=[NSString stringWithFormat:preSignString,[qrCodeTx myAddress],[StringUtil longToHex:[qrCodeTx fee]],[qrCodeTx toAddress],[StringUtil longToHex:[qrCodeTx to]]];
     NSArray * hashList=[qrCodeTx hashList];
-    for (int i=0; i<hashList.count; i++) {
-        NSString *hash=[hashList objectAtIndex:i];
-        preSignString = [preSignString stringByAppendingString:hash];
-        if (i<hashList.count-1) {
-            preSignString = [preSignString stringByAppendingString:QR_CODE_SPLIT];
-        }
-    }
+    preSignString=[preSignString stringByAppendingString:[QRCodeEncodeUtil joinedQRCode:hashList]];
     return preSignString;
 }
 @end
