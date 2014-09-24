@@ -391,3 +391,4 @@
 "Reload transactions data success"="重載交易數據成功 ";
 "You can only reload transactions data in a hour.."="一個小時內只能重載交易數據一次.";
 
+"XRandom increases randomness.\nSure to disable?"="極隨機(XRandom)能提高隨機性.\n確認不使用嗎?";
