@@ -17,16 +17,18 @@
 //  limitations under the License.
 
 #import "QRCodeTransportPage.h"
+#import "BTQRCodeUtil.h"
+#import "BitherSetting.h"
 #import "StringUtil.h"
-#import  "BitherSetting.h"
+#import "BTQRCodeUtil.h"
 
 @implementation QRCodeTransportPage
 +(QRCodeTransportPage *)formatQrCodeString:(NSString *)text{
-    if (![StringUtil verifyQrcodeTransport:text]) {
+    if (![BTQRCodeUtil verifyQrcodeTransport:text]) {
         return nil;
     }
     QRCodeTransportPage * qrCodePage=[[QRCodeTransportPage alloc] init];
-    NSArray * strArray=[text componentsSeparatedByString:QR_CODE_SPLIT];
+    NSArray * strArray=[BTQRCodeUtil splitQRCode:text];;
     if ([StringUtil isPureLongLong:[strArray objectAtIndex:0]]) {
         NSString * sumPageStr=strArray[0];
         NSString * currentPageStr=strArray[1];
@@ -49,14 +51,14 @@
            transportString= [transportString stringByAppendingString:[qrPage content]];
         }
     }
-    return [StringUtil decodeQrCodeString:transportString];
+    return [BTQRCodeUtil decodeQrCodeString:transportString];
     
 }
 
 +(NSArray *) getQrCodeStringList:(NSString *)str{
-    str=[StringUtil encodeQrCodeString:str];
+    str=[BTQRCodeUtil encodeQrCodeString:str];
     NSMutableArray *array=[NSMutableArray new];
-    NSInteger num=[StringUtil getNumOfQrCodeString:str.length];
+    NSInteger num=[BTQRCodeUtil getNumOfQrCodeString:str.length];
     NSInteger sumLength=str.length+num*6;
     NSInteger pageSize=sumLength/num;
     for (NSInteger i=0; i<num; i++) {
@@ -71,7 +73,34 @@
         NSString * splitStr=[str substringWithRange:NSMakeRange(start, end-start)];
         NSString *pageString=@"";
         if (num>1) {
-            pageString=[NSString stringWithFormat:@"%ld:%ld:",(num-1),i];
+            NSArray * array=[[NSArray alloc] initWithObjects:[NSString stringWithFormat:@"%d",num-1],[NSString stringWithFormat:@"%d",i],@"", nil];
+            pageString=[BTQRCodeUtil joinedQRCode:array];
+        }
+        [array addObject:[pageString stringByAppendingString:splitStr]];
+    }
+    return  array;
+}
+
++(NSArray *) oldGetQrCodeStringList:(NSString *)str{
+    str=[BTQRCodeUtil oldEncodeQrCodeString:str];
+    NSMutableArray *array=[NSMutableArray new];
+    NSInteger num=[BTQRCodeUtil getNumOfQrCodeString:str.length];
+    NSInteger sumLength=str.length+num*6;
+    NSInteger pageSize=sumLength/num;
+    for (NSInteger i=0; i<num; i++) {
+        NSInteger start=i*pageSize;
+        NSInteger end=(i+1)*pageSize;
+        if (start>str.length-1) {
+            continue;
+        }
+        if (end>str.length) {
+            end=str.length;
+        }
+        NSString * splitStr=[str substringWithRange:NSMakeRange(start, end-start)];
+        NSString *pageString=@"";
+        if (num>1) {
+            NSArray * array=[[NSArray alloc] initWithObjects:[NSString stringWithFormat:@"%d",num-1],[NSString stringWithFormat:@"%d",i],@"", nil];
+            pageString=[BTQRCodeUtil oldJoinedQRCode:array];
         }
         [array addObject:[pageString stringByAppendingString:splitStr]];
     }

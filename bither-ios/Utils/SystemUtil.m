@@ -1,5 +1,5 @@
 //
-//  QrCodeViewController.h
+//  SystemUtil.m
 //  bither-ios
 //
 //  Copyright 2014 http://Bither.net
@@ -16,12 +16,17 @@
 //  See the License for the specific language governing permissions and
 //  limitations under the License.
 
-#import <UIKit/UIKit.h>
 
-@interface QrCodeViewController : UIViewController
-@property NSString *content;
-@property NSString *cancelWarning;
-@property NSString *qrCodeTitle;
-@property NSString *qrCodeMsg;
--(void)setFinishAction:(NSString*)actionName target:(NSObject*)target selector:(SEL)selector;
+#import "SystemUtil.h"
+
+@implementation SystemUtil
+
++(NSInteger)getVersionCode{
+    NSDictionary* infoDict =[[NSBundle mainBundle] infoDictionary];
+    NSString * versionString= [infoDict objectForKey:@"CFBundleVersion"];
+    versionString=[versionString stringByReplacingOccurrencesOfString:@"." withString:@""];
+    return [versionString integerValue];
+}
+
+
 @end

@@ -68,7 +68,7 @@
 
 #define NavHeight 44.0f
 #define TabBarHeight 44.0f
-#define QR_CODE_SPLIT @":"
+
 
 
 typedef void (^DictResponseBlock)(NSDictionary *dict);

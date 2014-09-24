@@ -42,6 +42,8 @@
 #import "AddressDetailViewController.h"
 #import "Reachability.h"
 #import "TrendingGraphicData.h"
+#import "SystemUtil.h"
+#import "UpgradeUtil.h"
 
 @interface AppDelegate()
 @end
@@ -57,6 +59,9 @@ static StatusBarNotificationWindow* notificationWindow;
         [[UIApplication sharedApplication] setMinimumBackgroundFetchInterval:UIApplicationBackgroundFetchIntervalMinimum];
     }
     
+    [self upgradePub:^{
+        
+    }];
     [[BTAddressManager instance] initAddress];
     [CrashLog initCrashLog];
     [[BTSettings instance] openBitheriConsole];
@@ -86,6 +91,24 @@ static StatusBarNotificationWindow* notificationWindow;
     notificationWindow = [[StatusBarNotificationWindow alloc]initWithOriWindow:self.window];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(notification:) name:BitherBalanceChangedNotification object:nil];
     return YES;
+}
+
+-(void)upgradePub:(VoidBlock)callback{
+    if ([UpgradeUtil needUpgradePubKey]) {
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0),^{
+            [UpgradeUtil upgradePubKey];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                if (callback) {
+                    callback();
+                }
+            });
+        });
+        
+    }else{
+        if (callback) {
+            callback();
+        }
+    }
 }
 -(void)notification:(NSNotification *)notification{
     NSArray * array=[notification object];

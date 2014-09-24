@@ -44,8 +44,6 @@
 		4269FF84195AD81C001213B9 /* BitherTime.m in Sources */ = {isa = PBXBuildFile; fileRef = 4269FF83195AD81C001213B9 /* BitherTime.m */; };
 		4276CEA1194BF4F70027D119 /* NetworkUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 4276CEA0194BF4F70027D119 /* NetworkUtil.m */; };
 		4276CEA4194C20810027D119 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4276CEA6194C20810027D119 /* Localizable.strings */; };
-		427CF4C21953D6DF0081869C /* QRCodeTransportPage.m in Sources */ = {isa = PBXBuildFile; fileRef = 427CF4C11953D6DF0081869C /* QRCodeTransportPage.m */; };
-		427CF4C51953DC8A0081869C /* QRCodeTxTransport.m in Sources */ = {isa = PBXBuildFile; fileRef = 427CF4C41953DC8A0081869C /* QRCodeTxTransport.m */; };
 		427CF4CA19540ED50081869C /* QRCodeTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 427CF4C919540ED50081869C /* QRCodeTest.m */; };
 		42D9B765193D6B5B00C85B89 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 42D9B764193D6B5B00C85B89 /* Foundation.framework */; };
 		42D9B767193D6B5B00C85B89 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 42D9B766193D6B5B00C85B89 /* CoreGraphics.framework */; };
@@ -75,7 +73,6 @@
 		AC229A70196A40B500A7FB5E /* update_storyboard_strings.sh in Resources */ = {isa = PBXBuildFile; fileRef = AC229A6F196A40B500A7FB5E /* update_storyboard_strings.sh */; };
 		AC275EE419B59B0100F1C02F /* BlockCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AC275EE319B59B0100F1C02F /* BlockCell.m */; };
 		AC275EE719B5B9D800F1C02F /* PeerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AC275EE619B5B9D800F1C02F /* PeerCell.m */; };
-		AC2F3292195BF35E001B7439 /* QrUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = AC2F3291195BF35E001B7439 /* QrUtil.m */; };
 		AC2F3295195C02C3001B7439 /* AmountButton.m in Sources */ = {isa = PBXBuildFile; fileRef = AC2F3294195C02C3001B7439 /* AmountButton.m */; };
 		AC2F3298195C1D53001B7439 /* SendViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AC2F3297195C1D53001B7439 /* SendViewController.m */; };
 		AC2F329B195D1930001B7439 /* UnsignedTransactionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AC2F329A195D1930001B7439 /* UnsignedTransactionViewController.m */; };
@@ -94,15 +91,20 @@
 		AC45D84219878BAB00AF5C2C /* DialogBalanceDetail.m in Sources */ = {isa = PBXBuildFile; fileRef = AC45D84019878BAB00AF5C2C /* DialogBalanceDetail.m */; };
 		AC6163941964ED2F0055C9D0 /* DialogWithArrow.m in Sources */ = {isa = PBXBuildFile; fileRef = AC6163931964ED2F0055C9D0 /* DialogWithArrow.m */; };
 		AC616397196507B40055C9D0 /* DialogTxConfirmation.m in Sources */ = {isa = PBXBuildFile; fileRef = AC616396196507B40055C9D0 /* DialogTxConfirmation.m */; };
-		AC61639A19653C1A0055C9D0 /* QrCodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AC61639919653C1A0055C9D0 /* QrCodeViewController.m */; };
 		AC6163A01966524A0055C9D0 /* coins_received.wav in Resources */ = {isa = PBXBuildFile; fileRef = AC61639F1966524A0055C9D0 /* coins_received.wav */; };
 		AC6BAC6F196FA3410013B9E8 /* HotCheckPrivateKeyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AC6BAC6E196FA3410013B9E8 /* HotCheckPrivateKeyViewController.m */; };
 		AC6BAC75196FD8430013B9E8 /* DialogImportPrivateKey.m in Sources */ = {isa = PBXBuildFile; fileRef = AC6BAC74196FD8430013B9E8 /* DialogImportPrivateKey.m */; };
 		AC6CB25619752CE400FA9D23 /* StatusBarNotificationWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = AC6CB25519752CE400FA9D23 /* StatusBarNotificationWindow.m */; };
 		AC8F0DCA196CF4E400CCD0F9 /* SelectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AC8F0DC9196CF4E400CCD0F9 /* SelectViewController.m */; };
 		AC8F0DCD196D054A00CCD0F9 /* SelectListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AC8F0DCC196D054A00CCD0F9 /* SelectListCell.m */; };
-		ACA9D6FA1952D006002D1E3A /* ScanQrCodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ACA9D6F91952D006002D1E3A /* ScanQrCodeViewController.m */; };
-		ACA9D6FD1953F29D002D1E3A /* ScanQrCodeTransportViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ACA9D6FC1953F29D002D1E3A /* ScanQrCodeTransportViewController.m */; };
+		AC9BBCFE19D268AB00E58BA7 /* UpgradeUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = AC9BBCFD19D268AB00E58BA7 /* UpgradeUtil.m */; };
+		AC9BBD0F19D2CBB100E58BA7 /* QRCodeThemeUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = AC9BBD0419D2CBB100E58BA7 /* QRCodeThemeUtil.m */; };
+		AC9BBD1019D2CBB100E58BA7 /* QRCodeTransportPage.m in Sources */ = {isa = PBXBuildFile; fileRef = AC9BBD0619D2CBB100E58BA7 /* QRCodeTransportPage.m */; };
+		AC9BBD1119D2CBB100E58BA7 /* QRCodeTxTransport.m in Sources */ = {isa = PBXBuildFile; fileRef = AC9BBD0819D2CBB100E58BA7 /* QRCodeTxTransport.m */; };
+		AC9BBD1219D2CBB100E58BA7 /* QrCodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AC9BBD0A19D2CBB100E58BA7 /* QrCodeViewController.m */; };
+		AC9BBD1319D2CBB100E58BA7 /* ScanQrCodeTransportViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AC9BBD0C19D2CBB100E58BA7 /* ScanQrCodeTransportViewController.m */; };
+		AC9BBD1419D2CBB100E58BA7 /* ScanQrCodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AC9BBD0E19D2CBB100E58BA7 /* ScanQrCodeViewController.m */; };
+		AC9BC61019D18102003B88B5 /* SystemUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = AC9BC60F19D18102003B88B5 /* SystemUtil.m */; };
 		ACA9D70319540E0F002D1E3A /* PlaySoundUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = ACA9D70219540E0F002D1E3A /* PlaySoundUtil.m */; };
 		ACA9D70A195410FF002D1E3A /* qr_code_scanned.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = ACA9D709195410FF002D1E3A /* qr_code_scanned.mp3 */; };
 		ACA9D70C195415B0002D1E3A /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ACA9D70B195415B0002D1E3A /* AudioToolbox.framework */; };
@@ -237,10 +239,6 @@
 		4276CEA5194C20810027D119 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		4276CEA7194C20830027D119 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		4276CEA8194C20840027D119 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Localizable.strings"; sourceTree = "<group>"; };
-		427CF4C01953D6DF0081869C /* QRCodeTransportPage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QRCodeTransportPage.h; sourceTree = "<group>"; };
-		427CF4C11953D6DF0081869C /* QRCodeTransportPage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QRCodeTransportPage.m; sourceTree = "<group>"; };
-		427CF4C31953DC8A0081869C /* QRCodeTxTransport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QRCodeTxTransport.h; sourceTree = "<group>"; };
-		427CF4C41953DC8A0081869C /* QRCodeTxTransport.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QRCodeTxTransport.m; sourceTree = "<group>"; };
 		427CF4C919540ED50081869C /* QRCodeTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QRCodeTest.m; sourceTree = "<group>"; };
 		42D9B761193D6B5B00C85B89 /* bither-ios.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "bither-ios.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		42D9B764193D6B5B00C85B89 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -294,8 +292,6 @@
 		AC275EE319B59B0100F1C02F /* BlockCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BlockCell.m; sourceTree = "<group>"; };
 		AC275EE519B5B9D800F1C02F /* PeerCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PeerCell.h; sourceTree = "<group>"; };
 		AC275EE619B5B9D800F1C02F /* PeerCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PeerCell.m; sourceTree = "<group>"; };
-		AC2F3290195BF35E001B7439 /* QrUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QrUtil.h; sourceTree = "<group>"; };
-		AC2F3291195BF35E001B7439 /* QrUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QrUtil.m; sourceTree = "<group>"; };
 		AC2F3293195C02C3001B7439 /* AmountButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AmountButton.h; sourceTree = "<group>"; };
 		AC2F3294195C02C3001B7439 /* AmountButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AmountButton.m; sourceTree = "<group>"; };
 		AC2F3296195C1D53001B7439 /* SendViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SendViewController.h; sourceTree = "<group>"; };
@@ -332,8 +328,6 @@
 		AC6163931964ED2F0055C9D0 /* DialogWithArrow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DialogWithArrow.m; sourceTree = "<group>"; };
 		AC616395196507B40055C9D0 /* DialogTxConfirmation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DialogTxConfirmation.h; sourceTree = "<group>"; };
 		AC616396196507B40055C9D0 /* DialogTxConfirmation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DialogTxConfirmation.m; sourceTree = "<group>"; };
-		AC61639819653C1A0055C9D0 /* QrCodeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QrCodeViewController.h; sourceTree = "<group>"; };
-		AC61639919653C1A0055C9D0 /* QrCodeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QrCodeViewController.m; sourceTree = "<group>"; };
 		AC61639F1966524A0055C9D0 /* coins_received.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = coins_received.wav; sourceTree = "<group>"; };
 		AC6BAC6D196FA3410013B9E8 /* HotCheckPrivateKeyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HotCheckPrivateKeyViewController.h; sourceTree = "<group>"; };
 		AC6BAC6E196FA3410013B9E8 /* HotCheckPrivateKeyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HotCheckPrivateKeyViewController.m; sourceTree = "<group>"; };
@@ -345,10 +339,22 @@
 		AC8F0DC9196CF4E400CCD0F9 /* SelectViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SelectViewController.m; sourceTree = "<group>"; };
 		AC8F0DCB196D054A00CCD0F9 /* SelectListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelectListCell.h; sourceTree = "<group>"; };
 		AC8F0DCC196D054A00CCD0F9 /* SelectListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SelectListCell.m; sourceTree = "<group>"; };
-		ACA9D6F81952D006002D1E3A /* ScanQrCodeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScanQrCodeViewController.h; sourceTree = "<group>"; };
-		ACA9D6F91952D006002D1E3A /* ScanQrCodeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScanQrCodeViewController.m; sourceTree = "<group>"; };
-		ACA9D6FB1953F29D002D1E3A /* ScanQrCodeTransportViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScanQrCodeTransportViewController.h; sourceTree = "<group>"; };
-		ACA9D6FC1953F29D002D1E3A /* ScanQrCodeTransportViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScanQrCodeTransportViewController.m; sourceTree = "<group>"; };
+		AC9BBCFC19D268AB00E58BA7 /* UpgradeUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UpgradeUtil.h; sourceTree = "<group>"; };
+		AC9BBCFD19D268AB00E58BA7 /* UpgradeUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UpgradeUtil.m; sourceTree = "<group>"; };
+		AC9BBD0319D2CBB100E58BA7 /* QRCodeThemeUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QRCodeThemeUtil.h; sourceTree = "<group>"; };
+		AC9BBD0419D2CBB100E58BA7 /* QRCodeThemeUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QRCodeThemeUtil.m; sourceTree = "<group>"; };
+		AC9BBD0519D2CBB100E58BA7 /* QRCodeTransportPage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QRCodeTransportPage.h; sourceTree = "<group>"; };
+		AC9BBD0619D2CBB100E58BA7 /* QRCodeTransportPage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QRCodeTransportPage.m; sourceTree = "<group>"; };
+		AC9BBD0719D2CBB100E58BA7 /* QRCodeTxTransport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QRCodeTxTransport.h; sourceTree = "<group>"; };
+		AC9BBD0819D2CBB100E58BA7 /* QRCodeTxTransport.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QRCodeTxTransport.m; sourceTree = "<group>"; };
+		AC9BBD0919D2CBB100E58BA7 /* QrCodeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QrCodeViewController.h; sourceTree = "<group>"; };
+		AC9BBD0A19D2CBB100E58BA7 /* QrCodeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QrCodeViewController.m; sourceTree = "<group>"; };
+		AC9BBD0B19D2CBB100E58BA7 /* ScanQrCodeTransportViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScanQrCodeTransportViewController.h; sourceTree = "<group>"; };
+		AC9BBD0C19D2CBB100E58BA7 /* ScanQrCodeTransportViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScanQrCodeTransportViewController.m; sourceTree = "<group>"; };
+		AC9BBD0D19D2CBB100E58BA7 /* ScanQrCodeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScanQrCodeViewController.h; sourceTree = "<group>"; };
+		AC9BBD0E19D2CBB100E58BA7 /* ScanQrCodeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScanQrCodeViewController.m; sourceTree = "<group>"; };
+		AC9BC60E19D18102003B88B5 /* SystemUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SystemUtil.h; sourceTree = "<group>"; };
+		AC9BC60F19D18102003B88B5 /* SystemUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SystemUtil.m; sourceTree = "<group>"; };
 		ACA9D70119540E0F002D1E3A /* PlaySoundUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlaySoundUtil.h; sourceTree = "<group>"; };
 		ACA9D70219540E0F002D1E3A /* PlaySoundUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlaySoundUtil.m; sourceTree = "<group>"; };
 		ACA9D709195410FF002D1E3A /* qr_code_scanned.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = qr_code_scanned.mp3; sourceTree = "<group>"; };
@@ -471,10 +477,6 @@
 				AC3C2622199B58750055FF5E /* TrendingGraphicData.m */,
 				4217A3711951235D00063746 /* Depth.h */,
 				4217A3721951235D00063746 /* Depth.m */,
-				427CF4C01953D6DF0081869C /* QRCodeTransportPage.h */,
-				427CF4C11953D6DF0081869C /* QRCodeTransportPage.m */,
-				427CF4C31953DC8A0081869C /* QRCodeTxTransport.h */,
-				427CF4C41953DC8A0081869C /* QRCodeTxTransport.m */,
 				4269FF70195A885D001213B9 /* Ticker.h */,
 				4269FF71195A885D001213B9 /* Ticker.m */,
 				4269FF73195A8872001213B9 /* Market.h */,
@@ -492,7 +494,6 @@
 				421B03C219495DBB003A45F1 /* ChooseModeViewController.m */,
 				4268FE20194ACD57007A4C30 /* Cold */,
 				421B03B419495AEF003A45F1 /* Hot */,
-				ACA9D6F71952D006002D1E3A /* QRCode */,
 				ACE4ED5C198A3AE600C8862C /* AdvanceViewController.h */,
 				ACE4ED5D198A3AE600C8862C /* AdvanceViewController.m */,
 			);
@@ -587,8 +588,6 @@
 				4269FF7D195AB6F9001213B9 /* MarketUtil.m */,
 				4269FF82195AD81C001213B9 /* BitherTime.h */,
 				4269FF83195AD81C001213B9 /* BitherTime.m */,
-				AC2F3290195BF35E001B7439 /* QrUtil.h */,
-				AC2F3291195BF35E001B7439 /* QrUtil.m */,
 				424EA9E9195E99B70029AB43 /* NotificationUtil.h */,
 				424EA9EA195E99B70029AB43 /* NotificationUtil.m */,
 				AC1715881969249B00337AB5 /* NSString+Size.h */,
@@ -597,6 +596,10 @@
 				ACD6DFD4196BDC9F009D8031 /* NSAttributedString+Size.m */,
 				ACCA27461988DDE9000E6A32 /* UIImage+ImageRenderToColor.h */,
 				ACCA27471988DDE9000E6A32 /* UIImage+ImageRenderToColor.m */,
+				AC9BC60E19D18102003B88B5 /* SystemUtil.h */,
+				AC9BC60F19D18102003B88B5 /* SystemUtil.m */,
+				AC9BBCFC19D268AB00E58BA7 /* UpgradeUtil.h */,
+				AC9BBCFD19D268AB00E58BA7 /* UpgradeUtil.m */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -657,6 +660,7 @@
 		42D9B76A193D6B5B00C85B89 /* bither-ios */ = {
 			isa = PBXGroup;
 			children = (
+				AC9BBD0219D2CBB100E58BA7 /* QRCode */,
 				DA641E81196E7B750095DF42 /* CrashLog */,
 				AC229A6E196A40B500A7FB5E /* sh */,
 				AC33088B1955665500D8F621 /* Cells */,
@@ -767,15 +771,21 @@
 			name = Cells;
 			sourceTree = "<group>";
 		};
-		ACA9D6F71952D006002D1E3A /* QRCode */ = {
+		AC9BBD0219D2CBB100E58BA7 /* QRCode */ = {
 			isa = PBXGroup;
 			children = (
-				ACA9D6F81952D006002D1E3A /* ScanQrCodeViewController.h */,
-				ACA9D6F91952D006002D1E3A /* ScanQrCodeViewController.m */,
-				ACA9D6FB1953F29D002D1E3A /* ScanQrCodeTransportViewController.h */,
-				ACA9D6FC1953F29D002D1E3A /* ScanQrCodeTransportViewController.m */,
-				AC61639819653C1A0055C9D0 /* QrCodeViewController.h */,
-				AC61639919653C1A0055C9D0 /* QrCodeViewController.m */,
+				AC9BBD0319D2CBB100E58BA7 /* QRCodeThemeUtil.h */,
+				AC9BBD0419D2CBB100E58BA7 /* QRCodeThemeUtil.m */,
+				AC9BBD0519D2CBB100E58BA7 /* QRCodeTransportPage.h */,
+				AC9BBD0619D2CBB100E58BA7 /* QRCodeTransportPage.m */,
+				AC9BBD0719D2CBB100E58BA7 /* QRCodeTxTransport.h */,
+				AC9BBD0819D2CBB100E58BA7 /* QRCodeTxTransport.m */,
+				AC9BBD0919D2CBB100E58BA7 /* QrCodeViewController.h */,
+				AC9BBD0A19D2CBB100E58BA7 /* QrCodeViewController.m */,
+				AC9BBD0B19D2CBB100E58BA7 /* ScanQrCodeTransportViewController.h */,
+				AC9BBD0C19D2CBB100E58BA7 /* ScanQrCodeTransportViewController.m */,
+				AC9BBD0D19D2CBB100E58BA7 /* ScanQrCodeViewController.h */,
+				AC9BBD0E19D2CBB100E58BA7 /* ScanQrCodeViewController.m */,
 			);
 			path = QRCode;
 			sourceTree = "<group>";
@@ -1077,18 +1087,16 @@
 			files = (
 				4217A3731951235D00063746 /* Depth.m in Sources */,
 				ACBB5F56198B468E00B19F4B /* UIViewController+ConfigureTableView.m in Sources */,
-				ACA9D6FD1953F29D002D1E3A /* ScanQrCodeTransportViewController.m in Sources */,
 				AC45AA381987A2F4006314D5 /* DialogPrivateKeyText.m in Sources */,
 				42D9B775193D6B5B00C85B89 /* AppDelegate.m in Sources */,
+				AC9BBD1419D2CBB100E58BA7 /* ScanQrCodeViewController.m in Sources */,
 				421B037C19495315003A45F1 /* TabButton.m in Sources */,
 				ACB9B9C3195AD1CC00019216 /* AddressDetailViewController.m in Sources */,
 				4268FE2A194ACD57007A4C30 /* ColdViewController.m in Sources */,
 				424EA9EB195E99B70029AB43 /* NotificationUtil.m in Sources */,
 				4268FE29194ACD57007A4C30 /* ColdAddressViewController.m in Sources */,
 				AC202AD0196B8B7A00033EC1 /* Setting.m in Sources */,
-				427CF4C51953DC8A0081869C /* QRCodeTxTransport.m in Sources */,
 				ACC21A6B194C2BD900E02542 /* ColdModeCheckConnectionView.m in Sources */,
-				AC61639A19653C1A0055C9D0 /* QrCodeViewController.m in Sources */,
 				AC33089119556AB800D8F621 /* HotAddressListSectionHeader.m in Sources */,
 				AC6BAC6F196FA3410013B9E8 /* HotCheckPrivateKeyViewController.m in Sources */,
 				ACDDDC2419480DE00008A79D /* UIViewController+SwipeRightToPop.m in Sources */,
@@ -1097,7 +1105,6 @@
 				4254085F1946A219007AF99C /* UserDefaultsUtil.m in Sources */,
 				ACD6DFCF196B99BF009D8031 /* DialogBlackQrCode.m in Sources */,
 				ACD6DFD5196BDC9F009D8031 /* NSAttributedString+Size.m in Sources */,
-				427CF4C21953D6DF0081869C /* QRCodeTransportPage.m in Sources */,
 				ACEEB8E419B46ED200F2789C /* BlockViewController.m in Sources */,
 				ACF4B17419668D5700CE24FD /* MarketListCell.m in Sources */,
 				ACD6DFD2196BA83B009D8031 /* ColdAddressAddViewController.m in Sources */,
@@ -1117,15 +1124,16 @@
 				AC275EE419B59B0100F1C02F /* BlockCell.m in Sources */,
 				AC0135D6194FDCCD00E3BB95 /* HotAddressAddWatchOnlyViewController.m in Sources */,
 				ACB9B9C9195AD27300019216 /* TransactionCell.m in Sources */,
+				AC9BBD1019D2CBB100E58BA7 /* QRCodeTransportPage.m in Sources */,
 				AC0135D0194ED8B800E3BB95 /* HotAddressAddViewController.m in Sources */,
 				AC17158D1969359900337AB5 /* DialogPrivateKeyEncryptedQrCode.m in Sources */,
 				AC31E92F19B4533F00EFDDF1 /* TrendingGraphicView.m in Sources */,
 				4254084119469D5A007AF99C /* BitherSetting.m in Sources */,
 				421B03BD19495AEF003A45F1 /* MarketViewController.m in Sources */,
-				AC2F3292195BF35E001B7439 /* QrUtil.m in Sources */,
 				AC33088E1955668D00D8F621 /* HotAddressListCell.m in Sources */,
 				4254085D1946A219007AF99C /* StringUtil.m in Sources */,
 				4254083C19469C9A007AF99C /* BitherApi.m in Sources */,
+				AC9BBCFE19D268AB00E58BA7 /* UpgradeUtil.m in Sources */,
 				4276CEA1194BF4F70027D119 /* NetworkUtil.m in Sources */,
 				ACCA27481988DDE9000E6A32 /* UIImage+ImageRenderToColor.m in Sources */,
 				ACB9B9C6195AD25800019216 /* AddressDetailCell.m in Sources */,
@@ -1146,7 +1154,6 @@
 				AC616397196507B40055C9D0 /* DialogTxConfirmation.m in Sources */,
 				AC6CB25619752CE400FA9D23 /* StatusBarNotificationWindow.m in Sources */,
 				425408591946A219007AF99C /* FileUtil.m in Sources */,
-				ACA9D6FA1952D006002D1E3A /* ScanQrCodeViewController.m in Sources */,
 				ACDDDC2C19480ECF0008A79D /* DialogAlert.m in Sources */,
 				42D9B771193D6B5B00C85B89 /* main.m in Sources */,
 				DA641E8A196E7BC20095DF42 /* CrashLog.m in Sources */,
@@ -1154,14 +1161,17 @@
 				421B03BB19495AEF003A45F1 /* HotViewController.m in Sources */,
 				ACCA2751198F2A68000E6A32 /* PieChartView.m in Sources */,
 				4269FF72195A885D001213B9 /* Ticker.m in Sources */,
+				AC9BBD1119D2CBB100E58BA7 /* QRCodeTxTransport.m in Sources */,
 				AC33089519556F7A00D8F621 /* UIImage+ImageWithColor.m in Sources */,
 				AC8F0DCA196CF4E400CCD0F9 /* SelectViewController.m in Sources */,
 				ACE4ED5E198A3AE600C8862C /* AdvanceViewController.m in Sources */,
+				AC9BC61019D18102003B88B5 /* SystemUtil.m in Sources */,
 				4269FF7E195AB6F9001213B9 /* MarketUtil.m in Sources */,
 				ACEEB8E119B46EC600F2789C /* PeerViewController.m in Sources */,
 				ACEEB8DE19B46EB900F2789C /* NetworkMonitorViewController.m in Sources */,
 				AC2F329E195D19C2001B7439 /* DialogSendTxConfirm.m in Sources */,
 				AC3C2623199B58750055FF5E /* TrendingGraphicData.m in Sources */,
+				AC9BBD0F19D2CBB100E58BA7 /* QRCodeThemeUtil.m in Sources */,
 				DA641E8C196E7BC20095DF42 /* GCCrashReportFilterTrim.m in Sources */,
 				ACDDDC2319480DE00008A79D /* UIViewController+PiShowBanner.m in Sources */,
 				ACCA274B1989FACC000E6A32 /* HotAddressTabButton.m in Sources */,
@@ -1183,6 +1193,7 @@
 				ACDDDC2019480DE00008A79D /* PiPageViewController.m in Sources */,
 				AC0135D9194FDCDF00E3BB95 /* HotAddressAddPrivateKeyViewController.m in Sources */,
 				AC45D84219878BAB00AF5C2C /* DialogBalanceDetail.m in Sources */,
+				AC9BBD1219D2CBB100E58BA7 /* QrCodeViewController.m in Sources */,
 				ACCA274E198F2805000E6A32 /* DialogTotalBalance.m in Sources */,
 				ACDDDC2D19480ECF0008A79D /* DialogCentered.m in Sources */,
 				4268FE2B194ACD57007A4C30 /* CheckViewController.m in Sources */,
@@ -1192,6 +1203,7 @@
 				4269FF78195A92BE001213B9 /* ExchangeUtil.m in Sources */,
 				4254085B1946A219007AF99C /* JRSwizzle.m in Sources */,
 				AC6BAC75196FD8430013B9E8 /* DialogImportPrivateKey.m in Sources */,
+				AC9BBD1319D2CBB100E58BA7 /* ScanQrCodeTransportViewController.m in Sources */,
 				AC0135DC19501D9400E3BB95 /* DialogPassword.m in Sources */,
 				421B03BC19495AEF003A45F1 /* OptionHotViewController.m in Sources */,
 			);
@@ -1377,7 +1389,7 @@
 				INFOPLIST_FILE = "bither-ios/bither-ios-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "BA494991-713A-43A8-9ABA-24A2B6C98CFC";
 				TARGETED_DEVICE_FAMILY = 1;
 				USER_HEADER_SEARCH_PATHS = "${SRCROOT}/**";
 				WRAPPER_EXTENSION = app;

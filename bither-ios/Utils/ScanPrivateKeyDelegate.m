@@ -29,6 +29,8 @@
 #import "TransactionsUtil.h"
 #import "Bitheri/BTKey+Bitcoinj.h"
 #import "BTAddressManager.h"
+#import "BTQRCodeUtil.h"
+#import "BTPrivateKeyUtil.h"
 
 @interface CheckPasswordDelegate : NSObject<DialogPasswordDelegate>
 @property(nonatomic,strong) UIViewController *controller;
@@ -43,7 +45,7 @@
     [dp showInWindow:self.controller.view.window completion:^{
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
             BTKey * key=[[BTKey alloc] initWithPrivateKey:self.result];
-            NSString * encryptKey=[key bitcoinjKeyWithPassphrase:bpassword  andSalt:[NSData randomWithSize:8] andIV:[NSData randomWithSize:16]];
+            NSString * encryptKey=[BTPrivateKeyUtil getPrivateKeyString:key passphrase:bpassword];
             NSError * error;
             [KeyUtil addBitcoinjKey:[[NSArray alloc] initWithObjects:encryptKey, nil] withPassphrase:bpassword error:&error];
             
@@ -100,7 +102,7 @@ static ScanPrivateKeyDelegate * scanPrivateKeyDelegate;
 }
 
 -(void)handleResult:(NSString *)result byReader:(ScanQrCodeViewController *)reader{
-    if ([StringUtil verifyQrcodeTransport:result]&&[[result componentsSeparatedByString:QR_CODE_SPLIT] count]==3) {
+    if ([BTQRCodeUtil verifyQrcodeTransport:result]&&[[BTQRCodeUtil splitQRCode:result] count]==3) {
         self.result=result;
         [reader playSuccessSound];
         [reader vibrate];
@@ -147,7 +149,7 @@ static ScanPrivateKeyDelegate * scanPrivateKeyDelegate;
         NSMutableArray * array=[NSMutableArray new];
         BTKey *key=[BTKey keyWithBitcoinj:keyStr andPassphrase:password];
         [array addObject:key.address];
-        BTAddress *address=[[BTAddress alloc] initWithKey:key encryptPrivKey:nil];
+        BTAddress *address=[[BTAddress alloc] initWithKey:key encryptPrivKey:nil isXRandom:key.isFromXRandom];
         if ([[[BTAddressManager instance] privKeyAddresses] containsObject:address]){
             dispatch_async(dispatch_get_main_queue(), ^{
                 [self showMsg:NSLocalizedString(@"This private key already exists.", nil)];
@@ -203,7 +205,7 @@ static CheckPasswordDelegate *checkPasswordDelegate;
     }else{
         NSMutableArray * array=[NSMutableArray new];
         [array addObject:key.address];
-        BTAddress *address=[[BTAddress alloc] initWithKey:key encryptPrivKey:nil];
+        BTAddress *address=[[BTAddress alloc] initWithKey:key encryptPrivKey:nil isXRandom:NO];
         if ([[[BTAddressManager instance] privKeyAddresses] containsObject:address]){
             dispatch_async(dispatch_get_main_queue(), ^{
                 [self showMsg:NSLocalizedString(@"This private key already exists.", nil)];

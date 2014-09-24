@@ -165,7 +165,7 @@ NSUserDefaults *userDefaults;
 }
 
 -(void)setPasswordSeed:(BTPasswordSeed *)passwordSeed{
-    [userDefaults setValue:[passwordSeed description] forKey:PASSWORD_SEED];
+    [userDefaults setValue:[passwordSeed toPasswrodSeedString] forKey:PASSWORD_SEED];
     [userDefaults synchronize];
 
 }

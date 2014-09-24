@@ -41,14 +41,7 @@
 +(BOOL)isPureLongLong:(NSString *)string;
 +(BOOL)isPureFloat:(NSString *)string;
 
-+(BOOL)compareString:(NSString *) original compare:(NSString *)compare;
-
-+(NSString *) encodeQrCodeString :(NSString* )text;
-+(NSString *)decodeQrCodeString:(NSString *)text;
-+(BOOL)verifyQrcodeTransport:(NSString *)text;
-+(NSInteger)getNumOfQrCodeString:(NSInteger )length;
-
-+(NSString *)shortenAddress:(NSString *)address;
++(BOOL)compareString:(NSString *) original compare:(NSString *)compare;+(NSString *)shortenAddress:(NSString *)address;
 +(NSString *)formatAddress:(NSString *)address groupSize:(NSInteger)groupSize  lineSize:(NSInteger) lineSize;
 +(NSString *)longToHex:(long long) value;
 +(long long)hexToLong:(NSString *)hex;

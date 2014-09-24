@@ -1,5 +1,5 @@
 //
-//  DialogAddressQrCode.h
+//  SystemUtil.h
 //  bither-ios
 //
 //  Copyright 2014 http://Bither.net
@@ -16,14 +16,11 @@
 //  See the License for the specific language governing permissions and
 //  limitations under the License.
 
-#import "DialogCentered.h"
-#import "Bitheri/BTAddress.h"
-#import "QRCodeThemeUtil.h"
-@protocol DialogAddressQrCodeDelegate<NSObject>
--(void)qrCodeThemeChanged:(QRCodeTheme*)theme;
-@end
 
-@interface DialogAddressQrCode : DialogCentered
--(instancetype)initWithAddress:(BTAddress*)address delegate:(NSObject<DialogAddressQrCodeDelegate>*)delegate;
-@property (weak) NSObject<DialogAddressQrCodeDelegate>* delegate;
+#import <Foundation/Foundation.h>
+
+@interface SystemUtil : NSObject
+
++(NSInteger)getVersionCode;
+
 @end

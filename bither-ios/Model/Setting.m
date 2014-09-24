@@ -37,6 +37,7 @@
 #import "BTTxProvider.h"
 #import "PeerUtil.h"
 #import "TransactionsUtil.h"
+#import "BTQRCodeUtil.h"
 
 @interface SignTransactionScanDelegate : Setting<ScanQrCodeDelegate>
 -(instancetype)init;
@@ -402,7 +403,7 @@ static double reloadTime;
                 [pubKeys addObject:[NSString hexWithData:a.pubKey].uppercaseString];
             }
             QrCodeViewController* qrCtr = [controller.storyboard instantiateViewControllerWithIdentifier:@"QrCode"];
-            qrCtr.content = [pubKeys componentsJoinedByString:QR_CODE_SPLIT];
+            qrCtr.content =[BTQRCodeUtil joinedQRCode:pubKeys];
             qrCtr.qrCodeTitle = NSLocalizedString(@"Watch Only QR Code", nil);
             qrCtr.qrCodeMsg = NSLocalizedString(@"Scan with Bither Hot to watch Bither Cold", nil);
             [controller.navigationController pushViewController:qrCtr animated:YES];
@@ -530,7 +531,7 @@ static double reloadTime;
 
 -(void)handleResult:(NSString *)result byReader:(ScanQrCodeViewController *)reader{
     [reader dismissViewControllerAnimated:YES completion:^{
-        if([result componentsSeparatedByString:QR_CODE_SPLIT].count % 3 == 0){
+        if([BTQRCodeUtil splitQRCode:result].count % 3 == 0){
             self.scanContent = result;
             DialogPassword *dialog = [[DialogPassword alloc]initWithDelegate:self];
             [dialog showInWindow:self.controller.view.window];
@@ -544,11 +545,10 @@ static double reloadTime;
     DialogProgress* dp = [[DialogProgress alloc]initWithMessage:NSLocalizedString(@"Cloning...", nil)];
     [dp showInWindow:self.controller.view.window completion:^{
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-            NSArray *commponent = [self.scanContent componentsSeparatedByString:QR_CODE_SPLIT];
+            NSArray *commponent =[BTQRCodeUtil splitQRCode:self.scanContent];
             NSMutableArray* keys = [[NSMutableArray alloc]init];
             for(int i = 0; i < commponent.count; i+=3){
-                NSString* s = [[commponent subarrayWithRange:NSMakeRange(i, 3)] componentsJoinedByString:QR_CODE_SPLIT];
-                [keys addObject:s];
+                NSString* s =[BTQRCodeUtil joinedQRCode:[commponent subarrayWithRange:NSMakeRange(i, 3)]];                [keys addObject:s];
             }
             BOOL result = [KeyUtil addBitcoinjKey:[keys reverseObjectEnumerator].allObjects withPassphrase:password error:nil];
             dispatch_async(dispatch_get_main_queue(), ^{
@@ -596,10 +596,10 @@ static double reloadTime;
     NSArray *addresses = [BTAddressManager instance].privKeyAddresses;
     NSMutableArray* keys = [[NSMutableArray alloc]init];
     for(BTAddress* a in addresses){
-        [keys addObject:a.encryptPrivKey];
+        [keys addObject:[BTQRCodeUtil replaceNewQRCode:a.encryptPrivKey ]];
     }
     QrCodeViewController* qrController = [self.controller.storyboard instantiateViewControllerWithIdentifier:@"QrCode"];
-    qrController.content = [keys componentsJoinedByString:QR_CODE_SPLIT];
+    qrController.content =[BTQRCodeUtil joinedQRCode:keys];
     qrController.qrCodeTitle = NSLocalizedString(@"Cold Wallet Clone QR Code", nil);
     qrController.qrCodeMsg = NSLocalizedString(@"Scan by clone destination", nil);
     [self.controller.navigationController pushViewController:qrController animated:YES];
@@ -621,7 +621,7 @@ static double reloadTime;
             [[PeerUtil instance] stopPeer];
             for(BTAddress * address in [[BTAddressManager instance]allAddresses]){
                 [address setIsSyncComplete:NO];
-                [address updateAddress];
+                [address updateAddressWithPub];
             }
             [[BTTxProvider instance] clearAllTx];
             [TransactionsUtil syncWallet:^{

@@ -1,5 +1,5 @@
 //
-//  QRCodeTxTransport.h
+//  QrCodeViewController.h
 //  bither-ios
 //
 //  Copyright 2014 http://Bither.net
@@ -16,17 +16,13 @@
 //  See the License for the specific language governing permissions and
 //  limitations under the License.
 
-#import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 
-@interface QRCodeTxTransport : NSObject
-@property (nonatomic,strong) NSArray * hashList;
-@property (nonatomic,strong) NSString * myAddress;
-@property (nonatomic,strong) NSString * toAddress;
-@property (nonatomic,readwrite) long long to;
-@property (nonatomic,readwrite) long long fee;
-
-+(NSString *)getPreSignString :(QRCodeTxTransport *)qrCodeTransport;
-+(QRCodeTxTransport *)formatQRCodeTransport:(NSString *)str;
-
-
+@interface QrCodeViewController : UIViewController
+@property NSString *content;
+@property NSString *oldContent;
+@property NSString *cancelWarning;
+@property NSString *qrCodeTitle;
+@property NSString *qrCodeMsg;
+-(void)setFinishAction:(NSString*)actionName target:(NSObject*)target selector:(SEL)selector;
 @end
