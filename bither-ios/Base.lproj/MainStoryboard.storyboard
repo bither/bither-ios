@@ -564,11 +564,15 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <state key="selected" image="xrandom_checkbox_checked"/>
+                                <connections>
+                                    <action selector="xrandomCheckPressed:" destination="5gP-20-5H4" eventType="touchUpInside" id="hKH-V6-HFy"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </view>
                     <connections>
+                        <outlet property="btnXRandomCheck" destination="ySW-x6-06q" id="oQc-a4-SVt"/>
                         <outlet property="pvCount" destination="hEQ-cn-z22" id="dCV-cX-iRg"/>
                     </connections>
                 </viewController>

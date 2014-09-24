@@ -20,11 +20,13 @@
 #import "BitherSetting.h"
 #import "DialogProgress.h"
 #import "DialogPassword.h"
+#import "DialogAlert.h"
 #import <Bitheri/BTAddressManager.h>
 #import "KeyUtil.h"
 
 @interface HotAddressAddPrivateKeyViewController ()
 @property (weak, nonatomic) IBOutlet UIPickerView *pvCount;
+@property (weak, nonatomic) IBOutlet UIButton *btnXRandomCheck;
 @property int countToGenerate;
 @end
 
@@ -61,6 +63,17 @@
 - (IBAction)generatePressed:(id)sender {
     DialogPassword *d = [[DialogPassword alloc]initWithDelegate:self];
     [d showInWindow:self.view.window];
+}
+
+- (IBAction)xrandomCheckPressed:(id)sender{
+    if(!self.btnXRandomCheck.selected){
+        self.btnXRandomCheck.selected = YES;
+    }else{
+        DialogAlert *alert = [[DialogAlert alloc]initWithMessage:NSLocalizedString(@"XRandom increases randomness.\nSure to disable?", nil) confirm:^{
+            self.btnXRandomCheck.selected = NO;
+        } cancel:nil];
+        [alert showInWindow:self.view.window];
+    }
 }
 
 @end
