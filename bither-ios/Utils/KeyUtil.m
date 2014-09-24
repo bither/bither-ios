@@ -22,13 +22,17 @@
 #import "FileUtil.h"
 #import "BTPeerManager.h"
 #import "PeerUtil.h"
+#import "BTPrivateKeyUtil.h"
+#import "BTQRCodeUtil.h"
 
 
 @implementation KeyUtil
 +(void)addPrivateKeyByRandomWithPassphras:(NSString *)password count:(int) count{
     [[PeerUtil instance] stopPeer];
     for (int i=0; i<count; i++) {
-        BTAddress *btAddress=[[BTAddress alloc] initWithPassphrase:password];
+        BTKey *key = [BTKey keyWithSecret:[NSData randomWithSize:32] compressed:YES];
+        NSString * privateKeyString=[BTPrivateKeyUtil getPrivateKeyString:key passphrase:password];
+        BTAddress *btAddress=[[BTAddress alloc] initWithKey:key encryptPrivKey:privateKeyString isXRandom:NO];
         if (![[[BTAddressManager instance] privKeyAddresses] containsObject:btAddress]) {
             [[BTAddressManager instance] addAddress:btAddress];
             if (![[UserDefaultsUtil instance] getPasswordSeed]) {
@@ -64,8 +68,16 @@
 +(void) addWatckOnly:(NSArray *)pubKeys{
     [[PeerUtil instance] stopPeer];
     for (NSString * pubKey in pubKeys) {
-        BTKey *key = [BTKey keyWithPublicKey:[pubKey hexToData] ];
-        BTAddress *btAddress = [[BTAddress alloc] initWithKey:key encryptPrivKey:nil];
+        BOOL isXRandom=NO;
+        NSString * pubKeyString;
+        if ([pubKey containsString:XRANDOM_FLAG]) {
+            pubKeyString=[pubKey substringFromIndex:1];
+            isXRandom=YES;
+        }else{
+            pubKeyString=pubKey;
+        }
+        BTKey *key = [BTKey keyWithPublicKey:[pubKeyString hexToData] ];
+        BTAddress *btAddress = [[BTAddress alloc] initWithKey:key encryptPrivKey:nil isXRandom:isXRandom];
         if (![[[BTAddressManager instance] watchOnlyAddresses] containsObject:btAddress]&&![[[BTAddressManager instance] privKeyAddresses] containsObject:btAddress]) {
             [[BTAddressManager instance] addAddress:btAddress];
         }
