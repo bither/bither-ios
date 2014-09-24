@@ -221,7 +221,7 @@
         uint32_t apiBlockCount=[dict getIntFromDict:BLOCK_COUNT];
         [address initTxs:txs];
         [address setIsSyncComplete:YES];
-        [address updateAddress];
+        [address updateAddressWithPub];
         //TODO 100?
         if (apiBlockCount<storeHeight&&storeHeight-apiBlockCount<100) {
             [[BTBlockChain instance] rollbackBlock:apiBlockCount];

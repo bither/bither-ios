@@ -621,7 +621,7 @@ static double reloadTime;
             [[PeerUtil instance] stopPeer];
             for(BTAddress * address in [[BTAddressManager instance]allAddresses]){
                 [address setIsSyncComplete:NO];
-                [address updateAddress];
+                [address updateAddressWithPub];
             }
             [[BTTxProvider instance] clearAllTx];
             [TransactionsUtil syncWallet:^{
