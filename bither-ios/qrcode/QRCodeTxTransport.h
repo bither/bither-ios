@@ -28,6 +28,7 @@
 +(NSString *)getPreSignString :(QRCodeTxTransport *)qrCodeTransport;
 +(NSString *)oldGetPreSignString:(QRCodeTxTransport *)qrCodeTx;
 +(QRCodeTxTransport *)formatQRCodeTransport:(NSString *)str;
++(QRCodeTxTransport*)oldFormatQRCodeTransport:(NSString *)str;
 
 
 @end

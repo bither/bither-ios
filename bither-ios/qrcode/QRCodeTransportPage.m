@@ -73,7 +73,8 @@
         NSString * splitStr=[str substringWithRange:NSMakeRange(start, end-start)];
         NSString *pageString=@"";
         if (num>1) {
-            pageString=[NSString stringWithFormat:@"%d:%d:",(num-1),i];
+            NSArray * array=[[NSArray alloc] initWithObjects:[NSString stringWithFormat:@"%d",num-1],[NSString stringWithFormat:@"%d",i],@"", nil];
+            pageString=[BTQRCodeUtil joinedQRCode:array];
         }
         [array addObject:[pageString stringByAppendingString:splitStr]];
     }
@@ -98,7 +99,8 @@
         NSString * splitStr=[str substringWithRange:NSMakeRange(start, end-start)];
         NSString *pageString=@"";
         if (num>1) {
-            pageString=[NSString stringWithFormat:@"%d:%d:",(num-1),i];
+            NSArray * array=[[NSArray alloc] initWithObjects:[NSString stringWithFormat:@"%d",num-1],[NSString stringWithFormat:@"%d",i],@"", nil];
+            pageString=[BTQRCodeUtil oldJoinedQRCode:array];
         }
         [array addObject:[pageString stringByAppendingString:splitStr]];
     }

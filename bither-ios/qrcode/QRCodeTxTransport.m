@@ -23,7 +23,33 @@
 #import "BTQRCodeUtil.h"
 
 @implementation QRCodeTxTransport
-+(QRCodeTxTransport*)formatQRCodeTransport:(NSString *)str{
+
++(QRCodeTxTransport *)formatQRCodeTransport:(NSString *)str{
+    QRCodeTxTransport * qrCodeTx=[[QRCodeTxTransport alloc] init];
+    NSArray * strArray=[BTQRCodeUtil splitQRCode:str];;
+    if(strArray.count < 5){
+        return nil;
+    }
+    NSString * address=[[strArray objectAtIndex:0] hexToBase58check];
+    if (![address isValidBitcoinAddress]) {
+        return nil;
+    }
+    [qrCodeTx setMyAddress:address];
+    [qrCodeTx setFee:[StringUtil hexToLong:[strArray objectAtIndex:1]]];
+    [qrCodeTx setToAddress:[[strArray objectAtIndex:2] hexToBase58check]];
+    [qrCodeTx setTo:[StringUtil hexToLong:[strArray objectAtIndex:3]]];
+    NSMutableArray *array=[NSMutableArray new];
+    for (int i=4; i<strArray.count; i++) {
+        NSString * hash=[strArray objectAtIndex:i];
+        if (![StringUtil isEmpty:hash]) {
+            [array addObject:hash];
+        }
+    }
+    [qrCodeTx setHashList:array];
+    return  qrCodeTx;
+}
+
++(QRCodeTxTransport*)oldFormatQRCodeTransport:(NSString *)str{
     QRCodeTxTransport * qrCodeTx=[[QRCodeTxTransport alloc] init];
     NSArray * strArray=[BTQRCodeUtil splitQRCode:str];;
     if(strArray.count < 5){
@@ -48,7 +74,7 @@
     return  qrCodeTx;
 }
 +(NSString *)getPreSignString:(QRCodeTxTransport *)qrCodeTx{
-     NSArray * array=[[NSArray alloc] initWithObjects:[qrCodeTx myAddress],[StringUtil longToHex:[qrCodeTx fee]],[qrCodeTx toAddress],[StringUtil longToHex:[qrCodeTx to]], nil];
+     NSArray * array=[[NSArray alloc] initWithObjects:[[qrCodeTx myAddress] base58checkToHex],[StringUtil longToHex:[qrCodeTx fee]],[[qrCodeTx toAddress] base58checkToHex],[StringUtil longToHex:[qrCodeTx to]], nil];
     NSString * preSignString=[BTQRCodeUtil joinedQRCode:array];
     NSArray * hashList=[qrCodeTx hashList];
     preSignString=[preSignString stringByAppendingString:[BTQRCodeUtil joinedQRCode:hashList]];

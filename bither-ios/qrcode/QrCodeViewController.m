@@ -72,7 +72,11 @@
         return;
     }
     NSArray *strs = [QRCodeTransportPage getQrCodeStringList:self.content];
-    NSArray * oldStrs=[QRCodeTransportPage oldGetQrCodeStringList:self.oldContent];
+
+    NSArray * oldStrs;
+    if (self.oldContent) {
+        oldStrs=[QRCodeTransportPage oldGetQrCodeStringList:self.oldContent];
+    }
     CGFloat qrTop = (self.sv.frame.size.height - self.sv.frame.size.width - kButtonHeight - kPageHeight) / 4;
     if(qrTop < kQrCodeTopMarginThreshold){
         qrTop = 0;
