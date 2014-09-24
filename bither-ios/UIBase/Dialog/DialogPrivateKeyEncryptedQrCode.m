@@ -22,6 +22,7 @@
 #import "StringUtil.h"
 #import "FileUtil.h"
 #import "UIBaseUtil.h"
+#import "BTQRCodeUtil.h"
 
 #define kShareBottomDistance (20)
 #define kShareBottomHeight (32)
@@ -45,7 +46,7 @@
     }
     self = [super initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.width + (kShareBottomDistance + kShareBottomHeight) * 2)];
     if(self){
-         _encrytedPrivateKey = address.encryptPrivKey.uppercaseString;
+         _encrytedPrivateKey = [BTQRCodeUtil replaceNewQRCode:address.encryptPrivKey.uppercaseString ];
         _shareFileName = [NSString stringWithFormat:@"%@_private_key", address.address];
         [self firstConfigure];
     }

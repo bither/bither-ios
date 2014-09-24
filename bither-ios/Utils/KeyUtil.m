@@ -70,7 +70,7 @@
     for (NSString * pubKey in pubKeys) {
         BOOL isXRandom=NO;
         NSString * pubKeyString;
-        if ([pubKey containsString:XRANDOM_FLAG]) {
+        if ([pubKey rangeOfString:XRANDOM_FLAG].location!=NSNotFound) {
             pubKeyString=[pubKey substringFromIndex:1];
             isXRandom=YES;
         }else{

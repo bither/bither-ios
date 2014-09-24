@@ -596,7 +596,7 @@ static double reloadTime;
     NSArray *addresses = [BTAddressManager instance].privKeyAddresses;
     NSMutableArray* keys = [[NSMutableArray alloc]init];
     for(BTAddress* a in addresses){
-        [keys addObject:a.encryptPrivKey];
+        [keys addObject:[BTQRCodeUtil replaceNewQRCode:a.encryptPrivKey ]];
     }
     QrCodeViewController* qrController = [self.controller.storyboard instantiateViewControllerWithIdentifier:@"QrCode"];
     qrController.content =[BTQRCodeUtil joinedQRCode:keys];
