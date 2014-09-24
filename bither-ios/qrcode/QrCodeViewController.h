@@ -20,6 +20,7 @@
 
 @interface QrCodeViewController : UIViewController
 @property NSString *content;
+@property NSString *oldContent;
 @property NSString *cancelWarning;
 @property NSString *qrCodeTitle;
 @property NSString *qrCodeMsg;

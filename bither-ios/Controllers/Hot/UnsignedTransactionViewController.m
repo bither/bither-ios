@@ -155,6 +155,7 @@
     }
     txTrans.hashList = array;
     qr.content = [QRCodeTxTransport getPreSignString:txTrans];
+    qr.content=[QRCodeTxTransport oldGetPreSignString:txTrans];
     [qr setFinishAction:NSLocalizedString(@"Scan Bither Cold to sign", nil) target:self selector:@selector(scanBitherColdToSign)];
     [self.navigationController pushViewController:qr animated:YES];
 }

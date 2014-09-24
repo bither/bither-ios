@@ -26,6 +26,7 @@
 @property (nonatomic,readwrite) long long fee;
 
 +(NSString *)getPreSignString :(QRCodeTxTransport *)qrCodeTransport;
++(NSString *)oldGetPreSignString:(QRCodeTxTransport *)qrCodeTx;
 +(QRCodeTxTransport *)formatQRCodeTransport:(NSString *)str;
 
 

@@ -27,6 +27,7 @@
 +(QRCodeTransportPage *) formatQrCodeString:(NSString *) text;
 +(NSString *) formatQRCodeTran:(NSArray *)qrCodeTransportPages;
 +(NSArray *) getQrCodeStringList:(NSString *)str;
++(NSArray *) oldGetQrCodeStringList:(NSString *)str;
 
 
 -(BOOL) hasNextPage;

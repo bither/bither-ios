@@ -73,7 +73,32 @@
         NSString * splitStr=[str substringWithRange:NSMakeRange(start, end-start)];
         NSString *pageString=@"";
         if (num>1) {
-            pageString=[NSString stringWithFormat:@"%ld:%ld:",(num-1),i];
+            pageString=[NSString stringWithFormat:@"%d:%d:",(num-1),i];
+        }
+        [array addObject:[pageString stringByAppendingString:splitStr]];
+    }
+    return  array;
+}
+
++(NSArray *) oldGetQrCodeStringList:(NSString *)str{
+    str=[BTQRCodeUtil oldEncodeQrCodeString:str];
+    NSMutableArray *array=[NSMutableArray new];
+    NSInteger num=[BTQRCodeUtil getNumOfQrCodeString:str.length];
+    NSInteger sumLength=str.length+num*6;
+    NSInteger pageSize=sumLength/num;
+    for (NSInteger i=0; i<num; i++) {
+        NSInteger start=i*pageSize;
+        NSInteger end=(i+1)*pageSize;
+        if (start>str.length-1) {
+            continue;
+        }
+        if (end>str.length) {
+            end=str.length;
+        }
+        NSString * splitStr=[str substringWithRange:NSMakeRange(start, end-start)];
+        NSString *pageString=@"";
+        if (num>1) {
+            pageString=[NSString stringWithFormat:@"%d:%d:",(num-1),i];
         }
         [array addObject:[pageString stringByAppendingString:splitStr]];
     }

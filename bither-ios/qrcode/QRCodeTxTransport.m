@@ -48,10 +48,18 @@
     return  qrCodeTx;
 }
 +(NSString *)getPreSignString:(QRCodeTxTransport *)qrCodeTx{
-    NSString * preSignString=@"%@:%@:%@:%@:";
-    preSignString=[NSString stringWithFormat:preSignString,[qrCodeTx myAddress],[StringUtil longToHex:[qrCodeTx fee]],[qrCodeTx toAddress],[StringUtil longToHex:[qrCodeTx to]]];
+     NSArray * array=[[NSArray alloc] initWithObjects:[qrCodeTx myAddress],[StringUtil longToHex:[qrCodeTx fee]],[qrCodeTx toAddress],[StringUtil longToHex:[qrCodeTx to]], nil];
+    NSString * preSignString=[BTQRCodeUtil joinedQRCode:array];
     NSArray * hashList=[qrCodeTx hashList];
     preSignString=[preSignString stringByAppendingString:[BTQRCodeUtil joinedQRCode:hashList]];
+    return preSignString;
+}
++(NSString *)oldGetPreSignString:(QRCodeTxTransport *)qrCodeTx{
+    NSArray * array=[[NSArray alloc] initWithObjects:[qrCodeTx myAddress],[StringUtil longToHex:[qrCodeTx fee]],[qrCodeTx toAddress],[StringUtil longToHex:[qrCodeTx to]], nil];
+    NSString * preSignString=[BTQRCodeUtil oldJoinedQRCode:array];
+
+    NSArray * hashList=[qrCodeTx hashList];
+     preSignString=[preSignString stringByAppendingString:[BTQRCodeUtil oldJoinedQRCode:hashList]];
     return preSignString;
 }
 @end
