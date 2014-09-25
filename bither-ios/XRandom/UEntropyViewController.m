@@ -43,7 +43,7 @@
     [super viewDidLoad];
     self.collector = [[UEntropyCollector alloc]initWithDelegate:self];
     [self.collector addSource:[[UEntropyCamera alloc]initWithViewController:self.view andCollector:self.collector],
-                                [[UEntropyMic alloc]initWithView:nil andCollector:self.collector],
+                                //[[UEntropyMic alloc]initWithView:nil andCollector:self.collector],
                                 nil];
 }
 
@@ -57,7 +57,7 @@
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         NSLog(@"start generate");
         [self.collector start];
-        for(int i = 0; i < 20; i++){
+        for(int i = 0; i < 200; i++){
             NSData* data = [self.collector nextBytes:32];
             NSLog(@"outcome %d data %@", i + 1, [NSString hexWithData:data]);
         }

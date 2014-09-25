@@ -77,7 +77,7 @@
         
         NSMutableData *result = [NSMutableData dataWithLength:requestCount];
         for(int i = 0; i < requestCount; i++){
-            [data getBytes:result.mutableBytes + i range:NSMakeRange(i, 1)];
+            [data getBytes:result.mutableBytes + i range:NSMakeRange(random() % data.length, 1)];
         }
         
         dispatch_async(queue, ^{

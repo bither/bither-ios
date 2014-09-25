@@ -40,8 +40,9 @@
         }
         queue = dispatch_queue_create("UEntropyCamera", NULL);
         session = [[AVCaptureSession alloc]init];
+        session.sessionPreset = AVCaptureSessionPresetMedium;
         AVCaptureVideoDataOutput *output = [AVCaptureVideoDataOutput new];
-        output.alwaysDiscardsLateVideoFrames = YES;
+        output.videoSettings = @{(id)kCVPixelBufferPixelFormatTypeKey:@(kCVPixelFormatType_32BGRA)};
         [output setSampleBufferDelegate:(id<AVCaptureVideoDataOutputSampleBufferDelegate>)self queue: queue];
         [session addOutput:output];
         
@@ -79,6 +80,18 @@
 }
 
 - (void)captureOutput:(AVCaptureOutput *)captureOutput didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer fromConnection:(AVCaptureConnection *)connection{
+    if(!CMSampleBufferDataIsReady(sampleBuffer)){
+        NSLog(@"sample buffer not ready");
+        return;
+    }
+    if(CMSampleBufferGetNumSamples(sampleBuffer) != 1 ){
+        NSLog(@"sample buffer not 1");
+        return;
+    }
+    if(!CMSampleBufferIsValid(sampleBuffer)){
+        NSLog(@"sample buffer not valid");
+        return;
+    }
     CVImageBufferRef imageBuffer = CMSampleBufferGetImageBuffer(sampleBuffer);
     CVPixelBufferLockBaseAddress(imageBuffer,0);
     

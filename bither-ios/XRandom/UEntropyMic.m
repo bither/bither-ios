@@ -103,6 +103,6 @@
 }
 
 -(NSUInteger)byteCountFromSingleFrame{
-    return 16;
+    return 8;
 }
 @end
