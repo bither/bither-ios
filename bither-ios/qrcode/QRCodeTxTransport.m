@@ -25,6 +25,9 @@
 @implementation QRCodeTxTransport
 
 +(QRCodeTxTransport *)formatQRCodeTransport:(NSString *)str{
+    if ([BTQRCodeUtil isOldQRCodeVerion:str]) {
+        return [QRCodeTxTransport oldFormatQRCodeTransport:str];
+    }
     QRCodeTxTransport * qrCodeTx=[[QRCodeTxTransport alloc] init];
     NSArray * strArray=[BTQRCodeUtil splitQRCode:str];;
     if(strArray.count < 5){
