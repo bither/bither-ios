@@ -23,6 +23,7 @@
 #import "UIViewController+PiShowBanner.h"
 #import "DialogEditPassword.h"
 #import "UIViewController+ConfigureTableView.h"
+#import "SettingUtil.h"
 
 
 @interface OptionColdViewController ()<UITableViewDataSource,UITableViewDelegate>
@@ -39,7 +40,7 @@
     [self configureHeaderAndFooter:self.tableView background:ColorBg isHot:NO];
 }
 -(void)reload{
-    self.settings=[Setting coldSettings];
+    self.settings=[SettingUtil coldSettings];
     [self.tableView reloadData];
 }
 

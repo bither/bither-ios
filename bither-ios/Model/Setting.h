@@ -28,15 +28,20 @@
 @property (nonatomic,strong) NSString * icon;
 
 
-@property(nonatomic ,strong) GetValueBlock  getValueBlock;
-@property(nonatomic ,strong) GetArrayBlock getArrayBlock;
-@property(nonatomic ,strong) DictResponseBlock result;
+@property (nonatomic ,strong) GetValueBlock  getValueBlock;
+@property (nonatomic ,strong) GetArrayBlock getArrayBlock;
+@property (nonatomic ,strong) DictResponseBlock result;
 @property (nonatomic ,strong)ViewControllerBlock selectBlock;
 
 -(instancetype) initWithName:(NSString *)name icon:(NSString*)icon ;
 
 -(void)selection;
 
-+(NSArray*)hotSettings;
-+(NSArray*)coldSettings;
++(Setting * )getMarketSetting;
++(Setting * )getExchangeSetting;
++(Setting * )getTransactionFeeSetting;
++(Setting *)getCheckSetting;
++(Setting *)getAdvanceSetting;
++(Setting*)getColdMonitorSetting;
+
 @end
