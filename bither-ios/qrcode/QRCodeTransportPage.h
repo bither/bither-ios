@@ -1,5 +1,5 @@
 //
-//  DialogAddressQrCode.h
+//  QRCodeTransportPage.h
 //  bither-ios
 //
 //  Copyright 2014 http://Bither.net
@@ -16,14 +16,20 @@
 //  See the License for the specific language governing permissions and
 //  limitations under the License.
 
-#import "DialogCentered.h"
-#import "Bitheri/BTAddress.h"
-#import "QRCodeThemeUtil.h"
-@protocol DialogAddressQrCodeDelegate<NSObject>
--(void)qrCodeThemeChanged:(QRCodeTheme*)theme;
-@end
+#import <Foundation/Foundation.h>
 
-@interface DialogAddressQrCode : DialogCentered
--(instancetype)initWithAddress:(BTAddress*)address delegate:(NSObject<DialogAddressQrCodeDelegate>*)delegate;
-@property (weak) NSObject<DialogAddressQrCodeDelegate>* delegate;
+@interface QRCodeTransportPage : NSObject
+
+@property (nonatomic,readwrite) int currentPage;
+@property (nonatomic,readwrite) int sumPage;
+@property (nonatomic,strong) NSString * content;
+
++(QRCodeTransportPage *) formatQrCodeString:(NSString *) text;
++(NSString *) formatQRCodeTran:(NSArray *)qrCodeTransportPages;
++(NSArray *) getQrCodeStringList:(NSString *)str;
++(NSArray *) oldGetQrCodeStringList:(NSString *)str;
+
+
+-(BOOL) hasNextPage;
+
 @end

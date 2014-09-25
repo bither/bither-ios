@@ -20,7 +20,7 @@
 #import "StringUtil.h"
 #import "DialogAlert.h"
 #import "QRCodeTransportPage.h"
-#import "QrUtil.h"
+#import "QRCodeThemeUtil.h"
 
 #define kQrCodeTopMarginThreshold (10)
 
@@ -72,6 +72,11 @@
         return;
     }
     NSArray *strs = [QRCodeTransportPage getQrCodeStringList:self.content];
+
+    NSArray * oldStrs;
+    if (self.oldContent) {
+        oldStrs=[QRCodeTransportPage oldGetQrCodeStringList:self.oldContent];
+    }
     CGFloat qrTop = (self.sv.frame.size.height - self.sv.frame.size.width - kButtonHeight - kPageHeight) / 4;
     if(qrTop < kQrCodeTopMarginThreshold){
         qrTop = 0;
@@ -84,7 +89,7 @@
         v.backgroundColor = [UIColor clearColor];
         
         UIImageView* ivQr = [[UIImageView alloc]initWithFrame:CGRectMake((v.frame.size.width - qrSize)/2, 0, qrSize, qrSize)];
-        ivQr.image = [QrUtil qrCodeOfContent:[strs objectAtIndex:i] andSize:ivQr.frame.size.width withTheme:[QrCodeTheme black]];
+        ivQr.image = [QRCodeThemeUtil qrCodeOfContent:[strs objectAtIndex:i] andSize:ivQr.frame.size.width withTheme:[QRCodeTheme black]];
         
         UILabel *lbl = [[UILabel alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(ivQr.frame) + margin, v.frame.size.width, kPageHeight)];
         lbl.font = [UIFont systemFontOfSize:kPageFontSize];

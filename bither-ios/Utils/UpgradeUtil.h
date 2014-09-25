@@ -1,5 +1,5 @@
 //
-//  QRCodeTransportPage.h
+//  UpgradeUtil.h
 //  bither-ios
 //
 //  Copyright 2014 http://Bither.net
@@ -16,19 +16,11 @@
 //  See the License for the specific language governing permissions and
 //  limitations under the License.
 
+
 #import <Foundation/Foundation.h>
 
-@interface QRCodeTransportPage : NSObject
-
-@property (nonatomic,readwrite) int currentPage;
-@property (nonatomic,readwrite) int sumPage;
-@property (nonatomic,strong) NSString * content;
-
-+(QRCodeTransportPage *) formatQrCodeString:(NSString *) text;
-+(NSString *) formatQRCodeTran:(NSArray *)qrCodeTransportPages;
-+(NSArray *) getQrCodeStringList:(NSString *)str;
-
-
--(BOOL) hasNextPage;
+@interface UpgradeUtil : NSObject
++(BOOL)needUpgradePubKey;
++(void)upgradePubKey;
 
 @end

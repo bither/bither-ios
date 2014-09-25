@@ -35,6 +35,7 @@
 #import <Bitheri/BTAddressManager.h>
 #import <Bitheri/BTSettings.h>
 #import <Bitheri/BTPeerManager.h>
+#import "BTQRCodeUtil.h"
 
 #define kBalanceFontSize (15)
 #define kSendButtonQrIconSize (20)
@@ -154,6 +155,7 @@
     }
     txTrans.hashList = array;
     qr.content = [QRCodeTxTransport getPreSignString:txTrans];
+    qr.content=[QRCodeTxTransport oldGetPreSignString:txTrans];
     [qr setFinishAction:NSLocalizedString(@"Scan Bither Cold to sign", nil) target:self selector:@selector(scanBitherColdToSign)];
     [self.navigationController pushViewController:qr animated:YES];
 }
@@ -216,7 +218,7 @@
             }
         }else{
             self.btnSend.enabled = NO;
-            NSArray *strs = [result componentsSeparatedByString:QR_CODE_SPLIT];
+            NSArray *strs =[BTQRCodeUtil splitQRCode:result];
             NSMutableArray *sigs = [[NSMutableArray alloc]init];
             for(NSString *s in strs){
                 [sigs addObject:[s hexToData]];
