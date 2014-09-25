@@ -92,6 +92,9 @@
 		AC45AA381987A2F4006314D5 /* DialogPrivateKeyText.m in Sources */ = {isa = PBXBuildFile; fileRef = AC45AA371987A2F4006314D5 /* DialogPrivateKeyText.m */; };
 		AC45D84119878BAB00AF5C2C /* DialogAddressLongPressOptions.m in Sources */ = {isa = PBXBuildFile; fileRef = AC45D83E19878BAB00AF5C2C /* DialogAddressLongPressOptions.m */; };
 		AC45D84219878BAB00AF5C2C /* DialogBalanceDetail.m in Sources */ = {isa = PBXBuildFile; fileRef = AC45D84019878BAB00AF5C2C /* DialogBalanceDetail.m */; };
+		AC53ABAD19D27875007C095C /* UEntropyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AC53ABAC19D27875007C095C /* UEntropyViewController.m */; };
+		AC53ABB019D27B74007C095C /* UEntropyCamera.m in Sources */ = {isa = PBXBuildFile; fileRef = AC53ABAF19D27B74007C095C /* UEntropyCamera.m */; };
+		AC53ABB319D2CD80007C095C /* UEntropyCollector.m in Sources */ = {isa = PBXBuildFile; fileRef = AC53ABB219D2CD80007C095C /* UEntropyCollector.m */; };
 		AC6163941964ED2F0055C9D0 /* DialogWithArrow.m in Sources */ = {isa = PBXBuildFile; fileRef = AC6163931964ED2F0055C9D0 /* DialogWithArrow.m */; };
 		AC616397196507B40055C9D0 /* DialogTxConfirmation.m in Sources */ = {isa = PBXBuildFile; fileRef = AC616396196507B40055C9D0 /* DialogTxConfirmation.m */; };
 		AC61639A19653C1A0055C9D0 /* QrCodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AC61639919653C1A0055C9D0 /* QrCodeViewController.m */; };
@@ -328,6 +331,12 @@
 		AC45D83E19878BAB00AF5C2C /* DialogAddressLongPressOptions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DialogAddressLongPressOptions.m; sourceTree = "<group>"; };
 		AC45D83F19878BAB00AF5C2C /* DialogBalanceDetail.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DialogBalanceDetail.h; sourceTree = "<group>"; };
 		AC45D84019878BAB00AF5C2C /* DialogBalanceDetail.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DialogBalanceDetail.m; sourceTree = "<group>"; };
+		AC53ABAB19D27875007C095C /* UEntropyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UEntropyViewController.h; sourceTree = "<group>"; };
+		AC53ABAC19D27875007C095C /* UEntropyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UEntropyViewController.m; sourceTree = "<group>"; };
+		AC53ABAE19D27B74007C095C /* UEntropyCamera.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UEntropyCamera.h; sourceTree = "<group>"; };
+		AC53ABAF19D27B74007C095C /* UEntropyCamera.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UEntropyCamera.m; sourceTree = "<group>"; };
+		AC53ABB119D2CD80007C095C /* UEntropyCollector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UEntropyCollector.h; sourceTree = "<group>"; };
+		AC53ABB219D2CD80007C095C /* UEntropyCollector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UEntropyCollector.m; sourceTree = "<group>"; };
 		AC6163921964ED2F0055C9D0 /* DialogWithArrow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DialogWithArrow.h; sourceTree = "<group>"; };
 		AC6163931964ED2F0055C9D0 /* DialogWithArrow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DialogWithArrow.m; sourceTree = "<group>"; };
 		AC616395196507B40055C9D0 /* DialogTxConfirmation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DialogTxConfirmation.h; sourceTree = "<group>"; };
@@ -662,6 +671,7 @@
 				AC33088B1955665500D8F621 /* Cells */,
 				4217A36E1951233500063746 /* Model */,
 				421B038D19495466003A45F1 /* Controllers */,
+				AC53ABA419D277C1007C095C /* XRandom */,
 				425408441946A219007AF99C /* Utils */,
 				4254083219469C9A007AF99C /* Api */,
 				AC0135DD195056BE00E3BB95 /* KeyboardControl */,
@@ -765,6 +775,19 @@
 				ACBEC01D196E87B9004301E0 /* CheckPrivateKeyCell.m */,
 			);
 			name = Cells;
+			sourceTree = "<group>";
+		};
+		AC53ABA419D277C1007C095C /* XRandom */ = {
+			isa = PBXGroup;
+			children = (
+				AC53ABAB19D27875007C095C /* UEntropyViewController.h */,
+				AC53ABAC19D27875007C095C /* UEntropyViewController.m */,
+				AC53ABAE19D27B74007C095C /* UEntropyCamera.h */,
+				AC53ABAF19D27B74007C095C /* UEntropyCamera.m */,
+				AC53ABB119D2CD80007C095C /* UEntropyCollector.h */,
+				AC53ABB219D2CD80007C095C /* UEntropyCollector.m */,
+			);
+			path = XRandom;
 			sourceTree = "<group>";
 		};
 		ACA9D6F71952D006002D1E3A /* QRCode */ = {
@@ -1099,6 +1122,7 @@
 				ACD6DFD5196BDC9F009D8031 /* NSAttributedString+Size.m in Sources */,
 				427CF4C21953D6DF0081869C /* QRCodeTransportPage.m in Sources */,
 				ACEEB8E419B46ED200F2789C /* BlockViewController.m in Sources */,
+				AC53ABAD19D27875007C095C /* UEntropyViewController.m in Sources */,
 				ACF4B17419668D5700CE24FD /* MarketListCell.m in Sources */,
 				ACD6DFD2196BA83B009D8031 /* ColdAddressAddViewController.m in Sources */,
 				425408581946A219007AF99C /* DateUtil.m in Sources */,
@@ -1169,6 +1193,7 @@
 				AC1715871969213800337AB5 /* DialogAddressOptions.m in Sources */,
 				4269FF7B195A948A001213B9 /* CacheUtil.m in Sources */,
 				ACEEB703199B40FE008E06AA /* CurrencyCalculatorLink.m in Sources */,
+				AC53ABB319D2CD80007C095C /* UEntropyCollector.m in Sources */,
 				ACD6DFD8196BF98B009D8031 /* DialogAddressFull.m in Sources */,
 				4254086B1946CD17007AF99C /* NSDictionary+Fromat.m in Sources */,
 				AC2F329B195D1930001B7439 /* UnsignedTransactionViewController.m in Sources */,
@@ -1194,6 +1219,7 @@
 				AC6BAC75196FD8430013B9E8 /* DialogImportPrivateKey.m in Sources */,
 				AC0135DC19501D9400E3BB95 /* DialogPassword.m in Sources */,
 				421B03BC19495AEF003A45F1 /* OptionHotViewController.m in Sources */,
+				AC53ABB019D27B74007C095C /* UEntropyCamera.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

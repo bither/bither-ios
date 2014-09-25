@@ -21,6 +21,7 @@
 #import "DialogProgress.h"
 #import "DialogPassword.h"
 #import "DialogAlert.h"
+#import "UEntropyViewController.h"
 #import <Bitheri/BTAddressManager.h>
 #import "KeyUtil.h"
 
@@ -81,19 +82,24 @@
 @implementation HotAddressAddPrivateKeyViewController(DialogPassword)
 
 -(void)onPasswordEntered:(NSString *)password{
-    DialogProgress *d = [[DialogProgress alloc]initWithMessage:NSLocalizedString(@"Please wait…", nil)];
-    d.touchOutSideToDismiss = NO;
-    [d showInWindow:self.view.window];
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
-        [UIApplication sharedApplication].idleTimerDisabled = YES;
-        [KeyUtil addPrivateKeyByRandomWithPassphras:password count:self.countToGenerate];
-        [UIApplication sharedApplication].idleTimerDisabled = NO;
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [d dismissWithCompletion:^{
-                [self.parentViewController dismissViewControllerAnimated:YES completion:nil];
-            }];
+    if(self.btnXRandomCheck.selected){
+        UEntropyViewController* uentropy = [[UEntropyViewController alloc]init];
+        [self presentViewController:uentropy animated:YES completion:nil];
+    }else{
+        DialogProgress *d = [[DialogProgress alloc]initWithMessage:NSLocalizedString(@"Please wait…", nil)];
+        d.touchOutSideToDismiss = NO;
+        [d showInWindow:self.view.window];
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+            [UIApplication sharedApplication].idleTimerDisabled = YES;
+            [KeyUtil addPrivateKeyByRandomWithPassphras:password count:self.countToGenerate];
+            [UIApplication sharedApplication].idleTimerDisabled = NO;
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [d dismissWithCompletion:^{
+                    [self.parentViewController dismissViewControllerAnimated:YES completion:nil];
+                }];
+            });
         });
-    });
+    }
 }
 
 @end
