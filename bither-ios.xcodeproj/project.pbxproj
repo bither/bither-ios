@@ -148,7 +148,7 @@
 		ACEE7D3C19D4020E00932B39 /* ColdWalletCloneSetting.m in Sources */ = {isa = PBXBuildFile; fileRef = ACEE7D3B19D4020E00932B39 /* ColdWalletCloneSetting.m */; };
 		ACEE7D3F19D4034D00932B39 /* CloneQrCodeSetting.m in Sources */ = {isa = PBXBuildFile; fileRef = ACEE7D3E19D4034D00932B39 /* CloneQrCodeSetting.m */; };
 		ACEE7D4219D403DC00932B39 /* DonationSetting.m in Sources */ = {isa = PBXBuildFile; fileRef = ACEE7D4119D403DC00932B39 /* DonationSetting.m */; };
-		ACEE7D4519D40C1300932B39 /* ImportKeyPrivateKeySetting.m in Sources */ = {isa = PBXBuildFile; fileRef = ACEE7D4419D40C1300932B39 /* ImportKeyPrivateKeySetting.m */; };
+		ACEE7D4519D40C1300932B39 /* ImportPrivateKeySetting.m in Sources */ = {isa = PBXBuildFile; fileRef = ACEE7D4419D40C1300932B39 /* ImportPrivateKeySetting.m */; };
 		ACEEB703199B40FE008E06AA /* CurrencyCalculatorLink.m in Sources */ = {isa = PBXBuildFile; fileRef = ACEEB702199B40FE008E06AA /* CurrencyCalculatorLink.m */; };
 		ACEEB8DE19B46EB900F2789C /* NetworkMonitorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ACEEB8DD19B46EB900F2789C /* NetworkMonitorViewController.m */; };
 		ACEEB8E119B46EC600F2789C /* PeerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ACEEB8E019B46EC600F2789C /* PeerViewController.m */; };
@@ -448,8 +448,8 @@
 		ACEE7D3E19D4034D00932B39 /* CloneQrCodeSetting.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CloneQrCodeSetting.m; sourceTree = "<group>"; };
 		ACEE7D4019D403DC00932B39 /* DonationSetting.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DonationSetting.h; sourceTree = "<group>"; };
 		ACEE7D4119D403DC00932B39 /* DonationSetting.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DonationSetting.m; sourceTree = "<group>"; };
-		ACEE7D4319D40C1300932B39 /* ImportKeyPrivateKeySetting.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImportKeyPrivateKeySetting.h; sourceTree = "<group>"; };
-		ACEE7D4419D40C1300932B39 /* ImportKeyPrivateKeySetting.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImportKeyPrivateKeySetting.m; sourceTree = "<group>"; };
+		ACEE7D4319D40C1300932B39 /* ImportPrivateKeySetting.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImportPrivateKeySetting.h; sourceTree = "<group>"; };
+		ACEE7D4419D40C1300932B39 /* ImportPrivateKeySetting.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImportPrivateKeySetting.m; sourceTree = "<group>"; };
 		ACEEB701199B40FE008E06AA /* CurrencyCalculatorLink.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CurrencyCalculatorLink.h; sourceTree = "<group>"; };
 		ACEEB702199B40FE008E06AA /* CurrencyCalculatorLink.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CurrencyCalculatorLink.m; sourceTree = "<group>"; };
 		ACEEB8DC19B46EB900F2789C /* NetworkMonitorViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetworkMonitorViewController.h; sourceTree = "<group>"; };
@@ -943,8 +943,8 @@
 		ACEE7D3019D3FBA000932B39 /* Setting */ = {
 			isa = PBXGroup;
 			children = (
-				ACEE7D4319D40C1300932B39 /* ImportKeyPrivateKeySetting.h */,
-				ACEE7D4419D40C1300932B39 /* ImportKeyPrivateKeySetting.m */,
+				ACEE7D4319D40C1300932B39 /* ImportPrivateKeySetting.h */,
+				ACEE7D4419D40C1300932B39 /* ImportPrivateKeySetting.m */,
 				AC202ACE196B8B7A00033EC1 /* Setting.h */,
 				AC202ACF196B8B7A00033EC1 /* Setting.m */,
 				ACEE7D3119D3FBE500932B39 /* SettingUtil.h */,
@@ -1239,7 +1239,7 @@
 				ACEEB8DE19B46EB900F2789C /* NetworkMonitorViewController.m in Sources */,
 				AC2F329E195D19C2001B7439 /* DialogSendTxConfirm.m in Sources */,
 				AC3C2623199B58750055FF5E /* TrendingGraphicData.m in Sources */,
-				ACEE7D4519D40C1300932B39 /* ImportKeyPrivateKeySetting.m in Sources */,
+				ACEE7D4519D40C1300932B39 /* ImportPrivateKeySetting.m in Sources */,
 				DA641E8C196E7BC20095DF42 /* GCCrashReportFilterTrim.m in Sources */,
 				ACDDDC2319480DE00008A79D /* UIViewController+PiShowBanner.m in Sources */,
 				ACCA274B1989FACC000E6A32 /* HotAddressTabButton.m in Sources */,

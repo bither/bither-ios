@@ -16,7 +16,7 @@
 //  See the License for the specific language governing permissions and
 //  limitations under the License.
 
-#import "ImportKeyPrivateKeySetting.h"
+#import "ImportPrivateKeySetting.h"
 #import "StringUtil.h"
 #import "BitherSetting.h"
 #import "BTPasswordSeed.h"
@@ -77,15 +77,15 @@
 
 
 
-@implementation ImportKeyPrivateKeySetting
+@implementation ImportPrivateKeySetting
 
-static Setting* ImportPrivateKeySetting;
+static Setting* importPrivateKeySetting;
 
 
 +(Setting *)getImportPrivateKeySetting{
-    if(!ImportPrivateKeySetting){
-        ImportKeyPrivateKeySetting*  scanPrivateKeySetting=[[ImportKeyPrivateKeySetting alloc] initWithName:NSLocalizedString(@"Import Private Key", nil) icon:nil ];
-        __weak ImportKeyPrivateKeySetting* sself=scanPrivateKeySetting;
+    if(!importPrivateKeySetting){
+        ImportPrivateKeySetting*  scanPrivateKeySetting=[[ImportPrivateKeySetting alloc] initWithName:NSLocalizedString(@"Import Private Key", nil) icon:nil ];
+        __weak ImportPrivateKeySetting* sself=scanPrivateKeySetting;
         [scanPrivateKeySetting setSelectBlock:^(UIViewController * controller){
             sself.controller=controller;
             UIActionSheet *actionSheet=[[UIActionSheet alloc]initWithTitle:NSLocalizedString(@"Import Private Key", nil)
@@ -96,9 +96,9 @@ static Setting* ImportPrivateKeySetting;
             actionSheet.actionSheetStyle=UIActionSheetStyleDefault;
             [actionSheet showInView:controller.navigationController.view];
         }];
-        ImportPrivateKeySetting = scanPrivateKeySetting;
+        importPrivateKeySetting = scanPrivateKeySetting;
     }
-    return ImportPrivateKeySetting;
+    return importPrivateKeySetting;
 }
 
 
@@ -182,10 +182,10 @@ static Setting* ImportPrivateKeySetting;
                         
                     }else if(addressType==AddressTxTooMuch){
                         [self showMsg:NSLocalizedString(@"Cannot import private key with large amount of transactions.", nil)];
-                       
+                        
                     }else{
                         [self showMsg:NSLocalizedString(@"Cannot import private key with special transactions.", nil)];
-                       
+                        
                     }
                     [dp dismiss];
                 });
@@ -212,7 +212,7 @@ static CheckPasswordDelegate *checkPasswordDelegate;
 -(void)onPrivateKeyEntered:(NSString *)privateKey{
     BTKey * key=[BTKey keyWithPrivateKey:privateKey];
     if ([[BTSettings instance] getAppMode]==COLD) {
-        [self showCheckPassword:privateKey compressed:[key compressed]];
+        [self showCheckPassword:privateKey ];
     }else{
         NSMutableArray * array=[NSMutableArray new];
         [array addObject:key.address];
@@ -231,7 +231,7 @@ static CheckPasswordDelegate *checkPasswordDelegate;
                 dispatch_async(dispatch_get_main_queue(), ^{
                     AddressType addressType=(AddressType)[response integerValue];
                     if (addressType==AddressNormal) {
-                        [self showCheckPassword:privateKey compressed:[key compressed]];
+                        [self showCheckPassword:privateKey];
                     }else if(addressType==AddressTxTooMuch){
                         [self showMsg:NSLocalizedString(@"Cannot import private key with large amount of transactions.", nil)];
                     }else{
@@ -246,18 +246,13 @@ static CheckPasswordDelegate *checkPasswordDelegate;
     }
     
 }
--(void)showCheckPassword:(NSString *)privateKey compressed:(BOOL)compressed{
-    if (!compressed) {
-        [self showMsg:NSLocalizedString(@"Only supports the compressed format of private key", nil)];
-    }else{
-        checkPasswordDelegate=[[CheckPasswordDelegate alloc] init];
-        checkPasswordDelegate.controller=self.controller;
-        checkPasswordDelegate.resultStr=privateKey;
-        DialogPassword *dialog = [[DialogPassword alloc]initWithDelegate:checkPasswordDelegate];
-        
-        [dialog showInWindow:self.controller.view.window];
-        _result=privateKey;
-    }
+-(void)showCheckPassword:(NSString *)privateKey{
+    checkPasswordDelegate=[[CheckPasswordDelegate alloc] init];
+    checkPasswordDelegate.controller=self.controller;
+    checkPasswordDelegate.resultStr=privateKey;
+    DialogPassword *dialog = [[DialogPassword alloc]initWithDelegate:checkPasswordDelegate];
+    [dialog showInWindow:self.controller.view.window];
+    _result=privateKey;
 }
 -(void) showMsg:(NSString *)msg{
     if([self.controller respondsToSelector:@selector(showMsg:)]){
