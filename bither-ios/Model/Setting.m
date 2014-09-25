@@ -82,7 +82,7 @@ static Setting* CloneScanSetting;
 static Setting* CloneQrSetting;
 static Setting* ColdMonitorSetting;
 static Setting* AdvanceSetting;
-static ReloadTxSetting* reloadTxsSetting;
+static Setting* reloadTxsSetting;
 
 static double reloadTime;
 
@@ -353,7 +353,7 @@ static double reloadTime;
                                                                   delegate:        [ScanPrivateKeyDelegate instance]
                                                          cancelButtonTitle:NSLocalizedString(@"Cancel", nil)
                                                     destructiveButtonTitle:nil
-                                                         otherButtonTitles:NSLocalizedString(@"From Private Key QR Code", nil),NSLocalizedString(@"From Private Key Text", nil),nil];
+                                                         otherButtonTitles:NSLocalizedString(@"From Bither Private Key QR Code", nil),NSLocalizedString(@"From Private Key Text", nil),nil];
             
             actionSheet.actionSheetStyle=UIActionSheetStyleDefault;
             [actionSheet showInView:controller.navigationController.view];
@@ -424,8 +424,9 @@ static double reloadTime;
                 
             }else{
                 DialogAlert *dialogAlert=[[DialogAlert alloc] initWithMessage:NSLocalizedString(@"Reload Transactions data?\nNeed long time.\nConsume network data.\nRecommand trying only with wrong data.", nil) confirm:^{
-                    reloadTxsSetting.controller=controller;
-                    [reloadTxsSetting showDialogPassword];
+                    __weak ReloadTxSetting * _sslf= (ReloadTxSetting*)reloadTxsSetting;
+                    _sslf.controller=controller;
+                    [_sslf showDialogPassword];
                    
                     
                     

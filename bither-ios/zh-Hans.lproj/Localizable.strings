@@ -322,7 +322,7 @@
 "From Gallery"="来自图库";
 "Change Password"="修改密码";
 "Import Private Key"="导入私钥";
-"From Private Key QR Code"="来自私钥二维码";
+"From Bither Private Key QR Code"="来自比太私钥二维码";
 "From Private Key Text"="来自私钥明文";
 "Enter your private key text"="输入私钥明文";
 "Not match private key format"="不符合私钥格式";
@@ -391,3 +391,16 @@
 "You can only reload transactions data in a hour.."="一个小时内只能重载交易数据一次.";
 
 "XRandom increases randomness.\nSure to disable?"="极随机(XRandom)能提高随机性.\n确认不使用吗?";
+
+
+
+//bip38
+"Import BIP38-private key"="导入BIP38私钥";
+"From BIP38-private key QR Code"="来自BIP38私钥二维码";
+"From BIP38-private key text"="来自BIP38私钥文本";
+"Enter password of BIP38-private key"="请输入BIP38私钥的密码";
+"Enter your BIP38-private key"="输入BIP38私钥明文";
+"Not match BIP38-private key format"="不符合BIP38私钥格式";
+"Scan BIP38-private key QR Code"="扫描BIP38私钥二维码";
+
+
