@@ -19,7 +19,7 @@
 #import "SettingUtil.h"
 #import "Setting.h"
 #import "DonationSetting.h"
-#import "SignTransactionScanDelegate.h"
+#import "SignTransactionScanSetting.h"
 #import "CloneQrCodeSetting.h"
 #import "ColdWalletCloneSetting.h"
 #import "BTAddressManager.h"
@@ -42,7 +42,7 @@
 
 +(NSArray*)coldSettings{
     NSMutableArray *array = [NSMutableArray new];
-    [array addObject:[SignTransactionScanDelegate getSignTransactionSetting]];
+    [array addObject:[SignTransactionScanSetting getSignTransactionSetting]];
     [array addObject:[ColdWalletCloneSetting getCloneSetting]];
     if([BTAddressManager instance].privKeyAddresses.count > 0){
         [array addObject:[Setting getColdMonitorSetting]];

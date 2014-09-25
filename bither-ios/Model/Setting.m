@@ -20,7 +20,7 @@
 #import "UserDefaultsUtil.h"
 #import "NSDictionary+Fromat.h"
 #import "SelectViewController.h"
-#import "ScanPrivateKeyDelegate.h"
+#import "ImportKeyPrivateKeySetting.h"
 #import "DialogEditPassword.h"
 #import "ScanQrCodeTransportViewController.h"
 #import "SignTransactionViewController.h"
@@ -39,6 +39,7 @@
 #import "TransactionsUtil.h"
 #import "BTQRCodeUtil.h"
 #import "ReloadTxSetting.h"
+#import "ImportKeyPrivateKeySetting.h"
 
 
 
@@ -51,7 +52,6 @@ static Setting* NetworkSetting;
 static Setting* AvatarSetting;
 static Setting* CheckSetting;
 static Setting* EditPasswordSetting;
-static Setting* ImportPrivateKeySetting;
 static Setting* ColdMonitorSetting;
 static Setting* AdvanceSetting;
 static Setting* reloadTxsSetting;
@@ -312,27 +312,6 @@ static Setting* reloadTxsSetting;
     return EditPasswordSetting;
 }
 
-
-+(Setting *)getImportPrivateKeySetting{
-    if(!ImportPrivateKeySetting){
-        Setting *  setting=[[Setting alloc] initWithName:NSLocalizedString(@"Import Private Key", nil) icon:nil ];
-        
-        [setting setSelectBlock:^(UIViewController * controller){
-            [ScanPrivateKeyDelegate instance].controller=controller;
-            UIActionSheet *actionSheet=[[UIActionSheet alloc]initWithTitle:NSLocalizedString(@"Import Private Key", nil)
-                                                                  delegate:        [ScanPrivateKeyDelegate instance]
-                                                         cancelButtonTitle:NSLocalizedString(@"Cancel", nil)
-                                                    destructiveButtonTitle:nil
-                                                         otherButtonTitles:NSLocalizedString(@"From Bither Private Key QR Code", nil),NSLocalizedString(@"From Private Key Text", nil),nil];
-            
-            actionSheet.actionSheetStyle=UIActionSheetStyleDefault;
-            [actionSheet showInView:controller.navigationController.view];
-        }];
-        ImportPrivateKeySetting = setting;
-    }
-    return ImportPrivateKeySetting;
-}
-
 +(Setting*)getColdMonitorSetting{
     if(!ColdMonitorSetting){
         ColdMonitorSetting = [[Setting alloc]initWithName:NSLocalizedString(@"Watch Only QR Code", nil) icon:@"qr_code_button_icon"];
@@ -355,7 +334,7 @@ static Setting* reloadTxsSetting;
 +(NSArray*)advanceSettings{
     NSMutableArray *array = [NSMutableArray new];
     [array addObject:[Setting getEditPasswordSetting]];
-    [array addObject:[Setting getImportPrivateKeySetting]];
+    [array addObject:[ImportKeyPrivateKeySetting getImportPrivateKeySetting]];
     if ([[BTSettings instance] getAppMode]==HOT) {
         [array addObject:[ReloadTxSetting getReloadTxsSetting]];
     }

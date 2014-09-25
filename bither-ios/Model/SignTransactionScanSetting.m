@@ -16,18 +16,18 @@
 //  See the License for the specific language governing permissions and
 //  limitations under the License.
 
-#import "SignTransactionScanDelegate.h"
+#import "SignTransactionScanSetting.h"
 #import "ScanQrCodeTransportViewController.h"
 #import "QRCodeTxTransport.h"
 #import "SignTransactionViewController.h"
 
 static Setting* SignTransactionSetting;
 
-@implementation SignTransactionScanDelegate
+@implementation SignTransactionScanSetting
 
 +(Setting*)getSignTransactionSetting{
     if(!SignTransactionSetting){
-        SignTransactionScanDelegate* setting = [[SignTransactionScanDelegate alloc]init];
+        SignTransactionScanSetting* setting = [[SignTransactionScanSetting alloc]init];
         SignTransactionSetting = setting;
     }
     return SignTransactionSetting;
@@ -36,7 +36,7 @@ static Setting* SignTransactionSetting;
 -(instancetype)init{
     self = [super initWithName:NSLocalizedString(@"Sign Transaction", nil) icon:@"scan_button_icon"];
     if(self){
-        __weak SignTransactionScanDelegate *d = self;
+        __weak SignTransactionScanSetting *d = self;
         [self setSelectBlock:^(UIViewController * controller){
             d.controller = controller;
             ScanQrCodeTransportViewController *scan = [[ScanQrCodeTransportViewController alloc]initWithDelegate:d title:NSLocalizedString(@"Scan Unsigned TX", nil) pageName:NSLocalizedString(@"unsigned tx QR code", nil)];

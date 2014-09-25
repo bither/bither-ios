@@ -23,12 +23,14 @@
 #import "StringUtil.h"
 #import "BTKey+Bitcoinj.h"
 #import "DialogImportPrivateKey.h"
+#import "Setting.h"
 
-@interface ScanPrivateKeyDelegate : NSObject
-+ (ScanPrivateKeyDelegate *)instance;
+@interface ImportKeyPrivateKeySetting : Setting<UIActionSheetDelegate,ScanQrCodeDelegate,DialogPasswordDelegate,DialogImportPrivateKeyDelegate>{
+    NSString * _result;
+}
 
 @property(nonatomic,strong) UIViewController * controller;
-
++(Setting *)getImportPrivateKeySetting;
 
 
 @end

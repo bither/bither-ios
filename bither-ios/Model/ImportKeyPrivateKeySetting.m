@@ -16,7 +16,7 @@
 //  See the License for the specific language governing permissions and
 //  limitations under the License.
 
-#import "ScanPrivateKeyDelegate.h"
+#import "ImportKeyPrivateKeySetting.h"
 #import "StringUtil.h"
 #import "BitherSetting.h"
 #import "BTPasswordSeed.h"
@@ -34,17 +34,20 @@
 
 @interface CheckPasswordDelegate : NSObject<DialogPasswordDelegate>
 @property(nonatomic,strong) UIViewController *controller;
-@property(nonatomic,strong) NSString * result;
+@property(nonatomic,strong) NSString * resultStr;
 @end
 
+
+
 @implementation CheckPasswordDelegate
+
 -(void)onPasswordEntered:(NSString *)password{
     __block NSString * bpassword=password;
     password=nil;
     DialogProgress * dp = [[DialogProgress alloc]initWithMessage:NSLocalizedString(@"Please wait…", nil)];
     [dp showInWindow:self.controller.view.window completion:^{
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
-            BTKey * key=[[BTKey alloc] initWithPrivateKey:self.result];
+            BTKey * key=[[BTKey alloc] initWithPrivateKey:self.resultStr];
             NSString * encryptKey=[BTPrivateKeyUtil getPrivateKeyString:key passphrase:bpassword];
             NSError * error;
             [KeyUtil addBitcoinjKey:[[NSArray alloc] initWithObjects:encryptKey, nil] withPassphrase:bpassword error:&error];
@@ -58,7 +61,7 @@
             });
             bpassword=nil;
             key=nil;
-            self.result=nil;
+            self.resultStr=nil;
         });
     }];
 }
@@ -71,25 +74,33 @@
 }
 @end
 
-@interface ScanPrivateKeyDelegate()<UIActionSheetDelegate,ScanQrCodeDelegate,DialogPasswordDelegate,DialogImportPrivateKeyDelegate>
-
-@property(nonatomic,strong) NSString * result;
 
 
-@end
 
-@implementation ScanPrivateKeyDelegate
+@implementation ImportKeyPrivateKeySetting
 
-static ScanPrivateKeyDelegate * scanPrivateKeyDelegate;
-+ (ScanPrivateKeyDelegate *)instance {
-    @synchronized(self) {
-        if (scanPrivateKeyDelegate == nil) {
-            scanPrivateKeyDelegate = [[self alloc] init];
+static Setting* ImportPrivateKeySetting;
+
+
++(Setting *)getImportPrivateKeySetting{
+    if(!ImportPrivateKeySetting){
+        ImportKeyPrivateKeySetting*  scanPrivateKeySetting=[[ImportKeyPrivateKeySetting alloc] initWithName:NSLocalizedString(@"Import Private Key", nil) icon:nil ];
+        __weak ImportKeyPrivateKeySetting* sself=scanPrivateKeySetting;
+        [scanPrivateKeySetting setSelectBlock:^(UIViewController * controller){
+            sself.controller=controller;
+            UIActionSheet *actionSheet=[[UIActionSheet alloc]initWithTitle:NSLocalizedString(@"Import Private Key", nil)
+                                                                  delegate:sself                                                         cancelButtonTitle:NSLocalizedString(@"Cancel", nil)
+                                                    destructiveButtonTitle:nil
+                                                         otherButtonTitles:NSLocalizedString(@"From Bither Private Key QR Code", nil),NSLocalizedString(@"From Private Key Text", nil),nil];
             
-        }
+            actionSheet.actionSheetStyle=UIActionSheetStyleDefault;
+            [actionSheet showInView:controller.navigationController.view];
+        }];
+        ImportPrivateKeySetting = scanPrivateKeySetting;
     }
-    return scanPrivateKeyDelegate;
+    return ImportPrivateKeySetting;
 }
+
 
 -(void)actionSheet:(UIActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex{
     if (buttonIndex==0) {
@@ -103,7 +114,7 @@ static ScanPrivateKeyDelegate * scanPrivateKeyDelegate;
 
 -(void)handleResult:(NSString *)result byReader:(ScanQrCodeViewController *)reader{
     if ([BTQRCodeUtil verifyQrcodeTransport:result]&&[[BTQRCodeUtil splitQRCode:result] count]==3) {
-        self.result=result;
+        _result=result;
         [reader playSuccessSound];
         [reader vibrate];
         [reader dismissViewControllerAnimated:YES completion:^{
@@ -125,7 +136,7 @@ static ScanPrivateKeyDelegate * scanPrivateKeyDelegate;
                 BOOL checkPassword=[passwordSeed checkPassword:password];
                 dispatch_async(dispatch_get_main_queue(), ^{
                     if (checkPassword) {
-                        [self importKeyFormQrcode:self.result password:password dp:dp];
+                        [self importKeyFormQrcode:_result password:password dp:dp];
                     }else{
                         [self showMsg:NSLocalizedString(@"Password of the private key to import is different from ours. Import failed.", nil)];
                         [dp dismiss];
@@ -133,7 +144,7 @@ static ScanPrivateKeyDelegate * scanPrivateKeyDelegate;
                     
                 });
             }else{
-                [self importKeyFormQrcode:self.result password:password dp:dp];
+                [self importKeyFormQrcode:_result password:password dp:dp];
             }
         });
     }];
@@ -189,7 +200,7 @@ static ScanPrivateKeyDelegate * scanPrivateKeyDelegate;
     }
 }
 -(BOOL)checkPassword:(NSString *)password{
-    BTKey * key=[ BTKey  keyWithBitcoinj:self.result andPassphrase:password];
+    BTKey * key=[ BTKey  keyWithBitcoinj:_result andPassphrase:password];
     return key!=nil;
 }
 
@@ -241,11 +252,11 @@ static CheckPasswordDelegate *checkPasswordDelegate;
     }else{
         checkPasswordDelegate=[[CheckPasswordDelegate alloc] init];
         checkPasswordDelegate.controller=self.controller;
-        checkPasswordDelegate.result=privateKey;
+        checkPasswordDelegate.resultStr=privateKey;
         DialogPassword *dialog = [[DialogPassword alloc]initWithDelegate:checkPasswordDelegate];
         
         [dialog showInWindow:self.controller.view.window];
-        self.result=privateKey;
+        _result=privateKey;
     }
 }
 -(void) showMsg:(NSString *)msg{
