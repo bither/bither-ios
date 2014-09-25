@@ -105,4 +105,8 @@
     return @"Camera";
 }
 
+-(NSUInteger)byteCountFromSingleFrame{
+    return 8;
+}
+
 @end

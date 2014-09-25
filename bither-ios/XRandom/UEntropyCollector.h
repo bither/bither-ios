@@ -29,6 +29,7 @@
 
 @optional
 -(NSString*)name;
+-(NSUInteger)byteCountFromSingleFrame;
 @end
 
 @protocol UEntropyDelegate <NSObject>

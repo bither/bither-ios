@@ -70,10 +70,20 @@
 
 -(void)onNewData:(NSData*)data fromSource:(NSObject<UEntropySource>*) source{
     if(shouldCollectData){
+        NSUInteger requestCount = 1;
+        if([source respondsToSelector:@selector(byteCountFromSingleFrame)]){
+            requestCount = [source byteCountFromSingleFrame];
+        }
+        
+        NSMutableData *result = [NSMutableData dataWithLength:requestCount];
+        for(int i = 0; i < requestCount; i++){
+            [data getBytes:result.mutableBytes + i range:NSMakeRange(i, 1)];
+        }
+        
         dispatch_async(queue, ^{
             if(shouldCollectData && output && output.hasSpaceAvailable){
-                NSInteger actuallyWriten = [output write:data.bytes maxLength:data.length];
-                NSLog(@"write %lu/%lu data to uentropy pool", actuallyWriten, data.length);
+                NSInteger actuallyWriten = [output write:result.bytes maxLength:result.length];
+                NSLog(@"write %lu/%lu data to uentropy pool from %@", actuallyWriten, result.length, source.name);
             }
         });
     }

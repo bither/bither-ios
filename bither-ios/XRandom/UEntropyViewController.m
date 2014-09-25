@@ -18,6 +18,7 @@
 
 #import "UEntropyViewController.h"
 #import "UEntropyCamera.h"
+#import "UEntropyMic.h"
 #import "UEntropyCollector.h"
 #import "NSString+Base58.h"
 
@@ -41,7 +42,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.collector = [[UEntropyCollector alloc]initWithDelegate:self];
-    [self.collector addSource:[[UEntropyCamera alloc]initWithViewController:self.view andCollector:self.collector], nil];
+    [self.collector addSource:[[UEntropyCamera alloc]initWithViewController:self.view andCollector:self.collector],
+                                [[UEntropyMic alloc]initWithView:nil andCollector:self.collector],
+                                nil];
 }
 
 - (void)viewWillAppear:(BOOL)animated{

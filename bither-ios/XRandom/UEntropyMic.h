@@ -19,5 +19,5 @@
 #import "UEntropyCollector.h"
 
 @interface UEntropyMic : NSObject <UEntropySource>
-
+-(instancetype)initWithView:(UIView*)view andCollector:(UEntropyCollector*)collector;
 @end
