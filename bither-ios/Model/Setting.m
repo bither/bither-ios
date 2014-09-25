@@ -353,7 +353,7 @@ static double reloadTime;
                                                                   delegate:        [ScanPrivateKeyDelegate instance]
                                                          cancelButtonTitle:NSLocalizedString(@"Cancel", nil)
                                                     destructiveButtonTitle:nil
-                                                         otherButtonTitles:NSLocalizedString(@"From Private Key QR Code", nil),NSLocalizedString(@"From Private Key Text", nil),nil];
+                                                         otherButtonTitles:NSLocalizedString(@"From Bither Private Key QR Code", nil),NSLocalizedString(@"From Private Key Text", nil),nil];
             
             actionSheet.actionSheetStyle=UIActionSheetStyleDefault;
             [actionSheet showInView:controller.navigationController.view];
