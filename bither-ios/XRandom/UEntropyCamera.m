@@ -17,7 +17,6 @@
 //  limitations under the License.
 
 #import "UEntropyCamera.h"
-#import "NSString+Base58.h"
 #import <MobileCoreServices/MobileCoreServices.h>
 #import <AVFoundation/AVFoundation.h>
 

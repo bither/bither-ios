@@ -19,10 +19,10 @@
 #import "UEntropyViewController.h"
 #import "UEntropyCamera.h"
 #import "UEntropyCollector.h"
+#import "NSString+Base58.h"
 
 @interface UEntropyViewController ()<UEntropyDelegate>
 @property UEntropyCollector* collector;
-@property UEntropyCamera* camera;
 @end
 
 @implementation UEntropyViewController
@@ -41,17 +41,34 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.collector = [[UEntropyCollector alloc]initWithDelegate:self];
-    self.camera = [[UEntropyCamera alloc]initWithViewController:self andCollector:self.collector];
+    [self.collector addSource:[[UEntropyCamera alloc]initWithViewController:self andCollector:self.collector], nil];
 }
 
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    [self.camera onResume];
+    [self.collector onResume];
+}
+
+-(void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        NSLog(@"start generate");
+        [self.collector start];
+        for(int i = 0; i < 20; i++){
+            NSData* data = [self.collector nextBytes:32];
+            NSLog(@"outcome %d data %@", i + 1, [NSString hexWithData:data]);
+        }
+        [self.collector stop];
+        NSLog(@"end generate");
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self dismissViewControllerAnimated:YES completion:nil];
+        });
+    });
 }
 
 - (void)viewDidDisappear:(BOOL)animated{
     [super viewDidDisappear:animated];
-    [self.camera onPause];
+    [self.collector onPause];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -59,7 +76,7 @@
 }
 
 -(void)onNoSourceAvailable{
-    
+    NSLog(@"no source available");
 }
 
 -(BOOL)prefersStatusBarHidden{

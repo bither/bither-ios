@@ -44,6 +44,10 @@
 }
 
 -(void)addSource:(NSObject<UEntropySource>*)source,...{
+    if(!source){
+        return;
+    }
+    [self addSingleSource:source];
     va_list list;
     va_start(list, source);
     while (YES)
@@ -70,7 +74,7 @@
         dispatch_async(queue, ^{
             if(shouldCollectData && output && output.hasSpaceAvailable){
                 NSInteger actuallyWriten = [output write:data.bytes maxLength:data.length];
-                NSLog(@"write %lu/%lu data to uentropy pool from", actuallyWriten, data.length);
+                NSLog(@"write %lu/%lu data to uentropy pool", actuallyWriten, data.length);
             }
         });
     }
@@ -125,6 +129,7 @@
     input = inputStr;
     output = outputStr;
     [output open];
+    [input open];
 }
 
 -(void)stop{
