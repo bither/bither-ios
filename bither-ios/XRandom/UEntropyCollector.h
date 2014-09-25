@@ -1,6 +1,6 @@
 //
 //  UEntropyCollector.h
-//  ;;;
+//  bither-ios
 //
 //  Copyright 2014 http://Bither.net
 //

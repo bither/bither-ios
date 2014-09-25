@@ -41,7 +41,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.collector = [[UEntropyCollector alloc]initWithDelegate:self];
-    [self.collector addSource:[[UEntropyCamera alloc]initWithViewController:self andCollector:self.collector], nil];
+    [self.collector addSource:[[UEntropyCamera alloc]initWithViewController:self.view andCollector:self.collector], nil];
 }
 
 - (void)viewWillAppear:(BOOL)animated{

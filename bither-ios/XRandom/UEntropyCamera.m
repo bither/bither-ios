@@ -31,7 +31,7 @@
 
 @implementation UEntropyCamera
 
--(instancetype)initWithViewController:(UIViewController*)parent andCollector:(UEntropyCollector *)collector{
+-(instancetype)initWithViewController:(UIView*)view andCollector:(UEntropyCollector *)collector{
     self = [super init];
     if(self){
         device = [AVCaptureDevice defaultDeviceWithMediaType: AVMediaTypeVideo];
@@ -46,12 +46,12 @@
         [session addOutput:output];
         
         AVCaptureVideoPreviewLayer *preview = [AVCaptureVideoPreviewLayer layerWithSession: session];
-        CGRect bounds = parent.view.bounds;
+        CGRect bounds = view.bounds;
         bounds.origin = CGPointZero;
         preview.bounds = bounds;
         preview.position = CGPointMake(bounds.size.width / 2, bounds.size.height / 2);
         preview.videoGravity = AVLayerVideoGravityResizeAspectFill;
-        [parent.view.layer addSublayer: preview];
+        [view.layer addSublayer: preview];
         self.collector = collector;
         paused = YES;
     }

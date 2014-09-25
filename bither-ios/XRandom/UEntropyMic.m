@@ -1,5 +1,5 @@
 //
-//  UEntropyCamera.h
+//  UEntropyMic.m
 //  bither-ios
 //
 //  Copyright 2014 http://Bither.net
@@ -16,8 +16,8 @@
 //  See the License for the specific language governing permissions and
 //  limitations under the License.
 
-#import "UEntropyCollector.h"
+#import "UEntropyMic.h"
 
-@interface UEntropyCamera : NSObject <UEntropySource>
--(instancetype)initWithViewController:(UIView*)view andCollector:(UEntropyCollector*)collector;
+@implementation UEntropyMic
+
 @end

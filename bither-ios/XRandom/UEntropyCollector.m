@@ -50,8 +50,7 @@
     [self addSingleSource:source];
     va_list list;
     va_start(list, source);
-    while (YES)
-    {
+    while (YES){
         NSObject<UEntropySource> *s= va_arg(list, NSObject<UEntropySource> *);
         if (s) {
             [self addSingleSource:s];
@@ -163,8 +162,7 @@
     }
 }
 
-- (void)createBoundInputStream:(NSInputStream **)inputStreamPtr outputStream:(NSOutputStream **)outputStreamPtr bufferSize:(NSUInteger)bufferSize
-{
+- (void)createBoundInputStream:(NSInputStream **)inputStreamPtr outputStream:(NSOutputStream **)outputStreamPtr bufferSize:(NSUInteger)bufferSize{
     CFReadStreamRef     readStream;
     CFWriteStreamRef    writeStream;
     
