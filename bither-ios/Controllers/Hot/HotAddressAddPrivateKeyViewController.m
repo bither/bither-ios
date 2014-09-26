@@ -91,7 +91,8 @@
         [d showInWindow:self.view.window];
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
             [UIApplication sharedApplication].idleTimerDisabled = YES;
-            [KeyUtil addPrivateKeyByRandomWithPassphras:password count:self.countToGenerate];
+            XRandom *xRandom=[[XRandom alloc] initWithDelegate:nil];
+            [KeyUtil addPrivateKeyByRandom:xRandom passphras:password count:self.countToGenerate];
             [UIApplication sharedApplication].idleTimerDisabled = NO;
             dispatch_async(dispatch_get_main_queue(), ^{
                 [d dismissWithCompletion:^{

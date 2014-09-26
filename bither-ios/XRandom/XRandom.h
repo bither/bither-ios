@@ -1,5 +1,5 @@
 //
-//  KeyUtil.h
+//  XRandom.h
 //  bither-ios
 //
 //  Copyright 2014 http://Bither.net
@@ -16,14 +16,21 @@
 //  See the License for the specific language governing permissions and
 //  limitations under the License.
 
-#import <Foundation/Foundation.h>
-#import "BTAddress.h"
-#import "XRandom.h"
 
-@interface KeyUtil : NSObject
-+(void)addPrivateKeyByRandom:(XRandom*)xRandom  passphras:(NSString *)password count:(int) count;
-+(BOOL)addBitcoinjKey:(NSArray *)array withPassphrase:(NSString *)passphrase error:(NSError **)aError;
-+(BOOL)addAddressList:(NSArray *)array ;
-+(void) addWatckOnly:(NSArray *)pubKeys;
-+(void)stopMonitor:(BTAddress *)address;
+#import <Foundation/Foundation.h>
+
+@protocol UEntropyDelegate <NSObject>
+
+-(NSData *)randomWithSize:(NSInteger)size;
+
+@end
+
+
+@interface XRandom : NSObject
+-(instancetype)initWithDelegate:(id<UEntropyDelegate>)delegate ;
+
+-(NSData *)randomWithSize:(NSInteger)size;
+
+@property (weak) id<UEntropyDelegate> delegate;
+
 @end

@@ -26,8 +26,9 @@
 #import "BTQRCodeUtil.h"
 
 
+
 @implementation KeyUtil
-+(void)addPrivateKeyByRandomWithPassphras:(NSString *)password count:(int) count{
++(void)addPrivateKeyByRandom:(XRandom*)xRandom  passphras:(NSString *)password count:(int) count{
     [[PeerUtil instance] stopPeer];
     for (int i=0; i<count; i++) {
         BTKey *key = [BTKey keyWithSecret:[NSData randomWithSize:32] compressed:YES];
