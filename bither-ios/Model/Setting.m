@@ -62,7 +62,7 @@ static Setting* reloadTxsSetting;
     if (self) {
         _settingName=name;
         _icon=icon;
-
+        
     }
     
     return self;
@@ -80,7 +80,7 @@ static Setting* reloadTxsSetting;
             }
         }];
         [ExchangeSetting setGetValueBlock:^(){
-             ExchangeType defaultExchange=[[UserDefaultsUtil instance] getDefaultExchangeType];
+            ExchangeType defaultExchange=[[UserDefaultsUtil instance] getDefaultExchangeType];
             return [BitherSetting getExchangeName:defaultExchange];
         }];
         [ExchangeSetting setGetArrayBlock:^(){
@@ -208,8 +208,9 @@ static Setting* reloadTxsSetting;
         }];
         
         [setting setResult:^(NSDictionary * dict){
-            if ([[dict  allKeys] containsObject:SETTING_VALUE]) {
+            if ([[dict allKeys] containsObject:SETTING_VALUE]) {
                 [[UserDefaultsUtil instance] setSyncBlockOnlyWifi:[dict getBoolFromDict:SETTING_VALUE]];
+                [[PeerUtil instance] startPeer];
             }
         }];
         __block Setting * sself=setting;
@@ -243,7 +244,7 @@ static Setting* reloadTxsSetting;
         return NSLocalizedString(@"Sync always", nil);
     }
     
-
+    
 }
 +(Setting *)getAdvanceSetting{
     if(!AdvanceSetting){
@@ -258,7 +259,7 @@ static Setting* reloadTxsSetting;
         AdvanceSetting = setting;
     }
     return AdvanceSetting;
-
+    
 }
 
 +(Setting *)getAvatarSetting{
@@ -334,6 +335,9 @@ static Setting* reloadTxsSetting;
 
 +(NSArray*)advanceSettings{
     NSMutableArray *array = [NSMutableArray new];
+    if ([[BTSettings instance] getAppMode]==HOT) {
+        [array addObject:[Setting getNetworkSetting]];
+    }
     [array addObject:[Setting getEditPasswordSetting]];
     [array addObject:[ImportPrivateKeySetting getImportPrivateKeySetting]];
     [array addObject:[ImportBip38PrivateKeySetting getImportBip38PrivateKeySetting]];

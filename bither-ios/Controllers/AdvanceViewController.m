@@ -44,7 +44,10 @@
     [self.tableView reloadData];
     [self configureHeaderAndFooterNoLogo:self.tableView background:ColorBg];
 }
-
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    [self.tableView reloadData];
+}
 
 - (IBAction)backPressed:(id)sender {
     [self.navigationController popViewControllerAnimated:YES];

@@ -77,7 +77,8 @@
     for(BTPeer * peer in  [BTPeerManager instance].connectedPeers){
        [self.peers addObject:peer];
     }
-    [self.peers sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {
+   
+    [self.peers sortUsingComparator:^NSComparisonResult(id obj1, id obj2) {
         BTPeer * peer1=obj1;
         BTPeer * peer2=obj2;
         if (peer1.version>0&&peer2.version==0) {
