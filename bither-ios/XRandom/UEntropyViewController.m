@@ -41,7 +41,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.view.backgroundColor = [UIColor colorWithWhite:1 alpha:1];
     UIButton* btnClose = [UIButton buttonWithType:UIButtonTypeSystem];
     [btnClose setTitle:@"Close" forState:UIControlStateNormal];
     [btnClose addTarget:self action:@selector(close:) forControlEvents:UIControlEventTouchUpInside];
@@ -50,7 +49,7 @@
     [self.view addSubview:btnClose];
     
     self.collector = [[UEntropyCollector alloc]initWithDelegate:self];
-    [self.collector addSource://[[UEntropyCamera alloc]initWithViewController:self.view andCollector:self.collector],
+    [self.collector addSource:  [[UEntropyCamera alloc]initWithViewController:self.view andCollector:self.collector],
                                 [[UEntropyMic alloc]initWithView:nil andCollector:self.collector],
                                 nil];
 }
