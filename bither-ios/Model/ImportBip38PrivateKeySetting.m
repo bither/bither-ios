@@ -33,6 +33,7 @@
 #import "BTPrivateKeyUtil.h"
 #import "ImportPrivateKey.h"
 #import "BTKey+BIP38.h"
+#import "NSString+Base58.h"
 
 @interface CheckPasswordBip38Delegate : NSObject<DialogPasswordDelegate>
 @property(nonatomic,strong) UIViewController *controller;
@@ -85,7 +86,7 @@ static Setting* importPrivateKeySetting;
 }
 
 -(void)handleResult:(NSString *)result byReader:(ScanQrCodeViewController *)reader{
-    if ([BTQRCodeUtil verifyQrcodeTransport:result]&&[[BTQRCodeUtil splitQRCode:result] count]==3) {
+    if ([result isValidBitcoinBIP38Key]) {
         _result=result;
         [reader playSuccessSound];
         [reader vibrate];

@@ -74,7 +74,7 @@
 "Enter original password" = "请输入原密码";
 
 /* No comment provided by engineer. */
-"Enter Password" = "请输入密码";
+"Enter password of wallet" = "请输入钱包密码";
 
 /* No comment provided by engineer. */
 "Enter source password" = "请输入克隆源的密码";

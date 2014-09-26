@@ -158,7 +158,7 @@
     self.tfKey = [[UITextField alloc]initWithFrame:CGRectMake(kOuterPadding, CGRectGetMaxY(lblSubTitle.frame) + kInnerMargin, kWidth - kOuterPadding * 2, kTextFieldHeight)];
     NSString * holderString = NSLocalizedString(@"Enter your private key text", nil);
     if (self.importPrivateKeyType==Bip38) {
-        holderString=NSLocalizedString(@"Enter your BIP38-private key ", nil);;
+        holderString=NSLocalizedString(@"Enter your BIP38-private key", nil);;
     }
     
     self.tfKey.attributedPlaceholder = [[NSAttributedString alloc] initWithString:holderString attributes:@{NSForegroundColorAttributeName: [UIColor colorWithWhite:1 alpha:0.5]}];
