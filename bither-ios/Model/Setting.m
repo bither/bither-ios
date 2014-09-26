@@ -40,6 +40,7 @@
 #import "BTQRCodeUtil.h"
 #import "ReloadTxSetting.h"
 #import "ImportPrivateKeySetting.h"
+#import "ImportBip38PrivateKeySetting.h"
 
 
 
@@ -335,6 +336,7 @@ static Setting* reloadTxsSetting;
     NSMutableArray *array = [NSMutableArray new];
     [array addObject:[Setting getEditPasswordSetting]];
     [array addObject:[ImportPrivateKeySetting getImportPrivateKeySetting]];
+    [array addObject:[ImportBip38PrivateKeySetting getImportBip38PrivateKeySetting]];
     if ([[BTSettings instance] getAppMode]==HOT) {
         [array addObject:[ReloadTxSetting getReloadTxsSetting]];
     }

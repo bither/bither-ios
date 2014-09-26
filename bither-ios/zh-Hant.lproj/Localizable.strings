@@ -395,6 +395,7 @@
 
 
 //bip38
+"BIP38-private key"="BIP38私鑰";
 "Import BIP38-private key"="導入BIP38私鑰";
 "From BIP38-private key QR Code"="來自BIP38私鑰二維碼";
 "From BIP38-private key text"="來自BIP38私鑰文本";

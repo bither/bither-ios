@@ -25,7 +25,7 @@
 #import "DialogImportPrivateKey.h"
 #import "Setting.h"
 
-@interface ImportPrivateKeySetting : Setting<UIActionSheetDelegate,ScanQrCodeDelegate,DialogPasswordDelegate,DialogImportPrivateKeyDelegate>{
+@interface ImportPrivateKeySetting : Setting<UIActionSheetDelegate,ScanQrCodeDelegate,DialogPasswordDelegate,DialogImportKeyDelegate>{
     NSString * _result;
 }
 

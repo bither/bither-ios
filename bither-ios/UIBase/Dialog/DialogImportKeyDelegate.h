@@ -1,5 +1,5 @@
 //
-//  DialogImportPrivateKey.h
+//  DialogImportPrivateKeyDelegate.h
 //  bither-ios
 //
 //  Copyright 2014 http://Bither.net
@@ -16,18 +16,11 @@
 //  See the License for the specific language governing permissions and
 //  limitations under the License.
 
+
 #import <Foundation/Foundation.h>
-#import "DialogCentered.h"
-#import "DialogImportKeyDelegate.h"
-#import "ImportPrivateKey.h"
 
+@protocol DialogImportKeyDelegate <NSObject>
 
-
-@interface DialogImportPrivateKey : DialogCentered
-
--(instancetype)initWithDelegate:(id<DialogImportKeyDelegate>)delegate importPrivateKeyType:(ImportPrivateKeyType) importPrivateKeyType;
-
-@property (weak) id<DialogImportKeyDelegate> delegate;
-@property (nonatomic,readwrite) ImportPrivateKeyType importPrivateKeyType;
+-(void)onPrivateKeyEntered:(NSString*)privateKey;
 
 @end

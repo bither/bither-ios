@@ -54,14 +54,14 @@ static Setting* importPrivateKeySetting;
 
 +(Setting *)getImportBip38PrivateKeySetting{
     if(!importPrivateKeySetting){
-        ImportBip38PrivateKeySetting*  scanPrivateKeySetting=[[ImportBip38PrivateKeySetting alloc] initWithName:NSLocalizedString(@"Import Private Key", nil) icon:nil ];
+        ImportBip38PrivateKeySetting*  scanPrivateKeySetting=[[ImportBip38PrivateKeySetting alloc] initWithName:NSLocalizedString(@"Import BIP38-private key", nil) icon:nil ];
         __weak ImportBip38PrivateKeySetting * sself=scanPrivateKeySetting;
         [scanPrivateKeySetting setSelectBlock:^(UIViewController * controller){
             sself.controller=controller;
-            UIActionSheet *actionSheet=[[UIActionSheet alloc]initWithTitle:NSLocalizedString(@"Import Private Key", nil)
+            UIActionSheet *actionSheet=[[UIActionSheet alloc]initWithTitle:NSLocalizedString(@"Import BIP38-private key", nil)
                                                                   delegate:sself                                                         cancelButtonTitle:NSLocalizedString(@"Cancel", nil)
                                                     destructiveButtonTitle:nil
-                                                         otherButtonTitles:NSLocalizedString(@"From Bither Private Key QR Code", nil),NSLocalizedString(@"From Private Key Text", nil),nil];
+                                                         otherButtonTitles:NSLocalizedString(@"From BIP38-private key QR Code", nil),NSLocalizedString(@"From BIP38-private key text", nil),nil];
             
             actionSheet.actionSheetStyle=UIActionSheetStyleDefault;
             [actionSheet showInView:controller.navigationController.view];
@@ -78,7 +78,7 @@ static Setting* importPrivateKeySetting;
         ScanQrCodeViewController *scan = [[ScanQrCodeViewController alloc]initWithDelegate:self title:NSLocalizedString(@"Scan Private Key QR Code",nil) message:NSLocalizedString(@"Scan QR code No.1 provided by Bither", nil)];
         [self.controller presentViewController:scan animated:YES completion:nil];
     }else if(buttonIndex==1){
-        DialogImportPrivateKey * dialogImportPrivateKey=[[DialogImportPrivateKey alloc] initWithDelegate:self];
+        DialogImportPrivateKey * dialogImportPrivateKey=[[DialogImportPrivateKey alloc] initWithDelegate:self importPrivateKeyType:Bip38];
         [dialogImportPrivateKey showInWindow:self.controller.view.window];
     }
 }

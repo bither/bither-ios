@@ -79,7 +79,7 @@ static Setting* importPrivateKeySetting;
         ScanQrCodeViewController *scan = [[ScanQrCodeViewController alloc]initWithDelegate:self title:NSLocalizedString(@"Scan Private Key QR Code",nil) message:NSLocalizedString(@"Scan QR code No.1 provided by Bither", nil)];
         [self.controller presentViewController:scan animated:YES completion:nil];
     }else if(buttonIndex==1){
-        DialogImportPrivateKey * dialogImportPrivateKey=[[DialogImportPrivateKey alloc] initWithDelegate:self];
+        DialogImportPrivateKey * dialogImportPrivateKey=[[DialogImportPrivateKey alloc] initWithDelegate:self importPrivateKeyType:PrivateText];
         [dialogImportPrivateKey showInWindow:self.controller.view.window];
     }
 }
