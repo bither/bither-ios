@@ -37,12 +37,24 @@
     if(self){
         device = [AVCaptureDevice defaultDeviceWithMediaType: AVMediaTypeAudio];
         if(!device){
-            [collector onError:[[NSError alloc]initWithDomain:kUEntropySourceErrorDomain code:kUEntropySourceCameraCode userInfo:@{kUEntropySourceErrorDescKey: @"no mic"}] fromSource:self];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [collector onError:[[NSError alloc]initWithDomain:kUEntropySourceErrorDomain code:kUEntropySourceCameraCode userInfo:@{kUEntropySourceErrorDescKey: @"no mic"}] fromSource:self];
+            });
+            return self;
         }
         queue = dispatch_queue_create("UEntropyMic", NULL);
         session = [[AVCaptureSession alloc]init];
         AVCaptureAudioDataOutput *output = [AVCaptureAudioDataOutput new];
-        [output setSampleBufferDelegate: self queue: queue];
+        [output setSampleBufferDelegate:self queue:queue];
+        NSError *error = nil;
+        AVCaptureInput *input = [[AVCaptureDeviceInput alloc]initWithDevice: device error: &error];
+        if(error){
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self.collector onError:[[NSError alloc]initWithDomain:kUEntropySourceErrorDomain code:kUEntropySourceMicCode userInfo:@{kUEntropySourceErrorDescKey: error.debugDescription }] fromSource:self];
+            });
+            return self;
+        }
+        [session addInput:input];
         [session addOutput:output];
         
         self.collector = collector;
@@ -59,15 +71,6 @@
     if(session && session.isRunning){
         [session stopRunning];
     }
-    NSError *error = nil;
-    AVCaptureInput *input = [[AVCaptureDeviceInput alloc]initWithDevice: device error: &error];
-    if(error){
-        [self.collector onError:[[NSError alloc]initWithDomain:kUEntropySourceErrorDomain code:kUEntropySourceMicCode userInfo:@{kUEntropySourceErrorDescKey: error.debugDescription }] fromSource:self];
-        return;
-    }
-    [session beginConfiguration];
-    [session addInput:input];
-    [session commitConfiguration];
     [session startRunning];
 }
 
@@ -86,6 +89,7 @@
     }
     
     [self.collector onNewData:data fromSource:self];
+    CFRelease(blockBuffer);
 }
 
 -(void)onPause{

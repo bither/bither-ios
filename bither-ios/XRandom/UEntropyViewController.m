@@ -41,10 +41,22 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.view.backgroundColor = [UIColor colorWithWhite:1 alpha:1];
+    UIButton* btnClose = [UIButton buttonWithType:UIButtonTypeSystem];
+    [btnClose setTitle:@"Close" forState:UIControlStateNormal];
+    [btnClose addTarget:self action:@selector(close:) forControlEvents:UIControlEventTouchUpInside];
+    [btnClose sizeToFit];
+    btnClose.frame = CGRectMake(0, 0, btnClose.frame.size.width, btnClose.frame.size.height);
+    [self.view addSubview:btnClose];
+    
     self.collector = [[UEntropyCollector alloc]initWithDelegate:self];
-    [self.collector addSource:[[UEntropyCamera alloc]initWithViewController:self.view andCollector:self.collector],
-                                //[[UEntropyMic alloc]initWithView:nil andCollector:self.collector],
+    [self.collector addSource://[[UEntropyCamera alloc]initWithViewController:self.view andCollector:self.collector],
+                                [[UEntropyMic alloc]initWithView:nil andCollector:self.collector],
                                 nil];
+}
+
+-(void)close:(id)sender{
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (void)viewWillAppear:(BOOL)animated{
@@ -72,6 +84,7 @@
 - (void)viewDidDisappear:(BOOL)animated{
     [super viewDidDisappear:animated];
     [self.collector onPause];
+    [self.collector stop];
 }
 
 - (void)didReceiveMemoryWarning {

@@ -35,7 +35,7 @@
     self = [super init];
     if(self){
         device = [AVCaptureDevice defaultDeviceWithMediaType: AVMediaTypeVideo];
-        if(!device){
+        if(!device || !device.connected){
             [collector onError:[[NSError alloc]initWithDomain:kUEntropySourceErrorDomain code:kUEntropySourceCameraCode userInfo:@{kUEntropySourceErrorDescKey: @"no camera"}] fromSource:self];
         }
         queue = dispatch_queue_create("UEntropyCamera", NULL);
@@ -73,13 +73,15 @@
         [self.collector onError:[[NSError alloc]initWithDomain:kUEntropySourceErrorDomain code:kUEntropySourceCameraCode userInfo:@{kUEntropySourceErrorDescKey: error.debugDescription }] fromSource:self];
         return;
     }
-    [session beginConfiguration];
     [session addInput:input];
-    [session commitConfiguration];
     [session startRunning];
 }
 
 - (void)captureOutput:(AVCaptureOutput *)captureOutput didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer fromConnection:(AVCaptureConnection *)connection{
+    if(sampleBuffer == NULL){
+        NSLog(@"sample null");
+        return;
+    }
     if(!CMSampleBufferDataIsReady(sampleBuffer)){
         NSLog(@"sample buffer not ready");
         return;
