@@ -19,6 +19,7 @@
 #import "UEntropyViewController.h"
 #import "UEntropyCamera.h"
 #import "UEntropyMic.h"
+#import "UEntropySensor.h"
 #import "UEntropyCollector.h"
 #import "NSString+Base58.h"
 
@@ -49,8 +50,9 @@
     [self.view addSubview:btnClose];
     
     self.collector = [[UEntropyCollector alloc]initWithDelegate:self];
-    [self.collector addSource:  [[UEntropyCamera alloc]initWithViewController:self.view andCollector:self.collector],
-                                [[UEntropyMic alloc]initWithView:nil andCollector:self.collector],
+    [self.collector addSource:  [[UEntropyCamera alloc] initWithViewController: self.view andCollector: self.collector],
+                                [[UEntropyMic alloc] initWithView: nil andCollector: self.collector],
+                                [[UEntropySensor alloc] initWithCollecor: self.collector],
                                 nil];
 }
 
