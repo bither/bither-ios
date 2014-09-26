@@ -27,12 +27,13 @@
 @end
 
 @implementation ImportPrivateKey
--(instancetype) initWithController:(NSString *)content passwrod:(NSString *)passwrod importPrivateKeyType:(ImportPrivateKeyType) importPrivateKeyType{
+-(instancetype) initWithController:(UIViewController *)controller  content:(NSString *)content passwrod:(NSString *)passwrod importPrivateKeyType:(ImportPrivateKeyType) importPrivateKeyType{
     self=[super init];
     if (self) {
         self.passwrod=passwrod;
         self.content=content;
         self.importPrivateKeyType=importPrivateKeyType;
+        self.controller=controller;
     }
     return self;
 }
@@ -43,12 +44,13 @@
             BTKey * key=[self getKey];
             if (key==nil) {
                 dispatch_async(dispatch_get_main_queue(), ^{
+                    [self exit];
                     if (self.importPrivateKeyType==BitherQrcode) {
                         [self showMsg:NSLocalizedString(@"Password wrong.",nil)];
                     }else{
                         [self showMsg:NSLocalizedString(@"Import failed.",nil)];
                     }
-                    [self.dp dismiss];
+                    
                 });
                 return;
             }
@@ -79,19 +81,21 @@
                         callback();
                     }
                 }else if(addressType==AddressTxTooMuch){
+                    [self exit];
                     [self showMsg:NSLocalizedString(@"Cannot import private key with large amount of transactions.", nil)];
                     
                     
                 }else{
+                    [self exit];
                     [self showMsg:NSLocalizedString(@"Cannot import private key with special transactions.", nil)];
                     
                 }
-                [self.dp dismiss];
+               
             });
         }andErrorCallback:^(NSError *error) {
             dispatch_async(dispatch_get_main_queue(), ^{
+                [self exit];
                 [self showMsg:NSLocalizedString(@"Network failure.", nil)];
-                [self.dp dismiss];
             });
         }];
         
@@ -104,8 +108,9 @@
             BOOL checkPassword=[passwrodSeed checkPassword:self.passwrod];
             if (checkPassword) {
                 dispatch_async(dispatch_get_main_queue(), ^{
+                    [self exit];
                     [self showMsg:NSLocalizedString(@"Password of the private key to import is different from ours. Import failed.", nil)];
-                    [self.dp dismiss];
+                   
                     
                 });
                 return NO;
@@ -116,41 +121,48 @@
     BTAddress *address=[[BTAddress alloc] initWithKey:key encryptPrivKey:nil isXRandom:key.isFromXRandom];
     if ([[[BTAddressManager instance] privKeyAddresses] containsObject:address]){
         dispatch_async(dispatch_get_main_queue(), ^{
+            [self exit];
             [self showMsg:NSLocalizedString(@"This private key already exists.", nil)];
-            [self.dp dismiss];
             
         });
         return NO;
     }else if([[[BTAddressManager instance] watchOnlyAddresses] containsObject:address]){
         dispatch_async(dispatch_get_main_queue(), ^{
+            [self exit];
             [self showMsg:NSLocalizedString(@"Can\'t import Bither Cold private key.", nil)];
-            [self.dp dismiss];
         });
         return NO;
     }
     return YES;
 }
 -(void)addKey:(BTKey *)key{
-    BTAddress *address;
-    if (self.importPrivateKeyType==BitherQrcode) {
-        NSString * encryptKey=[BTQRCodeUtil replaceNewQRCode:self.content];
-         address=[[BTAddress alloc] initWithAddress:encryptKey pubKey:key.publicKey hasPrivKey:YES isXRandom:key.isFromXRandom];
-    }else{
-        NSString * encryptKey=[BTPrivateKeyUtil getPrivateKeyString:key passphrase:self.passwrod];
-        address=[[BTAddress alloc] initWithAddress:encryptKey pubKey:key.publicKey hasPrivKey:YES isXRandom:key.isFromXRandom];
-    }
-    if (address) {
-        [KeyUtil addAddressList:[[NSArray alloc] initWithObjects:address, nil]];
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [self showMsg:NSLocalizedString(@"Import success.", nil)];
-        });
-    }else{
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [self showMsg:NSLocalizedString(@"Import failed.", nil)];
-        });
-    }
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+        BTAddress *address;
+        if (self.importPrivateKeyType==BitherQrcode) {
+            NSString * encryptKey=[BTQRCodeUtil replaceNewQRCode:self.content];
+            address=[[BTAddress alloc] initWithAddress:encryptKey pubKey:key.publicKey hasPrivKey:YES isXRandom:key.isFromXRandom];
+        }else{
+            NSString * encryptKey=[BTPrivateKeyUtil getPrivateKeyString:key passphrase:self.passwrod];
+            if (encryptKey==nil) {
+                address=[[BTAddress alloc] initWithAddress:encryptKey pubKey:key.publicKey hasPrivKey:YES isXRandom:key.isFromXRandom];
+            }
+        }
+        if (address) {
+            [KeyUtil addAddressList:[[NSArray alloc] initWithObjects:address, nil]];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self exit];
+                [self showMsg:NSLocalizedString(@"Import success.", nil)];
+                
+            });
+        }else{
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self exit];
+                [self showMsg:NSLocalizedString(@"Import failed.", nil)];
+            });
+        }
+    });
     
-   
+    
 }
 
 -(BTKey *)getKey{
@@ -173,5 +185,12 @@
     }
     
 }
+-(void)exit{
+    self.passwrod=nil;
+    self.content=nil;
+    [self.dp dismiss];
+
+}
+
 
 @end

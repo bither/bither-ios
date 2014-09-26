@@ -12,5 +12,7 @@ typedef enum  {
 }ImportPrivateKeyType;
 
 @interface ImportPrivateKey : NSObject
+-(instancetype) initWithController:(UIViewController *)controller  content:(NSString *)content passwrod:(NSString *)passwrod importPrivateKeyType:(ImportPrivateKeyType) importPrivateKeyType;
+-(void)importPrivateKey;
 
 @end

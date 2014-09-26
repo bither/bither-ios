@@ -31,46 +31,18 @@
 #import "BTAddressManager.h"
 #import "BTQRCodeUtil.h"
 #import "BTPrivateKeyUtil.h"
+#import "ImportPrivateKey.h"
 
 @interface CheckPasswordDelegate : NSObject<DialogPasswordDelegate>
 @property(nonatomic,strong) UIViewController *controller;
-@property(nonatomic,strong) NSString * resultStr;
+@property(nonatomic,strong) NSString * privateKeyStr;
 @end
-
-
 
 @implementation CheckPasswordDelegate
 
 -(void)onPasswordEntered:(NSString *)password{
-    __block NSString * bpassword=password;
-    password=nil;
-    DialogProgress * dp = [[DialogProgress alloc]initWithMessage:NSLocalizedString(@"Please wait…", nil)];
-    [dp showInWindow:self.controller.view.window completion:^{
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
-            BTKey * key=[[BTKey alloc] initWithPrivateKey:self.resultStr];
-            NSString * encryptKey=[BTPrivateKeyUtil getPrivateKeyString:key passphrase:bpassword];
-            NSError * error;
-            [KeyUtil addBitcoinjKey:[[NSArray alloc] initWithObjects:encryptKey, nil] withPassphrase:bpassword error:&error];
-            
-            dispatch_async(dispatch_get_main_queue(), ^{
-                if (!error) {
-                    [self showMsg:NSLocalizedString(@"Import success.", nil)];                }else{
-                        [self showMsg:NSLocalizedString(@"Import failed.", nil)];
-                    }
-                [dp dismiss];
-            });
-            bpassword=nil;
-            key=nil;
-            self.resultStr=nil;
-        });
-    }];
-}
-
--(void) showMsg:(NSString *)msg{
-    if([self.controller respondsToSelector:@selector(showMsg:)]){
-        [self.controller performSelector:@selector(showMsg:) withObject:msg];
-    }
-    
+    ImportPrivateKey *improtPrivateKey=[[ImportPrivateKey alloc] initWithController:self.controller content:self.privateKeyStr passwrod:password importPrivateKeyType:PrivateText];
+    [improtPrivateKey importPrivateKey];
 }
 @end
 
@@ -152,104 +124,31 @@ static Setting* importPrivateKeySetting;
     
 }
 -(void) importKeyFormQrcode:(NSString *)keyStr password:(NSString *)password dp:(DialogProgress *)dp{
-    if ([[BTSettings instance] getAppMode]==COLD) {
-        [KeyUtil addBitcoinjKey:[[NSArray alloc] initWithObjects:keyStr, nil] withPassphrase:password error:nil];
-        [self showMsg:NSLocalizedString(@"Import success.", nil)];
-        [dp dismiss];
-    }else{
-        NSMutableArray * array=[NSMutableArray new];
-        BTKey *key=[BTKey keyWithBitcoinj:keyStr andPassphrase:password];
-        [array addObject:key.address];
-        BTAddress *address=[[BTAddress alloc] initWithKey:key encryptPrivKey:nil isXRandom:key.isFromXRandom];
-        if ([[[BTAddressManager instance] privKeyAddresses] containsObject:address]){
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [self showMsg:NSLocalizedString(@"This private key already exists.", nil)];
-                [dp dismiss];
-                
-            });
-        }else if([[[BTAddressManager instance] watchOnlyAddresses] containsObject:address]){
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [self showMsg:NSLocalizedString(@"Can\'t import Bither Cold private key.", nil)];
-                [dp dismiss];
-            });
-        }else{
-            [TransactionsUtil checkAddress:array callback:^(id response) {
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    AddressType addressType=(AddressType)[response integerValue];
-                    if (addressType==AddressNormal) {
-                        [KeyUtil addBitcoinjKey:[[NSArray alloc] initWithObjects:keyStr, nil] withPassphrase:password error:nil];
-                        [self showMsg:NSLocalizedString(@"Import success.", nil)];
-                        
-                    }else if(addressType==AddressTxTooMuch){
-                        [self showMsg:NSLocalizedString(@"Cannot import private key with large amount of transactions.", nil)];
-                        
-                    }else{
-                        [self showMsg:NSLocalizedString(@"Cannot import private key with special transactions.", nil)];
-                        
-                    }
-                    [dp dismiss];
-                });
-            }andErrorCallback:^(NSError *error) {
-                [self showMsg:NSLocalizedString(@"Network failure.", nil)];
-                [dp dismiss];
-            }];
-            
-        }
-        
-        
-    }
+    [dp dismiss];
+    ImportPrivateKey *importPrivateKey=[[ImportPrivateKey alloc] initWithController:self.controller content:keyStr passwrod:password importPrivateKeyType:BitherQrcode];
+    [importPrivateKey importPrivateKey];
 }
 -(BOOL)checkPassword:(NSString *)password{
     BTKey * key=[ BTKey  keyWithBitcoinj:_result andPassphrase:password];
-    return key!=nil;
+    BOOL result=key!=nil;
+    key=nil;
+    return result;
 }
 
 -(NSString *)passwordTitle{
     return NSLocalizedString(@"Enter original password", nil);
 }
+
 static CheckPasswordDelegate *checkPasswordDelegate;
 //delegate of dialogImportPrivateKey
 -(void)onPrivateKeyEntered:(NSString *)privateKey{
-    BTKey * key=[BTKey keyWithPrivateKey:privateKey];
-    if ([[BTSettings instance] getAppMode]==COLD) {
-        [self showCheckPassword:privateKey ];
-    }else{
-        NSMutableArray * array=[NSMutableArray new];
-        [array addObject:key.address];
-        BTAddress *address=[[BTAddress alloc] initWithKey:key encryptPrivKey:nil isXRandom:NO];
-        if ([[[BTAddressManager instance] privKeyAddresses] containsObject:address]){
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [self showMsg:NSLocalizedString(@"This private key already exists.", nil)];
-                
-            });
-        }else if([[[BTAddressManager instance] watchOnlyAddresses] containsObject:address]){
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [self showMsg:NSLocalizedString(@"Can\'t import Bither Cold private key.", nil)];
-            });
-        }else{
-            [TransactionsUtil checkAddress:array callback:^(id response) {
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    AddressType addressType=(AddressType)[response integerValue];
-                    if (addressType==AddressNormal) {
-                        [self showCheckPassword:privateKey];
-                    }else if(addressType==AddressTxTooMuch){
-                        [self showMsg:NSLocalizedString(@"Cannot import private key with large amount of transactions.", nil)];
-                    }else{
-                        [self showMsg:NSLocalizedString(@"Cannot import private key with special transactions.", nil)];
-                    }
-                });
-            } andErrorCallback:^(NSError *error) {
-                [self showMsg:NSLocalizedString(@"Network failure.", nil)];
-            }];
-        }
-        
-    }
+    [self showCheckPassword:privateKey ];
     
 }
 -(void)showCheckPassword:(NSString *)privateKey{
     checkPasswordDelegate=[[CheckPasswordDelegate alloc] init];
     checkPasswordDelegate.controller=self.controller;
-    checkPasswordDelegate.resultStr=privateKey;
+    checkPasswordDelegate.privateKeyStr=privateKey;
     DialogPassword *dialog = [[DialogPassword alloc]initWithDelegate:checkPasswordDelegate];
     [dialog showInWindow:self.controller.view.window];
     _result=privateKey;
