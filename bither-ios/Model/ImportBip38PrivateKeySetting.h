@@ -1,5 +1,5 @@
 //
-//  DialogImportPrivateKey.h
+//  ImportBip38PrivateKeySetting.h
 //  bither-ios
 //
 //  Copyright 2014 http://Bither.net
@@ -16,18 +16,22 @@
 //  See the License for the specific language governing permissions and
 //  limitations under the License.
 
+
 #import <Foundation/Foundation.h>
-#import "DialogCentered.h"
-#import "DialogImportKeyDelegate.h"
-#import "ImportPrivateKey.h"
+#import "HotCheckPrivateKeyViewController.h"
+#import "ScanQrCodeViewController.h"
+#import "DialogPassword.h"
+#import "StringUtil.h"
+#import "BTKey+Bitcoinj.h"
+#import "DialogImportPrivateKey.h"
+#import "Setting.h"
 
 
-
-@interface DialogImportPrivateKey : DialogCentered
-
--(instancetype)initWithDelegate:(id<DialogImportKeyDelegate>)delegate importPrivateKeyType:(ImportPrivateKeyType) importPrivateKeyType;
-
-@property (weak) id<DialogImportKeyDelegate> delegate;
-@property (nonatomic,readwrite) ImportPrivateKeyType importPrivateKeyType;
+@interface ImportBip38PrivateKeySetting : Setting<UIActionSheetDelegate,ScanQrCodeDelegate,DialogPasswordDelegate,DialogImportKeyDelegate>{
+        NSString * _result;
+        BTKey * _key;
+}
+@property(nonatomic,strong) UIViewController * controller;
++(Setting *)getImportBip38PrivateKeySetting;
 
 @end

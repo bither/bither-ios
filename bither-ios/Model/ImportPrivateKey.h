@@ -1,5 +1,5 @@
 //
-//  DialogImportPrivateKey.h
+//  ImportPrivateKey.h
 //  bither-ios
 //
 //  Copyright 2014 http://Bither.net
@@ -17,17 +17,12 @@
 //  limitations under the License.
 
 #import <Foundation/Foundation.h>
-#import "DialogCentered.h"
-#import "DialogImportKeyDelegate.h"
-#import "ImportPrivateKey.h"
+typedef enum  {
+     PrivateText, BitherQrcode, Bip38
+}ImportPrivateKeyType;
 
-
-
-@interface DialogImportPrivateKey : DialogCentered
-
--(instancetype)initWithDelegate:(id<DialogImportKeyDelegate>)delegate importPrivateKeyType:(ImportPrivateKeyType) importPrivateKeyType;
-
-@property (weak) id<DialogImportKeyDelegate> delegate;
-@property (nonatomic,readwrite) ImportPrivateKeyType importPrivateKeyType;
+@interface ImportPrivateKey : NSObject
+-(instancetype) initWithController:(UIViewController *)controller  content:(NSString *)content passwrod:(NSString *)passwrod importPrivateKeyType:(ImportPrivateKeyType) importPrivateKeyType;
+-(void)importPrivateKey;
 
 @end

@@ -20,7 +20,7 @@
 #import "UserDefaultsUtil.h"
 #import "NSDictionary+Fromat.h"
 #import "SelectViewController.h"
-#import "ImportKeyPrivateKeySetting.h"
+#import "ImportPrivateKeySetting.h"
 #import "DialogEditPassword.h"
 #import "ScanQrCodeTransportViewController.h"
 #import "SignTransactionViewController.h"
@@ -39,7 +39,8 @@
 #import "TransactionsUtil.h"
 #import "BTQRCodeUtil.h"
 #import "ReloadTxSetting.h"
-#import "ImportKeyPrivateKeySetting.h"
+#import "ImportPrivateKeySetting.h"
+#import "ImportBip38PrivateKeySetting.h"
 
 
 
@@ -334,7 +335,8 @@ static Setting* reloadTxsSetting;
 +(NSArray*)advanceSettings{
     NSMutableArray *array = [NSMutableArray new];
     [array addObject:[Setting getEditPasswordSetting]];
-    [array addObject:[ImportKeyPrivateKeySetting getImportPrivateKeySetting]];
+    [array addObject:[ImportPrivateKeySetting getImportPrivateKeySetting]];
+    [array addObject:[ImportBip38PrivateKeySetting getImportBip38PrivateKeySetting]];
     if ([[BTSettings instance] getAppMode]==HOT) {
         [array addObject:[ReloadTxSetting getReloadTxsSetting]];
     }

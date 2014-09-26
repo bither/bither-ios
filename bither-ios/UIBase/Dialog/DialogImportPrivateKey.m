@@ -50,7 +50,7 @@
 @property UIView *vChecking;
 @property UIView *vContent;
 @property UILabel *lblSubTitle;
-@property UITextField *tfPassword;
+@property UITextField *tfKey;
 @property UIButton *btnConfirm;
 @property UIButton *btnCancel;
 
@@ -59,10 +59,11 @@
 
 @implementation DialogImportPrivateKey
 
--(instancetype)initWithDelegate:(id<DialogImportPrivateKeyDelegate>)delegate{
+-(instancetype)initWithDelegate:(id<DialogImportKeyDelegate>)delegate importPrivateKeyType:(ImportPrivateKeyType)importPrivateKeyType{
     self = [super init];
     if(self){
         self.delegate = delegate;
+        self.importPrivateKeyType=importPrivateKeyType;
         [self firstConfigure];
         [self configureKeyboard];
     }
@@ -70,11 +71,19 @@
 }
 
 -(void)confirmPressed:(id)sender{
-    NSString* p = self.tfPassword.text;
-    if ([p isValidBitcoinPrivateKey]) {
-        [self dismissWithPassword:p];
-    }else{
-        [self showError:NSLocalizedString(@"Not match private key format", nil)];
+    NSString* p = self.tfKey.text;
+    if (self.importPrivateKeyType==PrivateText) {
+        if ([p isValidBitcoinPrivateKey]) {
+            [self dismissWithPassword:p];
+        }else{
+            [self showError:NSLocalizedString(@"Not match private key format", nil)];
+        }
+    }else if(self.importPrivateKeyType==Bip38){
+        if ([p isValidBitcoinBIP38Key]) {
+            [self dismissWithPassword:p];
+        }else{
+            [self showError:NSLocalizedString(@"Not match BIP38-private key format", nil)];
+        }
     }
 }
 
@@ -103,8 +112,8 @@
 }
 
 -(void)dialogWillDismiss{
-    if([self.tfPassword isFirstResponder]){
-        [self.tfPassword resignFirstResponder];
+    if([self.tfKey isFirstResponder]){
+        [self.tfKey resignFirstResponder];
     }
     [super dialogWillDismiss];
 }
@@ -115,7 +124,7 @@
 
 -(void)dialogDidShow{
     [super dialogDidShow];
-    [self.tfPassword becomeFirstResponder];
+    [self.tfKey becomeFirstResponder];
 }
 
 -(void)configureKeyboard{
@@ -146,12 +155,17 @@
     [self.vContent addSubview:lblSubTitle];
     
     
-    self.tfPassword = [[UITextField alloc]initWithFrame:CGRectMake(kOuterPadding, CGRectGetMaxY(lblSubTitle.frame) + kInnerMargin, kWidth - kOuterPadding * 2, kTextFieldHeight)];
-    self.tfPassword.attributedPlaceholder = [[NSAttributedString alloc] initWithString: NSLocalizedString(@"Enter your private key text", nil) attributes:@{NSForegroundColorAttributeName: [UIColor colorWithWhite:1 alpha:0.5]}];
-    [self configureTextField:self.tfPassword];
-    self.tfPassword.returnKeyType = UIReturnKeyDone;
-    CGFloat buttonTop = CGRectGetMaxY(self.tfPassword.frame) + kInnerMargin;
-    [self.vContent addSubview:self.tfPassword];
+    self.tfKey = [[UITextField alloc]initWithFrame:CGRectMake(kOuterPadding, CGRectGetMaxY(lblSubTitle.frame) + kInnerMargin, kWidth - kOuterPadding * 2, kTextFieldHeight)];
+    NSString * holderString = NSLocalizedString(@"Enter your private key text", nil);
+    if (self.importPrivateKeyType==Bip38) {
+        holderString=NSLocalizedString(@"Enter your BIP38-private key", nil);;
+    }
+    
+    self.tfKey.attributedPlaceholder = [[NSAttributedString alloc] initWithString:holderString attributes:@{NSForegroundColorAttributeName: [UIColor colorWithWhite:1 alpha:0.5]}];
+    [self configureTextField:self.tfKey];
+    self.tfKey.returnKeyType = UIReturnKeyDone;
+    CGFloat buttonTop = CGRectGetMaxY(self.tfKey.frame) + kInnerMargin;
+    [self.vContent addSubview:self.tfKey];
 
     self.btnCancel = [[UIButton alloc]initWithFrame:CGRectMake(kOuterPadding, buttonTop, (kWidth - kOuterPadding * 2 - kInnerMargin)/2, kButtonHeight)];
     [self.btnCancel setBackgroundImage:[UIImage imageNamed:@"dialog_btn_bg_normal"] forState:UIControlStateNormal];
@@ -195,7 +209,7 @@
     [self.vChecking addSubview:lblChecking];
     self.vChecking.hidden = YES;
     
-    [self.vContent bringSubviewToFront:self.tfPassword];
+    [self.vContent bringSubviewToFront:self.tfKey];
    
 }
 
@@ -207,7 +221,11 @@
 
 
 -(NSString*)subTitle{
-    return NSLocalizedString(@"private key", nil);
+    NSString * subTitle=NSLocalizedString(@"private key", nil);
+    if (self.importPrivateKeyType==Bip38) {
+        subTitle= NSLocalizedString(@"BIP38-private key", nil);
+    }
+    return subTitle;
 }
 
 -(void)configureTextField:(UITextField*)tf{
@@ -237,7 +255,7 @@
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField{
-    if(textField == self.tfPassword){
+    if(textField == self.tfKey){
         [self confirmPressed:self.btnConfirm];
     }
     return YES;

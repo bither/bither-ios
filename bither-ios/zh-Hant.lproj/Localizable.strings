@@ -74,7 +74,7 @@
 "Enter original password" = "請輸入原密碼";
 
 /* No comment provided by engineer. */
-"Enter Password" = "請輸入密碼";
+"Enter password of wallet" = "請錢包輸入密碼";
 
 /* No comment provided by engineer. */
 "Enter source password" = "請輸入克隆源的密碼";
@@ -395,10 +395,11 @@
 
 
 //bip38
+"BIP38-private key"="BIP38私鑰";
 "Import BIP38-private key"="導入BIP38私鑰";
 "From BIP38-private key QR Code"="來自BIP38私鑰二維碼";
 "From BIP38-private key text"="來自BIP38私鑰文本";
-"Enter password of BIP38-private key"="請輸入BIP38私鑰的密碼";
+"Enter password of BIP38-private key" ="請輸入BIP38私鑰的密碼";
 "Enter your BIP38-private key"="輸入BIP38私鑰明文";
 "Not match BIP38-private key format"="不符合BIP38私鑰格式";
 "Scan BIP38-private key QR Code"="掃描BIP38私鑰二維碼";

@@ -22,6 +22,7 @@
 @interface KeyUtil : NSObject
 +(void)addPrivateKeyByRandomWithPassphras:(NSString *)password count:(int) count;
 +(BOOL)addBitcoinjKey:(NSArray *)array withPassphrase:(NSString *)passphrase error:(NSError **)aError;
++(BOOL)addAddressList:(NSArray *)array ;
 +(void) addWatckOnly:(NSArray *)pubKeys;
 +(void)stopMonitor:(BTAddress *)address;
 @end

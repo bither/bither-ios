@@ -100,6 +100,7 @@
 		AC6BAC6F196FA3410013B9E8 /* HotCheckPrivateKeyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AC6BAC6E196FA3410013B9E8 /* HotCheckPrivateKeyViewController.m */; };
 		AC6BAC75196FD8430013B9E8 /* DialogImportPrivateKey.m in Sources */ = {isa = PBXBuildFile; fileRef = AC6BAC74196FD8430013B9E8 /* DialogImportPrivateKey.m */; };
 		AC6CB25619752CE400FA9D23 /* StatusBarNotificationWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = AC6CB25519752CE400FA9D23 /* StatusBarNotificationWindow.m */; };
+		AC808B8519D52D21004E78A3 /* ImportBip38PrivateKeySetting.m in Sources */ = {isa = PBXBuildFile; fileRef = AC808B8419D52D21004E78A3 /* ImportBip38PrivateKeySetting.m */; };
 		AC8F0DCA196CF4E400CCD0F9 /* SelectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AC8F0DC9196CF4E400CCD0F9 /* SelectViewController.m */; };
 		AC8F0DCD196D054A00CCD0F9 /* SelectListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AC8F0DCC196D054A00CCD0F9 /* SelectListCell.m */; };
 		AC9BBCFE19D268AB00E58BA7 /* UpgradeUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = AC9BBCFD19D268AB00E58BA7 /* UpgradeUtil.m */; };
@@ -150,7 +151,8 @@
 		ACEE7D3C19D4020E00932B39 /* ColdWalletCloneSetting.m in Sources */ = {isa = PBXBuildFile; fileRef = ACEE7D3B19D4020E00932B39 /* ColdWalletCloneSetting.m */; };
 		ACEE7D3F19D4034D00932B39 /* CloneQrCodeSetting.m in Sources */ = {isa = PBXBuildFile; fileRef = ACEE7D3E19D4034D00932B39 /* CloneQrCodeSetting.m */; };
 		ACEE7D4219D403DC00932B39 /* DonationSetting.m in Sources */ = {isa = PBXBuildFile; fileRef = ACEE7D4119D403DC00932B39 /* DonationSetting.m */; };
-		ACEE7D4519D40C1300932B39 /* ImportKeyPrivateKeySetting.m in Sources */ = {isa = PBXBuildFile; fileRef = ACEE7D4419D40C1300932B39 /* ImportKeyPrivateKeySetting.m */; };
+		ACEE7D4519D40C1300932B39 /* ImportPrivateKeySetting.m in Sources */ = {isa = PBXBuildFile; fileRef = ACEE7D4419D40C1300932B39 /* ImportPrivateKeySetting.m */; };
+		ACEE7D4819D417E400932B39 /* ImportPrivateKey.m in Sources */ = {isa = PBXBuildFile; fileRef = ACEE7D4719D417E400932B39 /* ImportPrivateKey.m */; };
 		ACEEB703199B40FE008E06AA /* CurrencyCalculatorLink.m in Sources */ = {isa = PBXBuildFile; fileRef = ACEEB702199B40FE008E06AA /* CurrencyCalculatorLink.m */; };
 		ACEEB8DE19B46EB900F2789C /* NetworkMonitorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ACEEB8DD19B46EB900F2789C /* NetworkMonitorViewController.m */; };
 		ACEEB8E119B46EC600F2789C /* PeerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ACEEB8E019B46EC600F2789C /* PeerViewController.m */; };
@@ -356,6 +358,9 @@
 		AC6BAC74196FD8430013B9E8 /* DialogImportPrivateKey.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DialogImportPrivateKey.m; sourceTree = "<group>"; };
 		AC6CB25419752CE400FA9D23 /* StatusBarNotificationWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StatusBarNotificationWindow.h; sourceTree = "<group>"; };
 		AC6CB25519752CE400FA9D23 /* StatusBarNotificationWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StatusBarNotificationWindow.m; sourceTree = "<group>"; };
+		AC808B8319D52D21004E78A3 /* ImportBip38PrivateKeySetting.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImportBip38PrivateKeySetting.h; sourceTree = "<group>"; };
+		AC808B8419D52D21004E78A3 /* ImportBip38PrivateKeySetting.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImportBip38PrivateKeySetting.m; sourceTree = "<group>"; };
+		AC808B8919D54274004E78A3 /* DialogImportKeyDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DialogImportKeyDelegate.h; sourceTree = "<group>"; };
 		AC8F0DC8196CF4E400CCD0F9 /* SelectViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelectViewController.h; sourceTree = "<group>"; };
 		AC8F0DC9196CF4E400CCD0F9 /* SelectViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SelectViewController.m; sourceTree = "<group>"; };
 		AC8F0DCB196D054A00CCD0F9 /* SelectListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelectListCell.h; sourceTree = "<group>"; };
@@ -454,8 +459,10 @@
 		ACEE7D3E19D4034D00932B39 /* CloneQrCodeSetting.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CloneQrCodeSetting.m; sourceTree = "<group>"; };
 		ACEE7D4019D403DC00932B39 /* DonationSetting.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DonationSetting.h; sourceTree = "<group>"; };
 		ACEE7D4119D403DC00932B39 /* DonationSetting.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DonationSetting.m; sourceTree = "<group>"; };
-		ACEE7D4319D40C1300932B39 /* ImportKeyPrivateKeySetting.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImportKeyPrivateKeySetting.h; sourceTree = "<group>"; };
-		ACEE7D4419D40C1300932B39 /* ImportKeyPrivateKeySetting.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImportKeyPrivateKeySetting.m; sourceTree = "<group>"; };
+		ACEE7D4319D40C1300932B39 /* ImportPrivateKeySetting.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImportPrivateKeySetting.h; sourceTree = "<group>"; };
+		ACEE7D4419D40C1300932B39 /* ImportPrivateKeySetting.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImportPrivateKeySetting.m; sourceTree = "<group>"; };
+		ACEE7D4619D417E400932B39 /* ImportPrivateKey.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImportPrivateKey.h; sourceTree = "<group>"; };
+		ACEE7D4719D417E400932B39 /* ImportPrivateKey.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImportPrivateKey.m; sourceTree = "<group>"; };
 		ACEEB701199B40FE008E06AA /* CurrencyCalculatorLink.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CurrencyCalculatorLink.h; sourceTree = "<group>"; };
 		ACEEB702199B40FE008E06AA /* CurrencyCalculatorLink.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CurrencyCalculatorLink.m; sourceTree = "<group>"; };
 		ACEEB8DC19B46EB900F2789C /* NetworkMonitorViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetworkMonitorViewController.h; sourceTree = "<group>"; };
@@ -690,25 +697,25 @@
 		42D9B76A193D6B5B00C85B89 /* bither-ios */ = {
 			isa = PBXGroup;
 			children = (
-				ACEE7D1A19D3F9F500932B39 /* QRCode */,
-				DA641E81196E7B750095DF42 /* CrashLog */,
-				AC229A6E196A40B500A7FB5E /* sh */,
-				AC33088B1955665500D8F621 /* Cells */,
-				4217A36E1951233500063746 /* Model */,
-				421B038D19495466003A45F1 /* Controllers */,
-				AC53ABA419D277C1007C095C /* XRandom */,
-				425408441946A219007AF99C /* Utils */,
 				4254083219469C9A007AF99C /* Api */,
-				AC0135DD195056BE00E3BB95 /* KeyboardControl */,
-				ACDDDC1119480DE00008A79D /* UIBase */,
-				ACA9D707195410FF002D1E3A /* Resouces */,
-				42D9B776193D6B5B00C85B89 /* Images.xcassets */,
-				42EFB54E1949C50900376888 /* MainStoryboard.storyboard */,
 				42D9B773193D6B5B00C85B89 /* AppDelegate.h */,
 				42D9B774193D6B5B00C85B89 /* AppDelegate.m */,
 				4254083F19469D5A007AF99C /* BitherSetting.h */,
 				4254084019469D5A007AF99C /* BitherSetting.m */,
+				AC33088B1955665500D8F621 /* Cells */,
+				421B038D19495466003A45F1 /* Controllers */,
+				DA641E81196E7B750095DF42 /* CrashLog */,
+				42D9B776193D6B5B00C85B89 /* Images.xcassets */,
+				AC0135DD195056BE00E3BB95 /* KeyboardControl */,
+				42EFB54E1949C50900376888 /* MainStoryboard.storyboard */,
+				4217A36E1951233500063746 /* Model */,
+				ACEE7D1A19D3F9F500932B39 /* QRCode */,
+				ACA9D707195410FF002D1E3A /* Resouces */,
+				AC229A6E196A40B500A7FB5E /* sh */,
 				42D9B76B193D6B5B00C85B89 /* Supporting Files */,
+				ACDDDC1119480DE00008A79D /* UIBase */,
+				425408441946A219007AF99C /* Utils */,
+				AC53ABA419D277C1007C095C /* XRandom */,
 			);
 			path = "bither-ios";
 			sourceTree = "<group>";
@@ -889,44 +896,45 @@
 		ACDDDC2519480ECE0008A79D /* Dialog */ = {
 			isa = PBXGroup;
 			children = (
-				ACDDDC2619480ECF0008A79D /* DialogAlert.h */,
-				ACDDDC2719480ECF0008A79D /* DialogAlert.m */,
-				ACDDDC2819480ECF0008A79D /* DialogCentered.h */,
-				ACDDDC2919480ECF0008A79D /* DialogCentered.m */,
-				ACDDDC2A19480ECF0008A79D /* DialogProgress.h */,
-				ACDDDC2B19480ECF0008A79D /* DialogProgress.m */,
-				AC0135DA19501D9400E3BB95 /* DialogPassword.h */,
-				AC0135DB19501D9400E3BB95 /* DialogPassword.m */,
-				AC2F329C195D19C2001B7439 /* DialogSendTxConfirm.h */,
-				AC2F329D195D19C2001B7439 /* DialogSendTxConfirm.m */,
-				AC3CDB5C1962AFF000C74B4C /* DialogAddressQrCode.h */,
-				AC3CDB5D1962AFF000C74B4C /* DialogAddressQrCode.m */,
-				AC6163921964ED2F0055C9D0 /* DialogWithArrow.h */,
-				AC6163931964ED2F0055C9D0 /* DialogWithArrow.m */,
-				AC616395196507B40055C9D0 /* DialogTxConfirmation.h */,
-				AC616396196507B40055C9D0 /* DialogTxConfirmation.m */,
-				AC1715851969213800337AB5 /* DialogAddressOptions.h */,
-				AC1715861969213800337AB5 /* DialogAddressOptions.m */,
-				AC17158B1969359900337AB5 /* DialogPrivateKeyEncryptedQrCode.h */,
-				AC17158C1969359900337AB5 /* DialogPrivateKeyEncryptedQrCode.m */,
-				ACD6DFCD196B99BF009D8031 /* DialogBlackQrCode.h */,
-				ACD6DFCE196B99BF009D8031 /* DialogBlackQrCode.m */,
 				ACD6DFD6196BF98B009D8031 /* DialogAddressFull.h */,
 				ACD6DFD7196BF98B009D8031 /* DialogAddressFull.m */,
-				ACBEC01F196FDC1E004301E0 /* DialogEditPassword.h */,
-				ACBEC020196FDC1E004301E0 /* DialogEditPassword.m */,
-				AC6BAC73196FD8430013B9E8 /* DialogImportPrivateKey.h */,
-				AC6BAC74196FD8430013B9E8 /* DialogImportPrivateKey.m */,
 				AC45D83D19878BAB00AF5C2C /* DialogAddressLongPressOptions.h */,
 				AC45D83E19878BAB00AF5C2C /* DialogAddressLongPressOptions.m */,
+				AC1715851969213800337AB5 /* DialogAddressOptions.h */,
+				AC1715861969213800337AB5 /* DialogAddressOptions.m */,
+				AC3CDB5C1962AFF000C74B4C /* DialogAddressQrCode.h */,
+				AC3CDB5D1962AFF000C74B4C /* DialogAddressQrCode.m */,
+				ACDDDC2619480ECF0008A79D /* DialogAlert.h */,
+				ACDDDC2719480ECF0008A79D /* DialogAlert.m */,
 				AC45D83F19878BAB00AF5C2C /* DialogBalanceDetail.h */,
 				AC45D84019878BAB00AF5C2C /* DialogBalanceDetail.m */,
+				ACD6DFCD196B99BF009D8031 /* DialogBlackQrCode.h */,
+				ACD6DFCE196B99BF009D8031 /* DialogBlackQrCode.m */,
+				ACDDDC2819480ECF0008A79D /* DialogCentered.h */,
+				ACDDDC2919480ECF0008A79D /* DialogCentered.m */,
+				ACBEC01F196FDC1E004301E0 /* DialogEditPassword.h */,
+				ACBEC020196FDC1E004301E0 /* DialogEditPassword.m */,
+				AC808B8919D54274004E78A3 /* DialogImportKeyDelegate.h */,
+				AC6BAC73196FD8430013B9E8 /* DialogImportPrivateKey.h */,
+				AC6BAC74196FD8430013B9E8 /* DialogImportPrivateKey.m */,
+				AC0135DA19501D9400E3BB95 /* DialogPassword.h */,
+				AC0135DB19501D9400E3BB95 /* DialogPassword.m */,
 				AC45AA3319879C96006314D5 /* DialogPrivateKeyDecryptedQrCode.h */,
 				AC45AA3419879C96006314D5 /* DialogPrivateKeyDecryptedQrCode.m */,
+				AC17158B1969359900337AB5 /* DialogPrivateKeyEncryptedQrCode.h */,
+				AC17158C1969359900337AB5 /* DialogPrivateKeyEncryptedQrCode.m */,
 				AC45AA361987A2F4006314D5 /* DialogPrivateKeyText.h */,
 				AC45AA371987A2F4006314D5 /* DialogPrivateKeyText.m */,
+				ACDDDC2A19480ECF0008A79D /* DialogProgress.h */,
+				ACDDDC2B19480ECF0008A79D /* DialogProgress.m */,
+				AC2F329C195D19C2001B7439 /* DialogSendTxConfirm.h */,
+				AC2F329D195D19C2001B7439 /* DialogSendTxConfirm.m */,
 				ACCA274C198F2805000E6A32 /* DialogTotalBalance.h */,
 				ACCA274D198F2805000E6A32 /* DialogTotalBalance.m */,
+				AC616395196507B40055C9D0 /* DialogTxConfirmation.h */,
+				AC616396196507B40055C9D0 /* DialogTxConfirmation.m */,
+				AC6163921964ED2F0055C9D0 /* DialogWithArrow.h */,
+				AC6163931964ED2F0055C9D0 /* DialogWithArrow.m */,
 			);
 			path = Dialog;
 			sourceTree = "<group>";
@@ -953,22 +961,26 @@
 		ACEE7D3019D3FBA000932B39 /* Setting */ = {
 			isa = PBXGroup;
 			children = (
-				ACEE7D4319D40C1300932B39 /* ImportKeyPrivateKeySetting.h */,
-				ACEE7D4419D40C1300932B39 /* ImportKeyPrivateKeySetting.m */,
+				ACEE7D3D19D4034D00932B39 /* CloneQrCodeSetting.h */,
+				ACEE7D3E19D4034D00932B39 /* CloneQrCodeSetting.m */,
+				ACEE7D3A19D4020E00932B39 /* ColdWalletCloneSetting.h */,
+				ACEE7D3B19D4020E00932B39 /* ColdWalletCloneSetting.m */,
+				ACEE7D4019D403DC00932B39 /* DonationSetting.h */,
+				ACEE7D4119D403DC00932B39 /* DonationSetting.m */,
+				AC808B8319D52D21004E78A3 /* ImportBip38PrivateKeySetting.h */,
+				AC808B8419D52D21004E78A3 /* ImportBip38PrivateKeySetting.m */,
+				ACEE7D4619D417E400932B39 /* ImportPrivateKey.h */,
+				ACEE7D4719D417E400932B39 /* ImportPrivateKey.m */,
+				ACEE7D4319D40C1300932B39 /* ImportPrivateKeySetting.h */,
+				ACEE7D4419D40C1300932B39 /* ImportPrivateKeySetting.m */,
+				ACEE7D3419D3FC4B00932B39 /* ReloadTxSetting.h */,
+				ACEE7D3519D3FC4B00932B39 /* ReloadTxSetting.m */,
 				AC202ACE196B8B7A00033EC1 /* Setting.h */,
 				AC202ACF196B8B7A00033EC1 /* Setting.m */,
 				ACEE7D3119D3FBE500932B39 /* SettingUtil.h */,
 				ACEE7D3219D3FBE500932B39 /* SettingUtil.m */,
-				ACEE7D3419D3FC4B00932B39 /* ReloadTxSetting.h */,
-				ACEE7D3519D3FC4B00932B39 /* ReloadTxSetting.m */,
 				ACEE7D3719D4012600932B39 /* SignTransactionScanSetting.h */,
 				ACEE7D3819D4012600932B39 /* SignTransactionScanSetting.m */,
-				ACEE7D3A19D4020E00932B39 /* ColdWalletCloneSetting.h */,
-				ACEE7D3B19D4020E00932B39 /* ColdWalletCloneSetting.m */,
-				ACEE7D3D19D4034D00932B39 /* CloneQrCodeSetting.h */,
-				ACEE7D3E19D4034D00932B39 /* CloneQrCodeSetting.m */,
-				ACEE7D4019D403DC00932B39 /* DonationSetting.h */,
-				ACEE7D4119D403DC00932B39 /* DonationSetting.m */,
 			);
 			name = Setting;
 			sourceTree = "<group>";
@@ -1157,6 +1169,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4217A3731951235D00063746 /* Depth.m in Sources */,
+				ACEE7D4819D417E400932B39 /* ImportPrivateKey.m in Sources */,
 				ACBB5F56198B468E00B19F4B /* UIViewController+ConfigureTableView.m in Sources */,
 				AC45AA381987A2F4006314D5 /* DialogPrivateKeyText.m in Sources */,
 				42D9B775193D6B5B00C85B89 /* AppDelegate.m in Sources */,
@@ -1179,6 +1192,7 @@
 				ACD6DFD5196BDC9F009D8031 /* NSAttributedString+Size.m in Sources */,
 				ACEE7D3319D3FBE500932B39 /* SettingUtil.m in Sources */,
 				ACEEB8E419B46ED200F2789C /* BlockViewController.m in Sources */,
+				AC808B8519D52D21004E78A3 /* ImportBip38PrivateKeySetting.m in Sources */,
 				AC53ABAD19D27875007C095C /* UEntropyViewController.m in Sources */,
 				ACF4B17419668D5700CE24FD /* MarketListCell.m in Sources */,
 				ACD6DFD2196BA83B009D8031 /* ColdAddressAddViewController.m in Sources */,
@@ -1249,7 +1263,7 @@
 				ACEEB8DE19B46EB900F2789C /* NetworkMonitorViewController.m in Sources */,
 				AC2F329E195D19C2001B7439 /* DialogSendTxConfirm.m in Sources */,
 				AC3C2623199B58750055FF5E /* TrendingGraphicData.m in Sources */,
-				ACEE7D4519D40C1300932B39 /* ImportKeyPrivateKeySetting.m in Sources */,
+				ACEE7D4519D40C1300932B39 /* ImportPrivateKeySetting.m in Sources */,
 				DA641E8C196E7BC20095DF42 /* GCCrashReportFilterTrim.m in Sources */,
 				ACDDDC2319480DE00008A79D /* UIViewController+PiShowBanner.m in Sources */,
 				ACCA274B1989FACC000E6A32 /* HotAddressTabButton.m in Sources */,
