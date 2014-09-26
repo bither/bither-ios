@@ -17,8 +17,8 @@
 //  limitations under the License.
 
 #import "UEntropyCamera.h"
-#import <MobileCoreServices/MobileCoreServices.h>
-#import <AVFoundation/AVFoundation.h>
+@import MobileCoreServices;
+@import AVFoundation;
 
 @interface UEntropyCamera() <AVCaptureVideoDataOutputSampleBufferDelegate>{
     AVCaptureDevice *device;
@@ -36,7 +36,9 @@
     if(self){
         device = [AVCaptureDevice defaultDeviceWithMediaType: AVMediaTypeVideo];
         if(!device || !device.connected){
-            [collector onError:[[NSError alloc]initWithDomain:kUEntropySourceErrorDomain code:kUEntropySourceCameraCode userInfo:@{kUEntropySourceErrorDescKey: @"no camera"}] fromSource:self];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [collector onError:[[NSError alloc]initWithDomain:kUEntropySourceErrorDomain code:kUEntropySourceCameraCode userInfo:@{kUEntropySourceErrorDescKey: @"no camera"}] fromSource:self];
+            });
         }
         queue = dispatch_queue_create("UEntropyCamera", NULL);
         session = [[AVCaptureSession alloc]init];
@@ -113,6 +115,9 @@
     paused = YES;
     if(session && session.isRunning){
         [session stopRunning];
+        for(AVCaptureInput *i in [NSArray arrayWithArray:session.inputs]){
+            [session removeInput:i];
+        }
     }
 }
 

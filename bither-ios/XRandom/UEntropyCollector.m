@@ -39,6 +39,14 @@
         queue = dispatch_queue_create("UEntropyCollector", NULL);
         paused = YES;
         shouldCollectData = NO;
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(onPause)
+                                                     name:UIApplicationWillResignActiveNotification
+                                                   object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(onResume)
+                                                     name:UIApplicationDidBecomeActiveNotification
+                                                   object:nil];
     }
     return self;
 }
@@ -170,6 +178,10 @@
     for(NSObject<UEntropySource>* s in self.sources){
         [s onPause];
     }
+}
+
+-(void)dealloc{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 - (void)createBoundInputStream:(NSInputStream **)inputStreamPtr outputStream:(NSOutputStream **)outputStreamPtr bufferSize:(NSUInteger)bufferSize{
