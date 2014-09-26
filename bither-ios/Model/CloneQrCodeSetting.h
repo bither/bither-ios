@@ -1,5 +1,5 @@
 //
-//  ScanPrivateKeyDelegate.h
+//  CloneQrCodeSetting.h
 //  bither-ios
 //
 //  Copyright 2014 http://Bither.net
@@ -16,19 +16,12 @@
 //  See the License for the specific language governing permissions and
 //  limitations under the License.
 
+
 #import <Foundation/Foundation.h>
-#import "HotCheckPrivateKeyViewController.h"
-#import "ScanQrCodeViewController.h"
+#import "Setting.h"
 #import "DialogPassword.h"
-#import "StringUtil.h"
-#import "BTKey+Bitcoinj.h"
-#import "DialogImportPrivateKey.h"
 
-@interface ScanPrivateKeyDelegate : NSObject
-+ (ScanPrivateKeyDelegate *)instance;
-
-@property(nonatomic,strong) UIViewController * controller;
-
-
-
+@interface CloneQrCodeSetting : Setting<DialogPasswordDelegate>
+-(instancetype)init;
+@property (weak) UIViewController* controller;
 @end

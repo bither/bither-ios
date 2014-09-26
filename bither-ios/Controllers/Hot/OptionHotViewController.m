@@ -25,6 +25,7 @@
 #import "DialogEditPassword.h"
 #import "BitherSetting.h"
 #import "UIViewController+ConfigureTableView.h"
+#import "SettingUtil.h"
 
 
 @interface OptionHotViewController ()<UITableViewDataSource,UITableViewDelegate>
@@ -45,7 +46,7 @@
     [self reload];
 }
 -(void)reload{
-    self.settings=[Setting hotSettings];
+    self.settings=[SettingUtil hotSettings];
     [self.tableView reloadData];
 }
 

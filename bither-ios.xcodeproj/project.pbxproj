@@ -137,7 +137,6 @@
 		ACDDDC2E19480ECF0008A79D /* DialogProgress.m in Sources */ = {isa = PBXBuildFile; fileRef = ACDDDC2B19480ECF0008A79D /* DialogProgress.m */; };
 		ACDDDC3619483A840008A79D /* UIColor+Util.m in Sources */ = {isa = PBXBuildFile; fileRef = ACDDDC3519483A840008A79D /* UIColor+Util.m */; };
 		ACDDDC3819483D210008A79D /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ACDDDC3719483D210008A79D /* QuartzCore.framework */; };
-		ACE4ED5B198A298100C8862C /* ScanPrivateKeyDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = ACE4ED5A198A298100C8862C /* ScanPrivateKeyDelegate.m */; };
 		ACE4ED5E198A3AE600C8862C /* AdvanceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ACE4ED5D198A3AE600C8862C /* AdvanceViewController.m */; };
 		ACEE7D2719D3F9F500932B39 /* QRCodeThemeUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = ACEE7D1C19D3F9F500932B39 /* QRCodeThemeUtil.m */; };
 		ACEE7D2819D3F9F500932B39 /* QRCodeTransportPage.m in Sources */ = {isa = PBXBuildFile; fileRef = ACEE7D1E19D3F9F500932B39 /* QRCodeTransportPage.m */; };
@@ -145,6 +144,13 @@
 		ACEE7D2A19D3F9F500932B39 /* QrCodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ACEE7D2219D3F9F500932B39 /* QrCodeViewController.m */; };
 		ACEE7D2B19D3F9F500932B39 /* ScanQrCodeTransportViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ACEE7D2419D3F9F500932B39 /* ScanQrCodeTransportViewController.m */; };
 		ACEE7D2C19D3F9F500932B39 /* ScanQrCodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ACEE7D2619D3F9F500932B39 /* ScanQrCodeViewController.m */; };
+		ACEE7D3319D3FBE500932B39 /* SettingUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = ACEE7D3219D3FBE500932B39 /* SettingUtil.m */; };
+		ACEE7D3619D3FC4B00932B39 /* ReloadTxSetting.m in Sources */ = {isa = PBXBuildFile; fileRef = ACEE7D3519D3FC4B00932B39 /* ReloadTxSetting.m */; };
+		ACEE7D3919D4012600932B39 /* SignTransactionScanSetting.m in Sources */ = {isa = PBXBuildFile; fileRef = ACEE7D3819D4012600932B39 /* SignTransactionScanSetting.m */; };
+		ACEE7D3C19D4020E00932B39 /* ColdWalletCloneSetting.m in Sources */ = {isa = PBXBuildFile; fileRef = ACEE7D3B19D4020E00932B39 /* ColdWalletCloneSetting.m */; };
+		ACEE7D3F19D4034D00932B39 /* CloneQrCodeSetting.m in Sources */ = {isa = PBXBuildFile; fileRef = ACEE7D3E19D4034D00932B39 /* CloneQrCodeSetting.m */; };
+		ACEE7D4219D403DC00932B39 /* DonationSetting.m in Sources */ = {isa = PBXBuildFile; fileRef = ACEE7D4119D403DC00932B39 /* DonationSetting.m */; };
+		ACEE7D4519D40C1300932B39 /* ImportKeyPrivateKeySetting.m in Sources */ = {isa = PBXBuildFile; fileRef = ACEE7D4419D40C1300932B39 /* ImportKeyPrivateKeySetting.m */; };
 		ACEEB703199B40FE008E06AA /* CurrencyCalculatorLink.m in Sources */ = {isa = PBXBuildFile; fileRef = ACEEB702199B40FE008E06AA /* CurrencyCalculatorLink.m */; };
 		ACEEB8DE19B46EB900F2789C /* NetworkMonitorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ACEEB8DD19B46EB900F2789C /* NetworkMonitorViewController.m */; };
 		ACEEB8E119B46EC600F2789C /* PeerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ACEEB8E019B46EC600F2789C /* PeerViewController.m */; };
@@ -422,8 +428,6 @@
 		ACDDDC3419483A840008A79D /* UIColor+Util.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+Util.h"; sourceTree = "<group>"; };
 		ACDDDC3519483A840008A79D /* UIColor+Util.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+Util.m"; sourceTree = "<group>"; };
 		ACDDDC3719483D210008A79D /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
-		ACE4ED59198A298100C8862C /* ScanPrivateKeyDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScanPrivateKeyDelegate.h; sourceTree = "<group>"; };
-		ACE4ED5A198A298100C8862C /* ScanPrivateKeyDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScanPrivateKeyDelegate.m; sourceTree = "<group>"; };
 		ACE4ED5C198A3AE600C8862C /* AdvanceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdvanceViewController.h; sourceTree = "<group>"; };
 		ACE4ED5D198A3AE600C8862C /* AdvanceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AdvanceViewController.m; sourceTree = "<group>"; };
 		ACEE7D1B19D3F9F500932B39 /* QRCodeThemeUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QRCodeThemeUtil.h; sourceTree = "<group>"; };
@@ -438,6 +442,20 @@
 		ACEE7D2419D3F9F500932B39 /* ScanQrCodeTransportViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScanQrCodeTransportViewController.m; sourceTree = "<group>"; };
 		ACEE7D2519D3F9F500932B39 /* ScanQrCodeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScanQrCodeViewController.h; sourceTree = "<group>"; };
 		ACEE7D2619D3F9F500932B39 /* ScanQrCodeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScanQrCodeViewController.m; sourceTree = "<group>"; };
+		ACEE7D3119D3FBE500932B39 /* SettingUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingUtil.h; sourceTree = "<group>"; };
+		ACEE7D3219D3FBE500932B39 /* SettingUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingUtil.m; sourceTree = "<group>"; };
+		ACEE7D3419D3FC4B00932B39 /* ReloadTxSetting.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReloadTxSetting.h; sourceTree = "<group>"; };
+		ACEE7D3519D3FC4B00932B39 /* ReloadTxSetting.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReloadTxSetting.m; sourceTree = "<group>"; };
+		ACEE7D3719D4012600932B39 /* SignTransactionScanSetting.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignTransactionScanSetting.h; sourceTree = "<group>"; };
+		ACEE7D3819D4012600932B39 /* SignTransactionScanSetting.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignTransactionScanSetting.m; sourceTree = "<group>"; };
+		ACEE7D3A19D4020E00932B39 /* ColdWalletCloneSetting.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ColdWalletCloneSetting.h; sourceTree = "<group>"; };
+		ACEE7D3B19D4020E00932B39 /* ColdWalletCloneSetting.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ColdWalletCloneSetting.m; sourceTree = "<group>"; };
+		ACEE7D3D19D4034D00932B39 /* CloneQrCodeSetting.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CloneQrCodeSetting.h; sourceTree = "<group>"; };
+		ACEE7D3E19D4034D00932B39 /* CloneQrCodeSetting.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CloneQrCodeSetting.m; sourceTree = "<group>"; };
+		ACEE7D4019D403DC00932B39 /* DonationSetting.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DonationSetting.h; sourceTree = "<group>"; };
+		ACEE7D4119D403DC00932B39 /* DonationSetting.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DonationSetting.m; sourceTree = "<group>"; };
+		ACEE7D4319D40C1300932B39 /* ImportKeyPrivateKeySetting.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImportKeyPrivateKeySetting.h; sourceTree = "<group>"; };
+		ACEE7D4419D40C1300932B39 /* ImportKeyPrivateKeySetting.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImportKeyPrivateKeySetting.m; sourceTree = "<group>"; };
 		ACEEB701199B40FE008E06AA /* CurrencyCalculatorLink.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CurrencyCalculatorLink.h; sourceTree = "<group>"; };
 		ACEEB702199B40FE008E06AA /* CurrencyCalculatorLink.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CurrencyCalculatorLink.m; sourceTree = "<group>"; };
 		ACEEB8DC19B46EB900F2789C /* NetworkMonitorViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetworkMonitorViewController.h; sourceTree = "<group>"; };
@@ -488,6 +506,7 @@
 		4217A36E1951233500063746 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				ACEE7D3019D3FBA000932B39 /* Setting */,
 				AC3C2621199B58750055FF5E /* TrendingGraphicData.h */,
 				AC3C2622199B58750055FF5E /* TrendingGraphicData.m */,
 				4217A3711951235D00063746 /* Depth.h */,
@@ -496,8 +515,6 @@
 				4269FF71195A885D001213B9 /* Ticker.m */,
 				4269FF73195A8872001213B9 /* Market.h */,
 				4269FF74195A8872001213B9 /* Market.m */,
-				AC202ACE196B8B7A00033EC1 /* Setting.h */,
-				AC202ACF196B8B7A00033EC1 /* Setting.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -563,8 +580,6 @@
 		425408441946A219007AF99C /* Utils */ = {
 			isa = PBXGroup;
 			children = (
-				ACE4ED59198A298100C8862C /* ScanPrivateKeyDelegate.h */,
-				ACE4ED5A198A298100C8862C /* ScanPrivateKeyDelegate.m */,
 				ACA9D70119540E0F002D1E3A /* PlaySoundUtil.h */,
 				ACA9D70219540E0F002D1E3A /* PlaySoundUtil.m */,
 				425408451946A219007AF99C /* DataCheckUtil.h */,
@@ -935,6 +950,29 @@
 			path = QRCode;
 			sourceTree = "<group>";
 		};
+		ACEE7D3019D3FBA000932B39 /* Setting */ = {
+			isa = PBXGroup;
+			children = (
+				ACEE7D4319D40C1300932B39 /* ImportKeyPrivateKeySetting.h */,
+				ACEE7D4419D40C1300932B39 /* ImportKeyPrivateKeySetting.m */,
+				AC202ACE196B8B7A00033EC1 /* Setting.h */,
+				AC202ACF196B8B7A00033EC1 /* Setting.m */,
+				ACEE7D3119D3FBE500932B39 /* SettingUtil.h */,
+				ACEE7D3219D3FBE500932B39 /* SettingUtil.m */,
+				ACEE7D3419D3FC4B00932B39 /* ReloadTxSetting.h */,
+				ACEE7D3519D3FC4B00932B39 /* ReloadTxSetting.m */,
+				ACEE7D3719D4012600932B39 /* SignTransactionScanSetting.h */,
+				ACEE7D3819D4012600932B39 /* SignTransactionScanSetting.m */,
+				ACEE7D3A19D4020E00932B39 /* ColdWalletCloneSetting.h */,
+				ACEE7D3B19D4020E00932B39 /* ColdWalletCloneSetting.m */,
+				ACEE7D3D19D4034D00932B39 /* CloneQrCodeSetting.h */,
+				ACEE7D3E19D4034D00932B39 /* CloneQrCodeSetting.m */,
+				ACEE7D4019D403DC00932B39 /* DonationSetting.h */,
+				ACEE7D4119D403DC00932B39 /* DonationSetting.m */,
+			);
+			name = Setting;
+			sourceTree = "<group>";
+		};
 		ACEEB8DB19B46EB900F2789C /* NetworkMonitor */ = {
 			isa = PBXGroup;
 			children = (
@@ -1139,10 +1177,12 @@
 				4254085F1946A219007AF99C /* UserDefaultsUtil.m in Sources */,
 				ACD6DFCF196B99BF009D8031 /* DialogBlackQrCode.m in Sources */,
 				ACD6DFD5196BDC9F009D8031 /* NSAttributedString+Size.m in Sources */,
+				ACEE7D3319D3FBE500932B39 /* SettingUtil.m in Sources */,
 				ACEEB8E419B46ED200F2789C /* BlockViewController.m in Sources */,
 				AC53ABAD19D27875007C095C /* UEntropyViewController.m in Sources */,
 				ACF4B17419668D5700CE24FD /* MarketListCell.m in Sources */,
 				ACD6DFD2196BA83B009D8031 /* ColdAddressAddViewController.m in Sources */,
+				ACEE7D3F19D4034D00932B39 /* CloneQrCodeSetting.m in Sources */,
 				425408581946A219007AF99C /* DateUtil.m in Sources */,
 				4268FE2C194ACD57007A4C30 /* OptionColdViewController.m in Sources */,
 				AC45D84119878BAB00AF5C2C /* DialogAddressLongPressOptions.m in Sources */,
@@ -1162,6 +1202,7 @@
 				AC0135D0194ED8B800E3BB95 /* HotAddressAddViewController.m in Sources */,
 				AC17158D1969359900337AB5 /* DialogPrivateKeyEncryptedQrCode.m in Sources */,
 				AC31E92F19B4533F00EFDDF1 /* TrendingGraphicView.m in Sources */,
+				ACEE7D3919D4012600932B39 /* SignTransactionScanSetting.m in Sources */,
 				ACEE7D2B19D3F9F500932B39 /* ScanQrCodeTransportViewController.m in Sources */,
 				4254084119469D5A007AF99C /* BitherSetting.m in Sources */,
 				ACEE7D2A19D3F9F500932B39 /* QrCodeViewController.m in Sources */,
@@ -1184,6 +1225,7 @@
 				4254083B19469C9A007AF99C /* BaseApi.m in Sources */,
 				AC2F3295195C02C3001B7439 /* AmountButton.m in Sources */,
 				42E8161C19529B14005F16F7 /* KeyUtil.m in Sources */,
+				ACEE7D3619D3FC4B00932B39 /* ReloadTxSetting.m in Sources */,
 				425408571946A219007AF99C /* DataCheckUtil.m in Sources */,
 				AC6163941964ED2F0055C9D0 /* DialogWithArrow.m in Sources */,
 				ACA9D70319540E0F002D1E3A /* PlaySoundUtil.m in Sources */,
@@ -1207,10 +1249,10 @@
 				ACEEB8DE19B46EB900F2789C /* NetworkMonitorViewController.m in Sources */,
 				AC2F329E195D19C2001B7439 /* DialogSendTxConfirm.m in Sources */,
 				AC3C2623199B58750055FF5E /* TrendingGraphicData.m in Sources */,
+				ACEE7D4519D40C1300932B39 /* ImportKeyPrivateKeySetting.m in Sources */,
 				DA641E8C196E7BC20095DF42 /* GCCrashReportFilterTrim.m in Sources */,
 				ACDDDC2319480DE00008A79D /* UIViewController+PiShowBanner.m in Sources */,
 				ACCA274B1989FACC000E6A32 /* HotAddressTabButton.m in Sources */,
-				ACE4ED5B198A298100C8862C /* ScanPrivateKeyDelegate.m in Sources */,
 				AC1715871969213800337AB5 /* DialogAddressOptions.m in Sources */,
 				4269FF7B195A948A001213B9 /* CacheUtil.m in Sources */,
 				ACEEB703199B40FE008E06AA /* CurrencyCalculatorLink.m in Sources */,
@@ -1224,12 +1266,14 @@
 				4217A39019512DC000063746 /* TransactionsUtil.m in Sources */,
 				425408681946BB7A007AF99C /* BlockUtil.m in Sources */,
 				DA641E8D196E7BC20095DF42 /* GCCrashReportSink.m in Sources */,
+				ACEE7D3C19D4020E00932B39 /* ColdWalletCloneSetting.m in Sources */,
 				4254085E1946A219007AF99C /* UIImageExt.m in Sources */,
 				AC275EE719B5B9D800F1C02F /* PeerCell.m in Sources */,
 				421B03C319495DBB003A45F1 /* ChooseModeViewController.m in Sources */,
 				AC53ABCF19D52387007C095C /* UEntropySensor.m in Sources */,
 				ACDDDC2019480DE00008A79D /* PiPageViewController.m in Sources */,
 				AC0135D9194FDCDF00E3BB95 /* HotAddressAddPrivateKeyViewController.m in Sources */,
+				ACEE7D4219D403DC00932B39 /* DonationSetting.m in Sources */,
 				AC45D84219878BAB00AF5C2C /* DialogBalanceDetail.m in Sources */,
 				ACCA274E198F2805000E6A32 /* DialogTotalBalance.m in Sources */,
 				ACDDDC2D19480ECF0008A79D /* DialogCentered.m in Sources */,
