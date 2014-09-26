@@ -79,7 +79,7 @@
             [self showError:NSLocalizedString(@"Not match private key format", nil)];
         }
     }else if(self.importPrivateKeyType==Bip38){
-        if ([p isValidBitcoinPrivateKey]) {
+        if ([p isValidBitcoinBIP38Key]) {
             [self dismissWithPassword:p];
         }else{
             [self showError:NSLocalizedString(@"Not match BIP38-private key format", nil)];

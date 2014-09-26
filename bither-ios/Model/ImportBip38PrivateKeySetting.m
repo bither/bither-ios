@@ -32,6 +32,7 @@
 #import "BTQRCodeUtil.h"
 #import "BTPrivateKeyUtil.h"
 #import "ImportPrivateKey.h"
+#import "BTKey+BIP38.h"
 
 @interface CheckPasswordBip38Delegate : NSObject<DialogPasswordDelegate>
 @property(nonatomic,strong) UIViewController *controller;
@@ -75,7 +76,7 @@ static Setting* importPrivateKeySetting;
 
 -(void)actionSheet:(UIActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex{
     if (buttonIndex==0) {
-        ScanQrCodeViewController *scan = [[ScanQrCodeViewController alloc]initWithDelegate:self title:NSLocalizedString(@"Scan Private Key QR Code",nil) message:NSLocalizedString(@"Scan QR code No.1 provided by Bither", nil)];
+        ScanQrCodeViewController *scan = [[ScanQrCodeViewController alloc]initWithDelegate:self title:NSLocalizedString(@"Scan BIP38-private key QR Code",nil) message:@""];
         [self.controller presentViewController:scan animated:YES completion:nil];
     }else if(buttonIndex==1){
         DialogImportPrivateKey * dialogImportPrivateKey=[[DialogImportPrivateKey alloc] initWithDelegate:self importPrivateKeyType:Bip38];
@@ -98,60 +99,44 @@ static Setting* importPrivateKeySetting;
     }
     
 }
--(void)onPasswordEntered:(NSString *)password{
-    DialogProgress * dp = [[DialogProgress alloc]initWithMessage:NSLocalizedString(@"Please wait…", nil)];
-    [dp showInWindow:self.controller.view.window completion:^{
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
-            BTPasswordSeed * passwordSeed=[[UserDefaultsUtil instance] getPasswordSeed];
-            if (passwordSeed) {
-                BOOL checkPassword=[passwordSeed checkPassword:password];
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    if (checkPassword) {
-                        [self importKeyFormQrcode:_result password:password dp:dp];
-                    }else{
-                        [self showMsg:NSLocalizedString(@"Password of the private key to import is different from ours. Import failed.", nil)];
-                        [dp dismiss];
-                    }
-                    
-                });
-            }else{
-                [self importKeyFormQrcode:_result password:password dp:dp];
-            }
-        });
-    }];
-    
-    
-}
+
 -(void) importKeyFormQrcode:(NSString *)keyStr password:(NSString *)password dp:(DialogProgress *)dp{
     [dp dismiss];
     ImportPrivateKey *importPrivateKey=[[ImportPrivateKey alloc] initWithController:self.controller content:keyStr passwrod:password importPrivateKeyType:BitherQrcode];
     [importPrivateKey importPrivateKey];
 }
 -(BOOL)checkPassword:(NSString *)password{
-    BTKey * key=[ BTKey  keyWithBitcoinj:_result andPassphrase:password];
-    BOOL result=key!=nil;
-    key=nil;
-    return result;
+   _key=[ BTKey  keyWithBIP38Key:_result andPassphrase:password];
+   return _key!=nil;
+}
+
+-(void)onPasswordEntered:(NSString *)password{
+    [self showCheckPassword:[_key privateKey]];
 }
 
 -(NSString *)passwordTitle{
-    return NSLocalizedString(@"Enter original password", nil);
+     return NSLocalizedString(@"Enter password of BIP38-private key", nil);
+}
+
+
+//delegate of dialogImportPrivateKey
+-(void)onPrivateKeyEntered:(NSString *)privateKey{
+    _result=privateKey;
+    DialogPassword *dialog = [[DialogPassword alloc]initWithDelegate:self];
+    [dialog showInWindow:self.controller.view.window];
 }
 
 static CheckPasswordBip38Delegate *checkPasswordDelegate;
-//delegate of dialogImportPrivateKey
--(void)onPrivateKeyEntered:(NSString *)privateKey{
-    [self showCheckPassword:privateKey ];
-    
-}
+
 -(void)showCheckPassword:(NSString *)privateKey{
     checkPasswordDelegate=[[CheckPasswordBip38Delegate alloc] init];
     checkPasswordDelegate.controller=self.controller;
     checkPasswordDelegate.privateKeyStr=privateKey;
+
     DialogPassword *dialog = [[DialogPassword alloc]initWithDelegate:checkPasswordDelegate];
     [dialog showInWindow:self.controller.view.window];
-    _result=privateKey;
 }
+
 -(void) showMsg:(NSString *)msg{
     if([self.controller respondsToSelector:@selector(showMsg:)]){
         [self.controller performSelector:@selector(showMsg:) withObject:msg];
