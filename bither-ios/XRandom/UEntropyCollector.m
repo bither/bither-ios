@@ -39,6 +39,14 @@
         queue = dispatch_queue_create("UEntropyCollector", NULL);
         paused = YES;
         shouldCollectData = NO;
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(onPause)
+                                                     name:UIApplicationWillResignActiveNotification
+                                                   object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(onResume)
+                                                     name:UIApplicationDidBecomeActiveNotification
+                                                   object:nil];
     }
     return self;
 }
@@ -50,8 +58,7 @@
     [self addSingleSource:source];
     va_list list;
     va_start(list, source);
-    while (YES)
-    {
+    while (YES){
         NSObject<UEntropySource> *s= va_arg(list, NSObject<UEntropySource> *);
         if (s) {
             [self addSingleSource:s];
@@ -71,10 +78,20 @@
 
 -(void)onNewData:(NSData*)data fromSource:(NSObject<UEntropySource>*) source{
     if(shouldCollectData){
+        NSUInteger requestCount = 1;
+        if([source respondsToSelector:@selector(byteCountFromSingleFrame)]){
+            requestCount = [source byteCountFromSingleFrame];
+        }
+        
+        NSMutableData *result = [NSMutableData dataWithLength:requestCount];
+        for(int i = 0; i < requestCount; i++){
+            [data getBytes:result.mutableBytes + i range:NSMakeRange(random() % data.length, 1)];
+        }
+        
         dispatch_async(queue, ^{
             if(shouldCollectData && output && output.hasSpaceAvailable){
-                NSInteger actuallyWriten = [output write:data.bytes maxLength:data.length];
-                NSLog(@"write %lu/%lu data to uentropy pool", actuallyWriten, data.length);
+                NSInteger actuallyWriten = [output write:result.bytes maxLength:result.length];
+                NSLog(@"write %lu/%lu data to uentropy pool from %@", actuallyWriten, result.length, source.name);
             }
         });
     }
@@ -163,8 +180,11 @@
     }
 }
 
-- (void)createBoundInputStream:(NSInputStream **)inputStreamPtr outputStream:(NSOutputStream **)outputStreamPtr bufferSize:(NSUInteger)bufferSize
-{
+-(void)dealloc{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+- (void)createBoundInputStream:(NSInputStream **)inputStreamPtr outputStream:(NSOutputStream **)outputStreamPtr bufferSize:(NSUInteger)bufferSize{
     CFReadStreamRef     readStream;
     CFWriteStreamRef    writeStream;
     

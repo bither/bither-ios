@@ -18,6 +18,8 @@
 
 #import "UEntropyViewController.h"
 #import "UEntropyCamera.h"
+#import "UEntropyMic.h"
+#import "UEntropySensor.h"
 #import "UEntropyCollector.h"
 #import "NSString+Base58.h"
 
@@ -40,12 +42,27 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    UIButton* btnClose = [UIButton buttonWithType:UIButtonTypeSystem];
+    [btnClose setTitle:@"Close" forState:UIControlStateNormal];
+    [btnClose addTarget:self action:@selector(close:) forControlEvents:UIControlEventTouchUpInside];
+    [btnClose sizeToFit];
+    btnClose.frame = CGRectMake(0, 0, btnClose.frame.size.width, btnClose.frame.size.height);
+    [self.view addSubview:btnClose];
+    
     self.collector = [[UEntropyCollector alloc]initWithDelegate:self];
-    [self.collector addSource:[[UEntropyCamera alloc]initWithViewController:self andCollector:self.collector], nil];
+    [self.collector addSource:  [[UEntropyCamera alloc] initWithViewController: self.view andCollector: self.collector],
+                                [[UEntropyMic alloc] initWithView: nil andCollector: self.collector],
+                                [[UEntropySensor alloc] initWithCollecor: self.collector],
+                                nil];
+}
+
+-(void)close:(id)sender{
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
+    [UIApplication sharedApplication].idleTimerDisabled = YES;
     [self.collector onResume];
 }
 
@@ -54,7 +71,7 @@
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         NSLog(@"start generate");
         [self.collector start];
-        for(int i = 0; i < 20; i++){
+        for(int i = 0; i < 200; i++){
             NSData* data = [self.collector nextBytes:32];
             NSLog(@"outcome %d data %@", i + 1, [NSString hexWithData:data]);
         }
@@ -69,6 +86,8 @@
 - (void)viewDidDisappear:(BOOL)animated{
     [super viewDidDisappear:animated];
     [self.collector onPause];
+    [self.collector stop];
+    [UIApplication sharedApplication].idleTimerDisabled = NO;
 }
 
 - (void)didReceiveMemoryWarning {

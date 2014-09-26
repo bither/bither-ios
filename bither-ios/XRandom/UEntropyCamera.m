@@ -17,8 +17,8 @@
 //  limitations under the License.
 
 #import "UEntropyCamera.h"
-#import <MobileCoreServices/MobileCoreServices.h>
-#import <AVFoundation/AVFoundation.h>
+@import MobileCoreServices;
+@import AVFoundation;
 
 @interface UEntropyCamera() <AVCaptureVideoDataOutputSampleBufferDelegate>{
     AVCaptureDevice *device;
@@ -31,27 +31,30 @@
 
 @implementation UEntropyCamera
 
--(instancetype)initWithViewController:(UIViewController*)parent andCollector:(UEntropyCollector *)collector{
+-(instancetype)initWithViewController:(UIView*)view andCollector:(UEntropyCollector *)collector{
     self = [super init];
     if(self){
         device = [AVCaptureDevice defaultDeviceWithMediaType: AVMediaTypeVideo];
-        if(!device){
-            [collector onError:[[NSError alloc]initWithDomain:kUEntropySourceErrorDomain code:kUEntropySourceCameraCode userInfo:@{kUEntropySourceErrorDescKey: @"no camera"}] fromSource:self];
+        if(!device || !device.connected){
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [collector onError:[[NSError alloc]initWithDomain:kUEntropySourceErrorDomain code:kUEntropySourceCameraCode userInfo:@{kUEntropySourceErrorDescKey: @"no camera"}] fromSource:self];
+            });
         }
         queue = dispatch_queue_create("UEntropyCamera", NULL);
         session = [[AVCaptureSession alloc]init];
+        session.sessionPreset = AVCaptureSessionPresetMedium;
         AVCaptureVideoDataOutput *output = [AVCaptureVideoDataOutput new];
-        output.alwaysDiscardsLateVideoFrames = YES;
+        output.videoSettings = @{(id)kCVPixelBufferPixelFormatTypeKey:@(kCVPixelFormatType_32BGRA)};
         [output setSampleBufferDelegate:(id<AVCaptureVideoDataOutputSampleBufferDelegate>)self queue: queue];
         [session addOutput:output];
         
         AVCaptureVideoPreviewLayer *preview = [AVCaptureVideoPreviewLayer layerWithSession: session];
-        CGRect bounds = parent.view.bounds;
+        CGRect bounds = view.bounds;
         bounds.origin = CGPointZero;
         preview.bounds = bounds;
         preview.position = CGPointMake(bounds.size.width / 2, bounds.size.height / 2);
         preview.videoGravity = AVLayerVideoGravityResizeAspectFill;
-        [parent.view.layer addSublayer: preview];
+        [view.layer insertSublayer:preview atIndex:0];
         self.collector = collector;
         paused = YES;
     }
@@ -72,13 +75,27 @@
         [self.collector onError:[[NSError alloc]initWithDomain:kUEntropySourceErrorDomain code:kUEntropySourceCameraCode userInfo:@{kUEntropySourceErrorDescKey: error.debugDescription }] fromSource:self];
         return;
     }
-    [session beginConfiguration];
     [session addInput:input];
-    [session commitConfiguration];
     [session startRunning];
 }
 
 - (void)captureOutput:(AVCaptureOutput *)captureOutput didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer fromConnection:(AVCaptureConnection *)connection{
+    if(sampleBuffer == NULL){
+        NSLog(@"sample null");
+        return;
+    }
+    if(!CMSampleBufferDataIsReady(sampleBuffer)){
+        NSLog(@"sample buffer not ready");
+        return;
+    }
+    if(CMSampleBufferGetNumSamples(sampleBuffer) != 1 ){
+        NSLog(@"sample buffer not 1");
+        return;
+    }
+    if(!CMSampleBufferIsValid(sampleBuffer)){
+        NSLog(@"sample buffer not valid");
+        return;
+    }
     CVImageBufferRef imageBuffer = CMSampleBufferGetImageBuffer(sampleBuffer);
     CVPixelBufferLockBaseAddress(imageBuffer,0);
     
@@ -98,11 +115,18 @@
     paused = YES;
     if(session && session.isRunning){
         [session stopRunning];
+        for(AVCaptureInput *i in [NSArray arrayWithArray:session.inputs]){
+            [session removeInput:i];
+        }
     }
 }
 
 -(NSString*)name{
     return @"Camera";
+}
+
+-(NSUInteger)byteCountFromSingleFrame{
+    return 6;
 }
 
 @end

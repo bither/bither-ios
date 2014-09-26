@@ -64,7 +64,7 @@ static StatusBarNotificationWindow* notificationWindow;
     }];
     [[BTAddressManager instance] initAddress];
     [CrashLog initCrashLog];
-    [[BTSettings instance] openBitheriConsole];
+ //   [[BTSettings instance] openBitheriConsole];
     UIStoryboard *storyboard = self.window.rootViewController.storyboard;
     if(![[BTSettings instance]needChooseMode]){
         IOS7ContainerViewController *container = [[IOS7ContainerViewController alloc]init];

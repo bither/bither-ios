@@ -92,6 +92,8 @@
 		AC53ABAD19D27875007C095C /* UEntropyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AC53ABAC19D27875007C095C /* UEntropyViewController.m */; };
 		AC53ABB019D27B74007C095C /* UEntropyCamera.m in Sources */ = {isa = PBXBuildFile; fileRef = AC53ABAF19D27B74007C095C /* UEntropyCamera.m */; };
 		AC53ABB319D2CD80007C095C /* UEntropyCollector.m in Sources */ = {isa = PBXBuildFile; fileRef = AC53ABB219D2CD80007C095C /* UEntropyCollector.m */; };
+		AC53ABCC19D40272007C095C /* UEntropyMic.m in Sources */ = {isa = PBXBuildFile; fileRef = AC53ABCB19D40272007C095C /* UEntropyMic.m */; };
+		AC53ABCF19D52387007C095C /* UEntropySensor.m in Sources */ = {isa = PBXBuildFile; fileRef = AC53ABCE19D52387007C095C /* UEntropySensor.m */; };
 		AC6163941964ED2F0055C9D0 /* DialogWithArrow.m in Sources */ = {isa = PBXBuildFile; fileRef = AC6163931964ED2F0055C9D0 /* DialogWithArrow.m */; };
 		AC616397196507B40055C9D0 /* DialogTxConfirmation.m in Sources */ = {isa = PBXBuildFile; fileRef = AC616396196507B40055C9D0 /* DialogTxConfirmation.m */; };
 		AC6163A01966524A0055C9D0 /* coins_received.wav in Resources */ = {isa = PBXBuildFile; fileRef = AC61639F1966524A0055C9D0 /* coins_received.wav */; };
@@ -339,6 +341,10 @@
 		AC53ABAF19D27B74007C095C /* UEntropyCamera.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UEntropyCamera.m; sourceTree = "<group>"; };
 		AC53ABB119D2CD80007C095C /* UEntropyCollector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UEntropyCollector.h; sourceTree = "<group>"; };
 		AC53ABB219D2CD80007C095C /* UEntropyCollector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UEntropyCollector.m; sourceTree = "<group>"; };
+		AC53ABCA19D40272007C095C /* UEntropyMic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UEntropyMic.h; sourceTree = "<group>"; };
+		AC53ABCB19D40272007C095C /* UEntropyMic.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UEntropyMic.m; sourceTree = "<group>"; };
+		AC53ABCD19D52387007C095C /* UEntropySensor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UEntropySensor.h; sourceTree = "<group>"; };
+		AC53ABCE19D52387007C095C /* UEntropySensor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UEntropySensor.m; sourceTree = "<group>"; };
 		AC6163921964ED2F0055C9D0 /* DialogWithArrow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DialogWithArrow.h; sourceTree = "<group>"; };
 		AC6163931964ED2F0055C9D0 /* DialogWithArrow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DialogWithArrow.m; sourceTree = "<group>"; };
 		AC616395196507B40055C9D0 /* DialogTxConfirmation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DialogTxConfirmation.h; sourceTree = "<group>"; };
@@ -801,10 +807,14 @@
 			children = (
 				AC53ABAB19D27875007C095C /* UEntropyViewController.h */,
 				AC53ABAC19D27875007C095C /* UEntropyViewController.m */,
-				AC53ABAE19D27B74007C095C /* UEntropyCamera.h */,
-				AC53ABAF19D27B74007C095C /* UEntropyCamera.m */,
 				AC53ABB119D2CD80007C095C /* UEntropyCollector.h */,
 				AC53ABB219D2CD80007C095C /* UEntropyCollector.m */,
+				AC53ABAE19D27B74007C095C /* UEntropyCamera.h */,
+				AC53ABAF19D27B74007C095C /* UEntropyCamera.m */,
+				AC53ABCA19D40272007C095C /* UEntropyMic.h */,
+				AC53ABCB19D40272007C095C /* UEntropyMic.m */,
+				AC53ABCD19D52387007C095C /* UEntropySensor.h */,
+				AC53ABCE19D52387007C095C /* UEntropySensor.m */,
 			);
 			path = XRandom;
 			sourceTree = "<group>";
@@ -1260,6 +1270,7 @@
 				4254085E1946A219007AF99C /* UIImageExt.m in Sources */,
 				AC275EE719B5B9D800F1C02F /* PeerCell.m in Sources */,
 				421B03C319495DBB003A45F1 /* ChooseModeViewController.m in Sources */,
+				AC53ABCF19D52387007C095C /* UEntropySensor.m in Sources */,
 				ACDDDC2019480DE00008A79D /* PiPageViewController.m in Sources */,
 				AC0135D9194FDCDF00E3BB95 /* HotAddressAddPrivateKeyViewController.m in Sources */,
 				ACEE7D4219D403DC00932B39 /* DonationSetting.m in Sources */,
@@ -1275,6 +1286,7 @@
 				AC6BAC75196FD8430013B9E8 /* DialogImportPrivateKey.m in Sources */,
 				AC0135DC19501D9400E3BB95 /* DialogPassword.m in Sources */,
 				421B03BC19495AEF003A45F1 /* OptionHotViewController.m in Sources */,
+				AC53ABCC19D40272007C095C /* UEntropyMic.m in Sources */,
 				AC53ABB019D27B74007C095C /* UEntropyCamera.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
