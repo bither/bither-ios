@@ -62,6 +62,7 @@
 
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
+    [UIApplication sharedApplication].idleTimerDisabled = YES;
     [self.collector onResume];
 }
 
@@ -86,6 +87,7 @@
     [super viewDidDisappear:animated];
     [self.collector onPause];
     [self.collector stop];
+    [UIApplication sharedApplication].idleTimerDisabled = NO;
 }
 
 - (void)didReceiveMemoryWarning {
