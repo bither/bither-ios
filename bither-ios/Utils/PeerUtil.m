@@ -52,13 +52,8 @@ static PeerUtil * peerUtil;
             if ([[BTPeerManager instance] doneSyncFromSPV]) {
                 [self syncSpvFromBitcoinDone];
             }else{
-                BOOL networkIsAvailable=![[UserDefaultsUtil instance] getSyncBlockOnlyWifi]||[NetworkUtil isEnableWIFI];
-                if (networkIsAvailable) {
-                    if (![[BTPeerManager instance] connected]) {
-                        [[BTPeerManager instance] start];
-                    }
-                }else{
-                    [self stopPeer];
+                if (![[BTPeerManager instance] connected]) {
+                    [[BTPeerManager instance] start];
                 }
                 [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(syncSpvFromBitcoinDone) name:BTPeerManagerSyncFromSPVFinishedNotification object:nil];
                 addObserver=YES;
@@ -92,9 +87,10 @@ static PeerUtil * peerUtil;
        
         BOOL downloadSpvFinish=[[UserDefaultsUtil instance ] getDownloadSpvFinish]&&[[BTPeerManager instance] doneSyncFromSPV];
         BOOL walletIsSyncComplete=[[BTAddressManager instance] allSyncComplete];
+        BOOL networkIsAvailable=![[UserDefaultsUtil instance] getSyncBlockOnlyWifi]||[NetworkUtil isEnableWIFI];
        // BOOL netWorkState=[NetworkUtil isEnableWIFI]||![[UserDefaultsUtil instance] getSyncBlockOnlyWifi];
         BTPeerManager * peerManager=[BTPeerManager instance];
-        if (downloadSpvFinish && walletIsSyncComplete ) {
+        if (networkIsAvailable&&downloadSpvFinish && walletIsSyncComplete ) {
             if (![peerManager connected]) {
                 [peerManager start];
             }
