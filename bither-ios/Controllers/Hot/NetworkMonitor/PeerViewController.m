@@ -80,6 +80,12 @@
     [self.peers sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {
         BTPeer * peer1=obj1;
         BTPeer * peer2=obj2;
+        if (peer1.version>0&&peer2.version==0) {
+            return NSOrderedAscending;
+        }
+        if (peer1.version==0&&peer2.version>0) {
+            return NSOrderedDescending;
+        }
         if (peer1.peerAddress>peer2.peerAddress) {
             return NSOrderedAscending;
         }else if(peer1.peerAddress==peer2.peerAddress){
