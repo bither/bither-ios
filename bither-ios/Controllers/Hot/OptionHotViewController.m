@@ -42,7 +42,8 @@
     [super viewDidLoad];
     self.tableView.dataSource=self;
     self.tableView.delegate=self;
-    [self configureHeaderAndFooter:self.tableView background:ColorBg isHot:YES];
+    NSString * version=[NSString stringWithFormat:@"Bither Hot %@", [[[NSBundle mainBundle]infoDictionary]objectForKey:(NSString*)kCFBundleVersionKey]];
+    [self configureHeaderAndFooter:self.tableView background:ColorBg isHot:YES version:version];
     [self reload];
 }
 -(void)reload{

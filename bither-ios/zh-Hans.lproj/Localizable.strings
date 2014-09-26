@@ -404,4 +404,5 @@
 "Not match BIP38-private key format"="不符合BIP38私钥格式";
 "Scan BIP38-private key QR Code"="扫描BIP38私钥二维码";
 
+"Based on %@ %@"="基于 %@ %@";
 

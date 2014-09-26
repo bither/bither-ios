@@ -22,7 +22,7 @@
 @implementation UIViewController(ConfigureTableView)
 
 
--(void)configureHeaderAndFooter :(UITableView * )tableView background:(UIColor *)colorBg isHot:(BOOL)isHot{
+-(void)configureHeaderAndFooter :(UITableView * )tableView background:(UIColor *)colorBg isHot:(BOOL)isHot version:(NSString *)version{
     UIImageView *ivTop = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"list_item_card_shadow_top"]];
     ivTop.contentMode = UIViewContentModeScaleToFill;
     UIView *vBottomCover = [[UIView alloc]initWithFrame:CGRectMake(0, -1, tableView.frame.size.width, 1)];
@@ -50,15 +50,7 @@
     lblVersion.textAlignment = NSTextAlignmentCenter;
     lblVersion.textColor = [UIColor colorWithWhite:1 alpha:0.6f];
     lblVersion.font = [UIFont systemFontOfSize:12];
-    if (isHot) {
-       lblVersion.text = [NSString stringWithFormat:@"Bither Hot %@", [[[NSBundle mainBundle]infoDictionary]objectForKey:(NSString*)kCFBundleVersionKey]];
-       
-        
-    }else{
-        lblVersion.text = [NSString stringWithFormat:@"Bither Cold %@", [[[NSBundle mainBundle]infoDictionary]objectForKey:(NSString*)kCFBundleVersionKey]];
-    
-    }
-   
+    lblVersion.text=version;   
     [lblVersion sizeToFit];
     
     UIView* footer = [[UIView alloc]initWithFrame:CGRectMake(0, 0, tableView.frame.size.width, ivBottom.frame.size.height + logoTopMargin + ivLogo.frame.size.height + logoBottomMargin + lblVersion.frame.size.height)];
