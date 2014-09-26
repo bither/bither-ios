@@ -16,6 +16,7 @@
 #import "TransactionsUtil.h"
 #import "KeyUtil.h"
 #import "BTPrivateKeyUtil.h"
+#import "BTQRCodeUtil.h"
 
 @interface ImportPrivateKey()
 @property(nonatomic,strong) NSString * passwrod;
@@ -130,23 +131,31 @@
     return YES;
 }
 -(void)addKey:(BTKey *)key{
+    BTAddress *address;
     if (self.importPrivateKeyType==BitherQrcode) {
-        [KeyUtil addBitcoinjKey:[[NSArray alloc] initWithObjects:self.content, nil] withPassphrase:self.passwrod error:nil];
+        NSString * encryptKey=[BTQRCodeUtil replaceNewQRCode:self.content];
+         address=[[BTAddress alloc] initWithAddress:encryptKey pubKey:key.publicKey hasPrivKey:YES isXRandom:key.isFromXRandom];
     }else{
         NSString * encryptKey=[BTPrivateKeyUtil getPrivateKeyString:key passphrase:self.passwrod];
-        NSError * error;
-        [KeyUtil addBitcoinjKey:[[NSArray alloc] initWithObjects:encryptKey, nil] withPassphrase:self.passwrod error:&error];
-        //todo add address
+        address=[[BTAddress alloc] initWithAddress:encryptKey pubKey:key.publicKey hasPrivKey:YES isXRandom:key.isFromXRandom];
     }
-    dispatch_async(dispatch_get_main_queue(), ^{
-         [self showMsg:NSLocalizedString(@"Import success.", nil)];
-    });
+    if (address) {
+        [KeyUtil addAddressList:[[NSArray alloc] initWithObjects:address, nil]];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self showMsg:NSLocalizedString(@"Import success.", nil)];
+        });
+    }else{
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self showMsg:NSLocalizedString(@"Import failed.", nil)];
+        });
+    }
+    
    
 }
 
 -(BTKey *)getKey{
     switch (self.importPrivateKeyType) {
-        case Text:
+        case PrivateText:
             return [BTKey keyWithPrivateKey:self.content];
         case Bip38:
             return [BTKey keyWithPrivateKey:self.content];

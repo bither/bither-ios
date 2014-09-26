@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 typedef enum  {
-     Text, BitherQrcode, Bip38
+     PrivateText, BitherQrcode, Bip38
 }ImportPrivateKeyType;
 
 @interface ImportPrivateKey : NSObject

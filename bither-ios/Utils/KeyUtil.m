@@ -65,6 +65,20 @@
     [[PeerUtil instance]startPeer];
     return YES; 
 }
++(BOOL)addAddressList:(NSArray *)array {
+    [[PeerUtil instance] stopPeer];
+    for(BTAddress * btAddress in array){
+        if (![[[BTAddressManager instance]  privKeyAddresses] containsObject:btAddress]&&![[[BTAddressManager instance] watchOnlyAddresses] containsObject:btAddress]) {
+            [[BTAddressManager instance] addAddress:btAddress];
+            if (![[UserDefaultsUtil instance] getPasswordSeed]) {
+                BTPasswordSeed * passwordSeed=[[BTPasswordSeed alloc] initWithBTAddress:btAddress];
+                [[UserDefaultsUtil instance] setPasswordSeed:passwordSeed];
+            }
+        }
+    }
+    [[PeerUtil instance]startPeer];
+    return YES;
+}
 +(void) addWatckOnly:(NSArray *)pubKeys{
     [[PeerUtil instance] stopPeer];
     for (NSString * pubKey in pubKeys) {
