@@ -2,9 +2,19 @@
 //  ImportPrivateKey.m
 //  bither-ios
 //
-//  Created by noname on 14-9-25.
-//  Copyright (c) 2014年 noname. All rights reserved.
+//  Copyright 2014 http://Bither.net
 //
+//  Licensed under the Apache License, Version 2.0 (the "License");
+//  you may not use this file except in compliance with the License.
+//  You may obtain a copy of the License at
+//
+//    http://www.apache.org/licenses/LICENSE-2.0
+//
+//  Unless required by applicable law or agreed to in writing, software
+//  distributed under the License is distributed on an "AS IS" BASIS,
+//  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+//  See the License for the specific language governing permissions and
+//  limitations under the License.
 
 #import "ImportPrivateKey.h"
 #import "BTKey+Bitcoinj.h"
@@ -106,7 +116,7 @@
         BTPasswordSeed * passwrodSeed=[[UserDefaultsUtil instance] getPasswordSeed];
         if (passwrodSeed) {
             BOOL checkPassword=[passwrodSeed checkPassword:self.passwrod];
-            if (checkPassword) {
+            if (!checkPassword) {
                 dispatch_async(dispatch_get_main_queue(), ^{
                     [self exit];
                     [self showMsg:NSLocalizedString(@"Password of the private key to import is different from ours. Import failed.", nil)];
@@ -140,11 +150,11 @@
         BTAddress *address;
         if (self.importPrivateKeyType==BitherQrcode) {
             NSString * encryptKey=[BTQRCodeUtil replaceNewQRCode:self.content];
-            address=[[BTAddress alloc] initWithAddress:encryptKey pubKey:key.publicKey hasPrivKey:YES isXRandom:key.isFromXRandom];
+            address=[[BTAddress alloc] initWithKey:key encryptPrivKey:encryptKey isXRandom:key.isFromXRandom];
         }else{
             NSString * encryptKey=[BTPrivateKeyUtil getPrivateKeyString:key passphrase:self.passwrod];
-            if (encryptKey==nil) {
-                address=[[BTAddress alloc] initWithAddress:encryptKey pubKey:key.publicKey hasPrivKey:YES isXRandom:key.isFromXRandom];
+            if (encryptKey!=nil) {
+                address=[[BTAddress alloc] initWithKey:key encryptPrivKey:encryptKey isXRandom:key.isFromXRandom];;
             }
         }
         if (address) {

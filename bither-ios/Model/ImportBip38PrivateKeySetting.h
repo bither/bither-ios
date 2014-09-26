@@ -1,5 +1,5 @@
 //
-//  ImportPrivateKey.h
+//  ImportBip38PrivateKeySetting.h
 //  bither-ios
 //
 //  Copyright 2014 http://Bither.net
@@ -16,13 +16,21 @@
 //  See the License for the specific language governing permissions and
 //  limitations under the License.
 
-#import <Foundation/Foundation.h>
-typedef enum  {
-     PrivateText, BitherQrcode, Bip38
-}ImportPrivateKeyType;
 
-@interface ImportPrivateKey : NSObject
--(instancetype) initWithController:(UIViewController *)controller  content:(NSString *)content passwrod:(NSString *)passwrod importPrivateKeyType:(ImportPrivateKeyType) importPrivateKeyType;
--(void)importPrivateKey;
+#import <Foundation/Foundation.h>
+#import "HotCheckPrivateKeyViewController.h"
+#import "ScanQrCodeViewController.h"
+#import "DialogPassword.h"
+#import "StringUtil.h"
+#import "BTKey+Bitcoinj.h"
+#import "DialogImportPrivateKey.h"
+#import "Setting.h"
+
+
+@interface ImportBip38PrivateKeySetting : Setting<UIActionSheetDelegate,ScanQrCodeDelegate,DialogPasswordDelegate,DialogImportPrivateKeyDelegate>{
+        NSString * _result;
+}
+@property(nonatomic,strong) UIViewController * controller;
++(Setting *)getImportBip38PrivateKeySetting;
 
 @end
