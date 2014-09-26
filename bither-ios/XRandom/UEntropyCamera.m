@@ -54,7 +54,7 @@
         preview.bounds = bounds;
         preview.position = CGPointMake(bounds.size.width / 2, bounds.size.height / 2);
         preview.videoGravity = AVLayerVideoGravityResizeAspectFill;
-        [view.layer addSublayer: preview];
+        [view.layer insertSublayer:preview atIndex:0];
         self.collector = collector;
         paused = YES;
     }
