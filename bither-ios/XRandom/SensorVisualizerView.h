@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#define kSensorVisualizerViewItemSize (30)
 @interface SensorVisualizerView : UIView
-
+-(void)updateViewWithSensors:(NSArray*)sensors;
+-(void)newDataFrom:(NSString*)sensor;
 @end
