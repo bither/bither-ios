@@ -28,11 +28,12 @@
 }
 
 @property (weak) UEntropyCollector *collector;
+@property (nonatomic) AudioVisualizerView* view;
 @end
 
 @implementation UEntropyMic
 
--(instancetype)initWithView:(UIView*)view andCollector:(UEntropyCollector*)collector{
+-(instancetype)initWithView:(AudioVisualizerView*)view andCollector:(UEntropyCollector*)collector{
     self = [super init];
     if(self){
         device = [AVCaptureDevice defaultDeviceWithMediaType: AVMediaTypeAudio];
@@ -49,6 +50,7 @@
         [session addOutput:output];
         
         self.collector = collector;
+        self.view = view;
         paused = YES;
     }
     return self;
@@ -87,6 +89,7 @@
     }
     
     [self.collector onNewData:data fromSource:self];
+    [self.view showConnectionData:connection];
     CFRelease(blockBuffer);
 }
 

@@ -23,6 +23,9 @@
 #import "UEntropyCollector.h"
 #import "DialogAlert.h"
 #import "DialogProgress.h"
+#import "AudioVisualizerView.h"
+
+#define kMicViewHeight (100)
 
 @interface UEntropyViewController ()<UEntropyDelegate>{
     NSString* password;
@@ -47,9 +50,12 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    AudioVisualizerView* vMic = [[AudioVisualizerView alloc]initWithFrame:CGRectMake(0, self.view.frame.size.height - kMicViewHeight, self.view.frame.size.width, kMicViewHeight)];
+    [self.view addSubview:vMic];
+    
     self.collector = [[UEntropyCollector alloc]initWithDelegate:self];
     [self.collector addSource:  [[UEntropyCamera alloc] initWithViewController: self.view andCollector: self.collector],
-                                [[UEntropyMic alloc] initWithView: nil andCollector: self.collector],
+                                [[UEntropyMic alloc] initWithView: vMic andCollector: self.collector],
                                 [[UEntropySensor alloc] initWithCollecor: self.collector],
                                 nil];
     [self configureOverlay];
@@ -80,7 +86,7 @@
 
 -(void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
-    [self startGenerate];
+    //[self startGenerate];
 }
 
 - (void)viewDidDisappear:(BOOL)animated{
