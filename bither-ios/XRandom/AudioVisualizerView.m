@@ -33,6 +33,8 @@
     CAShapeLayer *mainLine;
     NSMutableArray *subLines;
     NSTimeInterval beginTime;
+    UIBezierPath *mainPath;
+    NSMutableArray* subPaths;
 }
 @end
 
@@ -65,6 +67,8 @@
     mainLine.lineJoin = @"round";
     subLines = [[NSMutableArray alloc]init];
     [self.layer addSublayer:mainLine];
+    mainPath = [UIBezierPath bezierPath];
+    subPaths = [[NSMutableArray alloc]init];
     for(int i = 0; i < kSubLineCount; i++){
         CAShapeLayer *layer = [CAShapeLayer layer];
         layer.lineWidth = 0.5f;
@@ -74,6 +78,7 @@
         layer.lineJoin = @"round";
         [subLines addObject:layer];
         [self.layer insertSublayer:layer atIndex:0];
+        [subPaths addObject:[UIBezierPath bezierPath]];
     }
     displayLink = [CADisplayLink displayLinkWithTarget:self selector:@selector(handleDisplay:)];
     [displayLink addToRunLoop:[NSRunLoop mainRunLoop] forMode:NSDefaultRunLoopMode];
@@ -88,12 +93,8 @@
     CGFloat height = self.frame.size.height;
 
     CGFloat xOffset = (width - kHorizontalStraightLineLength * 2) / kWaveCount / kWaveDuration * (currentTime - beginTime);
-    UIBezierPath *mainPath = [UIBezierPath bezierPath];
-    NSMutableArray* subPaths = [[NSMutableArray alloc]init];
-    for(int i = 0; i < subLines.count; i++){
-        [subPaths addObject:[UIBezierPath bezierPath]];
-    }
     
+    [mainPath removeAllPoints];
     [mainPath moveToPoint:CGPointMake(0, height / 2)];
     CGFloat controlY = [self yForX:kHorizontalStraightLineLength * 3 offset:xOffset];
     CGFloat connectionY = [self yForX:kHorizontalStraightLineLength * 4 offset:xOffset];
@@ -103,6 +104,7 @@
     for(int i = 0; i < subPaths.count; i++){
         CGFloat rate = [self rateForSublineIndex:i];
         UIBezierPath *path = subPaths[i];
+        [path removeAllPoints];
         [path moveToPoint:CGPointMake(0, height / 2)];
         CGFloat subControlY = (controlY - height / 2) * rate + height / 2;
         CGFloat subConnectionY = (connectionY - height / 2) * rate + height / 2;

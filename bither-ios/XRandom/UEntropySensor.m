@@ -13,6 +13,7 @@
 @interface UEntropySensor(){
     CMMotionManager* manager;
     NSOperationQueue* queue;
+    BOOL paused;
 }
 @property (weak) UEntropyCollector* collector;
 @property (weak) SensorVisualizerView* view;
@@ -33,10 +34,14 @@
 }
 
 -(void)onResume{
+    paused = NO;
     [self updateViews];
     [[UIScreen mainScreen] addObserver:self forKeyPath:@"brightness" options:NSKeyValueObservingOptionNew context:NULL];
     if(manager.isAccelerometerAvailable){
         [manager startAccelerometerUpdatesToQueue:queue withHandler:^(CMAccelerometerData *accelerometerData, NSError *error) {
+            if(paused){
+                return;
+            }
             if(!error){
                 CMAcceleration a = accelerometerData.acceleration;
                 NSMutableData *data = [NSMutableData data];
@@ -49,6 +54,9 @@
     }
     if(manager.isGyroAvailable){
         [manager startGyroUpdatesToQueue:queue withHandler:^(CMGyroData *gyroData, NSError *error) {
+            if(paused){
+                return;
+            }
             if(!error){
                 CMRotationRate a = gyroData.rotationRate;
                 NSMutableData *data = [NSMutableData data];
@@ -61,6 +69,9 @@
     }
     if(manager.isMagnetometerAvailable){
         [manager startMagnetometerUpdatesToQueue:queue withHandler:^(CMMagnetometerData *magnetometerData, NSError *error) {
+            if(paused){
+                return;
+            }
             if(!error){
                 CMMagneticField a = magnetometerData.magneticField;
                 NSMutableData *data = [NSMutableData data];
@@ -74,6 +85,7 @@
 }
 
 -(void)onPause{
+    paused = YES;
     [[UIScreen mainScreen]removeObserver:self forKeyPath:@"brightness"];
     [manager stopAccelerometerUpdates];
     [manager stopGyroUpdates];
