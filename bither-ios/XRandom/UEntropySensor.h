@@ -7,11 +7,13 @@
 //
 
 #import "UEntropyCollector.h"
+#import "SensorVisualizerView.h"
+
 #define kUEntropySensorAccelerometer (@"Accelerometer")
 #define kUEntropySensorGyro (@"Gyro")
 #define kUEntropySensorMagnetometer (@"Magnetometer")
 #define kUEntropySensorBrightness (@"Brightness")
 
 @interface UEntropySensor : NSObject<UEntropySource>
--(instancetype) initWithCollecor:(UEntropyCollector*) collector;
+-(instancetype) initWithView:(SensorVisualizerView*)view andCollecor:(UEntropyCollector*) collector;
 @end
