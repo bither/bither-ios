@@ -403,8 +403,8 @@
 "Enter your BIP38-private key"="輸入BIP38私鑰明文";
 "Not match BIP38-private key format"="不符合BIP38私鑰格式";
 "Scan BIP38-private key QR Code"="掃描BIP38私鑰二維碼";
-
 "Based on %@ %@"="基于 %@ %@";
+
 "xrandom_no_source"="無可用隨機源";
 "xrandom_generating_failed"="生成失敗";
 "xrandom_cancel_confirm"="停止生成?";
