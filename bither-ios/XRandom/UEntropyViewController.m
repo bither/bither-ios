@@ -42,6 +42,10 @@
     void(^cancelBlock)();
     DialogProgress *dpStopping;
     UIProgressView *pv;
+    UIView *vOverlayTop;
+    UIView *vOverlayBottom;
+    UIImageView* ivOverlayTop;
+    UIImageView* ivOverlayBottom;
 }
 @property UEntropyCollector* collector;
 @end
