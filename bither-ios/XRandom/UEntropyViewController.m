@@ -51,9 +51,16 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    UIView *dimmer = [[UIView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
+    dimmer.backgroundColor = [UIColor colorWithWhite:0 alpha:0.2];
+    dimmer.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
+    [self.view addSubview:dimmer];
+    
     AudioVisualizerView* vMic = [[AudioVisualizerView alloc]initWithFrame:CGRectMake(0, self.view.frame.size.height - kMicViewHeight, self.view.frame.size.width, kMicViewHeight)];
+    vMic.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleTopMargin;
     [self.view addSubview:vMic];
     SensorVisualizerView* vSensor = [[SensorVisualizerView alloc]initWithFrame:CGRectMake(0, CGRectGetMinY(vMic.frame) - kSensorVisualizerViewItemSize - 10, self.view.frame.size.width, kSensorVisualizerViewItemSize)];
+    vSensor.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleTopMargin;
     [self.view addSubview:vSensor];
     
     self.collector = [[UEntropyCollector alloc]initWithDelegate:self];
@@ -61,8 +68,8 @@
                                 [[UEntropyMic alloc] initWithView: vMic andCollector: self.collector],
                                 [[UEntropySensor alloc] initWithView: vSensor andCollecor: self.collector],
                                 nil];
-    [self configureOverlay];
     dpStopping = [[DialogProgress alloc]initWithMessage:NSLocalizedString(@"xrandom_stopping", nil)];
+    [self configureOverlay];
 }
 
 -(void)configureOverlay{
