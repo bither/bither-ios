@@ -18,6 +18,7 @@
 
 #import "UEntropyCollector.h"
 #import "NSMutableData+Bitcoin.h"
+#import "NSString+Base58.h"
 
 @interface UEntropyCollector(){
     dispatch_queue_t queue;
@@ -93,7 +94,7 @@
         
         dispatch_async(queue, ^{
             if(shouldCollectData && output && output.hasSpaceAvailable){
-                NSInteger actuallyWriten = [output write:result.bytes maxLength:result.length];
+                [output write:result.bytes maxLength:result.length];
             }
         });
     }
@@ -122,13 +123,15 @@
     NSUInteger dataNeeded = length;
     while (dataNeeded > 0) {
         if(input.hasBytesAvailable){
-            NSInteger outcome = [input read:data.mutableBytes + (length - dataNeeded) maxLength:dataNeeded];
+            uint8_t buf[dataNeeded];
+            NSInteger outcome = [input read:buf maxLength:dataNeeded];
             if(outcome < 0){
                 NSLog(@"uentropy collector read error");
                 [self.delegate onNoSourceAvailable];
                 return nil;
             }
-            dataNeeded -= outcome;
+            [data appendBytes:(const void *)buf length:outcome];
+            dataNeeded = length - data.length;
         }
     }
     return data;

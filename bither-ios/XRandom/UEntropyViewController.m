@@ -25,6 +25,7 @@
 #import "DialogProgress.h"
 #import "AudioVisualizerView.h"
 #import "SensorVisualizerView.h"
+#import "NSString+Base58.h"
 
 #define kMicViewHeight (100)
 
@@ -83,14 +84,14 @@
 
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    [UIApplication sharedApplication].idleTimerDisabled = YES;
+  //  [UIApplication sharedApplication].idleTimerDisabled = YES;
     [self.collector onResume];
 }
 
 - (void)viewWillDisappear:(BOOL)animated{
     [self.collector onPause];
     [self.collector stop];
-    [UIApplication sharedApplication].idleTimerDisabled = NO;
+ //   [UIApplication sharedApplication].idleTimerDisabled = NO;
     [super viewWillDisappear:animated];
 }
 
@@ -161,6 +162,7 @@
             NSData* data = [self.collector nextBytes:32];
             if(data){
                 NSLog(@"uentropy outcome data %d/%lu", i + 1, count);
+                sleep(1);
                 //TODO new key
             }else{
                 dispatch_async(dispatch_get_main_queue(), ^{
