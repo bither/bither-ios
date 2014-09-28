@@ -24,6 +24,7 @@
 #import "DialogAlert.h"
 #import "DialogProgress.h"
 #import "AudioVisualizerView.h"
+#import "SensorVisualizerView.h"
 
 #define kMicViewHeight (100)
 
@@ -52,11 +53,13 @@
     [super viewDidLoad];
     AudioVisualizerView* vMic = [[AudioVisualizerView alloc]initWithFrame:CGRectMake(0, self.view.frame.size.height - kMicViewHeight, self.view.frame.size.width, kMicViewHeight)];
     [self.view addSubview:vMic];
+    SensorVisualizerView* vSensor = [[SensorVisualizerView alloc]initWithFrame:CGRectMake(0, CGRectGetMinY(vMic.frame) - kSensorVisualizerViewItemSize - 10, self.view.frame.size.width, kSensorVisualizerViewItemSize)];
+    [self.view addSubview:vSensor];
     
     self.collector = [[UEntropyCollector alloc]initWithDelegate:self];
     [self.collector addSource:  [[UEntropyCamera alloc] initWithViewController: self.view andCollector: self.collector],
                                 [[UEntropyMic alloc] initWithView: vMic andCollector: self.collector],
-                                [[UEntropySensor alloc] initWithCollecor: self.collector],
+                                [[UEntropySensor alloc] initWithView: vSensor andCollecor: self.collector],
                                 nil];
     [self configureOverlay];
     dpStopping = [[DialogProgress alloc]initWithMessage:NSLocalizedString(@"xrandom_stopping", nil)];

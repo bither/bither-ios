@@ -28,7 +28,7 @@
 }
 
 @property (weak) UEntropyCollector *collector;
-@property (nonatomic) AudioVisualizerView* view;
+@property (weak) AudioVisualizerView* view;
 @end
 
 @implementation UEntropyMic

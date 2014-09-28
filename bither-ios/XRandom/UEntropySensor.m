@@ -15,17 +15,19 @@
     NSOperationQueue* queue;
 }
 @property (weak) UEntropyCollector* collector;
+@property (weak) SensorVisualizerView* view;
 @end
 
 @implementation UEntropySensor
 
--(instancetype) initWithCollecor:(UEntropyCollector*) collector{
+-(instancetype) initWithView:(SensorVisualizerView*)view andCollecor:(UEntropyCollector*) collector{
     self = [super init];
     if(self){
         self.collector = collector;
         manager = [[CMMotionManager alloc]init];
         queue = [[NSOperationQueue alloc]init];
         queue.name = @"UEntropySensor";
+        self.view = view;
     }
     return self;
 }
@@ -91,25 +93,26 @@
 }
 
 -(void)newData:(NSData*)data from:(NSString*)source{
+    [self.view newDataFrom:source];
     [self.collector onNewData:data fromSource:self];
 }
 
 -(void)updateViews{
-    dispatch_async(dispatch_get_main_queue(), ^{
-        int count = 0;
-        if(manager.isMagnetometerAvailable){
-            count++;
-        }
-        if(manager.isAccelerometerAvailable){
-            count++;
-        }
-        if(manager.isGyroAvailable){
-            count++;
-        }
-        if(count == 0){
-            [self.collector onError:[[NSError alloc]initWithDomain:kUEntropySourceErrorDomain code:kUEntropySourceSensorCode userInfo:@{kUEntropySourceErrorDescKey: @"no sensors"}] fromSource:self];
-        }
-    });
+    NSMutableArray *sensors = [NSMutableArray array];
+    if(manager.isMagnetometerAvailable){
+        [sensors addObject:kUEntropySensorMagnetometer];
+    }
+    if(manager.isAccelerometerAvailable){
+        [sensors addObject:kUEntropySensorAccelerometer];
+    }
+    if(manager.isGyroAvailable){
+        [sensors addObject:kUEntropySensorGyro];
+    }
+    [sensors addObject:kUEntropySensorBrightness];
+    if(sensors.count == 0){
+        [self.collector onError:[[NSError alloc]initWithDomain:kUEntropySourceErrorDomain code:kUEntropySourceSensorCode userInfo:@{kUEntropySourceErrorDescKey: @"no sensors"}] fromSource:self];
+    }
+    [self.view updateViewWithSensors:sensors];
 }
 
 -(NSString*)name{

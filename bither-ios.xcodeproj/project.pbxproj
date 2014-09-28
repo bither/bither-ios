@@ -95,6 +95,7 @@
 		AC53ABCC19D40272007C095C /* UEntropyMic.m in Sources */ = {isa = PBXBuildFile; fileRef = AC53ABCB19D40272007C095C /* UEntropyMic.m */; };
 		AC53ABCF19D52387007C095C /* UEntropySensor.m in Sources */ = {isa = PBXBuildFile; fileRef = AC53ABCE19D52387007C095C /* UEntropySensor.m */; };
 		AC53ABDB19D7B657007C095C /* AudioVisualizerView.m in Sources */ = {isa = PBXBuildFile; fileRef = AC53ABDA19D7B657007C095C /* AudioVisualizerView.m */; };
+		AC53ABE119D7EAAE007C095C /* SensorVisualizerView.m in Sources */ = {isa = PBXBuildFile; fileRef = AC53ABE019D7EAAE007C095C /* SensorVisualizerView.m */; };
 		AC6163941964ED2F0055C9D0 /* DialogWithArrow.m in Sources */ = {isa = PBXBuildFile; fileRef = AC6163931964ED2F0055C9D0 /* DialogWithArrow.m */; };
 		AC616397196507B40055C9D0 /* DialogTxConfirmation.m in Sources */ = {isa = PBXBuildFile; fileRef = AC616396196507B40055C9D0 /* DialogTxConfirmation.m */; };
 		AC6163A01966524A0055C9D0 /* coins_received.wav in Resources */ = {isa = PBXBuildFile; fileRef = AC61639F1966524A0055C9D0 /* coins_received.wav */; };
@@ -351,6 +352,8 @@
 		AC53ABCE19D52387007C095C /* UEntropySensor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UEntropySensor.m; sourceTree = "<group>"; };
 		AC53ABD919D7B657007C095C /* AudioVisualizerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AudioVisualizerView.h; sourceTree = "<group>"; };
 		AC53ABDA19D7B657007C095C /* AudioVisualizerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AudioVisualizerView.m; sourceTree = "<group>"; };
+		AC53ABDF19D7EAAE007C095C /* SensorVisualizerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SensorVisualizerView.h; sourceTree = "<group>"; };
+		AC53ABE019D7EAAE007C095C /* SensorVisualizerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SensorVisualizerView.m; sourceTree = "<group>"; };
 		AC6163921964ED2F0055C9D0 /* DialogWithArrow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DialogWithArrow.h; sourceTree = "<group>"; };
 		AC6163931964ED2F0055C9D0 /* DialogWithArrow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DialogWithArrow.m; sourceTree = "<group>"; };
 		AC616395196507B40055C9D0 /* DialogTxConfirmation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DialogTxConfirmation.h; sourceTree = "<group>"; };
@@ -832,6 +835,8 @@
 				AC808B8B19D56757004E78A3 /* XRandom.m */,
 				AC53ABD919D7B657007C095C /* AudioVisualizerView.h */,
 				AC53ABDA19D7B657007C095C /* AudioVisualizerView.m */,
+				AC53ABDF19D7EAAE007C095C /* SensorVisualizerView.h */,
+				AC53ABE019D7EAAE007C095C /* SensorVisualizerView.m */,
 			);
 			path = XRandom;
 			sourceTree = "<group>";
@@ -1314,6 +1319,7 @@
 				421B03BC19495AEF003A45F1 /* OptionHotViewController.m in Sources */,
 				AC53ABCC19D40272007C095C /* UEntropyMic.m in Sources */,
 				AC53ABB019D27B74007C095C /* UEntropyCamera.m in Sources */,
+				AC53ABE119D7EAAE007C095C /* SensorVisualizerView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
