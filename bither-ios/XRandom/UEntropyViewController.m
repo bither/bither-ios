@@ -88,11 +88,12 @@
     pv.progress = 0;
     [self.view addSubview:pv];
     
-    UIButton* btnClose = [UIButton buttonWithType:UIButtonTypeSystem];
-    [btnClose setTitle:@"Close" forState:UIControlStateNormal];
+    UIButton* btnClose = [UIButton buttonWithType:UIButtonTypeCustom];
+    [btnClose setImage:[UIImage imageNamed:@"scan_cancel"] forState:UIControlStateNormal];
+    [btnClose setImage:[UIImage imageNamed:@"scan_cancel_pressed"] forState:UIControlStateHighlighted];
     [btnClose addTarget:self action:@selector(close:) forControlEvents:UIControlEventTouchUpInside];
     [btnClose sizeToFit];
-    btnClose.frame = CGRectMake(0, 0, btnClose.frame.size.width, btnClose.frame.size.height);
+    btnClose.frame = CGRectMake(10, 10, btnClose.frame.size.width, btnClose.frame.size.height);
     [self.view addSubview:btnClose];
 }
 
