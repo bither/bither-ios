@@ -25,8 +25,15 @@
 #import "DialogProgress.h"
 #import "AudioVisualizerView.h"
 #import "SensorVisualizerView.h"
+#import "NSString+Base58.h"
+#import "UIColor+Util.h"
 
 #define kMicViewHeight (100)
+#define kSaveProgress (0.1)
+#define kStartProgress (0.01)
+#define kProgressKeyRate (0.5)
+#define kProgressEntryptRate (0.5)
+#define kMinGeneratingTime (5)
 
 @interface UEntropyViewController ()<UEntropyDelegate>{
     NSString* password;
@@ -34,6 +41,7 @@
     BOOL isFinishing;
     void(^cancelBlock)();
     DialogProgress *dpStopping;
+    UIProgressView *pv;
 }
 @property UEntropyCollector* collector;
 @end
@@ -73,6 +81,13 @@
 }
 
 -(void)configureOverlay{
+    pv = [[UIProgressView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 1)];
+    pv.progressTintColor = [[UIColor parseColor:0x7ce24d] colorWithAlphaComponent:0.8];
+    pv.trackTintColor = [UIColor clearColor];
+    pv.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleBottomMargin;
+    pv.progress = 0;
+    [self.view addSubview:pv];
+    
     UIButton* btnClose = [UIButton buttonWithType:UIButtonTypeSystem];
     [btnClose setTitle:@"Close" forState:UIControlStateNormal];
     [btnClose addTarget:self action:@selector(close:) forControlEvents:UIControlEventTouchUpInside];
@@ -96,7 +111,7 @@
 
 -(void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
-    //[self startGenerate];
+    [self startGenerate];
 }
 
 - (void)viewDidDisappear:(BOOL)animated{
@@ -126,8 +141,10 @@
     NSLog(@"no source available");
 }
 
--(void)onProgress:(double)progress{
-    
+-(void)onProgress:(float)progress{
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [pv setProgress:progress animated:YES];
+    });
 }
 
 -(void)onSuccess{
@@ -151,17 +168,34 @@
 
 -(void)startGenerate{
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        float progress = kStartProgress;
+        float itemProgress = (1.0 - kStartProgress - kSaveProgress) / (float) count;
+        NSTimeInterval startGeneratingTime = [[NSDate date] timeIntervalSince1970];
         [self.collector start];
+        [self onProgress:progress];
         for(int i = 0; i < count; i++){
             if(cancelBlock){
                 [self.collector stop];
+                [self.collector onPause];
                 dispatch_async(dispatch_get_main_queue(), cancelBlock);
                 return;
             }
             NSData* data = [self.collector nextBytes:32];
             if(data){
                 NSLog(@"uentropy outcome data %d/%lu", i + 1, count);
+                progress += itemProgress * kProgressKeyRate;
+                [self onProgress:progress];
+                if(cancelBlock){
+                    [self.collector stop];
+                    [self.collector onPause];
+                    dispatch_async(dispatch_get_main_queue(), cancelBlock);
+                    return;
+                }
+                
+                sleep(1);
                 //TODO new key
+                progress += itemProgress * kProgressEntryptRate;
+                [self onProgress:progress];
             }else{
                 dispatch_async(dispatch_get_main_queue(), ^{
                     [self onFailed];
@@ -172,11 +206,17 @@
         }
         if(cancelBlock){
             [self.collector stop];
+            [self.collector onPause];
             dispatch_async(dispatch_get_main_queue(), cancelBlock);
             return;
         }
-        //TODO save
         [self.collector stop];
+        [self.collector onPause];
+        //TODO save
+        while ([[NSDate new] timeIntervalSince1970] - startGeneratingTime < kMinGeneratingTime) {
+            
+        }
+        [self onProgress:1];
         dispatch_async(dispatch_get_main_queue(), ^{
             [self onSuccess];
         });
