@@ -76,6 +76,7 @@
 -(void)processQrCodeContent:(NSString*)content dp:(DialogProgress * ) dp{
     NSArray *strs = [BTQRCodeUtil splitQRCode:content];
     NSMutableArray * addressList=[NSMutableArray new];
+    NSMutableArray * addressStrList=[NSMutableArray new];
     for(NSString * temp in strs){
         BOOL isXRandom=NO;
         NSString *pubStr=temp;
@@ -84,12 +85,14 @@
         }
         BTKey * key=[BTKey keyWithPublicKey:[pubStr hexToData]];
         key.isFromXRandom=isXRandom;
-        [addressList addObject:key.address];
+        BTAddress *btAddress = [[BTAddress alloc] initWithKey:key encryptPrivKey:nil isXRandom:isXRandom];
+        [addressList addObject:btAddress];
+        [addressStrList addObject:key.address];
     }
-    [TransactionsUtil checkAddress:addressList callback:^(id response) {
+    [TransactionsUtil checkAddress:addressStrList callback:^(id response) {
         AddressType  addressType=(AddressType)[response integerValue];
         if (addressType==AddressNormal) {
-            [KeyUtil addWatckOnly:[strs reverseObjectEnumerator].allObjects];
+            [KeyUtil addAddressList:addressList];
             dispatch_async(dispatch_get_main_queue(), ^{
                 [dp dismissWithCompletion:^{
                     [self dismissViewControllerAnimated:YES completion:^{

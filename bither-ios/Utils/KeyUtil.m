@@ -29,25 +29,20 @@
 
 @implementation KeyUtil
 +(void)addPrivateKeyByRandom:(XRandom*)xRandom  passphras:(NSString *)password count:(int) count{
-    [[PeerUtil instance] stopPeer];
+    NSMutableArray *addressList=[NSMutableArray new];
     for (int i=0; i<count; i++) {
         BTKey *key = [BTKey keyWithSecret:[NSData randomWithSize:32] compressed:YES];
         NSString * privateKeyString=[BTPrivateKeyUtil getPrivateKeyString:key passphrase:password];
         BTAddress *btAddress=[[BTAddress alloc] initWithKey:key encryptPrivKey:privateKeyString isXRandom:NO];
-        if (![[[BTAddressManager instance] privKeyAddresses] containsObject:btAddress]) {
-            [[BTAddressManager instance] addAddress:btAddress];
-            if (![[UserDefaultsUtil instance] getPasswordSeed]) {
-                BTPasswordSeed * passwordSeed=[[BTPasswordSeed alloc] initWithBTAddress:btAddress];
-                [[UserDefaultsUtil instance] setPasswordSeed:passwordSeed];
-            }
-        }
+        [addressList addObject:btAddress];
     }
-    [[PeerUtil instance] startPeer];
+    [KeyUtil addAddressList:addressList];
 
 }
 +(BOOL)addBitcoinjKey:(NSArray *)array withPassphrase:(NSString *)passphrase error:(NSError **)aError{
-    [[PeerUtil instance] stopPeer];
+    NSMutableArray *addressList=[NSMutableArray new];
     for(NSString * encryptPrivKey in array){
+        
         BTAddress *btAddress=[[BTAddress alloc] initWithBitcoinjKey:encryptPrivKey withPassphrase:passphrase];
         if (!btAddress) {
             if (aError!=NULL) {
@@ -55,52 +50,30 @@
             }
             return NO;
         }
-        if (![[[BTAddressManager instance]  privKeyAddresses] containsObject:btAddress]&&![[[BTAddressManager instance] watchOnlyAddresses] containsObject:btAddress]) {
-            [[BTAddressManager instance] addAddress:btAddress];
-            if (![[UserDefaultsUtil instance] getPasswordSeed]) {
-                BTPasswordSeed * passwordSeed=[[BTPasswordSeed alloc] initWithBTAddress:btAddress];
-                [[UserDefaultsUtil instance] setPasswordSeed:passwordSeed];
-            }
-        }
+        [addressList addObject:btAddress];
     }
-    [[PeerUtil instance]startPeer];
-    return YES; 
+    return [KeyUtil addAddressList:addressList];
+ 
 }
 +(BOOL)addAddressList:(NSArray *)array {
     [[PeerUtil instance] stopPeer];
+    array=array.reverseObjectEnumerator.allObjects;
     for(BTAddress * btAddress in array){
         if (![[[BTAddressManager instance]  privKeyAddresses] containsObject:btAddress]&&![[[BTAddressManager instance] watchOnlyAddresses] containsObject:btAddress]) {
             [[BTAddressManager instance] addAddress:btAddress];
-            if (![[UserDefaultsUtil instance] getPasswordSeed]) {
-                BTPasswordSeed * passwordSeed=[[BTPasswordSeed alloc] initWithBTAddress:btAddress];
-                [[UserDefaultsUtil instance] setPasswordSeed:passwordSeed];
+            if (btAddress.hasPrivKey) {
+                if (![[UserDefaultsUtil instance] getPasswordSeed]) {
+                    BTPasswordSeed * passwordSeed=[[BTPasswordSeed alloc] initWithBTAddress:btAddress];
+                    [[UserDefaultsUtil instance] setPasswordSeed:passwordSeed];
+                }
             }
+           
         }
     }
     [[PeerUtil instance]startPeer];
     return YES;
 }
-+(void) addWatckOnly:(NSArray *)pubKeys{
-    [[PeerUtil instance] stopPeer];
-    for (NSString * pubKey in pubKeys) {
-        BOOL isXRandom=NO;
-        NSString * pubKeyString;
-        if ([pubKey rangeOfString:XRANDOM_FLAG].location!=NSNotFound) {
-            pubKeyString=[pubKey substringFromIndex:1];
-            isXRandom=YES;
-        }else{
-            pubKeyString=pubKey;
-        }
-        BTKey *key = [BTKey keyWithPublicKey:[pubKeyString hexToData] ];
-        BTAddress *btAddress = [[BTAddress alloc] initWithKey:key encryptPrivKey:nil isXRandom:isXRandom];
-        if (![[[BTAddressManager instance] watchOnlyAddresses] containsObject:btAddress]&&![[[BTAddressManager instance] privKeyAddresses] containsObject:btAddress]) {
-            [[BTAddressManager instance] addAddress:btAddress];
-        }
 
-    }
-    [[PeerUtil instance]startPeer];
-    
-}
 
 +(void)stopMonitor:(BTAddress *)address{
     [[PeerUtil instance] stopPeer];
