@@ -86,6 +86,12 @@
         [data appendBytes:frame length:audioBuffer.mDataByteSize];
     }
     
+    NSLog(@"\n\n one data channel count %lu", connection.audioChannels.count);
+    for(AVCaptureAudioChannel * c in connection.audioChannels){
+        NSLog(@"channel average power %f, peak hold %f", c.averagePowerLevel, c.peakHoldLevel);
+    }
+    
+    
     [self.collector onNewData:data fromSource:self];
     CFRelease(blockBuffer);
 }

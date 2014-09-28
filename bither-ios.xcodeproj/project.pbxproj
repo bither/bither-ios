@@ -94,6 +94,7 @@
 		AC53ABB319D2CD80007C095C /* UEntropyCollector.m in Sources */ = {isa = PBXBuildFile; fileRef = AC53ABB219D2CD80007C095C /* UEntropyCollector.m */; };
 		AC53ABCC19D40272007C095C /* UEntropyMic.m in Sources */ = {isa = PBXBuildFile; fileRef = AC53ABCB19D40272007C095C /* UEntropyMic.m */; };
 		AC53ABCF19D52387007C095C /* UEntropySensor.m in Sources */ = {isa = PBXBuildFile; fileRef = AC53ABCE19D52387007C095C /* UEntropySensor.m */; };
+		AC53ABDB19D7B657007C095C /* AudioVisualizerView.m in Sources */ = {isa = PBXBuildFile; fileRef = AC53ABDA19D7B657007C095C /* AudioVisualizerView.m */; };
 		AC6163941964ED2F0055C9D0 /* DialogWithArrow.m in Sources */ = {isa = PBXBuildFile; fileRef = AC6163931964ED2F0055C9D0 /* DialogWithArrow.m */; };
 		AC616397196507B40055C9D0 /* DialogTxConfirmation.m in Sources */ = {isa = PBXBuildFile; fileRef = AC616396196507B40055C9D0 /* DialogTxConfirmation.m */; };
 		AC6163A01966524A0055C9D0 /* coins_received.wav in Resources */ = {isa = PBXBuildFile; fileRef = AC61639F1966524A0055C9D0 /* coins_received.wav */; };
@@ -348,6 +349,8 @@
 		AC53ABCB19D40272007C095C /* UEntropyMic.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UEntropyMic.m; sourceTree = "<group>"; };
 		AC53ABCD19D52387007C095C /* UEntropySensor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UEntropySensor.h; sourceTree = "<group>"; };
 		AC53ABCE19D52387007C095C /* UEntropySensor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UEntropySensor.m; sourceTree = "<group>"; };
+		AC53ABD919D7B657007C095C /* AudioVisualizerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AudioVisualizerView.h; sourceTree = "<group>"; };
+		AC53ABDA19D7B657007C095C /* AudioVisualizerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AudioVisualizerView.m; sourceTree = "<group>"; };
 		AC6163921964ED2F0055C9D0 /* DialogWithArrow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DialogWithArrow.h; sourceTree = "<group>"; };
 		AC6163931964ED2F0055C9D0 /* DialogWithArrow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DialogWithArrow.m; sourceTree = "<group>"; };
 		AC616395196507B40055C9D0 /* DialogTxConfirmation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DialogTxConfirmation.h; sourceTree = "<group>"; };
@@ -827,6 +830,8 @@
 				AC53ABCE19D52387007C095C /* UEntropySensor.m */,
 				AC808B8A19D56757004E78A3 /* XRandom.h */,
 				AC808B8B19D56757004E78A3 /* XRandom.m */,
+				AC53ABD919D7B657007C095C /* AudioVisualizerView.h */,
+				AC53ABDA19D7B657007C095C /* AudioVisualizerView.m */,
 			);
 			path = XRandom;
 			sourceTree = "<group>";
@@ -1264,6 +1269,7 @@
 				AC8F0DCA196CF4E400CCD0F9 /* SelectViewController.m in Sources */,
 				ACE4ED5E198A3AE600C8862C /* AdvanceViewController.m in Sources */,
 				AC9BC61019D18102003B88B5 /* SystemUtil.m in Sources */,
+				AC53ABDB19D7B657007C095C /* AudioVisualizerView.m in Sources */,
 				4269FF7E195AB6F9001213B9 /* MarketUtil.m in Sources */,
 				ACEEB8E119B46EC600F2789C /* PeerViewController.m in Sources */,
 				ACEEB8DE19B46EB900F2789C /* NetworkMonitorViewController.m in Sources */,
