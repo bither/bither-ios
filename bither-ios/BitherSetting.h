@@ -90,7 +90,7 @@ typedef NSArray *(^GetArrayBlock) (void);
 
 
 typedef enum  {
-     BITSTAMP=1, BTCE=2, HUOBI=3, OKCOIN=4, BTCCHINA=5, CHBTC=6
+     BITSTAMP=1, BTCE=2, HUOBI=3, OKCOIN=4, BTCCHINA=5, CHBTC=6,BITFINEX=7,MARKET796=8
 }MarketType;
 
 typedef enum  {

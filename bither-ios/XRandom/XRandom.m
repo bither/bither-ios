@@ -31,7 +31,7 @@
 }
 
 -(NSData *)randomWithSize:(NSInteger)size{
-    NSMutableData * xRandomData=[NSMutableData dataWithLength:size];
+    NSMutableData * xRandomData=[NSMutableData new];
     NSData * uRandomData=nil;
     NSData * uEntropyData=nil;
     while (uRandomData==nil) {

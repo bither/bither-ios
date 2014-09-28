@@ -83,7 +83,7 @@
             requestCount = [source byteCountFromSingleFrame];
         }
         
-        NSMutableData *result = [NSMutableData dataWithLength:requestCount];
+        NSMutableData *result = [NSMutableData new];
         for(int i = 0; i < requestCount; i++){
             [data getBytes:result.mutableBytes + i range:NSMakeRange(random() % data.length, 1)];
         }
@@ -116,7 +116,7 @@
     if(!shouldCollectData || !input){
         return nil;
     }
-    NSMutableData* data = [NSMutableData dataWithLength:length];
+    NSMutableData* data = [NSMutableData new];
     NSUInteger dataNeeded = length;
     while (dataNeeded > 0) {
         if(input.hasBytesAvailable){

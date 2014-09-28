@@ -121,7 +121,7 @@ static Setting* reloadTxsSetting;
         [setting setGetArrayBlock:^(){
             MarketType defaultMarket=[[UserDefaultsUtil instance] getDefaultMarket];
             NSMutableArray * array=[NSMutableArray new];
-            for (int i=BITSTAMP; i<=CHBTC; i++) {
+            for (int i=BITSTAMP; i<=MARKET796; i++) {
                 NSMutableDictionary *dict=[NSMutableDictionary new];
                 [dict setObject:[NSNumber numberWithInt:i] forKey:SETTING_VALUE];
                 [dict setObject:[BitherSetting getMarketName:i] forKey:SETTING_KEY];
