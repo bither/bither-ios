@@ -1,5 +1,5 @@
 //
-//  UEntropyMic.h
+//  AudioVisualizerView.h
 //  bither-ios
 //
 //  Copyright 2014 http://Bither.net
@@ -16,9 +16,9 @@
 //  See the License for the specific language governing permissions and
 //  limitations under the License.
 
-#import "UEntropyCollector.h"
-#import "AudioVisualizerView.h"
+#import <UIKit/UIKit.h>
+@import AVFoundation;
 
-@interface UEntropyMic : NSObject <UEntropySource>
--(instancetype)initWithView:(AudioVisualizerView*)view andCollector:(UEntropyCollector*)collector;
+@interface AudioVisualizerView : UIView
+-(void)showConnectionData:(AVCaptureConnection *)connection;
 @end

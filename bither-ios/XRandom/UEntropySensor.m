@@ -25,6 +25,7 @@
         self.collector = collector;
         manager = [[CMMotionManager alloc]init];
         queue = [[NSOperationQueue alloc]init];
+        queue.name = @"UEntropySensor";
     }
     return self;
 }
