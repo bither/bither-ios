@@ -76,8 +76,14 @@
 -(void)processQrCodeContent:(NSString*)content dp:(DialogProgress * ) dp{
     NSArray *strs = [BTQRCodeUtil splitQRCode:content];
     NSMutableArray * addressList=[NSMutableArray new];
-    for(NSString * pubStr in strs){
+    for(NSString * temp in strs){
+        BOOL isXRandom=NO;
+        NSString *pubStr=temp;
+        if ([temp rangeOfString:XRANDOM_FLAG].location!=NSNotFound) {
+            pubStr=[temp substringFromIndex:1];
+        }
         BTKey * key=[BTKey keyWithPublicKey:[pubStr hexToData]];
+        key.isFromXRandom=isXRandom;
         [addressList addObject:key.address];
     }
     [TransactionsUtil checkAddress:addressList callback:^(id response) {
@@ -114,7 +120,9 @@
 -(BOOL)checkQrCodeContent:(NSString*)content{
     NSArray *strs = [BTQRCodeUtil splitQRCode:content];
     for (NSString* str in strs) {
-        if (str.length != 66) {
+        BOOL checkCompress=(str.length==66)||(str.length==67&&[str rangeOfString:XRANDOM_FLAG].location!=NSNotFound);
+        BOOL checkUncompress=(str.length==130)||(str.length==131&&[str rangeOfString:XRANDOM_FLAG].location!=NSNotFound);
+        if (!checkCompress&&!checkUncompress) {
             return NO;
         }
     }
