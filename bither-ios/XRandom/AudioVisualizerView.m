@@ -55,6 +55,7 @@
 }
 
 -(void)firstConfigure{
+    self.backgroundColor = [UIColor clearColor];
     amptitude = kMinAmptitude;
     mainLine = [CAShapeLayer layer];
     mainLine.lineWidth = 2;
