@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+@import AVFoundation;
 
 @interface AudioVisualizerView : UIView
-
+-(void)showConnectionData:(AVCaptureConnection *)connection;
 @end
