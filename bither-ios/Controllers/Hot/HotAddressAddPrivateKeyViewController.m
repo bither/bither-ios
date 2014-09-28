@@ -83,7 +83,7 @@
 
 -(void)onPasswordEntered:(NSString *)password{
     if(self.btnXRandomCheck.selected){
-        UEntropyViewController* uentropy = [[UEntropyViewController alloc]init];
+        UEntropyViewController* uentropy = [[UEntropyViewController alloc]initWithCount:self.countToGenerate password:password];
         [self presentViewController:uentropy animated:YES completion:nil];
     }else{
         DialogProgress *d = [[DialogProgress alloc]initWithMessage:NSLocalizedString(@"Please wait…", nil)];
