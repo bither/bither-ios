@@ -17,7 +17,8 @@
 //  limitations under the License.
 
 #import "UEntropyCollector.h"
+#import "AudioVisualizerView.h"
 
 @interface UEntropyMic : NSObject <UEntropySource>
--(instancetype)initWithView:(UIView*)view andCollector:(UEntropyCollector*)collector;
+-(instancetype)initWithView:(AudioVisualizerView*)view andCollector:(UEntropyCollector*)collector;
 @end

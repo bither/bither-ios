@@ -1,6 +1,4 @@
-^{
-    <#code#>
-}//
+//
 //  AudioVisualizerView.m
 //  bither-ios
 //
@@ -54,6 +52,7 @@
     mainLine.lineCap = @"round";
     mainLine.lineJoin = @"round";
     subLines = [[NSMutableArray alloc]init];
+    [self.layer addSublayer:mainLine];
     for(int i = 0; i < kSubLineCount; i++){
         CAShapeLayer *layer = [CAShapeLayer layer];
         layer.lineWidth = 0.5f;
@@ -62,13 +61,14 @@
         layer.lineCap = @"round";
         layer.lineJoin = @"round";
         [subLines addObject:layer];
+        [self.layer insertSublayer:layer atIndex:0];
     }
     displayLink = [CADisplayLink displayLinkWithTarget:self selector:@selector(handleDisplay:)];
     [displayLink addToRunLoop:[NSRunLoop mainRunLoop] forMode:NSDefaultRunLoopMode];
 }
 
--(void)handleDisplay:(CADisplayLink*)link{
-    NSTimeInterval currentTime = displayLink.timestamp + displayLink.duration * displayLink.frameInterval;
+-(void)handleDisplay:(CADisplayLink*)display{
+    NSTimeInterval currentTime = display.timestamp + display.duration * display.frameInterval;
     if(beginTime <= 0 || currentTime - beginTime > kWaveDuration){
         beginTime = currentTime;
     }
@@ -109,6 +109,20 @@
             UIBezierPath *path = subPaths[i];
             [path addLineToPoint:CGPointMake(x, (y - height / 2) * rate + height / 2)];
         }
+    }
+    
+    controlY = [self yForX:width - kHorizontalStraightLineLength * 3 offset:xOffset];
+    [mainPath addQuadCurveToPoint:CGPointMake(width - kHorizontalStraightLineLength * 2, (height / 2 + controlY) / 2) controlPoint:CGPointMake(width - kHorizontalStraightLineLength * 3, controlY)];
+    [mainPath addQuadCurveToPoint:CGPointMake(width, height / 2) controlPoint:CGPointMake(width - kHorizontalStraightLineLength, height / 2)];
+    mainLine.path = mainPath.CGPath;
+    
+    for(int i = 0; i < subPaths.count; i++){
+        CGFloat rate = [self rateForSublineIndex:i];
+        UIBezierPath *path = subPaths[i];
+        CGFloat subControlY = (controlY - height / 2) * rate + height / 2;
+        [path addQuadCurveToPoint:CGPointMake(width - kHorizontalStraightLineLength * 2, (height / 2 + subControlY) / 2) controlPoint:CGPointMake(width - kHorizontalStraightLineLength * 3, subControlY)];
+        [path addQuadCurveToPoint:CGPointMake(width, height / 2) controlPoint:CGPointMake(width - kHorizontalStraightLineLength, height / 2)];
+        ((CAShapeLayer*)subLines[i]).path = path.CGPath;
     }
 }
 
