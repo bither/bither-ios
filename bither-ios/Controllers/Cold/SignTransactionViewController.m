@@ -87,7 +87,7 @@
             NSArray *hashes = [address signHashes:hashesData withPassphrase:bpassword];
             NSMutableArray* strHashes = [[NSMutableArray alloc]init];
             for(NSData* hash in hashes){
-                [strHashes addObject:[NSString hexWithData:hash].uppercaseString];
+                [strHashes addObject:[[NSString hexWithData:hash] toUppercaseStringWithEn]];
             }
             dispatch_async(dispatch_get_main_queue(), ^{
                 QrCodeViewController* controller = [self.storyboard instantiateViewControllerWithIdentifier:@"QrCode"];

@@ -41,6 +41,7 @@
 #import "ReloadTxSetting.h"
 #import "ImportPrivateKeySetting.h"
 #import "ImportBip38PrivateKeySetting.h"
+#import "NSString+Base58.h"
 
 
 
@@ -321,7 +322,7 @@ static Setting* reloadTxsSetting;
             NSArray* addresses = [BTAddressManager instance].privKeyAddresses;
             NSMutableArray* pubKeys = [[NSMutableArray alloc]init];
             for(BTAddress* a in addresses){
-                [pubKeys addObject:[NSString hexWithData:a.pubKey].uppercaseString];
+                [pubKeys addObject:[[NSString hexWithData:a.pubKey] toUppercaseStringWithEn] ];
             }
             QrCodeViewController* qrCtr = [controller.storyboard instantiateViewControllerWithIdentifier:@"QrCode"];
             qrCtr.content =[BTQRCodeUtil joinedQRCode:pubKeys];
