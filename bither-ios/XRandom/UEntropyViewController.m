@@ -33,6 +33,7 @@
 #define kStartProgress (0.01)
 #define kProgressKeyRate (0.5)
 #define kProgressEntryptRate (0.5)
+#define kMinGeneratingTime (5)
 
 @interface UEntropyViewController ()<UEntropyDelegate>{
     NSString* password;
@@ -169,6 +170,7 @@
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         float progress = kStartProgress;
         float itemProgress = (1.0 - kStartProgress - kSaveProgress) / (float) count;
+        NSTimeInterval startGeneratingTime = [[NSDate date] timeIntervalSince1970];
         [self.collector start];
         [self onProgress:progress];
         for(int i = 0; i < count; i++){
@@ -208,9 +210,12 @@
             dispatch_async(dispatch_get_main_queue(), cancelBlock);
             return;
         }
-        //TODO save
         [self.collector stop];
         [self.collector onPause];
+        //TODO save
+        while ([[NSDate new] timeIntervalSince1970] - startGeneratingTime < kMinGeneratingTime) {
+            
+        }
         [self onProgress:1];
         dispatch_async(dispatch_get_main_queue(), ^{
             [self onSuccess];
