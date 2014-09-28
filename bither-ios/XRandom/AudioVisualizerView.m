@@ -1,4 +1,6 @@
-//
+^{
+    <#code#>
+}//
 //  AudioVisualizerView.m
 //  bither-ios
 //
@@ -82,29 +84,40 @@
     
     [mainPath moveToPoint:CGPointMake(0, height / 2)];
     CGFloat controlY = [self yForX:kHorizontalStraightLineLength * 3 offset:xOffset];
+    CGFloat connectionY = [self yForX:kHorizontalStraightLineLength * 4 offset:xOffset];
     [mainPath addQuadCurveToPoint:CGPointMake(kHorizontalStraightLineLength * 2, (height / 2 + controlY) / 2) controlPoint:CGPointMake(kHorizontalStraightLineLength, height / 2)];
-    [mainPath addQuadCurveToPoint:CGPointMake(kHorizontalStraightLineLength * 4, [self yForX:kHorizontalStraightLineLength * 4 offset:xOffset]) controlPoint:CGPointMake(kHorizontalStraightLineLength * 3, controlY)];
+    [mainPath addQuadCurveToPoint:CGPointMake(kHorizontalStraightLineLength * 4, connectionY) controlPoint:CGPointMake(kHorizontalStraightLineLength * 3, controlY)];
     
     for(int i = 0; i < subPaths.count; i++){
-        CGFloat rate = (i + 1.0f) / (CGFloat) (subPaths.count + 1);
+        CGFloat rate = [self rateForSublineIndex:i];
         UIBezierPath *path = subPaths[i];
         [path moveToPoint:CGPointMake(0, height / 2)];
+        CGFloat subControlY = (controlY - height / 2) * rate + height / 2;
+        CGFloat subConnectionY = (connectionY - height / 2) * rate + height / 2;
         
-        controlY = [self yForX:kHorizontalStraightLineLength * 3 offset:xOffset] * rate;
-        
-        [path addQuadCurveToPoint:CGPointMake(kHorizontalStraightLineLength * 2, (height / 2 + controlY) / 2) controlPoint:CGPointMake(kHorizontalStraightLineLength, height / 2)];
-        [path addQuadCurveToPoint:CGPointMake(kHorizontalStraightLineLength * 4, [self yForX:kHorizontalStraightLineLength * 4 offset:xOffset] * rate) controlPoint:CGPointMake(kHorizontalStraightLineLength * 3, controlY)];
+        [path addQuadCurveToPoint:CGPointMake(kHorizontalStraightLineLength * 2, (height / 2 + subControlY) / 2) controlPoint:CGPointMake(kHorizontalStraightLineLength, height / 2)];
+        [path addQuadCurveToPoint:CGPointMake(kHorizontalStraightLineLength * 4, subConnectionY) controlPoint:CGPointMake(kHorizontalStraightLineLength * 3, subControlY)];
     }
     
     for (float x = kHorizontalStraightLineLength * 4;
          x < width - kHorizontalStraightLineLength * 4;
          x+=0.5f) {
-        
+        CGFloat y = [self yForX:x offset:xOffset];
+        [mainPath addLineToPoint:CGPointMake(x, y)];
+        for(int i = 0; i < subPaths.count; i++){
+            CGFloat rate = [self rateForSublineIndex:i];
+            UIBezierPath *path = subPaths[i];
+            [path addLineToPoint:CGPointMake(x, (y - height / 2) * rate + height / 2)];
+        }
     }
 }
 
 -(CGFloat)yForX:(CGFloat)x offset:(CGFloat)xOffset{
     return (amptitude * (self.frame.size.height - 2 * mainLine.lineWidth) / 2.0f * sin(2 * M_PI * ((x - xOffset) / (self.frame.size.width - kHorizontalStraightLineLength * 2)) * kWaveCount) + self.frame.size.height / 2);
+}
+
+-(CGFloat)rateForSublineIndex:(NSUInteger)index{
+    return (index + 1.0f) / (CGFloat) (subLines.count + 1);
 }
 
 -(void)showConnectionData:(AVCaptureConnection *)connection{
