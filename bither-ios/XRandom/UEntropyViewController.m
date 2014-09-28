@@ -96,7 +96,7 @@
 
 -(void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
-    //[self startGenerate];
+    [self startGenerate];
 }
 
 - (void)viewDidDisappear:(BOOL)animated{

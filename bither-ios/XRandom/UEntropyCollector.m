@@ -17,6 +17,7 @@
 //  limitations under the License.
 
 #import "UEntropyCollector.h"
+#import "NSMutableData+Bitcoin.h"
 
 @interface UEntropyCollector(){
     dispatch_queue_t queue;
@@ -84,14 +85,15 @@
         }
         
         NSMutableData *result = [NSMutableData new];
+        
+        Byte* bytes=(Byte*)data.bytes;
         for(int i = 0; i < requestCount; i++){
-            [data getBytes:result.mutableBytes + i range:NSMakeRange(random() % data.length, 1)];
+            [result appendUInt8:bytes[random() % data.length]];
         }
         
         dispatch_async(queue, ^{
             if(shouldCollectData && output && output.hasSpaceAvailable){
                 NSInteger actuallyWriten = [output write:result.bytes maxLength:result.length];
-                NSLog(@"write %lu/%lu data to uentropy pool from %@", actuallyWriten, result.length, source.name);
             }
         });
     }
