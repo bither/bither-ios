@@ -146,7 +146,7 @@
     if (_isNewVerionQRCode) {
         [self showMsg:NSLocalizedString(@"Switched to new version QR Codes, sign with Bither Cold ≧1.1.0",nil) ];
     }else{
-        [self showMsg:NSLocalizedString(@"Switched to old version QR Codes, sign with Bither Cold &lt;1.1.0",nil) ];
+        [self showMsg:NSLocalizedString(@"Switched to old version QR Codes, sign with Bither Cold <1.1.0",nil) ];
     }
 }
 
