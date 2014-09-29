@@ -19,8 +19,11 @@
 #import "XRandom.h"
 #import "NSData+Hash.h"
 #import "NSMutableData+Bitcoin.h"
+#import "StringUtil.h"
+#import "NSString+Base58.h"
 
 #define PARAMETERS_N @"fffffffffffffffffffffffffffffffebaaedce6af48a03bbfd25e8cd0364141"
+#define PARAMETERS_MIN_N @"0"
 
 @implementation XRandom
 
@@ -37,7 +40,7 @@
     NSData * uRandomData=nil;
     NSData * uEntropyData=nil;
     
-    //while () {
+    while ([xRandomData compore:[PARAMETERS_MIN_N hexToData]]==0||[xRandomData compore:[PARAMETERS_N hexToData]]>=0) {
         while (uRandomData==nil) {
             uRandomData=[NSData randomWithSize:size];
         }
@@ -55,13 +58,15 @@
             }
             
         }else{
-            [xRandomData appendData:xRandomData];
+            [xRandomData appendData:uRandomData];
         }
-    //}
+    }
    
     
     return xRandomData;
 
 }
+
+
 
 @end
