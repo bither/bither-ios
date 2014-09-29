@@ -29,6 +29,7 @@
 #import "UIColor+Util.h"
 #import "KeyUtil.h"
 #import "BTPrivateKeyUtil.h"
+#import "PlaySoundUtil.h"
 
 #define kMicViewHeight (100)
 #define kSaveProgress (0.1)
@@ -90,7 +91,6 @@
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     [UIApplication sharedApplication].idleTimerDisabled = YES;
-    [self.collector onResume];
 }
 
 - (void)viewWillDisappear:(BOOL)animated{
@@ -102,7 +102,6 @@
 
 -(void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
-    [self startGenerate];
     [self startAnimation];
 }
 
@@ -118,11 +117,14 @@
             vOverlayTop.frame = CGRectMake(0, -vOverlayTop.frame.size.height, vOverlayTop.frame.size.width, vOverlayTop.frame.size.height);
             vOverlayBottom.frame = CGRectMake(0, self.view.frame.size.height, vOverlayBottom.frame.size.width, vOverlayBottom.frame.size.height);
         } completion:nil];
+        [PlaySoundUtil playSound:@"xrandom_open_sound" callback:^{
+            [self startGenerate];
+        }];
     });
 }
 
 -(void)stopAnimationWithCompletion:(void(^)()) completion{
-    [UIView animateWithDuration:0.5 animations:^{
+    [UIView animateWithDuration:0.4 animations:^{
         vOverlayTop.frame = CGRectMake(0, 0, vOverlayTop.frame.size.width, vOverlayTop.frame.size.height);
         vOverlayBottom.frame = CGRectMake(0, self.view.frame.size.height - vOverlayBottom.frame.size.height, vOverlayBottom.frame.size.width, vOverlayBottom.frame.size.height);
     } completion:^(BOOL finished) {
@@ -130,6 +132,7 @@
         ivOverlayBottom.hidden = YES;
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.6 * NSEC_PER_SEC)), dispatch_get_main_queue(), completion);
     }];
+    [PlaySoundUtil playSound:@"xrandom_close_sound" callback:nil];
 }
 
 -(void)close:(id)sender{
@@ -217,6 +220,7 @@
         float progress = kStartProgress;
         float itemProgress = (1.0 - kStartProgress - kSaveProgress) / (float) count;
         NSTimeInterval startGeneratingTime = [[NSDate date] timeIntervalSince1970];
+        [self.collector onResume];
         [self.collector start];
         [self onProgress:progress];
         XRandom* xrandom = [[XRandom alloc]initWithDelegate:self.collector];
@@ -243,12 +247,22 @@
                     return;
                 }
                 
-                NSString * privateKeyString=[BTPrivateKeyUtil getPrivateKeyString:key passphrase:password];
-                BTAddress *btAddress=[[BTAddress alloc] initWithKey:key encryptPrivKey:privateKeyString isXRandom:YES];
+                NSString *privateKeyString = [BTPrivateKeyUtil getPrivateKeyString:key passphrase:password];
+                if(!privateKeyString){
+                    [self.collector stop];
+                    [self.collector onPause];
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        [self onFailed];
+                    });
+                    return;
+                }
+                BTAddress *btAddress = [[BTAddress alloc] initWithKey:key encryptPrivKey:privateKeyString isXRandom:YES];
                 [addresses addObject:btAddress];
                 progress += itemProgress * kProgressEncryptRate;
                 [self onProgress:progress];
             }else{
+                [self.collector stop];
+                [self.collector onPause];
                 dispatch_async(dispatch_get_main_queue(), ^{
                     [self onFailed];
                 });
