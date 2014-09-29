@@ -33,7 +33,7 @@
 
 @implementation UEntropyCollector
 
--(instancetype)initWithDelegate:(NSObject<UEntropyDelegate>*) delegate{
+-(instancetype)initWithDelegate:(NSObject<UEntropyCollectorDelegate>*) delegate{
     self = [super init];
     if(self){
         self.delegate = delegate;
@@ -115,12 +115,12 @@
     }
 }
 
--(NSData*)nextBytes:(int)length{
+-(NSData *)randomWithSize:(NSInteger)size{
     if(!shouldCollectData || !input){
         return nil;
     }
     NSMutableData* data = [NSMutableData new];
-    NSUInteger dataNeeded = length;
+    NSUInteger dataNeeded = size;
     while (dataNeeded > 0) {
         if(input.hasBytesAvailable){
             uint8_t buf[dataNeeded];
@@ -131,7 +131,7 @@
                 return nil;
             }
             [data appendBytes:(const void *)buf length:outcome];
-            dataNeeded = length - data.length;
+            dataNeeded = size - data.length;
         }
     }
     return data;
