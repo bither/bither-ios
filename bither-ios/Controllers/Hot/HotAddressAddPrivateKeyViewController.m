@@ -24,6 +24,7 @@
 #import "UEntropyViewController.h"
 #import <Bitheri/BTAddressManager.h>
 #import "KeyUtil.h"
+#import "DialogXrandomInfo.h"
 
 @interface HotAddressAddPrivateKeyViewController ()
 @property (weak, nonatomic) IBOutlet UIPickerView *pvCount;
@@ -75,6 +76,10 @@
         } cancel:nil];
         [alert showInWindow:self.view.window];
     }
+}
+
+- (IBAction)xrandomInfoPressed:(id)sender {
+    [[[DialogXrandomInfo alloc]initWithGuide:YES]showInWindow:self.view.window];
 }
 
 @end
