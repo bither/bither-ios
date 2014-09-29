@@ -39,6 +39,7 @@
         AVAuthorizationStatus authStatus = [AVCaptureDevice authorizationStatusForMediaType:AVMediaTypeAudio];
         if(authStatus == AVAuthorizationStatusDenied){
             dispatch_async(dispatch_get_main_queue(), ^{
+                self.view.hidden = YES;
                 [collector onError:[[NSError alloc]initWithDomain:kUEntropySourceErrorDomain code:kUEntropySourceMicCode userInfo:@{kUEntropySourceErrorDescKey: @"no mic"}] fromSource:self];
             });
             return self;
@@ -46,6 +47,7 @@
         device = [AVCaptureDevice defaultDeviceWithMediaType: AVMediaTypeAudio];
         if(!device){
             dispatch_async(dispatch_get_main_queue(), ^{
+                self.view.hidden = YES;
                 [collector onError:[[NSError alloc]initWithDomain:kUEntropySourceErrorDomain code:kUEntropySourceMicCode userInfo:@{kUEntropySourceErrorDescKey: @"no mic"}] fromSource:self];
             });
             return self;
@@ -77,9 +79,11 @@
     NSError *error = nil;
     AVCaptureInput *input = [[AVCaptureDeviceInput alloc]initWithDevice: device error: &error];
     if(error){
+        self.view.hidden = YES;
         [self.collector onError:[[NSError alloc]initWithDomain:kUEntropySourceErrorDomain code:kUEntropySourceMicCode userInfo:@{kUEntropySourceErrorDescKey: error.debugDescription }] fromSource:self];
         return;
     }
+    self.view.hidden = NO;
     [session addInput:input];
     [session startRunning];
 }
