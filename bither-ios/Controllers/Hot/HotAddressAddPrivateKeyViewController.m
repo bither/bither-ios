@@ -108,11 +108,14 @@
 }
 
 -(void)getPermissions:(void(^)())completion{
-    [self getPermisionFor:AVMediaTypeVideo completion:^(BOOL result) {
-        [self getPermisionFor:AVMediaTypeAudio completion:^(BOOL result) {
-            dispatch_async(dispatch_get_main_queue(), completion);
+    __weak __block HotAddressAddPrivateKeyViewController* c = self;
+    [[[DialogXrandomInfo alloc] initWithPermission:^{
+        [c getPermisionFor:AVMediaTypeVideo completion:^(BOOL result) {
+            [c getPermisionFor:AVMediaTypeAudio completion:^(BOOL result) {
+                dispatch_async(dispatch_get_main_queue(), completion);
+            }];
         }];
-    }];
+    }] showInWindow:self.view.window];
 }
 
 @end

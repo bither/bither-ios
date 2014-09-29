@@ -16,21 +16,33 @@
     CGFloat width;
 }
 @property BOOL guide;
+@property (strong) void(^completion)();
 @end
 
 @implementation DialogXrandomInfo
 
 -(instancetype)initWithGuide:(BOOL)guide{
-    self = [super init];
-    if(self){
-        self.guide = guide;
-        [self firstConfigure];
-    }
+    self = [self initWithGuide:guide andPermission:nil];
     return self;
 }
 
 -(instancetype)init{
     self = [self initWithGuide:NO];
+    return self;
+}
+
+-(instancetype)initWithPermission:(void(^)())completion{
+    self = [self initWithGuide:NO andPermission:completion];
+    return self;
+}
+
+-(instancetype)initWithGuide:(BOOL)guide andPermission:(void (^)())completion{
+    self = [super init];
+    if(self){
+        self.guide = guide;
+        self.completion = completion;
+        [self firstConfigure];
+    }
     return self;
 }
 
@@ -55,7 +67,11 @@
     UIButton *btnConfirm = [[UIButton alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(tv.frame) + kInnerMargin * 2, width, kButtonHeight)];
     [btnConfirm setBackgroundImage:[UIImage imageNamed:@"dialog_btn_bg_normal"] forState:UIControlStateNormal];
     btnConfirm.titleLabel.font = [UIFont systemFontOfSize:kButtonFontSize];
-    [btnConfirm setTitle:NSLocalizedString(@"OK", nil) forState:UIControlStateNormal];
+    if(self.completion){
+        [btnConfirm setTitle:NSLocalizedString(@"xrandom_info_get_permissions", nil) forState:UIControlStateNormal];
+    }else{
+        [btnConfirm setTitle:NSLocalizedString(@"OK", nil) forState:UIControlStateNormal];
+    }
     [btnConfirm setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     btnConfirm.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleTopMargin;
     [btnConfirm addTarget:self action:@selector(confirmPressed:) forControlEvents:UIControlEventTouchUpInside];
@@ -70,5 +86,11 @@
     [self dismiss];
 }
 
+-(void)dialogDidDismiss{
+    [super dialogDidDismiss];
+    if(self.completion){
+        self.completion();
+    }
+}
 
 @end
