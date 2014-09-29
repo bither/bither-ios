@@ -37,7 +37,7 @@
     NSData * uRandomData=nil;
     NSData * uEntropyData=nil;
     
-    while () {
+    //while () {
         while (uRandomData==nil) {
             uRandomData=[NSData randomWithSize:size];
         }
@@ -57,7 +57,7 @@
         }else{
             [xRandomData appendData:xRandomData];
         }
-    }
+    //}
    
     
     return xRandomData;
