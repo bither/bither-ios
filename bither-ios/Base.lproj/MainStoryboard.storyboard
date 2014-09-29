@@ -1089,12 +1089,16 @@
                                                                     <rect key="frame" x="0.0" y="65" width="300" height="41"/>
                                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                     <subviews>
+                                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="xrandom_address_label_normal" highlightedImage="xrandom_address_label_pressed" id="q0w-0Z-pP5">
+                                                                            <rect key="frame" x="240" y="10" width="20" height="20"/>
+                                                                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                                                        </imageView>
                                                                         <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" image="address_type_watchonly" id="cgi-Ad-bCG">
                                                                             <rect key="frame" x="266" y="8" width="24" height="24"/>
                                                                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                                                         </imageView>
                                                                         <view contentMode="scaleToFill" id="iQN-NV-3jz">
-                                                                            <rect key="frame" x="10" y="0.0" width="248" height="41"/>
+                                                                            <rect key="frame" x="10" y="0.0" width="216" height="41"/>
                                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" heightSizable="YES"/>
                                                                             <subviews>
                                                                                 <view contentMode="scaleToFill" id="2Lg-yC-wpv" customClass="TransactionConfidenceView">
@@ -1111,7 +1115,7 @@
                                                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                                         </view>
                                                                         <view contentMode="scaleToFill" id="jhg-sP-YGg">
-                                                                            <rect key="frame" x="10" y="0.0" width="248" height="41"/>
+                                                                            <rect key="frame" x="10" y="0.0" width="216" height="41"/>
                                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" heightSizable="YES"/>
                                                                             <subviews>
                                                                                 <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" image="transaction_icon_small" id="q1c-El-Lc2">
@@ -1186,6 +1190,7 @@
                                             <outlet property="ivHighlighted" destination="Mof-u2-DPq" id="T4O-Vs-cAF"/>
                                             <outlet property="ivSymbolBtc" destination="S4M-Q7-ULL" id="VwQ-Bh-zzN"/>
                                             <outlet property="ivType" destination="cgi-Ad-bCG" id="XFr-OQ-kiq"/>
+                                            <outlet property="ivXrandom" destination="q0w-0Z-pP5" id="jUx-vH-WIa"/>
                                             <outlet property="lblAddress" destination="cdq-og-ME5" id="qGB-1T-DW2"/>
                                             <outlet property="lblBalanceBtc" destination="bfg-wv-lfB" id="cfk-MN-wrW"/>
                                             <outlet property="lblBalanceMoney" destination="Nzn-0V-cau" id="V9f-7u-KhO"/>
@@ -2780,6 +2785,8 @@
         <image name="topnav_divider.png" width="3" height="44"/>
         <image name="transaction_icon_small" width="12" height="12"/>
         <image name="ui_topnav_titlebar_background.png" width="1" height="47"/>
+        <image name="xrandom_address_label_normal" width="18" height="18"/>
+        <image name="xrandom_address_label_pressed" width="18" height="18"/>
         <image name="xrandom_checkbox_checked" width="105" height="30"/>
         <image name="xrandom_checkbox_normal" width="105" height="30"/>
     </resources>
