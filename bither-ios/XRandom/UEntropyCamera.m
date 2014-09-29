@@ -34,6 +34,13 @@
 -(instancetype)initWithViewController:(UIView*)view andCollector:(UEntropyCollector *)collector{
     self = [super init];
     if(self){
+        AVAuthorizationStatus authStatus = [AVCaptureDevice authorizationStatusForMediaType:AVMediaTypeVideo];
+        if(authStatus == AVAuthorizationStatusDenied){
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [collector onError:[[NSError alloc]initWithDomain:kUEntropySourceErrorDomain code:kUEntropySourceCameraCode userInfo:@{kUEntropySourceErrorDescKey: @"no camera"}] fromSource:self];
+            });
+            return self;
+        }
         device = [AVCaptureDevice defaultDeviceWithMediaType: AVMediaTypeVideo];
         if(!device || !device.connected){
             dispatch_async(dispatch_get_main_queue(), ^{
@@ -63,6 +70,9 @@
 
 -(void)onResume{
     if(!paused){
+        return;
+    }
+    if(!device){
         return;
     }
     paused = NO;
@@ -110,6 +120,9 @@
 
 -(void)onPause{
     if(paused){
+        return;
+    }
+    if(!device){
         return;
     }
     paused = YES;

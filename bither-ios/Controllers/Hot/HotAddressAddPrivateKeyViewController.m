@@ -25,6 +25,8 @@
 #import <Bitheri/BTAddressManager.h>
 #import "KeyUtil.h"
 #import "DialogXrandomInfo.h"
+@import MobileCoreServices;
+@import AVFoundation;
 
 @interface HotAddressAddPrivateKeyViewController ()
 @property (weak, nonatomic) IBOutlet UIPickerView *pvCount;
@@ -63,8 +65,18 @@
 }
 
 - (IBAction)generatePressed:(id)sender {
-    DialogPassword *d = [[DialogPassword alloc]initWithDelegate:self];
-    [d showInWindow:self.view.window];
+    if(self.btnXRandomCheck.selected && (
+                [AVCaptureDevice authorizationStatusForMediaType:AVMediaTypeVideo] == AVAuthorizationStatusNotDetermined ||
+                [AVCaptureDevice authorizationStatusForMediaType:AVMediaTypeAudio] == AVAuthorizationStatusNotDetermined )
+                ){
+        [self getPermissions:^{
+            DialogPassword *d = [[DialogPassword alloc]initWithDelegate:self];
+            [d showInWindow:self.view.window];
+        }];
+    }else{
+        DialogPassword *d = [[DialogPassword alloc]initWithDelegate:self];
+        [d showInWindow:self.view.window];
+    }
 }
 
 - (IBAction)xrandomCheckPressed:(id)sender{
@@ -82,6 +94,28 @@
 
 - (IBAction)xrandomInfoPressed:(id)sender {
     [[[DialogXrandomInfo alloc]initWithGuide:YES]showInWindow:self.view.window];
+}
+
+-(void)getPermisionFor:(NSString*)mediaType completion:(void(^)(BOOL))completion{
+    AVAuthorizationStatus authStatus = [AVCaptureDevice authorizationStatusForMediaType:mediaType];
+    if(authStatus == AVAuthorizationStatusNotDetermined){
+        [AVCaptureDevice requestAccessForMediaType:mediaType completionHandler:^(BOOL granted) {
+            completion(granted);
+        }];
+    }else{
+        completion(authStatus == AVAuthorizationStatusAuthorized);
+    }
+}
+
+-(void)getPermissions:(void(^)())completion{
+    __weak __block HotAddressAddPrivateKeyViewController* c = self;
+    [[[DialogXrandomInfo alloc] initWithPermission:^{
+        [c getPermisionFor:AVMediaTypeVideo completion:^(BOOL result) {
+            [c getPermisionFor:AVMediaTypeAudio completion:^(BOOL result) {
+                dispatch_async(dispatch_get_main_queue(), completion);
+            }];
+        }];
+    }] showInWindow:self.view.window];
 }
 
 @end

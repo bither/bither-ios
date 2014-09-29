@@ -10,4 +10,5 @@
 
 @interface DialogXrandomInfo : DialogCentered
 -(instancetype)initWithGuide:(BOOL)guide;
+-(instancetype)initWithPermission:(void(^)())completion;
 @end
