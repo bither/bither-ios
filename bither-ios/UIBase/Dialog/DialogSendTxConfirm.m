@@ -27,7 +27,7 @@
 #define kLabelFontSize (14)
 #define kLabelAlpha (0.7f)
 
-#define kValueHeight (20)
+#define kValueHeight (40)
 #define kValueFontSize (16)
 #define kValueAlpha (1.0f)
 
@@ -72,7 +72,7 @@
     lblAddress.font = [UIFont systemFontOfSize:kValueFontSize];
     lblAddress.textColor = [UIColor colorWithWhite:1 alpha:kValueAlpha];
     lblAddress.adjustsFontSizeToFitWidth = YES;
-    lblAddress.lineBreakMode=UILineBreakModeCharacterWrap;
+    lblAddress.lineBreakMode=UILineBreakModeTailTruncation;
     lblAddress.numberOfLines=2;
     lblAddress.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleBottomMargin;
     lblAddress.text =[StringUtil formatAddress:toAddress groupSize:4 lineSize:24];
