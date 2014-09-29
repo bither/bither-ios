@@ -29,6 +29,7 @@
         queue = [[NSOperationQueue alloc]init];
         queue.name = @"UEntropySensor";
         self.view = view;
+        [self onResume];
     }
     return self;
 }
