@@ -36,10 +36,17 @@
 -(instancetype)initWithView:(AudioVisualizerView*)view andCollector:(UEntropyCollector*)collector{
     self = [super init];
     if(self){
+        AVAuthorizationStatus authStatus = [AVCaptureDevice authorizationStatusForMediaType:AVMediaTypeAudio];
+        if(authStatus == AVAuthorizationStatusDenied){
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [collector onError:[[NSError alloc]initWithDomain:kUEntropySourceErrorDomain code:kUEntropySourceMicCode userInfo:@{kUEntropySourceErrorDescKey: @"no mic"}] fromSource:self];
+            });
+            return self;
+        }
         device = [AVCaptureDevice defaultDeviceWithMediaType: AVMediaTypeAudio];
         if(!device){
             dispatch_async(dispatch_get_main_queue(), ^{
-                [collector onError:[[NSError alloc]initWithDomain:kUEntropySourceErrorDomain code:kUEntropySourceCameraCode userInfo:@{kUEntropySourceErrorDescKey: @"no mic"}] fromSource:self];
+                [collector onError:[[NSError alloc]initWithDomain:kUEntropySourceErrorDomain code:kUEntropySourceMicCode userInfo:@{kUEntropySourceErrorDescKey: @"no mic"}] fromSource:self];
             });
             return self;
         }
@@ -58,6 +65,9 @@
 
 -(void)onResume{
     if(!paused){
+        return;
+    }
+    if(!device){
         return;
     }
     paused = NO;
@@ -95,6 +105,9 @@
 
 -(void)onPause{
     if(paused){
+        return;
+    }
+    if(!device){
         return;
     }
     paused = YES;
