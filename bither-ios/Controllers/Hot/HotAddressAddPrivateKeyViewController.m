@@ -70,9 +70,11 @@
 - (IBAction)xrandomCheckPressed:(id)sender{
     if(!self.btnXRandomCheck.selected){
         self.btnXRandomCheck.selected = YES;
+        [self.btnXRandomCheck setImage:[UIImage imageNamed:@"xrandom_checkbox_checked"] forState:UIControlStateNormal];
     }else{
         DialogAlert *alert = [[DialogAlert alloc]initWithMessage:NSLocalizedString(@"XRandom increases randomness.\nSure to disable?", nil) confirm:^{
             self.btnXRandomCheck.selected = NO;
+            [self.btnXRandomCheck setImage:[UIImage imageNamed:@"xrandom_checkbox_normal"] forState:UIControlStateNormal];
         } cancel:nil];
         [alert showInWindow:self.view.window];
     }
