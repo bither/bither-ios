@@ -25,6 +25,7 @@
 #import "DialogProgress.h"
 #import "AudioVisualizerView.h"
 #import "SensorVisualizerView.h"
+#import "UEntropyAnimatedTransition.h"
 #import "NSString+Base58.h"
 #import "UIColor+Util.h"
 
@@ -33,9 +34,9 @@
 #define kStartProgress (0.01)
 #define kProgressKeyRate (0.5)
 #define kProgressEntryptRate (0.5)
-#define kMinGeneratingTime (5)
+#define kMinGeneratingTime (4)
 
-@interface UEntropyViewController ()<UEntropyDelegate>{
+@interface UEntropyViewController ()<UEntropyDelegate, UIViewControllerTransitioningDelegate>{
     NSString* password;
     NSUInteger count;
     BOOL isFinishing;
@@ -57,6 +58,7 @@
     if(self){
         password = inPassword;
         count = inCount;
+        self.transitioningDelegate = self;
     }
     return self;
 }
@@ -163,9 +165,14 @@
 -(void)onSuccess{
     isFinishing = YES;
     __weak __block UEntropyViewController* c = self;
+    __weak __block UIWindow* sourceWindow = self.view.window;
+    __block NSUInteger finishCount = count;
     void(^block)() = ^{
         [c stopAnimationWithCompletion:^{
-            [c.presentingViewController.presentingViewController dismissViewControllerAnimated:YES completion:nil];
+            [c.presentingViewController.presentingViewController dismissViewControllerAnimated:YES completion:^{
+                DialogAlert* alert = [[DialogAlert alloc]initWithMessage:[NSString stringWithFormat:NSLocalizedString(@"xrandom_final_confirm", nil), finishCount] confirm:nil cancel:nil];
+                [alert showInWindow:sourceWindow];
+            }];
         }];
     };
     if(dpStopping.shown){
@@ -307,6 +314,17 @@
     ivOverlayBottom.hidden = YES;
     [self.view addSubview:vOverlayTop];
     [self.view addSubview:vOverlayBottom];
+}
+
+- (id <UIViewControllerAnimatedTransitioning>)animationControllerForPresentedController:(UIViewController *)presented presentingController:(UIViewController *)presenting sourceController:(UIViewController *)source{
+    return [[UEntropyAnimatedTransition alloc]initWithPresenting:YES];
+}
+
+- (id <UIViewControllerAnimatedTransitioning>)animationControllerForDismissedController:(UIViewController *)dismissed{
+    if(dismissed == self){
+        return [[UEntropyAnimatedTransition alloc]initWithPresenting:NO];
+    }
+    return nil;
 }
 
 @end
