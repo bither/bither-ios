@@ -2253,6 +2253,10 @@
                                                             <rect key="frame" x="0.0" y="89" width="300" height="25"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
+                                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="xrandom_address_label_normal" highlightedImage="xrandom_address_label_pressed" id="5P1-t6-9UT">
+                                                                    <rect key="frame" x="240" y="2" width="20" height="20"/>
+                                                                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                                                </imageView>
                                                                 <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" image="address_type_private" id="PGA-6T-JXp">
                                                                     <rect key="frame" x="266" y="0.0" width="24" height="24"/>
                                                                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
@@ -2360,6 +2364,7 @@
                                         <connections>
                                             <outlet property="ivQr" destination="JRm-fL-eya" id="gg5-Fz-LID"/>
                                             <outlet property="ivType" destination="PGA-6T-JXp" id="lF5-dF-XXc"/>
+                                            <outlet property="ivXrandom" destination="5P1-t6-9UT" id="65q-MH-emP"/>
                                             <outlet property="lblAddress" destination="MSV-4p-BLw" id="Arj-ny-9Ht"/>
                                             <outlet property="vAddressContainer" destination="dTI-FK-OwB" id="YyC-6g-dAN"/>
                                             <outlet property="vContainer" destination="5aH-xd-nkI" id="pJc-BW-DjD"/>
