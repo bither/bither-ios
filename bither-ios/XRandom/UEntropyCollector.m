@@ -18,7 +18,7 @@
 
 #import "UEntropyCollector.h"
 #import "NSMutableData+Bitcoin.h"
-#import "NSString+Base58.h"
+#import "NSData+Hash.h"
 
 @interface UEntropyCollector(){
     dispatch_queue_t queue;
@@ -89,7 +89,10 @@
         
         Byte* bytes=(Byte*)data.bytes;
         for(int i = 0; i < requestCount; i++){
-            [result appendUInt8:bytes[random() % data.length]];
+            NSUInteger randomIndex;
+            NSData* randomBytes = [NSData randomWithSize:sizeof(randomIndex)];
+            [randomBytes getBytes:&randomIndex length:sizeof(randomIndex)];
+            [result appendUInt8:bytes[randomIndex % data.length]];
         }
         
         dispatch_async(queue, ^{

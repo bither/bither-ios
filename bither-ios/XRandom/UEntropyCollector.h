@@ -45,7 +45,6 @@
 -(void)addSource:(NSObject<UEntropySource>*)source,...;
 -(void)start;
 -(void)stop;
--(NSData*)nextBytes:(int)length;
 -(void)onNewData:(NSData*)data fromSource:(NSObject<UEntropySource>*) source;
 -(void)onError:(NSError*)error fromSource:(NSObject<UEntropySource>*) source;
 @end
