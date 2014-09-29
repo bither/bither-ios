@@ -35,7 +35,7 @@
 #define kProgressEntryptRate (0.5)
 #define kMinGeneratingTime (5)
 
-@interface UEntropyViewController ()<UEntropyDelegate>{
+@interface UEntropyViewController ()<UEntropyDelegate, UIViewControllerTransitioningDelegate>{
     NSString* password;
     NSUInteger count;
     BOOL isFinishing;
@@ -57,6 +57,7 @@
     if(self){
         password = inPassword;
         count = inCount;
+        self.transitioningDelegate = self;
     }
     return self;
 }
