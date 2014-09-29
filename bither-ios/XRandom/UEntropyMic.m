@@ -36,10 +36,19 @@
 -(instancetype)initWithView:(AudioVisualizerView*)view andCollector:(UEntropyCollector*)collector{
     self = [super init];
     if(self){
+        AVAuthorizationStatus authStatus = [AVCaptureDevice authorizationStatusForMediaType:AVMediaTypeAudio];
+        if(authStatus == AVAuthorizationStatusDenied){
+            dispatch_async(dispatch_get_main_queue(), ^{
+                self.view.hidden = YES;
+                [collector onError:[[NSError alloc]initWithDomain:kUEntropySourceErrorDomain code:kUEntropySourceMicCode userInfo:@{kUEntropySourceErrorDescKey: @"no mic"}] fromSource:self];
+            });
+            return self;
+        }
         device = [AVCaptureDevice defaultDeviceWithMediaType: AVMediaTypeAudio];
         if(!device){
             dispatch_async(dispatch_get_main_queue(), ^{
-                [collector onError:[[NSError alloc]initWithDomain:kUEntropySourceErrorDomain code:kUEntropySourceCameraCode userInfo:@{kUEntropySourceErrorDescKey: @"no mic"}] fromSource:self];
+                self.view.hidden = YES;
+                [collector onError:[[NSError alloc]initWithDomain:kUEntropySourceErrorDomain code:kUEntropySourceMicCode userInfo:@{kUEntropySourceErrorDescKey: @"no mic"}] fromSource:self];
             });
             return self;
         }
@@ -60,6 +69,9 @@
     if(!paused){
         return;
     }
+    if(!device){
+        return;
+    }
     paused = NO;
     if(session && session.isRunning){
         [session stopRunning];
@@ -67,9 +79,11 @@
     NSError *error = nil;
     AVCaptureInput *input = [[AVCaptureDeviceInput alloc]initWithDevice: device error: &error];
     if(error){
+        self.view.hidden = YES;
         [self.collector onError:[[NSError alloc]initWithDomain:kUEntropySourceErrorDomain code:kUEntropySourceMicCode userInfo:@{kUEntropySourceErrorDescKey: error.debugDescription }] fromSource:self];
         return;
     }
+    self.view.hidden = NO;
     [session addInput:input];
     [session startRunning];
 }
@@ -95,6 +109,9 @@
 
 -(void)onPause{
     if(paused){
+        return;
+    }
+    if(!device){
         return;
     }
     paused = YES;
