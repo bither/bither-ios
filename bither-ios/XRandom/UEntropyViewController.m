@@ -36,7 +36,7 @@
 #define kStartProgress (0.01)
 #define kProgressKeyRate (0.5)
 #define kProgressEncryptRate (0.5)
-#define kMinGeneratingTime (4)
+#define kMinGeneratingTime (2.4)
 
 @interface UEntropyViewController ()<UEntropyCollectorDelegate, UIViewControllerTransitioningDelegate>{
     NSString* password;
@@ -180,9 +180,7 @@
         }];
     };
     if(dpStopping.shown){
-        [dpStopping dismissWithCompletion:^{
-            block();
-        }];
+        [dpStopping dismissWithCompletion:block];
     }else{
         block();
     }
