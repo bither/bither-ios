@@ -335,6 +335,16 @@
 
 -(void)configureView{
     [self.view setBackgroundColor:[UIColor parseColor:kChooseModeGradientCenterColor]];
+    CGRect frame = self.vColdCheck.frame;
+    frame.size.width = self.view.frame.size.width;
+    frame.origin.y = self.vColdContainer.frame.size.height;
+    self.vColdCheck.frame = frame;
+    
+    frame = self.vHotWait.frame;
+    frame.size.width = self.view.frame.size.width;
+    frame.origin.y = 0;
+    self.vHotWait.frame = frame;
+    
     self.vHotIcon.autoresizingMask = UIViewAutoresizingFlexibleTopMargin;
     self.vHotWait.autoresizingMask = UIViewAutoresizingFlexibleBottomMargin;
     self.vColdCheck.autoresizingMask = UIViewAutoresizingFlexibleTopMargin;

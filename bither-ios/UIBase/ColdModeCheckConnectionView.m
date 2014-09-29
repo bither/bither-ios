@@ -56,10 +56,11 @@
     UIActivityIndicatorView *p = [[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
     [self addSubview:p];
     p.frame = CGRectMake((self.frame.size.width - p.frame.size.width)/2, self.frame.size.height/2 - p.frame.size.height - kIndicatorOffset - kLabelTopOffset, p.frame.size.width, p.frame.size.width);
-    p.autoresizingMask = UIViewAutoresizingFlexibleBottomMargin|UIViewAutoresizingFlexibleTopMargin;
+    p.autoresizingMask = UIViewAutoresizingFlexibleBottomMargin|UIViewAutoresizingFlexibleTopMargin|UIViewAutoresizingFlexibleLeftMargin|UIViewAutoresizingFlexibleRightMargin;
     [p startAnimating];
     for(int i = 0; i < 2; i++){
         UILabel *lbl = [[UILabel alloc]initWithFrame:CGRectMake(0, self.frame.size.height/2, self.frame.size.width, kLabelHeight)];
+        lbl.autoresizingMask = UIViewAutoresizingFlexibleBottomMargin|UIViewAutoresizingFlexibleTopMargin|UIViewAutoresizingFlexibleLeftMargin|UIViewAutoresizingFlexibleRightMargin;
         lbl.backgroundColor = [UIColor clearColor];
         lbl.textColor = [UIColor whiteColor];
         lbl.textAlignment = NSTextAlignmentCenter;
