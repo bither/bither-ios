@@ -92,8 +92,9 @@
         self.ivType.image = [UIImage imageNamed:@"address_type_watchonly"];
     }
     
-    if(![self.ivXrandom.gestureRecognizers containsObject:self.longPress]){
-        [self.ivXrandom addGestureRecognizer:self.longPress];
+    if(!self.xrandomLongPress){
+        self.xrandomLongPress = [[UILongPressGestureRecognizer alloc]initWithTarget:self action:@selector(handleXrandomLabelLongPressed:)];
+        [self.ivXrandom addGestureRecognizer:self.xrandomLongPress];
     }
     self.ivXrandom.hidden = !address.isFromXRandom;
     
