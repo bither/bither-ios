@@ -31,7 +31,7 @@
 +(void)addPrivateKeyByRandom:(XRandom*)xRandom  passphras:(NSString *)password count:(int) count{
     NSMutableArray *addressList=[NSMutableArray new];
     for (int i=0; i<count; i++) {
-        BTKey *key = [BTKey keyWithSecret:[NSData randomWithSize:32] compressed:YES];
+        BTKey *key = [BTKey keyWithSecret:[xRandom randomWithSize:32] compressed:YES];
         NSString * privateKeyString=[BTPrivateKeyUtil getPrivateKeyString:key passphrase:password];
         BTAddress *btAddress=[[BTAddress alloc] initWithKey:key encryptPrivKey:privateKeyString isXRandom:NO];
         [addressList addObject:btAddress];
