@@ -35,6 +35,7 @@
 #import "HotAddressViewController.h"
 #import "BitherSetting.h"
 #import "UIImage+ImageRenderToColor.h"
+#import "DialogXrandomInfo.h"
 
 #define kUnconfirmedTxAmountLeftMargin (3)
 
@@ -49,6 +50,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *lblBalanceBtc;
 @property (weak, nonatomic) IBOutlet UILabel *lblBalanceMoney;
 @property (weak, nonatomic) IBOutlet UIImageView *ivType;
+@property (weak, nonatomic) IBOutlet UIImageView *ivXrandom;
 @property (weak, nonatomic) IBOutlet UILabel *lblTransactionCount;
 @property (weak, nonatomic) IBOutlet UIImageView *ivHighlighted;
 @property (weak, nonatomic) IBOutlet UIView *vNoUnconfirmedTx;
@@ -56,8 +58,9 @@
 @property (weak, nonatomic) IBOutlet TransactionConfidenceView *vUnconfirmedTxConfidence;
 @property (weak, nonatomic) IBOutlet AmountButton *vUnconfirmedTxAmount;
 @property (weak, nonatomic) IBOutlet UIButton *btnAddressFull;
-@property (strong, nonatomic) UILongPressGestureRecognizer * longPress;
 @property (weak, nonatomic) IBOutlet UIImageView *ivSymbolBtc;
+@property (strong, nonatomic) UILongPressGestureRecognizer * longPress;
+@property (strong, nonatomic) UILongPressGestureRecognizer * xrandomLongPress;
 
 @end
 
@@ -89,6 +92,12 @@
     }else{
         self.ivType.image = [UIImage imageNamed:@"address_type_watchonly"];
     }
+    
+    if(!self.xrandomLongPress){
+        self.xrandomLongPress = [[UILongPressGestureRecognizer alloc]initWithTarget:self action:@selector(handleXrandomLabelLongPressed:)];
+        [self.ivXrandom addGestureRecognizer:self.xrandomLongPress];
+    }
+    self.ivXrandom.hidden = !address.isFromXRandom;
     
     self.lblBalanceBtc.attributedText = [StringUtil attributedStringForAmount:address.balance withFontSize:kBalanceFontSize];
     
@@ -174,9 +183,13 @@
     if (gestureRecognizer.state==UIGestureRecognizerStateBegan) {
         DialogAddressLongPressOptions *dialogPrivateKeyOptons=[[DialogAddressLongPressOptions alloc] initWithAddress:_btAddress andDelegate:self];
         [dialogPrivateKeyOptons showInWindow:self.window];
-    
     }
-    
+}
+
+-(void)handleXrandomLabelLongPressed:(UILongPressGestureRecognizer*)gesture{
+    if(gesture.state == UIGestureRecognizerStateBegan){
+        [[[DialogXrandomInfo alloc]init] showInWindow:self.window];
+    }
 }
 
 //DialogPrivateKeyOptionsDelegate
