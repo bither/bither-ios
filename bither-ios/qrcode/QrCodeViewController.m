@@ -21,6 +21,8 @@
 #import "DialogAlert.h"
 #import "QRCodeTransportPage.h"
 #import "QRCodeThemeUtil.h"
+#import "DialogSwitchQRCode.h"
+#import "UIViewController+PiShowBanner.h"
 
 #define kQrCodeTopMarginThreshold (10)
 
@@ -31,15 +33,18 @@
 #define kButtonHeight (36)
 #define kButtonPadding (10)
 
-@interface QrCodeViewController (){
+@interface QrCodeViewController ()<DialogSwitchQRCodeDelegate>{
     __weak NSObject* finishTarget;
     SEL finishSelector;
     NSString *_actionName;
+    BOOL  _isNewVerionQRCode;
 }
 @property (weak, nonatomic) IBOutlet UIScrollView *sv;
 @property (weak, nonatomic) IBOutlet UILabel *lblMsg;
 @property (weak, nonatomic) IBOutlet UILabel *lblTitle;
 @property (weak, nonatomic) IBOutlet UIView *vTopBar;
+@property (weak, nonatomic) IBOutlet UIButton *oldVersionSeperator;
+@property (weak, nonatomic) IBOutlet UIButton *btnOption;
 
 @end
 
@@ -59,7 +64,16 @@
     if(![StringUtil isEmpty:self.qrCodeTitle]){
         self.lblTitle.text = self.qrCodeTitle;
     }
+    if (![StringUtil isEmpty:self.oldContent]) {
+        self.oldVersionSeperator.hidden=NO;
+        self.btnOption.hidden=NO;
+    }else{
+        self.oldVersionSeperator.hidden=YES;
+        self.btnOption.hidden=YES;
+        
+    }
     self.lblMsg.text = self.qrCodeMsg;
+    _isNewVerionQRCode=YES;
 }
 
 -(void)viewWillAppear:(BOOL)animated{
@@ -67,15 +81,17 @@
     [self configureQrCodes];
 }
 
+
+
 -(void)configureQrCodes{
     if([StringUtil isEmpty:self.content]){
         return;
     }
-    NSArray *strs = [QRCodeTransportPage getQrCodeStringList:self.content];
-
-    NSArray * oldStrs;
-    if (self.oldContent) {
-        oldStrs=[QRCodeTransportPage oldGetQrCodeStringList:self.oldContent];
+    NSArray *strs ;
+    if (_isNewVerionQRCode) {
+          strs= [QRCodeTransportPage getQrCodeStringList:self.content];
+    }else{
+        strs=[QRCodeTransportPage oldGetQrCodeStringList:self.oldContent];
     }
     CGFloat qrTop = (self.sv.frame.size.height - self.sv.frame.size.width - kButtonHeight - kPageHeight) / 4;
     if(qrTop < kQrCodeTopMarginThreshold){
@@ -119,6 +135,23 @@
         [self.sv addSubview:v];
     }
     self.sv.contentSize = CGSizeMake(strs.count * self.sv.frame.size.width, self.sv.frame.size.height);
+}
+- (IBAction)switchQRCode:(id)sender {
+    DialogSwitchQRCode * dialogSwitchQRCode=[[DialogSwitchQRCode alloc] initWithDelegate:self];
+    [dialogSwitchQRCode showInWindow:self.view.window];
+}
+-(void)switchQRCode{
+    _isNewVerionQRCode=!_isNewVerionQRCode;
+    [self configureQrCodes];
+    if (_isNewVerionQRCode) {
+        [self showMsg:NSLocalizedString(@"Switched to new version QR Codes, sign with Bither Cold ≧1.1.0",nil) ];
+    }else{
+        [self showMsg:NSLocalizedString(@"Switched to old version QR Codes, sign with Bither Cold &lt;1.1.0",nil) ];
+    }
+}
+
+-(void)showMsg:(NSString *)msg{
+    [self showBannerWithMessage:msg belowView:self.vTopBar];
 }
 
 -(void)nextPagePressed:(id)sender{

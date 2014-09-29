@@ -160,6 +160,7 @@
 		ACEEB8DE19B46EB900F2789C /* NetworkMonitorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ACEEB8DD19B46EB900F2789C /* NetworkMonitorViewController.m */; };
 		ACEEB8E119B46EC600F2789C /* PeerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ACEEB8E019B46EC600F2789C /* PeerViewController.m */; };
 		ACEEB8E419B46ED200F2789C /* BlockViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ACEEB8E319B46ED200F2789C /* BlockViewController.m */; };
+		ACF02FE519D8EDAF001AB701 /* DialogSwitchQRCode.m in Sources */ = {isa = PBXBuildFile; fileRef = ACF02FE419D8EDAF001AB701 /* DialogSwitchQRCode.m */; };
 		ACF4B17419668D5700CE24FD /* MarketListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = ACF4B17319668D5700CE24FD /* MarketListCell.m */; };
 		CE2C53C791F4479AADAD9EB2 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FED7A4051DB45218112FAC0 /* libPods.a */; };
 		DA641E8A196E7BC20095DF42 /* CrashLog.m in Sources */ = {isa = PBXBuildFile; fileRef = DA641E83196E7BC20095DF42 /* CrashLog.m */; };
@@ -480,6 +481,8 @@
 		ACEEB8E019B46EC600F2789C /* PeerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PeerViewController.m; sourceTree = "<group>"; };
 		ACEEB8E219B46ED200F2789C /* BlockViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BlockViewController.h; sourceTree = "<group>"; };
 		ACEEB8E319B46ED200F2789C /* BlockViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BlockViewController.m; sourceTree = "<group>"; };
+		ACF02FE319D8EDAF001AB701 /* DialogSwitchQRCode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DialogSwitchQRCode.h; sourceTree = "<group>"; };
+		ACF02FE419D8EDAF001AB701 /* DialogSwitchQRCode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DialogSwitchQRCode.m; sourceTree = "<group>"; };
 		ACF4B17219668D5700CE24FD /* MarketListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MarketListCell.h; path = Cells/MarketListCell.h; sourceTree = "<group>"; };
 		ACF4B17319668D5700CE24FD /* MarketListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MarketListCell.m; path = Cells/MarketListCell.m; sourceTree = "<group>"; };
 		DA641E82196E7BC20095DF42 /* CrashLog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CrashLog.h; path = CrashLog/CrashLog.h; sourceTree = "<group>"; };
@@ -950,6 +953,8 @@
 				AC616396196507B40055C9D0 /* DialogTxConfirmation.m */,
 				AC6163921964ED2F0055C9D0 /* DialogWithArrow.h */,
 				AC6163931964ED2F0055C9D0 /* DialogWithArrow.m */,
+				ACF02FE319D8EDAF001AB701 /* DialogSwitchQRCode.h */,
+				ACF02FE419D8EDAF001AB701 /* DialogSwitchQRCode.m */,
 			);
 			path = Dialog;
 			sourceTree = "<group>";
@@ -1186,6 +1191,7 @@
 				4217A3731951235D00063746 /* Depth.m in Sources */,
 				ACEE7D4819D417E400932B39 /* ImportPrivateKey.m in Sources */,
 				ACBB5F56198B468E00B19F4B /* UIViewController+ConfigureTableView.m in Sources */,
+				ACF02FE519D8EDAF001AB701 /* DialogSwitchQRCode.m in Sources */,
 				AC45AA381987A2F4006314D5 /* DialogPrivateKeyText.m in Sources */,
 				42D9B775193D6B5B00C85B89 /* AppDelegate.m in Sources */,
 				421B037C19495315003A45F1 /* TabButton.m in Sources */,

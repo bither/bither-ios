@@ -983,6 +983,21 @@
                                         <color key="shadowColor" red="0.0" green="0.0" blue="0.0" alpha="0.40000000000000002" colorSpace="calibratedRGB"/>
                                         <size key="shadowOffset" width="1" height="1"/>
                                     </label>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="right" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="title_bar_seperator" id="mhW-fY-Npc">
+                                        <rect key="frame" x="273" y="0.0" width="3" height="44"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" heightSizable="YES"/>
+                                    </imageView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="M45-Q0-fwJ">
+                                        <rect key="frame" x="276" y="0.0" width="44" height="44"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" heightSizable="YES"/>
+                                        <state key="normal" image="title_bar_option_icon">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <state key="highlighted" backgroundImage="card_foreground_pressed"/>
+                                        <connections>
+                                            <action selector="switchQRCode:" destination="Ipx-4P-LPW" eventType="touchUpInside" id="uFv-9y-djn"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                             </view>
@@ -990,10 +1005,12 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <connections>
+                        <outlet property="btnOption" destination="M45-Q0-fwJ" id="YMD-7W-SSL"/>
                         <outlet property="lblMsg" destination="6FL-zM-ekJ" id="CYA-0M-Vg6"/>
                         <outlet property="lblTitle" destination="mSg-tC-frD" id="wxS-mk-C0X"/>
+                        <outlet property="oldVersionSeperator" destination="M45-Q0-fwJ" id="24D-Fa-kiP"/>
                         <outlet property="sv" destination="ODe-ba-zWd" id="NxT-pr-G3g"/>
-                        <outlet property="vTopBar" destination="OSy-fO-Jz8" id="Cvp-0p-SBw"/>
+                        <outlet property="vTopBar" destination="OSy-fO-Jz8" id="7hz-Vz-F2h"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nuR-wZ-srE" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -2399,7 +2416,7 @@
                                                         <size key="shadowOffset" width="0.0" height="4"/>
                                                     </label>
                                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="%" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="1MG-Ff-Ctm">
-                                                        <rect key="frame" x="137.00000032998699" y="36" width="32" height="31"/>
+                                                        <rect key="frame" x="137.00000041993357" y="36" width="32" height="31"/>
                                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" heightSizable="YES"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>

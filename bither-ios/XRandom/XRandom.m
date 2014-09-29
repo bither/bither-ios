@@ -20,6 +20,8 @@
 #import "NSData+Hash.h"
 #import "NSMutableData+Bitcoin.h"
 
+#define PARAMETERS_N @"fffffffffffffffffffffffffffffffebaaedce6af48a03bbfd25e8cd0364141"
+
 @implementation XRandom
 
 -(instancetype)initWithDelegate:(id<UEntropyDelegate>)delegate{
@@ -34,25 +36,29 @@
     NSMutableData * xRandomData=[NSMutableData new];
     NSData * uRandomData=nil;
     NSData * uEntropyData=nil;
-    while (uRandomData==nil) {
-        uRandomData=[NSData randomWithSize:size];
-    }
-    if ([self.delegate respondsToSelector:@selector(randomWithSize:)]) {
-        while (uEntropyData==nil) {
-            uEntropyData=[self.delegate randomWithSize:size];
+    
+    while () {
+        while (uRandomData==nil) {
+            uRandomData=[NSData randomWithSize:size];
+        }
+        if ([self.delegate respondsToSelector:@selector(randomWithSize:)]) {
+            while (uEntropyData==nil) {
+                uEntropyData=[self.delegate randomWithSize:size];
+            }
+        }
+        if (uEntropyData!=nil) {
+            Byte* uRandomBytes=(Byte*)uRandomData.bytes;
+            Byte* uEntropyBytes=(Byte*)uEntropyData.bytes;
+            for (int i=0; i<size; i++) {
+                Byte byte=uRandomBytes[i]^uEntropyBytes[i];
+                [xRandomData appendUInt8:byte];
+            }
+            
+        }else{
+            [xRandomData appendData:xRandomData];
         }
     }
-    if (uEntropyData!=nil) {
-        Byte* uRandomBytes=(Byte*)uRandomData.bytes;
-        Byte* uEntropyBytes=(Byte*)uEntropyData.bytes;
-        for (int i=0; i<size; i++) {
-            Byte byte=uRandomBytes[i]^uEntropyBytes[i];
-            [xRandomData appendUInt8:byte];
-        }
-        
-    }else{
-        [xRandomData appendData:xRandomData];
-    }
+   
     
     return xRandomData;
 
