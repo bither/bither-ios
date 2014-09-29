@@ -83,7 +83,9 @@
         [self.collector onError:[[NSError alloc]initWithDomain:kUEntropySourceErrorDomain code:kUEntropySourceMicCode userInfo:@{kUEntropySourceErrorDescKey: error.debugDescription }] fromSource:self];
         return;
     }
-    self.view.hidden = NO;
+    if(self.view.hidden){
+        self.view.hidden = NO;
+    }
     [session addInput:input];
     [session startRunning];
 }

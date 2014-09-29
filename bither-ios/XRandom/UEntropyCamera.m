@@ -64,6 +64,7 @@
         [view.layer insertSublayer:preview atIndex:0];
         self.collector = collector;
         paused = YES;
+        [self onResume];
     }
     return self;
 }

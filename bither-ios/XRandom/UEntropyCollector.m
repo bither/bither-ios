@@ -18,7 +18,7 @@
 
 #import "UEntropyCollector.h"
 #import "NSMutableData+Bitcoin.h"
-#import "NSString+Base58.h"
+#import "NSData+Hash.h"
 
 @interface UEntropyCollector(){
     dispatch_queue_t queue;
@@ -42,11 +42,11 @@
         paused = YES;
         shouldCollectData = NO;
         [[NSNotificationCenter defaultCenter] addObserver:self
-                                                 selector:@selector(onPause)
+                                                 selector:@selector(onResignActive)
                                                      name:UIApplicationWillResignActiveNotification
                                                    object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self
-                                                 selector:@selector(onResume)
+                                                 selector:@selector(onBecomeActive)
                                                      name:UIApplicationDidBecomeActiveNotification
                                                    object:nil];
     }
@@ -89,7 +89,10 @@
         
         Byte* bytes=(Byte*)data.bytes;
         for(int i = 0; i < requestCount; i++){
-            [result appendUInt8:bytes[random() % data.length]];
+            NSUInteger randomIndex;
+            NSData* randomBytes = [NSData randomWithSize:sizeof(randomIndex)];
+            [randomBytes getBytes:&randomIndex length:sizeof(randomIndex)];
+            [result appendUInt8:bytes[randomIndex % data.length]];
         }
         
         dispatch_async(queue, ^{
@@ -141,6 +144,7 @@
     if(shouldCollectData){
         return;
     }
+    [self onResume];
     shouldCollectData = YES;
     NSInputStream *inputStr;
     NSOutputStream *outputStr;
@@ -182,6 +186,16 @@
     paused = YES;
     for(NSObject<UEntropySource>* s in self.sources){
         [s onPause];
+    }
+}
+
+-(void)onResignActive{
+    [self onPause];
+}
+
+-(void)onBecomeActive{
+    if(shouldCollectData){
+        [self onResume];
     }
 }
 
