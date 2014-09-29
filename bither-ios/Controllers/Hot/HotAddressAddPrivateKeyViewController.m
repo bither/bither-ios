@@ -77,6 +77,9 @@
     }
 }
 
+- (IBAction)xrandomInfoPressed:(id)sender {
+}
+
 @end
 
 @implementation HotAddressAddPrivateKeyViewController(DialogPassword)
