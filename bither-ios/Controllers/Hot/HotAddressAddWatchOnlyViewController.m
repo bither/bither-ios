@@ -82,10 +82,11 @@
         NSString *pubStr=temp;
         if ([temp rangeOfString:XRANDOM_FLAG].location!=NSNotFound) {
             pubStr=[temp substringFromIndex:1];
+            isXRandom=YES;
         }
         BTKey * key=[BTKey keyWithPublicKey:[pubStr hexToData]];
         key.isFromXRandom=isXRandom;
-        BTAddress *btAddress = [[BTAddress alloc] initWithKey:key encryptPrivKey:nil isXRandom:isXRandom];
+        BTAddress *btAddress = [[BTAddress alloc] initWithKey:key encryptPrivKey:nil isXRandom:key.isFromXRandom];
         [addressList addObject:btAddress];
         [addressStrList addObject:key.address];
     }
