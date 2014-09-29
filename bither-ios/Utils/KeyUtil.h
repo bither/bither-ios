@@ -21,7 +21,7 @@
 #import "XRandom.h"
 
 @interface KeyUtil : NSObject
-+(void)addPrivateKeyByRandom:(XRandom*)xRandom  passphras:(NSString *)password count:(int) count;
++(BOOL)addPrivateKeyByRandom:(XRandom*)xRandom  passphras:(NSString *)password count:(int) count;
 +(BOOL)addBitcoinjKey:(NSArray *)array withPassphrase:(NSString *)passphrase error:(NSError **)aError;
 +(BOOL)addAddressList:(NSArray *)array ;
 +(void)stopMonitor:(BTAddress *)address;

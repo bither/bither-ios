@@ -28,16 +28,19 @@
 
 
 @implementation KeyUtil
-+(void)addPrivateKeyByRandom:(XRandom*)xRandom  passphras:(NSString *)password count:(int) count{
++(BOOL)addPrivateKeyByRandom:(XRandom*)xRandom  passphras:(NSString *)password count:(int) count{
     NSMutableArray *addressList=[NSMutableArray new];
     for (int i=0; i<count; i++) {
         BTKey *key = [BTKey keyWithSecret:[xRandom randomWithSize:32] compressed:YES];
         NSString * privateKeyString=[BTPrivateKeyUtil getPrivateKeyString:key passphrase:password];
+        if (!privateKeyString) {
+            return NO;
+        }
         BTAddress *btAddress=[[BTAddress alloc] initWithKey:key encryptPrivKey:privateKeyString isXRandom:NO];
         [addressList addObject:btAddress];
     }
     [KeyUtil addAddressList:addressList];
-
+    return YES;
 }
 +(BOOL)addBitcoinjKey:(NSArray *)array withPassphrase:(NSString *)passphrase error:(NSError **)aError{
     NSMutableArray *addressList=[NSMutableArray new];
