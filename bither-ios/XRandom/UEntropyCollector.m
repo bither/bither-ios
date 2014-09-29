@@ -42,11 +42,11 @@
         paused = YES;
         shouldCollectData = NO;
         [[NSNotificationCenter defaultCenter] addObserver:self
-                                                 selector:@selector(onPause)
+                                                 selector:@selector(onResignActive)
                                                      name:UIApplicationWillResignActiveNotification
                                                    object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self
-                                                 selector:@selector(onResume)
+                                                 selector:@selector(onBecomeActive)
                                                      name:UIApplicationDidBecomeActiveNotification
                                                    object:nil];
     }
@@ -144,6 +144,7 @@
     if(shouldCollectData){
         return;
     }
+    [self onResume];
     shouldCollectData = YES;
     NSInputStream *inputStr;
     NSOutputStream *outputStr;
@@ -185,6 +186,16 @@
     paused = YES;
     for(NSObject<UEntropySource>* s in self.sources){
         [s onPause];
+    }
+}
+
+-(void)onResignActive{
+    [self onPause];
+}
+
+-(void)onBecomeActive{
+    if(shouldCollectData){
+        [self onResume];
     }
 }
 
