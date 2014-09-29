@@ -98,6 +98,7 @@
 		AC53ABDB19D7B657007C095C /* AudioVisualizerView.m in Sources */ = {isa = PBXBuildFile; fileRef = AC53ABDA19D7B657007C095C /* AudioVisualizerView.m */; };
 		AC53ABE119D7EAAE007C095C /* SensorVisualizerView.m in Sources */ = {isa = PBXBuildFile; fileRef = AC53ABE019D7EAAE007C095C /* SensorVisualizerView.m */; };
 		AC53ABE419D8FBB6007C095C /* UEntropyAnimatedTransition.m in Sources */ = {isa = PBXBuildFile; fileRef = AC53ABE319D8FBB6007C095C /* UEntropyAnimatedTransition.m */; };
+		AC53ABE719D911AA007C095C /* DialogXrandomInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = AC53ABE619D911AA007C095C /* DialogXrandomInfo.m */; };
 		AC6163941964ED2F0055C9D0 /* DialogWithArrow.m in Sources */ = {isa = PBXBuildFile; fileRef = AC6163931964ED2F0055C9D0 /* DialogWithArrow.m */; };
 		AC616397196507B40055C9D0 /* DialogTxConfirmation.m in Sources */ = {isa = PBXBuildFile; fileRef = AC616396196507B40055C9D0 /* DialogTxConfirmation.m */; };
 		AC6163A01966524A0055C9D0 /* coins_received.wav in Resources */ = {isa = PBXBuildFile; fileRef = AC61639F1966524A0055C9D0 /* coins_received.wav */; };
@@ -182,7 +183,6 @@
 
 /* Begin PBXFileReference section */
 		0FED7A4051DB45218112FAC0 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		3838393A6F1442CDB8975EBC /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 		4217A3711951235D00063746 /* Depth.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Depth.h; sourceTree = "<group>"; };
 		4217A3721951235D00063746 /* Depth.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Depth.m; sourceTree = "<group>"; };
 		4217A38E19512DC000063746 /* TransactionsUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TransactionsUtil.h; sourceTree = "<group>"; };
@@ -359,6 +359,8 @@
 		AC53ABE019D7EAAE007C095C /* SensorVisualizerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SensorVisualizerView.m; sourceTree = "<group>"; };
 		AC53ABE219D8FBB6007C095C /* UEntropyAnimatedTransition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UEntropyAnimatedTransition.h; sourceTree = "<group>"; };
 		AC53ABE319D8FBB6007C095C /* UEntropyAnimatedTransition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UEntropyAnimatedTransition.m; sourceTree = "<group>"; };
+		AC53ABE519D911AA007C095C /* DialogXrandomInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DialogXrandomInfo.h; sourceTree = "<group>"; };
+		AC53ABE619D911AA007C095C /* DialogXrandomInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DialogXrandomInfo.m; sourceTree = "<group>"; };
 		AC6163921964ED2F0055C9D0 /* DialogWithArrow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DialogWithArrow.h; sourceTree = "<group>"; };
 		AC6163931964ED2F0055C9D0 /* DialogWithArrow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DialogWithArrow.m; sourceTree = "<group>"; };
 		AC616395196507B40055C9D0 /* DialogTxConfirmation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DialogTxConfirmation.h; sourceTree = "<group>"; };
@@ -685,7 +687,6 @@
 				42D9B763193D6B5B00C85B89 /* Frameworks */,
 				42D9B762193D6B5B00C85B89 /* Products */,
 				9451148A66C547A0721851BD /* Pods */,
-				3838393A6F1442CDB8975EBC /* Pods.xcconfig */,
 			);
 			sourceTree = "<group>";
 		};
@@ -972,6 +973,8 @@
 				AC616396196507B40055C9D0 /* DialogTxConfirmation.m */,
 				AC6163921964ED2F0055C9D0 /* DialogWithArrow.h */,
 				AC6163931964ED2F0055C9D0 /* DialogWithArrow.m */,
+				AC53ABE519D911AA007C095C /* DialogXrandomInfo.h */,
+				AC53ABE619D911AA007C095C /* DialogXrandomInfo.m */,
 			);
 			path = Dialog;
 			sourceTree = "<group>";
@@ -1180,7 +1183,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Pods-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		EB4305AED63F435A9851295D /* Check Pods Manifest.lock */ = {
@@ -1264,6 +1267,7 @@
 				4254085D1946A219007AF99C /* StringUtil.m in Sources */,
 				4254083C19469C9A007AF99C /* BitherApi.m in Sources */,
 				AC9BBCFE19D268AB00E58BA7 /* UpgradeUtil.m in Sources */,
+				AC53ABE719D911AA007C095C /* DialogXrandomInfo.m in Sources */,
 				4276CEA1194BF4F70027D119 /* NetworkUtil.m in Sources */,
 				ACCA27481988DDE9000E6A32 /* UIImage+ImageRenderToColor.m in Sources */,
 				ACB9B9C6195AD25800019216 /* AddressDetailCell.m in Sources */,
@@ -1488,7 +1492,7 @@
 		};
 		42D9B78E193D6B5B00C85B89 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 3838393A6F1442CDB8975EBC /* Pods.xcconfig */;
+			baseConfigurationReference = E7552F109D77434AC1A15A24 /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -1512,7 +1516,7 @@
 		};
 		42D9B78F193D6B5B00C85B89 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 3838393A6F1442CDB8975EBC /* Pods.xcconfig */;
+			baseConfigurationReference = 6A924775F78B472633EFD7CF /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
