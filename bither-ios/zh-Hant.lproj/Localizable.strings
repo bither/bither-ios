@@ -413,6 +413,7 @@
 "xrandom_info_detail"="極隨機通過採集數據源以增加隨機性.\n\n數據源包括攝像頭、麥克風、磁場感應器、重力感應器等設備內置傳感器.";
 "xrandom_info_guide"="\n\n採集過程中您可通過晃動設備等方式增加所採集數據的隨機性.";
 "xrandom_info_get_permissions"="請求權限";
+"reach_address_count_limit"="已達地址數上限";
 
 
 "Switch QRCode"="切換二維碼";

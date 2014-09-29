@@ -28,6 +28,7 @@
 #define RGBA(r, g, b, a) [UIColor colorWithRed:r/255.0 green:g/255.0 blue:b/255.0 alpha:a]
 #define PRIVATE_KEY_OF_HOT_COUNT_LIMIT (10)
 #define PRIVATE_KEY_OF_COLD_COUNT_LIMIT (100)
+#define WATCH_ONLY_COUNT_LIMIT (100)
 
 
 #define FORMAT_TIMESTAMP_INTERVAL 1000

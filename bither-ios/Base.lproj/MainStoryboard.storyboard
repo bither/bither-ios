@@ -226,6 +226,7 @@
                         <outlet property="tabAddress" destination="0EZ-yB-Ocm" id="K1J-6s-zVG"/>
                         <outlet property="tabMarket" destination="Az1-MX-haS" id="FgX-1b-BmG"/>
                         <outlet property="tabSetting" destination="zVw-G3-P2V" id="2lb-BK-DLh"/>
+                        <outlet property="vTabe" destination="2b2-FB-cJH" id="3yz-6U-WPl"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iI2-Ju-zFn" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -2017,6 +2018,7 @@
                         <outlet property="tabAddress" destination="LBg-Xz-mKW" id="gFO-9d-1Sb"/>
                         <outlet property="tabCheck" destination="mY8-eE-iNE" id="Al5-9e-0T0"/>
                         <outlet property="tabSetting" destination="p5I-zC-YsM" id="wIf-uh-dVI"/>
+                        <outlet property="vTab" destination="AXr-qY-vGs" id="XEi-NO-Gnt"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yyV-9E-keb" userLabel="First Responder" sceneMemberID="firstResponder"/>

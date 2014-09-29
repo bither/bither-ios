@@ -45,7 +45,6 @@
 -(id)initWithCoder:(NSCoder *)aDecoder{
     self=[super initWithCoder:aDecoder];
     if (self) {
-        self.limit=PRIVATE_KEY_OF_HOT_COUNT_LIMIT;
     }
     return self;
 }
@@ -53,13 +52,17 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        self.limit=PRIVATE_KEY_OF_HOT_COUNT_LIMIT;
     }
     return self;
 }
 
 - (void)viewDidLoad{
     [super viewDidLoad];
+    if([[BTSettings instance] getAppMode] == COLD){
+        self.limit = PRIVATE_KEY_OF_COLD_COUNT_LIMIT;
+    }else{
+        self.limit = PRIVATE_KEY_OF_HOT_COUNT_LIMIT;
+    }
     self.countToGenerate = 1;
     self.pvCount.delegate = self;
     self.pvCount.dataSource = self;
