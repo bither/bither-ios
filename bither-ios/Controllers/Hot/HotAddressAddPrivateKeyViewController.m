@@ -25,6 +25,7 @@
 #import <Bitheri/BTAddressManager.h>
 #import "KeyUtil.h"
 #import "DialogXrandomInfo.h"
+#import "UIViewController+PiShowBanner.h"
 @import MobileCoreServices;
 @import AVFoundation;
 
@@ -133,11 +134,15 @@
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
             [UIApplication sharedApplication].idleTimerDisabled = YES;
             XRandom *xRandom=[[XRandom alloc] initWithDelegate:nil];
-            [KeyUtil addPrivateKeyByRandom:xRandom passphras:password count:self.countToGenerate];
+            BOOL result = [KeyUtil addPrivateKeyByRandom:xRandom passphras:password count:self.countToGenerate];
             [UIApplication sharedApplication].idleTimerDisabled = NO;
             dispatch_async(dispatch_get_main_queue(), ^{
                 [d dismissWithCompletion:^{
-                    [self.parentViewController dismissViewControllerAnimated:YES completion:nil];
+                    if(result){
+                        [self.parentViewController dismissViewControllerAnimated:YES completion:nil];
+                    } else {
+                        [self showBannerWithMessage:NSLocalizedString(@"xrandom_generating_failed", nil) belowView:nil belowTop:0 autoHideIn:1 withCompletion:nil];
+                    }
                 }];
             });
         });
