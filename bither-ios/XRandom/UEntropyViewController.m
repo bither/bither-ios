@@ -265,11 +265,11 @@
         }
         
         [self.collector stop];
-        [self.collector onPause];
         [KeyUtil addAddressList:addresses];
         while ([[NSDate new] timeIntervalSince1970] - startGeneratingTime < kMinGeneratingTime) {
             
         }
+        [self.collector onPause];
         [self onProgress:1];
         dispatch_async(dispatch_get_main_queue(), ^{
             [self onSuccess];
