@@ -162,17 +162,38 @@
 
 -(void)onSuccess{
     isFinishing = YES;
-    [self stopAnimationWithCompletion:^{
-        [self.presentingViewController.presentingViewController dismissViewControllerAnimated:YES completion:nil];
-    }];
+    __weak __block UEntropyViewController* c = self;
+    void(^block)() = ^{
+        [c stopAnimationWithCompletion:^{
+            [c.presentingViewController.presentingViewController dismissViewControllerAnimated:YES completion:nil];
+        }];
+    };
+    if(dpStopping.shown){
+        [dpStopping dismissWithCompletion:^{
+            block();
+        }];
+    }else{
+        block();
+    }
+    
 }
 
 -(void)onFailed{
     isFinishing = YES;
+    __weak __block UEntropyViewController* c = self;
+    __weak __block DialogProgress* dp = dpStopping;
     void(^block)() = ^{
-        [self stopAnimationWithCompletion:^{
-            [self dismissViewControllerAnimated:YES completion:nil];
-        }];
+        if(dp.shown){
+            [dp dismissWithCompletion:^{
+                [c stopAnimationWithCompletion:^{
+                    [c dismissViewControllerAnimated:YES completion:nil];
+                }];
+            }];
+        }else{
+            [c stopAnimationWithCompletion:^{
+                [c dismissViewControllerAnimated:YES completion:nil];
+            }];
+        }
     };
     NSString* msg;
     if(self.collector.sources.count == 0){
