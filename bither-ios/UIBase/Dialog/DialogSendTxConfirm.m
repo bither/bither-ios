@@ -72,8 +72,10 @@
     lblAddress.font = [UIFont systemFontOfSize:kValueFontSize];
     lblAddress.textColor = [UIColor colorWithWhite:1 alpha:kValueAlpha];
     lblAddress.adjustsFontSizeToFitWidth = YES;
+    lblAddress.lineBreakMode=UILineBreakModeCharacterWrap;
+    lblAddress.numberOfLines=2;
     lblAddress.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleBottomMargin;
-    lblAddress.text = toAddress;
+    lblAddress.text =[StringUtil formatAddress:toAddress groupSize:4 lineSize:24];
     
     UILabel *lblAmount = [[UILabel alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(lblAddress.frame) + kVerticalGap, self.frame.size.width, kLabelHeight)];
     lblAmount.font = [UIFont systemFontOfSize:kLabelFontSize];

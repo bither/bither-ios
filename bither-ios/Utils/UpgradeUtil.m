@@ -28,8 +28,11 @@
 
 +(void)upgradePubKey{
     NSArray * addressList=[[BTAddressManager instance] allAddresses];
+    long long sortTime=[[NSDate new] timeIntervalSince1970]*1000;
     for (int i=addressList.count-1; i>=0; i--) {
         BTAddress * address=[addressList objectAtIndex:i];
+        address.sortTime=sortTime;
+        sortTime++;
         [address updateAddressWithPub];
     }
     [[UserDefaultsUtil instance] setLastVersion:[SystemUtil getVersionCode]];
