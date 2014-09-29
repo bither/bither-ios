@@ -26,14 +26,15 @@
 #import "AudioVisualizerView.h"
 #import "SensorVisualizerView.h"
 #import "UEntropyAnimatedTransition.h"
-#import "NSString+Base58.h"
 #import "UIColor+Util.h"
+#import "KeyUtil.h"
+#import "BTPrivateKeyUtil.h"
 
 #define kMicViewHeight (100)
 #define kSaveProgress (0.1)
 #define kStartProgress (0.01)
 #define kProgressKeyRate (0.5)
-#define kProgressEntryptRate (0.5)
+#define kProgressEncryptRate (0.5)
 #define kMinGeneratingTime (4)
 
 @interface UEntropyViewController ()<UEntropyCollectorDelegate, UIViewControllerTransitioningDelegate>{
@@ -219,6 +220,8 @@
         [self.collector start];
         [self onProgress:progress];
         XRandom* xrandom = [[XRandom alloc]initWithDelegate:self.collector];
+        NSMutableArray *addresses=[NSMutableArray new];
+        
         for(int i = 0; i < count; i++){
             if(cancelBlock){
                 [self.collector stop];
@@ -226,8 +229,10 @@
                 dispatch_async(dispatch_get_main_queue(), cancelBlock);
                 return;
             }
+            
             NSData* data = [xrandom randomWithSize:32];
             if(data){
+                BTKey *key = [BTKey keyWithSecret:data compressed:YES];
                 NSLog(@"uentropy outcome data %d/%lu", i + 1, count);
                 progress += itemProgress * kProgressKeyRate;
                 [self onProgress:progress];
@@ -238,9 +243,10 @@
                     return;
                 }
                 
-                sleep(1);
-                //TODO new key
-                progress += itemProgress * kProgressEntryptRate;
+                NSString * privateKeyString=[BTPrivateKeyUtil getPrivateKeyString:key passphrase:password];
+                BTAddress *btAddress=[[BTAddress alloc] initWithKey:key encryptPrivKey:privateKeyString isXRandom:YES];
+                [addresses addObject:btAddress];
+                progress += itemProgress * kProgressEncryptRate;
                 [self onProgress:progress];
             }else{
                 dispatch_async(dispatch_get_main_queue(), ^{
@@ -250,15 +256,17 @@
             }
             
         }
+        
         if(cancelBlock){
             [self.collector stop];
             [self.collector onPause];
             dispatch_async(dispatch_get_main_queue(), cancelBlock);
             return;
         }
+        
         [self.collector stop];
         [self.collector onPause];
-        //TODO save
+        [KeyUtil addAddressList:addresses];
         while ([[NSDate new] timeIntervalSince1970] - startGeneratingTime < kMinGeneratingTime) {
             
         }
