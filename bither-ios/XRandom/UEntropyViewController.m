@@ -25,6 +25,7 @@
 #import "DialogProgress.h"
 #import "AudioVisualizerView.h"
 #import "SensorVisualizerView.h"
+#import "UEntropyAnimatedTransition.h"
 #import "NSString+Base58.h"
 #import "UIColor+Util.h"
 
@@ -309,5 +310,18 @@
     [self.view addSubview:vOverlayTop];
     [self.view addSubview:vOverlayBottom];
 }
+
+
+- (id <UIViewControllerAnimatedTransitioning>)animationControllerForPresentedController:(UIViewController *)presented presentingController:(UIViewController *)presenting sourceController:(UIViewController *)source{
+    return [[UEntropyAnimatedTransition alloc]initWithPresenting:YES];
+}
+
+- (id <UIViewControllerAnimatedTransitioning>)animationControllerForDismissedController:(UIViewController *)dismissed{
+    if(dismissed == self){
+        return [[UEntropyAnimatedTransition alloc]initWithPresenting:NO];
+    }
+    return nil;
+}
+
 
 @end
