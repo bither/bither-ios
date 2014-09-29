@@ -35,6 +35,7 @@
 #import "HotAddressViewController.h"
 #import "BitherSetting.h"
 #import "UIImage+ImageRenderToColor.h"
+#import "DialogXrandomInfo.h"
 
 #define kUnconfirmedTxAmountLeftMargin (3)
 
@@ -187,7 +188,7 @@
 
 -(void)handleXrandomLabelLongPressed:(UILongPressGestureRecognizer*)gesture{
     if(gesture.state == UIGestureRecognizerStateBegan){
-        NSLog(@"Xrandom label long pressed");
+        [[[DialogXrandomInfo alloc]init] showInWindow:self.window];
     }
 }
 
