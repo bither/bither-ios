@@ -17,6 +17,7 @@
 //  limitations under the License.
 
 #import <Foundation/Foundation.h>
+#import "XRandom.h"
 #define kUEntropySourceErrorDomain (@"UEntropySource")
 #define kUEntropySourceCameraCode (1)
 #define kUEntropySourceMicCode (2)
@@ -32,15 +33,15 @@
 -(NSUInteger)byteCountFromSingleFrame;
 @end
 
-@protocol UEntropyDelegate <NSObject>
+@protocol UEntropyCollectorDelegate <NSObject>
 -(void)onNoSourceAvailable;
 @end
 
-@interface UEntropyCollector : NSObject <UEntropySource>
-@property (weak) NSObject<UEntropyDelegate> *delegate;
+@interface UEntropyCollector : NSObject <UEntropySource, UEntropyDelegate>
+@property (weak) NSObject<UEntropyCollectorDelegate> *delegate;
 @property (strong) NSMutableSet *sources;
 
--(instancetype)initWithDelegate:(NSObject<UEntropyDelegate>*) delegate;
+-(instancetype)initWithDelegate:(NSObject<UEntropyCollectorDelegate>*) delegate;
 -(void)addSource:(NSObject<UEntropySource>*)source,...;
 -(void)start;
 -(void)stop;

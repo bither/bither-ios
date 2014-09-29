@@ -36,7 +36,7 @@
 #define kProgressEntryptRate (0.5)
 #define kMinGeneratingTime (4)
 
-@interface UEntropyViewController ()<UEntropyDelegate, UIViewControllerTransitioningDelegate>{
+@interface UEntropyViewController ()<UEntropyCollectorDelegate, UIViewControllerTransitioningDelegate>{
     NSString* password;
     NSUInteger count;
     BOOL isFinishing;
@@ -218,6 +218,7 @@
         NSTimeInterval startGeneratingTime = [[NSDate date] timeIntervalSince1970];
         [self.collector start];
         [self onProgress:progress];
+        XRandom* xrandom = [[XRandom alloc]initWithDelegate:self.collector];
         for(int i = 0; i < count; i++){
             if(cancelBlock){
                 [self.collector stop];
@@ -225,7 +226,7 @@
                 dispatch_async(dispatch_get_main_queue(), cancelBlock);
                 return;
             }
-            NSData* data = [self.collector nextBytes:32];
+            NSData* data = [xrandom randomWithSize:32];
             if(data){
                 NSLog(@"uentropy outcome data %d/%lu", i + 1, count);
                 progress += itemProgress * kProgressKeyRate;
