@@ -105,30 +105,26 @@
     self.lblBalanceBtc.frame = CGRectMake(CGRectGetMaxX(self.lblBalanceBtc.frame) - width, self.lblBalanceBtc.frame.origin.y, width, self.lblBalanceBtc.frame.size.height);
     self.ivSymbolBtc.frame = CGRectMake(CGRectGetMinX(self.lblBalanceBtc.frame) - self.ivSymbolBtc.frame.size.width - 2, self.ivSymbolBtc.frame.origin.y, self.ivSymbolBtc.frame.size.width, self.ivSymbolBtc.frame.size.height);
 
-    if (![_btAddress.address isEqualToString:address.address])
-        self.lblTransactionCount.text = [NSString string];
+//    if (![_btAddress.address isEqualToString:address.address])
+//        self.lblTransactionCount.text = [NSString string];
     self.vNoUnconfirmedTx.hidden = NO;
     self.vUnconfirmedTx.hidden = YES;
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        uint32_t txCount = address.txCount;
-        NSArray *txs = [address getRecentlyTxsWithConfirmationCntLessThan:6 andLimit:1];
-        dispatch_async(dispatch_get_main_queue(), ^{
-            if (txCount > 0 && txs.count > 0) {
-                self.vNoUnconfirmedTx.hidden = YES;
-                self.vUnconfirmedTx.hidden = NO;
-                BTTx *tx = [txs objectAtIndex:0];
-                [self.vUnconfirmedTxConfidence showTransaction:tx];
-                self.vUnconfirmedTxAmount.amount = [tx deltaAmountFrom:address];
-                CGRect frame = self.vUnconfirmedTxAmount.frame;
-                frame.origin.x = CGRectGetMaxX(self.vUnconfirmedTxConfidence.frame) + kUnconfirmedTxAmountLeftMargin;
-                self.vUnconfirmedTxAmount.frame = frame;
-            } else {
-                self.lblTransactionCount.text = [NSString stringWithFormat:@"%u", txCount];
-                self.vNoUnconfirmedTx.hidden = NO;
-                self.vUnconfirmedTx.hidden = YES;
-            }
-        });
-    });
+    
+    uint32_t txCount = address.txCount;
+    BTTx *recentlyTx = address.recentlyTx;
+    if (txCount > 0 && recentlyTx != nil) {
+        self.vNoUnconfirmedTx.hidden = YES;
+        self.vUnconfirmedTx.hidden = NO;
+        [self.vUnconfirmedTxConfidence showTransaction:recentlyTx];
+        self.vUnconfirmedTxAmount.amount = [recentlyTx deltaAmountFrom:address];
+        CGRect frame = self.vUnconfirmedTxAmount.frame;
+        frame.origin.x = CGRectGetMaxX(self.vUnconfirmedTxConfidence.frame) + kUnconfirmedTxAmountLeftMargin;
+        self.vUnconfirmedTxAmount.frame = frame;
+    } else {
+        self.lblTransactionCount.text = [NSString stringWithFormat:@"%u", txCount];
+        self.vNoUnconfirmedTx.hidden = NO;
+        self.vUnconfirmedTx.hidden = YES;
+    }
 
     CGRect frame = self.btnAddressFull.frame;
     frame.origin.x = CGRectGetMaxX(self.lblAddress.frame) + 5;
