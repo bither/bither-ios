@@ -93,46 +93,59 @@ static NSArray* Colors;
 {
     CGContextRef context=UIGraphicsGetCurrentContext();
     CGContextClearRect(context, rect);
-    if(self.amounts){
-        NSMutableArray* rates = [[NSMutableArray alloc]initWithCapacity:self.amounts.count];
-        NSMutableIndexSet* minIndexes = [[NSMutableIndexSet alloc]init];
-        for(int i = 0;i < self.amounts.count;i++){
-            NSNumber* amountNumber = self.amounts[i];
-            double rate = (double)[amountNumber longLongValue] / (double)self.total;
-            rates[i] = [NSNumber numberWithDouble:rate];
-            if(rate < kMinRate && rate > 0){
-                [minIndexes addIndex:i];
-                rates[i] = [NSNumber numberWithDouble:kMinRate];
-            }
-        }
-        if(minIndexes.count > 0){
-            int64_t rest = 0;
-            for(NSInteger i = 0;i < self.amounts.count; i++){
-                if(![minIndexes containsIndex:i]){
-                    rest += [((NSNumber*)self.amounts[i]) longLongValue];
-                }
-            }
-            double restRate = 1.0f - minIndexes.count * kMinRate;
-            for (NSInteger i = 0; i < self.amounts.count; i++) {
-                if (![minIndexes containsIndex:i ]) {
-                    double rate = (double)[self.amounts[i] longLongValue] / (double)rest * restRate;
-                    rates[i] = [NSNumber numberWithDouble:rate];
-                }
-            }
-        }
+    if(self.total <= 0 && self.amounts){
         CGFloat angle = self.startAngle;
-        for(NSUInteger i = 0; i < rates.count; i++){
-            if(i >= Colors.count){
-                break;
+        float sweepAngle = self.totalAngle;
+        sweepAngle = MAX(kMaxTotalAngle / 1000.0, sweepAngle);
+        CGContextBeginPath(context);
+        CGContextMoveToPoint(context, CGRectGetMidX(rect), CGRectGetMidY(rect));
+        CGContextAddArc(context, CGRectGetMidX(rect), CGRectGetMidY(rect), MIN(rect.size.width, rect.size.height)/2, angle, angle + sweepAngle, 0);
+        [Colors[Colors.count - 1] setFill];
+        CGContextClosePath(context);
+        CGContextDrawPath(context, kCGPathFill);
+        angle += sweepAngle;
+    }else{
+        if(self.amounts){
+            NSMutableArray* rates = [[NSMutableArray alloc]initWithCapacity:self.amounts.count];
+            NSMutableIndexSet* minIndexes = [[NSMutableIndexSet alloc]init];
+            for(int i = 0;i < self.amounts.count;i++){
+                NSNumber* amountNumber = self.amounts[i];
+                double rate = (double)[amountNumber longLongValue] / (double)self.total;
+                rates[i] = [NSNumber numberWithDouble:rate];
+                if(rate < kMinRate && rate > 0){
+                    [minIndexes addIndex:i];
+                    rates[i] = [NSNumber numberWithDouble:kMinRate];
+                }
             }
-            float sweepAngle = [rates[i] doubleValue] * self.totalAngle;
-            CGContextBeginPath(context);
-            CGContextMoveToPoint(context, CGRectGetMidX(rect), CGRectGetMidY(rect));
-            CGContextAddArc(context, CGRectGetMidX(rect), CGRectGetMidY(rect), MIN(rect.size.width, rect.size.height)/2, angle, angle + sweepAngle, 0);
-            [Colors[i] setFill];
-            CGContextClosePath(context);
-            CGContextDrawPath(context, kCGPathFill);
-            angle += sweepAngle;
+            if(minIndexes.count > 0){
+                int64_t rest = 0;
+                for(NSInteger i = 0;i < self.amounts.count; i++){
+                    if(![minIndexes containsIndex:i]){
+                        rest += [((NSNumber*)self.amounts[i]) longLongValue];
+                    }
+                }
+                double restRate = 1.0f - minIndexes.count * kMinRate;
+                for (NSInteger i = 0; i < self.amounts.count; i++) {
+                    if (![minIndexes containsIndex:i ]) {
+                        double rate = (double)[self.amounts[i] longLongValue] / (double)rest * restRate;
+                        rates[i] = [NSNumber numberWithDouble:rate];
+                    }
+                }
+            }
+            CGFloat angle = self.startAngle;
+            for(NSUInteger i = 0; i < rates.count; i++){
+                if(i >= Colors.count){
+                    break;
+                }
+                float sweepAngle = [rates[i] doubleValue] * self.totalAngle;
+                CGContextBeginPath(context);
+                CGContextMoveToPoint(context, CGRectGetMidX(rect), CGRectGetMidY(rect));
+                CGContextAddArc(context, CGRectGetMidX(rect), CGRectGetMidY(rect), MIN(rect.size.width, rect.size.height)/2, angle, angle + sweepAngle, 0);
+                [Colors[i] setFill];
+                CGContextClosePath(context);
+                CGContextDrawPath(context, kCGPathFill);
+                angle += sweepAngle;
+            }
         }
     }
     CGFloat centerImageSize = MIN(rect.size.width, rect.size.height) * kLogoSizeRate;

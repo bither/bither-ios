@@ -128,13 +128,11 @@
 }
 
 -(void)showDialog{
-    if(_amount > 0){
-        self.isDialogShown = YES;
-        DialogTotalBalance *dialog = [[DialogTotalBalance alloc]init];
-        dialog.listener = self;
-        [dialog showFromView:self];
-        [self configureArrow];
-    }
+    self.isDialogShown = YES;
+    DialogTotalBalance *dialog = [[DialogTotalBalance alloc]init];
+    dialog.listener = self;
+    [dialog showFromView:self];
+    [self configureArrow];
 }
 
 -(void)dialogDismissed{
