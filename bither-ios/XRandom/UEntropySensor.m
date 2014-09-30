@@ -83,6 +83,7 @@
             }
         }];
     }
+    [self notifyBrightness];
 }
 
 -(void)onPause{
@@ -92,6 +93,7 @@
     [manager stopGyroUpdates];
     [manager stopMagnetometerUpdates];
     [queue cancelAllOperations];
+    [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(notifyBrightness) object:nil];
 }
 
 -(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context{
@@ -108,6 +110,12 @@
 -(void)newData:(NSData*)data from:(NSString*)source{
     [self.view newDataFrom:source];
     [self.collector onNewData:data fromSource:self];
+}
+
+-(void)notifyBrightness{
+    [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(notifyBrightness) object:nil];
+    [self.view newDataFrom:kUEntropySensorBrightness];
+    [self performSelector:@selector(notifyBrightness) withObject:nil afterDelay:1];
 }
 
 -(void)updateViews{
