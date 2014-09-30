@@ -23,7 +23,6 @@
 #import "UEntropyCollector.h"
 #import "DialogAlert.h"
 #import "DialogProgress.h"
-#import "AudioVisualizerView.h"
 #import "SensorVisualizerView.h"
 #import "UEntropyAnimatedTransition.h"
 #import "UIColor+Util.h"
@@ -72,16 +71,14 @@
     dimmer.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
     [self.view addSubview:dimmer];
     
-    AudioVisualizerView* vMic = [[AudioVisualizerView alloc]initWithFrame:CGRectMake(0, self.view.frame.size.height - kMicViewHeight, self.view.frame.size.width, kMicViewHeight)];
-    vMic.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleTopMargin;
-    [self.view addSubview:vMic];
-    SensorVisualizerView* vSensor = [[SensorVisualizerView alloc]initWithFrame:CGRectMake(0, CGRectGetMinY(vMic.frame) - kSensorVisualizerViewItemSize - 10, self.view.frame.size.width, kSensorVisualizerViewItemSize)];
+    SensorVisualizerView* vSensor = [[SensorVisualizerView alloc]initWithFrame:CGRectMake(0, self.view.frame.size.height - kSensorVisualizerViewItemSize - 10, self.view.frame.size.width, kSensorVisualizerViewItemSize)];
     vSensor.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleTopMargin;
+    vSensor.showMic = [AVCaptureDevice authorizationStatusForMediaType:AVMediaTypeAudio] == AVAuthorizationStatusAuthorized;
     [self.view addSubview:vSensor];
     
     self.collector = [[UEntropyCollector alloc]initWithDelegate:self];
     [self.collector addSource:  [[UEntropyCamera alloc] initWithViewController: self.view andCollector: self.collector],
-                                [[UEntropyMic alloc] initWithView: vMic andCollector: self.collector],
+                                [[UEntropyMic alloc] initWithView: nil andCollector: self.collector],
                                 [[UEntropySensor alloc] initWithView: vSensor andCollecor: self.collector],
                                 nil];
     dpStopping = [[DialogProgress alloc]initWithMessage:NSLocalizedString(@"xrandom_stopping", nil)];
@@ -214,7 +211,7 @@
 }
 
 -(void)startGenerate{
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
         float progress = kStartProgress;
         float itemProgress = (1.0 - kStartProgress - kSaveProgress) / (float) count;
         NSTimeInterval startGeneratingTime = [[NSDate date] timeIntervalSince1970];
@@ -235,7 +232,7 @@
             NSData* data = [xrandom randomWithSize:32];
             if(data){
                 BTKey *key = [BTKey keyWithSecret:data compressed:YES];
-                NSLog(@"uentropy outcome data %d/%lu", i + 1, count);
+                NSLog(@"uentropy outcome data %d/%lu", i + 1, (unsigned long)count);
                 progress += itemProgress * kProgressKeyRate;
                 [self onProgress:progress];
                 if(cancelBlock){
@@ -266,7 +263,6 @@
                 });
                 return;
             }
-            
         }
         
         if(cancelBlock){

@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #define kSensorVisualizerViewItemSize (30)
 @interface SensorVisualizerView : UIView
+@property BOOL showMic;
 -(void)updateViewWithSensors:(NSArray*)sensors;
 -(void)newDataFrom:(NSString*)sensor;
 @end

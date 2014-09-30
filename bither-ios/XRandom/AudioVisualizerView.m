@@ -113,6 +113,7 @@
         [path addQuadCurveToPoint:CGPointMake(kHorizontalStraightLineLength * 4, subConnectionY) controlPoint:CGPointMake(kHorizontalStraightLineLength * 3, subControlY)];
     }
     
+    //TODO optimize this loop for 4s or lower devices
     for (float x = kHorizontalStraightLineLength * 4;
          x < width - kHorizontalStraightLineLength * 4;
          x+=0.5f) {
@@ -161,8 +162,10 @@
 }
 
 -(void)dealloc{
-    [displayLink invalidate];
-    displayLink = nil;
+    if(displayLink){
+        [displayLink invalidate];
+        displayLink = nil;
+    }
 }
 
 @end

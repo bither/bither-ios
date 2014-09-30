@@ -20,6 +20,7 @@
     UIImageView *ivAccelerometer;
     UIImageView *ivBrightness;
     UIImageView *ivGyro;
+    UIImageView *ivMic;
     NSArray* sensorsList;
     NSMutableSet *animatingSensors;
     BOOL holdingBackNextFlash;
@@ -49,6 +50,7 @@
     self.clipsToBounds = NO;
     sensorsList = [[NSArray alloc]initWithObjects:kUEntropySensorMagnetometer, kUEntropySensorAccelerometer, kUEntropySensorBrightness, kUEntropySensorGyro, nil];
     animatingSensors = [NSMutableSet set];
+    ivMic = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"xrandom_sensor_mic"]];
     ivMagnetometer = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"xrandom_sensor_magnetic"]];
     ivAccelerometer = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"xrandom_sensor_accelerometer"]];
     ivBrightness = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"xrandom_sensor_light"]];
@@ -57,8 +59,22 @@
 
 -(void)updateViewWithSensors:(NSArray*)sensors{
     dispatch_async(dispatch_get_main_queue(), ^{
-        CGFloat totalWidth = sensors.count * kSensorVisualizerViewItemSize + (sensors.count - 1) * kGap;
+        NSUInteger count = sensors.count + (self.showMic ? 1 : 0);
+        CGFloat totalWidth = count * kSensorVisualizerViewItemSize + (count - 1) * kGap;
         CGFloat x = (self.frame.size.width - totalWidth) / 2;
+        if(self.showMic){
+            UIImageView *iv = ivMic;
+            iv.frame = CGRectMake(x, 0, kSensorVisualizerViewItemSize, kSensorVisualizerViewItemSize);
+            if(!iv.superview){
+                iv.alpha = kFadeAlpha;
+                [self addSubview:iv];
+            }
+            x+= kSensorVisualizerViewItemSize + kGap;
+            [self autoFlashMic];
+        } else {
+            [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(autoFlashMic) object:nil];
+            [ivMic removeFromSuperview];
+        }
         for(NSString* s in sensorsList){
             UIImageView *iv = [self viewForSensor:s];
             if(iv){
@@ -75,6 +91,19 @@
             }
         }
     });
+}
+
+-(void)autoFlashMic{
+    UIImageView *iv = ivMic;
+    [UIView animateWithDuration:kFlashDuration animations:^{
+        iv.alpha = kFlashAlpha;
+    } completion:^(BOOL finished) {
+        [UIView animateWithDuration:kFlashDuration delay:kFlashDuration / 2.0 options:UIViewAnimationOptionBeginFromCurrentState animations:^{
+            iv.alpha = kFadeAlpha;
+        } completion:^(BOOL finished) {
+            [self performSelector:@selector(autoFlashMic) withObject:nil afterDelay:kFlashDuration];
+        }];
+    }];
 }
 
 -(void)newDataFrom:(NSString*)sensor{
