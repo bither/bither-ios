@@ -53,6 +53,11 @@
     self.lbAddress.text=peer.host;
    
     if (peer.status==BTPeerStatusConnected) {
+        if (peer.userAgent.length > 20) {
+            self.lbVersion.text= [NSString stringWithFormat:@"%@...", [peer.userAgent substringToIndex:20]];
+        } else {
+            self.lbVersion.text = peer.userAgent;
+        }
         self.lbVersion.text= peer.userAgent;
         self.lbProtocol.text=[NSString stringWithFormat:@"protocol: %d",(int)peer.version];
         self.lbBlocks.text=[NSString stringWithFormat:@"%d blocks",(int)peer.displayLastBlock];
