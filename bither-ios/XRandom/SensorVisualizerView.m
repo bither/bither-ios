@@ -48,7 +48,10 @@
 -(void)firstConfigure{
     self.backgroundColor = [UIColor clearColor];
     self.clipsToBounds = NO;
-    sensorsList = [[NSArray alloc]initWithObjects:kUEntropySensorMagnetometer, kUEntropySensorAccelerometer, kUEntropySensorBrightness, kUEntropySensorGyro, nil];
+    sensorsList = [[NSArray alloc]initWithObjects:kUEntropySensorMagnetometer,
+                                                  kUEntropySensorAccelerometer,
+                                                  //kUEntropySensorBrightness,
+                                                  kUEntropySensorGyro, nil];
     animatingSensors = [NSMutableSet set];
     ivMic = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"xrandom_sensor_mic"]];
     ivMagnetometer = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"xrandom_sensor_magnetic"]];
@@ -59,7 +62,7 @@
 
 -(void)updateViewWithSensors:(NSArray*)sensors{
     dispatch_async(dispatch_get_main_queue(), ^{
-        NSUInteger count = sensors.count + (self.showMic ? 1 : 0);
+        NSUInteger count = sensors.count + (self.showMic ? 1 : 0) - ([sensors containsObject:kUEntropySensorBrightness] ? 1 : 0);
         CGFloat totalWidth = count * kSensorVisualizerViewItemSize + (count - 1) * kGap;
         CGFloat x = (self.frame.size.width - totalWidth) / 2;
         if(self.showMic){
