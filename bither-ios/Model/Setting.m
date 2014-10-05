@@ -322,7 +322,12 @@ static Setting* reloadTxsSetting;
             NSArray* addresses = [BTAddressManager instance].privKeyAddresses;
             NSMutableArray* pubKeys = [[NSMutableArray alloc]init];
             for(BTAddress* a in addresses){
-                [pubKeys addObject:[[NSString hexWithData:a.pubKey] toUppercaseStringWithEn] ];
+                NSString * pubStr=@"";
+                if (a.isFromXRandom) {
+                    pubStr=XRANDOM_FLAG;
+                }
+                pubStr=[pubStr stringByAppendingString:[[NSString hexWithData:a.pubKey] toUppercaseStringWithEn] ];
+                [pubKeys addObject:pubStr];
             }
             QrCodeViewController* qrCtr = [controller.storyboard instantiateViewControllerWithIdentifier:@"QrCode"];
             qrCtr.content =[BTQRCodeUtil joinedQRCode:pubKeys];
