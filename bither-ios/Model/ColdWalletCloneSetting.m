@@ -66,7 +66,7 @@ static Setting* CloneQrSetting;
             for(int i = 0; i < commponent.count; i+=3){
                 NSString* s =[BTQRCodeUtil joinedQRCode:[commponent subarrayWithRange:NSMakeRange(i, 3)]];                [keys addObject:s];
             }
-            BOOL result = [KeyUtil addBitcoinjKey:[keys reverseObjectEnumerator].allObjects withPassphrase:password error:nil];
+            BOOL result = [KeyUtil addBitcoinjKey:keys withPassphrase:password error:nil];
             dispatch_async(dispatch_get_main_queue(), ^{
                 if([self.controller respondsToSelector:@selector(reload)]){
                     [self.controller performSelector:@selector(reload)];
