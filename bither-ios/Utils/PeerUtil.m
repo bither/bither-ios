@@ -25,7 +25,8 @@
 #import "BlockUtil.h"
 #import "NetworkUtil.h"
 #import "NSDictionary+Fromat.h"
-
+#import "NetworkUtil.h"
+#import "UserDefaultsUtil.h"
 
 
 static BOOL isRunning=NO;
@@ -46,7 +47,7 @@ static PeerUtil * peerUtil;
 
 -(void)startPeer{
     if ([[BTSettings instance] getAppMode]!=COLD) {
-        
+    
         if ([[BlockUtil instance] syncSpvFinish]) {
             if ([[BTPeerManager instance] doneSyncFromSPV]) {
                 [self syncSpvFromBitcoinDone];
@@ -86,9 +87,10 @@ static PeerUtil * peerUtil;
        
         BOOL downloadSpvFinish=[[UserDefaultsUtil instance ] getDownloadSpvFinish]&&[[BTPeerManager instance] doneSyncFromSPV];
         BOOL walletIsSyncComplete=[[BTAddressManager instance] allSyncComplete];
+        BOOL networkIsAvailable=![[UserDefaultsUtil instance] getSyncBlockOnlyWifi]||[NetworkUtil isEnableWIFI];
        // BOOL netWorkState=[NetworkUtil isEnableWIFI]||![[UserDefaultsUtil instance] getSyncBlockOnlyWifi];
         BTPeerManager * peerManager=[BTPeerManager instance];
-        if (downloadSpvFinish && walletIsSyncComplete ) {
+        if (networkIsAvailable&&downloadSpvFinish && walletIsSyncComplete ) {
             if (![peerManager connected]) {
                 [peerManager start];
             }

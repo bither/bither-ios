@@ -19,7 +19,7 @@
 #import "ColdAddressListCell.h"
 #import "UIBaseUtil.h"
 #import "StringUtil.h"
-#import "QrUtil.h"
+#import "QRCodeThemeUtil.h"
 #import "NSString+Size.h"
 #import "DialogBlackQrCode.h"
 #import "ColdAddressViewController.h"
@@ -33,6 +33,7 @@
 #import "KeyUtil.h"
 #import "HotAddressViewController.h"
 #import "BitherSetting.h"
+#import "DialogXrandomInfo.h"
 
 #define kAddressGroupSize (4)
 #define kAddressLineSize (12)
@@ -43,12 +44,14 @@
 
 }
 @property (weak, nonatomic) IBOutlet UIImageView *ivType;
+@property (weak, nonatomic) IBOutlet UIImageView *ivXrandom;
 @property (weak, nonatomic) IBOutlet UILabel *lblAddress;
 @property (weak, nonatomic) IBOutlet UIView *vAddressContainer;
 @property (weak, nonatomic) IBOutlet UIImageView *ivQr;
 @property (weak, nonatomic) IBOutlet UIView *vQr;
 @property (weak, nonatomic) IBOutlet UIView *vContainer;
 @property (strong, nonatomic) UILongPressGestureRecognizer * longPress;
+@property (strong, nonatomic) UILongPressGestureRecognizer * xrandomLongPress;
 @end
 
 @implementation ColdAddressListCell
@@ -71,8 +74,13 @@
     if (![[self.ivType gestureRecognizers] containsObject:self.longPress]) {
         [self.ivType addGestureRecognizer:self.longPress];
     }
+    if(!self.xrandomLongPress){
+        self.xrandomLongPress = [[UILongPressGestureRecognizer alloc]initWithTarget:self action:@selector(handleXrandomLabelLongPressed:)];
+        [self.ivXrandom addGestureRecognizer:self.xrandomLongPress];
+    }
+    self.ivXrandom.hidden = !address.isFromXRandom;
     [self configureAddressFrame];
-    self.ivQr.image = [QrUtil qrCodeOfContent:address.address andSize:self.ivQr.frame.size.width withTheme:[QrCodeTheme black]];
+    self.ivQr.image = [QRCodeThemeUtil qrCodeOfContent:address.address andSize:self.ivQr.frame.size.width withTheme:[QRCodeTheme black]];
 }
 
 -(void)configureAddressFrame{
@@ -108,9 +116,13 @@
     if (gestureRecognizer.state==UIGestureRecognizerStateBegan) {
         DialogAddressLongPressOptions *dialogPrivateKeyOptons=[[DialogAddressLongPressOptions alloc] initWithAddress:_btAddress andDelegate:self];
         [dialogPrivateKeyOptons showInWindow:self.window];
-       
     }
-    
+}
+
+-(void)handleXrandomLabelLongPressed:(UILongPressGestureRecognizer*)gesture{
+    if(gesture.state == UIGestureRecognizerStateBegan){
+        [[[DialogXrandomInfo alloc]init] showInWindow:self.window];
+    }
 }
 
 //DialogPrivateKeyOptionsDelegate

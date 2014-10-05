@@ -23,6 +23,8 @@
 #import "PeerUtil.h"
 #import "HotAddressTabButton.h"
 #import "BTPeerManager.h"
+#import "BTAddressManager.h"
+#import "UIViewController+PiShowBanner.h"
 
 
 @interface HotViewController ()
@@ -30,6 +32,7 @@
 @property (strong, nonatomic) IBOutlet TabButton *tabMarket;
 @property (strong, nonatomic) IBOutlet HotAddressTabButton *tabAddress;
 @property (strong, nonatomic) IBOutlet TabButton *tabSetting;
+@property (weak, nonatomic) IBOutlet UIView *vTabe;
 
 @property (strong, nonatomic) PiPageViewController *page;
 @end
@@ -159,6 +162,10 @@
 }
 
 - (IBAction)addPressed:(id)sender {
+    if([BTAddressManager instance].privKeyAddresses.count >= PRIVATE_KEY_OF_HOT_COUNT_LIMIT && [BTAddressManager instance].watchOnlyAddresses.count >= WATCH_ONLY_COUNT_LIMIT){
+        [self showBannerWithMessage:NSLocalizedString(@"reach_address_count_limit", nil) belowView:self.vTabe];
+        return;
+    }
     IOS7ContainerViewController* container = [[IOS7ContainerViewController alloc]init];
     container.controller = [self.storyboard instantiateViewControllerWithIdentifier:@"HotAddressAdd"];
     [self presentViewController:container animated:YES completion:nil];

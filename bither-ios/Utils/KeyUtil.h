@@ -18,10 +18,11 @@
 
 #import <Foundation/Foundation.h>
 #import "BTAddress.h"
+#import "XRandom.h"
 
 @interface KeyUtil : NSObject
-+(void)addPrivateKeyByRandomWithPassphras:(NSString *)password count:(int) count;
++(BOOL)addPrivateKeyByRandom:(XRandom*)xRandom  passphras:(NSString *)password count:(int) count;
 +(BOOL)addBitcoinjKey:(NSArray *)array withPassphrase:(NSString *)passphrase error:(NSError **)aError;
-+(void) addWatckOnly:(NSArray *)pubKeys;
++(BOOL)addAddressList:(NSArray *)array ;
 +(void)stopMonitor:(BTAddress *)address;
 @end

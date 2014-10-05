@@ -20,6 +20,7 @@
 #import "DialogEditPassword.h"
 #import "UIViewController+PiShowBanner.h"
 #import "UIViewController+ConfigureTableView.h"
+#import "BTSettings.h"
 
 @interface AdvanceViewController ()<UITableViewDataSource,UITableViewDelegate,DialogEditPasswordDelegate>
 @property (weak, nonatomic) IBOutlet UIView *vTopBar;
@@ -42,9 +43,15 @@
     self.tableView.dataSource=self;
     self.tableView.delegate=self;
     [self.tableView reloadData];
-    [self configureHeaderAndFooterNoLogo:self.tableView background:ColorBg];
-}
 
+    NSString * version= [NSString stringWithFormat:NSLocalizedString(@"Based on %@ %@", nil),BITHERI_NAME,BITHERI_VERSION ];
+    BOOL isHot=[[BTSettings instance] getAppMode]==HOT;
+    [self configureHeaderAndFooter:self.tableView background:ColorBg isHot:isHot version:version];
+}
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    [self.tableView reloadData];
+}
 
 - (IBAction)backPressed:(id)sender {
     [self.navigationController popViewControllerAnimated:YES];

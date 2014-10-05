@@ -20,8 +20,13 @@
 #import "IOS7ContainerViewController.h"
 #import "UIViewController+PiShowBanner.h"
 #import "PiPageViewController.h"
+#import "BTAddressManager.h"
+#import "BitherSetting.h"
 
-@interface HotAddressAddViewController ()
+@interface HotAddressAddViewController (){
+    BOOL privateKeyLimited;
+    BOOL watchOnlyLimited;
+}
 @property (strong, nonatomic)PiPageViewController *page;
 @property (weak, nonatomic) IBOutlet UIView *vTopBar;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *vTab;
@@ -62,12 +67,26 @@
 @implementation HotAddressAddViewController(PageViewControllerDelegate)
 
 -(void)configurePage{
-    self.page = [[PiPageViewController alloc]initWithStoryboard:self.storyboard andViewControllerIdentifiers:[[NSArray alloc] initWithObjects:@"HotAddressAddPrivateKey", @"HotAddressAddWatchOnly", nil]];
+    privateKeyLimited = [BTAddressManager instance].privKeyAddresses.count >= PRIVATE_KEY_OF_HOT_COUNT_LIMIT;
+    watchOnlyLimited = [BTAddressManager instance].watchOnlyAddresses.count >= WATCH_ONLY_COUNT_LIMIT;
+    NSMutableArray* array = [NSMutableArray new];
+    if(!privateKeyLimited){
+        [array addObject:@"HotAddressAddPrivateKey"];
+    }
+    if(!watchOnlyLimited){
+        [array addObject:@"HotAddressAddWatchOnly"];
+    }
+    self.page = [[PiPageViewController alloc]initWithStoryboard:self.storyboard andViewControllerIdentifiers:array];
     self.page.pageDelegate = self;
     [self addChildViewController:self.page];
     self.page.view.frame = CGRectMake(0, CGRectGetMaxY(self.vTopBar.frame), self.view.frame.size.width, self.view.frame.size.height - CGRectGetMaxY(self.vTopBar.frame));
     [self.view insertSubview:self.page.view atIndex:0];
-    self.vTab.selectedSegmentIndex = 0;
+    if(privateKeyLimited){
+        self.vTab.selectedSegmentIndex = 1;
+    }else{
+        self.vTab.selectedSegmentIndex = 0;
+    }
+    self.vTab.enabled = !privateKeyLimited && !watchOnlyLimited;
 }
 
 -(void)pageIndexChanged:(int) index{

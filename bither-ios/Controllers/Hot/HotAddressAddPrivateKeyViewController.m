@@ -20,11 +20,18 @@
 #import "BitherSetting.h"
 #import "DialogProgress.h"
 #import "DialogPassword.h"
+#import "DialogAlert.h"
+#import "UEntropyViewController.h"
 #import <Bitheri/BTAddressManager.h>
 #import "KeyUtil.h"
+#import "DialogXrandomInfo.h"
+#import "UIViewController+PiShowBanner.h"
+@import MobileCoreServices;
+@import AVFoundation;
 
 @interface HotAddressAddPrivateKeyViewController ()
 @property (weak, nonatomic) IBOutlet UIPickerView *pvCount;
+@property (weak, nonatomic) IBOutlet UIButton *btnXRandomCheck;
 @property int countToGenerate;
 @end
 
@@ -38,7 +45,6 @@
 -(id)initWithCoder:(NSCoder *)aDecoder{
     self=[super initWithCoder:aDecoder];
     if (self) {
-        self.limit=PRIVATE_KEY_OF_HOT_COUNT_LIMIT;
     }
     return self;
 }
@@ -46,21 +52,74 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        self.limit=PRIVATE_KEY_OF_HOT_COUNT_LIMIT;
     }
     return self;
 }
 
 - (void)viewDidLoad{
     [super viewDidLoad];
+    if([[BTSettings instance] getAppMode] == COLD){
+        self.limit = PRIVATE_KEY_OF_COLD_COUNT_LIMIT;
+    }else{
+        self.limit = PRIVATE_KEY_OF_HOT_COUNT_LIMIT;
+    }
     self.countToGenerate = 1;
     self.pvCount.delegate = self;
     self.pvCount.dataSource = self;
 }
 
 - (IBAction)generatePressed:(id)sender {
-    DialogPassword *d = [[DialogPassword alloc]initWithDelegate:self];
-    [d showInWindow:self.view.window];
+    if(self.btnXRandomCheck.selected && (
+                [AVCaptureDevice authorizationStatusForMediaType:AVMediaTypeVideo] == AVAuthorizationStatusNotDetermined ||
+                [AVCaptureDevice authorizationStatusForMediaType:AVMediaTypeAudio] == AVAuthorizationStatusNotDetermined )
+                ){
+        [self getPermissions:^{
+            DialogPassword *d = [[DialogPassword alloc]initWithDelegate:self];
+            [d showInWindow:self.view.window];
+        }];
+    }else{
+        DialogPassword *d = [[DialogPassword alloc]initWithDelegate:self];
+        [d showInWindow:self.view.window];
+    }
+}
+
+- (IBAction)xrandomCheckPressed:(id)sender{
+    if(!self.btnXRandomCheck.selected){
+        self.btnXRandomCheck.selected = YES;
+        [self.btnXRandomCheck setImage:[UIImage imageNamed:@"xrandom_checkbox_checked"] forState:UIControlStateNormal];
+    }else{
+        DialogAlert *alert = [[DialogAlert alloc]initWithMessage:NSLocalizedString(@"XRandom increases randomness.\nSure to disable?", nil) confirm:^{
+            self.btnXRandomCheck.selected = NO;
+            [self.btnXRandomCheck setImage:[UIImage imageNamed:@"xrandom_checkbox_normal"] forState:UIControlStateNormal];
+        } cancel:nil];
+        [alert showInWindow:self.view.window];
+    }
+}
+
+- (IBAction)xrandomInfoPressed:(id)sender {
+    [[[DialogXrandomInfo alloc]initWithGuide:YES]showInWindow:self.view.window];
+}
+
+-(void)getPermisionFor:(NSString*)mediaType completion:(void(^)(BOOL))completion{
+    AVAuthorizationStatus authStatus = [AVCaptureDevice authorizationStatusForMediaType:mediaType];
+    if(authStatus == AVAuthorizationStatusNotDetermined){
+        [AVCaptureDevice requestAccessForMediaType:mediaType completionHandler:^(BOOL granted) {
+            completion(granted);
+        }];
+    }else{
+        completion(authStatus == AVAuthorizationStatusAuthorized);
+    }
+}
+
+-(void)getPermissions:(void(^)())completion{
+    __weak __block HotAddressAddPrivateKeyViewController* c = self;
+    [[[DialogXrandomInfo alloc] initWithPermission:^{
+        [c getPermisionFor:AVMediaTypeVideo completion:^(BOOL result) {
+            [c getPermisionFor:AVMediaTypeAudio completion:^(BOOL result) {
+                dispatch_async(dispatch_get_main_queue(), completion);
+            }];
+        }];
+    }] showInWindow:self.view.window];
 }
 
 @end
@@ -68,19 +127,29 @@
 @implementation HotAddressAddPrivateKeyViewController(DialogPassword)
 
 -(void)onPasswordEntered:(NSString *)password{
-    DialogProgress *d = [[DialogProgress alloc]initWithMessage:NSLocalizedString(@"Please wait…", nil)];
-    d.touchOutSideToDismiss = NO;
-    [d showInWindow:self.view.window];
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
-        [UIApplication sharedApplication].idleTimerDisabled = YES;
-        [KeyUtil addPrivateKeyByRandomWithPassphras:password count:self.countToGenerate];
-        [UIApplication sharedApplication].idleTimerDisabled = NO;
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [d dismissWithCompletion:^{
-                [self.parentViewController dismissViewControllerAnimated:YES completion:nil];
-            }];
+    if(self.btnXRandomCheck.selected){
+        UEntropyViewController* uentropy = [[UEntropyViewController alloc]initWithCount:self.countToGenerate password:password];
+        [self presentViewController:uentropy animated:YES completion:nil];
+    }else{
+        DialogProgress *d = [[DialogProgress alloc]initWithMessage:NSLocalizedString(@"Please wait…", nil)];
+        d.touchOutSideToDismiss = NO;
+        [d showInWindow:self.view.window];
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+            [UIApplication sharedApplication].idleTimerDisabled = YES;
+            XRandom *xRandom=[[XRandom alloc] initWithDelegate:nil];
+            BOOL result = [KeyUtil addPrivateKeyByRandom:xRandom passphras:password count:self.countToGenerate];
+            [UIApplication sharedApplication].idleTimerDisabled = NO;
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [d dismissWithCompletion:^{
+                    if(result){
+                        [self.parentViewController dismissViewControllerAnimated:YES completion:nil];
+                    } else {
+                        [self showBannerWithMessage:NSLocalizedString(@"xrandom_generating_failed", nil) belowView:nil belowTop:0 autoHideIn:1 withCompletion:nil];
+                    }
+                }];
+            });
         });
-    });
+    }
 }
 
 @end

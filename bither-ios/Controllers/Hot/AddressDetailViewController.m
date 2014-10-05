@@ -67,10 +67,17 @@
 }
 
 -(void)refresh{
-    [_txs removeAllObjects];
-    [_txs addObjectsFromArray:[self.address txs]];
-    [self.tableView reloadData];
-    self.tableView.tableFooterView.hidden = (_txs.count > 0);
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        NSArray *txs = [self.address txs];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [_txs removeAllObjects];
+            [_txs addObjectsFromArray:txs];
+            [self.tableView reloadData];
+            self.tableView.tableFooterView.hidden = (_txs.count > 0);
+            [((UIView *)[self.tableView.tableFooterView.subviews objectAtIndex:0]) setHidden:NO];
+            [((UIActivityIndicatorView *)[self.tableView.tableFooterView.subviews objectAtIndex:1]) stopAnimating];
+        });
+    });
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
@@ -173,7 +180,14 @@
     CGRect frame = lbl.frame;
     frame.size.height = height;
     lbl.frame = frame;
+    lbl.hidden = YES;
     [self.tableView.tableFooterView addSubview:lbl];
-    self.tableView.tableFooterView.hidden = YES;
+    
+    UIActivityIndicatorView *indicatorView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+    indicatorView.frame = frame;
+    [self.tableView.tableFooterView addSubview:indicatorView];
+    [indicatorView startAnimating];
+
+    self.tableView.tableFooterView.hidden = NO;
 }
 @end

@@ -74,6 +74,8 @@ static double rate=-1;
             break;
         case BTCE:
         case BITSTAMP:
+        case MARKET796:
+        case BITFINEX:
             if (exchangeType==CNY) {
                 rate=rate*preRate;
             }
@@ -96,6 +98,8 @@ static double rate=-1;
             break;
         case BTCE:
         case BITSTAMP:
+        case MARKET796:
+        case BITFINEX:
             return USD;
         default:
             break;

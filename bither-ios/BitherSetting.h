@@ -28,6 +28,7 @@
 #define RGBA(r, g, b, a) [UIColor colorWithRed:r/255.0 green:g/255.0 blue:b/255.0 alpha:a]
 #define PRIVATE_KEY_OF_HOT_COUNT_LIMIT (10)
 #define PRIVATE_KEY_OF_COLD_COUNT_LIMIT (100)
+#define WATCH_ONLY_COUNT_LIMIT (100)
 
 
 #define FORMAT_TIMESTAMP_INTERVAL 1000
@@ -68,7 +69,7 @@
 
 #define NavHeight 44.0f
 #define TabBarHeight 44.0f
-#define QR_CODE_SPLIT @":"
+
 
 
 typedef void (^DictResponseBlock)(NSDictionary *dict);
@@ -90,7 +91,7 @@ typedef NSArray *(^GetArrayBlock) (void);
 
 
 typedef enum  {
-     BITSTAMP=1, BTCE=2, HUOBI=3, OKCOIN=4, BTCCHINA=5, CHBTC=6
+     BITSTAMP=1, BTCE=2, HUOBI=3, OKCOIN=4, BTCCHINA=5, CHBTC=6,BITFINEX=7,MARKET796=8
 }MarketType;
 
 typedef enum  {

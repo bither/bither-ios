@@ -19,6 +19,6 @@
 #import <UIKit/UIKit.h>
 
 @interface UIViewController(ConfigureTableView) 
--(void)configureHeaderAndFooter :(UITableView * )tableView background:(UIColor *)colorBg isHot:(BOOL)isHot;
+-(void)configureHeaderAndFooter :(UITableView * )tableView background:(UIColor *)colorBg isHot:(BOOL)isHot version:(NSString *)version;
 -(void)configureHeaderAndFooterNoLogo :(UITableView * )tableView background:(UIColor *)colorBg;
 @end

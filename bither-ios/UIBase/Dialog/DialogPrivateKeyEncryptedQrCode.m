@@ -18,10 +18,11 @@
 
 #import "DialogPrivateKeyEncryptedQrCode.h"
 #import "UIImage+ImageWithColor.h"
-#import "QrUtil.h"
+#import "QRCodeThemeUtil.h"
 #import "StringUtil.h"
 #import "FileUtil.h"
 #import "UIBaseUtil.h"
+#import "BTQRCodeUtil.h"
 
 #define kShareBottomDistance (20)
 #define kShareBottomHeight (32)
@@ -45,7 +46,7 @@
     }
     self = [super initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.width + (kShareBottomDistance + kShareBottomHeight) * 2)];
     if(self){
-         _encrytedPrivateKey = address.encryptPrivKey.uppercaseString;
+         _encrytedPrivateKey = [BTQRCodeUtil replaceNewQRCode:[address.encryptPrivKey toUppercaseStringWithEn] ];
         _shareFileName = [NSString stringWithFormat:@"%@_private_key", address.address];
         [self firstConfigure];
     }
@@ -57,7 +58,7 @@
     self.bgInsets = UIEdgeInsetsMake(10, 0, 10, 0);
     self.dimAmount = 0.8f;
     self.iv = [[UIImageView alloc]initWithFrame:CGRectMake(0, kShareBottomDistance + kShareBottomHeight, self.frame.size.width, self.frame.size.width)];
-    self.iv.image = [QrUtil qrCodeOfContent:_encrytedPrivateKey andSize:self.frame.size.width withTheme:[QrCodeTheme black]];
+    self.iv.image = [QRCodeThemeUtil qrCodeOfContent:_encrytedPrivateKey andSize:self.frame.size.width withTheme:[QRCodeTheme black]];
     [self addSubview:self.iv];
     
     UIButton *btn = [[UIButton alloc]initWithFrame:CGRectMake(0, self.frame.size.height - kShareBottomHeight, 0, kShareBottomHeight)];

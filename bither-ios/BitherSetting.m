@@ -43,6 +43,12 @@
         case BTCCHINA:
             name = NSLocalizedString(@"BTCChina", nil);
             break;
+        case BITFINEX:
+            name = NSLocalizedString(@"Bitfinex", nil);
+            break;
+        case MARKET796:
+            name = NSLocalizedString(@"796", nil);
+            break;
         default:
             name = NSLocalizedString(@"HUOBI", nil);
             break;
@@ -64,6 +70,10 @@
             return @"chbtc.com";
         case BTCCHINA:
             return @"btcchina.com";
+        case BITFINEX:
+            return @"bitfinex.com";
+        case MARKET796:
+            return @"796.com";
         default:
             return nil;
     }
@@ -110,6 +120,12 @@
             //fff93c25
         case BTCCHINA:
             return RGBA(249, 60, 37, 1);
+            //ffa3bd0b
+        case BITFINEX:
+            return RGBA(163, 189, 11, 1);
+             //ffe31f21
+        case MARKET796:
+            return RGBA(227, 31, 33, 1);
         default:
             return nil;
     }

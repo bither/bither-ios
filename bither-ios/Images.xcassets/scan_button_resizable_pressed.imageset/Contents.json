@@ -31,6 +31,10 @@
       "idiom" : "universal",
       "filename" : "scan_button_resizable_pressed@2x.png",
       "scale" : "2x"
+    },
+    {
+      "idiom" : "universal",
+      "scale" : "3x"
     }
   ],
   "info" : {

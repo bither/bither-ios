@@ -35,6 +35,7 @@
 #import "HotAddressViewController.h"
 #import "BitherSetting.h"
 #import "UIImage+ImageRenderToColor.h"
+#import "DialogXrandomInfo.h"
 
 #define kUnconfirmedTxAmountLeftMargin (3)
 
@@ -49,6 +50,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *lblBalanceBtc;
 @property (weak, nonatomic) IBOutlet UILabel *lblBalanceMoney;
 @property (weak, nonatomic) IBOutlet UIImageView *ivType;
+@property (weak, nonatomic) IBOutlet UIImageView *ivXrandom;
 @property (weak, nonatomic) IBOutlet UILabel *lblTransactionCount;
 @property (weak, nonatomic) IBOutlet UIImageView *ivHighlighted;
 @property (weak, nonatomic) IBOutlet UIView *vNoUnconfirmedTx;
@@ -56,8 +58,9 @@
 @property (weak, nonatomic) IBOutlet TransactionConfidenceView *vUnconfirmedTxConfidence;
 @property (weak, nonatomic) IBOutlet AmountButton *vUnconfirmedTxAmount;
 @property (weak, nonatomic) IBOutlet UIButton *btnAddressFull;
-@property (strong, nonatomic) UILongPressGestureRecognizer * longPress;
 @property (weak, nonatomic) IBOutlet UIImageView *ivSymbolBtc;
+@property (strong, nonatomic) UILongPressGestureRecognizer * longPress;
+@property (strong, nonatomic) UILongPressGestureRecognizer * xrandomLongPress;
 
 @end
 
@@ -90,26 +93,39 @@
         self.ivType.image = [UIImage imageNamed:@"address_type_watchonly"];
     }
     
+    if(!self.xrandomLongPress){
+        self.xrandomLongPress = [[UILongPressGestureRecognizer alloc]initWithTarget:self action:@selector(handleXrandomLabelLongPressed:)];
+        [self.ivXrandom addGestureRecognizer:self.xrandomLongPress];
+    }
+    self.ivXrandom.hidden = !address.isFromXRandom;
+    
     self.lblBalanceBtc.attributedText = [StringUtil attributedStringForAmount:address.balance withFontSize:kBalanceFontSize];
     
     width = [self.lblBalanceBtc.attributedText sizeWithRestrict:CGSizeMake(CGFLOAT_MAX, self.lblBalanceBtc.frame.size.height)].width;
     self.lblBalanceBtc.frame = CGRectMake(CGRectGetMaxX(self.lblBalanceBtc.frame) - width, self.lblBalanceBtc.frame.origin.y, width, self.lblBalanceBtc.frame.size.height);
     self.ivSymbolBtc.frame = CGRectMake(CGRectGetMinX(self.lblBalanceBtc.frame) - self.ivSymbolBtc.frame.size.width - 2, self.ivSymbolBtc.frame.origin.y, self.ivSymbolBtc.frame.size.width, self.ivSymbolBtc.frame.size.height);
-    self.lblTransactionCount.text = [NSString stringWithFormat:@"%lu", (unsigned long)[address txCount]];
-    NSArray *txs;
-    if([address txCount] > 0 && (txs = [address getRecentlyTxsWithConfirmationCntLessThan:6 andLimit:1]) && txs.count > 0){
+
+//    if (![_btAddress.address isEqualToString:address.address])
+//        self.lblTransactionCount.text = [NSString string];
+    self.vNoUnconfirmedTx.hidden = NO;
+    self.vUnconfirmedTx.hidden = YES;
+    
+    uint32_t txCount = address.txCount;
+    BTTx *recentlyTx = address.recentlyTx;
+    if (txCount > 0 && recentlyTx != nil) {
         self.vNoUnconfirmedTx.hidden = YES;
         self.vUnconfirmedTx.hidden = NO;
-        BTTx *tx = [txs objectAtIndex:0];
-        [self.vUnconfirmedTxConfidence showTransaction:tx];
-        self.vUnconfirmedTxAmount.amount = [tx deltaAmountFrom:address];
+        [self.vUnconfirmedTxConfidence showTransaction:recentlyTx];
+        self.vUnconfirmedTxAmount.amount = [recentlyTx deltaAmountFrom:address];
         CGRect frame = self.vUnconfirmedTxAmount.frame;
         frame.origin.x = CGRectGetMaxX(self.vUnconfirmedTxConfidence.frame) + kUnconfirmedTxAmountLeftMargin;
         self.vUnconfirmedTxAmount.frame = frame;
-    }else{
+    } else {
+        self.lblTransactionCount.text = [NSString stringWithFormat:@"%u", txCount];
         self.vNoUnconfirmedTx.hidden = NO;
         self.vUnconfirmedTx.hidden = YES;
     }
+
     CGRect frame = self.btnAddressFull.frame;
     frame.origin.x = CGRectGetMaxX(self.lblAddress.frame) + 5;
     self.btnAddressFull.frame = frame;
@@ -163,9 +179,13 @@
     if (gestureRecognizer.state==UIGestureRecognizerStateBegan) {
         DialogAddressLongPressOptions *dialogPrivateKeyOptons=[[DialogAddressLongPressOptions alloc] initWithAddress:_btAddress andDelegate:self];
         [dialogPrivateKeyOptons showInWindow:self.window];
-    
     }
-    
+}
+
+-(void)handleXrandomLabelLongPressed:(UILongPressGestureRecognizer*)gesture{
+    if(gesture.state == UIGestureRecognizerStateBegan){
+        [[[DialogXrandomInfo alloc]init] showInWindow:self.window];
+    }
 }
 
 //DialogPrivateKeyOptionsDelegate

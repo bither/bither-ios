@@ -165,7 +165,7 @@ NSUserDefaults *userDefaults;
 }
 
 -(void)setPasswordSeed:(BTPasswordSeed *)passwordSeed{
-    [userDefaults setValue:[passwordSeed description] forKey:PASSWORD_SEED];
+    [userDefaults setValue:[passwordSeed toPasswrodSeedString] forKey:PASSWORD_SEED];
     [userDefaults synchronize];
 
 }
@@ -208,8 +208,6 @@ NSUserDefaults *userDefaults;
     [userDefaults setInteger:qrCodeTheme forKey:FANCY_QR_CODE_THEME];
     [userDefaults synchronize];
 }
-
-
 
 @end
 

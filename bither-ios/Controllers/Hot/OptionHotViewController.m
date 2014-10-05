@@ -25,6 +25,7 @@
 #import "DialogEditPassword.h"
 #import "BitherSetting.h"
 #import "UIViewController+ConfigureTableView.h"
+#import "SettingUtil.h"
 
 
 @interface OptionHotViewController ()<UITableViewDataSource,UITableViewDelegate>
@@ -41,11 +42,12 @@
     [super viewDidLoad];
     self.tableView.dataSource=self;
     self.tableView.delegate=self;
-    [self configureHeaderAndFooter:self.tableView background:ColorBg isHot:YES];
+    NSString * version=[NSString stringWithFormat:@"Bither Hot %@", [[[NSBundle mainBundle]infoDictionary]objectForKey:(NSString*)kCFBundleVersionKey]];
+    [self configureHeaderAndFooter:self.tableView background:ColorBg isHot:YES version:version];
     [self reload];
 }
 -(void)reload{
-    self.settings=[Setting hotSettings];
+    self.settings=[SettingUtil hotSettings];
     [self.tableView reloadData];
 }
 

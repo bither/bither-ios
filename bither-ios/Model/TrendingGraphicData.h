@@ -32,5 +32,6 @@
 +(void)getTrendingGraphicData:(MarketType ) marketType callback:(IdResponseBlock)callback andErrorCallback:(ErrorBlock)errorCallback;
 
 +(instancetype)getEmptyData;
++(void)clearCache;
 
 @end

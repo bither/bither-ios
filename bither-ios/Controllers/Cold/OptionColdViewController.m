@@ -23,6 +23,7 @@
 #import "UIViewController+PiShowBanner.h"
 #import "DialogEditPassword.h"
 #import "UIViewController+ConfigureTableView.h"
+#import "SettingUtil.h"
 
 
 @interface OptionColdViewController ()<UITableViewDataSource,UITableViewDelegate>
@@ -36,10 +37,11 @@
     [super viewDidLoad];
     self.tableView.dataSource=self;
     self.tableView.delegate=self;
-    [self configureHeaderAndFooter:self.tableView background:ColorBg isHot:NO];
+    NSString * version= [NSString stringWithFormat:@"Bither Cold %@", [[[NSBundle mainBundle]infoDictionary]objectForKey:(NSString*)kCFBundleVersionKey]];
+    [self configureHeaderAndFooter:self.tableView background:ColorBg isHot:NO version:version];
 }
 -(void)reload{
-    self.settings=[Setting coldSettings];
+    self.settings=[SettingUtil coldSettings];
     [self.tableView reloadData];
 }
 

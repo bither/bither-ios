@@ -310,7 +310,7 @@
     if([self isNewSetPassword]){
         return NSLocalizedString(@"Set Password", nil);
     }
-    return NSLocalizedString(@"Enter Password", nil);
+    return NSLocalizedString(@"Enter password of wallet", nil);
 }
 
 -(NSString*)subTitle{

@@ -31,6 +31,10 @@
       "idiom" : "universal",
       "filename" : "list_item_card_shadow_top@2x.png",
       "scale" : "2x"
+    },
+    {
+      "idiom" : "universal",
+      "scale" : "3x"
     }
   ],
   "info" : {

@@ -37,6 +37,10 @@
       "idiom" : "universal",
       "filename" : "button_small_blue_pressed@2x.png",
       "scale" : "2x"
+    },
+    {
+      "idiom" : "universal",
+      "scale" : "3x"
     }
   ],
   "info" : {

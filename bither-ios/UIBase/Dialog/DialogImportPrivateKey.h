@@ -18,18 +18,16 @@
 
 #import <Foundation/Foundation.h>
 #import "DialogCentered.h"
+#import "DialogImportKeyDelegate.h"
+#import "ImportPrivateKey.h"
 
-@protocol DialogImportPrivateKeyDelegate <NSObject>
-
--(void)onPrivateKeyEntered:(NSString*)privateKey;
-
-@end
 
 
 @interface DialogImportPrivateKey : DialogCentered
 
--(instancetype)initWithDelegate:(id<DialogImportPrivateKeyDelegate>)delegate;
+-(instancetype)initWithDelegate:(id<DialogImportKeyDelegate>)delegate importPrivateKeyType:(ImportPrivateKeyType) importPrivateKeyType;
 
-@property (weak) id<DialogImportPrivateKeyDelegate> delegate;
+@property (weak) id<DialogImportKeyDelegate> delegate;
+@property (nonatomic,readwrite) ImportPrivateKeyType importPrivateKeyType;
 
 @end

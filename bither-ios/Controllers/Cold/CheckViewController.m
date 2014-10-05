@@ -114,6 +114,8 @@
             BOOL result = [[[BTPasswordSeed alloc]initWithBTAddress:a]checkPassword:password];
             if(result){
                 safeCount++;
+            }else{
+                [dangerKeys addObject:a];
             }
             NSUInteger score = floorf((float)safeCount / (float)totalCount * 100.0f);
             checkingIndex++;

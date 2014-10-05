@@ -24,6 +24,7 @@
 #import "DialogProgress.h"
 #import "KeyUtil.h"
 #import "TransactionsUtil.h"
+#import "BTQRCodeUtil.h"
 
 @interface HotAddressAddWatchOnlyViewController ()<ScanQrCodeDelegate>
 
@@ -73,16 +74,26 @@
     }
 }
 -(void)processQrCodeContent:(NSString*)content dp:(DialogProgress * ) dp{
-    NSArray *strs = [content componentsSeparatedByString:QR_CODE_SPLIT];
+    NSArray *strs = [BTQRCodeUtil splitQRCode:content];
     NSMutableArray * addressList=[NSMutableArray new];
-    for(NSString * pubStr in strs){
+    NSMutableArray * addressStrList=[NSMutableArray new];
+    for(NSString * temp in strs){
+        BOOL isXRandom=NO;
+        NSString *pubStr=temp;
+        if ([temp rangeOfString:XRANDOM_FLAG].location!=NSNotFound) {
+            pubStr=[temp substringFromIndex:1];
+            isXRandom=YES;
+        }
         BTKey * key=[BTKey keyWithPublicKey:[pubStr hexToData]];
-        [addressList addObject:key.address];
+        key.isFromXRandom=isXRandom;
+        BTAddress *btAddress = [[BTAddress alloc] initWithKey:key encryptPrivKey:nil isXRandom:key.isFromXRandom];
+        [addressList addObject:btAddress];
+        [addressStrList addObject:key.address];
     }
-    [TransactionsUtil checkAddress:addressList callback:^(id response) {
+    [TransactionsUtil checkAddress:addressStrList callback:^(id response) {
         AddressType  addressType=(AddressType)[response integerValue];
         if (addressType==AddressNormal) {
-            [KeyUtil addWatckOnly:[strs reverseObjectEnumerator].allObjects];
+            [KeyUtil addAddressList:addressList];
             dispatch_async(dispatch_get_main_queue(), ^{
                 [dp dismissWithCompletion:^{
                     [self dismissViewControllerAnimated:YES completion:^{
@@ -111,9 +122,11 @@
 }
 
 -(BOOL)checkQrCodeContent:(NSString*)content{
-    NSArray *strs = [content componentsSeparatedByString:QR_CODE_SPLIT];
+    NSArray *strs = [BTQRCodeUtil splitQRCode:content];
     for (NSString* str in strs) {
-        if (str.length != 66) {
+        BOOL checkCompress=(str.length==66)||(str.length==67&&[str rangeOfString:XRANDOM_FLAG].location!=NSNotFound);
+        BOOL checkUncompress=(str.length==130)||(str.length==131&&[str rangeOfString:XRANDOM_FLAG].location!=NSNotFound);
+        if (!checkCompress&&!checkUncompress) {
             return NO;
         }
     }

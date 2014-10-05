@@ -21,6 +21,8 @@
 #import  "BitherSetting.h"
 #import "IOS7ContainerViewController.h"
 #import "AppDelegate.h"
+#import "BTAddressManager.h"
+#import "UIViewController+PiShowBanner.h"
 
 
 @interface ColdViewController ()
@@ -28,6 +30,7 @@
 @property (strong, nonatomic) IBOutlet TabButton *tabCheck;
 @property (strong, nonatomic) IBOutlet TabButton *tabAddress;
 @property (strong, nonatomic) IBOutlet TabButton *tabSetting;
+@property (weak, nonatomic) IBOutlet UIView *vTab;
 
 @property (strong, nonatomic) PiPageViewController *page;
 @end
@@ -162,6 +165,10 @@
 
 
 - (IBAction)addPressed:(id)sender {
+    if([BTAddressManager instance].privKeyAddresses.count >= PRIVATE_KEY_OF_COLD_COUNT_LIMIT){
+        [self showBannerWithMessage:NSLocalizedString(@"reach_address_count_limit", nil) belowView:self.vTab];
+        return;
+    }
     IOS7ContainerViewController* container = [[IOS7ContainerViewController alloc]init];
     container.controller = [self.storyboard instantiateViewControllerWithIdentifier:@"ColdAddressAdd"];
     [self presentViewController:container animated:YES completion:nil];

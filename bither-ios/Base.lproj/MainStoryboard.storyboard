@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5056" systemVersion="13E28" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="kY0-Iw-Q6e">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6245" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="kY0-Iw-Q6e">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
+        <deployment defaultVersion="1792" identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
     </dependencies>
     <scenes>
         <!--Choose Mode View Controller-->
@@ -17,11 +18,10 @@
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <view clipsSubviews="YES" contentMode="scaleToFill" id="tw3-eW-EMl" userLabel="ColdCheck">
-                                        <rect key="frame" x="0.0" y="284" width="320" height="0.0"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" id="us7-H5-MAX" customClass="ColdModeCheckConnectionView">
-                                                <rect key="frame" x="0.0" y="0.0" width="320" height="284"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="640" height="284"/>
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                             </view>
@@ -60,7 +60,6 @@
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" heightSizable="YES"/>
                                 <subviews>
                                     <view clipsSubviews="YES" contentMode="scaleToFill" id="sxA-d1-aDL" userLabel="HotWait">
-                                        <rect key="frame" x="0.0" y="0.0" width="320" height="0.0"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                         <subviews>
                                             <view hidden="YES" clipsSubviews="YES" contentMode="scaleToFill" id="DnG-sI-vTx" userLabel="HotRetry">
@@ -227,6 +226,7 @@
                         <outlet property="tabAddress" destination="0EZ-yB-Ocm" id="K1J-6s-zVG"/>
                         <outlet property="tabMarket" destination="Az1-MX-haS" id="FgX-1b-BmG"/>
                         <outlet property="tabSetting" destination="zVw-G3-P2V" id="2lb-BK-DLh"/>
+                        <outlet property="vTabe" destination="2b2-FB-cJH" id="3yz-6U-WPl"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iI2-Ju-zFn" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -536,12 +536,12 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <pickerView contentMode="scaleToFill" id="hEQ-cn-z22">
-                                <rect key="frame" x="0.0" y="62" width="320" height="162"/>
+                                <rect key="frame" x="0.0" y="60" width="320" height="162"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </pickerView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" id="vhW-ec-Y0h">
-                                <rect key="frame" x="42" y="252" width="237" height="42"/>
+                                <rect key="frame" x="20" y="283" width="280" height="42"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Generate" backgroundImage="button_lightblue">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -558,10 +558,32 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" selected="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="ySW-x6-06q">
+                                <rect key="frame" x="20" y="240" width="242" height="30"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <state key="normal" image="xrandom_checkbox_checked">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="xrandomCheckPressed:" destination="5gP-20-5H4" eventType="touchUpInside" id="hKH-V6-HFy"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="lQX-qn-8mY">
+                                <rect key="frame" x="270" y="240" width="30" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" image="xrandom_info_icon_normal">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted" image="xrandom_info_icon_pressed"/>
+                                <connections>
+                                    <action selector="xrandomInfoPressed:" destination="5gP-20-5H4" eventType="touchUpInside" id="7Zb-ui-h9H"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </view>
                     <connections>
+                        <outlet property="btnXRandomCheck" destination="ySW-x6-06q" id="oQc-a4-SVt"/>
                         <outlet property="pvCount" destination="hEQ-cn-z22" id="dCV-cX-iRg"/>
                     </connections>
                 </viewController>
@@ -972,6 +994,21 @@
                                         <color key="shadowColor" red="0.0" green="0.0" blue="0.0" alpha="0.40000000000000002" colorSpace="calibratedRGB"/>
                                         <size key="shadowOffset" width="1" height="1"/>
                                     </label>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="right" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="title_bar_seperator" id="mhW-fY-Npc">
+                                        <rect key="frame" x="273" y="0.0" width="3" height="44"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" heightSizable="YES"/>
+                                    </imageView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="M45-Q0-fwJ">
+                                        <rect key="frame" x="276" y="0.0" width="44" height="44"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" heightSizable="YES"/>
+                                        <state key="normal" image="title_bar_option_icon">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <state key="highlighted" backgroundImage="card_foreground_pressed"/>
+                                        <connections>
+                                            <action selector="switchQRCode:" destination="Ipx-4P-LPW" eventType="touchUpInside" id="uFv-9y-djn"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                             </view>
@@ -979,10 +1016,12 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <connections>
+                        <outlet property="btnOption" destination="M45-Q0-fwJ" id="YMD-7W-SSL"/>
                         <outlet property="lblMsg" destination="6FL-zM-ekJ" id="CYA-0M-Vg6"/>
                         <outlet property="lblTitle" destination="mSg-tC-frD" id="wxS-mk-C0X"/>
+                        <outlet property="oldVersionSeperator" destination="M45-Q0-fwJ" id="24D-Fa-kiP"/>
                         <outlet property="sv" destination="ODe-ba-zWd" id="NxT-pr-G3g"/>
-                        <outlet property="vTopBar" destination="OSy-fO-Jz8" id="Cvp-0p-SBw"/>
+                        <outlet property="vTopBar" destination="OSy-fO-Jz8" id="7hz-Vz-F2h"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nuR-wZ-srE" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1061,12 +1100,16 @@
                                                                     <rect key="frame" x="0.0" y="65" width="300" height="41"/>
                                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                     <subviews>
+                                                                        <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="xrandom_address_label_normal" highlightedImage="xrandom_address_label_pressed" id="q0w-0Z-pP5">
+                                                                            <rect key="frame" x="240" y="10" width="20" height="20"/>
+                                                                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                                                        </imageView>
                                                                         <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" image="address_type_watchonly" id="cgi-Ad-bCG">
                                                                             <rect key="frame" x="266" y="8" width="24" height="24"/>
                                                                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                                                         </imageView>
                                                                         <view contentMode="scaleToFill" id="iQN-NV-3jz">
-                                                                            <rect key="frame" x="10" y="0.0" width="248" height="41"/>
+                                                                            <rect key="frame" x="10" y="0.0" width="216" height="41"/>
                                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" heightSizable="YES"/>
                                                                             <subviews>
                                                                                 <view contentMode="scaleToFill" id="2Lg-yC-wpv" customClass="TransactionConfidenceView">
@@ -1083,14 +1126,14 @@
                                                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                                         </view>
                                                                         <view contentMode="scaleToFill" id="jhg-sP-YGg">
-                                                                            <rect key="frame" x="10" y="0.0" width="248" height="41"/>
+                                                                            <rect key="frame" x="10" y="0.0" width="216" height="41"/>
                                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" heightSizable="YES"/>
                                                                             <subviews>
                                                                                 <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" image="transaction_icon_small" id="q1c-El-Lc2">
                                                                                     <rect key="frame" x="0.0" y="15" width="12" height="12"/>
                                                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                                                                 </imageView>
-                                                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="DbI-lX-jWY">
+                                                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="DbI-lX-jWY">
                                                                                     <rect key="frame" x="18" y="10" width="114" height="21"/>
                                                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                                                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
@@ -1158,6 +1201,7 @@
                                             <outlet property="ivHighlighted" destination="Mof-u2-DPq" id="T4O-Vs-cAF"/>
                                             <outlet property="ivSymbolBtc" destination="S4M-Q7-ULL" id="VwQ-Bh-zzN"/>
                                             <outlet property="ivType" destination="cgi-Ad-bCG" id="XFr-OQ-kiq"/>
+                                            <outlet property="ivXrandom" destination="q0w-0Z-pP5" id="jUx-vH-WIa"/>
                                             <outlet property="lblAddress" destination="cdq-og-ME5" id="qGB-1T-DW2"/>
                                             <outlet property="lblBalanceBtc" destination="bfg-wv-lfB" id="cfk-MN-wrW"/>
                                             <outlet property="lblBalanceMoney" destination="Nzn-0V-cau" id="V9f-7u-KhO"/>
@@ -1974,6 +2018,7 @@
                         <outlet property="tabAddress" destination="LBg-Xz-mKW" id="gFO-9d-1Sb"/>
                         <outlet property="tabCheck" destination="mY8-eE-iNE" id="Al5-9e-0T0"/>
                         <outlet property="tabSetting" destination="p5I-zC-YsM" id="wIf-uh-dVI"/>
+                        <outlet property="vTab" destination="AXr-qY-vGs" id="XEi-NO-Gnt"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yyV-9E-keb" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -2220,6 +2265,10 @@
                                                             <rect key="frame" x="0.0" y="89" width="300" height="25"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
+                                                                <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="xrandom_address_label_normal" highlightedImage="xrandom_address_label_pressed" id="5P1-t6-9UT">
+                                                                    <rect key="frame" x="240" y="2" width="20" height="20"/>
+                                                                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                                                </imageView>
                                                                 <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" image="address_type_private" id="PGA-6T-JXp">
                                                                     <rect key="frame" x="266" y="0.0" width="24" height="24"/>
                                                                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
@@ -2327,6 +2376,7 @@
                                         <connections>
                                             <outlet property="ivQr" destination="JRm-fL-eya" id="gg5-Fz-LID"/>
                                             <outlet property="ivType" destination="PGA-6T-JXp" id="lF5-dF-XXc"/>
+                                            <outlet property="ivXrandom" destination="5P1-t6-9UT" id="65q-MH-emP"/>
                                             <outlet property="lblAddress" destination="MSV-4p-BLw" id="Arj-ny-9Ht"/>
                                             <outlet property="vAddressContainer" destination="dTI-FK-OwB" id="YyC-6g-dAN"/>
                                             <outlet property="vContainer" destination="5aH-xd-nkI" id="pJc-BW-DjD"/>
@@ -2388,7 +2438,7 @@
                                                         <size key="shadowOffset" width="0.0" height="4"/>
                                                     </label>
                                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="%" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="1MG-Ff-Ctm">
-                                                        <rect key="frame" x="137" y="36" width="32" height="31"/>
+                                                        <rect key="frame" x="137.0000000782311" y="36" width="32" height="31"/>
                                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" heightSizable="YES"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
@@ -2716,9 +2766,9 @@
         <image name="app_mode_warm_icon_pressed" width="130" height="130"/>
         <image name="button_check_bg_normal" width="45" height="42"/>
         <image name="button_check_bg_pressed" width="45" height="42"/>
-        <image name="button_lightblue" width="82" height="60"/>
-        <image name="button_lightblue_pressed" width="82" height="60"/>
-        <image name="button_small_blue_normal" width="20" height="36"/>
+        <image name="button_lightblue" width="81" height="60"/>
+        <image name="button_lightblue_pressed" width="81" height="60"/>
+        <image name="button_small_blue_normal" width="19" height="36"/>
         <image name="button_small_blue_pressed" width="20" height="36"/>
         <image name="card_foreground_pressed" width="1" height="1"/>
         <image name="check_failed" width="40" height="40"/>
@@ -2745,13 +2795,18 @@
         <image name="scan_button_resizable_pressed" width="45" height="45"/>
         <image name="symbol_btc" width="17" height="24"/>
         <image name="symbol_btc_slim_black" width="17" height="24"/>
-        <image name="textfield_activated_holo_light" width="26" height="32"/>
+        <image name="textfield_activated_holo_light" width="18" height="32"/>
         <image name="title_bar_back" width="20" height="20"/>
         <image name="title_bar_option_icon" width="25" height="20"/>
         <image name="title_bar_seperator" width="3" height="48"/>
         <image name="topnav_divider.png" width="3" height="44"/>
         <image name="transaction_icon_small" width="12" height="12"/>
         <image name="ui_topnav_titlebar_background.png" width="1" height="47"/>
+        <image name="xrandom_address_label_normal" width="18" height="18"/>
+        <image name="xrandom_address_label_pressed" width="18" height="18"/>
+        <image name="xrandom_checkbox_checked" width="105" height="30"/>
+        <image name="xrandom_info_icon_normal" width="30" height="30"/>
+        <image name="xrandom_info_icon_pressed" width="30" height="30"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
