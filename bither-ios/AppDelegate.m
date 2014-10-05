@@ -44,6 +44,7 @@
 #import "TrendingGraphicData.h"
 #import "SystemUtil.h"
 #import "UpgradeUtil.h"
+#import "TrendingGraphicData.h"
 
 @interface AppDelegate()
 @end
@@ -130,6 +131,7 @@ static StatusBarNotificationWindow* notificationWindow;
 {
     [self callInHot:^{
         [[BitherTime instance] resume];
+        [TrendingGraphicData clearCache];
         if (![[BTPeerManager instance] connected]) {
             [[PeerUtil instance] startPeer];
         }

@@ -136,5 +136,13 @@ static NSMutableDictionary * tgds;
     });
 
 }
++(void)clearCache{
+    NSEnumerator * enumeratorValue = [tgds objectEnumerator];
+    for (TrendingGraphicData * trending in enumeratorValue) {
+        [trending setCreateTime:-1];
+
+    }
+  
+}
 
 @end
