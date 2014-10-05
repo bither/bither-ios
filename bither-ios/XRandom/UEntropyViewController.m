@@ -232,6 +232,7 @@
             NSData* data = [xrandom randomWithSize:32];
             if(data){
                 BTKey *key = [BTKey keyWithSecret:data compressed:YES];
+                key.isFromXRandom=YES;
                 NSLog(@"uentropy outcome data %d/%lu", i + 1, (unsigned long)count);
                 progress += itemProgress * kProgressKeyRate;
                 [self onProgress:progress];
