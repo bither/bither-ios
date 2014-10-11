@@ -52,6 +52,22 @@
     return self;
 }
 
+- (id)initWithCoder:(NSCoder *)aDecoder{
+    self = [super initWithCoder:aDecoder];
+    if(self){
+        for (UIView *currentView in self.subviews)
+        {
+            if([currentView isKindOfClass:[UIScrollView class]])
+            {
+                ((UIScrollView *)currentView).delaysContentTouches = NO;
+                break;
+            }
+        }
+    }
+    return self;
+}
+
+
 -(void)showTx:(BTTx*)tx byAddress:(BTAddress*)address{
     _tx = tx;
     _address = address;

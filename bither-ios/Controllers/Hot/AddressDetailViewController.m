@@ -47,6 +47,21 @@
     self.tableView.dataSource = self;
     [self configureTableHeader];
     [self configureTableFooter];
+    for (id view in self.tableView.subviews)
+    {
+        // looking for a UITableViewWrapperView
+        if ([NSStringFromClass([view class]) isEqualToString:@"UITableViewWrapperView"])
+        {
+            // this test is necessary for safety and because a "UITableViewWrapperView" is NOT a UIScrollView in iOS7
+            if([view isKindOfClass:[UIScrollView class]])
+            {
+                // turn OFF delaysContentTouches in the hidden subview
+                UIScrollView *scroll = (UIScrollView *) view;
+                scroll.delaysContentTouches = NO;
+            }
+            break;
+        }
+    }
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refresh) name:BitherBalanceChangedNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(lastBlockChanged) name:BTPeerManagerLastBlockChangedNotification object:nil];
 }
