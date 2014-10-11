@@ -60,7 +60,11 @@
     for(int i = 0; i < themes.count; i++){
         UIImageView *iv = [[UIImageView alloc]initWithImage:[QRCodeThemeUtil qrCodeOfContent:self.address andSize:self.sv.frame.size.width margin:kQrCodeMargin withTheme:[themes objectAtIndex:i]]];
         iv.frame = CGRectMake(i * self.sv.frame.size.width, 0, self.sv.frame.size.width, self.sv.frame.size.height);
+        UIButton *btnDismiss = [[UIButton alloc]initWithFrame:iv.frame];
+        [btnDismiss setBackgroundImage:nil forState:UIControlStateNormal];
+        [btnDismiss addTarget:self action:@selector(dismiss) forControlEvents:UIControlEventTouchUpInside];
         [self.sv addSubview:iv];
+        [self.sv addSubview:btnDismiss];
     }
     self.sv.contentSize = CGSizeMake(themes.count * self.sv.frame.size.width, self.sv.frame.size.height);
     self.sv.pagingEnabled = YES;
