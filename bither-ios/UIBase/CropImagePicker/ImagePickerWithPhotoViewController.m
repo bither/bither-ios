@@ -1,5 +1,5 @@
 //
-//  ImagePickerWithCropViewController.m
+//  ImagePickerWithPhotoViewController.m
 //  bither-ios
 //
 //  Copyright 2014 http://Bither.net
@@ -17,44 +17,46 @@
 //  limitations under the License.
 
 
-#import "ImagePickerWithCropViewController.h"
+#import "ImagePickerWithPhotoViewController.h"
 #import "UIViewController+SwipeRightToPop.h"
 #import "CropImageViewController.h"
 
-@interface ImagePickerWithCropViewController ()<UIImagePickerControllerDelegate,UINavigationControllerDelegate>
+@interface ImagePickerWithPhotoViewController ()<UIImagePickerControllerDelegate,UINavigationControllerDelegate>
 
 @end
-
-@implementation ImagePickerWithCropViewController
-
+@implementation ImagePickerWithPhotoViewController
 -(id)init{
     self = [super init];
     if(self){
-        self.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+        self.sourceType = UIImagePickerControllerSourceTypeCamera;
         self.delegate = self;
         self.shouldSwipeRightToPop = NO;
     }
     return self;
 }
-
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     [self.navigationBar setBarStyle:UIBarStyleBlackTranslucent];
 }
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info{
+    
+    UIImage * image = [info objectForKey:UIImagePickerControllerOriginalImage];
+    UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil);
     CropImageViewController *cropImage = [[CropImageViewController alloc]initWithInfo:info];
     cropImage.delegate = self.cropDelegate;
     [self pushViewController:cropImage animated:YES];
 }
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker{
+   
     [self dismissViewControllerAnimated:YES completion:^{
         if ([self.cropDelegate respondsToSelector:@selector(imagePickerControllerDidCancel:)]) {
-            [self.cropDelegate imagePickerControllerDidCancel:self];
+           [self.cropDelegate imagePickerControllerDidCancel:self];
         }
         
     }];
 }
+
 
 @end

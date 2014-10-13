@@ -425,3 +425,7 @@
 "Set Avatar"="设置头像";
 "From Camera"="来自相机";
 "From Gallery"="来自图库";
+
+/* Crop Photo */
+"Move And Scale" = "移动和缩放";
+

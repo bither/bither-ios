@@ -1,5 +1,5 @@
 //
-//  AvatarSetting.h
+//  ImagePickerWithPhotoViewController.h
 //  bither-ios
 //
 //  Copyright 2014 http://Bither.net
@@ -17,11 +17,8 @@
 //  limitations under the License.
 
 #import <Foundation/Foundation.h>
-#import "Setting.h"
-#import "ImagePickerWithCropViewController.h"
-#import "ImagePickerWithPhotoViewController.h"
 
-@interface AvatarSetting : Setting<UIActionSheetDelegate,UIImagePickerControllerDelegate>
-@property(nonatomic,strong) UIViewController * controller;
-+(Setting *)getAvatarSetting;
+@interface ImagePickerWithPhotoViewController : UIImagePickerController
+@property (weak, nonatomic) id<UIImagePickerControllerDelegate> cropDelegate;
+
 @end

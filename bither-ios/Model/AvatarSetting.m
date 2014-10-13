@@ -45,9 +45,14 @@ static Setting* avatarSetting;
 
 -(void)actionSheet:(UIActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex{
     if (buttonIndex==0) {
+        ImagePickerWithPhotoViewController *picker = [[ImagePickerWithPhotoViewController alloc] init];
+    
+        picker.cropDelegate = self;
+        
+        [self.controller presentViewController:picker animated:YES completion:nil];
     
     }else if(buttonIndex==1){
-        __block ImagePickerWithCropViewController *picker = [[ImagePickerWithCropViewController alloc] init];
+        ImagePickerWithCropViewController *picker = [[ImagePickerWithCropViewController alloc] init];
         picker.cropDelegate = self;
         [self.controller presentViewController:picker animated:YES completion:nil];
     
@@ -62,8 +67,6 @@ static Setting* avatarSetting;
 #pragma mark - UIImagePicker Delegate methods
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
     UIImage* image = [self processAlbumPhoto:info];
-    
-   
 }
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
