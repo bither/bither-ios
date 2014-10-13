@@ -29,7 +29,7 @@ static Setting* avatarSetting;
 
 +(Setting *)getAvatarSetting{
     if(!avatarSetting){
-        AvatarSetting*  sAvatarSetting=[[AvatarSetting alloc] initWithName:NSLocalizedString(@"Set Avatar", nil) icon:@"avatar_button_icon" ];
+        AvatarSetting*  sAvatarSetting=[[AvatarSetting alloc] initWithName:NSLocalizedString(@"Set Avatar", nil) icon:[UIImage imageNamed:@"avatar_button_icon"]];
         __weak AvatarSetting* sself=sAvatarSetting;
         [sAvatarSetting setSelectBlock:^(UIViewController * controller){
             sself.controller=controller;

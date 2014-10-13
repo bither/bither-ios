@@ -26,7 +26,7 @@
 @implementation CloneQrCodeSetting
 
 -(instancetype)init{
-    self = [super initWithName:NSLocalizedString(@"Cold Wallet Clone QR Code", nil) icon:@"qr_code_button_icon"];
+    self = [super initWithName:NSLocalizedString(@"Cold Wallet Clone QR Code", nil) icon:[UIImage imageNamed:@"qr_code_button_icon"]];
     if(self){
         __weak CloneQrCodeSetting *d = self;
         [self setSelectBlock:^(UIViewController * controller){
