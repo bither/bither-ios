@@ -113,7 +113,7 @@
             dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
                 u_int64_t value = self.amtLink.amount;
                 NSError * error;
-                self.tx = [self.address txForAmounts:@[@(value)] andAddress:@[self.tfAddress.text] andError:&error];
+                self.tx = [self.address txForAmounts:@[@(value)] andAddress:@[[self.tfAddress.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]]] andError:&error];
                 if (error) {
                     NSString * msg=[TransactionsUtil getCompleteTxForError:error];
                     [self showSendResult:msg dialog:dp];
@@ -124,7 +124,7 @@
                     }
                     dispatch_async(dispatch_get_main_queue(), ^{
                         [dp dismissWithCompletion:^{
-                            DialogSendTxConfirm *dialog = [[DialogSendTxConfirm alloc]initWithTx:self.tx from:self.address to:self.tfAddress.text delegate:self];
+                            DialogSendTxConfirm *dialog = [[DialogSendTxConfirm alloc]initWithTx:self.tx from:self.address to:[self.tfAddress.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]] delegate:self];
                             [dialog showInWindow:self.view.window];
                         }];
                     });
@@ -145,9 +145,9 @@
     qr.cancelWarning = NSLocalizedString(@"Give up signing?", nil);
     QRCodeTxTransport *txTrans = [[QRCodeTxTransport alloc]init];
     txTrans.fee = self.tx.feeForTransaction;
-    txTrans.to = [tx amountSentTo:self.tfAddress.text];
+    txTrans.to = [tx amountSentTo:[self.tfAddress.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]]];
     txTrans.myAddress = self.address.address;
-    txTrans.toAddress = self.tfAddress.text;
+    txTrans.toAddress = [self.tfAddress.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
     NSMutableArray *array = [[NSMutableArray alloc]init];
     NSArray *hashDataArray = tx.unsignedInHashes;
     for(NSData *data in hashDataArray){

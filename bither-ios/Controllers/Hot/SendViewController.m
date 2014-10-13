@@ -104,7 +104,7 @@
                 }
                 u_int64_t value = self.amtLink.amount;
                 NSError * error;
-                BTTx* tx = [self.address txForAmounts:@[@(value)] andAddress:@[self.tfAddress.text] andError:&error];
+                BTTx* tx = [self.address txForAmounts:@[@(value)] andAddress:@[[self.tfAddress.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]]] andError:&error];
                 if (error) {
                     NSString * msg=[TransactionsUtil getCompleteTxForError:error];
                     [self showSendResult:msg dialog:dp];
@@ -116,7 +116,7 @@
                     if([self.address signTransaction:tx withPassphrase:self.tfPassword.text]){
                         dispatch_async(dispatch_get_main_queue(), ^{
                             [dp dismissWithCompletion:^{
-                                DialogSendTxConfirm *dialog = [[DialogSendTxConfirm alloc]initWithTx:tx from:self.address to:self.tfAddress.text delegate:self];
+                                DialogSendTxConfirm *dialog = [[DialogSendTxConfirm alloc]initWithTx:tx from:self.address to:[self.tfAddress.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]] delegate:self];
                                 [dialog showInWindow:self.view.window];
                             }];
                         });
