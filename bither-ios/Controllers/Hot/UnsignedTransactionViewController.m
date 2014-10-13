@@ -113,7 +113,8 @@
             dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
                 u_int64_t value = self.amtLink.amount;
                 NSError * error;
-                self.tx = [self.address txForAmounts:@[@(value)] andAddress:@[self.tfAddress.text] andError:&error];
+                 NSString * toAddress=[self.tfAddress.text stringByReplacingOccurrencesOfString:@" " withString:@""];
+                self.tx = [self.address txForAmounts:@[@(value)] andAddress:@[toAddress] andError:&error];
                 if (error) {
                     NSString * msg=[TransactionsUtil getCompleteTxForError:error];
                     [self showSendResult:msg dialog:dp];
@@ -123,8 +124,9 @@
                         return;
                     }
                     dispatch_async(dispatch_get_main_queue(), ^{
+                         __block NSString * addressBlock=toAddress;
                         [dp dismissWithCompletion:^{
-                            DialogSendTxConfirm *dialog = [[DialogSendTxConfirm alloc]initWithTx:self.tx from:self.address to:self.tfAddress.text delegate:self];
+                            DialogSendTxConfirm *dialog = [[DialogSendTxConfirm alloc]initWithTx:self.tx from:self.address to:addressBlock delegate:self];
                             [dialog showInWindow:self.view.window];
                         }];
                     });
