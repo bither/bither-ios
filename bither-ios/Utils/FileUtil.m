@@ -126,18 +126,18 @@
 +(NSString *)getAvatarDir{
     NSString * avatarDir=[FileUtil cachePathForFileName:IMAGE_CACHE_612];
     [FileUtil createDirectory:avatarDir];
-    return avatarDir;
+    return [avatarDir stringByAppendingString:@"/"];
     
 }
 +(NSString *)getSmallAvatarDir{
     NSString * avatarDir=[FileUtil cachePathForFileName:IMAGE_CACHE_150];
     [FileUtil createDirectory:avatarDir];
-    return avatarDir;
+    return [avatarDir stringByAppendingString:@"/"];
 }
 +(NSString *)getUploadAvatarDir{
     NSString * avatarDir=[FileUtil cachePathForFileName:IMAGE_CACHE_UPLOAD];
     [FileUtil createDirectory:avatarDir];
-    return avatarDir;
+    return [avatarDir stringByAppendingString:@"/"];
 }
 
 @end

@@ -29,7 +29,9 @@ static Setting* avatarSetting;
 
 +(Setting *)getAvatarSetting{
     if(!avatarSetting){
-        AvatarSetting*  sAvatarSetting=[[AvatarSetting alloc] initWithName:NSLocalizedString(@"Set Avatar", nil) icon:[UIImage imageNamed:@"avatar_button_icon"]];
+        UIImage *image=[UIImage imageNamed:@"avatar_button_icon"];
+       
+        AvatarSetting*  sAvatarSetting=[[AvatarSetting alloc] initWithName:NSLocalizedString(@"Set Avatar", nil) icon:image];
         __weak AvatarSetting* sself=sAvatarSetting;
         [sAvatarSetting setSelectBlock:^(UIViewController * controller){
             sself.controller=controller;
@@ -85,14 +87,32 @@ static Setting* avatarSetting;
             UIImage * smallImage=[blockImage scaleToSize:CGSizeMake(SMALL_IMAGE_WIDTH, SMALL_IMAGE_WIDTH)];
             [FileUtil saveImage:[samllAvararImageDir stringByAppendingString:fileName] image:smallImage];
             [[UserDefaultsUtil instance] setUserAvatar:fileName];
-            [dialogProgrees dismissWithCompletion:^{
-                
-            }];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [dialogProgrees dismiss];
+            });
             
             
         });
     }];
     
+}
+-(UIImage*)getIcon{
+    UIImage* image;
+    NSString * avatarName=[[UserDefaultsUtil instance] getUserAvatar];
+    if ([StringUtil isEmpty:avatarName]) {
+        image=[UIImage imageNamed:@"avatar_button_icon"];
+    }else{
+        UIImage *broderImage=[UIImage imageNamed:@"avatar_button_icon_border"];
+        NSString * samllAvatarDir=[FileUtil getSmallAvatarDir];
+        image=[[UIImage alloc]initWithContentsOfFile:[samllAvatarDir stringByAppendingString:avatarName]];
+        UIGraphicsBeginImageContextWithOptions(CGSizeMake(broderImage.size.width, broderImage.size.height), NO, 0);
+        CGRect drawRect = CGRectMake(2, 2, broderImage.size.width-4, broderImage.size.height-4);
+        [image drawInRect:drawRect];
+        [broderImage drawInRect:CGRectMake(0, 0, broderImage.size.width, broderImage.size.height)];
+        image = UIGraphicsGetImageFromCurrentImageContext();
+        UIGraphicsEndImageContext();
+    }
+    return image;
 }
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {

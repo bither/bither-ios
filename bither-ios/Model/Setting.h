@@ -36,6 +36,7 @@
 -(instancetype) initWithName:(NSString *)name icon:(UIImage*)icon ;
 
 -(void)selection;
+-(UIImage *)getIcon;
 
 +(Setting * )getMarketSetting;
 +(Setting * )getExchangeSetting;
@@ -43,5 +44,6 @@
 +(Setting * )getCheckSetting;
 +(Setting * )getAdvanceSetting;
 +(Setting * )getColdMonitorSetting;
+
 
 @end

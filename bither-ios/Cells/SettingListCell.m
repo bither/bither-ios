@@ -33,7 +33,7 @@
     if (setting.icon) {
         self.lbValue.hidden=YES;
         self.ivIcon.hidden=NO;
-        self.ivIcon.image=setting.icon;
+        self.ivIcon.image=[setting getIcon];
     }else{
         self.lbValue.hidden=NO;
         self.ivIcon.hidden=YES;

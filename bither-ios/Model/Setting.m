@@ -71,6 +71,11 @@ static Setting* reloadTxsSetting;
 -(void)selection{
     
 }
+-(UIImage *)getIcon{
+    return _icon;
+}
+
+
 
 +(Setting * )getExchangeSetting{
     if(!ExchangeSetting){
