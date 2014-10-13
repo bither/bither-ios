@@ -22,6 +22,7 @@
 #import "FileUtil.h"
 #import "BitherSetting.h"
 #import "UIImageExt.h"
+#import "UIViewController+SwipeRightToPop.h"
 
 static Setting* avatarSetting;
 
@@ -89,6 +90,9 @@ static Setting* avatarSetting;
             [[UserDefaultsUtil instance] setUserAvatar:fileName];
             dispatch_async(dispatch_get_main_queue(), ^{
                 [dialogProgrees dismiss];
+                if ([self.controller respondsToSelector:@selector(reload)]) {
+                    [self.controller reload];
+                }
             });
             
             

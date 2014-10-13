@@ -58,7 +58,7 @@
     self.sv.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
     NSArray *themes = [QRCodeTheme themes];
     for(int i = 0; i < themes.count; i++){
-        UIImageView *iv = [[UIImageView alloc]initWithImage:[QRCodeThemeUtil qrCodeOfContent:self.address andSize:self.sv.frame.size.width margin:kQrCodeMargin withTheme:[themes objectAtIndex:i]]];
+        UIImageView *iv = [[UIImageView alloc]initWithImage:[self getQRImage:[themes objectAtIndex:i]]];
         iv.frame = CGRectMake(i * self.sv.frame.size.width, 0, self.sv.frame.size.width, self.sv.frame.size.height);
         UIButton *btnDismiss = [[UIButton alloc]initWithFrame:iv.frame];
         [btnDismiss setBackgroundImage:nil forState:UIControlStateNormal];
@@ -88,13 +88,17 @@
     [btn addTarget:self action:@selector(savePressed:) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:btn];
 }
-
+-(UIImage *)getQRImage:(QRCodeTheme *)theme{
+    UIImage * qrCodeImage=[QRCodeThemeUtil qrCodeOfContent:self.address andSize:self.sv.frame.size.width margin:kQrCodeMargin withTheme:theme];
+    return qrCodeImage;
+}
 -(void)sharePressed:(id)sender{
     NSURL* url = [FileUtil saveTmpImageForShare:[self currentQrCode] fileName:_shareFileName];
     self.interactionController = [UIDocumentInteractionController interactionControllerWithURL:url];
     UIView *fromView = self.window.topViewController.view;
     self.interactionController.delegate = self;
     [self.interactionController presentOptionsMenuFromRect:CGRectMake(0, 0, fromView.frame.size.width, fromView.frame.size.height) inView:fromView animated:YES];
+    
 }
 
 -(void)savePressed:(id)sender{
