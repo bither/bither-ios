@@ -19,6 +19,10 @@
 
 @implementation FileUtil
 
+#define IMAGE_CACHE_UPLOAD @"/upload"
+#define IMAGE_CACHE_612  @"/612"
+#define IMAGE_CACHE_150  @"/150"
+
 +(NSString *)cachePathForFileName:(NSString *)fileName{
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
     NSString *documentsPath = [paths objectAtIndex:0];
@@ -119,4 +123,21 @@
     [FileUtil saveImage:path image:image compressionQuality:1];
     return [NSURL fileURLWithPath:path];
 }
++(NSString *)getAvatarDir{
+    NSString * avatarDir=[FileUtil cachePathForFileName:IMAGE_CACHE_612];
+    [FileUtil createDirectory:avatarDir];
+    return avatarDir;
+    
+}
++(NSString *)getSmallAvatarDir{
+    NSString * avatarDir=[FileUtil cachePathForFileName:IMAGE_CACHE_150];
+    [FileUtil createDirectory:avatarDir];
+    return avatarDir;
+}
++(NSString *)getUploadAvatarDir{
+    NSString * avatarDir=[FileUtil cachePathForFileName:IMAGE_CACHE_UPLOAD];
+    [FileUtil createDirectory:avatarDir];
+    return avatarDir;
+}
+
 @end

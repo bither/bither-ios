@@ -18,7 +18,10 @@
 
 
 #import "AvatarSetting.h"
-
+#import "DialogProgress.h"
+#import "FileUtil.h"
+#import "BitherSetting.h"
+#import "UIImageExt.h"
 
 static Setting* avatarSetting;
 
@@ -67,6 +70,29 @@ static Setting* avatarSetting;
 #pragma mark - UIImagePicker Delegate methods
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
     UIImage* image = [self processAlbumPhoto:info];
+    __block UIImage * blockImage=image;
+    DialogProgress *dialogProgrees=[[DialogProgress alloc] initWithMessage:NSLocalizedString(@"Please wait…", nil)];
+    [dialogProgrees showInWindow:self.controller.view.window completion:^{
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+            long long timestmap=[[NSDate date] timeIntervalSince1970]*FORMAT_TIMESTAMP_INTERVAL;
+            NSString* fileName=[NSString stringWithFormat:@"a%lld.jpg",timestmap];
+            blockImage=[image scaleToSize:CGSizeMake(IMAGE_WIDTH, IMAGE_WIDTH)];
+            NSString* uploadImageDir=[FileUtil getUploadAvatarDir];
+            [FileUtil saveImage:[uploadImageDir stringByAppendingString:fileName] image:blockImage];
+            NSString * avatartImageDir=[FileUtil getAvatarDir];
+            [FileUtil saveImage:[avatartImageDir stringByAppendingString:fileName] image:blockImage];
+            NSString * samllAvararImageDir=[FileUtil getSmallAvatarDir];
+            UIImage * smallImage=[blockImage scaleToSize:CGSizeMake(SMALL_IMAGE_WIDTH, SMALL_IMAGE_WIDTH)];
+            [FileUtil saveImage:[samllAvararImageDir stringByAppendingString:fileName] image:smallImage];
+            [[UserDefaultsUtil instance] setUserAvatar:fileName];
+            [dialogProgrees dismissWithCompletion:^{
+                
+            }];
+            
+            
+        });
+    }];
+    
 }
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
