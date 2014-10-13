@@ -147,6 +147,11 @@
 		ACDDDC3819483D210008A79D /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ACDDDC3719483D210008A79D /* QuartzCore.framework */; };
 		ACE4ED5E198A3AE600C8862C /* AdvanceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ACE4ED5D198A3AE600C8862C /* AdvanceViewController.m */; };
 		ACE7E70019EB6DE800F7AA3A /* AvatarSetting.m in Sources */ = {isa = PBXBuildFile; fileRef = ACE7E6FF19EB6DE800F7AA3A /* AvatarSetting.m */; };
+		ACE7E70F19EB78AE00F7AA3A /* CropImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ACE7E70819EB78AE00F7AA3A /* CropImageViewController.m */; };
+		ACE7E71019EB78AE00F7AA3A /* ImageCropView.m in Sources */ = {isa = PBXBuildFile; fileRef = ACE7E70A19EB78AE00F7AA3A /* ImageCropView.m */; };
+		ACE7E71119EB78AE00F7AA3A /* ImagePickerWithCropViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ACE7E70C19EB78AE00F7AA3A /* ImagePickerWithCropViewController.m */; };
+		ACE7E71219EB78AE00F7AA3A /* ImageScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = ACE7E70E19EB78AE00F7AA3A /* ImageScrollView.m */; };
+		ACE7E71519EB7A5A00F7AA3A /* UIImage_Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = ACE7E71419EB7A5A00F7AA3A /* UIImage_Extensions.m */; };
 		ACEE7D2719D3F9F500932B39 /* QRCodeThemeUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = ACEE7D1C19D3F9F500932B39 /* QRCodeThemeUtil.m */; };
 		ACEE7D2819D3F9F500932B39 /* QRCodeTransportPage.m in Sources */ = {isa = PBXBuildFile; fileRef = ACEE7D1E19D3F9F500932B39 /* QRCodeTransportPage.m */; };
 		ACEE7D2919D3F9F500932B39 /* QRCodeTxTransport.m in Sources */ = {isa = PBXBuildFile; fileRef = ACEE7D2019D3F9F500932B39 /* QRCodeTxTransport.m */; };
@@ -458,6 +463,16 @@
 		ACE4ED5D198A3AE600C8862C /* AdvanceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AdvanceViewController.m; sourceTree = "<group>"; };
 		ACE7E6FE19EB6DE800F7AA3A /* AvatarSetting.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AvatarSetting.h; sourceTree = "<group>"; };
 		ACE7E6FF19EB6DE800F7AA3A /* AvatarSetting.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AvatarSetting.m; sourceTree = "<group>"; };
+		ACE7E70719EB78AE00F7AA3A /* CropImageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CropImageViewController.h; sourceTree = "<group>"; };
+		ACE7E70819EB78AE00F7AA3A /* CropImageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CropImageViewController.m; sourceTree = "<group>"; };
+		ACE7E70919EB78AE00F7AA3A /* ImageCropView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageCropView.h; sourceTree = "<group>"; };
+		ACE7E70A19EB78AE00F7AA3A /* ImageCropView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageCropView.m; sourceTree = "<group>"; };
+		ACE7E70B19EB78AE00F7AA3A /* ImagePickerWithCropViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImagePickerWithCropViewController.h; sourceTree = "<group>"; };
+		ACE7E70C19EB78AE00F7AA3A /* ImagePickerWithCropViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImagePickerWithCropViewController.m; sourceTree = "<group>"; };
+		ACE7E70D19EB78AE00F7AA3A /* ImageScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageScrollView.h; sourceTree = "<group>"; };
+		ACE7E70E19EB78AE00F7AA3A /* ImageScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageScrollView.m; sourceTree = "<group>"; };
+		ACE7E71319EB7A5A00F7AA3A /* UIImage_Extensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIImage_Extensions.h; sourceTree = "<group>"; };
+		ACE7E71419EB7A5A00F7AA3A /* UIImage_Extensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIImage_Extensions.m; sourceTree = "<group>"; };
 		ACEE7D1B19D3F9F500932B39 /* QRCodeThemeUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QRCodeThemeUtil.h; sourceTree = "<group>"; };
 		ACEE7D1C19D3F9F500932B39 /* QRCodeThemeUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QRCodeThemeUtil.m; sourceTree = "<group>"; };
 		ACEE7D1D19D3F9F500932B39 /* QRCodeTransportPage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QRCodeTransportPage.h; sourceTree = "<group>"; };
@@ -891,6 +906,7 @@
 		ACDDDC1119480DE00008A79D /* UIBase */ = {
 			isa = PBXGroup;
 			children = (
+				ACE7E70619EB78AE00F7AA3A /* CropImagePicker */,
 				421B03B319495823003A45F1 /* TabButtonPressedDelegate.h */,
 				421B037A19495315003A45F1 /* TabButton.h */,
 				421B037B19495315003A45F1 /* TabButton.m */,
@@ -986,6 +1002,23 @@
 				AC53ABE619D911AA007C095C /* DialogXrandomInfo.m */,
 			);
 			path = Dialog;
+			sourceTree = "<group>";
+		};
+		ACE7E70619EB78AE00F7AA3A /* CropImagePicker */ = {
+			isa = PBXGroup;
+			children = (
+				ACE7E71319EB7A5A00F7AA3A /* UIImage_Extensions.h */,
+				ACE7E71419EB7A5A00F7AA3A /* UIImage_Extensions.m */,
+				ACE7E70719EB78AE00F7AA3A /* CropImageViewController.h */,
+				ACE7E70819EB78AE00F7AA3A /* CropImageViewController.m */,
+				ACE7E70919EB78AE00F7AA3A /* ImageCropView.h */,
+				ACE7E70A19EB78AE00F7AA3A /* ImageCropView.m */,
+				ACE7E70B19EB78AE00F7AA3A /* ImagePickerWithCropViewController.h */,
+				ACE7E70C19EB78AE00F7AA3A /* ImagePickerWithCropViewController.m */,
+				ACE7E70D19EB78AE00F7AA3A /* ImageScrollView.h */,
+				ACE7E70E19EB78AE00F7AA3A /* ImageScrollView.m */,
+			);
+			path = CropImagePicker;
 			sourceTree = "<group>";
 		};
 		ACEE7D1A19D3F9F500932B39 /* QRCode */ = {
@@ -1234,6 +1267,7 @@
 				424EA9EB195E99B70029AB43 /* NotificationUtil.m in Sources */,
 				4268FE29194ACD57007A4C30 /* ColdAddressViewController.m in Sources */,
 				AC202AD0196B8B7A00033EC1 /* Setting.m in Sources */,
+				ACE7E71019EB78AE00F7AA3A /* ImageCropView.m in Sources */,
 				ACC21A6B194C2BD900E02542 /* ColdModeCheckConnectionView.m in Sources */,
 				ACEE7D2C19D3F9F500932B39 /* ScanQrCodeViewController.m in Sources */,
 				AC33089119556AB800D8F621 /* HotAddressListSectionHeader.m in Sources */,
@@ -1282,6 +1316,7 @@
 				4254083C19469C9A007AF99C /* BitherApi.m in Sources */,
 				AC9BBCFE19D268AB00E58BA7 /* UpgradeUtil.m in Sources */,
 				AC53ABE719D911AA007C095C /* DialogXrandomInfo.m in Sources */,
+				ACE7E71119EB78AE00F7AA3A /* ImagePickerWithCropViewController.m in Sources */,
 				4276CEA1194BF4F70027D119 /* NetworkUtil.m in Sources */,
 				ACCA27481988DDE9000E6A32 /* UIImage+ImageRenderToColor.m in Sources */,
 				ACB9B9C6195AD25800019216 /* AddressDetailCell.m in Sources */,
@@ -1301,10 +1336,12 @@
 				AC6163941964ED2F0055C9D0 /* DialogWithArrow.m in Sources */,
 				ACA9D70319540E0F002D1E3A /* PlaySoundUtil.m in Sources */,
 				AC616397196507B40055C9D0 /* DialogTxConfirmation.m in Sources */,
+				ACE7E70F19EB78AE00F7AA3A /* CropImageViewController.m in Sources */,
 				AC6CB25619752CE400FA9D23 /* StatusBarNotificationWindow.m in Sources */,
 				425408591946A219007AF99C /* FileUtil.m in Sources */,
 				ACDDDC2C19480ECF0008A79D /* DialogAlert.m in Sources */,
 				42D9B771193D6B5B00C85B89 /* main.m in Sources */,
+				ACE7E71519EB7A5A00F7AA3A /* UIImage_Extensions.m in Sources */,
 				DA641E8A196E7BC20095DF42 /* CrashLog.m in Sources */,
 				AC45AA3519879C96006314D5 /* DialogPrivateKeyDecryptedQrCode.m in Sources */,
 				ACEE7D2819D3F9F500932B39 /* QRCodeTransportPage.m in Sources */,
@@ -1322,6 +1359,7 @@
 				AC2F329E195D19C2001B7439 /* DialogSendTxConfirm.m in Sources */,
 				AC3C2623199B58750055FF5E /* TrendingGraphicData.m in Sources */,
 				ACEE7D4519D40C1300932B39 /* ImportPrivateKeySetting.m in Sources */,
+				ACE7E71219EB78AE00F7AA3A /* ImageScrollView.m in Sources */,
 				DA641E8C196E7BC20095DF42 /* GCCrashReportFilterTrim.m in Sources */,
 				ACDDDC2319480DE00008A79D /* UIViewController+PiShowBanner.m in Sources */,
 				ACCA274B1989FACC000E6A32 /* HotAddressTabButton.m in Sources */,

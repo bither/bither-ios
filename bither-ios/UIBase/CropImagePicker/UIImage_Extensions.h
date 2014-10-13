@@ -1,5 +1,5 @@
 //
-//  AvatarSetting.h
+//  UIImage_Extensions.h
 //  bither-ios
 //
 //  Copyright 2014 http://Bither.net
@@ -16,11 +16,19 @@
 //  See the License for the specific language governing permissions and
 //  limitations under the License.
 
-#import <Foundation/Foundation.h>
-#import "Setting.h"
-#import "ImagePickerWithCropViewController.h"
 
-@interface AvatarSetting : Setting<UIActionSheetDelegate,UIImagePickerControllerDelegate>
-@property(nonatomic,strong) UIViewController * controller;
-+(Setting *)getAvatarSetting;
+#import <UIKit/UIKit.h>
+
+@interface UIImage (IF)
+
+- (UIImage *)cropImageWithBounds:(CGRect)bounds;
+- (UIImage *)imageRotatedByDegrees:(CGFloat)degrees;
+- (UIImage *)resizedImage:(CGSize)newSize interpolationQuality:(CGInterpolationQuality)quality;
+- (UIImage *)resizedImage:(CGSize)newSize
+                transform:(CGAffineTransform)transform
+           drawTransposed:(BOOL)transpose
+     interpolationQuality:(CGInterpolationQuality)quality;
+- (CGAffineTransform)transformForOrientation:(CGSize)newSize;
+- (UIImage *)imageRotatedByRadians:(CGFloat)radians;
+
 @end

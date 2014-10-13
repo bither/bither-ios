@@ -19,6 +19,7 @@
 
 #import "AvatarSetting.h"
 
+
 static Setting* avatarSetting;
 
 @implementation AvatarSetting
@@ -46,8 +47,28 @@ static Setting* avatarSetting;
     if (buttonIndex==0) {
     
     }else if(buttonIndex==1){
+        __block ImagePickerWithCropViewController *picker = [[ImagePickerWithCropViewController alloc] init];
+        picker.cropDelegate = self;
+        [self.controller presentViewController:picker animated:YES completion:nil];
     
     }
 }
+
+#pragma mark - Process Album Photo from Image Pick
+- (UIImage *)processAlbumPhoto:(NSDictionary *)info {
+    return [info objectForKey:UIImagePickerControllerEditedImage];
+}
+
+#pragma mark - UIImagePicker Delegate methods
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
+    UIImage* image = [self processAlbumPhoto:info];
+    
+   
+}
+
+- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
+    
+}
+
 
 @end
