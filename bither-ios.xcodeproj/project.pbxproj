@@ -100,6 +100,7 @@
 		AC53ABE719D911AA007C095C /* DialogXrandomInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = AC53ABE619D911AA007C095C /* DialogXrandomInfo.m */; };
 		AC53ABED19D94230007C095C /* xrandom_close_sound.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = AC53ABEB19D94230007C095C /* xrandom_close_sound.mp3 */; };
 		AC53ABEE19D94230007C095C /* xrandom_open_sound.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = AC53ABEC19D94230007C095C /* xrandom_open_sound.mp3 */; };
+		AC5A916119ECDB5D00FFDB13 /* UploadAndDowloadFileFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = AC5A916019ECDB5D00FFDB13 /* UploadAndDowloadFileFactory.m */; };
 		AC6163941964ED2F0055C9D0 /* DialogWithArrow.m in Sources */ = {isa = PBXBuildFile; fileRef = AC6163931964ED2F0055C9D0 /* DialogWithArrow.m */; };
 		AC616397196507B40055C9D0 /* DialogTxConfirmation.m in Sources */ = {isa = PBXBuildFile; fileRef = AC616396196507B40055C9D0 /* DialogTxConfirmation.m */; };
 		AC6163A01966524A0055C9D0 /* coins_received.wav in Resources */ = {isa = PBXBuildFile; fileRef = AC61639F1966524A0055C9D0 /* coins_received.wav */; };
@@ -372,6 +373,8 @@
 		AC53ABE619D911AA007C095C /* DialogXrandomInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DialogXrandomInfo.m; sourceTree = "<group>"; };
 		AC53ABEB19D94230007C095C /* xrandom_close_sound.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = xrandom_close_sound.mp3; sourceTree = "<group>"; };
 		AC53ABEC19D94230007C095C /* xrandom_open_sound.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = xrandom_open_sound.mp3; sourceTree = "<group>"; };
+		AC5A915F19ECDB5D00FFDB13 /* UploadAndDowloadFileFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UploadAndDowloadFileFactory.h; sourceTree = "<group>"; };
+		AC5A916019ECDB5D00FFDB13 /* UploadAndDowloadFileFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UploadAndDowloadFileFactory.m; sourceTree = "<group>"; };
 		AC6163921964ED2F0055C9D0 /* DialogWithArrow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DialogWithArrow.h; sourceTree = "<group>"; };
 		AC6163931964ED2F0055C9D0 /* DialogWithArrow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DialogWithArrow.m; sourceTree = "<group>"; };
 		AC616395196507B40055C9D0 /* DialogTxConfirmation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DialogTxConfirmation.h; sourceTree = "<group>"; };
@@ -618,6 +621,8 @@
 		4254083219469C9A007AF99C /* Api */ = {
 			isa = PBXGroup;
 			children = (
+				AC5A915F19ECDB5D00FFDB13 /* UploadAndDowloadFileFactory.h */,
+				AC5A916019ECDB5D00FFDB13 /* UploadAndDowloadFileFactory.m */,
 				4254083319469C9A007AF99C /* BaseApi.h */,
 				4254083419469C9A007AF99C /* BaseApi.m */,
 				4254083519469C9A007AF99C /* BitherApi.h */,
@@ -1265,6 +1270,7 @@
 				AC45AA381987A2F4006314D5 /* DialogPrivateKeyText.m in Sources */,
 				42D9B775193D6B5B00C85B89 /* AppDelegate.m in Sources */,
 				421B037C19495315003A45F1 /* TabButton.m in Sources */,
+				AC5A916119ECDB5D00FFDB13 /* UploadAndDowloadFileFactory.m in Sources */,
 				ACB9B9C3195AD1CC00019216 /* AddressDetailViewController.m in Sources */,
 				ACE7E70019EB6DE800F7AA3A /* AvatarSetting.m in Sources */,
 				4268FE2A194ACD57007A4C30 /* ColdViewController.m in Sources */,

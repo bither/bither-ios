@@ -23,6 +23,7 @@
 #import "BitherSetting.h"
 #import "UIImageExt.h"
 #import "UIViewController+SwipeRightToPop.h"
+#import "UploadAndDowloadFileFactory.h"
 
 static Setting* avatarSetting;
 
@@ -88,6 +89,12 @@ static Setting* avatarSetting;
             UIImage * smallImage=[blockImage scaleToSize:CGSizeMake(SMALL_IMAGE_WIDTH, SMALL_IMAGE_WIDTH)];
             [FileUtil saveImage:[samllAvararImageDir stringByAppendingString:fileName] image:smallImage];
             [[UserDefaultsUtil instance] setUserAvatar:fileName];
+            UploadAndDowloadFileFactory * uploadAndDowload=[[UploadAndDowloadFileFactory alloc ] init];
+            [uploadAndDowload uploadAvatar:^(NSDictionary *dict) {
+                
+            } andErrorCallBack:^(MKNetworkOperation *errorOp, NSError *error) {
+                
+            }];
             dispatch_async(dispatch_get_main_queue(), ^{
                 [dialogProgrees dismiss];
                 if ([self.controller respondsToSelector:@selector(reload)]) {
@@ -103,12 +110,12 @@ static Setting* avatarSetting;
 -(UIImage*)getIcon{
     UIImage* image;
     NSString * avatarName=[[UserDefaultsUtil instance] getUserAvatar];
-    if ([StringUtil isEmpty:avatarName]) {
+    NSString * smallAvatarFullName=[[FileUtil getSmallAvatarDir] stringByAppendingString:avatarName];
+    if ([StringUtil isEmpty:avatarName] ||![FileUtil fileExists:smallAvatarFullName]) {
         image=[UIImage imageNamed:@"avatar_button_icon"];
     }else{
         UIImage *broderImage=[UIImage imageNamed:@"avatar_button_icon_border"];
-        NSString * samllAvatarDir=[FileUtil getSmallAvatarDir];
-        image=[[UIImage alloc]initWithContentsOfFile:[samllAvatarDir stringByAppendingString:avatarName]];
+        image=[[UIImage alloc]initWithContentsOfFile:smallAvatarFullName];
         UIGraphicsBeginImageContextWithOptions(CGSizeMake(broderImage.size.width, broderImage.size.height), NO, 0);
         CGRect drawRect = CGRectMake(2, 2, broderImage.size.width-4, broderImage.size.height-4);
         [image drawInRect:drawRect];
