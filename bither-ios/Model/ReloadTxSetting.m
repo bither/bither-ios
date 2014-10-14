@@ -25,6 +25,7 @@
 #import "DialogAlert.h"
 #import "TransactionsUtil.h"
 #import "AdvanceViewController.h"
+#import "UserDefaultsUtil.h"
 
 static double reloadTime;
 static  Setting *reloadTxsSetting;
@@ -38,34 +39,43 @@ static  Setting *reloadTxsSetting;
 -(void)onPasswordEntered:(NSString *)password{
     DialogProgress *dialogProgrees=[[DialogProgress alloc] initWithMessage:NSLocalizedString(@"Please wait…", nil)];
     [dialogProgrees showInWindow:self.controller.view.window completion:^{
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-            reloadTime=[[NSDate new] timeIntervalSince1970];
-            [[PeerUtil instance] stopPeer];
-            for(BTAddress * address in [[BTAddressManager instance]allAddresses]){
-                [address setIsSyncComplete:NO];
-                [address updateAddressWithPub];
-            }
-            [[BTTxProvider instance] clearAllTx];
-            [TransactionsUtil syncWallet:^{
-                [[PeerUtil instance] startPeer];
-                [dialogProgrees dismiss];
-                if([self.controller respondsToSelector:@selector(showMsg:)]){
-                    [self.controller performSelector:@selector(showMsg:) withObject:NSLocalizedString(@"Reload transactions data success", nil)];
-                }
-                
-            } andErrorCallBack:^(MKNetworkOperation *errorOp, NSError *error) {
-                [dialogProgrees dismiss];
-                if([self.controller respondsToSelector:@selector(showMsg:)]){
-                    [self.controller performSelector:@selector(showMsg:) withObject:NSLocalizedString(@"Network failure.", nil)];
-                }
-                
-            }];
-            
-            
-        });
+        [self reloadTx:dialogProgrees];
+        
     }];
     
     
+}
+-(void)reloadTx:(DialogProgress *)dialogProgrees{
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        reloadTime=[[NSDate new] timeIntervalSince1970];
+        [[PeerUtil instance] stopPeer];
+        for(BTAddress * address in [[BTAddressManager instance]allAddresses]){
+            [address setIsSyncComplete:NO];
+            [address updateAddressWithPub];
+        }
+        [[BTTxProvider instance] clearAllTx];
+        [TransactionsUtil syncWallet:^{
+            [[PeerUtil instance] startPeer];
+            if (dialogProgrees) {
+                [dialogProgrees dismiss];
+            }
+            
+            if([self.controller respondsToSelector:@selector(showMsg:)]){
+                [self.controller performSelector:@selector(showMsg:) withObject:NSLocalizedString(@"Reload transactions data success", nil)];
+            }
+            
+        } andErrorCallBack:^(MKNetworkOperation *errorOp, NSError *error) {
+            if (dialogProgrees) {
+                [dialogProgrees dismiss];
+            }
+            if([self.controller respondsToSelector:@selector(showMsg:)]){
+                [self.controller performSelector:@selector(showMsg:) withObject:NSLocalizedString(@"Network failure.", nil)];
+            }
+            
+        }];
+        
+        
+    });
 }
 
 
@@ -84,7 +94,12 @@ static  Setting *reloadTxsSetting;
                 DialogAlert *dialogAlert=[[DialogAlert alloc] initWithMessage:NSLocalizedString(@"Reload Transactions data?\nNeed long time.\nConsume network data.\nRecommand trying only with wrong data.", nil) confirm:^{
                     __weak ReloadTxSetting * _sslf= (ReloadTxSetting*)reloadTxsSetting;
                     _sslf.controller=controller;
-                    [_sslf showDialogPassword];
+                    if ([[UserDefaultsUtil instance] getPasswordSeed]) {
+                        [_sslf showDialogPassword];
+                    }else{
+                        [_sslf reloadTx:nil];
+                    }
+                   
                     
                     
                     
