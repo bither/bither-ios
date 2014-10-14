@@ -19,6 +19,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ImagePickerWithCropViewController : UIImagePickerController
+@interface ImagePickerFromGalleryViewController : UIImagePickerController
 @property (weak, nonatomic) id<UIImagePickerControllerDelegate> cropDelegate;
 @end

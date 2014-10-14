@@ -18,7 +18,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface ImagePickerWithPhotoViewController : UIImagePickerController
+@interface ImagePickerFromCameraViewController : UIImagePickerController
 @property (weak, nonatomic) id<UIImagePickerControllerDelegate> cropDelegate;
 
 @end

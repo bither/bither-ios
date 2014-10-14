@@ -150,10 +150,10 @@
 		ACE7E70019EB6DE800F7AA3A /* AvatarSetting.m in Sources */ = {isa = PBXBuildFile; fileRef = ACE7E6FF19EB6DE800F7AA3A /* AvatarSetting.m */; };
 		ACE7E70F19EB78AE00F7AA3A /* CropImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ACE7E70819EB78AE00F7AA3A /* CropImageViewController.m */; };
 		ACE7E71019EB78AE00F7AA3A /* ImageCropView.m in Sources */ = {isa = PBXBuildFile; fileRef = ACE7E70A19EB78AE00F7AA3A /* ImageCropView.m */; };
-		ACE7E71119EB78AE00F7AA3A /* ImagePickerWithCropViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ACE7E70C19EB78AE00F7AA3A /* ImagePickerWithCropViewController.m */; };
+		ACE7E71119EB78AE00F7AA3A /* ImagePickerFromGalleryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ACE7E70C19EB78AE00F7AA3A /* ImagePickerFromGalleryViewController.m */; };
 		ACE7E71219EB78AE00F7AA3A /* ImageScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = ACE7E70E19EB78AE00F7AA3A /* ImageScrollView.m */; };
 		ACE7E71519EB7A5A00F7AA3A /* UIImage_Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = ACE7E71419EB7A5A00F7AA3A /* UIImage_Extensions.m */; };
-		ACE7E71819EB8DE100F7AA3A /* ImagePickerWithPhotoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ACE7E71719EB8DE100F7AA3A /* ImagePickerWithPhotoViewController.m */; };
+		ACE7E71819EB8DE100F7AA3A /* ImagePickerFromCameraViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ACE7E71719EB8DE100F7AA3A /* ImagePickerFromCameraViewController.m */; };
 		ACEE7D2719D3F9F500932B39 /* QRCodeThemeUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = ACEE7D1C19D3F9F500932B39 /* QRCodeThemeUtil.m */; };
 		ACEE7D2819D3F9F500932B39 /* QRCodeTransportPage.m in Sources */ = {isa = PBXBuildFile; fileRef = ACEE7D1E19D3F9F500932B39 /* QRCodeTransportPage.m */; };
 		ACEE7D2919D3F9F500932B39 /* QRCodeTxTransport.m in Sources */ = {isa = PBXBuildFile; fileRef = ACEE7D2019D3F9F500932B39 /* QRCodeTxTransport.m */; };
@@ -471,14 +471,14 @@
 		ACE7E70819EB78AE00F7AA3A /* CropImageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CropImageViewController.m; sourceTree = "<group>"; };
 		ACE7E70919EB78AE00F7AA3A /* ImageCropView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageCropView.h; sourceTree = "<group>"; };
 		ACE7E70A19EB78AE00F7AA3A /* ImageCropView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageCropView.m; sourceTree = "<group>"; };
-		ACE7E70B19EB78AE00F7AA3A /* ImagePickerWithCropViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImagePickerWithCropViewController.h; sourceTree = "<group>"; };
-		ACE7E70C19EB78AE00F7AA3A /* ImagePickerWithCropViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImagePickerWithCropViewController.m; sourceTree = "<group>"; };
+		ACE7E70B19EB78AE00F7AA3A /* ImagePickerFromGalleryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImagePickerFromGalleryViewController.h; sourceTree = "<group>"; };
+		ACE7E70C19EB78AE00F7AA3A /* ImagePickerFromGalleryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImagePickerFromGalleryViewController.m; sourceTree = "<group>"; };
 		ACE7E70D19EB78AE00F7AA3A /* ImageScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageScrollView.h; sourceTree = "<group>"; };
 		ACE7E70E19EB78AE00F7AA3A /* ImageScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageScrollView.m; sourceTree = "<group>"; };
 		ACE7E71319EB7A5A00F7AA3A /* UIImage_Extensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIImage_Extensions.h; sourceTree = "<group>"; };
 		ACE7E71419EB7A5A00F7AA3A /* UIImage_Extensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIImage_Extensions.m; sourceTree = "<group>"; };
-		ACE7E71619EB8DE100F7AA3A /* ImagePickerWithPhotoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImagePickerWithPhotoViewController.h; sourceTree = "<group>"; };
-		ACE7E71719EB8DE100F7AA3A /* ImagePickerWithPhotoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImagePickerWithPhotoViewController.m; sourceTree = "<group>"; };
+		ACE7E71619EB8DE100F7AA3A /* ImagePickerFromCameraViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImagePickerFromCameraViewController.h; sourceTree = "<group>"; };
+		ACE7E71719EB8DE100F7AA3A /* ImagePickerFromCameraViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImagePickerFromCameraViewController.m; sourceTree = "<group>"; };
 		ACEE7D1B19D3F9F500932B39 /* QRCodeThemeUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QRCodeThemeUtil.h; sourceTree = "<group>"; };
 		ACEE7D1C19D3F9F500932B39 /* QRCodeThemeUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QRCodeThemeUtil.m; sourceTree = "<group>"; };
 		ACEE7D1D19D3F9F500932B39 /* QRCodeTransportPage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QRCodeTransportPage.h; sourceTree = "<group>"; };
@@ -1021,12 +1021,12 @@
 				ACE7E70819EB78AE00F7AA3A /* CropImageViewController.m */,
 				ACE7E70919EB78AE00F7AA3A /* ImageCropView.h */,
 				ACE7E70A19EB78AE00F7AA3A /* ImageCropView.m */,
-				ACE7E70B19EB78AE00F7AA3A /* ImagePickerWithCropViewController.h */,
-				ACE7E70C19EB78AE00F7AA3A /* ImagePickerWithCropViewController.m */,
+				ACE7E70B19EB78AE00F7AA3A /* ImagePickerFromGalleryViewController.h */,
+				ACE7E70C19EB78AE00F7AA3A /* ImagePickerFromGalleryViewController.m */,
 				ACE7E70D19EB78AE00F7AA3A /* ImageScrollView.h */,
 				ACE7E70E19EB78AE00F7AA3A /* ImageScrollView.m */,
-				ACE7E71619EB8DE100F7AA3A /* ImagePickerWithPhotoViewController.h */,
-				ACE7E71719EB8DE100F7AA3A /* ImagePickerWithPhotoViewController.m */,
+				ACE7E71619EB8DE100F7AA3A /* ImagePickerFromCameraViewController.h */,
+				ACE7E71719EB8DE100F7AA3A /* ImagePickerFromCameraViewController.m */,
 			);
 			path = CropImagePicker;
 			sourceTree = "<group>";
@@ -1302,7 +1302,7 @@
 				AC45D84119878BAB00AF5C2C /* DialogAddressLongPressOptions.m in Sources */,
 				4269FF75195A8872001213B9 /* Market.m in Sources */,
 				DA641E8B196E7BC20095DF42 /* GCCrashInstallation.m in Sources */,
-				ACE7E71819EB8DE100F7AA3A /* ImagePickerWithPhotoViewController.m in Sources */,
+				ACE7E71819EB8DE100F7AA3A /* ImagePickerFromCameraViewController.m in Sources */,
 				AC808B8C19D56757004E78A3 /* XRandom.m in Sources */,
 				AC3CDB5B1962A3C800C74B4C /* TransactionConfidenceView.m in Sources */,
 				ACD6DFC9196B9367009D8031 /* ColdAddressListCell.m in Sources */,
@@ -1328,7 +1328,7 @@
 				4254083C19469C9A007AF99C /* BitherApi.m in Sources */,
 				AC9BBCFE19D268AB00E58BA7 /* UpgradeUtil.m in Sources */,
 				AC53ABE719D911AA007C095C /* DialogXrandomInfo.m in Sources */,
-				ACE7E71119EB78AE00F7AA3A /* ImagePickerWithCropViewController.m in Sources */,
+				ACE7E71119EB78AE00F7AA3A /* ImagePickerFromGalleryViewController.m in Sources */,
 				4276CEA1194BF4F70027D119 /* NetworkUtil.m in Sources */,
 				ACCA27481988DDE9000E6A32 /* UIImage+ImageRenderToColor.m in Sources */,
 				ACB9B9C6195AD25800019216 /* AddressDetailCell.m in Sources */,

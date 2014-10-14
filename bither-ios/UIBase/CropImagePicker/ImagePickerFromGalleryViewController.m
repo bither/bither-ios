@@ -17,15 +17,15 @@
 //  limitations under the License.
 
 
-#import "ImagePickerWithCropViewController.h"
+#import "ImagePickerFromGalleryViewController.h"
 #import "UIViewController+SwipeRightToPop.h"
 #import "CropImageViewController.h"
 
-@interface ImagePickerWithCropViewController ()<UIImagePickerControllerDelegate,UINavigationControllerDelegate>
+@interface ImagePickerFromGalleryViewController ()<UIImagePickerControllerDelegate,UINavigationControllerDelegate>
 
 @end
 
-@implementation ImagePickerWithCropViewController
+@implementation ImagePickerFromGalleryViewController
 
 -(id)init{
     self = [super init];

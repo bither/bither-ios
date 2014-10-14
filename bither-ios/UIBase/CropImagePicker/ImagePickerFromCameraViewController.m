@@ -17,14 +17,14 @@
 //  limitations under the License.
 
 
-#import "ImagePickerWithPhotoViewController.h"
+#import "ImagePickerFromCameraViewController.h"
 #import "UIViewController+SwipeRightToPop.h"
 #import "CropImageViewController.h"
 
-@interface ImagePickerWithPhotoViewController ()<UIImagePickerControllerDelegate,UINavigationControllerDelegate>
+@interface ImagePickerFromCameraViewController ()<UIImagePickerControllerDelegate,UINavigationControllerDelegate>
 
 @end
-@implementation ImagePickerWithPhotoViewController
+@implementation ImagePickerFromCameraViewController
 -(id)init{
     self = [super init];
     if(self){

@@ -18,8 +18,8 @@
 
 #import <Foundation/Foundation.h>
 #import "Setting.h"
-#import "ImagePickerWithCropViewController.h"
-#import "ImagePickerWithPhotoViewController.h"
+#import "ImagePickerFromGalleryViewController.h"
+#import "ImagePickerFromCameraViewController.h"
 
 @interface AvatarSetting : Setting<UIActionSheetDelegate,UIImagePickerControllerDelegate>
 @property(nonatomic,strong) UIViewController * controller;
