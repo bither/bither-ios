@@ -209,13 +209,14 @@
 }
 
 -(void)handleResult:(NSString*)result byReader:(ScanQrCodeViewController*)reader{
-    [reader dismissViewControllerAnimated:YES completion:^{
-        if(![reader isKindOfClass:[ScanQrCodeTransportViewController class]]){
-            BOOL isValidBitcoinAddress=result.isValidBitcoinAddress;
-            BOOL isValidBitcoinBIP21Address=[StringUtil isValidBitcoinBIP21Address:result];
-            if(isValidBitcoinAddress||isValidBitcoinBIP21Address){
-                [reader playSuccessSound];
-                [reader vibrate];
+    
+    if(![reader isKindOfClass:[ScanQrCodeTransportViewController class]]){
+        BOOL isValidBitcoinAddress=result.isValidBitcoinAddress;
+        BOOL isValidBitcoinBIP21Address=[StringUtil isValidBitcoinBIP21Address:result];
+        if(isValidBitcoinAddress||isValidBitcoinBIP21Address){
+            [reader playSuccessSound];
+            [reader vibrate];
+            [reader dismissViewControllerAnimated:YES completion:^{
                 if (isValidBitcoinAddress) {
                     self.tfAddress.text = result;
                     [self.amtLink becomeFirstResponder];
@@ -227,28 +228,38 @@
                         self.amtLink.amount=amt;
                     }
                     [self.amtLink becomeFirstResponder];
-
+                    
                 }
                 [self check];
-                
-            }
+            }];
+            
         }else{
-            self.btnSend.enabled = NO;
-            NSArray *strs =[BTQRCodeUtil splitQRCode:result];
-            NSMutableArray *sigs = [[NSMutableArray alloc]init];
-            for(NSString *s in strs){
-                [sigs addObject:[s hexToData]];
-            }
-            [self.tx signWithSignatures:sigs];
-            if([self.tx verifySignatures]){
-                [self finalSend];
-            }else{
-                self.btnSend.enabled = YES;
-                self.tx = nil;
-                [self showBannerWithMessage:NSLocalizedString(@"Send failed.", nil) belowView:self.vTopBar];
-            }
+            [reader vibrate];
         }
-    }];
+    }else{
+        if ([BTQRCodeUtil verifyQrcodeTransport:result]) {
+            [reader dismissViewControllerAnimated:YES completion:^{
+                self.btnSend.enabled = NO;
+                NSArray *strs =[BTQRCodeUtil splitQRCode:result];
+                NSMutableArray *sigs = [[NSMutableArray alloc]init];
+                for(NSString *s in strs){
+                    [sigs addObject:[s hexToData]];
+                }
+                [self.tx signWithSignatures:sigs];
+                if([self.tx verifySignatures]){
+                    [self finalSend];
+                }else{
+                    self.btnSend.enabled = YES;
+                    self.tx = nil;
+                    [self showBannerWithMessage:NSLocalizedString(@"Send failed.", nil) belowView:self.vTopBar];
+                }
+            }];
+        }else{
+           [reader vibrate];
+        }
+        
+    }
+   
 }
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{

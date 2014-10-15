@@ -171,7 +171,6 @@
 -(void)handleResult:(NSString*)result byReader:(ScanQrCodeViewController*)reader{
     BOOL isValidBitcoinAddress=result.isValidBitcoinAddress;
     BOOL isValidBitcoinBIP21Address=[StringUtil isValidBitcoinBIP21Address:result];
-    
     if(isValidBitcoinAddress||isValidBitcoinBIP21Address){
         [reader playSuccessSound];
         [reader vibrate];
@@ -199,8 +198,8 @@
                
             }];
         }
-        
-        
+    }else{
+         [reader vibrate];
     }
 }
 
