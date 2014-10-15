@@ -65,6 +65,16 @@
 		AC0135D9194FDCDF00E3BB95 /* HotAddressAddPrivateKeyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AC0135D8194FDCDF00E3BB95 /* HotAddressAddPrivateKeyViewController.m */; };
 		AC0135DC19501D9400E3BB95 /* DialogPassword.m in Sources */ = {isa = PBXBuildFile; fileRef = AC0135DB19501D9400E3BB95 /* DialogPassword.m */; };
 		AC0135E0195056BE00E3BB95 /* KeyboardController.m in Sources */ = {isa = PBXBuildFile; fileRef = AC0135DF195056BE00E3BB95 /* KeyboardController.m */; };
+		AC026C8A19EE5FF500BC0152 /* libPods-Bitheri.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AC026C8019EE5FF500BC0152 /* libPods-Bitheri.a */; };
+		AC026C8B19EE5FF500BC0152 /* libPods-CocoaLumberjack.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AC026C8119EE5FF500BC0152 /* libPods-CocoaLumberjack.a */; };
+		AC026C8C19EE5FF500BC0152 /* libPods-FMDB.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AC026C8219EE5FF500BC0152 /* libPods-FMDB.a */; };
+		AC026C8D19EE5FF500BC0152 /* libPods-KSCrash.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AC026C8319EE5FF500BC0152 /* libPods-KSCrash.a */; };
+		AC026C8E19EE5FF500BC0152 /* libPods-MKNetworkKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AC026C8419EE5FF500BC0152 /* libPods-MKNetworkKit.a */; };
+		AC026C8F19EE5FF500BC0152 /* libPods-OpenSSL.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AC026C8519EE5FF500BC0152 /* libPods-OpenSSL.a */; };
+		AC026C9019EE5FF500BC0152 /* libPods-Reachability.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AC026C8619EE5FF500BC0152 /* libPods-Reachability.a */; };
+		AC026C9119EE5FF500BC0152 /* libPods-RegexKitLite.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AC026C8719EE5FF500BC0152 /* libPods-RegexKitLite.a */; };
+		AC026C9219EE5FF500BC0152 /* libPods-ZBarSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AC026C8819EE5FF500BC0152 /* libPods-ZBarSDK.a */; };
+		AC026C9319EE5FF500BC0152 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AC026C8919EE5FF500BC0152 /* libPods.a */; };
 		AC1715871969213800337AB5 /* DialogAddressOptions.m in Sources */ = {isa = PBXBuildFile; fileRef = AC1715861969213800337AB5 /* DialogAddressOptions.m */; };
 		AC17158A1969249B00337AB5 /* NSString+Size.m in Sources */ = {isa = PBXBuildFile; fileRef = AC1715891969249B00337AB5 /* NSString+Size.m */; };
 		AC17158D1969359900337AB5 /* DialogPrivateKeyEncryptedQrCode.m in Sources */ = {isa = PBXBuildFile; fileRef = AC17158C1969359900337AB5 /* DialogPrivateKeyEncryptedQrCode.m */; };
@@ -303,6 +313,16 @@
 		AC0135DB19501D9400E3BB95 /* DialogPassword.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DialogPassword.m; sourceTree = "<group>"; };
 		AC0135DE195056BE00E3BB95 /* KeyboardController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeyboardController.h; sourceTree = "<group>"; };
 		AC0135DF195056BE00E3BB95 /* KeyboardController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KeyboardController.m; sourceTree = "<group>"; };
+		AC026C8019EE5FF500BC0152 /* libPods-Bitheri.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libPods-Bitheri.a"; path = "Pods/build/Debug-iphoneos/libPods-Bitheri.a"; sourceTree = "<group>"; };
+		AC026C8119EE5FF500BC0152 /* libPods-CocoaLumberjack.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libPods-CocoaLumberjack.a"; path = "Pods/build/Debug-iphoneos/libPods-CocoaLumberjack.a"; sourceTree = "<group>"; };
+		AC026C8219EE5FF500BC0152 /* libPods-FMDB.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libPods-FMDB.a"; path = "Pods/build/Debug-iphoneos/libPods-FMDB.a"; sourceTree = "<group>"; };
+		AC026C8319EE5FF500BC0152 /* libPods-KSCrash.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libPods-KSCrash.a"; path = "Pods/build/Debug-iphoneos/libPods-KSCrash.a"; sourceTree = "<group>"; };
+		AC026C8419EE5FF500BC0152 /* libPods-MKNetworkKit.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libPods-MKNetworkKit.a"; path = "Pods/build/Debug-iphoneos/libPods-MKNetworkKit.a"; sourceTree = "<group>"; };
+		AC026C8519EE5FF500BC0152 /* libPods-OpenSSL.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libPods-OpenSSL.a"; path = "Pods/build/Debug-iphoneos/libPods-OpenSSL.a"; sourceTree = "<group>"; };
+		AC026C8619EE5FF500BC0152 /* libPods-Reachability.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libPods-Reachability.a"; path = "Pods/build/Debug-iphoneos/libPods-Reachability.a"; sourceTree = "<group>"; };
+		AC026C8719EE5FF500BC0152 /* libPods-RegexKitLite.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libPods-RegexKitLite.a"; path = "Pods/build/Debug-iphoneos/libPods-RegexKitLite.a"; sourceTree = "<group>"; };
+		AC026C8819EE5FF500BC0152 /* libPods-ZBarSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libPods-ZBarSDK.a"; path = "Pods/build/Debug-iphoneos/libPods-ZBarSDK.a"; sourceTree = "<group>"; };
+		AC026C8919EE5FF500BC0152 /* libPods.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libPods.a; path = "Pods/build/Debug-iphoneos/libPods.a"; sourceTree = "<group>"; };
 		AC1715851969213800337AB5 /* DialogAddressOptions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DialogAddressOptions.h; sourceTree = "<group>"; };
 		AC1715861969213800337AB5 /* DialogAddressOptions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DialogAddressOptions.m; sourceTree = "<group>"; };
 		AC1715881969249B00337AB5 /* NSString+Size.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Size.h"; sourceTree = "<group>"; };
@@ -548,6 +568,16 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AC026C8A19EE5FF500BC0152 /* libPods-Bitheri.a in Frameworks */,
+				AC026C8B19EE5FF500BC0152 /* libPods-CocoaLumberjack.a in Frameworks */,
+				AC026C8C19EE5FF500BC0152 /* libPods-FMDB.a in Frameworks */,
+				AC026C8D19EE5FF500BC0152 /* libPods-KSCrash.a in Frameworks */,
+				AC026C8E19EE5FF500BC0152 /* libPods-MKNetworkKit.a in Frameworks */,
+				AC026C8F19EE5FF500BC0152 /* libPods-OpenSSL.a in Frameworks */,
+				AC026C9019EE5FF500BC0152 /* libPods-Reachability.a in Frameworks */,
+				AC026C9119EE5FF500BC0152 /* libPods-RegexKitLite.a in Frameworks */,
+				AC026C9219EE5FF500BC0152 /* libPods-ZBarSDK.a in Frameworks */,
+				AC026C9319EE5FF500BC0152 /* libPods.a in Frameworks */,
 				42D9B77E193D6B5B00C85B89 /* XCTest.framework in Frameworks */,
 				42D9B780193D6B5B00C85B89 /* UIKit.framework in Frameworks */,
 				42D9B77F193D6B5B00C85B89 /* Foundation.framework in Frameworks */,
@@ -732,6 +762,16 @@
 		42D9B763193D6B5B00C85B89 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				AC026C8019EE5FF500BC0152 /* libPods-Bitheri.a */,
+				AC026C8119EE5FF500BC0152 /* libPods-CocoaLumberjack.a */,
+				AC026C8219EE5FF500BC0152 /* libPods-FMDB.a */,
+				AC026C8319EE5FF500BC0152 /* libPods-KSCrash.a */,
+				AC026C8419EE5FF500BC0152 /* libPods-MKNetworkKit.a */,
+				AC026C8519EE5FF500BC0152 /* libPods-OpenSSL.a */,
+				AC026C8619EE5FF500BC0152 /* libPods-Reachability.a */,
+				AC026C8719EE5FF500BC0152 /* libPods-RegexKitLite.a */,
+				AC026C8819EE5FF500BC0152 /* libPods-ZBarSDK.a */,
+				AC026C8919EE5FF500BC0152 /* libPods.a */,
 				ACA9D70B195415B0002D1E3A /* AudioToolbox.framework */,
 				ACDDDC3719483D210008A79D /* QuartzCore.framework */,
 				42D9B764193D6B5B00C85B89 /* Foundation.framework */,
@@ -1618,8 +1658,13 @@
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = "bither-iosTests/bither-iosTests-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Pods/build/Debug-iphoneos/**",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUNDLE_LOADER)";
+				USER_HEADER_SEARCH_PATHS = "${SRCROOT}/**";
 				WRAPPER_EXTENSION = xctest;
 			};
 			name = Debug;
@@ -1636,8 +1681,13 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "bither-ios/bither-ios-Prefix.pch";
 				INFOPLIST_FILE = "bither-iosTests/bither-iosTests-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Pods/build/Debug-iphoneos/**",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUNDLE_LOADER)";
+				USER_HEADER_SEARCH_PATHS = "${SRCROOT}/**";
 				WRAPPER_EXTENSION = xctest;
 			};
 			name = Release;

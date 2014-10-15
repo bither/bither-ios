@@ -35,6 +35,9 @@
 +(BOOL) isEmpty:(NSString *) str;
 +(BOOL)validEmail:(NSString*)str;
 +(BOOL)validPassword:(NSString *)str;
++(BOOL)isValidBitcoinBIP21Address:(NSString *)str;
++(NSString*)getAddressFormBIP21Address:(NSString *)str;
++(uint64_t)getAmtFormBIP21Address:(NSString *)str;
 +(BOOL)validPartialPassword:(NSString *)str;
 +(NSString *) intToString:(int) num;
 +(NSString *)longToString:(long) num;

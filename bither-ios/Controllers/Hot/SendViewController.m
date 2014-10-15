@@ -169,14 +169,38 @@
 }
 
 -(void)handleResult:(NSString*)result byReader:(ScanQrCodeViewController*)reader{
-    if(result.isValidBitcoinAddress){
+    BOOL isValidBitcoinAddress=result.isValidBitcoinAddress;
+    BOOL isValidBitcoinBIP21Address=[StringUtil isValidBitcoinBIP21Address:result];
+    
+    if(isValidBitcoinAddress||isValidBitcoinBIP21Address){
         [reader playSuccessSound];
         [reader vibrate];
-        self.tfAddress.text = result;
-        [reader dismissViewControllerAnimated:YES completion:^{
-            [self check];
-            [self.amtLink becomeFirstResponder];
-        }];
+        if (isValidBitcoinAddress) {
+            self.tfAddress.text = result;
+            [reader dismissViewControllerAnimated:YES completion:^{
+                [self check];
+                [self.amtLink becomeFirstResponder];
+            }];
+        }
+        if (isValidBitcoinBIP21Address) {
+            self.tfAddress.text=[StringUtil getAddressFormBIP21Address:result];
+            uint64_t amt=[StringUtil getAmtFormBIP21Address:result];
+            if (amt!=-1) {
+                self.amtLink.amount=amt;
+            }
+           
+            [reader dismissViewControllerAnimated:YES completion:^{
+                [self check];
+                if (amt!=-1) {
+                    [self.tfPassword becomeFirstResponder];
+                }else{
+                    [self.amtLink becomeFirstResponder];
+                }
+               
+            }];
+        }
+        
+        
     }
 }
 

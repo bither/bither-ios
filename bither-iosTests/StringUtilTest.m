@@ -81,6 +81,7 @@
     XCTAssertTrue([[StringUtil shortenAddress:address] isEqualToString:@"1HZw..."], @"shorten address");
     NSString * formatAddress=[StringUtil formatAddress:address groupSize:4 lineSize:12];
     XCTAssertTrue(formatAddress.length==42, @"format hash");
+    XCTAssertFalse([StringUtil isValidBitcoinBIP21Address:@"bitcoin:1N9RQVmxewa2sEVDvmnsj9NgLHJ3dUjitz?amount=0.00040845"],@"bip21");
 
 
     
