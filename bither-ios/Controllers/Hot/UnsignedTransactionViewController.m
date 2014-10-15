@@ -237,26 +237,23 @@
             [reader vibrate];
         }
     }else{
-        if ([BTQRCodeUtil verifyQrcodeTransport:result]) {
-            [reader dismissViewControllerAnimated:YES completion:^{
-                self.btnSend.enabled = NO;
-                NSArray *strs =[BTQRCodeUtil splitQRCode:result];
-                NSMutableArray *sigs = [[NSMutableArray alloc]init];
-                for(NSString *s in strs){
-                    [sigs addObject:[s hexToData]];
-                }
-                [self.tx signWithSignatures:sigs];
-                if([self.tx verifySignatures]){
-                    [self finalSend];
-                }else{
-                    self.btnSend.enabled = YES;
-                    self.tx = nil;
-                    [self showBannerWithMessage:NSLocalizedString(@"Send failed.", nil) belowView:self.vTopBar];
-                }
-            }];
-        }else{
-           [reader vibrate];
-        }
+        [reader dismissViewControllerAnimated:YES completion:^{
+            self.btnSend.enabled = NO;
+            NSArray *strs =[BTQRCodeUtil splitQRCode:result];
+            NSMutableArray *sigs = [[NSMutableArray alloc]init];
+            for(NSString *s in strs){
+                [sigs addObject:[s hexToData]];
+            }
+            [self.tx signWithSignatures:sigs];
+            if([self.tx verifySignatures]){
+                [self finalSend];
+            }else{
+                self.btnSend.enabled = YES;
+                self.tx = nil;
+                [self showBannerWithMessage:NSLocalizedString(@"Send failed.", nil) belowView:self.vTopBar];
+            }
+        }];
+        
         
     }
    
