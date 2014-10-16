@@ -108,8 +108,11 @@
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         UIImage * qrCodeImage=[QRCodeThemeUtil qrCodeOfContent:self.address andSize:self.sv.frame.size.width margin:kQrCodeMargin withTheme:theme];
         NSString * avatarName=[[UserDefaultsUtil instance] getUserAvatar];
-        NSString * avatatPath=[[FileUtil getSmallAvatarDir] stringByAppendingString:avatarName];
-        if ([FileUtil fileExists:avatatPath]) {
+        NSString * avatatPath=nil;
+        if (avatarName) {
+            avatatPath= [[FileUtil getSmallAvatarDir] stringByAppendingString:avatarName];
+        }
+        if (avatatPath&&[FileUtil fileExists:avatatPath]) {
             if (!_avatarImage) {
                 _avatarImage=[[UIImage alloc]initWithContentsOfFile:avatatPath];
             }
