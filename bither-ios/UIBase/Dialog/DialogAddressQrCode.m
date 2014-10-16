@@ -30,7 +30,6 @@
 @interface DialogAddressQrCode()<UIDocumentInteractionControllerDelegate>{
     UserDefaultsUtil *defaults;
     NSString *_shareFileName;
-    UIImage * _shapeImage;
     UIImage * _broderImage;
     UIImage *_avatarImage;
 }
@@ -49,7 +48,6 @@
         self.delegate = delegate;
         defaults = [UserDefaultsUtil instance];
         _shareFileName = address.address;
-        _shapeImage=[UIImage imageNamed:@"avatar_for_fancy_qr_code_shape"];
         _broderImage=[UIImage imageNamed:@"avatar_for_fancy_qr_code_overlay"];
         [self firstConfigure];
     }
@@ -118,11 +116,10 @@
             }
             UIGraphicsBeginImageContextWithOptions(CGSizeMake(qrCodeImage.size.width, qrCodeImage.size.height), NO, 0);
             [qrCodeImage drawInRect:CGRectMake(0, 0, qrCodeImage.size.width, qrCodeImage.size.height)];
-            int w=130;
+            int w=qrCodeImage.size.width*0.24f;
             int borderW=(qrCodeImage.size.width-w)/2;
             int borderH=(qrCodeImage.size.height-w)/2;
             CGRect rect=CGRectMake(borderW, borderH, w, w);
-            [_shapeImage drawInRect:rect];
             [_avatarImage drawInRect:CGRectMake(borderW+4, borderH+4, w-8, w-8)];
             [_broderImage drawInRect:rect];
             qrCodeImage = UIGraphicsGetImageFromCurrentImageContext();
