@@ -123,6 +123,7 @@
 		AC8F0DCD196D054A00CCD0F9 /* SelectListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AC8F0DCC196D054A00CCD0F9 /* SelectListCell.m */; };
 		AC9BBCFE19D268AB00E58BA7 /* UpgradeUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = AC9BBCFD19D268AB00E58BA7 /* UpgradeUtil.m */; };
 		AC9BC61019D18102003B88B5 /* SystemUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = AC9BC60F19D18102003B88B5 /* SystemUtil.m */; };
+		ACA11DCA19F64D560087D39C /* RCheckViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ACA11DC919F64D560087D39C /* RCheckViewController.m */; };
 		ACA9D70319540E0F002D1E3A /* PlaySoundUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = ACA9D70219540E0F002D1E3A /* PlaySoundUtil.m */; };
 		ACA9D70A195410FF002D1E3A /* qr_code_scanned.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = ACA9D709195410FF002D1E3A /* qr_code_scanned.mp3 */; };
 		ACA9D70C195415B0002D1E3A /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ACA9D70B195415B0002D1E3A /* AudioToolbox.framework */; };
@@ -419,6 +420,8 @@
 		AC9BBCFD19D268AB00E58BA7 /* UpgradeUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UpgradeUtil.m; sourceTree = "<group>"; };
 		AC9BC60E19D18102003B88B5 /* SystemUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SystemUtil.h; sourceTree = "<group>"; };
 		AC9BC60F19D18102003B88B5 /* SystemUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SystemUtil.m; sourceTree = "<group>"; };
+		ACA11DC819F64D560087D39C /* RCheckViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RCheckViewController.h; sourceTree = "<group>"; };
+		ACA11DC919F64D560087D39C /* RCheckViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RCheckViewController.m; sourceTree = "<group>"; };
 		ACA9D70119540E0F002D1E3A /* PlaySoundUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlaySoundUtil.h; sourceTree = "<group>"; };
 		ACA9D70219540E0F002D1E3A /* PlaySoundUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlaySoundUtil.m; sourceTree = "<group>"; };
 		ACA9D709195410FF002D1E3A /* qr_code_scanned.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = qr_code_scanned.mp3; sourceTree = "<group>"; };
@@ -644,6 +647,8 @@
 				AC8F0DC9196CF4E400CCD0F9 /* SelectViewController.m */,
 				AC6BAC6D196FA3410013B9E8 /* HotCheckPrivateKeyViewController.h */,
 				AC6BAC6E196FA3410013B9E8 /* HotCheckPrivateKeyViewController.m */,
+				ACA11DC819F64D560087D39C /* RCheckViewController.h */,
+				ACA11DC919F64D560087D39C /* RCheckViewController.m */,
 			);
 			path = Hot;
 			sourceTree = "<group>";
@@ -1320,6 +1325,7 @@
 				AC202AD0196B8B7A00033EC1 /* Setting.m in Sources */,
 				ACE7E71019EB78AE00F7AA3A /* ImageCropView.m in Sources */,
 				ACC21A6B194C2BD900E02542 /* ColdModeCheckConnectionView.m in Sources */,
+				ACA11DCA19F64D560087D39C /* RCheckViewController.m in Sources */,
 				ACEE7D2C19D3F9F500932B39 /* ScanQrCodeViewController.m in Sources */,
 				AC33089119556AB800D8F621 /* HotAddressListSectionHeader.m in Sources */,
 				AC53ABE419D8FBB6007C095C /* UEntropyAnimatedTransition.m in Sources */,

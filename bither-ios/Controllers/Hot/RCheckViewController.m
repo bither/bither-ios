@@ -14,7 +14,7 @@
 //  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 //  See the License for the specific language governing permissions and
 //  limitations under the License.
-#import "CheckViewController.h"
+#import "RCheckViewController.h"
 #import "CheckScoreAndBgAnimatableView.h"
 #import "DialogPassword.h"
 #import "UIViewController+PiShowBanner.h"
@@ -25,10 +25,9 @@
 #define kResetScoreAnim (99)
 #define kAddScoreAnimPrefix (100)
 
-@interface CheckViewController ()<CheckScoreAndBgAnimatableViewDelegate,DialogPasswordDelegate, UITableViewDataSource, UITableViewDelegate>{
-    NSMutableArray* privateKeys;
-    NSString* _password;
-    NSMutableArray* dangerKeys;
+@interface RCheckViewController ()<CheckScoreAndBgAnimatableViewDelegate, UITableViewDataSource, UITableViewDelegate>{
+    NSMutableArray* addresses;
+    NSMutableArray* dangerAddresses;
     NSUInteger checkingIndex;
 }
 @property (weak, nonatomic) IBOutlet CheckScoreAndBgAnimatableView *vHeader;
@@ -44,7 +43,7 @@
 
 @end
 
-@implementation CheckViewController
+@implementation RCheckViewController
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil{
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -57,8 +56,8 @@
     [super viewDidLoad];
     self.vContainer.frame = CGRectMake(self.vContainer.frame.origin.x, self.vContainer.frame.origin.y, self.vContainer.frame.size.width, self.vHeader.frame.size.height);
     self.lblCheckStatus.text = NSLocalizedString(@"Private keys are safe.", nil);
-    privateKeys = [[NSMutableArray alloc]init];
-    dangerKeys = [[NSMutableArray alloc]init];
+    addresses = [[NSMutableArray alloc]init];
+    dangerAddresses = [[NSMutableArray alloc]init];
     self.vHeader.delegate = self;
     self.vHeader.score = 100;
     self.tableView.dataSource = self;
@@ -68,35 +67,30 @@
 }
 
 - (IBAction)checkPressed:(id)sender {
-    if([BTAddressManager instance].privKeyAddresses.count > 0){
+    if([BTAddressManager instance].allAddresses.count > 0){
         if(!self.checking){
-            [[[DialogPassword alloc]initWithDelegate:self]showInWindow:self.view.window];
+            self.checking = YES;
+            [self refreshAddresses];
+            [UIView animateWithDuration:kCheckScoreAndBgAnimatableViewDefaultAnimationDuration animations:^{
+                self.vPointsContainer.transform = CGAffineTransformTranslate(CGAffineTransformMakeScale(1.2, 1.2), 0, 10);
+                self.btnCheck.alpha = 0;
+                self.vContainer.frame = CGRectMake(self.vContainer.frame.origin.x, self.vContainer.frame.origin.y, self.vContainer.frame.size.width, self.view.frame.size.height - self.vContainer.frame.origin.y * 2);
+            } completion:^(BOOL finished) {
+                self.btnCheck.hidden = YES;
+                self.lblCheckStatus.text = NSLocalizedString(@"Checking private keys...", nil);
+                [self.vHeader animateToScore:0 withAnimationId:kResetScoreAnim];
+                [self moveProgress];
+            }];
         }
     }else{
         [self showBannerWithMessage:NSLocalizedString(@"No private keys", nil) belowView:nil belowTop:0 autoHideIn:1 withCompletion:nil];
     }
 }
 
--(void)onPasswordEntered:(NSString *)password{
-    self.checking = YES;
-    _password = password;
-    [self refreshPrivateKeys];
-    [UIView animateWithDuration:kCheckScoreAndBgAnimatableViewDefaultAnimationDuration animations:^{
-        self.vPointsContainer.transform = CGAffineTransformTranslate(CGAffineTransformMakeScale(1.2, 1.2), 0, 10);
-        self.btnCheck.alpha = 0;
-        self.vContainer.frame = CGRectMake(self.vContainer.frame.origin.x, self.vContainer.frame.origin.y, self.vContainer.frame.size.width, self.view.frame.size.height - self.vContainer.frame.origin.y * 2);
-    } completion:^(BOOL finished) {
-        self.btnCheck.hidden = YES;
-        self.lblCheckStatus.text = NSLocalizedString(@"Checking private keys...", nil);
-        [self.vHeader animateToScore:0 withAnimationId:kResetScoreAnim];
-        [self moveProgress];
-    }];
-}
-
 -(void)onAnimation:(NSInteger)animationId endWithScore:(NSUInteger)score{
     if(animationId == kResetScoreAnim){
         [self beginCheck];
-    }else if(animationId == (kAddScoreAnimPrefix + privateKeys.count - 1) && self.checking){
+    }else if(animationId == (kAddScoreAnimPrefix + addresses.count - 1) && self.checking){
         [self checkFinished];
     }
 }
@@ -106,16 +100,14 @@
     [self.tableView reloadData];
     [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:YES];
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        NSUInteger totalCount = privateKeys.count;
+        NSUInteger totalCount = addresses.count;
         NSUInteger safeCount = 0;
-        NSString *password = _password;
-        _password = nil;
-        for (BTAddress *a in privateKeys){
-            BOOL result = [[[BTPasswordSeed alloc]initWithBTAddress:a]checkPassword:password];
+        for (BTAddress *a in addresses){
+            BOOL result = [[[BTPasswordSeed alloc]initWithBTAddress:a]checkPassword:nil];
             if(result){
                 safeCount++;
             }else{
-                [dangerKeys addObject:a];
+                [dangerAddresses addObject:a];
             }
             NSUInteger score = floorf((float)safeCount / (float)totalCount * 100.0f);
             checkingIndex++;
@@ -125,7 +117,6 @@
                 [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:checkingIndex - 1 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:YES];
             });
         }
-        password=nil;
     });
 }
 
@@ -148,13 +139,13 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return privateKeys.count;
+    return addresses.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    BTAddress* address = privateKeys[indexPath.row];
+    BTAddress* address = addresses[indexPath.row];
     CheckPrivateKeyCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
-    [cell showAddress:address.address checking:checkingIndex == indexPath.row checked:checkingIndex > indexPath.row safe:![dangerKeys containsObject:address]];
+    [cell showAddress:address.address checking:checkingIndex == indexPath.row checked:checkingIndex > indexPath.row safe:![dangerAddresses containsObject:address]];
     return cell;
 }
 
@@ -173,10 +164,10 @@
         }
     }];
 }
--(void)refreshPrivateKeys{
-    [privateKeys removeAllObjects];
-    [privateKeys addObjectsFromArray:[BTAddressManager instance].privKeyAddresses];
-    [dangerKeys removeAllObjects];
+-(void)refreshAddresses{
+    [addresses removeAllObjects];
+    [addresses addObjectsFromArray:[BTAddressManager instance].allAddresses];
+    [dangerAddresses removeAllObjects];
     [self.tableView reloadData];
 }
 
