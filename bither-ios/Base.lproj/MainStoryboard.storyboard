@@ -2802,10 +2802,10 @@
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                             </view>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="f9N-3Q-IJD">
-                                                <rect key="frame" x="75" y="128" width="150" height="42"/>
+                                                <rect key="frame" x="70" y="128" width="160" height="42"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
-                                                <state key="normal" title="Check R Values" backgroundImage="button_check_bg_normal">
+                                                <state key="normal" image="rcheck_check_button" backgroundImage="button_check_bg_normal">
                                                     <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                 </state>
                                                 <state key="highlighted" backgroundImage="button_check_bg_pressed"/>
@@ -3008,6 +3008,7 @@
         <image name="no_address_image" width="240" height="330"/>
         <image name="qrcode_frame_default" width="71" height="71"/>
         <image name="qrcode_frame_pressed" width="71" height="71"/>
+        <image name="rcheck_check_button" width="132" height="30"/>
         <image name="scan_button_normal" width="45" height="45"/>
         <image name="scan_button_pressed" width="45" height="45"/>
         <image name="scan_button_resizable_normal" width="45" height="45"/>
