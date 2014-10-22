@@ -20,7 +20,7 @@
 #import "StringUtil.h"
 #import "NSString+Base58.h"
 #import "ScanQrCodeViewController.h"
-#import "DialogProgress.h"
+#import "DialogProgressChangable.h"
 #import "UserDefaultsUtil.h"
 #import "UIViewController+PiShowBanner.h"
 #import "DialogSendTxConfirm.h"
@@ -34,7 +34,9 @@
 
 #define kBalanceFontSize (15)
 
-@interface SendViewController ()<UITextFieldDelegate,ScanQrCodeDelegate,DialogSendTxConfirmDelegate>
+@interface SendViewController ()<UITextFieldDelegate,ScanQrCodeDelegate,DialogSendTxConfirmDelegate>{
+    DialogProgressChangable *dp;
+}
 @property (weak, nonatomic) IBOutlet UILabel *lblBalancePrefix;
 @property (weak, nonatomic) IBOutlet UILabel *lblBalance;
 @property (weak, nonatomic) IBOutlet UILabel *lblPayTo;
@@ -72,6 +74,7 @@
             self.amtLink.amount = self.amount;
         }
     }
+    dp = [[DialogProgressChangable alloc]initWithMessage:NSLocalizedString(@"Please wait…", nil)];
     [self check];
 }
 
@@ -95,7 +98,6 @@
 - (IBAction)sendPressed:(id)sender {
     if([self checkValues]){
         [self hideKeyboard];
-        DialogProgress *dp = [[DialogProgress alloc]initWithMessage:NSLocalizedString(@"Please wait…", nil)];
         [dp showInWindow:self.view.window completion:^{
             dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
                 if(![[[UserDefaultsUtil instance]getPasswordSeed]checkPassword:self.tfPassword.text]){
@@ -115,13 +117,31 @@
                         return;
                     }
                     if([self.address signTransaction:tx withPassphrase:self.tfPassword.text]){
-                        __block NSString * addressBlock=toAddress;
-                        dispatch_async(dispatch_get_main_queue(), ^{
-                            [dp dismissWithCompletion:^{
-                                DialogSendTxConfirm *dialog = [[DialogSendTxConfirm alloc]initWithTx:tx from:self.address to:addressBlock delegate:self];
-                                [dialog showInWindow:self.view.window];
-                            }];
-                        });
+                        [dp changeToMessage:NSLocalizedString(@"rchecking", nil) completion:^{
+                            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+                                sleep(1);
+                                BOOL result = rand() % 2 == 0;// TODO check r for tx
+                                
+                                if(result){
+                                    __block NSString * addressBlock = toAddress;
+                                    dispatch_async(dispatch_get_main_queue(), ^{
+                                        [dp changeToMessage:NSLocalizedString(@"rcheck_safe", nil) icon:[UIImage imageNamed:@"checkmark"] completion:^{
+                                            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.8 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                                                [dp dismissWithCompletion:^{
+                                                    [dp changeToMessage:NSLocalizedString(@"Please wait…", nil)];
+                                                    DialogSendTxConfirm *dialog = [[DialogSendTxConfirm alloc]initWithTx:tx from:self.address to:addressBlock delegate:self];
+                                                    [dialog showInWindow:self.view.window];
+                                                }];
+                                            });
+                                        }];
+                                    });
+                                } else {
+                                    [dp changeToMessage:NSLocalizedString(@"rcheck_recalculate", nil) completion:^{
+                                        [self sendPressed:self.btnSend];
+                                    }];
+                                }
+                            });
+                        }];
                     }else{
                         [self showSendResult:NSLocalizedString(@"Password wrong.", nil) dialog:dp];
                     }
@@ -136,7 +156,7 @@
     if(!tx){
         return;
     }
-    DialogProgress *dp = [[DialogProgress alloc]initWithMessage:NSLocalizedString(@"Please wait…", nil)];
+    [dp changeToMessage:NSLocalizedString(@"Please wait…", nil)];
     [dp showInWindow:self.view.window completion:^{
         [[BTPeerManager instance] publishTransaction:tx completion:^(NSError *error) {
             if(!error){
@@ -155,9 +175,9 @@
     }];
 }
 
--(void)showSendResult:(NSString*)msg dialog:(DialogProgress*)dp{
+-(void)showSendResult:(NSString*)msg dialog:(DialogProgressChangable*)dpc{
     dispatch_async(dispatch_get_main_queue(), ^{
-        [dp dismissWithCompletion:^{
+        [dpc dismissWithCompletion:^{
             [self showBannerWithMessage:msg belowView:self.vTopBar];
         }];
     });
