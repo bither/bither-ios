@@ -29,6 +29,7 @@
 #import "BitherApi.h"
 #import "BTBlockChain.h"
 #import "NSDictionary+Fromat.h"
+#import "BTIn.h"
 
 
 #define BLOCK_COUNT  @"block_count"
@@ -264,16 +265,43 @@
     return  msg;
 
 }
--(void)completeInSignature:(NSString *) result{
-    NSMutableArray * array=[NSMutableArray new];
+
++(void)completeInputsForAddress:(BTAddress *)address{
+      dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0),^{
+          int fromBlock=0;
+          while (fromBlock>0) {
+              [[BitherApi instance] getInSignaturesApi:address.address fromBlock:fromBlock callback:^(id response) {
+                  NSArray * ins=[TransactionsUtil getInSignature:response];
+                  //[address com]
+              } andErrorCallBack:^(MKNetworkOperation *errorOp, NSError *error) {
+                  
+              }];
+          }
+          
+      });
+}
++(NSArray *)getInSignature:(NSString *) result{
+    NSMutableArray * resultList=[NSMutableArray new];
     if([StringUtil isEmpty:result]){
-        NSArray * txs=[result componentsSeparatedByString:result];
+        NSArray * txs=[result componentsSeparatedByString:@";"];
         for ( NSString * tx in txs){
-            NSArray * ins=[tx componentsSeparatedByString:tx];
+            NSArray * ins=[tx componentsSeparatedByString:@":"];
             NSString * inStr=ins[0];
-           // NSData * txHash=[];
+            NSData * txHash=[inStr dataWithBase64EncodedString].reverse;
+            for (int i=1; i<ins.count; i++) {
+                NSArray *array=[ins[i] componentsSeparatedByString:@","];
+                int inSn=[array[0] intValue];
+                NSData * inSignature=[array[1] dataWithBase64EncodedString];
+                BTIn * btIn=[[BTIn alloc] init];
+                [btIn setTxHash:txHash];
+                [btIn setInSequence:inSn];
+                [btIn setInSignature:inSignature];
+                [resultList addObject:btIn];
+                
+            }
         }
     }
+    return resultList;
     
 }
 @end

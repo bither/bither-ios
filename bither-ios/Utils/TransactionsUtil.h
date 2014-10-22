@@ -27,4 +27,5 @@
 +(void) syncWallet:(VoidBlock) voidBlock andErrorCallBack:(ErrorHandler)errorCallback;
 
 +(NSString *)getCompleteTxForError:(NSError *) error;
++(void)completeInputsForAddress:(BTAddress *)address;
 @end

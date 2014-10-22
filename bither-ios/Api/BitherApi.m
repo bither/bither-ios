@@ -53,11 +53,11 @@ static BitherApi *piApi;
     }];
 
 }
--(void)getInSignaturesApi:(NSString *)address fromBlock:(int) blockNo callback:(DictResponseBlock) callback andErrorCallBack:(ErrorHandler)errorCallback{
+-(void)getInSignaturesApi:(NSString *)address fromBlock:(int) blockNo callback:(IdResponseBlock) callback andErrorCallBack:(ErrorHandler)errorCallback{
     NSString * url=[NSString stringWithFormat:BITHER_IN_SIGNATURES_API,address,blockNo];
     [self get:url withParams:nil networkType:BitherBitcoin completed:^(MKNetworkOperation *completedOperation) {
         if (callback) {
-            callback(completedOperation.responseJSON);
+            callback(completedOperation.responseString);
         }
         
     } andErrorCallback:^(MKNetworkOperation *errorOp, NSError *error) {
