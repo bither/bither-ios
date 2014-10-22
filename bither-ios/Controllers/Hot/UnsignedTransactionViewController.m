@@ -241,7 +241,6 @@
                         self.amtLink.amount=amt;
                     }
                     [self.amtLink becomeFirstResponder];
-                    
                 }
                 [self check];
             }];
