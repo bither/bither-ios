@@ -14,11 +14,12 @@
 //  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 //  See the License for the specific language governing permissions and
 //  limitations under the License.
+
 #import "RCheckViewController.h"
 #import "CheckScoreAndBgAnimatableView.h"
 #import "DialogPassword.h"
 #import "UIViewController+PiShowBanner.h"
-#import "CheckPrivateKeyCell.h"
+#import "RCheckCell.h"
 #import <Bitheri/BTPasswordSeed.h>
 #import <Bitheri/BTAddressManager.h>
 
@@ -55,7 +56,7 @@
 - (void)viewDidLoad{
     [super viewDidLoad];
     self.vContainer.frame = CGRectMake(self.vContainer.frame.origin.x, self.vContainer.frame.origin.y, self.vContainer.frame.size.width, self.vHeader.frame.size.height);
-    self.lblCheckStatus.text = NSLocalizedString(@"Private keys are safe.", nil);
+    self.lblCheckStatus.text = NSLocalizedString(@"rcheck_safe", nil);
     addresses = [[NSMutableArray alloc]init];
     dangerAddresses = [[NSMutableArray alloc]init];
     self.vHeader.delegate = self;
@@ -77,13 +78,13 @@
                 self.vContainer.frame = CGRectMake(self.vContainer.frame.origin.x, self.vContainer.frame.origin.y, self.vContainer.frame.size.width, self.view.frame.size.height - self.vContainer.frame.origin.y * 2);
             } completion:^(BOOL finished) {
                 self.btnCheck.hidden = YES;
-                self.lblCheckStatus.text = NSLocalizedString(@"Checking private keys...", nil);
+                self.lblCheckStatus.text = NSLocalizedString(@"rchecking", nil);
                 [self.vHeader animateToScore:0 withAnimationId:kResetScoreAnim];
                 [self moveProgress];
             }];
         }
     }else{
-        [self showBannerWithMessage:NSLocalizedString(@"No private keys", nil) belowView:nil belowTop:0 autoHideIn:1 withCompletion:nil];
+        [self showBannerWithMessage:NSLocalizedString(@"rcheck_no_address", nil) belowView:nil belowTop:0 autoHideIn:1 withCompletion:nil];
     }
 }
 
@@ -103,7 +104,7 @@
         NSUInteger totalCount = addresses.count;
         NSUInteger safeCount = 0;
         for (BTAddress *a in addresses){
-            BOOL result = [[[BTPasswordSeed alloc]initWithBTAddress:a]checkPassword:nil];
+            BOOL result = rand() % 2 == 0; // TODO check r value for address
             if(result){
                 safeCount++;
             }else{
@@ -122,9 +123,9 @@
 
 -(void)checkFinished{
     if(self.vHeader.score < 100){
-        self.lblCheckStatus.text = NSLocalizedString(@"Private keys in danger.", nil);
+        self.lblCheckStatus.text = NSLocalizedString(@"rcheck_danger", nil);
     }else{
-        self.lblCheckStatus.text = NSLocalizedString(@"Private keys are safe.", nil);
+        self.lblCheckStatus.text = NSLocalizedString(@"rcheck_safe", nil);
     }
     self.btnCheck.hidden = NO;
     self.btnCheck.alpha = 0;
@@ -144,7 +145,7 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     BTAddress* address = addresses[indexPath.row];
-    CheckPrivateKeyCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
+    RCheckCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
     [cell showAddress:address.address checking:checkingIndex == indexPath.row checked:checkingIndex > indexPath.row safe:![dangerAddresses containsObject:address]];
     return cell;
 }

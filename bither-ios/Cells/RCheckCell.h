@@ -1,5 +1,5 @@
 //
-//  RCheckViewController.h
+//  RCheckCell.h
 //  bither-ios
 //
 //  Copyright 2014 http://Bither.net
@@ -18,6 +18,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface RCheckViewController : UIViewController
+@interface RCheckCell : UITableViewCell
 
+-(void)showAddress:(NSString*)address checking:(BOOL)checking checked:(BOOL)checked safe:(BOOL)safe;
 @end

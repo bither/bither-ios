@@ -124,6 +124,7 @@
 		AC9BBCFE19D268AB00E58BA7 /* UpgradeUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = AC9BBCFD19D268AB00E58BA7 /* UpgradeUtil.m */; };
 		AC9BC61019D18102003B88B5 /* SystemUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = AC9BC60F19D18102003B88B5 /* SystemUtil.m */; };
 		ACA11DCA19F64D560087D39C /* RCheckViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ACA11DC919F64D560087D39C /* RCheckViewController.m */; };
+		ACA11DCD19F74FA10087D39C /* RCheckCell.m in Sources */ = {isa = PBXBuildFile; fileRef = ACA11DCC19F74FA10087D39C /* RCheckCell.m */; };
 		ACA9D70319540E0F002D1E3A /* PlaySoundUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = ACA9D70219540E0F002D1E3A /* PlaySoundUtil.m */; };
 		ACA9D70A195410FF002D1E3A /* qr_code_scanned.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = ACA9D709195410FF002D1E3A /* qr_code_scanned.mp3 */; };
 		ACA9D70C195415B0002D1E3A /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ACA9D70B195415B0002D1E3A /* AudioToolbox.framework */; };
@@ -422,6 +423,8 @@
 		AC9BC60F19D18102003B88B5 /* SystemUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SystemUtil.m; sourceTree = "<group>"; };
 		ACA11DC819F64D560087D39C /* RCheckViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RCheckViewController.h; sourceTree = "<group>"; };
 		ACA11DC919F64D560087D39C /* RCheckViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RCheckViewController.m; sourceTree = "<group>"; };
+		ACA11DCB19F74FA10087D39C /* RCheckCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RCheckCell.h; path = Cells/RCheckCell.h; sourceTree = "<group>"; };
+		ACA11DCC19F74FA10087D39C /* RCheckCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RCheckCell.m; path = Cells/RCheckCell.m; sourceTree = "<group>"; };
 		ACA9D70119540E0F002D1E3A /* PlaySoundUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlaySoundUtil.h; sourceTree = "<group>"; };
 		ACA9D70219540E0F002D1E3A /* PlaySoundUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlaySoundUtil.m; sourceTree = "<group>"; };
 		ACA9D709195410FF002D1E3A /* qr_code_scanned.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = qr_code_scanned.mp3; sourceTree = "<group>"; };
@@ -908,6 +911,8 @@
 				AC8F0DCC196D054A00CCD0F9 /* SelectListCell.m */,
 				ACBEC01C196E87B9004301E0 /* CheckPrivateKeyCell.h */,
 				ACBEC01D196E87B9004301E0 /* CheckPrivateKeyCell.m */,
+				ACA11DCB19F74FA10087D39C /* RCheckCell.h */,
+				ACA11DCC19F74FA10087D39C /* RCheckCell.m */,
 			);
 			name = Cells;
 			sourceTree = "<group>";
@@ -1348,6 +1353,7 @@
 				AC45D84119878BAB00AF5C2C /* DialogAddressLongPressOptions.m in Sources */,
 				4269FF75195A8872001213B9 /* Market.m in Sources */,
 				DA641E8B196E7BC20095DF42 /* GCCrashInstallation.m in Sources */,
+				ACA11DCD19F74FA10087D39C /* RCheckCell.m in Sources */,
 				ACE7E71819EB8DE100F7AA3A /* ImagePickerFromCameraViewController.m in Sources */,
 				AC808B8C19D56757004E78A3 /* XRandom.m in Sources */,
 				AC3CDB5B1962A3C800C74B4C /* TransactionConfidenceView.m in Sources */,
