@@ -223,3 +223,6 @@
 
 /* Class = "IBUILabel"; text = "Label"; ObjectID = "zLo-PY-kep"; */
 "zLo-PY-kep.text" = "Label";
+
+/* Class = "IBUIButton"; normalTitle = "Check R Values"; ObjectID = "f9N-3Q-IJD"; */
+"f9N-3Q-IJD.normalTitle" = "檢查 R 值";
