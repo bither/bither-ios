@@ -20,6 +20,7 @@
 #import "DialogPassword.h"
 #import "UIViewController+PiShowBanner.h"
 #import "RCheckCell.h"
+#import "UIColor+Util.h"
 #import "TransactionsUtil.h"
 #import <Bitheri/BTPasswordSeed.h>
 #import <Bitheri/BTAddressManager.h>
@@ -61,6 +62,7 @@
     self.lblCheckStatus.text = NSLocalizedString(@"rcheck_safe", nil);
     addresses = [[NSMutableArray alloc]init];
     dangerAddresses = [[NSMutableArray alloc]init];
+    [self.vHeader setEndColor:[UIColor parseColor:0x25bebc]];
     self.vHeader.delegate = self;
     self.vHeader.score = 100;
     self.tableView.dataSource = self;

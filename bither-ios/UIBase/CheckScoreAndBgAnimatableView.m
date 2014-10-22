@@ -30,11 +30,6 @@
 @property CADisplayLink *displayLink;
 @end
 
-@interface CheckScoreAndBgAnimatableView(BG)
--(void)firstConfigureBgColors;
--(void)configureBg;
-@end
-
 @implementation CheckScoreAndBgAnimatableView
 
 - (instancetype)initWithFrame:(CGRect)frame
@@ -131,18 +126,23 @@
         [self.displayLink invalidate];
     }
 }
-@end
 
+-(void)setBeginColor:(UIColor*)color{
+    [color getRed:&beginR green:&beginG blue:&beginB alpha:nil];
+}
 
-@implementation CheckScoreAndBgAnimatableView(BG)
+-(void)setMiddleColor:(UIColor*)color{
+    [color getRed:&middleR green:&middleG blue:&middleB alpha:nil];
+}
+
+-(void)setEndColor:(UIColor*)color{
+    [color getRed:&endR green:&endG blue:&endB alpha:nil];
+}
 
 -(void)firstConfigureBgColors{
-    UIColor *begin = [UIColor parseColor:0xea1010];
-    [begin getRed:&beginR green:&beginG blue:&beginB alpha:nil];
-    UIColor *middle = [UIColor parseColor:0xfdd201];
-    [middle getRed:&middleR green:&middleG blue:&middleB alpha:nil];
-    UIColor *end = [UIColor parseColor:0x3bbf59];
-    [end getRed:&endR green:&endG blue:&endB alpha:nil];
+    [self setBeginColor:[UIColor parseColor:0xea1010]];
+    [self setMiddleColor:[UIColor parseColor:0xfdd201]];
+    [self setEndColor:[UIColor parseColor:0x3bbf59]];
 }
 
 -(void)configureBg{
