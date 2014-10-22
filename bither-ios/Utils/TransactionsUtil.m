@@ -264,4 +264,38 @@
     return  msg;
 
 }
+-(void)completeInSignature:(NSString *) result{
+    NSMutableArray * array=[NSMutableArray new];
+    if([StringUtil isEmpty:result]){
+        NSArray * txs=[result componentsSeparatedByString:result];
+        for ( NSString * tx in txs){
+            NSArray * ins=[tx componentsSeparatedByString:tx];
+            NSString * inStr=ins[0];
+            NSData * txHash=bASE6;
+        }
+    }
+    
+}
 @end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

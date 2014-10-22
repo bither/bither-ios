@@ -53,6 +53,20 @@ static BitherApi *piApi;
     }];
 
 }
+-(void)getInSignaturesApi:(NSString *)address fromBlock:(int) blockNo callback:(DictResponseBlock) callback andErrorCallBack:(ErrorHandler)errorCallback{
+    NSString * url=[NSString stringWithFormat:BITHER_IN_SIGNATURES_API,address,blockNo];
+    [self get:url withParams:nil networkType:BitherBitcoin completed:^(MKNetworkOperation *completedOperation) {
+        if (callback) {
+            callback(completedOperation.responseJSON);
+        }
+        
+    } andErrorCallback:^(MKNetworkOperation *errorOp, NSError *error) {
+        if (errorCallback) {
+            errorCallback(errorOp,error);
+        }
+    }];
+    
+}
 -(void)getExchangeTrend:(MarketType) marketType callback:(ArrayResponseBlock) callback andErrorCallBack:(ErrorHandler)errorCallback{
     NSString  *url=[NSString stringWithFormat:BITHER_TREND_URL ,marketType];
     [self get:url withParams:nil networkType:BitherStats completed:^(MKNetworkOperation *completedOperation) {
