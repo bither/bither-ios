@@ -49,4 +49,6 @@
 +(NSString *)longToHex:(long long) value;
 +(long long)hexToLong:(NSString *)hex;
 
++(NSData *)getUrlSaleBase64:(NSString *)str;
+
 @end

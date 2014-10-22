@@ -19,6 +19,7 @@
 #import "BitherSetting.h"
 #import "UserDefaultsUtil.h"
 #import "UIImage+ImageRenderToColor.h"
+#import "NSData+MKBase64.h"
 
 
 
@@ -250,6 +251,11 @@
     unsigned long long iValue;
     [pScanner scanHexLongLong: &iValue];
     return iValue;
+}
++(NSData *)getUrlSaleBase64:(NSString *)str{
+    str=[str stringByReplacingOccurrencesOfString:@"-" withString:@"+"];
+    str=[str stringByReplacingOccurrencesOfString:@"_" withString:@"/"];
+    return [NSData dataFromBase64String:str];
 }
 
 @end

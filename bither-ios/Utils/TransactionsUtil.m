@@ -30,6 +30,7 @@
 #import "BTBlockChain.h"
 #import "NSDictionary+Fromat.h"
 #import "BTIn.h"
+#import "StringUtil.h"
 
 
 #define BLOCK_COUNT  @"block_count"
@@ -314,19 +315,18 @@
 }
 +(NSArray *)getInSignature:(NSString *) result{
     NSMutableArray * resultList=[NSMutableArray new];
-    if([StringUtil isEmpty:result]){
+    if(![StringUtil isEmpty:result]){
         NSArray * txs=[result componentsSeparatedByString:@";"];
         for ( NSString * tx in txs){
             NSArray * ins=[tx componentsSeparatedByString:@":"];
             NSString * inStr=ins[0];
-            NSData * txHash=[inStr dataWithBase64EncodedString].reverse;
+            NSData * txHash=[[StringUtil getUrlSaleBase64:inStr] reverse];
             for (int i=1; i<ins.count; i++) {
                 NSArray *array=[ins[i] componentsSeparatedByString:@","];
                 int inSn=[array[0] intValue];
-                NSData * inSignature=[array[1] dataWithBase64EncodedString];
-                BTIn * btIn=[[BTIn alloc] init];
+                NSData * inSignature=[StringUtil getUrlSaleBase64:array[1]];                BTIn * btIn=[[BTIn alloc] init];
                 [btIn setTxHash:txHash];
-                [btIn setInSequence:inSn];
+                btIn.inSn=inSn;
                 [btIn setInSignature:inSignature];
                 [resultList addObject:btIn];
                 
