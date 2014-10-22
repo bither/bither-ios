@@ -266,8 +266,7 @@
 
 }
 
-+(void)completeInputsForAddress:(BTAddress *)address{
-      dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0),^{
++(void)completeInputsForAddress:(BTAddress *)address callback:(VoidBlock) callback andErrorCallBack:(ErrorHandler)errorCallback{
           int fromBlock=0;
           while (fromBlock>0) {
               [[BitherApi instance] getInSignaturesApi:address.address fromBlock:fromBlock callback:^(id response) {
@@ -277,8 +276,21 @@
                   
               }];
           }
-          
-      });
+}
+
++(void)completeInputsForAddressInBackground:(BTAddress *)address{
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0),^{
+        int fromBlock=0;
+        while (fromBlock>0) {
+            [[BitherApi instance] getInSignaturesApi:address.address fromBlock:fromBlock callback:^(id response) {
+                NSArray * ins=[TransactionsUtil getInSignature:response];
+                //[address com]
+            } andErrorCallBack:^(MKNetworkOperation *errorOp, NSError *error) {
+                
+            }];
+        }
+        
+    });
 }
 +(NSArray *)getInSignature:(NSString *) result{
     NSMutableArray * resultList=[NSMutableArray new];
