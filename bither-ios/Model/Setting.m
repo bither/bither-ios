@@ -57,6 +57,7 @@ static Setting* EditPasswordSetting;
 static Setting* ColdMonitorSetting;
 static Setting* AdvanceSetting;
 static Setting* reloadTxsSetting;
+static Setting* RCheckSetting;
 
 -(instancetype)initWithName:(NSString *)name  icon:(UIImage *)icon {
     self=[super init];
@@ -344,12 +345,31 @@ static Setting* reloadTxsSetting;
     return ColdMonitorSetting;
 }
 
++(Setting*)getRCheckSetting{
+    if(!RCheckSetting){
+        RCheckSetting = [[Setting alloc]initWithName:NSLocalizedString(@"setting_name_rcheck", nil) icon:[UIImage imageNamed:@"check_button_icon"]];
+        [RCheckSetting setSelectBlock:^(UIViewController * controller){
+            if([BTAddressManager instance].allAddresses.count > 0){
+                [controller.navigationController pushViewController:[controller.storyboard instantiateViewControllerWithIdentifier:@"rcheck"] animated:YES];
+            }else{
+                if([controller respondsToSelector:@selector(showMsg:)]){
+                    [controller performSelector:@selector(showMsg:) withObject:NSLocalizedString(@"rcheck_no_address", nil) afterDelay:0];
+                }
+            }
+        }];
+    }
+    return RCheckSetting;
+}
+
 +(NSArray*)advanceSettings{
     NSMutableArray *array = [NSMutableArray new];
     if ([[BTSettings instance] getAppMode]==HOT) {
         [array addObject:[Setting getNetworkSetting]];
     }
     [array addObject:[Setting getEditPasswordSetting]];
+    if ([[BTSettings instance] getAppMode]==HOT) {
+        [array addObject:[Setting getRCheckSetting]];
+    }
     [array addObject:[ImportPrivateKeySetting getImportPrivateKeySetting]];
     [array addObject:[ImportBip38PrivateKeySetting getImportBip38PrivateKeySetting]];
     if ([[BTSettings instance] getAppMode]==HOT) {

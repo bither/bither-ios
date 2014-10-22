@@ -39,6 +39,7 @@
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UIView *vContainer;
 @property (weak, nonatomic) IBOutlet UIImageView *ivCheckProgress;
+@property (weak, nonatomic) IBOutlet UIView *topBar;
 
 @property (atomic) BOOL checking;
 
@@ -75,7 +76,7 @@
             [UIView animateWithDuration:kCheckScoreAndBgAnimatableViewDefaultAnimationDuration animations:^{
                 self.vPointsContainer.transform = CGAffineTransformTranslate(CGAffineTransformMakeScale(1.2, 1.2), 0, 10);
                 self.btnCheck.alpha = 0;
-                self.vContainer.frame = CGRectMake(self.vContainer.frame.origin.x, self.vContainer.frame.origin.y, self.vContainer.frame.size.width, self.view.frame.size.height - self.vContainer.frame.origin.y * 2);
+                self.vContainer.frame = CGRectMake(self.vContainer.frame.origin.x, self.vContainer.frame.origin.y, self.vContainer.frame.size.width, self.view.frame.size.height - self.vContainer.frame.origin.y - 20);
             } completion:^(BOOL finished) {
                 self.btnCheck.hidden = YES;
                 self.lblCheckStatus.text = NSLocalizedString(@"rchecking", nil);
@@ -84,7 +85,7 @@
             }];
         }
     }else{
-        [self showBannerWithMessage:NSLocalizedString(@"rcheck_no_address", nil) belowView:nil belowTop:0 autoHideIn:1 withCompletion:nil];
+        [self showBannerWithMessage:NSLocalizedString(@"rcheck_no_address", nil) belowView:self.topBar];
     }
 }
 
@@ -166,10 +167,15 @@
     }];
 }
 -(void)refreshAddresses{
+    checkingIndex = 0;
     [addresses removeAllObjects];
     [addresses addObjectsFromArray:[BTAddressManager instance].allAddresses];
     [dangerAddresses removeAllObjects];
     [self.tableView reloadData];
+}
+
+- (IBAction)backPressed:(id)sender {
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 @end
