@@ -20,6 +20,7 @@
 #import "DialogPassword.h"
 #import "UIViewController+PiShowBanner.h"
 #import "RCheckCell.h"
+#import "TransactionsUtil.h"
 #import <Bitheri/BTPasswordSeed.h>
 #import <Bitheri/BTAddressManager.h>
 
@@ -101,25 +102,37 @@
     checkingIndex = 0;
     [self.tableView reloadData];
     [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:YES];
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        NSUInteger totalCount = addresses.count;
-        NSUInteger safeCount = 0;
-        for (BTAddress *a in addresses){
-            BOOL result = rand() % 2 == 0; // TODO check r value for address
-            if(result){
-                safeCount++;
-            }else{
-                [dangerAddresses addObject:a];
-            }
-            NSUInteger score = floorf((float)safeCount / (float)totalCount * 100.0f);
-            checkingIndex++;
-            dispatch_sync(dispatch_get_main_queue(), ^{
-                [self.vHeader animateToScore:score withAnimationId:kAddScoreAnimPrefix + checkingIndex - 1];
-                [self.tableView reloadData];
-                [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:checkingIndex - 1 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:YES];
-            });
+    __block NSUInteger totalCount = addresses.count;
+    __block NSUInteger safeCount = 0;
+    void(^checkNext)() = ^{
+        if(checkingIndex >= addresses.count){
+            return;
         }
-    });
+        BTAddress* a = addresses[checkingIndex];
+        void(^check)() = ^{
+            dispatch_sync(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+                if([a checkRValues]){
+                    safeCount++;
+                }else{
+                    [dangerAddresses addObject:a];
+                }
+                NSUInteger score = floorf((float)safeCount / (float)totalCount * 100.0f);
+                checkingIndex++;
+                dispatch_sync(dispatch_get_main_queue(), ^{
+                    [self.vHeader animateToScore:score withAnimationId:kAddScoreAnimPrefix + checkingIndex - 1];
+                    [self.tableView reloadData];
+                    [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:checkingIndex - 1 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:YES];
+                    checkNext();
+                });
+            });
+        };
+        [TransactionsUtil completeInputsForAddress:a callback:^{
+            check();
+        } andErrorCallBack:^(MKNetworkOperation *errorOp, NSError *error) {
+            check();
+        }];
+    };
+   
 }
 
 -(void)checkFinished{

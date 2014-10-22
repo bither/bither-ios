@@ -84,6 +84,7 @@
     if (![[BTPeerManager instance] connected]) {
         [[PeerUtil instance] startPeer];
     }
+    [TransactionsUtil completeInputsForAddressInBackground:self.address];
 }
 
 -(void)viewDidAppear:(BOOL)animated{
@@ -119,10 +120,7 @@
                     if([self.address signTransaction:tx withPassphrase:self.tfPassword.text]){
                         [dp changeToMessage:NSLocalizedString(@"rchecking", nil) completion:^{
                             dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
-                                sleep(1);
-                                BOOL result = rand() % 2 == 0;// TODO check r for tx
-                                
-                                if(result){
+                                if([self.address checkRValuesForTx:tx]){
                                     __block NSString * addressBlock = toAddress;
                                     dispatch_async(dispatch_get_main_queue(), ^{
                                         [dp changeToMessage:NSLocalizedString(@"rcheck_safe", nil) icon:[UIImage imageNamed:@"checkmark"] completion:^{
