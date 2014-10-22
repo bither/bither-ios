@@ -18,6 +18,7 @@
 
 #import <Foundation/Foundation.h>
 #import "BitherSetting.h"
+#import "BTAddress.h"
 
 @interface TransactionsUtil : NSObject
 
