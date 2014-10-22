@@ -137,6 +137,9 @@
 /* Class = "IBUILabel"; text = "Label"; ObjectID = "bKW-aE-gcw"; */
 "bKW-aE-gcw.text" = "Label";
 
+/* Class = "IBUILabel"; text = "R Value Check"; ObjectID = "bNn-8g-rmY"; */
+"bNn-8g-rmY.text" = "R Value Check";
+
 /* Class = "IBUILabel"; text = "marketName"; ObjectID = "bOH-Sj-yMG"; */
 "bOH-Sj-yMG.text" = "marketName";
 

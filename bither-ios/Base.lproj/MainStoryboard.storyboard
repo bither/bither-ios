@@ -2758,7 +2758,7 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" id="i7z-A4-Xxh">
-                                <rect key="frame" x="10" y="10" width="300" height="450"/>
+                                <rect key="frame" x="10" y="54" width="300" height="406"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" id="PPb-QC-n4U" customClass="CheckScoreAndBgAnimatableView">
@@ -2817,11 +2817,11 @@
                                         <color key="backgroundColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
                                     </view>
                                     <view clipsSubviews="YES" contentMode="scaleToFill" id="KcI-qi-DH6">
-                                        <rect key="frame" x="0.0" y="187" width="300" height="258"/>
+                                        <rect key="frame" x="0.0" y="187" width="300" height="214"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                         <subviews>
                                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="50" sectionHeaderHeight="22" sectionFooterHeight="22" id="NjC-iU-aXl">
-                                                <rect key="frame" x="0.0" y="0.0" width="300" height="258"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="300" height="214"/>
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <prototypes>
@@ -2881,15 +2881,15 @@
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                     </view>
                                     <view userInteractionEnabled="NO" contentMode="scaleToFill" id="4Vd-Kk-DoG">
-                                        <rect key="frame" x="0.0" y="0.0" width="300" height="450"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="300" height="406"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                         <subviews>
                                             <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" image="list_item_card_corner_bottom_left" id="fxn-hf-dgK">
-                                                <rect key="frame" x="0.0" y="437" width="8" height="8"/>
+                                                <rect key="frame" x="0.0" y="393" width="8" height="8"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                             </imageView>
                                             <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" image="list_item_card_corner_bottom_right" id="Ghn-CC-tGr">
-                                                <rect key="frame" x="292" y="437" width="8" height="8"/>
+                                                <rect key="frame" x="292" y="393" width="8" height="8"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
                                             </imageView>
                                             <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" image="list_item_card_corner_top_left" id="ND0-pt-5PP">
@@ -2901,7 +2901,7 @@
                                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
                                             </imageView>
                                             <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" image="list_item_card_shadow_bottom" id="EZo-J9-QY4">
-                                                <rect key="frame" x="0.0" y="445" width="300" height="5"/>
+                                                <rect key="frame" x="0.0" y="401" width="300" height="5"/>
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                             </imageView>
                                             <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" image="list_item_card_shadow_top" id="6zc-Vm-zTp">
@@ -2914,8 +2914,43 @@
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                             </view>
+                            <view contentMode="scaleToFill" id="cpj-6T-AP7" userLabel="TopBar">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="ui_topnav_titlebar_background.png" id="zp5-tN-pYi">
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="47"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    </imageView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="3UE-w7-Sc9">
+                                        <rect key="frame" x="0.0" y="0.0" width="44" height="44"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" heightSizable="YES"/>
+                                        <state key="normal" image="title_bar_back">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <state key="highlighted" backgroundImage="card_foreground_pressed"/>
+                                        <connections>
+                                            <action selector="backPressed:" destination="1Za-zC-y7r" eventType="touchUpInside" id="rOM-RO-OBL"/>
+                                        </connections>
+                                    </button>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="title_bar_seperator" id="ZIK-cj-UDM">
+                                        <rect key="frame" x="44" y="0.0" width="3" height="44"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" heightSizable="YES"/>
+                                    </imageView>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="R Value Check" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="bNn-8g-rmY">
+                                        <rect key="frame" x="55" y="0.0" width="265" height="47"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
+                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                        <color key="shadowColor" red="0.0" green="0.0" blue="0.0" alpha="0.40000000000000002" colorSpace="calibratedRGB"/>
+                                        <size key="shadowOffset" width="1" height="1"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            </view>
                         </subviews>
-                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="0.25882352939999997" green="0.36862745099999999" blue="0.47843137250000001" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
                     <connections>
                         <outlet property="btnCheck" destination="f9N-3Q-IJD" id="puA-TS-Zyf"/>
@@ -2923,6 +2958,7 @@
                         <outlet property="lblCheckStatus" destination="Fuw-oe-UVC" id="3EY-Ec-Gcb"/>
                         <outlet property="lblPoints" destination="PJH-te-Brg" id="Gco-4e-HbW"/>
                         <outlet property="tableView" destination="NjC-iU-aXl" id="1Sy-Ks-iRI"/>
+                        <outlet property="topBar" destination="cpj-6T-AP7" id="cTd-rr-uhZ"/>
                         <outlet property="vContainer" destination="i7z-A4-Xxh" id="1co-z4-Dhi"/>
                         <outlet property="vHeader" destination="PPb-QC-n4U" id="Yv3-5m-heX"/>
                         <outlet property="vPointsContainer" destination="1IX-wu-nD3" id="Otw-FF-dof"/>
