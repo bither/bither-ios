@@ -430,12 +430,12 @@
 "Move And Scale" = "移动和缩放";
 
 /* RCheck */
-"rcheck_address_danger_title" = "%@ 有重复的 R 值";
+"rcheck_address_danger_title" = "%@ 的 R 值异常";
 "rcheck_address_title" = "%@ 的 R 值";
-"rcheck_button" = "检查 R 值";
-"rcheck_danger" = "发现重复的 R 值.";
+"rcheck_button" = "RCheck";
+"rcheck_danger" = "R 值异常.";
 "rcheck_no_address" = "未添加地址, 无需检查 R 值.";
-"rcheck_recalculate" = "正在重算 R 值";
-"rcheck_safe" = "未发现重复的 R 值.";
+"rcheck_recalculate" = "R 值检查失败, 重新签名交易";
+"rcheck_safe" = "R 值正常.";
 "rchecking" = "正在检查 R 值";
 "setting_name_rcheck" = "R 值检查";

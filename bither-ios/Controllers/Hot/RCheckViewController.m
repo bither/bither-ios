@@ -106,35 +106,43 @@
     [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:YES];
     __block NSUInteger totalCount = addresses.count;
     __block NSUInteger safeCount = 0;
-    void(^checkNext)() = ^{
-        if(checkingIndex >= addresses.count){
-            return;
+    [self checkNextAddressWithcompletion:^(BOOL result) {
+        if(result){
+            safeCount++;
+        }else{
+            [dangerAddresses addObject:addresses[checkingIndex]];
         }
-        BTAddress* a = addresses[checkingIndex];
-        void(^check)() = ^{
-            dispatch_sync(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-                if([a checkRValues]){
-                    safeCount++;
-                }else{
-                    [dangerAddresses addObject:a];
+        NSUInteger score = floorf((float)safeCount / (float)totalCount * 100.0f);
+        checkingIndex++;
+        [self.vHeader animateToScore:score withAnimationId:kAddScoreAnimPrefix + checkingIndex - 1];
+        [self.tableView reloadData];
+        [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:checkingIndex - 1 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:YES];
+    }];
+}
+
+-(void)checkNextAddressWithcompletion:(void (^)(BOOL result))completion{
+    if(checkingIndex >= addresses.count){
+        return;
+    }
+    BTAddress* address = addresses[checkingIndex];
+    NSLog(@"Checking %lu", (unsigned long)checkingIndex);
+    void(^check)() = ^{
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+            BOOL result = [address checkRValues];
+            dispatch_sync(dispatch_get_main_queue(), ^{
+                if(completion){
+                    NSLog(@"Checked %lu result %d", (unsigned long)checkingIndex, result);
+                    completion(result);
+                    [self checkNextAddressWithcompletion:completion];
                 }
-                NSUInteger score = floorf((float)safeCount / (float)totalCount * 100.0f);
-                checkingIndex++;
-                dispatch_sync(dispatch_get_main_queue(), ^{
-                    [self.vHeader animateToScore:score withAnimationId:kAddScoreAnimPrefix + checkingIndex - 1];
-                    [self.tableView reloadData];
-                    [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:checkingIndex - 1 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:YES];
-                    checkNext();
-                });
             });
-        };
-        [TransactionsUtil completeInputsForAddress:a callback:^{
-            check();
-        } andErrorCallBack:^(MKNetworkOperation *errorOp, NSError *error) {
-            check();
-        }];
+        });
     };
-   
+    [TransactionsUtil completeInputsForAddress:address callback:^{
+        check();
+    } andErrorCallBack:^(MKNetworkOperation *errorOp, NSError *error) {
+        check();
+    }];
 }
 
 -(void)checkFinished{
