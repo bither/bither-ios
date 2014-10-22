@@ -265,29 +265,49 @@
     return  msg;
 
 }
-
++(void)completeInputsForAddressForApi:(BTAddress *)address fromBlock:(uint32_t)fromBlock callback:(VoidBlock) callback andErrorCallBack:(ErrorHandler)errorCallback{
+    if (fromBlock<=0) {
+        if (callback) {
+            callback();
+        }
+        return;
+    }
+    [[BitherApi instance] getInSignaturesApi:address.address fromBlock:fromBlock callback:^(id response) {
+        NSArray * ins=[TransactionsUtil getInSignature:response];
+        [address completeInSignature:ins];
+        uint32_t  newFromBlock=[address needCompleteInSignature];
+        if (newFromBlock<=0) {
+            if (callback) {
+                callback();
+            }
+        }else{
+            [TransactionsUtil completeInputsForAddressForApi:address fromBlock:newFromBlock callback:callback andErrorCallBack:errorCallback];
+        }
+        
+    } andErrorCallBack:^(MKNetworkOperation *errorOp, NSError *error) {
+        if (errorCallback) {
+            errorCallback(errorOp,error);
+        }
+        
+    }];
+    
+}
 +(void)completeInputsForAddress:(BTAddress *)address callback:(VoidBlock) callback andErrorCallBack:(ErrorHandler)errorCallback{
-          int fromBlock=0;
-          while (fromBlock>0) {
-              [[BitherApi instance] getInSignaturesApi:address.address fromBlock:fromBlock callback:^(id response) {
-                  NSArray * ins=[TransactionsUtil getInSignature:response];
-                  //[address com]
-              } andErrorCallBack:^(MKNetworkOperation *errorOp, NSError *error) {
-                  
-              }];
-          }
+        uint32_t fromBlock=[address needCompleteInSignature];
+        if(fromBlock>0) {
+            [TransactionsUtil completeInputsForAddressForApi:address fromBlock:fromBlock callback:callback andErrorCallBack:errorCallback];
+        }else{
+            if (callback) {
+                callback();
+            }
+        }
 }
 
 +(void)completeInputsForAddressInBackground:(BTAddress *)address{
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0),^{
-        int fromBlock=0;
-        while (fromBlock>0) {
-            [[BitherApi instance] getInSignaturesApi:address.address fromBlock:fromBlock callback:^(id response) {
-                NSArray * ins=[TransactionsUtil getInSignature:response];
-                //[address com]
-            } andErrorCallBack:^(MKNetworkOperation *errorOp, NSError *error) {
-                
-            }];
+        uint32_t fromBlock=[address needCompleteInSignature];
+        if(fromBlock>0) {
+            [TransactionsUtil completeInputsForAddressForApi:address fromBlock:fromBlock callback:nil andErrorCallBack:nil];
         }
         
     });
