@@ -101,7 +101,9 @@
                         self.frame = CGRectMake(0, 0, self.riv.frame.size.width + kDialogProgressMargin + lableSize.width + kDialogProgressHorizotalPadding * 2, fmaxf(lableSize.height + kDialogProgressVerticalPadding * 2, kDialogProgressMinHeight));
                         [self resize];
                     } completion:^(BOOL finished) {
-                        completion();
+                        if(completion){
+                            completion();
+                        }
                     }];
                 }
             }else{
