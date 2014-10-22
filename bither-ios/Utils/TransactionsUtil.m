@@ -271,7 +271,7 @@
         for ( NSString * tx in txs){
             NSArray * ins=[tx componentsSeparatedByString:tx];
             NSString * inStr=ins[0];
-            NSData * txHash=bASE6;
+           // NSData * txHash=[];
         }
     }
     
