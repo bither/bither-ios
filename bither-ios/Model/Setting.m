@@ -347,7 +347,7 @@ static Setting* RCheckSetting;
 
 +(Setting*)getRCheckSetting{
     if(!RCheckSetting){
-        RCheckSetting = [[Setting alloc]initWithName:NSLocalizedString(@"setting_name_rcheck", nil) icon:[UIImage imageNamed:@"check_button_icon"]];
+        RCheckSetting = [[Setting alloc]initWithName:NSLocalizedString(@"setting_name_rcheck", nil) icon:[UIImage imageNamed:@"rcheck_button_icon"]];
         [RCheckSetting setSelectBlock:^(UIViewController * controller){
             if([BTAddressManager instance].allAddresses.count > 0){
                 [controller.navigationController pushViewController:[controller.storyboard instantiateViewControllerWithIdentifier:@"rcheck"] animated:YES];
