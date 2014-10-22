@@ -166,6 +166,7 @@
 		ACE7E71219EB78AE00F7AA3A /* ImageScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = ACE7E70E19EB78AE00F7AA3A /* ImageScrollView.m */; };
 		ACE7E71519EB7A5A00F7AA3A /* UIImage_Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = ACE7E71419EB7A5A00F7AA3A /* UIImage_Extensions.m */; };
 		ACE7E71819EB8DE100F7AA3A /* ImagePickerFromCameraViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ACE7E71719EB8DE100F7AA3A /* ImagePickerFromCameraViewController.m */; };
+		ACEDEE3319F76BAD000507E2 /* DialogProgressChangable.m in Sources */ = {isa = PBXBuildFile; fileRef = ACEDEE3219F76BAD000507E2 /* DialogProgressChangable.m */; };
 		ACEE7D2719D3F9F500932B39 /* QRCodeThemeUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = ACEE7D1C19D3F9F500932B39 /* QRCodeThemeUtil.m */; };
 		ACEE7D2819D3F9F500932B39 /* QRCodeTransportPage.m in Sources */ = {isa = PBXBuildFile; fileRef = ACEE7D1E19D3F9F500932B39 /* QRCodeTransportPage.m */; };
 		ACEE7D2919D3F9F500932B39 /* QRCodeTxTransport.m in Sources */ = {isa = PBXBuildFile; fileRef = ACEE7D2019D3F9F500932B39 /* QRCodeTxTransport.m */; };
@@ -505,6 +506,8 @@
 		ACE7E71619EB8DE100F7AA3A /* ImagePickerFromCameraViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImagePickerFromCameraViewController.h; sourceTree = "<group>"; };
 		ACE7E71719EB8DE100F7AA3A /* ImagePickerFromCameraViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImagePickerFromCameraViewController.m; sourceTree = "<group>"; };
 		ACEDEE3019F76201000507E2 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/MainStoryboard.strings; sourceTree = "<group>"; };
+		ACEDEE3119F76BAD000507E2 /* DialogProgressChangable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DialogProgressChangable.h; sourceTree = "<group>"; };
+		ACEDEE3219F76BAD000507E2 /* DialogProgressChangable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DialogProgressChangable.m; sourceTree = "<group>"; };
 		ACEE7D1B19D3F9F500932B39 /* QRCodeThemeUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QRCodeThemeUtil.h; sourceTree = "<group>"; };
 		ACEE7D1C19D3F9F500932B39 /* QRCodeThemeUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QRCodeThemeUtil.m; sourceTree = "<group>"; };
 		ACEE7D1D19D3F9F500932B39 /* QRCodeTransportPage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QRCodeTransportPage.h; sourceTree = "<group>"; };
@@ -1058,6 +1061,8 @@
 				AC6163931964ED2F0055C9D0 /* DialogWithArrow.m */,
 				AC53ABE519D911AA007C095C /* DialogXrandomInfo.h */,
 				AC53ABE619D911AA007C095C /* DialogXrandomInfo.m */,
+				ACEDEE3119F76BAD000507E2 /* DialogProgressChangable.h */,
+				ACEDEE3219F76BAD000507E2 /* DialogProgressChangable.m */,
 			);
 			path = Dialog;
 			sourceTree = "<group>";
@@ -1444,6 +1449,7 @@
 				4254085E1946A219007AF99C /* UIImageExt.m in Sources */,
 				AC275EE719B5B9D800F1C02F /* PeerCell.m in Sources */,
 				421B03C319495DBB003A45F1 /* ChooseModeViewController.m in Sources */,
+				ACEDEE3319F76BAD000507E2 /* DialogProgressChangable.m in Sources */,
 				AC53ABCF19D52387007C095C /* UEntropySensor.m in Sources */,
 				ACDDDC2019480DE00008A79D /* PiPageViewController.m in Sources */,
 				AC0135D9194FDCDF00E3BB95 /* HotAddressAddPrivateKeyViewController.m in Sources */,
