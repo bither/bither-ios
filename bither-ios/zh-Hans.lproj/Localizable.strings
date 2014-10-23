@@ -95,7 +95,7 @@
 "Invalid password" = "密码错误";
 
 /* No comment provided by engineer. */
-"Length: 6 - 30" = "长度: 6 - 30";
+"Length: 6 - 43" = "长度: 6 - 43";
 
 /* No comment provided by engineer. */
 "Me" = "我的地址";
@@ -435,7 +435,10 @@
 "rcheck_button" = "RCheck";
 "rcheck_danger" = "R 值异常.";
 "rcheck_no_address" = "未添加地址, 无需检查 R 值.";
-"rcheck_recalculate" = "R 值检查失败, 重新签名交易";
+"rcheck_recalculate" = "R 值检查失败, 重新签名交易.";
 "rcheck_safe" = "R 值正常.";
 "rchecking" = "正在检查 R 值";
 "setting_name_rcheck" = "R 值检查";
+"rchecking_new_tx" = "R 值检查";
+"rcheck_new_tx_success" = "R 值检查";
+"rcheck_fail_recalculate_confirm" = "R 值检查失败, 重新签名交易?";

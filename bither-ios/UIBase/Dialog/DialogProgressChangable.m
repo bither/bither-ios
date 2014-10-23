@@ -41,6 +41,7 @@
         self.lbl.font = [UIFont systemFontOfSize:kDialogProgressLabelFontSize];
         self.lbl.textColor = [UIColor whiteColor];
         self.lbl.text = message;
+        self.lbl.clipsToBounds = YES;
         [self addSubview:self.lbl];
         [self.riv startAnimating];
     }
@@ -97,9 +98,9 @@
                     }
                 }else{
                     [UIView animateWithDuration:0.2 animations:^{
-                        self.lbl.frame = CGRectMake(self.riv.frame.origin.x + self.riv.frame.size.width + kDialogProgressMargin, (self.frame.size.height - lableSize.height)/2, lableSize.width, lableSize.height);
-                        self.frame = CGRectMake(0, 0, self.riv.frame.size.width + kDialogProgressMargin + lableSize.width + kDialogProgressHorizotalPadding * 2, fmaxf(lableSize.height + kDialogProgressVerticalPadding * 2, kDialogProgressMinHeight));
+                        self.frame = CGRectMake(self.frame.origin.x, self.frame.origin.y, self.riv.frame.size.width + kDialogProgressMargin + lableSize.width + kDialogProgressHorizotalPadding * 2, fmaxf(lableSize.height + kDialogProgressVerticalPadding * 2, kDialogProgressMinHeight));
                         [self resize];
+                        self.lbl.frame = CGRectMake(self.riv.frame.origin.x + self.riv.frame.size.width + kDialogProgressMargin, (self.frame.size.height - lableSize.height)/2, lableSize.width, lableSize.height);
                     } completion:^(BOOL finished) {
                         if(completion){
                             completion();
@@ -108,9 +109,9 @@
                 }
             }else{
                 if(!CGSizeEqualToSize(lableSize, self.lbl.frame.size)){
-                    self.lbl.frame = CGRectMake(self.riv.frame.origin.x + self.riv.frame.size.width + kDialogProgressMargin, (self.frame.size.height - lableSize.height)/2, lableSize.width, lableSize.height);
-                    self.frame = CGRectMake(0, 0, self.riv.frame.size.width + kDialogProgressMargin + lableSize.width + kDialogProgressHorizotalPadding * 2, fmaxf(lableSize.height + kDialogProgressVerticalPadding * 2, kDialogProgressMinHeight));
+                    self.frame = CGRectMake(self.frame.origin.x, self.frame.origin.y, self.riv.frame.size.width + kDialogProgressMargin + lableSize.width + kDialogProgressHorizotalPadding * 2, fmaxf(lableSize.height + kDialogProgressVerticalPadding * 2, kDialogProgressMinHeight));
                     [self resize];
+                    self.lbl.frame = CGRectMake(self.riv.frame.origin.x + self.riv.frame.size.width + kDialogProgressMargin, (self.frame.size.height - lableSize.height)/2, lableSize.width, lableSize.height);
                 }
                 if(completion){
                     completion();

@@ -118,12 +118,12 @@
                         return;
                     }
                     if([self.address signTransaction:tx withPassphrase:self.tfPassword.text]){
-                        [dp changeToMessage:NSLocalizedString(@"rchecking", nil) completion:^{
+                        [dp changeToMessage:NSLocalizedString(@"rchecking_new_tx", nil) completion:^{
                             dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
                                 if([self.address checkRValuesForTx:tx]){
                                     __block NSString * addressBlock = toAddress;
                                     dispatch_async(dispatch_get_main_queue(), ^{
-                                        [dp changeToMessage:NSLocalizedString(@"rcheck_safe", nil) icon:[UIImage imageNamed:@"checkmark"] completion:^{
+                                        [dp changeToMessage:NSLocalizedString(@"rcheck_new_tx_success", nil) icon:[UIImage imageNamed:@"checkmark"] completion:^{
                                             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.8 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                                                 [dp dismissWithCompletion:^{
                                                     [dp changeToMessage:NSLocalizedString(@"Please wait…", nil)];

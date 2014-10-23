@@ -279,7 +279,7 @@
 }
 
 -(NSString*)subTitle{
-    return NSLocalizedString(@"Length: 6 - 30", nil);
+    return NSLocalizedString(@"Length: 6 - 43", nil);
 }
 
 -(void)configureTextField:(UITextField*)tf{

@@ -317,7 +317,7 @@
     if(self.delegate && [self.delegate respondsToSelector:@selector(passwordSubTitle)]){
         return [self.delegate passwordSubTitle];
     }
-    return NSLocalizedString(@"Length: 6 - 30", nil);
+    return NSLocalizedString(@"Length: 6 - 43", nil);
 }
 
 -(void)configureTextField:(UITextField*)tf{
