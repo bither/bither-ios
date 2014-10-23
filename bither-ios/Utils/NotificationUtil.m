@@ -64,7 +64,7 @@
         notification.soundName =@"coins_received.wav";
         notification.alertBody=msg;
         notification.hasAction=NO;
-        notification.applicationIconBadgeNumber += 1;
+        notification.applicationIconBadgeNumber = [UIApplication sharedApplication].applicationIconBadgeNumber + 1;
         notification.userInfo = dict;
 
         [[UIApplication sharedApplication] scheduleLocalNotification:notification];
