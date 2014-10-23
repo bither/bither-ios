@@ -125,13 +125,11 @@
         return;
     }
     BTAddress* address = addresses[checkingIndex];
-    NSLog(@"Checking %lu", (unsigned long)checkingIndex);
     void(^check)() = ^{
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
             BOOL result = [address checkRValues];
             dispatch_sync(dispatch_get_main_queue(), ^{
                 if(completion){
-                    NSLog(@"Checked %lu result %d", (unsigned long)checkingIndex, result);
                     completion(result);
                     [self checkNextAddressWithcompletion:completion];
                 }

@@ -224,7 +224,7 @@
 "zLo-PY-kep.text" = "Label";
 
 /* Class = "IBUIButton"; normalTitle = "Check R Values"; ObjectID = "f9N-3Q-IJD"; */
-"f9N-3Q-IJD.normalTitle" = "检查 R 值";
+"f9N-3Q-IJD.normalTitle" = "检查 r 值";
 
 /* Class = "IBUILabel"; text = "R Value Check"; ObjectID = "bNn-8g-rmY"; */
-"bNn-8g-rmY.text" = "R 值检查";
+"bNn-8g-rmY.text" = "r 值检查";

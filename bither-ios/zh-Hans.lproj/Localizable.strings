@@ -430,15 +430,15 @@
 "Move And Scale" = "移动和缩放";
 
 /* RCheck */
-"rcheck_address_danger_title" = "%@ 的 R 值异常";
-"rcheck_address_title" = "%@ 的 R 值";
+"rcheck_address_danger_title" = "%@ 的 r 值异常";
+"rcheck_address_title" = "%@ 的 r 值";
 "rcheck_button" = "RCheck";
-"rcheck_danger" = "R 值异常.";
-"rcheck_no_address" = "未添加地址, 无需检查 R 值.";
-"rcheck_recalculate" = "R 值检查失败, 重新签名交易.";
-"rcheck_safe" = "R 值正常.";
-"rchecking" = "正在检查 R 值";
-"setting_name_rcheck" = "R 值检查";
-"rchecking_new_tx" = "R 值检查";
-"rcheck_new_tx_success" = "R 值检查";
-"rcheck_fail_recalculate_confirm" = "R 值检查失败, 重新签名交易?";
+"rcheck_danger" = "r 值异常.";
+"rcheck_no_address" = "未添加地址, 无需检查 r 值.";
+"rcheck_recalculate" = "r 值检查失败, 重新签名交易.";
+"rcheck_safe" = "r 值正常.";
+"rchecking" = "正在检查 r 值";
+"setting_name_rcheck" = "r 值检查";
+"rchecking_new_tx" = "r 值检查";
+"rcheck_new_tx_success" = "r 值检查";
+"rcheck_fail_recalculate_confirm" = "r 值检查失败, 重新签名交易?";

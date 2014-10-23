@@ -138,7 +138,7 @@
 "bKW-aE-gcw.text" = "Label";
 
 /* Class = "IBUILabel"; text = "R Value Check"; ObjectID = "bNn-8g-rmY"; */
-"bNn-8g-rmY.text" = "R Value Check";
+"bNn-8g-rmY.text" = "r-value Check";
 
 /* Class = "IBUILabel"; text = "marketName"; ObjectID = "bOH-Sj-yMG"; */
 "bOH-Sj-yMG.text" = "marketName";
@@ -162,7 +162,7 @@
 "eEx-7U-SVT.text" = "Can not find private key";
 
 /* Class = "IBUIButton"; normalTitle = "Check R Values"; ObjectID = "f9N-3Q-IJD"; */
-"f9N-3Q-IJD.normalTitle" = "Check R Values";
+"f9N-3Q-IJD.normalTitle" = "Check r-values";
 
 /* Class = "IBUILabel"; text = "Pay to"; ObjectID = "g3O-Ch-Qm9"; */
 "g3O-Ch-Qm9.text" = "Pay to";
