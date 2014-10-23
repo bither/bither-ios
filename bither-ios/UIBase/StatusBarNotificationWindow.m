@@ -31,14 +31,14 @@
 @implementation StatusBarNotificationWindow
 
 -(instancetype)initWithOriWindow:(UIWindow*)ori{
-    self = [super initWithFrame:[UIApplication sharedApplication].statusBarFrame];
+    self = [super initWithFrame:[UIScreen mainScreen].bounds];
     if(self){
         self.oriWindow = ori;
-        self.windowLevel = UIWindowLevelStatusBar + 1;
+        self.windowLevel = UIWindowLevelStatusBar;
         self.rootViewController = [[NotificationViewController alloc]init];
         self.rootViewController.view.frame = CGRectMake(0, 0, self.frame.size.width, self.frame.size.height);
         self.rootViewController.view.backgroundColor = [UIColor clearColor];
-        self.btn = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 0, self.frame.size.height)];
+        self.btn = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 0, [UIApplication sharedApplication].statusBarFrame.size.height)];
         [self.btn setBackgroundColor:[UIColor colorWithRed:56.0/255.0 green:61.0/255.0 blue:64.0/255.0 alpha:1]];
         [self.btn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         self.btn.titleLabel.font = [UIFont systemFontOfSize:12];
@@ -55,10 +55,10 @@
     [self.btn setTitleColor:color forState:UIControlStateNormal];
     self.notificationAddress = address;
     [self.btn sizeToFit];
-    self.btn.frame = CGRectMake(self.frame.size.width - self.btn.frame.size.width, -self.frame.size.height, self.btn.frame.size.width, self.frame.size.height);
+    self.btn.frame = CGRectMake(self.frame.size.width - self.btn.frame.size.width, -self.frame.size.height, self.btn.frame.size.width, [UIApplication sharedApplication].statusBarFrame.size.height);
     [self makeKeyAndVisible];
     [UIView animateWithDuration:kNotificationAnimationDuration animations:^{
-         self.btn.frame = CGRectMake(self.frame.size.width - self.btn.frame.size.width, 0, self.btn.frame.size.width, self.frame.size.height);
+         self.btn.frame = CGRectMake(self.frame.size.width - self.btn.frame.size.width, 0, self.btn.frame.size.width, [UIApplication sharedApplication].statusBarFrame.size.height);
     }];
 }
 
@@ -106,9 +106,13 @@
         self.btn.frame = CGRectMake(self.frame.size.width - self.btn.frame.size.width, -self.frame.size.height, self.btn.frame.size.width, self.frame.size.height);
     } completion:^(BOOL finished) {
         [self.oriWindow makeKeyAndVisible];
+        self.hidden = YES;
     }];
 }
 
+- (BOOL)pointInside:(CGPoint)point withEvent:(UIEvent *)event{
+    return CGRectContainsPoint(self.btn.frame, point);
+}
 @end
 
 @implementation NotificationViewController
