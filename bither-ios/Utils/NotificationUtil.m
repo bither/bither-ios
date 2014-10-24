@@ -49,8 +49,6 @@
     if (txNotificationType==txReceive||txNotificationType==txSend) {
         [self notification:msg dict:infoDic];
     }
-    
-    
 }
 
 +(void)notification:(NSString *)msg dict:(NSDictionary * )dict{

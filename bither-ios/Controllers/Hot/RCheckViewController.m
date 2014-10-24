@@ -22,6 +22,7 @@
 #import "RCheckCell.h"
 #import "UIColor+Util.h"
 #import "TransactionsUtil.h"
+#import "DialogRCheckInfo.h"
 #import <Bitheri/BTPasswordSeed.h>
 #import <Bitheri/BTAddressManager.h>
 
@@ -42,6 +43,7 @@
 @property (weak, nonatomic) IBOutlet UIView *vContainer;
 @property (weak, nonatomic) IBOutlet UIImageView *ivCheckProgress;
 @property (weak, nonatomic) IBOutlet UIView *topBar;
+@property (weak, nonatomic) IBOutlet UIView *vBottom;
 
 @property (atomic) BOOL checking;
 
@@ -78,10 +80,10 @@
             [self refreshAddresses];
             [UIView animateWithDuration:kCheckScoreAndBgAnimatableViewDefaultAnimationDuration animations:^{
                 self.vPointsContainer.transform = CGAffineTransformTranslate(CGAffineTransformMakeScale(1.2, 1.2), 0, 10);
-                self.btnCheck.alpha = 0;
+                self.vBottom.alpha = 0;
                 self.vContainer.frame = CGRectMake(self.vContainer.frame.origin.x, self.vContainer.frame.origin.y, self.vContainer.frame.size.width, self.view.frame.size.height - self.vContainer.frame.origin.y - 20);
             } completion:^(BOOL finished) {
-                self.btnCheck.hidden = YES;
+                self.vBottom.hidden = YES;
                 self.lblCheckStatus.text = NSLocalizedString(@"rchecking", nil);
                 [self.vHeader animateToScore:0 withAnimationId:kResetScoreAnim];
                 [self moveProgress];
@@ -149,13 +151,13 @@
     }else{
         self.lblCheckStatus.text = NSLocalizedString(@"rcheck_safe", nil);
     }
-    self.btnCheck.hidden = NO;
-    self.btnCheck.alpha = 0;
+    self.vBottom.hidden = NO;
+    self.vBottom.alpha = 0;
     [self.ivCheckProgress.layer removeAllAnimations];
     [self.ivCheckProgress setHidden:YES];
     [UIView animateWithDuration:kCheckScoreAndBgAnimatableViewDefaultAnimationDuration animations:^{
         self.vPointsContainer.transform = CGAffineTransformIdentity;
-        self.btnCheck.alpha = 1;
+        self.vBottom.alpha = 1;
     } completion:^(BOOL finished) {
         self.checking = NO;
     }];
@@ -193,6 +195,10 @@
     [addresses addObjectsFromArray:[BTAddressManager instance].allAddresses];
     [dangerAddresses removeAllObjects];
     [self.tableView reloadData];
+}
+
+- (IBAction)infoPressed:(id)sender {
+    [[[DialogRCheckInfo alloc]init]showInWindow:self.view.window];
 }
 
 - (IBAction)backPressed:(id)sender {

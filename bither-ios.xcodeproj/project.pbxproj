@@ -117,6 +117,7 @@
 		AC6BAC6F196FA3410013B9E8 /* HotCheckPrivateKeyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AC6BAC6E196FA3410013B9E8 /* HotCheckPrivateKeyViewController.m */; };
 		AC6BAC75196FD8430013B9E8 /* DialogImportPrivateKey.m in Sources */ = {isa = PBXBuildFile; fileRef = AC6BAC74196FD8430013B9E8 /* DialogImportPrivateKey.m */; };
 		AC6CB25619752CE400FA9D23 /* StatusBarNotificationWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = AC6CB25519752CE400FA9D23 /* StatusBarNotificationWindow.m */; };
+		AC781B6019F9FF98003B5B87 /* DialogRCheckInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = AC781B5F19F9FF98003B5B87 /* DialogRCheckInfo.m */; };
 		AC808B8519D52D21004E78A3 /* ImportBip38PrivateKeySetting.m in Sources */ = {isa = PBXBuildFile; fileRef = AC808B8419D52D21004E78A3 /* ImportBip38PrivateKeySetting.m */; };
 		AC808B8C19D56757004E78A3 /* XRandom.m in Sources */ = {isa = PBXBuildFile; fileRef = AC808B8B19D56757004E78A3 /* XRandom.m */; };
 		AC8F0DCA196CF4E400CCD0F9 /* SelectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AC8F0DC9196CF4E400CCD0F9 /* SelectViewController.m */; };
@@ -408,6 +409,8 @@
 		AC6BAC74196FD8430013B9E8 /* DialogImportPrivateKey.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DialogImportPrivateKey.m; sourceTree = "<group>"; };
 		AC6CB25419752CE400FA9D23 /* StatusBarNotificationWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StatusBarNotificationWindow.h; sourceTree = "<group>"; };
 		AC6CB25519752CE400FA9D23 /* StatusBarNotificationWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StatusBarNotificationWindow.m; sourceTree = "<group>"; };
+		AC781B5E19F9FF98003B5B87 /* DialogRCheckInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DialogRCheckInfo.h; sourceTree = "<group>"; };
+		AC781B5F19F9FF98003B5B87 /* DialogRCheckInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DialogRCheckInfo.m; sourceTree = "<group>"; };
 		AC808B8319D52D21004E78A3 /* ImportBip38PrivateKeySetting.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImportBip38PrivateKeySetting.h; sourceTree = "<group>"; };
 		AC808B8419D52D21004E78A3 /* ImportBip38PrivateKeySetting.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImportBip38PrivateKeySetting.m; sourceTree = "<group>"; };
 		AC808B8919D54274004E78A3 /* DialogImportKeyDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DialogImportKeyDelegate.h; sourceTree = "<group>"; };
@@ -1063,6 +1066,8 @@
 				AC53ABE619D911AA007C095C /* DialogXrandomInfo.m */,
 				ACEDEE3119F76BAD000507E2 /* DialogProgressChangable.h */,
 				ACEDEE3219F76BAD000507E2 /* DialogProgressChangable.m */,
+				AC781B5E19F9FF98003B5B87 /* DialogRCheckInfo.h */,
+				AC781B5F19F9FF98003B5B87 /* DialogRCheckInfo.m */,
 			);
 			path = Dialog;
 			sourceTree = "<group>";
@@ -1424,6 +1429,7 @@
 				AC53ABDB19D7B657007C095C /* AudioVisualizerView.m in Sources */,
 				4269FF7E195AB6F9001213B9 /* MarketUtil.m in Sources */,
 				ACEEB8E119B46EC600F2789C /* PeerViewController.m in Sources */,
+				AC781B6019F9FF98003B5B87 /* DialogRCheckInfo.m in Sources */,
 				ACEEB8DE19B46EB900F2789C /* NetworkMonitorViewController.m in Sources */,
 				AC2F329E195D19C2001B7439 /* DialogSendTxConfirm.m in Sources */,
 				AC3C2623199B58750055FF5E /* TrendingGraphicData.m in Sources */,

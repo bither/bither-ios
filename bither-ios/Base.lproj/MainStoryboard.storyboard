@@ -2801,18 +2801,36 @@
                                                 </subviews>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                             </view>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="f9N-3Q-IJD">
-                                                <rect key="frame" x="70" y="128" width="160" height="42"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
-                                                <state key="normal" image="rcheck_check_button" backgroundImage="button_check_bg_normal">
-                                                    <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                                </state>
-                                                <state key="highlighted" backgroundImage="button_check_bg_pressed"/>
-                                                <connections>
-                                                    <action selector="checkPressed:" destination="1Za-zC-y7r" eventType="touchUpInside" id="o3p-tB-rkm"/>
-                                                </connections>
-                                            </button>
+                                            <view contentMode="scaleToFill" id="6kM-Ac-9Cv">
+                                                <rect key="frame" x="10" y="128" width="280" height="42"/>
+                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                                                <subviews>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="f9N-3Q-IJD">
+                                                        <rect key="frame" x="60" y="0.0" width="160" height="42"/>
+                                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
+                                                        <state key="normal" image="rcheck_check_button" backgroundImage="button_check_bg_normal">
+                                                            <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                        </state>
+                                                        <state key="highlighted" backgroundImage="button_check_bg_pressed"/>
+                                                        <connections>
+                                                            <action selector="checkPressed:" destination="1Za-zC-y7r" eventType="touchUpInside" id="o3p-tB-rkm"/>
+                                                        </connections>
+                                                    </button>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="9pb-TM-i5g">
+                                                        <rect key="frame" x="250" y="6" width="30" height="30"/>
+                                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                                        <state key="normal" image="xrandom_info_icon_normal">
+                                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                        </state>
+                                                        <state key="highlighted" image="xrandom_info_icon_pressed"/>
+                                                        <connections>
+                                                            <action selector="infoPressed:" destination="1Za-zC-y7r" eventType="touchUpInside" id="C77-R2-fN6"/>
+                                                        </connections>
+                                                    </button>
+                                                </subviews>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                            </view>
                                         </subviews>
                                         <color key="backgroundColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
                                     </view>
@@ -2959,6 +2977,7 @@
                         <outlet property="lblPoints" destination="PJH-te-Brg" id="Gco-4e-HbW"/>
                         <outlet property="tableView" destination="NjC-iU-aXl" id="1Sy-Ks-iRI"/>
                         <outlet property="topBar" destination="cpj-6T-AP7" id="cTd-rr-uhZ"/>
+                        <outlet property="vBottom" destination="6kM-Ac-9Cv" id="Ftu-an-lBW"/>
                         <outlet property="vContainer" destination="i7z-A4-Xxh" id="1co-z4-Dhi"/>
                         <outlet property="vHeader" destination="PPb-QC-n4U" id="Yv3-5m-heX"/>
                         <outlet property="vPointsContainer" destination="1IX-wu-nD3" id="Otw-FF-dof"/>
