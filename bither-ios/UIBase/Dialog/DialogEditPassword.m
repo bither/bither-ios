@@ -306,7 +306,7 @@
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
     [self dismissError];
     if([StringUtil validPartialPassword:string]){
-        if(textField.text.length - range.length + string.length <= 30){
+        if(textField.text.length - range.length + string.length <= 43){
             return YES;
         }
     }

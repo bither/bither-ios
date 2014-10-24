@@ -129,12 +129,12 @@
     return  [pred evaluateWithObject:str];
 }
 +(BOOL)validPassword:(NSString *)str{
-    NSString * regex = @"[0-9,a-z,A-Z]{6,30}";
+    NSString * regex = @"[0-9,a-z,A-Z]{6,43}";
     NSPredicate * pred = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", regex];
     return  [pred evaluateWithObject:str];
 }
 +(BOOL)validPartialPassword:(NSString *)str{
-    NSString * regex = @"[0-9,a-z,A-Z]{0,30}";
+    NSString * regex = @"[0-9,a-z,A-Z]{0,43}";
     NSPredicate * pred = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", regex];
     return  [pred evaluateWithObject:str];
 }
