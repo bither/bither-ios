@@ -25,6 +25,7 @@
 #import "BTPeerManager.h"
 #import "BTAddressManager.h"
 #import "UIViewController+PiShowBanner.h"
+#import "UploadAndDowloadFileFactory.h"
 
 
 @interface HotViewController ()
@@ -48,6 +49,7 @@
     self.page.index = 1;
     self.page.view.frame = CGRectMake(0, TabBarHeight, self.view.frame.size.width, self.view.frame.size.height - TabBarHeight);
     [self.view insertSubview:self.page.view atIndex:0];
+    
 }
 
 -(void)initTabs{
@@ -73,6 +75,7 @@
     cnt = 4;
     self.dict = [[NSMutableDictionary alloc] init];
     [self.view bringSubviewToFront:self.addAddressBtn];
+    [self initApp];
  
     
 }
@@ -171,6 +174,12 @@
     [self presentViewController:container animated:YES completion:nil];
 }
 
--(void)showFeedCnt:(int)feedCnt{
+-(void)initApp{
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0),^{
+        
+        UploadAndDowloadFileFactory * uploadAndDowload=[[UploadAndDowloadFileFactory alloc ] init];
+        [uploadAndDowload uploadAvatar:nil andErrorCallBack:nil];
+        [uploadAndDowload dowloadAvatar:nil andErrorCallBack:nil];
+    });
 }
 @end

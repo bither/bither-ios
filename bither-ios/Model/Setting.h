@@ -25,7 +25,7 @@
 @interface Setting : NSObject
 
 @property (nonatomic,strong) NSString * settingName;
-@property (nonatomic,strong) NSString * icon;
+@property (nonatomic,strong) UIImage * icon;
 
 
 @property (nonatomic ,strong) GetValueBlock  getValueBlock;
@@ -33,15 +33,17 @@
 @property (nonatomic ,strong) DictResponseBlock result;
 @property (nonatomic ,strong)ViewControllerBlock selectBlock;
 
--(instancetype) initWithName:(NSString *)name icon:(NSString*)icon ;
+-(instancetype) initWithName:(NSString *)name icon:(UIImage*)icon ;
 
 -(void)selection;
+-(UIImage *)getIcon;
 
 +(Setting * )getMarketSetting;
 +(Setting * )getExchangeSetting;
 +(Setting * )getTransactionFeeSetting;
-+(Setting *)getCheckSetting;
-+(Setting *)getAdvanceSetting;
-+(Setting*)getColdMonitorSetting;
++(Setting * )getCheckSetting;
++(Setting * )getAdvanceSetting;
++(Setting * )getColdMonitorSetting;
+
 
 @end

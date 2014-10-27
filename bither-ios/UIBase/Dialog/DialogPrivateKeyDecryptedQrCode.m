@@ -57,6 +57,10 @@
     self.iv = [[UIImageView alloc]initWithFrame:CGRectMake(0, kShareBottomDistance + kShareBottomHeight, self.frame.size.width, self.frame.size.width)];
     self.iv.image = [QRCodeThemeUtil qrCodeOfContent:_privateStr andSize:self.frame.size.width withTheme:[QRCodeTheme black]];
     [self addSubview:self.iv];
+    UIButton* btnDismiss = [[UIButton alloc]initWithFrame:self.iv.frame];
+    [btnDismiss setBackgroundImage:nil forState:UIControlStateNormal];
+    [btnDismiss addTarget:self action:@selector(dismiss) forControlEvents:UIControlEventTouchUpInside];
+    [self addSubview:btnDismiss];
 }
 
 -(void)documentInteractionController:(UIDocumentInteractionController *)controller didEndSendingToApplication:(NSString *)application{

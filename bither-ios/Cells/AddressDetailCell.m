@@ -55,7 +55,20 @@
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
-    if (self) {
+    return self;
+}
+
+- (id)initWithCoder:(NSCoder *)aDecoder{
+    self = [super initWithCoder:aDecoder];
+    if(self){
+        for (UIView *currentView in self.subviews)
+        {
+            if([currentView isKindOfClass:[UIScrollView class]])
+            {
+                ((UIScrollView *)currentView).delaysContentTouches = NO;
+                break;
+            }
+        }
     }
     return self;
 }

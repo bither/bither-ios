@@ -95,7 +95,7 @@
 "Invalid password" = "密碼錯誤";
 
 /* No comment provided by engineer. */
-"Length: 6 - 30" = "長度: 6 - 30";
+"Length: 6 - 43" = "長度: 6 - 43";
 
 /* No comment provided by engineer. */
 "Me" = "我的地址";
@@ -419,3 +419,27 @@
 "Switch QRCode"="切換二維碼";
 "Switched to old version QR Codes, sign with Bither Cold <1.1.0"="已切換到舊版二維碼，可用 <1.1.0的冷錢包簽名";
 "Switched to new version QR Codes, sign with Bither Cold ≧1.1.0"="已切換到新版二維碼，可用 ≧1.1.0的冷錢包簽名";
+
+
+//avatar
+"Set Avatar"="設置頭像";
+"From Camera"="來自相機";
+"From Gallery"="來自圖庫";
+
+/* Crop Photo */
+"Move And Scale" = "移動和縮放";
+
+/* RCheck */
+"rcheck_address_danger_title" = "%@ 的 r 值異常";
+"rcheck_address_title" = "%@ 的 r 值";
+"rcheck_button" = "RCheck";
+"rcheck_danger" = "r 值異常.";
+"rcheck_no_address" = "未添加地址, 無需檢查 r 值.";
+"rcheck_recalculate" = "r 值檢查失敗, 重新簽名交易.";
+"rcheck_safe" = "r 值正常.";
+"rchecking" = "正在檢查 r 值";
+"setting_name_rcheck" = "r 值檢查";
+"rchecking_new_tx" = "r 值檢查";
+"rcheck_new_tx_success" = "r 值檢查";
+"rcheck_info" = "同一個地址的交易歷史中出現重複的 r 值, 有可能導致私鑰暴露.\n\nr 值檢查會檢查交易歷史, 並確保不存在重複 r 值.";
+"rcheck_fail_recalculate_confirm" = "r 值檢查失敗, 重新簽名交易?";

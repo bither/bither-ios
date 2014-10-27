@@ -317,7 +317,7 @@
     if(self.delegate && [self.delegate respondsToSelector:@selector(passwordSubTitle)]){
         return [self.delegate passwordSubTitle];
     }
-    return NSLocalizedString(@"Length: 6 - 30", nil);
+    return NSLocalizedString(@"Length: 6 - 43", nil);
 }
 
 -(void)configureTextField:(UITextField*)tf{
@@ -344,7 +344,7 @@
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
     [self dismissError];
     if([StringUtil validPartialPassword:string]){
-        if(textField.text.length - range.length + string.length <= 30){
+        if(textField.text.length - range.length + string.length <= 43){
             return YES;
         }
     }

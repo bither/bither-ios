@@ -47,6 +47,12 @@
 /* Class = "IBUILabel"; text = "Amount"; ObjectID = "BZZ-7d-0no"; */
 "BZZ-7d-0no.text" = "Amount";
 
+/* Class = "IBUISegmentedControl"; Cxt-9h-SUk.segmentTitles[0] = "Peers"; ObjectID = "Cxt-9h-SUk"; */
+"Cxt-9h-SUk.segmentTitles[0]" = "Peers";
+
+/* Class = "IBUISegmentedControl"; Cxt-9h-SUk.segmentTitles[1] = "Blocks"; ObjectID = "Cxt-9h-SUk"; */
+"Cxt-9h-SUk.segmentTitles[1]" = "Blocks";
+
 /* Class = "IBUILabel"; text = "Label"; ObjectID = "DbI-lX-jWY"; */
 "DbI-lX-jWY.text" = "Label";
 
@@ -77,6 +83,9 @@
 /* Class = "IBUILabel"; text = "Label"; ObjectID = "MSV-4p-BLw"; */
 "MSV-4p-BLw.text" = "Label";
 
+/* Class = "IBUILabel"; text = "Label"; ObjectID = "Mcj-lw-QS2"; */
+"Mcj-lw-QS2.text" = "Label";
+
 /* Class = "IBUIButton"; normalTitle = "Check Private Keys"; ObjectID = "Np0-ig-4Cd"; */
 "Np0-ig-4Cd.normalTitle" = "Check Private Keys";
 
@@ -89,8 +98,17 @@
 /* Class = "IBUILabel"; text = "$1234.90"; ObjectID = "Onw-PZ-JGC"; */
 "Onw-PZ-JGC.text" = "$1234.90";
 
+/* Class = "IBUILabel"; text = "100"; ObjectID = "PJH-te-Brg"; */
+"PJH-te-Brg.text" = "100";
+
 /* Class = "IBUILabel"; text = "Label"; ObjectID = "Plt-58-S4m"; */
 "Plt-58-S4m.text" = "Label";
+
+/* Class = "IBUILabel"; text = "0000000000000000163440df04bc24eccb48a9d46c64dce3be979e2e6a35aa13"; ObjectID = "QaN-4R-hDw"; */
+"QaN-4R-hDw.text" = "0000000000000000163440df04bc24eccb48a9d46c64dce3be979e2e6a35aa13";
+
+/* Class = "IBUILabel"; text = "Label"; ObjectID = "SLL-YQ-ttn"; */
+"SLL-YQ-ttn.text" = "Label";
 
 /* Class = "IBUILabel"; text = "Bither Hot: Online & Simple."; ObjectID = "V5M-8Z-afm"; */
 "V5M-8Z-afm.text" = "Bither Hot: Online & Simple.";
@@ -110,14 +128,23 @@
 /* Class = "IBUILabel"; text = "Loading…"; ObjectID = "YDg-IR-7hP"; */
 "YDg-IR-7hP.text" = "Loading…";
 
+/* Class = "IBUITextField"; placeholder = "0.00"; ObjectID = "Yo9-av-E4b"; */
+"Yo9-av-E4b.placeholder" = "0.00";
+
 /* Class = "IBUIButton"; normalTitle = "Send"; ObjectID = "Z5W-Ua-Lm5"; */
 "Z5W-Ua-Lm5.normalTitle" = "Send";
 
 /* Class = "IBUILabel"; text = "Label"; ObjectID = "bKW-aE-gcw"; */
 "bKW-aE-gcw.text" = "Label";
 
+/* Class = "IBUILabel"; text = "R Value Check"; ObjectID = "bNn-8g-rmY"; */
+"bNn-8g-rmY.text" = "Check r-value";
+
 /* Class = "IBUILabel"; text = "marketName"; ObjectID = "bOH-Sj-yMG"; */
 "bOH-Sj-yMG.text" = "marketName";
+
+/* Class = "IBUILabel"; text = "Label"; ObjectID = "bb9-gm-2j7"; */
+"bb9-gm-2j7.text" = "Label";
 
 /* Class = "IBUILabel"; text = "0.00"; ObjectID = "bfg-wv-lfB"; */
 "bfg-wv-lfB.text" = "0.00";
@@ -134,11 +161,17 @@
 /* Class = "IBUILabel"; text = "Can not find private key"; ObjectID = "eEx-7U-SVT"; */
 "eEx-7U-SVT.text" = "Can not find private key";
 
+/* Class = "IBUIButton"; normalTitle = "Check R Values"; ObjectID = "f9N-3Q-IJD"; */
+"f9N-3Q-IJD.normalTitle" = "Check r-values";
+
 /* Class = "IBUILabel"; text = "Pay to"; ObjectID = "g3O-Ch-Qm9"; */
 "g3O-Ch-Qm9.text" = "Pay to";
 
 /* Class = "IBUILabel"; text = "Label"; ObjectID = "gbe-Xl-yCZ"; */
 "gbe-Xl-yCZ.text" = "Label";
+
+/* Class = "IBUILabel"; text = "%"; ObjectID = "jDX-wx-Vm4"; */
+"jDX-wx-Vm4.text" = "%";
 
 /* Class = "IBUILabel"; text = "Network failure."; ObjectID = "jQj-PR-DVU"; */
 "jQj-PR-DVU.text" = "Network failure.";
@@ -161,6 +194,9 @@
 /* Class = "IBUILabel"; text = "Password"; ObjectID = "nGP-EM-iOS"; */
 "nGP-EM-iOS.text" = "Password";
 
+/* Class = "IBUILabel"; text = "Label"; ObjectID = "njo-BE-gGN"; */
+"njo-BE-gGN.text" = "Label";
+
 /* Class = "IBUILabel"; text = "Amount"; ObjectID = "nyJ-oV-7hM"; */
 "nyJ-oV-7hM.text" = "Amount";
 
@@ -173,8 +209,14 @@
 /* Class = "IBUISegmentedControl"; oZb-Bk-280.segmentTitles[1] = "Watch Only"; ObjectID = "oZb-Bk-280"; */
 "oZb-Bk-280.segmentTitles[1]" = "Watch Only";
 
+/* Class = "IBUILabel"; text = "Label"; ObjectID = "p9x-vk-IwH"; */
+"p9x-vk-IwH.text" = "Label";
+
 /* Class = "IBUILabel"; text = "Detail"; ObjectID = "qNL-tR-Rjx"; */
 "qNL-tR-Rjx.text" = "Detail";
+
+/* Class = "IBUILabel"; text = "Label"; ObjectID = "qga-CG-06M"; */
+"qga-CG-06M.text" = "Label";
 
 /* Class = "IBUILabel"; text = "123456.34"; ObjectID = "qge-A9-g1H"; */
 "qge-A9-g1H.text" = "123456.34";
@@ -206,6 +248,9 @@
 /* Class = "IBUILabel"; text = "name"; ObjectID = "viE-UV-mZx"; */
 "viE-UV-mZx.text" = "name";
 
+/* Class = "IBUITextField"; placeholder = "0.00"; ObjectID = "xBU-Zh-e2V"; */
+"xBU-Zh-e2V.placeholder" = "0.00";
+
 /* Class = "IBUITextField"; placeholder = "Password"; ObjectID = "xmg-Xg-1Ns"; */
 "xmg-Xg-1Ns.placeholder" = "Password";
 
@@ -214,6 +259,9 @@
 
 /* Class = "IBUILabel"; text = "Bither Cold: Offline & Secure."; ObjectID = "yu4-YT-Y6b"; */
 "yu4-YT-Y6b.text" = "Bither Cold: Offline & Secure.";
+
+/* Class = "IBUILabel"; text = "Label"; ObjectID = "yx9-EY-UeR"; */
+"yx9-EY-UeR.text" = "Label";
 
 /* Class = "IBUILabel"; text = "3568.34"; ObjectID = "yz4-Gr-HYw"; */
 "yz4-Gr-HYw.text" = "3568.34";

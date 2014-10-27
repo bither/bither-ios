@@ -23,6 +23,7 @@
 #import "CloneQrCodeSetting.h"
 #import "ColdWalletCloneSetting.h"
 #import "BTAddressManager.h"
+#import "AvatarSetting.h"
 
 
 @implementation SettingUtil
@@ -32,6 +33,7 @@
     [array addObject:[Setting getExchangeSetting]];
     [array addObject:[Setting getMarketSetting]];
     [array addObject:[Setting getTransactionFeeSetting]];
+    [array addObject:[AvatarSetting getAvatarSetting]];
     [array addObject:[Setting getCheckSetting]];
     [array addObject:[DonationSetting getDonateSetting]];
     [array addObject:[Setting getAdvanceSetting]];

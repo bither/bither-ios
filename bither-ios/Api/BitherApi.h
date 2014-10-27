@@ -31,6 +31,8 @@
 
 -(void)getSpvBlock:(DictResponseBlock) callback andErrorCallBack:(ErrorHandler)errorCallback;
 
+-(void)getInSignaturesApi:(NSString *)address fromBlock:(int) blockNo callback:(IdResponseBlock) callback andErrorCallBack:(ErrorHandler)errorCallback;
+
 -(void)getMyTransactionApi:(NSString *)address callback:(DictResponseBlock) callback andErrorCallBack:(ErrorHandler)errorCallback;
 -(void)getExchangeTicker:(VoidBlock) callback andErrorCallBack:(ErrorHandler)errorCallback;
 - (void)uploadCrash:(NSString *)data callback:(DictResponseBlock)callback andErrorCallBack:(ErrorHandler)errorCallback;

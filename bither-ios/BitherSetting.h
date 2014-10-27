@@ -70,6 +70,8 @@
 #define NavHeight 44.0f
 #define TabBarHeight 44.0f
 
+#define SMALL_IMAGE_WIDTH  150
+#define IMAGE_WIDTH 612
 
 
 typedef void (^DictResponseBlock)(NSDictionary *dict);

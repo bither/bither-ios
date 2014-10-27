@@ -19,12 +19,15 @@
 #import "BitherSetting.h"
 #import "UserDefaultsUtil.h"
 #import "UIImage+ImageRenderToColor.h"
+#import "NSData+MKBase64.h"
 
 
 
 #define BTC         @"\xC9\x83"     // capital B with stroke (utf-8)
 #define BITS        @"\xC6\x80"     // lowercase b with stroke (utf-8)
 #define NARROW_NBSP @"\xE2\x80\xAF" // narrow no-break space (utf-8)
+#define BIP21ADDRESS_REGEX  @"^bitcoin:([123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz]{20,40})(\\?(.+))?$"
+#define BIP21AMT_REGEX  @"^(.*)amount=([1-9]\\d*\\.\\d*|0\\.\\d*[1-9]\\d*)(.*)$"
 
 
 @implementation StringUtil
@@ -126,15 +129,51 @@
     return  [pred evaluateWithObject:str];
 }
 +(BOOL)validPassword:(NSString *)str{
-    NSString * regex = @"[0-9,a-z,A-Z]{6,30}";
+    NSString * regex = @"[0-9,a-z,A-Z]{6,43}";
     NSPredicate * pred = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", regex];
     return  [pred evaluateWithObject:str];
 }
 +(BOOL)validPartialPassword:(NSString *)str{
-    NSString * regex = @"[0-9,a-z,A-Z]{0,30}";
+    NSString * regex = @"[0-9,a-z,A-Z]{0,43}";
     NSPredicate * pred = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", regex];
     return  [pred evaluateWithObject:str];
 }
+//BIP21 https://github.com/bitcoin/bips/blob/master/bip-0021.mediawiki
+
++(BOOL)isValidBitcoinBIP21Address:(NSString *)str{
+    NSError *error;
+    NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:BIP21ADDRESS_REGEX options:0 error:&error];
+    NSArray * matchs= [regex matchesInString:str options:0 range:NSMakeRange(0, str.length)];
+    return  matchs.count>0;
+    
+    
+}
++(NSString*)getAddressFormBIP21Address:(NSString *)str{
+    NSError *error;
+    NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:BIP21ADDRESS_REGEX options:0 error:&error];
+    NSArray * matchs= [regex matchesInString:str options:0 range:NSMakeRange(0, str.length)];
+    if (matchs.count>0) {
+        NSTextCheckingResult *match =[matchs objectAtIndex:0];
+        NSRange  range=[match rangeAtIndex:1];
+        return  [str substringWithRange:range];
+    }else{
+        return @"";
+    }
+}
++(uint64_t)getAmtFormBIP21Address:(NSString *)str{
+    NSError *error;
+    NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:BIP21AMT_REGEX options:0 error:&error];
+    NSArray * matchs= [regex matchesInString:str options:0 range:NSMakeRange(0, str.length)];
+    if (matchs.count>0) {
+        NSTextCheckingResult *match =[matchs objectAtIndex:0];
+        NSRange  range=[match rangeAtIndex:2];
+        return  [StringUtil amountForString:[str substringWithRange:range]];
+    }else{
+        return -1;
+    }
+}
+
+
 +(BOOL)isPureLongLong:(NSString *)string{
     NSScanner * scan=[NSScanner scannerWithString:string];
     long long val;
@@ -212,6 +251,11 @@
     unsigned long long iValue;
     [pScanner scanHexLongLong: &iValue];
     return iValue;
+}
++(NSData *)getUrlSaleBase64:(NSString *)str{
+    str=[str stringByReplacingOccurrencesOfString:@"-" withString:@"+"];
+    str=[str stringByReplacingOccurrencesOfString:@"_" withString:@"/"];
+    return [NSData dataFromBase64String:str];
 }
 
 @end

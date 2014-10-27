@@ -32,6 +32,11 @@
 @property NSUInteger score;
 @property NSUInteger targetScore;
 @property (weak) NSObject<CheckScoreAndBgAnimatableViewDelegate>* delegate;
+
+-(void)setBeginColor:(UIColor*)color;
+-(void)setMiddleColor:(UIColor*)color;
+-(void)setEndColor:(UIColor*)color;
+
 -(void)animateToScore:(NSUInteger)score withAnimationId:(NSUInteger)animationId;
 -(void)animateToScore:(NSUInteger)score withAnimationId:(NSUInteger)animationId andDuration:(NSTimeInterval)duration;
 @end

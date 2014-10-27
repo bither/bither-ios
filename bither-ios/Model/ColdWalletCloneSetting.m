@@ -32,7 +32,7 @@ static Setting* CloneQrSetting;
 @implementation ColdWalletCloneSetting
 
 -(instancetype)init{
-    self = [super initWithName:NSLocalizedString(@"Cold Wallet Clone", nil) icon:@"scan_button_icon"];
+    self = [super initWithName:NSLocalizedString(@"Cold Wallet Clone", nil) icon:[UIImage imageNamed:@"scan_button_icon"]];
     if(self){
         __weak ColdWalletCloneSetting *d = self;
         [self setSelectBlock:^(UIViewController * controller){

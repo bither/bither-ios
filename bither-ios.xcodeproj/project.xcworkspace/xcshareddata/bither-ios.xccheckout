@@ -12,22 +12,34 @@
 	<dict>
 		<key>4E2C49F1-8D77-400C-A478-9775F724192D</key>
 		<string>https://gitlab.com/bither/bither-ios.git</string>
+		<key>5A46D19453E9ED4A7ED3F47423CD80D1A7296B0E</key>
+		<string>https://github.com/bither/bither-ios.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>bither-ios/bither-ios.xcodeproj/project.xcworkspace</string>
+	<string>bither-ios.xcodeproj</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
 		<key>4E2C49F1-8D77-400C-A478-9775F724192D</key>
-		<string>../../..</string>
+		<string>../../../bitherios</string>
+		<key>5A46D19453E9ED4A7ED3F47423CD80D1A7296B0E</key>
+		<string>../..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
-	<string>https://gitlab.com/bither/bither-ios.git</string>
+	<string>https://github.com/bither/bither-ios.git</string>
 	<key>IDESourceControlProjectVersion</key>
-	<integer>110</integer>
+	<integer>111</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>4E2C49F1-8D77-400C-A478-9775F724192D</string>
+	<string>5A46D19453E9ED4A7ED3F47423CD80D1A7296B0E</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>5A46D19453E9ED4A7ED3F47423CD80D1A7296B0E</string>
+			<key>IDESourceControlWCCName</key>
+			<string>bither-ios</string>
+		</dict>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>

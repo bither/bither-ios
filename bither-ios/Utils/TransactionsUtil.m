@@ -29,6 +29,8 @@
 #import "BitherApi.h"
 #import "BTBlockChain.h"
 #import "NSDictionary+Fromat.h"
+#import "BTIn.h"
+#import "StringUtil.h"
 
 
 #define BLOCK_COUNT  @"block_count"
@@ -264,4 +266,96 @@
     return  msg;
 
 }
++(void)completeInputsForAddressForApi:(BTAddress *)address fromBlock:(uint32_t)fromBlock callback:(VoidBlock) callback andErrorCallBack:(ErrorHandler)errorCallback{
+    if (fromBlock<=0) {
+        if (callback) {
+            callback();
+        }
+        return;
+    }
+    [[BitherApi instance] getInSignaturesApi:address.address fromBlock:fromBlock callback:^(id response) {
+        NSArray * ins=[TransactionsUtil getInSignature:response];
+        [address completeInSignature:ins];
+        uint32_t  newFromBlock=[address needCompleteInSignature];
+        if (newFromBlock<=0) {
+            if (callback) {
+                callback();
+            }
+        }else{
+            [TransactionsUtil completeInputsForAddressForApi:address fromBlock:newFromBlock callback:callback andErrorCallBack:errorCallback];
+        }
+        
+    } andErrorCallBack:^(MKNetworkOperation *errorOp, NSError *error) {
+        if (errorCallback) {
+            errorCallback(errorOp,error);
+        }
+        
+    }];
+    
+}
++(void)completeInputsForAddress:(BTAddress *)address callback:(VoidBlock) callback andErrorCallBack:(ErrorHandler)errorCallback{
+        uint32_t fromBlock=[address needCompleteInSignature];
+        if(fromBlock>0) {
+            [TransactionsUtil completeInputsForAddressForApi:address fromBlock:fromBlock callback:callback andErrorCallBack:errorCallback];
+        }else{
+            if (callback) {
+                callback();
+            }
+        }
+}
+
++(void)completeInputsForAddressInBackground:(BTAddress *)address{
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0),^{
+        uint32_t fromBlock=[address needCompleteInSignature];
+        if(fromBlock>0) {
+            [TransactionsUtil completeInputsForAddressForApi:address fromBlock:fromBlock callback:nil andErrorCallBack:nil];
+        }
+        
+    });
+}
++(NSArray *)getInSignature:(NSString *) result{
+    NSMutableArray * resultList=[NSMutableArray new];
+    if(![StringUtil isEmpty:result]){
+        NSArray * txs=[result componentsSeparatedByString:@";"];
+        for ( NSString * tx in txs){
+            NSArray * ins=[tx componentsSeparatedByString:@":"];
+            NSString * inStr=ins[0];
+            NSData * txHash=[[StringUtil getUrlSaleBase64:inStr] reverse];
+            for (int i=1; i<ins.count; i++) {
+                NSArray *array=[ins[i] componentsSeparatedByString:@","];
+                int inSn=[array[0] intValue];
+                NSData * inSignature=[StringUtil getUrlSaleBase64:array[1]];                BTIn * btIn=[[BTIn alloc] init];
+                [btIn setTxHash:txHash];
+                btIn.inSn=inSn;
+                [btIn setInSignature:inSignature];
+                [resultList addObject:btIn];
+                
+            }
+        }
+    }
+    return resultList;
+    
+}
 @end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -30,10 +30,13 @@
 @interface DialogAddressQrCode()<UIDocumentInteractionControllerDelegate>{
     UserDefaultsUtil *defaults;
     NSString *_shareFileName;
+    UIImage * _broderImage;
+    UIImage *_avatarImage;
 }
 @property NSString *address;
 @property UIScrollView *sv;
 @property UIDocumentInteractionController *interactionController;
+@property (strong, nonatomic) UIActivityIndicatorView* riv;
 @end
 
 @implementation DialogAddressQrCode
@@ -45,6 +48,7 @@
         self.delegate = delegate;
         defaults = [UserDefaultsUtil instance];
         _shareFileName = address.address;
+        _broderImage=[UIImage imageNamed:@"avatar_for_fancy_qr_code_overlay"];
         [self firstConfigure];
     }
     return self;
@@ -56,16 +60,28 @@
     self.dimAmount = 0.8f;
     self.sv = [[UIScrollView alloc]initWithFrame:CGRectMake(0, kButtonSize + kButtonBottomDistance, self.frame.size.width, self.frame.size.width)];
     self.sv.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
+     self.riv = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
+    self.riv.frame = CGRectMake(self.frame.size.width/2,self.frame.size.width*2/3, self.riv.frame.size.width, self.riv.frame.size.height);
+    [self addSubview:self.riv];
+    [self.riv startAnimating];
     NSArray *themes = [QRCodeTheme themes];
-    for(int i = 0; i < themes.count; i++){
-        UIImageView *iv = [[UIImageView alloc]initWithImage:[QRCodeThemeUtil qrCodeOfContent:self.address andSize:self.sv.frame.size.width margin:kQrCodeMargin withTheme:[themes objectAtIndex:i]]];
-        iv.frame = CGRectMake(i * self.sv.frame.size.width, 0, self.sv.frame.size.width, self.sv.frame.size.height);
-        [self.sv addSubview:iv];
-    }
+    
     self.sv.contentSize = CGSizeMake(themes.count * self.sv.frame.size.width, self.sv.frame.size.height);
     self.sv.pagingEnabled = YES;
     self.sv.showsHorizontalScrollIndicator = NO;
     [self addSubview:self.sv];
+    
+    for(int i = 0; i < themes.count; i++){
+        UIImageView *iv = [[UIImageView alloc]init];
+        iv.frame = CGRectMake(i * self.sv.frame.size.width, 0, self.sv.frame.size.width, self.sv.frame.size.height);
+        UIButton *btnDismiss = [[UIButton alloc]initWithFrame:iv.frame];
+        [btnDismiss setBackgroundImage:nil forState:UIControlStateNormal];
+        [btnDismiss addTarget:self action:@selector(dismiss) forControlEvents:UIControlEventTouchUpInside];
+        [self.sv addSubview:iv];
+        [self.sv addSubview:btnDismiss];
+        [self setQRImage:[themes objectAtIndex:i] iv:iv last:i==themes.count-1];
+        
+    }
     
     int buttonCount = 2;
     CGFloat buttonMargin = (self.frame.size.width - kButtonSize * buttonCount)/(buttonCount + 1);
@@ -83,14 +99,50 @@
     [btn setBackgroundImage:nil forState:UIControlStateNormal];
     [btn addTarget:self action:@selector(savePressed:) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:btn];
+    
 }
 
+-(void)setQRImage:(QRCodeTheme *)theme iv:(UIImageView *)iv last:(BOOL) isLast{
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        UIImage * qrCodeImage=[QRCodeThemeUtil qrCodeOfContent:self.address andSize:self.sv.frame.size.width margin:kQrCodeMargin withTheme:theme];
+        NSString * avatarName=[[UserDefaultsUtil instance] getUserAvatar];
+        NSString * avatatPath=nil;
+        if (avatarName) {
+            avatatPath= [[FileUtil getSmallAvatarDir] stringByAppendingString:avatarName];
+        }
+        if (avatatPath&&[FileUtil fileExists:avatatPath]) {
+            if (!_avatarImage) {
+                _avatarImage=[[UIImage alloc]initWithContentsOfFile:avatatPath];
+            }
+            UIGraphicsBeginImageContextWithOptions(CGSizeMake(qrCodeImage.size.width, qrCodeImage.size.height), NO, 0);
+            [qrCodeImage drawInRect:CGRectMake(0, 0, qrCodeImage.size.width, qrCodeImage.size.height)];
+            int w=qrCodeImage.size.width*0.24f;
+            int borderW=(qrCodeImage.size.width-w)/2;
+            int borderH=(qrCodeImage.size.height-w)/2;
+            CGRect rect=CGRectMake(borderW, borderH, w, w);
+            [_avatarImage drawInRect:CGRectMake(borderW+4, borderH+4, w-8, w-8)];
+            [_broderImage drawInRect:rect];
+            qrCodeImage = UIGraphicsGetImageFromCurrentImageContext();
+            UIGraphicsEndImageContext();
+        }
+        dispatch_async(dispatch_get_main_queue(), ^{
+            iv.image=qrCodeImage;
+            if (isLast) {
+                [self.riv stopAnimating ];
+                self.riv.hidden=YES;
+            }
+        });
+        
+    });
+    
+}
 -(void)sharePressed:(id)sender{
     NSURL* url = [FileUtil saveTmpImageForShare:[self currentQrCode] fileName:_shareFileName];
     self.interactionController = [UIDocumentInteractionController interactionControllerWithURL:url];
     UIView *fromView = self.window.topViewController.view;
     self.interactionController.delegate = self;
     [self.interactionController presentOptionsMenuFromRect:CGRectMake(0, 0, fromView.frame.size.width, fromView.frame.size.height) inView:fromView animated:YES];
+    
 }
 
 -(void)savePressed:(id)sender{
@@ -118,6 +170,7 @@
 -(void)dialogWillShow{
     [super dialogWillShow];
     self.sv.contentOffset = CGPointMake([defaults getQrCodeTheme] * self.sv.frame.size.width, 0);
+    NSArray *themes = [QRCodeTheme themes];
 }
 
 -(int)currentIndex{

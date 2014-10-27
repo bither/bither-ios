@@ -57,8 +57,9 @@ static Setting* EditPasswordSetting;
 static Setting* ColdMonitorSetting;
 static Setting* AdvanceSetting;
 static Setting* reloadTxsSetting;
+static Setting* RCheckSetting;
 
--(instancetype)initWithName:(NSString *)name  icon:(NSString *)icon {
+-(instancetype)initWithName:(NSString *)name  icon:(UIImage *)icon {
     self=[super init];
     if (self) {
         _settingName=name;
@@ -71,6 +72,11 @@ static Setting* reloadTxsSetting;
 -(void)selection{
     
 }
+-(UIImage *)getIcon{
+    return _icon;
+}
+
+
 
 +(Setting * )getExchangeSetting{
     if(!ExchangeSetting){
@@ -249,7 +255,7 @@ static Setting* reloadTxsSetting;
 }
 +(Setting *)getAdvanceSetting{
     if(!AdvanceSetting){
-        Setting * setting=[[Setting alloc] initWithName:NSLocalizedString(@"Advance Options", nil) icon:@"advance_button_icon" ];
+        Setting * setting=[[Setting alloc] initWithName:NSLocalizedString(@"Advance Options", nil) icon:[UIImage imageNamed:@"advance_button_icon"] ];
         [setting setSelectBlock:^(UIViewController * controller){
             AdvanceViewController *advanceController = [controller.storyboard instantiateViewControllerWithIdentifier:@"AdvanceViewController"];
             advanceController.settings=[Setting advanceSettings];
@@ -265,7 +271,7 @@ static Setting* reloadTxsSetting;
 
 +(Setting *)getAvatarSetting{
     if(!AvatarSetting){
-        Setting * setting=[[Setting alloc] initWithName:NSLocalizedString(@"Set Avatar", nil) icon:@"avatar_button_icon" ];
+        Setting * setting=[[Setting alloc] initWithName:NSLocalizedString(@"Set Avatar", nil) icon:[UIImage imageNamed:@"avatar_button_icon" ]];
         [setting setSelectBlock:^(UIViewController * controller){
             
         }];
@@ -276,7 +282,7 @@ static Setting* reloadTxsSetting;
 }
 +(Setting *)getCheckSetting{
     if(!CheckSetting){
-        Setting * setting=[[Setting alloc] initWithName:NSLocalizedString(@"Check Private Keys", nil) icon:@"check_button_icon" ];
+        Setting * setting=[[Setting alloc] initWithName:NSLocalizedString(@"Check Private Keys", nil) icon:[UIImage imageNamed:@"check_button_icon" ]];
         [setting setSelectBlock:^(UIViewController * controller){
             if([BTAddressManager instance].privKeyAddresses.count == 0){
                 if([controller respondsToSelector:@selector(showMsg:)]){
@@ -298,7 +304,7 @@ static Setting* reloadTxsSetting;
 
 +(Setting *)getEditPasswordSetting{
     if(!EditPasswordSetting){
-        Setting * setting=[[Setting alloc] initWithName:NSLocalizedString(@"Change Password", nil) icon:@"edit_password_button_icon" ];
+        Setting * setting=[[Setting alloc] initWithName:NSLocalizedString(@"Change Password", nil) icon:[UIImage imageNamed:@"edit_password_button_icon"] ];
         [setting setSelectBlock:^(UIViewController * controller){
             if([BTAddressManager instance].privKeyAddresses.count == 0){
                 if([controller respondsToSelector:@selector(showMsg:)]){
@@ -317,7 +323,7 @@ static Setting* reloadTxsSetting;
 
 +(Setting*)getColdMonitorSetting{
     if(!ColdMonitorSetting){
-        ColdMonitorSetting = [[Setting alloc]initWithName:NSLocalizedString(@"Watch Only QR Code", nil) icon:@"qr_code_button_icon"];
+        ColdMonitorSetting = [[Setting alloc]initWithName:NSLocalizedString(@"Watch Only QR Code", nil) icon:[UIImage imageNamed:@"qr_code_button_icon"]];
         [ColdMonitorSetting setSelectBlock:^(UIViewController * controller){
             NSArray* addresses = [BTAddressManager instance].privKeyAddresses;
             NSMutableArray* pubKeys = [[NSMutableArray alloc]init];
@@ -339,12 +345,31 @@ static Setting* reloadTxsSetting;
     return ColdMonitorSetting;
 }
 
++(Setting*)getRCheckSetting{
+    if(!RCheckSetting){
+        RCheckSetting = [[Setting alloc]initWithName:NSLocalizedString(@"setting_name_rcheck", nil) icon:[UIImage imageNamed:@"rcheck_button_icon"]];
+        [RCheckSetting setSelectBlock:^(UIViewController * controller){
+            if([BTAddressManager instance].allAddresses.count > 0){
+                [controller.navigationController pushViewController:[controller.storyboard instantiateViewControllerWithIdentifier:@"rcheck"] animated:YES];
+            }else{
+                if([controller respondsToSelector:@selector(showMsg:)]){
+                    [controller performSelector:@selector(showMsg:) withObject:NSLocalizedString(@"rcheck_no_address", nil) afterDelay:0];
+                }
+            }
+        }];
+    }
+    return RCheckSetting;
+}
+
 +(NSArray*)advanceSettings{
     NSMutableArray *array = [NSMutableArray new];
     if ([[BTSettings instance] getAppMode]==HOT) {
         [array addObject:[Setting getNetworkSetting]];
     }
     [array addObject:[Setting getEditPasswordSetting]];
+    if ([[BTSettings instance] getAppMode]==HOT) {
+        [array addObject:[Setting getRCheckSetting]];
+    }
     [array addObject:[ImportPrivateKeySetting getImportPrivateKeySetting]];
     [array addObject:[ImportBip38PrivateKeySetting getImportBip38PrivateKeySetting]];
     if ([[BTSettings instance] getAppMode]==HOT) {

@@ -34,7 +34,7 @@ static Setting* DonateSetting;
 
 
 -(instancetype)init{
-    self = [super initWithName:NSLocalizedString(@"Donate", nil) icon:@"donate_button_icon"];
+    self = [super initWithName:NSLocalizedString(@"Donate", nil) icon:[UIImage imageNamed:@"donate_button_icon"]];
     if(self){
         __weak DonationSetting *d = self;
         [self setSelectBlock:^(UIViewController * controller){

@@ -418,5 +418,7 @@ static float PreVCMaskAlphaMax = 0.4;
 -(void)setShown:(BOOL)shown{
     [self swipeRightToPopVars].shown = shown;
 }
+-(void)reload{
+}
 
 @end

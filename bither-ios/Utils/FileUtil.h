@@ -40,4 +40,8 @@
 
 +(void)deleteTmpImageForShareWithName:(NSString*)name;
 +(NSURL*)saveTmpImageForShare:(UIImage*)image fileName:(NSString*)name;
+
++(NSString *)getAvatarDir;
++(NSString *)getSmallAvatarDir;
++(NSString *)getUploadAvatarDir;
 @end

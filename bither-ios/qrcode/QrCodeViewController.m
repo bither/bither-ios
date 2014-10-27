@@ -105,7 +105,7 @@
         v.backgroundColor = [UIColor clearColor];
         
         UIImageView* ivQr = [[UIImageView alloc]initWithFrame:CGRectMake((v.frame.size.width - qrSize)/2, 0, qrSize, qrSize)];
-        ivQr.image = [QRCodeThemeUtil qrCodeOfContent:[strs objectAtIndex:i] andSize:ivQr.frame.size.width withTheme:[QRCodeTheme black]];
+        ivQr.image = [QRCodeThemeUtil qrCodeOfContent:[strs objectAtIndex:i] andSize:ivQr.frame.size.width margin: ivQr.frame.size.width * 0.05f withTheme:[QRCodeTheme black]];
         
         UILabel *lbl = [[UILabel alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(ivQr.frame) + margin, v.frame.size.width, kPageHeight)];
         lbl.font = [UIFont systemFontOfSize:kPageFontSize];

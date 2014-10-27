@@ -20,7 +20,7 @@
 #import "StringUtil.h"
 #import "NSString+Base58.h"
 #import "ScanQrCodeViewController.h"
-#import "DialogProgress.h"
+#import "DialogProgressChangable.h"
 #import "UserDefaultsUtil.h"
 #import "UIViewController+PiShowBanner.h"
 #import "DialogSendTxConfirm.h"
@@ -34,7 +34,9 @@
 
 #define kBalanceFontSize (15)
 
-@interface SendViewController ()<UITextFieldDelegate,ScanQrCodeDelegate,DialogSendTxConfirmDelegate>
+@interface SendViewController ()<UITextFieldDelegate,ScanQrCodeDelegate,DialogSendTxConfirmDelegate>{
+    DialogProgressChangable *dp;
+}
 @property (weak, nonatomic) IBOutlet UILabel *lblBalancePrefix;
 @property (weak, nonatomic) IBOutlet UILabel *lblBalance;
 @property (weak, nonatomic) IBOutlet UILabel *lblPayTo;
@@ -72,6 +74,7 @@
             self.amtLink.amount = self.amount;
         }
     }
+    dp = [[DialogProgressChangable alloc]initWithMessage:NSLocalizedString(@"Please wait…", nil)];
     [self check];
 }
 
@@ -81,6 +84,7 @@
     if (![[BTPeerManager instance] connected]) {
         [[PeerUtil instance] startPeer];
     }
+    [TransactionsUtil completeInputsForAddressInBackground:self.address];
 }
 
 -(void)viewDidAppear:(BOOL)animated{
@@ -95,7 +99,6 @@
 - (IBAction)sendPressed:(id)sender {
     if([self checkValues]){
         [self hideKeyboard];
-        DialogProgress *dp = [[DialogProgress alloc]initWithMessage:NSLocalizedString(@"Please wait…", nil)];
         [dp showInWindow:self.view.window completion:^{
             dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
                 if(![[[UserDefaultsUtil instance]getPasswordSeed]checkPassword:self.tfPassword.text]){
@@ -104,7 +107,8 @@
                 }
                 u_int64_t value = self.amtLink.amount;
                 NSError * error;
-                BTTx* tx = [self.address txForAmounts:@[@(value)] andAddress:@[self.tfAddress.text] andError:&error];
+                NSString * toAddress=[self.tfAddress.text stringByReplacingOccurrencesOfString:@" " withString:@""];
+                BTTx* tx = [self.address txForAmounts:@[@(value)] andAddress:@[toAddress] andError:&error];
                 if (error) {
                     NSString * msg=[TransactionsUtil getCompleteTxForError:error];
                     [self showSendResult:msg dialog:dp];
@@ -114,12 +118,28 @@
                         return;
                     }
                     if([self.address signTransaction:tx withPassphrase:self.tfPassword.text]){
-                        dispatch_async(dispatch_get_main_queue(), ^{
-                            [dp dismissWithCompletion:^{
-                                DialogSendTxConfirm *dialog = [[DialogSendTxConfirm alloc]initWithTx:tx from:self.address to:self.tfAddress.text delegate:self];
-                                [dialog showInWindow:self.view.window];
-                            }];
-                        });
+                        [dp changeToMessage:NSLocalizedString(@"rchecking_new_tx", nil) completion:^{
+                            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+                                if([self.address checkRValuesForTx:tx]){
+                                    __block NSString * addressBlock = toAddress;
+                                    dispatch_async(dispatch_get_main_queue(), ^{
+                                        [dp changeToMessage:NSLocalizedString(@"rcheck_new_tx_success", nil) icon:[UIImage imageNamed:@"checkmark"] completion:^{
+                                            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.8 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                                                [dp dismissWithCompletion:^{
+                                                    [dp changeToMessage:NSLocalizedString(@"Please wait…", nil)];
+                                                    DialogSendTxConfirm *dialog = [[DialogSendTxConfirm alloc]initWithTx:tx from:self.address to:addressBlock delegate:self];
+                                                    [dialog showInWindow:self.view.window];
+                                                }];
+                                            });
+                                        }];
+                                    });
+                                } else {
+                                    [dp changeToMessage:NSLocalizedString(@"rcheck_recalculate", nil) completion:^{
+                                        [self sendPressed:self.btnSend];
+                                    }];
+                                }
+                            });
+                        }];
                     }else{
                         [self showSendResult:NSLocalizedString(@"Password wrong.", nil) dialog:dp];
                     }
@@ -134,7 +154,7 @@
     if(!tx){
         return;
     }
-    DialogProgress *dp = [[DialogProgress alloc]initWithMessage:NSLocalizedString(@"Please wait…", nil)];
+    [dp changeToMessage:NSLocalizedString(@"Please wait…", nil)];
     [dp showInWindow:self.view.window completion:^{
         [[BTPeerManager instance] publishTransaction:tx completion:^(NSError *error) {
             if(!error){
@@ -153,9 +173,9 @@
     }];
 }
 
--(void)showSendResult:(NSString*)msg dialog:(DialogProgress*)dp{
+-(void)showSendResult:(NSString*)msg dialog:(DialogProgressChangable*)dpc{
     dispatch_async(dispatch_get_main_queue(), ^{
-        [dp dismissWithCompletion:^{
+        [dpc dismissWithCompletion:^{
             [self showBannerWithMessage:msg belowView:self.vTopBar];
         }];
     });
@@ -167,14 +187,37 @@
 }
 
 -(void)handleResult:(NSString*)result byReader:(ScanQrCodeViewController*)reader{
-    if(result.isValidBitcoinAddress){
+    BOOL isValidBitcoinAddress=result.isValidBitcoinAddress;
+    BOOL isValidBitcoinBIP21Address=[StringUtil isValidBitcoinBIP21Address:result];
+    if(isValidBitcoinAddress||isValidBitcoinBIP21Address){
         [reader playSuccessSound];
         [reader vibrate];
-        self.tfAddress.text = result;
-        [reader dismissViewControllerAnimated:YES completion:^{
-            [self check];
-            [self.amtLink becomeFirstResponder];
-        }];
+        if (isValidBitcoinAddress) {
+            self.tfAddress.text = result;
+            [reader dismissViewControllerAnimated:YES completion:^{
+                [self check];
+                [self.amtLink becomeFirstResponder];
+            }];
+        }
+        if (isValidBitcoinBIP21Address) {
+            self.tfAddress.text=[StringUtil getAddressFormBIP21Address:result];
+            uint64_t amt=[StringUtil getAmtFormBIP21Address:result];
+            if (amt!=-1) {
+                self.amtLink.amount=amt;
+            }
+           
+            [reader dismissViewControllerAnimated:YES completion:^{
+                [self check];
+                if (amt!=-1) {
+                    [self.tfPassword becomeFirstResponder];
+                }else{
+                    [self.amtLink becomeFirstResponder];
+                }
+               
+            }];
+        }
+    }else{
+         [reader vibrate];
     }
 }
 

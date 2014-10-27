@@ -34,7 +34,7 @@ static Setting* SignTransactionSetting;
 }
 
 -(instancetype)init{
-    self = [super initWithName:NSLocalizedString(@"Sign Transaction", nil) icon:@"scan_button_icon"];
+    self = [super initWithName:NSLocalizedString(@"Sign Transaction", nil) icon:[UIImage imageNamed:@"scan_button_icon"]];
     if(self){
         __weak SignTransactionScanSetting *d = self;
         [self setSelectBlock:^(UIViewController * controller){

@@ -165,7 +165,7 @@
 -(void)moveProgress{
     self.ivCheckProgress.hidden=NO;
     [UIView animateWithDuration:1.2f animations:^{
-        self.ivCheckProgress.frame=CGRectMake(300-17, 0, self.ivCheckProgress.frame.size.width, self.ivCheckProgress.frame.size.height);
+        self.ivCheckProgress.frame=CGRectMake(self.vContainer.frame.size.width - 17, 0, self.ivCheckProgress.frame.size.width, self.ivCheckProgress.frame.size.height);
     } completion:^(BOOL finished) {
         if (finished&&self.checking) {
             self.ivCheckProgress.frame=CGRectMake(0, 0, self.ivCheckProgress.frame.size.width, self.ivCheckProgress.frame.size.height);

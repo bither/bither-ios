@@ -18,6 +18,7 @@
 
 #import <Foundation/Foundation.h>
 #import "BitherSetting.h"
+#import "BTAddress.h"
 
 @interface TransactionsUtil : NSObject
 
@@ -27,4 +28,6 @@
 +(void) syncWallet:(VoidBlock) voidBlock andErrorCallBack:(ErrorHandler)errorCallback;
 
 +(NSString *)getCompleteTxForError:(NSError *) error;
++(void)completeInputsForAddress:(BTAddress *)address callback:(VoidBlock) callback andErrorCallBack:(ErrorHandler)errorCallback;
++(void)completeInputsForAddressInBackground:(BTAddress *)address;
 @end

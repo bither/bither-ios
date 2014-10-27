@@ -49,8 +49,6 @@
     if (txNotificationType==txReceive||txNotificationType==txSend) {
         [self notification:msg dict:infoDic];
     }
-    
-    
 }
 
 +(void)notification:(NSString *)msg dict:(NSDictionary * )dict{
@@ -64,7 +62,7 @@
         notification.soundName =@"coins_received.wav";
         notification.alertBody=msg;
         notification.hasAction=NO;
-        notification.applicationIconBadgeNumber += 1;
+        notification.applicationIconBadgeNumber = [UIApplication sharedApplication].applicationIconBadgeNumber + 1;
         notification.userInfo = dict;
 
         [[UIApplication sharedApplication] scheduleLocalNotification:notification];

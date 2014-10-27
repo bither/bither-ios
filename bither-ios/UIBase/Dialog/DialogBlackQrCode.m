@@ -32,6 +32,10 @@
         iv.autoresizingMask = UIViewAutoresizingFlexibleHeight| UIViewAutoresizingFlexibleWidth;
         iv.image = [QRCodeThemeUtil qrCodeOfContent:content andSize:iv.frame.size.width withTheme:[QRCodeTheme black]];
         [self addSubview:iv];
+        UIButton* btnDismiss = [[UIButton alloc]initWithFrame:iv.frame];
+        [btnDismiss setBackgroundImage:nil forState:UIControlStateNormal];
+        [btnDismiss addTarget:self action:@selector(dismiss) forControlEvents:UIControlEventTouchUpInside];
+        [self addSubview:btnDismiss];
     }
     return self;
 }
