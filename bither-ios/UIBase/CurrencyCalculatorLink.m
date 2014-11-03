@@ -49,7 +49,7 @@
     iv.frame = CGRectMake(0, 9, self.tfBtc.leftView.frame.size.width, 16);
     [self.tfBtc.leftView addSubview:iv];
     
-    NSString* symbol = [BitherSetting getExchangeSymbol:[[UserDefaultsUtil instance] getDefaultExchangeType]];
+    NSString* symbol = [BitherSetting getCurrencySymbol:[[UserDefaultsUtil instance] getDefaultCurrency]];
     UILabel* lbl = [[UILabel alloc]initWithFrame:CGRectMake(0, 9, self.tfCurrency.leftView.frame.size.width, 18)];
     lbl.textAlignment = NSTextAlignmentCenter;
     lbl.textColor = [UIColor blackColor];

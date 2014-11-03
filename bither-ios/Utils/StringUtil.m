@@ -33,7 +33,7 @@
 @implementation StringUtil
 
 +(NSString *)formatPrice:(double) value{
-    NSString * symobl=[BitherSetting getExchangeSymbol:[[UserDefaultsUtil instance] getDefaultExchangeType]];
+    NSString * symobl= [BitherSetting getCurrencySymbol:[[UserDefaultsUtil instance] getDefaultCurrency]];
     return  [NSString stringWithFormat:@"%@%.2f",symobl, value];
 }
 +(NSString * )formatDouble:(double) value{

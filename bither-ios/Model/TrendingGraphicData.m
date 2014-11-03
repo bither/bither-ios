@@ -61,10 +61,10 @@ static NSMutableDictionary * tgds;
     TrendingGraphicData *tgd=[[TrendingGraphicData alloc] init];
     double high=0;
     double low=UINT32_MAX;
-    double rate=[ExchangeUtil getExchangeRate];
+//    double rate=[ExchangeUtil getExchangeRate];
     NSMutableArray * prices=[NSMutableArray new];
     for (int i=0; i<array.count; i++) {
-        double price=[[array objectAtIndex:i] doubleValue]/100*rate;
+        double price=[[array objectAtIndex:i] doubleValue];
         [prices addObject:@(price)];
         if (high<price) {
             high=price;

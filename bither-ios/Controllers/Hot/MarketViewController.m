@@ -118,7 +118,7 @@
     }
     if (self.market.ticker) {
         Ticker * ticker=self.market.ticker;
-        self.lbSymbol.text= [BitherSetting getExchangeSymbol:[[UserDefaultsUtil instance] getDefaultExchangeType]];
+        self.lbSymbol.text= [BitherSetting getCurrencySymbol:[[UserDefaultsUtil instance] getDefaultCurrency]];
         self.lbNew.text=[StringUtil formatDouble:[ticker getDefaultExchangePrice]];
         self.lbHigh.text=[StringUtil formatPrice:[ticker getDefaultExchangeHigh]];
         self.lbLow.text=[StringUtil formatPrice:[ticker getDefaultExchangeLow]];

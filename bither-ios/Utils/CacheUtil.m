@@ -34,6 +34,7 @@
 #define ADDRESS_LIST @"address_list"
 
 #define EXCHANGERATE @"exchangerate"
+#define CURRENCIES_RATE @"currencies_rate"
 #define MARKET_CAHER @"mark"
 
 #define IMAGE_CACHE_DIR @"image"
@@ -45,12 +46,18 @@
 
 
 @implementation CacheUtil
-+(NSString *)getExchangeFile{
-    NSString * cacheDir=[FileUtil cachePathForFileName:@""];
++ (NSString *)getExchangeFile {
+    NSString *cacheDir = [FileUtil cachePathForFileName:@""];
     return [cacheDir stringByAppendingPathComponent:EXCHANGERATE];
 }
-+(NSString *)getTickerFile{
-    NSString * marketDir=[FileUtil cachePathForFileName:MARKET_CAHER];
+
++ (NSString *)getCurrenciesRateFile; {
+    NSString *cacheDir = [FileUtil cachePathForFileName:@""];
+    return [cacheDir stringByAppendingPathComponent:CURRENCIES_RATE];
+}
+
++ (NSString *)getTickerFile {
+    NSString *marketDir = [FileUtil cachePathForFileName:MARKET_CAHER];
     if (![FileUtil fileExists:marketDir]) {
         [FileUtil createDirectory:marketDir];
     }

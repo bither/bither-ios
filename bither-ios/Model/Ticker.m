@@ -31,19 +31,19 @@
 
 @implementation Ticker
 -(double)getDefaultExchangeBuy{
-    return self.buy*[ExchangeUtil getRateOfMareket:self.marketType];
+    return self.buy* [ExchangeUtil getRateForMarket:self.marketType];
 }
 -(double)getDefaultExchangeHigh{
-    return self.high*[ExchangeUtil getRateOfMareket:self.marketType];
+    return self.high* [ExchangeUtil getRateForMarket:self.marketType];
 }
 -(double) getDefaultExchangeLow{
-    return self.low*[ExchangeUtil getRateOfMareket:self.marketType];
+    return self.low* [ExchangeUtil getRateForMarket:self.marketType];
 }
 -(double)getDefaultExchangePrice{
-    return self.pNew*[ExchangeUtil getRateOfMareket:self.marketType];
+    return self.pNew* [ExchangeUtil getRateForMarket:self.marketType];
 }
 -(double)getDefaultExchangeSell{
-    return self.sell*[ExchangeUtil getRateOfMareket:self.marketType];
+    return self.sell* [ExchangeUtil getRateForMarket:self.marketType];
 }
 +(Ticker *)formatTicker:(NSDictionary *)dict market:(MarketType) marketType{
     Ticker * ticker=[[Ticker alloc] init];

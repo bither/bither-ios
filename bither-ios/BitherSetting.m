@@ -22,8 +22,8 @@
 
 @implementation BitherSetting
 
-+(NSString *)getMarketName:(MarketType )marketType{
-    NSString * name;
++ (NSString *)getMarketName:(MarketType)marketType {
+    NSString *name;
     switch (marketType) {
         case HUOBI:
             name = NSLocalizedString(@"HUOBI", nil);
@@ -54,9 +54,10 @@
             break;
     }
     return name;
-    
+
 }
-+(NSString *)getMarketDomain:(MarketType )marketType{
+
++ (NSString *)getMarketDomain:(MarketType)marketType {
     switch (marketType) {
         case HUOBI:
             return @"huobi.com";
@@ -78,31 +79,95 @@
             return nil;
     }
 }
-+(NSString *)getExchangeSymbol:(ExchangeType)exchangeType{
-    if (exchangeType==USD) {
-        return @"$";
-    }else {
-        return @"¥";
+
++ (NSString *)getCurrencySymbol:(Currency)currency; {
+    switch (currency) {
+        case USD:
+            return @"$";
+        case CNY:
+            return @"¥";
+        case EUR:
+            return @"€";
+        case GBP:
+            return @"£";
+        case JPY:
+            return @"¥";
+        case KRW:
+            return @"₩";
+        case CAD:
+            return @"C$";
+        case AUD:
+            return @"A$";
+        default:
+            return @"$";
     }
 }
 
-+(NSString *)getExchangeName:(ExchangeType)exchangeType{
-    if (exchangeType==USD) {
-        return @"USD";
-    }else {
-        return @"CNY";
++ (NSString *)getCurrencyName:(Currency)currency; {
+    switch (currency) {
+        case USD:
+            return @"USD";
+        case CNY:
+            return @"CNY";
+        case EUR:
+            return @"EUR";
+        case GBP:
+            return @"GBP";
+        case JPY:
+            return @"JPY";
+        case KRW:
+            return @"KRW";
+        case CAD:
+            return @"CAD";
+        case AUD:
+            return @"AUD";
+        default:
+            return @"USD";
     }
 }
-+(NSString *)getTransactionFeeMode:(TransactionFeeMode)transactionFee{
-    if (transactionFee==Normal) {
+
++ (Currency)getCurrencyFromName:(NSString *)currencyName; {
+    if (currencyName == nil || currencyName.length == 0){
+        return USD;
+    }
+    if ([currencyName isEqualToString:@"USD"]) {
+        return USD;
+    }
+    if ([currencyName isEqualToString:@"CNY"]) {
+        return CNY;
+    }
+    if ([currencyName isEqualToString:@"EUR"]) {
+        return EUR;
+    }
+    if ([currencyName isEqualToString:@"GBP"]) {
+        return GBP;
+    }
+    if ([currencyName isEqualToString:@"JPY"]) {
+        return JPY;
+    }
+    if ([currencyName isEqualToString:@"KRW"]) {
+        return KRW;
+    }
+    if ([currencyName isEqualToString:@"CAD"]) {
+        return CAD;
+    }
+    if ([currencyName isEqualToString:@"AUD"]) {
+        return AUD;
+    }
+    return USD;
+}
+
++ (NSString *)getTransactionFeeMode:(TransactionFeeMode)transactionFee {
+    if (transactionFee == Normal) {
         return NSLocalizedString(@"Normal", nil);
-    }else{
+    } else {
         return NSLocalizedString(@"Low", nil);
     }
 }
-+(UIColor *)getMarketColor:(MarketType)marketType{
+
++ (UIColor *)getMarketColor:(MarketType)marketType {
     switch (marketType) {
-            //ffff9329
+        //ffff9329
         case HUOBI:
             return RGBA(255, 147, 41, 1);
             //ff3bbf59
@@ -123,7 +188,7 @@
             //ffa3bd0b
         case BITFINEX:
             return RGBA(163, 189, 11, 1);
-             //ffe31f21
+            //ffe31f21
         case MARKET796:
             return RGBA(227, 31, 33, 1);
         default:

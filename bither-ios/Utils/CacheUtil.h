@@ -19,7 +19,8 @@
 #import <Foundation/Foundation.h>
 
 @interface CacheUtil : NSObject
-+(NSString *)getExchangeFile;
-+(NSString *)getTickerFile;
++ (NSString *)getExchangeFile;
++ (NSString *)getCurrenciesRateFile;
++ (NSString *)getTickerFile;
 
 @end

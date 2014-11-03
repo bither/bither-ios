@@ -78,59 +78,58 @@ typedef void (^DictResponseBlock)(NSDictionary *dict);
 typedef void (^IdResponseBlock)(id response);
 typedef void (^ArrayResponseBlock)(NSArray *array);
 typedef void (^ImageResponseBlock)(UIImage *image, NSURL *url);
-typedef void (^ErrorHandler)(MKNetworkOperation *errorOp, NSError* error);
+typedef void (^ErrorHandler)(MKNetworkOperation *errorOp, NSError *error);
 typedef void (^CompletedOperation)(MKNetworkOperation *completedOperation);
 typedef void (^ResponseFormat)(MKNetworkOperation *completedOperation);
 typedef void (^LongResponseBlock)(long long num);
-typedef void (^StirngBlock)(NSString * string);
+typedef void (^StirngBlock)(NSString *string);
 typedef void (^VoidBlock)(void);
-typedef void (^ErrorBlock)(NSError * error);
-typedef void (^ViewControllerBlock)(UIViewController * controller);
-typedef NSString * (^GetValueBlock)(void);
-typedef NSArray *(^GetArrayBlock) (void);
+typedef void (^ErrorBlock)(NSError *error);
+typedef void (^ViewControllerBlock)(UIViewController *controller);
+typedef NSString *(^GetValueBlock)(void);
+typedef NSArray *(^GetArrayBlock)(void);
 
-
-
-
-typedef enum  {
-     BITSTAMP=1, BTCE=2, HUOBI=3, OKCOIN=4, BTCCHINA=5, CHBTC=6,BITFINEX=7,MARKET796=8
-}MarketType;
-
-typedef enum  {
-    ONE_MINUTE=1, FIVE_MINUTES=5, ONE_HOUR=60, ONE_DAY=1440
-}KLineTimeType;
-
-typedef enum  {
-    Normal=10000 ,Low=1000
-}TransactionFeeMode;
 
 typedef enum {
-    USD,CNY
-}ExchangeType;
+    BITSTAMP = 1, BTCE = 2, HUOBI = 3, OKCOIN = 4, BTCCHINA = 5, CHBTC = 6, BITFINEX = 7, MARKET796 = 8
+} MarketType;
+
+typedef enum {
+    ONE_MINUTE = 1, FIVE_MINUTES = 5, ONE_HOUR = 60, ONE_DAY = 1440
+} KLineTimeType;
+
+typedef enum {
+    Normal = 10000, Low = 1000
+} TransactionFeeMode;
+
+typedef enum {
+    USD, CNY, EUR, GBP, JPY, KRW, CAD, AUD
+} Currency;
 
 typedef enum {
     AddressNormal, AddressTxTooMuch, AddressSpecialAddress
-}AddressType;
+} AddressType;
 
 #define CustomErrorDomain @"www.bither.net"
 typedef enum {
-    
-PasswordError = -1000,
-    
-}CustomErrorFailed;
 
-typedef enum{
-    Text,Encrypted,Decrypetd
+    PasswordError = -1000,
+
+} CustomErrorFailed;
+
+typedef enum {
+    Text, Encrypted, Decrypetd
 } PrivateKeyQrCodeType;
 
 
 @interface BitherSetting : NSObject
 
-+(NSString *)getMarketName:(MarketType )marketType;
-+(NSString *)getMarketDomain:(MarketType )marketType;
-+(NSString *)getExchangeSymbol:(ExchangeType) exchangeType;
-+(NSString *)getExchangeName:(ExchangeType)exchangeType;
-+(NSString *)getTransactionFeeMode:(TransactionFeeMode)transactionFee;
-+(UIColor *) getMarketColor:(MarketType )marketType;
++ (NSString *)getMarketName:(MarketType)marketType;
++ (NSString *)getMarketDomain:(MarketType)marketType;
++ (NSString *)getCurrencySymbol:(Currency)currency;
++ (NSString *)getCurrencyName:(Currency)currency;
++ (Currency)getCurrencyFromName:(NSString *)currencyName;
++ (NSString *)getTransactionFeeMode:(TransactionFeeMode)transactionFee;
++ (UIColor *)getMarketColor:(MarketType)marketType;
 
 @end

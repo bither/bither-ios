@@ -82,8 +82,10 @@ static NSMutableArray * markets;
     }
 }
 +(void)handlerResult:(NSDictionary *)dict{
-    double currentRate=[dict getDoubleFromDict:@"currency_rate"];
-    [ExchangeUtil setExchangeRate:currentRate];
+//    double currentRate=[dict getDoubleFromDict:@"currency_rate"];
+//    [ExchangeUtil setExchangeRate:currentRate];
+    NSDictionary *currencies_rate_dict = dict[@"currencies_rate"];
+    [ExchangeUtil setCurrenciesRate:currencies_rate_dict];
     NSArray * array=[Ticker formatList:dict];
     [self setTickerList:array];
     dispatch_async(dispatch_get_main_queue(), ^{

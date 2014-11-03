@@ -32,8 +32,8 @@
 -(MarketType) getDefaultMarket;
 -(void)setMarket:(MarketType) marketType;
 
--(void)setExchangeType:(ExchangeType ) exchangeType;
--(ExchangeType)getDefaultExchangeType;
+-(void)setExchangeType:(Currency) exchangeType;
+-(Currency)getDefaultCurrency;
 
 
 -(long long)getLastCheckPrivateKeyTime;

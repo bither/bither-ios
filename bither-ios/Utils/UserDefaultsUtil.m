@@ -82,11 +82,11 @@ NSUserDefaults *userDefaults;
     [userDefaults synchronize];
 }
 
--(void)setExchangeType:(ExchangeType ) exchangeType{
+-(void)setExchangeType:(Currency) exchangeType{
     [userDefaults setInteger:exchangeType forKey:DEFAULT_EXCHANGE_RATE];
     [userDefaults synchronize];
 }
--(ExchangeType)getDefaultExchangeType{
+-(Currency)getDefaultCurrency {
     NSInteger type=[self  getExchangeType];
     if (type==-1) {
         [self setDefaultExchangeType];

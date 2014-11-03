@@ -68,7 +68,7 @@
     
     CGFloat bottom = CGRectGetMaxY(ivForeground.frame);
     
-    NSString * symbol=[BitherSetting getExchangeSymbol:[[UserDefaultsUtil instance] getDefaultExchangeType]];
+    NSString * symbol= [BitherSetting getCurrencySymbol:[[UserDefaultsUtil instance] getDefaultCurrency]];
     if(hot > 0){
         UILabel* lbl = [[UILabel alloc]initWithFrame:CGRectMake(kBottomHorizontalMargin, bottom + kVerticalGap, self.frame.size.width - kBottomHorizontalMargin * 2, kBottomLabelFontSize * 1.2)];
         lbl.font = [UIFont systemFontOfSize:kBottomLabelFontSize];
