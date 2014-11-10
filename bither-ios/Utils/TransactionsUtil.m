@@ -242,30 +242,30 @@
     }];
 }
 
-+(NSString *)getCompleteTxForError:(NSError *) error{
-    NSString * msg=@"";
++ (NSString *)getCompleteTxForError:(NSError *)error {
+    NSString *msg = @"";
     switch (error.code) {
         case ERR_TX_DUST_OUT_CODE:
-            msg=NSLocalizedString(@"Send failed. Sending coins this few will be igored.", nil);
+            msg = NSLocalizedString(@"Send failed. Sending coins this few will be igored.", nil);
             break;
         case ERR_TX_NOT_ENOUGH_MONEY_CODE:
-             msg= [NSString stringWithFormat: NSLocalizedString(@"Send failed. Lack of %@ BTC.", nil),[StringUtil stringForAmount:[error.userInfo getLongLongFromDict:ERR_TX_NOT_ENOUGH_MONEY_LACK]]];
+            msg = [NSString stringWithFormat:NSLocalizedString(@"Send failed. Lack of %@ BTC.", nil), [StringUtil stringForAmount:[error.userInfo getLongLongFromDict:ERR_TX_NOT_ENOUGH_MONEY_LACK]]];
             break;
-        
         case ERR_TX_WAIT_CONFIRM_CODE:
-            msg=[NSString stringWithFormat:NSLocalizedString(@"%@ BTC to be confirmed.", nil),[StringUtil stringForAmount:[error.userInfo getLongLongFromDict:ERR_TX_WAIT_CONFIRM_AMOUNT]]];
+            msg = [NSString stringWithFormat:NSLocalizedString(@"%@ BTC to be confirmed.", nil), [StringUtil stringForAmount:[error.userInfo getLongLongFromDict:ERR_TX_WAIT_CONFIRM_AMOUNT]]];
             break;
-        
         case ERR_TX_CAN_NOT_CALCULATE_CODE:
-             msg=NSLocalizedString(@"Send failed. You don\'t have enough coins available.", nil);
+            msg = NSLocalizedString(@"Send failed. You don\'t have enough coins available.", nil);
             break;
-            
+        case ERR_TX_MAX_SIZE_CODE:
+            msg = NSLocalizedString(@"Send failed. Transaction size is to large.", nil);
+            break;
         default:
             break;
     }
-    return  msg;
-
+    return msg;
 }
+
 +(void)completeInputsForAddressForApi:(BTAddress *)address fromBlock:(uint32_t)fromBlock callback:(VoidBlock) callback andErrorCallBack:(ErrorHandler)errorCallback{
     if (fromBlock<=0) {
         if (callback) {

@@ -379,6 +379,7 @@
 "Send failed. You don\'t have enough coins available for transaction fee."="发送失败. 可用余额不足以支付手续费.";
 "Send failed. You don\'t have enough coins available."="发送失败. 可用余额不足.";
 "Send failed. Lack of %@ BTC."="发送失败. 可用余额中缺少 %@ BTC. ";
+"Send failed. Transaction size is to large."="发送失败. 交易大小过大.";
 "Please wait for another confirmation."="请等待一个新的确认后再交易.";
 
 "Total BTC prefix"="总计: ";
