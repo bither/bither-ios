@@ -105,7 +105,7 @@
                 if(success){
                     if ([BTAddressManager instance].privKeyAddresses.count > 0) {
                         [[UserDefaultsUtil instance]setPasswordSeed:[[BTPasswordSeed alloc] initWithBTAddress:[BTAddressManager instance].privKeyAddresses[0]]];
-                    } else {
+                    } else if ([BTAddressManager instance].trashAddresses.count > 0) {
                         [[UserDefaultsUtil instance]setPasswordSeed:[[BTPasswordSeed alloc] initWithBTAddress:[BTAddressManager instance].trashAddresses[0]]];
                     }
 
