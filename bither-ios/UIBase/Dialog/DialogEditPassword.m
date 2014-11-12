@@ -100,7 +100,7 @@
             });
         }else{
             BOOL success = NO;
-            if([BTAddressManager instance].privKeyAddresses.count > 0){
+            if([BTAddressManager instance].privKeyAddresses.count + [BTAddressManager instance].trashAddresses.count > 0){
                 success = [[BTAddressManager instance] changePassphraseWithOldPassphrase:p andNewPassphrase:nP];
                 if(success){
                     [[UserDefaultsUtil instance]setPasswordSeed:[[BTPasswordSeed alloc] initWithBTAddress:[BTAddressManager instance].privKeyAddresses[0]]];
