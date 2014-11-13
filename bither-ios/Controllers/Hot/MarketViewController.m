@@ -148,7 +148,7 @@
     frame.size.width = width;
     self.lbNew.frame = frame;
     frame = self.lbSymbol.frame;
-    frame.origin.x = self.lbNew.frame.origin.x - frame.size.width;
+    frame.origin.x = self.lbNew.frame.origin.x - frame.size.width - 5;
     self.lbSymbol.frame = frame;
     
     frame = self.vLeftContainer.frame;
