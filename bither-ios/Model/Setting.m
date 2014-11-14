@@ -88,7 +88,7 @@ static Setting* RCheckSetting;
         }];
         [ExchangeSetting setGetValueBlock:^(){
             Currency defaultExchange= [[UserDefaultsUtil instance] getDefaultCurrency];
-            return [BitherSetting getCurrencyName:defaultExchange];
+            return [NSString stringWithFormat:@"%@ %@", [BitherSetting getCurrencySymbol:defaultExchange], [BitherSetting getCurrencyName:defaultExchange]];
         }];
         [ExchangeSetting setGetArrayBlock:^(){
             NSMutableArray * array=[NSMutableArray new];
@@ -117,7 +117,7 @@ static Setting* RCheckSetting;
     Currency defaultExchange= [[UserDefaultsUtil instance] getDefaultCurrency];
     NSMutableDictionary *dict=[NSMutableDictionary new];
     [dict setObject:[NSNumber numberWithInt:exchangeType] forKey:SETTING_VALUE];
-    [dict setObject:[BitherSetting getCurrencyName:exchangeType] forKey:SETTING_KEY];
+    [dict setObject:[NSString stringWithFormat:@"%@ %@", [BitherSetting getCurrencySymbol:exchangeType], [BitherSetting getCurrencyName:exchangeType]] forKey:SETTING_KEY];
     if (defaultExchange==exchangeType) {
         [dict setObject:[NSNumber numberWithBool:YES] forKey:SETTING_IS_DEFAULT];
     }
