@@ -32,7 +32,9 @@
 @interface DialogPrivateKeyEncryptedQrCode()<UIDocumentInteractionControllerDelegate>{
     NSString *_encrytedPrivateKey;
     NSString *_shareFileName;
+    NSString *_address;
 }
+@property UILabel *lblAddress;
 @property UIImageView *iv;
 @property UIButton *btnShare;
 @property UIDocumentInteractionController *interactionController;
@@ -46,7 +48,8 @@
     }
     self = [super initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.width + (kShareBottomDistance + kShareBottomHeight) * 2)];
     if(self){
-         _encrytedPrivateKey = [BTQRCodeUtil replaceNewQRCode:[address.encryptPrivKey toUppercaseStringWithEn] ];
+        _address = address.address;
+        _encrytedPrivateKey = [BTQRCodeUtil replaceNewQRCode:[address.encryptPrivKey toUppercaseStringWithEn] ];
         _shareFileName = [NSString stringWithFormat:@"%@_private_key", address.address];
         [self firstConfigure];
     }
@@ -58,7 +61,7 @@
     self.bgInsets = UIEdgeInsetsMake(10, 0, 10, 0);
     self.dimAmount = 0.8f;
     self.iv = [[UIImageView alloc]initWithFrame:CGRectMake(0, kShareBottomDistance + kShareBottomHeight, self.frame.size.width, self.frame.size.width)];
-    self.iv.image = [QRCodeThemeUtil qrCodeOfContent:_encrytedPrivateKey andSize:self.frame.size.width withTheme:[QRCodeTheme black]];
+    self.iv.image = [QRCodeThemeUtil qrCodeOfContent:_encrytedPrivateKey andSize:self.frame.size.width margin:self.frame.size.width * 0.03f  withTheme:[QRCodeTheme black]];
     [self addSubview:self.iv];
     UIButton* btnDismiss = [[UIButton alloc]initWithFrame:self.iv.frame];
     [btnDismiss setBackgroundImage:nil forState:UIControlStateNormal];
@@ -81,6 +84,15 @@
     btn.frame = frame;
     [btn addTarget:self action:@selector(sharePressed:) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:btn];
+
+    self.lblAddress = [[UILabel alloc]initWithFrame:CGRectZero];
+    self.lblAddress.font = [UIFont systemFontOfSize:16];
+    self.lblAddress.textColor = [UIColor whiteColor];
+    self.lblAddress.numberOfLines = 0;
+    self.lblAddress.text = [StringUtil formatAddress:_address groupSize:4 lineSize:20];
+    [self.lblAddress sizeToFit];
+    self.lblAddress.frame = CGRectMake((self.frame.size.width - self.lblAddress.frame.size.width) / 2.0f, 0, self.lblAddress.frame.size.width, self.lblAddress.frame.size.height);
+    [self addSubview:self.lblAddress];
 }
 
 -(void)documentInteractionController:(UIDocumentInteractionController *)controller didEndSendingToApplication:(NSString *)application{

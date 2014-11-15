@@ -233,7 +233,7 @@
         [self decrypted:bpassword callback:^(id response) {
             [dialogProgress dismiss];
             if (_qrcodeType==Decrypetd) {
-                DialogPrivateKeyDecryptedQrCode *dialogPrivateKey=[[DialogPrivateKeyDecryptedQrCode alloc] initWithAddress:response];
+                DialogPrivateKeyDecryptedQrCode *dialogPrivateKey=[[DialogPrivateKeyDecryptedQrCode alloc]initWithAddress:_btAddress.address privateKey:response];
                 [dialogPrivateKey showInWindow:self.window];
                 
             }else{
