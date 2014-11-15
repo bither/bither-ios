@@ -66,7 +66,7 @@
     [self addSubview:btnDismiss];
     
     self.lblAddress = [[UILabel alloc]initWithFrame:CGRectZero];
-    self.lblAddress.font = [UIFont systemFontOfSize:16];
+    self.lblAddress.font = [UIFont fontWithName:@"Courier New" size:16];
     self.lblAddress.textColor = [UIColor whiteColor];
     self.lblAddress.numberOfLines = 0;
     self.lblAddress.text = [StringUtil formatAddress:_address groupSize:4 lineSize:20];

@@ -49,7 +49,7 @@
     self = [super initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.width + (kShareBottomDistance + kShareBottomHeight) * 2)];
     if(self){
         _address = address.address;
-        _encrytedPrivateKey = [BTQRCodeUtil replaceNewQRCode:[address.encryptPrivKey toUppercaseStringWithEn] ];
+        _encrytedPrivateKey = [BTQRCodeUtil replaceNewQRCode:[address.encryptPrivKey toUppercaseStringWithEn]];
         _shareFileName = [NSString stringWithFormat:@"%@_private_key", address.address];
         [self firstConfigure];
     }
@@ -86,7 +86,7 @@
     [self addSubview:btn];
 
     self.lblAddress = [[UILabel alloc]initWithFrame:CGRectZero];
-    self.lblAddress.font = [UIFont systemFontOfSize:16];
+    self.lblAddress.font = [UIFont fontWithName:@"Courier New" size:16];
     self.lblAddress.textColor = [UIColor whiteColor];
     self.lblAddress.numberOfLines = 0;
     self.lblAddress.text = [StringUtil formatAddress:_address groupSize:4 lineSize:20];
