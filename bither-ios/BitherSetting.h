@@ -107,6 +107,10 @@ typedef enum {
 } Currency;
 
 typedef enum {
+    BTC, bits
+} BitcoinUnit;
+
+typedef enum {
     AddressNormal, AddressTxTooMuch, AddressSpecialAddress
 } AddressType;
 

@@ -95,6 +95,7 @@
 		AC3C2623199B58750055FF5E /* TrendingGraphicData.m in Sources */ = {isa = PBXBuildFile; fileRef = AC3C2622199B58750055FF5E /* TrendingGraphicData.m */; };
 		AC3CDB5B1962A3C800C74B4C /* TransactionConfidenceView.m in Sources */ = {isa = PBXBuildFile; fileRef = AC3CDB5A1962A3C800C74B4C /* TransactionConfidenceView.m */; };
 		AC3CDB5E1962AFF000C74B4C /* DialogAddressQrCode.m in Sources */ = {isa = PBXBuildFile; fileRef = AC3CDB5D1962AFF000C74B4C /* DialogAddressQrCode.m */; };
+		AC454DC61A19D981000AF4ED /* UnitUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = AC454DC51A19D981000AF4ED /* UnitUtil.m */; };
 		AC45AA3519879C96006314D5 /* DialogPrivateKeyDecryptedQrCode.m in Sources */ = {isa = PBXBuildFile; fileRef = AC45AA3419879C96006314D5 /* DialogPrivateKeyDecryptedQrCode.m */; };
 		AC45AA381987A2F4006314D5 /* DialogPrivateKeyText.m in Sources */ = {isa = PBXBuildFile; fileRef = AC45AA371987A2F4006314D5 /* DialogPrivateKeyText.m */; };
 		AC45D84119878BAB00AF5C2C /* DialogAddressLongPressOptions.m in Sources */ = {isa = PBXBuildFile; fileRef = AC45D83E19878BAB00AF5C2C /* DialogAddressLongPressOptions.m */; };
@@ -368,6 +369,8 @@
 		AC3CDB5A1962A3C800C74B4C /* TransactionConfidenceView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TransactionConfidenceView.m; sourceTree = "<group>"; };
 		AC3CDB5C1962AFF000C74B4C /* DialogAddressQrCode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DialogAddressQrCode.h; sourceTree = "<group>"; };
 		AC3CDB5D1962AFF000C74B4C /* DialogAddressQrCode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DialogAddressQrCode.m; sourceTree = "<group>"; };
+		AC454DC41A19D981000AF4ED /* UnitUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UnitUtil.h; sourceTree = "<group>"; };
+		AC454DC51A19D981000AF4ED /* UnitUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UnitUtil.m; sourceTree = "<group>"; };
 		AC45AA3319879C96006314D5 /* DialogPrivateKeyDecryptedQrCode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DialogPrivateKeyDecryptedQrCode.h; sourceTree = "<group>"; };
 		AC45AA3419879C96006314D5 /* DialogPrivateKeyDecryptedQrCode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DialogPrivateKeyDecryptedQrCode.m; sourceTree = "<group>"; };
 		AC45AA361987A2F4006314D5 /* DialogPrivateKeyText.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DialogPrivateKeyText.h; sourceTree = "<group>"; };
@@ -730,6 +733,8 @@
 				AC9BC60F19D18102003B88B5 /* SystemUtil.m */,
 				AC9BBCFC19D268AB00E58BA7 /* UpgradeUtil.h */,
 				AC9BBCFD19D268AB00E58BA7 /* UpgradeUtil.m */,
+				AC454DC41A19D981000AF4ED /* UnitUtil.h */,
+				AC454DC51A19D981000AF4ED /* UnitUtil.m */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -1326,6 +1331,7 @@
 			files = (
 				4217A3731951235D00063746 /* Depth.m in Sources */,
 				ACEE7D4819D417E400932B39 /* ImportPrivateKey.m in Sources */,
+				AC454DC61A19D981000AF4ED /* UnitUtil.m in Sources */,
 				ACBB5F56198B468E00B19F4B /* UIViewController+ConfigureTableView.m in Sources */,
 				AC45AA381987A2F4006314D5 /* DialogPrivateKeyText.m in Sources */,
 				42D9B775193D6B5B00C85B89 /* AppDelegate.m in Sources */,

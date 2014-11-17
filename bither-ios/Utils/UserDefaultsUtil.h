@@ -35,6 +35,8 @@
 -(void)setExchangeType:(Currency) exchangeType;
 -(Currency)getDefaultCurrency;
 
+-(void)setBitcoinUnit:(BitcoinUnit)bitcoinUnit;
+-(BitcoinUnit)getBitcoinUnit;
 
 -(long long)getLastCheckPrivateKeyTime;
 -(void)setLastCheckPrivateKeyTime:(long long)time;
