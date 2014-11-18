@@ -31,6 +31,7 @@
 #import "NSDictionary+Fromat.h"
 #import "BTIn.h"
 #import "StringUtil.h"
+#import "UnitUtil.h"
 
 
 #define BLOCK_COUNT  @"block_count"
@@ -249,10 +250,10 @@
             msg = NSLocalizedString(@"Send failed. Sending coins this few will be igored.", nil);
             break;
         case ERR_TX_NOT_ENOUGH_MONEY_CODE:
-            msg = [NSString stringWithFormat:NSLocalizedString(@"Send failed. Lack of %@ BTC.", nil), [StringUtil stringForAmount:[error.userInfo getLongLongFromDict:ERR_TX_NOT_ENOUGH_MONEY_LACK]]];
+            msg = [NSString stringWithFormat:NSLocalizedString(@"Send failed. Lack of %@ %@.", nil), [UnitUtil stringForAmount:[error.userInfo getLongLongFromDict:ERR_TX_NOT_ENOUGH_MONEY_LACK]], [UnitUtil unitName]];
             break;
         case ERR_TX_WAIT_CONFIRM_CODE:
-            msg = [NSString stringWithFormat:NSLocalizedString(@"%@ BTC to be confirmed.", nil), [StringUtil stringForAmount:[error.userInfo getLongLongFromDict:ERR_TX_WAIT_CONFIRM_AMOUNT]]];
+            msg = [NSString stringWithFormat:NSLocalizedString(@"%@ %@ to be confirmed.", nil), [UnitUtil stringForAmount:[error.userInfo getLongLongFromDict:ERR_TX_WAIT_CONFIRM_AMOUNT]], [UnitUtil unitName]];
             break;
         case ERR_TX_CAN_NOT_CALCULATE_CODE:
             msg = NSLocalizedString(@"Send failed. You don\'t have enough coins available.", nil);
@@ -337,25 +338,3 @@
     
 }
 @end
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

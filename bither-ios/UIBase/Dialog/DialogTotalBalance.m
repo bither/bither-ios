@@ -10,6 +10,7 @@
 #import <Bitheri/BTAddressManager.h>
 #import "PieChartView.h"
 #import "StringUtil.h"
+#import "UnitUtil.h"
 #import "MarketUtil.h"
 #import "UIImage+ImageRenderToColor.h"
 
@@ -57,7 +58,7 @@
     topLabel.font = [UIFont systemFontOfSize:kTopLabelFontSize];
     topLabel.textColor = [UIColor whiteColor];
     topLabel.textAlignment = NSTextAlignmentCenter;
-    topLabel.text = [NSString stringWithFormat:@"%@%@", NSLocalizedString(@"Total BTC prefix", nil), [StringUtil stringForAmount:total]];
+    topLabel.text = [NSString stringWithFormat:@"%@%@", NSLocalizedString(@"Total BTC prefix", nil), [UnitUtil stringForAmount:total]];
     [self addSubview:topLabel];
     
     self.chart = [[PieChartView alloc]initWithFrame:CGRectMake(kChartSize * kForegroundInsetsRate, CGRectGetMaxY(topLabel.frame) + kVerticalGap + kChartSize * kForegroundInsetsRate, kChartSize - kChartSize * kForegroundInsetsRate * 2, kChartSize - kChartSize * kForegroundInsetsRate * 2)];
@@ -81,7 +82,7 @@
         lbl.font = [UIFont systemFontOfSize:kBottomLabelFontSize];
         lbl.textColor = [UIColor whiteColor];
         lbl.textAlignment = NSTextAlignmentRight;
-        lbl.attributedText = [StringUtil stringWithSymbolForAmount:hot withFontSize:kBottomLabelFontSize color:lbl.textColor];
+        lbl.attributedText = [UnitUtil stringWithSymbolForAmount:hot withFontSize:kBottomLabelFontSize color:lbl.textColor];
         [self addSubview:lbl];
         
         bottom = CGRectGetMaxY(lbl.frame);
@@ -110,7 +111,7 @@
         lbl.font = [UIFont systemFontOfSize:kBottomLabelFontSize];
         lbl.textColor = [UIColor whiteColor];
         lbl.textAlignment = NSTextAlignmentRight;
-        lbl.attributedText = [StringUtil stringWithSymbolForAmount:cold withFontSize:kBottomLabelFontSize color:lbl.textColor];
+        lbl.attributedText = [UnitUtil stringWithSymbolForAmount:cold withFontSize:kBottomLabelFontSize color:lbl.textColor];
         [self addSubview:lbl];
         
         bottom = CGRectGetMaxY(lbl.frame);

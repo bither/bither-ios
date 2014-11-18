@@ -65,6 +65,7 @@
     self.lbl.textColor = [UIColor whiteColor];
     self.lbl.tintColor = self.lbl.textColor;
     self.lbl.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
+    self.ivSymbol = [[UIImageView alloc]initWithImage:[UIImage imageNamed:[UnitUtil imageNameSlim]]];
     self.ivSymbol.frame = CGRectMake(kHorizontalPadding, (self.frame.size.height - kFontSize)/2, kFontSize / self.ivSymbol.frame.size.height * self.ivSymbol.frame.size.width, kFontSize);
     [self addSubview:self.btn];
     [self addSubview:self.lbl];

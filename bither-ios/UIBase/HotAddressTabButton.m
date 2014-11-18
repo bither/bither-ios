@@ -11,6 +11,7 @@
 #import "UIColor+Util.h"
 #import <Bitheri/BTSettings.h>
 #import "BTAddressManager.h"
+#import "UnitUtil.h"
 #import "DialogTotalBalance.h"
 
 #define kHorizontalPadding (5)
@@ -116,7 +117,7 @@
 
 -(void)setAmount:(int64_t)amount{
     _amount = amount;
-    self.lbl.text = [StringUtil stringForAmount:amount];
+    self.lbl.text = [UnitUtil stringForAmount:amount];
     [self configureViews];
 }
 

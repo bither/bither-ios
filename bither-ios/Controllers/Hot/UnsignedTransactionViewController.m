@@ -21,6 +21,7 @@
 #import "ScanQrCodeTransportViewController.h"
 #import "QrCodeViewController.h"
 #import "StringUtil.h"
+#import "UnitUtil.h"
 #import "NSString+Base58.h"
 #import "ScanQrCodeViewController.h"
 #import "DialogProgressChangable.h"
@@ -332,7 +333,7 @@
 }
 
 -(void)configureBalance{
-    self.lblBalance.attributedText = [StringUtil stringWithSymbolForAmount:self.address.balance withFontSize:kBalanceFontSize color:self.lblBalance.textColor];
+    self.lblBalance.attributedText = [UnitUtil stringWithSymbolForAmount:self.address.balance withFontSize:kBalanceFontSize color:self.lblBalance.textColor];
     [self configureBalanceLabelWidth:self.lblBalance];
     [self configureBalanceLabelWidth:self.lblBalancePrefix];
     self.lblBalance.frame = CGRectMake(CGRectGetMaxX(self.lblBalancePrefix.frame) + 5, self.lblBalance.frame.origin.y, self.lblBalance.frame.size.width, self.lblBalance.frame.size.height);

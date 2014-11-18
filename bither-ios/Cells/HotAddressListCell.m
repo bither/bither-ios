@@ -105,7 +105,7 @@
     width = [self.lblBalanceBtc.attributedText sizeWithRestrict:CGSizeMake(CGFLOAT_MAX, self.lblBalanceBtc.frame.size.height)].width;
     self.lblBalanceBtc.frame = CGRectMake(CGRectGetMaxX(self.lblBalanceBtc.frame) - width, self.lblBalanceBtc.frame.origin.y, width, self.lblBalanceBtc.frame.size.height);
     self.ivSymbolBtc.frame = CGRectMake(CGRectGetMinX(self.lblBalanceBtc.frame) - self.ivSymbolBtc.frame.size.width - 2, self.ivSymbolBtc.frame.origin.y, self.ivSymbolBtc.frame.size.width, self.ivSymbolBtc.frame.size.height);
-    self.ivSymbolBtc.image = [UIImage imageNamed:[UnitUtil imageNameSlim]];
+    self.ivSymbolBtc.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@_black", [UnitUtil imageNameSlim]]];
 //    if (![_btAddress.address isEqualToString:address.address])
 //        self.lblTransactionCount.text = [NSString string];
     self.vNoUnconfirmedTx.hidden = NO;
