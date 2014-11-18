@@ -66,9 +66,7 @@ static Setting* RCheckSetting;
     if (self) {
         _settingName=name;
         _icon=icon;
-        
     }
-    
     return self;
 }
 -(void)selection{
