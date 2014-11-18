@@ -30,6 +30,7 @@
 
 +(NSArray *)hotSettings{
     NSMutableArray * array=[NSMutableArray new];
+    [array addObject:[Setting getBitcoinUnitSetting]];
     [array addObject:[Setting getExchangeSetting]];
     [array addObject:[Setting getMarketSetting]];
     [array addObject:[Setting getTransactionFeeSetting]];
