@@ -18,7 +18,7 @@
 
 #import "NotificationUtil.h"
 #import "BTAddressManager.h"
-#import "StringUtil.h"
+#import "UnitUtil.h"
 #import "AppDelegate.h"
 
 @implementation NotificationUtil
@@ -33,7 +33,7 @@
     if (diff<0) {
         diffValue=0-diff;
     }
-    NSString * balanceString=[[StringUtil stringForAmount:diff] stringByAppendingString:@" BTC"];
+    NSString * balanceString=[[UnitUtil stringForAmount:diff] stringByAppendingString:[NSString stringWithFormat:@" %@", [UnitUtil unitName]]];
     NSString * msg=[NSString stringWithFormat:@"%@ %@%@",address,typeString,balanceString];
     NSMutableDictionary* infoDic =[NSMutableDictionary new];
     [infoDic setValue:address forKey:@"address"];

@@ -18,6 +18,7 @@
 
 #import "DialogBalanceDetail.h"
 #import "StringUtil.h"
+#import "UnitUtil.h"
 #import "NSString+Size.h"
 #import "NSAttributedString+Size.h"
 
@@ -52,8 +53,8 @@
         }
     }
     int64_t sent = received - address.balance;
-    NSAttributedString *receivedStr = [StringUtil attributedStringForAmount:received withFontSize:kCountFontSize];
-    NSAttributedString *sentStr = [StringUtil attributedStringForAmount:sent withFontSize:kCountFontSize];
+    NSAttributedString *receivedStr = [UnitUtil attributedStringForAmount:received withFontSize:kCountFontSize];
+    NSAttributedString *sentStr = [UnitUtil attributedStringForAmount:sent withFontSize:kCountFontSize];
     
     CGFloat maxWidth = kMinWidth;
     CGSize restrictSize = CGSizeMake(CGFLOAT_MAX, CGFLOAT_MAX);

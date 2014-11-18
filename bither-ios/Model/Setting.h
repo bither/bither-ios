@@ -40,6 +40,7 @@
 
 +(Setting * )getMarketSetting;
 +(Setting * )getExchangeSetting;
++(Setting * )getBitcoinUnitSetting;
 +(Setting * )getTransactionFeeSetting;
 +(Setting * )getCheckSetting;
 +(Setting * )getAdvanceSetting;

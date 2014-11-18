@@ -42,6 +42,7 @@
 #import "ImportPrivateKeySetting.h"
 #import "ImportBip38PrivateKeySetting.h"
 #import "NSString+Base58.h"
+#import "UnitUtil.h"
 
 
 
@@ -49,6 +50,7 @@
 
 static Setting* ExchangeSetting;
 static Setting* MarketSetting;
+static Setting* BitcoinUnitSetting;
 static Setting* TransactionFeeSetting;
 static Setting* NetworkSetting;
 static Setting* AvatarSetting;
@@ -76,7 +78,47 @@ static Setting* RCheckSetting;
     return _icon;
 }
 
++(Setting * )getBitcoinUnitSetting{
+    if(!BitcoinUnitSetting){
+        BitcoinUnitSetting = [[Setting alloc]initWithName:NSLocalizedString(@"setting_name_bitcoin_unit", nil) icon:nil];
+        [BitcoinUnitSetting setGetArrayBlock:^(){
+            NSMutableArray *array = [NSMutableArray new];
+            [array addObject:[Setting getBitcoinUnitDict:UnitBTC]];
+            [array addObject:[Setting getBitcoinUnitDict:Unitbits]];
+            return array;
+        }];
+        [BitcoinUnitSetting setGetValueBlock:^(){
+            BitcoinUnit unit = [[UserDefaultsUtil instance]getBitcoinUnit];
+            return [UnitUtil unitName:unit];
+        }];
+        [BitcoinUnitSetting setResult:^(NSDictionary * dict){
+            if ([[dict allKeys] containsObject:SETTING_VALUE]) {
+                [[UserDefaultsUtil instance] setBitcoinUnit:[dict getIntFromDict:SETTING_VALUE]];
+                [[NSNotificationCenter defaultCenter] postNotificationName:BitherBalanceChangedNotification object:nil];
+            }
+        }];
+        __block Setting* sself = BitcoinUnitSetting;
+        [BitcoinUnitSetting setSelectBlock:^(UIViewController * controller){
+            SelectViewController *selectController = [controller.storyboard instantiateViewControllerWithIdentifier:@"SelectViewController"];UINavigationController *nav = controller.navigationController;
+            selectController.setting = sself;
+            [nav pushViewController:selectController animated:YES];
+            
+        }];
+    }
+    return BitcoinUnitSetting;
+}
 
++(NSDictionary *)getBitcoinUnitDict:(BitcoinUnit)unit{
+    BitcoinUnit defaultUnit = [[UserDefaultsUtil instance] getBitcoinUnit];
+    NSMutableDictionary *dict =[NSMutableDictionary new];
+    [dict setObject:[NSNumber numberWithInt:unit] forKey:SETTING_VALUE];
+    [dict setObject:[NSString stringWithFormat:@"%@", [UnitUtil unitName:unit]] forKey:SETTING_KEY];
+    if (defaultUnit == unit) {
+        [dict setObject:[NSNumber numberWithBool:YES] forKey:SETTING_IS_DEFAULT];
+    }
+    return dict;
+    
+}
 
 +(Setting * )getExchangeSetting{
     if(!ExchangeSetting){

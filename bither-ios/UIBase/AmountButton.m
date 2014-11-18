@@ -19,6 +19,7 @@
 #import "AmountButton.h"
 #import "StringUtil.h"
 #import "MarketUtil.h"
+#import "UnitUtil.h"
 #import "NSString+Size.h"
 #import "UIImage+ImageRenderToColor.h"
 
@@ -64,7 +65,7 @@
     self.lbl.textColor = [UIColor whiteColor];
     self.lbl.tintColor = self.lbl.textColor;
     self.lbl.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
-    self.ivSymbol = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"symbol_btc_slim"]];
+    self.ivSymbol = [[UIImageView alloc]initWithImage:[UIImage imageNamed:[UnitUtil imageNameSlim]]];
     self.ivSymbol.frame = CGRectMake(kHorizontalPadding, (self.frame.size.height - kFontSize)/2, kFontSize / self.ivSymbol.frame.size.height * self.ivSymbol.frame.size.width, kFontSize);
     [self addSubview:self.btn];
     [self addSubview:self.lbl];
@@ -93,7 +94,7 @@
         double money= ([MarketUtil getDefaultNewPrice]*_amount)/pow(10, 8);
         str = [StringUtil formatPrice:money];
     }else{
-        str = [StringUtil stringForAmount:_amount];
+        str = [UnitUtil stringForAmount:_amount];
     }
     CGFloat width = [str sizeWithRestrict:CGSizeMake(CGFLOAT_MAX, CGFLOAT_MAX) font:self.lbl.font].width;
     width += kHorizontalPadding * 2;
@@ -121,6 +122,7 @@
     if(self.frameChangeListener && [self.frameChangeListener respondsToSelector:@selector(amountButtonFrameChanged:)]){
         [self.frameChangeListener amountButtonFrameChanged:self.frame];
     }
+    self.ivSymbol.image = [UIImage imageNamed:[UnitUtil imageNameSlim]];
 }
 
 -(void)pressed:(id)sender{

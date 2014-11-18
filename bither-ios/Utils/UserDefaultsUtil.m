@@ -32,6 +32,8 @@
 #define USER_AVATAR @"user_avatar"
 #define FANCY_QR_CODE_THEME @"fancy_qr_code_theme"
 
+#define BITCOIN_UNIT @"bitcoin_unit"
+
 
 
 
@@ -207,6 +209,19 @@ NSUserDefaults *userDefaults;
 -(void)setQrCodeTheme:(NSInteger) qrCodeTheme{
     [userDefaults setInteger:qrCodeTheme forKey:FANCY_QR_CODE_THEME];
     [userDefaults synchronize];
+}
+
+
+-(void)setBitcoinUnit:(BitcoinUnit)bitcoinUnit{
+    [userDefaults setInteger:bitcoinUnit forKey:BITCOIN_UNIT];
+    [userDefaults synchronize];
+}
+
+-(BitcoinUnit)getBitcoinUnit{
+    if([userDefaults objectForKey:BITCOIN_UNIT]){
+        return [userDefaults integerForKey:BITCOIN_UNIT];
+    }
+    return UnitBTC;
 }
 
 @end
