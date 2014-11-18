@@ -18,6 +18,7 @@
 
 #import "SendViewController.h"
 #import "StringUtil.h"
+#import "UnitUtil.h"
 #import "NSString+Base58.h"
 #import "ScanQrCodeViewController.h"
 #import "DialogProgressChangable.h"

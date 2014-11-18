@@ -28,7 +28,7 @@
 #import "IOS7ContainerViewController.h"
 #import "NetworkUtil.h"
 #import "UserDefaultsUtil.h"
-#import "StringUtil.h"
+#import "UnitUtil.h"
 #import "KeyUtil.h"
 #import "PeerUtil.h"
 #import "BitherTime.h"
@@ -244,7 +244,7 @@ static StatusBarNotificationWindow* notificationWindow;
         int64_t diff = [(NSNumber*)dic[@"diff"] longLongValue];
         if(diff != 0){
             [PlaySoundUtil playSound:@"coins_received" extension:@"wav" callback:nil];
-            NSString* notification = [NSString stringWithFormat:@"%@ %@", diff >= 0 ? NSLocalizedString(@"Received", nil) : NSLocalizedString(@"Sent", nil), diff >= 0 ? [StringUtil stringForAmount:diff] : [StringUtil stringForAmount:0 - diff]];
+            NSString* notification = [NSString stringWithFormat:@"%@ %@ %@", diff >= 0 ? NSLocalizedString(@"Received", nil) : NSLocalizedString(@"Sent", nil), diff >= 0 ? [UnitUtil stringForAmount:diff] : [UnitUtil stringForAmount:0 - diff], [UnitUtil unitName]];
             [notificationWindow showNotification:notification withAddress:address color:diff > 0 ? [UIColor greenColor] : [UIColor redColor]];
         }
     }
