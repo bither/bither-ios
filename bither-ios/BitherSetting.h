@@ -107,7 +107,7 @@ typedef enum {
 } Currency;
 
 typedef enum {
-    BTC, bits
+    UnitBTC, Unitbits
 } BitcoinUnit;
 
 typedef enum {

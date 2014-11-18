@@ -221,7 +221,7 @@ NSUserDefaults *userDefaults;
     if([userDefaults objectForKey:BITCOIN_UNIT]){
         return [userDefaults integerForKey:BITCOIN_UNIT];
     }
-    return BTC;
+    return UnitBTC;
 }
 
 @end
