@@ -377,6 +377,7 @@
 		AC454DC81A1C6E05000AF4ED /* TrashCanViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TrashCanViewController.m; sourceTree = "<group>"; };
 		AC454DCA1A1C6EC1000AF4ED /* TrashCanCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TrashCanCell.h; path = Cells/TrashCanCell.h; sourceTree = "<group>"; };
 		AC454DCB1A1C6EC1000AF4ED /* TrashCanCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TrashCanCell.m; path = Cells/TrashCanCell.m; sourceTree = "<group>"; };
+		AC454DCE1A1C892B000AF4ED /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/MainStoryboard.strings; sourceTree = "<group>"; };
 		AC45AA3319879C96006314D5 /* DialogPrivateKeyDecryptedQrCode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DialogPrivateKeyDecryptedQrCode.h; sourceTree = "<group>"; };
 		AC45AA3419879C96006314D5 /* DialogPrivateKeyDecryptedQrCode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DialogPrivateKeyDecryptedQrCode.m; sourceTree = "<group>"; };
 		AC45AA361987A2F4006314D5 /* DialogPrivateKeyText.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DialogPrivateKeyText.h; sourceTree = "<group>"; };
@@ -517,7 +518,6 @@
 		ACE7E71419EB7A5A00F7AA3A /* UIImage_Extensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIImage_Extensions.m; sourceTree = "<group>"; };
 		ACE7E71619EB8DE100F7AA3A /* ImagePickerFromCameraViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImagePickerFromCameraViewController.h; sourceTree = "<group>"; };
 		ACE7E71719EB8DE100F7AA3A /* ImagePickerFromCameraViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImagePickerFromCameraViewController.m; sourceTree = "<group>"; };
-		ACEDEE3019F76201000507E2 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/MainStoryboard.strings; sourceTree = "<group>"; };
 		ACEDEE3119F76BAD000507E2 /* DialogProgressChangable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DialogProgressChangable.h; sourceTree = "<group>"; };
 		ACEDEE3219F76BAD000507E2 /* DialogProgressChangable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DialogProgressChangable.m; sourceTree = "<group>"; };
 		ACEE7D1B19D3F9F500932B39 /* QRCodeThemeUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QRCodeThemeUtil.h; sourceTree = "<group>"; };
@@ -1556,7 +1556,7 @@
 				42EFB5511949C52100376888 /* Base */,
 				AC229A7A196A466400A7FB5E /* zh-Hans */,
 				AC229A7B196A466900A7FB5E /* zh-Hant */,
-				ACEDEE3019F76201000507E2 /* en */,
+				AC454DCE1A1C892B000AF4ED /* en */,
 			);
 			name = MainStoryboard.storyboard;
 			sourceTree = "<group>";

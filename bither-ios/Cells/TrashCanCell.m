@@ -51,14 +51,31 @@
     if([vc respondsToSelector:@selector(showMsg:)]){
         [vc performSelector:@selector(showMsg:) withObject:NSLocalizedString(@"Address copied.", nil) afterDelay:0];
     }
+    NSLog(@"height %f", self.frame.size.height);
 }
 
 - (void)setAddress:(BTAddress *)address{
     _address = address;
     self.lblAddress.text = [StringUtil formatAddress:address.address groupSize:4 lineSize:12];
+    NSLog(@"height %f", self.frame.size.height);
 }
 
 -(BTAddress*)address{
     return _address;
+}
+
+- (id)initWithCoder:(NSCoder *)aDecoder{
+    self = [super initWithCoder:aDecoder];
+    if(self){
+        for (UIView *currentView in self.subviews)
+        {
+            if([currentView isKindOfClass:[UIScrollView class]])
+            {
+                ((UIScrollView *)currentView).delaysContentTouches = NO;
+                break;
+            }
+        }
+    }
+    return self;
 }
 @end
