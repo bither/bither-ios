@@ -2803,9 +2803,9 @@
                                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                         </view>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="dUQ-pe-joD">
-                                                            <rect key="frame" x="254" y="6" width="36" height="36"/>
+                                                            <rect key="frame" x="254" y="16" width="28" height="28"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
-                                                            <inset key="imageEdgeInsets" minX="6" minY="6" maxX="6" maxY="6"/>
+                                                            <inset key="imageEdgeInsets" minX="2" minY="2" maxX="2" maxY="2"/>
                                                             <state key="normal" image="address_full_show_button">
                                                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                             </state>
@@ -2814,9 +2814,9 @@
                                                             </connections>
                                                         </button>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="hEP-RO-lvi">
-                                                            <rect key="frame" x="254" y="50" width="36" height="36"/>
+                                                            <rect key="frame" x="254" y="48" width="28" height="28"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
-                                                            <inset key="imageEdgeInsets" minX="6" minY="6" maxX="6" maxY="6"/>
+                                                            <inset key="imageEdgeInsets" minX="2" minY="2" maxX="2" maxY="2"/>
                                                             <state key="normal" image="trash_can_restore">
                                                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                             </state>
