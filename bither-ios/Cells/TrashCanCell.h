@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "BTAddress.h"
 
 @interface TrashCanCell : UITableViewCell
-
+@property BTAddress *address;
 @end

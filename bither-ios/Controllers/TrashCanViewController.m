@@ -41,6 +41,7 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     TrashCanCell* cell = (TrashCanCell*)[tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
+    cell.address = self.addresses[indexPath.row];
     return cell;
 }
 
