@@ -96,6 +96,8 @@
 		AC3CDB5B1962A3C800C74B4C /* TransactionConfidenceView.m in Sources */ = {isa = PBXBuildFile; fileRef = AC3CDB5A1962A3C800C74B4C /* TransactionConfidenceView.m */; };
 		AC3CDB5E1962AFF000C74B4C /* DialogAddressQrCode.m in Sources */ = {isa = PBXBuildFile; fileRef = AC3CDB5D1962AFF000C74B4C /* DialogAddressQrCode.m */; };
 		AC454DC61A19D981000AF4ED /* UnitUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = AC454DC51A19D981000AF4ED /* UnitUtil.m */; };
+		AC454DC91A1C6E05000AF4ED /* TrashCanViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AC454DC81A1C6E05000AF4ED /* TrashCanViewController.m */; };
+		AC454DCC1A1C6EC1000AF4ED /* TrashCanCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AC454DCB1A1C6EC1000AF4ED /* TrashCanCell.m */; };
 		AC45AA3519879C96006314D5 /* DialogPrivateKeyDecryptedQrCode.m in Sources */ = {isa = PBXBuildFile; fileRef = AC45AA3419879C96006314D5 /* DialogPrivateKeyDecryptedQrCode.m */; };
 		AC45AA381987A2F4006314D5 /* DialogPrivateKeyText.m in Sources */ = {isa = PBXBuildFile; fileRef = AC45AA371987A2F4006314D5 /* DialogPrivateKeyText.m */; };
 		AC45D84119878BAB00AF5C2C /* DialogAddressLongPressOptions.m in Sources */ = {isa = PBXBuildFile; fileRef = AC45D83E19878BAB00AF5C2C /* DialogAddressLongPressOptions.m */; };
@@ -371,6 +373,10 @@
 		AC3CDB5D1962AFF000C74B4C /* DialogAddressQrCode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DialogAddressQrCode.m; sourceTree = "<group>"; };
 		AC454DC41A19D981000AF4ED /* UnitUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UnitUtil.h; sourceTree = "<group>"; };
 		AC454DC51A19D981000AF4ED /* UnitUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UnitUtil.m; sourceTree = "<group>"; };
+		AC454DC71A1C6E05000AF4ED /* TrashCanViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TrashCanViewController.h; sourceTree = "<group>"; };
+		AC454DC81A1C6E05000AF4ED /* TrashCanViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TrashCanViewController.m; sourceTree = "<group>"; };
+		AC454DCA1A1C6EC1000AF4ED /* TrashCanCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TrashCanCell.h; path = Cells/TrashCanCell.h; sourceTree = "<group>"; };
+		AC454DCB1A1C6EC1000AF4ED /* TrashCanCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TrashCanCell.m; path = Cells/TrashCanCell.m; sourceTree = "<group>"; };
 		AC45AA3319879C96006314D5 /* DialogPrivateKeyDecryptedQrCode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DialogPrivateKeyDecryptedQrCode.h; sourceTree = "<group>"; };
 		AC45AA3419879C96006314D5 /* DialogPrivateKeyDecryptedQrCode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DialogPrivateKeyDecryptedQrCode.m; sourceTree = "<group>"; };
 		AC45AA361987A2F4006314D5 /* DialogPrivateKeyText.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DialogPrivateKeyText.h; sourceTree = "<group>"; };
@@ -627,6 +633,8 @@
 				421B03B419495AEF003A45F1 /* Hot */,
 				ACE4ED5C198A3AE600C8862C /* AdvanceViewController.h */,
 				ACE4ED5D198A3AE600C8862C /* AdvanceViewController.m */,
+				AC454DC71A1C6E05000AF4ED /* TrashCanViewController.h */,
+				AC454DC81A1C6E05000AF4ED /* TrashCanViewController.m */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -924,6 +932,8 @@
 				ACBEC01D196E87B9004301E0 /* CheckPrivateKeyCell.m */,
 				ACA11DCB19F74FA10087D39C /* RCheckCell.h */,
 				ACA11DCC19F74FA10087D39C /* RCheckCell.m */,
+				AC454DCA1A1C6EC1000AF4ED /* TrashCanCell.h */,
+				AC454DCB1A1C6EC1000AF4ED /* TrashCanCell.m */,
 			);
 			name = Cells;
 			sourceTree = "<group>";
@@ -1427,6 +1437,7 @@
 				ACEE7D2819D3F9F500932B39 /* QRCodeTransportPage.m in Sources */,
 				421B03BB19495AEF003A45F1 /* HotViewController.m in Sources */,
 				ACCA2751198F2A68000E6A32 /* PieChartView.m in Sources */,
+				AC454DC91A1C6E05000AF4ED /* TrashCanViewController.m in Sources */,
 				4269FF72195A885D001213B9 /* Ticker.m in Sources */,
 				AC33089519556F7A00D8F621 /* UIImage+ImageWithColor.m in Sources */,
 				AC8F0DCA196CF4E400CCD0F9 /* SelectViewController.m in Sources */,
@@ -1460,6 +1471,7 @@
 				ACEE7D3C19D4020E00932B39 /* ColdWalletCloneSetting.m in Sources */,
 				4254085E1946A219007AF99C /* UIImageExt.m in Sources */,
 				AC275EE719B5B9D800F1C02F /* PeerCell.m in Sources */,
+				AC454DCC1A1C6EC1000AF4ED /* TrashCanCell.m in Sources */,
 				421B03C319495DBB003A45F1 /* ChooseModeViewController.m in Sources */,
 				ACEDEE3319F76BAD000507E2 /* DialogProgressChangable.m in Sources */,
 				AC53ABCF19D52387007C095C /* UEntropySensor.m in Sources */,
