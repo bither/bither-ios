@@ -60,7 +60,9 @@
         bottom += 1;
         bottom = [self createButtonWithText:NSLocalizedString(@"Private Key", nil) top:bottom action:@selector(privateKeyTextQrCodePressed:)];
         
-        
+        [self addSubview:[self getSeperator:bottom]];
+        bottom += 1;
+        bottom = [self createButtonWithText:NSLocalizedString(@"trash_private_key", nil) top:bottom action:@selector(trash:)];
     }else{
         bottom = [self createButtonWithText:NSLocalizedString(@"Stop Monitoring", nil) top:bottom action:@selector(stopMonitorPressed:)];
     }
@@ -130,6 +132,14 @@
     [self dismissWithCompletion:^{
         if(self.delegate && [self.delegate respondsToSelector:@selector(showPrivateKeyTextQrCode)]){
             [self.delegate showPrivateKeyTextQrCode];
+        }
+    }];
+}
+
+-(void)trash:(id)sender{
+    [self dismissWithCompletion:^{
+        if(self.delegate && [self.delegate respondsToSelector:@selector(moveToTrash)]){
+            [self.delegate moveToTrash];
         }
     }];
 }

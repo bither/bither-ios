@@ -122,6 +122,9 @@
 /* Class = "IBUILabel"; text = "Amount"; ObjectID = "W4J-bu-8RU"; */
 "W4J-bu-8RU.text" = "Amount";
 
+/* Class = "IBUILabel"; text = "Trash Can"; ObjectID = "W7P-G2-qt2"; */
+"W7P-G2-qt2.text" = "Trash Can";
+
 /* Class = "IBUIButton"; normalTitle = "Retry"; ObjectID = "XCg-Ta-A0q"; */
 "XCg-Ta-A0q.normalTitle" = "Retry";
 
@@ -137,7 +140,7 @@
 /* Class = "IBUILabel"; text = "Label"; ObjectID = "bKW-aE-gcw"; */
 "bKW-aE-gcw.text" = "Label";
 
-/* Class = "IBUILabel"; text = "R Value Check"; ObjectID = "bNn-8g-rmY"; */
+/* Class = "IBUILabel"; text = "Check r-value"; ObjectID = "bNn-8g-rmY"; */
 "bNn-8g-rmY.text" = "Check r-value";
 
 /* Class = "IBUILabel"; text = "marketName"; ObjectID = "bOH-Sj-yMG"; */
@@ -161,7 +164,7 @@
 /* Class = "IBUILabel"; text = "Can not find private key"; ObjectID = "eEx-7U-SVT"; */
 "eEx-7U-SVT.text" = "Can not find private key";
 
-/* Class = "IBUIButton"; normalTitle = "Check R Values"; ObjectID = "f9N-3Q-IJD"; */
+/* Class = "IBUIButton"; normalTitle = "Check r-values"; ObjectID = "f9N-3Q-IJD"; */
 "f9N-3Q-IJD.normalTitle" = "Check r-values";
 
 /* Class = "IBUILabel"; text = "Pay to"; ObjectID = "g3O-Ch-Qm9"; */
@@ -175,6 +178,9 @@
 
 /* Class = "IBUILabel"; text = "Network failure."; ObjectID = "jQj-PR-DVU"; */
 "jQj-PR-DVU.text" = "Network failure.";
+
+/* Class = "IBUILabel"; text = "Label"; ObjectID = "kKw-54-5PB"; */
+"kKw-54-5PB.text" = "Label";
 
 /* Class = "IBUILabel"; text = "24h"; ObjectID = "kS5-Zp-kQC"; */
 "kS5-Zp-kQC.text" = "24h";

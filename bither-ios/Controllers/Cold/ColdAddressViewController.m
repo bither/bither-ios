@@ -47,10 +47,10 @@
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    [self refresh];
+    [self reload];
 }
 
--(void)refresh{
+-(void)reload{
     [self.addresses removeAllObjects];
     [self.addresses addObjectsFromArray:[BTAddressManager instance].privKeyAddresses];
     [self.tableView reloadData];

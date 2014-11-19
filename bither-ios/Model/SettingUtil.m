@@ -50,6 +50,7 @@
     if([BTAddressManager instance].privKeyAddresses.count > 0){
         [array addObject:[Setting getColdMonitorSetting]];
     }
+    [array addObject:[Setting getBitcoinUnitSetting]];
     [array addObject:[Setting getAdvanceSetting]];
     return array;
 }

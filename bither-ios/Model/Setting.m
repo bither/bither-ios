@@ -60,6 +60,7 @@ static Setting* ColdMonitorSetting;
 static Setting* AdvanceSetting;
 static Setting* reloadTxsSetting;
 static Setting* RCheckSetting;
+static Setting* TrashCanSetting;
 
 -(instancetype)initWithName:(NSString *)name  icon:(UIImage *)icon {
     self=[super init];
@@ -407,6 +408,22 @@ static Setting* RCheckSetting;
     return RCheckSetting;
 }
 
++(Setting*)getTrashCanSetting{
+    if(!TrashCanSetting){
+        TrashCanSetting = [[Setting alloc]initWithName:NSLocalizedString(@"trash_can", nil) icon:[UIImage imageNamed:@"trash_can_button_icon"]];
+        [TrashCanSetting setSelectBlock:^(UIViewController * controller){
+            if([BTAddressManager instance].trashAddresses.count > 0){
+                [controller.navigationController pushViewController:[controller.storyboard instantiateViewControllerWithIdentifier:@"trash_can"] animated:YES];
+            }else{
+                if([controller respondsToSelector:@selector(showMsg:)]){
+                    [controller performSelector:@selector(showMsg:) withObject:NSLocalizedString(@"trash_can_empty", nil) afterDelay:0];
+                }
+            }
+        }];
+    }
+    return TrashCanSetting;
+}
+
 +(NSArray*)advanceSettings{
     NSMutableArray *array = [NSMutableArray new];
     if ([[BTSettings instance] getAppMode]==HOT) {
@@ -418,6 +435,7 @@ static Setting* RCheckSetting;
     }
     [array addObject:[ImportPrivateKeySetting getImportPrivateKeySetting]];
     [array addObject:[ImportBip38PrivateKeySetting getImportBip38PrivateKeySetting]];
+    [array addObject:[Setting getTrashCanSetting]];
     if ([[BTSettings instance] getAppMode]==HOT) {
         [array addObject:[ReloadTxSetting getReloadTxsSetting]];
     }
