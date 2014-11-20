@@ -186,7 +186,6 @@ static Setting* SwitchToColdSetting;
                 [array addObject:dict];
             }
             return array;
-            
         }];
         [setting setResult:^(NSDictionary * dict){
             if ([[dict  allKeys] containsObject:SETTING_VALUE]) {
@@ -436,7 +435,6 @@ static Setting* SwitchToColdSetting;
                         
                     }];
                 } cancel:nil] showInWindow:controller.view.window];
-                
             }
         }];
     }

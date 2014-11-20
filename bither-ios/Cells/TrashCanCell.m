@@ -38,6 +38,10 @@
                 [[BTAddressManager instance] restorePrivKey:self.address];
                 [[PeerUtil instance] startPeer];
                 dispatch_async(dispatch_get_main_queue(), ^{
+                    UIViewController* vc = self.getUIViewController;
+                    if([vc respondsToSelector:@selector(refresh)]){
+                        [vc performSelector:@selector(refresh) withObject:nil];
+                    }
                     [dp dismiss];
                 });
             });

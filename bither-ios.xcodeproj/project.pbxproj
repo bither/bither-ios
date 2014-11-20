@@ -98,6 +98,7 @@
 		AC454DC61A19D981000AF4ED /* UnitUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = AC454DC51A19D981000AF4ED /* UnitUtil.m */; };
 		AC454DC91A1C6E05000AF4ED /* TrashCanViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AC454DC81A1C6E05000AF4ED /* TrashCanViewController.m */; };
 		AC454DCC1A1C6EC1000AF4ED /* TrashCanCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AC454DCB1A1C6EC1000AF4ED /* TrashCanCell.m */; };
+		AC454DD51A1DE602000AF4ED /* PinCodeEnterView.m in Sources */ = {isa = PBXBuildFile; fileRef = AC454DD41A1DE602000AF4ED /* PinCodeEnterView.m */; };
 		AC45AA3519879C96006314D5 /* DialogPrivateKeyDecryptedQrCode.m in Sources */ = {isa = PBXBuildFile; fileRef = AC45AA3419879C96006314D5 /* DialogPrivateKeyDecryptedQrCode.m */; };
 		AC45AA381987A2F4006314D5 /* DialogPrivateKeyText.m in Sources */ = {isa = PBXBuildFile; fileRef = AC45AA371987A2F4006314D5 /* DialogPrivateKeyText.m */; };
 		AC45D84119878BAB00AF5C2C /* DialogAddressLongPressOptions.m in Sources */ = {isa = PBXBuildFile; fileRef = AC45D83E19878BAB00AF5C2C /* DialogAddressLongPressOptions.m */; };
@@ -378,6 +379,8 @@
 		AC454DCA1A1C6EC1000AF4ED /* TrashCanCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TrashCanCell.h; path = Cells/TrashCanCell.h; sourceTree = "<group>"; };
 		AC454DCB1A1C6EC1000AF4ED /* TrashCanCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TrashCanCell.m; path = Cells/TrashCanCell.m; sourceTree = "<group>"; };
 		AC454DCE1A1C892B000AF4ED /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/MainStoryboard.strings; sourceTree = "<group>"; };
+		AC454DD31A1DE602000AF4ED /* PinCodeEnterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PinCodeEnterView.h; sourceTree = "<group>"; };
+		AC454DD41A1DE602000AF4ED /* PinCodeEnterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PinCodeEnterView.m; sourceTree = "<group>"; };
 		AC45AA3319879C96006314D5 /* DialogPrivateKeyDecryptedQrCode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DialogPrivateKeyDecryptedQrCode.h; sourceTree = "<group>"; };
 		AC45AA3419879C96006314D5 /* DialogPrivateKeyDecryptedQrCode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DialogPrivateKeyDecryptedQrCode.m; sourceTree = "<group>"; };
 		AC45AA361987A2F4006314D5 /* DialogPrivateKeyText.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DialogPrivateKeyText.h; sourceTree = "<group>"; };
@@ -825,6 +828,7 @@
 				AC0135DD195056BE00E3BB95 /* KeyboardControl */,
 				42EFB54E1949C50900376888 /* MainStoryboard.storyboard */,
 				4217A36E1951233500063746 /* Model */,
+				AC454DCF1A1DE5D4000AF4ED /* pin */,
 				ACEE7D1A19D3F9F500932B39 /* QRCode */,
 				ACA9D707195410FF002D1E3A /* Resouces */,
 				AC229A6E196A40B500A7FB5E /* sh */,
@@ -936,6 +940,15 @@
 				AC454DCB1A1C6EC1000AF4ED /* TrashCanCell.m */,
 			);
 			name = Cells;
+			sourceTree = "<group>";
+		};
+		AC454DCF1A1DE5D4000AF4ED /* pin */ = {
+			isa = PBXGroup;
+			children = (
+				AC454DD31A1DE602000AF4ED /* PinCodeEnterView.h */,
+				AC454DD41A1DE602000AF4ED /* PinCodeEnterView.m */,
+			);
+			path = pin;
 			sourceTree = "<group>";
 		};
 		AC53ABA419D277C1007C095C /* XRandom */ = {
@@ -1391,6 +1404,7 @@
 				421B03C019495C1F003A45F1 /* HotAddressViewController.m in Sources */,
 				ACDDDC3619483A840008A79D /* UIColor+Util.m in Sources */,
 				AC275EE419B59B0100F1C02F /* BlockCell.m in Sources */,
+				AC454DD51A1DE602000AF4ED /* PinCodeEnterView.m in Sources */,
 				AC0135D6194FDCCD00E3BB95 /* HotAddressAddWatchOnlyViewController.m in Sources */,
 				ACB9B9C9195AD27300019216 /* TransactionCell.m in Sources */,
 				AC0135D0194ED8B800E3BB95 /* HotAddressAddViewController.m in Sources */,

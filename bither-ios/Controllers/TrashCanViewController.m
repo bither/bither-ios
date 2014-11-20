@@ -15,6 +15,7 @@
 @interface TrashCanViewController () <UITableViewDataSource, UITableViewDelegate>
 @property (weak, nonatomic) IBOutlet UIView *topBar;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (weak, nonatomic) IBOutlet UILabel *lblEmpty;
 @property NSMutableArray *addresses;
 @end
 
@@ -38,6 +39,8 @@
         }
     }
     [self configureTableView];
+    self.lblEmpty.text = NSLocalizedString(@"trash_can_empty", nil);
+    self.lblEmpty.hidden = YES;
     self.addresses = [NSMutableArray new];
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
@@ -48,6 +51,8 @@
     [self.addresses removeAllObjects];
     [self.addresses addObjectsFromArray:[BTAddressManager instance].trashAddresses];
     [self.tableView reloadData];
+    self.tableView.hidden = self.addresses.count == 0;
+    self.lblEmpty.hidden = !self.tableView.hidden;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
