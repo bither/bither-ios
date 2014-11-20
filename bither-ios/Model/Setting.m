@@ -61,6 +61,7 @@ static Setting* AdvanceSetting;
 static Setting* reloadTxsSetting;
 static Setting* RCheckSetting;
 static Setting* TrashCanSetting;
+static Setting* SwitchToColdSetting;
 
 -(instancetype)initWithName:(NSString *)name  icon:(UIImage *)icon {
     self=[super init];
@@ -422,6 +423,24 @@ static Setting* TrashCanSetting;
         }];
     }
     return TrashCanSetting;
+}
+
++(Setting * )getSwitchToColdSetting{
+    if(!SwitchToColdSetting){
+        SwitchToColdSetting = [[Setting alloc]initWithName:NSLocalizedString(@"launch_sequence_switch_to_cold", nil) icon:nil];
+        [SwitchToColdSetting setSelectBlock:^(UIViewController * controller){
+            if([BTAddressManager instance].allAddresses.count == 0){
+                [[[DialogAlert alloc]initWithMessage:NSLocalizedString(@"launch_sequence_switch_to_cold_warn", nil) confirm:^{
+                    [[BTSettings instance] setAppMode:COLD];
+                    [controller presentViewController:[controller.storyboard instantiateViewControllerWithIdentifier:@"ChooseModeViewController"] animated:YES completion:^{
+                        
+                    }];
+                } cancel:nil] showInWindow:controller.view.window];
+                
+            }
+        }];
+    }
+    return SwitchToColdSetting;
 }
 
 +(NSArray*)advanceSettings{

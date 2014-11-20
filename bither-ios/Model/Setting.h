@@ -46,6 +46,6 @@
 +(Setting * )getAdvanceSetting;
 +(Setting * )getColdMonitorSetting;
 +(Setting * )getTrashCanSetting;
-
++(Setting * )getSwitchToColdSetting;
 
 @end

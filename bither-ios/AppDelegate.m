@@ -55,7 +55,6 @@ static StatusBarNotificationWindow* notificationWindow;
 {
     if ([[BTSettings instance] getAppMode]==COLD) {
         [[UIApplication sharedApplication] setMinimumBackgroundFetchInterval:UIApplicationBackgroundFetchIntervalNever];
-        
     }else{
         [[UIApplication sharedApplication] setMinimumBackgroundFetchInterval:UIApplicationBackgroundFetchIntervalMinimum];
     }
@@ -63,10 +62,14 @@ static StatusBarNotificationWindow* notificationWindow;
     [self upgradePub:^{
     }];
     
+    if([[BTSettings instance] needChooseMode]){
+        [[BTSettings instance] setAppMode:HOT];
+    }
+    
     [CrashLog initCrashLog];
  //   [[BTSettings instance] openBitheriConsole];
     UIStoryboard *storyboard = self.window.rootViewController.storyboard;
-    if(![[BTSettings instance]needChooseMode]){
+    if(![[BTSettings instance] needChooseMode]){
         IOS7ContainerViewController *container = [[IOS7ContainerViewController alloc]init];
         if ([[BTSettings instance] getAppMode]==HOT && [[BlockUtil instance] syncSpvFinish]) {
             container.controller = [storyboard instantiateViewControllerWithIdentifier:@"BitherHot"];
