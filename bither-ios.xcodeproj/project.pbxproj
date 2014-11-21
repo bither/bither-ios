@@ -100,6 +100,11 @@
 		AC454DCC1A1C6EC1000AF4ED /* TrashCanCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AC454DCB1A1C6EC1000AF4ED /* TrashCanCell.m */; };
 		AC454DD51A1DE602000AF4ED /* PinCodeEnterView.m in Sources */ = {isa = PBXBuildFile; fileRef = AC454DD41A1DE602000AF4ED /* PinCodeEnterView.m */; };
 		AC454DD81A1ED7E7000AF4ED /* PinCodeDotsView.m in Sources */ = {isa = PBXBuildFile; fileRef = AC454DD71A1ED7E7000AF4ED /* PinCodeDotsView.m */; };
+		AC454DDB1A1F24E4000AF4ED /* PinCodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AC454DDA1A1F24E4000AF4ED /* PinCodeViewController.m */; };
+		AC454DDE1A1F24FA000AF4ED /* PinCodeEnableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AC454DDD1A1F24FA000AF4ED /* PinCodeEnableViewController.m */; };
+		AC454DE11A1F250C000AF4ED /* PinCodeDisableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AC454DE01A1F250C000AF4ED /* PinCodeDisableViewController.m */; };
+		AC454DE41A1F2518000AF4ED /* PinCodeChangeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AC454DE31A1F2518000AF4ED /* PinCodeChangeViewController.m */; };
+		AC454DE71A1F252B000AF4ED /* PinCodeUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = AC454DE61A1F252B000AF4ED /* PinCodeUtil.m */; };
 		AC45AA3519879C96006314D5 /* DialogPrivateKeyDecryptedQrCode.m in Sources */ = {isa = PBXBuildFile; fileRef = AC45AA3419879C96006314D5 /* DialogPrivateKeyDecryptedQrCode.m */; };
 		AC45AA381987A2F4006314D5 /* DialogPrivateKeyText.m in Sources */ = {isa = PBXBuildFile; fileRef = AC45AA371987A2F4006314D5 /* DialogPrivateKeyText.m */; };
 		AC45D84119878BAB00AF5C2C /* DialogAddressLongPressOptions.m in Sources */ = {isa = PBXBuildFile; fileRef = AC45D83E19878BAB00AF5C2C /* DialogAddressLongPressOptions.m */; };
@@ -384,6 +389,16 @@
 		AC454DD41A1DE602000AF4ED /* PinCodeEnterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PinCodeEnterView.m; sourceTree = "<group>"; };
 		AC454DD61A1ED7E7000AF4ED /* PinCodeDotsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PinCodeDotsView.h; sourceTree = "<group>"; };
 		AC454DD71A1ED7E7000AF4ED /* PinCodeDotsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PinCodeDotsView.m; sourceTree = "<group>"; };
+		AC454DD91A1F24E4000AF4ED /* PinCodeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PinCodeViewController.h; sourceTree = "<group>"; };
+		AC454DDA1A1F24E4000AF4ED /* PinCodeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PinCodeViewController.m; sourceTree = "<group>"; };
+		AC454DDC1A1F24FA000AF4ED /* PinCodeEnableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PinCodeEnableViewController.h; sourceTree = "<group>"; };
+		AC454DDD1A1F24FA000AF4ED /* PinCodeEnableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PinCodeEnableViewController.m; sourceTree = "<group>"; };
+		AC454DDF1A1F250C000AF4ED /* PinCodeDisableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PinCodeDisableViewController.h; sourceTree = "<group>"; };
+		AC454DE01A1F250C000AF4ED /* PinCodeDisableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PinCodeDisableViewController.m; sourceTree = "<group>"; };
+		AC454DE21A1F2518000AF4ED /* PinCodeChangeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PinCodeChangeViewController.h; sourceTree = "<group>"; };
+		AC454DE31A1F2518000AF4ED /* PinCodeChangeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PinCodeChangeViewController.m; sourceTree = "<group>"; };
+		AC454DE51A1F252B000AF4ED /* PinCodeUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PinCodeUtil.h; sourceTree = "<group>"; };
+		AC454DE61A1F252B000AF4ED /* PinCodeUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PinCodeUtil.m; sourceTree = "<group>"; };
 		AC45AA3319879C96006314D5 /* DialogPrivateKeyDecryptedQrCode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DialogPrivateKeyDecryptedQrCode.h; sourceTree = "<group>"; };
 		AC45AA3419879C96006314D5 /* DialogPrivateKeyDecryptedQrCode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DialogPrivateKeyDecryptedQrCode.m; sourceTree = "<group>"; };
 		AC45AA361987A2F4006314D5 /* DialogPrivateKeyText.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DialogPrivateKeyText.h; sourceTree = "<group>"; };
@@ -952,6 +967,16 @@
 				AC454DD41A1DE602000AF4ED /* PinCodeEnterView.m */,
 				AC454DD61A1ED7E7000AF4ED /* PinCodeDotsView.h */,
 				AC454DD71A1ED7E7000AF4ED /* PinCodeDotsView.m */,
+				AC454DD91A1F24E4000AF4ED /* PinCodeViewController.h */,
+				AC454DDA1A1F24E4000AF4ED /* PinCodeViewController.m */,
+				AC454DDC1A1F24FA000AF4ED /* PinCodeEnableViewController.h */,
+				AC454DDD1A1F24FA000AF4ED /* PinCodeEnableViewController.m */,
+				AC454DDF1A1F250C000AF4ED /* PinCodeDisableViewController.h */,
+				AC454DE01A1F250C000AF4ED /* PinCodeDisableViewController.m */,
+				AC454DE21A1F2518000AF4ED /* PinCodeChangeViewController.h */,
+				AC454DE31A1F2518000AF4ED /* PinCodeChangeViewController.m */,
+				AC454DE51A1F252B000AF4ED /* PinCodeUtil.h */,
+				AC454DE61A1F252B000AF4ED /* PinCodeUtil.m */,
 			);
 			path = pin;
 			sourceTree = "<group>";
@@ -1371,6 +1396,7 @@
 				ACEE7D2919D3F9F500932B39 /* QRCodeTxTransport.m in Sources */,
 				424EA9EB195E99B70029AB43 /* NotificationUtil.m in Sources */,
 				4268FE29194ACD57007A4C30 /* ColdAddressViewController.m in Sources */,
+				AC454DE11A1F250C000AF4ED /* PinCodeDisableViewController.m in Sources */,
 				AC202AD0196B8B7A00033EC1 /* Setting.m in Sources */,
 				ACE7E71019EB78AE00F7AA3A /* ImageCropView.m in Sources */,
 				ACC21A6B194C2BD900E02542 /* ColdModeCheckConnectionView.m in Sources */,
@@ -1438,10 +1464,12 @@
 				ACBEC01E196E87B9004301E0 /* CheckPrivateKeyCell.m in Sources */,
 				AC17158A1969249B00337AB5 /* NSString+Size.m in Sources */,
 				ACBEC01B196E397E004301E0 /* CheckScoreAndBgAnimatableView.m in Sources */,
+				AC454DE71A1F252B000AF4ED /* PinCodeUtil.m in Sources */,
 				4254083B19469C9A007AF99C /* BaseApi.m in Sources */,
 				AC2F3295195C02C3001B7439 /* AmountButton.m in Sources */,
 				42E8161C19529B14005F16F7 /* KeyUtil.m in Sources */,
 				ACEE7D3619D3FC4B00932B39 /* ReloadTxSetting.m in Sources */,
+				AC454DE41A1F2518000AF4ED /* PinCodeChangeViewController.m in Sources */,
 				425408571946A219007AF99C /* DataCheckUtil.m in Sources */,
 				AC6163941964ED2F0055C9D0 /* DialogWithArrow.m in Sources */,
 				ACA9D70319540E0F002D1E3A /* PlaySoundUtil.m in Sources */,
@@ -1470,6 +1498,7 @@
 				ACEEB8DE19B46EB900F2789C /* NetworkMonitorViewController.m in Sources */,
 				AC2F329E195D19C2001B7439 /* DialogSendTxConfirm.m in Sources */,
 				AC3C2623199B58750055FF5E /* TrendingGraphicData.m in Sources */,
+				AC454DDB1A1F24E4000AF4ED /* PinCodeViewController.m in Sources */,
 				ACEE7D4519D40C1300932B39 /* ImportPrivateKeySetting.m in Sources */,
 				ACE7E71219EB78AE00F7AA3A /* ImageScrollView.m in Sources */,
 				DA641E8C196E7BC20095DF42 /* GCCrashReportFilterTrim.m in Sources */,
@@ -1503,6 +1532,7 @@
 				ACDDDC2D19480ECF0008A79D /* DialogCentered.m in Sources */,
 				ACF02FEB19D90899001AB701 /* DialogSwitchQRCode.m in Sources */,
 				4268FE2B194ACD57007A4C30 /* CheckViewController.m in Sources */,
+				AC454DDE1A1F24FA000AF4ED /* PinCodeEnableViewController.m in Sources */,
 				ACDDDC2219480DE00008A79D /* UIBaseUtil.m in Sources */,
 				AC31E93219B477E400EFDDF1 /* BackgroundTransitionView.m in Sources */,
 				AC202AD3196BD97A00033EC1 /* SettingListCell.m in Sources */,
