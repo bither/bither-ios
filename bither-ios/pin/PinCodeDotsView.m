@@ -19,7 +19,7 @@
 #import "PinCodeDotsView.h"
 
 #define kPadding (1)
-#define kStrokeWidth (1.6f)
+#define kStrokeWidth (2.0f)
 
 @interface PinCodeDotsView(){
     UIColor *_dotColor;
@@ -42,13 +42,13 @@
     if(height == 0 || width == 0){
         return;
     }
-    CGFloat size = height;
-    CGFloat distance = (width - size * 4.0f) / 3.0f;
-    CGRect dotRect = CGRectMake(0, 0, size, size);
+    CGFloat size = height - kStrokeWidth * 2.0f;
+    CGFloat distance = (width - kStrokeWidth * 2.0f - size * 4.0f) / 3.0f;
+    CGRect dotRect = CGRectMake(kStrokeWidth, kStrokeWidth, size, size);
     for (NSUInteger i = 0;
          i < self.totalDotCount;
          i++) {
-        dotRect.origin.x = i * (size + distance);
+        dotRect.origin.x = i * (size + distance) + kStrokeWidth;
         if(i < self.filledCount){
             CGContextFillEllipseInRect(context, dotRect);
         }else{
