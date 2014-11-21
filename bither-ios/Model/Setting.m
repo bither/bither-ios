@@ -17,6 +17,7 @@
 //  limitations under the License.
 
 #import "Setting.h"
+#import "PinCodeSetting.h"
 #import "UserDefaultsUtil.h"
 #import "NSDictionary+Fromat.h"
 #import "SelectViewController.h"
@@ -447,6 +448,7 @@ static Setting* SwitchToColdSetting;
         [array addObject:[Setting getNetworkSetting]];
     }
     [array addObject:[Setting getEditPasswordSetting]];
+    [array addObject:[PinCodeSetting getPinCodeSetting]];
     if ([[BTSettings instance] getAppMode]==HOT) {
         [array addObject:[Setting getRCheckSetting]];
     }
