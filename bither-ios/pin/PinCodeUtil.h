@@ -19,5 +19,5 @@
 #import <Foundation/Foundation.h>
 
 @interface PinCodeUtil : NSObject
-
++(PinCodeUtil*)instance;
 @end

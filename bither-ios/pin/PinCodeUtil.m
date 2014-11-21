@@ -17,7 +17,56 @@
 //  limitations under the License.
 
 #import "PinCodeUtil.h"
+#import "AppDelegate.h"
+#import "UserDefaultsUtil.h"
+#import "IOS7ContainerViewController.h"
 
+#define kCausePinCodeBackgroundTime (60)
+
+@interface PinCodeUtil()
+@property NSDate* backgroundDate;
+@end
+
+static PinCodeUtil* util;
 @implementation PinCodeUtil
 
++(PinCodeUtil*)instance{
+    if(!util){
+        util = [[PinCodeUtil alloc]init];
+    }
+    return util;
+}
+
+-(instancetype)init{
+    self = [super init];
+    if(self){
+        [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(resignActive) name:UIApplicationWillResignActiveNotification object:nil];
+        [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(becomeActive) name:UIApplicationDidBecomeActiveNotification object:nil];
+    }
+    return self;
+}
+
+-(void)becomeActive{
+    if(!self.backgroundDate || [[NSDate new] timeIntervalSinceDate:self.backgroundDate] > kCausePinCodeBackgroundTime){
+        if([[UserDefaultsUtil instance]hasPinCode]){
+            UIViewController* rootVC = ((AppDelegate*)[UIApplication sharedApplication].delegate).window.rootViewController;
+            if([rootVC isKindOfClass:[IOS7ContainerViewController class]]){
+                rootVC = ((IOS7ContainerViewController*)rootVC).controller;
+            }
+            UIViewController* vc = rootVC;
+            while (vc.presentedViewController) {
+                vc = vc.presentedViewController;
+            }
+            [vc presentViewController:[rootVC.storyboard instantiateViewControllerWithIdentifier:@"PinCode"] animated:NO completion:nil];
+        }
+    }
+}
+
+-(void)resignActive{
+    self.backgroundDate = [NSDate new];
+}
+
+-(void)dealloc{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
 @end

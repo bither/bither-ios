@@ -45,6 +45,7 @@
 #import "SystemUtil.h"
 #import "UpgradeUtil.h"
 #import "TrendingGraphicData.h"
+#import "PinCodeUtil.h"
 
 @interface AppDelegate()
 @end
@@ -58,6 +59,7 @@ static StatusBarNotificationWindow* notificationWindow;
     }else{
         [[UIApplication sharedApplication] setMinimumBackgroundFetchInterval:UIApplicationBackgroundFetchIntervalMinimum];
     }
+    [PinCodeUtil instance];
     [[BTAddressManager instance] initAddress];
     [self upgradePub:^{
     }];
