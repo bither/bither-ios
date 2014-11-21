@@ -17,6 +17,9 @@
 //  limitations under the License.
 
 #import "PinCodeEnterView.h"
+#import "UIBaseUtil.h"
+#import <AudioToolbox/AudioToolbox.h>
+
 #define kDotsViewHeight (16)
 #define kDotsViewWidth (160)
 #define kFontSize (18)
@@ -52,6 +55,9 @@
 
 -(void)firstConfigure{
     self.keyboardType = UIKeyboardTypeNumberPad;
+    _text = [NSString new];
+    self.pinCodeLength = 4;
+    self.enabled = YES;
     topView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height / 2)];
     topView.backgroundColor = [UIColor clearColor];
     topView.autoresizingMask = UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
@@ -80,6 +86,38 @@
     [bottomView addSubview:self.dvNew];
 }
 
+-(void)animateToNext{
+    self.enabled = NO;
+    __block CGRect dvFrame = self.dv.frame;
+    __block CGRect dvNewFrame = self.dvNew.frame;
+    [UIView animateWithDuration:0.4f animations:^{
+        self.dv.frame = CGRectMake(-self.dv.frame.size.width, self.dv.frame.origin.y, self.dv.frame.size.width, self.dv.frame.size.height);
+        self.dvNew.frame = dvFrame;
+    } completion:^(BOOL finished) {
+        self.dv.frame = dvFrame;
+        self.dvNew.frame = dvNewFrame;
+        [self clearText];
+        self.enabled = YES;
+    }];
+}
+
+-(void)shakeToClear{
+    self.enabled = NO;
+    [self clearText];
+    [self vibrate];
+    [self.label shakeTime:3 interval:0.04f length:20 completion:^{
+        self.enabled = YES;
+    }];
+}
+
+-(void)vibrate{
+    AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
+}
+
+-(void)clearText{
+    self.text = @"";
+}
+
 -(BOOL)canBecomeFirstResponder{
     return YES;
 }
@@ -89,15 +127,32 @@
 }
 
 - (void)insertText:(NSString *)text{
-    _text = [_text stringByAppendingString:text];
+    if(_text.length < self.pinCodeLength && self.enabled){
+        _text = [_text stringByAppendingString:text];
+        [self onTextChanged];
+    }
 }
 
 - (void)deleteBackward{
-    _text = [_text substringToIndex:_text.length - 1];
+    if(self.hasText && self.enabled){
+        _text = [_text substringToIndex:_text.length - 1];
+        [self onTextChanged];
+    }
+}
+
+- (void)onTextChanged{
+    self.dv.filledCount = _text.length;
+    if(_text.length >= self.pinCodeLength){
+        if(self.delegate && [self.delegate respondsToSelector:@selector(onEntered:)]){
+            [self.delegate performSelector:@selector(onEntered:) withObject:_text afterDelay:0.1];
+        }
+    }
 }
 
 -(void)setPinCodeLength:(NSUInteger)pinCodeLength{
     _pinCodeLength = pinCodeLength;
+    self.dv.totalDotCount = pinCodeLength;
+    self.dvNew.totalDotCount = pinCodeLength;
 }
 
 -(NSUInteger)pinCodeLength{
@@ -114,6 +169,15 @@
 
 -(NSString*)msg{
     return _msg;
+}
+
+-(void)setText:(NSString *)text{
+    _text = text;
+    [self onTextChanged];
+}
+
+-(NSString*)text{
+    return _text;
 }
 
 @end

@@ -24,10 +24,18 @@
 @end
 
 @interface PinCodeEnterView : UIView
+
 @property UILabel* label;
 @property PinCodeDotsView* dv;
 @property PinCodeDotsView* dvNew;
 @property (weak) NSObject<PinCodeEnterViewDelegate>* delegate;
 @property NSUInteger pinCodeLength;
 @property NSString* msg;
+@property BOOL enabled;
+@property NSString* text;
+
+-(void)clearText;
+-(void)vibrate;
+-(void)animateToNext;
+-(void)shakeToClear;
 @end
