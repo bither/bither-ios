@@ -1,5 +1,5 @@
 //
-//  PinCodeEnterView.h
+//  PinCodeDotsView.h
 //  bither-ios
 //
 //  Copyright 2014 http://Bither.net
@@ -17,17 +17,11 @@
 //  limitations under the License.
 
 #import <UIKit/UIKit.h>
-#import "PinCodeDotsView.h"
 
-@protocol PinCodeEnterViewDelegate <NSObject>
--(void)onEntered:(NSString*) code;
-@end
+@interface PinCodeDotsView : UIView
 
-@interface PinCodeEnterView : UIView
-@property UILabel* label;
-@property PinCodeDotsView* dv;
-@property PinCodeDotsView* dvNew;
-@property (weak) NSObject<PinCodeEnterViewDelegate>* delegate;
-@property NSUInteger pinCodeLength;
-@property NSString* msg;
+@property UIColor *dotColor;
+@property NSUInteger filledCount;
+@property NSUInteger totalDotCount;
+
 @end
