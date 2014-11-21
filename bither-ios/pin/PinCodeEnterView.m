@@ -22,7 +22,7 @@
 
 #define kDotsViewHeight (20)
 #define kDotsViewWidth (160)
-#define kFontSize (18)
+#define kFontSize (16)
 #define kPadding (10)
 #define kMargin (20)
 

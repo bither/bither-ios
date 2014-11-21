@@ -282,6 +282,7 @@ static float PreVCMaskAlphaMax = 0.4;
         [self removeParentVCAsBg];
         [self swipeRightToPopVars].inAnimation = NO;
         self.inSwipeRightToPop = NO;
+        [self didAnimToResetForSwipeRightToPop];
     }];
 }
 
@@ -417,6 +418,9 @@ static float PreVCMaskAlphaMax = 0.4;
 
 -(void)setShown:(BOOL)shown{
     [self swipeRightToPopVars].shown = shown;
+}
+
+-(void)didAnimToResetForSwipeRightToPop{
 }
 -(void)reload{
 }

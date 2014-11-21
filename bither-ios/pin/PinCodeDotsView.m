@@ -19,7 +19,7 @@
 #import "PinCodeDotsView.h"
 
 #define kPadding (1)
-#define kStrokeWidth (2.0f)
+#define kStrokeWidth (1.5f)
 
 @interface PinCodeDotsView(){
     UIColor *_dotColor;
