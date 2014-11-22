@@ -11,11 +11,6 @@
 
 #define kPinCodeKey @"PIN_CODE"
 
-@interface TouchIdIntegration(){
-    BOOL _hasTouchId;
-}
-@end
-
 static TouchIdIntegration* touchId;
 @implementation TouchIdIntegration
 
@@ -26,25 +21,13 @@ static TouchIdIntegration* touchId;
     return touchId;
 }
 
--(instancetype)init{
-    self = [super init];
-    if(self){
-        [self configureTouchId];
-    }
-    return self;
-}
-
--(void)configureTouchId{
+-(BOOL)hasTouchId{
     LAContext *la = [[LAContext alloc]init];
     if([la respondsToSelector:@selector(canEvaluatePolicy:error:)]){
-        _hasTouchId = [la canEvaluatePolicy:LAPolicyDeviceOwnerAuthenticationWithBiometrics error:nil];
+        return [la canEvaluatePolicy:LAPolicyDeviceOwnerAuthenticationWithBiometrics error:nil];
     }else{
-        _hasTouchId = NO;
+        return NO;
     }
-}
-
--(BOOL)hasTouchId{
-    return _hasTouchId;
 }
 
 -(void)checkTouchId:(void (^)(BOOL success))completion{

@@ -23,7 +23,7 @@
 #import "IOS7ContainerViewController.h"
 #import "FXBlurView/FXBlurView.h"
 
-#define kCausePinCodeBackgroundTime (10)
+#define kCausePinCodeBackgroundTime (60)
 
 @interface PinCodeUtil()
 @property NSDate* backgroundDate;
@@ -56,8 +56,21 @@ static PinCodeUtil* util;
         if(!self.backgroundDate || [[NSDate new] timeIntervalSinceDate:self.backgroundDate] > kCausePinCodeBackgroundTime){
             if(![vc isKindOfClass:[PinCodeViewController class]]){
                 [self addBlur];
-                [vc presentViewController:[self.rootVC.storyboard instantiateViewControllerWithIdentifier:@"PinCode"] animated:NO completion:^{
-                    [self removeBlur:vc];
+                UIView* blurView = vc.view.subviews[vc.view.subviews.count - 1];
+                UIViewController* pin = [self.rootVC.storyboard instantiateViewControllerWithIdentifier:@"PinCode"];
+                __block __weak UIView* pinView = pin.view;
+                pinView.alpha = 0;
+                [vc presentViewController:pin animated:NO completion:^{
+                    [blurView removeFromSuperview];
+                    [pinView.window insertSubview:blurView atIndex:0];
+                    blurView.frame = CGRectMake(0, CGRectGetMaxY([UIApplication sharedApplication].statusBarFrame), pinView.window.frame.size.width * 2, pinView.window.frame.size.height * 2);
+                    
+                    [UIView animateWithDuration:0.3 animations:^{
+                        pinView.alpha = 1;
+                    } completion:^(BOOL finished) {
+                        [self removeBlur:vc];
+                        [blurView removeFromSuperview];
+                    }];
                 }];
             }
         }
@@ -74,14 +87,17 @@ static PinCodeUtil* util;
 }
 
 -(void)addBlur{
-    UIView* v = self.topVC.view;
+    UIViewController* vc = self.topVC;
+    if([vc isKindOfClass:[PinCodeViewController class]]){
+        return;
+    }
+    UIView* v = vc.view;
     if(![v.subviews[v.subviews.count - 1] isKindOfClass:[FXBlurView class]]){
         FXBlurView* blur = [[FXBlurView alloc]initWithFrame:CGRectMake(0, 0, v.frame.size.width, v.frame.size.height)];
         blur.underlyingView = v;
         blur.dynamic = NO;
         blur.blurRadius = 20;
         blur.tintColor = [UIColor clearColor];
-        [blur setNeedsDisplay];
         [v addSubview:blur];
     }
 }

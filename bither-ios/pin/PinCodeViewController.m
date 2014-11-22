@@ -39,12 +39,12 @@
     self.shouldSwipeRightToPop = NO;
     self.vEnter.delegate = self;
     self.vEnter.msg = NSLocalizedString(@"pin_code_enter_notice", nil);
-    [self.vEnter becomeFirstResponder];
     touchId = [TouchIdIntegration instance];
 }
 
--(void)viewWillAppear:(BOOL)animated{
-    [super viewWillAppear:animated];
+-(void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
+    [self.vEnter becomeFirstResponder];
     if(touchId.hasTouchId){
         [touchId checkTouchId:^(BOOL success) {
             if(success){
