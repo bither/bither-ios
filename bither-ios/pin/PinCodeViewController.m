@@ -21,9 +21,11 @@
 #import "UIViewController+PiShowBanner.h"
 #import "UIViewController+SwipeRightToPop.h"
 #import "UserDefaultsUtil.h"
+#import "TouchIdIntegration.h"
 
 @interface PinCodeViewController ()<PinCodeEnterViewDelegate>{
     UserDefaultsUtil *d;
+    TouchIdIntegration* touchId;
 }
 
 @property (weak, nonatomic) IBOutlet PinCodeEnterView *vEnter;
@@ -37,11 +39,25 @@
     self.shouldSwipeRightToPop = NO;
     self.vEnter.delegate = self;
     self.vEnter.msg = NSLocalizedString(@"pin_code_enter_notice", nil);
+    touchId = [TouchIdIntegration instance];
+}
+
+-(void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
     [self.vEnter becomeFirstResponder];
+    if(touchId.hasTouchId){
+        [touchId checkTouchId:^(BOOL success) {
+            if(success){
+                [self.vEnter resignFirstResponder];
+                [self dismissViewControllerAnimated:YES completion:nil];
+            }
+        }];
+    }
 }
 
 -(void)onEntered:(NSString*) code{
     if([d checkPinCode:code]){
+        [self.vEnter resignFirstResponder];
         [self dismissViewControllerAnimated:YES completion:nil];
     }else{
         [self.vEnter shakeToClear];

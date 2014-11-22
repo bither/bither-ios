@@ -475,3 +475,4 @@
 "pin_code_setting_change_new_repeat_msg" = "再次输入您的新 PIN 码";
 "pin_code_setting_change_repeat_wrong" = "两次输入的新 PIN 码不同";
 "pin_code_setting_close_wrong" = "PIN 码错误";
+"pin_code_touch_id_promot" = "解锁比太";

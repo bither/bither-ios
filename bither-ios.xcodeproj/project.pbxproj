@@ -144,6 +144,8 @@
 		ACB9B9C6195AD25800019216 /* AddressDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = ACB9B9C5195AD25800019216 /* AddressDetailCell.m */; };
 		ACB9B9C9195AD27300019216 /* TransactionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = ACB9B9C8195AD27300019216 /* TransactionCell.m */; };
 		ACBB5F56198B468E00B19F4B /* UIViewController+ConfigureTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = ACBB5F55198B468E00B19F4B /* UIViewController+ConfigureTableView.m */; };
+		ACBE75961A202E4900F49EE1 /* LocalAuthentication.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ACBE75951A202E4900F49EE1 /* LocalAuthentication.framework */; };
+		ACBE75991A202FE200F49EE1 /* TouchIdIntegration.m in Sources */ = {isa = PBXBuildFile; fileRef = ACBE75981A202FE200F49EE1 /* TouchIdIntegration.m */; };
 		ACBEC018196D422D004301E0 /* BalanceButton.m in Sources */ = {isa = PBXBuildFile; fileRef = ACBEC017196D422D004301E0 /* BalanceButton.m */; };
 		ACBEC01B196E397E004301E0 /* CheckScoreAndBgAnimatableView.m in Sources */ = {isa = PBXBuildFile; fileRef = ACBEC01A196E397E004301E0 /* CheckScoreAndBgAnimatableView.m */; };
 		ACBEC01E196E87B9004301E0 /* CheckPrivateKeyCell.m in Sources */ = {isa = PBXBuildFile; fileRef = ACBEC01D196E87B9004301E0 /* CheckPrivateKeyCell.m */; };
@@ -477,6 +479,9 @@
 		ACB9B9C8195AD27300019216 /* TransactionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TransactionCell.m; path = Cells/TransactionCell.m; sourceTree = "<group>"; };
 		ACBB5F54198B468E00B19F4B /* UIViewController+ConfigureTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+ConfigureTableView.h"; sourceTree = "<group>"; };
 		ACBB5F55198B468E00B19F4B /* UIViewController+ConfigureTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+ConfigureTableView.m"; sourceTree = "<group>"; };
+		ACBE75951A202E4900F49EE1 /* LocalAuthentication.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = LocalAuthentication.framework; path = System/Library/Frameworks/LocalAuthentication.framework; sourceTree = SDKROOT; };
+		ACBE75971A202FE200F49EE1 /* TouchIdIntegration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TouchIdIntegration.h; sourceTree = "<group>"; };
+		ACBE75981A202FE200F49EE1 /* TouchIdIntegration.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TouchIdIntegration.m; sourceTree = "<group>"; };
 		ACBEC016196D422D004301E0 /* BalanceButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BalanceButton.h; sourceTree = "<group>"; };
 		ACBEC017196D422D004301E0 /* BalanceButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BalanceButton.m; sourceTree = "<group>"; };
 		ACBEC019196E397E004301E0 /* CheckScoreAndBgAnimatableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CheckScoreAndBgAnimatableView.h; sourceTree = "<group>"; };
@@ -609,6 +614,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ACBE75961A202E4900F49EE1 /* LocalAuthentication.framework in Frameworks */,
 				ACA9D70C195415B0002D1E3A /* AudioToolbox.framework in Frameworks */,
 				ACDDDC3819483D210008A79D /* QuartzCore.framework in Frameworks */,
 				42D9B767193D6B5B00C85B89 /* CoreGraphics.framework in Frameworks */,
@@ -826,6 +832,7 @@
 		42D9B763193D6B5B00C85B89 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				ACBE75951A202E4900F49EE1 /* LocalAuthentication.framework */,
 				AC026C8019EE5FF500BC0152 /* libPods-Bitheri.a */,
 				AC026C8119EE5FF500BC0152 /* libPods-CocoaLumberjack.a */,
 				AC026C8219EE5FF500BC0152 /* libPods-FMDB.a */,
@@ -993,6 +1000,8 @@
 				AC454DE31A1F2518000AF4ED /* PinCodeChangeViewController.m */,
 				AC454DE51A1F252B000AF4ED /* PinCodeUtil.h */,
 				AC454DE61A1F252B000AF4ED /* PinCodeUtil.m */,
+				ACBE75971A202FE200F49EE1 /* TouchIdIntegration.h */,
+				ACBE75981A202FE200F49EE1 /* TouchIdIntegration.m */,
 			);
 			path = pin;
 			sourceTree = "<group>";
@@ -1454,6 +1463,7 @@
 				4269FF84195AD81C001213B9 /* BitherTime.m in Sources */,
 				AC3CDB5E1962AFF000C74B4C /* DialogAddressQrCode.m in Sources */,
 				ACBEC0241970E46C004301E0 /* SignTransactionViewController.m in Sources */,
+				ACBE75991A202FE200F49EE1 /* TouchIdIntegration.m in Sources */,
 				421B03C019495C1F003A45F1 /* HotAddressViewController.m in Sources */,
 				ACDDDC3619483A840008A79D /* UIColor+Util.m in Sources */,
 				AC275EE419B59B0100F1C02F /* BlockCell.m in Sources */,

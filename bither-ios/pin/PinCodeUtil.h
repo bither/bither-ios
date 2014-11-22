@@ -20,4 +20,5 @@
 
 @interface PinCodeUtil : NSObject
 +(PinCodeUtil*)instance;
+-(void)becomeActive;
 @end

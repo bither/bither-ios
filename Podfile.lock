@@ -14,6 +14,7 @@ PODS:
   - FMDB/common (2.4)
   - FMDB/standard (2.4):
     - FMDB/common
+  - FXBlurView (1.6.3)
   - KSCrash (0.0.3):
     - KSCrash/Installations
     - KSCrash/Recording
@@ -76,6 +77,7 @@ PODS:
 
 DEPENDENCIES:
   - Bitheri (from `git@github.com:bither/bitheri.git`, branch `develop`)
+  - FXBlurView
   - KSCrash (~> 0.0.3)
   - MKNetworkKit (~> 0.87)
   - RegexKitLite (~> 4.0)
@@ -91,6 +93,7 @@ SPEC CHECKSUMS:
   Bitheri: 8fec89c7cf97f3c46d1b7a1308a66bb2cbe9f253
   CocoaLumberjack: 205769c032b5fef85b92472046bcc8b7e7c8a817
   FMDB: 0b2fa25e5264ef177973c0cb8c02c711107979aa
+  FXBlurView: abe1046285813c4f6e9008abbc324fc5ab32af90
   KSCrash: c0a693b2d83ced5c15a40d4e916833c655475e6a
   MKNetworkKit: 83e6296a8d42e98a71880424a889773654846d74
   OpenSSL: 72a82aa51b056ae5833307a3fef9b571f38ce11c
