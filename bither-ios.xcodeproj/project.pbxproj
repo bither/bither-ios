@@ -206,6 +206,7 @@
 		DA641E8D196E7BC20095DF42 /* GCCrashReportSink.m in Sources */ = {isa = PBXBuildFile; fileRef = DA641E89196E7BC20095DF42 /* GCCrashReportSink.m */; };
 		DAB2C8701A1F46840011EE2F /* KeychainUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = DAB2C86F1A1F46840011EE2F /* KeychainUtil.m */; };
 		DAB2C8731A2038930011EE2F /* KeychainSetting.m in Sources */ = {isa = PBXBuildFile; fileRef = DAB2C8721A2038930011EE2F /* KeychainSetting.m */; };
+		DAB2C8761A206F080011EE2F /* KeychainBackupUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = DAB2C8751A206F080011EE2F /* KeychainBackupUtil.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -598,6 +599,8 @@
 		DAB2C86F1A1F46840011EE2F /* KeychainUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KeychainUtil.m; sourceTree = "<group>"; };
 		DAB2C8711A2038930011EE2F /* KeychainSetting.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeychainSetting.h; sourceTree = "<group>"; };
 		DAB2C8721A2038930011EE2F /* KeychainSetting.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KeychainSetting.m; sourceTree = "<group>"; };
+		DAB2C8741A206F080011EE2F /* KeychainBackupUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeychainBackupUtil.h; sourceTree = "<group>"; };
+		DAB2C8751A206F080011EE2F /* KeychainBackupUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KeychainBackupUtil.m; sourceTree = "<group>"; };
 		E7552F109D77434AC1A15A24 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -775,6 +778,8 @@
 				AC454DC51A19D981000AF4ED /* UnitUtil.m */,
 				DAB2C86E1A1F46840011EE2F /* KeychainUtil.h */,
 				DAB2C86F1A1F46840011EE2F /* KeychainUtil.m */,
+				DAB2C8741A206F080011EE2F /* KeychainBackupUtil.h */,
+				DAB2C8751A206F080011EE2F /* KeychainBackupUtil.m */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -1550,6 +1555,7 @@
 				ACDDDC2D19480ECF0008A79D /* DialogCentered.m in Sources */,
 				ACF02FEB19D90899001AB701 /* DialogSwitchQRCode.m in Sources */,
 				4268FE2B194ACD57007A4C30 /* CheckViewController.m in Sources */,
+				DAB2C8761A206F080011EE2F /* KeychainBackupUtil.m in Sources */,
 				AC454DDE1A1F24FA000AF4ED /* PinCodeEnableViewController.m in Sources */,
 				ACDDDC2219480DE00008A79D /* UIBaseUtil.m in Sources */,
 				AC31E93219B477E400EFDDF1 /* BackgroundTransitionView.m in Sources */,
