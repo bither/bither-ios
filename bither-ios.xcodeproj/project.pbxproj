@@ -205,6 +205,7 @@
 		DA641E8C196E7BC20095DF42 /* GCCrashReportFilterTrim.m in Sources */ = {isa = PBXBuildFile; fileRef = DA641E87196E7BC20095DF42 /* GCCrashReportFilterTrim.m */; };
 		DA641E8D196E7BC20095DF42 /* GCCrashReportSink.m in Sources */ = {isa = PBXBuildFile; fileRef = DA641E89196E7BC20095DF42 /* GCCrashReportSink.m */; };
 		DAB2C8701A1F46840011EE2F /* KeychainUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = DAB2C86F1A1F46840011EE2F /* KeychainUtil.m */; };
+		DAB2C8731A2038930011EE2F /* KeychainSetting.m in Sources */ = {isa = PBXBuildFile; fileRef = DAB2C8721A2038930011EE2F /* KeychainSetting.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -595,6 +596,8 @@
 		DA641E89196E7BC20095DF42 /* GCCrashReportSink.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GCCrashReportSink.m; path = CrashLog/GCCrashReportSink.m; sourceTree = "<group>"; };
 		DAB2C86E1A1F46840011EE2F /* KeychainUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeychainUtil.h; sourceTree = "<group>"; };
 		DAB2C86F1A1F46840011EE2F /* KeychainUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KeychainUtil.m; sourceTree = "<group>"; };
+		DAB2C8711A2038930011EE2F /* KeychainSetting.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeychainSetting.h; sourceTree = "<group>"; };
+		DAB2C8721A2038930011EE2F /* KeychainSetting.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KeychainSetting.m; sourceTree = "<group>"; };
 		E7552F109D77434AC1A15A24 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -1203,6 +1206,8 @@
 				ACE7E6FF19EB6DE800F7AA3A /* AvatarSetting.m */,
 				AC454DE81A1F3839000AF4ED /* PinCodeSetting.h */,
 				AC454DE91A1F3839000AF4ED /* PinCodeSetting.m */,
+				DAB2C8711A2038930011EE2F /* KeychainSetting.h */,
+				DAB2C8721A2038930011EE2F /* KeychainSetting.m */,
 			);
 			name = Setting;
 			sourceTree = "<group>";
@@ -1509,6 +1514,7 @@
 				AC781B6019F9FF98003B5B87 /* DialogRCheckInfo.m in Sources */,
 				ACEEB8DE19B46EB900F2789C /* NetworkMonitorViewController.m in Sources */,
 				AC2F329E195D19C2001B7439 /* DialogSendTxConfirm.m in Sources */,
+				DAB2C8731A2038930011EE2F /* KeychainSetting.m in Sources */,
 				AC3C2623199B58750055FF5E /* TrendingGraphicData.m in Sources */,
 				AC454DDB1A1F24E4000AF4ED /* PinCodeViewController.m in Sources */,
 				ACEE7D4519D40C1300932B39 /* ImportPrivateKeySetting.m in Sources */,
