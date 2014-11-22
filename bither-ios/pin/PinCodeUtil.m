@@ -21,8 +21,9 @@
 #import "UserDefaultsUtil.h"
 #import "PinCodeViewController.h"
 #import "IOS7ContainerViewController.h"
+#import "FXBlurView/FXBlurView.h"
 
-#define kCausePinCodeBackgroundTime (2)
+#define kCausePinCodeBackgroundTime (10)
 
 @interface PinCodeUtil()
 @property NSDate* backgroundDate;
@@ -48,25 +49,77 @@ static PinCodeUtil* util;
 }
 
 -(void)becomeActive{
-    if(!self.backgroundDate || [[NSDate new] timeIntervalSinceDate:self.backgroundDate] > kCausePinCodeBackgroundTime){
-        if([[UserDefaultsUtil instance]hasPinCode]){
-            UIViewController* rootVC = ((AppDelegate*)[UIApplication sharedApplication].delegate).window.rootViewController;
-            if([rootVC isKindOfClass:[IOS7ContainerViewController class]]){
-                rootVC = ((IOS7ContainerViewController*)rootVC).controller;
-            }
-            UIViewController* vc = rootVC;
-            while (vc.presentedViewController) {
-                vc = vc.presentedViewController;
-            }
+    [FXBlurView setUpdatesDisabled];
+    __block __weak UIViewController* vc = self.topVC;
+    [self removeBlur:vc];
+    if([[UserDefaultsUtil instance]hasPinCode]){
+        if(!self.backgroundDate || [[NSDate new] timeIntervalSinceDate:self.backgroundDate] > kCausePinCodeBackgroundTime){
             if(![vc isKindOfClass:[PinCodeViewController class]]){
-                [vc presentViewController:[rootVC.storyboard instantiateViewControllerWithIdentifier:@"PinCode"] animated:NO completion:nil];
+                [self addBlur];
+                [vc presentViewController:[self.rootVC.storyboard instantiateViewControllerWithIdentifier:@"PinCode"] animated:NO completion:^{
+                    [self removeBlur:vc];
+                }];
             }
         }
     }
 }
 
 -(void)resignActive{
-    self.backgroundDate = [NSDate new];
+    if(![self.topVC isKindOfClass:[PinCodeViewController class]]){
+        if([UserDefaultsUtil instance].hasPinCode){
+            [self addBlur];
+        }
+        self.backgroundDate = [NSDate new];
+    }
+}
+
+-(void)addBlur{
+    UIView* v = self.topVC.view;
+    if(![v.subviews[v.subviews.count - 1] isKindOfClass:[FXBlurView class]]){
+        FXBlurView* blur = [[FXBlurView alloc]initWithFrame:CGRectMake(0, 0, v.frame.size.width, v.frame.size.height)];
+        blur.underlyingView = v;
+        blur.dynamic = NO;
+        blur.blurRadius = 20;
+        blur.tintColor = [UIColor clearColor];
+        [blur setNeedsDisplay];
+        [v addSubview:blur];
+    }
+}
+
+-(void)removeBlur:(UIViewController*)vc{
+    if(!vc){
+        return;
+    }
+    UIView* v = vc.view;
+    NSUInteger subViewCount = v.subviews.count;
+    NSMutableArray *viewsToRemove = [NSMutableArray new];
+    for(NSInteger i = subViewCount - 1; i >= 0; i--){
+        UIView* subView = v.subviews[i];
+        if([subView isKindOfClass:[FXBlurView class]]){
+            [viewsToRemove addObject:subView];
+        }else{
+            break;
+        }
+    }
+    for(UIView* v in viewsToRemove){
+        [v removeFromSuperview];
+    }
+}
+
+-(UIViewController*)rootVC{
+    UIViewController* rootVC = ((AppDelegate*)[UIApplication sharedApplication].delegate).window.rootViewController;
+    if([rootVC isKindOfClass:[IOS7ContainerViewController class]]){
+        rootVC = ((IOS7ContainerViewController*)rootVC).controller;
+    }
+    return rootVC;
+}
+
+-(UIViewController*)topVC{
+    UIViewController* vc = [self rootVC];
+    while (vc.presentedViewController) {
+        vc = vc.presentedViewController;
+    }
+    return vc;
 }
 
 -(void)dealloc{

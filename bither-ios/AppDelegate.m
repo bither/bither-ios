@@ -59,7 +59,6 @@ static StatusBarNotificationWindow* notificationWindow;
     }else{
         [[UIApplication sharedApplication] setMinimumBackgroundFetchInterval:UIApplicationBackgroundFetchIntervalMinimum];
     }
-    [PinCodeUtil instance];
     [[BTAddressManager instance] initAddress];
     [self upgradePub:^{
     }];
@@ -94,6 +93,7 @@ static StatusBarNotificationWindow* notificationWindow;
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reachabilityChange) name:kReachabilityChangedNotification object:nil];
     }];
     notificationWindow = [[StatusBarNotificationWindow alloc]initWithOriWindow:self.window];
+    [[PinCodeUtil instance] becomeActive];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(notification:) name:BitherBalanceChangedNotification object:nil];
     return YES;
 }

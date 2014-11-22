@@ -43,11 +43,12 @@
     touchId = [TouchIdIntegration instance];
 }
 
--(void)viewDidAppear:(BOOL)animated{
-    [super viewDidAppear:animated];
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
     if(touchId.hasTouchId){
         [touchId checkTouchId:^(BOOL success) {
             if(success){
+                [self.vEnter resignFirstResponder];
                 [self dismissViewControllerAnimated:YES completion:nil];
             }
         }];
@@ -56,6 +57,7 @@
 
 -(void)onEntered:(NSString*) code{
     if([d checkPinCode:code]){
+        [self.vEnter resignFirstResponder];
         [self dismissViewControllerAnimated:YES completion:nil];
     }else{
         [self.vEnter shakeToClear];
