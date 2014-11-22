@@ -20,9 +20,9 @@
 #import "UIBaseUtil.h"
 #import <AudioToolbox/AudioToolbox.h>
 
-#define kDotsViewHeight (16)
+#define kDotsViewHeight (20)
 #define kDotsViewWidth (160)
-#define kFontSize (18)
+#define kFontSize (16)
 #define kPadding (10)
 #define kMargin (20)
 
@@ -54,7 +54,6 @@
 }
 
 -(void)firstConfigure{
-    self.keyboardType = UIKeyboardTypeNumberPad;
     _text = [NSString new];
     self.pinCodeLength = 4;
     self.enabled = YES;
@@ -105,7 +104,7 @@
     self.enabled = NO;
     [self clearText];
     [self vibrate];
-    [self.label shakeTime:3 interval:0.04f length:20 completion:^{
+    [self.dv shakeTime:5 interval:0.1f length:20 completion:^{
         self.enabled = YES;
     }];
 }
@@ -116,6 +115,14 @@
 
 -(void)clearText{
     self.text = @"";
+}
+
+-(UIKeyboardType)keyboardType{
+    return UIKeyboardTypeNumberPad;
+}
+
+-(BOOL)isSecureTextEntry{
+    return YES;
 }
 
 -(BOOL)canBecomeFirstResponder{

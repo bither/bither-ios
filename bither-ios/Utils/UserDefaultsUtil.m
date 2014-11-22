@@ -16,6 +16,8 @@
 //  limitations under the License.
 
 #import "UserDefaultsUtil.h"
+#import "NSData+Hash.h"
+#import "StringUtil.h"
 
 #define PREFS_KEY_LAST_VERSION @"last_version"
 #define DEFAULT_MARKET @"default_market"
@@ -33,7 +35,7 @@
 #define FANCY_QR_CODE_THEME @"fancy_qr_code_theme"
 
 #define BITCOIN_UNIT @"bitcoin_unit"
-
+#define PIN_CODE @"pin_code"
 
 
 
@@ -222,6 +224,52 @@ NSUserDefaults *userDefaults;
         return [userDefaults integerForKey:BITCOIN_UNIT];
     }
     return UnitBTC;
+}
+
+-(void)setPinCode:(NSString*)code{
+    if(!code || code.length == 0){
+        [self deletePinCode];
+        return;
+    }
+    NSUInteger salt;
+    NSData* randomBytes = [NSData randomWithSize:sizeof(salt)];
+    [randomBytes getBytes:&salt length:sizeof(salt)];
+    
+    NSString *beforeHashStr = [NSString stringWithFormat:@"%@%lu", code, (unsigned long)salt];
+    
+    [userDefaults setObject:[NSString stringWithFormat:@"%lu;%lu", salt, [beforeHashStr hash]] forKey:PIN_CODE];
+    [userDefaults synchronize];
+}
+
+-(BOOL)hasPinCode{
+    NSString *hash = [userDefaults objectForKey:PIN_CODE];
+    if(!hash || hash.length == 0){
+        return NO;
+    }
+    NSArray* strs = [hash componentsSeparatedByString:@";"];
+    if (strs.count != 2) {
+        [self deletePinCode];
+        return NO;
+    }
+    return YES;
+}
+
+-(void)deletePinCode{
+    [userDefaults removeObjectForKey:PIN_CODE];
+    [userDefaults synchronize];
+}
+
+-(BOOL)checkPinCode:(NSString*)code{
+    if([self hasPinCode]){
+        NSString *hash = [userDefaults objectForKey:PIN_CODE];
+        NSArray* strs = [hash componentsSeparatedByString:@";"];
+        NSString* saltStr = strs[0];
+        hash = strs[1];
+        NSString* codeHash = [NSString stringWithFormat:@"%@%@", code, saltStr];
+        return [StringUtil compareString:hash compare:[NSString stringWithFormat:@"%lu", [codeHash hash]]];
+    }else{
+        return YES;
+    }
 }
 
 @end

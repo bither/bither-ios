@@ -62,9 +62,8 @@
 -(NSInteger) getQrCodeTheme;
 -(void)setQrCodeTheme:(NSInteger) qrCodeTheme;
 
-
-
-
-
-
+-(void)setPinCode:(NSString*)code;
+-(BOOL)hasPinCode;
+-(void)deletePinCode;
+-(BOOL)checkPinCode:(NSString*)code;
 @end
