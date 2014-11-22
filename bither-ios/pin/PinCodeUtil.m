@@ -19,9 +19,10 @@
 #import "PinCodeUtil.h"
 #import "AppDelegate.h"
 #import "UserDefaultsUtil.h"
+#import "PinCodeViewController.h"
 #import "IOS7ContainerViewController.h"
 
-#define kCausePinCodeBackgroundTime (60)
+#define kCausePinCodeBackgroundTime (2)
 
 @interface PinCodeUtil()
 @property NSDate* backgroundDate;
@@ -57,7 +58,9 @@ static PinCodeUtil* util;
             while (vc.presentedViewController) {
                 vc = vc.presentedViewController;
             }
-            [vc presentViewController:[rootVC.storyboard instantiateViewControllerWithIdentifier:@"PinCode"] animated:NO completion:nil];
+            if(![vc isKindOfClass:[PinCodeViewController class]]){
+                [vc presentViewController:[rootVC.storyboard instantiateViewControllerWithIdentifier:@"PinCode"] animated:NO completion:nil];
+            }
         }
     }
 }
