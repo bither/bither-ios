@@ -63,6 +63,7 @@ static Setting* reloadTxsSetting;
 static Setting* RCheckSetting;
 static Setting* TrashCanSetting;
 static Setting* SwitchToColdSetting;
+static Setting* KeychainSetting;
 
 -(instancetype)initWithName:(NSString *)name  icon:(UIImage *)icon {
     self=[super init];
@@ -458,7 +459,46 @@ static Setting* SwitchToColdSetting;
     if ([[BTSettings instance] getAppMode]==HOT) {
         [array addObject:[ReloadTxSetting getReloadTxsSetting]];
     }
+    if ([[BTSettings instance] getAppMode] == HOT) {
+        [array addObject:[Setting getKeychainSetting]];
+    }
     return array;
+}
+
++(Setting *)getKeychainSetting;{
+    if(!KeychainSetting){
+        Setting * setting=[[Setting alloc] initWithName:NSLocalizedString(@"keychain", nil) icon:nil];
+        [setting setGetValueBlock:^(){
+            return [BitherSetting getKeychainMode:[[UserDefaultsUtil instance] getKeychainMode]];
+        }];
+        [setting setSelectBlock:^(UIViewController * controller){
+            KeychainMode keychainMode = [[UserDefaultsUtil instance] getKeychainMode];
+            if (keychainMode == Off) {
+                [[[DialogAlert alloc]initWithMessage:NSLocalizedString(@"enable_keychain", nil) confirm:^{
+                    [[UserDefaultsUtil instance] setKeychainMode:On];
+                    [[Setting getKeychainSetting] setGetValueBlock:^(){
+                        return [BitherSetting getKeychainMode:[[UserDefaultsUtil instance] getKeychainMode]];
+                    }];
+                    AdvanceViewController *advanceViewController = (AdvanceViewController *)controller;
+                    [advanceViewController.tableView reloadData];
+                } cancel:nil] showInWindow:controller.view.window];
+            } else {
+                [[[DialogAlert alloc]initWithMessage:NSLocalizedString(@"disable_keychain", nil) confirm:^{
+                    [[UserDefaultsUtil instance] setKeychainMode:Off];
+                    [[Setting getKeychainSetting] setGetValueBlock:^(){
+                        return [BitherSetting getKeychainMode:[[UserDefaultsUtil instance] getKeychainMode]];
+                    }];
+                    AdvanceViewController *advanceViewController = (AdvanceViewController *)controller;
+                    [advanceViewController.tableView reloadData];
+                } cancel:nil] showInWindow:controller.view.window];
+            }
+            AdvanceViewController *advanceViewController = (AdvanceViewController *)controller;
+            [advanceViewController.tableView reloadData];
+        }];
+        CheckSetting = setting;
+    }
+    return CheckSetting;
+    
 }
 @end
 

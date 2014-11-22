@@ -47,5 +47,5 @@
 +(Setting * )getColdMonitorSetting;
 +(Setting * )getTrashCanSetting;
 +(Setting * )getSwitchToColdSetting;
-
++(Setting *)getKeychainSetting;
 @end

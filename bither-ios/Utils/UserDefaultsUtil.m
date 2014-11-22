@@ -37,7 +37,7 @@
 #define BITCOIN_UNIT @"bitcoin_unit"
 #define PIN_CODE @"pin_code"
 
-
+#define KEYCHAIN_MODE @"keychain_mode"
 
 static UserDefaultsUtil *userDefaultsUtil;
 
@@ -271,6 +271,27 @@ NSUserDefaults *userDefaults;
         return YES;
     }
 }
+
+-(KeychainMode) getKeychainMode{
+    if ([userDefaults objectForKey:KEYCHAIN_MODE]) {
+        if ([userDefaults integerForKey:KEYCHAIN_MODE]==Off) {
+            return Off;
+        }else{
+            return On;
+        }
+    }else{
+        return Off;
+    }
+}
+
+-(void)setKeychainMode :(KeychainMode ) keychainMode{
+    if (!keychainMode) {
+        keychainMode = Off;
+    }
+    [userDefaults setInteger:keychainMode forKey:KEYCHAIN_MODE];
+    [userDefaults synchronize];
+}
+
 
 @end
 

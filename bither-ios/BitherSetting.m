@@ -165,6 +165,14 @@
     }
 }
 
++ (NSString *)getKeychainMode:(KeychainMode) keychainMode {
+    if (keychainMode == Off) {
+        return NSLocalizedString(@"Off", nil);
+    } else {
+        return NSLocalizedString(@"On", nil);
+    }
+}
+
 + (UIColor *)getMarketColor:(MarketType)marketType {
     switch (marketType) {
         //ffff9329

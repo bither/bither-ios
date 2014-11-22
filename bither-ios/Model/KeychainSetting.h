@@ -12,5 +12,5 @@
 
 @interface KeychainSetting : Setting
 @property(nonatomic,strong) UIViewController * controller;
-+(Setting *)getAvatarSetting;
++(Setting *)getKeychainSetting;
 @end

@@ -125,6 +125,9 @@ typedef enum {
     Text, Encrypted, Decrypetd
 } PrivateKeyQrCodeType;
 
+typedef enum {
+    Off = 0, On = 1
+} KeychainMode;
 
 @interface BitherSetting : NSObject
 
@@ -135,5 +138,5 @@ typedef enum {
 + (Currency)getCurrencyFromName:(NSString *)currencyName;
 + (NSString *)getTransactionFeeMode:(TransactionFeeMode)transactionFee;
 + (UIColor *)getMarketColor:(MarketType)marketType;
-
++ (NSString *)getKeychainMode:(KeychainMode) keychainMode;
 @end

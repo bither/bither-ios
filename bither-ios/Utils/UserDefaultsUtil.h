@@ -66,4 +66,7 @@
 -(BOOL)hasPinCode;
 -(void)deletePinCode;
 -(BOOL)checkPinCode:(NSString*)code;
+
+-(KeychainMode) getKeychainMode;
+-(void)setKeychainMode :(KeychainMode ) keychainMode;
 @end
