@@ -2,7 +2,7 @@ PODS:
   - Bitheri (1.2.1):
     - CocoaLumberjack (~> 1.9.1)
     - FMDB (~> 2.3)
-    - OpenSSL
+    - OpenSSL (= 1.0.1)
     - Reachability (~> 3.1.1)
   - CocoaLumberjack (1.9.2):
     - CocoaLumberjack/Extensions
@@ -68,9 +68,10 @@ PODS:
     - KSCrash/Recording
   - MKNetworkKit (0.87):
     - Reachability (~> 3.1.0)
-  - OpenSSL (1.0.110)
+  - OpenSSL (1.0.1)
   - Reachability (3.1.1)
   - RegexKitLite (4.0)
+  - SimpleKeychain (0.2.0)
   - ZBarSDK (1.3.1)
 
 DEPENDENCIES:
@@ -78,6 +79,7 @@ DEPENDENCIES:
   - KSCrash (~> 0.0.3)
   - MKNetworkKit (~> 0.87)
   - RegexKitLite (~> 4.0)
+  - SimpleKeychain
   - ZBarSDK (~> 1.3.1)
 
 EXTERNAL SOURCES:
@@ -86,14 +88,15 @@ EXTERNAL SOURCES:
     :git: git@github.com:bither/bitheri.git
 
 SPEC CHECKSUMS:
-  Bitheri: 8fec89c7cf97f3c46d1b7a1308a66bb2cbe9f253
+  Bitheri: f335b96c071a271de863ad7d60026e15d56558e4
   CocoaLumberjack: 205769c032b5fef85b92472046bcc8b7e7c8a817
   FMDB: 0b2fa25e5264ef177973c0cb8c02c711107979aa
   KSCrash: c0a693b2d83ced5c15a40d4e916833c655475e6a
   MKNetworkKit: 83e6296a8d42e98a71880424a889773654846d74
-  OpenSSL: 72a82aa51b056ae5833307a3fef9b571f38ce11c
+  OpenSSL: 59f42fe6ca33b17cd407ae688ef57b763741c116
   Reachability: 8e9635e3cb4f98e7f825e51147f677ecc694d0e7
   RegexKitLite: c0e4c12e6e7de0769f3a3ed679f0f61604170661
+  SimpleKeychain: f7c55140169037f7540c949b25da53096036b231
   ZBarSDK: 3ed560856963f765b66d834f464590bd6ba13b44
 
 COCOAPODS: 0.34.4
