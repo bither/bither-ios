@@ -105,6 +105,7 @@
 		AC454DE11A1F250C000AF4ED /* PinCodeDisableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AC454DE01A1F250C000AF4ED /* PinCodeDisableViewController.m */; };
 		AC454DE41A1F2518000AF4ED /* PinCodeChangeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AC454DE31A1F2518000AF4ED /* PinCodeChangeViewController.m */; };
 		AC454DE71A1F252B000AF4ED /* PinCodeUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = AC454DE61A1F252B000AF4ED /* PinCodeUtil.m */; };
+		AC454DEA1A1F3839000AF4ED /* PinCodeSetting.m in Sources */ = {isa = PBXBuildFile; fileRef = AC454DE91A1F3839000AF4ED /* PinCodeSetting.m */; };
 		AC45AA3519879C96006314D5 /* DialogPrivateKeyDecryptedQrCode.m in Sources */ = {isa = PBXBuildFile; fileRef = AC45AA3419879C96006314D5 /* DialogPrivateKeyDecryptedQrCode.m */; };
 		AC45AA381987A2F4006314D5 /* DialogPrivateKeyText.m in Sources */ = {isa = PBXBuildFile; fileRef = AC45AA371987A2F4006314D5 /* DialogPrivateKeyText.m */; };
 		AC45D84119878BAB00AF5C2C /* DialogAddressLongPressOptions.m in Sources */ = {isa = PBXBuildFile; fileRef = AC45D83E19878BAB00AF5C2C /* DialogAddressLongPressOptions.m */; };
@@ -400,6 +401,8 @@
 		AC454DE31A1F2518000AF4ED /* PinCodeChangeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PinCodeChangeViewController.m; sourceTree = "<group>"; };
 		AC454DE51A1F252B000AF4ED /* PinCodeUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PinCodeUtil.h; sourceTree = "<group>"; };
 		AC454DE61A1F252B000AF4ED /* PinCodeUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PinCodeUtil.m; sourceTree = "<group>"; };
+		AC454DE81A1F3839000AF4ED /* PinCodeSetting.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PinCodeSetting.h; sourceTree = "<group>"; };
+		AC454DE91A1F3839000AF4ED /* PinCodeSetting.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PinCodeSetting.m; sourceTree = "<group>"; };
 		AC45AA3319879C96006314D5 /* DialogPrivateKeyDecryptedQrCode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DialogPrivateKeyDecryptedQrCode.h; sourceTree = "<group>"; };
 		AC45AA3419879C96006314D5 /* DialogPrivateKeyDecryptedQrCode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DialogPrivateKeyDecryptedQrCode.m; sourceTree = "<group>"; };
 		AC45AA361987A2F4006314D5 /* DialogPrivateKeyText.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DialogPrivateKeyText.h; sourceTree = "<group>"; };
@@ -1198,6 +1201,8 @@
 				ACEE7D3819D4012600932B39 /* SignTransactionScanSetting.m */,
 				ACE7E6FE19EB6DE800F7AA3A /* AvatarSetting.h */,
 				ACE7E6FF19EB6DE800F7AA3A /* AvatarSetting.m */,
+				AC454DE81A1F3839000AF4ED /* PinCodeSetting.h */,
+				AC454DE91A1F3839000AF4ED /* PinCodeSetting.m */,
 			);
 			name = Setting;
 			sourceTree = "<group>";
@@ -1490,6 +1495,7 @@
 				AC45AA3519879C96006314D5 /* DialogPrivateKeyDecryptedQrCode.m in Sources */,
 				ACEE7D2819D3F9F500932B39 /* QRCodeTransportPage.m in Sources */,
 				421B03BB19495AEF003A45F1 /* HotViewController.m in Sources */,
+				AC454DEA1A1F3839000AF4ED /* PinCodeSetting.m in Sources */,
 				ACCA2751198F2A68000E6A32 /* PieChartView.m in Sources */,
 				AC454DC91A1C6E05000AF4ED /* TrashCanViewController.m in Sources */,
 				4269FF72195A885D001213B9 /* Ticker.m in Sources */,

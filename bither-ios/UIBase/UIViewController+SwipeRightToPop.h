@@ -30,5 +30,6 @@
 -(void)handleScrollViewForSwipeRightToPop:(UIScrollView*)sv;
 -(void)handleScrollableForSwipeRightToPop:(id<SwipeRightToPopScrollable>)scrollable;
 -(void)willAnimToPopForSwipeRight;
+-(void)didAnimToResetForSwipeRightToPop;
 -(void)reload;
 @end
