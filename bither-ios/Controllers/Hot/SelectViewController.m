@@ -55,7 +55,11 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     SelectListCell *cell = (SelectListCell*)[tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
     NSDictionary * dict =[self.array objectAtIndex:indexPath.row];
-    [cell setName:[dict getStringFromDict:SETTING_KEY] isDefault:[dict getBoolFromDict:SETTING_IS_DEFAULT]];
+    if([dict objectForKey:SETTING_KEY_ATTRIBUTED] && [[dict objectForKey:SETTING_KEY_ATTRIBUTED] isKindOfClass:[NSAttributedString class]]){
+        [cell setAttributedName:[dict objectForKey:SETTING_KEY_ATTRIBUTED] isDefault:[dict getBoolFromDict:SETTING_IS_DEFAULT]];
+    }else{
+        [cell setName:[dict getStringFromDict:SETTING_KEY] isDefault:[dict getBoolFromDict:SETTING_IS_DEFAULT]];
+    }
     return cell;
     
 }
