@@ -26,6 +26,7 @@
 @interface PinCodeViewController ()<PinCodeEnterViewDelegate>{
     UserDefaultsUtil *d;
     TouchIdIntegration* touchId;
+    BOOL giveUpTouchId;
 }
 
 @property (weak, nonatomic) IBOutlet PinCodeEnterView *vEnter;
@@ -45,11 +46,19 @@
 -(void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
     [self.vEnter becomeFirstResponder];
+    [self invokeTouchId];
+}
+
+-(void)invokeTouchId{
     if(touchId.hasTouchId){
+        giveUpTouchId = NO;
         [touchId checkTouchId:^(BOOL success) {
             if(success){
                 [self.vEnter resignFirstResponder];
                 [self dismissViewControllerAnimated:YES completion:nil];
+            } else {
+                giveUpTouchId = YES;
+                [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(becomeActive) name:UIApplicationDidBecomeActiveNotification object:nil];
             }
         }];
     }
@@ -66,6 +75,19 @@
 
 -(void)showMsg:(NSString*)msg{
     [self showBannerWithMessage:msg belowView:nil belowTop:0 autoHideIn:1 withCompletion:nil];
+}
+
+-(void)becomeActive{
+    if(giveUpTouchId){
+        giveUpTouchId = NO;
+    }else{
+        [[NSNotificationCenter defaultCenter] removeObserver:self];
+        [self invokeTouchId];
+    }
+}
+
+-(void)dealloc{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 -(UIStatusBarStyle)preferredStatusBarStyle{
