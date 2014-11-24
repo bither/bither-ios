@@ -86,7 +86,7 @@ typedef void (^StirngBlock)(NSString *string);
 typedef void (^VoidBlock)(void);
 typedef void (^ErrorBlock)(NSError *error);
 typedef void (^ViewControllerBlock)(UIViewController *controller);
-typedef NSString *(^GetValueBlock)(void);
+typedef NSObject *(^GetValueBlock)(void);
 typedef NSArray *(^GetArrayBlock)(void);
 
 

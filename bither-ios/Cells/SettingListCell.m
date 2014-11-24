@@ -38,9 +38,17 @@
         self.lbValue.hidden=NO;
         self.ivIcon.hidden=YES;
         if (setting.getValueBlock) {
-            self.lbValue.text=setting.getValueBlock();
+            self.lbValue.text = nil;
+            self.lbValue.attributedText = nil;
+            NSObject* value = setting.getValueBlock();
+            if([value isKindOfClass:[NSAttributedString class]]){
+                self.lbValue.attributedText = (NSAttributedString*)value;
+            }else if([value isKindOfClass:[NSString class]]){
+                self.lbValue.text = (NSString*)value;
+            }
         }else{
             self.lbValue.text=@"";
+            self.lbValue.attributedText = nil;
         }
     }
 }

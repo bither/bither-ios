@@ -19,6 +19,7 @@
 #import <Foundation/Foundation.h>
 #import "BitherSetting.h"
 #define  SETTING_KEY @"key"
+#define  SETTING_KEY_ATTRIBUTED @"key_attributed"
 #define  SETTING_VALUE @"VALUE"
 #define  SETTING_IS_DEFAULT @"default"
 
