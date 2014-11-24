@@ -24,7 +24,8 @@
 #define kDotsViewWidth (160)
 #define kFontSize (16)
 #define kPadding (10)
-#define kMargin (20)
+#define kTopMargin (30)
+#define kBottomMargin (40)
 
 @interface PinCodeEnterView() <UIKeyInput>{
     NSUInteger _pinCodeLength;
@@ -66,20 +67,25 @@
     [self addSubview:topView];
     [self addSubview:bottomView];
     
-    self.label = [[UILabel alloc]initWithFrame:CGRectMake(kPadding, topView.frame.size.height - kMargin - kFontSize * 1.2f, topView.frame.size.width - kPadding * 2, kFontSize * 1.2f)];
+    UIImageView* ivMark = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"pin_code_water_mark"]];
+    ivMark.frame = CGRectMake((self.frame.size.width - ivMark.frame.size.width) / 2, topView.frame.size.height - kTopMargin - ivMark.frame.size.height, ivMark.frame.size.width, ivMark.frame.size.height);
+    ivMark.autoresizingMask = UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin;
+    [topView addSubview:ivMark];
+    
+    self.label = [[UILabel alloc]initWithFrame:CGRectMake(kPadding, topView.frame.size.height - kFontSize * 1.2f / 2.0f, topView.frame.size.width - kPadding * 2, kFontSize * 1.2f)];
     self.label.backgroundColor = [UIColor clearColor];
-    self.label.autoresizingMask = UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin;
+    self.label.autoresizingMask = UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin |UIViewAutoresizingFlexibleWidth;
     self.label.textAlignment = NSTextAlignmentCenter;
     self.label.font = [UIFont systemFontOfSize:kFontSize];
     self.label.textColor = [UIColor whiteColor];
-    [topView addSubview:self.label];
+    [self addSubview:self.label];
     
-    self.dv = [[PinCodeDotsView alloc]initWithFrame:CGRectMake((bottomView.frame.size.width - kDotsViewWidth)/2, kMargin, kDotsViewWidth, kDotsViewHeight)];
+    self.dv = [[PinCodeDotsView alloc]initWithFrame:CGRectMake((bottomView.frame.size.width - kDotsViewWidth)/2, kBottomMargin, kDotsViewWidth, kDotsViewHeight)];
     self.dv.backgroundColor = [UIColor clearColor];
     self.dv.autoresizingMask = UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin;
     [bottomView addSubview:self.dv];
     
-    self.dvNew = [[PinCodeDotsView alloc]initWithFrame:CGRectMake(bottomView.frame.size.width, kMargin, kDotsViewWidth, kDotsViewHeight)];
+    self.dvNew = [[PinCodeDotsView alloc]initWithFrame:CGRectMake(bottomView.frame.size.width, kBottomMargin, kDotsViewWidth, kDotsViewHeight)];
     self.dvNew.backgroundColor = [UIColor clearColor];
     self.dvNew.autoresizingMask = UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin;
     [bottomView addSubview:self.dvNew];
@@ -169,9 +175,9 @@
 -(void)setMsg:(NSString *)msg{
     _msg = msg;
     self.label.text = msg;
-    CGSize size = [self.label sizeThatFits:CGSizeMake(self.frame.size.width - kPadding * 2, topView.frame.size.height - kMargin)];
+    CGSize size = [self.label sizeThatFits:CGSizeMake(self.frame.size.width - kPadding * 2, kBottomMargin + kTopMargin)];
     size.height = ceil(size.height);
-    self.label.frame = CGRectMake(kPadding, topView.frame.size.height - kMargin - size.height, topView.frame.size.width - kPadding * 2, size.height);
+    self.label.frame = CGRectMake(kPadding, topView.frame.size.height - size.height / 2.0f, topView.frame.size.width - kPadding * 2, size.height);
 }
 
 -(NSString*)msg{

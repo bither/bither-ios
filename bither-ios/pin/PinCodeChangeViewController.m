@@ -64,7 +64,7 @@
     if (!firstPin) {
         firstPin = code;
         [self.vEnter animateToNext];
-        self.vEnter.msg = NSLocalizedString(@"pin_code_setting_change_old_wrong", nil);
+        self.vEnter.msg = NSLocalizedString(@"pin_code_setting_change_new_repeat_msg", nil);
     } else {
         if ([StringUtil compareString:firstPin compare:code]) {
             [d setPinCode:code];
