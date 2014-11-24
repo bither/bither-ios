@@ -8,9 +8,14 @@
 
 #import <Foundation/Foundation.h>
 
-@interface KeychainBackupUtil : NSObject
-- (NSArray *)getPrivAddressesFromKeychain;
-- (NSArray *)getTrashAddressesFromKeychain;
+typedef enum {
+    AddFromKeychain = 0, AddFromLocal = 1, TrashFromKeychain = 2, TrashFromLocal = 3
+} BackupChangeType;
 
-- (void)storeToKeychainWithPrivAddresses:(NSArray *) privAddresses andTrashAddresses:(NSArray *) trashAddresses;
+@interface KeychainBackupUtil : NSObject
+
+- (NSArray *)checkWithKeychain;
+- (BOOL)syncWithKeychain:(NSArray *) changes;
+- (BOOL)canSync;
+
 @end
