@@ -83,6 +83,7 @@ static Setting* KeychainSetting;
 +(Setting * )getBitcoinUnitSetting{
     if(!BitcoinUnitSetting){
         BitcoinUnitSetting = [[Setting alloc]initWithName:NSLocalizedString(@"setting_name_bitcoin_unit", nil) icon:nil];
+        
         [BitcoinUnitSetting setGetArrayBlock:^(){
             NSMutableArray *array = [NSMutableArray new];
             [array addObject:[Setting getBitcoinUnitDict:UnitBTC]];
@@ -91,7 +92,7 @@ static Setting* KeychainSetting;
         }];
         [BitcoinUnitSetting setGetValueBlock:^(){
             BitcoinUnit unit = [[UserDefaultsUtil instance]getBitcoinUnit];
-            return [UnitUtil unitName:unit];
+            return [Setting attributedStrForBitcoinUnit:unit];
         }];
         [BitcoinUnitSetting setResult:^(NSDictionary * dict){
             if ([[dict allKeys] containsObject:SETTING_VALUE]) {
@@ -104,17 +105,32 @@ static Setting* KeychainSetting;
             SelectViewController *selectController = [controller.storyboard instantiateViewControllerWithIdentifier:@"SelectViewController"];UINavigationController *nav = controller.navigationController;
             selectController.setting = sself;
             [nav pushViewController:selectController animated:YES];
-            
         }];
     }
     return BitcoinUnitSetting;
+}
+
++(NSAttributedString*)attributedStrForBitcoinUnit:(BitcoinUnit)unit{
+    CGFloat fontSize = 18;
+    UIImage* image = [UIImage imageNamed:[NSString stringWithFormat:@"%@_black", [UnitUtil imageNameSlim:unit]]];
+    NSMutableAttributedString *attr = [[NSMutableAttributedString alloc]initWithString:[NSString stringWithFormat:@"  %@", [UnitUtil unitName:unit]] attributes:@{NSFontAttributeName: [UIFont systemFontOfSize:fontSize]}];
+    NSTextAttachment *attachment = [[NSTextAttachment alloc] init];
+    attachment.image = image;
+    CGRect bounds = attachment.bounds;
+    bounds.size = CGSizeMake(image.size.width * fontSize / image.size.height, fontSize);
+    attachment.bounds = bounds;
+    [attr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:fontSize * 0.5f] range:NSMakeRange(1, 1)];
+    NSAttributedString *attachmentString = [NSAttributedString attributedStringWithAttachment:attachment];
+    [attr insertAttributedString:attachmentString atIndex:0];
+    [attr addAttribute:NSBaselineOffsetAttributeName value:[NSNumber numberWithFloat:-fontSize * 0.09f] range:NSMakeRange(0, 1)];
+    return attr;
 }
 
 +(NSDictionary *)getBitcoinUnitDict:(BitcoinUnit)unit{
     BitcoinUnit defaultUnit = [[UserDefaultsUtil instance] getBitcoinUnit];
     NSMutableDictionary *dict =[NSMutableDictionary new];
     [dict setObject:[NSNumber numberWithInt:unit] forKey:SETTING_VALUE];
-    [dict setObject:[NSString stringWithFormat:@"%@", [UnitUtil unitName:unit]] forKey:SETTING_KEY];
+    [dict setObject:[Setting attributedStrForBitcoinUnit:unit] forKey:SETTING_KEY_ATTRIBUTED];
     if (defaultUnit == unit) {
         [dict setObject:[NSNumber numberWithBool:YES] forKey:SETTING_IS_DEFAULT];
     }
@@ -495,9 +511,9 @@ static Setting* KeychainSetting;
             AdvanceViewController *advanceViewController = (AdvanceViewController *)controller;
             [advanceViewController.tableView reloadData];
         }];
-        CheckSetting = setting;
+        KeychainSetting = setting;
     }
-    return CheckSetting;
+    return KeychainSetting;
     
 }
 @end
