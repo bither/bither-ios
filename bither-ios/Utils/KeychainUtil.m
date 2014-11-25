@@ -29,7 +29,8 @@ static BOOL setKeychainData(NSData *data, NSString *key, BOOL authenticated)
     (__bridge id)kSecAttrAccessibleAfterFirstUnlockThisDeviceOnly;
     NSDictionary *query = @{(__bridge id)kSecClass:(__bridge id)kSecClassGenericPassword,
                             (__bridge id)kSecAttrService:SEC_ATTR_SERVICE,
-                            (__bridge id)kSecAttrAccount:key};
+                            (__bridge id)kSecAttrAccount:key,
+                            (__bridge id)kSecAttrSynchronizable:(__bridge id)kCFBooleanTrue};
     
     if (SecItemCopyMatching((__bridge CFDictionaryRef)query, NULL) == errSecItemNotFound) {
         if (! data) return YES;
@@ -37,8 +38,9 @@ static BOOL setKeychainData(NSData *data, NSString *key, BOOL authenticated)
         NSDictionary *item = @{(__bridge id)kSecClass:(__bridge id)kSecClassGenericPassword,
                                (__bridge id)kSecAttrService:SEC_ATTR_SERVICE,
                                (__bridge id)kSecAttrAccount:key,
-                               (__bridge id)kSecAttrAccessible:accessible,
-                               (__bridge id)kSecValueData:data};
+                               (__bridge id)kSecAttrAccessible:(__bridge id)kSecAttrAccessibleWhenUnlocked,
+                               (__bridge id)kSecValueData:data,
+                               (__bridge id)kSecAttrSynchronizable:(__bridge id)kCFBooleanTrue};
         OSStatus status = SecItemAdd((__bridge CFDictionaryRef)item, NULL);
         
         if (status == noErr) return YES;
@@ -54,7 +56,7 @@ static BOOL setKeychainData(NSData *data, NSString *key, BOOL authenticated)
         return NO;
     }
     
-    NSDictionary *update = @{(__bridge id)kSecAttrAccessible:accessible,
+    NSDictionary *update = @{(__bridge id)kSecAttrAccessible:(__bridge id)kSecAttrAccessibleWhenUnlocked,
                              (__bridge id)kSecValueData:data};
     OSStatus status = SecItemUpdate((__bridge CFDictionaryRef)query, (__bridge CFDictionaryRef)update);
     
@@ -68,7 +70,8 @@ static NSData *getKeychainData(NSString *key)
     NSDictionary *query = @{(__bridge id)kSecClass:(__bridge id)kSecClassGenericPassword,
                             (__bridge id)kSecAttrService:SEC_ATTR_SERVICE,
                             (__bridge id)kSecAttrAccount:key,
-                            (__bridge id)kSecReturnData:@YES};
+                            (__bridge id)kSecReturnData:@YES,
+                            (__bridge id)kSecAttrSynchronizable:(__bridge id)kCFBooleanTrue};
     CFDataRef result = nil;
     OSStatus status = SecItemCopyMatching((__bridge CFDictionaryRef)query, (CFTypeRef *)&result);
     
