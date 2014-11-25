@@ -11,5 +11,5 @@
 @interface TouchIdIntegration : NSObject
 +(TouchIdIntegration*)instance;
 -(BOOL)hasTouchId;
--(void)checkTouchId:(void (^)(BOOL success))completion;
+-(void)checkTouchId:(void (^)(BOOL success, BOOL denied))completion;
 @end

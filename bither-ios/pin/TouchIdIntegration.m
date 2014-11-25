@@ -30,13 +30,17 @@ static TouchIdIntegration* touchId;
     }
 }
 
--(void)checkTouchId:(void (^)(BOOL success))completion{
+-(void)checkTouchId:(void (^)(BOOL success, BOOL denied))completion{
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
         LAContext *la = [[LAContext alloc]init];
         [la evaluatePolicy:LAPolicyDeviceOwnerAuthenticationWithBiometrics localizedReason:NSLocalizedString(@"pin_code_touch_id_promot", nil) reply:^(BOOL success, NSError *error) {
             if(completion){
                 dispatch_async(dispatch_get_main_queue(), ^{
-                    completion(success);
+                    if(success){
+                        completion(YES, NO);
+                    }else{
+                        completion(NO, error.code == LAErrorAuthenticationFailed);
+                    }
                 });
             }
         }];
