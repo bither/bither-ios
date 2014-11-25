@@ -30,7 +30,7 @@
 
 #define kAddressGroupSize (4)
 #define kAddressLineSize (12)
-#define kAddressExample (@"1PiimT5fGdWXywrLqYbTvxGRyveAcrKfb4")
+#define kAddressExample (@"1Nc9oEokW91HUohUpHt4Y7DisQXLuEBi77")
 
 @interface DialogAddressFullCell : UITableViewCell{
     NSString *_address;

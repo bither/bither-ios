@@ -487,3 +487,6 @@
 "keychain_backup_add_from_keychain" = "钥匙串添加";
 "keychain_backup_trash_from_local" = "本机移入回收站";
 "keychain_backup_trash_from_keychain" = "钥匙串移入回收站";
+"keychain_backup_diff_warn" = "iCloud 钥匙串备份产生如下变化\n是否继续?";
+"keychain_backup_diff_warn_yes" = "是";
+"keychain_backup_diff_warn_no" = "否";

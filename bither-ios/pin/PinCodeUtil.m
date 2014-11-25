@@ -63,7 +63,7 @@ static PinCodeUtil* util;
                 [vc presentViewController:pin animated:NO completion:^{
                     [blurView removeFromSuperview];
                     [pinView.window insertSubview:blurView atIndex:0];
-                    blurView.frame = CGRectMake(0, CGRectGetMaxY([UIApplication sharedApplication].statusBarFrame), pinView.window.frame.size.width * [UIScreen mainScreen].scale, pinView.window.frame.size.height * [UIScreen mainScreen].scale);
+                    blurView.frame = CGRectMake(0, CGRectGetMaxY([UIApplication sharedApplication].statusBarFrame), pinView.window.frame.size.width * 2, pinView.window.frame.size.height * 2);
                     
                     [UIView animateWithDuration:0.3 animations:^{
                         pinView.alpha = 1;
