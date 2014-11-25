@@ -52,11 +52,14 @@
 -(void)invokeTouchId{
     if(touchId.hasTouchId){
         giveUpTouchId = NO;
-        [touchId checkTouchId:^(BOOL success) {
+        [touchId checkTouchId:^(BOOL success, BOOL denied) {
             if(success){
                 [self.vEnter resignFirstResponder];
                 [self dismissViewControllerAnimated:YES completion:nil];
             } else {
+                if(denied){
+                    [self.vEnter shakeToClear];
+                }
                 giveUpTouchId = YES;
                 [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(becomeActive) name:UIApplicationDidBecomeActiveNotification object:nil];
             }
