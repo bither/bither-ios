@@ -490,3 +490,6 @@
 "keychain_backup_diff_warn" = "iCloud 鑰匙串備份產生如下變化\n是否繼續?";
 "keychain_backup_diff_warn_yes" = "是";
 "keychain_backup_diff_warn_no" = "否";
+
+/* Private Key Management */
+"private_key_management" = "私鑰管理";
