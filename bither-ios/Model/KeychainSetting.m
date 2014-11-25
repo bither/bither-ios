@@ -34,12 +34,26 @@ static Setting* keychainSetting;
         }];
         __block __weak KeychainSetting *weakSetting = setting;
         [setting setSelectBlock:^(UIViewController * controller){
+            weakSetting.controller = controller;
             KeychainMode keychainMode = [[UserDefaultsUtil instance] getKeychainMode];
             if (keychainMode == Off) {
                 [[[DialogAlert alloc]initWithMessage:NSLocalizedString(@"keychain_backup_enable", nil) confirm:^{
                     [[KeychainBackupUtil instance] update];
                     NSArray *changes = [[KeychainBackupUtil instance] checkWithKeychain];
-                    if ([changes count] == 0) {
+                    if ([[KeychainBackupUtil instance] isFirstUseKeychain]) {
+                        if ([[KeychainBackupUtil instance] uploadKeychain]) {
+                            [[UserDefaultsUtil instance] setKeychainMode:On];
+                            [[Setting getKeychainSetting] setGetValueBlock:^(){
+                                return [BitherSetting getKeychainMode:[[UserDefaultsUtil instance] getKeychainMode]];
+                            }];
+                            AdvanceViewController *advanceViewController = (AdvanceViewController *)controller;
+                            [advanceViewController.tableView reloadData];
+                        } else {
+                            // sync failed
+                            // alert
+                            [[[DialogAlert alloc]initWithMessage:NSLocalizedString(@"sync_with_keychain_failed", nil) confirm:nil cancel:nil] showInWindow:controller.view.window];                            
+                        }
+                    } else if ([changes count] == 0) {
                         [[UserDefaultsUtil instance] setKeychainMode:On];
                         [[Setting getKeychainSetting] setGetValueBlock:^(){
                             return [BitherSetting getKeychainMode:[[UserDefaultsUtil instance] getKeychainMode]];
@@ -49,39 +63,28 @@ static Setting* keychainSetting;
                     } else {
                         // show changes
                         // in call back do sth below
-                        
-                        if ([[KeychainBackupUtil instance] existKeySame]) {
-                            if ([[KeychainBackupUtil instance] syncKeysWithoutPassword]) {
-                                [[UserDefaultsUtil instance] setKeychainMode:On];
-                                [[Setting getKeychainSetting] setGetValueBlock:^(){
-                                    return [BitherSetting getKeychainMode:[[UserDefaultsUtil instance] getKeychainMode]];
-                                }];
-                                AdvanceViewController *advanceViewController = (AdvanceViewController *)controller;
-                                [advanceViewController.tableView reloadData];
-                            } else {
-                                // sync failed
-                                // alert
-                                [[[DialogAlert alloc]initWithMessage:NSLocalizedString(@"sync_with_keychain_failed", nil) confirm:nil cancel:nil] showInWindow:controller.view.window];
-                            }
-                        } else {
-                            // ask local password & keychain password
-                            // when success do sth below
-                            weakSetting.needCheckKeychainPassword = YES;
-                            weakSetting.needCheckLocalPassword = YES;
-                            weakSetting.controller = controller;
-                            DialogPassword *dialog = [[DialogPassword alloc] initWithDelegate:weakSetting];
-                            [dialog showInWindow:controller.view.window];
-                        }
+                        DialogKeychainBackupDiff *dialog = [[DialogKeychainBackupDiff alloc] initWithDiffs:changes andDelegate:weakSetting];
+                        [dialog showInWindow:controller.view.window];
                     }
                 } cancel:nil] showInWindow:controller.view.window];
             } else {
                 [[[DialogAlert alloc]initWithMessage:NSLocalizedString(@"keychain_backup_disable", nil) confirm:^{
-                    [[UserDefaultsUtil instance] setKeychainMode:Off];
-                    [[Setting getKeychainSetting] setGetValueBlock:^(){
-                        return [BitherSetting getKeychainMode:[[UserDefaultsUtil instance] getKeychainMode]];
-                    }];
-                    AdvanceViewController *advanceViewController = (AdvanceViewController *)controller;
-                    [advanceViewController.tableView reloadData];
+                    [[[DialogAlert alloc]initWithMessage:NSLocalizedString(@"keychain_backup_clean", nil) confirm:^{
+                        [[KeychainBackupUtil instance] cleanKeychain];
+                        [[UserDefaultsUtil instance] setKeychainMode:Off];
+                        [[Setting getKeychainSetting] setGetValueBlock:^(){
+                            return [BitherSetting getKeychainMode:[[UserDefaultsUtil instance] getKeychainMode]];
+                        }];
+                        AdvanceViewController *advanceViewController = (AdvanceViewController *)controller;
+                        [advanceViewController.tableView reloadData];
+                    } cancel:^{
+                        [[UserDefaultsUtil instance] setKeychainMode:Off];
+                        [[Setting getKeychainSetting] setGetValueBlock:^(){
+                            return [BitherSetting getKeychainMode:[[UserDefaultsUtil instance] getKeychainMode]];
+                        }];
+                        AdvanceViewController *advanceViewController = (AdvanceViewController *)controller;
+                        [advanceViewController.tableView reloadData];
+                    }] showInWindow:controller.view.window];
                 } cancel:nil] showInWindow:controller.view.window];
             }
             AdvanceViewController *advanceViewController = (AdvanceViewController *)controller;
@@ -139,5 +142,34 @@ static Setting* keychainSetting;
     }
 }
 
+#pragma mark - DialogKeychainBackupDiffDelegate
+
+-(void)onAccept; {
+    if ([[KeychainBackupUtil instance] existKeySame]) {
+        if ([[KeychainBackupUtil instance] syncKeysWithoutPassword]) {
+            [[UserDefaultsUtil instance] setKeychainMode:On];
+            [[Setting getKeychainSetting] setGetValueBlock:^(){
+                return [BitherSetting getKeychainMode:[[UserDefaultsUtil instance] getKeychainMode]];
+            }];
+            AdvanceViewController *advanceViewController = (AdvanceViewController *)self.controller;
+            [advanceViewController.tableView reloadData];
+        } else {
+            // sync failed
+            // alert
+            [[[DialogAlert alloc]initWithMessage:NSLocalizedString(@"sync_with_keychain_failed", nil) confirm:nil cancel:nil] showInWindow:self.controller.view.window];
+        }
+    } else {
+        // ask local password & keychain password
+        // when success do sth below
+        self.needCheckKeychainPassword = YES;
+        self.needCheckLocalPassword = YES;
+        DialogPassword *dialog = [[DialogPassword alloc] initWithDelegate:self];
+        [dialog showInWindow:self.controller.view.window];
+    }
+}
+
+-(void)onDeny; {
+    
+}
 
 @end

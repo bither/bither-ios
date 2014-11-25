@@ -23,5 +23,7 @@ typedef enum {
 - (BOOL)syncKeysWithKeychainPassword:(NSString *)keychainPassword andLocalPassword:(NSString *)localPassword;
 
 - (BOOL)existKeySame;
-
+- (BOOL)isFirstUseKeychain;
+- (BOOL)uploadKeychain;
+- (BOOL)cleanKeychain;
 @end

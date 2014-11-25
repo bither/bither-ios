@@ -121,17 +121,17 @@
         [localPubKeys addObject:[key componentsSeparatedByString:KEYCHAIN_KEY_CONTENT_SEP][0]];
     }
     NSMutableArray *keychainPubKeys = [NSMutableArray new];
-    for (NSString *key in keychainPubKeys) {
+    for (NSString *key in self.keychainKeys) {
         [keychainPubKeys addObject:[key componentsSeparatedByString:KEYCHAIN_KEY_CONTENT_SEP][0]];
     }
     for (NSString *pubKey in keychainPubKeys) {
         if (![localPubKeys containsObject:pubKey]) {
-            [diff addObject:@[pubKey, @(AddFromKeychain)]];
+            [diff addObject:@[[NSString addressWithPubKey:[pubKey hexToData]], @(AddFromKeychain)]];
         }
     }
     for (NSString *pubKey in localPubKeys) {
         if (![keychainPubKeys containsObject:pubKey]) {
-            [diff addObject:@[pubKey, @(AddFromLocal)]];
+            [diff addObject:@[[NSString addressWithPubKey:[pubKey hexToData]], @(AddFromLocal)]];
         }
     }
     return diff;
@@ -153,12 +153,12 @@
     NSMutableArray *diff = [NSMutableArray new];
     for (NSString *pubKey in self.keychainTrashes) {
         if (![self.localTrashs containsObject:pubKey]) {
-            [diff addObject:@[pubKey, @(TrashFromKeychain)]];
+            [diff addObject:@[[NSString addressWithPubKey:[pubKey hexToData]], @(TrashFromKeychain)]];
         }
     }
     for (NSString *pubKey in self.localTrashs) {
         if (![self.keychainTrashes containsObject:pubKey]) {
-            [diff addObject:@[pubKey, @(TrashFromLocal)]];
+            [diff addObject:@[[NSString addressWithPubKey:[pubKey hexToData]], @(TrashFromLocal)]];
         }
     }
     return diff;
@@ -175,7 +175,7 @@
 - (BOOL)syncKeysWithoutPassword; {
     if ([self isKeysSame]) {
         return YES;
-    } else if ([self existKeySame]) {
+    } else {
         // the password is the same
         // stop peer manager
         // add key to local
@@ -193,7 +193,7 @@
         
         // add key to keychain
         NSMutableArray *keychainPubKeys = [NSMutableArray new];
-        for (NSString *key in keychainPubKeys) {
+        for (NSString *key in self.keychainKeys) {
             [keychainPubKeys addObject:[key componentsSeparatedByString:KEYCHAIN_KEY_CONTENT_SEP][0]];
         }
         NSMutableArray *allKeys = [NSMutableArray arrayWithArray:self.keychainKeys];
@@ -205,10 +205,6 @@
         }
         [[A0SimpleKeychain keychain] setString:[allKeys componentsJoinedByString:KEYCHAIN_KEY_SEP] forKey:KEYCHAIN_KEY];
         return YES;
-    } else {
-        // get the two password
-        // check new & old password
-        return NO;
     }
 }
 
@@ -219,7 +215,7 @@
     }
 
     if ([keychainPassword isEqualToString:localPassword]) {
-        [self syncKeysWithoutPassword];
+        return [self syncKeysWithoutPassword];
     } else {
         // check all keychain password
         for (NSString *key in self.keychainKeys) {
@@ -249,7 +245,7 @@
         
         // add key to keychain
         NSMutableArray *keychainPubKeys = [NSMutableArray new];
-        for (NSString *key in keychainPubKeys) {
+        for (NSString *key in self.keychainKeys) {
             [keychainPubKeys addObject:[key componentsSeparatedByString:KEYCHAIN_KEY_CONTENT_SEP][0]];
         }
         NSMutableArray *allKeys = [NSMutableArray arrayWithArray:self.keychainKeys];
@@ -275,14 +271,29 @@
             [[UserDefaultsUtil instance]setPasswordSeed:[[BTPasswordSeed alloc] initWithBTAddress:[BTAddressManager instance].trashAddresses[0]]];
         }
         [[A0SimpleKeychain keychain] setString:[allKeys componentsJoinedByString:KEYCHAIN_KEY_SEP] forKey:KEYCHAIN_KEY];
+        return YES;
     }
-    return YES;
 }
 
 //- (NSArray *)getPrivAddressesFromKeychain;
 //- (NSArray *)getTrashAddressesFromKeychain;
 //
 //- (void)storeToKeychainWithPrivAddresses:(NSArray *) privAddresses andTrashAddresses:(NSArray *) trashAddresses;
+- (BOOL)isFirstUseKeychain; {
+    NSString *key = [[A0SimpleKeychain keychain] stringForKey:KEYCHAIN_KEY];
+    return key == nil || key.length == 0;
+}
 
+- (BOOL)uploadKeychain;{
+    [self updateLocal];
+    [[A0SimpleKeychain keychain] setString:[self.localKeys componentsJoinedByString:KEYCHAIN_KEY_SEP] forKey:KEYCHAIN_KEY];
+    return YES;
+}
+
+- (BOOL)cleanKeychain;{
+    [[A0SimpleKeychain keychain] deleteEntryForKey:KEYCHAIN_KEY];
+    [[A0SimpleKeychain keychain] deleteEntryForKey:KEYCHAIN_TRASH];
+    return YES;
+}
 
 @end
