@@ -23,6 +23,7 @@
 #import "UIBaseUtil.h"
 
 @interface DialogKeychainBackupDiff()<UITableViewDataSource, UITableViewDelegate>{
+    CGFloat warnHeight;
 }
 @property UITableView *table;
 @end
@@ -57,11 +58,20 @@
 @implementation DialogKeychainBackupDiff
 
 -(instancetype)initWithDiffs:(NSArray*)diffs andDelegate:(NSObject<DialogKeychainBackupDiffDelegate>*)delegate{
+    NSString* warn = NSLocalizedString(@"keychain_backup_diff_warn", nil);
+    CGSize sizeWarn = [warn sizeWithRestrict:CGSizeMake(CGFLOAT_MAX, CGFLOAT_MAX) font:[UIFont systemFontOfSize:15]];
+    sizeWarn.width = ceil(sizeWarn.width);
+    sizeWarn.height = ceil(sizeWarn.height);
     CGSize size = [DialogKeychainBackupDiff caculateSize:diffs];
+    size.width = MAX(sizeWarn.width, size.width);
+    if(sizeWarn.height > kTopAreaHeight){
+        size.height = size.height - kTopAreaHeight + sizeWarn.height;
+    }
     self = [super initWithFrame:CGRectMake(0, 0, size.width, size.height + kTopAreaHeight + kBottomButtonMargin + kBottomButtonHeight)];
     if(self){
         self.diffs = diffs;
         self.delegate = delegate;
+        warnHeight = MAX(sizeWarn.height, kTopAreaHeight);
         [self firstConfigure];
     }
     return self;
@@ -69,14 +79,14 @@
 
 -(void)firstConfigure{
     self.bgInsets = UIEdgeInsetsMake(8, 16, 8, 16);
-    self.table = [[UITableView alloc]initWithFrame:CGRectMake(0, kTopAreaHeight, self.frame.size.width, self.frame.size.height - (kTopAreaHeight + kBottomButtonMargin + kBottomButtonHeight)) style:UITableViewStylePlain];
+    self.table = [[UITableView alloc]initWithFrame:CGRectMake(0, warnHeight, self.frame.size.width, self.frame.size.height - (warnHeight + kBottomButtonMargin + kBottomButtonHeight)) style:UITableViewStylePlain];
     self.table.backgroundColor = [UIColor clearColor];
     [self.table registerClass:[BackupDiffCell class] forCellReuseIdentifier:@"Cell"];
     self.table.delegate = self;
     self.table.dataSource = self;
     [self.table setSeparatorStyle:UITableViewCellSeparatorStyleNone];
     [self addSubview:self.table];
-    UILabel *lbl = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, self.frame.size.width, kTopAreaHeight)];
+    UILabel *lbl = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, self.frame.size.width, warnHeight)];
     lbl.font = [UIFont systemFontOfSize:15];
     lbl.textColor = [UIColor whiteColor];
     lbl.contentMode = UIViewContentModeCenter;

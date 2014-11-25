@@ -35,7 +35,11 @@
 
 -(instancetype)initWithAddress:(BTAddress*)address andDelegate:(NSObject<DialogAddressOptionsDelegate>*)delegate{
     NSString* viewStr = NSLocalizedString(@"View on Blockchain.info", nil);
-    self = [super initWithFrame:CGRectMake(0, 0, [viewStr sizeWithRestrict:CGSizeMake(CGFLOAT_MAX, kButtonHeight) font:[UIFont systemFontOfSize:kFontSize]].width + kButtonEdgeInsets.left + kButtonEdgeInsets.right, kHeight)];
+    NSString* manageStr = NSLocalizedString(@"private_key_management", nil);
+    CGFloat width = MAX([viewStr sizeWithRestrict:CGSizeMake(CGFLOAT_MAX, kButtonHeight) font:[UIFont systemFontOfSize:kFontSize]].width,
+                        [manageStr sizeWithRestrict:CGSizeMake(CGFLOAT_MAX, kButtonHeight) font:[UIFont systemFontOfSize:kFontSize]].width) +
+                        kButtonEdgeInsets.left + kButtonEdgeInsets.right;
+    self = [super initWithFrame:CGRectMake(0, 0, width, kHeight)];
     if(self){
         _viewOnBlockChainInfoStr  = viewStr;
         self.delegate = delegate;
@@ -52,6 +56,16 @@
     seperator.autoresizingMask = UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleWidth;
     seperator.backgroundColor = [UIColor colorWithWhite:1 alpha:0.5];
     [self addSubview:seperator];
+    
+    if(hasPrivateKey){
+        bottom += 1;
+        bottom = [self createButtonWithText:NSLocalizedString(@"private_key_management", nil) top:bottom action:@selector(privateKeyManagement:)];
+        UIView *seperator = [[UIView alloc]initWithFrame:CGRectMake(0, bottom, self.frame.size.width, 1)];
+        seperator.autoresizingMask = UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleWidth;
+        seperator.backgroundColor = [UIColor colorWithWhite:1 alpha:0.5];
+        [self addSubview:seperator];
+    }
+    
     bottom += 1;
     bottom = [self createButtonWithText:NSLocalizedString(@"Cancel", nil) top:bottom action:@selector(cancelPressed:)];
     CGRect frame = self.frame;
@@ -87,6 +101,14 @@
     [self dismissWithCompletion:^{
         if(self.delegate && [self.delegate respondsToSelector:@selector(stopMonitorAddress)]){
             [self.delegate stopMonitorAddress];
+        }
+    }];
+}
+
+-(void)privateKeyManagement:(id)sender{
+    [self dismissWithCompletion:^{
+        if(self.delegate && [self.delegate respondsToSelector:@selector(showPrivateKeyManagement)]){
+            [self.delegate showPrivateKeyManagement];
         }
     }];
 }

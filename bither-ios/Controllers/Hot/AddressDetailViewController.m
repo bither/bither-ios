@@ -29,9 +29,16 @@
 #import "AppDelegate.h"
 #import "StringUtil.h"
 #import <Bitheri/BTAddressManager.h>
+#import "DialogAddressLongPressOptions.h"
+#import "BitherSetting.h"
+#import "DialogProgress.h"
+#import "DialogPrivateKeyDecryptedQrCode.h"
+#import "DialogPrivateKeyText.h"
 
-@interface AddressDetailViewController ()<UITableViewDataSource,UITableViewDelegate,DialogAddressOptionsDelegate,DialogPasswordDelegate>{
+@interface AddressDetailViewController ()<UITableViewDataSource,UITableViewDelegate,DialogAddressOptionsDelegate,DialogPasswordDelegate,DialogPrivateKeyOptionsDelegate>{
     NSMutableArray *_txs;
+    PrivateKeyQrCodeType _qrcodeType;
+    BOOL isMovingToTrash;
 }
 @property (weak, nonatomic) IBOutlet UIView *vTopBar;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -154,8 +161,76 @@
 }
 
 -(void)onPasswordEntered:(NSString *)password{
-    DialogPrivateKeyEncryptedQrCode *dialog = [[DialogPrivateKeyEncryptedQrCode alloc]initWithAddress:self.address];
+    __block NSString * bpassword=password;
+    password=nil;
+    __block __weak AddressDetailViewController* vc = self;
+    if(isMovingToTrash){
+        isMovingToTrash = NO;
+        DialogProgress *dp = [[DialogProgress alloc]initWithMessage:NSLocalizedString(@"trashing_private_key", nil)];
+        [dp showInWindow:self.view.window completion:^{
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+                [[BTAddressManager instance] trashPrivKey:vc.address];
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [dp dismissWithCompletion:^{
+                        [vc.navigationController popViewControllerAnimated:YES];
+                    }];
+                });
+            });
+        }];
+        return;
+    }
+    if(_qrcodeType==Encrypted){
+        DialogPrivateKeyEncryptedQrCode *dialog = [[DialogPrivateKeyEncryptedQrCode alloc]initWithAddress:vc.address];
+        [dialog showInWindow:vc.view.window];
+    }else{
+        DialogProgress *dialogProgress=[[DialogProgress alloc] initWithMessage:NSLocalizedString(@"Please wait…", nil)];
+        [dialogProgress showInWindow:vc.view.window];
+        [self decrypted:bpassword callback:^(id response) {
+            [dialogProgress dismiss];
+            if (_qrcodeType==Decrypetd) {
+                DialogPrivateKeyDecryptedQrCode *dialogPrivateKey=[[DialogPrivateKeyDecryptedQrCode alloc]initWithAddress:vc.address.address privateKey:response];
+                [dialogPrivateKey showInWindow:vc.view.window];
+                
+            }else{
+                DialogPrivateKeyText *dialogPrivateKeyText=[[DialogPrivateKeyText alloc] initWithPrivateKeyStr:response];
+                [dialogPrivateKeyText showInWindow:vc.view.window];
+            }
+            bpassword=nil;
+            response=nil;
+        } ];
+    }
+}
+
+-(void)showPrivateKeyManagement{
+    [[[DialogAddressLongPressOptions alloc]initWithAddress:self.address andDelegate:self]showInWindow:self.view.window];
+}
+
+-(void)showPrivateKeyDecryptedQrCode{
+    _qrcodeType=Decrypetd;
+    DialogPassword *dialog = [[DialogPassword alloc]initWithDelegate:self];
     [dialog showInWindow:self.view.window];
+}
+
+-(void)showPrivateKeyEncryptedQrCode{
+    _qrcodeType=Encrypted;
+    DialogPassword *dialog = [[DialogPassword alloc]initWithDelegate:self];
+    [dialog showInWindow:self.view.window];
+}
+
+-(void)showPrivateKeyTextQrCode{
+    _qrcodeType=Text;
+    DialogPassword *dialog = [[DialogPassword alloc]initWithDelegate:self];
+    [dialog showInWindow:self.view.window];
+}
+
+-(void)moveToTrash{
+    if(self.address.balance > 0){
+        [self showMessage:NSLocalizedString(@"trash_with_money_warn", nil)];
+    }else{
+        isMovingToTrash = YES;
+        DialogPassword* dp = [[DialogPassword alloc]initWithDelegate:self];
+        [dp showInWindow:self.view.window];
+    }
 }
 
 - (IBAction)backPressed:(id)sender {
@@ -204,5 +279,22 @@
     [indicatorView startAnimating];
 
     self.tableView.tableFooterView.hidden = NO;
+}
+
+-(void)decrypted:(NSString*)password callback:(IdResponseBlock )callback{
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0),^{
+        BTKey * key =[BTKey keyWithBitcoinj:self.address.encryptPrivKey andPassphrase:password];
+        __block NSString * privateKey=key.privateKey;
+        dispatch_async(dispatch_get_main_queue(), ^{
+            if (callback) {
+                callback(privateKey);
+            }
+        });
+        key=nil;
+    });
+}
+
+-(void)resetMonitorAddress{
+    
 }
 @end
