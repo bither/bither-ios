@@ -13,6 +13,8 @@
 
 #define KEYCHAIN_KEY @"key"
 #define KEYCHAIN_TRASH @"trash"
+#define KEYCHAIN_KEY_SEP @";"
+#define KEYCHAIN_KEY_CONTENT_SEP @"/"
 
 @interface KeychainBackupUtil()
 
@@ -25,6 +27,11 @@
 
 @implementation KeychainBackupUtil
 
+- (void)update; {
+    [self updateLocal];
+    [self updateKeychain];
+}
+
 - (void)updateLocal; {
     self.localKeys = [self getLocalKeys];
     self.localTrashs = [self getLocalTrashes];
@@ -36,11 +43,10 @@
 }
 
 - (NSArray *)checkWithKeychain; {
-    NSString *key = [[A0SimpleKeychain keychain] stringForKey:KEYCHAIN_KEY];
-    NSString *pub = [[A0SimpleKeychain keychain] stringForKey:KEYCHAIN_TRASH];
-//    NSString *content = [NSString stringWithFormat:@"%@:%@:%lld%@", [NSString hexWithData:self.pubKey], [self getSyncCompleteString],self.sortTime,[self getXRandomString]];
-//    NSString *privateKeyFullFileName = [NSString stringWithFormat:PRIVATE_KEY_FILE_NAME, [BTUtils getPrivDir], self.address];
-    return nil;
+    NSMutableArray *result = [NSMutableArray new];
+    [result addObjectsFromArray:[self keysDiff]];
+    [result addObjectsFromArray:[self trashesDiff]];
+    return result;
 }
 
 - (NSArray *)getLocalKeys; {
@@ -62,7 +68,7 @@
 - (NSArray *)getKeychainKeys; {
     NSString *key = [[A0SimpleKeychain keychain] stringForKey:KEYCHAIN_KEY];
     if (key != nil) {
-        return [key componentsSeparatedByString:@";"];
+        return [key componentsSeparatedByString:KEYCHAIN_KEY_SEP];
     } else {
         return [NSArray array];
     }
@@ -71,7 +77,7 @@
 - (NSArray *)getKeychainTrashes; {
     NSString *pub = [[A0SimpleKeychain keychain] stringForKey:KEYCHAIN_TRASH];
     if (pub != nil) {
-        return [pub componentsSeparatedByString:@";"];
+        return [pub componentsSeparatedByString:KEYCHAIN_KEY_SEP];
     } else {
         return [NSArray array];
     }
@@ -102,11 +108,11 @@
     NSMutableArray *diff = [NSMutableArray new];
     NSMutableArray *localPubKeys = [NSMutableArray new];
     for (NSString *key in self.localKeys) {
-        [localPubKeys addObject:[key componentsSeparatedByString:@"/"][0]];
+        [localPubKeys addObject:[key componentsSeparatedByString:KEYCHAIN_KEY_CONTENT_SEP][0]];
     }
     NSMutableArray *keychainPubKeys = [NSMutableArray new];
     for (NSString *key in keychainPubKeys) {
-        [keychainPubKeys addObject:[key componentsSeparatedByString:@"/"][0]];
+        [keychainPubKeys addObject:[key componentsSeparatedByString:KEYCHAIN_KEY_CONTENT_SEP][0]];
     }
     for (NSString *pubKey in keychainPubKeys) {
         if (![localPubKeys containsObject:pubKey]) {
@@ -148,12 +154,6 @@
     return diff;
 }
 
-- (BOOL)syncWithKeychain:(NSArray *) changes; {
-    NSString *jwt = @"";
-    [[A0SimpleKeychain keychain] setString:jwt forKey:@""];
-    return YES;
-}
-
 - (BOOL)canSync; {
     if ([[UserDefaultsUtil instance] getKeychainMode] == Off) {
         return YES;
@@ -162,19 +162,106 @@
     }
 }
 
-- (void)syncKeys; {
-    // logic
+- (BOOL)syncKeysWithoutPassword; {
     if ([self isKeysSame]) {
-        return;
+        return YES;
     } else if ([self existKeySame]) {
         // the password is the same
         // stop peer manager
-//        BTAddress *address = [BTAddress alloc] initWithAddress:<#(NSString *)#> pubKey:<#(NSData *)#> hasPrivKey:<#(BOOL)#> isXRandom:<#(BOOL)#>
-//        [BTAddressManager instance] addAddress:<#(BTAddress *)#>
+        // add key to local
+        NSMutableArray *localPubKeys = [NSMutableArray new];
+        for (NSString *key in self.localKeys) {
+            [localPubKeys addObject:[key componentsSeparatedByString:KEYCHAIN_KEY_CONTENT_SEP][0]];
+        }
+        for (NSString *key in self.keychainKeys) {
+            NSArray *array = [key componentsSeparatedByString:KEYCHAIN_KEY_CONTENT_SEP];
+            if (![localPubKeys containsObject:array[0]]) {
+                BTAddress *address = [[BTAddress alloc] initWithWithPubKey:array[0] encryptPrivKey:[[array subarrayWithRange:NSMakeRange(1, 3)] componentsJoinedByString:KEYCHAIN_KEY_CONTENT_SEP]];
+                [[BTAddressManager instance] addAddress:address];
+            }
+        }
+        
+        // add key to keychain
+        NSMutableArray *keychainPubKeys = [NSMutableArray new];
+        for (NSString *key in keychainPubKeys) {
+            [keychainPubKeys addObject:[key componentsSeparatedByString:KEYCHAIN_KEY_CONTENT_SEP][0]];
+        }
+        NSMutableArray *allKeys = [NSMutableArray arrayWithArray:self.keychainKeys];
+        for (NSString *key in self.localKeys) {
+            NSArray *array = [key componentsSeparatedByString:KEYCHAIN_KEY_CONTENT_SEP];
+            if (![keychainPubKeys containsObject:array[0]]) {
+                [allKeys addObject:key];
+            }
+        }
+        [[A0SimpleKeychain keychain] setString:[allKeys componentsJoinedByString:KEYCHAIN_KEY_SEP] forKey:KEYCHAIN_KEY];
+        return YES;
     } else {
         // get the two password
-        
+        // check new & old password
+        return NO;
     }
+}
+
+- (BOOL)syncKeysWithKeychainPassword:(NSString *)keychainPassword andLocalPassword:(NSString *)localPassword; {
+    // need check password before call this
+    if ([self isKeysSame]) {
+        return YES;
+    }
+
+    if ([keychainPassword isEqualToString:localPassword]) {
+        [self syncKeysWithoutPassword];
+    } else {
+        // check all keychain password
+        for (NSString *key in self.keychainKeys) {
+            NSArray *array = [key componentsSeparatedByString:KEYCHAIN_KEY_CONTENT_SEP];
+            BTAddress *address = [[BTAddress alloc] initWithWithPubKey:array[0] encryptPrivKey:[[array subarrayWithRange:NSMakeRange(1, 3)] componentsJoinedByString:KEYCHAIN_KEY_CONTENT_SEP]];
+            BTPasswordSeed *seed = [[BTPasswordSeed alloc] initWithBTAddress:address];
+            if (![seed checkPassword:keychainPassword]) {
+                return NO;
+            }
+        }
+        
+        NSMutableArray *localPubKeys = [NSMutableArray new];
+        for (NSString *key in self.localKeys) {
+            [localPubKeys addObject:[key componentsSeparatedByString:KEYCHAIN_KEY_CONTENT_SEP][0]];
+        }
+        NSMutableArray *needUpdateAddress = [NSMutableArray new];
+        NSMutableArray *needAddAddress = [NSMutableArray new];
+        for (NSString *key in self.keychainKeys) {
+            NSArray *array = [key componentsSeparatedByString:KEYCHAIN_KEY_CONTENT_SEP];
+            BTAddress *address = [[BTAddress alloc] initWithWithPubKey:array[0] encryptPrivKey:[[array subarrayWithRange:NSMakeRange(1, 3)] componentsJoinedByString:KEYCHAIN_KEY_CONTENT_SEP]];
+            if ([localPubKeys containsObject:array[0]]) {
+                [needUpdateAddress addObject:address];
+            } else {
+                [needAddAddress addObject:address];
+            }
+        }
+        
+        // add key to keychain
+        NSMutableArray *keychainPubKeys = [NSMutableArray new];
+        for (NSString *key in keychainPubKeys) {
+            [keychainPubKeys addObject:[key componentsSeparatedByString:KEYCHAIN_KEY_CONTENT_SEP][0]];
+        }
+        NSMutableArray *allKeys = [NSMutableArray arrayWithArray:self.keychainKeys];
+        for (NSString *key in self.localKeys) {
+            NSArray *array = [key componentsSeparatedByString:KEYCHAIN_KEY_CONTENT_SEP];
+            if (![keychainPubKeys containsObject:array[0]]) {
+                BTAddress *address = [[BTAddress alloc] initWithWithPubKey:array[0] encryptPrivKey:[[array subarrayWithRange:NSMakeRange(1, 3)] componentsJoinedByString:KEYCHAIN_KEY_CONTENT_SEP]];
+                address.encryptPrivKey = [address reEncryptPrivKeyWithOldPassphrase:localPassword andNewPassphrase:keychainPassword];
+                [allKeys addObject:[@[array[0], address.encryptPrivKey] componentsJoinedByString:KEYCHAIN_KEY_CONTENT_SEP]];
+                [needUpdateAddress addObject:address];
+            }
+        }
+        
+        for (BTAddress *address in needUpdateAddress) {
+            [address savePrivate];
+        }
+        for (BTAddress *address in needAddAddress) {
+            [[BTAddressManager instance] addAddress:address];
+        }
+        [[A0SimpleKeychain keychain] setString:[allKeys componentsJoinedByString:KEYCHAIN_KEY_SEP] forKey:KEYCHAIN_KEY];
+    }
+    return YES;
 }
 
 //- (NSArray *)getPrivAddressesFromKeychain;

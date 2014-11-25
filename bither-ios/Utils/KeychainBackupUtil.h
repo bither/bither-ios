@@ -14,8 +14,10 @@ typedef enum {
 
 @interface KeychainBackupUtil : NSObject
 
+- (void)update;
 - (NSArray *)checkWithKeychain;
-- (BOOL)syncWithKeychain:(NSArray *) changes;
 - (BOOL)canSync;
+- (BOOL)syncKeysWithoutPassword;
+- (BOOL)syncKeysWithKeychainPassword:(NSString *)keychainPassword andLocalPassword:(NSString *)localPassword;
 
 @end
