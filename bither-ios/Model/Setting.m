@@ -44,6 +44,8 @@
 #import "ImportBip38PrivateKeySetting.h"
 #import "NSString+Base58.h"
 #import "UnitUtil.h"
+#import "KeychainBackupUtil.h"
+#import "KeychainSetting.h"
 
 
 
@@ -63,7 +65,6 @@ static Setting* reloadTxsSetting;
 static Setting* RCheckSetting;
 static Setting* TrashCanSetting;
 static Setting* SwitchToColdSetting;
-static Setting* KeychainSetting;
 
 -(instancetype)initWithName:(NSString *)name  icon:(UIImage *)icon {
     self=[super init];
@@ -482,39 +483,7 @@ static Setting* KeychainSetting;
 }
 
 +(Setting *)getKeychainSetting;{
-    if(!KeychainSetting){
-        Setting * setting=[[Setting alloc] initWithName:NSLocalizedString(@"keychain_backup", nil) icon:nil];
-        [setting setGetValueBlock:^(){
-            return [BitherSetting getKeychainMode:[[UserDefaultsUtil instance] getKeychainMode]];
-        }];
-        [setting setSelectBlock:^(UIViewController * controller){
-            KeychainMode keychainMode = [[UserDefaultsUtil instance] getKeychainMode];
-            if (keychainMode == Off) {
-                [[[DialogAlert alloc]initWithMessage:NSLocalizedString(@"keychain_backup_enable", nil) confirm:^{
-                    [[UserDefaultsUtil instance] setKeychainMode:On];
-                    [[Setting getKeychainSetting] setGetValueBlock:^(){
-                        return [BitherSetting getKeychainMode:[[UserDefaultsUtil instance] getKeychainMode]];
-                    }];
-                    AdvanceViewController *advanceViewController = (AdvanceViewController *)controller;
-                    [advanceViewController.tableView reloadData];
-                } cancel:nil] showInWindow:controller.view.window];
-            } else {
-                [[[DialogAlert alloc]initWithMessage:NSLocalizedString(@"keychain_backup_disable", nil) confirm:^{
-                    [[UserDefaultsUtil instance] setKeychainMode:Off];
-                    [[Setting getKeychainSetting] setGetValueBlock:^(){
-                        return [BitherSetting getKeychainMode:[[UserDefaultsUtil instance] getKeychainMode]];
-                    }];
-                    AdvanceViewController *advanceViewController = (AdvanceViewController *)controller;
-                    [advanceViewController.tableView reloadData];
-                } cancel:nil] showInWindow:controller.view.window];
-            }
-            AdvanceViewController *advanceViewController = (AdvanceViewController *)controller;
-            [advanceViewController.tableView reloadData];
-        }];
-        KeychainSetting = setting;
-    }
-    return KeychainSetting;
-    
+    return [KeychainSetting getKeychainSetting];    
 }
 @end
 

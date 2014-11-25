@@ -7,10 +7,13 @@
 //
 
 #import <Foundation/Foundation.h>
-
 #import "Setting.h"
+#import "DialogPassword.h"
 
-@interface KeychainSetting : Setting
+@interface KeychainSetting : Setting<DialogPasswordDelegate>
+
 @property(nonatomic,strong) UIViewController * controller;
+
 +(Setting *)getKeychainSetting;
+
 @end

@@ -7,39 +7,137 @@
 //
 
 #import "KeychainSetting.h"
+#import "UserDefaultsUtil.h"
+#import "DialogAlert.h"
+#import "KeychainBackupUtil.h"
+#import "AdvanceViewController.h"
 
 static Setting* keychainSetting;
 
+@interface KeychainSetting()
+
+@property (nonatomic) BOOL needCheckKeychainPassword;
+@property (nonatomic) BOOL needCheckLocalPassword;
+
+@property (nonatomic, strong) NSString *keychainPassword;
+@property (nonatomic, strong) NSString *localPassword;
+
+@end
+
 @implementation KeychainSetting
 
-//+(Setting *)getAvatarSetting{
-//    if(!avatarSetting){
-//        UIImage *image=[UIImage imageNamed:@"avatar_button_icon"];
-//        
-//        AvatarSetting*  sAvatarSetting=[[AvatarSetting alloc] initWithName:NSLocalizedString(@"Set Avatar", nil) icon:image];
-//        __weak AvatarSetting* sself=sAvatarSetting;
-//        [sAvatarSetting setSelectBlock:^(UIViewController * controller){
-//            sself.controller=controller;
-//            UIActionSheet *actionSheet=nil;
-//            if([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]){
-//                
-//                actionSheet=[[UIActionSheet alloc]initWithTitle:NSLocalizedString(@"Set Avatar", nil)
-//                                                       delegate:sself                                                         cancelButtonTitle:NSLocalizedString(@"Cancel", nil)
-//                                         destructiveButtonTitle:nil
-//                                              otherButtonTitles:NSLocalizedString(@"From Camera", nil),NSLocalizedString(@"From Gallery", nil),nil];
-//            }else{
-//                actionSheet=[[UIActionSheet alloc]initWithTitle:NSLocalizedString(@"Set Avatar", nil)
-//                                                       delegate:sself                                                         cancelButtonTitle:NSLocalizedString(@"Cancel", nil)
-//                                         destructiveButtonTitle:nil
-//                                              otherButtonTitles:NSLocalizedString(@"From Gallery", nil),nil];
-//            }
-//            
-//            actionSheet.actionSheetStyle=UIActionSheetStyleDefault;
-//            [actionSheet showInView:controller.navigationController.view];
-//        }];
-//        avatarSetting = sAvatarSetting;
-//    }
-//    return avatarSetting;
-//}
++ (Setting *)getKeychainSetting; {
+    if (!keychainSetting) {
+        KeychainSetting *setting =[[KeychainSetting alloc] initWithName:NSLocalizedString(@"keychain_backup", nil) icon:nil];
+        [setting setGetValueBlock:^(){
+            return [BitherSetting getKeychainMode:[[UserDefaultsUtil instance] getKeychainMode]];
+        }];
+        __block __weak KeychainSetting *weakSetting = setting;
+        [setting setSelectBlock:^(UIViewController * controller){
+            KeychainMode keychainMode = [[UserDefaultsUtil instance] getKeychainMode];
+            if (keychainMode == Off) {
+                [[[DialogAlert alloc]initWithMessage:NSLocalizedString(@"keychain_backup_enable", nil) confirm:^{
+                    [[KeychainBackupUtil instance] update];
+                    NSArray *changes = [[KeychainBackupUtil instance] checkWithKeychain];
+                    if ([changes count] == 0) {
+                        [[UserDefaultsUtil instance] setKeychainMode:On];
+                        [[Setting getKeychainSetting] setGetValueBlock:^(){
+                            return [BitherSetting getKeychainMode:[[UserDefaultsUtil instance] getKeychainMode]];
+                        }];
+                        AdvanceViewController *advanceViewController = (AdvanceViewController *)controller;
+                        [advanceViewController.tableView reloadData];
+                    } else {
+                        // show changes
+                        // in call back do sth below
+                        
+                        if ([[KeychainBackupUtil instance] existKeySame]) {
+                            if ([[KeychainBackupUtil instance] syncKeysWithoutPassword]) {
+                                [[UserDefaultsUtil instance] setKeychainMode:On];
+                                [[Setting getKeychainSetting] setGetValueBlock:^(){
+                                    return [BitherSetting getKeychainMode:[[UserDefaultsUtil instance] getKeychainMode]];
+                                }];
+                                AdvanceViewController *advanceViewController = (AdvanceViewController *)controller;
+                                [advanceViewController.tableView reloadData];
+                            } else {
+                                // sync failed
+                                // alert
+                                [[[DialogAlert alloc]initWithMessage:NSLocalizedString(@"sync_with_keychain_failed", nil) confirm:nil cancel:nil] showInWindow:controller.view.window];
+                            }
+                        } else {
+                            // ask local password & keychain password
+                            // when success do sth below
+                            weakSetting.needCheckKeychainPassword = YES;
+                            weakSetting.needCheckLocalPassword = YES;
+                            weakSetting.controller = controller;
+                            DialogPassword *dialog = [[DialogPassword alloc] initWithDelegate:weakSetting];
+                            [dialog showInWindow:controller.view.window];
+                        }
+                    }
+                } cancel:nil] showInWindow:controller.view.window];
+            } else {
+                [[[DialogAlert alloc]initWithMessage:NSLocalizedString(@"keychain_backup_disable", nil) confirm:^{
+                    [[UserDefaultsUtil instance] setKeychainMode:Off];
+                    [[Setting getKeychainSetting] setGetValueBlock:^(){
+                        return [BitherSetting getKeychainMode:[[UserDefaultsUtil instance] getKeychainMode]];
+                    }];
+                    AdvanceViewController *advanceViewController = (AdvanceViewController *)controller;
+                    [advanceViewController.tableView reloadData];
+                } cancel:nil] showInWindow:controller.view.window];
+            }
+            AdvanceViewController *advanceViewController = (AdvanceViewController *)controller;
+            [advanceViewController.tableView reloadData];
+        }];
+        keychainSetting = setting;
+    }
+    return keychainSetting;
+}
+
+#pragma mark - DialogPasswordDelegate
+-(void)onPasswordEntered:(NSString*)password; {
+    if (self.needCheckKeychainPassword && self.needCheckLocalPassword) {
+        self.needCheckKeychainPassword = NO;
+        self.keychainPassword = password;
+        DialogPassword *dialog = [[DialogPassword alloc] initWithDelegate:self];
+        [dialog showInWindow:self.controller.view.window];
+    } else if (!self.needCheckKeychainPassword && self.needCheckLocalPassword) {
+        self.needCheckLocalPassword = NO;
+        self.localPassword = password;
+        if ([[KeychainBackupUtil instance] syncKeysWithKeychainPassword:self.keychainPassword andLocalPassword:self.localPassword]) {
+            [[UserDefaultsUtil instance] setKeychainMode:On];
+            [[Setting getKeychainSetting] setGetValueBlock:^(){
+                return [BitherSetting getKeychainMode:[[UserDefaultsUtil instance] getKeychainMode]];
+            }];
+            AdvanceViewController *advanceViewController = (AdvanceViewController *)self.controller;
+            [advanceViewController.tableView reloadData];
+        } else {
+            // sync failed
+            // alert
+            [[[DialogAlert alloc]initWithMessage:NSLocalizedString(@"sync_with_keychain_failed", nil) confirm:nil cancel:nil] showInWindow:self.controller.view.window];
+        }
+    }
+}
+
+-(BOOL)checkPassword:(NSString*)password; {
+    if (self.needCheckKeychainPassword) {
+        // check keychain password
+        return YES;
+    } else if (self.needCheckLocalPassword) {
+        // check local password
+        return YES;
+    } else {
+        return NO;
+    }
+}
+
+-(NSString*)passwordTitle; {
+    if (self.needCheckKeychainPassword) {
+        return NSLocalizedString(@"input_keychain_password", nil);
+    } else if (self.needCheckLocalPassword) {
+        return NSLocalizedString(@"input_local_password", nil);
+    } else {
+        return @"";
+    }
+}
+
 
 @end
