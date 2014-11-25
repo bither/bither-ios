@@ -167,9 +167,9 @@
 
 + (NSString *)getKeychainMode:(KeychainMode) keychainMode {
     if (keychainMode == Off) {
-        return NSLocalizedString(@"Off", nil);
+        return NSLocalizedString(@"keychain_backup_off", nil);
     } else {
-        return NSLocalizedString(@"On", nil);
+        return NSLocalizedString(@"keychain_backup_on", nil);
     }
 }
 

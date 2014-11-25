@@ -476,3 +476,14 @@
 "pin_code_setting_change_repeat_wrong" = "兩次輸入的新 PIN 碼不同";
 "pin_code_setting_close_wrong" = "PIN 碼錯誤";
 "pin_code_touch_id_promot" = "解鎖比太";
+
+/* keychain backup */
+"keychain_backup" = "iCloud 鑰匙串備份";
+"keychain_backup_on" = "開";
+"keychain_backup_off" = "關";
+"keychain_backup_enable" = "打開 iCloud 鑰匙串備份?";
+"keychain_backup_disable" = "關閉 iCloud 鑰匙串備份?";
+"keychain_backup_add_from_local" = "本機添加";
+"keychain_backup_add_from_keychain" = "鑰匙串添加";
+"keychain_backup_trash_from_local" = "本機移入回收站";
+"keychain_backup_trash_from_keychain" = "鑰匙串移入回收站";

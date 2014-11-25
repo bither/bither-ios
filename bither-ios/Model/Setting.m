@@ -483,14 +483,14 @@ static Setting* KeychainSetting;
 
 +(Setting *)getKeychainSetting;{
     if(!KeychainSetting){
-        Setting * setting=[[Setting alloc] initWithName:NSLocalizedString(@"keychain", nil) icon:nil];
+        Setting * setting=[[Setting alloc] initWithName:NSLocalizedString(@"keychain_backup", nil) icon:nil];
         [setting setGetValueBlock:^(){
             return [BitherSetting getKeychainMode:[[UserDefaultsUtil instance] getKeychainMode]];
         }];
         [setting setSelectBlock:^(UIViewController * controller){
             KeychainMode keychainMode = [[UserDefaultsUtil instance] getKeychainMode];
             if (keychainMode == Off) {
-                [[[DialogAlert alloc]initWithMessage:NSLocalizedString(@"enable_keychain", nil) confirm:^{
+                [[[DialogAlert alloc]initWithMessage:NSLocalizedString(@"keychain_backup_enable", nil) confirm:^{
                     [[UserDefaultsUtil instance] setKeychainMode:On];
                     [[Setting getKeychainSetting] setGetValueBlock:^(){
                         return [BitherSetting getKeychainMode:[[UserDefaultsUtil instance] getKeychainMode]];
@@ -499,7 +499,7 @@ static Setting* KeychainSetting;
                     [advanceViewController.tableView reloadData];
                 } cancel:nil] showInWindow:controller.view.window];
             } else {
-                [[[DialogAlert alloc]initWithMessage:NSLocalizedString(@"disable_keychain", nil) confirm:^{
+                [[[DialogAlert alloc]initWithMessage:NSLocalizedString(@"keychain_backup_disable", nil) confirm:^{
                     [[UserDefaultsUtil instance] setKeychainMode:Off];
                     [[Setting getKeychainSetting] setGetValueBlock:^(){
                         return [BitherSetting getKeychainMode:[[UserDefaultsUtil instance] getKeychainMode]];
