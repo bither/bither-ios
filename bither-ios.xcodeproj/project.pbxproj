@@ -207,7 +207,6 @@
 		DA641E8B196E7BC20095DF42 /* GCCrashInstallation.m in Sources */ = {isa = PBXBuildFile; fileRef = DA641E85196E7BC20095DF42 /* GCCrashInstallation.m */; };
 		DA641E8C196E7BC20095DF42 /* GCCrashReportFilterTrim.m in Sources */ = {isa = PBXBuildFile; fileRef = DA641E87196E7BC20095DF42 /* GCCrashReportFilterTrim.m */; };
 		DA641E8D196E7BC20095DF42 /* GCCrashReportSink.m in Sources */ = {isa = PBXBuildFile; fileRef = DA641E89196E7BC20095DF42 /* GCCrashReportSink.m */; };
-		DAB2C8701A1F46840011EE2F /* KeychainUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = DAB2C86F1A1F46840011EE2F /* KeychainUtil.m */; };
 		DAB2C8731A2038930011EE2F /* KeychainSetting.m in Sources */ = {isa = PBXBuildFile; fileRef = DAB2C8721A2038930011EE2F /* KeychainSetting.m */; };
 		DAB2C8761A206F080011EE2F /* KeychainBackupUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = DAB2C8751A206F080011EE2F /* KeychainBackupUtil.m */; };
 /* End PBXBuildFile section */
@@ -603,8 +602,6 @@
 		DA641E87196E7BC20095DF42 /* GCCrashReportFilterTrim.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GCCrashReportFilterTrim.m; path = CrashLog/GCCrashReportFilterTrim.m; sourceTree = "<group>"; };
 		DA641E88196E7BC20095DF42 /* GCCrashReportSink.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GCCrashReportSink.h; path = CrashLog/GCCrashReportSink.h; sourceTree = "<group>"; };
 		DA641E89196E7BC20095DF42 /* GCCrashReportSink.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GCCrashReportSink.m; path = CrashLog/GCCrashReportSink.m; sourceTree = "<group>"; };
-		DAB2C86E1A1F46840011EE2F /* KeychainUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeychainUtil.h; sourceTree = "<group>"; };
-		DAB2C86F1A1F46840011EE2F /* KeychainUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KeychainUtil.m; sourceTree = "<group>"; };
 		DAB2C8711A2038930011EE2F /* KeychainSetting.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeychainSetting.h; sourceTree = "<group>"; };
 		DAB2C8721A2038930011EE2F /* KeychainSetting.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KeychainSetting.m; sourceTree = "<group>"; };
 		DAB2C8741A206F080011EE2F /* KeychainBackupUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeychainBackupUtil.h; sourceTree = "<group>"; };
@@ -785,8 +782,6 @@
 				AC9BBCFD19D268AB00E58BA7 /* UpgradeUtil.m */,
 				AC454DC41A19D981000AF4ED /* UnitUtil.h */,
 				AC454DC51A19D981000AF4ED /* UnitUtil.m */,
-				DAB2C86E1A1F46840011EE2F /* KeychainUtil.h */,
-				DAB2C86F1A1F46840011EE2F /* KeychainUtil.m */,
 				DAB2C8741A206F080011EE2F /* KeychainBackupUtil.h */,
 				DAB2C8751A206F080011EE2F /* KeychainBackupUtil.m */,
 			);
@@ -1426,7 +1421,6 @@
 				AC5A916119ECDB5D00FFDB13 /* UploadAndDowloadFileFactory.m in Sources */,
 				ACE3765F1A231C9200F66321 /* DialogKeychainBackupDiff.m in Sources */,
 				ACB9B9C3195AD1CC00019216 /* AddressDetailViewController.m in Sources */,
-				DAB2C8701A1F46840011EE2F /* KeychainUtil.m in Sources */,
 				ACE7E70019EB6DE800F7AA3A /* AvatarSetting.m in Sources */,
 				4268FE2A194ACD57007A4C30 /* ColdViewController.m in Sources */,
 				ACEE7D2919D3F9F500932B39 /* QRCodeTxTransport.m in Sources */,

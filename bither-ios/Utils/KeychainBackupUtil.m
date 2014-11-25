@@ -2,15 +2,25 @@
 //  KeychainBackupUtil.m
 //  bither-ios
 //
-//  Created by ZhouQi on 14/11/22.
-//  Copyright (c) 2014年 ZhouQi. All rights reserved.
+//  Copyright 2014 http://Bither.net
 //
+//  Licensed under the Apache License, Version 2.0 (the "License");
+//  you may not use this file except in compliance with the License.
+//  You may obtain a copy of the License at
+//
+//    http://www.apache.org/licenses/LICENSE-2.0
+//
+//  Unless required by applicable law or agreed to in writing, software
+//  distributed under the License is distributed on an "AS IS" BASIS,
+//  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+//  See the License for the specific language governing permissions and
+//  limitations under the License.
 
 #import "KeychainBackupUtil.h"
 #import "UserDefaultsUtil.h"
 #import <SimpleKeychain/A0SimpleKeychain.h>
 #import "BTAddressManager.h"
-#import "KeychainUtil.h"
+//#import "KeychainUtil.h"
 
 #define KEYCHAIN_KEY @"key"
 #define KEYCHAIN_TRASH @"trash"
@@ -77,8 +87,8 @@
 }
 
 - (NSArray *)getKeychainKeys; {
-//    NSString *key = [[A0SimpleKeychain keychain] stringForKey:KEYCHAIN_KEY];
-    NSString *key = [KeychainUtil getKeychainString:KEYCHAIN_KEY];
+    NSString *key = [[A0SimpleKeychain keychain] stringForKey:KEYCHAIN_KEY];
+//    NSString *key = [KeychainUtil getKeychainString:KEYCHAIN_KEY];
     if (key != nil && key.length != 0) {
         return [key componentsSeparatedByString:KEYCHAIN_KEY_SEP];
     } else {
@@ -87,8 +97,8 @@
 }
 
 - (NSArray *)getKeychainTrashes; {
-//    NSString *pub = [[A0SimpleKeychain keychain] stringForKey:KEYCHAIN_TRASH];
-    NSString *pub = [KeychainUtil getKeychainString:KEYCHAIN_TRASH];
+    NSString *pub = [[A0SimpleKeychain keychain] stringForKey:KEYCHAIN_TRASH];
+//    NSString *pub = [KeychainUtil getKeychainString:KEYCHAIN_TRASH];
     if (pub != nil) {
         return [pub componentsSeparatedByString:KEYCHAIN_KEY_SEP];
     } else {
@@ -206,8 +216,8 @@
                 [allKeys addObject:key];
             }
         }
-//        [[A0SimpleKeychain keychain] setString:[allKeys componentsJoinedByString:KEYCHAIN_KEY_SEP] forKey:KEYCHAIN_KEY];
-        [KeychainUtil setKeychainString:[allKeys componentsJoinedByString:KEYCHAIN_KEY_SEP] andKey:KEYCHAIN_KEY andAuthenticated:NO];
+        [[A0SimpleKeychain keychain] setString:[allKeys componentsJoinedByString:KEYCHAIN_KEY_SEP] forKey:KEYCHAIN_KEY];
+//        [KeychainUtil setKeychainString:[allKeys componentsJoinedByString:KEYCHAIN_KEY_SEP] andKey:KEYCHAIN_KEY andAuthenticated:NO];
         return YES;
     }
 }
@@ -274,8 +284,8 @@
         } else if ([BTAddressManager instance].trashAddresses.count > 0) {
             [[UserDefaultsUtil instance]setPasswordSeed:[[BTPasswordSeed alloc] initWithBTAddress:[BTAddressManager instance].trashAddresses[0]]];
         }
-//        [[A0SimpleKeychain keychain] setString:[allKeys componentsJoinedByString:KEYCHAIN_KEY_SEP] forKey:KEYCHAIN_KEY];
-        [KeychainUtil setKeychainString:[allKeys componentsJoinedByString:KEYCHAIN_KEY_SEP] andKey:KEYCHAIN_KEY andAuthenticated:NO];
+        [[A0SimpleKeychain keychain] setString:[allKeys componentsJoinedByString:KEYCHAIN_KEY_SEP] forKey:KEYCHAIN_KEY];
+//        [KeychainUtil setKeychainString:[allKeys componentsJoinedByString:KEYCHAIN_KEY_SEP] andKey:KEYCHAIN_KEY andAuthenticated:NO];
         return YES;
     }
 }
@@ -285,15 +295,15 @@
 //
 //- (void)storeToKeychainWithPrivAddresses:(NSArray *) privAddresses andTrashAddresses:(NSArray *) trashAddresses;
 - (BOOL)isFirstUseKeychain; {
-//    NSString *key = [[A0SimpleKeychain keychain] stringForKey:KEYCHAIN_KEY];
-    NSString *key = [KeychainUtil getKeychainString:KEYCHAIN_KEY];
+    NSString *key = [[A0SimpleKeychain keychain] stringForKey:KEYCHAIN_KEY];
+//    NSString *key = [KeychainUtil getKeychainString:KEYCHAIN_KEY];
     return key == nil || key.length == 0;
 }
 
 - (BOOL)uploadKeychain;{
     [self updateLocal];
-//    [[A0SimpleKeychain keychain] setString:[self.localKeys componentsJoinedByString:KEYCHAIN_KEY_SEP] forKey:KEYCHAIN_KEY];
-    [KeychainUtil setKeychainString:[self.localKeys componentsJoinedByString:KEYCHAIN_KEY_SEP] andKey:KEYCHAIN_KEY andAuthenticated:NO];
+    [[A0SimpleKeychain keychain] setString:[self.localKeys componentsJoinedByString:KEYCHAIN_KEY_SEP] forKey:KEYCHAIN_KEY];
+//    [KeychainUtil setKeychainString:[self.localKeys componentsJoinedByString:KEYCHAIN_KEY_SEP] andKey:KEYCHAIN_KEY andAuthenticated:NO];
     return YES;
 }
 

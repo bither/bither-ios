@@ -476,9 +476,9 @@ static Setting* SwitchToColdSetting;
     if ([[BTSettings instance] getAppMode]==HOT) {
         [array addObject:[ReloadTxSetting getReloadTxsSetting]];
     }
-    if ([[BTSettings instance] getAppMode] == HOT) {
-        [array addObject:[Setting getKeychainSetting]];
-    }
+//    if ([[BTSettings instance] getAppMode] == HOT) {
+//        [array addObject:[Setting getKeychainSetting]];
+//    }
     return array;
 }
 
