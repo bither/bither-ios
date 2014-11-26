@@ -53,8 +53,8 @@
     [super viewDidLoad];
     self.lblFrom.text = self.tx.myAddress;
     self.lblTo.text = self.tx.toAddress;
-    self.lblAmount.attributedText = [UnitUtil attributedStringForAmount:self.tx.to withFontSize:14];
-    self.lblFee.attributedText = [UnitUtil attributedStringForAmount:self.tx.fee withFontSize:14];
+    self.lblAmount.attributedText = [UnitUtil attributedStringWithSymbolForAmount:self.tx.to withFontSize:14 color:self.lblAmount.textColor];
+    self.lblFee.attributedText = [UnitUtil attributedStringWithSymbolForAmount:self.tx.fee withFontSize:14 color:self.lblAmount.textColor];
     NSArray *privKeys = [BTAddressManager instance].privKeyAddresses;
     address = nil;
     for(BTAddress *a in privKeys){
