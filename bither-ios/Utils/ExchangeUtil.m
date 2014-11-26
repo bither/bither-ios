@@ -79,7 +79,7 @@ static NSDictionary *_currenciesRate = nil;
 + (double)getRate:(Currency)currency {
     Currency defaultCurrency = [[UserDefaultsUtil instance] getDefaultCurrency];
     double rate = 1;
-    if (currency != defaultCurrency) {
+    if (currency != defaultCurrency && [self getCurrenciesRate] != nil) {
         double preRate = [[self getCurrenciesRate][[BitherSetting getCurrencyName:currency]] doubleValue];
         double defaultRate = [[self getCurrenciesRate][[BitherSetting getCurrencyName:defaultCurrency]] doubleValue];
         rate = defaultRate / preRate;
@@ -91,7 +91,7 @@ static NSDictionary *_currenciesRate = nil;
     Currency defaultCurrency = [[UserDefaultsUtil instance] getDefaultCurrency];
     double rate = 1;
     Currency currency = [self getCurrencyForMarket:marketType];
-    if (currency != defaultCurrency) {
+    if (currency != defaultCurrency && [self getCurrenciesRate] != nil) {
         double preRate = [[self getCurrenciesRate][[BitherSetting getCurrencyName:currency]] doubleValue];
         double defaultRate = [[self getCurrenciesRate][[BitherSetting getCurrencyName:defaultCurrency]] doubleValue];
         rate = defaultRate / preRate;
