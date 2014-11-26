@@ -56,11 +56,15 @@ static NSDictionary *_currenciesRate = nil;
 + (NSDictionary *)getCurrenciesRate; {
     if (_currenciesRate == nil) {
         NSString *currenciesRateStr = [BTUtils readFile:[CacheUtil getCurrenciesRateFile]];
-        NSError *error = nil;
-        NSData *data = [currenciesRateStr dataUsingEncoding:NSUTF8StringEncoding];
-        _currenciesRate = [self parseCurrenciesRate:[NSJSONSerialization JSONObjectWithData:data options:0 error:&error]];;
-        if (error != nil) {
+        if (currenciesRateStr == nil || currenciesRateStr.length == 0) {
             _currenciesRate = nil;
+        } else {
+            NSError *error = nil;
+            NSData *data = [currenciesRateStr dataUsingEncoding:NSUTF8StringEncoding];
+            _currenciesRate = [self parseCurrenciesRate:[NSJSONSerialization JSONObjectWithData:data options:0 error:&error]];;
+            if (error != nil) {
+                _currenciesRate = nil;
+            }
         }
     }
     return _currenciesRate;
