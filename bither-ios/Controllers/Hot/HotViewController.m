@@ -186,7 +186,7 @@
         }else{
             progress = MAX(0.1, progress);
             self.pvSync.hidden = NO;
-            self.pvSync.progress = progress;
+            [self.pvSync setProgress:progress animated:YES];
             if(progress == 1){
                 [self performSelector:@selector(delayHidePvSync) withObject:nil afterDelay:0.5];
             }
