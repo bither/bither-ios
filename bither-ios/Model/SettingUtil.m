@@ -34,7 +34,7 @@
     [array addObject:[Setting getExchangeSetting]];
     [array addObject:[Setting getMarketSetting]];
     [array addObject:[Setting getTransactionFeeSetting]];
-    if([BTAddressManager instance].allAddresses.count == 0){
+    if([BTAddressManager instance].allAddresses.count == 0 && [BTAddressManager instance].trashAddresses.count == 0){
         [array addObject:[Setting getSwitchToColdSetting]];
     }
     [array addObject:[AvatarSetting getAvatarSetting]];
