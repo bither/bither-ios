@@ -90,7 +90,7 @@
 
 +(NSMutableAttributedString*)addSymbol:(NSMutableAttributedString*)attr withFontSize:(CGFloat)size color:(UIColor*)color{
     NSTextAttachment *attachment = [[NSTextAttachment alloc] init];
-    UIImage* symbol = [[UIImage imageNamed:@"symbol_btc_slim"] renderToColor:color];
+    UIImage* symbol = [[UIImage imageNamed:[UnitUtil imageNameSlim:[UnitUtil unit]]] renderToColor:color];
     attachment.image = symbol;
     CGRect bounds = attachment.bounds;
     bounds.size = CGSizeMake(symbol.size.width * size / symbol.size.height, size);
