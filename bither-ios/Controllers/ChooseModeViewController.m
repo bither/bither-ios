@@ -99,7 +99,7 @@
             [self showHotWait];
             
         }
-        if([[BTSettings instance]getAppMode]==COLD && ([NetworkUtil isEnable3G] || [NetworkUtil isEnableWIFI])){
+        if([[BTSettings instance]getAppMode]==COLD){
             [self showColdCheckWithCompletion:^{
                 [self.vColdNetCheck beginCheck:coldNetCheckCompletion];
             }];
