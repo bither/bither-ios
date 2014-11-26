@@ -56,11 +56,15 @@ static NSDictionary *_currenciesRate = nil;
 + (NSDictionary *)getCurrenciesRate; {
     if (_currenciesRate == nil) {
         NSString *currenciesRateStr = [BTUtils readFile:[CacheUtil getCurrenciesRateFile]];
-        NSError *error = nil;
-        NSData *data = [currenciesRateStr dataUsingEncoding:NSUTF8StringEncoding];
-        _currenciesRate = [self parseCurrenciesRate:[NSJSONSerialization JSONObjectWithData:data options:0 error:&error]];;
-        if (error != nil) {
+        if (currenciesRateStr == nil || currenciesRateStr.length == 0) {
             _currenciesRate = nil;
+        } else {
+            NSError *error = nil;
+            NSData *data = [currenciesRateStr dataUsingEncoding:NSUTF8StringEncoding];
+            _currenciesRate = [self parseCurrenciesRate:[NSJSONSerialization JSONObjectWithData:data options:0 error:&error]];;
+            if (error != nil) {
+                _currenciesRate = nil;
+            }
         }
     }
     return _currenciesRate;
@@ -75,7 +79,7 @@ static NSDictionary *_currenciesRate = nil;
 + (double)getRate:(Currency)currency {
     Currency defaultCurrency = [[UserDefaultsUtil instance] getDefaultCurrency];
     double rate = 1;
-    if (currency != defaultCurrency) {
+    if (currency != defaultCurrency && [self getCurrenciesRate] != nil) {
         double preRate = [[self getCurrenciesRate][[BitherSetting getCurrencyName:currency]] doubleValue];
         double defaultRate = [[self getCurrenciesRate][[BitherSetting getCurrencyName:defaultCurrency]] doubleValue];
         rate = defaultRate / preRate;
@@ -87,7 +91,7 @@ static NSDictionary *_currenciesRate = nil;
     Currency defaultCurrency = [[UserDefaultsUtil instance] getDefaultCurrency];
     double rate = 1;
     Currency currency = [self getCurrencyForMarket:marketType];
-    if (currency != defaultCurrency) {
+    if (currency != defaultCurrency && [self getCurrenciesRate] != nil) {
         double preRate = [[self getCurrenciesRate][[BitherSetting getCurrencyName:currency]] doubleValue];
         double defaultRate = [[self getCurrenciesRate][[BitherSetting getCurrencyName:defaultCurrency]] doubleValue];
         rate = defaultRate / preRate;

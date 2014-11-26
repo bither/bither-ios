@@ -180,16 +180,14 @@
     [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(delayHidePvSync) object:nil];
     if(notification && notification.object && [notification.object isKindOfClass:[NSNumber class]]){
         double progress = ((NSNumber*) notification.object).doubleValue;
-        if(progress < 0 || progress > 1){
-            self.pvSync.hidden = YES;
-            self.pvSync.progress = 0;
-        }else{
-            progress = MAX(0.1, progress);
+        if(progress >= 0 && progress <= 1){
             self.pvSync.hidden = NO;
+            progress = MAX(0.1, progress);
             [self.pvSync setProgress:progress animated:YES];
-            if(progress == 1){
-                [self performSelector:@selector(delayHidePvSync) withObject:nil afterDelay:0.5];
-            }
+            
+        }
+        if(progress < 0 || progress >= 1){
+            [self performSelector:@selector(delayHidePvSync) withObject:nil afterDelay:0.5];
         }
     }else{
         self.pvSync.hidden = YES;
@@ -198,9 +196,7 @@
 
 -(void)delayHidePvSync{
     [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(delayHidePvSync) object:nil];
-    if(self.pvSync.progress == 1){
-        self.pvSync.hidden = YES;
-    }
+    self.pvSync.hidden = YES;
 }
 
 -(void)initApp{
