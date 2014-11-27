@@ -26,12 +26,6 @@
 +(NSString *)formatPrice:(double) value;
 +(NSString * )formatDouble:(double) value;
 
-+ (int64_t)amountForString:(NSString *)string;
-+ (NSString *)stringForAmount:(int64_t)amount;
-+(NSMutableAttributedString*)attributedStringForAmount:(int64_t)amout withFontSize:(CGFloat)size;
-+(NSMutableAttributedString*)attributedStringWithSymbolForAmount:(int64_t)amount withFontSize:(CGFloat)size color:(UIColor*)color;
-+(NSMutableAttributedString*)stringWithSymbolForAmount:(int64_t)amount withFontSize:(CGFloat)size color:(UIColor*)color;
-+(void)stringWithSymbolForAmount:(int64_t)amount source:(NSMutableAttributedString*)str;
 +(BOOL) isEmpty:(NSString *) str;
 +(BOOL)validEmail:(NSString*)str;
 +(BOOL)validPassword:(NSString *)str;

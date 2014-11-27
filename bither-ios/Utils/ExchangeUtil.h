@@ -20,10 +20,11 @@
 #import "BitherSetting.h"
 
 @interface ExchangeUtil : NSObject
-+(void)setExchangeRate:(double) exchangeRate;
-+(double)getExchangeRate;
-+(double)getRate:(ExchangeType) exchangeType;
-+(double)getRateOfMareket:(MarketType) marketType;
-+(ExchangeType) getExchangeType:(MarketType )marketType;
-
+//+ (void)setExchangeRate:(double)exchangeRate;
+//+ (double)getExchangeRate;
++ (void)setCurrenciesRate:(NSDictionary *)currenciesRate;
++ (NSDictionary *)getCurrenciesRate;
++ (double)getRate:(Currency)currency;
++ (double)getRateForMarket:(MarketType)marketType;
++ (Currency)getCurrencyForMarket:(MarketType)marketType;
 @end

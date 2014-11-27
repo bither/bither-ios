@@ -28,7 +28,7 @@
 #import "IOS7ContainerViewController.h"
 #import "NetworkUtil.h"
 #import "UserDefaultsUtil.h"
-#import "StringUtil.h"
+#import "UnitUtil.h"
 #import "KeyUtil.h"
 #import "PeerUtil.h"
 #import "BitherTime.h"
@@ -45,6 +45,7 @@
 #import "SystemUtil.h"
 #import "UpgradeUtil.h"
 #import "TrendingGraphicData.h"
+#import "PinCodeUtil.h"
 
 @interface AppDelegate()
 @end
@@ -55,7 +56,6 @@ static StatusBarNotificationWindow* notificationWindow;
 {
     if ([[BTSettings instance] getAppMode]==COLD) {
         [[UIApplication sharedApplication] setMinimumBackgroundFetchInterval:UIApplicationBackgroundFetchIntervalNever];
-        
     }else{
         [[UIApplication sharedApplication] setMinimumBackgroundFetchInterval:UIApplicationBackgroundFetchIntervalMinimum];
     }
@@ -63,10 +63,14 @@ static StatusBarNotificationWindow* notificationWindow;
     [self upgradePub:^{
     }];
     
+    if([[BTSettings instance] needChooseMode]){
+        [[BTSettings instance] setAppMode:HOT];
+    }
+    
     [CrashLog initCrashLog];
  //   [[BTSettings instance] openBitheriConsole];
     UIStoryboard *storyboard = self.window.rootViewController.storyboard;
-    if(![[BTSettings instance]needChooseMode]){
+    if(![[BTSettings instance] needChooseMode]){
         IOS7ContainerViewController *container = [[IOS7ContainerViewController alloc]init];
         if ([[BTSettings instance] getAppMode]==HOT && [[BlockUtil instance] syncSpvFinish]) {
             container.controller = [storyboard instantiateViewControllerWithIdentifier:@"BitherHot"];
@@ -89,6 +93,7 @@ static StatusBarNotificationWindow* notificationWindow;
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reachabilityChange) name:kReachabilityChangedNotification object:nil];
     }];
     notificationWindow = [[StatusBarNotificationWindow alloc]initWithOriWindow:self.window];
+    [[PinCodeUtil instance] becomeActive];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(notification:) name:BitherBalanceChangedNotification object:nil];
     return YES;
 }
@@ -244,7 +249,7 @@ static StatusBarNotificationWindow* notificationWindow;
         int64_t diff = [(NSNumber*)dic[@"diff"] longLongValue];
         if(diff != 0){
             [PlaySoundUtil playSound:@"coins_received" extension:@"wav" callback:nil];
-            NSString* notification = [NSString stringWithFormat:@"%@ %@", diff >= 0 ? NSLocalizedString(@"Received", nil) : NSLocalizedString(@"Sent", nil), diff >= 0 ? [StringUtil stringForAmount:diff] : [StringUtil stringForAmount:0 - diff]];
+            NSString* notification = [NSString stringWithFormat:@"%@ %@ %@", diff >= 0 ? NSLocalizedString(@"Received", nil) : NSLocalizedString(@"Sent", nil), diff >= 0 ? [UnitUtil stringForAmount:diff] : [UnitUtil stringForAmount:0 - diff], [UnitUtil unitName]];
             [notificationWindow showNotification:notification withAddress:address color:diff > 0 ? [UIColor greenColor] : [UIColor redColor]];
         }
     }

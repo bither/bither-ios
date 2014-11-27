@@ -228,3 +228,6 @@
 
 /* Class = "IBUILabel"; text = "R Value Check"; ObjectID = "bNn-8g-rmY"; */
 "bNn-8g-rmY.text" = "r 值检查";
+
+/* Class = "IBUILabel"; text = "Trash Can"; ObjectID = "W7P-G2-qt2"; */
+"W7P-G2-qt2.text" = "回收站";

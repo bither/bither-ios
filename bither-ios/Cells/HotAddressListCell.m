@@ -18,6 +18,7 @@
 
 #import "HotAddressListCell.h"
 #import "StringUtil.h"
+#import "UnitUtil.h"
 #import "TransactionConfidenceView.h"
 #import "AmountButton.h"
 #import "NSAttributedString+Size.h"
@@ -36,6 +37,7 @@
 #import "BitherSetting.h"
 #import "UIImage+ImageRenderToColor.h"
 #import "DialogXrandomInfo.h"
+#import "BTAddressManager.h"
 
 #define kUnconfirmedTxAmountLeftMargin (3)
 
@@ -44,6 +46,7 @@
 @interface HotAddressListCell ()<DialogAddressFullDelegate,DialogPrivateKeyOptionsDelegate,DialogPasswordDelegate>{
     BTAddress * _btAddress;
     PrivateKeyQrCodeType _qrcodeType;
+    BOOL isMovingToTrash;
 }
 
 @property (weak, nonatomic) IBOutlet UILabel *lblAddress;
@@ -99,12 +102,12 @@
     }
     self.ivXrandom.hidden = !address.isFromXRandom;
     
-    self.lblBalanceBtc.attributedText = [StringUtil attributedStringForAmount:address.balance withFontSize:kBalanceFontSize];
+    self.lblBalanceBtc.attributedText = [UnitUtil attributedStringForAmount:address.balance withFontSize:kBalanceFontSize];
     
     width = [self.lblBalanceBtc.attributedText sizeWithRestrict:CGSizeMake(CGFLOAT_MAX, self.lblBalanceBtc.frame.size.height)].width;
     self.lblBalanceBtc.frame = CGRectMake(CGRectGetMaxX(self.lblBalanceBtc.frame) - width, self.lblBalanceBtc.frame.origin.y, width, self.lblBalanceBtc.frame.size.height);
     self.ivSymbolBtc.frame = CGRectMake(CGRectGetMinX(self.lblBalanceBtc.frame) - self.ivSymbolBtc.frame.size.width - 2, self.ivSymbolBtc.frame.origin.y, self.ivSymbolBtc.frame.size.width, self.ivSymbolBtc.frame.size.height);
-
+    self.ivSymbolBtc.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@_black", [UnitUtil imageNameSlim]]];
 //    if (![_btAddress.address isEqualToString:address.address])
 //        self.lblTransactionCount.text = [NSString string];
     self.vNoUnconfirmedTx.hidden = NO;
@@ -135,7 +138,7 @@
     }else{
         self.lblBalanceMoney.text=@"--";
     }
-   
+    isMovingToTrash = NO;
 }
 
 -(CGFloat)widthForLabel:(UILabel*)lbl maxWidth:(CGFloat)maxWidth{
@@ -220,10 +223,38 @@
     [dialog showInWindow:self.window];
 }
 
+-(void)moveToTrash{
+    if(_btAddress.balance > 0){
+        [self showMsg:NSLocalizedString(@"trash_with_money_warn", nil)];
+    }else{
+        isMovingToTrash = YES;
+        DialogPassword* dp = [[DialogPassword alloc]initWithDelegate:self];
+        [dp showInWindow:self.window];
+    }
+}
+
 //DialogPasswordDelegate
 -(void)onPasswordEntered:(NSString *)password{
     __block NSString * bpassword=password;
     password=nil;
+    if(isMovingToTrash){
+        isMovingToTrash = NO;
+        DialogProgress *dp = [[DialogProgress alloc]initWithMessage:NSLocalizedString(@"trashing_private_key", nil)];
+        [dp showInWindow:self.window completion:^{
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+                [[BTAddressManager instance] trashPrivKey:_btAddress];
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [dp dismissWithCompletion:^{
+                        UIViewController* vc = self.getUIViewController;
+                        if (vc && [vc respondsToSelector:@selector(reload)]) {
+                            [vc performSelector:@selector(reload) withObject:nil];
+                        }
+                    }];
+                });
+            });
+        }];
+        return;
+    }
     if(_qrcodeType==Encrypted){
         DialogPrivateKeyEncryptedQrCode *dialog = [[DialogPrivateKeyEncryptedQrCode alloc]initWithAddress:_btAddress];
         [dialog showInWindow:self.window];
@@ -233,7 +264,7 @@
         [self decrypted:bpassword callback:^(id response) {
             [dialogProgress dismiss];
             if (_qrcodeType==Decrypetd) {
-                DialogPrivateKeyDecryptedQrCode *dialogPrivateKey=[[DialogPrivateKeyDecryptedQrCode alloc] initWithAddress:response];
+                DialogPrivateKeyDecryptedQrCode *dialogPrivateKey=[[DialogPrivateKeyDecryptedQrCode alloc]initWithAddress:_btAddress.address privateKey:response];
                 [dialogPrivateKey showInWindow:self.window];
                 
             }else{

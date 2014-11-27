@@ -23,88 +23,97 @@
 #import "StringUtil.h"
 #import "UserDefaultsUtil.h"
 
-static double rate=-1;
+//static double rate = -1;
+static NSDictionary *_currenciesRate = nil;
 
 @implementation ExchangeUtil
-+(void)setExchangeRate:(double) exchangeRate{
-    rate=exchangeRate;
-    NSString * rateString=[NSString stringWithFormat:@"%f",rate];
-    [BTUtils writeFile:[CacheUtil getExchangeFile] content:rateString];
-    
+//+ (void)setExchangeRate:(double)exchangeRate {
+//    rate = exchangeRate;
+//    NSString *rateString = [NSString stringWithFormat:@"%f", rate];
+//    [BTUtils writeFile:[CacheUtil getExchangeFile] content:rateString];
+//
+//}
+//
+//+ (double)getExchangeRate {
+//    if (rate == -1) {
+//        NSString *rateString = [BTUtils readFile:[CacheUtil getExchangeFile]];
+//        if (![StringUtil isEmpty:rateString] && [StringUtil isPureFloat:rateString]) {
+//            rate = [rateString doubleValue];
+//        } else {
+//            rate = 1;
+//        }
+//
+//    }
+//    return rate;
+//
+//}
+
++ (void)setCurrenciesRate:(NSDictionary *)currenciesRate; {
+    _currenciesRate = [self parseCurrenciesRate:currenciesRate];
+    [BTUtils writeFile:[CacheUtil getCurrenciesRateFile] content:[currenciesRate jsonEncodedKeyValueString]];
 }
-+(double) getExchangeRate{
-    if (rate==-1) {
-        NSString * rateString=[BTUtils readFile:[CacheUtil getExchangeFile]];
-        if (![StringUtil isEmpty:rateString]&&[StringUtil isPureFloat:rateString]) {
-            rate=[rateString doubleValue];
-        }else{
-            rate= 1;
+
++ (NSDictionary *)getCurrenciesRate; {
+    if (_currenciesRate == nil) {
+        NSString *currenciesRateStr = [BTUtils readFile:[CacheUtil getCurrenciesRateFile]];
+        if (currenciesRateStr == nil || currenciesRateStr.length == 0) {
+            _currenciesRate = nil;
+        } else {
+            NSError *error = nil;
+            NSData *data = [currenciesRateStr dataUsingEncoding:NSUTF8StringEncoding];
+            _currenciesRate = [self parseCurrenciesRate:[NSJSONSerialization JSONObjectWithData:data options:0 error:&error]];;
+            if (error != nil) {
+                _currenciesRate = nil;
+            }
         }
-        
     }
-    return rate;
-    
+    return _currenciesRate;
 }
-+(double)getRate:(ExchangeType) exchangeType{
-    ExchangeType defaultExchangeType=[[UserDefaultsUtil instance] getDefaultExchangeType];
-    double rate=1;
-    if (exchangeType!=defaultExchangeType) {
-        double preRate=[self getExchangeRate];
-        if (defaultExchangeType==CNY) {
-            rate=rate*preRate;
-        }else{
-            rate=rate/preRate;
-        }
+
++ (NSDictionary *)parseCurrenciesRate:(NSDictionary *)dict; {
+    NSMutableDictionary *currenciesRate = [NSMutableDictionary dictionaryWithDictionary:dict];
+    currenciesRate[@"USD"] = @1;
+    return currenciesRate;
+}
+
++ (double)getRate:(Currency)currency {
+    Currency defaultCurrency = [[UserDefaultsUtil instance] getDefaultCurrency];
+    double rate = 1;
+    if (currency != defaultCurrency && [self getCurrenciesRate] != nil) {
+        double preRate = [[self getCurrenciesRate][[BitherSetting getCurrencyName:currency]] doubleValue];
+        double defaultRate = [[self getCurrenciesRate][[BitherSetting getCurrencyName:defaultCurrency]] doubleValue];
+        rate = defaultRate / preRate;
     }
     return rate;
 }
 
-+(double)getRateOfMareket:(MarketType) marketType{
-    ExchangeType exchangeType=[[UserDefaultsUtil instance] getDefaultExchangeType];
-    double rate=1;
-    double preRate=[self getExchangeRate];
-    switch (marketType) {
-        case HUOBI:
-        case OKCOIN:
-        case BTCCHINA:
-        case CHBTC:
-            if (exchangeType==USD) {
-                rate=rate/preRate;
-            }
-            break;
-        case BTCE:
-        case BITSTAMP:
-        case MARKET796:
-        case BITFINEX:
-            if (exchangeType==CNY) {
-                rate=rate*preRate;
-            }
-            break;
-        default:
-            break;
-    }
-    if (rate<0) {
-        rate=1;
++ (double)getRateForMarket:(MarketType)marketType {
+    Currency defaultCurrency = [[UserDefaultsUtil instance] getDefaultCurrency];
+    double rate = 1;
+    Currency currency = [self getCurrencyForMarket:marketType];
+    if (currency != defaultCurrency && [self getCurrenciesRate] != nil) {
+        double preRate = [[self getCurrenciesRate][[BitherSetting getCurrencyName:currency]] doubleValue];
+        double defaultRate = [[self getCurrenciesRate][[BitherSetting getCurrencyName:defaultCurrency]] doubleValue];
+        rate = defaultRate / preRate;
     }
     return rate;
 }
-+(ExchangeType) getExchangeType:(MarketType )marketType{
+
++ (Currency)getCurrencyForMarket:(MarketType)marketType {
     switch (marketType) {
         case HUOBI:
         case OKCOIN:
         case BTCCHINA:
         case CHBTC:
             return CNY;
-            break;
         case BTCE:
         case BITSTAMP:
         case MARKET796:
         case BITFINEX:
             return USD;
         default:
-            break;
+            return CNY;
     }
-    return CNY;
 }
 @end
 

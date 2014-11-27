@@ -18,6 +18,7 @@
 
 #import "DialogAddressFull.h"
 #import "StringUtil.h"
+#import "UnitUtil.h"
 #import "NSString+Size.h"
 
 #define kAddressFontSize (16)
@@ -29,7 +30,7 @@
 
 #define kAddressGroupSize (4)
 #define kAddressLineSize (12)
-#define kAddressExample (@"1PiimT5fGdWXywrLqYbTvxGRyveAcrKfb4")
+#define kAddressExample (@"1Nc9oEokW91HUohUpHt4Y7DisQXLuEBi77")
 
 @interface DialogAddressFullCell : UITableViewCell{
     NSString *_address;
@@ -116,7 +117,7 @@
         if(columnCount > 1){
             int64_t amount = [delegate dialogAddressFullAmountForRow:i];
             if(amount != 0){
-                NSString* amountStr = [StringUtil stringForAmount:amount];
+                NSString* amountStr = [UnitUtil stringForAmount:amount];
                 CGSize amountSize = [amountStr sizeWithRestrict:CGSizeMake(CGFLOAT_MAX, addressSize.height) font:[UIFont systemFontOfSize:kAmountFontSize]];
                 secondColumnWidth = MAX(secondColumnWidth, amountSize.width);
             }
@@ -192,7 +193,7 @@
     self.lblAddress.frame = frame;
     if(amount != 0){
         self.lblAmount.hidden = NO;
-        self.lblAmount.text = [StringUtil stringForAmount: amount];
+        self.lblAmount.text = [UnitUtil stringForAmount: amount];
     }else{
         self.lblAmount.hidden = YES;
     }

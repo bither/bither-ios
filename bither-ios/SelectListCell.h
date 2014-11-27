@@ -21,5 +21,6 @@
 @interface SelectListCell : UITableViewCell
 
 -(void)setName:(NSString *) name isDefault:(BOOL)isDefault;
+-(void)setAttributedName:(NSAttributedString *)name isDefault:(BOOL)isDefault;
 
 @end

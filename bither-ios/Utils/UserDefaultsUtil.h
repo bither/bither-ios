@@ -32,9 +32,11 @@
 -(MarketType) getDefaultMarket;
 -(void)setMarket:(MarketType) marketType;
 
--(void)setExchangeType:(ExchangeType ) exchangeType;
--(ExchangeType)getDefaultExchangeType;
+-(void)setExchangeType:(Currency) exchangeType;
+-(Currency)getDefaultCurrency;
 
+-(void)setBitcoinUnit:(BitcoinUnit)bitcoinUnit;
+-(BitcoinUnit)getBitcoinUnit;
 
 -(long long)getLastCheckPrivateKeyTime;
 -(void)setLastCheckPrivateKeyTime:(long long)time;
@@ -60,9 +62,11 @@
 -(NSInteger) getQrCodeTheme;
 -(void)setQrCodeTheme:(NSInteger) qrCodeTheme;
 
+-(void)setPinCode:(NSString*)code;
+-(BOOL)hasPinCode;
+-(void)deletePinCode;
+-(BOOL)checkPinCode:(NSString*)code;
 
-
-
-
-
+-(KeychainMode) getKeychainMode;
+-(void)setKeychainMode :(KeychainMode ) keychainMode;
 @end

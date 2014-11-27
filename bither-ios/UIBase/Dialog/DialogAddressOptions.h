@@ -23,6 +23,7 @@
 -(void)stopMonitorAddress;
 -(void)showAddressOnBlockChainInfo;
 -(void)showPrivateKeyQrCode;
+-(void)showPrivateKeyManagement;
 @end
 
 @interface DialogAddressOptions : DialogCentered

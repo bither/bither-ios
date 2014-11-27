@@ -34,6 +34,7 @@
 #import "HotAddressViewController.h"
 #import "BitherSetting.h"
 #import "DialogXrandomInfo.h"
+#import "BTAddressManager.h"
 
 #define kAddressGroupSize (4)
 #define kAddressLineSize (12)
@@ -41,6 +42,7 @@
 @interface ColdAddressListCell()<DialogPrivateKeyOptionsDelegate,DialogPasswordDelegate>{
     BTAddress * _btAddress;
     PrivateKeyQrCodeType _qrcodeType;
+    BOOL isMovingToTrash;
 
 }
 @property (weak, nonatomic) IBOutlet UIImageView *ivType;
@@ -81,6 +83,7 @@
     self.ivXrandom.hidden = !address.isFromXRandom;
     [self configureAddressFrame];
     self.ivQr.image = [QRCodeThemeUtil qrCodeOfContent:address.address andSize:self.ivQr.frame.size.width withTheme:[QRCodeTheme black]];
+    isMovingToTrash = NO;
 }
 
 -(void)configureAddressFrame{
@@ -151,10 +154,45 @@
     [dialog showInWindow:self.window];
 }
 
+-(void)showMsg:(NSString*)msg{
+    UIViewController* ctr = self.getUIViewController;
+    if([ctr respondsToSelector:@selector(showMsg:)]){
+        [ctr performSelector:@selector(showMsg:) withObject:msg];
+    }
+}
+
+-(void)moveToTrash{
+    if(_btAddress.balance > 0){
+        [self showMsg:NSLocalizedString(@"trash_with_money_warn", nil)];
+    }else{
+        isMovingToTrash = YES;
+        DialogPassword* dp = [[DialogPassword alloc]initWithDelegate:self];
+        [dp showInWindow:self.window];
+    }
+}
+
 //DialogPasswordDelegate
 -(void)onPasswordEntered:(NSString *)password{
     __block NSString * bpassword=password;
     password=nil;
+    if(isMovingToTrash){
+        isMovingToTrash = NO;
+        DialogProgress *dp = [[DialogProgress alloc]initWithMessage:NSLocalizedString(@"trashing_private_key", nil)];
+        [dp showInWindow:self.window completion:^{
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+                [[BTAddressManager instance] trashPrivKey:_btAddress];
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [dp dismissWithCompletion:^{
+                        UIViewController* vc = self.getUIViewController;
+                        if (vc && [vc respondsToSelector:@selector(reload)]) {
+                            [vc performSelector:@selector(reload) withObject:nil];
+                        }
+                    }];
+                });
+            });
+        }];
+        return;
+    }
     if(_qrcodeType==Encrypted){
         DialogPrivateKeyEncryptedQrCode *dialog = [[DialogPrivateKeyEncryptedQrCode alloc]initWithAddress:_btAddress];
         [dialog showInWindow:self.window];
@@ -164,7 +202,7 @@
         [self decrypted:bpassword callback:^(id response) {
             [dialogProgress dismiss];
             if (_qrcodeType==Decrypetd) {
-                DialogPrivateKeyDecryptedQrCode *dialogPrivateKey=[[DialogPrivateKeyDecryptedQrCode alloc] initWithAddress:response];
+                DialogPrivateKeyDecryptedQrCode *dialogPrivateKey=[[DialogPrivateKeyDecryptedQrCode alloc] initWithAddress:_btAddress.address privateKey:response];
                 [dialogPrivateKey showInWindow:self.window];
                 
             }else{

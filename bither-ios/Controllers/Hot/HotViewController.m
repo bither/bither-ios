@@ -1,4 +1,4 @@
-//
+        //
 //  HotViewController.m
 //  bither-ios
 //
@@ -26,6 +26,7 @@
 #import "BTAddressManager.h"
 #import "UIViewController+PiShowBanner.h"
 #import "UploadAndDowloadFileFactory.h"
+#import "BTSettings.h"
 
 
 @interface HotViewController ()
@@ -34,7 +35,7 @@
 @property (strong, nonatomic) IBOutlet HotAddressTabButton *tabAddress;
 @property (strong, nonatomic) IBOutlet TabButton *tabSetting;
 @property (weak, nonatomic) IBOutlet UIView *vTabe;
-
+@property (weak, nonatomic) IBOutlet UIProgressView *pvSync;
 @property (strong, nonatomic) PiPageViewController *page;
 @end
 
@@ -49,7 +50,8 @@
     self.page.index = 1;
     self.page.view.frame = CGRectMake(0, TabBarHeight, self.view.frame.size.width, self.view.frame.size.height - TabBarHeight);
     [self.view insertSubview:self.page.view atIndex:0];
-    
+    self.pvSync.hidden = YES;
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(syncProgress:) name:BTPeerManagerSyncProgressNotification object:nil];
 }
 
 -(void)initTabs{
@@ -139,7 +141,7 @@
     [super viewDidUnload];
 }
 -(void)dealloc{
-   // ApplicationDelegate.mainViewController=nil;
+    [[NSNotificationCenter defaultCenter]removeObserver:self];
 }
 -(void)fromPushNoification{
     NSArray * viewControllers=self.navigationController.viewControllers;
@@ -174,6 +176,29 @@
     [self presentViewController:container animated:YES completion:nil];
 }
 
+-(void)syncProgress:(NSNotification *)notification{
+    [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(delayHidePvSync) object:nil];
+    if(notification && notification.object && [notification.object isKindOfClass:[NSNumber class]]){
+        double progress = ((NSNumber*) notification.object).doubleValue;
+        if(progress >= 0 && progress <= 1){
+            self.pvSync.hidden = NO;
+            progress = MAX(0.1, progress);
+            [self.pvSync setProgress:progress animated:YES];
+            
+        }
+        if(progress < 0 || progress >= 1){
+            [self performSelector:@selector(delayHidePvSync) withObject:nil afterDelay:0.5];
+        }
+    }else{
+        self.pvSync.hidden = YES;
+    }
+}
+
+-(void)delayHidePvSync{
+    [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(delayHidePvSync) object:nil];
+    self.pvSync.hidden = YES;
+}
+
 -(void)initApp{
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0),^{
         
@@ -182,4 +207,5 @@
         [uploadAndDowload dowloadAvatar:nil andErrorCallBack:nil];
     });
 }
+
 @end

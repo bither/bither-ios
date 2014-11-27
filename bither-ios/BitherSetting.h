@@ -26,9 +26,9 @@
 #define DONATE_AMOUNT (100000)
 
 #define RGBA(r, g, b, a) [UIColor colorWithRed:r/255.0 green:g/255.0 blue:b/255.0 alpha:a]
-#define PRIVATE_KEY_OF_HOT_COUNT_LIMIT (10)
-#define PRIVATE_KEY_OF_COLD_COUNT_LIMIT (100)
-#define WATCH_ONLY_COUNT_LIMIT (100)
+#define PRIVATE_KEY_OF_HOT_COUNT_LIMIT (50)
+#define PRIVATE_KEY_OF_COLD_COUNT_LIMIT (150)
+#define WATCH_ONLY_COUNT_LIMIT (150)
 
 
 #define FORMAT_TIMESTAMP_INTERVAL 1000
@@ -78,59 +78,65 @@ typedef void (^DictResponseBlock)(NSDictionary *dict);
 typedef void (^IdResponseBlock)(id response);
 typedef void (^ArrayResponseBlock)(NSArray *array);
 typedef void (^ImageResponseBlock)(UIImage *image, NSURL *url);
-typedef void (^ErrorHandler)(MKNetworkOperation *errorOp, NSError* error);
+typedef void (^ErrorHandler)(MKNetworkOperation *errorOp, NSError *error);
 typedef void (^CompletedOperation)(MKNetworkOperation *completedOperation);
 typedef void (^ResponseFormat)(MKNetworkOperation *completedOperation);
 typedef void (^LongResponseBlock)(long long num);
-typedef void (^StirngBlock)(NSString * string);
+typedef void (^StirngBlock)(NSString *string);
 typedef void (^VoidBlock)(void);
-typedef void (^ErrorBlock)(NSError * error);
-typedef void (^ViewControllerBlock)(UIViewController * controller);
-typedef NSString * (^GetValueBlock)(void);
-typedef NSArray *(^GetArrayBlock) (void);
+typedef void (^ErrorBlock)(NSError *error);
+typedef void (^ViewControllerBlock)(UIViewController *controller);
+typedef NSObject *(^GetValueBlock)(void);
+typedef NSArray *(^GetArrayBlock)(void);
 
-
-
-
-typedef enum  {
-     BITSTAMP=1, BTCE=2, HUOBI=3, OKCOIN=4, BTCCHINA=5, CHBTC=6,BITFINEX=7,MARKET796=8
-}MarketType;
-
-typedef enum  {
-    ONE_MINUTE=1, FIVE_MINUTES=5, ONE_HOUR=60, ONE_DAY=1440
-}KLineTimeType;
-
-typedef enum  {
-    Normal=10000 ,Low=1000
-}TransactionFeeMode;
 
 typedef enum {
-    USD,CNY
-}ExchangeType;
+    BITSTAMP = 1, BTCE = 2, HUOBI = 3, OKCOIN = 4, BTCCHINA = 5, CHBTC = 6, BITFINEX = 7, MARKET796 = 8
+} MarketType;
+
+typedef enum {
+    ONE_MINUTE = 1, FIVE_MINUTES = 5, ONE_HOUR = 60, ONE_DAY = 1440
+} KLineTimeType;
+
+typedef enum {
+    Normal = 10000, Low = 1000
+} TransactionFeeMode;
+
+typedef enum {
+    USD, CNY, EUR, GBP, JPY, KRW, CAD, AUD
+} Currency;
+
+typedef enum {
+    UnitBTC, Unitbits
+} BitcoinUnit;
 
 typedef enum {
     AddressNormal, AddressTxTooMuch, AddressSpecialAddress
-}AddressType;
+} AddressType;
 
 #define CustomErrorDomain @"www.bither.net"
 typedef enum {
-    
-PasswordError = -1000,
-    
-}CustomErrorFailed;
 
-typedef enum{
-    Text,Encrypted,Decrypetd
+    PasswordError = -1000,
+
+} CustomErrorFailed;
+
+typedef enum {
+    Text, Encrypted, Decrypetd
 } PrivateKeyQrCodeType;
 
+typedef enum {
+    Off = 0, On = 1
+} KeychainMode;
 
 @interface BitherSetting : NSObject
 
-+(NSString *)getMarketName:(MarketType )marketType;
-+(NSString *)getMarketDomain:(MarketType )marketType;
-+(NSString *)getExchangeSymbol:(ExchangeType) exchangeType;
-+(NSString *)getExchangeName:(ExchangeType)exchangeType;
-+(NSString *)getTransactionFeeMode:(TransactionFeeMode)transactionFee;
-+(UIColor *) getMarketColor:(MarketType )marketType;
-
++ (NSString *)getMarketName:(MarketType)marketType;
++ (NSString *)getMarketDomain:(MarketType)marketType;
++ (NSString *)getCurrencySymbol:(Currency)currency;
++ (NSString *)getCurrencyName:(Currency)currency;
++ (Currency)getCurrencyFromName:(NSString *)currencyName;
++ (NSString *)getTransactionFeeMode:(TransactionFeeMode)transactionFee;
++ (UIColor *)getMarketColor:(MarketType)marketType;
++ (NSString *)getKeychainMode:(KeychainMode) keychainMode;
 @end

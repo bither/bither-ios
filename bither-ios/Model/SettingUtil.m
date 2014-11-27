@@ -30,9 +30,13 @@
 
 +(NSArray *)hotSettings{
     NSMutableArray * array=[NSMutableArray new];
+    [array addObject:[Setting getBitcoinUnitSetting]];
     [array addObject:[Setting getExchangeSetting]];
     [array addObject:[Setting getMarketSetting]];
     [array addObject:[Setting getTransactionFeeSetting]];
+    if([BTAddressManager instance].allAddresses.count == 0 && [BTAddressManager instance].trashAddresses.count == 0){
+        [array addObject:[Setting getSwitchToColdSetting]];
+    }
     [array addObject:[AvatarSetting getAvatarSetting]];
     [array addObject:[Setting getCheckSetting]];
     [array addObject:[DonationSetting getDonateSetting]];
@@ -49,6 +53,7 @@
     if([BTAddressManager instance].privKeyAddresses.count > 0){
         [array addObject:[Setting getColdMonitorSetting]];
     }
+    [array addObject:[Setting getBitcoinUnitSetting]];
     [array addObject:[Setting getAdvanceSetting]];
     return array;
 }

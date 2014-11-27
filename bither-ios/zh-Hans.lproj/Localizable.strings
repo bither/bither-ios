@@ -379,6 +379,7 @@
 "Send failed. You don\'t have enough coins available for transaction fee."="发送失败. 可用余额不足以支付手续费.";
 "Send failed. You don\'t have enough coins available."="发送失败. 可用余额不足.";
 "Send failed. Lack of %@ BTC."="发送失败. 可用余额中缺少 %@ BTC. ";
+"Send failed. Transaction size is to large."="发送失败. 交易大小过大.";
 "Please wait for another confirmation."="请等待一个新的确认后再交易.";
 
 "Total BTC prefix"="总计: ";
@@ -443,3 +444,52 @@
 "rcheck_new_tx_success" = "r 值检查";
 "rcheck_info" = "同一个地址的交易历史中出现重复的 r 值, 有可能导致私钥暴露.\n\nr 值检查会检查交易历史, 并确保不存在重复 r 值.";
 "rcheck_fail_recalculate_confirm" = "r 值检查失败, 重新签名交易?";
+
+/* trash */
+"trash_private_key" = "移入回收站";
+"trash_with_money_warn" = "这个地址内还有比特币.\n您不能把它移入回收站.";
+"trashing_private_key" = "正在移入回收站";
+"trash_can" = "回收站";
+"trash_can_empty" = "回收站空";
+"trash_address_restore" = "还原地址?";
+
+/* bitcoin unit */
+"setting_name_bitcoin_unit" = "默认单位";
+
+/* launch sequence */
+"launch_sequence_switch_to_cold" = "切换到冷钱包";
+"launch_sequence_switch_to_cold_warn" = "确认切换到冷钱包模式?\n\n冷钱包应该运行在离线的备用手机上.\n热钱包可以监控冷钱包.\n一旦切换成冷钱包便不能切换回热钱包.";
+
+/* pin code */
+"pin_code_enter_notice" = "输入您的 PIN 码";
+"pin_code_setting_name" = "PIN 码";
+"pin_code_setting_open" = "开启 PIN 码";
+"pin_code_setting_close" = "关闭 PIN 码";
+"pin_code_setting_change" = "修改 PIN 码";
+"pin_code_setting_open_msg" = "输入您的 PIN 码";
+"pin_code_setting_open_repeat_msg" = "再次输入您的 PIN 码";
+"pin_code_setting_open_repeat_wrong" = "两次输入的 PIN 码不同";
+"pin_code_setting_change_old_msg" = "输入您的原 PIN 码";
+"pin_code_setting_change_old_wrong" = "原 PIN 码错误";
+"pin_code_setting_change_new_msg" = "输入您的新 PIN 码";
+"pin_code_setting_change_new_repeat_msg" = "再次输入您的新 PIN 码";
+"pin_code_setting_change_repeat_wrong" = "两次输入的新 PIN 码不同";
+"pin_code_setting_close_wrong" = "PIN 码错误";
+"pin_code_touch_id_promot" = "解锁比太";
+
+/* keychain backup */
+"keychain_backup" = "iCloud 钥匙串备份";
+"keychain_backup_on" = "开";
+"keychain_backup_off" = "关";
+"keychain_backup_enable" = "打开 iCloud 钥匙串备份?";
+"keychain_backup_disable" = "关闭 iCloud 钥匙串备份?";
+"keychain_backup_add_from_local" = "本机添加";
+"keychain_backup_add_from_keychain" = "钥匙串添加";
+"keychain_backup_trash_from_local" = "本机移入回收站";
+"keychain_backup_trash_from_keychain" = "钥匙串移入回收站";
+"keychain_backup_diff_warn" = "iCloud 钥匙串备份产生如下变化\n是否继续?";
+"keychain_backup_diff_warn_yes" = "是";
+"keychain_backup_diff_warn_no" = "否";
+
+/* Private Key Management */
+"private_key_management" = "私钥管理";

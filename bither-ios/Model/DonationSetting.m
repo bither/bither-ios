@@ -19,6 +19,7 @@
 #import "DonationSetting.h"
 #import "BTAddressManager.h"
 #import "StringUtil.h"
+#import "UnitUtil.h"
 #import "UnsignedTransactionViewController.h"
 
 static Setting* DonateSetting;
@@ -71,7 +72,7 @@ static Setting* DonateSetting;
     
     UIActionSheet* actionSheet = [[UIActionSheet alloc]initWithTitle:NSLocalizedString(@"Select an address to donate", nil) delegate:self cancelButtonTitle:nil destructiveButtonTitle:nil otherButtonTitles:nil];
     for(BTAddress* a in self.addresses){
-        [actionSheet addButtonWithTitle:[NSString stringWithFormat:@"%@ (%@BTC)", [StringUtil shortenAddress:a.address], [StringUtil stringForAmount:a.balance]]];
+        [actionSheet addButtonWithTitle:[NSString stringWithFormat:@"%@ (%@%@)", [StringUtil shortenAddress:a.address], [UnitUtil stringForAmount:a.balance], [UnitUtil unitName]]];
     }
     [actionSheet addButtonWithTitle:NSLocalizedString(@"Cancel", nil)];
     actionSheet.cancelButtonIndex = self.addresses.count;

@@ -19,6 +19,7 @@
 #import <Foundation/Foundation.h>
 #import "BitherSetting.h"
 #define  SETTING_KEY @"key"
+#define  SETTING_KEY_ATTRIBUTED @"key_attributed"
 #define  SETTING_VALUE @"VALUE"
 #define  SETTING_IS_DEFAULT @"default"
 
@@ -40,10 +41,12 @@
 
 +(Setting * )getMarketSetting;
 +(Setting * )getExchangeSetting;
++(Setting * )getBitcoinUnitSetting;
 +(Setting * )getTransactionFeeSetting;
 +(Setting * )getCheckSetting;
 +(Setting * )getAdvanceSetting;
 +(Setting * )getColdMonitorSetting;
-
-
++(Setting * )getTrashCanSetting;
++(Setting * )getSwitchToColdSetting;
++(Setting *)getKeychainSetting;
 @end

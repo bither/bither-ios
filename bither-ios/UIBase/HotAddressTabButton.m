@@ -11,7 +11,9 @@
 #import "UIColor+Util.h"
 #import <Bitheri/BTSettings.h>
 #import "BTAddressManager.h"
+#import "UnitUtil.h"
 #import "DialogTotalBalance.h"
+#import "UserDefaultsUtil.h"
 
 #define kHorizontalPadding (5)
 #define kLabelLeftGap (-7)
@@ -116,7 +118,14 @@
 
 -(void)setAmount:(int64_t)amount{
     _amount = amount;
-    self.lbl.text = [StringUtil stringForAmount:amount];
+    self.lbl.text = [UnitUtil stringForAmount:amount];
+    if([[UserDefaultsUtil instance] getBitcoinUnit] == UnitBTC){
+        self.imageUnselected = [UIImage imageNamed:@"tab_main"];
+        self.imageSelected = [UIImage imageNamed:@"tab_main_checked"];
+    }else{
+        self.imageUnselected = [UIImage imageNamed:@"tab_main_bits"];
+        self.imageSelected = [UIImage imageNamed:@"tab_main_bits_checked"];
+    }
     [self configureViews];
 }
 

@@ -53,7 +53,16 @@
     lblVersion.text=version;   
     [lblVersion sizeToFit];
     
-    UIView* footer = [[UIView alloc]initWithFrame:CGRectMake(0, 0, tableView.frame.size.width, ivBottom.frame.size.height + logoTopMargin + ivLogo.frame.size.height + logoBottomMargin + lblVersion.frame.size.height)];
+    UIButton *btnLink = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, tableView.frame.size.width, 0)];
+    btnLink.titleLabel.textAlignment = NSTextAlignmentCenter;
+    [btnLink setTitleColor:[UIColor colorWithWhite:1 alpha:0.6f] forState:UIControlStateNormal];
+    [btnLink setTitleColor:[UIColor colorWithWhite:1 alpha:1] forState:UIControlStateHighlighted];
+    btnLink.titleLabel.font = [UIFont systemFontOfSize:12];
+    [btnLink setTitle:@"http://Bither.net" forState:UIControlStateNormal];
+    [btnLink sizeToFit];
+    [btnLink addTarget:self action:@selector(toWebsite) forControlEvents:UIControlEventTouchUpInside];
+    
+    UIView* footer = [[UIView alloc]initWithFrame:CGRectMake(0, 0, tableView.frame.size.width, ivBottom.frame.size.height + logoTopMargin + ivLogo.frame.size.height + logoBottomMargin + lblVersion.frame.size.height + (isHot ? btnLink.frame.size.height : 0))];
     footer.backgroundColor = [UIColor clearColor];
     vBottomCover.backgroundColor = colorBg;
     [footer addSubview:vBottomCover];
@@ -72,12 +81,19 @@
         ivLogo.userInteractionEnabled=YES;
         UITapGestureRecognizer *tapGestureTel = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(toNetworkMonitor)];
         [ivLogo addGestureRecognizer:tapGestureTel];
+        btnLink.frame = CGRectMake((footer.frame.size.width - btnLink.frame.size.width)/2, CGRectGetMaxY(lblVersion.frame), btnLink.frame.size.width, btnLink.frame.size.height);
+        [footer addSubview:btnLink];
     }
     tableView.tableFooterView = footer;
 }
+
 -(void)toNetworkMonitor{
     UIViewController *viewController = [self.storyboard instantiateViewControllerWithIdentifier:@"NetworkMonitorViewController"];
     [self.navigationController pushViewController:viewController animated:YES];
+}
+
+-(void)toWebsite{
+    [[UIApplication sharedApplication]openURL:[NSURL URLWithString:@"http://Bither.net"]];
 }
 
 -(void)configureHeaderAndFooterNoLogo :(UITableView * )tableView background:(UIColor *)colorBg{

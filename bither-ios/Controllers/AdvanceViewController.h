@@ -18,5 +18,6 @@
 #import <UIKit/UIKit.h>
 
 @interface AdvanceViewController : UIViewController
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (strong ,nonatomic)NSArray * settings;
 @end

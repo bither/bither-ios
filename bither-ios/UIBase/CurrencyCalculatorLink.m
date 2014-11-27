@@ -20,6 +20,7 @@
 #import "UserDefaultsUtil.h"
 #import "BitherSetting.h"
 #import "StringUtil.h"
+#import "UnitUtil.h"
 #import "MarketUtil.h"
 
 @interface CurrencyCalculatorLink()<UITextFieldDelegate>{
@@ -44,12 +45,12 @@
     [(UIButton*)self.tfBtc.rightView addTarget:self action:@selector(clearBtc:) forControlEvents:UIControlEventTouchUpInside];
     [(UIButton*)self.tfCurrency.rightView addTarget:self action:@selector(clearCurrency:) forControlEvents:UIControlEventTouchUpInside];
     
-    UIImageView* iv = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"symbol_btc_slim_black"]];
+    UIImageView* iv = [[UIImageView alloc]initWithImage:[UIImage imageNamed:[NSString stringWithFormat:@"%@_black",[UnitUtil imageNameSlim]]]];
     iv.contentMode = UIViewContentModeScaleAspectFit;
     iv.frame = CGRectMake(0, 9, self.tfBtc.leftView.frame.size.width, 16);
     [self.tfBtc.leftView addSubview:iv];
     
-    NSString* symbol = [BitherSetting getExchangeSymbol:[[UserDefaultsUtil instance] getDefaultExchangeType]];
+    NSString* symbol = [BitherSetting getCurrencySymbol:[[UserDefaultsUtil instance] getDefaultCurrency]];
     UILabel* lbl = [[UILabel alloc]initWithFrame:CGRectMake(0, 9, self.tfCurrency.leftView.frame.size.width, 18)];
     lbl.textAlignment = NSTextAlignmentCenter;
     lbl.textColor = [UIColor blackColor];
@@ -101,7 +102,7 @@
                 [self convertAmount2Currency];
             }
         }else{
-            u_int64_t amount = [StringUtil amountForString:text];
+            u_int64_t amount = [UnitUtil amountForString:text];
             if(amount > 0){
                 _amount = amount;
                 [self convertAmount2Currency];
@@ -165,7 +166,7 @@
                     _amount = _amount - extra + minimal;
                 }
             }
-            self.tfBtc.placeholder = [StringUtil stringForAmount:_amount];
+            self.tfBtc.placeholder = [UnitUtil stringForAmount:_amount];
         }
     }
 }
@@ -174,8 +175,8 @@
     if(self.delegate && [self.delegate respondsToSelector:@selector(textFieldDidEndEditing:)]){
         [self.delegate textFieldDidEndEditing:textField];
     }
-    if(![StringUtil isEmpty:self.tfBtc.text] && [StringUtil amountForString:self.tfBtc.text] > 0){
-        _amount = [StringUtil amountForString:self.tfBtc.text];
+    if(![StringUtil isEmpty:self.tfBtc.text] && [UnitUtil amountForString:self.tfBtc.text] > 0){
+        _amount = [UnitUtil amountForString:self.tfBtc.text];
         [self convertAmount2Currency];
         return;
     }
@@ -200,7 +201,7 @@
 
 -(void)setAmount:(u_int64_t)amount{
     _amount = amount;
-    self.tfBtc.text = [StringUtil stringForAmount:_amount];
+    self.tfBtc.text = [UnitUtil stringForAmount:_amount];
     [self convertAmount2Currency];
 }
 

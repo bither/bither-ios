@@ -17,6 +17,7 @@
 //  limitations under the License.
 
 #import "Setting.h"
+#import "PinCodeSetting.h"
 #import "UserDefaultsUtil.h"
 #import "NSDictionary+Fromat.h"
 #import "SelectViewController.h"
@@ -42,6 +43,9 @@
 #import "ImportPrivateKeySetting.h"
 #import "ImportBip38PrivateKeySetting.h"
 #import "NSString+Base58.h"
+#import "UnitUtil.h"
+#import "KeychainBackupUtil.h"
+#import "KeychainSetting.h"
 
 
 
@@ -49,6 +53,7 @@
 
 static Setting* ExchangeSetting;
 static Setting* MarketSetting;
+static Setting* BitcoinUnitSetting;
 static Setting* TransactionFeeSetting;
 static Setting* NetworkSetting;
 static Setting* AvatarSetting;
@@ -58,15 +63,15 @@ static Setting* ColdMonitorSetting;
 static Setting* AdvanceSetting;
 static Setting* reloadTxsSetting;
 static Setting* RCheckSetting;
+static Setting* TrashCanSetting;
+static Setting* SwitchToColdSetting;
 
 -(instancetype)initWithName:(NSString *)name  icon:(UIImage *)icon {
     self=[super init];
     if (self) {
         _settingName=name;
         _icon=icon;
-        
     }
-    
     return self;
 }
 -(void)selection{
@@ -76,7 +81,63 @@ static Setting* RCheckSetting;
     return _icon;
 }
 
++(Setting * )getBitcoinUnitSetting{
+    if(!BitcoinUnitSetting){
+        BitcoinUnitSetting = [[Setting alloc]initWithName:NSLocalizedString(@"setting_name_bitcoin_unit", nil) icon:nil];
+        
+        [BitcoinUnitSetting setGetArrayBlock:^(){
+            NSMutableArray *array = [NSMutableArray new];
+            [array addObject:[Setting getBitcoinUnitDict:UnitBTC]];
+            [array addObject:[Setting getBitcoinUnitDict:Unitbits]];
+            return array;
+        }];
+        [BitcoinUnitSetting setGetValueBlock:^(){
+            BitcoinUnit unit = [[UserDefaultsUtil instance]getBitcoinUnit];
+            return [Setting attributedStrForBitcoinUnit:unit];
+        }];
+        [BitcoinUnitSetting setResult:^(NSDictionary * dict){
+            if ([[dict allKeys] containsObject:SETTING_VALUE]) {
+                [[UserDefaultsUtil instance] setBitcoinUnit:[dict getIntFromDict:SETTING_VALUE]];
+                [[NSNotificationCenter defaultCenter] postNotificationName:BitherBalanceChangedNotification object:nil];
+            }
+        }];
+        __block Setting* sself = BitcoinUnitSetting;
+        [BitcoinUnitSetting setSelectBlock:^(UIViewController * controller){
+            SelectViewController *selectController = [controller.storyboard instantiateViewControllerWithIdentifier:@"SelectViewController"];UINavigationController *nav = controller.navigationController;
+            selectController.setting = sself;
+            [nav pushViewController:selectController animated:YES];
+        }];
+    }
+    return BitcoinUnitSetting;
+}
 
++(NSAttributedString*)attributedStrForBitcoinUnit:(BitcoinUnit)unit{
+    CGFloat fontSize = 18;
+    UIImage* image = [UIImage imageNamed:[NSString stringWithFormat:@"%@_black", [UnitUtil imageNameSlim:unit]]];
+    NSMutableAttributedString *attr = [[NSMutableAttributedString alloc]initWithString:[NSString stringWithFormat:@"  %@", [UnitUtil unitName:unit]] attributes:@{NSFontAttributeName: [UIFont systemFontOfSize:fontSize]}];
+    NSTextAttachment *attachment = [[NSTextAttachment alloc] init];
+    attachment.image = image;
+    CGRect bounds = attachment.bounds;
+    bounds.size = CGSizeMake(image.size.width * fontSize / image.size.height, fontSize);
+    attachment.bounds = bounds;
+    [attr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:fontSize * 0.5f] range:NSMakeRange(1, 1)];
+    NSAttributedString *attachmentString = [NSAttributedString attributedStringWithAttachment:attachment];
+    [attr insertAttributedString:attachmentString atIndex:0];
+    [attr addAttribute:NSBaselineOffsetAttributeName value:[NSNumber numberWithFloat:-fontSize * 0.09f] range:NSMakeRange(0, 1)];
+    return attr;
+}
+
++(NSDictionary *)getBitcoinUnitDict:(BitcoinUnit)unit{
+    BitcoinUnit defaultUnit = [[UserDefaultsUtil instance] getBitcoinUnit];
+    NSMutableDictionary *dict =[NSMutableDictionary new];
+    [dict setObject:[NSNumber numberWithInt:unit] forKey:SETTING_VALUE];
+    [dict setObject:[Setting attributedStrForBitcoinUnit:unit] forKey:SETTING_KEY_ATTRIBUTED];
+    if (defaultUnit == unit) {
+        [dict setObject:[NSNumber numberWithBool:YES] forKey:SETTING_IS_DEFAULT];
+    }
+    return dict;
+    
+}
 
 +(Setting * )getExchangeSetting{
     if(!ExchangeSetting){
@@ -87,13 +148,19 @@ static Setting* RCheckSetting;
             }
         }];
         [ExchangeSetting setGetValueBlock:^(){
-            ExchangeType defaultExchange=[[UserDefaultsUtil instance] getDefaultExchangeType];
-            return [BitherSetting getExchangeName:defaultExchange];
+            Currency defaultExchange= [[UserDefaultsUtil instance] getDefaultCurrency];
+            return [NSString stringWithFormat:@"%@ %@", [BitherSetting getCurrencySymbol:defaultExchange], [BitherSetting getCurrencyName:defaultExchange]];
         }];
         [ExchangeSetting setGetArrayBlock:^(){
             NSMutableArray * array=[NSMutableArray new];
             [array addObject:[self getExchangeDict:USD]];
             [array addObject:[self getExchangeDict:CNY]];
+            [array addObject:[self getExchangeDict:EUR]];
+            [array addObject:[self getExchangeDict:GBP]];
+            [array addObject:[self getExchangeDict:JPY]];
+            [array addObject:[self getExchangeDict:KRW]];
+            [array addObject:[self getExchangeDict:CAD]];
+            [array addObject:[self getExchangeDict:AUD]];
             return array;
             
         }];
@@ -107,11 +174,11 @@ static Setting* RCheckSetting;
     }
     return ExchangeSetting;
 }
-+(NSDictionary *)getExchangeDict:(ExchangeType)exchangeType{
-    ExchangeType defaultExchange=[[UserDefaultsUtil instance] getDefaultExchangeType];
++(NSDictionary *)getExchangeDict:(Currency)exchangeType{
+    Currency defaultExchange= [[UserDefaultsUtil instance] getDefaultCurrency];
     NSMutableDictionary *dict=[NSMutableDictionary new];
     [dict setObject:[NSNumber numberWithInt:exchangeType] forKey:SETTING_VALUE];
-    [dict setObject:[BitherSetting getExchangeName:exchangeType] forKey:SETTING_KEY];
+    [dict setObject:[NSString stringWithFormat:@"%@ %@", [BitherSetting getCurrencySymbol:exchangeType], [BitherSetting getCurrencyName:exchangeType]] forKey:SETTING_KEY];
     if (defaultExchange==exchangeType) {
         [dict setObject:[NSNumber numberWithBool:YES] forKey:SETTING_IS_DEFAULT];
     }
@@ -138,7 +205,6 @@ static Setting* RCheckSetting;
                 [array addObject:dict];
             }
             return array;
-            
         }];
         [setting setResult:^(NSDictionary * dict){
             if ([[dict  allKeys] containsObject:SETTING_VALUE]) {
@@ -361,21 +427,63 @@ static Setting* RCheckSetting;
     return RCheckSetting;
 }
 
++(Setting*)getTrashCanSetting{
+    if(!TrashCanSetting){
+        TrashCanSetting = [[Setting alloc]initWithName:NSLocalizedString(@"trash_can", nil) icon:[UIImage imageNamed:@"trash_can_button_icon"]];
+        [TrashCanSetting setSelectBlock:^(UIViewController * controller){
+            if([BTAddressManager instance].trashAddresses.count > 0){
+                [controller.navigationController pushViewController:[controller.storyboard instantiateViewControllerWithIdentifier:@"trash_can"] animated:YES];
+            }else{
+                if([controller respondsToSelector:@selector(showMsg:)]){
+                    [controller performSelector:@selector(showMsg:) withObject:NSLocalizedString(@"trash_can_empty", nil) afterDelay:0];
+                }
+            }
+        }];
+    }
+    return TrashCanSetting;
+}
+
++(Setting * )getSwitchToColdSetting{
+    if(!SwitchToColdSetting){
+        SwitchToColdSetting = [[Setting alloc]initWithName:NSLocalizedString(@"launch_sequence_switch_to_cold", nil) icon:nil];
+        [SwitchToColdSetting setSelectBlock:^(UIViewController * controller){
+            if([BTAddressManager instance].allAddresses.count == 0){
+                [[[DialogAlert alloc]initWithMessage:NSLocalizedString(@"launch_sequence_switch_to_cold_warn", nil) confirm:^{
+                    [[BTSettings instance] setAppMode:COLD];
+                    [controller presentViewController:[controller.storyboard instantiateViewControllerWithIdentifier:@"ChooseModeViewController"] animated:YES completion:^{
+                        
+                    }];
+                } cancel:nil] showInWindow:controller.view.window];
+            }
+        }];
+    }
+    return SwitchToColdSetting;
+}
+
 +(NSArray*)advanceSettings{
     NSMutableArray *array = [NSMutableArray new];
     if ([[BTSettings instance] getAppMode]==HOT) {
         [array addObject:[Setting getNetworkSetting]];
     }
     [array addObject:[Setting getEditPasswordSetting]];
+    [array addObject:[PinCodeSetting getPinCodeSetting]];
     if ([[BTSettings instance] getAppMode]==HOT) {
         [array addObject:[Setting getRCheckSetting]];
     }
     [array addObject:[ImportPrivateKeySetting getImportPrivateKeySetting]];
     [array addObject:[ImportBip38PrivateKeySetting getImportBip38PrivateKeySetting]];
+    [array addObject:[Setting getTrashCanSetting]];
     if ([[BTSettings instance] getAppMode]==HOT) {
         [array addObject:[ReloadTxSetting getReloadTxsSetting]];
     }
+//    if ([[BTSettings instance] getAppMode] == HOT) {
+//        [array addObject:[Setting getKeychainSetting]];
+//    }
     return array;
+}
+
++(Setting *)getKeychainSetting;{
+    return [KeychainSetting getKeychainSetting];    
 }
 @end
 

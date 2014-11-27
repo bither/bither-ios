@@ -95,6 +95,17 @@
 		AC3C2623199B58750055FF5E /* TrendingGraphicData.m in Sources */ = {isa = PBXBuildFile; fileRef = AC3C2622199B58750055FF5E /* TrendingGraphicData.m */; };
 		AC3CDB5B1962A3C800C74B4C /* TransactionConfidenceView.m in Sources */ = {isa = PBXBuildFile; fileRef = AC3CDB5A1962A3C800C74B4C /* TransactionConfidenceView.m */; };
 		AC3CDB5E1962AFF000C74B4C /* DialogAddressQrCode.m in Sources */ = {isa = PBXBuildFile; fileRef = AC3CDB5D1962AFF000C74B4C /* DialogAddressQrCode.m */; };
+		AC454DC61A19D981000AF4ED /* UnitUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = AC454DC51A19D981000AF4ED /* UnitUtil.m */; };
+		AC454DC91A1C6E05000AF4ED /* TrashCanViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AC454DC81A1C6E05000AF4ED /* TrashCanViewController.m */; };
+		AC454DCC1A1C6EC1000AF4ED /* TrashCanCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AC454DCB1A1C6EC1000AF4ED /* TrashCanCell.m */; };
+		AC454DD51A1DE602000AF4ED /* PinCodeEnterView.m in Sources */ = {isa = PBXBuildFile; fileRef = AC454DD41A1DE602000AF4ED /* PinCodeEnterView.m */; };
+		AC454DD81A1ED7E7000AF4ED /* PinCodeDotsView.m in Sources */ = {isa = PBXBuildFile; fileRef = AC454DD71A1ED7E7000AF4ED /* PinCodeDotsView.m */; };
+		AC454DDB1A1F24E4000AF4ED /* PinCodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AC454DDA1A1F24E4000AF4ED /* PinCodeViewController.m */; };
+		AC454DDE1A1F24FA000AF4ED /* PinCodeEnableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AC454DDD1A1F24FA000AF4ED /* PinCodeEnableViewController.m */; };
+		AC454DE11A1F250C000AF4ED /* PinCodeDisableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AC454DE01A1F250C000AF4ED /* PinCodeDisableViewController.m */; };
+		AC454DE41A1F2518000AF4ED /* PinCodeChangeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AC454DE31A1F2518000AF4ED /* PinCodeChangeViewController.m */; };
+		AC454DE71A1F252B000AF4ED /* PinCodeUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = AC454DE61A1F252B000AF4ED /* PinCodeUtil.m */; };
+		AC454DEA1A1F3839000AF4ED /* PinCodeSetting.m in Sources */ = {isa = PBXBuildFile; fileRef = AC454DE91A1F3839000AF4ED /* PinCodeSetting.m */; };
 		AC45AA3519879C96006314D5 /* DialogPrivateKeyDecryptedQrCode.m in Sources */ = {isa = PBXBuildFile; fileRef = AC45AA3419879C96006314D5 /* DialogPrivateKeyDecryptedQrCode.m */; };
 		AC45AA381987A2F4006314D5 /* DialogPrivateKeyText.m in Sources */ = {isa = PBXBuildFile; fileRef = AC45AA371987A2F4006314D5 /* DialogPrivateKeyText.m */; };
 		AC45D84119878BAB00AF5C2C /* DialogAddressLongPressOptions.m in Sources */ = {isa = PBXBuildFile; fileRef = AC45D83E19878BAB00AF5C2C /* DialogAddressLongPressOptions.m */; };
@@ -133,6 +144,8 @@
 		ACB9B9C6195AD25800019216 /* AddressDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = ACB9B9C5195AD25800019216 /* AddressDetailCell.m */; };
 		ACB9B9C9195AD27300019216 /* TransactionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = ACB9B9C8195AD27300019216 /* TransactionCell.m */; };
 		ACBB5F56198B468E00B19F4B /* UIViewController+ConfigureTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = ACBB5F55198B468E00B19F4B /* UIViewController+ConfigureTableView.m */; };
+		ACBE75961A202E4900F49EE1 /* LocalAuthentication.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ACBE75951A202E4900F49EE1 /* LocalAuthentication.framework */; };
+		ACBE75991A202FE200F49EE1 /* TouchIdIntegration.m in Sources */ = {isa = PBXBuildFile; fileRef = ACBE75981A202FE200F49EE1 /* TouchIdIntegration.m */; };
 		ACBEC018196D422D004301E0 /* BalanceButton.m in Sources */ = {isa = PBXBuildFile; fileRef = ACBEC017196D422D004301E0 /* BalanceButton.m */; };
 		ACBEC01B196E397E004301E0 /* CheckScoreAndBgAnimatableView.m in Sources */ = {isa = PBXBuildFile; fileRef = ACBEC01A196E397E004301E0 /* CheckScoreAndBgAnimatableView.m */; };
 		ACBEC01E196E87B9004301E0 /* CheckPrivateKeyCell.m in Sources */ = {isa = PBXBuildFile; fileRef = ACBEC01D196E87B9004301E0 /* CheckPrivateKeyCell.m */; };
@@ -159,6 +172,7 @@
 		ACDDDC2E19480ECF0008A79D /* DialogProgress.m in Sources */ = {isa = PBXBuildFile; fileRef = ACDDDC2B19480ECF0008A79D /* DialogProgress.m */; };
 		ACDDDC3619483A840008A79D /* UIColor+Util.m in Sources */ = {isa = PBXBuildFile; fileRef = ACDDDC3519483A840008A79D /* UIColor+Util.m */; };
 		ACDDDC3819483D210008A79D /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ACDDDC3719483D210008A79D /* QuartzCore.framework */; };
+		ACE3765F1A231C9200F66321 /* DialogKeychainBackupDiff.m in Sources */ = {isa = PBXBuildFile; fileRef = ACE3765E1A231C9200F66321 /* DialogKeychainBackupDiff.m */; };
 		ACE4ED5E198A3AE600C8862C /* AdvanceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ACE4ED5D198A3AE600C8862C /* AdvanceViewController.m */; };
 		ACE7E70019EB6DE800F7AA3A /* AvatarSetting.m in Sources */ = {isa = PBXBuildFile; fileRef = ACE7E6FF19EB6DE800F7AA3A /* AvatarSetting.m */; };
 		ACE7E70F19EB78AE00F7AA3A /* CropImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ACE7E70819EB78AE00F7AA3A /* CropImageViewController.m */; };
@@ -193,6 +207,8 @@
 		DA641E8B196E7BC20095DF42 /* GCCrashInstallation.m in Sources */ = {isa = PBXBuildFile; fileRef = DA641E85196E7BC20095DF42 /* GCCrashInstallation.m */; };
 		DA641E8C196E7BC20095DF42 /* GCCrashReportFilterTrim.m in Sources */ = {isa = PBXBuildFile; fileRef = DA641E87196E7BC20095DF42 /* GCCrashReportFilterTrim.m */; };
 		DA641E8D196E7BC20095DF42 /* GCCrashReportSink.m in Sources */ = {isa = PBXBuildFile; fileRef = DA641E89196E7BC20095DF42 /* GCCrashReportSink.m */; };
+		DAB2C8731A2038930011EE2F /* KeychainSetting.m in Sources */ = {isa = PBXBuildFile; fileRef = DAB2C8721A2038930011EE2F /* KeychainSetting.m */; };
+		DAB2C8761A206F080011EE2F /* KeychainBackupUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = DAB2C8751A206F080011EE2F /* KeychainBackupUtil.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -368,6 +384,29 @@
 		AC3CDB5A1962A3C800C74B4C /* TransactionConfidenceView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TransactionConfidenceView.m; sourceTree = "<group>"; };
 		AC3CDB5C1962AFF000C74B4C /* DialogAddressQrCode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DialogAddressQrCode.h; sourceTree = "<group>"; };
 		AC3CDB5D1962AFF000C74B4C /* DialogAddressQrCode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DialogAddressQrCode.m; sourceTree = "<group>"; };
+		AC454DC41A19D981000AF4ED /* UnitUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UnitUtil.h; sourceTree = "<group>"; };
+		AC454DC51A19D981000AF4ED /* UnitUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UnitUtil.m; sourceTree = "<group>"; };
+		AC454DC71A1C6E05000AF4ED /* TrashCanViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TrashCanViewController.h; sourceTree = "<group>"; };
+		AC454DC81A1C6E05000AF4ED /* TrashCanViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TrashCanViewController.m; sourceTree = "<group>"; };
+		AC454DCA1A1C6EC1000AF4ED /* TrashCanCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TrashCanCell.h; path = Cells/TrashCanCell.h; sourceTree = "<group>"; };
+		AC454DCB1A1C6EC1000AF4ED /* TrashCanCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TrashCanCell.m; path = Cells/TrashCanCell.m; sourceTree = "<group>"; };
+		AC454DCE1A1C892B000AF4ED /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/MainStoryboard.strings; sourceTree = "<group>"; };
+		AC454DD31A1DE602000AF4ED /* PinCodeEnterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PinCodeEnterView.h; sourceTree = "<group>"; };
+		AC454DD41A1DE602000AF4ED /* PinCodeEnterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PinCodeEnterView.m; sourceTree = "<group>"; };
+		AC454DD61A1ED7E7000AF4ED /* PinCodeDotsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PinCodeDotsView.h; sourceTree = "<group>"; };
+		AC454DD71A1ED7E7000AF4ED /* PinCodeDotsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PinCodeDotsView.m; sourceTree = "<group>"; };
+		AC454DD91A1F24E4000AF4ED /* PinCodeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PinCodeViewController.h; sourceTree = "<group>"; };
+		AC454DDA1A1F24E4000AF4ED /* PinCodeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PinCodeViewController.m; sourceTree = "<group>"; };
+		AC454DDC1A1F24FA000AF4ED /* PinCodeEnableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PinCodeEnableViewController.h; sourceTree = "<group>"; };
+		AC454DDD1A1F24FA000AF4ED /* PinCodeEnableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PinCodeEnableViewController.m; sourceTree = "<group>"; };
+		AC454DDF1A1F250C000AF4ED /* PinCodeDisableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PinCodeDisableViewController.h; sourceTree = "<group>"; };
+		AC454DE01A1F250C000AF4ED /* PinCodeDisableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PinCodeDisableViewController.m; sourceTree = "<group>"; };
+		AC454DE21A1F2518000AF4ED /* PinCodeChangeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PinCodeChangeViewController.h; sourceTree = "<group>"; };
+		AC454DE31A1F2518000AF4ED /* PinCodeChangeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PinCodeChangeViewController.m; sourceTree = "<group>"; };
+		AC454DE51A1F252B000AF4ED /* PinCodeUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PinCodeUtil.h; sourceTree = "<group>"; };
+		AC454DE61A1F252B000AF4ED /* PinCodeUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PinCodeUtil.m; sourceTree = "<group>"; };
+		AC454DE81A1F3839000AF4ED /* PinCodeSetting.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PinCodeSetting.h; sourceTree = "<group>"; };
+		AC454DE91A1F3839000AF4ED /* PinCodeSetting.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PinCodeSetting.m; sourceTree = "<group>"; };
 		AC45AA3319879C96006314D5 /* DialogPrivateKeyDecryptedQrCode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DialogPrivateKeyDecryptedQrCode.h; sourceTree = "<group>"; };
 		AC45AA3419879C96006314D5 /* DialogPrivateKeyDecryptedQrCode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DialogPrivateKeyDecryptedQrCode.m; sourceTree = "<group>"; };
 		AC45AA361987A2F4006314D5 /* DialogPrivateKeyText.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DialogPrivateKeyText.h; sourceTree = "<group>"; };
@@ -440,6 +479,9 @@
 		ACB9B9C8195AD27300019216 /* TransactionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TransactionCell.m; path = Cells/TransactionCell.m; sourceTree = "<group>"; };
 		ACBB5F54198B468E00B19F4B /* UIViewController+ConfigureTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+ConfigureTableView.h"; sourceTree = "<group>"; };
 		ACBB5F55198B468E00B19F4B /* UIViewController+ConfigureTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+ConfigureTableView.m"; sourceTree = "<group>"; };
+		ACBE75951A202E4900F49EE1 /* LocalAuthentication.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = LocalAuthentication.framework; path = System/Library/Frameworks/LocalAuthentication.framework; sourceTree = SDKROOT; };
+		ACBE75971A202FE200F49EE1 /* TouchIdIntegration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TouchIdIntegration.h; sourceTree = "<group>"; };
+		ACBE75981A202FE200F49EE1 /* TouchIdIntegration.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TouchIdIntegration.m; sourceTree = "<group>"; };
 		ACBEC016196D422D004301E0 /* BalanceButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BalanceButton.h; sourceTree = "<group>"; };
 		ACBEC017196D422D004301E0 /* BalanceButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BalanceButton.m; sourceTree = "<group>"; };
 		ACBEC019196E397E004301E0 /* CheckScoreAndBgAnimatableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CheckScoreAndBgAnimatableView.h; sourceTree = "<group>"; };
@@ -492,6 +534,8 @@
 		ACDDDC3419483A840008A79D /* UIColor+Util.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+Util.h"; sourceTree = "<group>"; };
 		ACDDDC3519483A840008A79D /* UIColor+Util.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+Util.m"; sourceTree = "<group>"; };
 		ACDDDC3719483D210008A79D /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		ACE3765D1A231C9200F66321 /* DialogKeychainBackupDiff.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DialogKeychainBackupDiff.h; sourceTree = "<group>"; };
+		ACE3765E1A231C9200F66321 /* DialogKeychainBackupDiff.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DialogKeychainBackupDiff.m; sourceTree = "<group>"; };
 		ACE4ED5C198A3AE600C8862C /* AdvanceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdvanceViewController.h; sourceTree = "<group>"; };
 		ACE4ED5D198A3AE600C8862C /* AdvanceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AdvanceViewController.m; sourceTree = "<group>"; };
 		ACE7E6FE19EB6DE800F7AA3A /* AvatarSetting.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AvatarSetting.h; sourceTree = "<group>"; };
@@ -508,7 +552,6 @@
 		ACE7E71419EB7A5A00F7AA3A /* UIImage_Extensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIImage_Extensions.m; sourceTree = "<group>"; };
 		ACE7E71619EB8DE100F7AA3A /* ImagePickerFromCameraViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImagePickerFromCameraViewController.h; sourceTree = "<group>"; };
 		ACE7E71719EB8DE100F7AA3A /* ImagePickerFromCameraViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImagePickerFromCameraViewController.m; sourceTree = "<group>"; };
-		ACEDEE3019F76201000507E2 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/MainStoryboard.strings; sourceTree = "<group>"; };
 		ACEDEE3119F76BAD000507E2 /* DialogProgressChangable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DialogProgressChangable.h; sourceTree = "<group>"; };
 		ACEDEE3219F76BAD000507E2 /* DialogProgressChangable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DialogProgressChangable.m; sourceTree = "<group>"; };
 		ACEE7D1B19D3F9F500932B39 /* QRCodeThemeUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QRCodeThemeUtil.h; sourceTree = "<group>"; };
@@ -559,6 +602,10 @@
 		DA641E87196E7BC20095DF42 /* GCCrashReportFilterTrim.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GCCrashReportFilterTrim.m; path = CrashLog/GCCrashReportFilterTrim.m; sourceTree = "<group>"; };
 		DA641E88196E7BC20095DF42 /* GCCrashReportSink.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GCCrashReportSink.h; path = CrashLog/GCCrashReportSink.h; sourceTree = "<group>"; };
 		DA641E89196E7BC20095DF42 /* GCCrashReportSink.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GCCrashReportSink.m; path = CrashLog/GCCrashReportSink.m; sourceTree = "<group>"; };
+		DAB2C8711A2038930011EE2F /* KeychainSetting.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeychainSetting.h; sourceTree = "<group>"; };
+		DAB2C8721A2038930011EE2F /* KeychainSetting.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KeychainSetting.m; sourceTree = "<group>"; };
+		DAB2C8741A206F080011EE2F /* KeychainBackupUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeychainBackupUtil.h; sourceTree = "<group>"; };
+		DAB2C8751A206F080011EE2F /* KeychainBackupUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KeychainBackupUtil.m; sourceTree = "<group>"; };
 		E7552F109D77434AC1A15A24 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -567,6 +614,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ACBE75961A202E4900F49EE1 /* LocalAuthentication.framework in Frameworks */,
 				ACA9D70C195415B0002D1E3A /* AudioToolbox.framework in Frameworks */,
 				ACDDDC3819483D210008A79D /* QuartzCore.framework in Frameworks */,
 				42D9B767193D6B5B00C85B89 /* CoreGraphics.framework in Frameworks */,
@@ -624,6 +672,8 @@
 				421B03B419495AEF003A45F1 /* Hot */,
 				ACE4ED5C198A3AE600C8862C /* AdvanceViewController.h */,
 				ACE4ED5D198A3AE600C8862C /* AdvanceViewController.m */,
+				AC454DC71A1C6E05000AF4ED /* TrashCanViewController.h */,
+				AC454DC81A1C6E05000AF4ED /* TrashCanViewController.m */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -730,6 +780,10 @@
 				AC9BC60F19D18102003B88B5 /* SystemUtil.m */,
 				AC9BBCFC19D268AB00E58BA7 /* UpgradeUtil.h */,
 				AC9BBCFD19D268AB00E58BA7 /* UpgradeUtil.m */,
+				AC454DC41A19D981000AF4ED /* UnitUtil.h */,
+				AC454DC51A19D981000AF4ED /* UnitUtil.m */,
+				DAB2C8741A206F080011EE2F /* KeychainBackupUtil.h */,
+				DAB2C8751A206F080011EE2F /* KeychainBackupUtil.m */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -776,6 +830,7 @@
 		42D9B763193D6B5B00C85B89 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				ACBE75951A202E4900F49EE1 /* LocalAuthentication.framework */,
 				AC026C8019EE5FF500BC0152 /* libPods-Bitheri.a */,
 				AC026C8119EE5FF500BC0152 /* libPods-CocoaLumberjack.a */,
 				AC026C8219EE5FF500BC0152 /* libPods-FMDB.a */,
@@ -812,6 +867,7 @@
 				AC0135DD195056BE00E3BB95 /* KeyboardControl */,
 				42EFB54E1949C50900376888 /* MainStoryboard.storyboard */,
 				4217A36E1951233500063746 /* Model */,
+				AC454DCF1A1DE5D4000AF4ED /* pin */,
 				ACEE7D1A19D3F9F500932B39 /* QRCode */,
 				ACA9D707195410FF002D1E3A /* Resouces */,
 				AC229A6E196A40B500A7FB5E /* sh */,
@@ -919,8 +975,33 @@
 				ACBEC01D196E87B9004301E0 /* CheckPrivateKeyCell.m */,
 				ACA11DCB19F74FA10087D39C /* RCheckCell.h */,
 				ACA11DCC19F74FA10087D39C /* RCheckCell.m */,
+				AC454DCA1A1C6EC1000AF4ED /* TrashCanCell.h */,
+				AC454DCB1A1C6EC1000AF4ED /* TrashCanCell.m */,
 			);
 			name = Cells;
+			sourceTree = "<group>";
+		};
+		AC454DCF1A1DE5D4000AF4ED /* pin */ = {
+			isa = PBXGroup;
+			children = (
+				AC454DD31A1DE602000AF4ED /* PinCodeEnterView.h */,
+				AC454DD41A1DE602000AF4ED /* PinCodeEnterView.m */,
+				AC454DD61A1ED7E7000AF4ED /* PinCodeDotsView.h */,
+				AC454DD71A1ED7E7000AF4ED /* PinCodeDotsView.m */,
+				AC454DD91A1F24E4000AF4ED /* PinCodeViewController.h */,
+				AC454DDA1A1F24E4000AF4ED /* PinCodeViewController.m */,
+				AC454DDC1A1F24FA000AF4ED /* PinCodeEnableViewController.h */,
+				AC454DDD1A1F24FA000AF4ED /* PinCodeEnableViewController.m */,
+				AC454DDF1A1F250C000AF4ED /* PinCodeDisableViewController.h */,
+				AC454DE01A1F250C000AF4ED /* PinCodeDisableViewController.m */,
+				AC454DE21A1F2518000AF4ED /* PinCodeChangeViewController.h */,
+				AC454DE31A1F2518000AF4ED /* PinCodeChangeViewController.m */,
+				AC454DE51A1F252B000AF4ED /* PinCodeUtil.h */,
+				AC454DE61A1F252B000AF4ED /* PinCodeUtil.m */,
+				ACBE75971A202FE200F49EE1 /* TouchIdIntegration.h */,
+				ACBE75981A202FE200F49EE1 /* TouchIdIntegration.m */,
+			);
+			path = pin;
 			sourceTree = "<group>";
 		};
 		AC53ABA419D277C1007C095C /* XRandom */ = {
@@ -1068,6 +1149,8 @@
 				ACEDEE3219F76BAD000507E2 /* DialogProgressChangable.m */,
 				AC781B5E19F9FF98003B5B87 /* DialogRCheckInfo.h */,
 				AC781B5F19F9FF98003B5B87 /* DialogRCheckInfo.m */,
+				ACE3765D1A231C9200F66321 /* DialogKeychainBackupDiff.h */,
+				ACE3765E1A231C9200F66321 /* DialogKeychainBackupDiff.m */,
 			);
 			path = Dialog;
 			sourceTree = "<group>";
@@ -1135,6 +1218,10 @@
 				ACEE7D3819D4012600932B39 /* SignTransactionScanSetting.m */,
 				ACE7E6FE19EB6DE800F7AA3A /* AvatarSetting.h */,
 				ACE7E6FF19EB6DE800F7AA3A /* AvatarSetting.m */,
+				AC454DE81A1F3839000AF4ED /* PinCodeSetting.h */,
+				AC454DE91A1F3839000AF4ED /* PinCodeSetting.m */,
+				DAB2C8711A2038930011EE2F /* KeychainSetting.h */,
+				DAB2C8721A2038930011EE2F /* KeychainSetting.m */,
 			);
 			name = Setting;
 			sourceTree = "<group>";
@@ -1326,17 +1413,20 @@
 			files = (
 				4217A3731951235D00063746 /* Depth.m in Sources */,
 				ACEE7D4819D417E400932B39 /* ImportPrivateKey.m in Sources */,
+				AC454DC61A19D981000AF4ED /* UnitUtil.m in Sources */,
 				ACBB5F56198B468E00B19F4B /* UIViewController+ConfigureTableView.m in Sources */,
 				AC45AA381987A2F4006314D5 /* DialogPrivateKeyText.m in Sources */,
 				42D9B775193D6B5B00C85B89 /* AppDelegate.m in Sources */,
 				421B037C19495315003A45F1 /* TabButton.m in Sources */,
 				AC5A916119ECDB5D00FFDB13 /* UploadAndDowloadFileFactory.m in Sources */,
+				ACE3765F1A231C9200F66321 /* DialogKeychainBackupDiff.m in Sources */,
 				ACB9B9C3195AD1CC00019216 /* AddressDetailViewController.m in Sources */,
 				ACE7E70019EB6DE800F7AA3A /* AvatarSetting.m in Sources */,
 				4268FE2A194ACD57007A4C30 /* ColdViewController.m in Sources */,
 				ACEE7D2919D3F9F500932B39 /* QRCodeTxTransport.m in Sources */,
 				424EA9EB195E99B70029AB43 /* NotificationUtil.m in Sources */,
 				4268FE29194ACD57007A4C30 /* ColdAddressViewController.m in Sources */,
+				AC454DE11A1F250C000AF4ED /* PinCodeDisableViewController.m in Sources */,
 				AC202AD0196B8B7A00033EC1 /* Setting.m in Sources */,
 				ACE7E71019EB78AE00F7AA3A /* ImageCropView.m in Sources */,
 				ACC21A6B194C2BD900E02542 /* ColdModeCheckConnectionView.m in Sources */,
@@ -1355,6 +1445,7 @@
 				ACEEB8E419B46ED200F2789C /* BlockViewController.m in Sources */,
 				AC808B8519D52D21004E78A3 /* ImportBip38PrivateKeySetting.m in Sources */,
 				AC53ABAD19D27875007C095C /* UEntropyViewController.m in Sources */,
+				AC454DD81A1ED7E7000AF4ED /* PinCodeDotsView.m in Sources */,
 				ACF4B17419668D5700CE24FD /* MarketListCell.m in Sources */,
 				ACD6DFD2196BA83B009D8031 /* ColdAddressAddViewController.m in Sources */,
 				ACEE7D3F19D4034D00932B39 /* CloneQrCodeSetting.m in Sources */,
@@ -1372,9 +1463,11 @@
 				4269FF84195AD81C001213B9 /* BitherTime.m in Sources */,
 				AC3CDB5E1962AFF000C74B4C /* DialogAddressQrCode.m in Sources */,
 				ACBEC0241970E46C004301E0 /* SignTransactionViewController.m in Sources */,
+				ACBE75991A202FE200F49EE1 /* TouchIdIntegration.m in Sources */,
 				421B03C019495C1F003A45F1 /* HotAddressViewController.m in Sources */,
 				ACDDDC3619483A840008A79D /* UIColor+Util.m in Sources */,
 				AC275EE419B59B0100F1C02F /* BlockCell.m in Sources */,
+				AC454DD51A1DE602000AF4ED /* PinCodeEnterView.m in Sources */,
 				AC0135D6194FDCCD00E3BB95 /* HotAddressAddWatchOnlyViewController.m in Sources */,
 				ACB9B9C9195AD27300019216 /* TransactionCell.m in Sources */,
 				AC0135D0194ED8B800E3BB95 /* HotAddressAddViewController.m in Sources */,
@@ -1402,10 +1495,12 @@
 				ACBEC01E196E87B9004301E0 /* CheckPrivateKeyCell.m in Sources */,
 				AC17158A1969249B00337AB5 /* NSString+Size.m in Sources */,
 				ACBEC01B196E397E004301E0 /* CheckScoreAndBgAnimatableView.m in Sources */,
+				AC454DE71A1F252B000AF4ED /* PinCodeUtil.m in Sources */,
 				4254083B19469C9A007AF99C /* BaseApi.m in Sources */,
 				AC2F3295195C02C3001B7439 /* AmountButton.m in Sources */,
 				42E8161C19529B14005F16F7 /* KeyUtil.m in Sources */,
 				ACEE7D3619D3FC4B00932B39 /* ReloadTxSetting.m in Sources */,
+				AC454DE41A1F2518000AF4ED /* PinCodeChangeViewController.m in Sources */,
 				425408571946A219007AF99C /* DataCheckUtil.m in Sources */,
 				AC6163941964ED2F0055C9D0 /* DialogWithArrow.m in Sources */,
 				ACA9D70319540E0F002D1E3A /* PlaySoundUtil.m in Sources */,
@@ -1420,7 +1515,9 @@
 				AC45AA3519879C96006314D5 /* DialogPrivateKeyDecryptedQrCode.m in Sources */,
 				ACEE7D2819D3F9F500932B39 /* QRCodeTransportPage.m in Sources */,
 				421B03BB19495AEF003A45F1 /* HotViewController.m in Sources */,
+				AC454DEA1A1F3839000AF4ED /* PinCodeSetting.m in Sources */,
 				ACCA2751198F2A68000E6A32 /* PieChartView.m in Sources */,
+				AC454DC91A1C6E05000AF4ED /* TrashCanViewController.m in Sources */,
 				4269FF72195A885D001213B9 /* Ticker.m in Sources */,
 				AC33089519556F7A00D8F621 /* UIImage+ImageWithColor.m in Sources */,
 				AC8F0DCA196CF4E400CCD0F9 /* SelectViewController.m in Sources */,
@@ -1432,7 +1529,9 @@
 				AC781B6019F9FF98003B5B87 /* DialogRCheckInfo.m in Sources */,
 				ACEEB8DE19B46EB900F2789C /* NetworkMonitorViewController.m in Sources */,
 				AC2F329E195D19C2001B7439 /* DialogSendTxConfirm.m in Sources */,
+				DAB2C8731A2038930011EE2F /* KeychainSetting.m in Sources */,
 				AC3C2623199B58750055FF5E /* TrendingGraphicData.m in Sources */,
+				AC454DDB1A1F24E4000AF4ED /* PinCodeViewController.m in Sources */,
 				ACEE7D4519D40C1300932B39 /* ImportPrivateKeySetting.m in Sources */,
 				ACE7E71219EB78AE00F7AA3A /* ImageScrollView.m in Sources */,
 				DA641E8C196E7BC20095DF42 /* GCCrashReportFilterTrim.m in Sources */,
@@ -1454,6 +1553,7 @@
 				ACEE7D3C19D4020E00932B39 /* ColdWalletCloneSetting.m in Sources */,
 				4254085E1946A219007AF99C /* UIImageExt.m in Sources */,
 				AC275EE719B5B9D800F1C02F /* PeerCell.m in Sources */,
+				AC454DCC1A1C6EC1000AF4ED /* TrashCanCell.m in Sources */,
 				421B03C319495DBB003A45F1 /* ChooseModeViewController.m in Sources */,
 				ACEDEE3319F76BAD000507E2 /* DialogProgressChangable.m in Sources */,
 				AC53ABCF19D52387007C095C /* UEntropySensor.m in Sources */,
@@ -1465,6 +1565,8 @@
 				ACDDDC2D19480ECF0008A79D /* DialogCentered.m in Sources */,
 				ACF02FEB19D90899001AB701 /* DialogSwitchQRCode.m in Sources */,
 				4268FE2B194ACD57007A4C30 /* CheckViewController.m in Sources */,
+				DAB2C8761A206F080011EE2F /* KeychainBackupUtil.m in Sources */,
+				AC454DDE1A1F24FA000AF4ED /* PinCodeEnableViewController.m in Sources */,
 				ACDDDC2219480DE00008A79D /* UIBaseUtil.m in Sources */,
 				AC31E93219B477E400EFDDF1 /* BackgroundTransitionView.m in Sources */,
 				AC202AD3196BD97A00033EC1 /* SettingListCell.m in Sources */,
@@ -1538,7 +1640,7 @@
 				42EFB5511949C52100376888 /* Base */,
 				AC229A7A196A466400A7FB5E /* zh-Hans */,
 				AC229A7B196A466900A7FB5E /* zh-Hant */,
-				ACEDEE3019F76201000507E2 /* en */,
+				AC454DCE1A1C892B000AF4ED /* en */,
 			);
 			name = MainStoryboard.storyboard;
 			sourceTree = "<group>";

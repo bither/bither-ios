@@ -24,7 +24,6 @@
 
 @interface AdvanceViewController ()<UITableViewDataSource,UITableViewDelegate,DialogEditPasswordDelegate>
 @property (weak, nonatomic) IBOutlet UIView *vTopBar;
-@property (weak, nonatomic) IBOutlet UITableView *tableView;
 
 @end
 
@@ -90,6 +89,7 @@
         setting.selectBlock(self);
     }
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
+    [tableView reloadData];
 }
 
 @end

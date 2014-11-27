@@ -26,6 +26,7 @@
 -(void)showPrivateKeyEncryptedQrCode;
 -(void)showPrivateKeyDecryptedQrCode;
 -(void)showPrivateKeyTextQrCode;
+-(void)moveToTrash;
 @end
 
 

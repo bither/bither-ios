@@ -34,7 +34,7 @@
     self.lbMarketName.text=[market getName];
     self.lbMarketName.textColor=[BitherSetting getMarketColor:market.marketType];
     if (market.ticker) {
-        NSString * symobl=[BitherSetting getExchangeSymbol:[[UserDefaultsUtil instance] getDefaultExchangeType]];
+        NSString * symobl= [BitherSetting getCurrencySymbol:[[UserDefaultsUtil instance] getDefaultCurrency]];
         
         self.lbPrice.text=[NSString stringWithFormat:@"%@%.2f",symobl, [market.ticker getDefaultExchangePrice] ];
     }else{

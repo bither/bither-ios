@@ -48,9 +48,15 @@
     // Configure the view for the selected state
 }
 -(void)setName:(NSString *)name isDefault:(BOOL)isDefault{
-
     self.ivCheckMark.hidden=!isDefault;
+    self.lbName.attributedText = nil;
     self.lbName.text=name;
+}
+
+-(void)setAttributedName:(NSAttributedString *)name isDefault:(BOOL)isDefault{
+    self.ivCheckMark.hidden=!isDefault;
+    self.lbName.text = nil;
+    self.lbName.attributedText = name;
 }
 -(void)setHighlighted:(BOOL)highlighted animated:(BOOL)animated{
     [super setHighlighted:highlighted animated:animated];

@@ -40,7 +40,7 @@
     NSData * uRandomData=nil;
     NSData * uEntropyData=nil;
     
-    while ([xRandomData compore:[PARAMETERS_MIN_N hexToData]]==0||[xRandomData compore:[PARAMETERS_N hexToData]]>=0) {
+    while ([xRandomData compare:[PARAMETERS_MIN_N hexToData]]==0||[xRandomData compare:[PARAMETERS_N hexToData]]>=0) {
         while (uRandomData==nil) {
             uRandomData=[NSData randomWithSize:size];
         }
