@@ -355,6 +355,7 @@
 
 "choose_mode_cold_confirm" = "模式设置后不能切换.\n冷钱包应该运行在离线的备用手机上.\n确认以冷钱包模式运行?";
 "choose_mode_warm_confirm" = "模式设置后不能切换.\n热钱包可以方便的在线发送交易.\n确认以热钱包模式运行?";
+"choose_mode_warm_change_to_cold" = "切换到冷钱包";
 
 "balance_detail_transaction_count" = "交易数";
 "balance_detail_total_incoming" = "总收入";
