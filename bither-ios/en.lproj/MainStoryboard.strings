@@ -17,6 +17,9 @@
 /* Class = "IBUILabel"; text = "Pay to"; ObjectID = "4lI-QI-HQr"; */
 "4lI-QI-HQr.text" = "Pay to";
 
+/* Class = "IBUIButton"; normalTitle = "Switch to Bither Cold"; ObjectID = "4pa-hj-c7j"; */
+"4pa-hj-c7j.normalTitle" = "Switch to Bither Cold";
+
 /* Class = "IBUILabel"; text = "Label"; ObjectID = "5Mm-vi-wGE"; */
 "5Mm-vi-wGE.text" = "Label";
 

@@ -222,6 +222,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0A93E0401A35987D00F24F7E /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/MainStoryboard.strings; sourceTree = "<group>"; };
 		0FED7A4051DB45218112FAC0 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		4217A3711951235D00063746 /* Depth.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Depth.h; sourceTree = "<group>"; };
 		4217A3721951235D00063746 /* Depth.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Depth.m; sourceTree = "<group>"; };
@@ -390,7 +391,6 @@
 		AC454DC81A1C6E05000AF4ED /* TrashCanViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TrashCanViewController.m; sourceTree = "<group>"; };
 		AC454DCA1A1C6EC1000AF4ED /* TrashCanCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TrashCanCell.h; path = Cells/TrashCanCell.h; sourceTree = "<group>"; };
 		AC454DCB1A1C6EC1000AF4ED /* TrashCanCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TrashCanCell.m; path = Cells/TrashCanCell.m; sourceTree = "<group>"; };
-		AC454DCE1A1C892B000AF4ED /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/MainStoryboard.strings; sourceTree = "<group>"; };
 		AC454DD31A1DE602000AF4ED /* PinCodeEnterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PinCodeEnterView.h; sourceTree = "<group>"; };
 		AC454DD41A1DE602000AF4ED /* PinCodeEnterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PinCodeEnterView.m; sourceTree = "<group>"; };
 		AC454DD61A1ED7E7000AF4ED /* PinCodeDotsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PinCodeDotsView.h; sourceTree = "<group>"; };
@@ -1640,7 +1640,7 @@
 				42EFB5511949C52100376888 /* Base */,
 				AC229A7A196A466400A7FB5E /* zh-Hans */,
 				AC229A7B196A466900A7FB5E /* zh-Hant */,
-				AC454DCE1A1C892B000AF4ED /* en */,
+				0A93E0401A35987D00F24F7E /* en */,
 			);
 			name = MainStoryboard.storyboard;
 			sourceTree = "<group>";

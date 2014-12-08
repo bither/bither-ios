@@ -231,3 +231,6 @@
 
 /* Class = "IBUILabel"; text = "Trash Can"; ObjectID = "W7P-G2-qt2"; */
 "W7P-G2-qt2.text" = "回收站";
+
+/* Class = "IBUIButton"; normalTitle = "Switch to Bither Cold"; ObjectID = "4pa-hj-c7j"; */
+"4pa-hj-c7j.normalTitle" = "切换到冷钱包";

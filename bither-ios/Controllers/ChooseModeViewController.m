@@ -47,6 +47,7 @@
 @property (weak, nonatomic) IBOutlet UIView *vHotWait;
 @property (weak, nonatomic) IBOutlet UIView *vHotProgress;
 @property (weak, nonatomic) IBOutlet UIView *vHotRetry;
+@property (weak, nonatomic) IBOutlet UIButton *btnSwitchToCold;
 @property (weak, nonatomic) IBOutlet UIButton *btnRetry;
 @property (weak, nonatomic) IBOutlet UIButton *btnHot;
 @property (weak, nonatomic) IBOutlet UIButton *btnCold;
@@ -172,13 +173,26 @@
     self.vHotProgress.hidden = NO;
 }
 
+- (IBAction)switchToColdPressed:(id)sender {
+    [[[DialogAlert alloc]initWithAttributedMessage:[self getAttributedWarningMessage:NSLocalizedString(@"launch_sequence_switch_to_cold_warn", nil)] confirm:^{
+        [[BTSettings instance] setAppMode:COLD];
+        [[UIApplication sharedApplication] setMinimumBackgroundFetchInterval:UIApplicationBackgroundFetchIntervalNever];
+        [self showColdCheckWithCompletion:^{
+            [self.vColdNetCheck beginCheck:coldNetCheckCompletion];
+        }];
+    } cancel:nil] showInWindow:self.view.window];
+}
+
 - (UIStatusBarStyle)preferredStatusBarStyle{
     return UIStatusBarStyleLightContent;
 }
 
 -(NSAttributedString*)getAttributedWarningMessage:(NSString*)str{
-    NSMutableAttributedString* attr = [[NSMutableAttributedString alloc]initWithString:str];
     NSUInteger firstLineBreak = [str rangeOfString:@"\n"].location;
+    if([str characterAtIndex:firstLineBreak + 1] == '\n'){
+        str = [[str substringToIndex:firstLineBreak + 1] stringByAppendingString:[str substringFromIndex:firstLineBreak + 2]];
+    }
+    NSMutableAttributedString* attr = [[NSMutableAttributedString alloc]initWithString:str];
     NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc]init];
     paragraphStyle.paragraphSpacing = 5;
     [attr addAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:kDialogAlertLabelFontSize], NSForegroundColorAttributeName:[UIColor whiteColor], NSParagraphStyleAttributeName: paragraphStyle} range:NSMakeRange(0, str.length)];
@@ -351,7 +365,8 @@
     self.vColdIcon.autoresizingMask = UIViewAutoresizingFlexibleBottomMargin;
     self.vColdNetCheck.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height / 2);
     self.vHotProgress.hidden=YES;
-    [UIBaseUtil makeButtonBgResizable:self.btnRetry];
+    CGFloat width = [self.btnSwitchToCold sizeThatFits:CGSizeMake(CGFLOAT_MAX, CGFLOAT_MAX)].width + 20;
+    self.btnSwitchToCold.frame = CGRectMake(self.btnSwitchToCold.frame.origin.x - (width - self.btnSwitchToCold.frame.size.width)/2, self.btnSwitchToCold.frame.origin.y, width, self.btnSwitchToCold.frame.size.height);
     [self gradientViewWithStart:[UIColor parseColor:kChooseModeGradientColdColor] end:[UIColor parseColor:kChooseModeGradientCenterColor] view:self.vColdContainer];
     [self gradientViewWithStart:[UIColor parseColor:kChooseModeGradientCenterColor] end:[UIColor parseColor:kChooseModeGradientHotColor] view:self.vHotContainer];
     __weak ChooseModeViewController *c = self;
