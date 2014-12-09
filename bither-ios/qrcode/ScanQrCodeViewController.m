@@ -26,9 +26,14 @@
 @interface ScanQrCodeViewController (){
     NSString* _scanTitle;
     NSString* _scanMessage;
+    NSString* _lastResult;
 }
 @property UILabel *lblTitle;
 @property UILabel *lblMessage;
+@property UIView  *vCamera;
+@property UIView* cameraOverlayView;
+@property (nonatomic, strong) AVCaptureSession *session;
+@property (nonatomic, strong) AVCaptureVideoPreviewLayer *preview;
 @end
 
 @interface ScanQrCodeViewController (CameraOverlay)
@@ -39,19 +44,59 @@
 
 @implementation ScanQrCodeViewController
 
--(instancetype)init{
-    self = [super init];
-    if(self){
-        self.readerDelegate = self;
-        self.showsZBarControls = NO;
-        self.videoQuality = UIImagePickerControllerQualityTypeHigh;
-        self.cameraFlashMode = UIImagePickerControllerCameraFlashModeOff;
-        [self.scanner setSymbology: 0 config: ZBAR_CFG_ENABLE to: 0];
-        [self.scanner setSymbology:ZBAR_QRCODE config:ZBAR_CFG_ENABLE to:1];
-        self.readerView.tracksSymbols = YES;
-        [self configureCameraOverlay];
+-(void)viewDidLoad{
+    [super viewDidLoad];
+    self.view.backgroundColor = [UIColor blackColor];
+    self.vCamera = [[UIView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
+    self.vCamera.backgroundColor = [UIColor clearColor];
+    self.vCamera.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
+    [self.view addSubview:self.vCamera];
+    [self configureCameraOverlay];
+}
+
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    if ([AVCaptureDevice authorizationStatusForMediaType:AVMediaTypeVideo] == AVAuthorizationStatusDenied) {
+        self.scanTitle = NSLocalizedString(@"Camera Permission Required", nil);
+        self.scanMessage = nil;
+        return;
     }
-    return self;
+    NSError *error = nil;
+    AVCaptureDevice *device = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
+    AVCaptureDeviceInput *input = [AVCaptureDeviceInput deviceInputWithDevice:device error:&error];
+    AVCaptureMetadataOutput *output = [AVCaptureMetadataOutput new];
+    
+    if (error) NSLog(@"%@", [error localizedDescription]);
+    
+    if ([device lockForConfiguration:&error]) {
+        if (device.isAutoFocusRangeRestrictionSupported) {
+            device.autoFocusRangeRestriction = AVCaptureAutoFocusRangeRestrictionNear;
+        }
+        
+        if ([device isFocusModeSupported:AVCaptureFocusModeContinuousAutoFocus]) {
+            device.focusMode = AVCaptureFocusModeContinuousAutoFocus;
+        }
+        
+        [device unlockForConfiguration];
+    }
+    
+    self.session = [AVCaptureSession new];
+    if (input) [self.session addInput:input];
+    [self.session addOutput:output];
+    [output setMetadataObjectsDelegate:self queue:dispatch_get_main_queue()];
+    
+    if ([output.availableMetadataObjectTypes containsObject:AVMetadataObjectTypeQRCode]) {
+        output.metadataObjectTypes = @[AVMetadataObjectTypeQRCode];
+    }
+    
+    self.preview = [[AVCaptureVideoPreviewLayer alloc] initWithSession:self.session];
+    self.preview.videoGravity = AVLayerVideoGravityResizeAspectFill;
+    self.preview.frame = self.view.layer.bounds;
+    [self.vCamera.layer addSublayer:self.preview];
+    
+    dispatch_async(dispatch_queue_create("scan", NULL), ^{
+        [self.session startRunning];
+    });
 }
 
 -(void)viewDidAppear:(BOOL)animated{
@@ -74,21 +119,30 @@
     return self;
 }
 
-- (void) imagePickerController: (UIImagePickerController*) reader
- didFinishPickingMediaWithInfo: (NSDictionary*) info
+-(void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+}
+
+- (void)viewDidDisappear:(BOOL)animated
 {
-    id<NSFastEnumeration> results = [info objectForKey: ZBarReaderControllerResults];
-    NSInteger bestQuality = NSIntegerMin;
-    ZBarSymbol *bestResult = nil;
-    for(ZBarSymbol *r in results){
-        int q = r.quality;
-        if(q > bestQuality){
-            bestQuality = q;
-            bestResult = r;
+    [self.session removeOutput:self.session.outputs.firstObject];
+    [self.session stopRunning];
+    self.session = nil;
+    [self.preview removeFromSuperlayer];
+    self.preview = nil;
+    [super viewDidDisappear:animated];
+}
+
+- (void)captureOutput:(AVCaptureOutput *)captureOutput didOutputMetadataObjects:(NSArray *)metadataObjects fromConnection:(AVCaptureConnection *)connection{
+    for (AVMetadataMachineReadableCodeObject *o in metadataObjects) {
+        if ([o.type isEqual:AVMetadataObjectTypeQRCode]){
+            NSString* result = o.stringValue;
+            if(result && ![StringUtil compareString:result compare:_lastResult] && self.scanDelegate && [self.scanDelegate respondsToSelector:@selector(handleResult:byReader:)]){
+                [self.scanDelegate handleResult:result byReader:self];
+            }
+            _lastResult = result;
+            return;
         }
-    }
-    if(bestResult && self.scanDelegate && [self.scanDelegate respondsToSelector:@selector(handleResult:byReader:)]){
-        [self.scanDelegate handleResult:bestResult.data byReader:self];
     }
 }
 
@@ -114,17 +168,6 @@
     return _scanMessage;
 }
 
--(BOOL)lowQualityImageProccesing{
-    return self.videoQuality != UIImagePickerControllerQualityTypeHigh;
-}
-
--(void)setLowQualityImageProccesing:(BOOL)lowQualityImageProccesing{
-    if(lowQualityImageProccesing){
-        self.videoQuality = UIImagePickerControllerQualityType640x480;
-    }else{
-        self.videoQuality = UIImagePickerControllerQualityTypeHigh;
-    }
-}
 @end
 
 #define kCancelButtonOffset (10)
@@ -149,6 +192,7 @@
     self.cameraOverlayView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
     self.cameraOverlayView.backgroundColor = [UIColor clearColor];
     self.cameraOverlayView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
+    [self.view addSubview:self.cameraOverlayView];
     
     UIButton *btnCancel = [[UIButton alloc]initWithFrame:CGRectMake(kCancelButtonOffset, kCancelButtonOffset, kCancelButtonWidth, kCancelButtonHeight)];
     btnCancel.autoresizingMask = UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleRightMargin;
@@ -187,6 +231,7 @@
     self.lblMessage.shadowColor = [UIColor colorWithWhite:0 alpha:0.9];
     self.lblMessage.shadowOffset = CGSizeMake(1, 1);
     [self.cameraOverlayView addSubview:self.lblMessage];
+    [self updateOverlay];
 }
 
 -(void)messageBreath{
@@ -204,18 +249,21 @@
 }
 
 -(void)updateOverlay{
-    if([StringUtil isEmpty:self.scanTitle]){
-        self.lblTitle.text = @"";
-    }else{
-        self.lblTitle.text = self.scanTitle;
-        [self configureLabel:self.lblTitle aroundLine:kTitleFromTop];
+    if(self.lblTitle){
+        if([StringUtil isEmpty:self.scanTitle]){
+            self.lblTitle.text = @"";
+        }else{
+            self.lblTitle.text = self.scanTitle;
+            [self configureLabel:self.lblTitle aroundLine:kTitleFromTop];
+        }
     }
-    
-    if([StringUtil isEmpty:self.scanMessage]){
-        self.lblMessage.text = @"";
-    }else{
-        self.lblMessage.text = self.scanMessage;
-        [self configureLabel:self.lblMessage aroundLine:self.cameraOverlayView.frame.size.height - kMessageFromBottom];
+    if(self.lblMessage){
+        if([StringUtil isEmpty:self.scanMessage]){
+            self.lblMessage.text = @"";
+        }else{
+            self.lblMessage.text = self.scanMessage;
+            [self configureLabel:self.lblMessage aroundLine:self.cameraOverlayView.frame.size.height - kMessageFromBottom];
+        }
     }
 }
 
@@ -231,10 +279,11 @@
 
 -(void)flashClick:(UIButton*)sender{
     sender.selected = !sender.selected;
-    if(sender.selected){
-        self.cameraFlashMode = UIImagePickerControllerCameraFlashModeOn;
-    }else{
-        self.cameraFlashMode = UIImagePickerControllerCameraFlashModeOff;
+    NSError *error = nil;
+    AVCaptureDevice *device = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
+    if ([device lockForConfiguration:&error]) {
+        device.torchMode = sender.selected ? AVCaptureTorchModeOn : AVCaptureTorchModeOff;
+        [device unlockForConfiguration];
     }
 }
 

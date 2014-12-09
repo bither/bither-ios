@@ -420,6 +420,7 @@
 "Switch QRCode"="切換二維碼";
 "Switched to old version QR Codes, sign with Bither Cold <1.1.0"="已切換到舊版二維碼，可用 <1.1.0的冷錢包簽名";
 "Switched to new version QR Codes, sign with Bither Cold ≧1.1.0"="已切換到新版二維碼，可用 ≧1.1.0的冷錢包簽名";
+"Camera Permission Required"="需要訪問攝像頭的權限";
 
 
 //avatar

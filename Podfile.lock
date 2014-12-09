@@ -73,7 +73,6 @@ PODS:
   - Reachability (3.1.1)
   - RegexKitLite (4.0)
   - SimpleKeychain (0.2.1)
-  - ZBarSDK (1.3.1)
 
 DEPENDENCIES:
   - Bitheri (from `git@github.com:bither/bitheri.git`, branch `develop`)
@@ -82,7 +81,6 @@ DEPENDENCIES:
   - MKNetworkKit (~> 0.87)
   - RegexKitLite (~> 4.0)
   - SimpleKeychain
-  - ZBarSDK (~> 1.3.1)
 
 EXTERNAL SOURCES:
   Bitheri:
@@ -105,6 +103,5 @@ SPEC CHECKSUMS:
   Reachability: 8e9635e3cb4f98e7f825e51147f677ecc694d0e7
   RegexKitLite: c0e4c12e6e7de0769f3a3ed679f0f61604170661
   SimpleKeychain: ebcd1e41377d29f2bf3c29531acfdc35cf929d9f
-  ZBarSDK: 3ed560856963f765b66d834f464590bd6ba13b44
 
 COCOAPODS: 0.35.0
