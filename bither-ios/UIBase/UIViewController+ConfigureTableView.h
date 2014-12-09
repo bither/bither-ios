@@ -20,5 +20,6 @@
 
 @interface UIViewController(ConfigureTableView) 
 -(void)configureHeaderAndFooter :(UITableView * )tableView background:(UIColor *)colorBg isHot:(BOOL)isHot version:(NSString *)version;
+-(void)configureHeaderAndFooter :(UITableView * )tableView background:(UIColor *)colorBg isHot:(BOOL)isHot version:(NSString *)version logoTarget:(id)target logoSelector:(SEL)selector;
 -(void)configureHeaderAndFooterNoLogo :(UITableView * )tableView background:(UIColor *)colorBg;
 @end
