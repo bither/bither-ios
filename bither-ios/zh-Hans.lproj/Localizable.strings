@@ -421,6 +421,7 @@
 "Switch QRCode"="切换二维码";
 "Switched to old version QR Codes, sign with Bither Cold <1.1.0"="已切换到旧版二维码，可用 <1.1.0的冷钱包签名";
 "Switched to new version QR Codes, sign with Bither Cold ≧1.1.0"="已切换到新版二维码，可用 ≧1.1.0的冷钱包签名";
+"Camera Permission Required"="需要访问摄像头的权限";
 
 //avatar
 "Set Avatar"="设置头像";
