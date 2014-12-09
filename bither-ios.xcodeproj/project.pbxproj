@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0A515F781A36A2C0008292AF /* RawDataView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A515F771A36A2C0008292AF /* RawDataView.m */; };
+		0A515F7B1A36CAE3008292AF /* RawPrivateKeyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A515F7A1A36CAE3008292AF /* RawPrivateKeyViewController.m */; };
 		4217A3731951235D00063746 /* Depth.m in Sources */ = {isa = PBXBuildFile; fileRef = 4217A3721951235D00063746 /* Depth.m */; };
 		4217A39019512DC000063746 /* TransactionsUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 4217A38F19512DC000063746 /* TransactionsUtil.m */; };
 		421B037C19495315003A45F1 /* TabButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 421B037B19495315003A45F1 /* TabButton.m */; };
@@ -222,6 +224,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0A515F761A36A2C0008292AF /* RawDataView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RawDataView.h; sourceTree = "<group>"; };
+		0A515F771A36A2C0008292AF /* RawDataView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RawDataView.m; sourceTree = "<group>"; };
+		0A515F791A36CAE3008292AF /* RawPrivateKeyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RawPrivateKeyViewController.h; sourceTree = "<group>"; };
+		0A515F7A1A36CAE3008292AF /* RawPrivateKeyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RawPrivateKeyViewController.m; sourceTree = "<group>"; };
 		0A93E0401A35987D00F24F7E /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/MainStoryboard.strings; sourceTree = "<group>"; };
 		0FED7A4051DB45218112FAC0 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		4217A3711951235D00063746 /* Depth.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Depth.h; sourceTree = "<group>"; };
@@ -647,6 +653,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0A515F721A36A293008292AF /* RawPrivateKey */ = {
+			isa = PBXGroup;
+			children = (
+				0A515F761A36A2C0008292AF /* RawDataView.h */,
+				0A515F771A36A2C0008292AF /* RawDataView.m */,
+				0A515F791A36CAE3008292AF /* RawPrivateKeyViewController.h */,
+				0A515F7A1A36CAE3008292AF /* RawPrivateKeyViewController.m */,
+			);
+			path = RawPrivateKey;
+			sourceTree = "<group>";
+		};
 		4217A36E1951233500063746 /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -868,6 +885,7 @@
 				42EFB54E1949C50900376888 /* MainStoryboard.storyboard */,
 				4217A36E1951233500063746 /* Model */,
 				AC454DCF1A1DE5D4000AF4ED /* pin */,
+				0A515F721A36A293008292AF /* RawPrivateKey */,
 				ACEE7D1A19D3F9F500932B39 /* QRCode */,
 				ACA9D707195410FF002D1E3A /* Resouces */,
 				AC229A6E196A40B500A7FB5E /* sh */,
@@ -1436,6 +1454,7 @@
 				AC53ABE419D8FBB6007C095C /* UEntropyAnimatedTransition.m in Sources */,
 				AC6BAC6F196FA3410013B9E8 /* HotCheckPrivateKeyViewController.m in Sources */,
 				ACDDDC2419480DE00008A79D /* UIViewController+SwipeRightToPop.m in Sources */,
+				0A515F781A36A2C0008292AF /* RawDataView.m in Sources */,
 				ACBEC018196D422D004301E0 /* BalanceButton.m in Sources */,
 				ACBEC021196FDC1E004301E0 /* DialogEditPassword.m in Sources */,
 				4254085F1946A219007AF99C /* UserDefaultsUtil.m in Sources */,
@@ -1458,6 +1477,7 @@
 				ACE7E71819EB8DE100F7AA3A /* ImagePickerFromCameraViewController.m in Sources */,
 				AC808B8C19D56757004E78A3 /* XRandom.m in Sources */,
 				AC3CDB5B1962A3C800C74B4C /* TransactionConfidenceView.m in Sources */,
+				0A515F7B1A36CAE3008292AF /* RawPrivateKeyViewController.m in Sources */,
 				ACD6DFC9196B9367009D8031 /* ColdAddressListCell.m in Sources */,
 				AC0135E0195056BE00E3BB95 /* KeyboardController.m in Sources */,
 				4269FF84195AD81C001213B9 /* BitherTime.m in Sources */,
