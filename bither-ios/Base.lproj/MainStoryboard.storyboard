@@ -3109,7 +3109,7 @@
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" heightSizable="YES"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="hQL-T3-YNx">
-                                                <rect key="frame" x="20" y="20" width="120" height="161"/>
+                                                <rect key="frame" x="8" y="30" width="132" height="151"/>
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" heightSizable="YES"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="50"/>
                                                 <state key="normal" title="0" backgroundImage="btn_keyboard_key_white_normal">
@@ -3122,7 +3122,7 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="RIA-YK-ZlZ">
-                                                <rect key="frame" x="160" y="20" width="120" height="161"/>
+                                                <rect key="frame" x="160" y="30" width="132" height="151"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" heightSizable="YES"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="50"/>
                                                 <state key="normal" title="1" backgroundImage="btn_keyboard_key_white_normal">
