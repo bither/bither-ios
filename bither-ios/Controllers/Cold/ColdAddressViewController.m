@@ -43,6 +43,7 @@
     [super viewDidLoad];
     self.tableView.dataSource = self;
     self.addresses = [[NSMutableArray alloc]init];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reload) name:BTAddressManagerIsReady object:nil];
 }
 
 -(void)viewWillAppear:(BOOL)animated{
@@ -51,6 +52,9 @@
 }
 
 -(void)reload{
+    if (![[BTAddressManager instance] isReady]) {
+        return;
+    }
     [self.addresses removeAllObjects];
     [self.addresses addObjectsFromArray:[BTAddressManager instance].privKeyAddresses];
     [self.tableView reloadData];
@@ -70,5 +74,9 @@
 -(void)showMsg:(NSString*)msg{
     [self showBannerWithMessage:msg belowView:nil belowTop:0 autoHideIn:1 withCompletion:nil];
 }
+-(void)dealloc{
+ [[NSNotificationCenter defaultCenter ] removeObserver:self name:BTAddressManagerIsReady object:nil];
+}
+
 
 @end

@@ -50,6 +50,7 @@
 
 -(void)firstConfigure{
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(balanceChanged) name:BitherBalanceChangedNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(balanceChanged) name:BTAddressManagerIsReady object:nil];
     self.lbl = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height)];
     self.lbl.font = [UIFont boldSystemFontOfSize:kFontSize];
     self.lbl.textColor = [UIColor whiteColor];
@@ -165,6 +166,9 @@
 }
 
 -(void)balanceChanged{
+    if (![[BTAddressManager instance] isReady]) {
+        return;
+    }
     NSArray* addresses = [BTAddressManager instance].allAddresses;
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         int64_t balance = 0;
@@ -178,7 +182,8 @@
 }
 
 -(void)dealloc{
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:BTAddressManagerIsReady object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:BitherBalanceChangedNotification object:nil];
 }
 
 @end

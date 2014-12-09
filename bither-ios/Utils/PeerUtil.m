@@ -46,23 +46,25 @@ static PeerUtil * peerUtil;
 
 
 -(void)startPeer{
-    if ([[BTSettings instance] getAppMode]!=COLD) {
-    
-        if ([[BlockUtil instance] syncSpvFinish]) {
-            if ([[BTPeerManager instance] doneSyncFromSPV]) {
-                [self syncSpvFromBitcoinDone];
-            }else{
-                if (![[BTPeerManager instance] connected]) {
-                    [[BTPeerManager instance] start];
-                }
-                [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(syncSpvFromBitcoinDone) name:BTPeerManagerSyncFromSPVFinishedNotification object:nil];
-                addObserver=YES;
-            }
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0),^{
+        if ([[BTSettings instance] getAppMode]!=COLD) {
             
-        }else{
-            [[BlockUtil instance] syncSpvBlock];
+            if ([[BlockUtil instance] syncSpvFinish]) {
+                if ([[BTPeerManager instance] doneSyncFromSPV]) {
+                    [self syncSpvFromBitcoinDone];
+                }else{
+                    if (![[BTPeerManager instance] connected]) {
+                        [[BTPeerManager instance] start];
+                    }
+                    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(syncSpvFromBitcoinDone) name:BTPeerManagerSyncFromSPVFinishedNotification object:nil];
+                    addObserver=YES;
+                }
+                
+            }else{
+                [[BlockUtil instance] syncSpvBlock];
+            }
         }
-    }
+    });
 }
 -(void) syncSpvFromBitcoinDone{
     if (addObserver) {
@@ -83,26 +85,21 @@ static PeerUtil * peerUtil;
 }
 
 -(void) connectPeer{
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0),^{
-       
-        BOOL downloadSpvFinish=[[UserDefaultsUtil instance ] getDownloadSpvFinish]&&[[BTPeerManager instance] doneSyncFromSPV];
-        BOOL walletIsSyncComplete=[[BTAddressManager instance] allSyncComplete];
-        BOOL networkIsAvailable=![[UserDefaultsUtil instance] getSyncBlockOnlyWifi]||[NetworkUtil isEnableWIFI];
-       // BOOL netWorkState=[NetworkUtil isEnableWIFI]||![[UserDefaultsUtil instance] getSyncBlockOnlyWifi];
-        BTPeerManager * peerManager=[BTPeerManager instance];
-        if (networkIsAvailable&&downloadSpvFinish && walletIsSyncComplete ) {
-            if (![peerManager connected]) {
-                [peerManager start];
-            }
-            
-        }else{
-            if ([peerManager connected]) {
-                [peerManager stop];
-            }
+    BOOL downloadSpvFinish=[[UserDefaultsUtil instance ] getDownloadSpvFinish]&&[[BTPeerManager instance] doneSyncFromSPV];
+    BOOL walletIsSyncComplete=[[BTAddressManager instance] allSyncComplete];
+    BOOL networkIsAvailable=![[UserDefaultsUtil instance] getSyncBlockOnlyWifi]||[NetworkUtil isEnableWIFI];
+    // BOOL netWorkState=[NetworkUtil isEnableWIFI]||![[UserDefaultsUtil instance] getSyncBlockOnlyWifi];
+    BTPeerManager * peerManager=[BTPeerManager instance];
+    if (networkIsAvailable&&downloadSpvFinish && walletIsSyncComplete ) {
+        if (![peerManager connected]) {
+            [peerManager start];
         }
         
-    });
-    
+    }else{
+        if ([peerManager connected]) {
+            [peerManager stop];
+        }
+    }
 }
 
 

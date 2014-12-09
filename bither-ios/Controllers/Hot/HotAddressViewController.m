@@ -42,8 +42,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    _privateKeys = [[NSMutableArray alloc]initWithArray:[[BTAddressManager instance]privKeyAddresses]];
-    _watchOnlys = [[NSMutableArray alloc]initWithArray:[[BTAddressManager instance]watchOnlyAddresses]];
+    _privateKeys=[NSMutableArray new];
+    _watchOnlys=[NSMutableArray new];
     _foldedSections = [NSMutableIndexSet indexSet];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
@@ -51,6 +51,7 @@
     [[NSNotificationCenter defaultCenter ] addObserver:self selector:@selector(receivedNotifications) name:BitherBalanceChangedNotification object:nil];
     [[NSNotificationCenter defaultCenter ] addObserver:self selector:@selector(receivedNotifications) name:BTPeerManagerLastBlockChangedNotification object:nil];
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(receivedNotifications) name:BitherMarketUpdateNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reload) name:BTAddressManagerIsReady object:nil];
 }
 
 -(void)viewDidAppear:(BOOL)animated{
@@ -59,6 +60,9 @@
 }
 
 -(void)reload{
+    if (![[BTAddressManager instance] isReady]) {
+        return;
+    }
     [_privateKeys removeAllObjects];
     [_watchOnlys removeAllObjects];
     [_privateKeys addObjectsFromArray:[[BTAddressManager instance]privKeyAddresses]];
@@ -157,5 +161,6 @@
 -(void)dealloc{
     [[NSNotificationCenter defaultCenter ] removeObserver:self name:BitherBalanceChangedNotification object:nil];
     [[NSNotificationCenter defaultCenter ] removeObserver:self name:BTPeerManagerLastBlockChangedNotification object:nil];
+    [[NSNotificationCenter defaultCenter ] removeObserver:self name:BTAddressManagerIsReady object:nil];
 }
 @end
