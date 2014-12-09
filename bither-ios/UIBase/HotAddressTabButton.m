@@ -166,11 +166,8 @@
 }
 
 -(void)balanceChanged{
-    if (![[BTAddressManager instance] isReady]) {
-        return;
-    }
-    NSArray* addresses = [BTAddressManager instance].allAddresses;
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        NSArray* addresses = [BTAddressManager instance].allAddresses;
         int64_t balance = 0;
         for(BTAddress *a in addresses){
             balance += a.balance;

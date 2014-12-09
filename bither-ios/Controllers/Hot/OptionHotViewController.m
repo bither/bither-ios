@@ -47,8 +47,12 @@
     [self reload];
 }
 -(void)reload{
-    self.settings=[SettingUtil hotSettings];
-    [self.tableView reloadData];
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        self.settings=[SettingUtil hotSettings];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.tableView reloadData];
+        });
+    });
 }
 
 -(void)viewWillAppear:(BOOL)animated{
