@@ -18,19 +18,22 @@
 
 #import "RawPrivateKeyViewController.h"
 #import "UIViewController+PiShowBanner.h"
-#import "NSData+Hash.h"
-#import "NSString+Base58.h"
 #import "RawDataView.h"
 #import "DialogProgress.h"
+#import "DialogPassword.h"
+#import "NSData+Hash.h"
+#import "NSString+Base58.h"
 #import "StringUtil.h"
 #import "BTKey.h"
+#import "BTPrivateKeyUtil.h"
+#import "KeyUtil.h"
 #import <openssl/ecdsa.h>
 #import <openssl/obj_mac.h>
 
 #define PARAMETERS_N @"fffffffffffffffffffffffffffffffebaaedce6af48a03bbfd25e8cd0364141"
 #define PARAMETERS_MIN_N @"0"
 
-@interface RawPrivateKeyViewController ()
+@interface RawPrivateKeyViewController ()<DialogPasswordDelegate>
 @property (weak, nonatomic) IBOutlet UIView *vTopbar;
 
 @property (weak, nonatomic) IBOutlet UIView *vInput;
@@ -59,37 +62,39 @@
 
 -(void)handleData{
     DialogProgress *dp = [[DialogProgress alloc]initWithMessage:NSLocalizedString(@"Please wait…", nil)];
-    [dp showInWindow:self.view.window];
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
-        NSMutableData* data = self.vData.data;
-        if(!data){
+     __weak __block DialogProgress* dpB = dp;
+    [dp showInWindow:self.view.window completion:^{
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+            NSMutableData* data = self.vData.data;
+            if(!data){
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [dpB dismiss];
+                });
+                return;
+            }
+            if(![self checkData:data]){
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [dpB dismissWithCompletion:^{
+                        [self showBannerWithMessage:NSLocalizedString(@"raw_private_key_not_safe", nil) belowView:self.vTopbar withCompletion:^{
+                            self.vData.dataSize = CGSizeMake(16, 16);
+                        }];
+                    }];
+                });
+                return;
+            }
+            data = [self modDataByN:data];
+            BTKey* key = [[BTKey alloc]initWithSecret:data compressed:YES];
+            NSString *privateKey = key.privateKey;
+            NSString *address = key.address;
             dispatch_async(dispatch_get_main_queue(), ^{
-                [dp dismiss];
+                [dpB dismiss];
+                self.lblPrivateKey.text = [StringUtil formatAddress:privateKey groupSize:4 lineSize:16];
+                self.lblAddress.text = [StringUtil formatAddress:address groupSize:4 lineSize:12];
+                self.vShow.hidden = NO;
+                self.vInput.hidden = YES;
             });
-            return;
-        }
-        if(![self checkData:data]){
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [dp dismissWithCompletion:^{
-                   [self showBannerWithMessage:NSLocalizedString(@"raw_private_key_not_safe", nil) belowView:self.vTopbar withCompletion:^{
-                       self.vData.dataSize = CGSizeMake(16, 16);
-                   }];
-                }];
-            });
-            return;
-        }
-        data = [self modDataByN:data];
-        BTKey* key = [[BTKey alloc]initWithSecret:data compressed:YES];
-        NSString *privateKey = key.privateKey;
-        NSString *address = key.address;
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [dp dismiss];
-            self.lblPrivateKey.text = [StringUtil formatAddress:privateKey groupSize:4 lineSize:16];
-            self.lblAddress.text = [StringUtil formatAddress:address groupSize:4 lineSize:12];
-            self.vShow.hidden = NO;
-            self.vInput.hidden = YES;
         });
-    });
+    }];
 }
 
 -(void)addData:(BOOL)d{
@@ -102,6 +107,34 @@
 }
 
 - (IBAction)addPressed:(id)sender {
+    [[[DialogPassword alloc]initWithDelegate:self] showInWindow:self.view.window];
+}
+
+-(void)onPasswordEntered:(NSString*)password{
+    DialogProgress* dp = [[DialogProgress alloc]initWithMessage:NSLocalizedString(@"Please wait…", nil)];
+    __weak __block DialogProgress* dpB = dp;
+    __weak __block UIViewController* vc = self;
+    [dp showInWindow:self.view.window completion:^{
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+            NSMutableData* data = self.vData.data;
+            if(!data){
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [dpB dismiss];
+                });
+                return;
+            }
+            data = [self modDataByN:data];
+            BTKey* key = [[BTKey alloc]initWithSecret:data compressed:YES];
+            NSString *privateKeyString = [BTPrivateKeyUtil getPrivateKeyString:key passphrase:password];
+            BTAddress *address = [[BTAddress alloc] initWithKey:key encryptPrivKey:privateKeyString isXRandom:NO];
+            [KeyUtil addAddressList:@[address]];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [dpB dismissWithCompletion:^{
+                    [vc.navigationController popViewControllerAnimated:YES];
+                }];
+            });
+        });
+    }];
 }
 
 -(NSMutableData*)modDataByN:(NSMutableData*)data{
