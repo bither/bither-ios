@@ -24,7 +24,7 @@
     NSUInteger restrictedHeight;
     NSUInteger column;
     NSUInteger row;
-    NSMutableArray* data;
+    CFMutableBitVectorRef data;
 }
 
 @end
@@ -34,7 +34,9 @@
 -(void)addData:(BOOL)d{
     if(self.filledDataLength < self.dataLength){
         UIView* v = ((UIView*)((UIView*)self.subviews[1]).subviews[self.filledDataLength]).subviews[0];
-        [data addObject:@(d)];
+        NSUInteger index = self.filledDataLength;
+        CFBitVectorSetCount(data, index + 1);
+        CFBitVectorSetBitAtIndex(data, index, d);
         if(d){
             v.backgroundColor = [UIColor parseColor:0xff9329];
         }else{
@@ -50,8 +52,13 @@
     }
 }
 
--(NSData*)data{
-    return [NSMutableData new];
+-(NSMutableData*)data{
+    if(self.filledDataLength < self.dataLength){
+        return nil;
+    }
+    NSMutableData *result = [NSMutableData dataWithLength:self.dataLength / 8];
+    CFBitVectorGetBits(data, CFRangeMake(0, self.dataLength), result.mutableBytes);
+    return result;
 }
 
 -(void)organizeView{
@@ -111,7 +118,10 @@
 -(void)setDataSize:(CGSize)dataSize{
     column = floorf(dataSize.width);
     row = floorf(dataSize.height);
-    data = [[NSMutableArray alloc]initWithCapacity:column * row];
+    if(data){
+        CFRelease(data);
+    }
+    data = CFBitVectorCreateMutable(NULL, column * row);
     [self organizeView];
 }
 
@@ -123,8 +133,15 @@
     return column * row;
 }
 
+- (void)dealloc
+{
+    if(data){
+        CFRelease(data);
+    }
+}
+
 -(NSUInteger)filledDataLength{
-    return data.count;
+    return CFBitVectorGetCount(data);
 }
 
 

@@ -23,6 +23,6 @@
 @property CGSize dataSize;
 @property (readonly) NSUInteger dataLength;
 @property (readonly) NSUInteger filledDataLength;
-@property (readonly) NSData* data;
+@property (readonly) NSMutableData* data;
 -(void)addData:(BOOL)d;
 @end
