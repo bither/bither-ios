@@ -46,7 +46,7 @@
 #import "UnitUtil.h"
 #import "KeychainBackupUtil.h"
 #import "KeychainSetting.h"
-
+#import "BTQRCodeUtil.h"
 
 
 @implementation Setting
@@ -63,6 +63,7 @@ static Setting* ColdMonitorSetting;
 static Setting* AdvanceSetting;
 static Setting* reloadTxsSetting;
 static Setting* RCheckSetting;
+static Setting* QrCodeQualitySetting;
 static Setting* TrashCanSetting;
 static Setting* SwitchToColdSetting;
 
@@ -460,6 +461,58 @@ static Setting* SwitchToColdSetting;
     return SwitchToColdSetting;
 }
 
++(Setting*)getQrCodeQualitySetting{
+    if(!QrCodeQualitySetting){
+        Setting* setting = [[Setting alloc]initWithName:NSLocalizedString(@"qr_code_quality_setting_name", nil) icon:nil];
+        [setting setGetValueBlock:^(){
+            QRQuality q = [BTQRCodeUtil qrQuality];
+            return [self getQrCodeQualityName:q];
+        }];
+        [setting setGetArrayBlock:^(){
+            NSMutableArray * array=[NSMutableArray new];
+            [array addObject:[self getQrCodeQualityDict:NORMAL]];
+            [array addObject:[self getQrCodeQualityDict:LOW]];
+            return array;
+        }];
+        
+        [setting setResult:^(NSDictionary * dict){
+            if ([[dict allKeys] containsObject:SETTING_VALUE]) {
+                [BTQRCodeUtil setQrQuality:[dict getIntFromDict:SETTING_VALUE]];
+            }
+        }];
+        __block Setting * sself=setting;
+        [setting setSelectBlock:^(UIViewController * controller){
+            SelectViewController *selectController = [controller.storyboard instantiateViewControllerWithIdentifier:@"SelectViewController"];UINavigationController *nav = controller.navigationController;
+            selectController.setting=sself;
+            [nav pushViewController:selectController animated:YES];
+        }];
+        QrCodeQualitySetting = setting;
+    }
+    return QrCodeQualitySetting;
+}
+
+
++(NSDictionary *)getQrCodeQualityDict:(QRQuality)quality{
+    QRQuality q = [BTQRCodeUtil qrQuality];
+    NSMutableDictionary *dict=[NSMutableDictionary new];
+    [dict setObject:[NSNumber numberWithInteger:quality] forKey:SETTING_VALUE];
+    [dict setObject:[self getQrCodeQualityName:quality] forKey:SETTING_KEY];
+    if (q == quality) {
+        [dict setObject:[NSNumber numberWithBool:YES] forKey:SETTING_IS_DEFAULT];
+    }
+    return dict;
+}
+
++(NSString *)getQrCodeQualityName:(QRQuality)quality{
+    switch (quality) {
+        case LOW:
+            return NSLocalizedString(@"qr_code_quality_setting_low", nil);
+        case NORMAL:
+        default:
+            return NSLocalizedString(@"qr_code_quality_setting_normal", nil);
+    }
+}
+
 +(NSArray*)advanceSettings{
     NSMutableArray *array = [NSMutableArray new];
     if ([[BTSettings instance] getAppMode]==HOT) {
@@ -470,6 +523,7 @@ static Setting* SwitchToColdSetting;
     if ([[BTSettings instance] getAppMode]==HOT) {
         [array addObject:[Setting getRCheckSetting]];
     }
+    [array addObject:[Setting getQrCodeQualitySetting]];
     [array addObject:[ImportPrivateKeySetting getImportPrivateKeySetting]];
     [array addObject:[ImportBip38PrivateKeySetting getImportBip38PrivateKeySetting]];
     [array addObject:[Setting getTrashCanSetting]];
