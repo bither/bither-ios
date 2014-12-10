@@ -1,4 +1,5 @@
-//  UIViewController+ConfigureTableView.h
+//
+//  RawDataView.h
 //  bither-ios
 //
 //  Copyright 2014 http://Bither.net
@@ -15,11 +16,13 @@
 //  See the License for the specific language governing permissions and
 //  limitations under the License.
 
-
 #import <UIKit/UIKit.h>
 
-@interface UIViewController(ConfigureTableView) 
--(void)configureHeaderAndFooter :(UITableView * )tableView background:(UIColor *)colorBg isHot:(BOOL)isHot version:(NSString *)version;
--(void)configureHeaderAndFooter :(UITableView * )tableView background:(UIColor *)colorBg isHot:(BOOL)isHot version:(NSString *)version logoTarget:(id)target logoSelector:(SEL)selector;
--(void)configureHeaderAndFooterNoLogo :(UITableView * )tableView background:(UIColor *)colorBg;
+@interface RawDataView : UIView
+@property CGSize restrictedSize;
+@property CGSize dataSize;
+@property (readonly) NSUInteger dataLength;
+@property (readonly) NSUInteger filledDataLength;
+@property (readonly) NSMutableData* data;
+-(void)addData:(BOOL)d;
 @end

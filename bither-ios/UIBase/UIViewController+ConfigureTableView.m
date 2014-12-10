@@ -23,6 +23,10 @@
 
 
 -(void)configureHeaderAndFooter :(UITableView * )tableView background:(UIColor *)colorBg isHot:(BOOL)isHot version:(NSString *)version{
+    [self configureHeaderAndFooter:tableView background:colorBg isHot:isHot version:version logoTarget:nil logoSelector:nil];
+}
+
+-(void)configureHeaderAndFooter :(UITableView * )tableView background:(UIColor *)colorBg isHot:(BOOL)isHot version:(NSString *)version logoTarget:(id)target logoSelector:(SEL)selector{
     UIImageView *ivTop = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"list_item_card_shadow_top"]];
     ivTop.contentMode = UIViewContentModeScaleToFill;
     UIView *vBottomCover = [[UIView alloc]initWithFrame:CGRectMake(0, -1, tableView.frame.size.width, 1)];
@@ -50,7 +54,7 @@
     lblVersion.textAlignment = NSTextAlignmentCenter;
     lblVersion.textColor = [UIColor colorWithWhite:1 alpha:0.6f];
     lblVersion.font = [UIFont systemFontOfSize:12];
-    lblVersion.text=version;   
+    lblVersion.text=version;
     [lblVersion sizeToFit];
     
     UIButton *btnLink = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, tableView.frame.size.width, 0)];
@@ -80,6 +84,9 @@
     if (isHot) {
         ivLogo.userInteractionEnabled=YES;
         UITapGestureRecognizer *tapGestureTel = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(toNetworkMonitor)];
+        if(target && selector && [target respondsToSelector:selector]){
+            tapGestureTel = [[UITapGestureRecognizer alloc]initWithTarget:target action:selector];
+        }
         [ivLogo addGestureRecognizer:tapGestureTel];
         btnLink.frame = CGRectMake((footer.frame.size.width - btnLink.frame.size.width)/2, CGRectGetMaxY(lblVersion.frame), btnLink.frame.size.width, btnLink.frame.size.height);
         [footer addSubview:btnLink];

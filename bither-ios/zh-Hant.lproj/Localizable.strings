@@ -494,3 +494,6 @@
 
 /* Private Key Management */
 "private_key_management" = "私鑰管理";
+
+// Raw Private Key
+"raw_private_key_not_safe" = "這個私鑰不安全";
