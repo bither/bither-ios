@@ -110,6 +110,9 @@
 /* Class = "IBUILabel"; text = "0000000000000000163440df04bc24eccb48a9d46c64dce3be979e2e6a35aa13"; ObjectID = "QaN-4R-hDw"; */
 "QaN-4R-hDw.text" = "0000000000000000163440df04bc24eccb48a9d46c64dce3be979e2e6a35aa13";
 
+/* Class = "IBUIButton"; normalTitle = "1"; ObjectID = "RIA-YK-ZlZ"; */
+"RIA-YK-ZlZ.normalTitle" = "1";
+
 /* Class = "IBUILabel"; text = "Label"; ObjectID = "SLL-YQ-ttn"; */
 "SLL-YQ-ttn.text" = "Label";
 
@@ -175,6 +178,9 @@
 
 /* Class = "IBUILabel"; text = "Label"; ObjectID = "gbe-Xl-yCZ"; */
 "gbe-Xl-yCZ.text" = "Label";
+
+/* Class = "IBUIButton"; normalTitle = "0"; ObjectID = "hQL-T3-YNx"; */
+"hQL-T3-YNx.normalTitle" = "0";
 
 /* Class = "IBUILabel"; text = "%"; ObjectID = "jDX-wx-Vm4"; */
 "jDX-wx-Vm4.text" = "%";
@@ -280,3 +286,15 @@
 
 /* Class = "IBUILabel"; text = "Label"; ObjectID = "zLo-PY-kep"; */
 "zLo-PY-kep.text" = "Label";
+
+/* Class = "IBUILabel"; text = "Raw Private Key"; ObjectID = "7q1-Od-7M4"; */
+"7q1-Od-7M4.text" = "Raw Private Key";
+
+/* Class = "IBUIButton"; normalTitle = "Add This Private Key"; ObjectID = "zjg-wy-EHw"; */
+"zjg-wy-EHw.normalTitle" = "Add This Private Key";
+
+/* Class = "IBUILabel"; text = "Address"; ObjectID = "9VQ-qA-ave"; */
+"9VQ-qA-ave.text" = "Address";
+
+/* Class = "IBUILabel"; text = "Private Key"; ObjectID = "he8-50-11R"; */
+"he8-50-11R.text" = "Private Key";

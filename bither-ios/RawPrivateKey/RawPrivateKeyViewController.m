@@ -40,6 +40,7 @@
 @property (weak, nonatomic) IBOutlet UIView *vShow;
 @property (weak, nonatomic) IBOutlet UILabel *lblPrivateKey;
 @property (weak, nonatomic) IBOutlet UILabel *lblAddress;
+@property (weak, nonatomic) IBOutlet UIButton *btnAdd;
 
 @end
 
@@ -50,6 +51,10 @@
     self.vData.restrictedSize = CGSizeMake(self.vData.frame.size.width, self.vInput.frame.size.height * 0.52f);
     self.vData.dataSize = CGSizeMake(16, 16);
     self.vButtons.frame = CGRectMake(self.vButtons.frame.origin.x, CGRectGetMaxY(self.vData.frame), self.vButtons.frame.size.width, self.vInput.frame.size.height - CGRectGetMaxY(self.vData.frame));
+    CGRect frame = self.btnAdd.frame;
+    frame.size.width = [self.btnAdd sizeThatFits:CGSizeMake(CGFLOAT_MAX, CGFLOAT_MAX)].width + 30;
+    frame.origin.x -= (frame.size.width - self.btnAdd.frame.size.width) / 2;
+    self.btnAdd.frame = frame;
 }
 
 -(void)handleData{

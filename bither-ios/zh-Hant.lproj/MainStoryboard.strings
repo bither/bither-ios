@@ -235,3 +235,15 @@
 
 /* Class = "IBUIButton"; normalTitle = "Switch to Bither Cold"; ObjectID = "4pa-hj-c7j"; */
 "4pa-hj-c7j.normalTitle" = "切換到冷錢包";
+
+/* Class = "IBUILabel"; text = "Raw Private Key"; ObjectID = "7q1-Od-7M4"; */
+"7q1-Od-7M4.text" = "原始私鑰";
+
+/* Class = "IBUIButton"; normalTitle = "Add This Private Key"; ObjectID = "zjg-wy-EHw"; */
+"zjg-wy-EHw.normalTitle" = "添加此私鑰";
+
+/* Class = "IBUILabel"; text = "Address"; ObjectID = "9VQ-qA-ave"; */
+"9VQ-qA-ave.text" = "地址";
+
+/* Class = "IBUILabel"; text = "Private Key"; ObjectID = "he8-50-11R"; */
+"he8-50-11R.text" = "私鑰";
