@@ -497,3 +497,8 @@
 
 // Raw Private Key
 "raw_private_key_not_safe" = "这个私钥不安全";
+
+// QR Code Precision
+"qr_code_quality_setting_name" = "二维码精度";
+"qr_code_quality_setting_normal" = "正常";
+"qr_code_quality_setting_low" = "较低";

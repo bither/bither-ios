@@ -70,7 +70,7 @@
     }
     [self configureSize];
     
-    UIImageView *ivBg = [[UIImageView alloc]initWithFrame:CGRectMake(1, 1, self.frame.size.width - 1, self.frame.size.height - 1)];
+    UIImageView *ivBg = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height)];
     ivBg.image = [UIImage imageNamed:@"border_bottom_right"];
     ivBg.contentMode = UIViewContentModeScaleToFill;
     [self addSubview:ivBg];
