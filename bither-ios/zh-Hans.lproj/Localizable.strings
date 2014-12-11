@@ -502,3 +502,6 @@
 "qr_code_quality_setting_name" = "二维码精度";
 "qr_code_quality_setting_normal" = "正常";
 "qr_code_quality_setting_low" = "较低";
+
+// Blockmeta
+"address_option_view_on_blockmeta" = "在BlockMeta.com上查看";

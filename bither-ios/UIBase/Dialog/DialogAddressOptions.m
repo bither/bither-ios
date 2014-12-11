@@ -18,6 +18,7 @@
 
 #import "DialogAddressOptions.h"
 #import "NSString+Size.h"
+#import "UserDefaultsUtil.h"
 
 #define kButtonHeight (44)
 #define kButtonEdgeInsets (UIEdgeInsetsMake(0, 10, 0, 10))
@@ -36,8 +37,9 @@
 -(instancetype)initWithAddress:(BTAddress*)address andDelegate:(NSObject<DialogAddressOptionsDelegate>*)delegate{
     NSString* viewStr = NSLocalizedString(@"View on Blockchain.info", nil);
     NSString* manageStr = NSLocalizedString(@"private_key_management", nil);
-    CGFloat width = MAX([viewStr sizeWithRestrict:CGSizeMake(CGFLOAT_MAX, kButtonHeight) font:[UIFont systemFontOfSize:kFontSize]].width,
-                        [manageStr sizeWithRestrict:CGSizeMake(CGFLOAT_MAX, kButtonHeight) font:[UIFont systemFontOfSize:kFontSize]].width) +
+    CGFloat width = MAX(MAX([viewStr sizeWithRestrict:CGSizeMake(CGFLOAT_MAX, kButtonHeight) font:[UIFont systemFontOfSize:kFontSize]].width,
+                        [manageStr sizeWithRestrict:CGSizeMake(CGFLOAT_MAX, kButtonHeight) font:[UIFont systemFontOfSize:kFontSize]].width),
+                        [NSLocalizedString(@"address_option_view_on_blockmeta", nil) sizeWithRestrict:CGSizeMake(CGFLOAT_MAX, kButtonHeight) font:[UIFont systemFontOfSize:kFontSize]].width) +
                         kButtonEdgeInsets.left + kButtonEdgeInsets.right;
     self = [super initWithFrame:CGRectMake(0, 0, width, kHeight)];
     if(self){
@@ -56,6 +58,15 @@
     seperator.autoresizingMask = UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleWidth;
     seperator.backgroundColor = [UIColor colorWithWhite:1 alpha:0.5];
     [self addSubview:seperator];
+    
+    if([UserDefaultsUtil instance].localeIsChina){
+        bottom += 1;
+        bottom = [self createButtonWithText:NSLocalizedString(@"address_option_view_on_blockmeta", nil) top:bottom action:@selector(viewOnBlockMetaPressed:)];
+        UIView *seperator = [[UIView alloc]initWithFrame:CGRectMake(0, bottom, self.frame.size.width, 1)];
+        seperator.autoresizingMask = UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleWidth;
+        seperator.backgroundColor = [UIColor colorWithWhite:1 alpha:0.5];
+        [self addSubview:seperator];
+    }
     
     if(hasPrivateKey){
         bottom += 1;
@@ -93,6 +104,14 @@
     [self dismissWithCompletion:^{
         if(self.delegate && [self.delegate respondsToSelector:@selector(showAddressOnBlockChainInfo)]){
             [self.delegate showAddressOnBlockChainInfo];
+        }
+    }];
+}
+
+-(void)viewOnBlockMetaPressed:(id)sender{
+    [self dismissWithCompletion:^{
+        if(self.delegate && [self.delegate respondsToSelector:@selector(showAddressOnBlockMeta)]){
+            [self.delegate showAddressOnBlockMeta];
         }
     }];
 }

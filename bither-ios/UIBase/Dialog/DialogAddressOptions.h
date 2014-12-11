@@ -22,6 +22,7 @@
 @protocol DialogAddressOptionsDelegate <NSObject>
 -(void)stopMonitorAddress;
 -(void)showAddressOnBlockChainInfo;
+-(void)showAddressOnBlockMeta;
 -(void)showPrivateKeyQrCode;
 -(void)showPrivateKeyManagement;
 @end
