@@ -51,6 +51,7 @@
     self.page.view.frame = CGRectMake(0, TabBarHeight, self.view.frame.size.width, self.view.frame.size.height - TabBarHeight);
     [self.view insertSubview:self.page.view atIndex:0];
     self.pvSync.hidden = YES;
+    self.pvSync.progress = 0;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(syncProgress:) name:BTPeerManagerSyncProgressNotification object:nil];
 }
 
@@ -198,6 +199,7 @@
 -(void)delayHidePvSync{
     [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(delayHidePvSync) object:nil];
     self.pvSync.hidden = YES;
+    self.pvSync.progress = 0;
 }
 
 -(void)initApp{
