@@ -15,6 +15,7 @@
 #import "DialogTotalBalance.h"
 #import "UserDefaultsUtil.h"
 
+
 #define kHorizontalPadding (5)
 #define kLabelLeftGap (-7)
 #define kLabelRightGap (1)
@@ -139,10 +140,17 @@
 
 -(void)showDialog{
     self.isDialogShown = YES;
-    DialogTotalBalance *dialog = [[DialogTotalBalance alloc]init];
-    dialog.listener = self;
-    [dialog showFromView:self];
-    [self configureArrow];
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        [[BTAddressManager instance] allAddresses];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            DialogTotalBalance *dialog = [[DialogTotalBalance alloc]init];
+            dialog.listener = self;
+            [dialog showFromView:self];
+            [self configureArrow];
+        });
+
+  
+    });
 }
 
 -(void)dialogDismissed{
