@@ -23,17 +23,38 @@
 @implementation UnitUtil
 
 + (int64_t)amountForString:(NSString *)string unit:(BitcoinUnit)unit{
-    NSNumberFormatter* format = [NSNumberFormatter new];
-    format.lenient = YES;
-    format.numberStyle = NSNumberFormatterCurrencyStyle;
-    format.minimumFractionDigits = 0;
-    format.negativeFormat = [format.positiveFormat
-                             stringByReplacingCharactersInRange:[format.positiveFormat rangeOfString:@"#"]
-                             withString:@"-#"];
-    format.currencySymbol = @"";
-    format.maximumFractionDigits = log10f([UnitUtil satoshisForUnit:unit]);
-    format.maximum = @(2100000000000000.0 / [UnitUtil satoshisForUnit:unit]);
-    return ([[format numberFromString:string] doubleValue] + DBL_EPSILON)*pow(10.0, format.maximumFractionDigits);
+    string = [string stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+    NSRange minusRange = [string rangeOfString:@"-"];
+    BOOL negative = NO;
+    if(minusRange.location == 0 && minusRange.length == 1){
+        string = [string substringFromIndex:minusRange.location + minusRange.length];
+        negative = YES;
+    }
+    NSRange pointRange = [string rangeOfString:@"."];
+    int64_t satoshis = [UnitUtil satoshisForUnit:unit];
+    
+    int64_t whole;
+    if(pointRange.length > 0){
+        whole = [string substringWithRange:NSMakeRange(0, pointRange.location)].intValue;
+    }else{
+        whole = string.integerValue;
+    }
+    whole = whole * satoshis;
+    
+    int64_t part = 0;
+    if(pointRange.length > 0){
+        NSString* partStr = [string substringFromIndex:pointRange.location + pointRange.length];
+        int64_t desiredLength = log10(satoshis);
+        if(desiredLength < partStr.length){
+            partStr = [partStr substringToIndex:desiredLength];
+        }
+        int64_t lackLength = desiredLength - partStr.length;
+        if(lackLength >= 0){
+            part = partStr.integerValue * pow(10, lackLength);
+        }
+    }
+    
+    return whole + part;
 }
 
 + (int64_t)amountForString:(NSString *)string{
