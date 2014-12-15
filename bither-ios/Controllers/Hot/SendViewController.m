@@ -76,6 +76,7 @@
         }
     }
     dp = [[DialogProgressChangable alloc]initWithMessage:NSLocalizedString(@"Please wait…", nil)];
+    dp.touchOutSideToDismiss = NO;
     [self check];
 }
 
