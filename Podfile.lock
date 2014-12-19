@@ -72,7 +72,7 @@ PODS:
   - OpenSSL (1.0.110)
   - Reachability (3.1.1)
   - RegexKitLite (4.0)
-  - SimpleKeychain (0.2.1)
+  - SimpleKeychain (0.2.2)
 
 DEPENDENCIES:
   - Bitheri (from `git@github.com:bither/bitheri.git`, branch `develop`)
@@ -89,7 +89,7 @@ EXTERNAL SOURCES:
 
 CHECKOUT OPTIONS:
   Bitheri:
-    :commit: b4d4f179f2b7f6e07b818773100bb3115c4a94a5
+    :commit: 02fa2b90988b61eda5d399549d77831bea1876bb
     :git: git@github.com:bither/bitheri.git
 
 SPEC CHECKSUMS:
@@ -102,6 +102,6 @@ SPEC CHECKSUMS:
   OpenSSL: 72a82aa51b056ae5833307a3fef9b571f38ce11c
   Reachability: 8e9635e3cb4f98e7f825e51147f677ecc694d0e7
   RegexKitLite: c0e4c12e6e7de0769f3a3ed679f0f61604170661
-  SimpleKeychain: ebcd1e41377d29f2bf3c29531acfdc35cf929d9f
+  SimpleKeychain: 05c1ff0ef0c553833d13851fbcf701a55f0f12a3
 
 COCOAPODS: 0.35.0
