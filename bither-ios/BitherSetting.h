@@ -73,6 +73,8 @@
 #define SMALL_IMAGE_WIDTH  150
 #define IMAGE_WIDTH 612
 
+#define CFBundleShortVersionString @"CFBundleShortVersionString"
+
 
 typedef void (^DictResponseBlock)(NSDictionary *dict);
 typedef void (^IdResponseBlock)(id response);

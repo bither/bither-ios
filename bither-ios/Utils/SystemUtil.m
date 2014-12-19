@@ -18,12 +18,13 @@
 
 
 #import "SystemUtil.h"
+#import "BitherSetting.h"
 
 @implementation SystemUtil
 
 +(NSInteger)getVersionCode{
     NSDictionary* infoDict =[[NSBundle mainBundle] infoDictionary];
-    NSString * versionString= [infoDict objectForKey:@"CFBundleVersion"];
+    NSString * versionString= [infoDict objectForKey:CFBundleShortVersionString];
     versionString=[versionString stringByReplacingOccurrencesOfString:@"." withString:@""];
     return [versionString integerValue];
 }
