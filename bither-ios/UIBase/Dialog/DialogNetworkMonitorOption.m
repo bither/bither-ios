@@ -7,6 +7,7 @@
 //
 
 #import "DialogNetworkMonitorOption.h"
+#import "BTPeerManager.h"
 #import "NSString+Size.h"
 
 #define kButtonHeight (44)
@@ -47,7 +48,7 @@
 
 -(void)clearPeerPressed:(id)sender{
     [self dismissWithCompletion:^{
-        
+        [[BTPeerManager instance]clearPeerAndRestart];
     }];
 }
 
