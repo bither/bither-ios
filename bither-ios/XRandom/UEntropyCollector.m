@@ -94,7 +94,8 @@
             [randomBytes getBytes:&randomIndex length:sizeof(randomIndex)];
             [result appendUInt8:bytes[randomIndex % data.length]];
         }
-        
+        Byte lastByteOfTime = [self lastByteOfTime];
+        [result appendBytes:&lastByteOfTime length:sizeof(Byte)];
         dispatch_async(queue, ^{
             if(shouldCollectData && output && output.hasSpaceAvailable){
                 [output write:result.bytes maxLength:result.length];
@@ -197,6 +198,19 @@
     if(shouldCollectData){
         [self onResume];
     }
+}
+
+-(Byte)lastByteOfTime{
+    NSInteger time = [NSDate new].timeIntervalSince1970 * 1000.0;
+    NSMutableData* data = [NSMutableData new];
+    [data appendBytes:&time length:sizeof(NSInteger)];
+    NSUInteger targetByteIndex = 0;
+    if(CFByteOrderGetCurrent() == CFByteOrderBigEndian){
+        targetByteIndex = data.length - 1;
+    }
+    Byte d;
+    [data getBytes:&d range:NSMakeRange(targetByteIndex, 1)];
+    return d;
 }
 
 -(void)dealloc{
