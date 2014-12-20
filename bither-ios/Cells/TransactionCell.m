@@ -24,6 +24,8 @@
 #import "DialogAddressFull.h"
 #import "NSString+Size.h"
 #import "UIBaseUtil.h"
+#import "BTPeerManager.h"
+#import "DialogAlert.h"
 
 #define kConfidenceIconRightMargin (10)
 
@@ -63,6 +65,7 @@
                 break;
             }
         }
+        [self addGestureRecognizer:[[UILongPressGestureRecognizer alloc]initWithTarget:self action:@selector(longPressed:)]];
     }
     return self;
 }
@@ -186,6 +189,31 @@
         }
     }else{
         return 0;
+    }
+}
+
+-(void)longPressed:(UILongPressGestureRecognizer *)gestureRecognizer{
+    if (gestureRecognizer.state != UIGestureRecognizerStateBegan){
+        return;
+    }
+    if([BTPeerManager instance].running && ![BTPeerManager instance].synchronizing && _tx && _address){
+        NSCalendar* cal = [NSCalendar currentCalendar];
+        NSDateComponents *com = [[NSDateComponents alloc] init];
+        com.day = -2;
+        NSDate *twoDaysAgo = [cal dateByAddingComponents:com toDate:[NSDate new] options:0];
+        if(_tx.confirmationCnt <= 0 && [[NSDate dateWithTimeIntervalSince1970:_tx.txTime] compare:twoDaysAgo] == NSOrderedAscending){
+            [[[DialogAlert alloc]initWithMessage:NSLocalizedString(@"manual_delete_transaction_warning", nil) confirm:^{
+                dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+                    [_address removeTx:_tx.txHash];
+                    __weak __block UIViewController* vc = self.getUIViewController;
+                    if([vc respondsToSelector:@selector(refresh)]){
+                        dispatch_async(dispatch_get_main_queue(), ^{
+                            [vc performSelector:@selector(refresh)];
+                        });
+                    }
+                });
+            } cancel:nil]showInWindow:self.window];
+        }
     }
 }
 

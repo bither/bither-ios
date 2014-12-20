@@ -508,3 +508,6 @@
 
 // Network Monitor Options
 "network_monitor_clear_peers" = "清空節點";
+
+// Manual Delete Transaction
+"manual_delete_transaction_warning" = "刪除此交易?";
