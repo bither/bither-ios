@@ -38,11 +38,12 @@
 #import <Bitheri/BTSettings.h>
 #import <Bitheri/BTPeerManager.h>
 #import "BTQRCodeUtil.h"
+#import "DialogSendOption.h"
 
 #define kBalanceFontSize (15)
 #define kSendButtonQrIconSize (20)
 
-@interface UnsignedTransactionViewController ()<UITextFieldDelegate,ScanQrCodeDelegate,DialogSendTxConfirmDelegate>{
+@interface UnsignedTransactionViewController ()<UITextFieldDelegate,ScanQrCodeDelegate,DialogSendTxConfirmDelegate,DialogSendOptionDelegate>{
     DialogProgressChangable *dp;
     BOOL needConfirm;
 }
@@ -324,6 +325,15 @@
         [self.btnSend setTitle:NSLocalizedString(@"Send", nil) forState:UIControlStateNormal];
         self.lblPayTo.text = NSLocalizedString(@"Pay to", nil);
     }
+}
+
+- (IBAction)optionPressed:(id)sender {
+    [self hideKeyboard];
+    [[[DialogSendOption alloc]initWithDelegate:self]showInWindow:self.view.window];
+}
+
+-(void)selectChangeAddress{
+
 }
 
 -(void)configureBalance{

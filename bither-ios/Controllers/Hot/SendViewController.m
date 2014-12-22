@@ -32,10 +32,11 @@
 #import "PeerUtil.h"
 #import "TransactionsUtil.h"
 #import "CurrencyCalculatorLink.h"
+#import "DialogSendOption.h"
 
 #define kBalanceFontSize (15)
 
-@interface SendViewController ()<UITextFieldDelegate,ScanQrCodeDelegate,DialogSendTxConfirmDelegate>{
+@interface SendViewController ()<UITextFieldDelegate,ScanQrCodeDelegate,DialogSendTxConfirmDelegate, DialogSendOptionDelegate>{
     DialogProgressChangable *dp;
 }
 @property (weak, nonatomic) IBOutlet UILabel *lblBalancePrefix;
@@ -254,6 +255,15 @@
         [self.btnSend setTitle:NSLocalizedString(@"Send", nil) forState:UIControlStateNormal];
         self.lblPayTo.text = NSLocalizedString(@"Pay to", nil);
     }
+}
+
+- (IBAction)optionPressed:(id)sender {
+    [self hideKeyboard];
+    [[[DialogSendOption alloc]initWithDelegate:self]showInWindow:self.view.window];
+}
+
+-(void)selectChangeAddress{
+    
 }
 
 -(void)configureBalance{
