@@ -11,7 +11,7 @@
 
 #define kButtonHeight (44)
 #define kButtonEdgeInsets (UIEdgeInsetsMake(0, 10, 0, 10))
-#define kWidth ([UIScreen mainScreen].bounds.size.width * 0.6f)
+#define kWidth ([UIScreen mainScreen].bounds.size.width * 0.7f)
 #define kHeaderHeight (44)
 #define kMaxHeight ([UIScreen mainScreen].bounds.size.height * 0.6f)
 #define kFontSize (16)
@@ -65,9 +65,17 @@
     tv.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
     tv.backgroundColor = [UIColor clearColor];
     tv.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
-    tv.separatorInset = UIEdgeInsetsMake(0, 0, 0, 0);
+    tv.separatorInset = UIEdgeInsetsZero;
+    if([tv respondsToSelector:@selector(setLayoutMargins:)]){
+        tv.layoutMargins = UIEdgeInsetsZero;
+    }
     [tv selectRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] animated:NO scrollPosition:YES];
     [self addSubview:tv];
+    
+    UIView* v = [[UIView alloc]initWithFrame:CGRectMake(0, kHeaderHeight - 1 / [UIScreen mainScreen].scale, self.frame.size.width, 1 / [UIScreen mainScreen].scale)];
+    v.backgroundColor = tv.separatorColor;
+    v.autoresizingMask = UIViewAutoresizingFlexibleBottomMargin;
+    [self addSubview:v];
 }
 
 
@@ -86,6 +94,8 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     _changeAddress = [addresses objectAtIndex:indexPath.row];
+    [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(dismiss) object:nil];
+    [self performSelector:@selector(dismiss) withObject:nil afterDelay:0.3];
 }
 
 -(BTAddress*)changeAddress{
@@ -114,7 +124,10 @@
 
 -(void)firstConfigure{
     self.selectionStyle = UITableViewCellSelectionStyleNone;
-    self.separatorInset = UIEdgeInsetsMake(0, 0, 0, 0);
+    self.separatorInset = UIEdgeInsetsZero;
+    if([self respondsToSelector:@selector(setLayoutMargins:)]){
+        self.layoutMargins = UIEdgeInsetsZero;
+    }
     self.backgroundColor = [UIColor clearColor];
     self.lblAddress = [[UILabel alloc]initWithFrame:CGRectMake(kButtonEdgeInsets.left, kButtonEdgeInsets.top, self.frame.size.width - kButtonEdgeInsets.left - kButtonEdgeInsets.right, self.frame.size.height - kButtonEdgeInsets.top - kButtonEdgeInsets.bottom)];
     self.lblAddress.font = [UIFont systemFontOfSize:kFontSize];
@@ -125,7 +138,7 @@
     self.ivSelected.frame = CGRectMake(self.frame.size.width - kButtonEdgeInsets.right - self.ivSelected.frame.size.width, (self.frame.size.height - self.ivSelected.frame.size.height) / 2, self.ivSelected.frame.size.width, self.ivSelected.frame.size.height);
     self.ivSelected.autoresizingMask = UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleLeftMargin;
     self.ivType = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"address_type_private"]];
-    self.ivType.frame = CGRectMake(self.ivSelected.frame.origin.x - self.ivType.frame.size.width - 5, (self.frame.size.height - self.ivType.frame.size.height) / 2, self.ivType.frame.size.width, self.ivType.frame.size.height);
+    self.ivType.frame = CGRectMake(self.ivSelected.frame.origin.x - self.ivType.frame.size.width - 10, (self.frame.size.height - self.ivType.frame.size.height) / 2, self.ivType.frame.size.width, self.ivType.frame.size.height);
     self.ivType.autoresizingMask = UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleLeftMargin;
     [self addSubview:self.lblAddress];
     [self addSubview:self.ivType];
@@ -151,6 +164,15 @@
 -(void)setSelected:(BOOL)selected animated:(BOOL)animated{
     [super setSelected:selected animated:animated];
     self.ivSelected.hidden = !selected;
+}
+
+-(void)setHighlighted:(BOOL)highlighted animated:(BOOL)animated{
+    [super setHighlighted:highlighted animated:animated];
+    if(highlighted){
+        self.backgroundColor = [UIColor colorWithWhite:0 alpha:0.8];
+    }else{
+        self.backgroundColor = [UIColor clearColor];
+    }
 }
 
 @end
