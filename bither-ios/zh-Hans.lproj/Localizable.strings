@@ -513,3 +513,10 @@
 "manual_delete_transaction_warning" = "删除此交易?";
 
 "old_version_no_support_change_adress"="旧版本二维码不支持选择找零地址";
+
+// Select Change Address
+"select_change_address_option_name" = "选择找零地址";
+"select_change_address_label" = "选择找零地址";
+"send_confirm_change_to_label" = "找零到:";
+"sign_transaction_change_to_label" = "找零到:";
+"sign_transaction_change_amount_label" = "找零金额:";
