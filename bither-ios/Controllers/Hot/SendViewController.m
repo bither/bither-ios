@@ -33,6 +33,7 @@
 #import "TransactionsUtil.h"
 #import "CurrencyCalculatorLink.h"
 #import "DialogSendOption.h"
+#import "DialogSelectChangeAddress.h"
 
 #define kBalanceFontSize (15)
 
@@ -47,6 +48,7 @@
 @property (weak, nonatomic) IBOutlet UITextField *tfPassword;
 @property (weak, nonatomic) IBOutlet UIButton *btnSend;
 @property (weak, nonatomic) IBOutlet UIView *vTopBar;
+@property DialogSelectChangeAddress *dialogSelectChangeAddress;
 
 @end
 
@@ -78,6 +80,7 @@
     }
     dp = [[DialogProgressChangable alloc]initWithMessage:NSLocalizedString(@"Please wait…", nil)];
     dp.touchOutSideToDismiss = NO;
+    self.dialogSelectChangeAddress = [[DialogSelectChangeAddress alloc]initWithFromAddress:self.address];
     [self check];
 }
 
@@ -263,7 +266,7 @@
 }
 
 -(void)selectChangeAddress{
-    
+    [self.dialogSelectChangeAddress showInWindow:self.view.window];
 }
 
 -(void)configureBalance{

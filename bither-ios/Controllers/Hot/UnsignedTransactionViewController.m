@@ -39,6 +39,7 @@
 #import <Bitheri/BTPeerManager.h>
 #import "BTQRCodeUtil.h"
 #import "DialogSendOption.h"
+#import "DialogSelectChangeAddress.h"
 
 #define kBalanceFontSize (15)
 #define kSendButtonQrIconSize (20)
@@ -54,6 +55,7 @@
 @property (strong, nonatomic) IBOutlet CurrencyCalculatorLink *amtLink;
 @property (weak, nonatomic) IBOutlet UIButton *btnSend;
 @property (weak, nonatomic) IBOutlet UIView *vTopBar;
+@property DialogSelectChangeAddress *dialogSelectChangeAddress;
 
 @property BTTx* tx;
 @end
@@ -89,6 +91,7 @@
     dp = [[DialogProgressChangable alloc]initWithMessage:NSLocalizedString(@"Please wait…", nil)];
     dp.touchOutSideToDismiss = NO;
     needConfirm = YES;
+    self.dialogSelectChangeAddress = [[DialogSelectChangeAddress alloc]initWithFromAddress:self.address];
     [self check];
 }
 
@@ -333,7 +336,7 @@
 }
 
 -(void)selectChangeAddress{
-
+    [self.dialogSelectChangeAddress showInWindow:self.view.window];
 }
 
 -(void)configureBalance{

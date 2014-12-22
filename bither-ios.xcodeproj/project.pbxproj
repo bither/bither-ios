@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		0A259E251A47F19100D7F707 /* DialogSendOption.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A259E241A47F19100D7F707 /* DialogSendOption.m */; };
+		0A259E281A47FDF600D7F707 /* DialogSelectChangeAddress.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A259E271A47FDF600D7F707 /* DialogSelectChangeAddress.m */; };
 		0A446C151A441393000CD25A /* DialogNetworkMonitorOption.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A446C141A441393000CD25A /* DialogNetworkMonitorOption.m */; };
 		0A515F781A36A2C0008292AF /* RawDataView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A515F771A36A2C0008292AF /* RawDataView.m */; };
 		0A515F7B1A36CAE3008292AF /* RawPrivateKeyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A515F7A1A36CAE3008292AF /* RawPrivateKeyViewController.m */; };
@@ -228,6 +229,8 @@
 /* Begin PBXFileReference section */
 		0A259E231A47F19100D7F707 /* DialogSendOption.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DialogSendOption.h; sourceTree = "<group>"; };
 		0A259E241A47F19100D7F707 /* DialogSendOption.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DialogSendOption.m; sourceTree = "<group>"; };
+		0A259E261A47FDF600D7F707 /* DialogSelectChangeAddress.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DialogSelectChangeAddress.h; sourceTree = "<group>"; };
+		0A259E271A47FDF600D7F707 /* DialogSelectChangeAddress.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DialogSelectChangeAddress.m; sourceTree = "<group>"; };
 		0A446C131A441393000CD25A /* DialogNetworkMonitorOption.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DialogNetworkMonitorOption.h; sourceTree = "<group>"; };
 		0A446C141A441393000CD25A /* DialogNetworkMonitorOption.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DialogNetworkMonitorOption.m; sourceTree = "<group>"; };
 		0A515F761A36A2C0008292AF /* RawDataView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RawDataView.h; sourceTree = "<group>"; };
@@ -1179,6 +1182,8 @@
 				0A446C141A441393000CD25A /* DialogNetworkMonitorOption.m */,
 				0A259E231A47F19100D7F707 /* DialogSendOption.h */,
 				0A259E241A47F19100D7F707 /* DialogSendOption.m */,
+				0A259E261A47FDF600D7F707 /* DialogSelectChangeAddress.h */,
+				0A259E271A47FDF600D7F707 /* DialogSelectChangeAddress.m */,
 			);
 			path = Dialog;
 			sourceTree = "<group>";
@@ -1457,6 +1462,7 @@
 				AC454DE11A1F250C000AF4ED /* PinCodeDisableViewController.m in Sources */,
 				AC202AD0196B8B7A00033EC1 /* Setting.m in Sources */,
 				ACE7E71019EB78AE00F7AA3A /* ImageCropView.m in Sources */,
+				0A259E281A47FDF600D7F707 /* DialogSelectChangeAddress.m in Sources */,
 				ACC21A6B194C2BD900E02542 /* ColdModeCheckConnectionView.m in Sources */,
 				ACA11DCA19F64D560087D39C /* RCheckViewController.m in Sources */,
 				ACEE7D2C19D3F9F500932B39 /* ScanQrCodeViewController.m in Sources */,
