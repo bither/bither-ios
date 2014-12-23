@@ -25,6 +25,7 @@
 -(void)showAddressOnBlockMeta;
 -(void)showPrivateKeyQrCode;
 -(void)showPrivateKeyManagement;
+-(void)signMessage;
 @end
 
 @interface DialogAddressOptions : DialogCentered
