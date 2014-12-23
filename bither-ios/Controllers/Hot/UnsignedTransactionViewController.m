@@ -142,7 +142,7 @@
                                 DialogSendTxConfirm *dialog = [[DialogSendTxConfirm alloc]initWithTx:self.tx from:self.address to:addressBlock changeTo:self.dialogSelectChangeAddress.changeAddress.address delegate:self];
                                 [dialog showInWindow:self.view.window];
                             }else{
-                                [self onSendTxConfirmed:self.tx changeAddress:nil];
+                                [self onSendTxConfirmed:self.tx changeAddress:self.dialogSelectChangeAddress.changeAddress.address];
                                 needConfirm = YES;
                             }
                         }];
@@ -167,7 +167,7 @@
     txTrans.to = [tx amountSentTo:self.tfAddress.text];
     txTrans.myAddress = self.address.address;
     txTrans.toAddress = self.tfAddress.text;
-    if (![StringUtil isEmpty:changeAddress]) {
+    if (![StringUtil isEmpty:changeAddress] && ![StringUtil compareString:changeAddress compare:self.address.address]) {
         txTrans.changeAddress=changeAddress;
         txTrans.changeAmt=[tx amountSentTo:changeAddress];
     }
