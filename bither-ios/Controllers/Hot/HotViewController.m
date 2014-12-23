@@ -51,6 +51,7 @@
     self.page.view.frame = CGRectMake(0, TabBarHeight, self.view.frame.size.width, self.view.frame.size.height - TabBarHeight);
     [self.view insertSubview:self.page.view atIndex:0];
     self.pvSync.hidden = YES;
+    self.pvSync.progress = 0;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(syncProgress:) name:BTPeerManagerSyncProgressNotification object:nil];
 }
 
@@ -182,9 +183,10 @@
         double progress = ((NSNumber*) notification.object).doubleValue;
         if(progress >= 0 && progress <= 1){
             self.pvSync.hidden = NO;
-            progress = MAX(0.1, progress);
-            [self.pvSync setProgress:progress animated:YES];
-            
+            progress = MAX(0.2, progress);
+            [UIView animateWithDuration:0.5 animations:^{
+                [self.pvSync setProgress:progress animated:YES];
+            }];
         }
         if(progress < 0 || progress >= 1){
             [self performSelector:@selector(delayHidePvSync) withObject:nil afterDelay:0.5];
@@ -197,11 +199,11 @@
 -(void)delayHidePvSync{
     [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(delayHidePvSync) object:nil];
     self.pvSync.hidden = YES;
+    self.pvSync.progress = 0;
 }
 
 -(void)initApp{
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0),^{
-        
         UploadAndDowloadFileFactory * uploadAndDowload=[[UploadAndDowloadFileFactory alloc ] init];
         [uploadAndDowload uploadAvatar:nil andErrorCallBack:nil];
         [uploadAndDowload dowloadAvatar:nil andErrorCallBack:nil];

@@ -155,6 +155,11 @@
     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:url]];
 }
 
+-(void)showAddressOnBlockMeta{
+    NSString *url = [NSString stringWithFormat:@"http://www.blockmeta.com/address/%@", self.address.address];
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:url]];
+}
+
 -(void)showPrivateKeyQrCode{
     DialogPassword *dialog = [[DialogPassword alloc]initWithDelegate:self];
     [dialog showInWindow:self.view.window];

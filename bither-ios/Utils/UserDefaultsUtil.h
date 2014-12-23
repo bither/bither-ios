@@ -67,6 +67,8 @@
 -(void)deletePinCode;
 -(BOOL)checkPinCode:(NSString*)code;
 
+-(BOOL)localeIsChina;
+
 -(KeychainMode) getKeychainMode;
 -(void)setKeychainMode :(KeychainMode ) keychainMode;
 @end

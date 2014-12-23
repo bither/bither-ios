@@ -15,6 +15,7 @@
 #import "DialogTotalBalance.h"
 #import "UserDefaultsUtil.h"
 
+
 #define kHorizontalPadding (5)
 #define kLabelLeftGap (-7)
 #define kLabelRightGap (1)
@@ -50,6 +51,7 @@
 
 -(void)firstConfigure{
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(balanceChanged) name:BitherBalanceChangedNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(balanceChanged) name:BTAddressManagerIsReady object:nil];
     self.lbl = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height)];
     self.lbl.font = [UIFont boldSystemFontOfSize:kFontSize];
     self.lbl.textColor = [UIColor whiteColor];
@@ -138,10 +140,17 @@
 
 -(void)showDialog{
     self.isDialogShown = YES;
-    DialogTotalBalance *dialog = [[DialogTotalBalance alloc]init];
-    dialog.listener = self;
-    [dialog showFromView:self];
-    [self configureArrow];
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        [[BTAddressManager instance] allAddresses];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            DialogTotalBalance *dialog = [[DialogTotalBalance alloc]init];
+            dialog.listener = self;
+            [dialog showFromView:self];
+            [self configureArrow];
+        });
+
+  
+    });
 }
 
 -(void)dialogDismissed{
@@ -165,8 +174,8 @@
 }
 
 -(void)balanceChanged{
-    NSArray* addresses = [BTAddressManager instance].allAddresses;
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        NSArray* addresses = [BTAddressManager instance].allAddresses;
         int64_t balance = 0;
         for(BTAddress *a in addresses){
             balance += a.balance;
@@ -178,7 +187,8 @@
 }
 
 -(void)dealloc{
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:BTAddressManagerIsReady object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:BitherBalanceChangedNotification object:nil];
 }
 
 @end

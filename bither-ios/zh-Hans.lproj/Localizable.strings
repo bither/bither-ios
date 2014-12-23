@@ -421,6 +421,7 @@
 "Switch QRCode"="切换二维码";
 "Switched to old version QR Codes, sign with Bither Cold <1.1.0"="已切换到旧版二维码，可用 <1.1.0的冷钱包签名";
 "Switched to new version QR Codes, sign with Bither Cold ≧1.1.0"="已切换到新版二维码，可用 ≧1.1.0的冷钱包签名";
+"Camera Permission Required"="需要访问摄像头的权限";
 
 //avatar
 "Set Avatar"="设置头像";
@@ -493,3 +494,20 @@
 
 /* Private Key Management */
 "private_key_management" = "私钥管理";
+
+// Raw Private Key
+"raw_private_key_not_safe" = "这个私钥不安全";
+
+// QR Code Precision
+"qr_code_quality_setting_name" = "二维码精度";
+"qr_code_quality_setting_normal" = "正常";
+"qr_code_quality_setting_low" = "较低";
+
+// Blockmeta
+"address_option_view_on_blockmeta" = "在BlockMeta.com上查看";
+
+// Network Monitor Options
+"network_monitor_clear_peers" = "清空节点";
+
+// Manual Delete Transaction
+"manual_delete_transaction_warning" = "删除此交易?";

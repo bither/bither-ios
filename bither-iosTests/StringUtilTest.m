@@ -18,6 +18,7 @@
 
 #import <XCTest/XCTest.h>
 #import "StringUtil.h"
+#import "UnitUtil.h"
 
 @interface StringUtilTest : XCTestCase
 
@@ -62,18 +63,18 @@
 //    XCTAssertFalse([StringUtil verifyQrcodeTransport:test], @"test false");
     
     NSString * testStr=@"0.00000001";
-    int64_t amount= [StringUtil amountForString:testStr];
-    NSString * str=[StringUtil stringForAmount:amount];
+    int64_t amount= [UnitUtil amountForString:testStr unit:UnitBTC];
+    NSString * str=[UnitUtil stringForAmount:amount unit:UnitBTC];
     XCTAssertTrue([str isEqualToString:testStr], @"test amount");
     
     testStr=@"0.001";
-    amount= [StringUtil amountForString:testStr];
-    str=[StringUtil stringForAmount:amount];
+    amount= [UnitUtil amountForString:testStr unit:UnitBTC];
+    str=[UnitUtil stringForAmount:amount unit:UnitBTC];
     XCTAssertTrue([str isEqualToString:testStr], @"test amount");
     
     testStr=@"0";
-    amount= [StringUtil amountForString:testStr];
-    str=[StringUtil stringForAmount:amount];
+    amount= [UnitUtil amountForString:testStr unit:UnitBTC];
+    str=[UnitUtil stringForAmount:amount unit:UnitBTC];
     XCTAssertTrue([str isEqualToString:@"0.00"], @"test amount");
     
     

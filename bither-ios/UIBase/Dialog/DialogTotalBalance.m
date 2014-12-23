@@ -143,6 +143,7 @@
     [super dialogDidShow];
     [self.chart setAmounts:@[@(hot), @(cold)]];
     [self.chart setNeedsDisplay];
+    
 }
 
 -(void)dialogDidDismiss{

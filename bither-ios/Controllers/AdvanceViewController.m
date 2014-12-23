@@ -45,8 +45,9 @@
 
     NSString * version= [NSString stringWithFormat:NSLocalizedString(@"Based on %@ %@", nil),BITHERI_NAME,BITHERI_VERSION ];
     BOOL isHot=[[BTSettings instance] getAppMode]==HOT;
-    [self configureHeaderAndFooter:self.tableView background:ColorBg isHot:isHot version:version];
+    [self configureHeaderAndFooter:self.tableView background:ColorBg isHot:isHot version:version logoTarget:self logoSelector:@selector(toRawPrivateKey)];
 }
+
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     [self.tableView reloadData];
@@ -90,6 +91,10 @@
     }
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
     [tableView reloadData];
+}
+
+-(void)toRawPrivateKey{
+    [self.navigationController pushViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"RawPrivateKey"] animated:YES];
 }
 
 @end

@@ -18,6 +18,7 @@
 
 #import "NetworkMonitorViewController.h"
 #import "PiPageViewController.h"
+#import "DialogNetworkMonitorOption.h"
 
 @interface NetworkMonitorViewController ()<PiPageViewControllerDelegate>
 
@@ -63,6 +64,9 @@
     self.vTab.selectedSegmentIndex = 0;
 }
 
+- (IBAction)optionPressed:(id)sender {
+    [[[DialogNetworkMonitorOption alloc]init]showInWindow:self.view.window];
+}
 
 -(void)pageIndexChanged:(int) index{
     self.vTab.selectedSegmentIndex = index;

@@ -59,9 +59,9 @@ static StatusBarNotificationWindow* notificationWindow;
     }else{
         [[UIApplication sharedApplication] setMinimumBackgroundFetchInterval:UIApplicationBackgroundFetchIntervalMinimum];
     }
-    [[BTAddressManager instance] initAddress];
     [self upgradePub:^{
     }];
+    [[BTPeerManager instance] initAddress];
     
     if([[BTSettings instance] needChooseMode]){
         [[BTSettings instance] setAppMode:HOT];
@@ -91,6 +91,7 @@ static StatusBarNotificationWindow* notificationWindow;
     [self callInCold:^{
         [[Reachability reachabilityForInternetConnection] startNotifier];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reachabilityChange) name:kReachabilityChangedNotification object:nil];
+        
     }];
     notificationWindow = [[StatusBarNotificationWindow alloc]initWithOriWindow:self.window];
     [[PinCodeUtil instance] becomeActive];

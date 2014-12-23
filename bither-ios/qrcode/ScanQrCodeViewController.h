@@ -16,14 +16,13 @@
 //  See the License for the specific language governing permissions and
 //  limitations under the License.
 
-#import "ZBarReaderViewController.h"
-#import <ZBarSDK/ZBarSDK.h>
+#import <UIKit/UIKit.h>
+#import <AVFoundation/AVFoundation.h>
 
-@interface ScanQrCodeViewController : ZBarReaderViewController<ZBarReaderDelegate>
+@interface ScanQrCodeViewController : UIViewController<AVCaptureMetadataOutputObjectsDelegate>
 
 @property (strong, nonatomic) NSString *scanTitle;
 @property (strong, nonatomic) NSString *scanMessage;
-@property BOOL lowQualityImageProccesing;
 
 @end
 
