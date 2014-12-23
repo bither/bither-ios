@@ -2882,11 +2882,10 @@
                                                         <rect key="frame" x="0.0" y="0.0" width="300" height="110"/>
                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     </imageView>
-                                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="jlw-5g-GF4">
-                                                        <rect key="frame" x="0.0" y="0.0" width="300" height="110"/>
+                                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" id="jlw-5g-GF4">
+                                                        <rect key="frame" x="10" y="10" width="280" height="90"/>
                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                                        <inset key="contentInset" minX="20" minY="20" maxX="20" maxY="20"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                                     </textView>
@@ -2935,19 +2934,19 @@
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     </view>
                                     <view contentMode="scaleToFill" id="U9b-Ad-xlq" userLabel="output">
-                                        <rect key="frame" x="0.0" y="170" width="320" height="124"/>
+                                        <rect key="frame" x="0.0" y="170" width="320" height="117"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" id="RKl-fe-4s2">
-                                                <rect key="frame" x="10" y="7" width="300" height="117"/>
+                                                <rect key="frame" x="10" y="7" width="300" height="110"/>
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 <subviews>
                                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="textarea_background" id="lSZ-wK-k0V">
-                                                        <rect key="frame" x="0.0" y="0.0" width="300" height="117"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="300" height="110"/>
                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     </imageView>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="bottom" lineBreakMode="middleTruncation" id="Zrv-6X-UuL">
-                                                        <rect key="frame" x="8" y="10" width="284" height="99"/>
+                                                        <rect key="frame" x="8" y="10" width="284" height="92"/>
                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                         <state key="normal" image="dropdown_ic_arrow_normal_holo_light">
                                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -2958,10 +2957,9 @@
                                                         </connections>
                                                     </button>
                                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" userInteractionEnabled="NO" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" selectable="NO" id="h75-Ld-Tbk">
-                                                        <rect key="frame" x="0.0" y="0.0" width="300" height="117"/>
+                                                        <rect key="frame" x="10" y="10" width="280" height="90"/>
                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                                        <inset key="contentInset" minX="20" minY="20" maxX="20" maxY="20"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                                     </textView>
