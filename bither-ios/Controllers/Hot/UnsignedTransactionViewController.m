@@ -142,7 +142,7 @@
                                 DialogSendTxConfirm *dialog = [[DialogSendTxConfirm alloc]initWithTx:self.tx from:self.address to:addressBlock changeTo:self.dialogSelectChangeAddress.changeAddress.address delegate:self];
                                 [dialog showInWindow:self.view.window];
                             }else{
-                                [self onSendTxConfirmed:self.tx changeAddress:self.dialogSelectChangeAddress.changeAddress.address];
+                                [self onSendTxConfirmed:self.tx];
                                 needConfirm = YES;
                             }
                         }];
@@ -154,7 +154,7 @@
 }
 
 
--(void)onSendTxConfirmed:(BTTx*)tx changeAddress:(NSString *)changeAddress{
+-(void)onSendTxConfirmed:(BTTx*)tx{
     if(!tx){
         return;
     }
@@ -167,6 +167,7 @@
     txTrans.to = [tx amountSentTo:self.tfAddress.text];
     txTrans.myAddress = self.address.address;
     txTrans.toAddress = self.tfAddress.text;
+    NSString* changeAddress = self.dialogSelectChangeAddress.changeAddress.address;
     if (![StringUtil isEmpty:changeAddress] && ![StringUtil compareString:changeAddress compare:self.address.address]) {
         txTrans.changeAddress=changeAddress;
         txTrans.changeAmt=[tx amountSentTo:changeAddress];
