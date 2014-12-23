@@ -511,3 +511,4 @@
 
 // Manual Delete Transaction
 "manual_delete_transaction_warning" = "刪除此交易?";
+"old_version_no_support_change_adress"="舊版本二維碼不支持選擇找零地址";

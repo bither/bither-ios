@@ -137,8 +137,14 @@
     self.sv.contentSize = CGSizeMake(strs.count * self.sv.frame.size.width, self.sv.frame.size.height);
 }
 - (IBAction)switchQRCode:(id)sender {
-    DialogSwitchQRCode * dialogSwitchQRCode=[[DialogSwitchQRCode alloc] initWithDelegate:self];
-    [dialogSwitchQRCode showInWindow:self.view.window];
+    if ([StringUtil isEmpty:self.changeAddress]) {
+        DialogSwitchQRCode * dialogSwitchQRCode=[[DialogSwitchQRCode alloc] initWithDelegate:self];
+        [dialogSwitchQRCode showInWindow:self.view.window];
+        
+    }else{
+        [self showMsg:NSLocalizedString(@"old_version_no_support_change_adress", nil)];
+    }
+   
 }
 -(void)switchQRCode{
     _isNewVerionQRCode=!_isNewVerionQRCode;
