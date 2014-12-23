@@ -521,3 +521,11 @@
 "sign_transaction_change_to_label" = "找零到:";
 "sign_transaction_change_amount_label" = "找零金额:";
 "select_change_address_change_to_same_warn" = "发送到的地址和找零地址不能相同";
+
+// Sign Message
+"sign_message_activity_name" = "签名消息";
+"sign_message_button" = "签名";
+"sign_message_output_copy" = "复制";
+"sign_message_output_qr" = "显示二维码";
+"sign_message_output_copied" = "内容已复制";
+"sign_message_input_hint" = "待签名的消息";
