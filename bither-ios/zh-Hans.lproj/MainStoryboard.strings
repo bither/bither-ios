@@ -246,3 +246,9 @@
 
 /* Class = "IBUILabel"; text = "Private Key"; ObjectID = "he8-50-11R"; */
 "he8-50-11R.text" = "私钥";
+
+/* Class = "IBUILabel"; text = "Change to"; ObjectID = "gL9-bD-fq2"; */
+"gL9-bD-fq2.text" = "找零到";
+
+/* Class = "IBUILabel"; text = "Change Amount"; ObjectID = "ipI-cb-OYV"; */
+"ipI-cb-OYV.text" = "找零金额";
