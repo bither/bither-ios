@@ -139,7 +139,7 @@
                          __block NSString * addressBlock=toAddress;
                         [dp dismissWithCompletion:^{
                             if(needConfirm){
-                                DialogSendTxConfirm *dialog = [[DialogSendTxConfirm alloc]initWithTx:self.tx from:self.address to:addressBlock delegate:self];
+                                DialogSendTxConfirm *dialog = [[DialogSendTxConfirm alloc]initWithTx:self.tx from:self.address to:addressBlock changeTo:self.dialogSelectChangeAddress.changeAddress.address delegate:self];
                                 [dialog showInWindow:self.view.window];
                             }else{
                                 [self onSendTxConfirmed:self.tx changeAddress:nil];

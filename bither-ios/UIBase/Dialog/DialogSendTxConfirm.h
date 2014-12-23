@@ -27,7 +27,7 @@
 @end
 
 @interface DialogSendTxConfirm : DialogCentered
--(instancetype)initWithTx:(BTTx*)tx from:(BTAddress*)fromAddress to:(NSString*)toAddress delegate:(NSObject<DialogSendTxConfirmDelegate>*)delegate;
+-(instancetype)initWithTx:(BTTx*)tx from:(BTAddress*)fromAddress to:(NSString*)toAddress changeTo:(NSString*)changeAddress delegate:(NSObject<DialogSendTxConfirmDelegate>*)delegate;
 
 @property (weak) NSObject<DialogSendTxConfirmDelegate>* delegate;
 @end

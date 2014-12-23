@@ -129,7 +129,7 @@
                             dispatch_async(dispatch_get_main_queue(), ^{
                                 [dp dismissWithCompletion:^{
                                     [dp changeToMessage:NSLocalizedString(@"Please wait…", nil)];
-                                    DialogSendTxConfirm *dialog = [[DialogSendTxConfirm alloc]initWithTx:tx from:self.address to:addressBlock delegate:self];
+                                    DialogSendTxConfirm *dialog = [[DialogSendTxConfirm alloc]initWithTx:tx from:self.address to:addressBlock changeTo:self.dialogSelectChangeAddress.changeAddress.address delegate:self];
                                     [dialog showInWindow:self.view.window];
                                 }];
                             });

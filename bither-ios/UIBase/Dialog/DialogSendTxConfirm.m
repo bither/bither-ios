@@ -41,17 +41,23 @@
     BTTx *_tx;
     BTAddress *_fromAddress;
     NSString *_toAddress;
+    NSString *_changeAddress;
 }
 @end
 
 @implementation DialogSendTxConfirm
 
--(instancetype)initWithTx:(BTTx *)tx from:(BTAddress*)fromAddress to:(NSString*)toAddress delegate:(NSObject<DialogSendTxConfirmDelegate>*)delegate{
+-(instancetype)initWithTx:(BTTx *)tx from:(BTAddress*)fromAddress to:(NSString*)toAddress changeTo:(NSString*)changeAddress delegate:(NSObject<DialogSendTxConfirmDelegate>*)delegate{
     self = [super initWithFrame:CGRectMake(0, 0, kWidth, 200)];
     if(self){
         _tx = tx;
         _fromAddress = fromAddress;
         _toAddress = toAddress;
+        if(changeAddress){
+            _changeAddress = changeAddress;
+        }else{
+            _changeAddress = _fromAddress.address;
+        }
         self.delegate = delegate;
         [self firstConfigure];
     }
@@ -62,6 +68,10 @@
     NSString *toAddress = _toAddress;
     NSString *amountString = [UnitUtil stringForAmount:[_tx amountSentTo:_toAddress]];
     NSString *feeString = [UnitUtil stringForAmount:[_fromAddress feeForTransaction:_tx]];
+    NSString *changeAmountStr = nil;
+    if(_changeAddress && ![StringUtil compareString:_fromAddress.address compare:_changeAddress] && [_tx amountSentTo:_changeAddress] > 0){
+        changeAmountStr = [UnitUtil stringForAmount:[_tx amountSentTo:_changeAddress]];
+    }
     
     UILabel *lblPayto = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, self.frame.size.width, kLabelHeight)];
     lblPayto.font = [UIFont systemFontOfSize:kLabelFontSize];
@@ -90,7 +100,41 @@
     lblAmountValue.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleBottomMargin;
     lblAmountValue.text = [NSString stringWithFormat:@"%@ %@", amountString, [UnitUtil unitName]];
     
-    UILabel *lblFee = [[UILabel alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(lblAmountValue.frame) + kVerticalGap, self.frame.size.width, kLabelHeight)];
+    CGFloat bottom = CGRectGetMaxY(lblAmountValue.frame);
+    
+    UILabel *lblChangeTo, *lblChangeAddress, *lblChangeAmount, *lblChangeAmountValue;
+    if(![StringUtil isEmpty:changeAmountStr]){
+        lblChangeTo = [[UILabel alloc]initWithFrame:CGRectMake(0, bottom + kVerticalGap, self.frame.size.width, kLabelHeight)];
+        lblChangeTo.font = [UIFont systemFontOfSize:kLabelFontSize];
+        lblChangeTo.textColor = [UIColor colorWithWhite:1 alpha:kLabelAlpha];
+        lblChangeTo.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleBottomMargin;
+        lblChangeTo.text = NSLocalizedString(@"send_confirm_change_to_label", nil);
+        
+        lblChangeAddress = [[UILabel alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(lblChangeTo.frame), self.frame.size.width, kValueHeight)];
+        lblChangeAddress.font = [UIFont systemFontOfSize:kValueFontSize];
+        lblChangeAddress.textColor = [UIColor colorWithWhite:1 alpha:kValueAlpha];
+        lblChangeAddress.adjustsFontSizeToFitWidth = YES;
+        lblChangeAddress.lineBreakMode=UILineBreakModeTailTruncation;
+        lblChangeAddress.numberOfLines=2;
+        lblChangeAddress.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleBottomMargin;
+        lblChangeAddress.text =[StringUtil formatAddress:_changeAddress groupSize:4 lineSize:24];
+        
+        lblChangeAmount = [[UILabel alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(lblChangeAddress.frame) + kVerticalGap, self.frame.size.width, kLabelHeight)];
+        lblChangeAmount.font = [UIFont systemFontOfSize:kLabelFontSize];
+        lblChangeAmount.textColor = [UIColor colorWithWhite:1 alpha:kLabelAlpha];
+        lblChangeAmount.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleBottomMargin;
+        lblChangeAmount.text = NSLocalizedString(@"sign_transaction_change_amount_label", nil);
+        
+        lblChangeAmountValue = [[UILabel alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(lblChangeAmount.frame), self.frame.size.width, kValueHeight)];
+        lblChangeAmountValue.font = [UIFont systemFontOfSize:kValueFontSize];
+        lblChangeAmountValue.textColor = [UIColor colorWithWhite:1 alpha:kValueAlpha];
+        lblChangeAmountValue.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleBottomMargin;
+        lblChangeAmountValue.text = [NSString stringWithFormat:@"%@ %@", changeAmountStr, [UnitUtil unitName]];
+        
+        bottom = CGRectGetMaxY(lblChangeAmountValue.frame);
+    }
+    
+    UILabel *lblFee = [[UILabel alloc]initWithFrame:CGRectMake(0, bottom + kVerticalGap, self.frame.size.width, kLabelHeight)];
     lblFee.font = [UIFont systemFontOfSize:kLabelFontSize];
     lblFee.textColor = [UIColor colorWithWhite:1 alpha:kLabelAlpha];
     lblFee.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleBottomMargin;
@@ -127,6 +171,12 @@
     [self addSubview:lblFeeValue];
     [self addSubview:btnCancel];
     [self addSubview:btnOk];
+    if(lblChangeTo){
+        [self addSubview:lblChangeTo];
+        [self addSubview:lblChangeAddress];
+        [self addSubview:lblChangeAmount];
+        [self addSubview:lblChangeAmountValue];
+    }
 }
 
 -(void)confirmPressed:(id)sender{
