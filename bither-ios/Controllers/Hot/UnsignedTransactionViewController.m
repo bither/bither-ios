@@ -126,7 +126,7 @@
                 u_int64_t value = self.amtLink.amount;
                 NSError * error;
                 NSString * toAddress=[self.tfAddress.text stringByReplacingOccurrencesOfString:@" " withString:@""];
-                self.tx = [self.address txForAmounts:@[@(value)] andAddress:@[toAddress] andError:&error];
+                self.tx = [self.address txForAmounts:@[@(value)] andAddress:@[toAddress] andChangeAddress:self.dialogSelectChangeAddress.changeAddress.address  andError:&error];
                 if (error) {
                     NSString * msg=[TransactionsUtil getCompleteTxForError:error];
                     [self showSendResult:msg dialog:dp];
