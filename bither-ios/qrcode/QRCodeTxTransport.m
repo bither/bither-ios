@@ -32,10 +32,9 @@
     if(strArray.count < 5){
         return nil;
     }
-    long long changeAmt=[StringUtil hexToLong:strArray[1]];
-    if (changeAmt>0) {
+    NSString * changeAddress=[strArray[1] hexToBase58check];
+    if ([changeAddress isValidBitcoinAddress]) {
         qrCodeTx=[QRCodeTxTransport changeFormatQRCodeTransport:strArray];
-        
     }else{
         qrCodeTx=[QRCodeTxTransport noChangeFormatQRCodeTransport:strArray];
     }
@@ -51,13 +50,19 @@
     if (![address isValidBitcoinAddress]) {
         return nil;
     }
+    NSString * changeAddress=[[strArray objectAtIndex:1] hexToBase58check];
+    if (![changeAddress isValidBitcoinAddress]) {
+        return nil;
+    }
     
     [qrCodeTx setMyAddress:address];
-    [qrCodeTx setFee:[StringUtil hexToLong:[strArray objectAtIndex:1]]];
-    [qrCodeTx setToAddress:[[strArray objectAtIndex:2] hexToBase58check]];
-    [qrCodeTx setTo:[StringUtil hexToLong:[strArray objectAtIndex:3]]];
+    [qrCodeTx setChangeAddress:changeAddress];
+    [qrCodeTx setChangeAmt:[StringUtil hexToLong:[strArray objectAtIndex:2]]];
+    [qrCodeTx setFee:[StringUtil hexToLong:[strArray objectAtIndex:3]]];
+    [qrCodeTx setToAddress:[[strArray objectAtIndex:4] hexToBase58check]];
+    [qrCodeTx setTo:[StringUtil hexToLong:[strArray objectAtIndex:5]]];
     NSMutableArray *array=[NSMutableArray new];
-    for (int i=4; i<strArray.count; i++) {
+    for (int i=6; i<strArray.count; i++) {
         NSString * hash=[strArray objectAtIndex:i];
         if (![StringUtil isEmpty:hash]) {
             [array addObject:hash];

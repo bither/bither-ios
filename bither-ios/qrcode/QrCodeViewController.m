@@ -137,7 +137,7 @@
     self.sv.contentSize = CGSizeMake(strs.count * self.sv.frame.size.width, self.sv.frame.size.height);
 }
 - (IBAction)switchQRCode:(id)sender {
-    if ([StringUtil isEmpty:self.changeAddress]) {
+    if (!self.hasChangeAddress) {
         DialogSwitchQRCode * dialogSwitchQRCode=[[DialogSwitchQRCode alloc] initWithDelegate:self];
         [dialogSwitchQRCode showInWindow:self.view.window];
         

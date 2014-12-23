@@ -24,6 +24,6 @@
 @property NSString *cancelWarning;
 @property NSString *qrCodeTitle;
 @property NSString *qrCodeMsg;
-@property NSString *changeAddress;
+@property BOOL hasChangeAddress;
 -(void)setFinishAction:(NSString*)actionName target:(NSObject*)target selector:(SEL)selector;
 @end

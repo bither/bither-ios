@@ -180,7 +180,7 @@
     txTrans.hashList = array;
     qr.content = [QRCodeTxTransport getPreSignString:txTrans];
     qr.oldContent=[QRCodeTxTransport oldGetPreSignString:txTrans];
-    qr.changeAddress=changeAddress;
+    qr.hasChangeAddress=![StringUtil compareString:changeAddress compare:self.address.address];
     [qr setFinishAction:NSLocalizedString(@"Scan Bither Cold to sign", nil) target:self selector:@selector(scanBitherColdToSign)];
     [self.navigationController pushViewController:qr animated:YES];
 }
