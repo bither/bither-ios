@@ -520,3 +520,4 @@
 "send_confirm_change_to_label" = "找零到:";
 "sign_transaction_change_to_label" = "找零到:";
 "sign_transaction_change_amount_label" = "找零金额:";
+"select_change_address_change_to_same_warn" = "发送到的地址和找零地址不能相同";
