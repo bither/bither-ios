@@ -22,8 +22,12 @@
 @property (nonatomic,strong) NSArray * hashList;
 @property (nonatomic,strong) NSString * myAddress;
 @property (nonatomic,strong) NSString * toAddress;
+@property (nonatomic,strong) NSString * changeAddress;
 @property (nonatomic,readwrite) long long to;
 @property (nonatomic,readwrite) long long fee;
+@property (nonatomic,readwrite) long long changeAmt;
+
+
 
 +(NSString *)getPreSignString :(QRCodeTxTransport *)qrCodeTransport;
 +(NSString *)oldGetPreSignString:(QRCodeTxTransport *)qrCodeTx;

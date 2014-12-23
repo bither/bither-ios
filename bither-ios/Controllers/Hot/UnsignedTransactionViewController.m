@@ -121,7 +121,7 @@
             dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
                 u_int64_t value = self.amtLink.amount;
                 NSError * error;
-                 NSString * toAddress=[self.tfAddress.text stringByReplacingOccurrencesOfString:@" " withString:@""];
+                NSString * toAddress=[self.tfAddress.text stringByReplacingOccurrencesOfString:@" " withString:@""];
                 self.tx = [self.address txForAmounts:@[@(value)] andAddress:@[toAddress] andError:&error];
                 if (error) {
                     NSString * msg=[TransactionsUtil getCompleteTxForError:error];
@@ -138,7 +138,7 @@
                                 DialogSendTxConfirm *dialog = [[DialogSendTxConfirm alloc]initWithTx:self.tx from:self.address to:addressBlock delegate:self];
                                 [dialog showInWindow:self.view.window];
                             }else{
-                                [self onSendTxConfirmed:self.tx];
+                                [self onSendTxConfirmed:self.tx changeAddress:nil];
                                 needConfirm = YES;
                             }
                         }];
@@ -150,7 +150,7 @@
 }
 
 
--(void)onSendTxConfirmed:(BTTx*)tx{
+-(void)onSendTxConfirmed:(BTTx*)tx changeAddress:(NSString *)changeAddress{
     if(!tx){
         return;
     }
@@ -163,6 +163,10 @@
     txTrans.to = [tx amountSentTo:self.tfAddress.text];
     txTrans.myAddress = self.address.address;
     txTrans.toAddress = self.tfAddress.text;
+    if (![StringUtil isEmpty:changeAddress]) {
+        txTrans.changeAddress=changeAddress;
+        txTrans.changeAmt=[tx amountSentTo:changeAddress];
+    }
     NSMutableArray *array = [[NSMutableArray alloc]init];
     NSArray *hashDataArray = tx.unsignedInHashes;
     for(NSData *data in hashDataArray){
