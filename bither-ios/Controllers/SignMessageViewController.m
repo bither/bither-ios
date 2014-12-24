@@ -12,8 +12,9 @@
 #import "DialogSignMessageOutput.h"
 #import "DialogBlackQrCode.h"
 #import "UIViewController+PiShowBanner.h"
+#import "ScanQrCodeViewController.h"
 
-@interface SignMessageViewController ()<UITextViewDelegate, DialogPasswordDelegate, DialogSignMessageOutputDelegate>{
+@interface SignMessageViewController ()<UITextViewDelegate, DialogPasswordDelegate, DialogSignMessageOutputDelegate, ScanQrCodeDelegate>{
     CGFloat _tvMinHeight;
 }
 @property (weak, nonatomic) IBOutlet UIView *vTopbar;
@@ -113,7 +114,17 @@
 }
 
 - (IBAction)scanPressed:(id)sender {
-    
+    ScanQrCodeViewController *scan = [[ScanQrCodeViewController alloc]initWithDelegate:self];
+    [self presentViewController:scan animated:YES completion:nil];
+}
+
+-(void)handleResult:(NSString*)result byReader:(ScanQrCodeViewController*)reader{
+    if([StringUtil isEmpty:result]){
+        return;
+    }
+    self.tvInput.text = result;
+    [self textViewDidChange:self.tvInput];
+    [reader dismissViewControllerAnimated:YES completion:nil];
 }
 
 -(void)showMsg:(NSString*)msg{
