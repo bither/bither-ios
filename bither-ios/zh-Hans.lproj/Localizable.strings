@@ -529,3 +529,7 @@
 "sign_message_output_qr" = "显示二维码";
 "sign_message_output_copied" = "内容已复制";
 "sign_message_input_hint" = "待签名的消息";
+
+// Verify Message Signature
+"verify_message_signature_verify_success" = "签名验证通过";
+"verify_message_signature_verify_failed" = "签名验证未通过";
