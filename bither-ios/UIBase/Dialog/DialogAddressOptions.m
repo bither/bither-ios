@@ -75,6 +75,13 @@
         seperator.autoresizingMask = UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleWidth;
         seperator.backgroundColor = [UIColor colorWithWhite:1 alpha:0.5];
         [self addSubview:seperator];
+        
+        bottom += 1;
+        bottom = [self createButtonWithText:NSLocalizedString(@"sign_message_activity_name", nil) top:bottom action:@selector(signMessagePressed:)];
+        seperator = [[UIView alloc]initWithFrame:CGRectMake(0, bottom, self.frame.size.width, 1)];
+        seperator.autoresizingMask = UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleWidth;
+        seperator.backgroundColor = [UIColor colorWithWhite:1 alpha:0.5];
+        [self addSubview:seperator];
     }
     
     bottom += 1;
@@ -128,6 +135,14 @@
     [self dismissWithCompletion:^{
         if(self.delegate && [self.delegate respondsToSelector:@selector(showPrivateKeyManagement)]){
             [self.delegate showPrivateKeyManagement];
+        }
+    }];
+}
+
+-(void)signMessagePressed:(id)sender{
+    [self dismissWithCompletion:^{
+        if(self.delegate && [self.delegate respondsToSelector:@selector(signMessage)]){
+            [self.delegate signMessage];
         }
     }];
 }

@@ -104,6 +104,10 @@
 
 - (IBAction)sendPressed:(id)sender {
     if([self checkValues]){
+        if([StringUtil compareString:[self.tfAddress.text stringByReplacingOccurrencesOfString:@" " withString:@""] compare:self.dialogSelectChangeAddress.changeAddress.address]){
+            [self showBannerWithMessage:NSLocalizedString(@"select_change_address_change_to_same_warn", nil) belowView:self.vTopBar];
+            return;
+        }
         [self hideKeyboard];
         [dp showInWindow:self.view.window completion:^{
             dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{

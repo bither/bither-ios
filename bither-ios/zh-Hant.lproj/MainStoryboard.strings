@@ -253,3 +253,9 @@
 
 /* Class = "IBUILabel"; text = "Change Amount"; ObjectID = "ipI-cb-OYV"; */
 "ipI-cb-OYV.text" = "找零金額";
+
+/* Class = "IBUILabel"; text = "Sign Message"; ObjectID = "sn3-Rm-dRd"; */
+"sn3-Rm-dRd.text" = "簽名消息";
+
+/* Class = "IBUIButton"; normalTitle = "Sign"; ObjectID = "GHf-wI-Umw"; */
+"GHf-wI-Umw.normalTitle" = "簽名";

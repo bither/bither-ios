@@ -34,6 +34,7 @@
 #import "DialogProgress.h"
 #import "DialogPrivateKeyDecryptedQrCode.h"
 #import "DialogPrivateKeyText.h"
+#import "SignMessageViewController.h"
 
 @interface AddressDetailViewController ()<UITableViewDataSource,UITableViewDelegate,DialogAddressOptionsDelegate,DialogPasswordDelegate,DialogPrivateKeyOptionsDelegate>{
     NSMutableArray *_txs;
@@ -208,6 +209,15 @@
 
 -(void)showPrivateKeyManagement{
     [[[DialogAddressLongPressOptions alloc]initWithAddress:self.address andDelegate:self]showInWindow:self.view.window];
+}
+
+-(void)signMessage{
+    if(!self.address.hasPrivKey){
+        return;
+    }
+    SignMessageViewController* sign = [self.storyboard instantiateViewControllerWithIdentifier:@"SignMessage"];
+    sign.address = self.address;
+    [self.navigationController pushViewController:sign animated:YES];
 }
 
 -(void)showPrivateKeyDecryptedQrCode{

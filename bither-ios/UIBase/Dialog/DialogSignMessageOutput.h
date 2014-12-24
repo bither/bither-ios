@@ -1,5 +1,5 @@
 //
-//  DialogSendOption.h
+//  DialogSignMessageOutput.h
 //  bither-ios
 //
 //  Copyright 2014 http://Bither.net
@@ -18,12 +18,12 @@
 
 #import "DialogCentered.h"
 
-@protocol DialogSendOptionDelegate <NSObject>
--(void)selectChangeAddress;
+@protocol DialogSignMessageOutputDelegate <NSObject>
+-(void)copyOutput;
+-(void)qrOutput;
 @end
 
-@interface DialogSendOption : DialogCentered
--(instancetype)initWithDelegate:(NSObject<DialogSendOptionDelegate>*)delegate;
-
-@property (weak) NSObject<DialogSendOptionDelegate>* delegate;
+@interface DialogSignMessageOutput : DialogCentered
+-(instancetype)initWithDelegate:(NSObject<DialogSignMessageOutputDelegate>*)delegate;
+@property (weak) NSObject<DialogSignMessageOutputDelegate>* delegate;
 @end
