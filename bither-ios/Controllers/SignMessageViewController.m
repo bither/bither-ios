@@ -38,6 +38,7 @@
     self.ivArrow.hidden = YES;
     self.ai.hidden = YES;
     self.vOutput.hidden = YES;
+    [self.tvInput becomeFirstResponder];
 }
 
 - (void)textViewDidChange:(UITextView *)textView{

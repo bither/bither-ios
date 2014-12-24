@@ -185,6 +185,9 @@
 /* Class = "IBUILabel"; text = "Pay to"; ObjectID = "g3O-Ch-Qm9"; */
 "g3O-Ch-Qm9.text" = "Pay to";
 
+/* Class = "IBUILabel"; text = "Change to"; ObjectID = "gL9-bD-fq2"; */
+"gL9-bD-fq2.text" = "Change to";
+
 /* Class = "IBUILabel"; text = "Label"; ObjectID = "gbe-Xl-yCZ"; */
 "gbe-Xl-yCZ.text" = "Label";
 
@@ -193,6 +196,9 @@
 
 /* Class = "IBUILabel"; text = "Private Key"; ObjectID = "he8-50-11R"; */
 "he8-50-11R.text" = "Private Key";
+
+/* Class = "IBUILabel"; text = "Change Amount"; ObjectID = "ipI-cb-OYV"; */
+"ipI-cb-OYV.text" = "Change Amount";
 
 /* Class = "IBUILabel"; text = "%"; ObjectID = "jDX-wx-Vm4"; */
 "jDX-wx-Vm4.text" = "%";
@@ -305,8 +311,8 @@
 /* Class = "IBUIButton"; normalTitle = "Add This Private Key"; ObjectID = "zjg-wy-EHw"; */
 "zjg-wy-EHw.normalTitle" = "Add This Private Key";
 
-/* Class = "IBUILabel"; text = "Change to"; ObjectID = "gL9-bD-fq2"; */
-"gL9-bD-fq2.text" = "Change to";
+/* Class = "IBUILabel"; text = "Sign Message"; ObjectID = "sn3-Rm-dRd"; */
+"sn3-Rm-dRd.text" = "Sign Message";
 
-/* Class = "IBUILabel"; text = "Change Amount"; ObjectID = "ipI-cb-OYV"; */
-"ipI-cb-OYV.text" = "Change Amount";
+/* Class = "IBUIButton"; normalTitle = "Sign"; ObjectID = "GHf-wI-Umw"; */
+"GHf-wI-Umw.normalTitle" = "Sign";
