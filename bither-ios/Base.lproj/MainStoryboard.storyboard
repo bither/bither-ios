@@ -3020,6 +3020,7 @@
                         <outlet property="vButtons" destination="n2K-Ci-p1o" id="xbP-CK-6Ea"/>
                         <outlet property="vInput" destination="R7U-wK-kEB" id="LWT-SD-NZu"/>
                         <outlet property="vOutput" destination="U9b-Ad-xlq" id="Obj-QH-Giu"/>
+                        <outlet property="vTopbar" destination="zSA-Ju-DX8" id="0KJ-iR-zUy"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="izZ-D0-iOg" userLabel="First Responder" sceneMemberID="firstResponder"/>

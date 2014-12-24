@@ -9,10 +9,14 @@
 #import "SignMessageViewController.h"
 #import "StringUtil.h"
 #import "DialogPassword.h"
+#import "DialogSignMessageOutput.h"
+#import "DialogBlackQrCode.h"
+#import "UIViewController+PiShowBanner.h"
 
-@interface SignMessageViewController ()<UITextViewDelegate,DialogPasswordDelegate>{
+@interface SignMessageViewController ()<UITextViewDelegate, DialogPasswordDelegate, DialogSignMessageOutputDelegate>{
     CGFloat _tvMinHeight;
 }
+@property (weak, nonatomic) IBOutlet UIView *vTopbar;
 @property (weak, nonatomic) IBOutlet UIView *vOutput;
 @property (weak, nonatomic) IBOutlet UITextView *tvOutput;
 @property (weak, nonatomic) IBOutlet UIView *vInput;
@@ -96,11 +100,24 @@
 }
 
 - (IBAction)outputPressed:(id)sender {
+    [[[DialogSignMessageOutput alloc]initWithDelegate:self] showInWindow:self.view.window];
+}
 
+-(void)copyOutput{
+    [UIPasteboard generalPasteboard].string = self.tvOutput.text;
+    [self showMsg:NSLocalizedString(@"sign_message_output_copied", nil)];
+}
+
+-(void)qrOutput{
+    [[[DialogBlackQrCode alloc]initWithContent:self.tvOutput.text]showInWindow:self.view.window];
 }
 
 - (IBAction)scanPressed:(id)sender {
     
+}
+
+-(void)showMsg:(NSString*)msg{
+    [self showBannerWithMessage:msg belowView:self.vTopbar];
 }
 
 -(void)configureOutputFrame{
