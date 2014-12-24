@@ -2866,7 +2866,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="L7m-sS-Q69">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" delaysContentTouches="NO" id="L7m-sS-Q69">
                                 <rect key="frame" x="0.0" y="44" width="320" height="436"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <subviews>
@@ -2922,7 +2922,7 @@
                                                 </subviews>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                             </view>
-                                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="whiteLarge" id="DNz-Sg-MjQ">
+                                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="whiteLarge" id="DNz-Sg-MjQ">
                                                 <rect key="frame" x="142" y="129" width="37" height="37"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
                                             </activityIndicatorView>
@@ -2946,7 +2946,7 @@
                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     </imageView>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="bottom" lineBreakMode="middleTruncation" id="Zrv-6X-UuL">
-                                                        <rect key="frame" x="8" y="10" width="284" height="92"/>
+                                                        <rect key="frame" x="8" y="8" width="284" height="94"/>
                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                         <state key="normal" image="dropdown_ic_arrow_normal_holo_light">
                                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -2988,6 +2988,7 @@
                                         </state>
                                         <state key="highlighted" backgroundImage="card_foreground_pressed"/>
                                         <connections>
+                                            <action selector="backPressed:" destination="tud-nR-ofb" eventType="touchUpInside" id="MAV-RB-bhN"/>
                                             <action selector="backPressed:" destination="in6-za-FFH" eventType="touchUpInside" id="X9u-yC-FW1"/>
                                         </connections>
                                     </button>
@@ -3013,6 +3014,7 @@
                     <connections>
                         <outlet property="ai" destination="DNz-Sg-MjQ" id="IpS-qa-X8a"/>
                         <outlet property="ivArrow" destination="wnt-AV-dLW" id="yuw-hJ-Afn"/>
+                        <outlet property="sv" destination="L7m-sS-Q69" id="IBG-Gz-t93"/>
                         <outlet property="tvInput" destination="jlw-5g-GF4" id="2oI-iN-lj8"/>
                         <outlet property="tvOutput" destination="h75-Ld-Tbk" id="hgd-ax-cmM"/>
                         <outlet property="vButtons" destination="n2K-Ci-p1o" id="xbP-CK-6Ea"/>
