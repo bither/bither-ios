@@ -32,14 +32,21 @@
     if(strArray.count < 5){
         return nil;
     }
-    NSString * changeAddress=[strArray[1] hexToBase58check];
-    if ([changeAddress isValidBitcoinAddress]) {
+    if ([QRCodeTxTransport isAddressHex:strArray[1]]) {
         qrCodeTx=[QRCodeTxTransport changeFormatQRCodeTransport:strArray];
     }else{
         qrCodeTx=[QRCodeTxTransport noChangeFormatQRCodeTransport:strArray];
     }
     
     return  qrCodeTx;
+}
++(BOOL)isAddressHex:(NSString *)str{
+    BOOL isAddress=NO;
+    if (str.length%2==0) {
+        NSString * changeAddress=[str hexToBase58check];
+        isAddress=[changeAddress isValidBitcoinAddress];
+    }
+    return isAddress;
 }
 +(QRCodeTxTransport * )changeFormatQRCodeTransport:(NSArray *)strArray{
     QRCodeTxTransport * qrCodeTx=[[QRCodeTxTransport alloc] init];
