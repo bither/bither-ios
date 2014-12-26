@@ -43,6 +43,7 @@
     NSString * version= [NSString stringWithFormat:@"Bither Cold %@", [[[NSBundle mainBundle]infoDictionary]objectForKey:CFBundleShortVersionString]];
     [self configureHeaderAndFooter:self.tableView background:ColorBg isHot:NO version:version];
 }
+
 -(void)reload{
     self.settings=[SettingUtil coldSettings];
     [self.tableView reloadData];

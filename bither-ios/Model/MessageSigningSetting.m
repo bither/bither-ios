@@ -8,6 +8,7 @@
 
 #import "MessageSigningSetting.h"
 #import "BTAddressManager.h"
+#import "DialogSignMessageSelectAddress.h"
 
 @interface MessageSigningSetting()<UIActionSheetDelegate>
 @property (weak) UIViewController* controller;
@@ -58,7 +59,7 @@ static MessageSigningSetting* S;
             break;
         case 1:
         default:
-            
+            [[[DialogSignMessageSelectAddress alloc]initWithViewController:self.controller]showInWindow:self.controller.view.window];
             break;
     }
 }
