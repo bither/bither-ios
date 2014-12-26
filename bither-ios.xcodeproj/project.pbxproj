@@ -13,7 +13,9 @@
 		0A446C151A441393000CD25A /* DialogNetworkMonitorOption.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A446C141A441393000CD25A /* DialogNetworkMonitorOption.m */; };
 		0A515F781A36A2C0008292AF /* RawDataView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A515F771A36A2C0008292AF /* RawDataView.m */; };
 		0A515F7B1A36CAE3008292AF /* RawPrivateKeyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A515F7A1A36CAE3008292AF /* RawPrivateKeyViewController.m */; };
+		0A6C0F5C1A4D548B00544B33 /* MessageSigningSetting.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A6C0F5B1A4D548B00544B33 /* MessageSigningSetting.m */; };
 		0A93B6011A4A66080081D74D /* DialogSignMessageOutput.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A93B6001A4A66080081D74D /* DialogSignMessageOutput.m */; };
+		0A93B6061A4AA0520081D74D /* VerifyMessageSignatureViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A93B6051A4AA0520081D74D /* VerifyMessageSignatureViewController.m */; };
 		4217A3731951235D00063746 /* Depth.m in Sources */ = {isa = PBXBuildFile; fileRef = 4217A3721951235D00063746 /* Depth.m */; };
 		4217A39019512DC000063746 /* TransactionsUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 4217A38F19512DC000063746 /* TransactionsUtil.m */; };
 		421B037C19495315003A45F1 /* TabButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 421B037B19495315003A45F1 /* TabButton.m */; };
@@ -241,9 +243,13 @@
 		0A515F771A36A2C0008292AF /* RawDataView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RawDataView.m; sourceTree = "<group>"; };
 		0A515F791A36CAE3008292AF /* RawPrivateKeyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RawPrivateKeyViewController.h; sourceTree = "<group>"; };
 		0A515F7A1A36CAE3008292AF /* RawPrivateKeyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RawPrivateKeyViewController.m; sourceTree = "<group>"; };
+		0A6C0F591A4D411800544B33 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/MainStoryboard.strings; sourceTree = "<group>"; };
+		0A6C0F5A1A4D548B00544B33 /* MessageSigningSetting.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageSigningSetting.h; sourceTree = "<group>"; };
+		0A6C0F5B1A4D548B00544B33 /* MessageSigningSetting.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageSigningSetting.m; sourceTree = "<group>"; };
 		0A93B5FF1A4A66080081D74D /* DialogSignMessageOutput.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DialogSignMessageOutput.h; sourceTree = "<group>"; };
 		0A93B6001A4A66080081D74D /* DialogSignMessageOutput.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DialogSignMessageOutput.m; sourceTree = "<group>"; };
-		0A93B6031A4A9CAA0081D74D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/MainStoryboard.strings; sourceTree = "<group>"; };
+		0A93B6041A4AA0520081D74D /* VerifyMessageSignatureViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VerifyMessageSignatureViewController.h; sourceTree = "<group>"; };
+		0A93B6051A4AA0520081D74D /* VerifyMessageSignatureViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VerifyMessageSignatureViewController.m; sourceTree = "<group>"; };
 		0FED7A4051DB45218112FAC0 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		4217A3711951235D00063746 /* Depth.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Depth.h; sourceTree = "<group>"; };
 		4217A3721951235D00063746 /* Depth.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Depth.m; sourceTree = "<group>"; };
@@ -708,6 +714,8 @@
 				AC454DC81A1C6E05000AF4ED /* TrashCanViewController.m */,
 				0A4206281A494F1000562100 /* SignMessageViewController.h */,
 				0A4206291A494F1000562100 /* SignMessageViewController.m */,
+				0A93B6041A4AA0520081D74D /* VerifyMessageSignatureViewController.h */,
+				0A93B6051A4AA0520081D74D /* VerifyMessageSignatureViewController.m */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -1261,6 +1269,8 @@
 				ACEE7D3819D4012600932B39 /* SignTransactionScanSetting.m */,
 				ACE7E6FE19EB6DE800F7AA3A /* AvatarSetting.h */,
 				ACE7E6FF19EB6DE800F7AA3A /* AvatarSetting.m */,
+				0A6C0F5A1A4D548B00544B33 /* MessageSigningSetting.h */,
+				0A6C0F5B1A4D548B00544B33 /* MessageSigningSetting.m */,
 				AC454DE81A1F3839000AF4ED /* PinCodeSetting.h */,
 				AC454DE91A1F3839000AF4ED /* PinCodeSetting.m */,
 				DAB2C8711A2038930011EE2F /* KeychainSetting.h */,
@@ -1468,6 +1478,7 @@
 				4268FE2A194ACD57007A4C30 /* ColdViewController.m in Sources */,
 				ACEE7D2919D3F9F500932B39 /* QRCodeTxTransport.m in Sources */,
 				424EA9EB195E99B70029AB43 /* NotificationUtil.m in Sources */,
+				0A93B6061A4AA0520081D74D /* VerifyMessageSignatureViewController.m in Sources */,
 				4268FE29194ACD57007A4C30 /* ColdAddressViewController.m in Sources */,
 				AC454DE11A1F250C000AF4ED /* PinCodeDisableViewController.m in Sources */,
 				AC202AD0196B8B7A00033EC1 /* Setting.m in Sources */,
@@ -1521,6 +1532,7 @@
 				AC0135D0194ED8B800E3BB95 /* HotAddressAddViewController.m in Sources */,
 				AC17158D1969359900337AB5 /* DialogPrivateKeyEncryptedQrCode.m in Sources */,
 				AC31E92F19B4533F00EFDDF1 /* TrendingGraphicView.m in Sources */,
+				0A6C0F5C1A4D548B00544B33 /* MessageSigningSetting.m in Sources */,
 				ACEE7D3919D4012600932B39 /* SignTransactionScanSetting.m in Sources */,
 				ACEE7D2B19D3F9F500932B39 /* ScanQrCodeTransportViewController.m in Sources */,
 				4254084119469D5A007AF99C /* BitherSetting.m in Sources */,
@@ -1690,7 +1702,7 @@
 				42EFB5511949C52100376888 /* Base */,
 				AC229A7A196A466400A7FB5E /* zh-Hans */,
 				AC229A7B196A466900A7FB5E /* zh-Hant */,
-				0A93B6031A4A9CAA0081D74D /* en */,
+				0A6C0F591A4D411800544B33 /* en */,
 			);
 			name = MainStoryboard.storyboard;
 			sourceTree = "<group>";

@@ -259,3 +259,15 @@
 
 /* Class = "IBUIButton"; normalTitle = "Sign"; ObjectID = "GHf-wI-Umw"; */
 "GHf-wI-Umw.normalTitle" = "簽名";
+
+/* Class = "IBUILabel"; text = "Verify Message Signature"; ObjectID = "gvK-WF-XJl"; */
+"gvK-WF-XJl.text" = "驗證消息簽名";
+
+/* Class = "IBUILabel"; text = "Signing Address"; ObjectID = "xhb-O8-bSH"; */
+"xhb-O8-bSH.text" = "簽名用的地址";
+
+/* Class = "IBUILabel"; text = "Original Message"; ObjectID = "qRU-bn-bhg"; */
+"qRU-bn-bhg.text" = "原消息";
+
+/* Class = "IBUILabel"; text = "Signature"; ObjectID = "CJp-QT-laa"; */
+"CJp-QT-laa.text" = "簽名";
