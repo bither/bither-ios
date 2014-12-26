@@ -77,7 +77,6 @@
             [self showBannerWithMessage:msg belowView:self.vTopbar];
         });
     });
-    
 }
 
 - (IBAction)backPressed:(id)sender {
@@ -95,6 +94,7 @@
     CGRect frame = self.vMessage.frame;
     frame.size.height = height + top + bottom;
     self.vMessage.frame = frame;
+    self.tvMessage.contentOffset = CGPointMake(0, 0);
     
     height = [self.tvSignature sizeThatFits:CGSizeMake(self.tvSignature.frame.size.width, CGFLOAT_MAX)].height;
     height = MAX(height, _tvMinHeight);
@@ -104,6 +104,13 @@
     frame.size.height = height + top + bottom;
     frame.origin.y = CGRectGetMaxY(self.vMessage.frame);
     self.vSignature.frame = frame;
+    self.tvSignature.contentOffset = CGPointMake(0, 0);
+    
+    frame = self.vBottom.frame;
+    frame.origin.y = CGRectGetMaxY(self.vSignature.frame);
+    self.vBottom.frame = frame;
+    
+    self.sv.contentSize = CGSizeMake(self.sv.frame.size.width, CGRectGetMaxY(self.vBottom.frame));
 }
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
