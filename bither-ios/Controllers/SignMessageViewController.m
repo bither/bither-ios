@@ -13,8 +13,11 @@
 #import "DialogBlackQrCode.h"
 #import "UIViewController+PiShowBanner.h"
 #import "ScanQrCodeViewController.h"
+#import "QRCodeThemeUtil.h"
+#import "UserDefaultsUtil.h"
+#import "DialogAddressQrCode.h"
 
-@interface SignMessageViewController ()<UITextViewDelegate, DialogPasswordDelegate, DialogSignMessageOutputDelegate, ScanQrCodeDelegate>{
+@interface SignMessageViewController ()<UITextViewDelegate, DialogPasswordDelegate, DialogSignMessageOutputDelegate, ScanQrCodeDelegate,DialogAddressQrCodeDelegate>{
     CGFloat _tvMinHeight;
 }
 @property (weak, nonatomic) IBOutlet UIView *vTopbar;
@@ -26,6 +29,10 @@
 @property (weak, nonatomic) IBOutlet UIImageView *ivArrow;
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *ai;
 @property (weak, nonatomic) IBOutlet UIScrollView *sv;
+@property (weak, nonatomic) IBOutlet UILabel *lblAddress;
+@property (weak, nonatomic) IBOutlet UIView *vAddress;
+@property (weak, nonatomic) IBOutlet UIView *vQr;
+@property (weak, nonatomic) IBOutlet UIImageView *ivQr;
 
 @end
 
@@ -38,6 +45,9 @@
     self.ivArrow.hidden = YES;
     self.ai.hidden = YES;
     self.vOutput.hidden = YES;
+    self.lblAddress.text = [StringUtil formatAddress:self.address.address groupSize:4 lineSize:12];
+    [self configureAddressFrame];
+    self.ivQr.image = [QRCodeThemeUtil qrCodeOfContent:self.address.address andSize:self.ivQr.frame.size.width withTheme:[[QRCodeTheme themes] objectAtIndex:[[UserDefaultsUtil instance] getQrCodeTheme]]];
     [self.tvInput becomeFirstResponder];
 }
 
@@ -132,6 +142,16 @@
     [self showBannerWithMessage:msg belowView:self.vTopbar];
 }
 
+- (IBAction)addressPressed:(id)sender {
+    [UIPasteboard generalPasteboard].string = self.address.address;
+    [self showMsg:NSLocalizedString(@"Address copied.", nil)];
+}
+
+- (IBAction)qrPressed:(id)sender {
+    DialogAddressQrCode* dialogQr = [[DialogAddressQrCode alloc]initWithAddress:self.address delegate:self];
+    [dialogQr showInWindow:self.view.window];
+}
+
 -(void)configureOutputFrame{
     CGFloat height = [self.tvOutput sizeThatFits:CGSizeMake(self.tvOutput.frame.size.width, CGFLOAT_MAX)].height;
     height = MAX(height, _tvMinHeight);
@@ -142,6 +162,26 @@
     self.vOutput.frame = outputFrame;
     
     self.sv.contentSize = CGSizeMake(self.sv.contentSize.width, CGRectGetMaxY(self.vOutput.frame));
+}
+
+-(void)configureAddressFrame{
+    CGSize lblSize = [self.lblAddress.text boundingRectWithSize:CGSizeMake(CGFLOAT_MAX, CGFLOAT_MAX) options:NSStringDrawingUsesLineFragmentOrigin|NSStringDrawingUsesFontLeading attributes:@{NSFontAttributeName: self.lblAddress.font, NSParagraphStyleAttributeName:[NSParagraphStyle defaultParagraphStyle]} context:nil].size;
+    lblSize.height = ceilf(lblSize.height);
+    lblSize.width = ceilf(lblSize.width);
+    CGSize containerSize = CGSizeMake(lblSize.width + self.lblAddress.frame.origin.x * 2, lblSize.height + self.lblAddress.frame.origin.y * 2);
+    self.vAddress.frame = CGRectMake(self.vAddress.frame.origin.x, self.vAddress.frame.origin.y, containerSize.width, containerSize.height);
+    [self configureQrCodeFrame];
+}
+
+-(void)configureQrCodeFrame{
+    CGFloat size = self.vAddress.frame.size.height;
+    CGFloat gap = (self.view.frame.size.width - 20 - self.vAddress.frame.size.width - size)/3;
+    self.vAddress.frame = CGRectMake(gap, self.vAddress.frame.origin.y, self.vAddress.frame.size.width, self.vAddress.frame.size.height);
+    self.vQr.frame = CGRectMake(CGRectGetMaxX(self.vAddress.frame) + gap, self.vAddress.frame.origin.y, size, size);
+}
+
+-(void)qrCodeThemeChanged:(QRCodeTheme*)theme{
+    self.ivQr.image = [QRCodeThemeUtil qrCodeOfContent:self.address.address andSize:self.ivQr.frame.size.width withTheme:theme];
 }
 
 - (IBAction)backPressed:(id)sender {
