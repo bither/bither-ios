@@ -702,25 +702,25 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" id="hvg-6q-3rx">
-                                                    <rect key="frame" x="10" y="0.0" width="300" height="46"/>
+                                                    <rect key="frame" x="10" y="0.0" width="300" height="47"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <subviews>
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" highlightedImage="card_foreground_pressed" id="aIN-xD-zeH">
-                                                            <rect key="frame" x="0.0" y="0.0" width="300" height="46"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="300" height="47"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                         </imageView>
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="xtY-sS-XRG">
-                                                            <rect key="frame" x="261" y="12" width="25" height="25"/>
+                                                            <rect key="frame" x="261" y="13" width="25" height="25"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                                         </imageView>
                                                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="value" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="cAB-ok-gus">
-                                                            <rect key="frame" x="71" y="14" width="215" height="21"/>
+                                                            <rect key="frame" x="71" y="15" width="215" height="21"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="viE-UV-mZx">
-                                                            <rect key="frame" x="8" y="14" width="245" height="21"/>
+                                                            <rect key="frame" x="8" y="15" width="245" height="21"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                             <nil key="highlightedColor"/>
@@ -3133,6 +3133,9 @@
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <state key="highlighted" image="scan_button_pressed"/>
+                                        <connections>
+                                            <action selector="qrAddressPressed:" destination="W6Z-3m-hO0" eventType="touchUpInside" id="Gom-kM-9Ts"/>
+                                        </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Original Message" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="qRU-bn-bhg">
                                         <rect key="frame" x="10" y="87" width="300" height="14"/>
@@ -3148,6 +3151,9 @@
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <state key="highlighted" image="scan_button_pressed"/>
+                                        <connections>
+                                            <action selector="qrMessagePressed:" destination="W6Z-3m-hO0" eventType="touchUpInside" id="cV5-0C-TcG"/>
+                                        </connections>
                                     </button>
                                     <view contentMode="scaleToFill" id="sL9-CD-KEg">
                                         <rect key="frame" x="10" y="97" width="246" height="84"/>
@@ -3196,6 +3202,9 @@
                                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                 </state>
                                                 <state key="highlighted" image="scan_button_pressed"/>
+                                                <connections>
+                                                    <action selector="qrSignaturePressed:" destination="W6Z-3m-hO0" eventType="touchUpInside" id="Mb3-TS-a2O"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -3225,6 +3234,9 @@
                                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                 </state>
                                                 <state key="highlighted" backgroundImage="btn_keyboard_key_white_pressed"/>
+                                                <connections>
+                                                    <action selector="verifyPressed:" destination="W6Z-3m-hO0" eventType="touchUpInside" id="lKs-TE-OxT"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -3246,6 +3258,9 @@
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <state key="highlighted" backgroundImage="card_foreground_pressed"/>
+                                        <connections>
+                                            <action selector="backPressed:" destination="W6Z-3m-hO0" eventType="touchUpInside" id="Wgk-RZ-SYq"/>
+                                        </connections>
                                     </button>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="title_bar_seperator" id="QPq-b2-y8Y">
                                         <rect key="frame" x="44" y="0.0" width="3" height="44"/>
@@ -3266,6 +3281,20 @@
                         </subviews>
                         <color key="backgroundColor" red="0.25882352939999997" green="0.36862745099999999" blue="0.47843137250000001" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
+                    <connections>
+                        <outlet property="ai" destination="FXx-XA-EbQ" id="J3h-Dh-ZUG"/>
+                        <outlet property="btnVerify" destination="ucz-yG-b5R" id="KSS-Gv-krW"/>
+                        <outlet property="ivFailed" destination="cEJ-7u-EHl" id="GpF-Va-Dfd"/>
+                        <outlet property="ivSuccess" destination="91j-wM-zjk" id="dBD-lP-li1"/>
+                        <outlet property="sv" destination="jfK-EL-hsO" id="7k9-mG-2Wb"/>
+                        <outlet property="tfAddress" destination="dhi-BL-PHy" id="R6q-a3-OQ9"/>
+                        <outlet property="tvMessage" destination="Fcn-in-EQH" id="0hi-4l-QZk"/>
+                        <outlet property="tvSignature" destination="7cj-wD-b25" id="Jua-4V-2Zb"/>
+                        <outlet property="vBottom" destination="IqR-xP-K5A" id="awx-aB-AaY"/>
+                        <outlet property="vMessage" destination="sL9-CD-KEg" id="deE-po-fqg"/>
+                        <outlet property="vSignature" destination="HGM-er-QW0" id="nBO-dT-nqi"/>
+                        <outlet property="vTopbar" destination="7eN-mH-iAS" id="sVQ-R3-KCh"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Bcn-Rs-les" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -3535,7 +3564,7 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="RIA-YK-ZlZ">
-                                                <rect key="frame" x="160.00000007224804" y="30" width="132" height="151"/>
+                                                <rect key="frame" x="160.00000007224807" y="30" width="132" height="151"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" heightSizable="YES"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="50"/>
                                                 <state key="normal" title="1" backgroundImage="btn_keyboard_key_white_normal">

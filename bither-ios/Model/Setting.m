@@ -526,6 +526,7 @@ static Setting* SwitchToColdSetting;
     [array addObject:[Setting getQrCodeQualitySetting]];
     [array addObject:[ImportPrivateKeySetting getImportPrivateKeySetting]];
     [array addObject:[ImportBip38PrivateKeySetting getImportBip38PrivateKeySetting]];
+    
     [array addObject:[Setting getTrashCanSetting]];
     if ([[BTSettings instance] getAppMode]==HOT) {
         [array addObject:[ReloadTxSetting getReloadTxsSetting]];
