@@ -8,8 +8,6 @@
 
 #import "DialogSignMessageSelectAddress.h"
 #import "StringUtil.h"
-#import "BTAddressManager.h"
-#import "SignMessageViewController.h"
 
 #define kButtonHeight (44)
 #define kButtonEdgeInsets (UIEdgeInsetsMake(0, 10, 0, 10))
@@ -32,13 +30,13 @@
 @implementation DialogSignMessageSelectAddress
 
 
--(instancetype)initWithViewController:(UIViewController*)vc{
+-(instancetype)initWithDelegate:(NSObject<DialogSignMessageSelectAddressDelegate> *)delegate{
     NSArray* as = [BTAddressManager instance].privKeyAddresses;
     CGFloat height = as.count * (kButtonHeight + 1) - 1 + kHeaderHeight;
     height = MIN(kMaxHeight, height);
     self = [super initWithFrame:CGRectMake(0, 0, kWidth, height)];
     if(self){
-        self.vc = vc;
+        self.delegate = delegate;
         self.bgInsets = UIEdgeInsetsMake(4, 16, 4, 16);
         addresses = [NSMutableArray new];
         [addresses addObjectsFromArray:as];
@@ -91,17 +89,13 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    __block __weak UIViewController* vc = self.vc;
+    __block __weak NSObject<DialogSignMessageSelectAddressDelegate>* d = self.delegate;
     __block __weak BTAddress* address = addresses[indexPath.row];
-    if(!vc || !address){
+    if(!d || !address || ![d respondsToSelector:@selector(signMessageWithAddress:)]){
         return;
     }
     [self dismissWithCompletion:^{
-        if(vc){
-            SignMessageViewController* sign = [vc.storyboard instantiateViewControllerWithIdentifier:@"SignMessage"];
-            sign.address = address;
-            [vc.navigationController pushViewController:sign animated:YES];
-        }
+        [d signMessageWithAddress:address];
     }];
 }
 

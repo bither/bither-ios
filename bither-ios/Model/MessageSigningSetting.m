@@ -9,8 +9,9 @@
 #import "MessageSigningSetting.h"
 #import "BTAddressManager.h"
 #import "DialogSignMessageSelectAddress.h"
+#import "SignMessageViewController.h"
 
-@interface MessageSigningSetting()<UIActionSheetDelegate>
+@interface MessageSigningSetting()<UIActionSheetDelegate, DialogSignMessageSelectAddressDelegate>
 @property (weak) UIViewController* controller;
 @end
 
@@ -59,10 +60,15 @@ static MessageSigningSetting* S;
             break;
         case 1:
         default:
-            [[[DialogSignMessageSelectAddress alloc]initWithViewController:self.controller]showInWindow:self.controller.view.window];
+            [[[DialogSignMessageSelectAddress alloc]initWithDelegate:self]showInWindow:self.controller.view.window];
             break;
     }
 }
 
+-(void)signMessageWithAddress:(BTAddress *)address{
+    SignMessageViewController* sign = [self.controller.storyboard instantiateViewControllerWithIdentifier:@"SignMessage"];
+    sign.address = address;
+    [self.controller.navigationController pushViewController:sign animated:YES];
+}
 
 @end

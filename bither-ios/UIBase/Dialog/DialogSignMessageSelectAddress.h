@@ -16,5 +16,5 @@
 
 -(instancetype)initWithDelegate:(NSObject<DialogSignMessageSelectAddressDelegate>*)delegate;
 
-@property (weak) UIViewController* vc;
+@property (weak) NSObject<DialogSignMessageSelectAddressDelegate>* delegate;
 @end
