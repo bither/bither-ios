@@ -24,7 +24,6 @@
 @property (weak, nonatomic) IBOutlet UIView *vOutput;
 @property (weak, nonatomic) IBOutlet UITextView *tvOutput;
 @property (weak, nonatomic) IBOutlet UIView *vInput;
-@property (weak, nonatomic) IBOutlet UIView *vButtons;
 @property (weak, nonatomic) IBOutlet UITextView *tvInput;
 @property (weak, nonatomic) IBOutlet UIImageView *ivArrow;
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *ai;
@@ -33,6 +32,10 @@
 @property (weak, nonatomic) IBOutlet UIView *vAddress;
 @property (weak, nonatomic) IBOutlet UIView *vQr;
 @property (weak, nonatomic) IBOutlet UIImageView *ivQr;
+@property (weak, nonatomic) IBOutlet UIButton *btnScan;
+@property (weak, nonatomic) IBOutlet UIButton *btnSign;
+@property (weak, nonatomic) IBOutlet UIView *vButtons;
+
 
 @end
 
@@ -66,7 +69,8 @@
     
     self.vOutput.hidden = YES;
     self.ivArrow.hidden = YES;
-    self.vButtons.hidden = NO;
+    self.btnScan.enabled = YES;
+    self.btnSign.hidden = NO;
 }
 
 - (IBAction)signPressed:(id)sender {
@@ -74,6 +78,7 @@
     if([StringUtil isEmpty:input]){
         return;
     }
+    [self.view endEditing:YES];
     [[[DialogPassword alloc]initWithDelegate:self]showInWindow:self.view.window];
 }
 
@@ -85,11 +90,11 @@
     if([StringUtil isEmpty:input]){
         return;
     }
-    [self.view resignFirstResponder];
     self.ai.hidden = NO;
     self.vOutput.hidden = YES;
     self.ivArrow.hidden = YES;
-    self.vButtons.hidden = YES;
+    self.btnScan.enabled = NO;
+    self.btnSign.hidden = YES;
     self.tvInput.editable = NO;
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
         NSString* output = [self.address signMessage:input withPassphrase:password];
@@ -97,14 +102,15 @@
             self.tvOutput.text = output;
             self.tvInput.editable = YES;
             self.ai.hidden = YES;
+            self.btnScan.enabled = YES;
             if(![StringUtil isEmpty:output]){
                 self.vOutput.hidden = NO;
                 self.ivArrow.hidden = NO;
-                self.vButtons.hidden = YES;
+                self.btnSign.hidden = YES;
             } else {
                 self.vOutput.hidden = YES;
                 self.ivArrow.hidden = YES;
-                self.vButtons.hidden = NO;
+                self.btnSign.hidden = NO;
             }
             [self configureOutputFrame];
         });
@@ -112,6 +118,7 @@
 }
 
 - (IBAction)outputPressed:(id)sender {
+    [self.view endEditing:YES];
     [[[DialogSignMessageOutput alloc]initWithDelegate:self] showInWindow:self.view.window];
 }
 
@@ -125,6 +132,7 @@
 }
 
 - (IBAction)scanPressed:(id)sender {
+    [self.view endEditing:YES];
     ScanQrCodeViewController *scan = [[ScanQrCodeViewController alloc]initWithDelegate:self];
     [self presentViewController:scan animated:YES completion:nil];
 }
@@ -148,6 +156,7 @@
 }
 
 - (IBAction)qrPressed:(id)sender {
+    [self.view endEditing:YES];
     DialogAddressQrCode* dialogQr = [[DialogAddressQrCode alloc]initWithAddress:self.address delegate:self];
     [dialogQr showInWindow:self.view.window];
 }
