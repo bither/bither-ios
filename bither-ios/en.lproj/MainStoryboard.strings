@@ -68,11 +68,17 @@
 /* Class = "IBUILabel"; text = "Pay to"; ObjectID = "F4n-lA-Ige"; */
 "F4n-lA-Ige.text" = "Pay to";
 
+/* Class = "IBUILabel"; text = "Label"; ObjectID = "FCX-7D-yfn"; */
+"FCX-7D-yfn.text" = "Label";
+
 /* Class = "IBUILabel"; text = "name"; ObjectID = "FGf-zH-Ia6"; */
 "FGf-zH-Ia6.text" = "name";
 
 /* Class = "IBUILabel"; text = "Advance Options"; ObjectID = "FzN-AZ-zUK"; */
 "FzN-AZ-zUK.text" = "Advance Options";
+
+/* Class = "IBUIButton"; normalTitle = "Sign"; ObjectID = "GHf-wI-Umw"; */
+"GHf-wI-Umw.normalTitle" = "Sign";
 
 /* Class = "IBUILabel"; text = "Balance:"; ObjectID = "GbZ-iW-rIX"; */
 "GbZ-iW-rIX.text" = "Balance:";
@@ -263,11 +269,17 @@
 /* Class = "IBUIButton"; normalTitle = "Send"; ObjectID = "rFx-au-8Hm"; */
 "rFx-au-8Hm.normalTitle" = "Send";
 
+/* Class = "IBUILabel"; text = "Sign Message"; ObjectID = "sn3-Rm-dRd"; */
+"sn3-Rm-dRd.text" = "Sign Message";
+
 /* Class = "IBUILabel"; text = "Fee"; ObjectID = "uBs-uD-RbW"; */
 "uBs-uD-RbW.text" = "Fee";
 
 /* Class = "IBUILabel"; text = "value"; ObjectID = "uZ8-dN-dTU"; */
 "uZ8-dN-dTU.text" = "value";
+
+/* Class = "IBUIButton"; normalTitle = "Verify"; ObjectID = "ucz-yG-b5R"; */
+"ucz-yG-b5R.normalTitle" = "Verify";
 
 /* Class = "IBUILabel"; text = "Balance:"; ObjectID = "uiN-WE-JlS"; */
 "uiN-WE-JlS.text" = "Balance:";
@@ -311,8 +323,14 @@
 /* Class = "IBUIButton"; normalTitle = "Add This Private Key"; ObjectID = "zjg-wy-EHw"; */
 "zjg-wy-EHw.normalTitle" = "Add This Private Key";
 
-/* Class = "IBUILabel"; text = "Sign Message"; ObjectID = "sn3-Rm-dRd"; */
-"sn3-Rm-dRd.text" = "Sign Message";
+/* Class = "IBUILabel"; text = "Verify Message Signature"; ObjectID = "gvK-WF-XJl"; */
+"gvK-WF-XJl.text" = "Verify Message Signature";
 
-/* Class = "IBUIButton"; normalTitle = "Sign"; ObjectID = "GHf-wI-Umw"; */
-"GHf-wI-Umw.normalTitle" = "Sign";
+/* Class = "IBUILabel"; text = "Signing Address"; ObjectID = "xhb-O8-bSH"; */
+"xhb-O8-bSH.text" = "Signing Address";
+
+/* Class = "IBUILabel"; text = "Original Message"; ObjectID = "qRU-bn-bhg"; */
+"qRU-bn-bhg.text" = "Original Message";
+
+/* Class = "IBUILabel"; text = "Signature"; ObjectID = "CJp-QT-laa"; */
+"CJp-QT-laa.text" = "Signature";
