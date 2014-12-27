@@ -53,14 +53,21 @@
     if(hasPrivateKey){
         bottom = [self createButtonWithText:NSLocalizedString(@"Private Key QR Code (Encrypted)", nil) top:bottom action:@selector(privateKeyEncryptedQrCodePressed:)];
         [self addSubview:[self getSeperator:bottom]];
+        
         bottom += 1;
         bottom = [self createButtonWithText:NSLocalizedString(@"Private Key QR Code (Decrypted)", nil) top:bottom action:@selector(privateKeyDecryptedQrCodePressed:)];
-        
         [self addSubview:[self getSeperator:bottom]];
+        
         bottom += 1;
         bottom = [self createButtonWithText:NSLocalizedString(@"Private Key", nil) top:bottom action:@selector(privateKeyTextQrCodePressed:)];
-        
         [self addSubview:[self getSeperator:bottom]];
+        
+        if([BTSettings instance].getAppMode == COLD){
+            bottom += 1;
+            bottom = [self createButtonWithText:NSLocalizedString(@"sign_message_activity_name", nil) top:bottom action:@selector(signMessagePressed:)];
+            [self addSubview:[self getSeperator:bottom]];
+        }
+        
         bottom += 1;
         bottom = [self createButtonWithText:NSLocalizedString(@"trash_private_key", nil) top:bottom action:@selector(trash:)];
     }else{
@@ -140,6 +147,14 @@
     [self dismissWithCompletion:^{
         if(self.delegate && [self.delegate respondsToSelector:@selector(moveToTrash)]){
             [self.delegate moveToTrash];
+        }
+    }];
+}
+
+-(void)signMessagePressed:(id)sender{
+    [self dismissWithCompletion:^{
+        if(self.delegate && [self.delegate respondsToSelector:@selector(signMessage)]){
+            [self.delegate signMessage];
         }
     }];
 }
