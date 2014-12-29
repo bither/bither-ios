@@ -38,6 +38,7 @@
 #import "UIImage+ImageRenderToColor.h"
 #import "DialogXrandomInfo.h"
 #import "BTAddressManager.h"
+#import "SignMessageViewController.h"
 
 #define kUnconfirmedTxAmountLeftMargin (3)
 
@@ -231,6 +232,15 @@
         DialogPassword* dp = [[DialogPassword alloc]initWithDelegate:self];
         [dp showInWindow:self.window];
     }
+}
+
+-(void)signMessage{
+    if(!_btAddress.hasPrivKey){
+        return;
+    }
+    SignMessageViewController* sign = [self.getUIViewController.storyboard instantiateViewControllerWithIdentifier:@"SignMessage"];
+    sign.address = _btAddress;
+    [self.getUIViewController.navigationController pushViewController:sign animated:YES];
 }
 
 //DialogPasswordDelegate

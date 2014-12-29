@@ -529,6 +529,7 @@
 "sign_message_output_qr" = "显示二维码";
 "sign_message_output_copied" = "内容已复制";
 "sign_message_input_hint" = "待签名的消息";
+"sign_message_select_address" = "选择签名消息用的地址";
 
 // Verify Message Signature
 "verify_message_signature_activity_name" = "验证消息签名";
