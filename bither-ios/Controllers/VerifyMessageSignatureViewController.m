@@ -12,7 +12,6 @@
 #import "ScanQrCodeViewController.h"
 #import "KeyboardController.h"
 #import "BTPrivateKeyUtil.h"
-#import "AppDelegate.h"
 
 @interface VerifyMessageSignatureViewController ()<UITextViewDelegate, UITextFieldDelegate, ScanQrCodeDelegate, KeyboardControllerDelegate>{
     NSObject<UITextInput>* _qrWaitingInput;

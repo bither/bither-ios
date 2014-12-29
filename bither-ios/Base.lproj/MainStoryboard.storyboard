@@ -8,7 +8,7 @@
         <!--Choose Mode View Controller-->
         <scene sceneID="I1a-eD-HL9">
             <objects>
-                <viewController storyboardIdentifier="ChooseModeViewController" id="kY0-Iw-Q6e" customClass="ChooseModeViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ChooseModeViewController" id="kY0-Iw-Q6e" customClass="ChooseModeViewController" propertyAccessControl="all" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="QeP-sH-cEH">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -177,7 +177,7 @@
         <!--Hot View Controller-->
         <scene sceneID="WVt-6V-XdC">
             <objects>
-                <viewController storyboardIdentifier="HotViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="apG-h2-03F" customClass="HotViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="HotViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="apG-h2-03F" customClass="HotViewController" propertyAccessControl="all" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="nzh-Um-5HK">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -259,7 +259,7 @@
         <!--Network Monitor View Controller-->
         <scene sceneID="fbm-4R-Eo2">
             <objects>
-                <viewController storyboardIdentifier="NetworkMonitorViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="ZcG-XC-ngs" customClass="NetworkMonitorViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="NetworkMonitorViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="ZcG-XC-ngs" customClass="NetworkMonitorViewController" propertyAccessControl="all" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="VXp-3F-5un">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -334,7 +334,7 @@
         <!--Peer View Controller-->
         <scene sceneID="PzM-mL-N1T">
             <objects>
-                <viewController restorationIdentifier="PeerViewController" storyboardIdentifier="PeerViewController" id="2kL-5v-0aD" customClass="PeerViewController" sceneMemberID="viewController">
+                <viewController restorationIdentifier="PeerViewController" storyboardIdentifier="PeerViewController" id="2kL-5v-0aD" customClass="PeerViewController" propertyAccessControl="all" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Edl-ck-7OX">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -426,7 +426,7 @@
         <!--Block View Controller-->
         <scene sceneID="DbV-ca-h9O">
             <objects>
-                <viewController restorationIdentifier="BlockViewController" storyboardIdentifier="BlockViewController" id="2I8-p8-sHu" customClass="BlockViewController" sceneMemberID="viewController">
+                <viewController restorationIdentifier="BlockViewController" storyboardIdentifier="BlockViewController" id="2I8-p8-sHu" customClass="BlockViewController" propertyAccessControl="all" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="IBE-a2-80v">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -504,7 +504,7 @@
         <!--Hot Address Add View Controller-->
         <scene sceneID="f24-aG-9de">
             <objects>
-                <viewController storyboardIdentifier="HotAddressAdd" useStoryboardIdentifierAsRestorationIdentifier="YES" id="ao7-9N-6vp" customClass="HotAddressAddViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="HotAddressAdd" useStoryboardIdentifierAsRestorationIdentifier="YES" id="ao7-9N-6vp" customClass="HotAddressAddViewController" propertyAccessControl="all" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="s9D-jC-ycb">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -567,7 +567,7 @@
         <!--Hot Address Add Private Key View Controller-->
         <scene sceneID="15x-fd-pEi">
             <objects>
-                <viewController storyboardIdentifier="HotAddressAddPrivateKey" useStoryboardIdentifierAsRestorationIdentifier="YES" id="5gP-20-5H4" customClass="HotAddressAddPrivateKeyViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="HotAddressAddPrivateKey" useStoryboardIdentifierAsRestorationIdentifier="YES" id="5gP-20-5H4" customClass="HotAddressAddPrivateKeyViewController" propertyAccessControl="all" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="DGR-IR-09i">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -631,7 +631,7 @@
         <!--Hot Address Add Watch Only View Controller-->
         <scene sceneID="VHg-bC-3ub">
             <objects>
-                <viewController storyboardIdentifier="HotAddressAddWatchOnly" useStoryboardIdentifierAsRestorationIdentifier="YES" id="NH3-5p-UBE" customClass="HotAddressAddWatchOnlyViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="HotAddressAddWatchOnly" useStoryboardIdentifierAsRestorationIdentifier="YES" id="NH3-5p-UBE" customClass="HotAddressAddWatchOnlyViewController" propertyAccessControl="all" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Hxd-zD-Y7E">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -660,7 +660,7 @@
         <!--Navigation Controller-->
         <scene sceneID="6E1-0Q-Zv7">
             <objects>
-                <navigationController storyboardIdentifier="BitherHot" useStoryboardIdentifierAsRestorationIdentifier="YES" navigationBarHidden="YES" id="gbN-Sp-XBo" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="BitherHot" useStoryboardIdentifierAsRestorationIdentifier="YES" navigationBarHidden="YES" id="gbN-Sp-XBo" propertyAccessControl="all" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationItem key="navigationItem" id="ctO-Ve-1Es"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="1QA-Pz-MWS">
@@ -679,7 +679,7 @@
         <!--Option Hot View Controller-->
         <scene sceneID="UcO-Un-N3V">
             <objects>
-                <viewController storyboardIdentifier="tab_option_hot" id="5qC-FM-9jy" customClass="OptionHotViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="tab_option_hot" id="5qC-FM-9jy" customClass="OptionHotViewController" propertyAccessControl="all" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="IM6-kN-MtU">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -755,7 +755,7 @@
         <!--Market View Controller-->
         <scene sceneID="BG9-lJ-VHB">
             <objects>
-                <viewController storyboardIdentifier="tab_market" id="HIC-Xg-iPf" customClass="MarketViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="tab_market" id="HIC-Xg-iPf" customClass="MarketViewController" propertyAccessControl="all" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="CAt-Zt-Agu">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -977,7 +977,7 @@
         <!--Qr Code View Controller-->
         <scene sceneID="Ej9-xI-rsK">
             <objects>
-                <viewController storyboardIdentifier="QrCode" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Ipx-4P-LPW" customClass="QrCodeViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="QrCode" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Ipx-4P-LPW" customClass="QrCodeViewController" propertyAccessControl="all" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="cUS-ui-K0K">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1068,7 +1068,7 @@
         <!--Hot Address View Controller-->
         <scene sceneID="NFh-bv-Tb8">
             <objects>
-                <viewController storyboardIdentifier="tab_hot_address" id="D40-nJ-Fe5" customClass="HotAddressViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="tab_hot_address" id="D40-nJ-Fe5" customClass="HotAddressViewController" propertyAccessControl="all" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="GoL-yb-jz7">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -1266,7 +1266,7 @@
         <!--Address Detail View Controller-->
         <scene sceneID="pSA-oq-eXi">
             <objects>
-                <viewController storyboardIdentifier="AddressDetail" useStoryboardIdentifierAsRestorationIdentifier="YES" id="B1F-tP-m9O" customClass="AddressDetailViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="AddressDetail" useStoryboardIdentifierAsRestorationIdentifier="YES" id="B1F-tP-m9O" customClass="AddressDetailViewController" propertyAccessControl="all" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="H5L-Q4-mLe">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -1516,7 +1516,7 @@
         <!--Select View Controller-->
         <scene sceneID="P5W-Rk-hY9">
             <objects>
-                <viewController storyboardIdentifier="SelectViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="y8U-d0-ypR" customClass="SelectViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SelectViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="y8U-d0-ypR" customClass="SelectViewController" propertyAccessControl="all" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="kKv-Zu-rx4">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -1626,7 +1626,7 @@
         <!--Send View Controller-->
         <scene sceneID="jpm-hl-i7g">
             <objects>
-                <viewController storyboardIdentifier="Send" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Xf8-za-YXH" customClass="SendViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Send" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Xf8-za-YXH" customClass="SendViewController" propertyAccessControl="all" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="t7S-9n-GdZ">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -1801,7 +1801,7 @@
         <!--Unsigned Transaction View Controller-->
         <scene sceneID="r5B-3W-MBS">
             <objects>
-                <viewController storyboardIdentifier="UnsignedTransaction" useStoryboardIdentifierAsRestorationIdentifier="YES" id="o0d-uZ-7EE" customClass="UnsignedTransactionViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="UnsignedTransaction" useStoryboardIdentifierAsRestorationIdentifier="YES" id="o0d-uZ-7EE" customClass="UnsignedTransactionViewController" propertyAccessControl="all" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="HrA-0e-gey">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -1962,7 +1962,7 @@
         <!--Navigation Controller-->
         <scene sceneID="DP0-Bl-vj6">
             <objects>
-                <navigationController storyboardIdentifier="BitherCold" useStoryboardIdentifierAsRestorationIdentifier="YES" navigationBarHidden="YES" id="llh-hu-XEa" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="BitherCold" useStoryboardIdentifierAsRestorationIdentifier="YES" navigationBarHidden="YES" id="llh-hu-XEa" propertyAccessControl="all" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationItem key="navigationItem" id="Yhg-Vo-ITy"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="8ab-54-ANk">
@@ -1981,7 +1981,7 @@
         <!--Cold Address Add View Controller-->
         <scene sceneID="QgX-k8-cLZ">
             <objects>
-                <viewController storyboardIdentifier="ColdAddressAdd" useStoryboardIdentifierAsRestorationIdentifier="YES" id="aJS-L3-J2s" customClass="ColdAddressAddViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ColdAddressAdd" useStoryboardIdentifierAsRestorationIdentifier="YES" id="aJS-L3-J2s" customClass="ColdAddressAddViewController" propertyAccessControl="all" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="5OF-U9-9qc">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -2040,7 +2040,7 @@
         <!--Cold View Controller-->
         <scene sceneID="ePZ-wt-crF">
             <objects>
-                <viewController storyboardIdentifier="ColdViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="ZJv-3l-W6L" customClass="ColdViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ColdViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="ZJv-3l-W6L" customClass="ColdViewController" propertyAccessControl="all" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="tXN-Ey-LbC">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -2113,7 +2113,7 @@
         <!--Option Cold View Controller-->
         <scene sceneID="Hwj-im-7QG">
             <objects>
-                <viewController storyboardIdentifier="tab_option_cold" id="RIv-xz-BJ4" customClass="OptionColdViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="tab_option_cold" id="RIv-xz-BJ4" customClass="OptionColdViewController" propertyAccessControl="all" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="XcZ-B8-Jvz">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -2189,7 +2189,7 @@
         <!--Sign Transaction View Controller-->
         <scene sceneID="c5V-os-hE3">
             <objects>
-                <viewController storyboardIdentifier="SignTransaction" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Xhm-nl-Fcp" customClass="SignTransactionViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SignTransaction" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Xhm-nl-Fcp" customClass="SignTransactionViewController" propertyAccessControl="all" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="4bf-UX-MP0">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -2364,7 +2364,7 @@
         <!--Cold Address View Controller-->
         <scene sceneID="baP-ZH-2Kv">
             <objects>
-                <viewController storyboardIdentifier="tab_cold_address" id="3hj-Y1-dpn" customClass="ColdAddressViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="tab_cold_address" id="3hj-Y1-dpn" customClass="ColdAddressViewController" propertyAccessControl="all" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="goV-jr-385">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -2529,7 +2529,7 @@
         <!--Check View Controller-->
         <scene sceneID="Xil-Kv-3A7">
             <objects>
-                <viewController storyboardIdentifier="tab_check" id="wg1-tw-lAU" customClass="CheckViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="tab_check" id="wg1-tw-lAU" customClass="CheckViewController" propertyAccessControl="all" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="bKy-hf-RFp">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -2712,7 +2712,7 @@
         <!--Hot Check Private Key View Controller-->
         <scene sceneID="uOO-wW-Er5">
             <objects>
-                <viewController storyboardIdentifier="HotCheckPrivateKeyViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="8tl-tH-nMI" customClass="HotCheckPrivateKeyViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="HotCheckPrivateKeyViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="8tl-tH-nMI" customClass="HotCheckPrivateKeyViewController" propertyAccessControl="all" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="1t3-g1-hN2">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -2766,7 +2766,7 @@
         <!--Advance View Controller-->
         <scene sceneID="4yP-AU-Nza">
             <objects>
-                <viewController storyboardIdentifier="AdvanceViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="nHn-VR-JC7" customClass="AdvanceViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="AdvanceViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="nHn-VR-JC7" customClass="AdvanceViewController" propertyAccessControl="all" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="6zO-U4-SuX">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -2881,7 +2881,7 @@
         <!--Sign Message View Controller-->
         <scene sceneID="Zgl-V8-VdE">
             <objects>
-                <viewController storyboardIdentifier="SignMessage" useStoryboardIdentifierAsRestorationIdentifier="YES" id="tud-nR-ofb" customClass="SignMessageViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SignMessage" useStoryboardIdentifierAsRestorationIdentifier="YES" id="tud-nR-ofb" customClass="SignMessageViewController" propertyAccessControl="all" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Tem-ug-NaU">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -3113,7 +3113,7 @@
         <!--Verify Message Signature View Controller-->
         <scene sceneID="lej-6H-k5n">
             <objects>
-                <viewController storyboardIdentifier="VerifyMessageSignature" useStoryboardIdentifierAsRestorationIdentifier="YES" id="W6Z-3m-hO0" customClass="VerifyMessageSignatureViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="VerifyMessageSignature" useStoryboardIdentifierAsRestorationIdentifier="YES" id="W6Z-3m-hO0" customClass="VerifyMessageSignatureViewController" propertyAccessControl="all" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="EiJ-Z1-PfT">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -3139,9 +3139,9 @@
                                             </imageView>
                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" id="dhi-BL-PHy">
                                                 <rect key="frame" x="10" y="15" width="226" height="30"/>
-                                                <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
+                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                <textInputTraits key="textInputTraits"/>
+                                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="alphabet"/>
                                             </textField>
                                         </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -3188,7 +3188,7 @@
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no"/>
                                             </textView>
                                         </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -3213,7 +3213,7 @@
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="alphabet"/>
                                             </textView>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="MUD-ZY-aQa">
                                                 <rect key="frame" x="252" y="27" width="41" height="41"/>
@@ -3323,7 +3323,7 @@
         <!--Trash Can View Controller-->
         <scene sceneID="9Zs-SR-RbI">
             <objects>
-                <viewController storyboardIdentifier="trash_can" useStoryboardIdentifierAsRestorationIdentifier="YES" id="in6-za-FFH" customClass="TrashCanViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="trash_can" useStoryboardIdentifierAsRestorationIdentifier="YES" id="in6-za-FFH" customClass="TrashCanViewController" propertyAccessControl="all" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Pco-LN-OZ6">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -3467,7 +3467,7 @@
         <!--Pin Code View Controller-->
         <scene sceneID="im9-mr-aPB">
             <objects>
-                <viewController storyboardIdentifier="PinCode" useStoryboardIdentifierAsRestorationIdentifier="YES" id="xEk-gh-uah" customClass="PinCodeViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="PinCode" useStoryboardIdentifierAsRestorationIdentifier="YES" id="xEk-gh-uah" customClass="PinCodeViewController" propertyAccessControl="all" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="3Zx-j8-jeD">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -3491,7 +3491,7 @@
         <!--Pin Code Enable View Controller-->
         <scene sceneID="Qg3-jd-uLE">
             <objects>
-                <viewController storyboardIdentifier="PinCodeEnable" useStoryboardIdentifierAsRestorationIdentifier="YES" id="0fg-Dd-dZZ" customClass="PinCodeEnableViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="PinCodeEnable" useStoryboardIdentifierAsRestorationIdentifier="YES" id="0fg-Dd-dZZ" customClass="PinCodeEnableViewController" propertyAccessControl="all" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="3Cc-Vl-zPl">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -3552,7 +3552,7 @@
         <!--Raw Private Key View Controller-->
         <scene sceneID="l9g-Jj-umj">
             <objects>
-                <viewController storyboardIdentifier="RawPrivateKey" useStoryboardIdentifierAsRestorationIdentifier="YES" id="GLK-Cm-DMJ" customClass="RawPrivateKeyViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="RawPrivateKey" useStoryboardIdentifierAsRestorationIdentifier="YES" id="GLK-Cm-DMJ" customClass="RawPrivateKeyViewController" propertyAccessControl="all" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="LtY-FB-iN5">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -3744,7 +3744,7 @@
         <!--Pin Code Disable View Controller-->
         <scene sceneID="LZc-Ac-uVd">
             <objects>
-                <viewController storyboardIdentifier="PinCodeDisable" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Vpu-MO-0b8" customClass="PinCodeDisableViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="PinCodeDisable" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Vpu-MO-0b8" customClass="PinCodeDisableViewController" propertyAccessControl="all" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="exS-hS-e53">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -3805,7 +3805,7 @@
         <!--Pin Code Change View Controller-->
         <scene sceneID="a6X-mS-2Bd">
             <objects>
-                <viewController storyboardIdentifier="PinCodeChange" useStoryboardIdentifierAsRestorationIdentifier="YES" id="C5s-45-KLk" customClass="PinCodeChangeViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="PinCodeChange" useStoryboardIdentifierAsRestorationIdentifier="YES" id="C5s-45-KLk" customClass="PinCodeChangeViewController" propertyAccessControl="all" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="eax-au-A4u">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -3866,7 +3866,7 @@
         <!--R Check View Controller-->
         <scene sceneID="LZ6-zZ-K31">
             <objects>
-                <viewController storyboardIdentifier="rcheck" useStoryboardIdentifierAsRestorationIdentifier="YES" id="1Za-zC-y7r" userLabel="R Check View Controller" customClass="RCheckViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="rcheck" useStoryboardIdentifierAsRestorationIdentifier="YES" id="1Za-zC-y7r" userLabel="R Check View Controller" customClass="RCheckViewController" propertyAccessControl="all" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="to4-J5-eKF">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>

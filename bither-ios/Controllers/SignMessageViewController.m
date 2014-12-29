@@ -16,8 +16,9 @@
 #import "QRCodeThemeUtil.h"
 #import "UserDefaultsUtil.h"
 #import "DialogAddressQrCode.h"
+#import "KeyboardController.h"
 
-@interface SignMessageViewController ()<UITextViewDelegate, DialogPasswordDelegate, DialogSignMessageOutputDelegate, ScanQrCodeDelegate,DialogAddressQrCodeDelegate>{
+@interface SignMessageViewController ()<UITextViewDelegate, DialogPasswordDelegate, DialogSignMessageOutputDelegate, ScanQrCodeDelegate, DialogAddressQrCodeDelegate, KeyboardControllerDelegate>{
     CGFloat _tvMinHeight;
 }
 @property (weak, nonatomic) IBOutlet UIView *vTopbar;
@@ -36,7 +37,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *btnSign;
 @property (weak, nonatomic) IBOutlet UIView *vButtons;
 
-
+@property KeyboardController* kc;
 @end
 
 @implementation SignMessageViewController
@@ -54,6 +55,16 @@
     [self.tvInput becomeFirstResponder];
 }
 
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    self.kc = [[KeyboardController alloc]initWithDelegate:self];
+}
+
+- (void)viewDidDisappear:(BOOL)animated{
+    [super viewDidDisappear:animated];
+    self.kc = nil;
+}
+
 - (void)textViewDidChange:(UITextView *)textView{
     if(textView != self.tvInput){
         return;
@@ -65,12 +76,12 @@
     inputFrame.size.height = height + self.tvInput.frame.origin.y * 2 + self.vButtons.frame.size.height + 10;
     self.vInput.frame = inputFrame;
     
-    [self configureOutputFrame];
-    
     self.vOutput.hidden = YES;
     self.ivArrow.hidden = YES;
     self.btnScan.enabled = YES;
     self.btnSign.hidden = NO;
+    
+    [self configureOutputFrame];
 }
 
 - (IBAction)signPressed:(id)sender {
@@ -170,7 +181,13 @@
     outputFrame.size.height = height + self.tvOutput.frame.origin.y * 2 + 7;
     self.vOutput.frame = outputFrame;
     
-    self.sv.contentSize = CGSizeMake(self.sv.contentSize.width, CGRectGetMaxY(self.vOutput.frame));
+    CGFloat bottom = CGRectGetMaxY(self.vInput.frame);
+    
+    if(!self.vOutput.hidden){
+        bottom = CGRectGetMaxY(self.vOutput.frame);
+    }
+    
+    self.sv.contentSize = CGSizeMake(self.sv.contentSize.width, bottom);
 }
 
 -(void)configureAddressFrame{
@@ -195,6 +212,14 @@
 
 - (IBAction)backPressed:(id)sender {
     [self.navigationController popViewControllerAnimated:YES];
+}
+
+// MARK: KeyboardControllerDelegate
+-(void)keyboardFrameChanged:(CGRect)frame{
+    CGFloat y = [self.sv convertPoint:frame.origin fromView:self.view].y;
+    UIEdgeInsets insets = self.sv.contentInset;
+    insets.bottom = self.sv.frame.size.height - y;
+    self.sv.contentInset = insets;
 }
 
 @end
