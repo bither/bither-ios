@@ -49,7 +49,7 @@
     UILabel* lblTop = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, self.frame.size.width, kHeaderHeight)];
     lblTop.textColor = [UIColor whiteColor];
     lblTop.font = [UIFont systemFontOfSize:kFontSize];
-    lblTop.text = NSLocalizedString(@"select_change_address_label", nil);
+    lblTop.text = NSLocalizedString(@"sign_message_select_address", nil);
     lblTop.backgroundColor = [UIColor clearColor];
     lblTop.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleBottomMargin;
     [self addSubview:lblTop];
