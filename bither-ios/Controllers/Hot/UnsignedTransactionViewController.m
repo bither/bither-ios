@@ -388,6 +388,10 @@
     }
 }
 
+- (IBAction)topBarPressed:(id)sender {
+    self.amtLink.amount = self.address.balance;
+}
+
 -(void)touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event{
     UITouch *touch = touches.anyObject;
     if(touch.view != self.tfAddress && touch.view != self.amtLink.tfBtc && touch.view != self.amtLink.tfCurrency){
