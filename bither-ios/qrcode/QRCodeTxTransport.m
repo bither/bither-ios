@@ -35,7 +35,12 @@
     if ([QRCodeTxTransport isAddressHex:strArray[1]]) {
         qrCodeTx=[QRCodeTxTransport changeFormatQRCodeTransport:strArray];
     }else{
-        qrCodeTx=[QRCodeTxTransport noChangeFormatQRCodeTransport:strArray];
+        
+        if ([BTQRCodeUtil isOldQRCodeVerion:str]) {
+            qrCodeTx=[QRCodeTxTransport oldFormatQRCodeTransport:str];
+        }else{
+            qrCodeTx=[QRCodeTxTransport noChangeFormatQRCodeTransport:strArray];
+        }
     }
     
     return  qrCodeTx;
@@ -80,6 +85,7 @@
     
 
 }
+
 +(QRCodeTxTransport *)noChangeFormatQRCodeTransport:(NSArray *)strArray{
     
     QRCodeTxTransport * qrCodeTx=[[QRCodeTxTransport alloc] init];
@@ -134,6 +140,31 @@
     NSString * preSignString=[BTQRCodeUtil oldJoinedQRCode:array];
 
     return preSignString;
+}
+
++(QRCodeTxTransport*)oldFormatQRCodeTransport:(NSString *)str{
+    QRCodeTxTransport * qrCodeTx=[[QRCodeTxTransport alloc] init];
+    NSArray * strArray=[BTQRCodeUtil splitQRCode:str];;
+    if(strArray.count < 5){
+        return nil;
+    }
+    NSString * address=[strArray objectAtIndex:0];
+    if (![address isValidBitcoinAddress]) {
+        return nil;
+    }
+    [qrCodeTx setMyAddress:address];
+    [qrCodeTx setFee:[StringUtil hexToLong:[strArray objectAtIndex:1]]];
+    [qrCodeTx setToAddress:[strArray objectAtIndex:2]];
+    [qrCodeTx setTo:[StringUtil hexToLong:[strArray objectAtIndex:3]]];
+    NSMutableArray *array=[NSMutableArray new];
+    for (int i=4; i<strArray.count; i++) {
+        NSString * hash=[strArray objectAtIndex:i];
+        if (![StringUtil isEmpty:hash]) {
+            [array addObject:hash];
+        }
+    }
+    [qrCodeTx setHashList:array];
+    return  qrCodeTx;
 }
 @end
 
