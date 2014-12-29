@@ -12,6 +12,7 @@
 #import "ScanQrCodeViewController.h"
 #import "KeyboardController.h"
 #import "BTPrivateKeyUtil.h"
+#import "AppDelegate.h"
 
 @interface VerifyMessageSignatureViewController ()<UITextViewDelegate, UITextFieldDelegate, ScanQrCodeDelegate, KeyboardControllerDelegate>{
     NSObject<UITextInput>* _qrWaitingInput;
@@ -42,6 +43,7 @@
     self.tvSignature.delegate = self;
     _tvMinHeight = MIN(self.tvMessage.frame.size.height, self.tvSignature.frame.size.height);
     [self textViewDidChange:self.tvMessage];
+    [self.tfAddress becomeFirstResponder];
 }
 
 - (void)viewWillAppear:(BOOL)animated{
@@ -120,8 +122,9 @@
 
 // MARK: KeyboardControllerDelegate
 -(void)keyboardFrameChanged:(CGRect)frame{
+    CGFloat y = [self.sv convertPoint:frame.origin fromView:self.view].y;
     UIEdgeInsets insets = self.sv.contentInset;
-    insets.bottom = frame.size.height;
+    insets.bottom = self.sv.frame.size.height - y;
     self.sv.contentInset = insets;
 }
 
