@@ -59,8 +59,8 @@ static MessageSigningSetting* S;
             [self.controller.navigationController pushViewController:[self.controller.storyboard instantiateViewControllerWithIdentifier:@"VerifyMessageSignature"] animated:YES];
             break;
         case 1:
-        default:
             [[[DialogSignMessageSelectAddress alloc]initWithDelegate:self]showInWindow:self.controller.view.window];
+        default:
             break;
     }
 }
