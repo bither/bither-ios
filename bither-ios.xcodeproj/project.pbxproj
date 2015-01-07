@@ -7,9 +7,16 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0A259E251A47F19100D7F707 /* DialogSendOption.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A259E241A47F19100D7F707 /* DialogSendOption.m */; };
+		0A259E281A47FDF600D7F707 /* DialogSelectChangeAddress.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A259E271A47FDF600D7F707 /* DialogSelectChangeAddress.m */; };
+		0A42062A1A494F1000562100 /* SignMessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A4206291A494F1000562100 /* SignMessageViewController.m */; };
 		0A446C151A441393000CD25A /* DialogNetworkMonitorOption.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A446C141A441393000CD25A /* DialogNetworkMonitorOption.m */; };
 		0A515F781A36A2C0008292AF /* RawDataView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A515F771A36A2C0008292AF /* RawDataView.m */; };
 		0A515F7B1A36CAE3008292AF /* RawPrivateKeyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A515F7A1A36CAE3008292AF /* RawPrivateKeyViewController.m */; };
+		0A6C0F5C1A4D548B00544B33 /* MessageSigningSetting.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A6C0F5B1A4D548B00544B33 /* MessageSigningSetting.m */; };
+		0A6C0F5F1A4D5E1900544B33 /* DialogSignMessageSelectAddress.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A6C0F5E1A4D5E1900544B33 /* DialogSignMessageSelectAddress.m */; };
+		0A93B6011A4A66080081D74D /* DialogSignMessageOutput.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A93B6001A4A66080081D74D /* DialogSignMessageOutput.m */; };
+		0A93B6061A4AA0520081D74D /* VerifyMessageSignatureViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A93B6051A4AA0520081D74D /* VerifyMessageSignatureViewController.m */; };
 		4217A3731951235D00063746 /* Depth.m in Sources */ = {isa = PBXBuildFile; fileRef = 4217A3721951235D00063746 /* Depth.m */; };
 		4217A39019512DC000063746 /* TransactionsUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 4217A38F19512DC000063746 /* TransactionsUtil.m */; };
 		421B037C19495315003A45F1 /* TabButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 421B037B19495315003A45F1 /* TabButton.m */; };
@@ -225,13 +232,27 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0A259E231A47F19100D7F707 /* DialogSendOption.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DialogSendOption.h; sourceTree = "<group>"; };
+		0A259E241A47F19100D7F707 /* DialogSendOption.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DialogSendOption.m; sourceTree = "<group>"; };
+		0A259E261A47FDF600D7F707 /* DialogSelectChangeAddress.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DialogSelectChangeAddress.h; sourceTree = "<group>"; };
+		0A259E271A47FDF600D7F707 /* DialogSelectChangeAddress.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DialogSelectChangeAddress.m; sourceTree = "<group>"; };
+		0A4206281A494F1000562100 /* SignMessageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignMessageViewController.h; sourceTree = "<group>"; };
+		0A4206291A494F1000562100 /* SignMessageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignMessageViewController.m; sourceTree = "<group>"; };
 		0A446C131A441393000CD25A /* DialogNetworkMonitorOption.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DialogNetworkMonitorOption.h; sourceTree = "<group>"; };
 		0A446C141A441393000CD25A /* DialogNetworkMonitorOption.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DialogNetworkMonitorOption.m; sourceTree = "<group>"; };
 		0A515F761A36A2C0008292AF /* RawDataView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RawDataView.h; sourceTree = "<group>"; };
 		0A515F771A36A2C0008292AF /* RawDataView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RawDataView.m; sourceTree = "<group>"; };
 		0A515F791A36CAE3008292AF /* RawPrivateKeyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RawPrivateKeyViewController.h; sourceTree = "<group>"; };
 		0A515F7A1A36CAE3008292AF /* RawPrivateKeyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RawPrivateKeyViewController.m; sourceTree = "<group>"; };
-		0ACB59321A38289E00CB682B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/MainStoryboard.strings; sourceTree = "<group>"; };
+		0A6C0F591A4D411800544B33 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/MainStoryboard.strings; sourceTree = "<group>"; };
+		0A6C0F5A1A4D548B00544B33 /* MessageSigningSetting.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageSigningSetting.h; sourceTree = "<group>"; };
+		0A6C0F5B1A4D548B00544B33 /* MessageSigningSetting.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageSigningSetting.m; sourceTree = "<group>"; };
+		0A6C0F5D1A4D5E1900544B33 /* DialogSignMessageSelectAddress.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DialogSignMessageSelectAddress.h; sourceTree = "<group>"; };
+		0A6C0F5E1A4D5E1900544B33 /* DialogSignMessageSelectAddress.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DialogSignMessageSelectAddress.m; sourceTree = "<group>"; };
+		0A93B5FF1A4A66080081D74D /* DialogSignMessageOutput.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DialogSignMessageOutput.h; sourceTree = "<group>"; };
+		0A93B6001A4A66080081D74D /* DialogSignMessageOutput.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DialogSignMessageOutput.m; sourceTree = "<group>"; };
+		0A93B6041A4AA0520081D74D /* VerifyMessageSignatureViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VerifyMessageSignatureViewController.h; sourceTree = "<group>"; };
+		0A93B6051A4AA0520081D74D /* VerifyMessageSignatureViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VerifyMessageSignatureViewController.m; sourceTree = "<group>"; };
 		0FED7A4051DB45218112FAC0 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		4217A3711951235D00063746 /* Depth.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Depth.h; sourceTree = "<group>"; };
 		4217A3721951235D00063746 /* Depth.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Depth.m; sourceTree = "<group>"; };
@@ -694,6 +715,10 @@
 				ACE4ED5D198A3AE600C8862C /* AdvanceViewController.m */,
 				AC454DC71A1C6E05000AF4ED /* TrashCanViewController.h */,
 				AC454DC81A1C6E05000AF4ED /* TrashCanViewController.m */,
+				0A4206281A494F1000562100 /* SignMessageViewController.h */,
+				0A4206291A494F1000562100 /* SignMessageViewController.m */,
+				0A93B6041A4AA0520081D74D /* VerifyMessageSignatureViewController.h */,
+				0A93B6051A4AA0520081D74D /* VerifyMessageSignatureViewController.m */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -1174,6 +1199,14 @@
 				ACE3765E1A231C9200F66321 /* DialogKeychainBackupDiff.m */,
 				0A446C131A441393000CD25A /* DialogNetworkMonitorOption.h */,
 				0A446C141A441393000CD25A /* DialogNetworkMonitorOption.m */,
+				0A259E231A47F19100D7F707 /* DialogSendOption.h */,
+				0A259E241A47F19100D7F707 /* DialogSendOption.m */,
+				0A259E261A47FDF600D7F707 /* DialogSelectChangeAddress.h */,
+				0A259E271A47FDF600D7F707 /* DialogSelectChangeAddress.m */,
+				0A93B5FF1A4A66080081D74D /* DialogSignMessageOutput.h */,
+				0A93B6001A4A66080081D74D /* DialogSignMessageOutput.m */,
+				0A6C0F5D1A4D5E1900544B33 /* DialogSignMessageSelectAddress.h */,
+				0A6C0F5E1A4D5E1900544B33 /* DialogSignMessageSelectAddress.m */,
 			);
 			path = Dialog;
 			sourceTree = "<group>";
@@ -1241,6 +1274,8 @@
 				ACEE7D3819D4012600932B39 /* SignTransactionScanSetting.m */,
 				ACE7E6FE19EB6DE800F7AA3A /* AvatarSetting.h */,
 				ACE7E6FF19EB6DE800F7AA3A /* AvatarSetting.m */,
+				0A6C0F5A1A4D548B00544B33 /* MessageSigningSetting.h */,
+				0A6C0F5B1A4D548B00544B33 /* MessageSigningSetting.m */,
 				AC454DE81A1F3839000AF4ED /* PinCodeSetting.h */,
 				AC454DE91A1F3839000AF4ED /* PinCodeSetting.m */,
 				DAB2C8711A2038930011EE2F /* KeychainSetting.h */,
@@ -1448,10 +1483,12 @@
 				4268FE2A194ACD57007A4C30 /* ColdViewController.m in Sources */,
 				ACEE7D2919D3F9F500932B39 /* QRCodeTxTransport.m in Sources */,
 				424EA9EB195E99B70029AB43 /* NotificationUtil.m in Sources */,
+				0A93B6061A4AA0520081D74D /* VerifyMessageSignatureViewController.m in Sources */,
 				4268FE29194ACD57007A4C30 /* ColdAddressViewController.m in Sources */,
 				AC454DE11A1F250C000AF4ED /* PinCodeDisableViewController.m in Sources */,
 				AC202AD0196B8B7A00033EC1 /* Setting.m in Sources */,
 				ACE7E71019EB78AE00F7AA3A /* ImageCropView.m in Sources */,
+				0A259E281A47FDF600D7F707 /* DialogSelectChangeAddress.m in Sources */,
 				ACC21A6B194C2BD900E02542 /* ColdModeCheckConnectionView.m in Sources */,
 				ACA11DCA19F64D560087D39C /* RCheckViewController.m in Sources */,
 				ACEE7D2C19D3F9F500932B39 /* ScanQrCodeViewController.m in Sources */,
@@ -1478,6 +1515,7 @@
 				AC45D84119878BAB00AF5C2C /* DialogAddressLongPressOptions.m in Sources */,
 				4269FF75195A8872001213B9 /* Market.m in Sources */,
 				DA641E8B196E7BC20095DF42 /* GCCrashInstallation.m in Sources */,
+				0A93B6011A4A66080081D74D /* DialogSignMessageOutput.m in Sources */,
 				ACA11DCD19F74FA10087D39C /* RCheckCell.m in Sources */,
 				ACE7E71819EB8DE100F7AA3A /* ImagePickerFromCameraViewController.m in Sources */,
 				AC808B8C19D56757004E78A3 /* XRandom.m in Sources */,
@@ -1499,6 +1537,7 @@
 				AC0135D0194ED8B800E3BB95 /* HotAddressAddViewController.m in Sources */,
 				AC17158D1969359900337AB5 /* DialogPrivateKeyEncryptedQrCode.m in Sources */,
 				AC31E92F19B4533F00EFDDF1 /* TrendingGraphicView.m in Sources */,
+				0A6C0F5C1A4D548B00544B33 /* MessageSigningSetting.m in Sources */,
 				ACEE7D3919D4012600932B39 /* SignTransactionScanSetting.m in Sources */,
 				ACEE7D2B19D3F9F500932B39 /* ScanQrCodeTransportViewController.m in Sources */,
 				4254084119469D5A007AF99C /* BitherSetting.m in Sources */,
@@ -1528,6 +1567,7 @@
 				ACEE7D3619D3FC4B00932B39 /* ReloadTxSetting.m in Sources */,
 				AC454DE41A1F2518000AF4ED /* PinCodeChangeViewController.m in Sources */,
 				425408571946A219007AF99C /* DataCheckUtil.m in Sources */,
+				0A6C0F5F1A4D5E1900544B33 /* DialogSignMessageSelectAddress.m in Sources */,
 				AC6163941964ED2F0055C9D0 /* DialogWithArrow.m in Sources */,
 				ACA9D70319540E0F002D1E3A /* PlaySoundUtil.m in Sources */,
 				AC616397196507B40055C9D0 /* DialogTxConfirmation.m in Sources */,
@@ -1591,7 +1631,9 @@
 				ACDDDC2D19480ECF0008A79D /* DialogCentered.m in Sources */,
 				ACF02FEB19D90899001AB701 /* DialogSwitchQRCode.m in Sources */,
 				4268FE2B194ACD57007A4C30 /* CheckViewController.m in Sources */,
+				0A42062A1A494F1000562100 /* SignMessageViewController.m in Sources */,
 				DAB2C8761A206F080011EE2F /* KeychainBackupUtil.m in Sources */,
+				0A259E251A47F19100D7F707 /* DialogSendOption.m in Sources */,
 				AC454DDE1A1F24FA000AF4ED /* PinCodeEnableViewController.m in Sources */,
 				ACDDDC2219480DE00008A79D /* UIBaseUtil.m in Sources */,
 				AC31E93219B477E400EFDDF1 /* BackgroundTransitionView.m in Sources */,
@@ -1666,7 +1708,7 @@
 				42EFB5511949C52100376888 /* Base */,
 				AC229A7A196A466400A7FB5E /* zh-Hans */,
 				AC229A7B196A466900A7FB5E /* zh-Hant */,
-				0ACB59321A38289E00CB682B /* en */,
+				0A6C0F591A4D411800544B33 /* en */,
 			);
 			name = MainStoryboard.storyboard;
 			sourceTree = "<group>";
@@ -1787,7 +1829,7 @@
 				INFOPLIST_FILE = "bither-ios/bither-ios-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "BA494991-713A-43A8-9ABA-24A2B6C98CFC";
+				PROVISIONING_PROFILE = "1ef11b8b-f66f-4938-a14b-6a1367ceaad0";
 				TARGETED_DEVICE_FAMILY = 1;
 				USER_HEADER_SEARCH_PATHS = "${SRCROOT}/**";
 				WRAPPER_EXTENSION = app;

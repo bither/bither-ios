@@ -38,11 +38,13 @@
 #import <Bitheri/BTSettings.h>
 #import <Bitheri/BTPeerManager.h>
 #import "BTQRCodeUtil.h"
+#import "DialogSendOption.h"
+#import "DialogSelectChangeAddress.h"
 
 #define kBalanceFontSize (15)
 #define kSendButtonQrIconSize (20)
 
-@interface UnsignedTransactionViewController ()<UITextFieldDelegate,ScanQrCodeDelegate,DialogSendTxConfirmDelegate>{
+@interface UnsignedTransactionViewController ()<UITextFieldDelegate,ScanQrCodeDelegate,DialogSendTxConfirmDelegate,DialogSendOptionDelegate>{
     DialogProgressChangable *dp;
     BOOL needConfirm;
 }
@@ -53,6 +55,7 @@
 @property (strong, nonatomic) IBOutlet CurrencyCalculatorLink *amtLink;
 @property (weak, nonatomic) IBOutlet UIButton *btnSend;
 @property (weak, nonatomic) IBOutlet UIView *vTopBar;
+@property DialogSelectChangeAddress *dialogSelectChangeAddress;
 
 @property BTTx* tx;
 @end
@@ -88,6 +91,7 @@
     dp = [[DialogProgressChangable alloc]initWithMessage:NSLocalizedString(@"Please wait…", nil)];
     dp.touchOutSideToDismiss = NO;
     needConfirm = YES;
+    self.dialogSelectChangeAddress = [[DialogSelectChangeAddress alloc]initWithFromAddress:self.address];
     [self check];
 }
 
@@ -115,14 +119,18 @@
 
 - (IBAction)sendPressed:(id)sender {
     if([self checkValues]){
+        if([StringUtil compareString:[self.tfAddress.text stringByReplacingOccurrencesOfString:@" " withString:@""] compare:self.dialogSelectChangeAddress.changeAddress.address]){
+            [self showBannerWithMessage:NSLocalizedString(@"select_change_address_change_to_same_warn", nil) belowView:self.vTopBar];
+            return;
+        }
         [self hideKeyboard];
         self.btnSend.enabled = NO;
         [dp showInWindow:self.view.window completion:^{
             dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
                 u_int64_t value = self.amtLink.amount;
                 NSError * error;
-                 NSString * toAddress=[self.tfAddress.text stringByReplacingOccurrencesOfString:@" " withString:@""];
-                self.tx = [self.address txForAmounts:@[@(value)] andAddress:@[toAddress] andError:&error];
+                NSString * toAddress=[self.tfAddress.text stringByReplacingOccurrencesOfString:@" " withString:@""];
+                self.tx = [self.address txForAmounts:@[@(value)] andAddress:@[toAddress] andChangeAddress:self.dialogSelectChangeAddress.changeAddress.address  andError:&error];
                 if (error) {
                     NSString * msg=[TransactionsUtil getCompleteTxForError:error];
                     [self showSendResult:msg dialog:dp];
@@ -135,7 +143,7 @@
                          __block NSString * addressBlock=toAddress;
                         [dp dismissWithCompletion:^{
                             if(needConfirm){
-                                DialogSendTxConfirm *dialog = [[DialogSendTxConfirm alloc]initWithTx:self.tx from:self.address to:addressBlock delegate:self];
+                                DialogSendTxConfirm *dialog = [[DialogSendTxConfirm alloc]initWithTx:self.tx from:self.address to:addressBlock changeTo:self.dialogSelectChangeAddress.changeAddress.address delegate:self];
                                 [dialog showInWindow:self.view.window];
                             }else{
                                 [self onSendTxConfirmed:self.tx];
@@ -163,6 +171,11 @@
     txTrans.to = [tx amountSentTo:self.tfAddress.text];
     txTrans.myAddress = self.address.address;
     txTrans.toAddress = self.tfAddress.text;
+    NSString* changeAddress = self.dialogSelectChangeAddress.changeAddress.address;
+    if (![StringUtil isEmpty:changeAddress] && ![StringUtil compareString:changeAddress compare:self.address.address]) {
+        txTrans.changeAddress=changeAddress;
+        txTrans.changeAmt=[tx amountSentTo:changeAddress];
+    }
     NSMutableArray *array = [[NSMutableArray alloc]init];
     NSArray *hashDataArray = tx.unsignedInHashes;
     for(NSData *data in hashDataArray){
@@ -171,6 +184,7 @@
     txTrans.hashList = array;
     qr.content = [QRCodeTxTransport getPreSignString:txTrans];
     qr.oldContent=[QRCodeTxTransport oldGetPreSignString:txTrans];
+    qr.hasChangeAddress=![StringUtil compareString:changeAddress compare:self.address.address];
     [qr setFinishAction:NSLocalizedString(@"Scan Bither Cold to sign", nil) target:self selector:@selector(scanBitherColdToSign)];
     [self.navigationController pushViewController:qr animated:YES];
 }
@@ -321,6 +335,15 @@
     }
 }
 
+- (IBAction)optionPressed:(id)sender {
+    [self hideKeyboard];
+    [[[DialogSendOption alloc]initWithDelegate:self]showInWindow:self.view.window];
+}
+
+-(void)selectChangeAddress{
+    [self.dialogSelectChangeAddress showInWindow:self.view.window];
+}
+
 -(void)configureBalance{
     self.lblBalance.attributedText = [UnitUtil stringWithSymbolForAmount:self.address.balance withFontSize:kBalanceFontSize color:self.lblBalance.textColor];
     [self configureBalanceLabelWidth:self.lblBalance];
@@ -363,6 +386,10 @@
     if(touch.view != self.tfAddress && touch.view != self.amtLink.tfBtc && touch.view != self.amtLink.tfCurrency){
         [self hideKeyboard];
     }
+}
+
+- (IBAction)topBarPressed:(id)sender {
+    self.amtLink.amount = self.address.balance;
 }
 
 -(void)touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event{

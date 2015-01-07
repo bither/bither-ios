@@ -37,6 +37,10 @@
 @property (weak, nonatomic) IBOutlet UILabel *lblFee;
 @property (weak, nonatomic) IBOutlet UILabel *lblNoPrivateKey;
 @property (weak, nonatomic) IBOutlet UIButton *btnSign;
+@property (weak, nonatomic) IBOutlet UIView *vChange;
+@property (weak, nonatomic) IBOutlet UIView *vBottom;
+@property (weak, nonatomic) IBOutlet UILabel *lblChangeAddress;
+@property (weak, nonatomic) IBOutlet UILabel *lblChangeAmount;
 
 @end
 
@@ -55,6 +59,23 @@
     self.lblTo.text = self.tx.toAddress;
     self.lblAmount.attributedText = [UnitUtil attributedStringWithSymbolForAmount:self.tx.to withFontSize:14 color:self.lblAmount.textColor];
     self.lblFee.attributedText = [UnitUtil attributedStringWithSymbolForAmount:self.tx.fee withFontSize:14 color:self.lblAmount.textColor];
+    
+    if(self.tx.changeAmt > 0 && ![StringUtil isEmpty:self.tx.changeAddress]){
+        self.vChange.hidden = NO;
+        self.lblChangeAddress.text = self.tx.changeAddress;
+        self.lblChangeAmount.attributedText = [UnitUtil attributedStringWithSymbolForAmount:self.tx.changeAmt withFontSize:14 color:self.lblChangeAmount.textColor];
+    }else{
+        self.vChange.hidden = YES;
+    }
+    
+    CGRect bottomFrame = self.vBottom.frame;
+    if(!self.vChange.hidden){
+        bottomFrame.origin.y = CGRectGetMaxY(self.vChange.frame);
+    }else{
+        bottomFrame.origin.y = self.vChange.frame.origin.y;
+    }
+    self.vBottom.frame = bottomFrame;
+    
     NSArray *privKeys = [BTAddressManager instance].privKeyAddresses;
     address = nil;
     for(BTAddress *a in privKeys){

@@ -1,5 +1,5 @@
 //
-//  DialogNetworkMonitorOption.h
+//  DialogSendOption.h
 //  bither-ios
 //
 //  Copyright 2014 http://Bither.net
@@ -18,6 +18,12 @@
 
 #import "DialogCentered.h"
 
-@interface DialogNetworkMonitorOption : DialogCentered
+@protocol DialogSendOptionDelegate <NSObject>
+-(void)selectChangeAddress;
+@end
 
+@interface DialogSendOption : DialogCentered
+-(instancetype)initWithDelegate:(NSObject<DialogSendOptionDelegate>*)delegate;
+
+@property (weak) NSObject<DialogSendOptionDelegate>* delegate;
 @end

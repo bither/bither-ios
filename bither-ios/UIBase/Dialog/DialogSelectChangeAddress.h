@@ -1,5 +1,5 @@
 //
-//  DialogNetworkMonitorOption.h
+//  DialogSelectChangeAddress.h
 //  bither-ios
 //
 //  Copyright 2014 http://Bither.net
@@ -17,7 +17,9 @@
 //  limitations under the License.
 
 #import "DialogCentered.h"
+#import "BTAddressManager.h"
 
-@interface DialogNetworkMonitorOption : DialogCentered
-
+@interface DialogSelectChangeAddress : DialogCentered
+-(instancetype)initWithFromAddress:(BTAddress*)fromAddress;
+@property(readonly) BTAddress* changeAddress;
 @end

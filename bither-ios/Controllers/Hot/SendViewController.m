@@ -32,10 +32,12 @@
 #import "PeerUtil.h"
 #import "TransactionsUtil.h"
 #import "CurrencyCalculatorLink.h"
+#import "DialogSendOption.h"
+#import "DialogSelectChangeAddress.h"
 
 #define kBalanceFontSize (15)
 
-@interface SendViewController ()<UITextFieldDelegate,ScanQrCodeDelegate,DialogSendTxConfirmDelegate>{
+@interface SendViewController ()<UITextFieldDelegate,ScanQrCodeDelegate,DialogSendTxConfirmDelegate, DialogSendOptionDelegate>{
     DialogProgressChangable *dp;
 }
 @property (weak, nonatomic) IBOutlet UILabel *lblBalancePrefix;
@@ -46,6 +48,7 @@
 @property (weak, nonatomic) IBOutlet UITextField *tfPassword;
 @property (weak, nonatomic) IBOutlet UIButton *btnSend;
 @property (weak, nonatomic) IBOutlet UIView *vTopBar;
+@property DialogSelectChangeAddress *dialogSelectChangeAddress;
 
 @end
 
@@ -77,6 +80,7 @@
     }
     dp = [[DialogProgressChangable alloc]initWithMessage:NSLocalizedString(@"Please wait…", nil)];
     dp.touchOutSideToDismiss = NO;
+    self.dialogSelectChangeAddress = [[DialogSelectChangeAddress alloc]initWithFromAddress:self.address];
     [self check];
 }
 
@@ -100,6 +104,10 @@
 
 - (IBAction)sendPressed:(id)sender {
     if([self checkValues]){
+        if([StringUtil compareString:[self.tfAddress.text stringByReplacingOccurrencesOfString:@" " withString:@""] compare:self.dialogSelectChangeAddress.changeAddress.address]){
+            [self showBannerWithMessage:NSLocalizedString(@"select_change_address_change_to_same_warn", nil) belowView:self.vTopBar];
+            return;
+        }
         [self hideKeyboard];
         [dp showInWindow:self.view.window completion:^{
             dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
@@ -110,7 +118,7 @@
                 u_int64_t value = self.amtLink.amount;
                 NSError * error;
                 NSString * toAddress=[self.tfAddress.text stringByReplacingOccurrencesOfString:@" " withString:@""];
-                BTTx* tx = [self.address txForAmounts:@[@(value)] andAddress:@[toAddress] andError:&error];
+                BTTx* tx = [self.address txForAmounts:@[@(value)] andAddress:@[toAddress] andChangeAddress:self.dialogSelectChangeAddress.changeAddress.address andError:&error];
                 if (error) {
                     NSString * msg=[TransactionsUtil getCompleteTxForError:error];
                     [self showSendResult:msg dialog:dp];
@@ -125,7 +133,7 @@
                             dispatch_async(dispatch_get_main_queue(), ^{
                                 [dp dismissWithCompletion:^{
                                     [dp changeToMessage:NSLocalizedString(@"Please wait…", nil)];
-                                    DialogSendTxConfirm *dialog = [[DialogSendTxConfirm alloc]initWithTx:tx from:self.address to:addressBlock delegate:self];
+                                    DialogSendTxConfirm *dialog = [[DialogSendTxConfirm alloc]initWithTx:tx from:self.address to:addressBlock changeTo:self.dialogSelectChangeAddress.changeAddress.address delegate:self];
                                     [dialog showInWindow:self.view.window];
                                 }];
                             });
@@ -256,6 +264,15 @@
     }
 }
 
+- (IBAction)optionPressed:(id)sender {
+    [self hideKeyboard];
+    [[[DialogSendOption alloc]initWithDelegate:self]showInWindow:self.view.window];
+}
+
+-(void)selectChangeAddress{
+    [self.dialogSelectChangeAddress showInWindow:self.view.window];
+}
+
 -(void)configureBalance{
     self.lblBalance.attributedText = [UnitUtil stringWithSymbolForAmount:self.address.balance withFontSize:kBalanceFontSize color:self.lblBalance.textColor];
     [self configureBalanceLabelWidth:self.lblBalance];
@@ -296,7 +313,6 @@
     tf.leftViewMode = UITextFieldViewModeAlways;
 }
 
-
 -(void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event{
     UITouch *touch = touches.anyObject;
     if(touch.view != self.tfAddress && touch.view != self.amtLink.tfCurrency && touch.view != self.amtLink.tfBtc && touch.view != self.tfPassword){
@@ -309,5 +325,9 @@
     if(touch.view != self.tfAddress && touch.view != self.amtLink.tfCurrency && touch.view != self.amtLink.tfBtc && touch.view != self.tfPassword){
         [self hideKeyboard];
     }
+}
+
+- (IBAction)topBarPressed:(id)sender {
+    self.amtLink.amount = self.address.balance;
 }
 @end

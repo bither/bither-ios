@@ -42,6 +42,9 @@
     [super viewDidLoad];
     self.tableView.dataSource=self;
     self.tableView.delegate=self;
+    if([self.tableView respondsToSelector:@selector(setLayoutMargins:)]){
+        self.tableView.layoutMargins = UIEdgeInsetsZero;
+    }
     NSString * version=[NSString stringWithFormat:@"Bither Hot %@", [[[NSBundle mainBundle]infoDictionary]objectForKey:CFBundleShortVersionString]];
     [self configureHeaderAndFooter:self.tableView background:ColorBg isHot:YES version:version];
     [self reload];

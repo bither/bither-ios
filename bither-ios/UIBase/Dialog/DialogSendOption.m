@@ -1,5 +1,5 @@
 //
-//  DialogNetworkMonitorOption.m
+//  DialogSendOption.m
 //  bither-ios
 //
 //  Copyright 2014 http://Bither.net
@@ -16,34 +16,32 @@
 //  See the License for the specific language governing permissions and
 //  limitations under the License.
 
-#import "DialogNetworkMonitorOption.h"
-#import "BTPeerManager.h"
+#import "DialogSendOption.h"
 #import "NSString+Size.h"
 
 #define kButtonHeight (44)
 #define kButtonEdgeInsets (UIEdgeInsetsMake(0, 10, 0, 10))
-#define kHeight (kButtonHeight * 3 + 2)
 #define kMinWidth (160)
 #define kFontSize (16)
 
-@implementation DialogNetworkMonitorOption
+@implementation DialogSendOption
 
--(instancetype)init{
-    NSString* str = NSLocalizedString(@"network_monitor_clear_peers", nil);
+-(instancetype)initWithDelegate:(NSObject<DialogSendOptionDelegate>*)delegate{
+    NSString* str = NSLocalizedString(@"select_change_address_option_name", nil);
     CGFloat width = [str sizeWithRestrict:CGSizeMake(CGFLOAT_MAX, kButtonHeight) font:[UIFont systemFontOfSize:kFontSize]].width + kButtonEdgeInsets.left + kButtonEdgeInsets.right;
     width = MAX(kMinWidth, width);
-    self = [super initWithFrame:CGRectMake(0, 0, width, kHeight)];
+    self = [super initWithFrame:CGRectMake(0, 0, width, kButtonHeight * 2 + 1)];
     if(self){
+        self.delegate = delegate;
         [self firstConfigure];
     }
     return self;
 }
 
-
 -(void)firstConfigure{
     self.bgInsets = UIEdgeInsetsMake(4, 16, 4, 16);
     CGFloat bottom = 0;
-    bottom = [self createButtonWithText:NSLocalizedString(@"network_monitor_clear_peers", nil) top:bottom action:@selector(clearPeerPressed:)];
+    bottom = [self createButtonWithText:NSLocalizedString(@"select_change_address_option_name", nil) top:bottom action:@selector(selectChangeAddressPressed:)];
     UIView *seperator = [[UIView alloc]initWithFrame:CGRectMake(0, bottom, self.frame.size.width, 1)];
     seperator.autoresizingMask = UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleWidth;
     seperator.backgroundColor = [UIColor colorWithWhite:1 alpha:0.5];
@@ -56,11 +54,12 @@
     self.frame = frame;
 }
 
--(void)clearPeerPressed:(id)sender{
+-(void)selectChangeAddressPressed:(id)sender{
+    __weak __block NSObject<DialogSendOptionDelegate>* d = self.delegate;
     [self dismissWithCompletion:^{
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
-            [[BTPeerManager instance]clearPeerAndRestart];
-        });
+        if(d && [d respondsToSelector:@selector(selectChangeAddress)]){
+            [d selectChangeAddress];
+        }
     }];
 }
 
@@ -83,5 +82,6 @@
     [self addSubview:btn];
     return CGRectGetMaxY(btn.frame);
 }
+
 
 @end
