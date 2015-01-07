@@ -75,7 +75,7 @@ PODS:
   - SimpleKeychain (0.2.2)
 
 DEPENDENCIES:
-  - Bitheri (from `git@github.com:bither/bitheri.git`, branch `develop`)
+  - Bitheri (from `git@github.com:bither/bitheri.git`, tag `v1.2.3`)
   - FXBlurView
   - KSCrash (~> 0.0.3)
   - MKNetworkKit (~> 0.87)
@@ -84,13 +84,13 @@ DEPENDENCIES:
 
 EXTERNAL SOURCES:
   Bitheri:
-    :branch: develop
     :git: git@github.com:bither/bitheri.git
+    :tag: v1.2.3
 
 CHECKOUT OPTIONS:
   Bitheri:
-    :commit: 62c3d96dc3a800772711ace5233c93228e69ce04
     :git: git@github.com:bither/bitheri.git
+    :tag: v1.2.3
 
 SPEC CHECKSUMS:
   Bitheri: 2212b9559ef686cb48e59d9e5f08ebda7e4109db
