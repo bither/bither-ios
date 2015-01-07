@@ -1,5 +1,5 @@
 PODS:
-  - Bitheri (1.2.3):
+  - Bitheri (1.3.0):
     - CocoaLumberjack (~> 1.9.1)
     - FMDB (~> 2.3)
     - OpenSSL
@@ -75,7 +75,7 @@ PODS:
   - SimpleKeychain (0.2.2)
 
 DEPENDENCIES:
-  - Bitheri (from `git@github.com:bither/bitheri.git`, tag `v1.2.3`)
+  - Bitheri (from `git@github.com:bither/bitheri.git`, branch `develop`)
   - FXBlurView
   - KSCrash (~> 0.0.3)
   - MKNetworkKit (~> 0.87)
@@ -84,16 +84,16 @@ DEPENDENCIES:
 
 EXTERNAL SOURCES:
   Bitheri:
+    :branch: develop
     :git: git@github.com:bither/bitheri.git
-    :tag: v1.2.3
 
 CHECKOUT OPTIONS:
   Bitheri:
+    :commit: ad836836acee8ccb9d17fe188dfaaeb74933013c
     :git: git@github.com:bither/bitheri.git
-    :tag: v1.2.3
 
 SPEC CHECKSUMS:
-  Bitheri: 2212b9559ef686cb48e59d9e5f08ebda7e4109db
+  Bitheri: b1f58a27bdb502e69e19a052340729db53f3e5f4
   CocoaLumberjack: 205769c032b5fef85b92472046bcc8b7e7c8a817
   FMDB: 0b2fa25e5264ef177973c0cb8c02c711107979aa
   FXBlurView: abe1046285813c4f6e9008abbc324fc5ab32af90
