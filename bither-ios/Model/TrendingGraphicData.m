@@ -52,7 +52,11 @@ static NSMutableDictionary * tgds;
     double interval=self.high-self.low;
     for(int i=0;i<self.prices.count;i++){
         double price=[[self.prices objectAtIndex:i] doubleValue];
-        [self.rates addObject:@(MAX(0, price-self.low)/interval)];
+        if(interval == 0){
+            [self.rates addObject:@(0.5)];
+        }else{
+            [self.rates addObject:@(MAX(0, price-self.low)/interval)];
+        }
     }
     
 }
