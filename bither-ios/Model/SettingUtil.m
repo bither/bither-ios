@@ -39,7 +39,7 @@
     }
     [array addObject:[AvatarSetting getAvatarSetting]];
     [array addObject:[Setting getCheckSetting]];
-    [array addObject:[DonationSetting getDonateSetting]];
+    //[array addObject:[DonationSetting getDonateSetting]];
     [array addObject:[Setting getAdvanceSetting]];
     return array;
 }
