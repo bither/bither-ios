@@ -20,7 +20,6 @@
 #import "UEntropyCamera.h"
 #import "UEntropyMic.h"
 #import "UEntropySensor.h"
-#import "UEntropyCollector.h"
 #import "DialogAlert.h"
 #import "DialogProgress.h"
 #import "SensorVisualizerView.h"
@@ -31,15 +30,9 @@
 #import "PlaySoundUtil.h"
 
 #define kMicViewHeight (100)
-#define kSaveProgress (0.1)
-#define kStartProgress (0.01)
-#define kProgressKeyRate (0.5)
-#define kProgressEncryptRate (0.5)
-#define kMinGeneratingTime (2.4)
 
 @interface UEntropyViewController ()<UEntropyCollectorDelegate, UIViewControllerTransitioningDelegate>{
     NSString* password;
-    NSUInteger count;
     BOOL isFinishing;
     void(^cancelBlock)();
     DialogProgress *dpStopping;
@@ -50,15 +43,16 @@
     UIImageView* ivOverlayBottom;
 }
 @property UEntropyCollector* collector;
+@property (weak) NSObject<UEntropyViewControllerDelegate>* delegate;
 @end
 
 @implementation UEntropyViewController
 
--(instancetype)initWithCount:(NSUInteger)inCount password:(NSString*)inPassword{
+-(instancetype)initWithPassword:(NSString*)inPassword andDelegate:(NSObject<UEntropyViewControllerDelegate>*)delegate{
     self = [super init];
     if(self){
         password = inPassword;
-        count = inCount;
+        self.delegate = delegate;
         self.transitioningDelegate = self;
     }
     return self;
@@ -164,125 +158,77 @@
 }
 
 -(void)onSuccess{
-    isFinishing = YES;
-    __weak __block UEntropyViewController* c = self;
-    __weak __block UIWindow* sourceWindow = self.view.window;
-    __block NSUInteger finishCount = count;
-    void(^block)() = ^{
-        [c stopAnimationWithCompletion:^{
-            [c.presentingViewController.presentingViewController dismissViewControllerAnimated:YES completion:^{
-                DialogAlert* alert = [[DialogAlert alloc]initWithMessage:[NSString stringWithFormat:NSLocalizedString(@"xrandom_final_confirm", nil), finishCount] confirm:nil cancel:nil];
-                [alert showInWindow:sourceWindow];
+    [self.collector stop];
+    [self.collector onPause];
+    [self onProgress:1];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        isFinishing = YES;
+        __weak __block UEntropyViewController* c = self;
+        void(^block)() = ^{
+            [c stopAnimationWithCompletion:^{
+                if(self.delegate && [self.delegate respondsToSelector:@selector(successFinish:)]){
+                    [self.delegate successFinish:self];
+                }else{
+                    [c dismissViewControllerAnimated:YES completion:nil];
+                }
             }];
-        }];
-    };
-    if(dpStopping.shown){
-        [dpStopping dismissWithCompletion:block];
-    }else{
-        block();
-    }
-    
+        };
+        if(dpStopping.shown){
+            [dpStopping dismissWithCompletion:block];
+        }else{
+            block();
+        }
+    });
 }
 
 -(void)onFailed{
-    isFinishing = YES;
-    __weak __block UEntropyViewController* c = self;
-    __weak __block DialogProgress* dp = dpStopping;
-    void(^block)() = ^{
-        if(dp.shown){
-            [dp dismissWithCompletion:^{
+    [self.collector stop];
+    [self.collector onPause];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        isFinishing = YES;
+        __weak __block UEntropyViewController* c = self;
+        __weak __block DialogProgress* dp = dpStopping;
+        void(^block)() = ^{
+            if(dp.shown){
+                [dp dismissWithCompletion:^{
+                    [c stopAnimationWithCompletion:^{
+                        [c dismissViewControllerAnimated:YES completion:nil];
+                    }];
+                }];
+            }else{
                 [c stopAnimationWithCompletion:^{
                     [c dismissViewControllerAnimated:YES completion:nil];
                 }];
-            }];
+            }
+        };
+        NSString* msg;
+        if(self.collector.sources.count == 0){
+            msg = NSLocalizedString(@"xrandom_no_source", nil);
         }else{
-            [c stopAnimationWithCompletion:^{
-                [c dismissViewControllerAnimated:YES completion:nil];
-            }];
+            msg = NSLocalizedString(@"xrandom_generating_failed", nil);
         }
-    };
-    NSString* msg;
-    if(self.collector.sources.count == 0){
-        msg = NSLocalizedString(@"xrandom_no_source", nil);
-    }else{
-        msg = NSLocalizedString(@"xrandom_generating_failed", nil);
+        [[[DialogAlert alloc]initWithMessage:msg confirm:block cancel:block] showInWindow:self.view.window];
+    });
+}
+
+
+-(BOOL)testShouldCancel{
+    if(cancelBlock){
+        [self.collector stop];
+        [self.collector onPause];
+        dispatch_async(dispatch_get_main_queue(), cancelBlock);
+        return YES;
     }
-    [[[DialogAlert alloc]initWithMessage:msg confirm:block cancel:block] showInWindow:self.view.window];
+    return NO;
 }
 
 -(void)startGenerate{
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
-        float progress = kStartProgress;
-        float itemProgress = (1.0 - kStartProgress - kSaveProgress) / (float) count;
-        NSTimeInterval startGeneratingTime = [[NSDate date] timeIntervalSince1970];
-        [self.collector onResume];
-        [self.collector start];
-        [self onProgress:progress];
-        XRandom* xrandom = [[XRandom alloc]initWithDelegate:self.collector];
-        NSMutableArray *addresses=[NSMutableArray new];
-        
-        for(int i = 0; i < count; i++){
-            if(cancelBlock){
-                [self.collector stop];
-                [self.collector onPause];
-                dispatch_async(dispatch_get_main_queue(), cancelBlock);
-                return;
-            }
-            
-            NSData* data = [xrandom randomWithSize:32];
-            if(data){
-                BTKey *key = [BTKey keyWithSecret:data compressed:YES];
-                key.isFromXRandom=YES;
-                NSLog(@"uentropy outcome data %d/%lu", i + 1, (unsigned long)count);
-                progress += itemProgress * kProgressKeyRate;
-                [self onProgress:progress];
-                if(cancelBlock){
-                    [self.collector stop];
-                    [self.collector onPause];
-                    dispatch_async(dispatch_get_main_queue(), cancelBlock);
-                    return;
-                }
-                
-                NSString *privateKeyString = [BTPrivateKeyUtil getPrivateKeyString:key passphrase:password];
-                if(!privateKeyString){
-                    [self.collector stop];
-                    [self.collector onPause];
-                    dispatch_async(dispatch_get_main_queue(), ^{
-                        [self onFailed];
-                    });
-                    return;
-                }
-                BTAddress *btAddress = [[BTAddress alloc] initWithKey:key encryptPrivKey:privateKeyString isXRandom:YES];
-                [addresses addObject:btAddress];
-                progress += itemProgress * kProgressEncryptRate;
-                [self onProgress:progress];
-            }else{
-                [self.collector stop];
-                [self.collector onPause];
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    [self onFailed];
-                });
-                return;
-            }
+        if(self.delegate && [self.delegate respondsToSelector:@selector(onUEntropyGeneratingWithController:collector:andPassword:)]){
+            [self.delegate onUEntropyGeneratingWithController:self collector:self.collector andPassword:password];
+        }else{
+            [self onFailed];
         }
-        
-        if(cancelBlock){
-            [self.collector stop];
-            [self.collector onPause];
-            dispatch_async(dispatch_get_main_queue(), cancelBlock);
-            return;
-        }
-        
-        [self.collector stop];
-        [KeyUtil addAddressList:addresses];
-        while ([[NSDate new] timeIntervalSince1970] - startGeneratingTime < kMinGeneratingTime) {
-            
-        }
-        [self.collector onPause];
-        [self onProgress:1];
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [self onSuccess];
-        });
     });
 }
 

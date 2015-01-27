@@ -2,7 +2,7 @@ PODS:
   - Bitheri (1.3.0):
     - CocoaLumberjack (~> 1.9.1)
     - FMDB (~> 2.3)
-    - OpenSSL
+    - OpenSSL (= 1.0.110)
     - Reachability (~> 3.1.1)
   - CocoaLumberjack (1.9.2):
     - CocoaLumberjack/Extensions (= 1.9.2)
@@ -72,7 +72,7 @@ PODS:
   - OpenSSL (1.0.110)
   - Reachability (3.1.1)
   - RegexKitLite (4.0)
-  - SimpleKeychain (0.2.2)
+  - SimpleKeychain (0.3.0)
 
 DEPENDENCIES:
   - Bitheri (from `git@github.com:bither/bitheri.git`, branch `develop`)
@@ -89,11 +89,11 @@ EXTERNAL SOURCES:
 
 CHECKOUT OPTIONS:
   Bitheri:
-    :commit: ad836836acee8ccb9d17fe188dfaaeb74933013c
+    :commit: 5107c0c2aa545e25820ad9032d2dfbee971540a6
     :git: git@github.com:bither/bitheri.git
 
 SPEC CHECKSUMS:
-  Bitheri: b1f58a27bdb502e69e19a052340729db53f3e5f4
+  Bitheri: 99ba570195747198843b4301b3ebd369d5d26fba
   CocoaLumberjack: 205769c032b5fef85b92472046bcc8b7e7c8a817
   FMDB: 0b2fa25e5264ef177973c0cb8c02c711107979aa
   FXBlurView: abe1046285813c4f6e9008abbc324fc5ab32af90
@@ -102,6 +102,6 @@ SPEC CHECKSUMS:
   OpenSSL: 72a82aa51b056ae5833307a3fef9b571f38ce11c
   Reachability: 8e9635e3cb4f98e7f825e51147f677ecc694d0e7
   RegexKitLite: c0e4c12e6e7de0769f3a3ed679f0f61604170661
-  SimpleKeychain: 05c1ff0ef0c553833d13851fbcf701a55f0f12a3
+  SimpleKeychain: 4758625a53ca89cfae98b4aca8c550d1193292f8
 
 COCOAPODS: 0.35.0
