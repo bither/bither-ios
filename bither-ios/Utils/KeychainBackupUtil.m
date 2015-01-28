@@ -275,7 +275,7 @@
         }
         
         for (BTAddress *address in needUpdateAddress) {
-            [address savePrivate];
+//            [address savePrivate];
         }
         for (BTAddress *address in needAddAddress) {
             [[BTAddressManager instance] addAddress:address];

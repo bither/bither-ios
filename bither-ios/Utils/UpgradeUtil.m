@@ -33,7 +33,7 @@
         BTAddress * address=[addressList objectAtIndex:i];
         address.sortTime=sortTime;
         sortTime++;
-        [address updateAddressWithPub];
+//        [address updateAddressWithPub];
     }
     [[UserDefaultsUtil instance] setLastVersion:[SystemUtil getVersionCode]];
 }
@@ -50,6 +50,11 @@
     }
     return YES;
     
+}
+
++ (BOOL)need;{
+    // version
+    return YES;
 }
 
 @end

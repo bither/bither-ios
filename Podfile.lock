@@ -9,10 +9,10 @@ PODS:
   - CocoaLumberjack/Core (1.9.2)
   - CocoaLumberjack/Extensions (1.9.2):
     - CocoaLumberjack/Core
-  - FMDB (2.4):
-    - FMDB/standard (= 2.4)
-  - FMDB/common (2.4)
-  - FMDB/standard (2.4):
+  - FMDB (2.5):
+    - FMDB/standard (= 2.5)
+  - FMDB/common (2.5)
+  - FMDB/standard (2.5):
     - FMDB/common
   - FXBlurView (1.6.3)
   - KSCrash (0.0.3):
@@ -89,13 +89,13 @@ EXTERNAL SOURCES:
 
 CHECKOUT OPTIONS:
   Bitheri:
-    :commit: 5107c0c2aa545e25820ad9032d2dfbee971540a6
+    :commit: 8e16a879ab72fcd30d42b3ce21fc08143a6508b2
     :git: git@github.com:bither/bitheri.git
 
 SPEC CHECKSUMS:
   Bitheri: 99ba570195747198843b4301b3ebd369d5d26fba
   CocoaLumberjack: 205769c032b5fef85b92472046bcc8b7e7c8a817
-  FMDB: 0b2fa25e5264ef177973c0cb8c02c711107979aa
+  FMDB: 0efa188cf0dd1ce82c27a478cd5f5fa245308677
   FXBlurView: abe1046285813c4f6e9008abbc324fc5ab32af90
   KSCrash: c0a693b2d83ced5c15a40d4e916833c655475e6a
   MKNetworkKit: 83e6296a8d42e98a71880424a889773654846d74

@@ -26,6 +26,7 @@
 #import "TransactionsUtil.h"
 #import "AdvanceViewController.h"
 #import "UserDefaultsUtil.h"
+#import "BTAddressProvider.h"
 
 static double reloadTime;
 static  Setting *reloadTxsSetting;
@@ -51,7 +52,8 @@ static  Setting *reloadTxsSetting;
         [[PeerUtil instance] stopPeer];
         for(BTAddress * address in [[BTAddressManager instance]allAddresses]){
             [address setIsSyncComplete:NO];
-            [address updateAddressWithPub];
+            [[BTAddressProvider instance] updateSyncComplete:address];
+//            [address updateAddressWithPub];
         }
         [[BTTxProvider instance] clearAllTx];
         [TransactionsUtil syncWallet:^{
