@@ -244,7 +244,7 @@
 		0A515F771A36A2C0008292AF /* RawDataView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RawDataView.m; sourceTree = "<group>"; };
 		0A515F791A36CAE3008292AF /* RawPrivateKeyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RawPrivateKeyViewController.h; sourceTree = "<group>"; };
 		0A515F7A1A36CAE3008292AF /* RawPrivateKeyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RawPrivateKeyViewController.m; sourceTree = "<group>"; };
-		0A6C0F591A4D411800544B33 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/MainStoryboard.strings; sourceTree = "<group>"; };
+		0A5B31E41A78D57D00E66F5E /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/MainStoryboard.strings; sourceTree = "<group>"; };
 		0A6C0F5A1A4D548B00544B33 /* MessageSigningSetting.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageSigningSetting.h; sourceTree = "<group>"; };
 		0A6C0F5B1A4D548B00544B33 /* MessageSigningSetting.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageSigningSetting.m; sourceTree = "<group>"; };
 		0A6C0F5D1A4D5E1900544B33 /* DialogSignMessageSelectAddress.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DialogSignMessageSelectAddress.h; sourceTree = "<group>"; };
@@ -1708,7 +1708,7 @@
 				42EFB5511949C52100376888 /* Base */,
 				AC229A7A196A466400A7FB5E /* zh-Hans */,
 				AC229A7B196A466900A7FB5E /* zh-Hant */,
-				0A6C0F591A4D411800544B33 /* en */,
+				0A5B31E41A78D57D00E66F5E /* en */,
 			);
 			name = MainStoryboard.storyboard;
 			sourceTree = "<group>";

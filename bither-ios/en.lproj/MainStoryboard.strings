@@ -56,14 +56,14 @@
 /* Class = "IBUILabel"; text = "Amount"; ObjectID = "BZZ-7d-0no"; */
 "BZZ-7d-0no.text" = "Amount";
 
+/* Class = "IBUILabel"; text = "Signature"; ObjectID = "CJp-QT-laa"; */
+"CJp-QT-laa.text" = "Signature";
+
 /* Class = "IBUISegmentedControl"; Cxt-9h-SUk.segmentTitles[0] = "Peers"; ObjectID = "Cxt-9h-SUk"; */
 "Cxt-9h-SUk.segmentTitles[0]" = "Peers";
 
 /* Class = "IBUISegmentedControl"; Cxt-9h-SUk.segmentTitles[1] = "Blocks"; ObjectID = "Cxt-9h-SUk"; */
 "Cxt-9h-SUk.segmentTitles[1]" = "Blocks";
-
-/* Class = "IBUILabel"; text = "Label"; ObjectID = "DbI-lX-jWY"; */
-"DbI-lX-jWY.text" = "Label";
 
 /* Class = "IBUILabel"; text = "Pay to"; ObjectID = "F4n-lA-Ige"; */
 "F4n-lA-Ige.text" = "Pay to";
@@ -149,8 +149,8 @@
 /* Class = "IBUILabel"; text = "Label"; ObjectID = "XVA-OX-iFc"; */
 "XVA-OX-iFc.text" = "Label";
 
-/* Class = "IBUILabel"; text = "Loading…"; ObjectID = "YDg-IR-7hP"; */
-"YDg-IR-7hP.text" = "Loading…";
+/* Class = "IBUILabel"; text = "Building Wallet…"; ObjectID = "YDg-IR-7hP"; */
+"YDg-IR-7hP.text" = "Building Wallet…";
 
 /* Class = "IBUITextField"; placeholder = "0.00"; ObjectID = "Yo9-av-E4b"; */
 "Yo9-av-E4b.placeholder" = "0.00";
@@ -161,8 +161,8 @@
 /* Class = "IBUILabel"; text = "Label"; ObjectID = "bKW-aE-gcw"; */
 "bKW-aE-gcw.text" = "Label";
 
-/* Class = "IBUILabel"; text = "Check r-value"; ObjectID = "bNn-8g-rmY"; */
-"bNn-8g-rmY.text" = "Check r-value";
+/* Class = "IBUILabel"; text = "R Value Check"; ObjectID = "bNn-8g-rmY"; */
+"bNn-8g-rmY.text" = "R Value Check";
 
 /* Class = "IBUILabel"; text = "marketName"; ObjectID = "bOH-Sj-yMG"; */
 "bOH-Sj-yMG.text" = "marketName";
@@ -185,9 +185,6 @@
 /* Class = "IBUILabel"; text = "Can not find private key"; ObjectID = "eEx-7U-SVT"; */
 "eEx-7U-SVT.text" = "Can not find private key";
 
-/* Class = "IBUIButton"; normalTitle = "Check r-values"; ObjectID = "f9N-3Q-IJD"; */
-"f9N-3Q-IJD.normalTitle" = "Check r-values";
-
 /* Class = "IBUILabel"; text = "Pay to"; ObjectID = "g3O-Ch-Qm9"; */
 "g3O-Ch-Qm9.text" = "Pay to";
 
@@ -196,6 +193,9 @@
 
 /* Class = "IBUILabel"; text = "Label"; ObjectID = "gbe-Xl-yCZ"; */
 "gbe-Xl-yCZ.text" = "Label";
+
+/* Class = "IBUILabel"; text = "Verify Message Signature"; ObjectID = "gvK-WF-XJl"; */
+"gvK-WF-XJl.text" = "Verify Message Signature";
 
 /* Class = "IBUIButton"; normalTitle = "0"; ObjectID = "hQL-T3-YNx"; */
 "hQL-T3-YNx.normalTitle" = "0";
@@ -242,9 +242,6 @@
 /* Class = "IBUILabel"; text = "Amount"; ObjectID = "nyJ-oV-7hM"; */
 "nyJ-oV-7hM.text" = "Amount";
 
-/* Class = "IBUILabel"; text = "Generate New Private Keys"; ObjectID = "oGZ-jk-Y8A"; */
-"oGZ-jk-Y8A.text" = "Generate New Private Keys";
-
 /* Class = "IBUISegmentedControl"; oZb-Bk-280.segmentTitles[0] = "Private Key"; ObjectID = "oZb-Bk-280"; */
 "oZb-Bk-280.segmentTitles[0]" = "Private Key";
 
@@ -254,8 +251,17 @@
 /* Class = "IBUILabel"; text = "Label"; ObjectID = "p9x-vk-IwH"; */
 "p9x-vk-IwH.text" = "Label";
 
+/* Class = "IBUISegmentedControl"; pIA-ee-e58.segmentTitles[0] = "Private"; ObjectID = "pIA-ee-e58"; */
+"pIA-ee-e58.segmentTitles[0]" = "Private";
+
+/* Class = "IBUISegmentedControl"; pIA-ee-e58.segmentTitles[1] = "HDM"; ObjectID = "pIA-ee-e58"; */
+"pIA-ee-e58.segmentTitles[1]" = "HDM";
+
 /* Class = "IBUILabel"; text = "Detail"; ObjectID = "qNL-tR-Rjx"; */
 "qNL-tR-Rjx.text" = "Detail";
+
+/* Class = "IBUILabel"; text = "Original Message"; ObjectID = "qRU-bn-bhg"; */
+"qRU-bn-bhg.text" = "Original Message";
 
 /* Class = "IBUILabel"; text = "Label"; ObjectID = "qga-CG-06M"; */
 "qga-CG-06M.text" = "Label";
@@ -299,6 +305,9 @@
 /* Class = "IBUITextField"; placeholder = "0.00"; ObjectID = "xBU-Zh-e2V"; */
 "xBU-Zh-e2V.placeholder" = "0.00";
 
+/* Class = "IBUILabel"; text = "Signing Address"; ObjectID = "xhb-O8-bSH"; */
+"xhb-O8-bSH.text" = "Signing Address";
+
 /* Class = "IBUITextField"; placeholder = "Password"; ObjectID = "xmg-Xg-1Ns"; */
 "xmg-Xg-1Ns.placeholder" = "Password";
 
@@ -322,15 +331,3 @@
 
 /* Class = "IBUIButton"; normalTitle = "Add This Private Key"; ObjectID = "zjg-wy-EHw"; */
 "zjg-wy-EHw.normalTitle" = "Add This Private Key";
-
-/* Class = "IBUILabel"; text = "Verify Message Signature"; ObjectID = "gvK-WF-XJl"; */
-"gvK-WF-XJl.text" = "Verify Message Signature";
-
-/* Class = "IBUILabel"; text = "Signing Address"; ObjectID = "xhb-O8-bSH"; */
-"xhb-O8-bSH.text" = "Signing Address";
-
-/* Class = "IBUILabel"; text = "Original Message"; ObjectID = "qRU-bn-bhg"; */
-"qRU-bn-bhg.text" = "Original Message";
-
-/* Class = "IBUILabel"; text = "Signature"; ObjectID = "CJp-QT-laa"; */
-"CJp-QT-laa.text" = "Signature";

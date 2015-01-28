@@ -270,3 +270,9 @@
 
 /* Class = "IBUILabel"; text = "Signature"; ObjectID = "CJp-QT-laa"; */
 "CJp-QT-laa.text" = "签名";
+
+/* Class = "IBUISegmentedControl"; pIA-ee-e58.segmentTitles[0] = "Private"; ObjectID = "pIA-ee-e58"; */
+"pIA-ee-e58.segmentTitles[0]" = "私钥";
+
+/* Class = "IBUISegmentedControl"; pIA-ee-e58.segmentTitles[1] = "HDM"; ObjectID = "pIA-ee-e58"; */
+"pIA-ee-e58.segmentTitles[1]" = "HDM";

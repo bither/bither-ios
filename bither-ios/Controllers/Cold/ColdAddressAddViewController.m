@@ -22,6 +22,7 @@
 
 @interface ColdAddressAddViewController ()
 @property (weak, nonatomic) IBOutlet UIView *vTopBar;
+@property (weak, nonatomic) IBOutlet UISegmentedControl *vTab;
 
 @end
 
