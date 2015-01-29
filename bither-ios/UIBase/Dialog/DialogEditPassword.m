@@ -23,6 +23,7 @@
 #import "UIBaseUtil.h"
 #import <AudioToolbox/AudioToolbox.h>
 #import <Bitheri/BTAddressManager.h>
+#import <Bitheri/BTAddressProvider.h>
 
 #define kOuterPadding (1)
 #define kInnerMargin (10)
@@ -272,7 +273,7 @@
 }
 
 -(BOOL)checkPassword:(NSString*)password{
-    BTPasswordSeed *passwordSeed = [[UserDefaultsUtil instance]getPasswordSeed];
+    BTPasswordSeed *passwordSeed = [[BTAddressProvider instance] getPasswordSeed];
     if(passwordSeed){
         return [passwordSeed checkPassword:password];
     }

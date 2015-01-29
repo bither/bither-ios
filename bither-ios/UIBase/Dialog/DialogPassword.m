@@ -21,6 +21,7 @@
 #import "KeyboardController.h"
 #import "StringUtil.h"
 #import "UIBaseUtil.h"
+#import "BTAddressProvider.h"
 #import <AudioToolbox/AudioToolbox.h>
 
 #define kOuterPadding (1)
@@ -273,7 +274,7 @@
             return NO;
         }
     }
-    BTPasswordSeed *passwordSeed = [[UserDefaultsUtil instance]getPasswordSeed];
+    BTPasswordSeed *passwordSeed = [[BTAddressProvider instance] getPasswordSeed];
     return !passwordSeed;
 }
 
@@ -296,7 +297,7 @@
     if(self.delegate && [self.delegate respondsToSelector:@selector(checkPassword:)]){
         return [self.delegate checkPassword:password];
     }
-    BTPasswordSeed *passwordSeed = [[UserDefaultsUtil instance]getPasswordSeed];
+    BTPasswordSeed *passwordSeed = [[BTAddressProvider instance] getPasswordSeed];
     if(passwordSeed){
         return [passwordSeed checkPassword:password];
     }

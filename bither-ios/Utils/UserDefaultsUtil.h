@@ -51,7 +51,7 @@
 -(void)setSyncBlockOnlyWifi:(BOOL)onlyWifi;
 -(BOOL)getDownloadSpvFinish;
 -(void)setDownloadSpvFinish:(BOOL)finish;
--(BTPasswordSeed *)getPasswordSeed;
+//-(BTPasswordSeed *)getPasswordSeed;
 -(void)setPasswordSeed:(BTPasswordSeed *)passwordSeed;
 
 -(TransactionFeeMode) getTransactionFeeMode;

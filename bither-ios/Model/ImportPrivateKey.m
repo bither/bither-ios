@@ -16,6 +16,7 @@
 //  See the License for the specific language governing permissions and
 //  limitations under the License.
 
+#import <Bitheri/BTAddressProvider.h>
 #import "ImportPrivateKey.h"
 #import "BTKey+Bitcoinj.h"
 #import "DialogProgress.h"
@@ -113,19 +114,16 @@
 }
 -(BOOL)checkKey:(BTKey *)key {
     if (self.importPrivateKeyType==BitherQrcode) {
-        BTPasswordSeed * passwrodSeed=[[UserDefaultsUtil instance] getPasswordSeed];
-        if (passwrodSeed) {
-            BOOL checkPassword=[passwrodSeed checkPassword:self.passwrod];
+        BTPasswordSeed *passwordSeed = [[BTAddressProvider instance] getPasswordSeed];
+        if (passwordSeed) {
+            BOOL checkPassword=[passwordSeed checkPassword:self.passwrod];
             if (!checkPassword) {
                 dispatch_async(dispatch_get_main_queue(), ^{
                     [self exit];
                     [self showMsg:NSLocalizedString(@"Password of the private key to import is different from ours. Import failed.", nil)];
-                   
-                    
                 });
                 return NO;
             }
-            
         }
     }
     BTAddress *address=[[BTAddress alloc] initWithKey:key encryptPrivKey:nil isXRandom:key.isFromXRandom];

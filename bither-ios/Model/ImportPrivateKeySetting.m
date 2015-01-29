@@ -16,6 +16,7 @@
 //  See the License for the specific language governing permissions and
 //  limitations under the License.
 
+#import <Bitheri/BTAddressProvider.h>
 #import "ImportPrivateKeySetting.h"
 #import "StringUtil.h"
 #import "BitherSetting.h"
@@ -103,7 +104,7 @@ static Setting* importPrivateKeySetting;
     DialogProgress * dp = [[DialogProgress alloc]initWithMessage:NSLocalizedString(@"Please wait…", nil)];
     [dp showInWindow:self.controller.view.window completion:^{
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
-            BTPasswordSeed * passwordSeed=[[UserDefaultsUtil instance] getPasswordSeed];
+            BTPasswordSeed * passwordSeed=[[BTAddressProvider instance] getPasswordSeed];
             if (passwordSeed) {
                 BOOL checkPassword=[passwordSeed checkPassword:password];
                 dispatch_async(dispatch_get_main_queue(), ^{

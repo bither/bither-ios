@@ -16,6 +16,7 @@
 //  See the License for the specific language governing permissions and
 //  limitations under the License.
 
+#import <Bitheri/BTAddressProvider.h>
 #import "KeyUtil.h"
 #import "BTAddressManager.h"
 #import "UserDefaultsUtil.h"
@@ -65,7 +66,7 @@
         if (![[[BTAddressManager instance]  privKeyAddresses] containsObject:btAddress]&&![[[BTAddressManager instance] watchOnlyAddresses] containsObject:btAddress]) {
             [[BTAddressManager instance] addAddress:btAddress];
             if (btAddress.hasPrivKey) {
-                if (![[UserDefaultsUtil instance] getPasswordSeed]) {
+                if (![[BTAddressProvider instance] getPasswordSeed]) {
                     BTPasswordSeed * passwordSeed=[[BTPasswordSeed alloc] initWithBTAddress:btAddress];
                     [[UserDefaultsUtil instance] setPasswordSeed:passwordSeed];
                 }
