@@ -303,10 +303,20 @@
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
     [self dismissError];
-    if([StringUtil validPartialPassword:string]){
-        if(textField.text.length - range.length + string.length <= 43){
-            return YES;
+    if ([textField isEqual:self.tfPasswordNew]||[textField isEqual:self.tfPasswordConfirm]) {
+        if([StringUtil validSimplePartialPassword:string]){
+            if(textField.text.length - range.length + string.length <= 43){
+                return YES;
+            }
         }
+        
+    }else{
+        if([StringUtil validPartialPassword:string]){
+            if(textField.text.length - range.length + string.length <= 43){
+                return YES;
+            }
+        }
+        
     }
     return NO;
 }

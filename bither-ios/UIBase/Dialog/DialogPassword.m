@@ -84,10 +84,18 @@
         if(![StringUtil compareString:pc compare:p]){
             [self showError:NSLocalizedString(@"Passwords not same.", nil)];
         }else{
-            if([StringUtil validPassword:p]){
-                [self dismissWithPassword:p];
+            if ([self isNewSetPassword]) {
+                if([StringUtil validSimplePassword:p]){
+                    [self dismissWithPassword:p];
+                }else{
+                    [self showError:NSLocalizedString(@"Invalid password", nil)];
+                }
             }else{
-                [self showError:NSLocalizedString(@"Invalid password", nil)];
+                if([StringUtil validPassword:p]){
+                    [self dismissWithPassword:p];
+                }else{
+                    [self showError:NSLocalizedString(@"Invalid password", nil)];
+                }
             }
         }
     }else{
@@ -344,9 +352,17 @@
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
     [self dismissError];
-    if([StringUtil validPartialPassword:string]){
-        if(textField.text.length - range.length + string.length <= 43){
-            return YES;
+    if([self isNewSetPassword]){
+        if([StringUtil validSimplePartialPassword:string]){
+            if(textField.text.length - range.length + string.length <= 43){
+                return YES;
+            }
+        }
+    }else{
+        if([StringUtil validPartialPassword:string]){
+            if(textField.text.length - range.length + string.length <= 43){
+                return YES;
+            }
         }
     }
     return NO;
