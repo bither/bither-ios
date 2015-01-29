@@ -244,9 +244,10 @@
 
 -(void)successFinish:(UEntropyViewController*)controller{
     UInt32 count = self.countToGenerate;
+    __block UIWindow* window = controller.view.window;
     [controller.presentingViewController.presentingViewController dismissViewControllerAnimated:YES completion:^{
         DialogAlert* alert = [[DialogAlert alloc]initWithMessage:[NSString stringWithFormat:NSLocalizedString(@"xrandom_final_confirm", nil), count] confirm:nil cancel:nil];
-        [alert showInWindow:self.view.window];
+        [alert showInWindow:window];
     }];
 }
 
