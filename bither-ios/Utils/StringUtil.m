@@ -59,6 +59,17 @@
     NSPredicate * pred = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", regex];
     return  [pred evaluateWithObject:str];
 }
++(BOOL)validSimplePassword:(NSString *)str{
+    NSString * regex = @"[0-9a-zA-Z]{6,43}";
+    NSPredicate * pred = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", regex];
+    return  [pred evaluateWithObject:str];
+}
++(BOOL)validSimplePartialPassword:(NSString *)str{
+    NSString * regex = @"[0-9a-zA-Z]{0,43}";
+    NSPredicate * pred = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", regex];
+    return  [pred evaluateWithObject:str];
+}
+
 //BIP21 https://github.com/bitcoin/bips/blob/master/bip-0021.mediawiki
 
 +(BOOL)isValidBitcoinBIP21Address:(NSString *)str{
