@@ -153,7 +153,7 @@
     while (!keychain) {
         @try {
             NSData* seed = [xrandom randomWithSize:32];
-            keychain = [[BTHDMKeychain alloc]initWithMnemonicSeed:seed password:password andXRandom:NO];
+            keychain = [[BTHDMKeychain alloc]initWithMnemonicSeed:seed password:password andXRandom:YES];
         }
         @catch (NSException *exception) {
             NSLog(@"generate HDM keychain error %@", exception.debugDescription);
