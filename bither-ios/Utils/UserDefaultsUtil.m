@@ -160,7 +160,7 @@ NSUserDefaults *userDefaults;
     [userDefaults synchronize];
 }
 
--(BTPasswordSeed *)getPasswordSeed{
+-(BTPasswordSeed *)getPasswordSeedForOldVersion {
     NSString * str=[userDefaults stringForKey:PASSWORD_SEED];
     if ([StringUtil isEmpty:str]) {
         return nil;

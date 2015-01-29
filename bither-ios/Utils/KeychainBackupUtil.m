@@ -280,11 +280,11 @@
         for (BTAddress *address in needAddAddress) {
             [[BTAddressManager instance] addAddress:address];
         }
-        if ([BTAddressManager instance].privKeyAddresses.count > 0) {
-            [[UserDefaultsUtil instance]setPasswordSeed:[[BTPasswordSeed alloc] initWithBTAddress:[BTAddressManager instance].privKeyAddresses[0]]];
-        } else if ([BTAddressManager instance].trashAddresses.count > 0) {
-            [[UserDefaultsUtil instance]setPasswordSeed:[[BTPasswordSeed alloc] initWithBTAddress:[BTAddressManager instance].trashAddresses[0]]];
-        }
+//        if ([BTAddressManager instance].privKeyAddresses.count > 0) {
+//            [[UserDefaultsUtil instance]setPasswordSeed:[[BTPasswordSeed alloc] initWithBTAddress:[BTAddressManager instance].privKeyAddresses[0]]];
+//        } else if ([BTAddressManager instance].trashAddresses.count > 0) {
+//            [[UserDefaultsUtil instance]setPasswordSeed:[[BTPasswordSeed alloc] initWithBTAddress:[BTAddressManager instance].trashAddresses[0]]];
+//        }
         [[A0SimpleKeychain keychain] setString:[allKeys componentsJoinedByString:KEYCHAIN_KEY_SEP] forKey:KEYCHAIN_KEY];
 //        [KeychainUtil setKeychainString:[allKeys componentsJoinedByString:KEYCHAIN_KEY_SEP] andKey:KEYCHAIN_KEY andAuthenticated:NO];
         return YES;

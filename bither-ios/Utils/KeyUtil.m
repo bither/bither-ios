@@ -65,13 +65,6 @@
     for(BTAddress * btAddress in array){
         if (![[[BTAddressManager instance]  privKeyAddresses] containsObject:btAddress]&&![[[BTAddressManager instance] watchOnlyAddresses] containsObject:btAddress]) {
             [[BTAddressManager instance] addAddress:btAddress];
-            if (btAddress.hasPrivKey) {
-                if (![[BTAddressProvider instance] getPasswordSeed]) {
-                    BTPasswordSeed * passwordSeed=[[BTPasswordSeed alloc] initWithBTAddress:btAddress];
-                    [[UserDefaultsUtil instance] setPasswordSeed:passwordSeed];
-                }
-            }
-           
         }
     }
     [[PeerUtil instance]startPeer];
