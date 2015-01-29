@@ -11,6 +11,9 @@
 /* Class = "IBUILabel"; text = "name"; ObjectID = "2Jh-dT-UDy"; */
 "2Jh-dT-UDy.text" = "name";
 
+/* Class = "IBUIButton"; normalTitle = "Generate"; ObjectID = "2fh-9Q-YV2"; */
+"2fh-9Q-YV2.normalTitle" = "Generate";
+
 /* Class = "IBUILabel"; text = "Label"; ObjectID = "38x-NI-gXk"; */
 "38x-NI-gXk.text" = "Label";
 

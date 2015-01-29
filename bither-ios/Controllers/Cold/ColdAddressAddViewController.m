@@ -19,11 +19,17 @@
 #import "ColdAddressAddViewController.h"
 #import "HotAddressAddPrivateKeyViewController.h"
 #import "BitherSetting.h"
+#import "PiPageViewController.h"
+#import "UIViewController+PiShowBanner.h"
+#import "BTAddressManager.h"
 
-@interface ColdAddressAddViewController ()
+@interface ColdAddressAddViewController() <PiPageViewControllerDelegate>{
+    BOOL privateKeyLimited;
+    BOOL hdmLimited;
+}
 @property (weak, nonatomic) IBOutlet UIView *vTopBar;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *vTab;
-
+@property (strong, nonatomic)PiPageViewController *page;
 @end
 
 @implementation ColdAddressAddViewController
@@ -39,14 +45,47 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    HotAddressAddPrivateKeyViewController * ctr = [self.storyboard instantiateViewControllerWithIdentifier:@"HotAddressAddPrivateKey"];
-    ctr.limit=PRIVATE_KEY_OF_COLD_COUNT_LIMIT;
-    [self addChildViewController:ctr];
-    ctr.view.frame = CGRectMake(0, CGRectGetMaxY(self.vTopBar.frame), self.view.frame.size.width, self.view.frame.size.height - CGRectGetMaxY(self.vTopBar.frame));
-    [self.view addSubview:ctr.view];
+    [self configurePage];
 }
 - (IBAction)cancelPressed:(id)sender {
     [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+-(void)showMessage:(NSString *)msg{
+    [self showBannerWithMessage:msg belowView:self.vTopBar];
+}
+
+-(void)configurePage{
+    privateKeyLimited = [BTAddressManager instance].privKeyAddresses.count >= PRIVATE_KEY_OF_HOT_COUNT_LIMIT;
+    hdmLimited = [BTAddressManager instance].hasHDMKeychain;
+    NSMutableArray* array = [NSMutableArray new];
+    if(!privateKeyLimited){
+        [array addObject:@"HotAddressAddPrivateKey"];
+    }
+    if(!hdmLimited){
+        [array addObject:@"ColdAddressAddHDM"];
+    }
+    self.page = [[PiPageViewController alloc]initWithStoryboard:self.storyboard andViewControllerIdentifiers:array];
+    self.page.pageDelegate = self;
+    [self addChildViewController:self.page];
+    self.page.view.frame = CGRectMake(0, CGRectGetMaxY(self.vTopBar.frame), self.view.frame.size.width, self.view.frame.size.height - CGRectGetMaxY(self.vTopBar.frame));
+    [self.view insertSubview:self.page.view atIndex:0];
+    if(privateKeyLimited){
+        self.vTab.selectedSegmentIndex = 1;
+    }else{
+        self.vTab.selectedSegmentIndex = 0;
+    }
+    self.vTab.enabled = !privateKeyLimited && !hdmLimited;
+}
+
+-(void)pageIndexChanged:(int) index{
+    self.vTab.selectedSegmentIndex = index;
+}
+
+- (IBAction)tabChanged:(id)sender {
+    if(self.vTab.selectedSegmentIndex != self.page.index){
+        [self.page setIndex:(int)self.vTab.selectedSegmentIndex animated:YES];
+    }
 }
 
 @end

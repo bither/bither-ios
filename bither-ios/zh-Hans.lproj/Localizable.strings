@@ -539,3 +539,6 @@
 "verify_message_signature_verify_button_verifying" = "正在验证…";
 "verify_message_signature_verify_button_reverify" = "重新验证";
 "sign_message_setting_name" = "消息签名";
+
+// Cold Add HDM
+"hdm_seed_generation_notice" = "HDM 结合了分层确定性和多重签名两种技术.\n\nHDM 运用多重签名技术来避免分层确定性钱包的缺陷.\n\n比太使用 2/3 的多重签名来生成 HDM 地址.\n\n三个私钥分别由热钱包, 冷钱包和 HDM 服务器上的确定性种子生成.";

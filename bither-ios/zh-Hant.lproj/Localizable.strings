@@ -539,3 +539,6 @@
 "verify_message_signature_verify_button_verifying" = "正在驗證…";
 "verify_message_signature_verify_button_reverify" = "重新驗證";
 "sign_message_setting_name" = "消息簽名";
+
+// Cold Add HDM
+"hdm_seed_generation_notice" = "HDM 結合了分層確定性和多重簽名兩種技術.\n\nHDM 運用多重簽名技術來避免分層確定性錢包的缺陷.\n\n比太使用 2/3 的多重簽名來生成 HDM 地址.\n\n三個私鑰分別由熱錢包, 冷錢包和 HDM 服務器上的確定性種子生成.";
