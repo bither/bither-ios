@@ -32,6 +32,8 @@
 #define BITHER_UPLOAD_AVATAR @"api/v1/avatar"
 #define BITHER_DOWNLOAD_AVATAR @"api/v1/avatar"
 
+#define BC_ADDRESS_TX_URL @"api/v2/address/%@/transaction/%d"
+
 
 
 

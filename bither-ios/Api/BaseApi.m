@@ -167,7 +167,9 @@ ErrorHandler errorHandler = ^(MKNetworkOperation *errorOp, NSError *error){
         case BitherStats:
             networkEngine=[bitherEngine getStatsNetworkEngine];
             break;
-            
+        case BitherBC:
+            networkEngine=[bitherEngine getBCNetworkEngine];
+            break;
         default:
             networkEngine=[bitherEngine getUserNetworkEngine];
             break;

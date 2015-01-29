@@ -17,10 +17,11 @@
 
 #import "BitherEngine.h"
 
-static BitherEngine * bitherEngine;
-static MKNetworkEngine * userNetworkEngine;
-static MKNetworkEngine * statsNetworkEngine;
-static MKNetworkEngine * bitcoinNetworkEngine;
+static BitherEngine *bitherEngine;
+static MKNetworkEngine *userNetworkEngine;
+static MKNetworkEngine *statsNetworkEngine;
+static MKNetworkEngine *bitcoinNetworkEngine;
+static MKNetworkEngine *bcNetworkEngine;
 
 @implementation BitherEngine
 +(BitherEngine *)instance{
@@ -32,20 +33,26 @@ static MKNetworkEngine * bitcoinNetworkEngine;
             userNetworkEngine = [[MKNetworkEngine alloc] initWithHostName:@"bu.getcai.com" customHeaderFields:headerFields];
             statsNetworkEngine = [[MKNetworkEngine alloc] initWithHostName:@"bs.getcai.com" customHeaderFields:headerFields];
             bitcoinNetworkEngine = [[MKNetworkEngine alloc] initWithHostName:@"b.getcai.com" customHeaderFields:headerFields];
-            
-            
+            bcNetworkEngine = [[MKNetworkEngine alloc] initWithHostName:@"bc.bither.net" customHeaderFields:headerFields];
         }
     }
     return bitherEngine;
 }
--(MKNetworkEngine *)getUserNetworkEngine{
+
+- (MKNetworkEngine *)getUserNetworkEngine {
     return userNetworkEngine;
 }
--(MKNetworkEngine *)getStatsNetworkEngine{
+
+- (MKNetworkEngine *)getStatsNetworkEngine {
     return statsNetworkEngine;
 }
--(MKNetworkEngine *)getBitcoinNetworkEngine{
+
+- (MKNetworkEngine *)getBitcoinNetworkEngine {
     return bitcoinNetworkEngine;
+}
+
+- (MKNetworkEngine *)getBCNetworkEngine {
+    return bcNetworkEngine;
 }
 
 -(NSArray*)getCookies{
@@ -74,7 +81,6 @@ static MKNetworkEngine * bitcoinNetworkEngine;
     }
     NSArray * cookies1=[[NSHTTPCookieStorage sharedHTTPCookieStorage] cookiesForURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://%@",domain]]];
     NSLog(@"cook %@",cookies1);
-    
 }
 
 @end
