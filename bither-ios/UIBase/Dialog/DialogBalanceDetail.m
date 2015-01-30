@@ -21,6 +21,7 @@
 #import "UnitUtil.h"
 #import "NSString+Size.h"
 #import "NSAttributedString+Size.h"
+#import "BTTxProvider.h"
 
 #define kLabelFontSize (16)
 #define kCountFontSize (18)
@@ -45,13 +46,13 @@
     NSString *receivedLabel = NSLocalizedString(@"balance_detail_total_incoming", nil);
     NSString *sentLabel = NSLocalizedString(@"balance_detail_total_outgoing", nil);
     NSArray *txs = address.txs;
-    int64_t received = 0;
-    for(BTTx* tx in txs){
-        int64_t amount = [tx deltaAmountFrom:address];
-        if(amount > 0){
-            received += amount;
-        }
-    }
+    int64_t received = [[BTTxProvider instance] getTotalReceiveWithAddress:address.address];
+//    for(BTTx* tx in txs){
+//        int64_t amount = [tx deltaAmountFrom:address];
+//        if(amount > 0){
+//            received += amount;
+//        }
+//    }
     int64_t sent = received - address.balance;
     NSAttributedString *receivedStr = [UnitUtil attributedStringForAmount:received withFontSize:kCountFontSize];
     NSAttributedString *sentStr = [UnitUtil attributedStringForAmount:sent withFontSize:kCountFontSize];

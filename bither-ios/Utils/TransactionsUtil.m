@@ -252,7 +252,7 @@
             page += 1;
             [[BitherApi instance] getTransactionApi:address.address withPage:page callback:nextPageBlock andErrorCallBack:errorHandler];
         } else {
-            [address initTxs:allTxs];
+            [address initTxs:[[BTAddressManager instance] compressTxsForApi:allTxs andAddress:address.address]];
             [address setIsSyncComplete:YES];
             [[BTAddressProvider instance] updateSyncComplete:address];
 
@@ -280,7 +280,7 @@
             page += 1;
             [[BitherApi instance] getTransactionApi:address.address withPage:page callback:nextPageBlock andErrorCallBack:errorHandler];
         } else {
-            [address initTxs:allTxs];
+            [address initTxs:[[BTAddressManager instance] compressTxsForApi:allTxs andAddress:address.address]];
             [address setIsSyncComplete:YES];
             [[BTAddressProvider instance] updateSyncComplete:address];
 
