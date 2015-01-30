@@ -221,6 +221,9 @@
 /* Class = "IBUILabel"; text = "24h"; ObjectID = "kS5-Zp-kQC"; */
 "kS5-Zp-kQC.text" = "24h";
 
+/* Class = "IBUILabel"; text = "HDM Cold"; ObjectID = "kSV-dE-lAl"; */
+"kSV-dE-lAl.text" = "HDM Cold";
+
 /* Class = "IBUIButton"; normalTitle = "Monitor Bither Cold"; ObjectID = "kbG-t9-dEm"; */
 "kbG-t9-dEm.normalTitle" = "Monitor Bither Cold";
 

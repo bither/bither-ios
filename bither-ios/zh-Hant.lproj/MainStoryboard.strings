@@ -280,3 +280,6 @@
 
 /* Class = "IBUIButton"; normalTitle = "Generate"; ObjectID = "2fh-9Q-YV2"; */
 "2fh-9Q-YV2.normalTitle" = "生成";
+
+/* Class = "IBUILabel"; text = "HDM Cold"; ObjectID = "kSV-dE-lAl"; */
+"kSV-dE-lAl.text" = "HDM 冷";

@@ -18,11 +18,12 @@
 
 #import "ColdAddressViewController.h"
 #import "ColdAddressListCell.h"
+#import "ColdAddressListHDMCell.h"
 #import "UIViewController+PiShowBanner.h"
 #import <Bitheri/BTAddress.h>
 #import <Bitheri/BTAddressManager.h>
 
-@interface ColdAddressViewController ()<UITableViewDataSource>
+@interface ColdAddressViewController ()<UITableViewDataSource,UITableViewDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UIImageView *ivNoAddress;
 @property NSMutableArray *addresses;
@@ -42,6 +43,7 @@
 {
     [super viewDidLoad];
     self.tableView.dataSource = self;
+    self.tableView.delegate = self;
     self.addresses = [[NSMutableArray alloc]init];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reload) name:BTAddressManagerIsReady object:nil];
 }
@@ -61,16 +63,35 @@
     self.ivNoAddress.hidden = !(self.addresses.count == 0);
 }
 
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
+    return [BTAddressManager instance].hasHDMKeychain ? 2 : 0;
+}
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    if([BTAddressManager instance].hasHDMKeychain && section == 0){
+        return 1;
+    }
     return self.addresses.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    if([BTAddressManager instance].hasHDMKeychain && indexPath.section == 0){
+        ColdAddressListHDMCell* cell = [tableView dequeueReusableCellWithIdentifier:@"HDMCell" forIndexPath:indexPath];
+        cell.keychain = [BTAddressManager instance].hdmKeychain;
+        return cell;
+    }
     ColdAddressListCell* cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
     [cell showAddress:[self.addresses objectAtIndex:indexPath.row]];
     return cell;
 }
 
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    if([BTAddressManager instance].hasHDMKeychain && indexPath.section == 0){
+        return 80;
+    }
+    return 120;
+}
+ 
 -(void)showMsg:(NSString*)msg{
     [self showBannerWithMessage:msg belowView:nil belowTop:0 autoHideIn:1 withCompletion:nil];
 }
