@@ -2471,7 +2471,7 @@
                                             <subviews>
                                                 <view contentMode="scaleToFill" id="XZn-o6-7Kc">
                                                     <rect key="frame" x="10" y="0.0" width="300" height="80"/>
-                                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <subviews>
                                                         <view contentMode="scaleToFill" id="XRP-Nu-FIo">
                                                             <rect key="frame" x="0.0" y="49" width="300" height="25"/>
@@ -2525,8 +2525,8 @@
                                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                         </view>
                                                         <view contentMode="scaleToFill" id="gbF-2Y-cMW">
-                                                            <rect key="frame" x="0.0" y="47" width="300" height="1"/>
-                                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                                            <rect key="frame" x="0.0" y="48" width="300" height="1"/>
+                                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                                             <color key="backgroundColor" white="0.80000000000000004" alpha="1" colorSpace="calibratedWhite"/>
                                                         </view>
                                                         <view userInteractionEnabled="NO" contentMode="scaleToFill" id="3KS-6j-d0f">
@@ -2571,7 +2571,7 @@
                                             <outlet property="ivXRandom" destination="qgg-sk-eaH" id="Sff-a2-CPb"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="Cell" id="xrq-p5-jGo" customClass="ColdAddressListCell">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="Cell" rowHeight="120" id="xrq-p5-jGo" customClass="ColdAddressListCell">
                                         <rect key="frame" x="0.0" y="22" width="320" height="120"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="xrq-p5-jGo" id="rrL-tp-XH9">
