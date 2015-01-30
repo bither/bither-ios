@@ -20,4 +20,5 @@
 
 @interface DialogBlackQrCode : DialogCentered
 -(instancetype)initWithContent:(NSString*)content;
+-(instancetype)initWithContent:(NSString*)content andTitle:(NSString*)title;
 @end

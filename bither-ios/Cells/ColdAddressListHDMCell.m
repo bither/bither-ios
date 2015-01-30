@@ -9,9 +9,15 @@
 #import "ColdAddressListHDMCell.h"
 #import "DialogXrandomInfo.h"
 #import "DialogWithActions.h"
+#import "DialogPassword.h"
+#import "DialogBlackQrCode.h"
+#import "DialogProgress.h"
 
-@interface ColdAddressListHDMCell(){
+@interface ColdAddressListHDMCell()<DialogPasswordDelegate>{
     BTHDMKeychain* _keychain;
+    NSString* password;
+    SEL passwordSelector;
+    DialogProgress *dp;
 }
 @property (weak, nonatomic) IBOutlet UIImageView *ivXRandom;
 @property (weak, nonatomic) IBOutlet UIImageView *ivType;
@@ -36,6 +42,9 @@
     if(![self.ivXRandom.gestureRecognizers containsObject:self.xrandomLongPress]){
         [self.ivXRandom addGestureRecognizer:self.xrandomLongPress];
     }
+    if(!dp){
+        dp = [[DialogProgress alloc]initWithMessage:NSLocalizedString(@"Please wait…", nil)];
+    }
     self.ivXRandom.hidden = !_keychain.isFromXRandom;
 }
 
@@ -59,18 +68,82 @@
 }
 
 -(void)showAccountQrCode{
-    
+    if(!password){
+        passwordSelector = @selector(showAccountQrCode);
+        [[[DialogPassword alloc]initWithDelegate:self] showInWindow:self.window];
+        return;
+    }
+    NSString* p = password;
+    password = nil;
+    __weak __block DialogProgress* d = dp;
+    [d showInWindow:self.window completion:^{
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+            NSString* pub = [self.keychain externalChainRootPubExtendedAsHex:p];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [d dismissWithCompletion:^{
+                    DialogBlackQrCode* d = [[DialogBlackQrCode alloc]initWithContent:pub andTitle:NSLocalizedString(@"hdm_cold_pub_key_qr_code_name", nil)];
+                    [d showInWindow:self.window];
+                }];
+            });
+        });
+    }];
 }
 
 -(void)scanServerQrCode{
-
-}
-
--(void)showPhrase{
+    
     
 }
 
+-(void)showPhrase{
+    if(!password){
+        passwordSelector = @selector(showPhrase);
+        [[[DialogPassword alloc]initWithDelegate:self] showInWindow:self.window];
+        return;
+    }
+    NSString* p = password;
+    password = nil;
+    __weak __block DialogProgress* d = dp;
+    [d showInWindow:self.window completion:^{
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+            NSArray* words = [self.keychain seedWords:p];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [d dismissWithCompletion:^{
+                    
+                }];
+            });
+        });
+    }];
+}
+
 -(void)showSeedQRCode{
+    if(!password){
+        passwordSelector = @selector(showSeedQRCode);
+        [[[DialogPassword alloc]initWithDelegate:self] showInWindow:self.window];
+        return;
+    }
+    NSString* p = password;
+    password = nil;
+    __weak __block DialogProgress* d = dp;
+    [d showInWindow:self.window completion:^{
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+            NSString* pub = [self.keychain externalChainRootPubExtendedAsHex:p]; //TODO: set this qr code to full encrypt private key
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [d dismissWithCompletion:^{
+                    DialogBlackQrCode* d = [[DialogBlackQrCode alloc]initWithContent:pub andTitle:NSLocalizedString(@"hdm_cold_pub_key_qr_code_name", nil)];
+                    [d showInWindow:self.window];
+                }];
+            });
+        });
+    }];
+}
+
+
+-(void)onPasswordEntered:(NSString*)p{
+    password = p;
+    if(passwordSelector && [self respondsToSelector:passwordSelector]){
+        [self performSelector:passwordSelector];
+    }
+    passwordSelector = nil;
 }
 
 -(void)handleXrandomLabelLongPressed:(UILongPressGestureRecognizer*)gesture{
