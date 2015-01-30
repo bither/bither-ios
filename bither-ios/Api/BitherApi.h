@@ -40,4 +40,7 @@
 
 -(void)getExchangeTrend:(MarketType) marketType callback:(ArrayResponseBlock) callback andErrorCallBack:(ErrorHandler)errorCallback;
 
+#pragma mark - hdm api
+- (void)getHDMPasswordRandomWithHDMBid:(NSString *) hdmBid callback:(IdResponseBlock) callback andErrorCallBack:(ErrorHandler)errorCallback;
+
 @end

@@ -164,5 +164,20 @@ static BitherApi *piApi;
     }];
 }
 
+#pragma mark - hdm api
+- (void)getHDMPasswordRandomWithHDMBid:(NSString *) hdmBid callback:(IdResponseBlock) callback andErrorCallBack:(ErrorHandler)errorCallback;{
+    [self get:[NSString stringWithFormat:@"api/v1/%@/hdm/password", hdmBid] withParams:nil networkType:BitherHDM completed:^(MKNetworkOperation *completedOperation) {
+        NSNumber *random = @([completedOperation.responseString longLongValue]);
+        NSLog(@"hdm password random:%@", random);
+        if (callback != nil) {
+            callback(random);
+        }
+    } andErrorCallback:^(MKNetworkOperation *errorOp, NSError *error) {
+        if (errorCallback) {
+            errorCallback(errorOp, error);
+        }
+    } ssl:YES];
+}
+
 
 @end

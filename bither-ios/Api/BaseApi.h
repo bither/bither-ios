@@ -41,9 +41,12 @@
 
 #pragma mark-get
 -(void)get:(NSString *)url withParams:(NSDictionary *) params networkType:(BitherNetworkType) networkType completed:(CompletedOperation) completedOperationParam andErrorCallback:(ErrorHandler) errorCallback;
+-(void)get:(NSString *)url withParams:(NSDictionary *) params networkType:(BitherNetworkType) networkType completed:(CompletedOperation) completedOperationParam andErrorCallback:(ErrorHandler) errorCallback ssl:(BOOL)ssl;
 
 
 #pragma mark-post
 -(void)post:(NSString *)url withParams:(NSDictionary *) params networkType:(BitherNetworkType) networkType completed:(CompletedOperation) completedOperationParam andErrorCallBack:(ErrorHandler) errorCallback;
+-(void)post:(NSString *)url withParams:(NSDictionary *) params networkType:(BitherNetworkType) networkType completed:(CompletedOperation) completedOperationParam andErrorCallBack:(ErrorHandler) errorCallback ssl:(BOOL)ssl;
+
 
 @end

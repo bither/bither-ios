@@ -22,6 +22,7 @@ static MKNetworkEngine *userNetworkEngine;
 static MKNetworkEngine *statsNetworkEngine;
 static MKNetworkEngine *bitcoinNetworkEngine;
 static MKNetworkEngine *bcNetworkEngine;
+static MKNetworkEngine *hdmNetworkEngine;
 
 @implementation BitherEngine
 +(BitherEngine *)instance{
@@ -34,6 +35,7 @@ static MKNetworkEngine *bcNetworkEngine;
             statsNetworkEngine = [[MKNetworkEngine alloc] initWithHostName:@"bs.getcai.com" customHeaderFields:headerFields];
             bitcoinNetworkEngine = [[MKNetworkEngine alloc] initWithHostName:@"b.getcai.com" customHeaderFields:headerFields];
             bcNetworkEngine = [[MKNetworkEngine alloc] initWithHostName:@"bc.bither.net" customHeaderFields:headerFields];
+            hdmNetworkEngine = [[MKNetworkEngine alloc] initWithHostName:@"hdm.bither.net" customHeaderFields:headerFields];
         }
     }
     return bitherEngine;
@@ -53,6 +55,10 @@ static MKNetworkEngine *bcNetworkEngine;
 
 - (MKNetworkEngine *)getBCNetworkEngine {
     return bcNetworkEngine;
+}
+
+- (MKNetworkEngine *)getHDMNetworkEngine {
+    return hdmNetworkEngine;
 }
 
 -(NSArray*)getCookies{
