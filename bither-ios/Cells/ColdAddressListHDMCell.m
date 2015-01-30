@@ -12,6 +12,7 @@
 #import "DialogPassword.h"
 #import "DialogBlackQrCode.h"
 #import "DialogProgress.h"
+#import "DialogHDMSeedWordList.h"
 
 @interface ColdAddressListHDMCell()<DialogPasswordDelegate>{
     BTHDMKeychain* _keychain;
@@ -91,7 +92,6 @@
 
 -(void)scanServerQrCode{
     
-    
 }
 
 -(void)showPhrase{
@@ -108,7 +108,7 @@
             NSArray* words = [self.keychain seedWords:p];
             dispatch_async(dispatch_get_main_queue(), ^{
                 [d dismissWithCompletion:^{
-                    
+                    [[[DialogHDMSeedWordList alloc]initWithWords:words]showInWindow:self.window];
                 }];
             });
         });
