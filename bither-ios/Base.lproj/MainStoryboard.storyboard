@@ -2525,7 +2525,7 @@
                                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                         </view>
                                                         <view contentMode="scaleToFill" id="gbF-2Y-cMW">
-                                                            <rect key="frame" x="0.0" y="47" width="300" height="1"/>
+                                                            <rect key="frame" x="0.0" y="48" width="300" height="1"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                                             <color key="backgroundColor" white="0.80000000000000004" alpha="1" colorSpace="calibratedWhite"/>
                                                         </view>

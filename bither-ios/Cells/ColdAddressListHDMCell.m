@@ -8,6 +8,7 @@
 
 #import "ColdAddressListHDMCell.h"
 #import "DialogXrandomInfo.h"
+#import "DialogWithActions.h"
 
 @interface ColdAddressListHDMCell(){
     BTHDMKeychain* _keychain;
@@ -43,11 +44,33 @@
 }
 
 - (IBAction)seedPressed:(id)sender {
+    [[[DialogWithActions alloc]initWithActions:@[
+            [[Action alloc] initWithName:NSLocalizedString(@"hdm_cold_seed_qr_code", nil) target:self andSelector:@selector(showSeedQRCode)],
+            [[Action alloc] initWithName:NSLocalizedString(@"hdm_cold_seed_word_list", nil) target:self andSelector:@selector(showPhrase)]
+            ]] showInWindow:self.window];
+}
+
+
+- (IBAction)qrPressed:(id)sender {
+    [[[DialogWithActions alloc]initWithActions:@[
+            [[Action alloc] initWithName:NSLocalizedString(@"hdm_cold_pub_key_qr_code_name", nil) target:self andSelector:@selector(showAccountQrCode)],
+            [[Action alloc] initWithName:NSLocalizedString(@"hdm_server_qr_code_name", nil) target:self andSelector:@selector(scanServerQrCode)]
+            ]] showInWindow:self.window];
+}
+
+-(void)showAccountQrCode{
     
 }
 
-- (IBAction)qrPressed:(id)sender {
+-(void)scanServerQrCode{
 
+}
+
+-(void)showPhrase{
+    
+}
+
+-(void)showSeedQRCode{
 }
 
 -(void)handleXrandomLabelLongPressed:(UILongPressGestureRecognizer*)gesture{

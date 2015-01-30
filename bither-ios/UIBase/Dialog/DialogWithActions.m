@@ -41,9 +41,10 @@
 @implementation DialogWithActions
 
 -(instancetype)initWithActions:(NSArray *)actions{
-    self = [super initWithFrame:CGRectMake(0, 0, [DialogWithActions maxWidth:actions], (actions.count + 1) * (kButtonHeight + 1) - 1)];
+    self = [super initWithFrame:CGRectMake(0, 0, [DialogWithActions maxWidth:actions] + kButtonEdgeInsets.left + kButtonEdgeInsets.right, (actions.count + 1) * (kButtonHeight + 1) - 1)];
     if(self){
         self.actions = actions;
+        [self firstConfigure];
     }
     return self;
 }

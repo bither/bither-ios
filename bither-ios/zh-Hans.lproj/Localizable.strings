@@ -542,3 +542,9 @@
 
 // Cold Add HDM
 "hdm_seed_generation_notice" = "HDM 结合了分层确定性和多重签名两种技术.\n\nHDM 运用多重签名技术来避免分层确定性钱包的缺陷.\n\n比太使用 2/3 的多重签名来生成 HDM 地址.\n\n三个私钥分别由热钱包, 冷钱包和 HDM 服务器上的确定性种子生成.";
+"hdm_cold_pub_key_qr_code_name" = "HDM 冷帐号二维码";
+"hdm_server_qr_code_name" = "HDM 服务器二维码";
+"hdm_cold_seed_qr_code" = "HDM 冷种子二维码";
+"hdm_hot_seed_qr_code" = "HDM 热种子二维码";
+"hdm_cold_seed_word_list" = "HDM 密语(冷)";
+"hdm_hot_seed_word_list" = "HDM 密语(热)";
