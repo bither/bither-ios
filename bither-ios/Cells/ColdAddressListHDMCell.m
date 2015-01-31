@@ -106,7 +106,9 @@
         return;
     }
     hdmBidMessageHash = result;
-    [self signHDMBId];
+    [reader dismissViewControllerAnimated:YES completion:^{
+        [self signHDMBId];
+    }];
 }
 
 -(void)signHDMBId{
