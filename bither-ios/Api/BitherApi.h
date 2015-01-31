@@ -42,5 +42,16 @@
 
 #pragma mark - hdm api
 - (void)getHDMPasswordRandomWithHDMBid:(NSString *) hdmBid callback:(IdResponseBlock) callback andErrorCallBack:(ErrorHandler)errorCallback;
+- (void)ChangeHDMPasswordWithHDMBid:(NSString *)hdmBid andPassword:(NSString *)password
+                           andSignature:(NSString *)signature andHotAddress:(NSString *)hotAddress
+                               callback:(VoidResponseBlock)callback andErrorCallBack:(ErrorHandler)errorCallback;
+- (void)createHDMAddressWithHDMBid:(NSString *)hdmBid andPassword:(NSString *)password start:(int)start end:(int)end
+                           pubHots:(NSArray *) pubHots pubColds:(NSArray *)pubColds
+                          callback:(ArrayResponseBlock)callback andErrorCallBack:(ErrorHandler)errorCallback;
+- (void)signatureByRemoteWithHDMBid:(NSString *)hdmBid andPassword:(NSString *)password andUnsignHash:(NSData *)unsignHash
+                           callback:(IdResponseBlock) callback andErrorCallBack:(ErrorHandler)errorCallback;
+- (void)recoverHDMAddressWithHDMBid:(NSString *)hdmBid andPassword:(NSString *)password andSignature:(NSString *)signature
+                           callback:(DictResponseBlock)callback andErrorCallBack:(ErrorHandler)errorCallback;
+
 
 @end
