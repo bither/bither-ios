@@ -60,7 +60,7 @@
     [self.addresses removeAllObjects];
     [self.addresses addObjectsFromArray:[BTAddressManager instance].privKeyAddresses];
     [self.tableView reloadData];
-    self.ivNoAddress.hidden = !(self.addresses.count == 0);
+    self.ivNoAddress.hidden = !(self.addresses.count == 0 || [BTAddressManager instance].hasHDMKeychain);
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
