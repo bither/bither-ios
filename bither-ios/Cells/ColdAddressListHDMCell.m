@@ -1,4 +1,4 @@
-//
+    //
 //  ColdAddressListHDMCell.m
 //  bither-ios
 //
@@ -13,12 +13,17 @@
 #import "DialogBlackQrCode.h"
 #import "DialogProgress.h"
 #import "DialogHDMSeedWordList.h"
+#import "ScanQrCodeViewController.h"
+#import "UIBaseUtil.h"
+#import "BTUtils.h"
+#import "NSString+Base58.h"
 
-@interface ColdAddressListHDMCell()<DialogPasswordDelegate>{
+@interface ColdAddressListHDMCell()<DialogPasswordDelegate, ScanQrCodeDelegate>{
     BTHDMKeychain* _keychain;
     NSString* password;
     SEL passwordSelector;
     DialogProgress *dp;
+    NSString* hdmBidMessageHash;
 }
 @property (weak, nonatomic) IBOutlet UIImageView *ivXRandom;
 @property (weak, nonatomic) IBOutlet UIImageView *ivType;
@@ -91,7 +96,56 @@
 }
 
 -(void)scanServerQrCode{
-    
+    hdmBidMessageHash = nil;
+    ScanQrCodeViewController* scan = [[ScanQrCodeViewController alloc]initWithDelegate:self];
+    [self.getUIViewController presentViewController:scan animated:YES completion:nil];
+}
+
+-(void)handleResult:(NSString*)result byReader:(ScanQrCodeViewController*)reader{
+    if([BTUtils isEmpty:result]){
+        return;
+    }
+    hdmBidMessageHash = result;
+    [self signHDMBId];
+}
+
+-(void)signHDMBId{
+    if(!hdmBidMessageHash){
+        [self scanServerQrCode];
+        return;
+    }
+    if(!password){
+        passwordSelector = @selector(signHDMBId);
+        [[[DialogPassword alloc]initWithDelegate:self]showInWindow:self.window];
+        return;
+    }
+    NSString* p = password;
+    password = nil;
+    __weak __block DialogProgress* d = dp;
+    [d showInWindow:self.window completion:^{
+       dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+           NSString* result;
+           @try {
+               result = [self.keychain signHDMBIdWithMessageHash:hdmBidMessageHash andPassword:p];
+           }
+           @catch (NSException *exception) {
+               NSLog(@"sign hdm bid wrong: %@", exception);
+           }
+           hdmBidMessageHash = nil;
+           dispatch_async(dispatch_get_main_queue(), ^{
+               [d dismissWithCompletion:^{
+                   if(result){
+                       [[[DialogBlackQrCode alloc]initWithContent:result andTitle:NSLocalizedString(@"hdm_keychain_add_signed_server_qr_code_title", nil)] showInWindow:self.window];
+                   }else{
+                       UIViewController* vc = self.getUIViewController;
+                       if(vc && [vc respondsToSelector:@selector(showMsg:)]){
+                           [vc performSelector:@selector(showMsg:) withObject:NSLocalizedString(@"hdm_keychain_add_sign_server_qr_code_error", nil)];
+                       }
+                   }
+               }];
+           });
+       });
+    }];
 }
 
 -(void)showPhrase{
