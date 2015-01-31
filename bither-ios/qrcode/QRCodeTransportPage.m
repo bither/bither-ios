@@ -29,7 +29,7 @@
     }
     QRCodeTransportPage * qrCodePage=[[QRCodeTransportPage alloc] init];
     NSArray * strArray=[BTQRCodeUtil splitQRCode:text];;
-    if ([StringUtil isPureLongLong:[strArray objectAtIndex:0]]) {
+    if ([StringUtil isPureLongLong:[strArray objectAtIndex:0]]&&[StringUtil isPureLongLong:[strArray objectAtIndex:1]]) {
         NSString * sumPageStr=strArray[0];
         NSString * currentPageStr=strArray[1];
         NSInteger length=sumPageStr.length +currentPageStr.length+2;

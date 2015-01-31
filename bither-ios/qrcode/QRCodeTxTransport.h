@@ -18,6 +18,8 @@
 
 #import <Foundation/Foundation.h>
 
+#define NO_HDM_INDEX  -1
+
 @interface QRCodeTxTransport : NSObject
 @property (nonatomic,strong) NSArray * hashList;
 @property (nonatomic,strong) NSString * myAddress;
@@ -26,7 +28,7 @@
 @property (nonatomic,readwrite) long long to;
 @property (nonatomic,readwrite) long long fee;
 @property (nonatomic,readwrite) long long changeAmt;
-
+@property (nonatomic,readwrite) int hdmIndex;
 
 
 +(NSString *)getPreSignString :(QRCodeTxTransport *)qrCodeTransport;
