@@ -22,14 +22,16 @@
 #import <Bitheri/BTPasswordSeed.h>
 #import <Bitheri/BTAddressManager.h>
 
-#define kResetScoreAnim (99)
+#define kResetScoreAnim (89)
 #define kAddScoreAnimPrefix (100)
 
 @interface CheckViewController ()<CheckScoreAndBgAnimatableViewDelegate,DialogPasswordDelegate, UITableViewDataSource, UITableViewDelegate>{
     NSMutableArray* privateKeys;
     NSString* _password;
     NSMutableArray* dangerKeys;
-    NSUInteger checkingIndex;
+    BOOL hdmDanger;
+    BOOL hdmChecking;
+    NSInteger checkingIndex;
 }
 @property (weak, nonatomic) IBOutlet CheckScoreAndBgAnimatableView *vHeader;
 @property (weak, nonatomic) IBOutlet UILabel *lblPoints;
@@ -65,10 +67,13 @@
     self.tableView.delegate = self;
     self.tableView.tableFooterView = [[UIView alloc]initWithFrame:CGRectZero];
     self.tableView.tableFooterView.backgroundColor = [UIColor clearColor];
+    hdmDanger = NO;
+    hdmChecking = NO;
+    checkingIndex = -1;
 }
 
 - (IBAction)checkPressed:(id)sender {
-    if([BTAddressManager instance].privKeyAddresses.count > 0){
+    if([BTAddressManager instance].privKeyAddresses.count > 0 || [BTAddressManager instance].hasHDMKeychain){
         if(!self.checking){
             [[[DialogPassword alloc]initWithDelegate:self]showInWindow:self.view.window];
         }
@@ -79,6 +84,8 @@
 
 -(void)onPasswordEntered:(NSString *)password{
     self.checking = YES;
+    hdmChecking = YES;
+    checkingIndex = -1;
     _password = password;
     [self refreshPrivateKeys];
     [UIView animateWithDuration:kCheckScoreAndBgAnimatableViewDefaultAnimationDuration animations:^{
@@ -102,7 +109,7 @@
 }
 
 -(void)beginCheck{
-    checkingIndex = 0;
+    checkingIndex = -1;
     [self.tableView reloadData];
     [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:YES];
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
@@ -110,6 +117,25 @@
         NSUInteger safeCount = 0;
         NSString *password = _password;
         _password = nil;
+        if([BTAddressManager instance].hasHDMKeychain){
+            totalCount++;
+            if([[BTAddressManager instance].hdmKeychain checkWithPassword:password]){
+                hdmDanger = NO;
+                safeCount++;
+            }else{
+                hdmDanger = YES;
+            }
+            NSUInteger score = floorf((float)safeCount / (float)totalCount * 100.0f);
+            hdmChecking = NO;
+            checkingIndex = 0;
+            dispatch_sync(dispatch_get_main_queue(), ^{
+                [self.vHeader animateToScore:score withAnimationId:kAddScoreAnimPrefix - 1];
+                [self.tableView reloadData];
+                [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:YES];
+            });
+        }
+        hdmChecking = NO;
+        checkingIndex = 0;
         for (BTAddress *a in privateKeys){
             BOOL result = [[[BTPasswordSeed alloc]initWithBTAddress:a]checkPassword:password];
             if(result){
@@ -148,13 +174,23 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return privateKeys.count;
+    return privateKeys.count + ([BTAddressManager instance].hasHDMKeychain ? 1 : 0);
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    BTAddress* address = privateKeys[indexPath.row];
+    NSUInteger index = indexPath.row;
+    if([BTAddressManager instance].hasHDMKeychain){
+        if(indexPath.row == 0){
+            NSString* hdmTitle = [BTSettings instance].getAppMode == COLD ? NSLocalizedString(@"hdm_keychain_check_title_cold", nil) : NSLocalizedString(@"hdm_keychain_check_title_hot", nil);
+            CheckPrivateKeyCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
+            [cell showAddress:hdmTitle checking:hdmChecking checked:!hdmChecking && checkingIndex >= 0 safe:!hdmDanger];
+            return cell;
+        }
+        index --;
+    }
+    BTAddress* address = privateKeys[index];
     CheckPrivateKeyCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
-    [cell showAddress:address.address checking:checkingIndex == indexPath.row checked:checkingIndex > indexPath.row safe:![dangerKeys containsObject:address]];
+    [cell showAddress:address.address checking:!hdmChecking && checkingIndex == index checked:!hdmChecking && checkingIndex > index safe:![dangerKeys containsObject:address]];
     return cell;
 }
 
