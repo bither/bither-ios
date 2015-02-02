@@ -554,8 +554,17 @@
 "hdm_keychain_check_title_hot" = "HDM 热";
 
 // Hot Add HDM
+"hdm_keychain_add_hot" = "HDM 热";
+"hdm_keychain_add_cold" = "HDM 冷";
+"hdm_keychain_add_server" = "HDM 服务器";
+"hdm_keychain_add_hot_confirm" = "生成 HDM 热帐号";
+"hdm_keychain_add_scan_cold" = "扫描 HDM 冷帐号二维码";
+"hdm_keychain_add_unsigned_server_qr_code_title" = "在冷钱包选择 HDM 服务器二维码来签名";
+"hdm_keychain_add_scan_signed_server_qr_code_action" = "扫描已签名服务器二维码";
 "hdm_keychain_add_sign_server_qr_code_error" = "签名服务器二维码出错";
 "hdm_keychain_add_signed_server_qr_code_title" = "已签名服务器二维码";
+"hdm_exception_bid_already_exists" = "此 HDM 冷账户已被绑定到另一个 HDM 热账户";
+"hdm_keychain_add_unsigned_server_qr_code_dismiss_confirm" = "放弃签名?";
 
 // HDM Send
 "hdm_send_with_cold" = "与 HDM 冷共同签名";

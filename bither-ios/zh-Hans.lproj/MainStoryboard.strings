@@ -282,3 +282,12 @@
 
 /* Class = "IBUILabel"; text = "HDM Cold"; ObjectID = "kSV-dE-lAl"; */
 "kSV-dE-lAl.text" = "HDM 冷";
+
+/* Class = "IBUILabel"; text = "HDM Hot"; ObjectID = "5Da-1U-rSQ"; */
+"5Da-1U-rSQ.text" = "HDM 热";
+
+/* Class = "IBUILabel"; text = "HDM Cold"; ObjectID = "lUJ-Y1-VRb"; */
+"lUJ-Y1-VRb.text" = "HDM 冷";
+
+/* Class = "IBUILabel"; text = "HDM Server"; ObjectID = "lnF-bS-z2z"; */
+"lnF-bS-z2z.text" = "HDM 服务器";
