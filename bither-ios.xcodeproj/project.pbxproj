@@ -146,6 +146,7 @@
 		AC781B6019F9FF98003B5B87 /* DialogRCheckInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = AC781B5F19F9FF98003B5B87 /* DialogRCheckInfo.m */; };
 		AC808B8519D52D21004E78A3 /* ImportBip38PrivateKeySetting.m in Sources */ = {isa = PBXBuildFile; fileRef = AC808B8419D52D21004E78A3 /* ImportBip38PrivateKeySetting.m */; };
 		AC808B8C19D56757004E78A3 /* XRandom.m in Sources */ = {isa = PBXBuildFile; fileRef = AC808B8B19D56757004E78A3 /* XRandom.m */; };
+		AC8912F21A7F62FE003797C4 /* WorldListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AC8912F11A7F62FE003797C4 /* WorldListCell.m */; };
 		AC8F0DCA196CF4E400CCD0F9 /* SelectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AC8F0DC9196CF4E400CCD0F9 /* SelectViewController.m */; };
 		AC8F0DCD196D054A00CCD0F9 /* SelectListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AC8F0DCC196D054A00CCD0F9 /* SelectListCell.m */; };
 		AC9BBCFE19D268AB00E58BA7 /* UpgradeUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = AC9BBCFD19D268AB00E58BA7 /* UpgradeUtil.m */; };
@@ -225,6 +226,7 @@
 		DAB2C8731A2038930011EE2F /* KeychainSetting.m in Sources */ = {isa = PBXBuildFile; fileRef = DAB2C8721A2038930011EE2F /* KeychainSetting.m */; };
 		DAB2C8761A206F080011EE2F /* KeychainBackupUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = DAB2C8751A206F080011EE2F /* KeychainBackupUtil.m */; };
 		DC06422DA44A6DA77DCFBB2D /* ImportHDMCold.m in Sources */ = {isa = PBXBuildFile; fileRef = DC0A375AE83A8BA37F3FA65F /* ImportHDMCold.m */; };
+		DC075758EE0F48911D8D4CE8 /* ImportHDMColdSeedController.m in Sources */ = {isa = PBXBuildFile; fileRef = DC07A672CCAD76ED66B72B91 /* ImportHDMColdSeedController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -500,6 +502,8 @@
 		AC808B8919D54274004E78A3 /* DialogImportKeyDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DialogImportKeyDelegate.h; sourceTree = "<group>"; };
 		AC808B8A19D56757004E78A3 /* XRandom.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XRandom.h; sourceTree = "<group>"; };
 		AC808B8B19D56757004E78A3 /* XRandom.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XRandom.m; sourceTree = "<group>"; };
+		AC8912F01A7F62FE003797C4 /* WorldListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WorldListCell.h; path = Cells/WorldListCell.h; sourceTree = "<group>"; };
+		AC8912F11A7F62FE003797C4 /* WorldListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WorldListCell.m; path = Cells/WorldListCell.m; sourceTree = "<group>"; };
 		AC8F0DC8196CF4E400CCD0F9 /* SelectViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelectViewController.h; sourceTree = "<group>"; };
 		AC8F0DC9196CF4E400CCD0F9 /* SelectViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SelectViewController.m; sourceTree = "<group>"; };
 		AC8F0DCB196D054A00CCD0F9 /* SelectListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelectListCell.h; sourceTree = "<group>"; };
@@ -651,8 +655,10 @@
 		DAB2C8721A2038930011EE2F /* KeychainSetting.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KeychainSetting.m; sourceTree = "<group>"; };
 		DAB2C8741A206F080011EE2F /* KeychainBackupUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeychainBackupUtil.h; sourceTree = "<group>"; };
 		DAB2C8751A206F080011EE2F /* KeychainBackupUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KeychainBackupUtil.m; sourceTree = "<group>"; };
+		DC07A672CCAD76ED66B72B91 /* ImportHDMColdSeedController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImportHDMColdSeedController.m; sourceTree = "<group>"; };
 		DC0A375AE83A8BA37F3FA65F /* ImportHDMCold.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImportHDMCold.m; sourceTree = "<group>"; };
 		DC0D6773769B40A704B784B4 /* ImportHDMCold.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImportHDMCold.h; sourceTree = "<group>"; };
+		DC0E3B0A73BF05166C9733A1 /* ImportHDMColdSeedController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImportHDMColdSeedController.h; sourceTree = "<group>"; };
 		E7552F109D77434AC1A15A24 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -867,6 +873,8 @@
 				ACBEC0231970E46C004301E0 /* SignTransactionViewController.m */,
 				0AD674901A79E6E4007967DB /* ColdAddressAddHDMViewController.h */,
 				0AD674911A79E6E4007967DB /* ColdAddressAddHDMViewController.m */,
+				DC07A672CCAD76ED66B72B91 /* ImportHDMColdSeedController.m */,
+				DC0E3B0A73BF05166C9733A1 /* ImportHDMColdSeedController.h */,
 			);
 			path = Cold;
 			sourceTree = "<group>";
@@ -1044,6 +1052,8 @@
 				AC454DCB1A1C6EC1000AF4ED /* TrashCanCell.m */,
 				0AD674951A7B4BDA007967DB /* ColdAddressListHDMCell.h */,
 				0AD674961A7B4BDA007967DB /* ColdAddressListHDMCell.m */,
+				AC8912F01A7F62FE003797C4 /* WorldListCell.h */,
+				AC8912F11A7F62FE003797C4 /* WorldListCell.m */,
 			);
 			name = Cells;
 			sourceTree = "<group>";
@@ -1552,6 +1562,7 @@
 				AC808B8C19D56757004E78A3 /* XRandom.m in Sources */,
 				AC3CDB5B1962A3C800C74B4C /* TransactionConfidenceView.m in Sources */,
 				0A446C151A441393000CD25A /* DialogNetworkMonitorOption.m in Sources */,
+				AC8912F21A7F62FE003797C4 /* WorldListCell.m in Sources */,
 				0A515F7B1A36CAE3008292AF /* RawPrivateKeyViewController.m in Sources */,
 				ACD6DFC9196B9367009D8031 /* ColdAddressListCell.m in Sources */,
 				AC0135E0195056BE00E3BB95 /* KeyboardController.m in Sources */,
@@ -1680,6 +1691,7 @@
 				AC53ABB019D27B74007C095C /* UEntropyCamera.m in Sources */,
 				AC53ABE119D7EAAE007C095C /* SensorVisualizerView.m in Sources */,
 				DC06422DA44A6DA77DCFBB2D /* ImportHDMCold.m in Sources */,
+				DC075758EE0F48911D8D4CE8 /* ImportHDMColdSeedController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
