@@ -94,7 +94,7 @@ static Setting* CloneQrSetting;
 }
 
 +(Setting*)getCloneSetting{
-    if([BTAddressManager instance].privKeyAddresses.count > 0){
+    if([BTAddressManager instance].privKeyAddresses.count > 0||[[BTAddressManager instance] hasHDMKeychain]){
         if(!CloneQrSetting){
             CloneQrSetting = [[CloneQrCodeSetting alloc]init];
         }

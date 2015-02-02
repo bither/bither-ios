@@ -25,6 +25,7 @@
 #import "PeerUtil.h"
 #import "BTPrivateKeyUtil.h"
 #import "BTQRCodeUtil.h"
+#import "BTEncryptedData.h"
 
 
 
@@ -45,19 +46,37 @@
 }
 +(BOOL)addBitcoinjKey:(NSArray *)array withPassphrase:(NSString *)passphrase error:(NSError **)aError{
     NSMutableArray *addressList=[NSMutableArray new];
+    BTHDMKeychain * keychain= nil;
     for(NSString * encryptPrivKey in array){
-        
-        BTAddress *btAddress=[[BTAddress alloc] initWithBitcoinjKey:encryptPrivKey withPassphrase:passphrase];
-        if (!btAddress) {
-            if (aError!=NULL) {
-                *aError = [NSError errorWithDomain:CustomErrorDomain code:PasswordError userInfo:nil];
+        NSRange range=[encryptPrivKey rangeOfString:HDM_QR_CODE_FLAG] ;
+        if(range.location==0){
+            NSString * hdmEncryptPrivKey= [encryptPrivKey substringFromIndex:1];
+            BTEncryptedData *encryptedData=[[BTEncryptedData alloc] initWithStr:hdmEncryptPrivKey];
+            if ([encryptedData decrypt:passphrase]== nil){
+                return NO;
+            } else {
+                keychain = [[BTHDMKeychain alloc] initWithEncrypted:hdmEncryptPrivKey password:passphrase andFetchDelegate:nil];
             }
-            return NO;
+
+        }else {
+            BTAddress *btAddress = [[BTAddress alloc] initWithBitcoinjKey:encryptPrivKey withPassphrase:passphrase];
+            if (!btAddress) {
+                if (aError != NULL) {
+                    *aError = [NSError errorWithDomain:CustomErrorDomain code:PasswordError userInfo:nil];
+                }
+                return NO;
+            }
+            [addressList addObject:btAddress];
         }
-        [addressList addObject:btAddress];
+    }
+    if (keychain!= nil){
+        [KeyUtil setHDKeyChain:keychain];
     }
     return [KeyUtil addAddressList:addressList];
  
+}
++ (void)setHDKeyChain:(BTHDMKeychain *)keychain{
+     [[BTAddressManager instance] setHdmKeychain:keychain];
 }
 +(BOOL)addAddressList:(NSArray *)array {
     [[PeerUtil instance] stopPeer];

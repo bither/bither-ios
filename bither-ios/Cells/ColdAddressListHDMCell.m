@@ -17,6 +17,7 @@
 #import "UIBaseUtil.h"
 #import "BTUtils.h"
 #import "NSString+Base58.h"
+#import "BTQRCodeUtil.h"
 
 @interface ColdAddressListHDMCell()<DialogPasswordDelegate, ScanQrCodeDelegate>{
     BTHDMKeychain* _keychain;
@@ -182,10 +183,10 @@
     __weak __block DialogProgress* d = dp;
     [d showInWindow:self.window completion:^{
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
-            NSString* pub = [self.keychain externalChainRootPubExtendedAsHex:p]; //TODO: set this qr code to full encrypt private key
+            __block NSString* pub =[self.keychain getFullEncryptPrivKeyWithHDMFlag];
             dispatch_async(dispatch_get_main_queue(), ^{
                 [d dismissWithCompletion:^{
-                    DialogBlackQrCode* d = [[DialogBlackQrCode alloc]initWithContent:pub andTitle:NSLocalizedString(@"hdm_cold_pub_key_qr_code_name", nil)];
+                    DialogBlackQrCode* d = [[DialogBlackQrCode alloc]initWithContent:pub andTitle:NSLocalizedString(@"hdm_cold_seed_qr_code", nil)];
                     [d showInWindow:self.window];
                 }];
             });
