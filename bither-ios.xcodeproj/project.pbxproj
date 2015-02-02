@@ -92,7 +92,6 @@
 		AC026C8F19EE5FF500BC0152 /* libPods-OpenSSL.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AC026C8519EE5FF500BC0152 /* libPods-OpenSSL.a */; };
 		AC026C9019EE5FF500BC0152 /* libPods-Reachability.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AC026C8619EE5FF500BC0152 /* libPods-Reachability.a */; };
 		AC026C9119EE5FF500BC0152 /* libPods-RegexKitLite.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AC026C8719EE5FF500BC0152 /* libPods-RegexKitLite.a */; };
-		AC026C9219EE5FF500BC0152 /* libPods-ZBarSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AC026C8819EE5FF500BC0152 /* libPods-ZBarSDK.a */; };
 		AC026C9319EE5FF500BC0152 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AC026C8919EE5FF500BC0152 /* libPods.a */; };
 		AC1715871969213800337AB5 /* DialogAddressOptions.m in Sources */ = {isa = PBXBuildFile; fileRef = AC1715861969213800337AB5 /* DialogAddressOptions.m */; };
 		AC17158A1969249B00337AB5 /* NSString+Size.m in Sources */ = {isa = PBXBuildFile; fileRef = AC1715891969249B00337AB5 /* NSString+Size.m */; };
@@ -404,7 +403,6 @@
 		AC026C8519EE5FF500BC0152 /* libPods-OpenSSL.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libPods-OpenSSL.a"; path = "Pods/build/Debug-iphoneos/libPods-OpenSSL.a"; sourceTree = "<group>"; };
 		AC026C8619EE5FF500BC0152 /* libPods-Reachability.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libPods-Reachability.a"; path = "Pods/build/Debug-iphoneos/libPods-Reachability.a"; sourceTree = "<group>"; };
 		AC026C8719EE5FF500BC0152 /* libPods-RegexKitLite.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libPods-RegexKitLite.a"; path = "Pods/build/Debug-iphoneos/libPods-RegexKitLite.a"; sourceTree = "<group>"; };
-		AC026C8819EE5FF500BC0152 /* libPods-ZBarSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libPods-ZBarSDK.a"; path = "Pods/build/Debug-iphoneos/libPods-ZBarSDK.a"; sourceTree = "<group>"; };
 		AC026C8919EE5FF500BC0152 /* libPods.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libPods.a; path = "Pods/build/Debug-iphoneos/libPods.a"; sourceTree = "<group>"; };
 		AC1715851969213800337AB5 /* DialogAddressOptions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DialogAddressOptions.h; sourceTree = "<group>"; };
 		AC1715861969213800337AB5 /* DialogAddressOptions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DialogAddressOptions.m; sourceTree = "<group>"; };
@@ -712,7 +710,6 @@
 				AC026C8F19EE5FF500BC0152 /* libPods-OpenSSL.a in Frameworks */,
 				AC026C9019EE5FF500BC0152 /* libPods-Reachability.a in Frameworks */,
 				AC026C9119EE5FF500BC0152 /* libPods-RegexKitLite.a in Frameworks */,
-				AC026C9219EE5FF500BC0152 /* libPods-ZBarSDK.a in Frameworks */,
 				AC026C9319EE5FF500BC0152 /* libPods.a in Frameworks */,
 				42D9B77E193D6B5B00C85B89 /* XCTest.framework in Frameworks */,
 				42D9B780193D6B5B00C85B89 /* UIKit.framework in Frameworks */,
@@ -944,7 +941,6 @@
 				AC026C8519EE5FF500BC0152 /* libPods-OpenSSL.a */,
 				AC026C8619EE5FF500BC0152 /* libPods-Reachability.a */,
 				AC026C8719EE5FF500BC0152 /* libPods-RegexKitLite.a */,
-				AC026C8819EE5FF500BC0152 /* libPods-ZBarSDK.a */,
 				AC026C8919EE5FF500BC0152 /* libPods.a */,
 				ACA9D70B195415B0002D1E3A /* AudioToolbox.framework */,
 				ACDDDC3719483D210008A79D /* QuartzCore.framework */,
@@ -1436,7 +1432,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastUpgradeCheck = 0510;
-				ORGANIZATIONNAME = "___FULLUSERNAME___";
+				ORGANIZATIONNAME = Bither;
 				TargetAttributes = {
 					42D9B760193D6B5B00C85B89 = {
 						DevelopmentTeam = 6887Q2ZK67;
