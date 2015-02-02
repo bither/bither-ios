@@ -75,6 +75,18 @@
 
 #define CFBundleShortVersionString @"CFBundleShortVersionString"
 
+#define ERR_API_400_DOMAIN @"http400"
+#define ERR_API_500_DOMAIN @"http500"
+
+#define HDMBID_IS_ALREADY_EXISTS 1001
+#define MESSAGE_SIGNATURE_IS_WRONG 1002
+#define HDMBID_SHOULD_BIND_TO_AN_ADDRESS 1003
+#define HDMBID_IS_NOT_EXIST 1004
+#define HDMBID_PASSWORD_WRONG 1005
+#define HDM_PUBKEY_IS_EXISTS 1006
+#define HDM_SIGNATURE_FAILED 1007
+#define HDSEED_IS_NOT_EXIST 2001
+#define HDM_SERVICE_SIGNATURE_FAILED 2002
 
 typedef void (^DictResponseBlock)(NSDictionary *dict);
 typedef void (^IdResponseBlock)(id response);
@@ -84,7 +96,7 @@ typedef void (^ErrorHandler)(MKNetworkOperation *errorOp, NSError *error);
 typedef void (^CompletedOperation)(MKNetworkOperation *completedOperation);
 typedef void (^ResponseFormat)(MKNetworkOperation *completedOperation);
 typedef void (^LongResponseBlock)(long long num);
-typedef void (^StirngBlock)(NSString *string);
+typedef void (^StringBlock)(NSString *string);
 typedef void (^VoidBlock)(void);
 typedef void (^ErrorBlock)(NSError *error);
 typedef void (^ViewControllerBlock)(UIViewController *controller);

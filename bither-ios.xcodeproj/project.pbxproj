@@ -218,6 +218,7 @@
 		ACF02FEB19D90899001AB701 /* DialogSwitchQRCode.m in Sources */ = {isa = PBXBuildFile; fileRef = ACF02FEA19D90899001AB701 /* DialogSwitchQRCode.m */; };
 		ACF4B17419668D5700CE24FD /* MarketListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = ACF4B17319668D5700CE24FD /* MarketListCell.m */; };
 		D607EF24F3CE4EBC82950BB4 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FED7A4051DB45218112FAC0 /* libPods.a */; };
+		D61D098FD091EB8752EF00A2 /* BTHDMBid+Api.m in Sources */ = {isa = PBXBuildFile; fileRef = D61D0F5AB509120289D32CE8 /* BTHDMBid+Api.m */; };
 		DA641E8A196E7BC20095DF42 /* CrashLog.m in Sources */ = {isa = PBXBuildFile; fileRef = DA641E83196E7BC20095DF42 /* CrashLog.m */; };
 		DA641E8B196E7BC20095DF42 /* GCCrashInstallation.m in Sources */ = {isa = PBXBuildFile; fileRef = DA641E85196E7BC20095DF42 /* GCCrashInstallation.m */; };
 		DA641E8C196E7BC20095DF42 /* GCCrashReportFilterTrim.m in Sources */ = {isa = PBXBuildFile; fileRef = DA641E87196E7BC20095DF42 /* GCCrashReportFilterTrim.m */; };
@@ -639,6 +640,8 @@
 		ACF02FEA19D90899001AB701 /* DialogSwitchQRCode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DialogSwitchQRCode.m; sourceTree = "<group>"; };
 		ACF4B17219668D5700CE24FD /* MarketListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MarketListCell.h; path = Cells/MarketListCell.h; sourceTree = "<group>"; };
 		ACF4B17319668D5700CE24FD /* MarketListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MarketListCell.m; path = Cells/MarketListCell.m; sourceTree = "<group>"; };
+		D61D0E2B59DCC58D05F2CCE6 /* BTHDMBid+Api.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "BTHDMBid+Api.h"; sourceTree = "<group>"; };
+		D61D0F5AB509120289D32CE8 /* BTHDMBid+Api.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "BTHDMBid+Api.m"; sourceTree = "<group>"; };
 		DA641E82196E7BC20095DF42 /* CrashLog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CrashLog.h; path = CrashLog/CrashLog.h; sourceTree = "<group>"; };
 		DA641E83196E7BC20095DF42 /* CrashLog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CrashLog.m; path = CrashLog/CrashLog.m; sourceTree = "<group>"; };
 		DA641E84196E7BC20095DF42 /* GCCrashInstallation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GCCrashInstallation.h; path = CrashLog/GCCrashInstallation.h; sourceTree = "<group>"; };
@@ -785,6 +788,8 @@
 				4254083619469C9A007AF99C /* BitherApi.m */,
 				4254083719469C9A007AF99C /* BitherEngine.h */,
 				4254083819469C9A007AF99C /* BitherEngine.m */,
+				D61D0F5AB509120289D32CE8 /* BTHDMBid+Api.m */,
+				D61D0E2B59DCC58D05F2CCE6 /* BTHDMBid+Api.h */,
 			);
 			path = Api;
 			sourceTree = "<group>";
@@ -1680,6 +1685,7 @@
 				AC53ABB019D27B74007C095C /* UEntropyCamera.m in Sources */,
 				AC53ABE119D7EAAE007C095C /* SensorVisualizerView.m in Sources */,
 				DC06422DA44A6DA77DCFBB2D /* ImportHDMCold.m in Sources */,
+				D61D098FD091EB8752EF00A2 /* BTHDMBid+Api.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
