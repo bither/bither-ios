@@ -22,6 +22,7 @@
 #import "DialogHDMServerUnsignedQRCode.h"
 #import "NSError+HDMHttpErrorMessage.h"
 #import "PeerUtil.h"
+#import "BTHDMBid+Api.h"
 
 @import MobileCoreServices;
 @import AVFoundation;

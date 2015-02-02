@@ -20,6 +20,7 @@
     self = [super init];
     if(self){
         self.window = window;
+        condition = [NSCondition new];
     }
     return self;
 }
@@ -29,6 +30,7 @@
     if(self){
         self.window = window;
         self.delegate = delegate;
+        condition = [NSCondition new];
     }
     return self;
 }

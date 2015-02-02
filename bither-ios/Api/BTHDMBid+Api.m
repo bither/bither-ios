@@ -25,23 +25,28 @@
 
 @implementation BTHDMBid (Api)
 
-- (void)getPreSignHash:(StringBlock) callback andError:(ErrorBlock)error; {
+- (NSString *)getPreSignHashAndError:(NSError **)error; {
     self.password = [NSData randomWithSize:32];
     __block long serviceRandom = 0;
+    __block NSCondition *condition = [NSCondition new];
     [[BitherApi instance] getHDMPasswordRandomWithHDMBid:self.address callback:^(id response) {
         serviceRandom = [response intValue];
-        self.serviceRandom = serviceRandom;
-        NSString *message = [NSString stringWithFormat:@"bitid://hdm.bither.net/%@/password/%@/%ld", self.address, [NSString hexWithData:self.password], self.serviceRandom];
-        NSData *d = [[BTUtils formatMessageForSigning:message] SHA256_2];
-        if (callback != nil) {
-            callback([NSString hexWithData:d]);
-        }
+
     } andErrorCallBack:^(MKNetworkOperation *errorOp, NSError *err) {
 
     }];
+    //
+    [condition lock];
+    [condition wait];
+    [condition unlock];
+
+    self.serviceRandom = serviceRandom;
+    NSString *message = [NSString stringWithFormat:@"bitid://hdm.bither.net/%@/password/%@/%ld", self.address, [NSString hexWithData:self.password], self.serviceRandom];
+    NSData *d = [[BTUtils formatMessageForSigning:message] SHA256_2];
+    return [NSString hexWithData:d];
 }
 
-- (void)changeBidPasswordWithSignature:(NSString *)signature andPassword:(NSString *)password callback:(VoidBlock)callback andError:(ErrorBlock)error; {
+- (void)changeBidPasswordWithSignature:(NSString *)signature andPassword:(NSString *)password andError:(NSError **)error; {
     NSString *message = [NSString stringWithFormat:@"bitid://hdm.bither.net/%@/password/%@/%ld", self.address, [NSString hexWithData:self.password], self.serviceRandom];
     NSData *d = [[BTUtils formatMessageForSigning:message] SHA256_2];
     BTKey *key = [BTKey signedMessageToKey:message andSignatureBase64:signature];
