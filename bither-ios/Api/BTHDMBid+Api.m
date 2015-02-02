@@ -30,19 +30,26 @@
     __block long serviceRandom = 0;
     __block NSCondition *condition = [NSCondition new];
     [[BitherApi instance] getHDMPasswordRandomWithHDMBid:self.address callback:^(id response) {
+        [condition lock];
         serviceRandom = [response intValue];
 
+        [condition signal];
+        [condition unlock];
     } andErrorCallBack:^(MKNetworkOperation *errorOp, NSError *err) {
+        [condition lock];
 
+        [condition signal];
+        [condition unlock];
     }];
     //
     [condition lock];
     [condition wait];
-    [condition unlock];
 
     self.serviceRandom = serviceRandom;
     NSString *message = [NSString stringWithFormat:@"bitid://hdm.bither.net/%@/password/%@/%ld", self.address, [NSString hexWithData:self.password], self.serviceRandom];
     NSData *d = [[BTUtils formatMessageForSigning:message] SHA256_2];
+
+    [condition unlock];
     return [NSString hexWithData:d];
 }
 
@@ -64,8 +71,8 @@
     }];
 }
 
-- (void)recoverHDMWithSignature:(NSString *)signature andPassword:(NSString *)password callback:(GetArrayBlock)callback andError:(ErrorBlock)error; {
-    return ;
+- (NSArray *)recoverHDMWithSignature:(NSString *)signature andPassword:(NSString *)password andError:(NSError **)error; {
+    return nil;
 }
 
 @end

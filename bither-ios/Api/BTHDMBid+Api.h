@@ -23,6 +23,6 @@
 
 - (NSString *)getPreSignHashAndError:(NSError **)error;
 - (void)changeBidPasswordWithSignature:(NSString *)signature andPassword:(NSString *)password andError:(NSError **)error;
-- (void)recoverHDMWithSignature:(NSString *)signature andPassword:(NSString *)password callback:(GetArrayBlock)callback andError:(ErrorBlock)error;
+- (NSArray *)recoverHDMWithSignature:(NSString *)signature andPassword:(NSString *)password andError:(NSError **)error;
 
 @end
