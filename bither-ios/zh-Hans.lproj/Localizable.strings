@@ -561,3 +561,10 @@
 "hdm_send_with_cold" = "与 HDM 冷共同签名";
 "hdm_send_with_server" = "与 HDM 服务器共同签名";
 "hdm_send_with_cold_no_requested_seed" = "您没有签名所需的 HDM 冷帐号";
+
+
+"import_hdm_cold_seed_qr_code"="来自HDM冷种子二维码";
+"import_hdm_cold_seed_phrase"="来自HDM密语(冷)";
+"import_hdm_cold_seed_format_error"="不是HDM冷种子";
+"can_not_import_hdm_cold_seed"="不能导入HDM冷种子";
+"import_hdm_cold_seed_qr_code_scan_title"="扫描HDM冷种子二维码";

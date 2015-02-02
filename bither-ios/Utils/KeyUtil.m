@@ -25,7 +25,7 @@
 #import "PeerUtil.h"
 #import "BTPrivateKeyUtil.h"
 #import "BTQRCodeUtil.h"
-#import "BTEncryptedData.h"
+#import "BTEncryptData.h"
 
 
 
@@ -51,7 +51,7 @@
         NSRange range=[encryptPrivKey rangeOfString:HDM_QR_CODE_FLAG] ;
         if(range.location==0){
             NSString * hdmEncryptPrivKey= [encryptPrivKey substringFromIndex:1];
-            BTEncryptedData *encryptedData=[[BTEncryptedData alloc] initWithStr:hdmEncryptPrivKey];
+            BTEncryptData *encryptedData=[[BTEncryptData alloc] initWithStr:hdmEncryptPrivKey];
             if ([encryptedData decrypt:passphrase]== nil){
                 return NO;
             } else {
