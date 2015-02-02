@@ -19,7 +19,9 @@
 #import "BTUtils.h"
 #import "BitherSetting.h"
 #import "BTHDMBid.h"
+#import "DialogHDMServerUnsignedQRCode.h"
 #import "NSError+HDMHttpErrorMessage.h"
+#import "PeerUtil.h"
 
 @import MobileCoreServices;
 @import AVFoundation;
@@ -61,6 +63,7 @@
     dp = [[DialogProgress alloc]initWithMessage:NSLocalizedString(@"Please wait…", nil)];
     dp.touchOutSideToDismiss = NO;
     passwordGetter = [[PasswordGetter alloc]initWithWindow:self.window andDelegate:self];
+    [self findCurrentStep];
 }
 
 -(void)hot{
@@ -252,23 +255,64 @@
         [self cold];
     }
     serverPressed = NO;
-    if(!dp.shown){
-        [dp showInWindow:self.window];
+    [dp showInWindow:self.window completion:^{
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+            [self initHDMBidFromColdRoot];
+            NSError* error;
+            NSString* preSign = [hdmBid getPreSignHashAndError:&error];
+            if(error && !preSign){
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [self showMsg:error.msg];
+                });
+            }else{
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [[[DialogHDMServerUnsignedQRCode alloc]initWithContent:preSign andAction:^{
+                        afterQRScanSelector = @selector(serverScanned:);
+                        ScanQrCodeViewController* scan = [[ScanQrCodeViewController alloc]initWithDelegate:self];
+                        [self.controller presentViewController:scan animated:YES completion:nil];
+                    }]showInWindow:self.window];
+                });
+            }
+        });
+    }];
+}
+
+-(void)serverScanned:(NSString*)result{
+    if(!hdmBid){
+        return;
     }
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
-        [self initHDMBidFromColdRoot];
-        NSError* error;
-        NSString* preSign = [hdmBid getPreSignHashAndError:&error];
-        if(error && !preSign){
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [self showMsg:error.msg];
-            });
-        }else{
-            dispatch_async(dispatch_get_main_queue(), ^{
+    [dp showInWindow:self.window completion:^{
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+            NSString* password = passwordGetter.password;
+            if(!password){
+                return;
+            }
+            NSError* error;
+            [hdmBid changeBidPasswordWithSignature:result andPassword:password andError:&error];
+            if(error){
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [dp dismissWithCompletion:^{
+                        [self showMsg:NSLocalizedString(@"hdm_keychain_add_sign_server_qr_code_error", nil)];
+                    }];
+                });
+                return;
+            }
+            [[PeerUtil instance]stopPeer];
+            NSArray* as = [[BTAddressManager instance].hdmKeychain completeAddressesWithCount:1 password:password andFetchBlock:^(NSString *password, NSArray *partialPubs) {
+                //TODO: fetch remote public keys
                 
+            }];
+            
+            [[PeerUtil instance]startPeer];
+            dispatch_async(dispatch_get_main_queue(), ^{
+               [dp dismissWithCompletion:^{
+                   if(as.count > 0){
+                       [self.controller moveToFinal:YES];
+                   }
+               }];
             });
-        }
-    });
+        });
+    }];
 }
 
 -(void)handleResult:(NSString*)result byReader:(ScanQrCodeViewController*)reader{
@@ -281,6 +325,22 @@
         }
         afterQRScanSelector = nil;
     }];
+}
+
+-(void)findCurrentStep{
+    [self.controller moveToHot:NO];
+    if([BTAddressManager instance].hdmKeychain){
+        [self.controller moveToCold:NO];
+        if([BTAddressManager instance].hdmKeychain.uncompletedAddressCount > 0){
+            [self.controller moveToServer:NO];
+            if(hdmKeychainLimit){
+                [self.controller moveToFinal:NO];
+            }
+        }else if(hdmKeychainLimit){
+            [self.controller moveToServer:NO];
+            [self.controller moveToFinal:NO];
+        }
+    }
 }
 
 -(void)showMsg:(NSString*)msg{
