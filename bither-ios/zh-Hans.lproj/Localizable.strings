@@ -556,3 +556,8 @@
 // Hot Add HDM
 "hdm_keychain_add_sign_server_qr_code_error" = "签名服务器二维码出错";
 "hdm_keychain_add_signed_server_qr_code_title" = "已签名服务器二维码";
+
+// HDM Send
+"hdm_send_with_cold" = "与 HDM 冷共同签名";
+"hdm_send_with_server" = "与 HDM 服务器共同签名";
+"hdm_send_with_cold_no_requested_seed" = "您没有签名所需的 HDM 冷帐号";

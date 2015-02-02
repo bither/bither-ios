@@ -26,6 +26,7 @@
 #import "DialogPassword.h"
 #import "QrCodeViewController.h"
 #import "BTQRCodeUtil.h"
+#import "BTBIP32Key.h"
 
 @interface SignTransactionViewController ()<DialogPasswordDelegate>{
     BTAddress *address;
@@ -77,24 +78,34 @@
     self.vBottom.frame = bottomFrame;
     
     NSArray *privKeys = [BTAddressManager instance].privKeyAddresses;
-    address = nil;
-    for(BTAddress *a in privKeys){
-        if([StringUtil compareString:a.address compare:self.tx.myAddress]){
-            address = a;
-            break;
+    if(self.tx.hdmIndex >= 0){
+        if([BTAddressManager instance].hdmKeychain){
+            self.btnSign.hidden = NO;
+            self.lblNoPrivateKey.hidden = YES;
+        }else{
+            self.btnSign.hidden = YES;
+            self.lblNoPrivateKey.hidden = NO;
         }
-    }
-    if(address){
-        self.btnSign.hidden = NO;
-        self.lblNoPrivateKey.hidden = YES;
     }else{
-        self.btnSign.hidden = YES;
-        self.lblNoPrivateKey.hidden = NO;
+        address = nil;
+        for(BTAddress *a in privKeys){
+            if([StringUtil compareString:a.address compare:self.tx.myAddress]){
+                address = a;
+                break;
+            }
+        }
+        if(address){
+            self.btnSign.hidden = NO;
+            self.lblNoPrivateKey.hidden = YES;
+        }else{
+            self.btnSign.hidden = YES;
+            self.lblNoPrivateKey.hidden = NO;
+        }
     }
 }
 
 -(void)onPasswordEntered:(NSString*)password{
-    if(!address){
+    if((!address && self.tx.hdmIndex < 0) || (self.tx.hdmIndex >= 0 && ![BTAddressManager instance].hasHDMKeychain)){
         return;
     }
     __block NSString *bpassword=password;
@@ -106,10 +117,17 @@
             for(NSString* h in self.tx.hashList){
                 [hashesData addObject:[h hexToData]];
             }
-            NSArray *hashes = [address signHashes:hashesData withPassphrase:bpassword];
             NSMutableArray* strHashes = [[NSMutableArray alloc]init];
-            for(NSData* hash in hashes){
-                [strHashes addObject:[[NSString hexWithData:hash] toUppercaseStringWithEn]];
+            if(self.tx.hdmIndex >= 0){
+                BTBIP32Key* key = [[BTAddressManager instance].hdmKeychain externalKeyWithIndex:self.tx.hdmIndex andPassword:bpassword];
+                for(NSData *hash in hashesData){
+                    [strHashes addObject:[[NSString hexWithData:[key.key sign:hash]] toUppercaseStringWithEn]];
+                }
+            }else{
+                NSArray *hashes = [address signHashes:hashesData withPassphrase:bpassword];
+                for(NSData* hash in hashes){
+                    [strHashes addObject:[[NSString hexWithData:hash] toUppercaseStringWithEn]];
+                }
             }
             dispatch_async(dispatch_get_main_queue(), ^{
                 QrCodeViewController* controller = [self.storyboard instantiateViewControllerWithIdentifier:@"QrCode"];
@@ -132,7 +150,7 @@
 }
 
 - (IBAction)signButtonPressed:(id)sender {
-    if(!address){
+    if((!address && self.tx.hdmIndex < 0) || (self.tx.hdmIndex >= 0 && ![BTAddressManager instance].hasHDMKeychain)){
         return;
     }
     [[[DialogPassword alloc]initWithDelegate:self]showInWindow:self.view.window];
