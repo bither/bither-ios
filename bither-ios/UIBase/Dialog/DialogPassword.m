@@ -157,7 +157,11 @@
 }
 
 -(void)cancelPressed:(id)sender{
-    [self dismiss];
+    [self dismissWithCompletion:^{
+        if(self.delegate && [self.delegate respondsToSelector:@selector(dialogPasswordCanceled)]){
+            [self.delegate dialogPasswordCanceled];
+        }
+    }];
 }
 
 -(void)dialogDidShow{

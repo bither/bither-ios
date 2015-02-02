@@ -7,8 +7,13 @@
 //
 
 #import "HDMHotAddUtil.h"
+#import "DialogProgress.h"
+#import "PasswordGetter.h"
 
-@interface HDMHotAddUtil()
+@interface HDMHotAddUtil()<PasswordGetterDelegate>{
+    PasswordGetter* passwordGetter;
+    DialogProgress *dp;
+}
 @property (weak) UIViewController<HDMHotAddUtilDelegate>* controller;
 @end
 
@@ -17,8 +22,15 @@
     self = [super init];
     if(self){
         self.controller = controller;
+        [self firstConfigure];
     }
     return self;
+}
+
+-(void)firstConfigure{
+    dp = [[DialogProgress alloc]initWithMessage:NSLocalizedString(@"Please wait…", nil)];
+    dp.touchOutSideToDismiss = NO;
+    passwordGetter = [[PasswordGetter alloc]initWithWindow:self.controller.view.window andDelegate:self];
 }
 
 -(void)hot{
@@ -36,6 +48,18 @@
 -(void)showMsg:(NSString*)msg{
     if(self.controller && [self.controller respondsToSelector:@selector(showMsg:)]){
         [self.controller performSelector:@selector(showMsg:) withObject:msg];
+    }
+}
+
+-(void)beforePasswordDialogShow{
+    if(dp.shown){
+        [dp dismiss];
+    }
+}
+
+-(void)afterPasswordDialogDismiss{
+    if(!dp.shown){
+        [dp showInWindow:self.controller.view.window];
     }
 }
 @end
