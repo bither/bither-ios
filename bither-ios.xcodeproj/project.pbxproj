@@ -20,6 +20,7 @@
 		0AB8BC9A1A7F3194003C07D8 /* HotAddressAddHDMViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AB8BC991A7F3194003C07D8 /* HotAddressAddHDMViewController.m */; };
 		0AB8BCA51A7F445D003C07D8 /* DialogHDMKeychainAddHot.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AB8BCA41A7F445D003C07D8 /* DialogHDMKeychainAddHot.m */; };
 		0AB8BCAB1A7F6DEE003C07D8 /* DialogHDMServerUnsignedQRCode.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AB8BCAA1A7F6DEE003C07D8 /* DialogHDMServerUnsignedQRCode.m */; };
+		0AB8BCB11A7F8656003C07D8 /* NSConditionTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AB8BCB01A7F8656003C07D8 /* NSConditionTest.m */; };
 		0AD674921A79E6E4007967DB /* ColdAddressAddHDMViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AD674911A79E6E4007967DB /* ColdAddressAddHDMViewController.m */; };
 		0AD674941A79F2B8007967DB /* BIP39EnglishWords.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0AD674931A79F2B8007967DB /* BIP39EnglishWords.plist */; };
 		0AD674971A7B4BDA007967DB /* ColdAddressListHDMCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AD674961A7B4BDA007967DB /* ColdAddressListHDMCell.m */; };
@@ -274,6 +275,7 @@
 		0AB8BCA41A7F445D003C07D8 /* DialogHDMKeychainAddHot.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DialogHDMKeychainAddHot.m; sourceTree = "<group>"; };
 		0AB8BCA91A7F6DEE003C07D8 /* DialogHDMServerUnsignedQRCode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DialogHDMServerUnsignedQRCode.h; sourceTree = "<group>"; };
 		0AB8BCAA1A7F6DEE003C07D8 /* DialogHDMServerUnsignedQRCode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DialogHDMServerUnsignedQRCode.m; sourceTree = "<group>"; };
+		0AB8BCB01A7F8656003C07D8 /* NSConditionTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSConditionTest.m; sourceTree = "<group>"; };
 		0AD674901A79E6E4007967DB /* ColdAddressAddHDMViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ColdAddressAddHDMViewController.h; sourceTree = "<group>"; };
 		0AD674911A79E6E4007967DB /* ColdAddressAddHDMViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ColdAddressAddHDMViewController.m; sourceTree = "<group>"; };
 		0AD674931A79F2B8007967DB /* BIP39EnglishWords.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = BIP39EnglishWords.plist; sourceTree = "<group>"; };
@@ -1004,6 +1006,7 @@
 				42E816241952DF43005F16F7 /* StringUtilTest.m */,
 				427CF4C919540ED50081869C /* QRCodeTest.m */,
 				421D8A0219592BF20062FDAF /* WalletUtilTest.m */,
+				0AB8BCB01A7F8656003C07D8 /* NSConditionTest.m */,
 			);
 			path = "bither-iosTests";
 			sourceTree = "<group>";
@@ -1731,7 +1734,6 @@
 				AC53ABE119D7EAAE007C095C /* SensorVisualizerView.m in Sources */,
 				DC06422DA44A6DA77DCFBB2D /* ImportHDMCold.m in Sources */,
 				DC075758EE0F48911D8D4CE8 /* ImportHDMColdSeedController.m in Sources */,
-				0AB8BC9F1A7F3A89003C07D8 /* HDMHotAddUtil.m in Sources */,
 				D61D098FD091EB8752EF00A2 /* BTHDMBid+Api.m in Sources */,
 				D61D0ACF2F75D62B878ADAEF /* HDMHotAddUtil.m in Sources */,
 				D61D0D05D11BC8527C40F8C3 /* PasswordGetter.m in Sources */,
@@ -1744,6 +1746,7 @@
 			files = (
 				42D9B78A193D6B5B00C85B89 /* bither_iosTests.m in Sources */,
 				427CF4CA19540ED50081869C /* QRCodeTest.m in Sources */,
+				0AB8BCB11A7F8656003C07D8 /* NSConditionTest.m in Sources */,
 				42E816251952DF43005F16F7 /* StringUtilTest.m in Sources */,
 				421D8A0319592BF20062FDAF /* WalletUtilTest.m in Sources */,
 				4254086D1946E0FD007AF99C /* BlockUtilTest.m in Sources */,
