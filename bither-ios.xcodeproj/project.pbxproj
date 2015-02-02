@@ -18,6 +18,7 @@
 		0A93B6011A4A66080081D74D /* DialogSignMessageOutput.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A93B6001A4A66080081D74D /* DialogSignMessageOutput.m */; };
 		0A93B6061A4AA0520081D74D /* VerifyMessageSignatureViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A93B6051A4AA0520081D74D /* VerifyMessageSignatureViewController.m */; };
 		0AB8BC9A1A7F3194003C07D8 /* HotAddressAddHDMViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AB8BC991A7F3194003C07D8 /* HotAddressAddHDMViewController.m */; };
+		0AB8BC9F1A7F3A89003C07D8 /* HDMHotAddUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AB8BC9E1A7F3A89003C07D8 /* HDMHotAddUtil.m */; };
 		0AD674921A79E6E4007967DB /* ColdAddressAddHDMViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AD674911A79E6E4007967DB /* ColdAddressAddHDMViewController.m */; };
 		0AD674941A79F2B8007967DB /* BIP39EnglishWords.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0AD674931A79F2B8007967DB /* BIP39EnglishWords.plist */; };
 		0AD674971A7B4BDA007967DB /* ColdAddressListHDMCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AD674961A7B4BDA007967DB /* ColdAddressListHDMCell.m */; };
@@ -262,6 +263,8 @@
 		0AB8BC981A7F3194003C07D8 /* HotAddressAddHDMViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HotAddressAddHDMViewController.h; sourceTree = "<group>"; };
 		0AB8BC991A7F3194003C07D8 /* HotAddressAddHDMViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HotAddressAddHDMViewController.m; sourceTree = "<group>"; };
 		0AB8BC9C1A7F3772003C07D8 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/MainStoryboard.strings; sourceTree = "<group>"; };
+		0AB8BC9D1A7F3A89003C07D8 /* HDMHotAddUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HDMHotAddUtil.h; sourceTree = "<group>"; };
+		0AB8BC9E1A7F3A89003C07D8 /* HDMHotAddUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HDMHotAddUtil.m; sourceTree = "<group>"; };
 		0AD674901A79E6E4007967DB /* ColdAddressAddHDMViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ColdAddressAddHDMViewController.h; sourceTree = "<group>"; };
 		0AD674911A79E6E4007967DB /* ColdAddressAddHDMViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ColdAddressAddHDMViewController.m; sourceTree = "<group>"; };
 		0AD674931A79F2B8007967DB /* BIP39EnglishWords.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = BIP39EnglishWords.plist; sourceTree = "<group>"; };
@@ -851,6 +854,8 @@
 				AC454DC51A19D981000AF4ED /* UnitUtil.m */,
 				DAB2C8741A206F080011EE2F /* KeychainBackupUtil.h */,
 				DAB2C8751A206F080011EE2F /* KeychainBackupUtil.m */,
+				0AB8BC9D1A7F3A89003C07D8 /* HDMHotAddUtil.h */,
+				0AB8BC9E1A7F3A89003C07D8 /* HDMHotAddUtil.m */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -1686,6 +1691,7 @@
 				AC53ABB019D27B74007C095C /* UEntropyCamera.m in Sources */,
 				AC53ABE119D7EAAE007C095C /* SensorVisualizerView.m in Sources */,
 				DC06422DA44A6DA77DCFBB2D /* ImportHDMCold.m in Sources */,
+				0AB8BC9F1A7F3A89003C07D8 /* HDMHotAddUtil.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

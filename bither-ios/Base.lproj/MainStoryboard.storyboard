@@ -567,7 +567,7 @@
         <!--Hot Address AddHDM View Controller-->
         <scene sceneID="iT4-MN-vCu">
             <objects>
-                <viewController storyboardIdentifier="HotAddressAddHDM" useStoryboardIdentifierAsRestorationIdentifier="YES" id="DVL-1f-gD0" customClass="HotAddressAddHDMViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="HotAddressAddHDM" useStoryboardIdentifierAsRestorationIdentifier="YES" id="DVL-1f-gD0" customClass="HotAddressAddHDMViewController" propertyAccessControl="all" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="kvd-4J-NtE">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
