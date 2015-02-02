@@ -35,6 +35,7 @@
 #import "ImportPrivateKey.h"
 #import "BTEncryptData.h"
 #import "ImportHDMCold.h"
+#import "ImportHDMColdSeedController.h"
 
 @interface CheckPasswordDelegate : NSObject<DialogPasswordDelegate>
 @property(nonatomic,strong) UIViewController *controller;
@@ -121,6 +122,10 @@ static Setting* importPrivateKeySetting;
 
 }
 -(void)importWithHDMColdPhrase{
+    ImportHDMColdSeedController *advanceController = [self.controller.storyboard instantiateViewControllerWithIdentifier:@"ImportHDMColdSeedController"];
+    UINavigationController *nav = self.controller.navigationController;
+    [nav pushViewController:advanceController animated:YES];
+    
 
 }
 
