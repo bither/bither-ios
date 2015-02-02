@@ -55,7 +55,7 @@
             if ([encryptedData decrypt:passphrase]== nil){
                 return NO;
             } else {
-                keychain = [[BTHDMKeychain alloc] initWithEncrypted:hdmEncryptPrivKey password:passphrase andFetchDelegate:nil];
+                keychain = [[BTHDMKeychain alloc] initWithEncrypted:hdmEncryptPrivKey password:passphrase andFetchBlock:nil];
             }
 
         }else {

@@ -39,7 +39,7 @@
             switch (self.importHDSeedType) {
                 case HDMColdSeedQRCode: {
                     NSString *keyStr = [self.content substringFromIndex:1];
-                    BTHDMKeychain *keychain = [[BTHDMKeychain alloc] initWithEncrypted:keyStr password:self.passwrod andFetchDelegate:nil];
+                    BTHDMKeychain *keychain = [[BTHDMKeychain alloc] initWithEncrypted:keyStr password:self.passwrod andFetchBlock:nil];
                     dispatch_async(dispatch_get_main_queue(), ^{
                         if (keychain == nil) {
                             [self showMsg:NSLocalizedString(@"Import failed.", nil)];
