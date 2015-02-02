@@ -564,6 +564,162 @@
             </objects>
             <point key="canvasLocation" x="612" y="990"/>
         </scene>
+        <!--Hot Address AddHDM View Controller-->
+        <scene sceneID="iT4-MN-vCu">
+            <objects>
+                <viewController storyboardIdentifier="HotAddressAddHDM" useStoryboardIdentifierAsRestorationIdentifier="YES" id="DVL-1f-gD0" customClass="HotAddressAddHDMViewController" propertyAccessControl="all" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="kvd-4J-NtE">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" id="8fT-hN-B3F">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="39"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="HDM = HD + Multisig" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="14f-Li-LUz">
+                                        <rect key="frame" x="105" y="13" width="141" height="29"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="sEE-WC-l4r">
+                                        <rect key="frame" x="74" y="13" width="29" height="29"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                        <state key="normal" image="hdm_label">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <state key="highlighted" image="hdm_label_pressed"/>
+                                        <connections>
+                                            <action selector="hdmInfoPressed:" destination="DVL-1f-gD0" eventType="touchUpInside" id="8aD-Cn-7cs"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            </view>
+                            <view contentMode="scaleToFill" id="zbm-8V-vqp">
+                                <rect key="frame" x="20" y="50" width="280" height="264"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" id="mFg-w8-DC5" userLabel="vBg">
+                                        <rect key="frame" x="70" y="66" width="140" height="132"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                    </view>
+                                    <view contentMode="scaleToFill" id="556-0S-H5u" userLabel="Hot">
+                                        <rect key="frame" x="90" y="0.0" width="100" height="115"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <subviews>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="hdm_keychain_add_one_part_enabled_light" id="stx-gA-Ygi">
+                                                <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
+                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                            </imageView>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="NbP-Ok-Hno">
+                                                <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
+                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                <state key="normal" image="hdm_keychain_add_hot_completed">
+                                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                </state>
+                                                <state key="disabled" image="hdm_keychain_add_hot_disable_uncompleted"/>
+                                                <state key="highlighted" image="hdm_keychain_add_hot_pressed"/>
+                                                <connections>
+                                                    <action selector="hotPressed:" destination="DVL-1f-gD0" eventType="touchUpInside" id="Tf6-gz-ZYk"/>
+                                                </connections>
+                                            </button>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="HDM Hot" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="5Da-1U-rSQ">
+                                                <rect key="frame" x="0.0" y="100" width="100" height="15"/>
+                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                    </view>
+                                    <view contentMode="scaleToFill" id="xs4-5l-YM1" userLabel="Cold">
+                                        <rect key="frame" x="0.0" y="149" width="100" height="115"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                        <subviews>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="hdm_keychain_add_one_part_enabled_light" id="Qs6-kA-PVw">
+                                                <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
+                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                            </imageView>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="lme-4G-Bm5">
+                                                <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
+                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                <state key="normal" image="hdm_keychain_add_cold_completed">
+                                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                </state>
+                                                <state key="disabled" image="hdm_keychain_add_cold_disable_uncompleted"/>
+                                                <state key="highlighted" image="hdm_keychain_add_cold_pressed"/>
+                                                <connections>
+                                                    <action selector="coldPressed:" destination="DVL-1f-gD0" eventType="touchUpInside" id="HXv-dt-ER0"/>
+                                                </connections>
+                                            </button>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="HDM Cold" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="lUJ-Y1-VRb">
+                                                <rect key="frame" x="0.0" y="100" width="100" height="15"/>
+                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                    </view>
+                                    <view contentMode="scaleToFill" id="9bP-UZ-74n" userLabel="Server">
+                                        <rect key="frame" x="180" y="149" width="100" height="115"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
+                                        <subviews>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="hdm_keychain_add_one_part_enabled_light" id="amY-Oj-LvP">
+                                                <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
+                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                            </imageView>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="C61-yu-oQo">
+                                                <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
+                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                <state key="normal" image="hdm_keychain_add_server_completed">
+                                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                </state>
+                                                <state key="disabled" image="hdm_keychain_add_server_disable_uncompleted"/>
+                                                <state key="highlighted" image="hdm_keychain_add_server_pressed"/>
+                                                <connections>
+                                                    <action selector="serverPressed:" destination="DVL-1f-gD0" eventType="touchUpInside" id="rnn-oz-ALx"/>
+                                                </connections>
+                                            </button>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="HDM Server" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="lnF-bS-z2z">
+                                                <rect key="frame" x="0.0" y="100" width="100" height="15"/>
+                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                    </view>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    </view>
+                    <connections>
+                        <outlet property="btnCold" destination="lme-4G-Bm5" id="FzJ-ea-uN1"/>
+                        <outlet property="btnHot" destination="NbP-Ok-Hno" id="7v7-Yw-E4d"/>
+                        <outlet property="btnServer" destination="C61-yu-oQo" id="olw-aW-zqB"/>
+                        <outlet property="ivColdLight" destination="Qs6-kA-PVw" id="VzN-iz-psn"/>
+                        <outlet property="ivHotLight" destination="stx-gA-Ygi" id="fNG-um-WTe"/>
+                        <outlet property="ivServerLight" destination="amY-Oj-LvP" id="3oK-ZY-w76"/>
+                        <outlet property="lblCold" destination="lUJ-Y1-VRb" id="hoD-bw-2er"/>
+                        <outlet property="lblHot" destination="5Da-1U-rSQ" id="4VI-Q0-Uhg"/>
+                        <outlet property="lblServer" destination="lnF-bS-z2z" id="pWf-Sk-Ztq"/>
+                        <outlet property="vBg" destination="mFg-w8-DC5" id="ptk-e2-SsZ"/>
+                        <outlet property="vContainer" destination="zbm-8V-vqp" id="UJC-5k-BAh"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="z6q-MZ-bAx" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-129" y="1690"/>
+        </scene>
         <!--Hot Address Add Private Key View Controller-->
         <scene sceneID="15x-fd-pEi">
             <objects>
@@ -4332,6 +4488,18 @@
         <image name="hdm_button_qr_code_pressed" width="25" height="25"/>
         <image name="hdm_button_seed_normal" width="25" height="25"/>
         <image name="hdm_button_seed_pressed" width="25" height="25"/>
+        <image name="hdm_keychain_add_cold_completed" width="100" height="100"/>
+        <image name="hdm_keychain_add_cold_disable_uncompleted" width="100" height="100"/>
+        <image name="hdm_keychain_add_cold_pressed" width="100" height="100"/>
+        <image name="hdm_keychain_add_hot_completed" width="100" height="100"/>
+        <image name="hdm_keychain_add_hot_disable_uncompleted" width="100" height="100"/>
+        <image name="hdm_keychain_add_hot_pressed" width="100" height="100"/>
+        <image name="hdm_keychain_add_one_part_enabled_light" width="100" height="100"/>
+        <image name="hdm_keychain_add_server_completed" width="100" height="100"/>
+        <image name="hdm_keychain_add_server_disable_uncompleted" width="100" height="100"/>
+        <image name="hdm_keychain_add_server_pressed" width="100" height="100"/>
+        <image name="hdm_label" width="29" height="29"/>
+        <image name="hdm_label_pressed" width="29" height="29"/>
         <image name="list_item_card_corner_bottom_left" width="8" height="8"/>
         <image name="list_item_card_corner_bottom_right" width="8" height="8"/>
         <image name="list_item_card_corner_top_left" width="8" height="8"/>
