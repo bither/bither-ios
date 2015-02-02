@@ -29,12 +29,12 @@ static NetworkUtil *netWorkUtil;
 
 + (BOOL) isEnableWIFI {
     NetworkStatus networkStatus=[[Reachability reachabilityForLocalWiFi] currentReachabilityStatus];
-    return networkStatus == ReachableViaWiFi && NO;
+    return networkStatus == ReachableViaWiFi;
 }
 
 + (BOOL) isEnable3G {
      NetworkStatus networkStatus=[[Reachability reachabilityForInternetConnection] currentReachabilityStatus];
-    return networkStatus == ReachableViaWWAN && NO;
+    return networkStatus == ReachableViaWWAN;
 }
 
 @end
