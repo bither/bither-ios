@@ -2,6 +2,9 @@
 /* Class = "IBUILabel"; text = "Label"; ObjectID = "0u9-oG-ULv"; */
 "0u9-oG-ULv.text" = "Label";
 
+/* Class = "IBUILabel"; text = "HDM = HD + Multisig"; ObjectID = "14f-Li-LUz"; */
+"14f-Li-LUz.text" = "HDM = HD + Multisig";
+
 /* Class = "IBUILabel"; text = "%"; ObjectID = "1MG-Ff-Ctm"; */
 "1MG-Ff-Ctm.text" = "%";
 
@@ -22,6 +25,9 @@
 
 /* Class = "IBUIButton"; normalTitle = "Switch to Bither Cold"; ObjectID = "4pa-hj-c7j"; */
 "4pa-hj-c7j.normalTitle" = "Switch to Bither Cold";
+
+/* Class = "IBUILabel"; text = "HDM Hot"; ObjectID = "5Da-1U-rSQ"; */
+"5Da-1U-rSQ.text" = "HDM Hot";
 
 /* Class = "IBUILabel"; text = "Label"; ObjectID = "5Mm-vi-wGE"; */
 "5Mm-vi-wGE.text" = "Label";
@@ -226,6 +232,12 @@
 
 /* Class = "IBUIButton"; normalTitle = "Monitor Bither Cold"; ObjectID = "kbG-t9-dEm"; */
 "kbG-t9-dEm.normalTitle" = "Monitor Bither Cold";
+
+/* Class = "IBUILabel"; text = "HDM Cold"; ObjectID = "lUJ-Y1-VRb"; */
+"lUJ-Y1-VRb.text" = "HDM Cold";
+
+/* Class = "IBUILabel"; text = "HDM Server"; ObjectID = "lnF-bS-z2z"; */
+"lnF-bS-z2z.text" = "HDM Server";
 
 /* Class = "IBUILabel"; text = "QR Code"; ObjectID = "mSg-tC-frD"; */
 "mSg-tC-frD.text" = "QR Code";

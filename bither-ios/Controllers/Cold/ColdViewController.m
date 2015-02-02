@@ -165,7 +165,7 @@
 
 
 - (IBAction)addPressed:(id)sender {
-    if([BTAddressManager instance].privKeyAddresses.count >= PRIVATE_KEY_OF_COLD_COUNT_LIMIT){
+    if([BTAddressManager instance].privKeyAddresses.count >= PRIVATE_KEY_OF_COLD_COUNT_LIMIT && [BTAddressManager instance].hasHDMKeychain){
         [self showBannerWithMessage:NSLocalizedString(@"reach_address_count_limit", nil) belowView:self.vTab];
         return;
     }

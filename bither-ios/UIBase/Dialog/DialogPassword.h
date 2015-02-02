@@ -27,6 +27,7 @@
 -(BOOL)checkPassword:(NSString*)password;
 -(NSString*)passwordTitle;
 -(NSString*)passwordSubTitle;
+-(void)dialogPasswordCanceled;
 
 @end
 

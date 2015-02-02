@@ -38,6 +38,12 @@
 @implementation DialogCentered
 
 -(void)showInWindow:(UIWindow*)window completion:(void(^)())completion{
+    if(self.shown){
+        if(completion){
+            completion();
+        }
+        return;
+    }
     self.shown = YES;
     self.backgroundColor = [UIColor clearColor];
     self.clipsToBounds = NO;
@@ -86,6 +92,12 @@
 }
 
 -(void)dismissWithCompletion:(void(^)())completion{
+    if(!self.shown){
+        if(completion){
+            completion();
+        }
+        return;
+    }
     [self dialogWillDismiss];
     [self.btnModal removeTarget:self action:@selector(modalTouch:) forControlEvents:UIControlEventTouchUpInside];
     [UIView animateWithDuration:kDismissAnimDuration delay:0 options:UIViewAnimationOptionCurveEaseIn|UIViewAnimationOptionBeginFromCurrentState  animations:^{
