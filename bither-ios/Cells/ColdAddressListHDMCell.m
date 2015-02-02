@@ -84,7 +84,7 @@
     __weak __block DialogProgress* d = dp;
     [d showInWindow:self.window completion:^{
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
-            NSString* pub = [self.keychain externalChainRootPubExtendedAsHex:p];
+            NSString* pub = [[self.keychain externalChainRootPubExtendedAsHex:p] toUppercaseStringWithEn];
             dispatch_async(dispatch_get_main_queue(), ^{
                 [d dismissWithCompletion:^{
                     DialogBlackQrCode* d = [[DialogBlackQrCode alloc]initWithContent:pub andTitle:NSLocalizedString(@"hdm_cold_pub_key_qr_code_name", nil)];

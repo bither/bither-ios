@@ -119,7 +119,7 @@
             }
             NSMutableArray* strHashes = [[NSMutableArray alloc]init];
             if(self.tx.hdmIndex >= 0){
-                BTBIP32Key* key = [[BTAddressManager instance].hdmKeychain externalKeyWithIndex:self.tx.hdmIndex andPassword:password];
+                BTBIP32Key* key = [[BTAddressManager instance].hdmKeychain externalKeyWithIndex:self.tx.hdmIndex andPassword:bpassword];
                 for(NSData *hash in hashesData){
                     [strHashes addObject:[[NSString hexWithData:[key.key sign:hash]] toUppercaseStringWithEn]];
                 }
