@@ -556,3 +556,8 @@
 // Hot Add HDM
 "hdm_keychain_add_sign_server_qr_code_error" = "簽名服務器二維碼出錯";
 "hdm_keychain_add_signed_server_qr_code_title" = "已簽名服務器二維碼";
+
+// HDM Send
+"hdm_send_with_cold" = "與 HDM 冷共同簽名";
+"hdm_send_with_server" = "與 HDM 服務器共同簽名";
+"hdm_send_with_cold_no_requested_seed" = "您沒有簽名所需的 HDM 冷帳號";
