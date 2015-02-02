@@ -9,7 +9,7 @@
 #import "NSError+HDMHttpErrorMessage.h"
 
 @implementation NSError (HDMHttpErrorMessage)
--(NSString*)msg{
-    
-}
+//-(NSString*)msg{
+//
+//}
 @end
