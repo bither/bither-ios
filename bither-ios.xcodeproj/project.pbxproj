@@ -21,6 +21,8 @@
 		0AB8BC9F1A7F3A89003C07D8 /* HDMHotAddUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AB8BC9E1A7F3A89003C07D8 /* HDMHotAddUtil.m */; };
 		0AB8BCA21A7F3E68003C07D8 /* PasswordGetter.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AB8BCA11A7F3E68003C07D8 /* PasswordGetter.m */; };
 		0AB8BCA51A7F445D003C07D8 /* DialogHDMKeychainAddHot.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AB8BCA41A7F445D003C07D8 /* DialogHDMKeychainAddHot.m */; };
+		0AB8BCA81A7F6D3B003C07D8 /* NSError+HDMHttpErrorMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AB8BCA71A7F6D3B003C07D8 /* NSError+HDMHttpErrorMessage.m */; };
+		0AB8BCAB1A7F6DEE003C07D8 /* DialogHDMServerUnsignedQRCode.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AB8BCAA1A7F6DEE003C07D8 /* DialogHDMServerUnsignedQRCode.m */; };
 		0AD674921A79E6E4007967DB /* ColdAddressAddHDMViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AD674911A79E6E4007967DB /* ColdAddressAddHDMViewController.m */; };
 		0AD674941A79F2B8007967DB /* BIP39EnglishWords.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0AD674931A79F2B8007967DB /* BIP39EnglishWords.plist */; };
 		0AD674971A7B4BDA007967DB /* ColdAddressListHDMCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AD674961A7B4BDA007967DB /* ColdAddressListHDMCell.m */; };
@@ -271,6 +273,10 @@
 		0AB8BCA11A7F3E68003C07D8 /* PasswordGetter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PasswordGetter.m; sourceTree = "<group>"; };
 		0AB8BCA31A7F445D003C07D8 /* DialogHDMKeychainAddHot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DialogHDMKeychainAddHot.h; sourceTree = "<group>"; };
 		0AB8BCA41A7F445D003C07D8 /* DialogHDMKeychainAddHot.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DialogHDMKeychainAddHot.m; sourceTree = "<group>"; };
+		0AB8BCA61A7F6D3B003C07D8 /* NSError+HDMHttpErrorMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSError+HDMHttpErrorMessage.h"; sourceTree = "<group>"; };
+		0AB8BCA71A7F6D3B003C07D8 /* NSError+HDMHttpErrorMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSError+HDMHttpErrorMessage.m"; sourceTree = "<group>"; };
+		0AB8BCA91A7F6DEE003C07D8 /* DialogHDMServerUnsignedQRCode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DialogHDMServerUnsignedQRCode.h; sourceTree = "<group>"; };
+		0AB8BCAA1A7F6DEE003C07D8 /* DialogHDMServerUnsignedQRCode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DialogHDMServerUnsignedQRCode.m; sourceTree = "<group>"; };
 		0AD674901A79E6E4007967DB /* ColdAddressAddHDMViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ColdAddressAddHDMViewController.h; sourceTree = "<group>"; };
 		0AD674911A79E6E4007967DB /* ColdAddressAddHDMViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ColdAddressAddHDMViewController.m; sourceTree = "<group>"; };
 		0AD674931A79F2B8007967DB /* BIP39EnglishWords.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = BIP39EnglishWords.plist; sourceTree = "<group>"; };
@@ -864,6 +870,8 @@
 				0AB8BC9E1A7F3A89003C07D8 /* HDMHotAddUtil.m */,
 				0AB8BCA01A7F3E68003C07D8 /* PasswordGetter.h */,
 				0AB8BCA11A7F3E68003C07D8 /* PasswordGetter.m */,
+				0AB8BCA61A7F6D3B003C07D8 /* NSError+HDMHttpErrorMessage.h */,
+				0AB8BCA71A7F6D3B003C07D8 /* NSError+HDMHttpErrorMessage.m */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -1188,6 +1196,8 @@
 		ACDDDC2519480ECE0008A79D /* Dialog */ = {
 			isa = PBXGroup;
 			children = (
+				0AB8BCA91A7F6DEE003C07D8 /* DialogHDMServerUnsignedQRCode.h */,
+				0AB8BCAA1A7F6DEE003C07D8 /* DialogHDMServerUnsignedQRCode.m */,
 				ACF02FE919D90899001AB701 /* DialogSwitchQRCode.h */,
 				ACF02FEA19D90899001AB701 /* DialogSwitchQRCode.m */,
 				ACD6DFD6196BF98B009D8031 /* DialogAddressFull.h */,
@@ -1593,6 +1603,7 @@
 				0A6C0F5C1A4D548B00544B33 /* MessageSigningSetting.m in Sources */,
 				ACEE7D3919D4012600932B39 /* SignTransactionScanSetting.m in Sources */,
 				ACEE7D2B19D3F9F500932B39 /* ScanQrCodeTransportViewController.m in Sources */,
+				0AB8BCA81A7F6D3B003C07D8 /* NSError+HDMHttpErrorMessage.m in Sources */,
 				4254084119469D5A007AF99C /* BitherSetting.m in Sources */,
 				ACEE7D2A19D3F9F500932B39 /* QrCodeViewController.m in Sources */,
 				421B03BD19495AEF003A45F1 /* MarketViewController.m in Sources */,
@@ -1666,6 +1677,7 @@
 				4254086B1946CD17007AF99C /* NSDictionary+Fromat.m in Sources */,
 				AC2F329B195D1930001B7439 /* UnsignedTransactionViewController.m in Sources */,
 				ACDDDC2E19480ECF0008A79D /* DialogProgress.m in Sources */,
+				0AB8BCAB1A7F6DEE003C07D8 /* DialogHDMServerUnsignedQRCode.m in Sources */,
 				4254083D19469C9A007AF99C /* BitherEngine.m in Sources */,
 				ACEE7D2719D3F9F500932B39 /* QRCodeThemeUtil.m in Sources */,
 				4217A39019512DC000063746 /* TransactionsUtil.m in Sources */,

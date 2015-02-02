@@ -19,6 +19,7 @@
 #import "BTUtils.h"
 #import "BitherSetting.h"
 #import "BTHDMBid.h"
+#import "NSError+HDMHttpErrorMessage.h"
 
 @import MobileCoreServices;
 @import AVFoundation;
@@ -239,7 +240,7 @@
     NSString* address = key.key.address;
     [root wipe];
     [key wipe];
-    hdmBid = [[BTHDMBid alloc]initWithHDMBid:address andEncryptBitherPassword:nil];
+    hdmBid = [[BTHDMBid alloc]initWithHDMBid:address];
 }
 
 -(void)server{
@@ -255,9 +256,18 @@
         [dp showInWindow:self.window];
     }
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
-        [self initHDMBidFromColdRoot];        
-        NSString * preSign = @"";//TODO: getPreSignString from HDMBid
-        
+        [self initHDMBidFromColdRoot];
+        NSError* error;
+        NSString* preSign = [hdmBid getPreSignHashAndError:&error];
+        if(error && !preSign){
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self showMsg:error.msg];
+            });
+        }else{
+            dispatch_async(dispatch_get_main_queue(), ^{
+                
+            });
+        }
     });
 }
 
