@@ -20,7 +20,12 @@
 #import <Foundation/Foundation.h>
 
 @interface UpgradeUtil : NSObject
-+(BOOL)needUpgradePubKey;
-+(void)upgradePubKey;
+//+(BOOL)needUpgradePubKey;
+//+(void)upgradePubKey;
+//
+//+ (BOOL)needUpgradeKeyFromFileToDB;
+//+ (BOOL)upgradeKeyFromFileToDB;
+
++ (BOOL)checkVersion;
 
 @end

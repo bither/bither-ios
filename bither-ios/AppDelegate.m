@@ -59,8 +59,11 @@ static StatusBarNotificationWindow* notificationWindow;
     }else{
         [[UIApplication sharedApplication] setMinimumBackgroundFetchInterval:UIApplicationBackgroundFetchIntervalMinimum];
     }
-    [self upgradePub:^{
-    }];
+    if (![UpgradeUtil checkVersion]) {
+        // todo:
+        // prompt upgrade failed
+        return NO;
+    }
     [[BTPeerManager instance] initAddress];
     
     if([[BTSettings instance] needChooseMode]){
@@ -99,23 +102,6 @@ static StatusBarNotificationWindow* notificationWindow;
     return YES;
 }
 
--(void)upgradePub:(VoidBlock)callback{
-    if ([UpgradeUtil needUpgradePubKey]) {
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0),^{
-            [UpgradeUtil upgradePubKey];
-            dispatch_async(dispatch_get_main_queue(), ^{
-                if (callback) {
-                    callback();
-                }
-            });
-        });
-        
-    }else{
-        if (callback) {
-            callback();
-        }
-    }
-}
 -(void)notification:(NSNotification *)notification{
     NSArray * array=[notification object];
     [NotificationUtil notificationTx:array];
