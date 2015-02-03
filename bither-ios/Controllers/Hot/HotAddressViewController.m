@@ -25,11 +25,24 @@
 #import "UIBaseUtil.h"
 #import "KeyUtil.h"
 #import "BitherSetting.h"
+#import "DialogWithActions.h"
+#import "DialogPassword.h"
+#import "DialogProgress.h"
+#import "DialogHDMSeedWordList.h"
+#import "DialogBlackQrCode.h"
 
-@interface HotAddressViewController ()<UITableViewDataSource, UITableViewDelegate,SectionHeaderPressedDelegate>{
+typedef enum {
+    SectionHDM = 0, SectionPrivate = 1, SectionWatchOnly = 2
+}SectionType;
+
+@interface HotAddressViewController ()<UITableViewDataSource, UITableViewDelegate,SectionHeaderPressedDelegate,DialogPasswordDelegate>{
     NSMutableArray *_privateKeys;
     NSMutableArray *_watchOnlys;
+    NSMutableArray *_hdms;
     NSMutableIndexSet *_foldedSections;
+    NSString* password;
+    SEL passwordSelector;
+    DialogProgress *dp;
 }
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UIImageView *ivNoAddress;
@@ -42,8 +55,10 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    dp = [[DialogProgress alloc]initWithMessage:NSLocalizedString(@"Please wait…", nil)];
     _privateKeys=[NSMutableArray new];
     _watchOnlys=[NSMutableArray new];
+    _hdms = [NSMutableArray new];
     _foldedSections = [NSMutableIndexSet indexSet];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
@@ -65,10 +80,14 @@
     }
     [_privateKeys removeAllObjects];
     [_watchOnlys removeAllObjects];
+    [_hdms removeAllObjects];
     [_privateKeys addObjectsFromArray:[[BTAddressManager instance]privKeyAddresses]];
     [_watchOnlys addObjectsFromArray:[[BTAddressManager instance]watchOnlyAddresses]];
+    if([BTAddressManager instance].hasHDMKeychain){
+        [_hdms addObjectsFromArray:[BTAddressManager instance].hdmKeychain.addresses];
+    }
     [self.tableView reloadData];
-    self.ivNoAddress.hidden = !(_privateKeys.count == 0 && _watchOnlys.count == 0);
+    self.ivNoAddress.hidden = !(_privateKeys.count == 0 && _watchOnlys.count == 0 && _hdms.count);
 }
 
 -(void)receivedNotifications{
@@ -79,21 +98,32 @@
     if([self isSectionFolded:section]){
         return 0;
     }
-    if([self isPrivateKeySection:section]){
-        return _privateKeys.count;
-    }else{
-        return _watchOnlys.count;
+    switch ([self sectionTypeForIndex:section]){
+        case SectionHDM:
+            return _hdms.count;
+        case SectionPrivate:
+            return _privateKeys.count;
+        case SectionWatchOnly:
+            return _watchOnlys.count;
+        default:
+            return 0;
     }
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     HotAddressListCell*cell = (HotAddressListCell*)[tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
-    if([self isPrivateKeySection:indexPath.section]){
-        [cell setAddress:[_privateKeys objectAtIndex:indexPath.row]];
-    }else{
-        [cell setAddress:[_watchOnlys objectAtIndex:indexPath.row]];
-        cell.viewController=self;
+    switch ([self sectionTypeForIndex:indexPath.section]){
+        case SectionPrivate:
+            [cell setAddress:[_privateKeys objectAtIndex:indexPath.row]];
+            break;
+        case SectionWatchOnly:
+            [cell setAddress:[_watchOnlys objectAtIndex:indexPath.row]];
+            break;
+        case SectionHDM:
+            [cell setAddress:[_hdms objectAtIndex:indexPath.row]];
+            break;
     }
+    [cell setAddress:[_watchOnlys objectAtIndex:indexPath.row]];
     return cell;
 }
 
@@ -105,19 +135,31 @@
     if(_watchOnlys.count > 0){
         sections++;
     }
+    if(_hdms.count > 0){
+        sections++;
+    }
     return sections;
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
-    return [[HotAddressListSectionHeader alloc]initWithSize:CGSizeMake(tableView.frame.size.width, tableView.sectionHeaderHeight) isPrivate:[self isPrivateKeySection:section] section:section delegate:self];
+    SectionType type = [self sectionTypeForIndex:section];
+    return [[HotAddressListSectionHeader alloc]initWithSize:CGSizeMake(tableView.frame.size.width, tableView.sectionHeaderHeight) isHDM:type == SectionHDM isPrivate:type == SectionPrivate section:section delegate:self];
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     BTAddress* address;
-    if([self isPrivateKeySection:indexPath.section]){
-        address = [_privateKeys objectAtIndex:indexPath.row];
-    }else{
-        address = [_watchOnlys objectAtIndex:indexPath.row];
+    switch ([self sectionTypeForIndex:indexPath.section]){
+        case SectionPrivate:
+            address = [_privateKeys objectAtIndex:indexPath.row];
+            break;
+        case SectionWatchOnly:
+            address = [_watchOnlys objectAtIndex:indexPath.row];
+            break;
+        case SectionHDM:
+            address = [_hdms objectAtIndex:indexPath.row];
+            break;
+        default:
+            return;
     }
     AddressDetailViewController *controller = [self.storyboard instantiateViewControllerWithIdentifier:@"AddressDetail"];
     controller.address = address;
@@ -140,19 +182,125 @@
     [self.tableView reloadSections:set withRowAnimation:UITableViewRowAnimationAutomatic];
 }
 
--(BOOL)isPrivateKeySection:(NSUInteger)section{
-    NSInteger sectionCount = [self numberOfSectionsInTableView:self.tableView];
-    if(sectionCount == 2){
-        if(section == 0){
-            return YES;
-        }
-    }else if(sectionCount == 1){
-        if(_privateKeys.count > 0){
-            return YES;
-        }
+-(void)hdmAddPressed {
+    if([BTAddressManager instance].hdmKeychain.isInRecovery){
+        [self showMsg:NSLocalizedString(@"hdm_keychain_recovery_warn", nil)];
+        return;
     }
-    return NO;
+    if([BTAddressManager instance].hdmKeychain.allCompletedAddresses.count >= HDM_ADDRESS_PER_SEED_COUNT_LIMIT){
+        [self showMsg:NSLocalizedString(@"hdm_address_count_limit", nil)];
+        return;
+    }
+    //TODO: call add hdm address view controller
 }
+
+-(SectionType)sectionTypeForIndex:(NSUInteger)section{
+    if(section == [self sectionIndexForType:SectionHDM]){
+        return SectionHDM;
+    }
+    if(section == [self sectionIndexForType:SectionPrivate]){
+        return SectionPrivate;
+    }
+    if(section == [self sectionIndexForType:SectionWatchOnly]){
+        return SectionWatchOnly;
+    }
+    return nil;
+}
+
+-(NSUInteger)sectionIndexForType:(SectionType)type{
+    if(type == SectionHDM){
+        if(_hdms.count == 0){
+            return -1;
+        }
+        return 0;
+    }
+    if(type == SectionPrivate){
+        if(_privateKeys.count == 0){
+            return -1;
+        }
+        NSUInteger index = 0;
+        if(_hdms.count > 0){
+            index++;
+        }
+        return index;
+    }
+    if(type == SectionWatchOnly){
+        if(_watchOnlys.count == 0){
+            return -1;
+        }
+        NSUInteger index = 0;
+        if(_hdms.count > 0){
+            index++;
+        }
+        if(_privateKeys.count > 0){
+            index++;
+        }
+        return index;
+    }
+    return -1;
+}
+
+-(void)hdmSeedPressed {
+    if([BTAddressManager instance].hdmKeychain.isInRecovery){
+        [self showMsg:NSLocalizedString(@"hdm_keychain_recovery_warn", nil)];
+        return;
+    }
+    [[[DialogWithActions alloc]initWithActions:@[
+            [[Action alloc] initWithName:NSLocalizedString(@"hdm_hot_seed_qr_code", nil) target:self andSelector:@selector(showSeedQRCode)],
+            [[Action alloc] initWithName:NSLocalizedString(@"hdm_hot_seed_word_list", nil) target:self andSelector:@selector(showPhrase)]
+    ]] showInWindow:self.view.window];
+}
+
+-(void)showPhrase{
+    if(!password){
+        passwordSelector = @selector(showPhrase);
+        [[[DialogPassword alloc]initWithDelegate:self] showInWindow:self.view.window];
+        return;
+    }
+    NSString* p = password;
+    password = nil;
+    __weak __block DialogProgress* d = dp;
+    [d showInWindow:self.view.window completion:^{
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+            NSArray* words = [[BTAddressManager instance].hdmKeychain seedWords:p];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [d dismissWithCompletion:^{
+                    [[[DialogHDMSeedWordList alloc]initWithWords:words]showInWindow:self.view.window];
+                }];
+            });
+        });
+    }];
+}
+
+-(void)showSeedQRCode{
+    if(!password){
+        passwordSelector = @selector(showSeedQRCode);
+        [[[DialogPassword alloc]initWithDelegate:self] showInWindow:self.view.window];
+        return;
+    }
+    password = nil;
+    __weak __block DialogProgress* d = dp;
+    [d showInWindow:self.view.window completion:^{
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+            __block NSString* pub =[[BTAddressManager instance].hdmKeychain getFullEncryptPrivKeyWithHDMFlag];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [d dismissWithCompletion:^{
+                    DialogBlackQrCode* d = [[DialogBlackQrCode alloc]initWithContent:pub andTitle:NSLocalizedString(@"hdm_cold_seed_qr_code", nil)];
+                    [d showInWindow:self.view.window];
+                }];
+            });
+        });
+    }];
+}
+
+-(void)onPasswordEntered:(NSString*)p{
+    password = p;
+    if(passwordSelector && [self respondsToSelector:passwordSelector]){
+        [self performSelector:passwordSelector];
+    }
+    passwordSelector = nil;
+}
+
 
 -(void)showMsg:(NSString *)msg{
     [self showBannerWithMessage:msg belowView:nil belowTop:0 autoHideIn:1 withCompletion:nil];
