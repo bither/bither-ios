@@ -9,12 +9,13 @@
 #import "HotAddressAddHDMViewController.h"
 #import "UIViewController+PiShowBanner.h"
 #import "HDMHotAddUtil.h"
+#import "HDMTriangleBgView.h"
 
 @interface HotAddressAddHDMViewController () <HDMHotAddUtilDelegate>{
     UIImageView* flashingIv;
 }
 @property(weak, nonatomic) IBOutlet UIView *vContainer;
-@property(weak, nonatomic) IBOutlet UIView *vBg;
+@property(weak, nonatomic) IBOutlet HDMTriangleBgView *vBg;
 @property(weak, nonatomic) IBOutlet UIImageView *ivHotLight;
 @property(weak, nonatomic) IBOutlet UIImageView *ivColdLight;
 @property(weak, nonatomic) IBOutlet UIImageView *ivServerLight;
@@ -59,12 +60,15 @@
     self.btnServer.selected = NO;
     self.btnCold.selected = NO;
     if (!anim) {
+        [self.vBg addLineFromView:self.btnHot toView:self.btnCold];
         self.btnCold.enabled = YES;
         [self showFlash:self.ivColdLight];
     } else {
         [self stopAllFlash];
-        [self showFlash:self.ivColdLight];
-        self.btnCold.enabled = YES;
+        [self.vBg addLineAnimatedFromView:self.btnHot toView:self.btnCold completion:^{
+            [self showFlash:self.ivColdLight];
+            self.btnCold.enabled = YES;
+        }];
     }
 }
 
@@ -78,12 +82,15 @@
     self.btnCold.selected = YES;
     self.btnServer.selected = NO;
     if (!anim) {
+        [self.vBg addLineFromView:self.btnCold toView:self.btnServer];
         self.btnServer.enabled = YES;
         [self showFlash:self.ivServerLight];
     } else {
         [self stopAllFlash];
-        [self showFlash:self.ivServerLight];
-        self.btnServer.enabled = YES;
+        [self.vBg addLineAnimatedFromView:self.btnCold toView:self.btnServer completion:^{
+            [self showFlash:self.ivServerLight];
+            self.btnServer.enabled = YES;
+        }];
     }
 }
 
@@ -97,14 +104,21 @@
     self.btnServer.selected = YES;
     [self stopAllFlash];
     if (!animToFinish) {
+        [self.vBg addLineFromView:self.btnServer toView:self.btnHot];
         if (self.util.isHDMKeychainLimited) {
             self.btnHot.enabled = YES;
             self.btnCold.enabled = YES;
             self.btnServer.enabled = YES;
         }
     } else {
-
+        [self.vBg addLineAnimatedFromView:self.btnServer toView:self.btnHot completion:^{
+            [self finalAnimation];
+        }];
     }
+}
+
+- (void)finalAnimation{
+
 }
 
 - (void)stopAllFlash {
@@ -123,7 +137,7 @@
     if (iv) {
         iv.alpha = 0;
         iv.hidden = NO;
-        [UIView animateWithDuration:0.8 delay:0 options:UIViewAnimationCurveEaseInOut | UIViewAnimationOptionRepeat | UIViewAnimationOptionAutoreverse animations:^{
+        [UIView animateWithDuration:0.8 delay:0.2 options:UIViewAnimationCurveEaseInOut | UIViewAnimationOptionRepeat | UIViewAnimationOptionAutoreverse animations:^{
             iv.alpha = 1;
         } completion:nil];
     }

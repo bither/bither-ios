@@ -26,6 +26,7 @@
 		0AD674971A7B4BDA007967DB /* ColdAddressListHDMCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AD674961A7B4BDA007967DB /* ColdAddressListHDMCell.m */; };
 		0AD6749C1A7B6229007967DB /* DialogWithActions.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AD6749B1A7B6229007967DB /* DialogWithActions.m */; };
 		0AD6749F1A7B9108007967DB /* DialogHDMSeedWordList.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AD6749E1A7B9108007967DB /* DialogHDMSeedWordList.m */; };
+		1BC275F3608609D0E72BFBE7 /* HDMTriangleBgView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BC27C837F7819A54B0A2E37 /* HDMTriangleBgView.m */; };
 		4217A3731951235D00063746 /* Depth.m in Sources */ = {isa = PBXBuildFile; fileRef = 4217A3721951235D00063746 /* Depth.m */; };
 		4217A39019512DC000063746 /* TransactionsUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 4217A38F19512DC000063746 /* TransactionsUtil.m */; };
 		421B037C19495315003A45F1 /* TabButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 421B037B19495315003A45F1 /* TabButton.m */; };
@@ -285,6 +286,8 @@
 		0AD6749E1A7B9108007967DB /* DialogHDMSeedWordList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DialogHDMSeedWordList.m; sourceTree = "<group>"; };
 		0AEE360F1A806A34007293DE /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/MainStoryboard.strings; sourceTree = "<group>"; };
 		0FED7A4051DB45218112FAC0 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		1BC279BF6C2A1E9DF4D86908 /* HDMTriangleBgView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HDMTriangleBgView.h; sourceTree = "<group>"; };
+		1BC27C837F7819A54B0A2E37 /* HDMTriangleBgView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HDMTriangleBgView.m; sourceTree = "<group>"; };
 		4217A3711951235D00063746 /* Depth.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Depth.h; sourceTree = "<group>"; };
 		4217A3721951235D00063746 /* Depth.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Depth.m; sourceTree = "<group>"; };
 		4217A38E19512DC000063746 /* TransactionsUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TransactionsUtil.h; sourceTree = "<group>"; };
@@ -1203,6 +1206,8 @@
 				AC31E92E19B4533F00EFDDF1 /* TrendingGraphicView.m */,
 				AC31E93019B477E400EFDDF1 /* BackgroundTransitionView.h */,
 				AC31E93119B477E400EFDDF1 /* BackgroundTransitionView.m */,
+				1BC27C837F7819A54B0A2E37 /* HDMTriangleBgView.m */,
+				1BC279BF6C2A1E9DF4D86908 /* HDMTriangleBgView.h */,
 			);
 			path = UIBase;
 			sourceTree = "<group>";
@@ -1733,6 +1738,7 @@
 				D61D098FD091EB8752EF00A2 /* BTHDMBid+Api.m in Sources */,
 				D61D0ACF2F75D62B878ADAEF /* HDMHotAddUtil.m in Sources */,
 				D61D0D05D11BC8527C40F8C3 /* PasswordGetter.m in Sources */,
+				1BC275F3608609D0E72BFBE7 /* HDMTriangleBgView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
