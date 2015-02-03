@@ -131,6 +131,9 @@
 /* Class = "IBUILabel"; text = "0000000000000000163440df04bc24eccb48a9d46c64dce3be979e2e6a35aa13"; ObjectID = "QaN-4R-hDw"; */
 "QaN-4R-hDw.text" = "0000000000000000163440df04bc24eccb48a9d46c64dce3be979e2e6a35aa13";
 
+/* Class = "IBUILabel"; text = "R Value Check"; ObjectID = "Qwn-YF-uwn"; */
+"Qwn-YF-uwn.text" = "R Value Check";
+
 /* Class = "IBUIButton"; normalTitle = "1"; ObjectID = "RIA-YK-ZlZ"; */
 "RIA-YK-ZlZ.normalTitle" = "1";
 
@@ -212,6 +215,9 @@
 /* Class = "IBUILabel"; text = "Private Key"; ObjectID = "he8-50-11R"; */
 "he8-50-11R.text" = "Private Key";
 
+/* Class = "IBUIButton"; normalTitle = "Ok"; ObjectID = "ifX-vq-zRq"; */
+"ifX-vq-zRq.normalTitle" = "Ok";
+
 /* Class = "IBUILabel"; text = "Change Amount"; ObjectID = "ipI-cb-OYV"; */
 "ipI-cb-OYV.text" = "Change Amount";
 
@@ -261,10 +267,13 @@
 "nyJ-oV-7hM.text" = "Amount";
 
 /* Class = "IBUISegmentedControl"; oZb-Bk-280.segmentTitles[0] = "Private Key"; ObjectID = "oZb-Bk-280"; */
-"oZb-Bk-280.segmentTitles[0]" = "Private Key";
+"oZb-Bk-280.segmentTitles[0]" = "Private";
 
 /* Class = "IBUISegmentedControl"; oZb-Bk-280.segmentTitles[1] = "Watch Only"; ObjectID = "oZb-Bk-280"; */
-"oZb-Bk-280.segmentTitles[1]" = "Watch Only";
+"oZb-Bk-280.segmentTitles[1]" = "Monitor";
+
+/* Class = "IBUISegmentedControl"; oZb-Bk-280.segmentTitles[2] = "HDM"; ObjectID = "oZb-Bk-280"; */
+"oZb-Bk-280.segmentTitles[2]" = "HDM";
 
 /* Class = "IBUILabel"; text = "Label"; ObjectID = "p9x-vk-IwH"; */
 "p9x-vk-IwH.text" = "Label";

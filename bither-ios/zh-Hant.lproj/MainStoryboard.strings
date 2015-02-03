@@ -292,3 +292,12 @@
 
 /* Class = "IBUILabel"; text = "HDM Server"; ObjectID = "lnF-bS-z2z"; */
 "lnF-bS-z2z.text" = "HDM 服務器";
+
+/* Class = "IBUISegmentedControl"; oZb-Bk-280.segmentTitles[0] = "Private Key"; ObjectID = "oZb-Bk-280"; */
+"oZb-Bk-280.segmentTitles[0]" = "私鑰";
+
+/* Class = "IBUISegmentedControl"; oZb-Bk-280.segmentTitles[1] = "Watch Only"; ObjectID = "oZb-Bk-280"; */
+"oZb-Bk-280.segmentTitles[1]" = "監控";
+
+/* Class = "IBUISegmentedControl"; oZb-Bk-280.segmentTitles[2] = "HDM"; ObjectID = "oZb-Bk-280"; */
+"oZb-Bk-280.segmentTitles[2]" = "HDM";
