@@ -30,11 +30,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-}
-
-- (void)viewDidAppear:(BOOL)animated {
-    [super viewDidAppear:animated];
-    self.util = [[HDMHotAddUtil alloc] initWithViewContoller:self];
+    if(!self.util){
+        self.util = [[HDMHotAddUtil alloc] initWithViewContoller:self];
+    }
 }
 
 - (void)moveToHot:(BOOL)anim {

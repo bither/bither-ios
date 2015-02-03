@@ -23,7 +23,7 @@
 #import "NSString+Size.h"
 
 #define kTitleMargin (10)
-#define kTitleFontSize (18)
+#define kTitleFontSize (16)
 
 @implementation DialogBlackQrCode
 
@@ -59,6 +59,7 @@
         lblTitle.font = [UIFont systemFontOfSize:kTitleFontSize];
         lblTitle.text = title;
         lblTitle.textAlignment = NSTextAlignmentCenter;
+        lblTitle.numberOfLines = 0;
         [self addSubview:lblTitle];
     }
     UIButton* btnDismiss = [[UIButton alloc]initWithFrame:iv.frame];

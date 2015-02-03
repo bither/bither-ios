@@ -34,16 +34,18 @@
 #define kMinGeneratingTime (2.4)
 
 @interface HDMHotAddUtil()<PasswordGetterDelegate, UEntropyViewControllerDelegate, ScanQrCodeDelegate>{
-    PasswordGetter* passwordGetter;
+    PasswordGetter* _passwordGetter;
     DialogProgress *dp;
     NSData* coldRoot;
     BTHDMBid* hdmBid;
     BOOL hdmKeychainLimit;
     SEL afterQRScanSelector;
     BOOL serverPressed;
+    __weak UIWindow* _window;
 }
 @property (weak) UIViewController<HDMHotAddUtilDelegate>* controller;
-@property (weak) UIWindow* window;
+@property (readonly, weak) UIWindow* window;
+@property (readonly) PasswordGetter* passwordGetter;
 @end
 
 @implementation HDMHotAddUtil
@@ -51,7 +53,6 @@
     self = [super init];
     if(self){
         self.controller = controller;
-        self.window = self.controller.view.window;
         [self firstConfigure];
     }
     return self;
@@ -63,7 +64,6 @@
     [self refreshHDMLimit];
     dp = [[DialogProgress alloc]initWithMessage:NSLocalizedString(@"Please wait…", nil)];
     dp.touchOutSideToDismiss = NO;
-    passwordGetter = [[PasswordGetter alloc]initWithWindow:self.window andDelegate:self];
     [self findCurrentStep];
 }
 
@@ -75,16 +75,15 @@
     if(hdmKeychainLimit){
         return;
     }
-    __block __weak HDMHotAddUtil* s;
     [[[DialogHDMKeychainAddHot alloc]initWithBlock:^(BOOL xrandom) {
         if(xrandom){
             [self hotWithXRandom];
         }else{
-            NSString* password = passwordGetter.password;
-            if(!password){
-                return;
-            }
             dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+                NSString* password = self.passwordGetter.password;
+                if(!password){
+                    return;
+                }
                 [UIApplication sharedApplication].idleTimerDisabled = YES;
                 XRandom *xRandom=[[XRandom alloc] initWithDelegate:nil];
                 BTHDMKeychain* keychain = nil;
@@ -102,9 +101,9 @@
                 dispatch_async(dispatch_get_main_queue(), ^{
                     [dp dismissWithCompletion:^{
                         if(keychain){
-                            [s.controller moveToCold:YES];
+                            [self.controller moveToCold:YES];
                         } else {
-                            [s showMsg:NSLocalizedString(@"xrandom_generating_failed", nil)];
+                            [self showMsg:NSLocalizedString(@"xrandom_generating_failed", nil)];
                         }
                     }];
                 });
@@ -122,14 +121,18 @@
         }];
         return;
     }
-    passwordGetter.delegate = nil;
-    NSString* password = passwordGetter.password;
-    passwordGetter.delegate = self;
-    if(!password){
-        return;
-    }
-    UEntropyViewController* uentropy = [[UEntropyViewController alloc]initWithPassword:password andDelegate:self];
-    [self.controller presentViewController:uentropy animated:YES completion:nil];
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+        self.passwordGetter.delegate = nil;
+        NSString* password = self.passwordGetter.password;
+        self.passwordGetter.delegate = self;
+        if(!password){
+            return;
+        }
+        dispatch_async(dispatch_get_main_queue(), ^{
+            UEntropyViewController* uentropy = [[UEntropyViewController alloc]initWithPassword:password andDelegate:self];
+            [self.controller presentViewController:uentropy animated:YES completion:nil];
+        });
+    });
 }
 
 -(void)onUEntropyGeneratingWithController:(UEntropyViewController*)controller collector:(UEntropyCollector*)collector andPassword:(NSString*)password{
@@ -212,12 +215,12 @@
         return;
     }
     NSUInteger count = HDM_ADDRESS_PER_SEED_PREPARE_COUNT - [BTAddressManager instance].hdmKeychain.uncompletedAddressCount;
-    if(!dp.shown && passwordGetter.hasPassword && count > 0){
+    if(!dp.shown && self.passwordGetter.hasPassword && count > 0){
         [dp showInWindow:self.window];
     }
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
         if(count > 0){
-            NSString* password = passwordGetter.password;
+            NSString* password = self.passwordGetter.password;
             if(!password){
                 dispatch_async(dispatch_get_main_queue(), ^{
                     [dp dismiss];
@@ -225,17 +228,17 @@
                 return ;
             }
             [[BTAddressManager instance].hdmKeychain prepareAddressesWithCount:(UInt32)count password:password andColdExternalPub:[NSData dataWithBytes:coldRoot.bytes length:coldRoot.length]];
-            [self initHDMBidFromColdRoot];
-            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
-               [dp dismissWithCompletion:^{
-                   if(serverPressed){
-                       [self server];
-                   }else{
-                       [self.controller moveToServer:YES];
-                   }
-               }];
-            });
         }
+        [self initHDMBidFromColdRoot];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [dp dismissWithCompletion:^{
+                if(serverPressed){
+                    [self server];
+                }else{
+                    [self.controller moveToServer:YES];
+                }
+            }];
+        });
     });
 }
 
@@ -258,6 +261,7 @@
     if(!coldRoot && !hdmBid){
         serverPressed = YES;
         [self cold];
+        return;
     }
     serverPressed = NO;
     [dp showInWindow:self.window completion:^{
@@ -271,11 +275,13 @@
                 });
             }else{
                 dispatch_async(dispatch_get_main_queue(), ^{
-                    [[[DialogHDMServerUnsignedQRCode alloc]initWithContent:preSign andAction:^{
-                        afterQRScanSelector = @selector(serverScanned:);
-                        ScanQrCodeViewController* scan = [[ScanQrCodeViewController alloc]initWithDelegate:self];
-                        [self.controller presentViewController:scan animated:YES completion:nil];
-                    }]showInWindow:self.window];
+                    [dp dismissWithCompletion:^{
+                        [[[DialogHDMServerUnsignedQRCode alloc]initWithContent:preSign andAction:^{
+                            afterQRScanSelector = @selector(serverScanned:);
+                            ScanQrCodeViewController* scan = [[ScanQrCodeViewController alloc]initWithDelegate:self];
+                            [self.controller presentViewController:scan animated:YES completion:nil];
+                        }]showInWindow:self.window];
+                    }];
                 });
             }
         });
@@ -288,7 +294,7 @@
     }
     [dp showInWindow:self.window completion:^{
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
-            NSString* password = passwordGetter.password;
+            NSString* password = self.passwordGetter.password;
             if(!password){
                 return;
             }
@@ -369,4 +375,20 @@
 - (BOOL)isHDMKeychainLimited {
     return hdmKeychainLimit;
 }
+
+- (UIWindow *)window {
+    if(!_window){
+        _window = self.controller.view.window;
+    }
+    return _window;
+}
+
+- (PasswordGetter *)passwordGetter {
+    if(!_passwordGetter){
+        _passwordGetter = [[PasswordGetter alloc] initWithWindow:self.window andDelegate:self];
+    }
+    return _passwordGetter;
+}
+
+
 @end
