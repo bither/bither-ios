@@ -10,6 +10,7 @@
 #import "UIViewController+PiShowBanner.h"
 #import "HDMHotAddUtil.h"
 #import "HDMTriangleBgView.h"
+#import "DialogHDMInfo.h"
 
 @interface HotAddressAddHDMViewController () <HDMHotAddUtilDelegate>{
     UIImageView* flashingIv;
@@ -211,7 +212,7 @@
 }
 
 - (IBAction)hdmInfoPressed:(id)sender {
-    //TODO: hdmInfoPressed
+    [[[DialogHDMInfo alloc] init] showInWindow:self.view.window];
 }
 
 - (void)showMsg:(NSString *)msg {
