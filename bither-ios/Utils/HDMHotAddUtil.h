@@ -20,4 +20,6 @@
 -(void)hot;
 -(void)cold;
 -(void)server;
+-(void)refreshHDMLimit;
+@property (readonly) BOOL isHDMKeychainLimited;
 @end

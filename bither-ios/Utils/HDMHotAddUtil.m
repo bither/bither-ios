@@ -60,11 +60,15 @@
 -(void)firstConfigure{
     serverPressed = NO;
     hdmBid = nil;
-    hdmKeychainLimit = [BTAddressManager instance].hasHDMKeychain;
+    [self refreshHDMLimit];
     dp = [[DialogProgress alloc]initWithMessage:NSLocalizedString(@"Please wait…", nil)];
     dp.touchOutSideToDismiss = NO;
     passwordGetter = [[PasswordGetter alloc]initWithWindow:self.window andDelegate:self];
     [self findCurrentStep];
+}
+
+-(void)refreshHDMLimit{
+    hdmKeychainLimit = [BTAddressManager instance].hasHDMKeychain;
 }
 
 -(void)hot{
@@ -360,5 +364,9 @@
     if(!dp.shown){
         [dp showInWindow:self.window];
     }
+}
+
+- (BOOL)isHDMKeychainLimited {
+    return hdmKeychainLimit;
 }
 @end
