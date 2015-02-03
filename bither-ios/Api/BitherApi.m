@@ -182,7 +182,7 @@ static BitherApi *piApi;
 - (void)changeHDMPasswordWithHDMBid:(NSString *)hdmBid andPassword:(NSString *)password
                        andSignature:(NSString *)signature andHotAddress:(NSString *)hotAddress
                            callback:(VoidResponseBlock)callback andErrorCallBack:(ErrorHandler)errorCallback; {
-    NSDictionary *params = @{@"password" : [[password hexToData] base64EncodedString], @"signature" : [[signature hexToData] base64EncodedString],
+    NSDictionary *params = @{@"password" : [[password hexToData] base64EncodedString], @"signature" : signature,
             @"hot_address" : hotAddress};
     [self post:[NSString stringWithFormat:@"api/v1/%@/hdm/password",hdmBid] withParams:params networkType:BitherHDM completed:^(MKNetworkOperation *completedOperation) {
         NSDictionary *dict = completedOperation.responseJSON;
@@ -267,4 +267,7 @@ static BitherApi *piApi;
     return result;
 }
 
+- (NSError *)formatHDMErrorWithOP:(MKNetworkOperation *)errorOp andError:(NSError *)error;{
+    return nil;
+}
 @end

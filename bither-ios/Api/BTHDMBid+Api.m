@@ -30,10 +30,10 @@
     self.password = [NSData randomWithSize:32];
     __block long serviceRandom = 0;
     __block NSCondition *condition = [NSCondition new];
+    __block NSError *e = nil;
     [[BitherApi instance] getHDMPasswordRandomWithHDMBid:self.address callback:^(id response) {
         [condition lock];
         serviceRandom = [response intValue];
-
         [condition signal];
         [condition unlock];
     } andErrorCallBack:^(MKNetworkOperation *errorOp, NSError *err) {
@@ -45,56 +45,63 @@
     //
     [condition lock];
     [condition wait];
+    NSString *result = nil;
 
     self.serviceRandom = serviceRandom;
     NSString *message = [NSString stringWithFormat:@"bitid://hdm.bither.net/%@/password/%@/%ld", self.address, [NSString hexWithData:self.password], self.serviceRandom];
     NSData *d = [[BTUtils formatMessageForSigning:message] SHA256_2];
-
+    result = [NSString hexWithData:d];
     [condition unlock];
-    return [NSString hexWithData:d];
+    return result;
 }
 
 - (void)changeBidPasswordWithSignature:(NSString *)signature andPassword:(NSString *)password andError:(NSError **)error; {
     NSString *message = [NSString stringWithFormat:@"bitid://hdm.bither.net/%@/password/%@/%ld", self.address, [NSString hexWithData:self.password], self.serviceRandom];
     NSData *d = [[BTUtils formatMessageForSigning:message] SHA256_2];
-    BTKey *key = [BTKey signedMessageToKey:message andSignatureBase64:signature];
-    if ([self.address isEqualToString:[key address]]) {
+    __block NSCondition *condition = [NSCondition new];
+    if ([self.address isEqualToString:[[BTKey signedMessageToKey:message andSignatureBase64:signature] address]]) {
         //
     }
     NSString *hotAddress = [BTAddressManager instance].hdmKeychain.firstAddressFromDb;
     [[BitherApi instance] changeHDMPasswordWithHDMBid:self.address andPassword:[NSString hexWithData:self.password] andSignature:signature andHotAddress:hotAddress callback:^{
-        BTKey *key1 = [[BTKey alloc] initWithSecret:self.password compressed:YES];
-        NSString *address = [key1 address];
-        self.encryptedBitherPassword = [[[BTEncryptData alloc] initWithData:self.password andPassowrd:password] toEncryptedString];
-        [[BTAddressProvider instance] addHDMBid:self andPasswordSeed:address];
-    }                                andErrorCallBack:^(MKNetworkOperation *errorOp, NSError *err) {
-
+        [condition lock];
+        [condition signal];
+        [condition unlock];
+    } andErrorCallBack:^(MKNetworkOperation *errorOp, NSError *err) {
+        [condition lock];
+        [condition signal];
+        [condition unlock];
     }];
+    [condition lock];
+    [condition wait];
+    self.encryptedBitherPassword = [[[BTEncryptData alloc] initWithData:self.password andPassowrd:password] toEncryptedString];
+    [[BTAddressProvider instance] addHDMBid:self andPasswordSeed:[[[BTKey alloc] initWithSecret:self.password compressed:YES] address]];
+    [condition unlock];
 }
 
 - (NSArray *)recoverHDMWithSignature:(NSString *)signature andPassword:(NSString *)password andError:(NSError **)error; {
     return nil;
 }
 
--(void)createHDMAddress:(NSArray *)pubsList andPassword:(NSString *)password  andError:(ErrorBlock)errorblock{
+- (void)createHDMAddress:(NSArray *)pubsList andPassword:(NSString *)password andError:(ErrorBlock)errorblock {
     int start = 2147483647;
-    int end =0 ;
-    NSMutableArray * hots=[NSMutableArray new];
-    NSMutableArray * colds=[NSMutableArray new];
+    int end = 0;
+    NSMutableArray *hots = [NSMutableArray new];
+    NSMutableArray *colds = [NSMutableArray new];
     for (BTHDMPubs *pubs in pubsList) {
-        start= MIN(start, pubs.index);
-        end= MAX(end, pubs.index);
+        start = (int) MIN(start, pubs.index);
+        end = (int) MAX(end, pubs.index);
         [hots addObject:pubs.hot];
         [colds addObject:pubs.cold];
     }
     [[BitherApi instance] createHDMAddressWithHDMBid:self.address andPassword:password start:start end:end pubHots:hots pubColds:colds callback:^(NSArray *array) {
-        for (int i=0;i<pubsList.count;i++) {
-            BTHDMPubs * pubs= [pubsList objectAtIndex:i];
-            pubs.remote=[array objectAtIndex:i];
+        for (int i = 0; i < pubsList.count; i++) {
+            BTHDMPubs *pubs = pubsList[i];
+            pubs.remote = array[i];
 
         }
     } andErrorCallBack:^(MKNetworkOperation *errorOp, NSError *error) {
-        if(errorblock){
+        if (errorblock) {
             errorblock(error);
         }
     }];

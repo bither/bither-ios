@@ -53,5 +53,5 @@
 - (void)recoverHDMAddressWithHDMBid:(NSString *)hdmBid andPassword:(NSString *)password andSignature:(NSString *)signature
                            callback:(DictResponseBlock)callback andErrorCallBack:(ErrorHandler)errorCallback;
 
-
+- (NSError *)formatHDMErrorWithOP:(MKNetworkOperation *)errorOp andError:(NSError *)error;
 @end

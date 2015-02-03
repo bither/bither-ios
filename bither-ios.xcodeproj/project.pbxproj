@@ -226,6 +226,7 @@
 		D61D098FD091EB8752EF00A2 /* BTHDMBid+Api.m in Sources */ = {isa = PBXBuildFile; fileRef = D61D0F5AB509120289D32CE8 /* BTHDMBid+Api.m */; };
 		D61D0ACF2F75D62B878ADAEF /* HDMHotAddUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = D61D0EFD9890E54E56C5A21E /* HDMHotAddUtil.m */; };
 		D61D0D05D11BC8527C40F8C3 /* PasswordGetter.m in Sources */ = {isa = PBXBuildFile; fileRef = D61D0DB47AB1A1EA42112C56 /* PasswordGetter.m */; };
+		D61D0E640B2A2C7E6874FDEA /* HDMApi.m in Sources */ = {isa = PBXBuildFile; fileRef = D61D089EE8093848A924819C /* HDMApi.m */; };
 		DA641E8A196E7BC20095DF42 /* CrashLog.m in Sources */ = {isa = PBXBuildFile; fileRef = DA641E83196E7BC20095DF42 /* CrashLog.m */; };
 		DA641E8B196E7BC20095DF42 /* GCCrashInstallation.m in Sources */ = {isa = PBXBuildFile; fileRef = DA641E85196E7BC20095DF42 /* GCCrashInstallation.m */; };
 		DA641E8C196E7BC20095DF42 /* GCCrashReportFilterTrim.m in Sources */ = {isa = PBXBuildFile; fileRef = DA641E87196E7BC20095DF42 /* GCCrashReportFilterTrim.m */; };
@@ -659,7 +660,9 @@
 		ACF02FEA19D90899001AB701 /* DialogSwitchQRCode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DialogSwitchQRCode.m; sourceTree = "<group>"; };
 		ACF4B17219668D5700CE24FD /* MarketListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MarketListCell.h; path = Cells/MarketListCell.h; sourceTree = "<group>"; };
 		ACF4B17319668D5700CE24FD /* MarketListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MarketListCell.m; path = Cells/MarketListCell.m; sourceTree = "<group>"; };
+		D61D00DE53941DC6062E1938 /* HDMApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HDMApi.h; sourceTree = "<group>"; };
 		D61D07CCE58EB1B7FCA04677 /* PasswordGetter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PasswordGetter.h; sourceTree = "<group>"; };
+		D61D089EE8093848A924819C /* HDMApi.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HDMApi.m; sourceTree = "<group>"; };
 		D61D0DB47AB1A1EA42112C56 /* PasswordGetter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PasswordGetter.m; sourceTree = "<group>"; };
 		D61D0E2B59DCC58D05F2CCE6 /* BTHDMBid+Api.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "BTHDMBid+Api.h"; sourceTree = "<group>"; };
 		D61D0EFD9890E54E56C5A21E /* HDMHotAddUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HDMHotAddUtil.m; sourceTree = "<group>"; };
@@ -818,6 +821,8 @@
 				4254083819469C9A007AF99C /* BitherEngine.m */,
 				D61D0F5AB509120289D32CE8 /* BTHDMBid+Api.m */,
 				D61D0E2B59DCC58D05F2CCE6 /* BTHDMBid+Api.h */,
+				D61D089EE8093848A924819C /* HDMApi.m */,
+				D61D00DE53941DC6062E1938 /* HDMApi.h */,
 			);
 			path = Api;
 			sourceTree = "<group>";
@@ -1739,6 +1744,7 @@
 				D61D0ACF2F75D62B878ADAEF /* HDMHotAddUtil.m in Sources */,
 				D61D0D05D11BC8527C40F8C3 /* PasswordGetter.m in Sources */,
 				1BC275F3608609D0E72BFBE7 /* HDMTriangleBgView.m in Sources */,
+				D61D0E640B2A2C7E6874FDEA /* HDMApi.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
