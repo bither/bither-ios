@@ -25,4 +25,6 @@
 - (void)changeBidPasswordWithSignature:(NSString *)signature andPassword:(NSString *)password andError:(NSError **)error;
 - (NSArray *)recoverHDMWithSignature:(NSString *)signature andPassword:(NSString *)password andError:(NSError **)error;
 
+-(void)createHDMAddress:(NSArray *)pubsList andPassword:(NSString *)password  andError:(ErrorBlock)errorblock;
+
 @end

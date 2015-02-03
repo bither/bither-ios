@@ -22,6 +22,7 @@
 #import <Bitheri/BTEncryptData.h>
 #import "BTHDMBid+Api.h"
 #import "BitherApi.h"
+#import "BTHDMAddress.h"
 
 @implementation BTHDMBid (Api)
 
@@ -61,12 +62,12 @@
         //
     }
     NSString *hotAddress = [BTAddressManager instance].hdmKeychain.firstAddressFromDb;
-    [[BitherApi instance] ChangeHDMPasswordWithHDMBid:self.address andPassword:[NSString hexWithData:self.password] andSignature:signature andHotAddress:hotAddress callback:^{
+    [[BitherApi instance] changeHDMPasswordWithHDMBid:self.address andPassword:[NSString hexWithData:self.password] andSignature:signature andHotAddress:hotAddress callback:^{
         BTKey *key1 = [[BTKey alloc] initWithSecret:self.password compressed:YES];
         NSString *address = [key1 address];
         self.encryptedBitherPassword = [[[BTEncryptData alloc] initWithData:self.password andPassowrd:password] toEncryptedString];
         [[BTAddressProvider instance] addHDMBid:self andPasswordSeed:address];
-    } andErrorCallBack:^(MKNetworkOperation *errorOp, NSError *err) {
+    }                                andErrorCallBack:^(MKNetworkOperation *errorOp, NSError *err) {
 
     }];
 }
@@ -74,5 +75,30 @@
 - (NSArray *)recoverHDMWithSignature:(NSString *)signature andPassword:(NSString *)password andError:(NSError **)error; {
     return nil;
 }
+
+-(void)createHDMAddress:(NSArray *)pubsList andPassword:(NSString *)password  andError:(ErrorBlock)errorblock{
+    int start = 2147483647;
+    int end =0 ;
+    NSMutableArray * hots=[NSMutableArray new];
+    NSMutableArray * colds=[NSMutableArray new];
+    for (BTHDMPubs *pubs in pubsList) {
+        start= MIN(start, pubs.index);
+        end= MAX(end, pubs.index);
+        [hots addObject:pubs.hot];
+        [colds addObject:pubs.cold];
+    }
+    [[BitherApi instance] createHDMAddressWithHDMBid:self.address andPassword:password start:start end:end pubHots:hots pubColds:colds callback:^(NSArray *array) {
+        for (int i=0;i<pubsList.count;i++) {
+            BTHDMPubs * pubs= [pubsList objectAtIndex:i];
+            pubs.remote=[array objectAtIndex:i];
+
+        }
+    } andErrorCallBack:^(MKNetworkOperation *errorOp, NSError *error) {
+        if(errorblock){
+            errorblock(error);
+        }
+    }];
+}
+
 
 @end

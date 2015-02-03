@@ -23,6 +23,8 @@
 #import "NSError+HDMHttpErrorMessage.h"
 #import "PeerUtil.h"
 #import "BTHDMBid+Api.h"
+#import "BTAddressProvider.h"
+#import "BTKey.h"
 
 @import MobileCoreServices;
 @import AVFoundation;
@@ -310,9 +312,12 @@
             }
             [[PeerUtil instance]stopPeer];
             NSArray* as = [[BTAddressManager instance].hdmKeychain completeAddressesWithCount:1 password:password andFetchBlock:^(NSString *password, NSArray *partialPubs) {
-                //TODO: fetch remote public keys
+                [hdmBid createHDMAddress:partialPubs andPassword:password  andError:^(NSError *error) {
+                    NSLog(@"error:%@",error);
+                }];
                 
             }];
+            
             
             [[PeerUtil instance]startPeer];
             dispatch_async(dispatch_get_main_queue(), ^{

@@ -3,6 +3,8 @@
 #import "ImportHDMColdSeedController.h"
 #import "WorldListCell.h"
 #import "KeyboardController.h"
+#import "UIViewController+PiShowBanner.h"
+#import "BTBIP39.h"
 
 #define kTextFieldHorizontalMargin (10)
 
@@ -63,9 +65,6 @@
     [self configureTextField:self.tfKey];
     self.tfKey.returnKeyType = UIReturnKeyDone;
     self.kc = [[KeyboardController alloc]initWithDelegate:self];
-    
-
-    
 }
 
 -(void)viewDidAppear:(BOOL)animated{
@@ -80,7 +79,7 @@
     CGFloat totalHeight = frame.origin.y;
     NSLog(@"totalHeight:%f",totalHeight);
         NSLog(@"toolBarFrame:%f",toolBarFrame.size.height);
-    CGFloat top = totalHeight - toolBarFrame.size.height*2;
+    CGFloat top = totalHeight - toolBarFrame.size.height;
     self.inputView.frame = CGRectMake(toolBarFrame.origin.x, top, toolBarFrame.size.width, toolBarFrame.size.height);
    
    
@@ -114,12 +113,19 @@
 
 - (IBAction)addWorld:(id)sender {
     NSString * world=self.tfKey.text;
-    [self.worldListArray addObject:world];
-    [self.collectionView reloadData];
-    self.tfKey.text=@"";
-    
+    if ([[[BTBIP39 sharedInstance] getWords] containsObject:world]) {
+        [self.worldListArray addObject:world];
+        [self.collectionView reloadData];
+        self.tfKey.text=@"";
+    }else{
+        [self showMsg:NSLocalizedString(@"hdm_import_word_list_wrong_word_warn", nil)];
+    }
 }
 
+
+-(void)showMsg:(NSString *)msg{
+     [self showBannerWithMessage:msg belowView:nil];
+}
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
     return YES;

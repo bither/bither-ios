@@ -179,12 +179,12 @@ static BitherApi *piApi;
     } ssl:YES];
 }
 
-- (void)ChangeHDMPasswordWithHDMBid:(NSString *)hdmBid andPassword:(NSString *)password
+- (void)changeHDMPasswordWithHDMBid:(NSString *)hdmBid andPassword:(NSString *)password
                        andSignature:(NSString *)signature andHotAddress:(NSString *)hotAddress
                            callback:(VoidResponseBlock)callback andErrorCallBack:(ErrorHandler)errorCallback; {
-    NSDictionary *params = @{@"password" : [[password hexToData] base64EncodedString], @"signature" : signature,
+    NSDictionary *params = @{@"password" : [[password hexToData] base64EncodedString], @"signature" : [[signature hexToData] base64EncodedString],
             @"hot_address" : hotAddress};
-    [self post:[NSString stringWithFormat:@""] withParams:params networkType:BitherHDM completed:^(MKNetworkOperation *completedOperation) {
+    [self post:[NSString stringWithFormat:@"api/v1/%@/hdm/password",hdmBid] withParams:params networkType:BitherHDM completed:^(MKNetworkOperation *completedOperation) {
         NSDictionary *dict = completedOperation.responseJSON;
         if ([dict[@"result"] isEqualToString:@"ok"] && callback != nil) {
             callback();
@@ -201,7 +201,7 @@ static BitherApi *piApi;
                           callback:(ArrayResponseBlock)callback andErrorCallBack:(ErrorHandler)errorCallback; {
     NSDictionary *params = @{@"password" : [[password hexToData] base64EncodedString], @"start" : @(start), @"end": @(end),
             @"pub_hot": [self connect:pubHots], @"pub_cold": [self connect:pubColds]};
-    [self post:[NSString stringWithFormat:@""] withParams:params networkType:BitherHDM completed:^(MKNetworkOperation *completedOperation) {
+    [self post:[NSString stringWithFormat:@"api/v1/%@/hdm/address/create", hdmBid] withParams:params networkType:BitherHDM completed:^(MKNetworkOperation *completedOperation) {
         NSArray *pubRemotes = [self split:completedOperation.responseString];
         if (callback != nil) {
             callback(pubRemotes);
