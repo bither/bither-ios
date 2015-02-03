@@ -319,6 +319,8 @@
                [dp dismissWithCompletion:^{
                    if(as.count > 0){
                        [self.controller moveToFinal:YES];
+                   }else{
+                       [self showMsg:NSLocalizedString(@"hdm_keychain_add_sign_server_qr_code_error", nil)];
                    }
                }];
             });

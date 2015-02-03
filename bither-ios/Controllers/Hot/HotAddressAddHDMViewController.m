@@ -10,7 +10,9 @@
 #import "UIViewController+PiShowBanner.h"
 #import "HDMHotAddUtil.h"
 
-@interface HotAddressAddHDMViewController () <HDMHotAddUtilDelegate>
+@interface HotAddressAddHDMViewController () <HDMHotAddUtilDelegate>{
+    UIImageView* flashingIv;
+}
 @property(weak, nonatomic) IBOutlet UIView *vContainer;
 @property(weak, nonatomic) IBOutlet UIView *vBg;
 @property(weak, nonatomic) IBOutlet UIImageView *ivHotLight;
@@ -33,6 +35,11 @@
     if(!self.util){
         self.util = [[HDMHotAddUtil alloc] initWithViewContoller:self];
     }
+}
+
+-(void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    [self showFlash:flashingIv];
 }
 
 - (void)moveToHot:(BOOL)anim {
@@ -105,6 +112,7 @@
 }
 
 - (void)showFlash:(UIImageView *)iv {
+    flashingIv = iv;
     NSArray *ivs = @[self.ivHotLight, self.ivColdLight, self.ivServerLight];
     for (UIImageView *v in ivs) {
         if (v != iv) {
