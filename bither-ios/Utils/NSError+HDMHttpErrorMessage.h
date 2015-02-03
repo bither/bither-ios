@@ -10,4 +10,5 @@
 
 @interface NSError (HDMHttpErrorMessage)
 -(NSString*)msg;
+-(BOOL)isHttp400;
 @end
