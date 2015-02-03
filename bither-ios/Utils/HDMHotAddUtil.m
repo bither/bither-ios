@@ -315,7 +315,6 @@
                 [hdmBid createHDMAddress:partialPubs andPassword:password  andError:^(NSError *error) {
                     NSLog(@"error:%@",error);
                 }];
-                
             }];
             
             
@@ -325,7 +324,11 @@
                    if(as.count > 0){
                        [self.controller moveToFinal:YES];
                    }else{
-                       [self showMsg:NSLocalizedString(@"hdm_keychain_add_sign_server_qr_code_error", nil)];
+                       if(error && error.isHttp400){
+                           [self showMsg:error.msg];
+                       }else{
+                           [self showMsg:NSLocalizedString(@"Network failure.", nil)];
+                       }
                    }
                }];
             });

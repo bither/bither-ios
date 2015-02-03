@@ -19,7 +19,6 @@
 //  Created by songchenwen on 15/2/3.
 //
 
-#import <CoreGraphics/CoreGraphics.h>
 #import "HDMTriangleBgView.h"
 
 #define kAnimDuration (0.8)

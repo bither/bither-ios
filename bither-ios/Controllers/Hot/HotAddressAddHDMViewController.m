@@ -10,9 +10,12 @@
 #import "UIViewController+PiShowBanner.h"
 #import "HDMHotAddUtil.h"
 #import "HDMTriangleBgView.h"
+#import "DialogHDMInfo.h"
 
 @interface HotAddressAddHDMViewController () <HDMHotAddUtilDelegate>{
     UIImageView* flashingIv;
+    CGFloat containerFullWidth;
+    CGFloat containerFullTop;
 }
 @property(weak, nonatomic) IBOutlet UIView *vContainer;
 @property(weak, nonatomic) IBOutlet HDMTriangleBgView *vBg;
@@ -33,6 +36,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    containerFullTop = self.vContainer.frame.origin.y;
+    containerFullWidth = self.vContainer.frame.size.width;
+    [self configureContainerFull];
     if(!self.util){
         self.util = [[HDMHotAddUtil alloc] initWithViewContoller:self];
     }
@@ -118,7 +124,57 @@
 }
 
 - (void)finalAnimation{
+    NSTimeInterval fadeDuration = 0.4;
+    NSTimeInterval zoomDuration = 0.5;
+    NSTimeInterval spinDuration = 2;
+    NSTimeInterval fadeOutOffset = 0.3;
+    [UIView animateWithDuration:fadeDuration animations:^{
+        self.vBg.alpha = 0;
+        self.lblHot.alpha = 0;
+        self.lblCold.alpha = 0;
+        self.lblServer.alpha = 0;
+    } completion:^(BOOL finished) {
+        [UIView animateWithDuration:zoomDuration animations:^{
+            [self configureContainerCompact];
+        } completion:^(BOOL finished) {
+            self.vContainer.layer.anchorPoint = CGPointMake(0.5, 0.5);
+            CABasicAnimation* rotate =  [CABasicAnimation animationWithKeyPath: @"transform.rotation.z"];
+            rotate.removedOnCompletion = FALSE;
+            rotate.fillMode = kCAFillModeForwards;
+            [rotate setToValue: [NSNumber numberWithFloat: -M_PI / 2]];
+            rotate.repeatCount = 80;
+            rotate.duration = spinDuration/rotate.repeatCount;
+            rotate.cumulative = TRUE;
+            rotate.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseIn];
+            [self.vContainer.layer addAnimation:rotate forKey:@"ROTATE"];
+            [UIView animateWithDuration:spinDuration - fadeOutOffset * 2 delay:fadeOutOffset options:UIViewAnimationCurveEaseIn|UIViewAnimationOptionBeginFromCurrentState animations:^{
+                self.vContainer.alpha = 0.1;
+                self.vContainer.transform = CGAffineTransformMakeScale(2, 2);
+            } completion:^(BOOL finished) {
+                [self dismissViewControllerAnimated:YES completion:^{
+                    [self.vContainer.layer removeAllAnimations];
+                }];
+            }];
+        }];
+    }];
+}
 
+- (void)configureContainerFull{
+    CGFloat height = [self containerHeightForWidth:containerFullWidth];
+    self.vContainer.frame = CGRectMake((self.view.frame.size.width - containerFullWidth) / 2, containerFullTop, containerFullWidth, height);
+}
+
+- (void)configureContainerCompact{
+    CGFloat btnWidth = self.btnHot.frame.size.width;
+    CGFloat fullHeight = [self containerHeightForWidth:containerFullWidth];
+    CGFloat width = btnWidth * 2;
+    CGFloat height = [self containerHeightForWidth:width];
+    self.vContainer.frame = CGRectMake((self.view.frame.size.width - width) / 2, containerFullTop + (fullHeight - height) / 2, width, height);
+}
+
+- (CGFloat)containerHeightForWidth:(CGFloat)width{
+    CGFloat btnWidth = self.btnHot.frame.size.width;
+    return (width - btnWidth) / 2 * tan(M_PI / 3) + btnWidth + self.lblServer.frame.size.height;
 }
 
 - (void)stopAllFlash {
@@ -156,7 +212,7 @@
 }
 
 - (IBAction)hdmInfoPressed:(id)sender {
-
+    [[[DialogHDMInfo alloc] init] showInWindow:self.view.window];
 }
 
 - (void)showMsg:(NSString *)msg {

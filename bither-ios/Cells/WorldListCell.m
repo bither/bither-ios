@@ -1,18 +1,10 @@
-//
-//  WorldListCell.m
-//  bither-ios
-//
-//  Created by noname on 15/2/2.
-//  Copyright (c) 2015年 noname. All rights reserved.
-//
 
 #import "WorldListCell.h"
 
-#define Margin 3
+#define Margin 5
 
 @interface WorldListCell()
 
-@property (strong, nonatomic)UILabel* labIndex;
 @property (strong, nonatomic)UILabel* labWorld;
 
 @end
@@ -40,17 +32,16 @@
 
 
 -(void)initConfigure{
-    CGRect ivRect = CGRectMake(Margin, Margin, self.frame.size.width - Margin * 2, self.frame.size.height - Margin * 2);
-    self.labIndex = [[UILabel alloc]initWithFrame:ivRect];
-  
-    self.labWorld = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height)];
-    
-    [self addSubview:self.labIndex];
+    CGRect ivRect = CGRectMake(5, 15, self.frame.size.width , 20);
+
+    self.labWorld = [[UILabel alloc]initWithFrame:ivRect];
     [self addSubview:self.labWorld];
+    [self setBackgroundColor:[UIColor whiteColor]];
+
 }
 -(void)setWorld:(NSString *)world index:(NSInteger)index{
-    self.labWorld.text=world;
-    self.labIndex.text=[NSString stringWithFormat:@"%d.",index];
+    self.labWorld.text=[NSString stringWithFormat:@"%d.%@",index+1,world];
+
 }
 
 @end

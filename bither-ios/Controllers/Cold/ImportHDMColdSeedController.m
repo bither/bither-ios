@@ -5,6 +5,10 @@
 #import "KeyboardController.h"
 #import "UIViewController+PiShowBanner.h"
 #import "BTBIP39.h"
+#import "DialogProgress.h"
+#import "BTHDMKeychain.h"
+#import "ImportHDMCold.h"
+#import "DialogPassword.h"
 
 #define kTextFieldHorizontalMargin (10)
 
@@ -13,9 +17,10 @@
 #define kTextFieldFontSize (14)
 #define kTextFieldHeight (35)
 #define kTextFieldHorizontalMargin (10)
+#define WORD_COUNT 24
 
 
-@interface ImportHDMColdSeedController()<UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout,UITextFieldDelegate, KeyboardControllerDelegate>
+@interface ImportHDMColdSeedController()<UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout,UITextFieldDelegate, KeyboardControllerDelegate,DialogPasswordDelegate>
 
 @property (nonatomic, strong) UICollectionView *collectionView;
 @property (nonatomic, strong) NSMutableArray *worldListArray;
@@ -50,7 +55,7 @@
     UICollectionViewFlowLayout *layout = [UICollectionViewFlowLayout new];
     layout.sectionInset = UIEdgeInsetsMake(6, 4, 0, 4);
     layout.minimumInteritemSpacing = 0;
-    layout.minimumLineSpacing = 0;
+    layout.minimumLineSpacing = 10;
     self.collectionView = [[UICollectionView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height) collectionViewLayout:layout];
     self.collectionView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
     self.collectionView.backgroundColor = [UIColor clearColor];
@@ -61,9 +66,10 @@
 
     [self.collectionView registerClass:[WorldListCell class] forCellWithReuseIdentifier:@"WorldListCell"];
     
-    self.tfKey.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"" attributes:@{NSForegroundColorAttributeName: [UIColor colorWithWhite:1 alpha:0.5]}];
+    self.tfKey.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"hdm_import_word_list_empty_message" attributes:@{NSForegroundColorAttributeName: [UIColor colorWithWhite:1 alpha:0.5]}];
     [self configureTextField:self.tfKey];
     self.tfKey.returnKeyType = UIReturnKeyDone;
+    self.collectionView.alwaysBounceVertical = YES;
     self.kc = [[KeyboardController alloc]initWithDelegate:self];
 }
 
@@ -72,15 +78,22 @@
     if ([self.tfKey canBecomeFirstResponder]) {
         [self.tfKey becomeFirstResponder];
     }
+    NSArray * wordLsit=[[BTBIP39 sharedInstance] getWords];
+    for (int i =0; i<22; i++) {
+        [self.worldListArray addObject:[wordLsit objectAtIndex:i]];
+    }
 }
 
 -(void)keyboardFrameChanged:(CGRect)frame{
     CGRect toolBarFrame = self.inputView.frame;
     CGFloat totalHeight = frame.origin.y;
-    NSLog(@"totalHeight:%f",totalHeight);
-        NSLog(@"toolBarFrame:%f",toolBarFrame.size.height);
     CGFloat top = totalHeight - toolBarFrame.size.height;
     self.inputView.frame = CGRectMake(toolBarFrame.origin.x, top, toolBarFrame.size.width, toolBarFrame.size.height);
+    self.collectionView.frame = CGRectMake( self.collectionView.frame.origin.x,  self.collectionView.frame.origin.y,  self.collectionView.frame.size.width, top -  self.collectionView.frame.origin.y-self.topBar.frame.size.height);
+    if (self.worldListArray.count>3) {
+        [self.collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:self.worldListArray.count-1 inSection:0 ] atScrollPosition:UICollectionViewScrollPositionBottom animated:YES];
+    }
+
    
    
 }
@@ -116,12 +129,34 @@
     if ([[[BTBIP39 sharedInstance] getWords] containsObject:world]) {
         [self.worldListArray addObject:world];
         [self.collectionView reloadData];
+
         self.tfKey.text=@"";
+        if (self.worldListArray.count>3) {
+            [self.collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:self.worldListArray.count-1 inSection:0 ] atScrollPosition:UICollectionViewScrollPositionBottom animated:YES];
+        }
+        
     }else{
         [self showMsg:NSLocalizedString(@"hdm_import_word_list_wrong_word_warn", nil)];
     }
+    if (self.worldListArray.count== WORD_COUNT){
+        if ([self.tfKey isFirstResponder ]) {
+            [self.tfKey resignFirstResponder];
+        }
+        DialogPassword * dialogPassword= [[DialogPassword alloc] initWithDelegate:self];
+        [dialogPassword showInWindow:self.view.window];
+
+    }
 }
 
+-(void)onPasswordEntered:(NSString *)password {
+    DialogProgress *dialogProgrees=[[DialogProgress alloc] initWithMessage:NSLocalizedString(@"Please wait…", nil)];
+    __block ImportHDMColdSeedController * sslf=self;
+    
+    ImportHDMCold *importPrivateKey=[[ImportHDMCold alloc] initWithController:sslf content:nil worldList:sslf.worldListArray passwrod:password importHDSeedType:HDMColdPhrase];
+    [importPrivateKey importHDSeed];
+    [dialogProgrees dismiss];
+
+}
 
 -(void)showMsg:(NSString *)msg{
      [self showBannerWithMessage:msg belowView:nil];
@@ -156,7 +191,7 @@
     return cell;
 }
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath;{
-      return (CGSize){104, 104};
+      return (CGSize){100, 50};
 }
 
 @end

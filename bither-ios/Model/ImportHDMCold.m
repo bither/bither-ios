@@ -53,17 +53,25 @@
                 }
                 case  HDMColdPhrase: {
                     BTBIP39 *btbip39 = [BTBIP39 sharedInstance];
-                    NSData *mnemonicCodeSeed = [btbip39 toEntropy:[btbip39 toMnemonicWithArray:self.worldList]];
-                    BTHDMKeychain *keychain = [[BTHDMKeychain alloc] initWithMnemonicSeed:mnemonicCodeSeed password:self.passwrod andXRandom:NO];
-                    dispatch_async(dispatch_get_main_queue(), ^{
-                        if (keychain == nil) {
-                            [self showMsg:NSLocalizedString(@"Import failed.", nil)];
-                        } else {
-                            [KeyUtil setHDKeyChain:keychain];
-                            [self showMsg:NSLocalizedString(@"Import success.", nil)];
-                        }
-                        [self exit];
-                    });
+                    NSString * code=[btbip39 toMnemonicWithArray:self.worldList];
+                    NSData *mnemonicCodeSeed = [btbip39 toEntropy:code];
+                    if (mnemonicCodeSeed==nil) {
+                        dispatch_async(dispatch_get_main_queue(), ^{
+                            [self showMsg:NSLocalizedString(@"import_hdm_cold_seed_format_error", nil)];
+                            [self exit];
+                        });
+                    }else{
+                        BTHDMKeychain *keychain = [[BTHDMKeychain alloc] initWithMnemonicSeed:mnemonicCodeSeed password:self.passwrod andXRandom:NO];
+                        dispatch_async(dispatch_get_main_queue(), ^{
+                            if (keychain == nil) {
+                                [self showMsg:NSLocalizedString(@"Import failed.", nil)];
+                            } else {
+                                [KeyUtil setHDKeyChain:keychain];
+                                [self showMsg:NSLocalizedString(@"Import success.", nil)];
+                            }
+                            [self exit];
+                        });
+                    }
                     break;
                 }
             }
