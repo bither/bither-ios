@@ -13,6 +13,9 @@
 #import "NSString+Base58.h"
 #import "BTBIP32Key.h"
 #import "HDMApi.h"
+#import "AFHTTPRequestOperationManager.h"
+#import "HDMApi.h"
+#import "NSData+Hash.h"
 
 @interface HDMApiTest : XCTestCase
 
@@ -37,26 +40,23 @@
 }
 
 - (void)testNormal {
-    NSData *hdmHot = [@"0000000000000000000000000000000000000000000000000000000000000001" hexToData];
-    NSData *hdmCold = [@"0000000000000000000000000000000000000000000000000000000000000002" hexToData];
-    BTBIP32Key *keyHot = [[BTBIP32Key alloc] initWithSeed:hdmHot];
-    BTBIP32Key *keyCold = [[BTBIP32Key alloc] initWithSeed:hdmCold];
-    BTBIP32Key *firstKeyCold = [self getPrivKey:0 andMasterKey:keyCold];
-    BTBIP32Key *firstKeyHot = [self getPrivKey:0 andMasterKey:keyHot];
-    BTHDMBid *hdmBid = [[BTHDMBid alloc] initWithHDMBid:[firstKeyCold.key address]];
-    NSError *error = nil;
-    NSString *pre = [hdmBid getPreSignHashAndError:&error];
-    NSString *signature = [[firstKeyCold.key signHash:[pre hexToData]] base64EncodedStringWithOptions:0];
-    [hdmBid changeBidPasswordWithSignature:signature andPassword:[NSString hexWithData:hdmBid.password] andHotAddress:[firstKeyHot.key address] andError:&error];
-}
+    if (YES)
+        return;
 
-- (void)testApi {
-    [[HDMApi instance] getHDMPasswordRandomWithHDMBid:@"1" callback:^(id response) {
-        NSLog(@"%@", response);
-    } andErrorCallBack:^(NSOperation *errorOp, NSError *error) {
-        NSLog(@"%@", error);
-    }];
-    [NSThread sleepForTimeInterval:100];
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        // change password
+        NSData *hdmHot = [@"0000000000000000000000000000000000000000000000000000000000000001" hexToData];
+        NSData *hdmCold = [@"0000000000000000000000000000000000000000000000000000000000000002" hexToData];
+        BTBIP32Key *keyHot = [[BTBIP32Key alloc] initWithSeed:hdmHot];
+        BTBIP32Key *keyCold = [[BTBIP32Key alloc] initWithSeed:hdmCold];
+        BTBIP32Key *firstKeyCold = [self getPrivKey:0 andMasterKey:keyCold];
+        BTBIP32Key *firstKeyHot = [self getPrivKey:0 andMasterKey:keyHot];
+        BTHDMBid *hdmBid = [[BTHDMBid alloc] initWithHDMBid:[firstKeyCold.key address]];
+        NSError *error = nil;
+        NSString *pre = [hdmBid getPreSignHashAndError:&error];
+        NSString *signature = [[firstKeyCold.key signHash:[pre hexToData]] base64EncodedStringWithOptions:0];
+        [hdmBid changeBidPasswordWithSignature:signature andPassword:[NSString hexWithData:hdmBid.password] andHotAddress:[firstKeyHot.key address] andError:&error];
+    });
 }
 
 - (BTBIP32Key *)getPrivKey:(int)index andMasterKey:(BTBIP32Key *)master; {
