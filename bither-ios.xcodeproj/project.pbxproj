@@ -238,8 +238,10 @@
 		DAAF4EB21A7F7F6700933296 /* NSError+HDMHttpErrorMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = DAAF4EB01A7F7F6700933296 /* NSError+HDMHttpErrorMessage.m */; };
 		DAB2C8731A2038930011EE2F /* KeychainSetting.m in Sources */ = {isa = PBXBuildFile; fileRef = DAB2C8721A2038930011EE2F /* KeychainSetting.m */; };
 		DAB2C8761A206F080011EE2F /* KeychainBackupUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = DAB2C8751A206F080011EE2F /* KeychainBackupUtil.m */; };
+		DC0448DAEF65BD227897D240 /* HDMKeychainRecoverUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = DC0CC84409CD956F1FA008BF /* HDMKeychainRecoverUtil.m */; };
 		DC06422DA44A6DA77DCFBB2D /* ImportHDMCold.m in Sources */ = {isa = PBXBuildFile; fileRef = DC0A375AE83A8BA37F3FA65F /* ImportHDMCold.m */; };
 		DC075758EE0F48911D8D4CE8 /* ImportHDMColdSeedController.m in Sources */ = {isa = PBXBuildFile; fileRef = DC07A672CCAD76ED66B72B91 /* ImportHDMColdSeedController.m */; };
+		DC0C00F6FC8AA88E26580598 /* HDMRecoverSetting.m in Sources */ = {isa = PBXBuildFile; fileRef = DC0769FAB5B4727E089E23CC /* HDMRecoverSetting.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -694,8 +696,12 @@
 		DAB2C8721A2038930011EE2F /* KeychainSetting.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KeychainSetting.m; sourceTree = "<group>"; };
 		DAB2C8741A206F080011EE2F /* KeychainBackupUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeychainBackupUtil.h; sourceTree = "<group>"; };
 		DAB2C8751A206F080011EE2F /* KeychainBackupUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KeychainBackupUtil.m; sourceTree = "<group>"; };
+		DC01B0277E3ECFEB18F87712 /* HDMRecoverSetting.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HDMRecoverSetting.h; sourceTree = "<group>"; };
+		DC03155DE24560F766E286C4 /* HDMKeychainRecoverUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HDMKeychainRecoverUtil.h; sourceTree = "<group>"; };
+		DC0769FAB5B4727E089E23CC /* HDMRecoverSetting.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HDMRecoverSetting.m; sourceTree = "<group>"; };
 		DC07A672CCAD76ED66B72B91 /* ImportHDMColdSeedController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImportHDMColdSeedController.m; sourceTree = "<group>"; };
 		DC0A375AE83A8BA37F3FA65F /* ImportHDMCold.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImportHDMCold.m; sourceTree = "<group>"; };
+		DC0CC84409CD956F1FA008BF /* HDMKeychainRecoverUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HDMKeychainRecoverUtil.m; sourceTree = "<group>"; };
 		DC0D6773769B40A704B784B4 /* ImportHDMCold.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImportHDMCold.h; sourceTree = "<group>"; };
 		DC0E3B0A73BF05166C9733A1 /* ImportHDMColdSeedController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImportHDMColdSeedController.h; sourceTree = "<group>"; };
 		E7552F109D77434AC1A15A24 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
@@ -902,6 +908,8 @@
 				D61D0EFD9890E54E56C5A21E /* HDMHotAddUtil.m */,
 				D61D07CCE58EB1B7FCA04677 /* PasswordGetter.h */,
 				D61D0DB47AB1A1EA42112C56 /* PasswordGetter.m */,
+				DC0CC84409CD956F1FA008BF /* HDMKeychainRecoverUtil.m */,
+				DC03155DE24560F766E286C4 /* HDMKeychainRecoverUtil.h */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -1382,6 +1390,8 @@
 				DAB2C8721A2038930011EE2F /* KeychainSetting.m */,
 				DC0A375AE83A8BA37F3FA65F /* ImportHDMCold.m */,
 				DC0D6773769B40A704B784B4 /* ImportHDMCold.h */,
+				DC0769FAB5B4727E089E23CC /* HDMRecoverSetting.m */,
+				DC01B0277E3ECFEB18F87712 /* HDMRecoverSetting.h */,
 			);
 			name = Setting;
 			sourceTree = "<group>";
@@ -1769,6 +1779,8 @@
 				1BC27499EE579986A1439709 /* DialogHDMInfo.m in Sources */,
 				D61D0E640B2A2C7E6874FDEA /* HDMApi.m in Sources */,
 				1BC270F1C2BEA60E0B3384AB /* DialogHDMAddressOptions.m in Sources */,
+				DC0C00F6FC8AA88E26580598 /* HDMRecoverSetting.m in Sources */,
+				DC0448DAEF65BD227897D240 /* HDMKeychainRecoverUtil.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
