@@ -133,6 +133,10 @@
 /* Class = "IBUILabel"; text = "Can not find private key"; ObjectID = "eEx-7U-SVT"; */
 "eEx-7U-SVT.text" = "没有找到对应的私钥";
 
+/* Class = "IBUILabel"; text = "Import HDM Phrase"; ObjectID = "Qwn-YF-uwn"; */
+"Qwn-YF-uwn.text" = "导入 HDM 密语";
+
+
 /* Class = "IBUILabel"; text = "Pay to"; ObjectID = "g3O-Ch-Qm9"; */
 "g3O-Ch-Qm9.text" = "发送给";
 
@@ -213,6 +217,9 @@
 
 /* Class = "IBUILabel"; text = "value"; ObjectID = "zIR-6H-nG4"; */
 "zIR-6H-nG4.text" = "value";
+
+/* Class = "IBUIButton"; normalTitle = "Next Word"; ObjectID = "ifX-vq-zRq"; */
+"ifX-vq-zRq.normalTitle" = "下一单词";
 
 /* Class = "IBUILabel"; text = "Label"; ObjectID = "zLo-PY-kep"; */
 "zLo-PY-kep.text" = "Label";

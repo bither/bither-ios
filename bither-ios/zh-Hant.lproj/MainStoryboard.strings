@@ -134,6 +134,10 @@
 /* Class = "IBUILabel"; text = "Can not find private key"; ObjectID = "eEx-7U-SVT"; */
 "eEx-7U-SVT.text" = "沒有找到對應的私鑰";
 
+
+/* Class = "IBUILabel"; text = "Import HDM Phrase"; ObjectID = "Qwn-YF-uwn"; */
+"Qwn-YF-uwn.text" = "導入 HDM 密語";
+
 /* Class = "IBUILabel"; text = "Pay to"; ObjectID = "g3O-Ch-Qm9"; */
 "g3O-Ch-Qm9.text" = "發送給";
 
@@ -214,6 +218,10 @@
 
 /* Class = "IBUILabel"; text = "Bither Cold: Offline & Secure."; ObjectID = "yu4-YT-Y6b"; */
 "yu4-YT-Y6b.text" = "冷錢包 : 離線, 安全!";
+
+
+/* Class = "IBUIButton"; normalTitle = "Next Word"; ObjectID = "ifX-vq-zRq"; */
+"ifX-vq-zRq.normalTitle" = "下壹單詞";
 
 /* Class = "IBUILabel"; text = "3568.34"; ObjectID = "yz4-Gr-HYw"; */
 "yz4-Gr-HYw.text" = "3568.34";

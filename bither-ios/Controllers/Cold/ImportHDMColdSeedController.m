@@ -9,6 +9,7 @@
 #import "BTHDMKeychain.h"
 #import "ImportHDMCold.h"
 #import "DialogPassword.h"
+#import "DialogOperationWorld.h"
 
 #define kTextFieldHorizontalMargin (10)
 
@@ -20,7 +21,8 @@
 #define WORD_COUNT 24
 
 
-@interface ImportHDMColdSeedController()<UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout,UITextFieldDelegate, KeyboardControllerDelegate,DialogPasswordDelegate>
+@interface ImportHDMColdSeedController()<UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout
+        ,UITextFieldDelegate, KeyboardControllerDelegate,DialogPasswordDelegate,DialogOperationDelegate>
 
 @property (nonatomic, strong) UICollectionView *collectionView;
 @property (nonatomic, strong) NSMutableArray *worldListArray;
@@ -78,10 +80,7 @@
     if ([self.tfKey canBecomeFirstResponder]) {
         [self.tfKey becomeFirstResponder];
     }
-    NSArray * wordLsit=[[BTBIP39 sharedInstance] getWords];
-    for (int i =0; i<22; i++) {
-        [self.worldListArray addObject:[wordLsit objectAtIndex:i]];
-    }
+    
 }
 
 -(void)keyboardFrameChanged:(CGRect)frame{
@@ -188,10 +187,32 @@
     WorldListCell *cell = [cv dequeueReusableCellWithReuseIdentifier:@"WorldListCell" forIndexPath:indexPath];
     NSString *world=[self.worldListArray objectAtIndex:indexPath.row];
     [cell setWorld:world index:indexPath.row];
+    cell.delegate=self;
     return cell;
 }
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath;{
       return (CGSize){100, 50};
+}
+
+-(void)replaceWorld:(NSString *)newWorld index:(int)index {
+    if (index<=self.worldListArray.count-1){
+        [self.worldListArray replaceObjectAtIndex:index withObject:newWorld];
+    }
+    [self.collectionView reloadData];
+
+}
+
+-(void)deleteWorld:(NSString *)world index:(int)index {
+    if(index<=self.worldListArray.count-1){
+        [self.worldListArray removeObjectAtIndex:index];
+    }
+    [self.collectionView reloadData];
+
+}
+-(void)beginOperation{
+    if ([self.tfKey isFirstResponder]) {
+        [self.tfKey resignFirstResponder];
+    }
 }
 
 @end
