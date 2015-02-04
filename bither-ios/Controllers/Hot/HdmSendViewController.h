@@ -1,6 +1,6 @@
 //
-//  BTHDMBid+Api.h
-//  bitheri
+//  SendViewController.h
+//  bither-ios
 //
 //  Copyright 2014 http://Bither.net
 //
@@ -15,16 +15,16 @@
 //  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 //  See the License for the specific language governing permissions and
 //  limitations under the License.
-#import <Foundation/Foundation.h>
-#import "BTHDMBid.h"
-#import "BitherSetting.h"
+//
+//  Created by songchenwen on 15/2/4.
+//
 
-@interface BTHDMBid (Api)
+#import <UIKit/UIKit.h>
+#import "SendViewController.h"
 
-- (NSString *)getPreSignHashAndError:(NSError **)err;
-- (void)changeBidPasswordWithSignature:(NSString *)signature andPassword:(NSString *)password andHotAddress:(NSString *)hotAddress andError:(NSError **)err;
-- (NSArray *)recoverHDMWithSignature:(NSString *)signature andPassword:(NSString *)password andError:(NSError **)err;
-
--(void)createHDMAddress:(NSArray *)pubsList andPassword:(NSString *)password  andError:(ErrorBlock)errorblock;
-
+@interface HdmSendViewController : UIViewController
+@property BTHDMAddress *address;
+@property NSString* toAddress;
+@property uint64_t amount;
+@property (weak) NSObject<SendDelegate> *sendDelegate;
 @end

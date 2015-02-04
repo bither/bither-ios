@@ -28,6 +28,7 @@
 #import "UserDefaultsUtil.h"
 #import "UnsignedTransactionViewController.h"
 #import "DialogBalanceDetail.h"
+#import "HdmSendViewController.h"
 
 #define kAddressGroupSize (4)
 #define kAddressLineSize (12)
@@ -131,7 +132,10 @@
 
 - (IBAction)sendPressed:(id)sender {
     if(self.address.isHDM){
-        //TODO: hdm send view controller
+        HdmSendViewController *send = [self.getUIViewController.storyboard instantiateViewControllerWithIdentifier:@"HdmSend"];
+        send.address = (BTHDMAddress *)self.address;
+        send.sendDelegate = self;
+        [self.getUIViewController.navigationController pushViewController:send animated:YES];
     }else if(self.address.hasPrivKey){
         SendViewController* send =[self.getUIViewController.storyboard instantiateViewControllerWithIdentifier:@"Send"];
         send.address = self.address;

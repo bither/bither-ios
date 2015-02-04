@@ -55,14 +55,13 @@
     return result;
 }
 
-- (void)changeBidPasswordWithSignature:(NSString *)signature andPassword:(NSString *)password andError:(NSError **)err; {
+- (void)changeBidPasswordWithSignature:(NSString *)signature andPassword:(NSString *)password andHotAddress:(NSString *)hotAddress andError:(NSError **)err; {
     NSString *message = [NSString stringWithFormat:@"bitid://hdm.bither.net/%@/password/%@/%ld", self.address, [NSString hexWithData:self.password], self.serviceRandom];
     NSData *d = [[BTUtils formatMessageForSigning:message] SHA256_2];
     __block NSCondition *condition = [NSCondition new];
-    if ([self.address isEqualToString:[[BTKey signedMessageToKey:message andSignatureBase64:signature] address]]) {
+    if (![self.address isEqualToString:[[BTKey signedMessageToKey:message andSignatureBase64:signature] address]]) {
         //
     }
-    NSString *hotAddress = [BTAddressManager instance].hdmKeychain.firstAddressFromDb;
     [[HDMApi instance] changeHDMPasswordWithHDMBid:self.address andPassword:[NSString hexWithData:self.password] andSignature:signature andHotAddress:hotAddress callback:^{
         [condition lock];
         [condition signal];

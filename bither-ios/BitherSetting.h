@@ -155,4 +155,6 @@ typedef enum {
 + (NSString *)getTransactionFeeMode:(TransactionFeeMode)transactionFee;
 + (UIColor *)getMarketColor:(MarketType)marketType;
 + (NSString *)getKeychainMode:(KeychainMode) keychainMode;
++ (BOOL)isUnitTest;
++ (void)setIsUnitTest:(BOOL)isUnitTest;
 @end

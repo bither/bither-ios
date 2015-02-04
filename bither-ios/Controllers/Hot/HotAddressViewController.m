@@ -123,7 +123,7 @@ typedef enum {
             [cell setAddress:[_hdms objectAtIndex:indexPath.row]];
             break;
     }
-   // [cell setAddress:[_watchOnlys objectAtIndex:indexPath.row]];
+    cell.viewController = self;
     return cell;
 }
 

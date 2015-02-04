@@ -25,6 +25,7 @@
 #import "KeyUtil.h"
 #import "TransactionsUtil.h"
 #import "BTQRCodeUtil.h"
+#import "StringUtil.h"
 
 @interface HotAddressAddWatchOnlyViewController ()<ScanQrCodeDelegate>
 
@@ -62,7 +63,11 @@
                 });
             }];
         }else{
-            [self showMsg:NSLocalizedString(@"Monitor Bither Cold failed.", nil)];
+            if(result.isValidBitcoinAddress || [StringUtil isValidBitcoinBIP21Address:result]){
+                [self showMsg:NSLocalizedString(@"add_address_watch_only_scanned_address_warning", nil)];
+            }else{
+                [self showMsg:NSLocalizedString(@"Monitor Bither Cold failed.", nil)];
+            }
         }
     }];
 }
