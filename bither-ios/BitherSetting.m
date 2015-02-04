@@ -20,6 +20,8 @@
 
 #import "BitherSetting.h"
 
+static BOOL _isUnitTest = NO;
+
 @implementation BitherSetting
 
 + (NSString *)getMarketName:(MarketType)marketType {
@@ -204,5 +206,11 @@
     }
 }
 
++ (BOOL)isUnitTest; {
+    return _isUnitTest;
+}
 
++ (void)setIsUnitTest:(BOOL)isUnitTest; {
+    _isUnitTest = isUnitTest;
+}
 @end

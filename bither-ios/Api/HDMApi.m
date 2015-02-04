@@ -43,7 +43,12 @@ static HDMApi *hdmApi;
     manager.responseSerializer = [AFHTTPResponseSerializer serializer];
     manager.securityPolicy = [AFSecurityPolicy policyWithPinningMode:AFSSLPinningModeCertificate];
     manager.securityPolicy.allowInvalidCertificates = YES;
-    manager.securityPolicy.pinnedCertificates = @[[NSData dataWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"hdm.bither.net" ofType:@"cer"]]];
+    if (![BitherSetting isUnitTest]) {
+        manager.securityPolicy.pinnedCertificates = @[[NSData dataWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"hdm.bither.net" ofType:@"cer"]]];
+    } else {
+        manager.securityPolicy.pinnedCertificates = @[[NSData dataWithContentsOfFile:[[NSBundle bundleForClass:[self class]] pathForResource:@"hdm.bither.net" ofType:@"cer"]]];
+    }
+
 
     return self;
 }

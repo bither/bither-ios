@@ -22,7 +22,7 @@
 @interface BTHDMBid (Api)
 
 - (NSString *)getPreSignHashAndError:(NSError **)err;
-- (void)changeBidPasswordWithSignature:(NSString *)signature andPassword:(NSString *)password andError:(NSError **)err;
+- (void)changeBidPasswordWithSignature:(NSString *)signature andPassword:(NSString *)password andHotAddress:(NSString *)hotAddress andError:(NSError **)err;
 - (NSArray *)recoverHDMWithSignature:(NSString *)signature andPassword:(NSString *)password andError:(NSError **)err;
 
 -(void)createHDMAddress:(NSArray *)pubsList andPassword:(NSString *)password  andError:(ErrorBlock)errorblock;

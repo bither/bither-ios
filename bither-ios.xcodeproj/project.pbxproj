@@ -241,6 +241,7 @@
 		DAB2C8731A2038930011EE2F /* KeychainSetting.m in Sources */ = {isa = PBXBuildFile; fileRef = DAB2C8721A2038930011EE2F /* KeychainSetting.m */; };
 		DAB2C8761A206F080011EE2F /* KeychainBackupUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = DAB2C8751A206F080011EE2F /* KeychainBackupUtil.m */; };
 		DAD0FFF51A81D08D008AEAA2 /* HDMApiTest.m in Sources */ = {isa = PBXBuildFile; fileRef = DAD0FFF41A81D08D008AEAA2 /* HDMApiTest.m */; };
+		DAD0FFF61A81D41B008AEAA2 /* hdm.bither.net.cer in Resources */ = {isa = PBXBuildFile; fileRef = D61D0299B4CDCCFC6D0BA161 /* hdm.bither.net.cer */; };
 		DC06422DA44A6DA77DCFBB2D /* ImportHDMCold.m in Sources */ = {isa = PBXBuildFile; fileRef = DC0A375AE83A8BA37F3FA65F /* ImportHDMCold.m */; };
 		DC075758EE0F48911D8D4CE8 /* ImportHDMColdSeedController.m in Sources */ = {isa = PBXBuildFile; fileRef = DC07A672CCAD76ED66B72B91 /* ImportHDMColdSeedController.m */; };
 /* End PBXBuildFile section */
@@ -1527,6 +1528,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DAD0FFF61A81D41B008AEAA2 /* hdm.bither.net.cer in Resources */,
 				42D9B788193D6B5B00C85B89 /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
