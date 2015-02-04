@@ -159,7 +159,9 @@
 -(void)setAddress:(BTAddress *)address{
     _address = address;
     self.lblAddress.text = [StringUtil shortenAddress:address.address];
-    if(address.hasPrivKey){
+    if(address.isHDM){
+        self.ivType.image = [UIImage imageNamed:@"address_type_hdm"];
+    }else if(address.hasPrivKey){
         self.ivType.image = [UIImage imageNamed:@"address_type_private"];
     }else{
         self.ivType.image = [UIImage imageNamed:@"address_type_watchonly"];
