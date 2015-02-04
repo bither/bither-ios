@@ -215,10 +215,6 @@
     }];
 }
 
-
-
-
-
 -(void)showMsg:(NSString*)msg{
     if(self.controller && [self.controller respondsToSelector:@selector(showMsg:)]){
         [self.controller performSelector:@selector(showMsg:) withObject:msg];

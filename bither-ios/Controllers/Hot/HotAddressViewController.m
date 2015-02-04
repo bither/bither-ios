@@ -123,7 +123,7 @@ typedef enum {
             [cell setAddress:[_hdms objectAtIndex:indexPath.row]];
             break;
     }
-    [cell setAddress:[_watchOnlys objectAtIndex:indexPath.row]];
+   // [cell setAddress:[_watchOnlys objectAtIndex:indexPath.row]];
     return cell;
 }
 

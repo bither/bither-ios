@@ -73,7 +73,7 @@ static StatusBarNotificationWindow* notificationWindow;
     }
     [self.window makeKeyAndVisible];
     
-    NSLog(@"h %d",[[BTBlockChain instance] lastBlock].blockNo);
+   // NSLog(@"h %d",[[BTBlockChain instance] lastBlock].blockNo);
     [self callInHot:^{
         [[PeerUtil instance] startPeer];
         [[BitherTime instance] start];
