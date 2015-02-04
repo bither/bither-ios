@@ -26,8 +26,10 @@
 		0AD674971A7B4BDA007967DB /* ColdAddressListHDMCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AD674961A7B4BDA007967DB /* ColdAddressListHDMCell.m */; };
 		0AD6749C1A7B6229007967DB /* DialogWithActions.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AD6749B1A7B6229007967DB /* DialogWithActions.m */; };
 		0AD6749F1A7B9108007967DB /* DialogHDMSeedWordList.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AD6749E1A7B9108007967DB /* DialogHDMSeedWordList.m */; };
+		1BC270F1C2BEA60E0B3384AB /* DialogHDMAddressOptions.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BC27D1407586D2FCB8F01AC /* DialogHDMAddressOptions.m */; };
 		1BC27499EE579986A1439709 /* DialogHDMInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BC27E22C25A90DF1E5DA1DC /* DialogHDMInfo.m */; };
 		1BC275F3608609D0E72BFBE7 /* HDMTriangleBgView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BC27C837F7819A54B0A2E37 /* HDMTriangleBgView.m */; };
+		1BC2778BC574DA2F816BC77A /* AddHDMAddressViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BC27FD66F3376A2C68612DD /* AddHDMAddressViewController.m */; };
 		4217A3731951235D00063746 /* Depth.m in Sources */ = {isa = PBXBuildFile; fileRef = 4217A3721951235D00063746 /* Depth.m */; };
 		4217A39019512DC000063746 /* TransactionsUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 4217A38F19512DC000063746 /* TransactionsUtil.m */; };
 		421B037C19495315003A45F1 /* TabButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 421B037B19495315003A45F1 /* TabButton.m */; };
@@ -95,6 +97,8 @@
 		AC026C9019EE5FF500BC0152 /* libPods-Reachability.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AC026C8619EE5FF500BC0152 /* libPods-Reachability.a */; };
 		AC026C9119EE5FF500BC0152 /* libPods-RegexKitLite.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AC026C8719EE5FF500BC0152 /* libPods-RegexKitLite.a */; };
 		AC026C9319EE5FF500BC0152 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AC026C8919EE5FF500BC0152 /* libPods.a */; };
+		AC1454A51A80D04D00E851B4 /* DialogOperationWorld.m in Sources */ = {isa = PBXBuildFile; fileRef = AC1454A41A80D04D00E851B4 /* DialogOperationWorld.m */; };
+		AC1454A81A80D30E00E851B4 /* DialogReplaceWorld.m in Sources */ = {isa = PBXBuildFile; fileRef = AC1454A71A80D30E00E851B4 /* DialogReplaceWorld.m */; };
 		AC1715871969213800337AB5 /* DialogAddressOptions.m in Sources */ = {isa = PBXBuildFile; fileRef = AC1715861969213800337AB5 /* DialogAddressOptions.m */; };
 		AC17158A1969249B00337AB5 /* NSString+Size.m in Sources */ = {isa = PBXBuildFile; fileRef = AC1715891969249B00337AB5 /* NSString+Size.m */; };
 		AC17158D1969359900337AB5 /* DialogPrivateKeyEncryptedQrCode.m in Sources */ = {isa = PBXBuildFile; fileRef = AC17158C1969359900337AB5 /* DialogPrivateKeyEncryptedQrCode.m */; };
@@ -257,6 +261,7 @@
 		0A259E271A47FDF600D7F707 /* DialogSelectChangeAddress.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DialogSelectChangeAddress.m; sourceTree = "<group>"; };
 		0A4206281A494F1000562100 /* SignMessageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignMessageViewController.h; sourceTree = "<group>"; };
 		0A4206291A494F1000562100 /* SignMessageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignMessageViewController.m; sourceTree = "<group>"; };
+		0A43F43D1A81B925008171DB /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/MainStoryboard.strings; sourceTree = "<group>"; };
 		0A446C131A441393000CD25A /* DialogNetworkMonitorOption.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DialogNetworkMonitorOption.h; sourceTree = "<group>"; };
 		0A446C141A441393000CD25A /* DialogNetworkMonitorOption.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DialogNetworkMonitorOption.m; sourceTree = "<group>"; };
 		0A515F761A36A2C0008292AF /* RawDataView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RawDataView.h; sourceTree = "<group>"; };
@@ -287,12 +292,15 @@
 		0AD6749B1A7B6229007967DB /* DialogWithActions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DialogWithActions.m; sourceTree = "<group>"; };
 		0AD6749D1A7B9108007967DB /* DialogHDMSeedWordList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DialogHDMSeedWordList.h; sourceTree = "<group>"; };
 		0AD6749E1A7B9108007967DB /* DialogHDMSeedWordList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DialogHDMSeedWordList.m; sourceTree = "<group>"; };
-		0AEE360F1A806A34007293DE /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/MainStoryboard.strings; sourceTree = "<group>"; };
 		0FED7A4051DB45218112FAC0 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		1BC272BC4509E4F880EAC6F9 /* AddHDMAddressViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddHDMAddressViewController.h; sourceTree = "<group>"; };
+		1BC275D3A11FAF859823CF7E /* DialogHDMAddressOptions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DialogHDMAddressOptions.h; sourceTree = "<group>"; };
 		1BC279BF6C2A1E9DF4D86908 /* HDMTriangleBgView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HDMTriangleBgView.h; sourceTree = "<group>"; };
 		1BC27C837F7819A54B0A2E37 /* HDMTriangleBgView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HDMTriangleBgView.m; sourceTree = "<group>"; };
 		1BC27C882946AB67434912E5 /* DialogHDMInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DialogHDMInfo.h; sourceTree = "<group>"; };
+		1BC27D1407586D2FCB8F01AC /* DialogHDMAddressOptions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DialogHDMAddressOptions.m; sourceTree = "<group>"; };
 		1BC27E22C25A90DF1E5DA1DC /* DialogHDMInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DialogHDMInfo.m; sourceTree = "<group>"; };
+		1BC27FD66F3376A2C68612DD /* AddHDMAddressViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddHDMAddressViewController.m; sourceTree = "<group>"; };
 		4217A3711951235D00063746 /* Depth.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Depth.h; sourceTree = "<group>"; };
 		4217A3721951235D00063746 /* Depth.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Depth.m; sourceTree = "<group>"; };
 		4217A38E19512DC000063746 /* TransactionsUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TransactionsUtil.h; sourceTree = "<group>"; };
@@ -412,6 +420,11 @@
 		AC026C8619EE5FF500BC0152 /* libPods-Reachability.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libPods-Reachability.a"; path = "Pods/build/Debug-iphoneos/libPods-Reachability.a"; sourceTree = "<group>"; };
 		AC026C8719EE5FF500BC0152 /* libPods-RegexKitLite.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libPods-RegexKitLite.a"; path = "Pods/build/Debug-iphoneos/libPods-RegexKitLite.a"; sourceTree = "<group>"; };
 		AC026C8919EE5FF500BC0152 /* libPods.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libPods.a; path = "Pods/build/Debug-iphoneos/libPods.a"; sourceTree = "<group>"; };
+		AC1454A21A80C34F00E851B4 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/MainStoryboard.strings; sourceTree = "<group>"; };
+		AC1454A31A80D04D00E851B4 /* DialogOperationWorld.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DialogOperationWorld.h; sourceTree = "<group>"; };
+		AC1454A41A80D04D00E851B4 /* DialogOperationWorld.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DialogOperationWorld.m; sourceTree = "<group>"; };
+		AC1454A61A80D30E00E851B4 /* DialogReplaceWorld.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DialogReplaceWorld.h; sourceTree = "<group>"; };
+		AC1454A71A80D30E00E851B4 /* DialogReplaceWorld.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DialogReplaceWorld.m; sourceTree = "<group>"; };
 		AC1715851969213800337AB5 /* DialogAddressOptions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DialogAddressOptions.h; sourceTree = "<group>"; };
 		AC1715861969213800337AB5 /* DialogAddressOptions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DialogAddressOptions.m; sourceTree = "<group>"; };
 		AC1715881969249B00337AB5 /* NSString+Size.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Size.h"; sourceTree = "<group>"; };
@@ -809,6 +822,8 @@
 				ACA11DC919F64D560087D39C /* RCheckViewController.m */,
 				0AB8BC981A7F3194003C07D8 /* HotAddressAddHDMViewController.h */,
 				0AB8BC991A7F3194003C07D8 /* HotAddressAddHDMViewController.m */,
+				1BC27FD66F3376A2C68612DD /* AddHDMAddressViewController.m */,
+				1BC272BC4509E4F880EAC6F9 /* AddHDMAddressViewController.h */,
 			);
 			path = Hot;
 			sourceTree = "<group>";
@@ -1226,6 +1241,10 @@
 		ACDDDC2519480ECE0008A79D /* Dialog */ = {
 			isa = PBXGroup;
 			children = (
+				AC1454A61A80D30E00E851B4 /* DialogReplaceWorld.h */,
+				AC1454A71A80D30E00E851B4 /* DialogReplaceWorld.m */,
+				AC1454A31A80D04D00E851B4 /* DialogOperationWorld.h */,
+				AC1454A41A80D04D00E851B4 /* DialogOperationWorld.m */,
 				0AB8BCA91A7F6DEE003C07D8 /* DialogHDMServerUnsignedQRCode.h */,
 				0AB8BCAA1A7F6DEE003C07D8 /* DialogHDMServerUnsignedQRCode.m */,
 				ACF02FE919D90899001AB701 /* DialogSwitchQRCode.h */,
@@ -1295,6 +1314,8 @@
 				0AB8BCA41A7F445D003C07D8 /* DialogHDMKeychainAddHot.m */,
 				1BC27E22C25A90DF1E5DA1DC /* DialogHDMInfo.m */,
 				1BC27C882946AB67434912E5 /* DialogHDMInfo.h */,
+				1BC27D1407586D2FCB8F01AC /* DialogHDMAddressOptions.m */,
+				1BC275D3A11FAF859823CF7E /* DialogHDMAddressOptions.h */,
 			);
 			path = Dialog;
 			sourceTree = "<group>";
@@ -1569,6 +1590,7 @@
 				42D9B775193D6B5B00C85B89 /* AppDelegate.m in Sources */,
 				421B037C19495315003A45F1 /* TabButton.m in Sources */,
 				AC5A916119ECDB5D00FFDB13 /* UploadAndDowloadFileFactory.m in Sources */,
+				AC1454A51A80D04D00E851B4 /* DialogOperationWorld.m in Sources */,
 				ACE3765F1A231C9200F66321 /* DialogKeychainBackupDiff.m in Sources */,
 				0AB8BCA51A7F445D003C07D8 /* DialogHDMKeychainAddHot.m in Sources */,
 				ACB9B9C3195AD1CC00019216 /* AddressDetailViewController.m in Sources */,
@@ -1715,6 +1737,7 @@
 				4254083D19469C9A007AF99C /* BitherEngine.m in Sources */,
 				ACEE7D2719D3F9F500932B39 /* QRCodeThemeUtil.m in Sources */,
 				4217A39019512DC000063746 /* TransactionsUtil.m in Sources */,
+				AC1454A81A80D30E00E851B4 /* DialogReplaceWorld.m in Sources */,
 				425408681946BB7A007AF99C /* BlockUtil.m in Sources */,
 				DA641E8D196E7BC20095DF42 /* GCCrashReportSink.m in Sources */,
 				ACEE7D3C19D4020E00932B39 /* ColdWalletCloneSetting.m in Sources */,
@@ -1755,6 +1778,8 @@
 				1BC275F3608609D0E72BFBE7 /* HDMTriangleBgView.m in Sources */,
 				1BC27499EE579986A1439709 /* DialogHDMInfo.m in Sources */,
 				D61D0E640B2A2C7E6874FDEA /* HDMApi.m in Sources */,
+				1BC270F1C2BEA60E0B3384AB /* DialogHDMAddressOptions.m in Sources */,
+				1BC2778BC574DA2F816BC77A /* AddHDMAddressViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1818,7 +1843,7 @@
 				42EFB5511949C52100376888 /* Base */,
 				AC229A7A196A466400A7FB5E /* zh-Hans */,
 				AC229A7B196A466900A7FB5E /* zh-Hant */,
-				0AEE360F1A806A34007293DE /* en */,
+				AC1454A21A80C34F00E851B4 /* en */,
 			);
 			name = MainStoryboard.storyboard;
 			sourceTree = "<group>";

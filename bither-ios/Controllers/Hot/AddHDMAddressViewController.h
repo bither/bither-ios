@@ -1,5 +1,5 @@
 //
-//  HotAddressListSectionHeader.h
+//  AddHDMAddressViewController.h
 //  bither-ios
 //
 //  Copyright 2014 http://Bither.net
@@ -15,23 +15,12 @@
 //  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 //  See the License for the specific language governing permissions and
 //  limitations under the License.
+//
+//  Created by songchenwen on 15/2/4.
+//
 
-#import <UIKit/UIKit.h>
+#import <Foundation/Foundation.h>
 
-@protocol SectionHeaderPressedDelegate <NSObject>
 
--(void)sectionHeaderPressed:(NSUInteger)section;
-
--(BOOL)isSectionFolded:(NSUInteger)section;
-
-@optional
--(void)hdmAddPressed;
--(void)hdmSeedPressed;
-
-@end
-
-@interface HotAddressListSectionHeader : UIView
--(instancetype)initWithSize:(CGSize)size isHDM:(BOOL)hdm isPrivate:(BOOL)isPrivate section:(NSUInteger)section  delegate:(NSObject<SectionHeaderPressedDelegate>*)delegate;
-
-@property (weak) NSObject<SectionHeaderPressedDelegate>* delegate;
+@interface AddHDMAddressViewController : UIViewController
 @end

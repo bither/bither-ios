@@ -133,6 +133,10 @@
 /* Class = "IBUILabel"; text = "Can not find private key"; ObjectID = "eEx-7U-SVT"; */
 "eEx-7U-SVT.text" = "没有找到对应的私钥";
 
+/* Class = "IBUILabel"; text = "Import HDM Phrase"; ObjectID = "Qwn-YF-uwn"; */
+"Qwn-YF-uwn.text" = "导入 HDM 密语";
+
+
 /* Class = "IBUILabel"; text = "Pay to"; ObjectID = "g3O-Ch-Qm9"; */
 "g3O-Ch-Qm9.text" = "发送给";
 
@@ -214,6 +218,9 @@
 /* Class = "IBUILabel"; text = "value"; ObjectID = "zIR-6H-nG4"; */
 "zIR-6H-nG4.text" = "value";
 
+/* Class = "IBUIButton"; normalTitle = "Next Word"; ObjectID = "ifX-vq-zRq"; */
+"ifX-vq-zRq.normalTitle" = "下一单词";
+
 /* Class = "IBUILabel"; text = "Label"; ObjectID = "zLo-PY-kep"; */
 "zLo-PY-kep.text" = "Label";
 
@@ -294,3 +301,12 @@
 
 /* Class = "IBUISegmentedControl"; oZb-Bk-280.segmentTitles[2] = "HDM"; ObjectID = "oZb-Bk-280"; */
 "oZb-Bk-280.segmentTitles[2]" = "HDM";
+
+/* Class = "IBUILabel"; text = "How many HDM addresses to add?"; ObjectID = "KSX-eO-Uwn"; */
+"KSX-eO-Uwn.text" = "增加多少个 HDM 地址?";
+
+/* Class = "IBUILabel"; text = "Add HDM Address"; ObjectID = "Kfd-Dg-pnE"; */
+"Kfd-Dg-pnE.text" = "增加 HDM 地址";
+
+/* Class = "IBUIButton"; normalTitle = "Generate"; ObjectID = "gHB-fo-cHb"; */
+"gHB-fo-cHb.normalTitle" = "增加";

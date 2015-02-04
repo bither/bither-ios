@@ -67,6 +67,8 @@
                                 [self showMsg:NSLocalizedString(@"Import failed.", nil)];
                             } else {
                                 [KeyUtil setHDKeyChain:keychain];
+                                [self.controller.navigationController popViewControllerAnimated:YES];
+
                                 [self showMsg:NSLocalizedString(@"Import success.", nil)];
                             }
                             [self exit];

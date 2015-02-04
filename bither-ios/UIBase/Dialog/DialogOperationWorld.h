@@ -1,5 +1,5 @@
 //
-//  HotAddressListSectionHeader.h
+//  DialogAddressOptions.h
 //  bither-ios
 //
 //  Copyright 2014 http://Bither.net
@@ -16,22 +16,12 @@
 //  See the License for the specific language governing permissions and
 //  limitations under the License.
 
-#import <UIKit/UIKit.h>
+#import "DialogCentered.h"
+#import "Bitheri/BTAddress.h"
+#import "DialogReplaceWorld.h"
 
-@protocol SectionHeaderPressedDelegate <NSObject>
 
--(void)sectionHeaderPressed:(NSUInteger)section;
-
--(BOOL)isSectionFolded:(NSUInteger)section;
-
-@optional
--(void)hdmAddPressed;
--(void)hdmSeedPressed;
-
-@end
-
-@interface HotAddressListSectionHeader : UIView
--(instancetype)initWithSize:(CGSize)size isHDM:(BOOL)hdm isPrivate:(BOOL)isPrivate section:(NSUInteger)section  delegate:(NSObject<SectionHeaderPressedDelegate>*)delegate;
-
-@property (weak) NSObject<SectionHeaderPressedDelegate>* delegate;
+@interface DialogOperationWorld : DialogCentered
+-(instancetype)initWithDelegate:(NSObject<DialogOperationDelegate>*)delegate world:(NSString*) world index:(int)index;
+@property (weak) NSObject<DialogOperationDelegate>* delegate;
 @end
