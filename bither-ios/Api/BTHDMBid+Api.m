@@ -62,7 +62,7 @@
     if (![self.address isEqualToString:[[BTKey signedMessageToKey:message andSignatureBase64:signature] address]]) {
         //
     }
-    [[HDMApi instance] changeHDMPasswordWithHDMBid:self.address andPassword:[NSString hexWithData:self.password] andSignature:signature andHotAddress:hotAddress callback:^{
+    [[HDMApi instance] changeHDMPasswordWithHDMBid:self.address andPassword:self.password andSignature:signature andHotAddress:hotAddress callback:^{
         [condition lock];
         [condition signal];
         [condition unlock];
@@ -83,7 +83,7 @@
     return nil;
 }
 
-- (void)createHDMAddress:(NSArray *)pubsList andPassword:(NSString *)password andError:(ErrorBlock)errorblock {
+- (NSArray *)createHDMAddress:(NSArray *)pubsList andPassword:(NSString *)password andError:(NSError **)err; {
     int start = 2147483647;
     int end = 0;
     NSMutableArray *hots = [NSMutableArray new];
@@ -94,17 +94,27 @@
         [hots addObject:pubs.hot];
         [colds addObject:pubs.cold];
     }
-    [[BitherApi instance] createHDMAddressWithHDMBid:self.address andPassword:password start:start end:end pubHots:hots pubColds:colds callback:^(NSArray *array) {
-        for (int i = 0; i < pubsList.count; i++) {
-            BTHDMPubs *pubs = pubsList[i];
-            pubs.remote = array[i];
-
-        }
+    __block NSCondition *condition = [NSCondition new];
+    __block NSArray *remotes = nil;
+    [[HDMApi instance] createHDMAddressWithHDMBid:self.address andPassword:[[[BTEncryptData alloc] initWithStr:self.encryptedBitherPassword] decrypt:password] start:start end:end pubHots:hots pubColds:colds callback:^(NSArray *array) {
+        [condition lock];
+        remotes = array;
+        [condition signal];
+        [condition unlock];
     } andErrorCallBack:^(NSOperation *errorOp, NSError *error) {
-        if (errorblock) {
-            errorblock(error);
-        }
+        [condition lock];
+        [condition signal];
+        [condition unlock];
     }];
+
+    [condition lock];
+    [condition wait];
+    for (NSUInteger i = 0; i < pubsList.count; i++) {
+        BTHDMPubs *pubs = pubsList[i];
+        pubs.remote = remotes[i];
+    }
+    [condition unlock];
+    return pubsList;
 }
 
 

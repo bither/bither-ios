@@ -23,15 +23,15 @@
 + (HDMApi *)instance;
 
 - (void)getHDMPasswordRandomWithHDMBid:(NSString *) hdmBid callback:(IdResponseBlock) callback andErrorCallBack:(ErrorHandler)errorCallback;
-- (void)changeHDMPasswordWithHDMBid:(NSString *)hdmBid andPassword:(NSString *)password
+- (void)changeHDMPasswordWithHDMBid:(NSString *)hdmBid andPassword:(NSData *)password
                        andSignature:(NSString *)signature andHotAddress:(NSString *)hotAddress
                            callback:(VoidResponseBlock)callback andErrorCallBack:(ErrorHandler)errorCallback;
-- (void)createHDMAddressWithHDMBid:(NSString *)hdmBid andPassword:(NSString *)password start:(int)start end:(int)end
+- (void)createHDMAddressWithHDMBid:(NSString *)hdmBid andPassword:(NSData *)password start:(int)start end:(int)end
                            pubHots:(NSArray *) pubHots pubColds:(NSArray *)pubColds
                           callback:(ArrayResponseBlock)callback andErrorCallBack:(ErrorHandler)errorCallback;
-- (void)signatureByRemoteWithHDMBid:(NSString *)hdmBid andPassword:(NSString *)password andUnsignHash:(NSData *)unsignHash
+- (void)signatureByRemoteWithHDMBid:(NSString *)hdmBid andPassword:(NSData *)password andUnsignHash:(NSData *)unsignHash andIndex:(int)index
                            callback:(IdResponseBlock) callback andErrorCallBack:(ErrorHandler)errorCallback;
-- (void)recoverHDMAddressWithHDMBid:(NSString *)hdmBid andPassword:(NSString *)password andSignature:(NSString *)signature
+- (void)recoverHDMAddressWithHDMBid:(NSString *)hdmBid andPassword:(NSData *)password andSignature:(NSString *)signature
                            callback:(DictResponseBlock)callback andErrorCallBack:(ErrorHandler)errorCallback;
 
 @end

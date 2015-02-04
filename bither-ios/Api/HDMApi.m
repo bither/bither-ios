@@ -68,10 +68,10 @@ static HDMApi *hdmApi;
     }];
 }
 
-- (void)changeHDMPasswordWithHDMBid:(NSString *)hdmBid andPassword:(NSString *)password
+- (void)changeHDMPasswordWithHDMBid:(NSString *)hdmBid andPassword:(NSData *)password
                        andSignature:(NSString *)signature andHotAddress:(NSString *)hotAddress
                            callback:(VoidResponseBlock)callback andErrorCallBack:(ErrorHandler)errorCallback; {
-    NSDictionary *params = @{@"password" : [[password hexToData] base64EncodedString], @"signature" : signature,
+    NSDictionary *params = @{@"password" : [password base64EncodedString], @"signature" : signature,
             @"hot_address" : hotAddress};
     NSString *url = [NSString stringWithFormat:@"https://hdm.bither.net/api/v1/%@/hdm/password", hdmBid];
     [manager POST:url parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
@@ -95,10 +95,10 @@ static HDMApi *hdmApi;
     }];
 };
 
-- (void)createHDMAddressWithHDMBid:(NSString *)hdmBid andPassword:(NSString *)password start:(int)start end:(int)end
+- (void)createHDMAddressWithHDMBid:(NSString *)hdmBid andPassword:(NSData *)password start:(int)start end:(int)end
                            pubHots:(NSArray *) pubHots pubColds:(NSArray *)pubColds
                           callback:(ArrayResponseBlock)callback andErrorCallBack:(ErrorHandler)errorCallback; {
-    NSDictionary *params = @{@"password" : [[password hexToData] base64EncodedString], @"start" : @(start), @"end": @(end),
+    NSDictionary *params = @{@"password" : [password base64EncodedString], @"start" : @(start), @"end": @(end),
             @"pub_hot": [self connect:pubHots], @"pub_cold": [self connect:pubColds]};
     NSString *url = [NSString stringWithFormat:@"https://hdm.bither.net/api/v1/%@/hdm/address/create", hdmBid];
     [manager POST:url parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
@@ -113,9 +113,9 @@ static HDMApi *hdmApi;
     }];
 }
 
-- (void)signatureByRemoteWithHDMBid:(NSString *)hdmBid andPassword:(NSString *)password andUnsignHash:(NSData *)unsignHash andIndex:(int)index
+- (void)signatureByRemoteWithHDMBid:(NSString *)hdmBid andPassword:(NSData *)password andUnsignHash:(NSData *)unsignHash andIndex:(int)index
                            callback:(IdResponseBlock) callback andErrorCallBack:(ErrorHandler)errorCallback;{
-    NSDictionary *params = @{@"password" : [[password hexToData] base64EncodedString], @"unsign": [unsignHash base64EncodedString]};
+    NSDictionary *params = @{@"password" : [password base64EncodedString], @"unsign": [unsignHash base64EncodedString]};
     NSString *url = [NSString stringWithFormat:@"https://hdm.bither.net/api/v1/%@/hdm/address/%d/signature", hdmBid, index];
     [manager POST:url parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
         if (callback != nil) {
@@ -128,9 +128,9 @@ static HDMApi *hdmApi;
     }];
 }
 
-- (void)recoverHDMAddressWithHDMBid:(NSString *)hdmBid andPassword:(NSString *)password andSignature:(NSString *)signature
+- (void)recoverHDMAddressWithHDMBid:(NSString *)hdmBid andPassword:(NSData *)password andSignature:(NSString *)signature
                            callback:(DictResponseBlock)callback andErrorCallBack:(ErrorHandler)errorCallback; {
-    NSDictionary *params = @{@"password" : [[password hexToData] base64EncodedString], @"signature" : signature};
+    NSDictionary *params = @{@"password" : [password base64EncodedString], @"signature" : signature};
     NSString *url = [NSString stringWithFormat:@"https://hdm.bither.net/api/v1/%@/hdm/recovery", hdmBid];
     [manager POST:url parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSError *error = nil;
@@ -169,11 +169,12 @@ static HDMApi *hdmApi;
     NSData *data = [NSData dataFromBase64String:str];
     NSMutableArray *result = [NSMutableArray new];
     NSUInteger index = 0;
-    while (str.length > index) {
-        uint8_t l = [data UInt8AtOffset:index];
-        NSData *each = [data dataAtOffset:index + 1 length:l];
-        index += l + 1;
-        [result addObject:each];
+    while (data.length > index) {
+        NSUInteger l = 0;
+        NSData *each = [data dataAtOffset:index length:&l];
+        index += l;
+        if (each)
+            [result addObject:each];
     }
     return result;
 }

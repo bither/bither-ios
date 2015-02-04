@@ -16,6 +16,7 @@
 #import "AFHTTPRequestOperationManager.h"
 #import "HDMApi.h"
 #import "NSData+Hash.h"
+#import "BTHDMAddress.h"
 
 @interface HDMApiTest : XCTestCase
 
@@ -45,6 +46,7 @@
 
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         // change password
+        NSString *password = @"111111";
         NSData *hdmHot = [@"0000000000000000000000000000000000000000000000000000000000000001" hexToData];
         NSData *hdmCold = [@"0000000000000000000000000000000000000000000000000000000000000002" hexToData];
         BTBIP32Key *keyHot = [[BTBIP32Key alloc] initWithSeed:hdmHot];
@@ -55,7 +57,17 @@
         NSError *error = nil;
         NSString *pre = [hdmBid getPreSignHashAndError:&error];
         NSString *signature = [[firstKeyCold.key signHash:[pre hexToData]] base64EncodedStringWithOptions:0];
-        [hdmBid changeBidPasswordWithSignature:signature andPassword:[NSString hexWithData:hdmBid.password] andHotAddress:[firstKeyHot.key address] andError:&error];
+        [hdmBid changeBidPasswordWithSignature:signature andPassword:password andHotAddress:[firstKeyHot.key address] andError:&error];
+
+        // add address
+        NSMutableArray *pubsList = [NSMutableArray new];
+        for (int i = 0; i < 3; i++) {
+            NSData *hot = [self getPrivKey:i andMasterKey:keyHot].key.publicKey;
+            NSData *cold = [self getPrivKey:i andMasterKey:keyCold].key.publicKey;
+            BTHDMPubs *pubs = [[BTHDMPubs alloc] initWithHot:hot cold:cold remote:nil andIndex:i];
+            [pubsList addObject:pubs];
+        }
+        [hdmBid createHDMAddress:pubsList andPassword:password andError:&error];
     });
 }
 

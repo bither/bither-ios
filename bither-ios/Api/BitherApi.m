@@ -164,110 +164,110 @@ static BitherApi *piApi;
     }];
 }
 
-#pragma mark - hdm api
-- (void)getHDMPasswordRandomWithHDMBid:(NSString *) hdmBid callback:(IdResponseBlock) callback andErrorCallBack:(ErrorHandler)errorCallback;{
-    [self get:[NSString stringWithFormat:@"api/v1/%@/hdm/password", hdmBid] withParams:nil networkType:BitherHDM completed:^(MKNetworkOperation *completedOperation) {
-        NSNumber *random = @([completedOperation.responseString longLongValue]);
-        NSLog(@"hdm password random:%@", random);
-        if (callback != nil) {
-            callback(random);
-        }
-    } andErrorCallback:^(NSOperation *errorOp, NSError *error) {
-        if (errorCallback) {
-            errorCallback(errorOp, error);
-        }
-    } ssl:YES];
-}
+//#pragma mark - hdm api
+//- (void)getHDMPasswordRandomWithHDMBid:(NSString *) hdmBid callback:(IdResponseBlock) callback andErrorCallBack:(ErrorHandler)errorCallback;{
+//    [self get:[NSString stringWithFormat:@"api/v1/%@/hdm/password", hdmBid] withParams:nil networkType:BitherHDM completed:^(MKNetworkOperation *completedOperation) {
+//        NSNumber *random = @([completedOperation.responseString longLongValue]);
+//        NSLog(@"hdm password random:%@", random);
+//        if (callback != nil) {
+//            callback(random);
+//        }
+//    } andErrorCallback:^(NSOperation *errorOp, NSError *error) {
+//        if (errorCallback) {
+//            errorCallback(errorOp, error);
+//        }
+//    } ssl:YES];
+//}
+//
+////- (void)changeHDMPasswordWithHDMBid:(NSString *)hdmBid andPassword:(NSString *)password
+////                       andSignature:(NSString *)signature andHotAddress:(NSString *)hotAddress
+////                           callback:(VoidResponseBlock)callback andErrorCallBack:(ErrorHandler)errorCallback; {
+////    NSDictionary *params = @{@"password" : [[password hexToData] base64EncodedString], @"signature" : signature,
+////            @"hot_address" : hotAddress};
+////    [self post:[NSString stringWithFormat:@"api/v1/%@/hdm/password",hdmBid] withParams:params networkType:BitherHDM completed:^(MKNetworkOperation *completedOperation) {
+////        NSDictionary *dict = completedOperation.responseJSON;
+////        if ([dict[@"result"] isEqualToString:@"ok"] && callback != nil) {
+////            callback();
+////        }
+////    } andErrorCallBack:^(NSOperation *errorOp, NSError *error) {
+////        if (errorCallback) {
+////            errorCallback(errorOp, error);
+////        }
+////    } ssl:YES];
+////};
+////
+////- (void)createHDMAddressWithHDMBid:(NSString *)hdmBid andPassword:(NSString *)password start:(int)start end:(int)end
+////                           pubHots:(NSArray *) pubHots pubColds:(NSArray *)pubColds
+////                          callback:(ArrayResponseBlock)callback andErrorCallBack:(ErrorHandler)errorCallback; {
+////    NSDictionary *params = @{@"password" : [[password hexToData] base64EncodedString], @"start" : @(start), @"end": @(end),
+////            @"pub_hot": [self connect:pubHots], @"pub_cold": [self connect:pubColds]};
+////    [self post:[NSString stringWithFormat:@"api/v1/%@/hdm/address/create", hdmBid] withParams:params networkType:BitherHDM completed:^(MKNetworkOperation *completedOperation) {
+////        NSArray *pubRemotes = [self split:completedOperation.responseString];
+////        if (callback != nil) {
+////            callback(pubRemotes);
+////        }
+////    } andErrorCallBack:^(NSOperation *errorOp, NSError *error) {
+////        if (errorCallback) {
+////            errorCallback(errorOp, error);
+////        }
+////    } ssl:YES];
+////}
+////
+////- (void)signatureByRemoteWithHDMBid:(NSString *)hdmBid andPassword:(NSString *)password andUnsignHash:(NSData *)unsignHash
+////                           callback:(IdResponseBlock) callback andErrorCallBack:(ErrorHandler)errorCallback;{
+////    NSDictionary *params = @{@"password" : [[password hexToData] base64EncodedString], @"unsign": [unsignHash base64EncodedString]};
+////    [self post:[NSString stringWithFormat:@""] withParams:params networkType:BitherHDM completed:^(MKNetworkOperation *completedOperation) {
+////        if (callback != nil) {
+////            callback(completedOperation.responseString);
+////        }
+////    } andErrorCallBack:^(NSOperation *errorOp, NSError *error) {
+////        if (errorCallback) {
+////            errorCallback(errorOp, error);
+////        }
+////    } ssl:YES];
+////}
+////
+////- (void)recoverHDMAddressWithHDMBid:(NSString *)hdmBid andPassword:(NSString *)password andSignature:(NSString *)signature
+////                           callback:(DictResponseBlock)callback andErrorCallBack:(ErrorHandler)errorCallback; {
+////    NSDictionary *params = @{@"password" : [[password hexToData] base64EncodedString], @"signature" : signature};
+////    [self post:[NSString stringWithFormat:@""] withParams:params networkType:BitherHDM completed:^(MKNetworkOperation *completedOperation) {
+////        NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithDictionary:completedOperation.responseJSON];
+////        dict[@"pub_hot"] = [self split:dict[@"pub_hot"]];
+////        dict[@"pub_cold"] = [self split:dict[@"pub_cold"]];
+////        dict[@"pub_server"] = [self split:dict[@"pub_server"]];
+////        if (callback != nil) {
+////            callback(dict);
+////        }
+////    } andErrorCallBack:^(NSOperation *errorOp, NSError *error) {
+////        if (errorCallback) {
+////            errorCallback(errorOp, error);
+////        }
+////    } ssl:YES];
+////}
 
-- (void)changeHDMPasswordWithHDMBid:(NSString *)hdmBid andPassword:(NSString *)password
-                       andSignature:(NSString *)signature andHotAddress:(NSString *)hotAddress
-                           callback:(VoidResponseBlock)callback andErrorCallBack:(ErrorHandler)errorCallback; {
-    NSDictionary *params = @{@"password" : [[password hexToData] base64EncodedString], @"signature" : signature,
-            @"hot_address" : hotAddress};
-    [self post:[NSString stringWithFormat:@"api/v1/%@/hdm/password",hdmBid] withParams:params networkType:BitherHDM completed:^(MKNetworkOperation *completedOperation) {
-        NSDictionary *dict = completedOperation.responseJSON;
-        if ([dict[@"result"] isEqualToString:@"ok"] && callback != nil) {
-            callback();
-        }
-    } andErrorCallBack:^(NSOperation *errorOp, NSError *error) {
-        if (errorCallback) {
-            errorCallback(errorOp, error);
-        }
-    } ssl:YES];
-};
-
-- (void)createHDMAddressWithHDMBid:(NSString *)hdmBid andPassword:(NSString *)password start:(int)start end:(int)end
-                           pubHots:(NSArray *) pubHots pubColds:(NSArray *)pubColds
-                          callback:(ArrayResponseBlock)callback andErrorCallBack:(ErrorHandler)errorCallback; {
-    NSDictionary *params = @{@"password" : [[password hexToData] base64EncodedString], @"start" : @(start), @"end": @(end),
-            @"pub_hot": [self connect:pubHots], @"pub_cold": [self connect:pubColds]};
-    [self post:[NSString stringWithFormat:@"api/v1/%@/hdm/address/create", hdmBid] withParams:params networkType:BitherHDM completed:^(MKNetworkOperation *completedOperation) {
-        NSArray *pubRemotes = [self split:completedOperation.responseString];
-        if (callback != nil) {
-            callback(pubRemotes);
-        }
-    } andErrorCallBack:^(NSOperation *errorOp, NSError *error) {
-        if (errorCallback) {
-            errorCallback(errorOp, error);
-        }
-    } ssl:YES];
-}
-
-- (void)signatureByRemoteWithHDMBid:(NSString *)hdmBid andPassword:(NSString *)password andUnsignHash:(NSData *)unsignHash
-                           callback:(IdResponseBlock) callback andErrorCallBack:(ErrorHandler)errorCallback;{
-    NSDictionary *params = @{@"password" : [[password hexToData] base64EncodedString], @"unsign": [unsignHash base64EncodedString]};
-    [self post:[NSString stringWithFormat:@""] withParams:params networkType:BitherHDM completed:^(MKNetworkOperation *completedOperation) {
-        if (callback != nil) {
-            callback(completedOperation.responseString);
-        }
-    } andErrorCallBack:^(NSOperation *errorOp, NSError *error) {
-        if (errorCallback) {
-            errorCallback(errorOp, error);
-        }
-    } ssl:YES];
-}
-
-- (void)recoverHDMAddressWithHDMBid:(NSString *)hdmBid andPassword:(NSString *)password andSignature:(NSString *)signature
-                           callback:(DictResponseBlock)callback andErrorCallBack:(ErrorHandler)errorCallback; {
-    NSDictionary *params = @{@"password" : [[password hexToData] base64EncodedString], @"signature" : signature};
-    [self post:[NSString stringWithFormat:@""] withParams:params networkType:BitherHDM completed:^(MKNetworkOperation *completedOperation) {
-        NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithDictionary:completedOperation.responseJSON];
-        dict[@"pub_hot"] = [self split:dict[@"pub_hot"]];
-        dict[@"pub_cold"] = [self split:dict[@"pub_cold"]];
-        dict[@"pub_server"] = [self split:dict[@"pub_server"]];
-        if (callback != nil) {
-            callback(dict);
-        }
-    } andErrorCallBack:^(NSOperation *errorOp, NSError *error) {
-        if (errorCallback) {
-            errorCallback(errorOp, error);
-        }
-    } ssl:YES];
-}
-
-- (NSString *)connect:(NSArray *)dataList;{
-    NSMutableData *result = [NSMutableData secureData];
-    for (NSData *each in dataList) {
-        [result appendUInt8:(uint8_t) each.length];
-        [result appendData:each];
-    }
-    return [result base64EncodedString];
-}
-
-- (NSArray *)split:(NSString *)str; {
-    NSData *data = [NSData dataFromBase64String:str];
-    NSMutableArray *result = [NSMutableArray new];
-    NSUInteger index = 0;
-    while (str.length > index) {
-        uint8_t l = [data UInt8AtOffset:index];
-        NSData *each = [data dataAtOffset:index + 1 length:l];
-        index += l + 1;
-        [result addObject:each];
-    }
-    return result;
-}
-
-- (NSError *)formatHDMErrorWithOP:(MKNetworkOperation *)errorOp andError:(NSError *)error;{
-    return nil;
-}
+//- (NSString *)connect:(NSArray *)dataList;{
+//    NSMutableData *result = [NSMutableData secureData];
+//    for (NSData *each in dataList) {
+//        [result appendUInt8:(uint8_t) each.length];
+//        [result appendData:each];
+//    }
+//    return [result base64EncodedString];
+//}
+//
+//- (NSArray *)split:(NSString *)str; {
+//    NSData *data = [NSData dataFromBase64String:str];
+//    NSMutableArray *result = [NSMutableArray new];
+//    NSUInteger index = 0;
+//    while (str.length > index) {
+//        uint8_t l = [data UInt8AtOffset:index];
+//        NSData *each = [data dataAtOffset:index + 1 length:&l];
+//        index += l + 1;
+//        [result addObject:each];
+//    }
+//    return result;
+//}
+//
+//- (NSError *)formatHDMErrorWithOP:(MKNetworkOperation *)errorOp andError:(NSError *)error;{
+//    return nil;
+//}
 @end

@@ -164,9 +164,10 @@
             }
             [[PeerUtil instance]stopPeer];
             NSArray* as = [[BTAddressManager instance].hdmKeychain completeAddressesWithCount:1 password:password andFetchBlock:^(NSString *password, NSArray *partialPubs) {
-                [hdmBid createHDMAddress:partialPubs andPassword:password  andError:^(NSError *error) {
-                    NSLog(@"error:%@",error);
-                }];
+                // todo:
+//                [hdmBid createHDMAddress:partialPubs andPassword:password  andError:^(NSError *error) {
+//                    NSLog(@"error:%@",error);
+//                }];
             }];
 
 
