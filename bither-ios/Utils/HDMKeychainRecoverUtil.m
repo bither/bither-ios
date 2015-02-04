@@ -153,7 +153,7 @@
                 return;
             }
             NSError* error;
-            [hdmBid changeBidPasswordWithSignature:result andPassword:password andError:&error];
+            [hdmBid changeBidPasswordWithSignature:result andPassword:password andHotAddress:[BTAddressManager instance].hdmKeychain.firstAddressFromDb andError:&error];
             if(error){
                 dispatch_async(dispatch_get_main_queue(), ^{
                     [dp dismissWithCompletion:^{
