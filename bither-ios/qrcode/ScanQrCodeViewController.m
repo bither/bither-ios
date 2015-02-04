@@ -274,7 +274,11 @@
 }
 
 -(void)cancelClick:(id)sender{
-    [self dismissViewControllerAnimated:YES completion:nil];
+    [self dismissViewControllerAnimated:YES completion:^{
+        if(self.scanDelegate && [self.scanDelegate respondsToSelector:@selector(handleScanCancelByReader:)]){
+            [self.scanDelegate handleScanCancelByReader:self];
+        }
+    }];
 }
 
 -(void)flashClick:(UIButton*)sender{

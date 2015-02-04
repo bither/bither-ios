@@ -19,6 +19,9 @@
 #import "ScanQrCodeTransportViewController.h"
 #import "StringUtil.h"
 #import "QRCodeTransportPage.h"
+#import "NSString+Base58.h"
+#import "BTUtils.h"
+#import "UIViewController+PiShowBanner.h"
 
 @interface ScanQrCodeTransportViewController ()<ScanQrCodeDelegate>{
     NSString *_pageName;
@@ -80,6 +83,12 @@
     return _pageName;
 }
 
+-(void)handleScanCancelByReader:(ScanQrCodeViewController *)reader {
+    if(self.delegate && [self.delegate respondsToSelector:@selector(handleScanCancelByReader:)]){
+        [self.delegate handleScanCancelByReader:self];
+    }
+}
+
 -(void)handleResult:(NSString *)result byReader:(ScanQrCodeViewController *)reader{
     if(![StringUtil compareString:_lastResult compare:result]){
         _lastResult = result;
@@ -95,6 +104,8 @@
                     [self.delegate handleResult:r byReader:self];
                 }
             }
+        }else if((result.isValidBitcoinAddress || [StringUtil isValidBitcoinBIP21Address:result]) && [BTUtils compareString:NSLocalizedString(@"Scan to watch Bither Cold",nil) compare:self.scanTitle]){
+            [self showBannerWithMessage:NSLocalizedString(@"add_address_watch_only_scanned_address_warning", nil) belowView:nil belowTop:0 autoHideIn:1 withCompletion:nil];
         }
         self.scanMessage = [self pageMessage];
         [reader vibrate];

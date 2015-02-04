@@ -1,5 +1,4 @@
-//
-//  HotAddressAddHDMViewController.h
+//  HDMKeychainRecoverUtil.h
 //  bither-ios
 //
 //  Copyright 2014 http://Bither.net
@@ -15,12 +14,15 @@
 //  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 //  See the License for the specific language governing permissions and
 //  limitations under the License.
-//
-//  Created by songchenwen on 15/2/2.
-//
 
-#import <UIKit/UIKit.h>
+#import <Foundation/Foundation.h>
 
-@interface HotAddressAddHDMViewController : UIViewController
+
+@interface HDMKeychainRecoverUtil : NSObject
+
+-(instancetype)initWithViewContoller:(UIViewController*)controller;
+
+-(BOOL)canRecover;
+-(void)revovery;
 
 @end

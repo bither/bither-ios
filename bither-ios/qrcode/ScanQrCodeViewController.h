@@ -31,6 +31,8 @@
 
 -(void)handleResult:(NSString*)result byReader:(ScanQrCodeViewController*)reader;
 
+@optional
+-(void)handleScanCancelByReader:(ScanQrCodeViewController *)reader;
 @end
 
 

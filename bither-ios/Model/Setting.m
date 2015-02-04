@@ -48,6 +48,7 @@
 #import "KeychainSetting.h"
 #import "BTQRCodeUtil.h"
 #import "MessageSigningSetting.h"
+#import "HDMRecoverSetting.h"
 
 @implementation Setting
 
@@ -526,6 +527,9 @@ static Setting* SwitchToColdSetting;
     [array addObject:[Setting getQrCodeQualitySetting]];
     [array addObject:[ImportPrivateKeySetting getImportPrivateKeySetting]];
     [array addObject:[ImportBip38PrivateKeySetting getImportBip38PrivateKeySetting]];
+    if([[BTSettings instance] getAppMode]==HOT&&![[BTAddressManager instance] hasHDMKeychain]){
+        [array addObject:[HDMRecoverSetting getHDMRecoverSetting]];
+    }
     [array addObject:[MessageSigningSetting getMessageSigningSetting]];
     [array addObject:[Setting getTrashCanSetting]];
     if ([[BTSettings instance] getAppMode]==HOT) {

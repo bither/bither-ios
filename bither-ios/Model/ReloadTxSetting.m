@@ -29,7 +29,7 @@
 #import "BTAddressProvider.h"
 
 static double reloadTime;
-static  Setting *reloadTxsSetting;
+static Setting *reloadTxsSetting;
 
 @implementation ReloadTxSetting
 
