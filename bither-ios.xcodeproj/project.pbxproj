@@ -10,6 +10,7 @@
 		0A259E251A47F19100D7F707 /* DialogSendOption.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A259E241A47F19100D7F707 /* DialogSendOption.m */; };
 		0A259E281A47FDF600D7F707 /* DialogSelectChangeAddress.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A259E271A47FDF600D7F707 /* DialogSelectChangeAddress.m */; };
 		0A42062A1A494F1000562100 /* SignMessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A4206291A494F1000562100 /* SignMessageViewController.m */; };
+		0A43F4401A81C6BF008171DB /* HdmSendViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A43F43F1A81C6BF008171DB /* HdmSendViewController.m */; };
 		0A446C151A441393000CD25A /* DialogNetworkMonitorOption.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A446C141A441393000CD25A /* DialogNetworkMonitorOption.m */; };
 		0A515F781A36A2C0008292AF /* RawDataView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A515F771A36A2C0008292AF /* RawDataView.m */; };
 		0A515F7B1A36CAE3008292AF /* RawPrivateKeyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A515F7A1A36CAE3008292AF /* RawPrivateKeyViewController.m */; };
@@ -260,7 +261,8 @@
 		0A259E271A47FDF600D7F707 /* DialogSelectChangeAddress.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DialogSelectChangeAddress.m; sourceTree = "<group>"; };
 		0A4206281A494F1000562100 /* SignMessageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignMessageViewController.h; sourceTree = "<group>"; };
 		0A4206291A494F1000562100 /* SignMessageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignMessageViewController.m; sourceTree = "<group>"; };
-		0A43F43D1A81B925008171DB /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/MainStoryboard.strings; sourceTree = "<group>"; };
+		0A43F43E1A81C6BF008171DB /* HdmSendViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HdmSendViewController.h; sourceTree = "<group>"; };
+		0A43F43F1A81C6BF008171DB /* HdmSendViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HdmSendViewController.m; sourceTree = "<group>"; };
 		0A446C131A441393000CD25A /* DialogNetworkMonitorOption.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DialogNetworkMonitorOption.h; sourceTree = "<group>"; };
 		0A446C141A441393000CD25A /* DialogNetworkMonitorOption.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DialogNetworkMonitorOption.m; sourceTree = "<group>"; };
 		0A515F761A36A2C0008292AF /* RawDataView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RawDataView.h; sourceTree = "<group>"; };
@@ -822,6 +824,8 @@
 				0AB8BC991A7F3194003C07D8 /* HotAddressAddHDMViewController.m */,
 				1BC27FD66F3376A2C68612DD /* AddHDMAddressViewController.m */,
 				1BC272BC4509E4F880EAC6F9 /* AddHDMAddressViewController.h */,
+				0A43F43E1A81C6BF008171DB /* HdmSendViewController.h */,
+				0A43F43F1A81C6BF008171DB /* HdmSendViewController.m */,
 			);
 			path = Hot;
 			sourceTree = "<group>";
@@ -1722,6 +1726,7 @@
 				ACDDDC2319480DE00008A79D /* UIViewController+PiShowBanner.m in Sources */,
 				ACCA274B1989FACC000E6A32 /* HotAddressTabButton.m in Sources */,
 				AC1715871969213800337AB5 /* DialogAddressOptions.m in Sources */,
+				0A43F4401A81C6BF008171DB /* HdmSendViewController.m in Sources */,
 				4269FF7B195A948A001213B9 /* CacheUtil.m in Sources */,
 				ACEEB703199B40FE008E06AA /* CurrencyCalculatorLink.m in Sources */,
 				AC53ABB319D2CD80007C095C /* UEntropyCollector.m in Sources */,

@@ -1,5 +1,5 @@
 //
-//  HotAddressAddHDMViewController.h
+//  SendViewController.h
 //  bither-ios
 //
 //  Copyright 2014 http://Bither.net
@@ -16,11 +16,15 @@
 //  See the License for the specific language governing permissions and
 //  limitations under the License.
 //
-//  Created by songchenwen on 15/2/2.
+//  Created by songchenwen on 15/2/4.
 //
 
 #import <UIKit/UIKit.h>
+#import "SendViewController.h"
 
-@interface HotAddressAddHDMViewController : UIViewController
-
+@interface HdmSendViewController : UIViewController
+@property BTAddress *address;
+@property NSString* toAddress;
+@property uint64_t amount;
+@property (weak) NSObject<SendDelegate> *sendDelegate;
 @end
