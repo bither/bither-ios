@@ -35,6 +35,7 @@
 #import "DialogPrivateKeyDecryptedQrCode.h"
 #import "DialogPrivateKeyText.h"
 #import "SignMessageViewController.h"
+#import "DialogHDMAddressOptions.h"
 
 @interface AddressDetailViewController ()<UITableViewDataSource,UITableViewDelegate,DialogAddressOptionsDelegate,DialogPasswordDelegate,DialogPrivateKeyOptionsDelegate>{
     NSMutableArray *_txs;
@@ -140,8 +141,12 @@
 }
 
 - (IBAction)optionPressed:(id)sender {
-    DialogAddressOptions *dialog = [[DialogAddressOptions alloc]initWithAddress:self.address andDelegate:self];
-    [dialog showInWindow:self.view.window];
+    if(self.address.isHDM){
+        [[[DialogHDMAddressOptions alloc] initWithAddress:self.address] showInWindow:self.view.window];
+    }else{
+        DialogAddressOptions *dialog = [[DialogAddressOptions alloc]initWithAddress:self.address andDelegate:self];
+        [dialog showInWindow:self.view.window];
+    }
 }
 
 -(void)stopMonitorAddress{
