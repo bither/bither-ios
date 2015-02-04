@@ -148,13 +148,11 @@
 }
 
 -(void)onPasswordEntered:(NSString *)password {
-    DialogProgress *dialogProgrees=[[DialogProgress alloc] initWithMessage:NSLocalizedString(@"Please wait…", nil)];
-    __block ImportHDMColdSeedController * sslf=self;
+   
     
-    ImportHDMCold *importPrivateKey=[[ImportHDMCold alloc] initWithController:sslf content:nil worldList:sslf.worldListArray passwrod:password importHDSeedType:HDMColdPhrase];
+    ImportHDMCold *importPrivateKey=[[ImportHDMCold alloc] initWithController:self content:nil worldList:self.worldListArray passwrod:password importHDSeedType:HDMColdPhrase];
     [importPrivateKey importHDSeed];
-    [dialogProgrees dismiss];
-
+    
 }
 
 -(void)showMsg:(NSString *)msg{

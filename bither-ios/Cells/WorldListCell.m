@@ -36,7 +36,7 @@
 
 
 -(void)initConfigure{
-    CGRect ivRect = CGRectMake(8, 15, self.frame.size.width , 20);
+    CGRect ivRect = CGRectMake(10, 15, self.frame.size.width , 20);
     self.btnBackground=[[UIButton alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width,self.frame.size.height)];
     [self.btnBackground setBackgroundImage:[UIImage imageNamed:@"textarea_background"] forState:UIControlStateNormal];
     [self.btnBackground setBackgroundImage:[UIImage imageNamed:@"textarea_background_pressed"] forState:UIControlStateHighlighted];
@@ -48,6 +48,7 @@
     [self addSubview:self.btnBackground];
 
     self.labWorld = [[UILabel alloc]initWithFrame:ivRect];
+    self.labWorld.font=[UIFont systemFontOfSize:14];
     [self addSubview:self.labWorld];
     [self setBackgroundColor:[UIColor clearColor]];
 
