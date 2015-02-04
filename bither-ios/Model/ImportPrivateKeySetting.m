@@ -135,7 +135,7 @@ static Setting* importPrivateKeySetting;
     bool isHDMSeed= range.location==0;
     if(self.isImportHDM) {
         if ([BTQRCodeUtil verifyQrcodeTransport:result] && [[BTQRCodeUtil splitQRCode:result] count] == 3) {
-            if (isHDMSeed){
+            if (!isHDMSeed){
                 [self showMsg:NSLocalizedString(@"can_not_import_hdm_cold_seed", nil)];
             } else {
                 _result = result;
@@ -152,7 +152,7 @@ static Setting* importPrivateKeySetting;
         }
     }else {
         if ([BTQRCodeUtil verifyQrcodeTransport:result] && [[BTQRCodeUtil splitQRCode:result] count] == 3) {
-             if (!isHDMSeed){
+             if (isHDMSeed){
                    [self showMsg:NSLocalizedString(@"import_hdm_cold_seed_format_error", nil)];
              } else {
                  _result = result;

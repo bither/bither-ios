@@ -37,10 +37,14 @@
 #import "SignMessageViewController.h"
 #import "DialogHDMAddressOptions.h"
 
-@interface AddressDetailViewController ()<UITableViewDataSource,UITableViewDelegate,DialogAddressOptionsDelegate,DialogPasswordDelegate,DialogPrivateKeyOptionsDelegate>{
+@interface AddressDetailViewController ()<UITableViewDataSource,UITableViewDelegate,DialogAddressOptionsDelegate
+        ,DialogPasswordDelegate,DialogPrivateKeyOptionsDelegate>{
     NSMutableArray *_txs;
     PrivateKeyQrCodeType _qrcodeType;
     BOOL isMovingToTrash;
+    BOOL  hasMore;
+    BOOL  isLoading;
+    int   page;
 }
 @property (weak, nonatomic) IBOutlet UIView *vTopBar;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -51,6 +55,9 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    hasMore= YES;
+    isLoading= NO;
+    page=1;
     _txs = [[NSMutableArray alloc]init];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
@@ -91,15 +98,34 @@
 }
 
 -(void)refresh{
+    page=1;
+    [self loadTx];
+}
+
+-(void)loadTx{
+    if(isLoading){
+        return;
+    }
+    isLoading= YES;
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        NSArray *txs = [self.address txs];
+        __block NSArray *txs = [self.address txs:page];
         dispatch_async(dispatch_get_main_queue(), ^{
-            [_txs removeAllObjects];
-            [_txs addObjectsFromArray:txs];
+            if (page==1) {
+                [_txs removeAllObjects];
+            }
+            if(txs&&txs.count>0) {
+                [_txs addObjectsFromArray:txs];
+                hasMore= YES;
+            }else{
+                hasMore= NO;
+            }
+            [self.address sortTx:_txs];
             [self.tableView reloadData];
             self.tableView.tableFooterView.hidden = (_txs.count > 0);
             [((UIView *)[self.tableView.tableFooterView.subviews objectAtIndex:0]) setHidden:NO];
             [((UIActivityIndicatorView *)[self.tableView.tableFooterView.subviews objectAtIndex:1]) stopAnimating];
+            isLoading= NO;
+
         });
     });
 }
@@ -121,8 +147,13 @@
     }else if(indexPath.section == 1){
         TransactionCell *cell =[tableView dequeueReusableCellWithIdentifier:@"TransactionCell" forIndexPath:indexPath];
         [cell showTx:[_txs objectAtIndex:indexPath.row] byAddress:self.address];
+        if (indexPath.row>(_txs.count-2)&&!isLoading&&hasMore) {
+            page++;
+            [self loadTx];
+        }
         return cell;
     }
+
     return nil;
 }
 
