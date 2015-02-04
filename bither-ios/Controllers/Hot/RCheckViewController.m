@@ -140,7 +140,7 @@
     };
     [TransactionsUtil completeInputsForAddress:address callback:^{
         check();
-    } andErrorCallBack:^(MKNetworkOperation *errorOp, NSError *error) {
+    } andErrorCallBack:^(NSOperation *errorOp, NSError *error) {
         check();
     }];
 }

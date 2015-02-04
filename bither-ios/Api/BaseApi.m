@@ -19,7 +19,7 @@
 
 
 
-ErrorHandler errorHandler = ^(MKNetworkOperation *errorOp, NSError *error){
+ErrorHandler errorHandler = ^(NSOperation *errorOp, NSError *error){
     DLog(@"%@", [error localizedDescription]);
 };
 
@@ -46,7 +46,7 @@ ErrorHandler errorHandler = ^(MKNetworkOperation *errorOp, NSError *error){
             if (completedOperationParam) {
                 completedOperationParam(completedOperation);
             }
-        } andErrorCallBack:^(MKNetworkOperation *errorOp, NSError *error) {
+        } andErrorCallBack:^(NSOperation *errorOp, NSError *error) {
             if (errorCallback) {
                 errorCallback(errorOp,error);
             }
@@ -71,7 +71,7 @@ ErrorHandler errorHandler = ^(MKNetworkOperation *errorOp, NSError *error){
     }
     [self initEngine:^(MKNetworkOperation *completedOperation) {
         [self execGet:url withParams:params networkType:networkType completed:completedOperationParam andErrorCallback:errorCallback ssl:ssl];
-    } andErrorCallback:^(MKNetworkOperation *errorOp, NSError *error) {
+    } andErrorCallback:^(NSOperation *errorOp, NSError *error) {
         if (errorCallback) {
             errorCallback(errorOp,error);
         }
@@ -88,7 +88,7 @@ ErrorHandler errorHandler = ^(MKNetworkOperation *errorOp, NSError *error){
         NSLog(@"completedOperation:%@",completedOperation);
         if ( completedOperation.HTTPStatusCode == 403) {
             [self getCookie:^(MKNetworkOperation *completedOperation) {
-            } andErrorCallBack:^(MKNetworkOperation *errorOp, NSError *error) {
+            } andErrorCallBack:^(NSOperation *errorOp, NSError *error) {
             }];
         }
         if (errorCallback != nil) {
@@ -110,7 +110,7 @@ ErrorHandler errorHandler = ^(MKNetworkOperation *errorOp, NSError *error){
     }
     [self initEngine:^(MKNetworkOperation *completedOperation) {
         [self execPost:url withParams:params networkType:networkType completed:completedOperationParam andErrorCallBack:errorCallback ssl:ssl];
-    } andErrorCallback:^(MKNetworkOperation *errorOp, NSError *error) {
+    } andErrorCallback:^(NSOperation *errorOp, NSError *error) {
         if (errorCallback) {
             errorCallback(errorOp,error);
         }
@@ -126,7 +126,7 @@ ErrorHandler errorHandler = ^(MKNetworkOperation *errorOp, NSError *error){
         NSLog(@"completedOperation:%@",completedOperation);
         if (completedOperation.HTTPStatusCode == 403) {
             [self getCookie:^(MKNetworkOperation *completedOperation) {
-            } andErrorCallBack:^(MKNetworkOperation *errorOp, NSError *error) {
+            } andErrorCallBack:^(NSOperation *errorOp, NSError *error) {
             }];
         }
         if (errorCallback != nil) {

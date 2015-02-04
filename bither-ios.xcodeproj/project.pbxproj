@@ -29,6 +29,7 @@
 		1BC270F1C2BEA60E0B3384AB /* DialogHDMAddressOptions.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BC27D1407586D2FCB8F01AC /* DialogHDMAddressOptions.m */; };
 		1BC27499EE579986A1439709 /* DialogHDMInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BC27E22C25A90DF1E5DA1DC /* DialogHDMInfo.m */; };
 		1BC275F3608609D0E72BFBE7 /* HDMTriangleBgView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BC27C837F7819A54B0A2E37 /* HDMTriangleBgView.m */; };
+		1BC2778BC574DA2F816BC77A /* AddHDMAddressViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BC27FD66F3376A2C68612DD /* AddHDMAddressViewController.m */; };
 		4217A3731951235D00063746 /* Depth.m in Sources */ = {isa = PBXBuildFile; fileRef = 4217A3721951235D00063746 /* Depth.m */; };
 		4217A39019512DC000063746 /* TransactionsUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 4217A38F19512DC000063746 /* TransactionsUtil.m */; };
 		421B037C19495315003A45F1 /* TabButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 421B037B19495315003A45F1 /* TabButton.m */; };
@@ -227,6 +228,7 @@
 		ACF02FEB19D90899001AB701 /* DialogSwitchQRCode.m in Sources */ = {isa = PBXBuildFile; fileRef = ACF02FEA19D90899001AB701 /* DialogSwitchQRCode.m */; };
 		ACF4B17419668D5700CE24FD /* MarketListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = ACF4B17319668D5700CE24FD /* MarketListCell.m */; };
 		D607EF24F3CE4EBC82950BB4 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FED7A4051DB45218112FAC0 /* libPods.a */; };
+		D61D047B6D9BE30D5BED20E1 /* hdm.bither.net.cer in Resources */ = {isa = PBXBuildFile; fileRef = D61D0299B4CDCCFC6D0BA161 /* hdm.bither.net.cer */; };
 		D61D098FD091EB8752EF00A2 /* BTHDMBid+Api.m in Sources */ = {isa = PBXBuildFile; fileRef = D61D0F5AB509120289D32CE8 /* BTHDMBid+Api.m */; };
 		D61D0ACF2F75D62B878ADAEF /* HDMHotAddUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = D61D0EFD9890E54E56C5A21E /* HDMHotAddUtil.m */; };
 		D61D0D05D11BC8527C40F8C3 /* PasswordGetter.m in Sources */ = {isa = PBXBuildFile; fileRef = D61D0DB47AB1A1EA42112C56 /* PasswordGetter.m */; };
@@ -239,6 +241,7 @@
 		DAB2C8731A2038930011EE2F /* KeychainSetting.m in Sources */ = {isa = PBXBuildFile; fileRef = DAB2C8721A2038930011EE2F /* KeychainSetting.m */; };
 		DAB2C8761A206F080011EE2F /* KeychainBackupUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = DAB2C8751A206F080011EE2F /* KeychainBackupUtil.m */; };
 		DC0448DAEF65BD227897D240 /* HDMKeychainRecoverUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = DC0CC84409CD956F1FA008BF /* HDMKeychainRecoverUtil.m */; };
+		DAD0FFF51A81D08D008AEAA2 /* HDMApiTest.m in Sources */ = {isa = PBXBuildFile; fileRef = DAD0FFF41A81D08D008AEAA2 /* HDMApiTest.m */; };
 		DC06422DA44A6DA77DCFBB2D /* ImportHDMCold.m in Sources */ = {isa = PBXBuildFile; fileRef = DC0A375AE83A8BA37F3FA65F /* ImportHDMCold.m */; };
 		DC075758EE0F48911D8D4CE8 /* ImportHDMColdSeedController.m in Sources */ = {isa = PBXBuildFile; fileRef = DC07A672CCAD76ED66B72B91 /* ImportHDMColdSeedController.m */; };
 		DC0C00F6FC8AA88E26580598 /* HDMRecoverSetting.m in Sources */ = {isa = PBXBuildFile; fileRef = DC0769FAB5B4727E089E23CC /* HDMRecoverSetting.m */; };
@@ -292,12 +295,14 @@
 		0AD6749D1A7B9108007967DB /* DialogHDMSeedWordList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DialogHDMSeedWordList.h; sourceTree = "<group>"; };
 		0AD6749E1A7B9108007967DB /* DialogHDMSeedWordList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DialogHDMSeedWordList.m; sourceTree = "<group>"; };
 		0FED7A4051DB45218112FAC0 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		1BC272BC4509E4F880EAC6F9 /* AddHDMAddressViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddHDMAddressViewController.h; sourceTree = "<group>"; };
 		1BC275D3A11FAF859823CF7E /* DialogHDMAddressOptions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DialogHDMAddressOptions.h; sourceTree = "<group>"; };
 		1BC279BF6C2A1E9DF4D86908 /* HDMTriangleBgView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HDMTriangleBgView.h; sourceTree = "<group>"; };
 		1BC27C837F7819A54B0A2E37 /* HDMTriangleBgView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HDMTriangleBgView.m; sourceTree = "<group>"; };
 		1BC27C882946AB67434912E5 /* DialogHDMInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DialogHDMInfo.h; sourceTree = "<group>"; };
 		1BC27D1407586D2FCB8F01AC /* DialogHDMAddressOptions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DialogHDMAddressOptions.m; sourceTree = "<group>"; };
 		1BC27E22C25A90DF1E5DA1DC /* DialogHDMInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DialogHDMInfo.m; sourceTree = "<group>"; };
+		1BC27FD66F3376A2C68612DD /* AddHDMAddressViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddHDMAddressViewController.m; sourceTree = "<group>"; };
 		4217A3711951235D00063746 /* Depth.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Depth.h; sourceTree = "<group>"; };
 		4217A3721951235D00063746 /* Depth.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Depth.m; sourceTree = "<group>"; };
 		4217A38E19512DC000063746 /* TransactionsUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TransactionsUtil.h; sourceTree = "<group>"; };
@@ -675,6 +680,7 @@
 		ACF4B17219668D5700CE24FD /* MarketListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MarketListCell.h; path = Cells/MarketListCell.h; sourceTree = "<group>"; };
 		ACF4B17319668D5700CE24FD /* MarketListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MarketListCell.m; path = Cells/MarketListCell.m; sourceTree = "<group>"; };
 		D61D00DE53941DC6062E1938 /* HDMApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HDMApi.h; sourceTree = "<group>"; };
+		D61D0299B4CDCCFC6D0BA161 /* hdm.bither.net.cer */ = {isa = PBXFileReference; lastKnownFileType = file.der; path = hdm.bither.net.cer; sourceTree = "<group>"; };
 		D61D07CCE58EB1B7FCA04677 /* PasswordGetter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PasswordGetter.h; sourceTree = "<group>"; };
 		D61D089EE8093848A924819C /* HDMApi.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HDMApi.m; sourceTree = "<group>"; };
 		D61D0DB47AB1A1EA42112C56 /* PasswordGetter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PasswordGetter.m; sourceTree = "<group>"; };
@@ -699,6 +705,7 @@
 		DC01B0277E3ECFEB18F87712 /* HDMRecoverSetting.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HDMRecoverSetting.h; sourceTree = "<group>"; };
 		DC03155DE24560F766E286C4 /* HDMKeychainRecoverUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HDMKeychainRecoverUtil.h; sourceTree = "<group>"; };
 		DC0769FAB5B4727E089E23CC /* HDMRecoverSetting.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HDMRecoverSetting.m; sourceTree = "<group>"; };
+		DAD0FFF41A81D08D008AEAA2 /* HDMApiTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HDMApiTest.m; sourceTree = "<group>"; };
 		DC07A672CCAD76ED66B72B91 /* ImportHDMColdSeedController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImportHDMColdSeedController.m; sourceTree = "<group>"; };
 		DC0A375AE83A8BA37F3FA65F /* ImportHDMCold.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImportHDMCold.m; sourceTree = "<group>"; };
 		DC0CC84409CD956F1FA008BF /* HDMKeychainRecoverUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HDMKeychainRecoverUtil.m; sourceTree = "<group>"; };
@@ -822,6 +829,8 @@
 				ACA11DC919F64D560087D39C /* RCheckViewController.m */,
 				0AB8BC981A7F3194003C07D8 /* HotAddressAddHDMViewController.h */,
 				0AB8BC991A7F3194003C07D8 /* HotAddressAddHDMViewController.m */,
+				1BC27FD66F3376A2C68612DD /* AddHDMAddressViewController.m */,
+				1BC272BC4509E4F880EAC6F9 /* AddHDMAddressViewController.h */,
 			);
 			path = Hot;
 			sourceTree = "<group>";
@@ -1031,6 +1040,7 @@
 				427CF4C919540ED50081869C /* QRCodeTest.m */,
 				421D8A0219592BF20062FDAF /* WalletUtilTest.m */,
 				0AB8BCB01A7F8656003C07D8 /* NSConditionTest.m */,
+				DAD0FFF41A81D08D008AEAA2 /* HDMApiTest.m */,
 			);
 			path = "bither-iosTests";
 			sourceTree = "<group>";
@@ -1169,6 +1179,7 @@
 			children = (
 				0AD674931A79F2B8007967DB /* BIP39EnglishWords.plist */,
 				ACA9D708195410FF002D1E3A /* Sound */,
+				D61D0299B4CDCCFC6D0BA161 /* hdm.bither.net.cer */,
 			);
 			path = Resouces;
 			sourceTree = "<group>";
@@ -1518,6 +1529,7 @@
 				ACA9D70A195410FF002D1E3A /* qr_code_scanned.mp3 in Resources */,
 				42D9B777193D6B5B00C85B89 /* Images.xcassets in Resources */,
 				AC53ABEE19D94230007C095C /* xrandom_open_sound.mp3 in Resources */,
+				D61D047B6D9BE30D5BED20E1 /* hdm.bither.net.cer in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1781,6 +1793,7 @@
 				1BC270F1C2BEA60E0B3384AB /* DialogHDMAddressOptions.m in Sources */,
 				DC0C00F6FC8AA88E26580598 /* HDMRecoverSetting.m in Sources */,
 				DC0448DAEF65BD227897D240 /* HDMKeychainRecoverUtil.m in Sources */,
+				1BC2778BC574DA2F816BC77A /* AddHDMAddressViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1793,6 +1806,7 @@
 				0AB8BCB11A7F8656003C07D8 /* NSConditionTest.m in Sources */,
 				42E816251952DF43005F16F7 /* StringUtilTest.m in Sources */,
 				421D8A0319592BF20062FDAF /* WalletUtilTest.m in Sources */,
+				DAD0FFF51A81D08D008AEAA2 /* HDMApiTest.m in Sources */,
 				4254086D1946E0FD007AF99C /* BlockUtilTest.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

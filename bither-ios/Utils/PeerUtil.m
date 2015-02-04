@@ -78,7 +78,7 @@ static PeerUtil * peerUtil;
         [TransactionsUtil syncWallet:^{
             [self connectPeer];
             isRunning=NO;
-        } andErrorCallBack:^(MKNetworkOperation *errorOp, NSError *error) {
+        } andErrorCallBack:^(NSOperation *errorOp, NSError *error) {
             isRunning=NO;
         }];
     }

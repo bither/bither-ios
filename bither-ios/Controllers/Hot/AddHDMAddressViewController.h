@@ -1,6 +1,6 @@
 //
-//  BTHDMBid+Api.h
-//  bitheri
+//  AddHDMAddressViewController.h
+//  bither-ios
 //
 //  Copyright 2014 http://Bither.net
 //
@@ -15,16 +15,12 @@
 //  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 //  See the License for the specific language governing permissions and
 //  limitations under the License.
+//
+//  Created by songchenwen on 15/2/4.
+//
+
 #import <Foundation/Foundation.h>
-#import "BTHDMBid.h"
-#import "BitherSetting.h"
 
-@interface BTHDMBid (Api)
 
-- (NSString *)getPreSignHashAndError:(NSError **)err;
-- (void)changeBidPasswordWithSignature:(NSString *)signature andPassword:(NSString *)password andError:(NSError **)err;
-- (NSArray *)recoverHDMWithSignature:(NSString *)signature andPassword:(NSString *)password andError:(NSError **)err;
-
--(void)createHDMAddress:(NSArray *)pubsList andPassword:(NSString *)password  andError:(ErrorBlock)errorblock;
-
+@interface AddHDMAddressViewController : UIViewController
 @end

@@ -113,7 +113,7 @@ static Setting* avatarSetting;
             UploadAndDowloadFileFactory * uploadAndDowload=[[UploadAndDowloadFileFactory alloc ] init];
             [uploadAndDowload uploadAvatar:^(NSDictionary *dict) {
                 
-            } andErrorCallBack:^(MKNetworkOperation *errorOp, NSError *error) {
+            } andErrorCallBack:^(NSOperation *errorOp, NSError *error) {
                 
             }];
             dispatch_async(dispatch_get_main_queue(), ^{

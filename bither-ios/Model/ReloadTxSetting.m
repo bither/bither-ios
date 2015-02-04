@@ -66,7 +66,7 @@ static Setting *reloadTxsSetting;
                 [self.controller performSelector:@selector(showMsg:) withObject:NSLocalizedString(@"Reload transactions data success", nil)];
             }
             
-        } andErrorCallBack:^(MKNetworkOperation *errorOp, NSError *error) {
+        } andErrorCallBack:^(NSOperation *errorOp, NSError *error) {
             if (dialogProgrees) {
                 [dialogProgrees dismiss];
             }

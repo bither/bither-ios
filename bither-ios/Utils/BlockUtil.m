@@ -112,7 +112,7 @@ static BlockUtil *blockUtil;
                     callback();
                 }
             }
-        } andErrorCallBack:^(MKNetworkOperation *errorOp, NSError *error) {
+        } andErrorCallBack:^(NSOperation *errorOp, NSError *error) {
             if ([self.delegate respondsToSelector:@selector(error)]) {
                 [self.delegate error];
             }

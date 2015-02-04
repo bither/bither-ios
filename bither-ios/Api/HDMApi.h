@@ -16,6 +16,22 @@
 //  See the License for the specific language governing permissions and
 //  limitations under the License.
 #import <Foundation/Foundation.h>
+#import "BitherSetting.h"
 
 @interface HDMApi : NSObject
+
++ (HDMApi *)instance;
+
+- (void)getHDMPasswordRandomWithHDMBid:(NSString *) hdmBid callback:(IdResponseBlock) callback andErrorCallBack:(ErrorHandler)errorCallback;
+- (void)changeHDMPasswordWithHDMBid:(NSString *)hdmBid andPassword:(NSString *)password
+                       andSignature:(NSString *)signature andHotAddress:(NSString *)hotAddress
+                           callback:(VoidResponseBlock)callback andErrorCallBack:(ErrorHandler)errorCallback;
+- (void)createHDMAddressWithHDMBid:(NSString *)hdmBid andPassword:(NSString *)password start:(int)start end:(int)end
+                           pubHots:(NSArray *) pubHots pubColds:(NSArray *)pubColds
+                          callback:(ArrayResponseBlock)callback andErrorCallBack:(ErrorHandler)errorCallback;
+- (void)signatureByRemoteWithHDMBid:(NSString *)hdmBid andPassword:(NSString *)password andUnsignHash:(NSData *)unsignHash
+                           callback:(IdResponseBlock) callback andErrorCallBack:(ErrorHandler)errorCallback;
+- (void)recoverHDMAddressWithHDMBid:(NSString *)hdmBid andPassword:(NSString *)password andSignature:(NSString *)signature
+                           callback:(DictResponseBlock)callback andErrorCallBack:(ErrorHandler)errorCallback;
+
 @end
