@@ -29,8 +29,8 @@
 - (void)createHDMAddressWithHDMBid:(NSString *)hdmBid andPassword:(NSData *)password start:(int)start end:(int)end
                            pubHots:(NSArray *) pubHots pubColds:(NSArray *)pubColds
                           callback:(ArrayResponseBlock)callback andErrorCallBack:(ErrorHandler)errorCallback;
-- (void)signatureByRemoteWithHDMBid:(NSString *)hdmBid andPassword:(NSData *)password andUnsignHash:(NSData *)unsignHash andIndex:(int)index
-                           callback:(IdResponseBlock) callback andErrorCallBack:(ErrorHandler)errorCallback;
+- (void)signatureByRemoteWithHDMBid:(NSString *)hdmBid andPassword:(NSData *)password andUnsignHash:(NSArray *)unsignHashes andIndex:(int)index
+                           callback:(ArrayResponseBlock) callback andErrorCallBack:(ErrorHandler)errorCallback;
 - (void)recoverHDMAddressWithHDMBid:(NSString *)hdmBid andPassword:(NSData *)password andSignature:(NSString *)signature
                            callback:(DictResponseBlock)callback andErrorCallBack:(ErrorHandler)errorCallback;
 

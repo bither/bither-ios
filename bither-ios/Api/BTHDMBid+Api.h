@@ -23,8 +23,9 @@
 
 - (NSString *)getPreSignHashAndError:(NSError **)err;
 - (void)changeBidPasswordWithSignature:(NSString *)signature andPassword:(NSString *)password andHotAddress:(NSString *)hotAddress andError:(NSError **)err;
-- (NSArray *)recoverHDMWithSignature:(NSString *)signature andPassword:(NSString *)password andError:(NSError **)err;
 
 - (NSArray *)createHDMAddress:(NSArray *)pubsList andPassword:(NSString *)password andError:(NSError **)err;
+- (NSArray *)recoverHDMWithSignature:(NSString *)signature andPassword:(NSString *)password andError:(NSError **)err;
 
+- (NSArray *)signatureByRemoteWithPassword:(NSString *)password andUnsignHash:(NSArray *)unsignHashes andIndex:(int)index andError:(NSError **)err;
 @end

@@ -68,6 +68,15 @@
             [pubsList addObject:pubs];
         }
         [hdmBid createHDMAddress:pubsList andPassword:password andError:&error];
+
+        // recover address
+        pre = [hdmBid getPreSignHashAndError:&error];
+        signature = [[firstKeyCold.key signHash:[pre hexToData]] base64EncodedStringWithOptions:0];
+        NSArray *recoverPubsList = [hdmBid recoverHDMWithSignature:signature andPassword:password andError:&error];
+
+        // sign
+        NSArray *unsignHashes = @[[@"0000000000000000000000000000000000000000000000000000000000000000" hexToData]];
+        NSArray *sign = [hdmBid signatureByRemoteWithPassword:password andUnsignHash:unsignHashes andIndex:0 andError:&error];
     });
 }
 
