@@ -80,6 +80,12 @@
     return _pageName;
 }
 
+-(void)handleScanCancelByReader:(ScanQrCodeViewController *)reader {
+    if(self.delegate && [self.delegate respondsToSelector:@selector(handleScanCancelByReader:)]){
+        [self.delegate handleScanCancelByReader:self];
+    }
+}
+
 -(void)handleResult:(NSString *)result byReader:(ScanQrCodeViewController *)reader{
     if(![StringUtil compareString:_lastResult compare:result]){
         _lastResult = result;

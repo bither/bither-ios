@@ -34,11 +34,21 @@
 #import "DialogSendTxConfirm.h"
 #import "DialogSendOption.h"
 #import "UnitUtil.h"
+#import "ScanQrCodeTransportViewController.h"
+#import "DialogWithActions.h"
+#import "NSError+HDMHttpErrorMessage.h"
+#import "QrCodeViewController.h"
+#import "QRCodeTxTransport.h"
+#import "BTQRCodeUtil.h"
 
 #define kBalanceFontSize (15)
+#define kSendButtonQrIconSize (20)
 
-@interface HdmSendViewController()<UITextFieldDelegate,ScanQrCodeDelegate,DialogSendTxConfirmDelegate, DialogSendOptionDelegate>{
+@interface HdmSendViewController()<UITextFieldDelegate,ScanQrCodeDelegate,DialogSendTxConfirmDelegate>{
     DialogProgressChangable *dp;
+    BOOL signWithCold;
+    BOOL isInRecovery;
+    UIImageView *ivSendQr;
 }
 @property (weak, nonatomic) IBOutlet UILabel *lblBalancePrefix;
 @property (weak, nonatomic) IBOutlet UILabel *lblBalance;
@@ -51,19 +61,36 @@
 @property DialogSelectChangeAddress *dialogSelectChangeAddress;
 @end
 
+@interface ColdSigFetcher : NSObject<ScanQrCodeDelegate,DialogSendTxConfirmDelegate>
+-(instancetype) initWithIndex:(UInt32)index password:(NSString*)password unsignedHashes:(NSArray*)unsignedHashes tx:(BTTx*)tx from:(BTAddress*)from to:(NSString*)toAddress changeTo:(NSString*)changeAddress andController:(HdmSendViewController *)controller ;
+-(NSArray *)sigs;
+@property BOOL userCancel;
+@property NSString *errorMsg;
+@end
+
+@interface RemoteSigFetcher : NSObject
+-(instancetype) initWithIndex:(UInt32)index password:(NSString*)password unsignedHashes:(NSArray*)unsignedHashes andTx:(BTTx*)tx;
+-(NSArray *)sigs;
+@property NSString *errorMsg;
+@end
+
 @implementation HdmSendViewController
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
     }
     return self;
 }
 
-- (void)viewDidLoad
-{
+- (void)viewDidLoad {
     [super viewDidLoad];
+    isInRecovery = self.address.isInRecovery;
+    if(isInRecovery){
+        signWithCold = YES;
+    }else{
+        signWithCold = NO;
+    }
     [self configureBalance];
     self.tfAddress.delegate = self;
     self.tfPassword.delegate = self;
@@ -79,7 +106,12 @@
     }
     dp = [[DialogProgressChangable alloc]initWithMessage:NSLocalizedString(@"Please wait…", nil)];
     dp.touchOutSideToDismiss = NO;
+    ivSendQr = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"unsigned_transaction_button_icon"]];
+    CGFloat ivSendQrMargin = (self.btnSend.frame.size.height - kSendButtonQrIconSize)/2;
+    ivSendQr.frame = CGRectMake(self.btnSend.frame.size.width - kSendButtonQrIconSize - ivSendQrMargin, ivSendQrMargin, kSendButtonQrIconSize, kSendButtonQrIconSize);
+    [self.btnSend addSubview:ivSendQr];
     self.dialogSelectChangeAddress = [[DialogSelectChangeAddress alloc]initWithFromAddress:self.address];
+    [self configureForSigningPartner];
     [self check];
 }
 
@@ -126,14 +158,46 @@
                         [self showSendResult:NSLocalizedString(@"Send failed.", nil) dialog:dp];
                         return;
                     }
-                    if([self.address signTransaction:tx withPassphrase:self.tfPassword.text]){
+                    BOOL signResult;
+                    __block NSString* errorMsg;
+                    __block BOOL userCanceled = NO;
+                    NSArray* (^coldFetcher)(UInt32 index, NSString* password, NSArray* unsignHashes, BTTx* tx) = ^NSArray *(UInt32 index, NSString *password, NSArray *unsignedHashes, BTTx *tx){
+                        ColdSigFetcher *f = [[ColdSigFetcher alloc] initWithIndex:index password:password unsignedHashes:unsignedHashes tx:tx from:self.address to:toAddress changeTo:self.dialogSelectChangeAddress.changeAddress.address andController:self];
+                        NSArray* sigs = f.sigs;
+                        userCanceled = f.userCancel;
+                        errorMsg = f.errorMsg;
+                        return sigs;
+                    };
+                    NSArray* (^remoteFetcher)(UInt32 index, NSString* password, NSArray* unsignHashes, BTTx* tx) = ^NSArray *(UInt32 index, NSString *password, NSArray *unsignedHashes, BTTx *tx){
+                        RemoteSigFetcher *f = [[RemoteSigFetcher alloc] initWithIndex:index password:password unsignedHashes:unsignedHashes andTx:tx];
+                        NSArray *sigs = f.sigs;
+                        errorMsg = f.errorMsg;
+                        return sigs;
+                    };
+                    @try{
+                        if(isInRecovery){
+                            signResult = [self.address signTx:tx withPassword:self.tfPassword.text coldBlock:coldFetcher andRemoteBlock:remoteFetcher];
+                        }else if(signWithCold){
+                            signResult = [self.address signTx:tx withPassword:self.tfPassword.text andFetchBlock:coldFetcher];
+                        } else {
+                            signResult = [self.address signTx:tx withPassword:self.tfPassword.text andFetchBlock:remoteFetcher];
+                        }
+                    }@catch(BTHDMPasswordWrongException* e){
+                        signResult = NO;
+                        errorMsg = NSLocalizedString(@"Password wrong.", nil);
+                    }
+                    if(signResult){
                         if([self.address checkRValuesForTx:tx]){
                             __block NSString * addressBlock = toAddress;
                             dispatch_async(dispatch_get_main_queue(), ^{
                                 [dp dismissWithCompletion:^{
                                     [dp changeToMessage:NSLocalizedString(@"Please wait…", nil)];
-                                    DialogSendTxConfirm *dialog = [[DialogSendTxConfirm alloc]initWithTx:tx from:self.address to:addressBlock changeTo:self.dialogSelectChangeAddress.changeAddress.address delegate:self];
-                                    [dialog showInWindow:self.view.window];
+                                    if(!signWithCold && !isInRecovery){
+                                        DialogSendTxConfirm *dialog = [[DialogSendTxConfirm alloc]initWithTx:tx from:self.address to:addressBlock changeTo:self.dialogSelectChangeAddress.changeAddress.address delegate:self];
+                                        [dialog showInWindow:self.view.window];
+                                    } else {
+                                        [self onSendTxConfirmed:tx];
+                                    }
                                 }];
                             });
                         } else {
@@ -142,14 +206,26 @@
                             });
                         }
                     }else{
-                        [self showSendResult:NSLocalizedString(@"Password wrong.", nil) dialog:dp];
+                        if(userCanceled){
+                            dispatch_async(dispatch_get_main_queue(), ^{
+                                [dp dismissWithCompletion:nil];
+                            });
+                        }
+                        if(errorMsg){
+                            [self showSendResult:errorMsg dialog:dp];
+                        }else{
+                            if(!signWithCold && !isInRecovery){
+                                [self showSendResult:NSLocalizedString(@"Password wrong.", nil) dialog:dp];
+                            }else{
+                                [self showSendResult:NSLocalizedString(@"Send failed.", nil) dialog:dp];
+                            }
+                        }
                     }
                 }
             });
         }];
     }
 }
-
 
 -(void)onSendTxConfirmed:(BTTx*)tx{
     if(!tx){
@@ -265,11 +341,37 @@
 
 - (IBAction)optionPressed:(id)sender {
     [self hideKeyboard];
-    [[[DialogSendOption alloc]initWithDelegate:self]showInWindow:self.view.window];
+    NSMutableArray *actions = [NSMutableArray new];
+    [actions addObject:[[Action alloc] initWithName:NSLocalizedString(@"select_change_address_option_name", nil) target:self andSelector:@selector(selectChangeAddress)]];
+    if(!isInRecovery){
+        if(signWithCold){
+            [actions addObject:[[Action alloc] initWithName:NSLocalizedString(@"hdm_send_with_server", nil) target:self andSelector:@selector(changeSigningPartner)]];
+        }else{
+            [actions addObject:[[Action alloc] initWithName:NSLocalizedString(@"hdm_send_with_cold", nil) target:self andSelector:@selector(changeSigningPartner)]];
+        }
+    }
+    [[[DialogWithActions alloc] initWithActions:actions] showInWindow:self.view.window];
 }
 
 -(void)selectChangeAddress{
     [self.dialogSelectChangeAddress showInWindow:self.view.window];
+}
+
+-(void)changeSigningPartner{
+    if(isInRecovery){
+       signWithCold = YES;
+    }else{
+        signWithCold = !signWithCold;
+    }
+    [self configureForSigningPartner];
+}
+
+-(void)configureForSigningPartner{
+    if(signWithCold || isInRecovery){
+        ivSendQr.hidden = NO;
+    } else {
+        ivSendQr.hidden = YES;
+    }
 }
 
 -(void)configureBalance{
@@ -329,4 +431,146 @@
 - (IBAction)topBarPressed:(id)sender {
     self.amtLink.amount = self.address.balance;
 }
+@end
+
+@implementation ColdSigFetcher{
+    UInt32 _index;
+    NSString* _password;
+    NSArray * _unsignedHashes;
+    BTTx* _tx;
+    BTAddress* _from;
+    NSString* _to;
+    NSString* _change;
+    HdmSendViewController *_controller;
+    NSCondition *fetched;
+    NSArray* sigs;
+}
+
+-(instancetype)initWithIndex:(UInt32)index password:(NSString *)password unsignedHashes:(NSArray *)unsignedHashes tx:(BTTx *)tx from:(BTAddress*)from to:(NSString*)toAddress changeTo:(NSString*)changeAddress andController:(HdmSendViewController *)controller {
+    self = [super init];
+    if(self){
+        _index = index;
+        _password = password;
+        _unsignedHashes = unsignedHashes;
+        _tx = tx;
+        _from = from;
+        _to = toAddress;
+        _change = changeAddress;
+        _controller = controller;
+        fetched = [NSCondition new];
+    }
+    return self;
+}
+
+- (NSArray *)sigs {
+    sigs = nil;
+    self.userCancel = NO;
+    dispatch_sync(dispatch_get_main_queue(), ^{
+        [[[DialogSendTxConfirm alloc] initWithTx:_tx from:_from to:_to changeTo:_change delegate:self] showInWindow:self];
+    });
+    [fetched lock];
+    [fetched wait];
+    [fetched unlock];
+    return sigs;
+}
+
+- (void)handleResult:(NSString *)result byReader:(ScanQrCodeViewController *)reader {
+    [reader dismissViewControllerAnimated:YES completion:^{
+        NSArray *strs =[BTQRCodeUtil splitQRCode:result];
+        NSMutableArray * signatures = [[NSMutableArray alloc]init];
+        for(NSString *str in strs){
+            NSMutableData *sig = [NSMutableData data];
+            NSMutableData *s = [NSMutableData dataWithData:str.hexToData];
+            [s appendUInt8:SIG_HASH_ALL];
+            [sig appendScriptPushData:s];
+            [signatures addObject:sig];
+        }
+        sigs = signatures;
+        [self signalFetchedCondition];
+    }];
+}
+
+- (void)handleScanCancelByReader:(ScanQrCodeViewController *)reader {
+    self.userCancel = YES;
+    [self signalFetchedCondition];
+}
+
+-(void)scanBitherColdToSign{
+    ScanQrCodeTransportViewController *scan = [[ScanQrCodeTransportViewController alloc]initWithDelegate:self title:NSLocalizedString(@"Scan Bither Cold to sign", nil) pageName:NSLocalizedString(@"Signed TX QR Code", nil)];
+    [_controller presentViewController:scan animated:YES completion:^{
+        [_controller.navigationController popToViewController:self animated:NO];
+    }];
+}
+
+-(void)onSendTxConfirmed:(BTTx*)tx{
+    QrCodeViewController *qr = [_controller.storyboard instantiateViewControllerWithIdentifier:@"QrCode"];
+    qr.qrCodeTitle = NSLocalizedString(@"Sign Trasaction", nil);
+    qr.qrCodeMsg = NSLocalizedString(@"Scan with Bither Cold", nil);
+    qr.cancelWarning = NSLocalizedString(@"Give up signing?", nil);
+    QRCodeTxTransport *txTrans = [[QRCodeTxTransport alloc]init];
+    txTrans.fee = _tx.feeForTransaction;
+    txTrans.to = [tx amountSentTo:_to];
+    txTrans.myAddress = _from.address;
+    txTrans.toAddress = _to;
+    if (![StringUtil isEmpty:_change] && ![StringUtil compareString:_change compare:_from.address]) {
+        txTrans.changeAddress=_change;
+        txTrans.changeAmt=[tx amountSentTo:_change];
+    }
+    NSMutableArray *array = [[NSMutableArray alloc]init];
+    NSArray *hashDataArray = tx.unsignedInHashes;
+    for(NSData *data in hashDataArray){
+        [array addObject:[NSString hexWithData:data]];
+    }
+    txTrans.hashList = array;
+    qr.content = [QRCodeTxTransport getPreSignString:txTrans];
+    qr.oldContent=[QRCodeTxTransport oldGetPreSignString:txTrans];
+    qr.hasChangeAddress=![StringUtil compareString:_change compare:_from.address];
+    [qr setFinishAction:NSLocalizedString(@"Scan Bither Cold to sign", nil) target:self selector:@selector(scanBitherColdToSign)];
+}
+
+- (void)signalFetchedCondition{
+    [fetched lock];
+    [fetched signal];
+    [fetched unlock];
+}
+
+-(void)onSendTxCanceled{
+    self.userCancel = YES;
+    [self signalFetchedCondition];
+}
+
+
+@end
+
+@implementation RemoteSigFetcher{
+    UInt32 _index;
+    NSString* _password;
+    NSArray *_unsignedHashes;
+    BTTx* _tx;
+}
+
+- (instancetype)initWithIndex:(UInt32)index password:(NSString *)password unsignedHashes:(NSArray *)unsignedHashes andTx:(BTTx *)tx {
+    self = [super init];
+    if(self){
+        _index = index;
+        _password = password;
+        _unsignedHashes = unsignedHashes;
+        _tx = tx;
+    }
+    return self;
+}
+
+- (NSArray *)sigs {
+    NSError* error;
+    //TODO: fetch remote signatures
+    if(error){
+        if(error.isHttp400){
+            self.errorMsg = NSLocalizedString(@"hdm_address_sign_tx_server_error", nil);
+        }else{
+            self.errorMsg = NSLocalizedString(@"Network failure.", nil);
+        }
+    }
+    return nil;
+}
+
 @end

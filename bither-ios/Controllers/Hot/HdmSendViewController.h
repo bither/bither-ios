@@ -23,7 +23,7 @@
 #import "SendViewController.h"
 
 @interface HdmSendViewController : UIViewController
-@property BTAddress *address;
+@property BTHDMAddress *address;
 @property NSString* toAddress;
 @property uint64_t amount;
 @property (weak) NSObject<SendDelegate> *sendDelegate;
