@@ -358,3 +358,12 @@
 
 /* Class = "IBUIButton"; normalTitle = "Add This Private Key"; ObjectID = "zjg-wy-EHw"; */
 "zjg-wy-EHw.normalTitle" = "Add This Private Key";
+
+/* Class = "IBUILabel"; text = "How many HDM addresses to add?"; ObjectID = "KSX-eO-Uwn"; */
+"KSX-eO-Uwn.text" = "How many HDM addresses to add?";
+
+/* Class = "IBUILabel"; text = "Add HDM Address"; ObjectID = "Kfd-Dg-pnE"; */
+"Kfd-Dg-pnE.text" = "Add HDM Address";
+
+/* Class = "IBUIButton"; normalTitle = "Generate"; ObjectID = "gHB-fo-cHb"; */
+"gHB-fo-cHb.normalTitle" = "Generate";

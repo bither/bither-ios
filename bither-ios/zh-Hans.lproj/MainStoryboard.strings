@@ -301,3 +301,12 @@
 
 /* Class = "IBUISegmentedControl"; oZb-Bk-280.segmentTitles[2] = "HDM"; ObjectID = "oZb-Bk-280"; */
 "oZb-Bk-280.segmentTitles[2]" = "HDM";
+
+/* Class = "IBUILabel"; text = "How many HDM addresses to add?"; ObjectID = "KSX-eO-Uwn"; */
+"KSX-eO-Uwn.text" = "增加多少个 HDM 地址?";
+
+/* Class = "IBUILabel"; text = "Add HDM Address"; ObjectID = "Kfd-Dg-pnE"; */
+"Kfd-Dg-pnE.text" = "增加 HDM 地址";
+
+/* Class = "IBUIButton"; normalTitle = "Generate"; ObjectID = "gHB-fo-cHb"; */
+"gHB-fo-cHb.normalTitle" = "增加";
