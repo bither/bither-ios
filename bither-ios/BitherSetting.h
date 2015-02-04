@@ -94,7 +94,7 @@ typedef void (^DictResponseBlock)(NSDictionary *dict);
 typedef void (^IdResponseBlock)(id response);
 typedef void (^ArrayResponseBlock)(NSArray *array);
 typedef void (^ImageResponseBlock)(UIImage *image, NSURL *url);
-typedef void (^ErrorHandler)(MKNetworkOperation *errorOp, NSError *error);
+typedef void (^ErrorHandler)(NSOperation *errorOp, NSError *error);
 typedef void (^CompletedOperation)(MKNetworkOperation *completedOperation);
 typedef void (^ResponseFormat)(MKNetworkOperation *completedOperation);
 typedef void (^LongResponseBlock)(long long num);

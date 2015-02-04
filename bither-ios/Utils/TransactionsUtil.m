@@ -87,7 +87,7 @@
             }else{
                 [self getAddressState:addressList index:index callback:callback andErrorCallback:errorBlcok];
             }
-        } andErrorCallBack:^(MKNetworkOperation *errorOp, NSError *error) {
+        } andErrorCallBack:^(NSOperation *errorOp, NSError *error) {
             if (errorBlcok) {
                 errorBlcok(error);
             }
@@ -209,7 +209,7 @@
             }else{
                 [TransactionsUtil getMyTx:addresses index:index callback:callback andErrorCallBack:errorCallback];
             }
-        } andErrorCallBack:^(MKNetworkOperation *errorOp, NSError *error) {
+        } andErrorCallBack:^(NSOperation *errorOp, NSError *error) {
             if (errorCallback) {
                 errorCallback(errorOp,error);
             }
@@ -233,11 +233,11 @@
     __block int tmpTxCnt = 0;
     __block int page = 1;
 
-    ErrorHandler errorHandler = ^(MKNetworkOperation *errorOp, NSError *error) {
+    ErrorHandler errorHandler = ^(NSOperation *errorOp, NSError *error) {
         if (errorCallback) {
             errorCallback(errorOp,error);
         }
-        NSLog(@"get my transcation api %@",errorOp.responseString);
+        NSLog(@"get my transcation api %@",errorOp);
     };
 
     DictResponseBlock nextPageBlock = ^(NSDictionary * dict) {
@@ -372,7 +372,7 @@
             [TransactionsUtil completeInputsForAddressForApi:address fromBlock:newFromBlock callback:callback andErrorCallBack:errorCallback];
         }
         
-    } andErrorCallBack:^(MKNetworkOperation *errorOp, NSError *error) {
+    } andErrorCallBack:^(NSOperation *errorOp, NSError *error) {
         if (errorCallback) {
             errorCallback(errorOp,error);
         }

@@ -23,22 +23,23 @@
 #import "BTHDMBid+Api.h"
 #import "BitherApi.h"
 #import "BTHDMAddress.h"
+#import "HDMApi.h"
 
 @implementation BTHDMBid (Api)
 
-- (NSString *)getPreSignHashAndError:(NSError **)error; {
+- (NSString *)getPreSignHashAndError:(NSError **)err; {
     self.password = [NSData randomWithSize:32];
     __block long serviceRandom = 0;
     __block NSCondition *condition = [NSCondition new];
     __block NSError *e = nil;
-    [[BitherApi instance] getHDMPasswordRandomWithHDMBid:self.address callback:^(id response) {
+    [[HDMApi instance] getHDMPasswordRandomWithHDMBid:self.address callback:^(id response) {
         [condition lock];
         serviceRandom = [response intValue];
         [condition signal];
         [condition unlock];
-    } andErrorCallBack:^(MKNetworkOperation *errorOp, NSError *err) {
+    } andErrorCallBack:^(NSOperation *errorOp, NSError *error) {
         [condition lock];
-
+        e = error;
         [condition signal];
         [condition unlock];
     }];
@@ -46,7 +47,6 @@
     [condition lock];
     [condition wait];
     NSString *result = nil;
-
     self.serviceRandom = serviceRandom;
     NSString *message = [NSString stringWithFormat:@"bitid://hdm.bither.net/%@/password/%@/%ld", self.address, [NSString hexWithData:self.password], self.serviceRandom];
     NSData *d = [[BTUtils formatMessageForSigning:message] SHA256_2];
@@ -55,7 +55,7 @@
     return result;
 }
 
-- (void)changeBidPasswordWithSignature:(NSString *)signature andPassword:(NSString *)password andError:(NSError **)error; {
+- (void)changeBidPasswordWithSignature:(NSString *)signature andPassword:(NSString *)password andError:(NSError **)err; {
     NSString *message = [NSString stringWithFormat:@"bitid://hdm.bither.net/%@/password/%@/%ld", self.address, [NSString hexWithData:self.password], self.serviceRandom];
     NSData *d = [[BTUtils formatMessageForSigning:message] SHA256_2];
     __block NSCondition *condition = [NSCondition new];
@@ -63,15 +63,16 @@
         //
     }
     NSString *hotAddress = [BTAddressManager instance].hdmKeychain.firstAddressFromDb;
-    [[BitherApi instance] changeHDMPasswordWithHDMBid:self.address andPassword:[NSString hexWithData:self.password] andSignature:signature andHotAddress:hotAddress callback:^{
+    [[HDMApi instance] changeHDMPasswordWithHDMBid:self.address andPassword:[NSString hexWithData:self.password] andSignature:signature andHotAddress:hotAddress callback:^{
         [condition lock];
         [condition signal];
         [condition unlock];
-    } andErrorCallBack:^(MKNetworkOperation *errorOp, NSError *err) {
+    } andErrorCallBack:^(NSOperation *errorOp, NSError *error) {
         [condition lock];
         [condition signal];
         [condition unlock];
     }];
+
     [condition lock];
     [condition wait];
     self.encryptedBitherPassword = [[[BTEncryptData alloc] initWithData:self.password andPassowrd:password] toEncryptedString];
@@ -100,7 +101,7 @@
             pubs.remote = array[i];
 
         }
-    } andErrorCallBack:^(MKNetworkOperation *errorOp, NSError *error) {
+    } andErrorCallBack:^(NSOperation *errorOp, NSError *error) {
         if (errorblock) {
             errorblock(error);
         }

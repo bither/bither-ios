@@ -47,7 +47,7 @@ static BitherApi *piApi;
                 callback(dict);
             }
         }
-    } andErrorCallback:^(MKNetworkOperation *errorOp, NSError *error) {
+    } andErrorCallback:^(NSOperation *errorOp, NSError *error) {
         if (errorCallback) {
             errorCallback(errorOp, error);
         }
@@ -63,7 +63,7 @@ static BitherApi *piApi;
             callback(completedOperation.responseString);
         }
 
-    } andErrorCallback:^(MKNetworkOperation *errorOp, NSError *error) {
+    } andErrorCallback:^(NSOperation *errorOp, NSError *error) {
         if (errorCallback) {
             errorCallback(errorOp, error);
         }
@@ -78,7 +78,7 @@ static BitherApi *piApi;
             callback(completedOperation.responseJSON);
         }
 
-    } andErrorCallback:^(MKNetworkOperation *errorOp, NSError *error) {
+    } andErrorCallback:^(NSOperation *errorOp, NSError *error) {
         if (errorCallback) {
             errorCallback(errorOp, error);
         }
@@ -101,7 +101,7 @@ static BitherApi *piApi;
                 }
             }
         });
-    } andErrorCallback:^(MKNetworkOperation *errorOp, NSError *error) {
+    } andErrorCallback:^(NSOperation *errorOp, NSError *error) {
         if (errorCallback) {
             errorCallback(errorOp, error);
         }
@@ -120,7 +120,7 @@ static BitherApi *piApi;
             }
         });
 
-    } andErrorCallback:^(MKNetworkOperation *errorOp, NSError *error) {
+    } andErrorCallback:^(NSOperation *errorOp, NSError *error) {
         if (errorCallback) {
             errorCallback(errorOp, error);
         }
@@ -141,7 +141,7 @@ static BitherApi *piApi;
             }
 
         });
-    } andErrorCallback:^(MKNetworkOperation *errorOp, NSError *error) {
+    } andErrorCallback:^(NSOperation *errorOp, NSError *error) {
         if (errorCallback) {
             errorCallback(errorOp, error);
         }
@@ -157,7 +157,7 @@ static BitherApi *piApi;
         if (callback) {
             callback(nil);
         }
-    } andErrorCallBack:^(MKNetworkOperation *errorOp, NSError *error) {
+    } andErrorCallBack:^(NSOperation *errorOp, NSError *error) {
         if (errorCallback) {
             errorCallback(errorOp, error);
         }
@@ -172,7 +172,7 @@ static BitherApi *piApi;
         if (callback != nil) {
             callback(random);
         }
-    } andErrorCallback:^(MKNetworkOperation *errorOp, NSError *error) {
+    } andErrorCallback:^(NSOperation *errorOp, NSError *error) {
         if (errorCallback) {
             errorCallback(errorOp, error);
         }
@@ -189,7 +189,7 @@ static BitherApi *piApi;
         if ([dict[@"result"] isEqualToString:@"ok"] && callback != nil) {
             callback();
         }
-    } andErrorCallBack:^(MKNetworkOperation *errorOp, NSError *error) {
+    } andErrorCallBack:^(NSOperation *errorOp, NSError *error) {
         if (errorCallback) {
             errorCallback(errorOp, error);
         }
@@ -206,7 +206,7 @@ static BitherApi *piApi;
         if (callback != nil) {
             callback(pubRemotes);
         }
-    } andErrorCallBack:^(MKNetworkOperation *errorOp, NSError *error) {
+    } andErrorCallBack:^(NSOperation *errorOp, NSError *error) {
         if (errorCallback) {
             errorCallback(errorOp, error);
         }
@@ -220,7 +220,7 @@ static BitherApi *piApi;
         if (callback != nil) {
             callback(completedOperation.responseString);
         }
-    } andErrorCallBack:^(MKNetworkOperation *errorOp, NSError *error) {
+    } andErrorCallBack:^(NSOperation *errorOp, NSError *error) {
         if (errorCallback) {
             errorCallback(errorOp, error);
         }
@@ -238,7 +238,7 @@ static BitherApi *piApi;
         if (callback != nil) {
             callback(dict);
         }
-    } andErrorCallBack:^(MKNetworkOperation *errorOp, NSError *error) {
+    } andErrorCallBack:^(NSOperation *errorOp, NSError *error) {
         if (errorCallback) {
             errorCallback(errorOp, error);
         }
