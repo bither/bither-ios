@@ -191,7 +191,8 @@ typedef enum {
         [self showMsg:NSLocalizedString(@"hdm_address_count_limit", nil)];
         return;
     }
-    //TODO: call add hdm address view controller
+    UIViewController *add = [self.storyboard instantiateViewControllerWithIdentifier:@"AddHDMAddress"];
+    [self presentViewController:add animated:YES completion:nil];
 }
 
 -(SectionType)sectionTypeForIndex:(NSUInteger)section{

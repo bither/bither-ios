@@ -1137,7 +1137,7 @@
         <!--AddHDM Address View Controller-->
         <scene sceneID="G78-xR-oMp">
             <objects>
-                <viewController storyboardIdentifier="AddHDMAddress" useStoryboardIdentifierAsRestorationIdentifier="YES" id="3Ag-pQ-2Pw" customClass="AddHDMAddressViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="AddHDMAddress" useStoryboardIdentifierAsRestorationIdentifier="YES" id="3Ag-pQ-2Pw" customClass="AddHDMAddressViewController" propertyAccessControl="all" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="4Wl-fp-YqK">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
