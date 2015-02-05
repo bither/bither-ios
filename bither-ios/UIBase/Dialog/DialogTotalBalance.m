@@ -92,7 +92,7 @@
         lbl.font = [UIFont systemFontOfSize:kBottomLabelFontSize];
         lbl.textColor = [UIColor whiteColor];
         lbl.textAlignment = NSTextAlignmentLeft;
-        lbl.attributedText = [self stringAddDotColor:[self.chart colorForIndex:0] string:NSLocalizedString(@"address_group_hdm_hot", nil)];
+        lbl.attributedText = [self stringAddDotColor:[self.chart colorForIndex:0] string:@"HDM"];
         [self addSubview:lbl];
 
         lbl = [[UILabel alloc]initWithFrame:CGRectMake(kBottomHorizontalMargin, bottom + kVerticalGap, self.frame.size.width - kBottomHorizontalMargin * 2, kBottomLabelFontSize * 1.2)];
