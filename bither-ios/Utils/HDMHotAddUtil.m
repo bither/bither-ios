@@ -23,11 +23,14 @@
 #import "NSError+HDMHttpErrorMessage.h"
 #import "PeerUtil.h"
 #import "BTHDMBid+Api.h"
+#import "NSString+Base58.h"
 #import "BTAddressProvider.h"
 #import "BTKey.h"
 
+
 @import MobileCoreServices;
 @import AVFoundation;
+
 
 #define kSaveProgress (0.1)
 #define kStartProgress (0.01)
@@ -294,13 +297,14 @@
     if(!hdmBid){
         return;
     }
+    result=[[result hexToData] base64EncodedStringWithOptions:0];
     [dp showInWindow:self.window completion:^{
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
             NSString* password = self.passwordGetter.password;
             if(!password){
                 return;
             }
-            NSError* error;
+            __block NSError* error;
             [hdmBid changeBidPasswordWithSignature:result andPassword:password andHotAddress:[BTAddressManager instance].hdmKeychain.firstAddressFromDb andError:&error];
             if(error){
                 dispatch_async(dispatch_get_main_queue(), ^{
@@ -312,14 +316,12 @@
             }
             [[PeerUtil instance]stopPeer];
             NSArray* as = [[BTAddressManager instance].hdmKeychain completeAddressesWithCount:1 password:password andFetchBlock:^(NSString *password, NSArray *partialPubs) {
-                // todo:
-//                [hdmBid createHDMAddress:partialPubs andPassword:password  andError:^(NSError *error) {
-//                    NSLog(@"error:%@",error);
-//                }];
+
+                [hdmBid createHDMAddress:partialPubs andPassword:password  andError:&error];
             }];
-            
-            
-            [[PeerUtil instance]startPeer];
+            if (!error) {
+                [[PeerUtil instance] startPeer];
+            }
             dispatch_async(dispatch_get_main_queue(), ^{
                [dp dismissWithCompletion:^{
                    if(as.count > 0){
