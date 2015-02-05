@@ -30,6 +30,7 @@
 #import "ScanQrCodeViewController.h"
 #import "PeerUtil.h"
 #import "NSError+HDMHttpErrorMessage.h"
+#import "BTHDMBid+Api.h"
 
 @interface AddHDMAddressViewController()<PasswordGetterDelegate,UIPickerViewDataSource,UIPickerViewDelegate,ScanQrCodeDelegate>{
     PasswordGetter *_passwordGetter;
@@ -104,9 +105,11 @@
             return;
         }
         [[PeerUtil instance] stopPeer];
-        NSError *error;
-        [keychain completeAddressesWithCount:count password:password andFetchBlock:^(NSString *p, NSArray *partialPubs) {
-            //TODO: fetch server hdm pub
+        __block NSError *error;
+
+        NSArray* as = [keychain completeAddressesWithCount:count password:password andFetchBlock:^(NSString *p, NSArray *partialPubs) {
+            BTHDMBid *hdmBid=[BTHDMBid getHDMBidFromDb];
+            [hdmBid createHDMAddress:partialPubs andPassword:p  andError:&error];
         }];
         [[PeerUtil instance] stopPeer];
         dispatch_async(dispatch_get_main_queue(), ^{
