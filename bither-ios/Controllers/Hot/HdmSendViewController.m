@@ -510,12 +510,12 @@
     QRCodeTxTransport *txTrans = [[QRCodeTxTransport alloc]init];
     txTrans.hdmIndex = _index;
     txTrans.fee = _tx.feeForTransaction;
-    txTrans.to = [tx amountSentTo:_to];
+    txTrans.to = [_tx amountSentTo:_to];
     txTrans.myAddress = _from.address;
     txTrans.toAddress = _to;
     if (![StringUtil isEmpty:_change] && ![StringUtil compareString:_change compare:_from.address]) {
         txTrans.changeAddress=_change;
-        txTrans.changeAmt=[tx amountSentTo:_change];
+        txTrans.changeAmt=[_tx amountSentTo:_change];
     }
     NSMutableArray *array = [[NSMutableArray alloc]init];
     for(NSData *data in _unsignedHashes){
@@ -526,6 +526,7 @@
     qr.oldContent=[QRCodeTxTransport oldGetPreSignString:txTrans];
     qr.hasChangeAddress=![StringUtil compareString:_change compare:_from.address];
     [qr setFinishAction:NSLocalizedString(@"Scan Bither Cold to sign", nil) target:self selector:@selector(scanBitherColdToSign)];
+    [_controller.navigationController pushViewController:qr animated:YES];
 }
 
 - (void)signalFetchedCondition{
