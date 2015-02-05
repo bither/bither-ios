@@ -374,7 +374,7 @@ static Setting* SwitchToColdSetting;
     if(!EditPasswordSetting){
         Setting * setting=[[Setting alloc] initWithName:NSLocalizedString(@"Change Password", nil) icon:[UIImage imageNamed:@"edit_password_button_icon"] ];
         [setting setSelectBlock:^(UIViewController * controller){
-            if([BTAddressManager instance].privKeyAddresses.count == 0){
+            if([BTAddressManager instance].privKeyAddresses.count == 0&&![[BTAddressManager instance] hasHDMKeychain]){
                 if([controller respondsToSelector:@selector(showMsg:)]){
                     [controller performSelector:@selector(showMsg:) withObject:NSLocalizedString(@"No private keys", nil)];
                 }

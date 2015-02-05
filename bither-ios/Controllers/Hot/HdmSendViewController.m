@@ -40,6 +40,7 @@
 #import "QrCodeViewController.h"
 #import "QRCodeTxTransport.h"
 #import "BTQRCodeUtil.h"
+#import "BTHDMBid+Api.h"
 
 #define kBalanceFontSize (15)
 #define kSendButtonQrIconSize (20)
@@ -563,15 +564,18 @@
 
 - (NSArray *)sigs {
     NSError* error;
-    //TODO: fetch remote signatures
+    BTHDMBid * hdmBid=[BTHDMBid getHDMBidFromDb];
+    NSArray * array=  [hdmBid signatureByRemoteWithPassword:_password andUnsignHash:_unsignedHashes andIndex:_index andError:&error];
     if(error){
         if(error.isHttp400){
             self.errorMsg = NSLocalizedString(@"hdm_address_sign_tx_server_error", nil);
         }else{
             self.errorMsg = NSLocalizedString(@"Network failure.", nil);
         }
+        return nil;
     }
-    return nil;
+    return array;
+
 }
 
 @end
