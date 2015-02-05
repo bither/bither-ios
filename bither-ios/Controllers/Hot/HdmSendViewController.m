@@ -508,6 +508,7 @@
     qr.qrCodeMsg = NSLocalizedString(@"Scan with Bither Cold", nil);
     qr.cancelWarning = NSLocalizedString(@"Give up signing?", nil);
     QRCodeTxTransport *txTrans = [[QRCodeTxTransport alloc]init];
+    txTrans.hdmIndex = _index;
     txTrans.fee = _tx.feeForTransaction;
     txTrans.to = [tx amountSentTo:_to];
     txTrans.myAddress = _from.address;
@@ -517,8 +518,7 @@
         txTrans.changeAmt=[tx amountSentTo:_change];
     }
     NSMutableArray *array = [[NSMutableArray alloc]init];
-    NSArray *hashDataArray = tx.unsignedInHashes;
-    for(NSData *data in hashDataArray){
+    for(NSData *data in _unsignedHashes){
         [array addObject:[NSString hexWithData:data]];
     }
     txTrans.hashList = array;
