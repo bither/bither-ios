@@ -4778,7 +4778,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <connections>
-                        <outlet property="amtLink" destination="SYZ-Ik-nmW" id="Rpi-4b-vu7"/>
+                        <outlet property="amtLink" destination="UHa-Vs-BiS" id="vRT-yt-vYr"/>
                         <outlet property="btnSend" destination="ygh-ls-Qes" id="Zba-Y2-P72"/>
                         <outlet property="lblBalance" destination="z1L-xS-51U" id="n2S-fO-cKK"/>
                         <outlet property="lblBalancePrefix" destination="hsE-yP-NwX" id="65N-Qr-ei7"/>
