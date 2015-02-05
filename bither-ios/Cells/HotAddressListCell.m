@@ -121,7 +121,7 @@
     if (txCount > 0 && recentlyTx != nil) {
         self.vNoUnconfirmedTx.hidden = YES;
         self.vUnconfirmedTx.hidden = NO;
-        [self.vUnconfirmedTxConfidence showTransaction:recentlyTx];
+        [self.vUnconfirmedTxConfidence showTransaction:recentlyTx withAddress:_btAddress];
         self.vUnconfirmedTxAmount.amount = [recentlyTx deltaAmountFrom:address];
         CGRect frame = self.vUnconfirmedTxAmount.frame;
         frame.origin.x = CGRectGetMaxX(self.vUnconfirmedTxConfidence.frame) + kUnconfirmedTxAmountLeftMargin;

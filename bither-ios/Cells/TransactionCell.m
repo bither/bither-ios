@@ -137,7 +137,7 @@
     if(a.length > 4){
         a = [StringUtil shortenAddress:a];
     }
-    [self.vTransactionConfidence showTransaction:tx];
+    [self.vTransactionConfidence showTransaction:tx withAddress:address];
     self.lblAddress.text = a;
     
     CGFloat width = [self.lblAddress.text sizeWithRestrict:CGSizeMake(CGFLOAT_MAX, CGFLOAT_MAX) font:self.lblAddress.font].width;

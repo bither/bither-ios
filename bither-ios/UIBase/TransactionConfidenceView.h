@@ -19,6 +19,8 @@
 #import <UIKit/UIKit.h>
 #import <Bitheri/BTTx.h>
 
+@class BTAddress;
+
 @interface TransactionConfidenceView : UIView
--(void)showTransaction:(BTTx*)tx;
+- (void)showTransaction:(BTTx *)tx withAddress:(BTAddress *)address;
 @end
