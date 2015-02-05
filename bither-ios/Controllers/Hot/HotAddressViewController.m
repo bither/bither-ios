@@ -30,6 +30,7 @@
 #import "DialogProgress.h"
 #import "DialogHDMSeedWordList.h"
 #import "DialogBlackQrCode.h"
+#import "IOS7ContainerViewController.h"
 
 typedef enum {
     SectionHDM = 0, SectionPrivate = 1, SectionWatchOnly = 2
@@ -192,53 +193,9 @@ typedef enum {
         return;
     }
     UIViewController *add = [self.storyboard instantiateViewControllerWithIdentifier:@"AddHDMAddress"];
-    [self presentViewController:add animated:YES completion:nil];
-}
-
--(SectionType)sectionTypeForIndex:(NSUInteger)section{
-    if(section == [self sectionIndexForType:SectionHDM]){
-        return SectionHDM;
-    }
-    if(section == [self sectionIndexForType:SectionPrivate]){
-        return SectionPrivate;
-    }
-    if(section == [self sectionIndexForType:SectionWatchOnly]){
-        return SectionWatchOnly;
-    }
-    return nil;
-}
-
--(NSUInteger)sectionIndexForType:(SectionType)type{
-    if(type == SectionHDM){
-        if(_hdms.count == 0){
-            return -1;
-        }
-        return 0;
-    }
-    if(type == SectionPrivate){
-        if(_privateKeys.count == 0){
-            return -1;
-        }
-        NSUInteger index = 0;
-        if(_hdms.count > 0){
-            index++;
-        }
-        return index;
-    }
-    if(type == SectionWatchOnly){
-        if(_watchOnlys.count == 0){
-            return -1;
-        }
-        NSUInteger index = 0;
-        if(_hdms.count > 0){
-            index++;
-        }
-        if(_privateKeys.count > 0){
-            index++;
-        }
-        return index;
-    }
-    return -1;
+    IOS7ContainerViewController *container = [[IOS7ContainerViewController alloc]init];
+    container.controller = add;
+    [self presentViewController:container animated:YES completion:nil];
 }
 
 -(void)hdmSeedPressed {
@@ -292,6 +249,52 @@ typedef enum {
             });
         });
     }];
+}
+
+-(SectionType)sectionTypeForIndex:(NSUInteger)section{
+    if(section == [self sectionIndexForType:SectionHDM]){
+        return SectionHDM;
+    }
+    if(section == [self sectionIndexForType:SectionPrivate]){
+        return SectionPrivate;
+    }
+    if(section == [self sectionIndexForType:SectionWatchOnly]){
+        return SectionWatchOnly;
+    }
+    return nil;
+}
+
+-(NSUInteger)sectionIndexForType:(SectionType)type{
+    if(type == SectionHDM){
+        if(_hdms.count == 0){
+            return -1;
+        }
+        return 0;
+    }
+    if(type == SectionPrivate){
+        if(_privateKeys.count == 0){
+            return -1;
+        }
+        NSUInteger index = 0;
+        if(_hdms.count > 0){
+            index++;
+        }
+        return index;
+    }
+    if(type == SectionWatchOnly){
+        if(_watchOnlys.count == 0){
+            return -1;
+        }
+        NSUInteger index = 0;
+        if(_hdms.count > 0){
+            index++;
+        }
+        if(_privateKeys.count > 0){
+            index++;
+        }
+        return index;
+    }
+    return -1;
 }
 
 -(void)onPasswordEntered:(NSString*)p{

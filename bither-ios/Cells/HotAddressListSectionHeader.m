@@ -105,6 +105,7 @@
     if(isHDM){
         UIButton *btnHDMAdd = [[UIButton alloc] initWithFrame:ivType.frame];
         [btnHDMAdd setBackgroundImage:nil forState:UIControlStateNormal];
+        [btnHDMAdd setBackgroundImage:[UIImage imageWithColor:[UIColor colorWithWhite:0 alpha:0.1]] forState:UIControlStateHighlighted];
         [btnHDMAdd setImage:[UIImage imageNamed:@"hdm_button_add_address_normal"] forState:UIControlStateNormal];
         [btnHDMAdd addTarget:self action:@selector(hdmAddPressed:) forControlEvents:UIControlEventTouchUpInside];
 
@@ -112,6 +113,7 @@
         frame.origin.x = frame.origin.x - frame.size.width;
         UIButton *btnHDMSeed = [[UIButton alloc] initWithFrame:frame];
         [btnHDMSeed setBackgroundImage:nil forState:UIControlStateNormal];
+        [btnHDMSeed setBackgroundImage:[UIImage imageWithColor:[UIColor colorWithWhite:0 alpha:0.1]] forState:UIControlStateHighlighted];
         [btnHDMSeed setImage:[UIImage imageNamed:@"hdm_button_seed_normal"] forState:UIControlStateNormal];
         [btnHDMSeed addTarget:self action:@selector(hdmSeedPressed:) forControlEvents:UIControlEventTouchUpInside];
 
