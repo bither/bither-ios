@@ -352,7 +352,7 @@ static Setting* SwitchToColdSetting;
     if(!CheckSetting){
         Setting * setting=[[Setting alloc] initWithName:NSLocalizedString(@"Check Private Keys", nil) icon:[UIImage imageNamed:@"check_button_icon" ]];
         [setting setSelectBlock:^(UIViewController * controller){
-            if([BTAddressManager instance].privKeyAddresses.count == 0){
+            if([BTAddressManager instance].privKeyAddresses.count == 0 && ![BTAddressManager instance].hasHDMKeychain){
                 if([controller respondsToSelector:@selector(showMsg:)]){
                     [controller performSelector:@selector(showMsg:) withObject:NSLocalizedString(@"No private keys", nil)];
                 }
