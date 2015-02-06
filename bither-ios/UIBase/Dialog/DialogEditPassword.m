@@ -101,7 +101,7 @@
             });
         }else{
             BOOL success = NO;
-            if([BTAddressManager instance].privKeyAddresses.count + [BTAddressManager instance].trashAddresses.count > 0){
+            if([BTAddressManager instance].privKeyAddresses.count + [BTAddressManager instance].trashAddresses.count > 0 || [[BTAddressManager instance] hdmKeychain]!= nil){
                 success = [[BTAddressManager instance] changePassphraseWithOldPassphrase:p andNewPassphrase:nP];
             }
             dispatch_async(dispatch_get_main_queue(), ^{
