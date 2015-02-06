@@ -221,11 +221,7 @@
                         if(errorMsg){
                             [self showSendResult:errorMsg dialog:dp];
                         }else{
-                            if(!signWithCold && !isInRecovery ){
-                                [self showSendResult:NSLocalizedString(@"Password wrong.", nil) dialog:dp];
-                            }else{
-                                [self showSendResult:NSLocalizedString(@"Send failed.", nil) dialog:dp];
-                            }
+                            [self showSendResult:NSLocalizedString(@"Send failed.", nil) dialog:dp];
                         }
                     }
                 }
