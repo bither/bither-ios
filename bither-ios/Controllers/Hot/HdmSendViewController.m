@@ -63,7 +63,7 @@
 @end
 
 @interface ColdSigFetcher : NSObject<ScanQrCodeDelegate,DialogSendTxConfirmDelegate>
--(instancetype) initWithIndex:(UInt32)index password:(NSString*)password unsignedHashes:(NSArray*)unsignedHashes tx:(BTTx*)tx from:(BTAddress*)from to:(NSString*)toAddress changeTo:(NSString*)changeAddress andController:(HdmSendViewController *)controller ;
+-(instancetype) initWithIndex:(UInt32)index password:(NSString*)password unsignedHashes:(NSArray*)unsignedHashes tx:(BTTx*)tx from:(BTAddress*)from to:(NSString*)toAddress changeTo:(NSString*)changeAddress controller:(HdmSendViewController *)controller andDialogProgress:(DialogProgressChangable *)dp;
 -(NSArray *)sigs;
 @property BOOL userCancel;
 @property NSString *errorMsg;
@@ -163,7 +163,7 @@
                     __block NSString* errorMsg;
                     __block BOOL userCanceled = NO;
                     NSArray* (^coldFetcher)(UInt32 index, NSString* password, NSArray* unsignHashes, BTTx* tx) = ^NSArray *(UInt32 index, NSString *password, NSArray *unsignedHashes, BTTx *tx){
-                        ColdSigFetcher *f = [[ColdSigFetcher alloc] initWithIndex:index password:password unsignedHashes:unsignedHashes tx:tx from:self.address to:toAddress changeTo:self.dialogSelectChangeAddress.changeAddress.address andController:self];
+                        ColdSigFetcher *f = [[ColdSigFetcher alloc] initWithIndex:index password:password unsignedHashes:unsignedHashes tx:tx from:self.address to:toAddress changeTo:self.dialogSelectChangeAddress.changeAddress.address controller:self andDialogProgress:dp];
                         NSArray* sigs = f.sigs;
                         userCanceled = f.userCancel;
                         errorMsg = f.errorMsg;
@@ -446,9 +446,10 @@
     HdmSendViewController *_controller;
     NSCondition *fetched;
     NSArray* sigs;
+    DialogProgressChangable *_dp;
 }
 
--(instancetype)initWithIndex:(UInt32)index password:(NSString *)password unsignedHashes:(NSArray *)unsignedHashes tx:(BTTx *)tx from:(BTAddress*)from to:(NSString*)toAddress changeTo:(NSString*)changeAddress andController:(HdmSendViewController *)controller {
+-(instancetype)initWithIndex:(UInt32)index password:(NSString *)password unsignedHashes:(NSArray *)unsignedHashes tx:(BTTx *)tx from:(BTAddress*)from to:(NSString*)toAddress changeTo:(NSString*)changeAddress controller:(HdmSendViewController *)controller andDialogProgress:(DialogProgressChangable *)dp {
     self = [super init];
     if(self){
         _index = index;
@@ -459,6 +460,7 @@
         _to = toAddress;
         _change = changeAddress;
         _controller = controller;
+        _dp = dp;
         fetched = [NSCondition new];
     }
     return self;
@@ -468,7 +470,9 @@
     sigs = nil;
     self.userCancel = NO;
     dispatch_sync(dispatch_get_main_queue(), ^{
-        [[[DialogSendTxConfirm alloc] initWithTx:_tx from:_from to:_to changeTo:_change delegate:self] showInWindow:_controller.view.window];
+        [_dp dismissWithCompletion:^{
+            [[[DialogSendTxConfirm alloc] initWithTx:_tx from:_from to:_to changeTo:_change delegate:self] showInWindow:_controller.view.window];
+        }];
     });
     [fetched lock];
     [fetched wait];
@@ -478,15 +482,17 @@
 
 - (void)handleResult:(NSString *)result byReader:(ScanQrCodeViewController *)reader {
     [reader dismissViewControllerAnimated:YES completion:^{
-        NSArray *strs =[BTQRCodeUtil splitQRCode:result];
-        NSMutableArray * signatures = [[NSMutableArray alloc]init];
-        for(NSString *str in strs){
-            NSMutableData *s = [NSMutableData dataWithData:str.hexToData];
-            [s appendUInt8:SIG_HASH_ALL];
-            [signatures addObject:s];
-        }
-        sigs = signatures;
-        [self signalFetchedCondition];
+        [_dp showInWindow:_controller.view.window completion:^{
+            NSArray *strs =[BTQRCodeUtil splitQRCode:result];
+            NSMutableArray * signatures = [[NSMutableArray alloc]init];
+            for(NSString *str in strs){
+                NSMutableData *s = [NSMutableData dataWithData:str.hexToData];
+                [s appendUInt8:SIG_HASH_ALL];
+                [signatures addObject:s];
+            }
+            sigs = signatures;
+            [self signalFetchedCondition];
+        }];
     }];
 }
 
