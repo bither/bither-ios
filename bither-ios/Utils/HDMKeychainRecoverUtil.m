@@ -28,6 +28,8 @@
 #import "DialogHDMServerUnsignedQRCode.h"
 #import "NSError+HDMHttpErrorMessage.h"
 #import "PeerUtil.h"
+#import "BTHDMKeychainRecover.h"
+#import "KeyUtil.h"
 
 @interface HDMKeychainRecoverUtil()<PasswordGetterDelegate,ScanQrCodeDelegate>{
     PasswordGetter* _passwordGetter;
@@ -146,14 +148,23 @@
     if(!hdmBid){
         return;
     }
+    __block NSString * blockResult=[[result hexToData] base64EncodedStringWithOptions:0];
     [dp showInWindow:self.controller.view.window completion:^{
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
             NSString* password = self.passwordGetter.password;
             if(!password){
                 return;
             }
-            NSError* error;
-            [hdmBid changeBidPasswordWithSignature:result andPassword:password andHotAddress:[BTAddressManager instance].hdmKeychain.firstAddressFromDb andError:&error];
+
+
+
+            [[PeerUtil instance]stopPeer];
+            __block NSError* error;
+
+            BTHDMKeychain * keychain=[[BTHDMKeychainRecover alloc] initWithColdExternalRootPub:coldRoot password:password andFetchBlock:^NSArray *(NSString *password) {
+                return [hdmBid recoverHDMWithSignature:blockResult andPassword:password andError:&error];
+            }];
+            [KeyUtil setHDKeyChain:keychain];
             if(error){
                 dispatch_async(dispatch_get_main_queue(), ^{
                     [dp dismissWithCompletion:^{
@@ -162,27 +173,16 @@
                 });
                 return;
             }
-            [[PeerUtil instance]stopPeer];
-            NSArray* as = [[BTAddressManager instance].hdmKeychain completeAddressesWithCount:1 password:password andFetchBlock:^(NSString *password, NSArray *partialPubs) {
-                // todo:
-//                [hdmBid createHDMAddress:partialPubs andPassword:password  andError:^(NSError *error) {
-//                    NSLog(@"error:%@",error);
-//                }];
-            }];
-
 
             [[PeerUtil instance]startPeer];
             dispatch_async(dispatch_get_main_queue(), ^{
                 [dp dismissWithCompletion:^{
-                    if(as.count > 0){
-                       // [self.controller moveToFinal:YES];
+                    if(error && error.isHttp400){
+                        [self showMsg:error.msg];
                     }else{
-                        if(error && error.isHttp400){
-                            [self showMsg:error.msg];
-                        }else{
-                            [self showMsg:NSLocalizedString(@"Network failure.", nil)];
-                        }
+                        [self showMsg:NSLocalizedString(@"Network failure.", nil)];
                     }
+
                 }];
             });
         });

@@ -527,7 +527,7 @@ static Setting* SwitchToColdSetting;
     [array addObject:[Setting getQrCodeQualitySetting]];
     [array addObject:[ImportPrivateKeySetting getImportPrivateKeySetting]];
     [array addObject:[ImportBip38PrivateKeySetting getImportBip38PrivateKeySetting]];
-    if( [[BTSettings instance] getAppMode]==HOT && [[BTAddressManager instance] hdmKeychain] != nil){
+    if( [[BTSettings instance] getAppMode]==HOT && [[BTAddressManager instance] hdmKeychain] == nil){
         [array addObject:[HDMRecoverSetting getHDMRecoverSetting]];
     }
     [array addObject:[MessageSigningSetting getMessageSigningSetting]];
