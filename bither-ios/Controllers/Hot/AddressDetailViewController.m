@@ -110,17 +110,28 @@
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         __block NSArray *txs = [self.address txs:page];
         dispatch_async(dispatch_get_main_queue(), ^{
-            if (page==1) {
-                [_txs removeAllObjects];
-            }
-            if(txs&&txs.count>0) {
-                [_txs addObjectsFromArray:txs];
+
+
+            if(txs && txs.count>0) {
+                if (page==1) {
+                    [_txs removeAllObjects];
+                    [_txs addObjectsFromArray:txs];
+                    [self.address sortTx:_txs];
+                    [self.tableView reloadData];
+                }else{
+                    NSMutableArray *indexPathSet = [[NSMutableArray alloc] init];
+                    for(BTTx *tx in txs){
+                        [_txs addObject:tx];
+                        [indexPathSet addObject:[NSIndexPath indexPathForRow:_txs.count-1 inSection:1]];
+                    }
+                    [self.address sortTx:_txs];
+                    [self.tableView insertRowsAtIndexPaths:indexPathSet withRowAnimation:true];
+                }
+
                 hasMore= YES;
             }else{
                 hasMore= NO;
             }
-            [self.address sortTx:_txs];
-            [self.tableView reloadData];
             self.tableView.tableFooterView.hidden = (_txs.count > 0);
             [((UIView *)[self.tableView.tableFooterView.subviews objectAtIndex:0]) setHidden:NO];
             [((UIActivityIndicatorView *)[self.tableView.tableFooterView.subviews objectAtIndex:1]) stopAnimating];

@@ -60,10 +60,7 @@
 
 
 @implementation TransactionsUtil
-+(void)checkAddress:(NSArray *) addressList callback:(IdResponseBlock)callback andErrorCallback:(ErrorBlock)errorBlcok{
-    NSInteger index=0;
-    [TransactionsUtil getAddressState:addressList index:index callback:callback andErrorCallback:errorBlcok];
-}
+
 +(void)getAddressState:(NSArray *)addressList index:(NSInteger) index callback:(IdResponseBlock)callback andErrorCallback:(ErrorBlock)errorBlcok{
     if (index==addressList.count) {
         if (callback) {

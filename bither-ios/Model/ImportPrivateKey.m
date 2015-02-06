@@ -66,52 +66,14 @@
                 return;
             }
             if ([self checkKey:key]) {
-                [self checkSpecialAddress:key callback:^{
-                    [self addKey:key];
-                }];
-                
+                [self addKey:key];
             }
         });
         
     }];
     
 }
--(void)checkSpecialAddress:(BTKey *)key callback:(VoidBlock) callback{
-    if ([[BTSettings instance] getAppMode]==COLD) {
-        if (callback) {
-            callback();
-        }
-    }else{
-        NSMutableArray * array=[NSMutableArray new];
-        [array addObject:key.address];
-        [TransactionsUtil checkAddress:array callback:^(id response) {
-            dispatch_async(dispatch_get_main_queue(), ^{
-                AddressType addressType=(AddressType)[response integerValue];
-                if (addressType==AddressNormal) {
-                    if (callback) {
-                        callback();
-                    }
-                }else if(addressType==AddressTxTooMuch){
-                    [self exit];
-                    [self showMsg:NSLocalizedString(@"Cannot import private key with large amount of transactions.", nil)];
-                    
-                    
-                }else{
-                    [self exit];
-                    [self showMsg:NSLocalizedString(@"Cannot import private key with special transactions.", nil)];
-                    
-                }
-               
-            });
-        }andErrorCallback:^(NSError *error) {
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [self exit];
-                [self showMsg:NSLocalizedString(@"Network failure.", nil)];
-            });
-        }];
-        
-    }
-}
+
 -(BOOL)checkKey:(BTKey *)key {
     if (self.importPrivateKeyType==BitherQrcode) {
         BTPasswordSeed *passwordSeed = [BTPasswordSeed getPasswordSeed];
