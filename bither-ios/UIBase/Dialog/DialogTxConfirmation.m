@@ -18,10 +18,11 @@
 
 #import <Bitheri/BTHDMAddress.h>
 #import "DialogTxConfirmation.h"
+#import "BTIn.h"
 
 #define kFontSize (15)
 #define kMaxWidth (280)
-#define kVerticalGap (8)
+#define kVerticalGap (4)
 #define kPartSize (24)
 
 @interface DialogTxConfirmation()
@@ -64,6 +65,7 @@
         self.address = address;
         self.tx = tx;
         self.shouldShowSigningInfo = shouldShowSigningInfo;
+        self.bgInsets = UIEdgeInsetsMake(8, 12, 8, 12);
         UILabel *lbl = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, lblSize.width, lblSize.height)];
         lbl.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
         lbl.font = [UIFont systemFontOfSize:kFontSize];
@@ -119,7 +121,7 @@
     }
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
         BTHDMAddress *hdm = (BTHDMAddress *)self.address;
-        NSArray* signingPubs = nil;//TODO: get signing pubs
+        NSArray* signingPubs = [self.tx.ins[0] getP2SHPubKeys];
         BOOL isHot = NO;
         BOOL isCold = NO;
         BOOL isServer = NO;
@@ -140,7 +142,7 @@
         }
         dispatch_async(dispatch_get_main_queue(), ^{
             self.ai.hidden = YES;
-            CGFloat left = 0;
+            CGFloat left = -1;
             CGRect frame = self.ivHot.frame;
             if(isHot){
                 self.ivHot.hidden = NO;
