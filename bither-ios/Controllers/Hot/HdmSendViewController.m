@@ -504,7 +504,7 @@
 -(void)scanBitherColdToSign{
     ScanQrCodeTransportViewController *scan = [[ScanQrCodeTransportViewController alloc]initWithDelegate:self title:NSLocalizedString(@"Scan Bither Cold to sign", nil) pageName:NSLocalizedString(@"Signed TX QR Code", nil)];
     [_controller presentViewController:scan animated:YES completion:^{
-        [_controller.navigationController popToViewController:self animated:NO];
+        [_controller.navigationController popToViewController:_controller animated:NO];
     }];
 }
 
