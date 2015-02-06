@@ -56,14 +56,12 @@ static HDMApi *hdmApi;
     NSString *url = [NSString stringWithFormat:@"https://hdm.bither.net/api/v1/%@/hdm/password",hdmBid];
     AFHTTPRequestOperation *op = [manager GET:url parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSNumber *random = @([operation.responseString longLongValue]);
-        NSLog(@"hdm password random:%@", random);
         if (callback != nil) {
             callback(random);
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         if (errorCallback) {
             NSError *e = [self formatHttpErrorWithOperation:operation];
-            NSLog(@"error:%@", e);
             errorCallback(operation, e);
         }
     }];
@@ -74,7 +72,6 @@ static HDMApi *hdmApi;
                            callback:(VoidResponseBlock)callback andErrorCallBack:(ErrorHandler)errorCallback; {
     NSDictionary *params = @{@"password" : [password base64EncodedString], @"signature" : signature,
             @"hot_address" : hotAddress};
-    NSLog(@"change password %@ %@", password, signature);
     NSString *url = [NSString stringWithFormat:@"https://hdm.bither.net/api/v1/%@/hdm/password", hdmBid];
     [manager POST:url parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSError *error = nil;
@@ -93,7 +90,6 @@ static HDMApi *hdmApi;
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         if (errorCallback) {
             NSError *e = [self formatHttpErrorWithOperation:operation];
-            NSLog(@"error:%@", e);
             errorCallback(operation, e);
         }
     }];
@@ -113,7 +109,6 @@ static HDMApi *hdmApi;
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         if (errorCallback) {
             NSError *e = [self formatHttpErrorWithOperation:operation];
-            NSLog(@"error:%@", e);
             errorCallback(operation, e);
         }
     }];
@@ -122,7 +117,6 @@ static HDMApi *hdmApi;
 - (void)signatureByRemoteWithHDMBid:(NSString *)hdmBid andPassword:(NSData *)password andUnsignHash:(NSArray *)unsignHashes andIndex:(int)index
                            callback:(ArrayResponseBlock) callback andErrorCallBack:(ErrorHandler)errorCallback;{
     NSDictionary *params = @{@"password" : [password base64EncodedString], @"unsign": [self connect:unsignHashes]};
-    NSLog(@"password %@", password);
     NSString *url = [NSString stringWithFormat:@"https://hdm.bither.net/api/v1/%@/hdm/address/%d/signature", hdmBid, index];
     [manager POST:url parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSArray *signatures = [self split:operation.responseString];
@@ -132,7 +126,6 @@ static HDMApi *hdmApi;
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         if (errorCallback) {
             NSError *e = [self formatHttpErrorWithOperation:operation];
-            NSLog(@"error:%@", e);
             errorCallback(operation, e);
         }
     }];
@@ -142,7 +135,6 @@ static HDMApi *hdmApi;
                            callback:(DictResponseBlock)callback andErrorCallBack:(ErrorHandler)errorCallback; {
     NSDictionary *params = @{@"password" : [password base64EncodedString], @"signature" : signature};
     NSString *url = [NSString stringWithFormat:@"https://hdm.bither.net/api/v1/%@/hdm/recovery", hdmBid];
-    NSLog(@"change password %@ %@", password, signature);
     [manager POST:url parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSError *error = nil;
         NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithDictionary:[NSJSONSerialization JSONObjectWithData:operation.responseData options:0 error:&error]];
@@ -163,7 +155,6 @@ static HDMApi *hdmApi;
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         if (errorCallback) {
             NSError *e = [self formatHttpErrorWithOperation:operation];
-            NSLog(@"error:%@", e);
             errorCallback(operation, e);
         }
     }];
