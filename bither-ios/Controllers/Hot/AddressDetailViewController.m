@@ -125,7 +125,7 @@
                         [indexPathSet addObject:[NSIndexPath indexPathForRow:_txs.count-1 inSection:1]];
                     }
                     [self.address sortTx:_txs];
-                    [self.tableView insertRowsAtIndexPaths:indexPathSet withRowAnimation:true];
+                    [self.tableView insertRowsAtIndexPaths:indexPathSet withRowAnimation:UITableViewRowAnimationAutomatic];
                 }
 
                 hasMore= YES;
