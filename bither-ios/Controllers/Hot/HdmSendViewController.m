@@ -480,11 +480,9 @@
         NSArray *strs =[BTQRCodeUtil splitQRCode:result];
         NSMutableArray * signatures = [[NSMutableArray alloc]init];
         for(NSString *str in strs){
-            NSMutableData *sig = [NSMutableData data];
             NSMutableData *s = [NSMutableData dataWithData:str.hexToData];
             [s appendUInt8:SIG_HASH_ALL];
-            [sig appendScriptPushData:s];
-            [signatures addObject:sig];
+            [signatures addObject:s];
         }
         sigs = signatures;
         [self signalFetchedCondition];
@@ -565,7 +563,13 @@
 - (NSArray *)sigs {
     NSError* error;
     BTHDMBid * hdmBid=[BTHDMBid getHDMBidFromDb];
-    NSArray * array=  [hdmBid signatureByRemoteWithPassword:_password andUnsignHash:_unsignedHashes andIndex:_index andError:&error];
+    NSArray * array = [hdmBid signatureByRemoteWithPassword:_password andUnsignHash:_unsignedHashes andIndex:_index andError:&error];
+    NSMutableArray *array1 = [NSMutableArray new];
+    for (NSData *data in array) {
+        NSMutableData *data1 = [NSMutableData dataWithData:data];
+        [data1 appendUInt8:SIG_HASH_ALL];
+        [array1 addObject:data1];
+    }
     if(error){
         if(error.isHttp400){
             self.errorMsg = NSLocalizedString(@"hdm_address_sign_tx_server_error", nil);
@@ -574,7 +578,7 @@
         }
         return nil;
     }
-    return array;
+    return array1;
 
 }
 
