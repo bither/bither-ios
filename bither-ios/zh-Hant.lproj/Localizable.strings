@@ -604,3 +604,5 @@
 "hdm_import_word_list_delete"="刪除";
 "hdm_import_word_list_replace"="替換";
 
+"not_verify_bither_private_key_qrcode"="不是比太私鑰二維碼";
+

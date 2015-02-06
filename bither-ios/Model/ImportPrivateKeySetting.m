@@ -134,36 +134,36 @@ static Setting* importPrivateKeySetting;
     NSRange range=[result rangeOfString:HDM_QR_CODE_FLAG];
     bool isHDMSeed= range.location==0;
     if(self.isImportHDM) {
-        if ([BTQRCodeUtil verifyQrcodeTransport:result] && [[BTQRCodeUtil splitQRCode:result] count] == 3) {
-            if (!isHDMSeed){
-                [self showMsg:NSLocalizedString(@"can_not_import_hdm_cold_seed", nil)];
-            } else {
-                _result = result;
-                [reader playSuccessSound];
-                [reader vibrate];
-                [reader dismissViewControllerAnimated:YES completion:^{
+        if ([BTQRCodeUtil verifyQrcodeTransport:result] ) {
+            [reader playSuccessSound];
+            [reader vibrate];
+            [reader dismissViewControllerAnimated:YES completion:^{
+                if (!isHDMSeed || [[BTQRCodeUtil splitQRCode:result] count] != 3){
+                    [self showMsg:NSLocalizedString(@"import_hdm_cold_seed_format_error", nil)];
+                } else {
+                    _result = result;
                     DialogPassword *dialog = [[DialogPassword alloc] initWithDelegate:self];
                     [dialog showInWindow:self.controller.view.window];
-
-                }];
-            }
+                }
+            }];
         } else {
             [reader vibrate];
         }
     }else {
-        if ([BTQRCodeUtil verifyQrcodeTransport:result] && [[BTQRCodeUtil splitQRCode:result] count] == 3) {
-             if (isHDMSeed){
-                   [self showMsg:NSLocalizedString(@"import_hdm_cold_seed_format_error", nil)];
-             } else {
-                 _result = result;
-                 [reader playSuccessSound];
-                 [reader vibrate];
-                 [reader dismissViewControllerAnimated:YES completion:^{
-                     DialogPassword *dialog = [[DialogPassword alloc] initWithDelegate:self];
-                     [dialog showInWindow:self.controller.view.window];
-
-                 }];
-             }
+        if ([BTQRCodeUtil verifyQrcodeTransport:result]) {
+            [reader playSuccessSound];
+            [reader vibrate];
+            [reader dismissViewControllerAnimated:YES completion:^{
+                if (isHDMSeed){
+                    [self showMsg:NSLocalizedString(@"can_not_import_hdm_cold_seed", nil)];
+                } else if([[BTQRCodeUtil splitQRCode:result] count] != 3){
+                    [self showMsg:NSLocalizedString(@"not_verify_bither_private_key_qrcode", nil)];
+                }else{
+                    _result = result;
+                    DialogPassword *dialog = [[DialogPassword alloc] initWithDelegate:self];
+                    [dialog showInWindow:self.controller.view.window];
+                }
+            }];
         } else {
             [reader vibrate];
         }
