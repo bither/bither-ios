@@ -88,7 +88,7 @@ typedef enum {
         [_hdms addObjectsFromArray:[BTAddressManager instance].hdmKeychain.addresses];
     }
     [self.tableView reloadData];
-    self.ivNoAddress.hidden = !(_privateKeys.count == 0 && _watchOnlys.count == 0 && _hdms.count);
+    self.ivNoAddress.hidden = !(_privateKeys.count == 0 && _watchOnlys.count == 0 && _hdms.count == 0);
 }
 
 -(void)receivedNotifications{

@@ -59,13 +59,8 @@
 
 - (void)changeBidPasswordWithSignature:(NSString *)signature andPassword:(NSString *)password andHotAddress:(NSString *)hotAddress andError:(NSError **)err; {
     NSString *message = [NSString stringWithFormat:@"bitid://hdm.bither.net/%@/password/%@/%lld", self.address, [NSString hexWithData:self.password], self.serviceRandom];
-    NSLog(@"message:%@", message);
-    NSLog(@"hotAddress:%@", hotAddress);
-    NSLog(@"signature:%@", signature);
-
     __block NSCondition *condition = [NSCondition new];
     if (![self.address isEqualToString:[[BTKey signedMessageToKey:message andSignatureBase64:signature] address]]) {
-        NSLog(@"check sign %@ ！= %@", self.address,[[BTKey signedMessageToKey:message andSignatureBase64:signature] address]);
         *err = [[NSError alloc] initWithDomain:ERR_API_400_DOMAIN code:1002 userInfo:nil];
         return;
     }

@@ -45,14 +45,14 @@
     NSString *txCount = [NSString stringWithFormat:@"%d", address.txCount];
     NSString *receivedLabel = NSLocalizedString(@"balance_detail_total_incoming", nil);
     NSString *sentLabel = NSLocalizedString(@"balance_detail_total_outgoing", nil);
-    NSArray *txs = address.txs;
-    int64_t received = [[BTTxProvider instance] getTotalReceiveWithAddress:address.address];
+//    NSArray *txs = address.txs;
 //    for(BTTx* tx in txs){
 //        int64_t amount = [tx deltaAmountFrom:address];
 //        if(amount > 0){
 //            received += amount;
 //        }
 //    }
+    int64_t received = [[BTTxProvider instance] getTotalReceiveWithAddress:address.address];
     int64_t sent = received - address.balance;
     NSAttributedString *receivedStr = [UnitUtil attributedStringForAmount:received withFontSize:kCountFontSize];
     NSAttributedString *sentStr = [UnitUtil attributedStringForAmount:sent withFontSize:kCountFontSize];

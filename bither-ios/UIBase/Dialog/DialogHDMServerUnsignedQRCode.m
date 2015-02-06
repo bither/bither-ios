@@ -10,7 +10,7 @@
 #import "DialogAlert.h"
 
 #define kDialogAlertButtonFontSize 14
-#define kButtonHeight (36)
+#define kButtonHeight (40)
 #define kDialogAlertLabelAndBtnDistance 14
 
 @interface DialogHDMServerUnsignedQRCode(){

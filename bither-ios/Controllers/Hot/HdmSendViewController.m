@@ -187,7 +187,8 @@
                         signResult = NO;
                         errorMsg = NSLocalizedString(@"Password wrong.", nil);
                     }
-                    if(signResult){
+                    BOOL verifyTx=[tx verifySignatures];
+                    if(signResult&&verifyTx){
                         if([self.address checkRValuesForTx:tx]){
                             __block NSString * addressBlock = toAddress;
                             dispatch_async(dispatch_get_main_queue(), ^{
@@ -215,7 +216,7 @@
                         if(errorMsg){
                             [self showSendResult:errorMsg dialog:dp];
                         }else{
-                            if(!signWithCold && !isInRecovery){
+                            if(!signWithCold && !isInRecovery && verifyTx){
                                 [self showSendResult:NSLocalizedString(@"Password wrong.", nil) dialog:dp];
                             }else{
                                 [self showSendResult:NSLocalizedString(@"Send failed.", nil) dialog:dp];
@@ -467,7 +468,7 @@
     sigs = nil;
     self.userCancel = NO;
     dispatch_sync(dispatch_get_main_queue(), ^{
-        [[[DialogSendTxConfirm alloc] initWithTx:_tx from:_from to:_to changeTo:_change delegate:self] showInWindow:self];
+        [[[DialogSendTxConfirm alloc] initWithTx:_tx from:_from to:_to changeTo:_change delegate:self] showInWindow:_controller.view.window];
     });
     [fetched lock];
     [fetched wait];
@@ -570,6 +571,7 @@
         [data1 appendUInt8:SIG_HASH_ALL];
         [array1 addObject:data1];
     }
+    NSArray * array = [hdmBid signatureByRemoteWithPassword:_password andUnsignHash:_unsignedHashes andIndex:_index andError:&error];
     if(error){
         if(error.isHttp400){
             self.errorMsg = NSLocalizedString(@"hdm_address_sign_tx_server_error", nil);

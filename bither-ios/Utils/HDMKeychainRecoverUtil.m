@@ -28,6 +28,8 @@
 #import "DialogHDMServerUnsignedQRCode.h"
 #import "NSError+HDMHttpErrorMessage.h"
 #import "PeerUtil.h"
+#import "BTHDMKeychainRecover.h"
+#import "KeyUtil.h"
 
 @interface HDMKeychainRecoverUtil()<PasswordGetterDelegate,ScanQrCodeDelegate>{
     PasswordGetter* _passwordGetter;
@@ -101,9 +103,7 @@
         }
         [self initHDMBidFromColdRoot];
         dispatch_async(dispatch_get_main_queue(), ^{
-            [dp dismissWithCompletion:^{
                 [self server];
-            }];
         });
     });
 }
@@ -116,29 +116,32 @@
         return;
     }
     //  serverPressed = NO;
-    [dp showInWindow:self.controller.view.window completion:^{
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
-            [self initHDMBidFromColdRoot];
-            NSError* error;
-            NSString* preSign = [hdmBid getPreSignHashAndError:&error];
-            if(error && !preSign){
-                dispatch_async(dispatch_get_main_queue(), ^{
+
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+        [self initHDMBidFromColdRoot];
+        NSError* error;
+        NSString* preSign = [hdmBid getPreSignHashAndError:&error];
+        if(error && !preSign){
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [dp dismissWithCompletion:^{
                     [self showMsg:error.msg];
-                });
-            }else{
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    [dp dismissWithCompletion:^{
-                        [[[DialogHDMServerUnsignedQRCode alloc]initWithContent:preSign andAction:^{
-                            afterQRScanSelector = @selector(serverScanned:);
-                            ScanQrCodeViewController* scan = [[ScanQrCodeViewController alloc]initWithDelegate:self];
-                            [self.controller presentViewController:scan animated:YES completion:nil];
-                        }]showInWindow:self.controller.view.window];
-                    }];
-                });
-            }
-        });
-    }];
+                }];
+
+            });
+        }else{
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [dp dismissWithCompletion:^{
+                    [[[DialogHDMServerUnsignedQRCode alloc]initWithContent:preSign andAction:^{
+                        afterQRScanSelector = @selector(serverScanned:);
+                        ScanQrCodeViewController* scan = [[ScanQrCodeViewController alloc]initWithDelegate:self];
+                        [self.controller presentViewController:scan animated:YES completion:nil];
+                    }]showInWindow:self.controller.view.window];
+                }];
+            });
+        }
+    });
 }
+
 
 
 
@@ -146,45 +149,37 @@
     if(!hdmBid){
         return;
     }
+    __block NSString * blockResult=[[result hexToData] base64EncodedStringWithOptions:0];
     [dp showInWindow:self.controller.view.window completion:^{
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
             NSString* password = self.passwordGetter.password;
             if(!password){
                 return;
             }
-            NSError* error;
-            [hdmBid changeBidPasswordWithSignature:result andPassword:password andHotAddress:[BTAddressManager instance].hdmKeychain.firstAddressFromDb andError:&error];
-            if(error){
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    [dp dismissWithCompletion:^{
-                        [self showMsg:NSLocalizedString(@"hdm_keychain_add_sign_server_qr_code_error", nil)];
-                    }];
-                });
-                return;
-            }
             [[PeerUtil instance]stopPeer];
-            NSArray* as = [[BTAddressManager instance].hdmKeychain completeAddressesWithCount:1 password:password andFetchBlock:^(NSString *password, NSArray *partialPubs) {
-                // todo:
-//                [hdmBid createHDMAddress:partialPubs andPassword:password  andError:^(NSError *error) {
-//                    NSLog(@"error:%@",error);
-//                }];
-            }];
-
-
-            [[PeerUtil instance]startPeer];
+            __block NSError* error;
+            __block NSArray * as=  [hdmBid recoverHDMWithSignature:blockResult andPassword:password andError:&error];
+            if (!error) {
+                BTHDMKeychain *keychain = [[BTHDMKeychainRecover alloc] initWithColdExternalRootPub:coldRoot password:password andFetchBlock:^NSArray *(NSString *password) {
+                    return as;
+                }];
+                [KeyUtil setHDKeyChain:keychain];
+            }
             dispatch_async(dispatch_get_main_queue(), ^{
                 [dp dismissWithCompletion:^{
-                    if(as.count > 0){
-                       // [self.controller moveToFinal:YES];
-                    }else{
-                        if(error && error.isHttp400){
+                    if(error) {
+                        if (error && error.isHttp400) {
                             [self showMsg:error.msg];
-                        }else{
+                        } else {
                             [self showMsg:NSLocalizedString(@"Network failure.", nil)];
                         }
+                    } else{
+                        [self showMsg:NSLocalizedString(@"hdm_keychain_recovery_message", nil)];
                     }
                 }];
             });
+            [[PeerUtil instance]startPeer];
+
         });
     }];
 }
