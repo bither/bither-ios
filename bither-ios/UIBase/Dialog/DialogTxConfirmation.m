@@ -21,7 +21,7 @@
 
 #define kFontSize (15)
 #define kMaxWidth (280)
-#define kVerticalGap (4)
+#define kVerticalGap (8)
 #define kPartSize (24)
 
 @interface DialogTxConfirmation()
