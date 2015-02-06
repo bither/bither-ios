@@ -50,6 +50,7 @@
     BOOL signWithCold;
     BOOL isInRecovery;
     UIImageView *ivSendQr;
+    BOOL preventKeyboardForColdSign;
 }
 @property (weak, nonatomic) IBOutlet UILabel *lblBalancePrefix;
 @property (weak, nonatomic) IBOutlet UILabel *lblBalance;
@@ -130,7 +131,10 @@
     if([StringUtil isEmpty:self.tfAddress.text]){
         [self.tfAddress becomeFirstResponder];
     }else{
-        [self.amtLink becomeFirstResponder];
+        if(preventKeyboardForColdSign){
+            [self.amtLink becomeFirstResponder];
+        }
+        preventKeyboardForColdSign = NO;
     }
 }
 
@@ -164,6 +168,7 @@
                     __block BOOL userCanceled = NO;
                     NSArray* (^coldFetcher)(UInt32 index, NSString* password, NSArray* unsignHashes, BTTx* tx) = ^NSArray *(UInt32 index, NSString *password, NSArray *unsignedHashes, BTTx *tx){
                         ColdSigFetcher *f = [[ColdSigFetcher alloc] initWithIndex:index password:password unsignedHashes:unsignedHashes tx:tx from:self.address to:toAddress changeTo:self.dialogSelectChangeAddress.changeAddress.address controller:self andDialogProgress:dp];
+                        preventKeyboardForColdSign = YES;
                         NSArray* sigs = f.sigs;
                         userCanceled = f.userCancel;
                         errorMsg = f.errorMsg;
