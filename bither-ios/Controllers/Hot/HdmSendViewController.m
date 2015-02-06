@@ -566,7 +566,7 @@
 - (NSArray *)sigs {
     NSError* error;
     BTHDMBid * hdmBid=[BTHDMBid getHDMBidFromDb];
-    NSArray * array=  [hdmBid signatureByRemoteWithPassword:_password andUnsignHash:_unsignedHashes andIndex:_index andError:&error];
+    NSArray * array = [hdmBid signatureByRemoteWithPassword:_password andUnsignHash:_unsignedHashes andIndex:_index andError:&error];
     if(error){
         if(error.isHttp400){
             self.errorMsg = NSLocalizedString(@"hdm_address_sign_tx_server_error", nil);

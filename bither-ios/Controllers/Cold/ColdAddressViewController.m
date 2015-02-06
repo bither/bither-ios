@@ -64,7 +64,7 @@
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    return [BTAddressManager instance].hasHDMKeychain ? 2 : 0;
+    return [BTAddressManager instance].hasHDMKeychain ? 2 : 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
