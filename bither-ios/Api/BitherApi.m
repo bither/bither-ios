@@ -108,8 +108,8 @@ static BitherApi *piApi;
     }];
 }
 - (void)getMyTransactionApi:(NSString *)address callback:(DictResponseBlock)callback andErrorCallBack:(ErrorHandler)errorCallback {
-    NSString *url = [NSString stringWithFormat:BITHER_Q_MYTRANSACTIONS, address];
-    [self get:url withParams:nil networkType:BitherBitcoin completed:^(MKNetworkOperation *completedOperation) {
+    NSString *url = [NSString stringWithFormat:BC_ADDRESS_STAT_URL, address];
+    [self get:url withParams:nil networkType:BitherBC completed:^(MKNetworkOperation *completedOperation) {
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
             NSLog(@"%@", completedOperation.responseString);
             if (![StringUtil isEmpty:completedOperation.responseString]) {

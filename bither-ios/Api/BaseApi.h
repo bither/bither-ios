@@ -33,6 +33,7 @@
 #define BITHER_DOWNLOAD_AVATAR @"api/v1/avatar"
 
 #define BC_ADDRESS_TX_URL @"api/v2/address/%@/transaction/%d"
+#define BC_ADDRESS_STAT_URL @"api/v2/address/%@/transaction/stat"
 
 
 
