@@ -52,13 +52,13 @@
     self.serviceRandom = serviceRandom;
     NSString *message = [self getPreSignMessage];
     NSData *d = [[BTUtils formatMessageForSigning:message] SHA256_2];
-    result = [NSString hexWithQRCodeData:d];
+    result = [NSString hexWithData:d];
     [condition unlock];
     return result;
 }
 
 -(NSString *)getPreSignMessage{
-    return  [NSString stringWithFormat:@"bitid://hdm.bither.net/%@/password/%@/%lld", self.address, [NSString hexWithData:self.password], self.serviceRandom];
+    return  [NSString stringWithFormat:@"bitid://hdm.bither.net/%@/password/%@/%lld", self.address, [[NSString hexWithData:self.password] toLowercaseStringWithEn], self.serviceRandom];
 }
 
 - (void)changeBidPasswordWithSignature:(NSString *)signature andPassword:(NSString *)password andHotAddress:(NSString *)hotAddress andError:(NSError **)err; {

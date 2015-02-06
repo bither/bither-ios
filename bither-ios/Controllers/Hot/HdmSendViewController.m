@@ -519,7 +519,7 @@
     }
     NSMutableArray *array = [[NSMutableArray alloc]init];
     for(NSData *data in _unsignedHashes){
-        [array addObject:[NSString hexWithQRCodeData:data]];
+        [array addObject:[NSString hexWithData :data]];
     }
     txTrans.hashList = array;
     qr.content = [QRCodeTxTransport getPreSignString:txTrans];
@@ -571,7 +571,6 @@
         [data1 appendUInt8:SIG_HASH_ALL];
         [array1 addObject:data1];
     }
-    NSArray * array = [hdmBid signatureByRemoteWithPassword:_password andUnsignHash:_unsignedHashes andIndex:_index andError:&error];
     if(error){
         if(error.isHttp400){
             self.errorMsg = NSLocalizedString(@"hdm_address_sign_tx_server_error", nil);

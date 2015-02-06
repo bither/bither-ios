@@ -400,7 +400,7 @@ static Setting* SwitchToColdSetting;
                 if (a.isFromXRandom) {
                     pubStr=XRANDOM_FLAG;
                 }
-                pubStr=[pubStr stringByAppendingString:[NSString hexWithQRCodeData:a.pubKey]  ];
+                pubStr=[pubStr stringByAppendingString:[NSString hexWithData:a.pubKey]  ];
                 [pubKeys addObject:pubStr];
             }
             QrCodeViewController* qrCtr = [controller.storyboard instantiateViewControllerWithIdentifier:@"QrCode"];

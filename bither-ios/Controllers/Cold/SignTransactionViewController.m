@@ -121,12 +121,12 @@
             if(self.tx.hdmIndex >= 0){
                 BTBIP32Key* key = [[BTAddressManager instance].hdmKeychain externalKeyWithIndex:self.tx.hdmIndex andPassword:bpassword];
                 for(NSData *hash in hashesData){
-                    [strHashes addObject:[NSString hexWithQRCodeData:[key.key sign:hash]]];
+                    [strHashes addObject:[NSString hexWithData :[key.key sign:hash]]];
                 }
             }else{
                 NSArray *hashes = [address signHashes:hashesData withPassphrase:bpassword];
                 for(NSData* hash in hashes){
-                    [strHashes addObject:[NSString hexWithQRCodeData:hash] ];
+                    [strHashes addObject:[NSString hexWithData:hash] ];
                 }
             }
             dispatch_async(dispatch_get_main_queue(), ^{
