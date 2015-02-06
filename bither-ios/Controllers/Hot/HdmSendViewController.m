@@ -131,10 +131,9 @@
     if([StringUtil isEmpty:self.tfAddress.text]){
         [self.tfAddress becomeFirstResponder];
     }else{
-        if(preventKeyboardForColdSign){
+        if(!preventKeyboardForColdSign){
             [self.amtLink becomeFirstResponder];
         }
-        preventKeyboardForColdSign = NO;
     }
 }
 
@@ -172,6 +171,7 @@
                         NSArray* sigs = f.sigs;
                         userCanceled = f.userCancel;
                         errorMsg = f.errorMsg;
+                        preventKeyboardForColdSign = NO;
                         return sigs;
                     };
                     NSArray* (^remoteFetcher)(UInt32 index, NSString* password, NSArray* unsignHashes, BTTx* tx) = ^NSArray *(UInt32 index, NSString *password, NSArray *unsignedHashes, BTTx *tx){
@@ -196,15 +196,15 @@
                         if([self.address checkRValuesForTx:tx]){
                             __block NSString * addressBlock = toAddress;
                             dispatch_async(dispatch_get_main_queue(), ^{
-                                [dp dismissWithCompletion:^{
-                                    [dp changeToMessage:NSLocalizedString(@"Please wait…", nil)];
-                                    if(!signWithCold && !isInRecovery){
-                                        DialogSendTxConfirm *dialog = [[DialogSendTxConfirm alloc]initWithTx:tx from:self.address to:addressBlock changeTo:self.dialogSelectChangeAddress.changeAddress.address delegate:self];
+                                if(!signWithCold && !isInRecovery){
+                                    [dp dismissWithCompletion:^{
+                                        [dp changeToMessage:NSLocalizedString(@"Please wait…", nil)];
+                                        DialogSendTxConfirm *dialog = [[DialogSendTxConfirm alloc] initWithTx:tx from:self.address to:addressBlock changeTo:self.dialogSelectChangeAddress.changeAddress.address delegate:self];
                                         [dialog showInWindow:self.view.window];
-                                    } else {
-                                        [self onSendTxConfirmed:tx];
-                                    }
-                                }];
+                                    }];
+                                } else {
+                                    [self onSendTxConfirmed:tx];
+                                }
                             });
                         } else {
                             dispatch_async(dispatch_get_main_queue(), ^{
@@ -216,6 +216,7 @@
                             dispatch_async(dispatch_get_main_queue(), ^{
                                 [dp dismissWithCompletion:nil];
                             });
+                            return;
                         }
                         if(errorMsg){
                             [self showSendResult:errorMsg dialog:dp];
