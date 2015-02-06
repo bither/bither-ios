@@ -192,8 +192,7 @@
                         signResult = NO;
                         errorMsg = NSLocalizedString(@"Password wrong.", nil);
                     }
-                    BOOL verifyTx=[tx verifySignatures];
-                    if(signResult&&verifyTx){
+                    if(signResult){
                         if([self.address checkRValuesForTx:tx]){
                             __block NSString * addressBlock = toAddress;
                             dispatch_async(dispatch_get_main_queue(), ^{
@@ -221,7 +220,7 @@
                         if(errorMsg){
                             [self showSendResult:errorMsg dialog:dp];
                         }else{
-                            if(!signWithCold && !isInRecovery && verifyTx){
+                            if(!signWithCold && !isInRecovery ){
                                 [self showSendResult:NSLocalizedString(@"Password wrong.", nil) dialog:dp];
                             }else{
                                 [self showSendResult:NSLocalizedString(@"Send failed.", nil) dialog:dp];
