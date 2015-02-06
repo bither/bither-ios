@@ -519,7 +519,7 @@
     }
     NSMutableArray *array = [[NSMutableArray alloc]init];
     for(NSData *data in _unsignedHashes){
-        [array addObject:[NSString hexWithData:data]];
+        [array addObject:[NSString hexWithQRCodeData:data]];
     }
     txTrans.hashList = array;
     qr.content = [QRCodeTxTransport getPreSignString:txTrans];

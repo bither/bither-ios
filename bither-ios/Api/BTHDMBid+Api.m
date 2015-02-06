@@ -50,15 +50,19 @@
     [condition wait];
     NSString *result = nil;
     self.serviceRandom = serviceRandom;
-    NSString *message = [NSString stringWithFormat:@"bitid://hdm.bither.net/%@/password/%@/%lld", self.address, [NSString hexWithData:self.password], self.serviceRandom];
+    NSString *message = [self getPreSignMessage];
     NSData *d = [[BTUtils formatMessageForSigning:message] SHA256_2];
-    result = [NSString hexWithData:d];
+    result = [NSString hexWithQRCodeData:d];
     [condition unlock];
     return result;
 }
 
+-(NSString *)getPreSignMessage{
+    return  [NSString stringWithFormat:@"bitid://hdm.bither.net/%@/password/%@/%lld", self.address, [NSString hexWithData:self.password], self.serviceRandom];
+}
+
 - (void)changeBidPasswordWithSignature:(NSString *)signature andPassword:(NSString *)password andHotAddress:(NSString *)hotAddress andError:(NSError **)err; {
-    NSString *message = [NSString stringWithFormat:@"bitid://hdm.bither.net/%@/password/%@/%lld", self.address, [NSString hexWithData:self.password], self.serviceRandom];
+    NSString *message =[self getPreSignMessage];
     __block NSCondition *condition = [NSCondition new];
     if (![self.address isEqualToString:[[BTKey signedMessageToKey:message andSignatureBase64:signature] address]]) {
         *err = [[NSError alloc] initWithDomain:ERR_API_400_DOMAIN code:1002 userInfo:nil];
@@ -116,8 +120,7 @@
 }
 
 - (NSArray *)recoverHDMWithSignature:(NSString *)signature andPassword:(NSString *)password andError:(NSError **)err; {
-    NSString *message = [NSString stringWithFormat:@"bitid://hdm.bither.net/%@/password/%@/%lld", self.address, [NSString hexWithData:self.password], self.serviceRandom];
-    NSLog(@"message:%@", message);
+    NSString *message = [self getPreSignMessage];
     NSData *d = [[BTUtils formatMessageForSigning:message] SHA256_2];
     if (![self.address isEqualToString:[[BTKey signedMessageToKey:message andSignatureBase64:signature] address]]) {
         //
