@@ -146,7 +146,7 @@
         [self hideKeyboard];
         [dp showInWindow:self.view.window completion:^{
             dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
-                if(![[[BTAddressProvider instance] getPasswordSeed]checkPassword:self.tfPassword.text]){
+                if(![[BTPasswordSeed getPasswordSeed]checkPassword:self.tfPassword.text]){
                     [self showSendResult:NSLocalizedString(@"Password wrong.", nil) dialog:dp];
                     return;
                 }

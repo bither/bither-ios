@@ -96,7 +96,7 @@ static Setting *reloadTxsSetting;
                 DialogAlert *dialogAlert=[[DialogAlert alloc] initWithMessage:NSLocalizedString(@"Reload Transactions data?\nNeed long time.\nConsume network data.\nRecommand trying only with wrong data.", nil) confirm:^{
                     __weak ReloadTxSetting * _sslf= (ReloadTxSetting*)reloadTxsSetting;
                     _sslf.controller=controller;
-                    if ([[BTAddressProvider instance] getPasswordSeed]) {
+                    if ([BTPasswordSeed getPasswordSeed]) {
                         [_sslf showDialogPassword];
                     }else{
                         [_sslf reloadTx:nil];

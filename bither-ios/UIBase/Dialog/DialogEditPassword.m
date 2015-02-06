@@ -101,7 +101,7 @@
             });
         }else{
             BOOL success = NO;
-            if([BTAddressManager instance].privKeyAddresses.count + [BTAddressManager instance].trashAddresses.count > 0 || [[BTAddressManager instance] hdmKeychain]!= nil){
+            if([BTPasswordSeed hasPasswordSeed]){
                 success = [[BTAddressManager instance] changePassphraseWithOldPassphrase:p andNewPassphrase:nP];
             }
             dispatch_async(dispatch_get_main_queue(), ^{
@@ -265,7 +265,7 @@
 }
 
 -(BOOL)checkPassword:(NSString*)password{
-    BTPasswordSeed *passwordSeed = [[BTAddressProvider instance] getPasswordSeed];
+    BTPasswordSeed *passwordSeed = [BTPasswordSeed getPasswordSeed];
     if(passwordSeed){
         return [passwordSeed checkPassword:password];
     }

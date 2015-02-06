@@ -177,7 +177,7 @@ static Setting* importPrivateKeySetting;
 
         [dp showInWindow:self.controller.view.window completion:^{
             dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
-                BTPasswordSeed *passwordSeed = [[BTAddressProvider instance] getPasswordSeed];
+                BTPasswordSeed *passwordSeed = [BTPasswordSeed getPasswordSeed];
                 if (passwordSeed) {
                     BOOL checkPassword = [passwordSeed checkPassword:password];
                     dispatch_async(dispatch_get_main_queue(), ^{
@@ -196,7 +196,7 @@ static Setting* importPrivateKeySetting;
     } else {
         [dp showInWindow:self.controller.view.window completion:^{
             dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
-                BTPasswordSeed *passwordSeed = [[BTAddressProvider instance] getPasswordSeed];
+                BTPasswordSeed *passwordSeed = [BTPasswordSeed getPasswordSeed];
                 if (passwordSeed) {
                     BOOL checkPassword = [passwordSeed checkPassword:password];
                     dispatch_async(dispatch_get_main_queue(), ^{

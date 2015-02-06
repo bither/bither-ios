@@ -286,7 +286,7 @@
             return NO;
         }
     }
-    BTPasswordSeed *passwordSeed = [[BTAddressProvider instance] getPasswordSeed];
+    BTPasswordSeed *passwordSeed = [BTPasswordSeed getPasswordSeed];
     return !passwordSeed;
 }
 
@@ -309,7 +309,7 @@
     if(self.delegate && [self.delegate respondsToSelector:@selector(checkPassword:)]){
         return [self.delegate checkPassword:password];
     }
-    BTPasswordSeed *passwordSeed = [[BTAddressProvider instance] getPasswordSeed];
+    BTPasswordSeed *passwordSeed = [BTPasswordSeed getPasswordSeed];
     if(passwordSeed){
         return [passwordSeed checkPassword:password];
     }

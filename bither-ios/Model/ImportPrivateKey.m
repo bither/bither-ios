@@ -114,7 +114,7 @@
 }
 -(BOOL)checkKey:(BTKey *)key {
     if (self.importPrivateKeyType==BitherQrcode) {
-        BTPasswordSeed *passwordSeed = [[BTAddressProvider instance] getPasswordSeed];
+        BTPasswordSeed *passwordSeed = [BTPasswordSeed getPasswordSeed];
         if (passwordSeed) {
             BOOL checkPassword=[passwordSeed checkPassword:self.passwrod];
             if (!checkPassword) {
