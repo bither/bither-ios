@@ -111,6 +111,11 @@ NSUserDefaults *userDefaults;
     return  [language isEqualToString:@"zh-Hans"];
 }
 
+-(BOOL)localeIsZHHant{
+    NSString * language = [[NSLocale preferredLanguages] objectAtIndex:0];
+    return  [language isEqualToString:@"zh-Hant"];
+}
+
 -(NSInteger) getExchangeType{
     if ([userDefaults objectForKey:DEFAULT_EXCHANGE_RATE]){
         return [userDefaults integerForKey:DEFAULT_EXCHANGE_RATE];
