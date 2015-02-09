@@ -116,7 +116,6 @@
                 if (page==1) {
                     [_txs removeAllObjects];
                     [_txs addObjectsFromArray:txs];
-                    [self.address sortTx:_txs];
                     [self.tableView reloadData];
                 }else{
                     NSMutableArray *indexPathSet = [[NSMutableArray alloc] init];
@@ -124,7 +123,6 @@
                         [_txs addObject:tx];
                         [indexPathSet addObject:[NSIndexPath indexPathForRow:_txs.count-1 inSection:1]];
                     }
-                    [self.address sortTx:_txs];
                     [self.tableView insertRowsAtIndexPaths:indexPathSet withRowAnimation:UITableViewRowAnimationAutomatic];
                 }
 
