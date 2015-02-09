@@ -34,6 +34,9 @@
 #import "UpgradeUtil.h"
 #import "PinCodeUtil.h"
 
+#import "DialogProgress.h"
+#import "SystemUtil.h"
+
 @interface AppDelegate()
 @end
 static StatusBarNotificationWindow* notificationWindow;
@@ -46,11 +49,7 @@ static StatusBarNotificationWindow* notificationWindow;
     }else{
         [[UIApplication sharedApplication] setMinimumBackgroundFetchInterval:UIApplicationBackgroundFetchIntervalMinimum];
     }
-    if (![UpgradeUtil checkVersion]) {
-        // todo:
-        // prompt upgrade failed
-        return NO;
-    }
+
     [[BTPeerManager instance] initAddress];
     
     if([[BTSettings instance] needChooseMode]){
@@ -58,7 +57,32 @@ static StatusBarNotificationWindow* notificationWindow;
     }
     
     [CrashLog initCrashLog];
- //   [[BTSettings instance] openBitheriConsole];
+    if ([UpgradeUtil needUpgradeKeyFromFileToDB]){
+        DialogProgress * dp=[[DialogProgress alloc] initWithMessage:NSLocalizedString(@"Please wait…", nil)];
+        __block  DialogProgress* sslfDp=dp;
+        [dp showInWindow:self.window completion:^{
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0),^{
+                BOOL  success = [UpgradeUtil upgradeKeyFromFileToDB];
+                if (success){
+                    [[UserDefaultsUtil instance] setLastVersion:[SystemUtil getVersionCode]];
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        [sslfDp dismissWithCompletion:^{
+                            [self loadViewController];
+                        }];
+
+                    });
+                }
+            });
+        }];
+    }else{
+        [self loadViewController];
+    }
+
+    //   [[BTSettings instance] openBitheriConsole];
+
+    return YES;
+}
+-(void)loadViewController{
     UIStoryboard *storyboard = self.window.rootViewController.storyboard;
     if(![[BTSettings instance] needChooseMode]){
         IOS7ContainerViewController *container = [[IOS7ContainerViewController alloc]init];
@@ -72,8 +96,8 @@ static StatusBarNotificationWindow* notificationWindow;
         }
     }
     [self.window makeKeyAndVisible];
-    
-   // NSLog(@"h %d",[[BTBlockChain instance] lastBlock].blockNo);
+
+    // NSLog(@"h %d",[[BTBlockChain instance] lastBlock].blockNo);
     [self callInHot:^{
         [[PeerUtil instance] startPeer];
         [[BitherTime instance] start];
@@ -81,12 +105,12 @@ static StatusBarNotificationWindow* notificationWindow;
     [self callInCold:^{
         [[Reachability reachabilityForInternetConnection] startNotifier];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reachabilityChange) name:kReachabilityChangedNotification object:nil];
-        
+
     }];
     notificationWindow = [[StatusBarNotificationWindow alloc]initWithOriWindow:self.window];
     [[PinCodeUtil instance] becomeActive];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(notification:) name:BitherBalanceChangedNotification object:nil];
-    return YES;
+
 }
 
 -(void)notification:(NSNotification *)notification{

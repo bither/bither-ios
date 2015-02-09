@@ -26,6 +26,8 @@
 //+ (BOOL)needUpgradeKeyFromFileToDB;
 //+ (BOOL)upgradeKeyFromFileToDB;
 
-+ (BOOL)checkVersion;
+
++(BOOL)needUpgradeKeyFromFileToDB;
++ (BOOL)upgradeKeyFromFileToDB;
 
 @end
