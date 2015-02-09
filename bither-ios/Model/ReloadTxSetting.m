@@ -52,8 +52,7 @@ static Setting *reloadTxsSetting;
         [[PeerUtil instance] stopPeer];
         for(BTAddress * address in [[BTAddressManager instance]allAddresses]){
             [address setIsSyncComplete:NO];
-            [[BTAddressProvider instance] updateSyncComplete:address];
-//            [address updateAddressWithPub];
+            [address updateSyncComplete];
         }
         [[BTTxProvider instance] clearAllTx];
         [TransactionsUtil syncWallet:^{

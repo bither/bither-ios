@@ -269,12 +269,7 @@
         } else {
             [address initTxs:[[BTAddressManager instance] compressTxsForApi:allTxs andAddress:address.address]];
             [address setIsSyncComplete:YES];
-            if (address.isHDM) {
-                BTHDMAddress *hdmAddress = (BTHDMAddress *)address;
-                [[BTAddressProvider instance] syncCompleteHDSeedId:hdmAddress.keychain.hdSeedId hdSeedIndex:hdmAddress.index];
-            } else {
-                [[BTAddressProvider instance] updateSyncComplete:address];
-            }
+            [address updateSyncComplete];
 
             uint32_t storeHeight=[[BTBlockChain instance] lastBlock].blockNo;
             if (blockCount < storeHeight && storeHeight - blockCount < 100) {
@@ -302,12 +297,7 @@
         } else {
             [address initTxs:[[BTAddressManager instance] compressTxsForApi:allTxs andAddress:address.address]];
             [address setIsSyncComplete:YES];
-            if (address.isHDM) {
-                BTHDMAddress *hdmAddress = (BTHDMAddress *)address;
-                [[BTAddressProvider instance] syncCompleteHDSeedId:hdmAddress.keychain.hdSeedId hdSeedIndex:hdmAddress.index];
-            } else {
-                [[BTAddressProvider instance] updateSyncComplete:address];
-            }
+            [address updateSyncComplete];
 
             uint32_t storeHeight=[[BTBlockChain instance] lastBlock].blockNo;
             if (blockCount < storeHeight && storeHeight - blockCount < 100) {
