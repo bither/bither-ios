@@ -269,7 +269,7 @@
         } else {
             [address initTxs:[[BTAddressManager instance] compressTxsForApi:allTxs andAddress:address.address]];
             [address setIsSyncComplete:YES];
-            [[BTAddressProvider instance] updateSyncComplete:address];
+            [address updateSyncComplete];
 
             uint32_t storeHeight=[[BTBlockChain instance] lastBlock].blockNo;
             if (blockCount < storeHeight && storeHeight - blockCount < 100) {
@@ -297,7 +297,7 @@
         } else {
             [address initTxs:[[BTAddressManager instance] compressTxsForApi:allTxs andAddress:address.address]];
             [address setIsSyncComplete:YES];
-            [[BTAddressProvider instance] updateSyncComplete:address];
+            [address updateSyncComplete];
 
             uint32_t storeHeight=[[BTBlockChain instance] lastBlock].blockNo;
             if (blockCount < storeHeight && storeHeight - blockCount < 100) {
