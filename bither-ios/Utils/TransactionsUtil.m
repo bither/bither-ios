@@ -216,10 +216,28 @@
 }
 
 + (NSArray *)getTxs:(NSDictionary *)dict;{
+    NSArray *array=[[BTBlockChain instance] getAllBlocks];
+    NSMutableDictionary *dictionary=[NSMutableDictionary new];
+    BTBlock *minBlock=[array objectAtIndex:array.count-1];
+    uint32_t  minBlockNo= minBlock.blockNo;
+    for(BTBlock *block in array){
+        if(block.blockNo<minBlockNo){
+            minBlockNo=block.blockNo;
+        }
+        [dictionary setObject:block forKey:[NSNumber numberWithInt:block.blockNo]];
+    };
     NSMutableArray *txs = [NSMutableArray new];
     for (NSArray *each in dict[@"tx"]) {
         BTTx *tx = [[BTTx alloc] initWithMessage:[NSData dataFromBase64String:each[1]]];
         tx.blockNo = (uint32_t) [each[0] intValue];
+        BTBlock * block;
+        if (tx.blockNo<minBlockNo){
+            block= [dictionary objectForKey:[NSNumber numberWithInt:minBlockNo]];
+        } else{
+            block= [dictionary objectForKey:[NSNumber numberWithInt:tx.blockNo]];
+        }
+
+        [tx setTxTime:block.blockTime];
         [txs addObject:tx];
     }
     return txs;

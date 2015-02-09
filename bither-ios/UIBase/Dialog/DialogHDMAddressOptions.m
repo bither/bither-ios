@@ -29,7 +29,7 @@
 - (instancetype)initWithAddress:(BTAddress *)address {
     NSMutableArray *actions = [NSMutableArray new];
     [actions addObject:[[Action alloc] initWithName:NSLocalizedString(@"View on Blockchain.info", nil) target:self andSelector:@selector(viewOnBlockchain)]];
-    if([UserDefaultsUtil instance].localeIsChina) {
+    if([UserDefaultsUtil instance].localeIsChina||[[UserDefaultsUtil instance] localeIsZHHant]) {
         [actions addObject:[[Action alloc] initWithName:NSLocalizedString(@"address_option_view_on_blockmeta", nil) target:self andSelector:@selector(viewOnBlockmeta)]];
     }
     self = [super initWithActions:actions];
