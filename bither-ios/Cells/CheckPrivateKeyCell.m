@@ -46,8 +46,10 @@
     _address = address;
     if([StringUtil isValidBitcoinBIP21Address:address] || address.isValidBitcoinAddress){
         self.lbl.text = [NSString stringWithFormat:NSLocalizedString(@"Private key of %@", nil),[StringUtil shortenAddress:address]];
+        self.btnFullAddress.hidden = NO;
     } else {
         self.lbl.text = address;
+        self.btnFullAddress.hidden = YES;
     }
     CGFloat width = [self.lbl.text sizeWithRestrict:CGSizeMake(CGFLOAT_MAX, CGFLOAT_MAX) font:self.lbl.font].width;
     CGRect frame = self.lbl.frame;
