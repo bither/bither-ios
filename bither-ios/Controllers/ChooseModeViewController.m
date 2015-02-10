@@ -30,9 +30,6 @@
 #import <QuartzCore/QuartzCore.h>
 #import "BitherTime.h"
 #import "DialogAlert.h"
-#import "UpgradeUtil.h"
-#import "DialogProgress.h"
-#import "SystemUtil.h"
 
 #define kChooseModeGradientCenterColor (0x8881a2)
 #define kChooseModeGradientColdColor (0x10a0df)
@@ -95,16 +92,13 @@
 {
     [super viewDidLoad];
     [self configureView];
-
-}
--(void)loadViewController{
     [[BlockUtil instance] syncSpvBlock];
     if(![[BTSettings instance] needChooseMode]){
         if([[BTSettings instance]getAppMode]==HOT && ![[BlockUtil instance]syncSpvFinish]){
             [BlockUtil instance].delegate = self;
             [[BlockUtil instance] syncSpvBlock];
             [self showHotWait];
-
+            
         }
         if([[BTSettings instance]getAppMode]==COLD){
             [self showColdCheckWithCompletion:^{
