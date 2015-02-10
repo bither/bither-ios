@@ -28,6 +28,7 @@
 
 #define kForegroundInsetsRate (0.05f)
 #define kChartSize (260)
+#define kChartSizeSmall (230)
 #define kTopLabelFontSize (18)
 #define kVerticalGap (5)
 #define kBottomLabelFontSize (13)
@@ -69,6 +70,12 @@
         }
         total += a.balance;
     }
+    
+    CGFloat chartSize = kChartSize;
+    if(hdm > 0 && hot > 0 && cold > 0 && [UIScreen mainScreen].bounds.size.height <= 480){
+        chartSize = kChartSizeSmall;
+    }
+    
     self.bgInsets = UIEdgeInsetsMake(14, 6, 14, 6);
     UILabel* topLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, self.frame.size.width, kTopLabelFontSize * 1.2)];
     topLabel.font = [UIFont systemFontOfSize:kTopLabelFontSize];
@@ -77,10 +84,11 @@
     topLabel.text = [NSString stringWithFormat:@"%@%@", NSLocalizedString(@"Total BTC prefix", nil), [UnitUtil stringForAmount:total]];
     [self addSubview:topLabel];
 
-    self.chart = [[PieChartView alloc]initWithFrame:CGRectMake(kChartSize * kForegroundInsetsRate, CGRectGetMaxY(topLabel.frame) + kVerticalGap + kChartSize * kForegroundInsetsRate, kChartSize - kChartSize * kForegroundInsetsRate * 2, kChartSize - kChartSize * kForegroundInsetsRate * 2)];
+    CGFloat left = (self.frame.size.width - chartSize)/2;
+    self.chart = [[PieChartView alloc]initWithFrame:CGRectMake(chartSize * kForegroundInsetsRate + left, CGRectGetMaxY(topLabel.frame) + kVerticalGap + chartSize * kForegroundInsetsRate, chartSize - chartSize * kForegroundInsetsRate * 2, chartSize - chartSize * kForegroundInsetsRate * 2)];
     [self addSubview:self.chart];
     UIImageView* ivForeground = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"pie_mask"]];
-    ivForeground.frame = CGRectMake(0, CGRectGetMaxY(topLabel.frame) + kVerticalGap, kChartSize, kChartSize);
+    ivForeground.frame = CGRectMake(left, CGRectGetMaxY(topLabel.frame) + kVerticalGap, chartSize, chartSize);
     [self addSubview:ivForeground];
 
     CGFloat bottom = CGRectGetMaxY(ivForeground.frame);
@@ -220,4 +228,9 @@
     [attr insertAttributedString:attachmentString atIndex:0];
     return attr;
 }
+
+-(BOOL)arrowAlwaysOnTop{
+    return YES;
+}
+
 @end

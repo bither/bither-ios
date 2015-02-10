@@ -68,7 +68,14 @@
     self.ivArrow.frame = CGRectMake(arrowX, arrowY, kArrowWidth, kArrowHeight);
 }
 
+-(BOOL)arrowAlwaysOnTop{
+    return NO;
+}
+
 -(BOOL)isArrowOnTop{
+    if(self.arrowAlwaysOnTop){
+        return YES;
+    }
     CGFloat dialogHeight = self.frame.size.height + self.bgInsets.bottom + self.bgInsets.top;
     CGFloat windowHeight = self.fromView.window.topViewController.view.frame.size.height;
     CGFloat fromViewTop = [self.fromView.window.topViewController.view convertPoint:CGPointMake(0, 0) fromView:self.fromView].y;
