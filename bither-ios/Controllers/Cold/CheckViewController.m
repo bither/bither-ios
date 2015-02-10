@@ -65,6 +65,9 @@
     self.vHeader.score = 100;
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
+    if([self.tableView respondsToSelector:@selector(setLayoutMargins:)]){
+        self.tableView.layoutMargins = UIEdgeInsetsZero;
+    }
     self.tableView.tableFooterView = [[UIView alloc]initWithFrame:CGRectZero];
     self.tableView.tableFooterView.backgroundColor = [UIColor clearColor];
     hdmDanger = NO;

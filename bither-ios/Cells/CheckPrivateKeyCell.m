@@ -97,4 +97,9 @@
 -(void)showMsg:(NSString*)msg{
     
 }
+
+-(UIEdgeInsets)layoutMargins{
+    return UIEdgeInsetsZero;
+}
+
 @end
