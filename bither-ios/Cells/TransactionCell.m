@@ -80,10 +80,10 @@
     _address = address;
     _addresses = [[NSMutableDictionary alloc]init];
     self.btnAmount.frameChangeListener = self;
-    int64_t value = [tx deltaAmountFrom:address];
-    [self.btnAmount setAmount:value];
+    int64_t amount = [tx deltaAmountFrom:address];
+    [self.btnAmount setAmount:amount];
     self.lblTime.text = [DateUtil stringFromDate:[NSDate dateWithTimeIntervalSince1970:tx.txTime]];
-    _income = value > 0;
+    _income = amount > 0;
     NSString *a = @"---";
     if(_income){
         NSUInteger count = tx.ins.count;
