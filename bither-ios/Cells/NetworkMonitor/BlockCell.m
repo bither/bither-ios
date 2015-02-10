@@ -52,7 +52,7 @@
 
 -(void)setBlock:(BTBlock *)block{
     self.lbBlockNo.text=[NSString stringWithFormat:@"%d",block.blockNo];
-    NSString * blockHash=[NSString hexWithHash:block.blockHash];
+    NSString * blockHash=[[NSString hexWithHash:block.blockHash] toLowercaseStringWithEn];
     self.lbBlockHash.text=blockHash;
     self.lbTime.text=[DateUtil getRelativeDate:[NSDate dateWithTimeIntervalSince1970:block.blockTime]];
 }
