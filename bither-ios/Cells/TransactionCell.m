@@ -16,6 +16,8 @@
 //  See the License for the specific language governing permissions and
 //  limitations under the License.
 
+#import <Bitheri/BTIn.h>
+#import <Bitheri/BTTxProvider.h>
 #import "TransactionCell.h"
 #import "AmountButton.h"
 #import "StringUtil.h"
@@ -73,6 +75,7 @@
 
 -(void)showTx:(BTTx*)tx byAddress:(BTAddress*)address{
     _tx = tx;
+    NSArray *inValues = [[BTTxProvider instance] txInValues:_tx.txHash];
     _address = address;
     _addresses = [[NSMutableDictionary alloc]init];
     self.btnAmount.frameChangeListener = self;
@@ -84,7 +87,7 @@
     if(_income){
         NSUInteger count = tx.inputAddresses.count;
         for(int k = 0; k < count;k++){
-            NSObject *ai = [tx.inputAddresses objectAtIndex:k];
+            NSObject *ai = tx.inputAddresses[k];
             if(ai == [NSNull null]){
                 ai = @"Coinbase";
             }
@@ -92,34 +95,34 @@
                 a = (NSString*)ai;
             }
             NSObject* value = _addresses[ai];
-            NSObject* newValue = _tx.inValues[k];
+            NSObject* newValue = inValues[k];
             if(value != nil && value != [NSNull null]){
                 u_int64_t delta = 0;
                 if(newValue != nil && newValue != [NSNull null]){
                     delta = [(NSNumber*)newValue unsignedLongLongValue];
                 }
-                value = [NSNumber numberWithUnsignedLongLong:(delta + [(NSNumber*)value unsignedLongLongValue])];
+                value = @(delta + [(NSNumber *) value unsignedLongLongValue]);
             }else{
                 value = newValue;
             }
             _addresses[(NSString*)ai] = value;
         }
     }else{
-        NSUInteger count = tx.outputAddresses.count;
+        NSUInteger count = tx.outs.count;
         for(int k = 0; k < count;k++){
-            NSObject *ai = [tx.outputAddresses objectAtIndex:k];
-            if(ai != [NSNull null]){
+            NSObject *ai = ((BTOut *)tx.outs[k]).outAddress;
+            if(ai != nil){
                 if(![StringUtil compareString:address.address compare:(NSString*)ai] && a.length < 30){
                     a = (NSString*)ai;
                 }
                 NSObject* value = _addresses[ai];
-                NSObject* newValue = _tx.outputAmounts[k];
+                NSObject* newValue = @(((BTOut *)_tx.outs[k]).outValue);
                 if(value != nil && value != [NSNull null]){
                     u_int64_t delta = 0;
                     if(newValue != nil && newValue != [NSNull null]){
                         delta = [(NSNumber*)newValue unsignedLongLongValue];
                     }
-                    value = [NSNumber numberWithUnsignedLongLong:(delta + [(NSNumber*)value unsignedLongLongValue])];
+                    value = @(delta + [(NSNumber *) value unsignedLongLongValue]);
                 }else{
                     value = newValue;
                 }

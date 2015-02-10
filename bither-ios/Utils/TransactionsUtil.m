@@ -138,11 +138,19 @@
                 }
                 
             }
+            NSMutableArray *txInputHashes = [NSMutableArray new];
+            for (BTIn *btIn in tx.ins) {
+                [txInputHashes addObject:btIn.prevTxHash];
+            }
             for(BTTx * temp in array){
                 if (temp.blockNo==tx.blockNo) {
-                    if ([[temp inputHashes] containsObject:tx.txHash]) {
+                    NSMutableArray *tempInputHashes = [NSMutableArray new];
+                    for (BTIn *btIn in temp.ins) {
+                        [tempInputHashes addObject:btIn.prevTxHash];
+                    }
+                    if ([tempInputHashes containsObject:tx.txHash]) {
                         [tx setTxTime:temp.txTime-1];
-                    }else if([[tx inputHashes]containsObject:temp.txHash]){
+                    }else if([txInputHashes containsObject:temp.txHash]){
                         [tx setTxTime:temp.txTime+1];
                     }
                 }
