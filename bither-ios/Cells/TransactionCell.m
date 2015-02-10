@@ -76,7 +76,7 @@
 -(void)showTx:(BTTx*)tx byAddress:(BTAddress*)address{
     _tx = tx;
     NSArray *inValues = [[BTTxProvider instance] txInValues:_tx.txHash];
-    NSArray *inAddresses = tx.inputAddresses;
+    NSArray *inAddresses = [tx getInAddresses];
     _address = address;
     _addresses = [[NSMutableDictionary alloc]init];
     self.btnAmount.frameChangeListener = self;
