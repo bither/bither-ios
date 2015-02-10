@@ -85,23 +85,24 @@
         NSUInteger count = tx.inputAddresses.count;
         for(int k = 0; k < count;k++){
             NSObject *ai = [tx.inputAddresses objectAtIndex:k];
-            if(ai != [NSNull null]){
-                if(![StringUtil compareString:address.address compare:(NSString*)ai] && a.length < 30){
-                    a = (NSString*)ai;
-                }
-                NSObject* value = _addresses[ai];
-                NSObject* newValue = _tx.inValues[k];
-                if(value != nil && value != [NSNull null]){
-                    u_int64_t delta = 0;
-                    if(newValue != nil && newValue != [NSNull null]){
-                        delta = [(NSNumber*)newValue unsignedLongLongValue];
-                    }
-                    value = [NSNumber numberWithUnsignedLongLong:(delta + [(NSNumber*)value unsignedLongLongValue])];
-                }else{
-                    value = newValue;
-                }
-                _addresses[(NSString*)ai] = value;
+            if(ai == [NSNull null]){
+                ai = @"Coinbase";
             }
+            if(![StringUtil compareString:address.address compare:(NSString*)ai] && a.length < 30){
+                a = (NSString*)ai;
+            }
+            NSObject* value = _addresses[ai];
+            NSObject* newValue = _tx.inValues[k];
+            if(value != nil && value != [NSNull null]){
+                u_int64_t delta = 0;
+                if(newValue != nil && newValue != [NSNull null]){
+                    delta = [(NSNumber*)newValue unsignedLongLongValue];
+                }
+                value = [NSNumber numberWithUnsignedLongLong:(delta + [(NSNumber*)value unsignedLongLongValue])];
+            }else{
+                value = newValue;
+            }
+            _addresses[(NSString*)ai] = value;
         }
     }else{
         NSUInteger count = tx.outputAddresses.count;
@@ -134,7 +135,7 @@
         }
         return NSOrderedSame;
     }];
-    if(a.length > 4){
+    if(a.length > 4 && ![StringUtil compareString:a compare:@"Coinbase"]){
         a = [StringUtil shortenAddress:a];
     }
     [self.vTransactionConfidence showTransaction:tx withAddress:address];
