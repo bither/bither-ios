@@ -124,7 +124,7 @@
 }
 
 - (IBAction)addWorld:(id)sender {
-    NSString * world=self.tfKey.text;
+    NSString * world= [self.tfKey.text toLowercaseStringWithEn];
     if ([[[BTBIP39 sharedInstance] getWords] containsObject:world]) {
         [self.worldListArray addObject:world];
         [self.collectionView reloadData];
