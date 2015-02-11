@@ -272,8 +272,8 @@
             for(NSString *s in strs){
                 [sigs addObject:[s hexToData]];
             }
-            [self.tx signWithSignatures:sigs];
-            if([self.tx verifySignatures]){
+            BOOL success=[self.tx signWithSignatures:sigs];
+            if(success){
                 [dp showInWindow:self.view.window completion:^{
                     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
                         if([self.address checkRValuesForTx:self.tx]){

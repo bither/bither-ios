@@ -26,6 +26,14 @@
 
 @implementation QRCodeTxTransport
 
+-(instancetype)init {
+    self=[super init];
+    if (self){
+        self.hdmIndex=NO_HDM_INDEX;
+    }
+    return self;
+}
+
 +(QRCodeTxTransport *)formatQRCodeTransport:(NSString *)str{
     QRCodeTxTransport * qrCodeTx;
     NSArray * strArray=[BTQRCodeUtil splitQRCode:str];;
