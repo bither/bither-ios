@@ -187,7 +187,11 @@
     __block NSCondition *condition = [NSCondition new];
     __block NSArray *signatures = nil;
     __block NSError *e = nil;
-    [[HDMApi instance] signatureByRemoteWithHDMBid:self.address andPassword:[[[BTEncryptData alloc] initWithStr:self.encryptedBitherPassword] decrypt:password] andUnsignHash:unsignHashes andIndex:index callback:^(NSArray * array) {
+    NSData* p = [[[BTEncryptData alloc] initWithStr:self.encryptedBitherPassword] decrypt:password];
+    if(!p){
+        [BTHDMPasswordWrongException raise:@"hdm server password decrypt error" format:nil];
+    }
+    [[HDMApi instance] signatureByRemoteWithHDMBid:self.address andPassword:p andUnsignHash:unsignHashes andIndex:index callback:^(NSArray * array) {
         [condition lock];
         signatures = array;
         [condition signal];
