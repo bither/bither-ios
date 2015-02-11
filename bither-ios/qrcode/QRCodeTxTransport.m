@@ -57,7 +57,7 @@
             qrCodeTx=[QRCodeTxTransport noChangeFormatQRCodeTransport:strArray];
         }
     }
-    
+    qrCodeTx.hdmIndex = hdmIndex;
     return  qrCodeTx;
 }
 +(BOOL)isAddressHex:(NSString *)str{
