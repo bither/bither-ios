@@ -19,7 +19,7 @@
 
 
 
-ErrorHandler errorHandler = ^(MKNetworkOperation *errorOp, NSError *error){
+ErrorHandler errorHandler = ^(NSOperation *errorOp, NSError *error){
     DLog(@"%@", [error localizedDescription]);
 };
 
@@ -46,7 +46,7 @@ ErrorHandler errorHandler = ^(MKNetworkOperation *errorOp, NSError *error){
             if (completedOperationParam) {
                 completedOperationParam(completedOperation);
             }
-        } andErrorCallBack:^(MKNetworkOperation *errorOp, NSError *error) {
+        } andErrorCallBack:^(NSOperation *errorOp, NSError *error) {
             if (errorCallback) {
                 errorCallback(errorOp,error);
             }
@@ -58,22 +58,29 @@ ErrorHandler errorHandler = ^(MKNetworkOperation *errorOp, NSError *error){
     }
     
 }
--(void)get:(NSString *)url withParams:(NSDictionary *) params networkType:(BitherNetworkType) networkType completed:(CompletedOperation) completedOperationParam andErrorCallback:(ErrorHandler) errorCallback {
+
+- (void)get:(NSString *)url withParams:(NSDictionary *)params networkType:(BitherNetworkType)networkType
+  completed:(CompletedOperation)completedOperationParam andErrorCallback:(ErrorHandler)errorCallback; {
+    [self get:url withParams:params networkType:networkType completed:completedOperationParam andErrorCallback:errorCallback ssl:NO];
+}
+
+-(void)get:(NSString *)url withParams:(NSDictionary *) params networkType:(BitherNetworkType) networkType
+ completed:(CompletedOperation) completedOperationParam andErrorCallback:(ErrorHandler) errorCallback ssl:(BOOL)ssl {
     if (errorCallback == nil) {
         errorCallback = errorHandler;
     }
     [self initEngine:^(MKNetworkOperation *completedOperation) {
-        [self execGet:url withParams:params networkType:networkType  completed:completedOperationParam andErrorCallback:errorCallback];
-    } andErrorCallback:^(MKNetworkOperation *errorOp, NSError *error) {
+        [self execGet:url withParams:params networkType:networkType completed:completedOperationParam andErrorCallback:errorCallback ssl:ssl];
+    } andErrorCallback:^(NSOperation *errorOp, NSError *error) {
         if (errorCallback) {
             errorCallback(errorOp,error);
         }
     }];
 }
 
--(void)execGet:(NSString *)url withParams:(NSDictionary *) params networkType:(BitherNetworkType) networkType completed:(CompletedOperation) completedOperationParam andErrorCallback:(ErrorHandler) errorCallback{
+-(void)execGet:(NSString *)url withParams:(NSDictionary *) params networkType:(BitherNetworkType) networkType completed:(CompletedOperation) completedOperationParam andErrorCallback:(ErrorHandler) errorCallback ssl:(BOOL)ssl{
     MKNetworkEngine *mkNetworkEngine=[self getNetworkEngine:networkType];
-    MKNetworkOperation *get = [mkNetworkEngine operationWithPath:url params:params];
+    MKNetworkOperation *get = [mkNetworkEngine operationWithPath:url params:params httpMethod:HTTP_GET ssl:ssl];
     [get addCompletionHandler:^(MKNetworkOperation *completedOperation){
         //DLog(@"%@", [completedOperation responseString]);
         completedOperationParam(completedOperation);
@@ -81,7 +88,7 @@ ErrorHandler errorHandler = ^(MKNetworkOperation *errorOp, NSError *error){
         NSLog(@"completedOperation:%@",completedOperation);
         if ( completedOperation.HTTPStatusCode == 403) {
             [self getCookie:^(MKNetworkOperation *completedOperation) {
-            } andErrorCallBack:^(MKNetworkOperation *errorOp, NSError *error) {
+            } andErrorCallBack:^(NSOperation *errorOp, NSError *error) {
             }];
         }
         if (errorCallback != nil) {
@@ -92,30 +99,34 @@ ErrorHandler errorHandler = ^(MKNetworkOperation *errorOp, NSError *error){
 }
 
 #pragma mark-post
--(void)post:(NSString *)url withParams:(NSDictionary *) params networkType:(BitherNetworkType) networkType completed:(CompletedOperation) completedOperationParam andErrorCallBack:(ErrorHandler) errorCallback {
-    
+-(void)post:(NSString *)url withParams:(NSDictionary *) params networkType:(BitherNetworkType) networkType
+  completed:(CompletedOperation) completedOperationParam andErrorCallBack:(ErrorHandler) errorCallback {
+    [self post:url withParams:params networkType:networkType completed:completedOperationParam andErrorCallBack:errorCallback ssl:NO];
+}
+-(void)post:(NSString *)url withParams:(NSDictionary *) params networkType:(BitherNetworkType) networkType
+  completed:(CompletedOperation) completedOperationParam andErrorCallBack:(ErrorHandler) errorCallback ssl:(BOOL)ssl{
     if (errorCallback == nil) {
         errorCallback = errorHandler;
     }
     [self initEngine:^(MKNetworkOperation *completedOperation) {
-        [self execPostpost:url withParams:params networkType:networkType  completed:completedOperationParam andErrorCallBack:errorCallback];
-    } andErrorCallback:^(MKNetworkOperation *errorOp, NSError *error) {
+        [self execPost:url withParams:params networkType:networkType completed:completedOperationParam andErrorCallBack:errorCallback ssl:ssl];
+    } andErrorCallback:^(NSOperation *errorOp, NSError *error) {
         if (errorCallback) {
             errorCallback(errorOp,error);
         }
     }];
 }
 
--(void)execPostpost:(NSString *)url withParams:(NSDictionary *) params networkType:(BitherNetworkType) networkType completed:(CompletedOperation) completedOperationParam andErrorCallBack:(ErrorHandler) errorCallback{
+-(void)execPost:(NSString *)url withParams:(NSDictionary *)params networkType:(BitherNetworkType)networkType completed:(CompletedOperation)completedOperationParam andErrorCallBack:(ErrorHandler)errorCallback ssl:(BOOL)ssl{
     MKNetworkEngine *mkNetworkEngine=[self getNetworkEngine:networkType];
-    MKNetworkOperation *post = [mkNetworkEngine operationWithPath:url params:params httpMethod:HTTP_POST];
+    MKNetworkOperation *post = [mkNetworkEngine operationWithPath:url params:params httpMethod:HTTP_POST ssl:ssl];
     [post addCompletionHandler:^(MKNetworkOperation *completedOperation){
         completedOperationParam(completedOperation);
     }errorHandler:^(MKNetworkOperation *completedOperation, NSError *error) {
         NSLog(@"completedOperation:%@",completedOperation);
         if (completedOperation.HTTPStatusCode == 403) {
             [self getCookie:^(MKNetworkOperation *completedOperation) {
-            } andErrorCallBack:^(MKNetworkOperation *errorOp, NSError *error) {
+            } andErrorCallBack:^(NSOperation *errorOp, NSError *error) {
             }];
         }
         if (errorCallback != nil) {
@@ -167,7 +178,12 @@ ErrorHandler errorHandler = ^(MKNetworkOperation *errorOp, NSError *error){
         case BitherStats:
             networkEngine=[bitherEngine getStatsNetworkEngine];
             break;
-            
+        case BitherBC:
+            networkEngine=[bitherEngine getBCNetworkEngine];
+            break;
+        case BitherHDM:
+            networkEngine=[bitherEngine getHDMNetworkEngine];
+            break;
         default:
             networkEngine=[bitherEngine getUserNetworkEngine];
             break;

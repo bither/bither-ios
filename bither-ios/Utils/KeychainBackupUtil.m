@@ -267,23 +267,24 @@
             NSArray *array = [key componentsSeparatedByString:KEYCHAIN_KEY_CONTENT_SEP];
             if (![keychainPubKeys containsObject:array[0]]) {
                 BTAddress *address = [[BTAddress alloc] initWithWithPubKey:array[0] encryptPrivKey:[[array subarrayWithRange:NSMakeRange(1, 3)] componentsJoinedByString:KEYCHAIN_KEY_CONTENT_SEP]];
-                address.encryptPrivKey = [address reEncryptPrivKeyWithOldPassphrase:localPassword andNewPassphrase:keychainPassword];
+                // todo:
+//                address.encryptPrivKey = [address reEncryptPrivKeyWithOldPassphrase:localPassword andNewPassphrase:keychainPassword];
                 [allKeys addObject:[@[array[0], address.encryptPrivKey] componentsJoinedByString:KEYCHAIN_KEY_CONTENT_SEP]];
                 [needUpdateAddress addObject:address];
             }
         }
         
         for (BTAddress *address in needUpdateAddress) {
-            [address savePrivate];
+//            [address savePrivate];
         }
         for (BTAddress *address in needAddAddress) {
             [[BTAddressManager instance] addAddress:address];
         }
-        if ([BTAddressManager instance].privKeyAddresses.count > 0) {
-            [[UserDefaultsUtil instance]setPasswordSeed:[[BTPasswordSeed alloc] initWithBTAddress:[BTAddressManager instance].privKeyAddresses[0]]];
-        } else if ([BTAddressManager instance].trashAddresses.count > 0) {
-            [[UserDefaultsUtil instance]setPasswordSeed:[[BTPasswordSeed alloc] initWithBTAddress:[BTAddressManager instance].trashAddresses[0]]];
-        }
+//        if ([BTAddressManager instance].privKeyAddresses.count > 0) {
+//            [[UserDefaultsUtil instance]setPasswordSeed:[[BTPasswordSeed alloc] initWithBTAddress:[BTAddressManager instance].privKeyAddresses[0]]];
+//        } else if ([BTAddressManager instance].trashAddresses.count > 0) {
+//            [[UserDefaultsUtil instance]setPasswordSeed:[[BTPasswordSeed alloc] initWithBTAddress:[BTAddressManager instance].trashAddresses[0]]];
+//        }
         [[A0SimpleKeychain keychain] setString:[allKeys componentsJoinedByString:KEYCHAIN_KEY_SEP] forKey:KEYCHAIN_KEY];
 //        [KeychainUtil setKeychainString:[allKeys componentsJoinedByString:KEYCHAIN_KEY_SEP] andKey:KEYCHAIN_KEY andAuthenticated:NO];
         return YES;

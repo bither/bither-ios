@@ -16,6 +16,7 @@
 //  See the License for the specific language governing permissions and
 //  limitations under the License.
 
+#import <Bitheri/BTAddressProvider.h>
 #import "ImportPrivateKeySetting.h"
 #import "StringUtil.h"
 #import "BitherSetting.h"
@@ -32,6 +33,9 @@
 #import "BTQRCodeUtil.h"
 #import "BTPrivateKeyUtil.h"
 #import "ImportPrivateKey.h"
+#import "BTEncryptData.h"
+#import "ImportHDMCold.h"
+#import "ImportHDMColdSeedController.h"
 
 @interface CheckPasswordDelegate : NSObject<DialogPasswordDelegate>
 @property(nonatomic,strong) UIViewController *controller;
@@ -48,7 +52,9 @@
 
 
 
-
+@interface ImportPrivateKeySetting()
+@property(nonatomic, readwrite) BOOL isImportHDM;
+@end
 @implementation ImportPrivateKeySetting
 
 static Setting* importPrivateKeySetting;
@@ -60,10 +66,19 @@ static Setting* importPrivateKeySetting;
         __weak ImportPrivateKeySetting* sself=scanPrivateKeySetting;
         [scanPrivateKeySetting setSelectBlock:^(UIViewController * controller){
             sself.controller=controller;
-            UIActionSheet *actionSheet=[[UIActionSheet alloc]initWithTitle:NSLocalizedString(@"Import Private Key", nil)
-                                                                  delegate:sself                                                         cancelButtonTitle:NSLocalizedString(@"Cancel", nil)
-                                                    destructiveButtonTitle:nil
-                                                         otherButtonTitles:NSLocalizedString(@"From Bither Private Key QR Code", nil),NSLocalizedString(@"From Private Key Text", nil),nil];
+            UIActionSheet *actionSheet= nil;
+           if ([[BTSettings instance] getAppMode]==COLD&&![[BTAddressManager instance] hasHDMKeychain]) {
+
+               actionSheet=  [[UIActionSheet alloc]initWithTitle:NSLocalizedString(@"Import Private Key", nil)
+                                                        delegate:sself                                                         cancelButtonTitle:NSLocalizedString(@"Cancel", nil)
+                                          destructiveButtonTitle:nil
+                                               otherButtonTitles:NSLocalizedString(@"From Bither Private Key QR Code", nil),NSLocalizedString(@"From Private Key Text", nil),NSLocalizedString(@"import_hdm_cold_seed_qr_code", nil),NSLocalizedString(@"import_hdm_cold_seed_phrase", nil),nil];
+           } else{
+               actionSheet=  [[UIActionSheet alloc]initWithTitle:NSLocalizedString(@"Import Private Key", nil)
+                                          delegate:sself                                                         cancelButtonTitle:NSLocalizedString(@"Cancel", nil)
+                            destructiveButtonTitle:nil
+                                 otherButtonTitles:NSLocalizedString(@"From Bither Private Key QR Code", nil),NSLocalizedString(@"From Private Key Text", nil),nil];
+           }
             
             actionSheet.actionSheetStyle=UIActionSheetStyleDefault;
             [actionSheet showInView:controller.navigationController.view];
@@ -75,64 +90,150 @@ static Setting* importPrivateKeySetting;
 
 
 -(void)actionSheet:(UIActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex{
-    if (buttonIndex==0) {
-        ScanQrCodeViewController *scan = [[ScanQrCodeViewController alloc]initWithDelegate:self title:NSLocalizedString(@"Scan Private Key QR Code",nil) message:NSLocalizedString(@"Scan QR code No.1 provided by Bither", nil)];
-        [self.controller presentViewController:scan animated:YES completion:nil];
-    }else if(buttonIndex==1){
-        DialogImportPrivateKey * dialogImportPrivateKey=[[DialogImportPrivateKey alloc] initWithDelegate:self importPrivateKeyType:PrivateText];
-        [dialogImportPrivateKey showInWindow:self.controller.view.window];
+    self.isImportHDM= buttonIndex==2;
+    switch(buttonIndex){
+        case 0:
+            [self scanQRCodeWithPrivateKey];
+            break;
+        case 1:
+            [self importPrivateKey];
+            break;
+        case 2:
+            [self scanQRCodeWithHDMColdSeed];
+            break;
+        case 3:
+            [self importWithHDMColdPhrase];
+            break;
     }
+
+}
+-(void)scanQRCodeWithPrivateKey{
+    ScanQrCodeViewController *scan = [[ScanQrCodeViewController alloc] initWithDelegate:self title:NSLocalizedString(@"Scan Private Key QR Code", nil) message:NSLocalizedString(@"Scan QR code No.1 provided by Bither", nil)];
+    [self.controller presentViewController:scan animated:YES completion:nil];
+
+}
+-(void)importPrivateKey{
+    DialogImportPrivateKey * dialogImportPrivateKey=[[DialogImportPrivateKey alloc] initWithDelegate:self importPrivateKeyType:PrivateText];
+    [dialogImportPrivateKey showInWindow:self.controller.view.window];
+}
+-(void)scanQRCodeWithHDMColdSeed{
+    ScanQrCodeViewController *scan = [[ScanQrCodeViewController alloc] initWithDelegate:self title:NSLocalizedString(@"import_hdm_cold_seed_qr_code_scan_title", nil) message:NSLocalizedString(@"Scan QR code No.1 provided by Bither", nil)];
+    [self.controller presentViewController:scan animated:YES completion:nil];
+
+}
+-(void)importWithHDMColdPhrase{
+    ImportHDMColdSeedController *advanceController = [self.controller.storyboard instantiateViewControllerWithIdentifier:@"ImportHDMColdSeedController"];
+    UINavigationController *nav = self.controller.navigationController;
+    [nav pushViewController:advanceController animated:YES];
+    
+
 }
 
 -(void)handleResult:(NSString *)result byReader:(ScanQrCodeViewController *)reader{
-    if ([BTQRCodeUtil verifyQrcodeTransport:result]&&[[BTQRCodeUtil splitQRCode:result] count]==3) {
-        _result=result;
-        [reader playSuccessSound];
-        [reader vibrate];
-        [reader dismissViewControllerAnimated:YES completion:^{
-            DialogPassword *dialog = [[DialogPassword alloc]initWithDelegate:self];
-            [dialog showInWindow:self.controller.view.window];
-            
-        }];
-    }else{
-        [reader vibrate];
+
+    NSRange range=[result rangeOfString:HDM_QR_CODE_FLAG];
+    bool isHDMSeed= range.location==0;
+    if(self.isImportHDM) {
+        if ([BTQRCodeUtil verifyQrcodeTransport:result] ) {
+            [reader playSuccessSound];
+            [reader vibrate];
+            [reader dismissViewControllerAnimated:YES completion:^{
+                if (!isHDMSeed || [[BTQRCodeUtil splitQRCode:result] count] != 3){
+                    [self showMsg:NSLocalizedString(@"import_hdm_cold_seed_format_error", nil)];
+                } else {
+                    _result = result;
+                    DialogPassword *dialog = [[DialogPassword alloc] initWithDelegate:self];
+                    [dialog showInWindow:self.controller.view.window];
+                }
+            }];
+        } else {
+            [reader vibrate];
+        }
+    }else {
+        if ([BTQRCodeUtil verifyQrcodeTransport:result]) {
+            [reader playSuccessSound];
+            [reader vibrate];
+            [reader dismissViewControllerAnimated:YES completion:^{
+                if (isHDMSeed){
+                    [self showMsg:NSLocalizedString(@"can_not_import_hdm_cold_seed", nil)];
+                } else if([[BTQRCodeUtil splitQRCode:result] count] != 3){
+                    [self showMsg:NSLocalizedString(@"not_verify_bither_private_key_qrcode", nil)];
+                }else{
+                    _result = result;
+                    DialogPassword *dialog = [[DialogPassword alloc] initWithDelegate:self];
+                    [dialog showInWindow:self.controller.view.window];
+                }
+            }];
+        } else {
+            [reader vibrate];
+        }
+
     }
     
 }
 -(void)onPasswordEntered:(NSString *)password{
     DialogProgress * dp = [[DialogProgress alloc]initWithMessage:NSLocalizedString(@"Please wait…", nil)];
-    [dp showInWindow:self.controller.view.window completion:^{
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
-            BTPasswordSeed * passwordSeed=[[UserDefaultsUtil instance] getPasswordSeed];
-            if (passwordSeed) {
-                BOOL checkPassword=[passwordSeed checkPassword:password];
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    if (checkPassword) {
-                        [self importKeyFormQrcode:_result password:password dp:dp];
-                    }else{
-                        [self showMsg:NSLocalizedString(@"Password of the private key to import is different from ours. Import failed.", nil)];
-                        [dp dismiss];
-                    }
-                    
-                });
-            }else{
-                [self importKeyFormQrcode:_result password:password dp:dp];
-            }
-        });
-    }];
-    
-    
+    if (self.isImportHDM){
+
+        [dp showInWindow:self.controller.view.window completion:^{
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+                BTPasswordSeed *passwordSeed = [BTPasswordSeed getPasswordSeed];
+                if (passwordSeed) {
+                    BOOL checkPassword = [passwordSeed checkPassword:password];
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        if (checkPassword) {
+                            [self importHDMColdSeedFormQRCode:_result password:password dp:dp];
+                        } else {
+                            [self showMsg:NSLocalizedString(@"Password of the private key to import is different from ours. Import failed.", nil)];
+                            [dp dismiss];
+                        }
+                    });
+                } else {
+                    [self importHDMColdSeedFormQRCode:_result password:password dp:dp];
+                }
+            });
+        }];
+    } else {
+        [dp showInWindow:self.controller.view.window completion:^{
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+                BTPasswordSeed *passwordSeed = [BTPasswordSeed getPasswordSeed];
+                if (passwordSeed) {
+                    BOOL checkPassword = [passwordSeed checkPassword:password];
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        if (checkPassword) {
+                            [self importKeyFormQrcode:_result password:password dp:dp];
+                        } else {
+                            [self showMsg:NSLocalizedString(@"Password of the private key to import is different from ours. Import failed.", nil)];
+                            [dp dismiss];
+                        }
+
+                    });
+                } else {
+                    [self importKeyFormQrcode:_result password:password dp:dp];
+                }
+            });
+        }];
+
+    }
 }
--(void) importKeyFormQrcode:(NSString *)keyStr password:(NSString *)password dp:(DialogProgress *)dp{
+-(void)importHDMColdSeedFormQRCode:(NSString *)keyStr password:(NSString *)password dp:(DialogProgress *)dp {
+    [dp dismiss];
+    ImportHDMCold *importPrivateKey=[[ImportHDMCold alloc] initWithController:self.controller content:keyStr worldList:nil passwrod:password importHDSeedType:HDMColdSeedQRCode];
+    [importPrivateKey importHDSeed];
+}
+
+-(void)importKeyFormQrcode:(NSString *)keyStr password:(NSString *)password dp:(DialogProgress *)dp{
     [dp dismiss];
     ImportPrivateKey *importPrivateKey=[[ImportPrivateKey alloc] initWithController:self.controller content:keyStr passwrod:password importPrivateKeyType:BitherQrcode];
     [importPrivateKey importPrivateKey];
 }
 -(BOOL)checkPassword:(NSString *)password{
-    BTKey * key=[ BTKey  keyWithBitcoinj:_result andPassphrase:password];
-    BOOL result=key!=nil;
-    key=nil;
-    return result;
+    NSString * checkKeyStr=_result;
+    if (self.isImportHDM){
+       checkKeyStr= [checkKeyStr substringFromIndex:1];
+    }
+    BTEncryptData * encryptedData=[[BTEncryptData alloc] initWithStr:checkKeyStr];
+    return [encryptedData decrypt:password]!= nil;
 }
 
 -(NSString *)passwordTitle{

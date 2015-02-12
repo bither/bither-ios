@@ -22,30 +22,20 @@
 #import "BTPeerManager.h"
 #import "BitherApi.h"
 #import "BlockUtil.h"
-#import "NSString+Base58.h"
-#import "BTBlockChain.h"
-#import "BTPeerProvider.h"
 #import "IOS7ContainerViewController.h"
 #import "NetworkUtil.h"
-#import "UserDefaultsUtil.h"
 #import "UnitUtil.h"
-#import "KeyUtil.h"
 #import "PeerUtil.h"
 #import "BitherTime.h"
-#import "PeerUtil.h"
-#import "BitherSetting.h"
 #import "NotificationUtil.h"
-#import "UIViewController+PiShowBanner.h"
-#import "DialogAlert.h"
 #import "PlaySoundUtil.h"
 #import "CrashLog/CrashLog.h"
-#import "AddressDetailViewController.h"
-#import "Reachability.h"
 #import "TrendingGraphicData.h"
-#import "SystemUtil.h"
 #import "UpgradeUtil.h"
-#import "TrendingGraphicData.h"
 #import "PinCodeUtil.h"
+
+#import "DialogProgress.h"
+#import "SystemUtil.h"
 
 @interface AppDelegate()
 @end
@@ -59,8 +49,7 @@ static StatusBarNotificationWindow* notificationWindow;
     }else{
         [[UIApplication sharedApplication] setMinimumBackgroundFetchInterval:UIApplicationBackgroundFetchIntervalMinimum];
     }
-    [self upgradePub:^{
-    }];
+
     [[BTPeerManager instance] initAddress];
     
     if([[BTSettings instance] needChooseMode]){
@@ -68,7 +57,32 @@ static StatusBarNotificationWindow* notificationWindow;
     }
     
     [CrashLog initCrashLog];
- //   [[BTSettings instance] openBitheriConsole];
+    if ([UpgradeUtil needUpgradeKeyFromFileToDB]){
+        DialogProgress * dp=[[DialogProgress alloc] initWithMessage:NSLocalizedString(@"Please wait…", nil)];
+        __block  DialogProgress* sslfDp=dp;
+        [dp showInWindow:self.window completion:^{
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0),^{
+                BOOL  success = [UpgradeUtil upgradeKeyFromFileToDB];
+                if (success){
+                    [[UserDefaultsUtil instance] setLastVersion:[SystemUtil getVersionCode]];
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        [sslfDp dismissWithCompletion:^{
+                            [self loadViewController];
+                        }];
+
+                    });
+                }
+            });
+        }];
+    }else{
+        [self loadViewController];
+    }
+
+    //   [[BTSettings instance] openBitheriConsole];
+
+    return YES;
+}
+-(void)loadViewController{
     UIStoryboard *storyboard = self.window.rootViewController.storyboard;
     if(![[BTSettings instance] needChooseMode]){
         IOS7ContainerViewController *container = [[IOS7ContainerViewController alloc]init];
@@ -82,8 +96,8 @@ static StatusBarNotificationWindow* notificationWindow;
         }
     }
     [self.window makeKeyAndVisible];
-    
-    NSLog(@"h %d",[[BTBlockChain instance] lastBlock].blockNo);
+
+    // NSLog(@"h %d",[[BTBlockChain instance] lastBlock].blockNo);
     [self callInHot:^{
         [[PeerUtil instance] startPeer];
         [[BitherTime instance] start];
@@ -91,31 +105,14 @@ static StatusBarNotificationWindow* notificationWindow;
     [self callInCold:^{
         [[Reachability reachabilityForInternetConnection] startNotifier];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reachabilityChange) name:kReachabilityChangedNotification object:nil];
-        
+
     }];
     notificationWindow = [[StatusBarNotificationWindow alloc]initWithOriWindow:self.window];
     [[PinCodeUtil instance] becomeActive];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(notification:) name:BitherBalanceChangedNotification object:nil];
-    return YES;
+
 }
 
--(void)upgradePub:(VoidBlock)callback{
-    if ([UpgradeUtil needUpgradePubKey]) {
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0),^{
-            [UpgradeUtil upgradePubKey];
-            dispatch_async(dispatch_get_main_queue(), ^{
-                if (callback) {
-                    callback();
-                }
-            });
-        });
-        
-    }else{
-        if (callback) {
-            callback();
-        }
-    }
-}
 -(void)notification:(NSNotification *)notification{
     NSArray * array=[notification object];
     [NotificationUtil notificationTx:array];

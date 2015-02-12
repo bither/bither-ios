@@ -48,6 +48,8 @@
 #import "KeychainSetting.h"
 #import "BTQRCodeUtil.h"
 #import "MessageSigningSetting.h"
+#import "HDMRecoverSetting.h"
+#import "BTAddressProvider.h"
 
 @implementation Setting
 
@@ -351,7 +353,7 @@ static Setting* SwitchToColdSetting;
     if(!CheckSetting){
         Setting * setting=[[Setting alloc] initWithName:NSLocalizedString(@"Check Private Keys", nil) icon:[UIImage imageNamed:@"check_button_icon" ]];
         [setting setSelectBlock:^(UIViewController * controller){
-            if([BTAddressManager instance].privKeyAddresses.count == 0){
+            if([BTAddressManager instance].privKeyAddresses.count == 0 && ![BTAddressManager instance].hasHDMKeychain){
                 if([controller respondsToSelector:@selector(showMsg:)]){
                     [controller performSelector:@selector(showMsg:) withObject:NSLocalizedString(@"No private keys", nil)];
                 }
@@ -373,7 +375,7 @@ static Setting* SwitchToColdSetting;
     if(!EditPasswordSetting){
         Setting * setting=[[Setting alloc] initWithName:NSLocalizedString(@"Change Password", nil) icon:[UIImage imageNamed:@"edit_password_button_icon"] ];
         [setting setSelectBlock:^(UIViewController * controller){
-            if([BTAddressManager instance].privKeyAddresses.count == 0){
+            if(![BTPasswordSeed getPasswordSeed]){
                 if([controller respondsToSelector:@selector(showMsg:)]){
                     [controller performSelector:@selector(showMsg:) withObject:NSLocalizedString(@"No private keys", nil)];
                 }
@@ -399,7 +401,7 @@ static Setting* SwitchToColdSetting;
                 if (a.isFromXRandom) {
                     pubStr=XRANDOM_FLAG;
                 }
-                pubStr=[pubStr stringByAppendingString:[[NSString hexWithData:a.pubKey] toUppercaseStringWithEn] ];
+                pubStr=[pubStr stringByAppendingString:[NSString hexWithData:a.pubKey]  ];
                 [pubKeys addObject:pubStr];
             }
             QrCodeViewController* qrCtr = [controller.storyboard instantiateViewControllerWithIdentifier:@"QrCode"];
@@ -526,6 +528,9 @@ static Setting* SwitchToColdSetting;
     [array addObject:[Setting getQrCodeQualitySetting]];
     [array addObject:[ImportPrivateKeySetting getImportPrivateKeySetting]];
     [array addObject:[ImportBip38PrivateKeySetting getImportBip38PrivateKeySetting]];
+    if( [[BTSettings instance] getAppMode]==HOT && [[BTAddressManager instance] hdmKeychain] == nil){
+        [array addObject:[HDMRecoverSetting getHDMRecoverSetting]];
+    }
     [array addObject:[MessageSigningSetting getMessageSigningSetting]];
     [array addObject:[Setting getTrashCanSetting]];
     if ([[BTSettings instance] getAppMode]==HOT) {

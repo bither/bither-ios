@@ -107,16 +107,17 @@
         NSLog(@"sample buffer not valid");
         return;
     }
-    CVImageBufferRef imageBuffer = CMSampleBufferGetImageBuffer(sampleBuffer);
-    CVPixelBufferLockBaseAddress(imageBuffer,0);
-    
-    size_t bytesPerRow = CVPixelBufferGetBytesPerRow(imageBuffer);
-    size_t height = CVPixelBufferGetHeight(imageBuffer);
-    void *src_buff = CVPixelBufferGetBaseAddress(imageBuffer);
-    
-    NSData *data = [NSData dataWithBytes:src_buff length:bytesPerRow * height];
-    CVPixelBufferUnlockBaseAddress(imageBuffer, 0);
-    [self.collector onNewData:data fromSource:self];
+    @autoreleasepool {
+        CVImageBufferRef imageBuffer = CMSampleBufferGetImageBuffer(sampleBuffer);
+        CVPixelBufferLockBaseAddress(imageBuffer,0);
+        
+        size_t bytesPerRow = CVPixelBufferGetBytesPerRow(imageBuffer);
+        size_t height = CVPixelBufferGetHeight(imageBuffer);
+        void *src_buff = CVPixelBufferGetBaseAddress(imageBuffer);
+        NSData *data = [NSData dataWithBytes:src_buff length:bytesPerRow * height];
+        CVPixelBufferUnlockBaseAddress(imageBuffer, 0);
+        [self.collector onNewData:data fromSource:self];
+    }
 }
 
 -(void)onPause{

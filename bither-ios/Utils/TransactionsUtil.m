@@ -32,6 +32,7 @@
 #import "BTIn.h"
 #import "StringUtil.h"
 #import "UnitUtil.h"
+#import "BTAddressProvider.h"
 
 
 #define BLOCK_COUNT  @"block_count"
@@ -59,10 +60,7 @@
 
 
 @implementation TransactionsUtil
-+(void)checkAddress:(NSArray *) addressList callback:(IdResponseBlock)callback andErrorCallback:(ErrorBlock)errorBlcok{
-    NSInteger index=0;
-    [TransactionsUtil getAddressState:addressList index:index callback:callback andErrorCallback:errorBlcok];
-}
+
 +(void)getAddressState:(NSArray *)addressList index:(NSInteger) index callback:(IdResponseBlock)callback andErrorCallback:(ErrorBlock)errorBlcok{
     if (index==addressList.count) {
         if (callback) {
@@ -86,7 +84,7 @@
             }else{
                 [self getAddressState:addressList index:index callback:callback andErrorCallback:errorBlcok];
             }
-        } andErrorCallBack:^(MKNetworkOperation *errorOp, NSError *error) {
+        } andErrorCallBack:^(NSOperation *errorOp, NSError *error) {
             if (errorBlcok) {
                 errorBlcok(error);
             }
@@ -140,11 +138,19 @@
                 }
                 
             }
+            NSMutableArray *txInputHashes = [NSMutableArray new];
+            for (BTIn *btIn in tx.ins) {
+                [txInputHashes addObject:btIn.prevTxHash];
+            }
             for(BTTx * temp in array){
                 if (temp.blockNo==tx.blockNo) {
-                    if ([[temp inputHashes] containsObject:tx.txHash]) {
+                    NSMutableArray *tempInputHashes = [NSMutableArray new];
+                    for (BTIn *btIn in temp.ins) {
+                        [tempInputHashes addObject:btIn.prevTxHash];
+                    }
+                    if ([tempInputHashes containsObject:tx.txHash]) {
                         [tx setTxTime:temp.txTime-1];
-                    }else if([[tx inputHashes]containsObject:temp.txHash]){
+                    }else if([txInputHashes containsObject:temp.txHash]){
                         [tx setTxTime:temp.txTime+1];
                     }
                 }
@@ -208,7 +214,7 @@
             }else{
                 [TransactionsUtil getMyTx:addresses index:index callback:callback andErrorCallBack:errorCallback];
             }
-        } andErrorCallBack:^(MKNetworkOperation *errorOp, NSError *error) {
+        } andErrorCallBack:^(NSOperation *errorOp, NSError *error) {
             if (errorCallback) {
                 errorCallback(errorOp,error);
             }
@@ -216,32 +222,135 @@
     }
     
 }
+
++ (NSArray *)getTxs:(NSDictionary *)dict;{
+    NSArray *array=[[BTBlockChain instance] getAllBlocks];
+    NSMutableDictionary *dictionary=[NSMutableDictionary new];
+    BTBlock *minBlock=[array objectAtIndex:array.count-1];
+    uint32_t  minBlockNo= minBlock.blockNo;
+    for(BTBlock *block in array){
+        if(block.blockNo<minBlockNo){
+            minBlockNo=block.blockNo;
+        }
+        [dictionary setObject:block forKey:[NSNumber numberWithInt:block.blockNo]];
+    };
+    NSMutableArray *txs = [NSMutableArray new];
+    for (NSArray *each in dict[@"tx"]) {
+        BTTx *tx = [[BTTx alloc] initWithMessage:[NSData dataFromBase64String:each[1]]];
+        tx.blockNo = (uint32_t) [each[0] intValue];
+        BTBlock * block;
+        if (tx.blockNo<minBlockNo){
+            block= [dictionary objectForKey:[NSNumber numberWithInt:minBlockNo]];
+        } else{
+            block= [dictionary objectForKey:[NSNumber numberWithInt:tx.blockNo]];
+        }
+
+        [tx setTxTime:block.blockTime];
+        [txs addObject:tx];
+    }
+    return txs;
+}
 +(void)getTxs:(BTAddress *) address callback:(VoidBlock)callback andErrorCallBack:(ErrorHandler)errorCallback{
-    
-    [[BitherApi instance] getMyTransactionApi:address.address callback:^(NSDictionary * dict) {
-        uint32_t storeHeight=[[BTBlockChain instance] lastBlock].blockNo;
-        NSArray *txs=[TransactionsUtil getTransactions:dict storeBlockHeight:storeHeight];
-        uint32_t apiBlockCount=[dict getIntFromDict:BLOCK_COUNT];
-        [address initTxs:txs];
-        [address setIsSyncComplete:YES];
-        [address updateAddressWithPub];
-        //TODO 100?
-        if (apiBlockCount<storeHeight&&storeHeight-apiBlockCount<100) {
-            [[BTBlockChain instance] rollbackBlock:apiBlockCount];
-        }
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [[NSNotificationCenter defaultCenter] postNotificationName:BitherAddressNotification object:address.address];
-        });
-        if (callback) {
-            callback();
-        }
-    } andErrorCallBack:^(MKNetworkOperation *errorOp, NSError *error) {
+    __block NSMutableArray *allTxs = [NSMutableArray new];
+    __block int tmpBlockCount = 0;
+    __block int tmpTxCnt = 0;
+    __block int page = 1;
+
+    ErrorHandler errorHandler = ^(NSOperation *errorOp, NSError *error) {
         if (errorCallback) {
             errorCallback(errorOp,error);
         }
-        NSLog(@"get my transcation api %@",errorOp.responseString);
-    }];
+        NSLog(@"get my transcation api %@",errorOp);
+    };
+
+    DictResponseBlock nextPageBlock = ^(NSDictionary * dict) {
+        int blockCount = [dict[@"block_count"] intValue];
+        int txCnt = [dict[@"tx_cnt"] intValue];
+        if (blockCount != tmpBlockCount && txCnt != tmpTxCnt) {
+            // may be server data updated
+        }
+        NSArray *txs = [TransactionsUtil getTxs:dict];
+        [allTxs addObjectsFromArray:txs];
+        if ([allTxs count] < txCnt) {
+            page += 1;
+            [[BitherApi instance] getTransactionApi:address.address withPage:page callback:nextPageBlock andErrorCallBack:errorHandler];
+        } else {
+            [address initTxs:[[BTAddressManager instance] compressTxsForApi:allTxs andAddress:address.address]];
+            [address setIsSyncComplete:YES];
+            [address updateSyncComplete];
+
+            uint32_t storeHeight=[[BTBlockChain instance] lastBlock].blockNo;
+            if (blockCount < storeHeight && storeHeight - blockCount < 100) {
+                [[BTBlockChain instance] rollbackBlock:(uint32_t) blockCount];
+            }
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [[NSNotificationCenter defaultCenter] postNotificationName:BitherAddressNotification object:address.address];
+            });
+            if (callback) {
+                callback();
+            }
+        }
+    };
+
+    [[BitherApi instance] getTransactionApi:address.address withPage:page callback:^(NSDictionary *dict) {
+        int blockCount = [dict[@"block_count"] intValue];
+        int txCnt = [dict[@"tx_cnt"] intValue];
+        tmpBlockCount = blockCount;
+        tmpTxCnt = txCnt;
+        NSArray *txs = [TransactionsUtil getTxs:dict];
+        [allTxs addObjectsFromArray:txs];
+        if ([allTxs count] < txCnt) {
+            page += 1;
+            [[BitherApi instance] getTransactionApi:address.address withPage:page callback:nextPageBlock andErrorCallBack:errorHandler];
+        } else {
+            [address initTxs:[[BTAddressManager instance] compressTxsForApi:allTxs andAddress:address.address]];
+            [address setIsSyncComplete:YES];
+            [address updateSyncComplete];
+
+            uint32_t storeHeight=[[BTBlockChain instance] lastBlock].blockNo;
+            if (blockCount < storeHeight && storeHeight - blockCount < 100) {
+                [[BTBlockChain instance] rollbackBlock:(uint32_t) blockCount];
+            }
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [[NSNotificationCenter defaultCenter] postNotificationName:BitherAddressNotification object:address.address];
+            });
+            if (callback) {
+                callback();
+            }
+        }
+    } andErrorCallBack:errorHandler];
+
+
+//    [[BitherApi instance] getMyTransactionApi:address.address callback:^(NSDictionary * dict) {
+//        int blockCount = [dict[@"block_count"] intValue];
+//        int txCnt = [dict[@"tx_cnt"] intValue];
+//
+//        uint32_t storeHeight=[[BTBlockChain instance] lastBlock].blockNo;
+//        NSArray *txs=[TransactionsUtil getTransactions:dict storeBlockHeight:storeHeight];
+//        uint32_t apiBlockCount=[dict getIntFromDict:BLOCK_COUNT];
+//        [address initTxs:txs];
+//        [address setIsSyncComplete:YES];
+//        [[BTAddressProvider instance] updateSyncComplete:address];
+////        [address updateAddressWithPub];
+//        //TODO 100?
+//        if (apiBlockCount<storeHeight&&storeHeight-apiBlockCount<100) {
+//            [[BTBlockChain instance] rollbackBlock:apiBlockCount];
+//        }
+//        dispatch_async(dispatch_get_main_queue(), ^{
+//            [[NSNotificationCenter defaultCenter] postNotificationName:BitherAddressNotification object:address.address];
+//        });
+//        if (callback) {
+//            callback();
+//        }
+//    } andErrorCallBack:^(MKNetworkOperation *errorOp, NSError *error) {
+//        if (errorCallback) {
+//            errorCallback(errorOp,error);
+//        }
+//        NSLog(@"get my transcation api %@",errorOp.responseString);
+//    }];
 }
+
+
 
 + (NSString *)getCompleteTxForError:(NSError *)error {
     NSString *msg = @"";
@@ -286,7 +395,7 @@
             [TransactionsUtil completeInputsForAddressForApi:address fromBlock:newFromBlock callback:callback andErrorCallBack:errorCallback];
         }
         
-    } andErrorCallBack:^(MKNetworkOperation *errorOp, NSError *error) {
+    } andErrorCallBack:^(NSOperation *errorOp, NSError *error) {
         if (errorCallback) {
             errorCallback(errorOp,error);
         }

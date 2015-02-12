@@ -20,6 +20,7 @@
 #import "DialogAddressFull.h"
 #import "StringUtil.h"
 #import "NSString+Size.h"
+#import "NSString+Base58.h"
 
 @interface CheckPrivateKeyCell()<DialogAddressFullDelegate>{
     NSString *_address;
@@ -43,7 +44,13 @@
 
 -(void)showAddress:(NSString*)address checking:(BOOL)checking checked:(BOOL)checked safe:(BOOL)safe{
     _address = address;
-    self.lbl.text = [NSString stringWithFormat:NSLocalizedString(@"Private key of %@", nil),[StringUtil shortenAddress:address]];
+    if([StringUtil isValidBitcoinBIP21Address:address] || address.isValidBitcoinAddress){
+        self.lbl.text = [NSString stringWithFormat:NSLocalizedString(@"Private key of %@", nil),[StringUtil shortenAddress:address]];
+        self.btnFullAddress.hidden = NO;
+    } else {
+        self.lbl.text = address;
+        self.btnFullAddress.hidden = YES;
+    }
     CGFloat width = [self.lbl.text sizeWithRestrict:CGSizeMake(CGFLOAT_MAX, CGFLOAT_MAX) font:self.lbl.font].width;
     CGRect frame = self.lbl.frame;
     frame.size.width = width;
@@ -92,4 +99,9 @@
 -(void)showMsg:(NSString*)msg{
     
 }
+
+-(UIEdgeInsets)layoutMargins{
+    return UIEdgeInsetsZero;
+}
+
 @end

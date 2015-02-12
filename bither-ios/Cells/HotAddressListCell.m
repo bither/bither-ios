@@ -39,6 +39,7 @@
 #import "DialogXrandomInfo.h"
 #import "BTAddressManager.h"
 #import "SignMessageViewController.h"
+#import "DialogHDMAddressOptions.h"
 
 #define kUnconfirmedTxAmountLeftMargin (3)
 
@@ -86,12 +87,13 @@
     self.lblAddress.frame = CGRectMake(self.lblAddress.frame.origin.x, self.lblAddress.frame.origin.y, width, self.lblAddress.frame.size.height);
     if (self.longPress==nil) {
         self.longPress=[[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleTableviewCellLongPressed:)];
-        
     }
     if (![[self.ivType gestureRecognizers] containsObject:self.longPress]) {
         [self.ivType addGestureRecognizer:self.longPress];
     }
-    if(address.hasPrivKey){
+    if(address.isHDM){
+        self.ivType.image = [UIImage imageNamed:@"address_type_hdm"];
+    }else if(address.hasPrivKey){
         self.ivType.image = [UIImage imageNamed:@"address_type_private"];
     }else{
         self.ivType.image = [UIImage imageNamed:@"address_type_watchonly"];
@@ -119,7 +121,7 @@
     if (txCount > 0 && recentlyTx != nil) {
         self.vNoUnconfirmedTx.hidden = YES;
         self.vUnconfirmedTx.hidden = NO;
-        [self.vUnconfirmedTxConfidence showTransaction:recentlyTx];
+        [self.vUnconfirmedTxConfidence showTransaction:recentlyTx withAddress:_btAddress];
         self.vUnconfirmedTxAmount.amount = [recentlyTx deltaAmountFrom:address];
         CGRect frame = self.vUnconfirmedTxAmount.frame;
         frame.origin.x = CGRectGetMaxX(self.vUnconfirmedTxConfidence.frame) + kUnconfirmedTxAmountLeftMargin;
@@ -181,8 +183,12 @@
 
 - (void) handleTableviewCellLongPressed:(UILongPressGestureRecognizer *)gestureRecognizer {
     if (gestureRecognizer.state==UIGestureRecognizerStateBegan) {
-        DialogAddressLongPressOptions *dialogPrivateKeyOptons=[[DialogAddressLongPressOptions alloc] initWithAddress:_btAddress andDelegate:self];
-        [dialogPrivateKeyOptons showInWindow:self.window];
+        if(_btAddress.isHDM){
+            [[[DialogHDMAddressOptions alloc] initWithAddress:_btAddress] showInWindow:self.window];
+        }else{
+            DialogAddressLongPressOptions *dialogPrivateKeyOptons=[[DialogAddressLongPressOptions alloc] initWithAddress:_btAddress andDelegate:self];
+            [dialogPrivateKeyOptons showInWindow:self.window];
+        }
     }
 }
 

@@ -26,9 +26,10 @@
 #import "TransactionsUtil.h"
 #import "AdvanceViewController.h"
 #import "UserDefaultsUtil.h"
+#import "BTAddressProvider.h"
 
 static double reloadTime;
-static  Setting *reloadTxsSetting;
+static Setting *reloadTxsSetting;
 
 @implementation ReloadTxSetting
 
@@ -51,7 +52,7 @@ static  Setting *reloadTxsSetting;
         [[PeerUtil instance] stopPeer];
         for(BTAddress * address in [[BTAddressManager instance]allAddresses]){
             [address setIsSyncComplete:NO];
-            [address updateAddressWithPub];
+            [address updateSyncComplete];
         }
         [[BTTxProvider instance] clearAllTx];
         [TransactionsUtil syncWallet:^{
@@ -64,7 +65,7 @@ static  Setting *reloadTxsSetting;
                 [self.controller performSelector:@selector(showMsg:) withObject:NSLocalizedString(@"Reload transactions data success", nil)];
             }
             
-        } andErrorCallBack:^(MKNetworkOperation *errorOp, NSError *error) {
+        } andErrorCallBack:^(NSOperation *errorOp, NSError *error) {
             if (dialogProgrees) {
                 [dialogProgrees dismiss];
             }
@@ -94,7 +95,7 @@ static  Setting *reloadTxsSetting;
                 DialogAlert *dialogAlert=[[DialogAlert alloc] initWithMessage:NSLocalizedString(@"Reload Transactions data?\nNeed long time.\nConsume network data.\nRecommand trying only with wrong data.", nil) confirm:^{
                     __weak ReloadTxSetting * _sslf= (ReloadTxSetting*)reloadTxsSetting;
                     _sslf.controller=controller;
-                    if ([[UserDefaultsUtil instance] getPasswordSeed]) {
+                    if ([BTPasswordSeed getPasswordSeed]) {
                         [_sslf showDialogPassword];
                     }else{
                         [_sslf reloadTx:nil];

@@ -16,6 +16,7 @@
 //  See the License for the specific language governing permissions and
 //  limitations under the License.
 
+#import <Bitheri/BTHDMAddress.h>
 #import "AddressDetailCell.h"
 #import "UIBaseUtil.h"
 #import "StringUtil.h"
@@ -27,6 +28,7 @@
 #import "UserDefaultsUtil.h"
 #import "UnsignedTransactionViewController.h"
 #import "DialogBalanceDetail.h"
+#import "HdmSendViewController.h"
 
 #define kAddressGroupSize (4)
 #define kAddressLineSize (12)
@@ -82,7 +84,7 @@
     self.btnAmount.frameChangeListener = self;
     
     CGPoint sendOri = self.btnSend.frame.origin;
-    if(!address.hasPrivKey){
+    if(!address.hasPrivKey && !address.isHDM || (address.isHDM && ((BTHDMAddress *)address).isInRecovery)){
         UIImageView *iv = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"unsigned_transaction_button_icon"]];
         CGFloat margin = (self.btnSend.frame.size.height - kSendButtonQrIconSize)/2;
         iv.frame= CGRectMake(self.btnSend.frame.size.width - kSendButtonQrIconSize - margin, margin, kSendButtonQrIconSize, kSendButtonQrIconSize);
@@ -129,7 +131,12 @@
 }
 
 - (IBAction)sendPressed:(id)sender {
-    if(self.address.hasPrivKey){
+    if(self.address.isHDM){
+        HdmSendViewController *send = [self.getUIViewController.storyboard instantiateViewControllerWithIdentifier:@"HdmSend"];
+        send.address = (BTHDMAddress *)self.address;
+        send.sendDelegate = self;
+        [self.getUIViewController.navigationController pushViewController:send animated:YES];
+    }else if(self.address.hasPrivKey){
         SendViewController* send =[self.getUIViewController.storyboard instantiateViewControllerWithIdentifier:@"Send"];
         send.address = self.address;
         send.sendDelegate = self;

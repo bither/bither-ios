@@ -25,6 +25,7 @@
 #import "KeyUtil.h"
 #import "TransactionsUtil.h"
 #import "BTQRCodeUtil.h"
+#import "StringUtil.h"
 
 @interface HotAddressAddWatchOnlyViewController ()<ScanQrCodeDelegate>
 
@@ -62,7 +63,11 @@
                 });
             }];
         }else{
-            [self showMsg:NSLocalizedString(@"Monitor Bither Cold failed.", nil)];
+            if(result.isValidBitcoinAddress || [StringUtil isValidBitcoinBIP21Address:result]){
+                [self showMsg:NSLocalizedString(@"add_address_watch_only_scanned_address_warning", nil)];
+            }else{
+                [self showMsg:NSLocalizedString(@"Monitor Bither Cold failed.", nil)];
+            }
         }
     }];
 }
@@ -90,34 +95,13 @@
         [addressList addObject:btAddress];
         [addressStrList addObject:key.address];
     }
-    [TransactionsUtil checkAddress:addressStrList callback:^(id response) {
-        AddressType  addressType=(AddressType)[response integerValue];
-        if (addressType==AddressNormal) {
-            [KeyUtil addAddressList:addressList];
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [dp dismissWithCompletion:^{
-                    [self dismissViewControllerAnimated:YES completion:^{
-                    }];
-                }];
-            });
-        }else if(addressType==AddressTxTooMuch){
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [self showMsg:NSLocalizedString(@"Cannot import private key with large amount of transactions.", nil)];
-                [dp dismiss];
-            });
-            
-        }else{
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [self showMsg:NSLocalizedString(@"Cannot import private key with special transactions.", nil)];
-                [dp dismiss];
-            });
-        }
-    } andErrorCallback:^(NSError *error) {
-        [self showMsg:NSLocalizedString(@"Network failure.", nil)];
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [dp dismiss];
-        });
-    }];
+    [KeyUtil addAddressList:addressList];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [dp dismissWithCompletion:^{
+            [self dismissViewControllerAnimated:YES completion:^{
+            }];
+        }];
+    });
   
 }
 

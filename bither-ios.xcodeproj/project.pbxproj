@@ -10,6 +10,7 @@
 		0A259E251A47F19100D7F707 /* DialogSendOption.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A259E241A47F19100D7F707 /* DialogSendOption.m */; };
 		0A259E281A47FDF600D7F707 /* DialogSelectChangeAddress.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A259E271A47FDF600D7F707 /* DialogSelectChangeAddress.m */; };
 		0A42062A1A494F1000562100 /* SignMessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A4206291A494F1000562100 /* SignMessageViewController.m */; };
+		0A43F4401A81C6BF008171DB /* HdmSendViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A43F43F1A81C6BF008171DB /* HdmSendViewController.m */; };
 		0A446C151A441393000CD25A /* DialogNetworkMonitorOption.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A446C141A441393000CD25A /* DialogNetworkMonitorOption.m */; };
 		0A515F781A36A2C0008292AF /* RawDataView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A515F771A36A2C0008292AF /* RawDataView.m */; };
 		0A515F7B1A36CAE3008292AF /* RawPrivateKeyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A515F7A1A36CAE3008292AF /* RawPrivateKeyViewController.m */; };
@@ -17,6 +18,19 @@
 		0A6C0F5F1A4D5E1900544B33 /* DialogSignMessageSelectAddress.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A6C0F5E1A4D5E1900544B33 /* DialogSignMessageSelectAddress.m */; };
 		0A93B6011A4A66080081D74D /* DialogSignMessageOutput.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A93B6001A4A66080081D74D /* DialogSignMessageOutput.m */; };
 		0A93B6061A4AA0520081D74D /* VerifyMessageSignatureViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A93B6051A4AA0520081D74D /* VerifyMessageSignatureViewController.m */; };
+		0AB8BC9A1A7F3194003C07D8 /* HotAddressAddHDMViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AB8BC991A7F3194003C07D8 /* HotAddressAddHDMViewController.m */; };
+		0AB8BCA51A7F445D003C07D8 /* DialogHDMKeychainAddHot.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AB8BCA41A7F445D003C07D8 /* DialogHDMKeychainAddHot.m */; };
+		0AB8BCAB1A7F6DEE003C07D8 /* DialogHDMServerUnsignedQRCode.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AB8BCAA1A7F6DEE003C07D8 /* DialogHDMServerUnsignedQRCode.m */; };
+		0AB8BCB11A7F8656003C07D8 /* NSConditionTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AB8BCB01A7F8656003C07D8 /* NSConditionTest.m */; };
+		0AD674921A79E6E4007967DB /* ColdAddressAddHDMViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AD674911A79E6E4007967DB /* ColdAddressAddHDMViewController.m */; };
+		0AD674941A79F2B8007967DB /* BIP39EnglishWords.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0AD674931A79F2B8007967DB /* BIP39EnglishWords.plist */; };
+		0AD674971A7B4BDA007967DB /* ColdAddressListHDMCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AD674961A7B4BDA007967DB /* ColdAddressListHDMCell.m */; };
+		0AD6749C1A7B6229007967DB /* DialogWithActions.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AD6749B1A7B6229007967DB /* DialogWithActions.m */; };
+		0AD6749F1A7B9108007967DB /* DialogHDMSeedWordList.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AD6749E1A7B9108007967DB /* DialogHDMSeedWordList.m */; };
+		1BC270F1C2BEA60E0B3384AB /* DialogHDMAddressOptions.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BC27D1407586D2FCB8F01AC /* DialogHDMAddressOptions.m */; };
+		1BC27499EE579986A1439709 /* DialogHDMInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BC27E22C25A90DF1E5DA1DC /* DialogHDMInfo.m */; };
+		1BC275F3608609D0E72BFBE7 /* HDMTriangleBgView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BC27C837F7819A54B0A2E37 /* HDMTriangleBgView.m */; };
+		1BC2778BC574DA2F816BC77A /* AddHDMAddressViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BC27FD66F3376A2C68612DD /* AddHDMAddressViewController.m */; };
 		4217A3731951235D00063746 /* Depth.m in Sources */ = {isa = PBXBuildFile; fileRef = 4217A3721951235D00063746 /* Depth.m */; };
 		4217A39019512DC000063746 /* TransactionsUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 4217A38F19512DC000063746 /* TransactionsUtil.m */; };
 		421B037C19495315003A45F1 /* TabButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 421B037B19495315003A45F1 /* TabButton.m */; };
@@ -83,8 +97,9 @@
 		AC026C8F19EE5FF500BC0152 /* libPods-OpenSSL.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AC026C8519EE5FF500BC0152 /* libPods-OpenSSL.a */; };
 		AC026C9019EE5FF500BC0152 /* libPods-Reachability.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AC026C8619EE5FF500BC0152 /* libPods-Reachability.a */; };
 		AC026C9119EE5FF500BC0152 /* libPods-RegexKitLite.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AC026C8719EE5FF500BC0152 /* libPods-RegexKitLite.a */; };
-		AC026C9219EE5FF500BC0152 /* libPods-ZBarSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AC026C8819EE5FF500BC0152 /* libPods-ZBarSDK.a */; };
 		AC026C9319EE5FF500BC0152 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AC026C8919EE5FF500BC0152 /* libPods.a */; };
+		AC1454A51A80D04D00E851B4 /* DialogOperationWorld.m in Sources */ = {isa = PBXBuildFile; fileRef = AC1454A41A80D04D00E851B4 /* DialogOperationWorld.m */; };
+		AC1454A81A80D30E00E851B4 /* DialogReplaceWorld.m in Sources */ = {isa = PBXBuildFile; fileRef = AC1454A71A80D30E00E851B4 /* DialogReplaceWorld.m */; };
 		AC1715871969213800337AB5 /* DialogAddressOptions.m in Sources */ = {isa = PBXBuildFile; fileRef = AC1715861969213800337AB5 /* DialogAddressOptions.m */; };
 		AC17158A1969249B00337AB5 /* NSString+Size.m in Sources */ = {isa = PBXBuildFile; fileRef = AC1715891969249B00337AB5 /* NSString+Size.m */; };
 		AC17158D1969359900337AB5 /* DialogPrivateKeyEncryptedQrCode.m in Sources */ = {isa = PBXBuildFile; fileRef = AC17158C1969359900337AB5 /* DialogPrivateKeyEncryptedQrCode.m */; };
@@ -141,6 +156,7 @@
 		AC781B6019F9FF98003B5B87 /* DialogRCheckInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = AC781B5F19F9FF98003B5B87 /* DialogRCheckInfo.m */; };
 		AC808B8519D52D21004E78A3 /* ImportBip38PrivateKeySetting.m in Sources */ = {isa = PBXBuildFile; fileRef = AC808B8419D52D21004E78A3 /* ImportBip38PrivateKeySetting.m */; };
 		AC808B8C19D56757004E78A3 /* XRandom.m in Sources */ = {isa = PBXBuildFile; fileRef = AC808B8B19D56757004E78A3 /* XRandom.m */; };
+		AC8912F21A7F62FE003797C4 /* WorldListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AC8912F11A7F62FE003797C4 /* WorldListCell.m */; };
 		AC8F0DCA196CF4E400CCD0F9 /* SelectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AC8F0DC9196CF4E400CCD0F9 /* SelectViewController.m */; };
 		AC8F0DCD196D054A00CCD0F9 /* SelectListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AC8F0DCC196D054A00CCD0F9 /* SelectListCell.m */; };
 		AC9BBCFE19D268AB00E58BA7 /* UpgradeUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = AC9BBCFD19D268AB00E58BA7 /* UpgradeUtil.m */; };
@@ -213,12 +229,24 @@
 		ACF02FEB19D90899001AB701 /* DialogSwitchQRCode.m in Sources */ = {isa = PBXBuildFile; fileRef = ACF02FEA19D90899001AB701 /* DialogSwitchQRCode.m */; };
 		ACF4B17419668D5700CE24FD /* MarketListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = ACF4B17319668D5700CE24FD /* MarketListCell.m */; };
 		D607EF24F3CE4EBC82950BB4 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FED7A4051DB45218112FAC0 /* libPods.a */; };
+		D61D047B6D9BE30D5BED20E1 /* hdm.bither.net.cer in Resources */ = {isa = PBXBuildFile; fileRef = D61D0299B4CDCCFC6D0BA161 /* hdm.bither.net.cer */; };
+		D61D098FD091EB8752EF00A2 /* BTHDMBid+Api.m in Sources */ = {isa = PBXBuildFile; fileRef = D61D0F5AB509120289D32CE8 /* BTHDMBid+Api.m */; };
+		D61D0ACF2F75D62B878ADAEF /* HDMHotAddUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = D61D0EFD9890E54E56C5A21E /* HDMHotAddUtil.m */; };
+		D61D0D05D11BC8527C40F8C3 /* PasswordGetter.m in Sources */ = {isa = PBXBuildFile; fileRef = D61D0DB47AB1A1EA42112C56 /* PasswordGetter.m */; };
+		D61D0E640B2A2C7E6874FDEA /* HDMApi.m in Sources */ = {isa = PBXBuildFile; fileRef = D61D089EE8093848A924819C /* HDMApi.m */; };
 		DA641E8A196E7BC20095DF42 /* CrashLog.m in Sources */ = {isa = PBXBuildFile; fileRef = DA641E83196E7BC20095DF42 /* CrashLog.m */; };
 		DA641E8B196E7BC20095DF42 /* GCCrashInstallation.m in Sources */ = {isa = PBXBuildFile; fileRef = DA641E85196E7BC20095DF42 /* GCCrashInstallation.m */; };
 		DA641E8C196E7BC20095DF42 /* GCCrashReportFilterTrim.m in Sources */ = {isa = PBXBuildFile; fileRef = DA641E87196E7BC20095DF42 /* GCCrashReportFilterTrim.m */; };
 		DA641E8D196E7BC20095DF42 /* GCCrashReportSink.m in Sources */ = {isa = PBXBuildFile; fileRef = DA641E89196E7BC20095DF42 /* GCCrashReportSink.m */; };
+		DAAF4EB21A7F7F6700933296 /* NSError+HDMHttpErrorMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = DAAF4EB01A7F7F6700933296 /* NSError+HDMHttpErrorMessage.m */; };
 		DAB2C8731A2038930011EE2F /* KeychainSetting.m in Sources */ = {isa = PBXBuildFile; fileRef = DAB2C8721A2038930011EE2F /* KeychainSetting.m */; };
 		DAB2C8761A206F080011EE2F /* KeychainBackupUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = DAB2C8751A206F080011EE2F /* KeychainBackupUtil.m */; };
+		DC0448DAEF65BD227897D240 /* HDMKeychainRecoverUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = DC0CC84409CD956F1FA008BF /* HDMKeychainRecoverUtil.m */; };
+		DAD0FFF51A81D08D008AEAA2 /* HDMApiTest.m in Sources */ = {isa = PBXBuildFile; fileRef = DAD0FFF41A81D08D008AEAA2 /* HDMApiTest.m */; };
+		DAD0FFF61A81D41B008AEAA2 /* hdm.bither.net.cer in Resources */ = {isa = PBXBuildFile; fileRef = D61D0299B4CDCCFC6D0BA161 /* hdm.bither.net.cer */; };
+		DC06422DA44A6DA77DCFBB2D /* ImportHDMCold.m in Sources */ = {isa = PBXBuildFile; fileRef = DC0A375AE83A8BA37F3FA65F /* ImportHDMCold.m */; };
+		DC075758EE0F48911D8D4CE8 /* ImportHDMColdSeedController.m in Sources */ = {isa = PBXBuildFile; fileRef = DC07A672CCAD76ED66B72B91 /* ImportHDMColdSeedController.m */; };
+		DC0C00F6FC8AA88E26580598 /* HDMRecoverSetting.m in Sources */ = {isa = PBXBuildFile; fileRef = DC0769FAB5B4727E089E23CC /* HDMRecoverSetting.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -238,13 +266,14 @@
 		0A259E271A47FDF600D7F707 /* DialogSelectChangeAddress.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DialogSelectChangeAddress.m; sourceTree = "<group>"; };
 		0A4206281A494F1000562100 /* SignMessageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignMessageViewController.h; sourceTree = "<group>"; };
 		0A4206291A494F1000562100 /* SignMessageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignMessageViewController.m; sourceTree = "<group>"; };
+		0A43F43E1A81C6BF008171DB /* HdmSendViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HdmSendViewController.h; sourceTree = "<group>"; };
+		0A43F43F1A81C6BF008171DB /* HdmSendViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HdmSendViewController.m; sourceTree = "<group>"; };
 		0A446C131A441393000CD25A /* DialogNetworkMonitorOption.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DialogNetworkMonitorOption.h; sourceTree = "<group>"; };
 		0A446C141A441393000CD25A /* DialogNetworkMonitorOption.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DialogNetworkMonitorOption.m; sourceTree = "<group>"; };
 		0A515F761A36A2C0008292AF /* RawDataView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RawDataView.h; sourceTree = "<group>"; };
 		0A515F771A36A2C0008292AF /* RawDataView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RawDataView.m; sourceTree = "<group>"; };
 		0A515F791A36CAE3008292AF /* RawPrivateKeyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RawPrivateKeyViewController.h; sourceTree = "<group>"; };
 		0A515F7A1A36CAE3008292AF /* RawPrivateKeyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RawPrivateKeyViewController.m; sourceTree = "<group>"; };
-		0A6C0F591A4D411800544B33 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/MainStoryboard.strings; sourceTree = "<group>"; };
 		0A6C0F5A1A4D548B00544B33 /* MessageSigningSetting.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageSigningSetting.h; sourceTree = "<group>"; };
 		0A6C0F5B1A4D548B00544B33 /* MessageSigningSetting.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageSigningSetting.m; sourceTree = "<group>"; };
 		0A6C0F5D1A4D5E1900544B33 /* DialogSignMessageSelectAddress.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DialogSignMessageSelectAddress.h; sourceTree = "<group>"; };
@@ -253,7 +282,31 @@
 		0A93B6001A4A66080081D74D /* DialogSignMessageOutput.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DialogSignMessageOutput.m; sourceTree = "<group>"; };
 		0A93B6041A4AA0520081D74D /* VerifyMessageSignatureViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VerifyMessageSignatureViewController.h; sourceTree = "<group>"; };
 		0A93B6051A4AA0520081D74D /* VerifyMessageSignatureViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VerifyMessageSignatureViewController.m; sourceTree = "<group>"; };
+		0AB8BC981A7F3194003C07D8 /* HotAddressAddHDMViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HotAddressAddHDMViewController.h; sourceTree = "<group>"; };
+		0AB8BC991A7F3194003C07D8 /* HotAddressAddHDMViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HotAddressAddHDMViewController.m; sourceTree = "<group>"; };
+		0AB8BCA31A7F445D003C07D8 /* DialogHDMKeychainAddHot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DialogHDMKeychainAddHot.h; sourceTree = "<group>"; };
+		0AB8BCA41A7F445D003C07D8 /* DialogHDMKeychainAddHot.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DialogHDMKeychainAddHot.m; sourceTree = "<group>"; };
+		0AB8BCA91A7F6DEE003C07D8 /* DialogHDMServerUnsignedQRCode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DialogHDMServerUnsignedQRCode.h; sourceTree = "<group>"; };
+		0AB8BCAA1A7F6DEE003C07D8 /* DialogHDMServerUnsignedQRCode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DialogHDMServerUnsignedQRCode.m; sourceTree = "<group>"; };
+		0AB8BCB01A7F8656003C07D8 /* NSConditionTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSConditionTest.m; sourceTree = "<group>"; };
+		0AD674901A79E6E4007967DB /* ColdAddressAddHDMViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ColdAddressAddHDMViewController.h; sourceTree = "<group>"; };
+		0AD674911A79E6E4007967DB /* ColdAddressAddHDMViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ColdAddressAddHDMViewController.m; sourceTree = "<group>"; };
+		0AD674931A79F2B8007967DB /* BIP39EnglishWords.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = BIP39EnglishWords.plist; sourceTree = "<group>"; };
+		0AD674951A7B4BDA007967DB /* ColdAddressListHDMCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ColdAddressListHDMCell.h; path = Cells/ColdAddressListHDMCell.h; sourceTree = "<group>"; };
+		0AD674961A7B4BDA007967DB /* ColdAddressListHDMCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ColdAddressListHDMCell.m; path = Cells/ColdAddressListHDMCell.m; sourceTree = "<group>"; };
+		0AD6749A1A7B6229007967DB /* DialogWithActions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DialogWithActions.h; sourceTree = "<group>"; };
+		0AD6749B1A7B6229007967DB /* DialogWithActions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DialogWithActions.m; sourceTree = "<group>"; };
+		0AD6749D1A7B9108007967DB /* DialogHDMSeedWordList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DialogHDMSeedWordList.h; sourceTree = "<group>"; };
+		0AD6749E1A7B9108007967DB /* DialogHDMSeedWordList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DialogHDMSeedWordList.m; sourceTree = "<group>"; };
 		0FED7A4051DB45218112FAC0 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		1BC272BC4509E4F880EAC6F9 /* AddHDMAddressViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddHDMAddressViewController.h; sourceTree = "<group>"; };
+		1BC275D3A11FAF859823CF7E /* DialogHDMAddressOptions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DialogHDMAddressOptions.h; sourceTree = "<group>"; };
+		1BC279BF6C2A1E9DF4D86908 /* HDMTriangleBgView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HDMTriangleBgView.h; sourceTree = "<group>"; };
+		1BC27C837F7819A54B0A2E37 /* HDMTriangleBgView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HDMTriangleBgView.m; sourceTree = "<group>"; };
+		1BC27C882946AB67434912E5 /* DialogHDMInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DialogHDMInfo.h; sourceTree = "<group>"; };
+		1BC27D1407586D2FCB8F01AC /* DialogHDMAddressOptions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DialogHDMAddressOptions.m; sourceTree = "<group>"; };
+		1BC27E22C25A90DF1E5DA1DC /* DialogHDMInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DialogHDMInfo.m; sourceTree = "<group>"; };
+		1BC27FD66F3376A2C68612DD /* AddHDMAddressViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddHDMAddressViewController.m; sourceTree = "<group>"; };
 		4217A3711951235D00063746 /* Depth.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Depth.h; sourceTree = "<group>"; };
 		4217A3721951235D00063746 /* Depth.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Depth.m; sourceTree = "<group>"; };
 		4217A38E19512DC000063746 /* TransactionsUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TransactionsUtil.h; sourceTree = "<group>"; };
@@ -372,8 +425,12 @@
 		AC026C8519EE5FF500BC0152 /* libPods-OpenSSL.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libPods-OpenSSL.a"; path = "Pods/build/Debug-iphoneos/libPods-OpenSSL.a"; sourceTree = "<group>"; };
 		AC026C8619EE5FF500BC0152 /* libPods-Reachability.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libPods-Reachability.a"; path = "Pods/build/Debug-iphoneos/libPods-Reachability.a"; sourceTree = "<group>"; };
 		AC026C8719EE5FF500BC0152 /* libPods-RegexKitLite.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libPods-RegexKitLite.a"; path = "Pods/build/Debug-iphoneos/libPods-RegexKitLite.a"; sourceTree = "<group>"; };
-		AC026C8819EE5FF500BC0152 /* libPods-ZBarSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libPods-ZBarSDK.a"; path = "Pods/build/Debug-iphoneos/libPods-ZBarSDK.a"; sourceTree = "<group>"; };
 		AC026C8919EE5FF500BC0152 /* libPods.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libPods.a; path = "Pods/build/Debug-iphoneos/libPods.a"; sourceTree = "<group>"; };
+		AC1454A21A80C34F00E851B4 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/MainStoryboard.strings; sourceTree = "<group>"; };
+		AC1454A31A80D04D00E851B4 /* DialogOperationWorld.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DialogOperationWorld.h; sourceTree = "<group>"; };
+		AC1454A41A80D04D00E851B4 /* DialogOperationWorld.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DialogOperationWorld.m; sourceTree = "<group>"; };
+		AC1454A61A80D30E00E851B4 /* DialogReplaceWorld.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DialogReplaceWorld.h; sourceTree = "<group>"; };
+		AC1454A71A80D30E00E851B4 /* DialogReplaceWorld.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DialogReplaceWorld.m; sourceTree = "<group>"; };
 		AC1715851969213800337AB5 /* DialogAddressOptions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DialogAddressOptions.h; sourceTree = "<group>"; };
 		AC1715861969213800337AB5 /* DialogAddressOptions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DialogAddressOptions.m; sourceTree = "<group>"; };
 		AC1715881969249B00337AB5 /* NSString+Size.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Size.h"; sourceTree = "<group>"; };
@@ -485,6 +542,8 @@
 		AC808B8919D54274004E78A3 /* DialogImportKeyDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DialogImportKeyDelegate.h; sourceTree = "<group>"; };
 		AC808B8A19D56757004E78A3 /* XRandom.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XRandom.h; sourceTree = "<group>"; };
 		AC808B8B19D56757004E78A3 /* XRandom.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XRandom.m; sourceTree = "<group>"; };
+		AC8912F01A7F62FE003797C4 /* WorldListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WorldListCell.h; path = Cells/WorldListCell.h; sourceTree = "<group>"; };
+		AC8912F11A7F62FE003797C4 /* WorldListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WorldListCell.m; path = Cells/WorldListCell.m; sourceTree = "<group>"; };
 		AC8F0DC8196CF4E400CCD0F9 /* SelectViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelectViewController.h; sourceTree = "<group>"; };
 		AC8F0DC9196CF4E400CCD0F9 /* SelectViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SelectViewController.m; sourceTree = "<group>"; };
 		AC8F0DCB196D054A00CCD0F9 /* SelectListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelectListCell.h; sourceTree = "<group>"; };
@@ -624,6 +683,15 @@
 		ACF02FEA19D90899001AB701 /* DialogSwitchQRCode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DialogSwitchQRCode.m; sourceTree = "<group>"; };
 		ACF4B17219668D5700CE24FD /* MarketListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MarketListCell.h; path = Cells/MarketListCell.h; sourceTree = "<group>"; };
 		ACF4B17319668D5700CE24FD /* MarketListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MarketListCell.m; path = Cells/MarketListCell.m; sourceTree = "<group>"; };
+		D61D00DE53941DC6062E1938 /* HDMApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HDMApi.h; sourceTree = "<group>"; };
+		D61D0299B4CDCCFC6D0BA161 /* hdm.bither.net.cer */ = {isa = PBXFileReference; lastKnownFileType = file.der; path = hdm.bither.net.cer; sourceTree = "<group>"; };
+		D61D07CCE58EB1B7FCA04677 /* PasswordGetter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PasswordGetter.h; sourceTree = "<group>"; };
+		D61D089EE8093848A924819C /* HDMApi.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HDMApi.m; sourceTree = "<group>"; };
+		D61D0DB47AB1A1EA42112C56 /* PasswordGetter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PasswordGetter.m; sourceTree = "<group>"; };
+		D61D0E2B59DCC58D05F2CCE6 /* BTHDMBid+Api.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "BTHDMBid+Api.h"; sourceTree = "<group>"; };
+		D61D0EFD9890E54E56C5A21E /* HDMHotAddUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HDMHotAddUtil.m; sourceTree = "<group>"; };
+		D61D0F5AB509120289D32CE8 /* BTHDMBid+Api.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "BTHDMBid+Api.m"; sourceTree = "<group>"; };
+		D61D0FE34D07B82E0A821E21 /* HDMHotAddUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HDMHotAddUtil.h; sourceTree = "<group>"; };
 		DA641E82196E7BC20095DF42 /* CrashLog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CrashLog.h; path = CrashLog/CrashLog.h; sourceTree = "<group>"; };
 		DA641E83196E7BC20095DF42 /* CrashLog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CrashLog.m; path = CrashLog/CrashLog.m; sourceTree = "<group>"; };
 		DA641E84196E7BC20095DF42 /* GCCrashInstallation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GCCrashInstallation.h; path = CrashLog/GCCrashInstallation.h; sourceTree = "<group>"; };
@@ -632,10 +700,21 @@
 		DA641E87196E7BC20095DF42 /* GCCrashReportFilterTrim.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GCCrashReportFilterTrim.m; path = CrashLog/GCCrashReportFilterTrim.m; sourceTree = "<group>"; };
 		DA641E88196E7BC20095DF42 /* GCCrashReportSink.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GCCrashReportSink.h; path = CrashLog/GCCrashReportSink.h; sourceTree = "<group>"; };
 		DA641E89196E7BC20095DF42 /* GCCrashReportSink.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GCCrashReportSink.m; path = CrashLog/GCCrashReportSink.m; sourceTree = "<group>"; };
+		DAAF4EB01A7F7F6700933296 /* NSError+HDMHttpErrorMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSError+HDMHttpErrorMessage.m"; sourceTree = "<group>"; };
+		DAAF4EB11A7F7F6700933296 /* NSError+HDMHttpErrorMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSError+HDMHttpErrorMessage.h"; sourceTree = "<group>"; };
 		DAB2C8711A2038930011EE2F /* KeychainSetting.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeychainSetting.h; sourceTree = "<group>"; };
 		DAB2C8721A2038930011EE2F /* KeychainSetting.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KeychainSetting.m; sourceTree = "<group>"; };
 		DAB2C8741A206F080011EE2F /* KeychainBackupUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeychainBackupUtil.h; sourceTree = "<group>"; };
 		DAB2C8751A206F080011EE2F /* KeychainBackupUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KeychainBackupUtil.m; sourceTree = "<group>"; };
+		DC01B0277E3ECFEB18F87712 /* HDMRecoverSetting.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HDMRecoverSetting.h; sourceTree = "<group>"; };
+		DC03155DE24560F766E286C4 /* HDMKeychainRecoverUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HDMKeychainRecoverUtil.h; sourceTree = "<group>"; };
+		DC0769FAB5B4727E089E23CC /* HDMRecoverSetting.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HDMRecoverSetting.m; sourceTree = "<group>"; };
+		DAD0FFF41A81D08D008AEAA2 /* HDMApiTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HDMApiTest.m; sourceTree = "<group>"; };
+		DC07A672CCAD76ED66B72B91 /* ImportHDMColdSeedController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImportHDMColdSeedController.m; sourceTree = "<group>"; };
+		DC0A375AE83A8BA37F3FA65F /* ImportHDMCold.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImportHDMCold.m; sourceTree = "<group>"; };
+		DC0CC84409CD956F1FA008BF /* HDMKeychainRecoverUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HDMKeychainRecoverUtil.m; sourceTree = "<group>"; };
+		DC0D6773769B40A704B784B4 /* ImportHDMCold.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImportHDMCold.h; sourceTree = "<group>"; };
+		DC0E3B0A73BF05166C9733A1 /* ImportHDMColdSeedController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImportHDMColdSeedController.h; sourceTree = "<group>"; };
 		E7552F109D77434AC1A15A24 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -666,7 +745,6 @@
 				AC026C8F19EE5FF500BC0152 /* libPods-OpenSSL.a in Frameworks */,
 				AC026C9019EE5FF500BC0152 /* libPods-Reachability.a in Frameworks */,
 				AC026C9119EE5FF500BC0152 /* libPods-RegexKitLite.a in Frameworks */,
-				AC026C9219EE5FF500BC0152 /* libPods-ZBarSDK.a in Frameworks */,
 				AC026C9319EE5FF500BC0152 /* libPods.a in Frameworks */,
 				42D9B77E193D6B5B00C85B89 /* XCTest.framework in Frameworks */,
 				42D9B780193D6B5B00C85B89 /* UIKit.framework in Frameworks */,
@@ -753,6 +831,12 @@
 				AC6BAC6E196FA3410013B9E8 /* HotCheckPrivateKeyViewController.m */,
 				ACA11DC819F64D560087D39C /* RCheckViewController.h */,
 				ACA11DC919F64D560087D39C /* RCheckViewController.m */,
+				0AB8BC981A7F3194003C07D8 /* HotAddressAddHDMViewController.h */,
+				0AB8BC991A7F3194003C07D8 /* HotAddressAddHDMViewController.m */,
+				1BC27FD66F3376A2C68612DD /* AddHDMAddressViewController.m */,
+				1BC272BC4509E4F880EAC6F9 /* AddHDMAddressViewController.h */,
+				0A43F43E1A81C6BF008171DB /* HdmSendViewController.h */,
+				0A43F43F1A81C6BF008171DB /* HdmSendViewController.m */,
 			);
 			path = Hot;
 			sourceTree = "<group>";
@@ -768,6 +852,10 @@
 				4254083619469C9A007AF99C /* BitherApi.m */,
 				4254083719469C9A007AF99C /* BitherEngine.h */,
 				4254083819469C9A007AF99C /* BitherEngine.m */,
+				D61D0F5AB509120289D32CE8 /* BTHDMBid+Api.m */,
+				D61D0E2B59DCC58D05F2CCE6 /* BTHDMBid+Api.h */,
+				D61D089EE8093848A924819C /* HDMApi.m */,
+				D61D00DE53941DC6062E1938 /* HDMApi.h */,
 			);
 			path = Api;
 			sourceTree = "<group>";
@@ -775,6 +863,8 @@
 		425408441946A219007AF99C /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				DAAF4EB01A7F7F6700933296 /* NSError+HDMHttpErrorMessage.m */,
+				DAAF4EB11A7F7F6700933296 /* NSError+HDMHttpErrorMessage.h */,
 				ACA9D70119540E0F002D1E3A /* PlaySoundUtil.h */,
 				ACA9D70219540E0F002D1E3A /* PlaySoundUtil.m */,
 				425408451946A219007AF99C /* DataCheckUtil.h */,
@@ -829,6 +919,12 @@
 				AC454DC51A19D981000AF4ED /* UnitUtil.m */,
 				DAB2C8741A206F080011EE2F /* KeychainBackupUtil.h */,
 				DAB2C8751A206F080011EE2F /* KeychainBackupUtil.m */,
+				D61D0FE34D07B82E0A821E21 /* HDMHotAddUtil.h */,
+				D61D0EFD9890E54E56C5A21E /* HDMHotAddUtil.m */,
+				D61D07CCE58EB1B7FCA04677 /* PasswordGetter.h */,
+				D61D0DB47AB1A1EA42112C56 /* PasswordGetter.m */,
+				DC0CC84409CD956F1FA008BF /* HDMKeychainRecoverUtil.m */,
+				DC03155DE24560F766E286C4 /* HDMKeychainRecoverUtil.h */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -848,6 +944,10 @@
 				ACD6DFD1196BA83B009D8031 /* ColdAddressAddViewController.m */,
 				ACBEC0221970E46C004301E0 /* SignTransactionViewController.h */,
 				ACBEC0231970E46C004301E0 /* SignTransactionViewController.m */,
+				0AD674901A79E6E4007967DB /* ColdAddressAddHDMViewController.h */,
+				0AD674911A79E6E4007967DB /* ColdAddressAddHDMViewController.m */,
+				DC07A672CCAD76ED66B72B91 /* ImportHDMColdSeedController.m */,
+				DC0E3B0A73BF05166C9733A1 /* ImportHDMColdSeedController.h */,
 			);
 			path = Cold;
 			sourceTree = "<group>";
@@ -884,7 +984,6 @@
 				AC026C8519EE5FF500BC0152 /* libPods-OpenSSL.a */,
 				AC026C8619EE5FF500BC0152 /* libPods-Reachability.a */,
 				AC026C8719EE5FF500BC0152 /* libPods-RegexKitLite.a */,
-				AC026C8819EE5FF500BC0152 /* libPods-ZBarSDK.a */,
 				AC026C8919EE5FF500BC0152 /* libPods.a */,
 				ACA9D70B195415B0002D1E3A /* AudioToolbox.framework */,
 				ACDDDC3719483D210008A79D /* QuartzCore.framework */,
@@ -946,6 +1045,8 @@
 				42E816241952DF43005F16F7 /* StringUtilTest.m */,
 				427CF4C919540ED50081869C /* QRCodeTest.m */,
 				421D8A0219592BF20062FDAF /* WalletUtilTest.m */,
+				0AB8BCB01A7F8656003C07D8 /* NSConditionTest.m */,
+				DAD0FFF41A81D08D008AEAA2 /* HDMApiTest.m */,
 			);
 			path = "bither-iosTests";
 			sourceTree = "<group>";
@@ -1023,6 +1124,10 @@
 				ACA11DCC19F74FA10087D39C /* RCheckCell.m */,
 				AC454DCA1A1C6EC1000AF4ED /* TrashCanCell.h */,
 				AC454DCB1A1C6EC1000AF4ED /* TrashCanCell.m */,
+				0AD674951A7B4BDA007967DB /* ColdAddressListHDMCell.h */,
+				0AD674961A7B4BDA007967DB /* ColdAddressListHDMCell.m */,
+				AC8912F01A7F62FE003797C4 /* WorldListCell.h */,
+				AC8912F11A7F62FE003797C4 /* WorldListCell.m */,
 			);
 			name = Cells;
 			sourceTree = "<group>";
@@ -1078,7 +1183,9 @@
 		ACA9D707195410FF002D1E3A /* Resouces */ = {
 			isa = PBXGroup;
 			children = (
+				0AD674931A79F2B8007967DB /* BIP39EnglishWords.plist */,
 				ACA9D708195410FF002D1E3A /* Sound */,
+				D61D0299B4CDCCFC6D0BA161 /* hdm.bither.net.cer */,
 			);
 			path = Resouces;
 			sourceTree = "<group>";
@@ -1141,6 +1248,8 @@
 				AC31E92E19B4533F00EFDDF1 /* TrendingGraphicView.m */,
 				AC31E93019B477E400EFDDF1 /* BackgroundTransitionView.h */,
 				AC31E93119B477E400EFDDF1 /* BackgroundTransitionView.m */,
+				1BC27C837F7819A54B0A2E37 /* HDMTriangleBgView.m */,
+				1BC279BF6C2A1E9DF4D86908 /* HDMTriangleBgView.h */,
 			);
 			path = UIBase;
 			sourceTree = "<group>";
@@ -1148,6 +1257,12 @@
 		ACDDDC2519480ECE0008A79D /* Dialog */ = {
 			isa = PBXGroup;
 			children = (
+				AC1454A61A80D30E00E851B4 /* DialogReplaceWorld.h */,
+				AC1454A71A80D30E00E851B4 /* DialogReplaceWorld.m */,
+				AC1454A31A80D04D00E851B4 /* DialogOperationWorld.h */,
+				AC1454A41A80D04D00E851B4 /* DialogOperationWorld.m */,
+				0AB8BCA91A7F6DEE003C07D8 /* DialogHDMServerUnsignedQRCode.h */,
+				0AB8BCAA1A7F6DEE003C07D8 /* DialogHDMServerUnsignedQRCode.m */,
 				ACF02FE919D90899001AB701 /* DialogSwitchQRCode.h */,
 				ACF02FEA19D90899001AB701 /* DialogSwitchQRCode.m */,
 				ACD6DFD6196BF98B009D8031 /* DialogAddressFull.h */,
@@ -1207,6 +1322,16 @@
 				0A93B6001A4A66080081D74D /* DialogSignMessageOutput.m */,
 				0A6C0F5D1A4D5E1900544B33 /* DialogSignMessageSelectAddress.h */,
 				0A6C0F5E1A4D5E1900544B33 /* DialogSignMessageSelectAddress.m */,
+				0AD6749A1A7B6229007967DB /* DialogWithActions.h */,
+				0AD6749B1A7B6229007967DB /* DialogWithActions.m */,
+				0AD6749D1A7B9108007967DB /* DialogHDMSeedWordList.h */,
+				0AD6749E1A7B9108007967DB /* DialogHDMSeedWordList.m */,
+				0AB8BCA31A7F445D003C07D8 /* DialogHDMKeychainAddHot.h */,
+				0AB8BCA41A7F445D003C07D8 /* DialogHDMKeychainAddHot.m */,
+				1BC27E22C25A90DF1E5DA1DC /* DialogHDMInfo.m */,
+				1BC27C882946AB67434912E5 /* DialogHDMInfo.h */,
+				1BC27D1407586D2FCB8F01AC /* DialogHDMAddressOptions.m */,
+				1BC275D3A11FAF859823CF7E /* DialogHDMAddressOptions.h */,
 			);
 			path = Dialog;
 			sourceTree = "<group>";
@@ -1280,6 +1405,10 @@
 				AC454DE91A1F3839000AF4ED /* PinCodeSetting.m */,
 				DAB2C8711A2038930011EE2F /* KeychainSetting.h */,
 				DAB2C8721A2038930011EE2F /* KeychainSetting.m */,
+				DC0A375AE83A8BA37F3FA65F /* ImportHDMCold.m */,
+				DC0D6773769B40A704B784B4 /* ImportHDMCold.h */,
+				DC0769FAB5B4727E089E23CC /* HDMRecoverSetting.m */,
+				DC01B0277E3ECFEB18F87712 /* HDMRecoverSetting.h */,
 			);
 			name = Setting;
 			sourceTree = "<group>";
@@ -1360,7 +1489,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastUpgradeCheck = 0510;
-				ORGANIZATIONNAME = "___FULLUSERNAME___";
+				ORGANIZATIONNAME = Bither;
 				TargetAttributes = {
 					42D9B760193D6B5B00C85B89 = {
 						DevelopmentTeam = 6887Q2ZK67;
@@ -1399,12 +1528,14 @@
 				AC6163A01966524A0055C9D0 /* coins_received.wav in Resources */,
 				AC229A70196A40B500A7FB5E /* update_storyboard_strings.sh in Resources */,
 				4276CEA4194C20810027D119 /* Localizable.strings in Resources */,
+				0AD674941A79F2B8007967DB /* BIP39EnglishWords.plist in Resources */,
 				AC53ABED19D94230007C095C /* xrandom_close_sound.mp3 in Resources */,
 				42D9B76F193D6B5B00C85B89 /* InfoPlist.strings in Resources */,
 				42EFB54C1949C50900376888 /* MainStoryboard.storyboard in Resources */,
 				ACA9D70A195410FF002D1E3A /* qr_code_scanned.mp3 in Resources */,
 				42D9B777193D6B5B00C85B89 /* Images.xcassets in Resources */,
 				AC53ABEE19D94230007C095C /* xrandom_open_sound.mp3 in Resources */,
+				D61D047B6D9BE30D5BED20E1 /* hdm.bither.net.cer in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1412,6 +1543,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DAD0FFF61A81D41B008AEAA2 /* hdm.bither.net.cer in Resources */,
 				42D9B788193D6B5B00C85B89 /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1477,7 +1609,9 @@
 				42D9B775193D6B5B00C85B89 /* AppDelegate.m in Sources */,
 				421B037C19495315003A45F1 /* TabButton.m in Sources */,
 				AC5A916119ECDB5D00FFDB13 /* UploadAndDowloadFileFactory.m in Sources */,
+				AC1454A51A80D04D00E851B4 /* DialogOperationWorld.m in Sources */,
 				ACE3765F1A231C9200F66321 /* DialogKeychainBackupDiff.m in Sources */,
+				0AB8BCA51A7F445D003C07D8 /* DialogHDMKeychainAddHot.m in Sources */,
 				ACB9B9C3195AD1CC00019216 /* AddressDetailViewController.m in Sources */,
 				ACE7E70019EB6DE800F7AA3A /* AvatarSetting.m in Sources */,
 				4268FE2A194ACD57007A4C30 /* ColdViewController.m in Sources */,
@@ -1514,13 +1648,17 @@
 				4268FE2C194ACD57007A4C30 /* OptionColdViewController.m in Sources */,
 				AC45D84119878BAB00AF5C2C /* DialogAddressLongPressOptions.m in Sources */,
 				4269FF75195A8872001213B9 /* Market.m in Sources */,
+				0AD674921A79E6E4007967DB /* ColdAddressAddHDMViewController.m in Sources */,
 				DA641E8B196E7BC20095DF42 /* GCCrashInstallation.m in Sources */,
+				0AD6749C1A7B6229007967DB /* DialogWithActions.m in Sources */,
 				0A93B6011A4A66080081D74D /* DialogSignMessageOutput.m in Sources */,
 				ACA11DCD19F74FA10087D39C /* RCheckCell.m in Sources */,
 				ACE7E71819EB8DE100F7AA3A /* ImagePickerFromCameraViewController.m in Sources */,
 				AC808B8C19D56757004E78A3 /* XRandom.m in Sources */,
 				AC3CDB5B1962A3C800C74B4C /* TransactionConfidenceView.m in Sources */,
 				0A446C151A441393000CD25A /* DialogNetworkMonitorOption.m in Sources */,
+				AC8912F21A7F62FE003797C4 /* WorldListCell.m in Sources */,
+				0AB8BC9A1A7F3194003C07D8 /* HotAddressAddHDMViewController.m in Sources */,
 				0A515F7B1A36CAE3008292AF /* RawPrivateKeyViewController.m in Sources */,
 				ACD6DFC9196B9367009D8031 /* ColdAddressListCell.m in Sources */,
 				AC0135E0195056BE00E3BB95 /* KeyboardController.m in Sources */,
@@ -1550,6 +1688,7 @@
 				AC53ABE719D911AA007C095C /* DialogXrandomInfo.m in Sources */,
 				ACE7E71119EB78AE00F7AA3A /* ImagePickerFromGalleryViewController.m in Sources */,
 				4276CEA1194BF4F70027D119 /* NetworkUtil.m in Sources */,
+				DAAF4EB21A7F7F6700933296 /* NSError+HDMHttpErrorMessage.m in Sources */,
 				ACCA27481988DDE9000E6A32 /* UIImage+ImageRenderToColor.m in Sources */,
 				ACB9B9C6195AD25800019216 /* AddressDetailCell.m in Sources */,
 				AC8F0DCD196D054A00CCD0F9 /* SelectListCell.m in Sources */,
@@ -1559,6 +1698,7 @@
 				AC2F3298195C1D53001B7439 /* SendViewController.m in Sources */,
 				ACBEC01E196E87B9004301E0 /* CheckPrivateKeyCell.m in Sources */,
 				AC17158A1969249B00337AB5 /* NSString+Size.m in Sources */,
+				0AD6749F1A7B9108007967DB /* DialogHDMSeedWordList.m in Sources */,
 				ACBEC01B196E397E004301E0 /* CheckScoreAndBgAnimatableView.m in Sources */,
 				AC454DE71A1F252B000AF4ED /* PinCodeUtil.m in Sources */,
 				4254083B19469C9A007AF99C /* BaseApi.m in Sources */,
@@ -1569,6 +1709,7 @@
 				425408571946A219007AF99C /* DataCheckUtil.m in Sources */,
 				0A6C0F5F1A4D5E1900544B33 /* DialogSignMessageSelectAddress.m in Sources */,
 				AC6163941964ED2F0055C9D0 /* DialogWithArrow.m in Sources */,
+				0AD674971A7B4BDA007967DB /* ColdAddressListHDMCell.m in Sources */,
 				ACA9D70319540E0F002D1E3A /* PlaySoundUtil.m in Sources */,
 				AC616397196507B40055C9D0 /* DialogTxConfirmation.m in Sources */,
 				ACE7E70F19EB78AE00F7AA3A /* CropImageViewController.m in Sources */,
@@ -1604,6 +1745,7 @@
 				ACDDDC2319480DE00008A79D /* UIViewController+PiShowBanner.m in Sources */,
 				ACCA274B1989FACC000E6A32 /* HotAddressTabButton.m in Sources */,
 				AC1715871969213800337AB5 /* DialogAddressOptions.m in Sources */,
+				0A43F4401A81C6BF008171DB /* HdmSendViewController.m in Sources */,
 				4269FF7B195A948A001213B9 /* CacheUtil.m in Sources */,
 				ACEEB703199B40FE008E06AA /* CurrencyCalculatorLink.m in Sources */,
 				AC53ABB319D2CD80007C095C /* UEntropyCollector.m in Sources */,
@@ -1611,9 +1753,11 @@
 				4254086B1946CD17007AF99C /* NSDictionary+Fromat.m in Sources */,
 				AC2F329B195D1930001B7439 /* UnsignedTransactionViewController.m in Sources */,
 				ACDDDC2E19480ECF0008A79D /* DialogProgress.m in Sources */,
+				0AB8BCAB1A7F6DEE003C07D8 /* DialogHDMServerUnsignedQRCode.m in Sources */,
 				4254083D19469C9A007AF99C /* BitherEngine.m in Sources */,
 				ACEE7D2719D3F9F500932B39 /* QRCodeThemeUtil.m in Sources */,
 				4217A39019512DC000063746 /* TransactionsUtil.m in Sources */,
+				AC1454A81A80D30E00E851B4 /* DialogReplaceWorld.m in Sources */,
 				425408681946BB7A007AF99C /* BlockUtil.m in Sources */,
 				DA641E8D196E7BC20095DF42 /* GCCrashReportSink.m in Sources */,
 				ACEE7D3C19D4020E00932B39 /* ColdWalletCloneSetting.m in Sources */,
@@ -1646,6 +1790,18 @@
 				AC53ABCC19D40272007C095C /* UEntropyMic.m in Sources */,
 				AC53ABB019D27B74007C095C /* UEntropyCamera.m in Sources */,
 				AC53ABE119D7EAAE007C095C /* SensorVisualizerView.m in Sources */,
+				DC06422DA44A6DA77DCFBB2D /* ImportHDMCold.m in Sources */,
+				DC075758EE0F48911D8D4CE8 /* ImportHDMColdSeedController.m in Sources */,
+				D61D098FD091EB8752EF00A2 /* BTHDMBid+Api.m in Sources */,
+				D61D0ACF2F75D62B878ADAEF /* HDMHotAddUtil.m in Sources */,
+				D61D0D05D11BC8527C40F8C3 /* PasswordGetter.m in Sources */,
+				1BC275F3608609D0E72BFBE7 /* HDMTriangleBgView.m in Sources */,
+				1BC27499EE579986A1439709 /* DialogHDMInfo.m in Sources */,
+				D61D0E640B2A2C7E6874FDEA /* HDMApi.m in Sources */,
+				1BC270F1C2BEA60E0B3384AB /* DialogHDMAddressOptions.m in Sources */,
+				DC0C00F6FC8AA88E26580598 /* HDMRecoverSetting.m in Sources */,
+				DC0448DAEF65BD227897D240 /* HDMKeychainRecoverUtil.m in Sources */,
+				1BC2778BC574DA2F816BC77A /* AddHDMAddressViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1655,8 +1811,10 @@
 			files = (
 				42D9B78A193D6B5B00C85B89 /* bither_iosTests.m in Sources */,
 				427CF4CA19540ED50081869C /* QRCodeTest.m in Sources */,
+				0AB8BCB11A7F8656003C07D8 /* NSConditionTest.m in Sources */,
 				42E816251952DF43005F16F7 /* StringUtilTest.m in Sources */,
 				421D8A0319592BF20062FDAF /* WalletUtilTest.m in Sources */,
+				DAD0FFF51A81D08D008AEAA2 /* HDMApiTest.m in Sources */,
 				4254086D1946E0FD007AF99C /* BlockUtilTest.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1708,7 +1866,7 @@
 				42EFB5511949C52100376888 /* Base */,
 				AC229A7A196A466400A7FB5E /* zh-Hans */,
 				AC229A7B196A466900A7FB5E /* zh-Hant */,
-				0A6C0F591A4D411800544B33 /* en */,
+				AC1454A21A80C34F00E851B4 /* en */,
 			);
 			name = MainStoryboard.storyboard;
 			sourceTree = "<group>";

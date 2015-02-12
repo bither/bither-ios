@@ -539,3 +539,69 @@
 "verify_message_signature_verify_button_verifying" = "正在验证…";
 "verify_message_signature_verify_button_reverify" = "重新验证";
 "sign_message_setting_name" = "消息签名";
+
+"add_address_watch_only_scanned_address_warning" = "比太只能监控冷钱包监控二维码,\n不能监控其它地址";
+
+// Cold Add HDM
+"hdm_seed_generation_notice" = "HDM 结合了分层确定性和多重签名两种技术.\n\nHDM 运用多重签名技术来避免分层确定性钱包的缺陷.\n\n比太使用 2/3 的多重签名来生成 HDM 地址.\n\n三个私钥分别由热钱包, 冷钱包和 HDM 服务器上的确定性种子生成.";
+"hdm_cold_pub_key_qr_code_name" = "HDM 冷帐号二维码";
+"hdm_server_qr_code_name" = "HDM 服务器二维码";
+"hdm_cold_seed_qr_code" = "HDM 冷种子二维码";
+"hdm_hot_seed_qr_code" = "HDM 热种子二维码";
+"hdm_cold_seed_word_list" = "HDM 密语(冷)";
+"hdm_hot_seed_word_list" = "HDM 密语(热)";
+
+// HDM Check
+"hdm_keychain_check_title_cold" = "HDM 冷";
+"hdm_keychain_check_title_hot" = "HDM 热";
+
+// Hot Add HDM
+"hdm_keychain_add_hot" = "HDM 热";
+"hdm_keychain_add_cold" = "HDM 冷";
+"hdm_keychain_add_server" = "HDM 服务器";
+"hdm_keychain_add_hot_confirm" = "生成 HDM 热帐号";
+"hdm_keychain_add_scan_cold" = "扫描 HDM 冷帐号二维码";
+"hdm_keychain_add_unsigned_server_qr_code_title" = "在冷钱包选择 HDM 服务器二维码来签名";
+"hdm_keychain_add_scan_signed_server_qr_code_action" = "扫描已签名服务器二维码";
+"hdm_keychain_add_sign_server_qr_code_error" = "签名服务器二维码出错";
+"hdm_keychain_add_signed_server_qr_code_title" = "已签名服务器二维码";
+"hdm_exception_bid_already_exists" = "此 HDM 冷账户已被绑定到另一个 HDM 热账户";
+"hdm_keychain_add_unsigned_server_qr_code_dismiss_confirm" = "放弃签名?";
+
+// Show HDM Address
+"address_group_hdm_hot" = "HDM 热";
+"hdm_address_sign_tx_server_error" = "HDM 服务器签名出错";
+
+// HDM Hot Address Add
+"hdm_address_count_limit" = "已达 HDM 地址数上限";
+"activity_name_add_hdm_address" = "增加 HDM 地址";
+"hdm_address_add_count_label" = "增加多少个 HDM 地址?";
+"hdm_address_add_need_cold_pub" = "需要 HDM 冷帐号二维码才能继续";
+"hdm_address_add_button" = "增加";
+"hdm_address_add_cold_pub_not_match" = "HDM 冷帐号和之前不同";
+
+// HDM Send
+"hdm_send_with_cold" = "与 HDM 冷共同签名";
+"hdm_send_with_server" = "与 HDM 服务器共同签名";
+"hdm_send_with_cold_no_requested_seed" = "您没有签名所需的 HDM 冷帐号";
+
+"import_hdm_cold_seed_qr_code"="来自HDM冷种子二维码";
+"import_hdm_cold_seed_phrase"="来自HDM密语(冷)";
+"import_hdm_cold_seed_format_error"="不是HDM冷种子";
+"can_not_import_hdm_cold_seed"="不能导入HDM冷种子";
+"import_hdm_cold_seed_qr_code_scan_title"="扫描HDM冷种子二维码";
+
+//hdm recovery
+"hdm_keychain_recovery_setting_name"="HDM 帐号恢复";
+"hdm_keychain_recovery_warn"="HDM 账号正在恢复中";
+"hdm_keychain_recovery_no_addresses"="没有需要恢复的 HDM 地址";
+"hdm_keychain_recovery_message"="请尽快转移走 HDM 恢复帐号中的比特币";
+"address_group_hdm_recovery"="HDM 恢复";
+"activity_name_hdm_import_word_list"="导入 HDM 密语";
+"hdm_import_word_list_input_hint"="下一单词";
+"hdm_import_word_list_empty_message"="请输入 HDM 密语";
+"hdm_import_word_list_wrong_word_warn"="单词无效";
+"hdm_import_word_list_delete"="删除";
+"hdm_import_word_list_replace"="替换";
+
+"not_verify_bither_private_key_qrcode"="不是比太私钥二维码";

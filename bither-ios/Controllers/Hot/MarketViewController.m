@@ -68,6 +68,9 @@
     [super viewDidLoad];
     self.tableView.dataSource=self;
     self.tableView.delegate=self;
+    if([self.tableView respondsToSelector:@selector(setLayoutMargins:)]){
+        self.tableView.layoutMargins = UIEdgeInsetsZero;
+    }
     self.tableView.tableFooterView = [[UIView alloc]initWithFrame:CGRectZero];
     self.market=[MarketUtil getDefaultMarket];
     [self reload];

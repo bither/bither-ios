@@ -16,6 +16,8 @@
 //  See the License for the specific language governing permissions and
 //  limitations under the License.
 
+#import <Bitheri/BTIn.h>
+#import <Bitheri/BTTxProvider.h>
 #import "TransactionCell.h"
 #import "AmountButton.h"
 #import "StringUtil.h"
@@ -73,52 +75,55 @@
 
 -(void)showTx:(BTTx*)tx byAddress:(BTAddress*)address{
     _tx = tx;
+    NSArray *inValues = [[BTTxProvider instance] txInValues:_tx.txHash];
+    NSArray *inAddresses = [tx getInAddresses];
     _address = address;
     _addresses = [[NSMutableDictionary alloc]init];
     self.btnAmount.frameChangeListener = self;
-    int64_t value = [tx deltaAmountFrom:address];
-    [self.btnAmount setAmount:value];
+    int64_t amount = [tx deltaAmountFrom:address];
+    [self.btnAmount setAmount:amount];
     self.lblTime.text = [DateUtil stringFromDate:[NSDate dateWithTimeIntervalSince1970:tx.txTime]];
-    _income = value > 0;
+    _income = amount > 0;
     NSString *a = @"---";
     if(_income){
-        NSUInteger count = tx.inputAddresses.count;
+        NSUInteger count = tx.ins.count;
         for(int k = 0; k < count;k++){
-            NSObject *ai = [tx.inputAddresses objectAtIndex:k];
-            if(ai != [NSNull null]){
-                if(![StringUtil compareString:address.address compare:(NSString*)ai] && a.length < 30){
-                    a = (NSString*)ai;
-                }
-                NSObject* value = _addresses[ai];
-                NSObject* newValue = _tx.inValues[k];
-                if(value != nil && value != [NSNull null]){
-                    u_int64_t delta = 0;
-                    if(newValue != nil && newValue != [NSNull null]){
-                        delta = [(NSNumber*)newValue unsignedLongLongValue];
-                    }
-                    value = [NSNumber numberWithUnsignedLongLong:(delta + [(NSNumber*)value unsignedLongLongValue])];
-                }else{
-                    value = newValue;
-                }
-                _addresses[(NSString*)ai] = value;
+            NSObject *ai = inAddresses[k];
+            if(ai == [NSNull null]){
+                ai = @"Coinbase";
             }
+            if(![StringUtil compareString:address.address compare:(NSString*)ai] && a.length < 30){
+                a = (NSString*)ai;
+            }
+            NSObject* value = _addresses[ai];
+            NSObject* newValue = inValues[k];
+            if(value != nil && value != [NSNull null]){
+                u_int64_t delta = 0;
+                if(newValue != nil && newValue != [NSNull null]){
+                    delta = [(NSNumber*)newValue unsignedLongLongValue];
+                }
+                value = @(delta + [(NSNumber *) value unsignedLongLongValue]);
+            }else{
+                value = newValue;
+            }
+            _addresses[(NSString*)ai] = value;
         }
     }else{
-        NSUInteger count = tx.outputAddresses.count;
+        NSUInteger count = tx.outs.count;
         for(int k = 0; k < count;k++){
-            NSObject *ai = [tx.outputAddresses objectAtIndex:k];
-            if(ai != [NSNull null]){
+            NSObject *ai = ((BTOut *)tx.outs[k]).outAddress;
+            if(ai != nil){
                 if(![StringUtil compareString:address.address compare:(NSString*)ai] && a.length < 30){
                     a = (NSString*)ai;
                 }
                 NSObject* value = _addresses[ai];
-                NSObject* newValue = _tx.outputAmounts[k];
+                NSObject* newValue = @(((BTOut *)_tx.outs[k]).outValue);
                 if(value != nil && value != [NSNull null]){
                     u_int64_t delta = 0;
                     if(newValue != nil && newValue != [NSNull null]){
                         delta = [(NSNumber*)newValue unsignedLongLongValue];
                     }
-                    value = [NSNumber numberWithUnsignedLongLong:(delta + [(NSNumber*)value unsignedLongLongValue])];
+                    value = @(delta + [(NSNumber *) value unsignedLongLongValue]);
                 }else{
                     value = newValue;
                 }
@@ -134,10 +139,10 @@
         }
         return NSOrderedSame;
     }];
-    if(a.length > 4){
+    if(a.length > 4 && ![StringUtil compareString:a compare:@"Coinbase"]){
         a = [StringUtil shortenAddress:a];
     }
-    [self.vTransactionConfidence showTransaction:tx];
+    [self.vTransactionConfidence showTransaction:tx withAddress:address];
     self.lblAddress.text = a;
     
     CGFloat width = [self.lblAddress.text sizeWithRestrict:CGSizeMake(CGFLOAT_MAX, CGFLOAT_MAX) font:self.lblAddress.font].width;

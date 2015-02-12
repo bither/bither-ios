@@ -16,12 +16,15 @@
 //  See the License for the specific language governing permissions and
 //  limitations under the License.
 
+#import <Bitheri/BTAddress.h>
 #import "TransactionConfidenceView.h"
 #import "DialogTxConfirmation.h"
 
 @interface TransactionConfidenceView()
 @property UIButton *btn;
 @property int confirmationCnt;
+@property BTTx* tx;
+@property BTAddress *address;
 @end
 
 @implementation TransactionConfidenceView
@@ -55,7 +58,9 @@
     [self addSubview:self.btn];
 }
 
--(void)showTransaction:(BTTx*)tx{
+- (void)showTransaction:(BTTx *)tx withAddress:(BTAddress *)address {
+    self.tx = tx;
+    self.address = address;
     self.confirmationCnt = tx.confirmationCnt;
     if(tx.confirmationCnt <= 6){
         [self.btn setImage:[UIImage imageNamed:[NSString stringWithFormat:@"transaction_confirmation_icon_%d", tx.confirmationCnt]] forState:UIControlStateNormal];
@@ -67,7 +72,7 @@
 }
 
 -(void)pressed:(id)sender{
-    DialogTxConfirmation *dialog = [[DialogTxConfirmation alloc]initWithConfirmationCnt:self.confirmationCnt];
+    DialogTxConfirmation *dialog = [[DialogTxConfirmation alloc] initWithTx:self.tx andAddress:self.address];
     [dialog showFromView:self];
 }
 

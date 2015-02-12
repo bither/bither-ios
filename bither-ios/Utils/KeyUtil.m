@@ -16,6 +16,7 @@
 //  See the License for the specific language governing permissions and
 //  limitations under the License.
 
+#import <Bitheri/BTAddressProvider.h>
 #import "KeyUtil.h"
 #import "BTAddressManager.h"
 #import "UserDefaultsUtil.h"
@@ -24,6 +25,7 @@
 #import "PeerUtil.h"
 #import "BTPrivateKeyUtil.h"
 #import "BTQRCodeUtil.h"
+#import "BTEncryptData.h"
 
 
 
@@ -44,19 +46,37 @@
 }
 +(BOOL)addBitcoinjKey:(NSArray *)array withPassphrase:(NSString *)passphrase error:(NSError **)aError{
     NSMutableArray *addressList=[NSMutableArray new];
+    BTHDMKeychain * keychain= nil;
     for(NSString * encryptPrivKey in array){
-        
-        BTAddress *btAddress=[[BTAddress alloc] initWithBitcoinjKey:encryptPrivKey withPassphrase:passphrase];
-        if (!btAddress) {
-            if (aError!=NULL) {
-                *aError = [NSError errorWithDomain:CustomErrorDomain code:PasswordError userInfo:nil];
+        NSRange range=[encryptPrivKey rangeOfString:HDM_QR_CODE_FLAG] ;
+        if(range.location==0){
+            NSString * hdmEncryptPrivKey= [encryptPrivKey substringFromIndex:1];
+            BTEncryptData *encryptedData=[[BTEncryptData alloc] initWithStr:hdmEncryptPrivKey];
+            if ([encryptedData decrypt:passphrase]== nil){
+                return NO;
+            } else {
+                keychain = [[BTHDMKeychain alloc] initWithEncrypted:hdmEncryptPrivKey password:passphrase andFetchBlock:nil];
             }
-            return NO;
+
+        }else {
+            BTAddress *btAddress = [[BTAddress alloc] initWithBitcoinjKey:encryptPrivKey withPassphrase:passphrase];
+            if (!btAddress) {
+                if (aError != NULL) {
+                    *aError = [NSError errorWithDomain:CustomErrorDomain code:PasswordError userInfo:nil];
+                }
+                return NO;
+            }
+            [addressList addObject:btAddress];
         }
-        [addressList addObject:btAddress];
+    }
+    if (keychain!= nil){
+        [KeyUtil setHDKeyChain:keychain];
     }
     return [KeyUtil addAddressList:addressList];
  
+}
++ (void)setHDKeyChain:(BTHDMKeychain *)keychain{
+     [[BTAddressManager instance] setHdmKeychain:keychain];
 }
 +(BOOL)addAddressList:(NSArray *)array {
     [[PeerUtil instance] stopPeer];
@@ -64,13 +84,6 @@
     for(BTAddress * btAddress in array){
         if (![[[BTAddressManager instance]  privKeyAddresses] containsObject:btAddress]&&![[[BTAddressManager instance] watchOnlyAddresses] containsObject:btAddress]) {
             [[BTAddressManager instance] addAddress:btAddress];
-            if (btAddress.hasPrivKey) {
-                if (![[UserDefaultsUtil instance] getPasswordSeed]) {
-                    BTPasswordSeed * passwordSeed=[[BTPasswordSeed alloc] initWithBTAddress:btAddress];
-                    [[UserDefaultsUtil instance] setPasswordSeed:passwordSeed];
-                }
-            }
-           
         }
     }
     [[PeerUtil instance]startPeer];

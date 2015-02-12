@@ -55,7 +55,7 @@
         for (NSString *data in reports) {
             [bitherApi uploadCrash:data callback:^(NSDictionary *dict) {
                 kscrash_i_callCompletion(onCompletion, reports, YES, nil);
-            } andErrorCallBack:^(MKNetworkOperation *errorOp, NSError *error) {
+            } andErrorCallBack:^(NSOperation *errorOp, NSError *error) {
                 kscrash_i_callCompletion(onCompletion, reports, NO, nil);
             }];
         }

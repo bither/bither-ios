@@ -26,8 +26,15 @@
 #import "KeyUtil.h"
 #import "DialogXrandomInfo.h"
 #import "UIViewController+PiShowBanner.h"
+#import "BTPrivateKeyUtil.h"
 @import MobileCoreServices;
 @import AVFoundation;
+
+#define kSaveProgress (0.1)
+#define kStartProgress (0.01)
+#define kProgressKeyRate (0.5)
+#define kProgressEncryptRate (0.5)
+#define kMinGeneratingTime (2.4)
 
 @interface HotAddressAddPrivateKeyViewController ()
 @property (weak, nonatomic) IBOutlet UIPickerView *pvCount;
@@ -39,6 +46,9 @@
 @end
 
 @interface HotAddressAddPrivateKeyViewController(UIPickerViewDataSource)<UIPickerViewDataSource,UIPickerViewDelegate>
+@end
+
+@interface HotAddressAddPrivateKeyViewController(UEntropy)<UEntropyViewControllerDelegate>
 @end
 
 @implementation HotAddressAddPrivateKeyViewController
@@ -128,7 +138,7 @@
 
 -(void)onPasswordEntered:(NSString *)password{
     if(self.btnXRandomCheck.selected){
-        UEntropyViewController* uentropy = [[UEntropyViewController alloc]initWithCount:self.countToGenerate password:password];
+        UEntropyViewController* uentropy = [[UEntropyViewController alloc]initWithPassword:password andDelegate:self];
         [self presentViewController:uentropy animated:YES completion:nil];
     }else{
         DialogProgress *d = [[DialogProgress alloc]initWithMessage:NSLocalizedString(@"Please wait…", nil)];
@@ -171,6 +181,74 @@
 
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component{
     self.countToGenerate = (int)(row + 1);
+}
+
+@end
+
+@implementation HotAddressAddPrivateKeyViewController (UEntropy)
+
+-(void)onUEntropyGeneratingWithController:(UEntropyViewController*)controller collector:(UEntropyCollector*)collector andPassword:(NSString*)password{
+    UInt32 count = self.countToGenerate;
+    float progress = kStartProgress;
+    float itemProgress = (1.0 - kStartProgress - kSaveProgress) / (float) count;
+    NSTimeInterval startGeneratingTime = [[NSDate date] timeIntervalSince1970];
+    [collector onResume];
+    [collector start];
+    [controller onProgress:progress];
+    XRandom* xrandom = [[XRandom alloc]initWithDelegate:collector];
+    NSMutableArray *addresses=[NSMutableArray new];
+    
+    for(int i = 0; i < count; i++){
+        if(controller.testShouldCancel){
+            return;
+        }
+        
+        NSData* data = [xrandom randomWithSize:32];
+        if(data){
+            BTKey *key = [BTKey keyWithSecret:data compressed:YES];
+            key.isFromXRandom=YES;
+            NSLog(@"uentropy outcome data %d/%lu", i + 1, (unsigned long)count);
+            progress += itemProgress * kProgressKeyRate;
+            [controller onProgress:progress];
+            if(controller.testShouldCancel){
+                return;
+            }
+            
+            NSString *privateKeyString = [BTPrivateKeyUtil getPrivateKeyString:key passphrase:password];
+            if(!privateKeyString){
+                [controller onFailed];
+                return;
+            }
+            BTAddress *btAddress = [[BTAddress alloc] initWithKey:key encryptPrivKey:privateKeyString isXRandom:YES];
+            [addresses addObject:btAddress];
+            progress += itemProgress * kProgressEncryptRate;
+            [controller onProgress:progress];
+        }else{
+            [controller onFailed];
+            return;
+        }
+    }
+    
+    if(controller.testShouldCancel){
+        return;
+    }
+    
+    [collector stop];
+    [KeyUtil addAddressList:addresses];
+    while ([[NSDate new] timeIntervalSince1970] - startGeneratingTime < kMinGeneratingTime) {
+        
+    }
+    [controller onSuccess];
+    
+}
+
+-(void)successFinish:(UEntropyViewController*)controller{
+    UInt32 count = self.countToGenerate;
+    __block UIWindow* window = controller.view.window;
+    [controller.presentingViewController.presentingViewController dismissViewControllerAnimated:YES completion:^{
+        DialogAlert* alert = [[DialogAlert alloc]initWithMessage:[NSString stringWithFormat:NSLocalizedString(@"xrandom_final_confirm", nil), count] confirm:nil cancel:nil];
+        [alert showInWindow:window];
+    }];
 }
 
 @end

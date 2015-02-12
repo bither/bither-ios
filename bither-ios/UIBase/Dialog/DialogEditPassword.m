@@ -23,6 +23,7 @@
 #import "UIBaseUtil.h"
 #import <AudioToolbox/AudioToolbox.h>
 #import <Bitheri/BTAddressManager.h>
+#import <Bitheri/BTAddressProvider.h>
 
 #define kOuterPadding (1)
 #define kInnerMargin (10)
@@ -100,16 +101,8 @@
             });
         }else{
             BOOL success = NO;
-            if([BTAddressManager instance].privKeyAddresses.count + [BTAddressManager instance].trashAddresses.count > 0){
+            if([BTPasswordSeed hasPasswordSeed]){
                 success = [[BTAddressManager instance] changePassphraseWithOldPassphrase:p andNewPassphrase:nP];
-                if(success){
-                    if ([BTAddressManager instance].privKeyAddresses.count > 0) {
-                        [[UserDefaultsUtil instance]setPasswordSeed:[[BTPasswordSeed alloc] initWithBTAddress:[BTAddressManager instance].privKeyAddresses[0]]];
-                    } else if ([BTAddressManager instance].trashAddresses.count > 0) {
-                        [[UserDefaultsUtil instance]setPasswordSeed:[[BTPasswordSeed alloc] initWithBTAddress:[BTAddressManager instance].trashAddresses[0]]];
-                    }
-
-                }
             }
             dispatch_async(dispatch_get_main_queue(), ^{
                 if(success){
@@ -272,7 +265,7 @@
 }
 
 -(BOOL)checkPassword:(NSString*)password{
-    BTPasswordSeed *passwordSeed = [[UserDefaultsUtil instance]getPasswordSeed];
+    BTPasswordSeed *passwordSeed = [BTPasswordSeed getPasswordSeed];
     if(passwordSeed){
         return [passwordSeed checkPassword:password];
     }
@@ -310,10 +303,20 @@
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
     [self dismissError];
-    if([StringUtil validPartialPassword:string]){
-        if(textField.text.length - range.length + string.length <= 43){
-            return YES;
+    if ([textField isEqual:self.tfPasswordNew]||[textField isEqual:self.tfPasswordConfirm]) {
+        if([StringUtil validSimplePartialPassword:string]){
+            if(textField.text.length - range.length + string.length <= 43){
+                return YES;
+            }
         }
+        
+    }else{
+        if([StringUtil validPartialPassword:string]){
+            if(textField.text.length - range.length + string.length <= 43){
+                return YES;
+            }
+        }
+        
     }
     return NO;
 }

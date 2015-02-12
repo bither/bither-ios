@@ -17,7 +17,9 @@
 //  limitations under the License.
 
 #import "DialogWithArrow.h"
+#import "BTTx.h"
+#import "BTAddress.h"
 
 @interface DialogTxConfirmation : DialogWithArrow
--(instancetype)initWithConfirmationCnt:(int)cnt;
+-(instancetype)initWithTx:(BTTx*)tx andAddress:(BTAddress*)address;
 @end

@@ -20,6 +20,7 @@
 #import "StringUtil.h"
 
 #define PREFS_KEY_LAST_VERSION @"last_version"
+#define USER_DEFAULT_LAST_VER @"last_ver"
 #define DEFAULT_MARKET @"default_market"
 #define DEFAULT_EXCHANGE_RATE @"default_exchange_rate"
 
@@ -56,11 +57,11 @@ NSUserDefaults *userDefaults;
 }
 
 -(NSInteger)getLastVersion{
-    return [userDefaults integerForKey:PREFS_KEY_LAST_VERSION];
+    return [userDefaults integerForKey:USER_DEFAULT_LAST_VER];
 }
 
 -(void)setLastVersion:(NSInteger) version{
-    [userDefaults setInteger:version forKey:PREFS_KEY_LAST_VERSION];
+    [userDefaults setInteger:version forKey:USER_DEFAULT_LAST_VER];
     [userDefaults synchronize];
 }
 -(MarketType)getDefaultMarket{
@@ -108,6 +109,11 @@ NSUserDefaults *userDefaults;
 -(BOOL)localeIsChina{
     NSString * language = [[NSLocale preferredLanguages] objectAtIndex:0];
     return  [language isEqualToString:@"zh-Hans"];
+}
+
+-(BOOL)localeIsZHHant{
+    NSString * language = [[NSLocale preferredLanguages] objectAtIndex:0];
+    return  [language isEqualToString:@"zh-Hant"];
 }
 
 -(NSInteger) getExchangeType{
@@ -160,7 +166,7 @@ NSUserDefaults *userDefaults;
     [userDefaults synchronize];
 }
 
--(BTPasswordSeed *)getPasswordSeed{
+-(BTPasswordSeed *)getPasswordSeedForOldVersion {
     NSString * str=[userDefaults stringForKey:PASSWORD_SEED];
     if ([StringUtil isEmpty:str]) {
         return nil;
@@ -169,7 +175,7 @@ NSUserDefaults *userDefaults;
 }
 
 -(void)setPasswordSeed:(BTPasswordSeed *)passwordSeed{
-    [userDefaults setValue:[passwordSeed toPasswrodSeedString] forKey:PASSWORD_SEED];
+    [userDefaults setValue:[passwordSeed toPasswordSeedString] forKey:PASSWORD_SEED];
     [userDefaults synchronize];
 
 }

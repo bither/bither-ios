@@ -21,6 +21,7 @@
 #import "KeyboardController.h"
 #import "StringUtil.h"
 #import "UIBaseUtil.h"
+#import "BTAddressProvider.h"
 #import <AudioToolbox/AudioToolbox.h>
 
 #define kOuterPadding (1)
@@ -83,10 +84,18 @@
         if(![StringUtil compareString:pc compare:p]){
             [self showError:NSLocalizedString(@"Passwords not same.", nil)];
         }else{
-            if([StringUtil validPassword:p]){
-                [self dismissWithPassword:p];
+            if ([self isNewSetPassword]) {
+                if([StringUtil validSimplePassword:p]){
+                    [self dismissWithPassword:p];
+                }else{
+                    [self showError:NSLocalizedString(@"Invalid password", nil)];
+                }
             }else{
-                [self showError:NSLocalizedString(@"Invalid password", nil)];
+                if([StringUtil validPassword:p]){
+                    [self dismissWithPassword:p];
+                }else{
+                    [self showError:NSLocalizedString(@"Invalid password", nil)];
+                }
             }
         }
     }else{
@@ -148,7 +157,11 @@
 }
 
 -(void)cancelPressed:(id)sender{
-    [self dismiss];
+    [self dismissWithCompletion:^{
+        if(self.delegate && [self.delegate respondsToSelector:@selector(dialogPasswordCanceled)]){
+            [self.delegate dialogPasswordCanceled];
+        }
+    }];
 }
 
 -(void)dialogDidShow{
@@ -273,7 +286,7 @@
             return NO;
         }
     }
-    BTPasswordSeed *passwordSeed = [[UserDefaultsUtil instance]getPasswordSeed];
+    BTPasswordSeed *passwordSeed = [BTPasswordSeed getPasswordSeed];
     return !passwordSeed;
 }
 
@@ -296,7 +309,7 @@
     if(self.delegate && [self.delegate respondsToSelector:@selector(checkPassword:)]){
         return [self.delegate checkPassword:password];
     }
-    BTPasswordSeed *passwordSeed = [[UserDefaultsUtil instance]getPasswordSeed];
+    BTPasswordSeed *passwordSeed = [BTPasswordSeed getPasswordSeed];
     if(passwordSeed){
         return [passwordSeed checkPassword:password];
     }
@@ -343,9 +356,17 @@
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
     [self dismissError];
-    if([StringUtil validPartialPassword:string]){
-        if(textField.text.length - range.length + string.length <= 43){
-            return YES;
+    if([self isNewSetPassword]){
+        if([StringUtil validSimplePartialPassword:string]){
+            if(textField.text.length - range.length + string.length <= 43){
+                return YES;
+            }
+        }
+    }else{
+        if([StringUtil validPartialPassword:string]){
+            if(textField.text.length - range.length + string.length <= 43){
+                return YES;
+            }
         }
     }
     return NO;

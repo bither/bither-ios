@@ -133,6 +133,10 @@
 /* Class = "IBUILabel"; text = "Can not find private key"; ObjectID = "eEx-7U-SVT"; */
 "eEx-7U-SVT.text" = "没有找到对应的私钥";
 
+/* Class = "IBUILabel"; text = "Import HDM Phrase"; ObjectID = "Qwn-YF-uwn"; */
+"Qwn-YF-uwn.text" = "导入 HDM 密语";
+
+
 /* Class = "IBUILabel"; text = "Pay to"; ObjectID = "g3O-Ch-Qm9"; */
 "g3O-Ch-Qm9.text" = "发送给";
 
@@ -165,12 +169,6 @@
 
 /* Class = "IBUILabel"; text = "Generate New Private Keys"; ObjectID = "oGZ-jk-Y8A"; */
 "oGZ-jk-Y8A.text" = "生成新私钥";
-
-/* Class = "IBUISegmentedControl"; oZb-Bk-280.segmentTitles[0] = "Private Key"; ObjectID = "oZb-Bk-280"; */
-"oZb-Bk-280.segmentTitles[0]" = "热钱包地址";
-
-/* Class = "IBUISegmentedControl"; oZb-Bk-280.segmentTitles[1] = "Watch Only"; ObjectID = "oZb-Bk-280"; */
-"oZb-Bk-280.segmentTitles[1]" = "冷钱包地址";
 
 /* Class = "IBUILabel"; text = "Detail"; ObjectID = "qNL-tR-Rjx"; */
 "qNL-tR-Rjx.text" = "详情";
@@ -219,6 +217,9 @@
 
 /* Class = "IBUILabel"; text = "value"; ObjectID = "zIR-6H-nG4"; */
 "zIR-6H-nG4.text" = "value";
+
+/* Class = "IBUIButton"; normalTitle = "Next Word"; ObjectID = "ifX-vq-zRq"; */
+"ifX-vq-zRq.normalTitle" = "下一单词";
 
 /* Class = "IBUILabel"; text = "Label"; ObjectID = "zLo-PY-kep"; */
 "zLo-PY-kep.text" = "Label";
@@ -270,3 +271,42 @@
 
 /* Class = "IBUILabel"; text = "Signature"; ObjectID = "CJp-QT-laa"; */
 "CJp-QT-laa.text" = "签名";
+
+/* Class = "IBUISegmentedControl"; pIA-ee-e58.segmentTitles[0] = "Private"; ObjectID = "pIA-ee-e58"; */
+"pIA-ee-e58.segmentTitles[0]" = "私钥";
+
+/* Class = "IBUISegmentedControl"; pIA-ee-e58.segmentTitles[1] = "HDM"; ObjectID = "pIA-ee-e58"; */
+"pIA-ee-e58.segmentTitles[1]" = "HDM";
+
+/* Class = "IBUIButton"; normalTitle = "Generate"; ObjectID = "2fh-9Q-YV2"; */
+"2fh-9Q-YV2.normalTitle" = "生成";
+
+/* Class = "IBUILabel"; text = "HDM Cold"; ObjectID = "kSV-dE-lAl"; */
+"kSV-dE-lAl.text" = "HDM 冷";
+
+/* Class = "IBUILabel"; text = "HDM Hot"; ObjectID = "5Da-1U-rSQ"; */
+"5Da-1U-rSQ.text" = "HDM 热";
+
+/* Class = "IBUILabel"; text = "HDM Cold"; ObjectID = "lUJ-Y1-VRb"; */
+"lUJ-Y1-VRb.text" = "HDM 冷";
+
+/* Class = "IBUILabel"; text = "HDM Server"; ObjectID = "lnF-bS-z2z"; */
+"lnF-bS-z2z.text" = "HDM 服务器";
+
+/* Class = "IBUISegmentedControl"; oZb-Bk-280.segmentTitles[0] = "Private Key"; ObjectID = "oZb-Bk-280"; */
+"oZb-Bk-280.segmentTitles[0]" = "私钥";
+
+/* Class = "IBUISegmentedControl"; oZb-Bk-280.segmentTitles[1] = "Watch Only"; ObjectID = "oZb-Bk-280"; */
+"oZb-Bk-280.segmentTitles[1]" = "监控";
+
+/* Class = "IBUISegmentedControl"; oZb-Bk-280.segmentTitles[2] = "HDM"; ObjectID = "oZb-Bk-280"; */
+"oZb-Bk-280.segmentTitles[2]" = "HDM";
+
+/* Class = "IBUILabel"; text = "How many HDM addresses to add?"; ObjectID = "KSX-eO-Uwn"; */
+"KSX-eO-Uwn.text" = "增加多少个 HDM 地址?";
+
+/* Class = "IBUILabel"; text = "Add HDM Address"; ObjectID = "Kfd-Dg-pnE"; */
+"Kfd-Dg-pnE.text" = "增加 HDM 地址";
+
+/* Class = "IBUIButton"; normalTitle = "Generate"; ObjectID = "gHB-fo-cHb"; */
+"gHB-fo-cHb.normalTitle" = "增加";

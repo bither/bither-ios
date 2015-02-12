@@ -26,9 +26,24 @@
 
 @implementation QRCodeTxTransport
 
+-(instancetype)init {
+    self=[super init];
+    if (self){
+        self.hdmIndex=NO_HDM_INDEX;
+    }
+    return self;
+}
+
 +(QRCodeTxTransport *)formatQRCodeTransport:(NSString *)str{
     QRCodeTxTransport * qrCodeTx;
     NSArray * strArray=[BTQRCodeUtil splitQRCode:str];;
+    int hdmIndex = NO_HDM_INDEX;
+    BOOL isHDM = ![QRCodeTxTransport isAddressHex:strArray[0]];
+    if (isHDM) {
+        hdmIndex = (int)[StringUtil hexToLong:strArray[0]];
+        str =[str substringFromIndex:([strArray[0] length]+1)];
+        strArray = [BTQRCodeUtil splitQRCode:str];
+    }
     if(strArray.count < 5){
         return nil;
     }
@@ -42,7 +57,7 @@
             qrCodeTx=[QRCodeTxTransport noChangeFormatQRCodeTransport:strArray];
         }
     }
-    
+    qrCodeTx.hdmIndex = hdmIndex;
     return  qrCodeTx;
 }
 +(BOOL)isAddressHex:(NSString *)str{
@@ -117,6 +132,9 @@
 
 +(NSString *)getPreSignString:(QRCodeTxTransport *)qrCodeTx{
     NSMutableArray * array=[NSMutableArray new];
+    if (qrCodeTx.hdmIndex!=NO_HDM_INDEX) {
+        [array addObject:[StringUtil longToHex:qrCodeTx.hdmIndex]];
+    }
     [array addObject:[[qrCodeTx myAddress] base58checkToHex]];
     if (qrCodeTx.changeAmt!=0) {
         [array addObject:[qrCodeTx.changeAddress base58checkToHex]];

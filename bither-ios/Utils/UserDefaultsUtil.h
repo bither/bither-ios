@@ -51,8 +51,8 @@
 -(void)setSyncBlockOnlyWifi:(BOOL)onlyWifi;
 -(BOOL)getDownloadSpvFinish;
 -(void)setDownloadSpvFinish:(BOOL)finish;
--(BTPasswordSeed *)getPasswordSeed;
--(void)setPasswordSeed:(BTPasswordSeed *)passwordSeed;
+-(BTPasswordSeed *)getPasswordSeedForOldVersion;
+//-(void)setPasswordSeed:(BTPasswordSeed *)passwordSeed;
 
 -(TransactionFeeMode) getTransactionFeeMode;
 -(void)setTransactionFeeMode :(TransactionFeeMode ) feeMode;
@@ -68,6 +68,7 @@
 -(BOOL)checkPinCode:(NSString*)code;
 
 -(BOOL)localeIsChina;
+-(BOOL)localeIsZHHant;
 
 -(KeychainMode) getKeychainMode;
 -(void)setKeychainMode :(KeychainMode ) keychainMode;

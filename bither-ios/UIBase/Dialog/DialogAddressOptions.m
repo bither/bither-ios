@@ -59,7 +59,7 @@
     seperator.backgroundColor = [UIColor colorWithWhite:1 alpha:0.5];
     [self addSubview:seperator];
     
-    if([UserDefaultsUtil instance].localeIsChina){
+    if([UserDefaultsUtil instance].localeIsChina||[[UserDefaultsUtil instance] localeIsZHHant]){
         bottom += 1;
         bottom = [self createButtonWithText:NSLocalizedString(@"address_option_view_on_blockmeta", nil) top:bottom action:@selector(viewOnBlockMetaPressed:)];
         UIView *seperator = [[UIView alloc]initWithFrame:CGRectMake(0, bottom, self.frame.size.width, 1)];

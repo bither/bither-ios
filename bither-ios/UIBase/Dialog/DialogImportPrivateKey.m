@@ -21,6 +21,7 @@
 #import "StringUtil.h"
 #import "UIBaseUtil.h"
 #import "NSString+Base58.h"
+#import "ScanQrCodeViewController.h"
 #import <AudioToolbox/AudioToolbox.h>
 
 #define kOuterPadding (1)
@@ -46,7 +47,7 @@
 
 #define kCheckingFontSize (16)
 
-@interface DialogImportPrivateKey()<UITextFieldDelegate, KeyboardControllerDelegate>
+@interface DialogImportPrivateKey()<UITextFieldDelegate, KeyboardControllerDelegate, ScanQrCodeDelegate>
 @property UIView *vChecking;
 @property UIView *vContent;
 @property UILabel *lblSubTitle;
@@ -167,6 +168,16 @@
     CGFloat buttonTop = CGRectGetMaxY(self.tfKey.frame) + kInnerMargin;
     [self.vContent addSubview:self.tfKey];
 
+    if(self.importPrivateKeyType == PrivateText){
+        UIButton *btnScan = [[UIButton alloc] initWithFrame:CGRectMake(kWidth - kOuterPadding - kTextFieldHeight, self.tfKey.frame.origin.y, kTextFieldHeight, kTextFieldHeight)];
+        [btnScan setImage:[UIImage imageNamed:@"scan_button_normal"] forState:UIControlStateNormal];
+        [btnScan addTarget:self action:@selector(scanPrivateText:) forControlEvents:UIControlEventTouchUpInside];
+        [self.vContent addSubview:btnScan];
+        CGRect f = self.tfKey.frame;
+        f.size.width -= (f.size.height + kOuterPadding);
+        self.tfKey.frame = f;
+    }
+
     self.btnCancel = [[UIButton alloc]initWithFrame:CGRectMake(kOuterPadding, buttonTop, (kWidth - kOuterPadding * 2 - kInnerMargin)/2, kButtonHeight)];
     [self.btnCancel setBackgroundImage:[UIImage imageNamed:@"dialog_btn_bg_normal"] forState:UIControlStateNormal];
     self.btnCancel.titleLabel.font = [UIFont systemFontOfSize:kButtonFontSize];
@@ -245,9 +256,28 @@
     tf.rightViewMode = UITextFieldViewModeAlways;
     tf.enablesReturnKeyAutomatically = YES;
     tf.keyboardType = UIKeyboardTypeASCIICapable;
-
 }
 
+-(void)scanPrivateText:(id)sender{
+    ScanQrCodeViewController *scan = [[ScanQrCodeViewController alloc] initWithDelegate:self];
+    [self.window.topViewController presentViewController:scan animated:YES completion:nil];
+}
+
+-(void)handleResult:(NSString*)result byReader:(ScanQrCodeViewController*)reader{
+    [reader dismissViewControllerAnimated:YES completion:^{
+        if(result.isValidBitcoinPrivateKey){
+            self.tfKey.text = result;
+        }
+        [self confirmPressed:self.btnConfirm];
+        if(!result.isValidBitcoinPrivateKey){
+            [self.tfKey becomeFirstResponder];
+        }
+    }];
+}
+
+-(void)handleScanCancelByReader:(ScanQrCodeViewController *)reader {
+    [self.tfKey becomeFirstResponder];
+}
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
     [self dismissError];

@@ -22,4 +22,5 @@
 @interface DialogWithArrow : DialogCentered
 -(void)showFromView:(UIView *)view;
 -(void)showFromView:(UIView *)view completion:(void (^)())completion;
+-(BOOL)arrowAlwaysOnTop;
 @end

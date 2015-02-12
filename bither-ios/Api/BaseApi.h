@@ -32,6 +32,9 @@
 #define BITHER_UPLOAD_AVATAR @"api/v1/avatar"
 #define BITHER_DOWNLOAD_AVATAR @"api/v1/avatar"
 
+#define BC_ADDRESS_TX_URL @"api/v2/address/%@/transaction/%d"
+#define BC_ADDRESS_STAT_URL @"api/v2/address/%@/transaction/stat"
+
 
 
 
@@ -39,9 +42,12 @@
 
 #pragma mark-get
 -(void)get:(NSString *)url withParams:(NSDictionary *) params networkType:(BitherNetworkType) networkType completed:(CompletedOperation) completedOperationParam andErrorCallback:(ErrorHandler) errorCallback;
+-(void)get:(NSString *)url withParams:(NSDictionary *) params networkType:(BitherNetworkType) networkType completed:(CompletedOperation) completedOperationParam andErrorCallback:(ErrorHandler) errorCallback ssl:(BOOL)ssl;
 
 
 #pragma mark-post
 -(void)post:(NSString *)url withParams:(NSDictionary *) params networkType:(BitherNetworkType) networkType completed:(CompletedOperation) completedOperationParam andErrorCallBack:(ErrorHandler) errorCallback;
+-(void)post:(NSString *)url withParams:(NSDictionary *) params networkType:(BitherNetworkType) networkType completed:(CompletedOperation) completedOperationParam andErrorCallBack:(ErrorHandler) errorCallback ssl:(BOOL)ssl;
+
 
 @end

@@ -17,7 +17,20 @@
 //  limitations under the License.
 
 #import <UIKit/UIKit.h>
+#import "UEntropyCollector.h"
+@class UEntropyViewController;
+
+@protocol UEntropyViewControllerDelegate
+-(void)onUEntropyGeneratingWithController:(UEntropyViewController*)controller collector:(UEntropyCollector*)collector andPassword:(NSString*)password;
+
+@optional
+-(void)successFinish:(UEntropyViewController*)controller;
+@end
 
 @interface UEntropyViewController : UIViewController
--(instancetype)initWithCount:(NSUInteger)count password:(NSString*)password;
+-(instancetype)initWithPassword:(NSString*)password andDelegate:(NSObject<UEntropyViewControllerDelegate>*)delegate;
+-(void)onFailed;
+-(void)onSuccess;
+-(void)onProgress:(float)progress;
+-(BOOL)testShouldCancel;
 @end

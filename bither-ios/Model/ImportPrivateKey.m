@@ -16,6 +16,7 @@
 //  See the License for the specific language governing permissions and
 //  limitations under the License.
 
+#import <Bitheri/BTAddressProvider.h>
 #import "ImportPrivateKey.h"
 #import "BTKey+Bitcoinj.h"
 #import "DialogProgress.h"
@@ -65,67 +66,26 @@
                 return;
             }
             if ([self checkKey:key]) {
-                [self checkSpecialAddress:key callback:^{
-                    [self addKey:key];
-                }];
-                
+                [self addKey:key];
             }
         });
         
     }];
     
 }
--(void)checkSpecialAddress:(BTKey *)key callback:(VoidBlock) callback{
-    if ([[BTSettings instance] getAppMode]==COLD) {
-        if (callback) {
-            callback();
-        }
-    }else{
-        NSMutableArray * array=[NSMutableArray new];
-        [array addObject:key.address];
-        [TransactionsUtil checkAddress:array callback:^(id response) {
-            dispatch_async(dispatch_get_main_queue(), ^{
-                AddressType addressType=(AddressType)[response integerValue];
-                if (addressType==AddressNormal) {
-                    if (callback) {
-                        callback();
-                    }
-                }else if(addressType==AddressTxTooMuch){
-                    [self exit];
-                    [self showMsg:NSLocalizedString(@"Cannot import private key with large amount of transactions.", nil)];
-                    
-                    
-                }else{
-                    [self exit];
-                    [self showMsg:NSLocalizedString(@"Cannot import private key with special transactions.", nil)];
-                    
-                }
-               
-            });
-        }andErrorCallback:^(NSError *error) {
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [self exit];
-                [self showMsg:NSLocalizedString(@"Network failure.", nil)];
-            });
-        }];
-        
-    }
-}
+
 -(BOOL)checkKey:(BTKey *)key {
     if (self.importPrivateKeyType==BitherQrcode) {
-        BTPasswordSeed * passwrodSeed=[[UserDefaultsUtil instance] getPasswordSeed];
-        if (passwrodSeed) {
-            BOOL checkPassword=[passwrodSeed checkPassword:self.passwrod];
+        BTPasswordSeed *passwordSeed = [BTPasswordSeed getPasswordSeed];
+        if (passwordSeed) {
+            BOOL checkPassword=[passwordSeed checkPassword:self.passwrod];
             if (!checkPassword) {
                 dispatch_async(dispatch_get_main_queue(), ^{
                     [self exit];
                     [self showMsg:NSLocalizedString(@"Password of the private key to import is different from ours. Import failed.", nil)];
-                   
-                    
                 });
                 return NO;
             }
-            
         }
     }
     BTAddress *address=[[BTAddress alloc] initWithKey:key encryptPrivKey:nil isXRandom:key.isFromXRandom];

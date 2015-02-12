@@ -40,7 +40,10 @@
     }else{
         self.lbPrice.text=@"--";
     }
+}
 
+-(UIEdgeInsets)layoutMargins{
+    return UIEdgeInsetsZero;
 }
 
 @end
