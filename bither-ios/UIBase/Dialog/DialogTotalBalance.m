@@ -107,7 +107,7 @@
         lbl.font = [UIFont systemFontOfSize:kBottomLabelFontSize];
         lbl.textColor = [UIColor whiteColor];
         lbl.textAlignment = NSTextAlignmentRight;
-        lbl.attributedText = [UnitUtil stringWithSymbolForAmount:hot withFontSize:kBottomLabelFontSize color:lbl.textColor];
+        lbl.attributedText = [UnitUtil stringWithSymbolForAmount:hdm withFontSize:kBottomLabelFontSize color:lbl.textColor];
         [self addSubview:lbl];
 
         bottom = CGRectGetMaxY(lbl.frame);

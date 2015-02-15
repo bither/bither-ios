@@ -243,7 +243,7 @@ typedef enum {
             __block NSString* pub =[[BTAddressManager instance].hdmKeychain getFullEncryptPrivKeyWithHDMFlag];
             dispatch_async(dispatch_get_main_queue(), ^{
                 [d dismissWithCompletion:^{
-                    DialogBlackQrCode* d = [[DialogBlackQrCode alloc]initWithContent:pub andTitle:NSLocalizedString(@"hdm_cold_seed_qr_code", nil)];
+                    DialogBlackQrCode* d = [[DialogBlackQrCode alloc]initWithContent:pub andTitle:NSLocalizedString(@"hdm_hot_seed_qr_code", nil)];
                     [d showInWindow:self.view.window];
                 }];
             });
