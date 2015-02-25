@@ -5,5 +5,8 @@
             "title": "Optional title"
         },
         "category": "myCategory"
-    }
+    },
+    
+    "address": "1Nc9oEokW91HUohUpHt4Y7DisQXLuEBi77",
+    "diff": 1000
 }

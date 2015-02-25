@@ -1,6 +1,6 @@
 //
-//  InterfaceController.h
-//  bither-ios WatchKit Extension
+//  WatchStringUtil.h
+//  bither-ios
 //
 //  Copyright 2014 http://Bither.net
 //
@@ -19,9 +19,8 @@
 //  Created by songchenwen on 2015/2/25.
 //
 
-#import <WatchKit/WatchKit.h>
 #import <Foundation/Foundation.h>
 
-@interface InterfaceController : WKInterfaceController
-
+@interface WatchStringUtil : NSObject
++(NSString *)formatAddress:(NSString *)address groupSize:(NSInteger)groupSize  lineSize:(NSInteger) lineSize;
 @end

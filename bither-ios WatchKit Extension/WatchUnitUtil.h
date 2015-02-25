@@ -1,6 +1,6 @@
 //
-//  InterfaceController.h
-//  bither-ios WatchKit Extension
+//  WatchUnitUtil.h
+//  bither-ios
 //
 //  Copyright 2014 http://Bither.net
 //
@@ -19,9 +19,10 @@
 //  Created by songchenwen on 2015/2/25.
 //
 
-#import <WatchKit/WatchKit.h>
 #import <Foundation/Foundation.h>
 
-@interface InterfaceController : WKInterfaceController
+@interface WatchUnitUtil : NSObject
+
++ (NSString *)stringForAmount:(int64_t)amount;
 
 @end
