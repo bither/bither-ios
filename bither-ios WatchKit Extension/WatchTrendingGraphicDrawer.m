@@ -48,7 +48,30 @@
 }
 
 -(UIImage*)animatingImageFromData:(WatchTrendingGraphicData*)from toData:(WatchTrendingGraphicData*)to{
-    return nil;
+    NSMutableArray* images = [NSMutableArray new];
+    CGContextRef context = [self beginDrawing];
+    
+    for(NSUInteger i = 0; i < kTrendingAnimationFrameCount; i++){
+        double progress = (double)(i + 1) / (double)kTrendingAnimationFrameCount;
+        [self drawRates:[self rateFrom:from.rates to:to.rates progress:progress] in: context];
+        [images addObject:UIGraphicsGetImageFromCurrentImageContext()];
+        [self clearContext:context];
+    }
+    
+    [self endDrawing];
+    
+    return [UIImage animatedImageWithImages:images duration:kTrendingAnimationDuration];
+}
+
+-(NSArray*)rateFrom:(NSArray*)from to:(NSArray*)to progress:(double)progress{
+    NSUInteger count = MIN(from.count, to.count);
+    NSMutableArray* r = [NSMutableArray new];
+    for(NSUInteger i = 0; i < count; i++){
+        double start = ((NSNumber*)from[i]).doubleValue;
+        double end = ((NSNumber*)to[i]).doubleValue;
+        [r addObject:@(progress * (end - start) + start)];
+    }
+    return r;
 }
 
 -(void)drawRates:(NSArray*)rates in:(CGContextRef) context{

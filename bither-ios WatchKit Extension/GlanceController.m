@@ -60,14 +60,14 @@
 -(void)refreshTrending{
     [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(refreshTrending) object:nil];
     [WatchTrendingGraphicData getTrendingGraphicData:market.marketType callback:^(WatchTrendingGraphicData *data) {
-        [self.ivTrending setImage:[tDrawer imageForData:data]];
+        [self.ivTrending setImage:[tDrawer animatingImageFromData:[WatchTrendingGraphicData getEmptyData] toData:data]];
+        [self.ivTrending startAnimatingWithImagesInRange:NSMakeRange(0, kTrendingAnimationFrameCount) duration:kTrendingAnimationDuration repeatCount:1];
     } andErrorCallback:^(NSError *error) {
         [self performSelector:@selector(refreshTrending) withObject:nil afterDelay:5];
     }];
 }
 
 - (void)didDeactivate {
-    // This method is called when watch view controller is no longer visible
     [super didDeactivate];
 }
 

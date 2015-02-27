@@ -33,7 +33,7 @@
                                     <fontDescription key="font" style="UICTFontTextStyleCaption2"/>
                                 </label>
                                 <label alignment="right" text="￥1545.01" textAlignment="right" id="rZc-kv-Uj0">
-                                    <fontDescription key="font" style="UICTFontTextStyleCaption1"/>
+                                    <fontDescription key="font" type="boldSystem" pointSize="20"/>
                                 </label>
                                 <group width="1" height="0.59999999999999998" alignment="left" id="HmR-0B-Mjo">
                                     <items>

@@ -23,6 +23,9 @@
 #import "WatchTrendingGraphicData.h"
 #import <WatchKit/WatchKit.h>
 
+#define kTrendingAnimationFrameCount (20)
+#define kTrendingAnimationDuration (0.3)
+
 @interface WatchTrendingGraphicDrawer : NSObject
 -(instancetype)initWithSize:(CGSize)size;
 -(UIImage*)imageForData:(WatchTrendingGraphicData*)data;
