@@ -24,6 +24,8 @@
 		0A47498F1A9D7F0B003684E2 /* bither-ios WatchKit Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 0A47496F1A9D7F0B003684E2 /* bither-ios WatchKit Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		0A515F781A36A2C0008292AF /* RawDataView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A515F771A36A2C0008292AF /* RawDataView.m */; };
 		0A515F7B1A36CAE3008292AF /* RawPrivateKeyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A515F7A1A36CAE3008292AF /* RawPrivateKeyViewController.m */; };
+		0A52BDA51A9FFC6400BC8C3E /* GroupFileUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A52BDA41A9FFC6400BC8C3E /* GroupFileUtil.m */; };
+		0A52BDA61A9FFEB800BC8C3E /* GroupFileUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A52BDA41A9FFC6400BC8C3E /* GroupFileUtil.m */; };
 		0A6C0F5C1A4D548B00544B33 /* MessageSigningSetting.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A6C0F5B1A4D548B00544B33 /* MessageSigningSetting.m */; };
 		0A6C0F5F1A4D5E1900544B33 /* DialogSignMessageSelectAddress.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A6C0F5E1A4D5E1900544B33 /* DialogSignMessageSelectAddress.m */; };
 		0A93B6011A4A66080081D74D /* DialogSignMessageOutput.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A93B6001A4A66080081D74D /* DialogSignMessageOutput.m */; };
@@ -330,6 +332,10 @@
 		0A515F771A36A2C0008292AF /* RawDataView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RawDataView.m; sourceTree = "<group>"; };
 		0A515F791A36CAE3008292AF /* RawPrivateKeyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RawPrivateKeyViewController.h; sourceTree = "<group>"; };
 		0A515F7A1A36CAE3008292AF /* RawPrivateKeyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RawPrivateKeyViewController.m; sourceTree = "<group>"; };
+		0A52BDA11A9FFBA400BC8C3E /* bither-ios.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "bither-ios.entitlements"; sourceTree = "<group>"; };
+		0A52BDA21A9FFC2B00BC8C3E /* bither-ios WatchKit Extension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "bither-ios WatchKit Extension.entitlements"; sourceTree = "<group>"; };
+		0A52BDA31A9FFC6400BC8C3E /* GroupFileUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GroupFileUtil.h; sourceTree = "<group>"; };
+		0A52BDA41A9FFC6400BC8C3E /* GroupFileUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GroupFileUtil.m; sourceTree = "<group>"; };
 		0A6C0F5A1A4D548B00544B33 /* MessageSigningSetting.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageSigningSetting.h; sourceTree = "<group>"; };
 		0A6C0F5B1A4D548B00544B33 /* MessageSigningSetting.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageSigningSetting.m; sourceTree = "<group>"; };
 		0A6C0F5D1A4D5E1900544B33 /* DialogSignMessageSelectAddress.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DialogSignMessageSelectAddress.h; sourceTree = "<group>"; };
@@ -821,6 +827,7 @@
 		0A4749701A9D7F0B003684E2 /* bither-ios WatchKit Extension */ = {
 			isa = PBXGroup;
 			children = (
+				0A52BDA21A9FFC2B00BC8C3E /* bither-ios WatchKit Extension.entitlements */,
 				0A4749741A9D7F0B003684E2 /* InterfaceController.h */,
 				0A4749751A9D7F0B003684E2 /* InterfaceController.m */,
 				0A4749771A9D7F0B003684E2 /* NotificationController.h */,
@@ -1034,6 +1041,8 @@
 				D61D0DB47AB1A1EA42112C56 /* PasswordGetter.m */,
 				DC0CC84409CD956F1FA008BF /* HDMKeychainRecoverUtil.m */,
 				DC03155DE24560F766E286C4 /* HDMKeychainRecoverUtil.h */,
+				0A52BDA31A9FFC6400BC8C3E /* GroupFileUtil.h */,
+				0A52BDA41A9FFC6400BC8C3E /* GroupFileUtil.m */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -1140,6 +1149,7 @@
 		42D9B76B193D6B5B00C85B89 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				0A52BDA11A9FFBA400BC8C3E /* bither-ios.entitlements */,
 				42D9B76C193D6B5B00C85B89 /* bither-ios-Info.plist */,
 				42D9B76D193D6B5B00C85B89 /* InfoPlist.strings */,
 				42D9B770193D6B5B00C85B89 /* main.m */,
@@ -1642,12 +1652,22 @@
 					0A47496E1A9D7F0B003684E2 = {
 						CreatedOnToolsVersion = 6.3;
 						DevelopmentTeam = 6887Q2ZK67;
+						SystemCapabilities = {
+							com.apple.ApplicationGroups.iOS = {
+								enabled = 1;
+							};
+						};
 					};
 					0A4749801A9D7F0B003684E2 = {
 						CreatedOnToolsVersion = 6.3;
 					};
 					42D9B760193D6B5B00C85B89 = {
 						DevelopmentTeam = 6887Q2ZK67;
+						SystemCapabilities = {
+							com.apple.ApplicationGroups.iOS = {
+								enabled = 1;
+							};
+						};
 					};
 					42D9B77B193D6B5B00C85B89 = {
 						TestTargetID = 42D9B760193D6B5B00C85B89;
@@ -1777,6 +1797,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0A4182AE1A9DBB8600576A12 /* WatchStringUtil.m in Sources */,
+				0A52BDA61A9FFEB800BC8C3E /* GroupFileUtil.m in Sources */,
 				0A4182A31A9DB70500576A12 /* WatchUnitUtil.m in Sources */,
 				0A4749791A9D7F0B003684E2 /* NotificationController.m in Sources */,
 				0A4749761A9D7F0B003684E2 /* InterfaceController.m in Sources */,
@@ -1797,6 +1818,7 @@
 				421B037C19495315003A45F1 /* TabButton.m in Sources */,
 				AC5A916119ECDB5D00FFDB13 /* UploadAndDowloadFileFactory.m in Sources */,
 				AC1454A51A80D04D00E851B4 /* DialogOperationWorld.m in Sources */,
+				0A52BDA51A9FFC6400BC8C3E /* GroupFileUtil.m in Sources */,
 				ACE3765F1A231C9200F66321 /* DialogKeychainBackupDiff.m in Sources */,
 				0AB8BCA51A7F445D003C07D8 /* DialogHDMKeychainAddHot.m in Sources */,
 				ACB9B9C3195AD1CC00019216 /* AddressDetailViewController.m in Sources */,
@@ -2083,6 +2105,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CODE_SIGN_ENTITLEMENTS = "bither-ios WatchKit Extension/bither-ios WatchKit Extension.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEBUG_INFORMATION_FORMAT = dwarf;
@@ -2097,6 +2120,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				MTL_ENABLE_DEBUG_INFO = YES;
 				PRODUCT_NAME = "${TARGET_NAME}";
+				PROVISIONING_PROFILE = "";
 				SKIP_INSTALL = YES;
 			};
 			name = Debug;
@@ -2105,6 +2129,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CODE_SIGN_ENTITLEMENTS = "bither-ios WatchKit Extension/bither-ios WatchKit Extension.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
@@ -2116,6 +2141,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_NAME = "${TARGET_NAME}";
+				PROVISIONING_PROFILE = "";
 				SKIP_INSTALL = YES;
 			};
 			name = Release;
@@ -2241,6 +2267,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_ENTITLEMENTS = "bither-ios/bither-ios.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -2265,6 +2292,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_ENTITLEMENTS = "bither-ios/bither-ios.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -2276,7 +2304,7 @@
 				INFOPLIST_FILE = "bither-ios/bither-ios-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "1ef11b8b-f66f-4938-a14b-6a1367ceaad0";
+				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;
 				USER_HEADER_SEARCH_PATHS = "${SRCROOT}/**";
 				WRAPPER_EXTENSION = app;
@@ -2343,6 +2371,7 @@
 				0A4749931A9D7F0B003684E2 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		0A4749951A9D7F0B003684E2 /* Build configuration list for PBXNativeTarget "bither-ios WatchKit Extension" */ = {
 			isa = XCConfigurationList;
@@ -2351,6 +2380,7 @@
 				0A4749911A9D7F0B003684E2 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		42D9B75C193D6B5B00C85B89 /* Build configuration list for PBXProject "bither-ios" */ = {
 			isa = XCConfigurationList;

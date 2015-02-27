@@ -24,9 +24,10 @@
 @implementation WatchUnitUtil
 
 + (NSString *)stringForAmount:(int64_t)amount{
+    GroupBitcoinUnit unit = [GroupFileUtil defaultBitcoinUnit];
     NSString *sign = amount >= 0 ? @"" : @"-";
     uint64_t absValue = amount >= 0 ? amount : 0 - amount;
-    NSUInteger unitSatoshis = 100000000;
+    NSUInteger unitSatoshis = [WatchUnitUtil satoshisForUnit:unit];
     uint64_t coins = absValue / unitSatoshis;
     uint64_t satoshis = absValue % unitSatoshis;
     
@@ -40,6 +41,28 @@
     
     NSString* point = strSatoshis.length > 0 ? @"." : @"";
     
-    return [NSString stringWithFormat:@"%@%llu%@%@BTC", sign, coins, point, strSatoshis];
+    return [NSString stringWithFormat:@"%@%llu%@%@%@", sign, coins, point, strSatoshis, [WatchUnitUtil unitName:unit]];
 }
+
+
++(NSString*)unitName:(GroupBitcoinUnit)unit{
+    switch (unit) {
+        case UnitbitsG:
+            return @"bits";
+        case UnitBTCG:
+        default:
+            return @"BTC";
+    }
+}
+
++(NSUInteger)satoshisForUnit:(GroupBitcoinUnit)unit{
+    switch (unit) {
+        case UnitbitsG:
+            return 100;
+        case UnitBTCG:
+        default:
+            return 100000000;
+    }
+}
+
 @end

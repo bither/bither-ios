@@ -20,6 +20,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "GroupFileUtil.h"
 
 @interface WatchUnitUtil : NSObject
 

@@ -18,6 +18,7 @@
 #import "UserDefaultsUtil.h"
 #import "NSData+Hash.h"
 #import "StringUtil.h"
+#import "GroupFileUtil.h"
 
 #define PREFS_KEY_LAST_VERSION @"last_version"
 #define USER_DEFAULT_LAST_VER @"last_ver"
@@ -223,6 +224,7 @@ NSUserDefaults *userDefaults;
 -(void)setBitcoinUnit:(BitcoinUnit)bitcoinUnit{
     [userDefaults setInteger:bitcoinUnit forKey:BITCOIN_UNIT];
     [userDefaults synchronize];
+    [GroupFileUtil setDefaultBitcoinUnit:(GroupBitcoinUnit)bitcoinUnit];
 }
 
 -(BitcoinUnit)getBitcoinUnit{
