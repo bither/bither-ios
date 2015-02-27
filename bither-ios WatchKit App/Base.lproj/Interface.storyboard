@@ -21,10 +21,73 @@
                     <connections>
                         <outlet property="gContainer" destination="ysO-G9-RwS" id="3rb-mn-gRz"/>
                         <outlet property="lblTotal" destination="Je9-T4-j1G" id="KWW-zI-5uQ"/>
+                        <segue destination="58z-ni-tOQ" kind="relationship" relationship="nextPage" id="LMa-ok-IlW"/>
                     </connections>
                 </controller>
             </objects>
             <point key="canvasLocation" x="235" y="347"/>
+        </scene>
+        <!--Market Interface Controller-->
+        <scene sceneID="2hb-rI-xfr">
+            <objects>
+                <controller id="58z-ni-tOQ" customClass="MarketInterfaceController">
+                    <items>
+                        <group width="1" height="1" alignment="center" verticalAlignment="center" layout="vertical" id="659-ka-I7p">
+                            <items>
+                                <label alignment="left" text="OKCoin.CN" id="H6F-TW-cgD">
+                                    <fontDescription key="font" style="UICTFontTextStyleCaption2"/>
+                                </label>
+                                <label alignment="right" text="￥1545.01" textAlignment="right" minimumScaleFactor="0.80000000000000004" id="4ZY-6F-Lnf">
+                                    <fontDescription key="font" type="system" weight="heavy" pointSize="25"/>
+                                </label>
+                                <imageView width="0.90000000000000002" height="0.35999999999999999" alignment="center" id="IDN-8h-XaF">
+                                    <variation key="device=watch38mm" height="0.29999999999999999"/>
+                                </imageView>
+                                <group width="1" alignment="left" id="tpf-RW-COw">
+                                    <items>
+                                        <group height="1" alignment="left" layout="vertical" id="Ly4-1t-pn8">
+                                            <items>
+                                                <label alignment="left" text="Label" minimumScaleFactor="0.50000000000000011" id="oLV-aM-wwV">
+                                                    <fontDescription key="font" type="system" weight="light" pointSize="11"/>
+                                                </label>
+                                                <label alignment="left" text="Label" minimumScaleFactor="0.50000000000000011" id="mOW-Ci-NTh">
+                                                    <fontDescription key="font" type="system" weight="light" pointSize="11"/>
+                                                </label>
+                                            </items>
+                                        </group>
+                                        <separator alignment="left" id="2vd-LV-pWp">
+                                            <color key="color" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </separator>
+                                        <group height="1" alignment="right" layout="vertical" id="QEh-TT-FYJ">
+                                            <items>
+                                                <label alignment="right" text="Label" textAlignment="right" minimumScaleFactor="0.50000000000000011" id="fG5-Y8-jhe">
+                                                    <fontDescription key="font" type="system" weight="light" pointSize="11"/>
+                                                </label>
+                                                <label alignment="right" text="Label" textAlignment="right" minimumScaleFactor="0.50000000000000011" id="Wma-yP-sVJ">
+                                                    <fontDescription key="font" type="system" weight="light" pointSize="11"/>
+                                                </label>
+                                            </items>
+                                        </group>
+                                    </items>
+                                    <edgeInsets key="margins" left="0.0" right="0.0" top="7" bottom="0.0"/>
+                                </group>
+                            </items>
+                            <edgeInsets key="margins" left="8" right="8" top="5" bottom="5"/>
+                        </group>
+                    </items>
+                    <connections>
+                        <outlet property="gContainer" destination="659-ka-I7p" id="EmZ-BP-0oA"/>
+                        <outlet property="ivTrending" destination="IDN-8h-XaF" id="3f4-39-8FC"/>
+                        <outlet property="lblBuy" destination="Wma-yP-sVJ" id="U2E-ow-QIq"/>
+                        <outlet property="lblHigh" destination="oLV-aM-wwV" id="UWm-2d-Le4"/>
+                        <outlet property="lblLow" destination="mOW-Ci-NTh" id="8w0-GY-fdD"/>
+                        <outlet property="lblName" destination="H6F-TW-cgD" id="xC9-dH-VXQ"/>
+                        <outlet property="lblPrice" destination="4ZY-6F-Lnf" id="SSH-xG-ack"/>
+                        <outlet property="lblSell" destination="fG5-Y8-jhe" id="jVH-PV-Eiz"/>
+                    </connections>
+                </controller>
+            </objects>
+            <point key="canvasLocation" x="418" y="347"/>
         </scene>
         <!--Glance Interface Controller-->
         <scene sceneID="BOz-TT-tkC">
@@ -47,7 +110,7 @@
                                     <fontDescription key="font" style="UICTFontTextStyleCaption2"/>
                                 </label>
                                 <label alignment="right" text="￥1545.01" textAlignment="right" id="rZc-kv-Uj0">
-                                    <fontDescription key="font" type="boldSystem" pointSize="20"/>
+                                    <fontDescription key="font" type="system" weight="heavy" pointSize="20"/>
                                 </label>
                                 <group width="1" height="0.59999999999999998" alignment="left" id="HmR-0B-Mjo">
                                     <items>
