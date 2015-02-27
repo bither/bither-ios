@@ -56,7 +56,7 @@
     [GroupFileUtil writeFile:[GroupFileUtil defaultBitcoinUnitFile] content:[NSString stringWithFormat:@"%d", unit]];
 }
 
-+(void)setTotalBalanceWithHDM:(long long)hdm hot:(long long)hot andCold:(long long)cold{
++(void)setTotalBalanceWithHDM:(int64_t)hdm hot:(int64_t)hot andCold:(int64_t)cold{
     NSDictionary* dict = @{@"hdm": @(hdm), @"hot": @(hot), @"cold": @(cold)};
     
     NSError *error = nil;

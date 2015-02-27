@@ -91,6 +91,7 @@ NSUserDefaults *userDefaults;
 -(void)setExchangeType:(Currency) exchangeType{
     [userDefaults setInteger:exchangeType forKey:DEFAULT_EXCHANGE_RATE];
     [userDefaults synchronize];
+    [GroupFileUtil setDefaultCurrency:(GroupCurrency)exchangeType];
 }
 -(Currency)getDefaultCurrency {
     NSInteger type=[self  getExchangeType];

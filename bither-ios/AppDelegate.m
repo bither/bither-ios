@@ -36,6 +36,7 @@
 
 #import "DialogProgress.h"
 #import "SystemUtil.h"
+#import "GroupFileUtil.h"
 
 @interface AppDelegate()
 @end
@@ -77,7 +78,9 @@ static StatusBarNotificationWindow* notificationWindow;
     }else{
         [self loadViewController];
     }
-
+    
+    [self updateGroupBalance];
+    
     //   [[BTSettings instance] openBitheriConsole];
 
     return YES;
@@ -116,6 +119,7 @@ static StatusBarNotificationWindow* notificationWindow;
 -(void)notification:(NSNotification *)notification{
     NSArray * array=[notification object];
     [NotificationUtil notificationTx:array];
+    [self updateGroupBalance];
 }
 
 - (void)applicationDidEnterBackground:(UIApplication *)application
@@ -255,6 +259,23 @@ static StatusBarNotificationWindow* notificationWindow;
 
 +(StatusBarNotificationWindow*)notificationWindow{
     return notificationWindow;
+}
+
+-(void)updateGroupBalance{
+    int64_t hdm = 0;
+    int64_t hot = 0;
+    int64_t cold = 0;
+    NSArray* allAddresses = [BTAddressManager instance].allAddresses;
+    for(BTAddress* a in allAddresses){
+        if(a.isHDM){
+            hdm += a.balance;
+        }else if(a.hasPrivKey){
+            hot+= a.balance;
+        }else{
+            cold+= a.balance;
+        }
+    }
+    [GroupFileUtil setTotalBalanceWithHDM:hdm hot:hot andCold:cold];
 }
 
 -(void)callInHot:(VoidBlock)voidBlock{
