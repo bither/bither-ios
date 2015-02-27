@@ -40,10 +40,10 @@
     return self.low* [ExchangeUtil getRateForMarket:self.marketType];
 }
 -(double)getDefaultExchangePrice{
-    return self.pNew* [ExchangeUtil getRateForMarket:self.marketType];
+    return self.pNew * [ExchangeUtil getRateForMarket:self.marketType];
 }
 -(double)getDefaultExchangeSell{
-    return self.sell* [ExchangeUtil getRateForMarket:self.marketType];
+    return self.sell * [ExchangeUtil getRateForMarket:self.marketType];
 }
 +(Ticker *)formatTicker:(NSDictionary *)dict market:(MarketType) marketType{
     Ticker * ticker=[[Ticker alloc] init];

@@ -17,10 +17,40 @@
             <objects>
                 <glanceController spacing="0.0" id="0uZ-2p-rRc" customClass="GlanceController">
                     <items>
-                        <group alignment="left" id="t8f-Gd-c4y"/>
-                        <group alignment="left" id="uCw-4Q-Ouw"/>
+                        <group alignment="left" layout="vertical" id="t8f-Gd-c4y">
+                            <items>
+                                <label alignment="left" text="Balance:" textAlignment="left" id="XPt-1T-tH8">
+                                    <fontDescription key="font" style="UICTFontTextStyleFootnote"/>
+                                </label>
+                                <label width="136" alignment="center" verticalAlignment="center" text="0.0bits" textAlignment="right" id="7Ix-BB-mEU">
+                                    <fontDescription key="font" style="UICTFontTextStyleCaption2"/>
+                                </label>
+                            </items>
+                        </group>
+                        <group alignment="left" layout="vertical" id="uCw-4Q-Ouw">
+                            <items>
+                                <label alignment="left" text="OKCoin.CN" textAlignment="left" id="8eu-gz-MK9">
+                                    <fontDescription key="font" style="UICTFontTextStyleCaption2"/>
+                                </label>
+                                <label alignment="right" text="￥1545.01" textAlignment="right" id="rZc-kv-Uj0">
+                                    <fontDescription key="font" style="UICTFontTextStyleCaption1"/>
+                                </label>
+                                <group width="1" height="0.59999999999999998" alignment="left" id="HmR-0B-Mjo">
+                                    <items>
+                                        <imageView width="0.90000000000000002" height="1" alignment="center" verticalAlignment="center" id="x2H-Cr-zl8"/>
+                                    </items>
+                                </group>
+                            </items>
+                        </group>
                     </items>
                     <edgeInsets key="margins" left="0.0" right="0.0" top="0.0" bottom="14"/>
+                    <connections>
+                        <outlet property="gMarket" destination="uCw-4Q-Ouw" id="Vpf-Jd-6eW"/>
+                        <outlet property="ivTrending" destination="x2H-Cr-zl8" id="T14-7z-Y9B"/>
+                        <outlet property="lblBalance" destination="7Ix-BB-mEU" id="hZA-m4-P4S"/>
+                        <outlet property="lblMarketName" destination="8eu-gz-MK9" id="t2w-gr-upc"/>
+                        <outlet property="lblPrice" destination="rZc-kv-Uj0" id="C6K-wC-L2g"/>
+                    </connections>
                 </glanceController>
             </objects>
             <point key="canvasLocation" x="235" y="672"/>
@@ -49,7 +79,7 @@
                         <label alignment="left" text="+ 1000 BTC" id="MhE-8h-MLo">
                             <fontDescription key="font" style="UICTFontTextStyleHeadline"/>
                         </label>
-                        <label width="119" height="54" alignment="left" text="1Nc9 oEok W91H UohU pHt4 Y7Di sQXL uEBi 77 " numberOfLines="3" id="tBx-UV-KWa">
+                        <label alignment="left" text="1Nc9 oEok W91H UohU pHt4 Y7Di sQXL uEBi 77 " numberOfLines="0" id="tBx-UV-KWa">
                             <fontDescription key="font" style="UICTFontTextStyleFootnote"/>
                         </label>
                     </items>

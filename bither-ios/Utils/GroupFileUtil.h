@@ -30,6 +30,14 @@ typedef enum {
     UnitBTCG, UnitbitsG
 } GroupBitcoinUnit;
 
+typedef enum {
+    BITSTAMPG = 1, BTCEG = 2, HUOBIG = 3, OKCOING = 4, BTCCHINAG = 5, CHBTCG = 6, BITFINEXG = 7, MARKET796G = 8
+} GroupMarketType;
+
++(GroupMarketType)defaultMarket;
+
++(void)setDefaultMarket:(GroupMarketType)market;
+
 +(GroupCurrency)defaultCurrency;
 
 +(void)setDefaultCurrency:(GroupCurrency)currency;

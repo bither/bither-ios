@@ -86,6 +86,7 @@ NSUserDefaults *userDefaults;
 -(void)setMarket:(MarketType) marketType{
     [userDefaults setInteger:marketType forKey:DEFAULT_MARKET];
     [userDefaults synchronize];
+    [GroupFileUtil setDefaultMarket:(GroupMarketType)marketType];
 }
 
 -(void)setExchangeType:(Currency) exchangeType{

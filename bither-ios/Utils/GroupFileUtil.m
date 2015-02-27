@@ -29,8 +29,24 @@
 #define DEFAULT_CURRENCY (@"default_currency")
 #define DEFAULT_BITCOIN_UNIT (@"default_bitcoin_unit")
 #define TOTAL_BALANCE (@"total_balance")
+#define DEFAULT_MARKET (@"default_market")
 
 @implementation GroupFileUtil
+
++(GroupMarketType)defaultMarket{
+    NSString* s = [GroupFileUtil readFile:[GroupFileUtil defaultMarketFile]];
+    if(s){
+        return s.intValue;
+    }
+    if([GroupFileUtil localeIsChina]){
+        return HUOBIG;
+    }
+    return BITSTAMPG;
+}
+
++(void)setDefaultMarket:(GroupMarketType)market{
+    [GroupFileUtil writeFile:[GroupFileUtil defaultMarketFile] content:[NSString stringWithFormat:@"%d", market]];
+}
 
 +(GroupCurrency)defaultCurrency{
     NSString* s = [GroupFileUtil readFile:[GroupFileUtil defaultCurrencyFile]];
@@ -82,6 +98,10 @@
     }else{
         return  @{@"hdm": @(0), @"hot": @(0), @"cold": @(0)};
     }
+}
+
++(NSURL*)defaultMarketFile{
+    return [[GroupFileUtil documents] URLByAppendingPathComponent:DEFAULT_MARKET];
 }
 
 +(NSURL*)currencyRateFile{
@@ -243,6 +263,11 @@
     });
     
     return queue;
+}
+
++(BOOL)localeIsChina{
+    NSString * language = [[NSLocale preferredLanguages] objectAtIndex:0];
+    return  [language isEqualToString:@"zh-Hans"];
 }
 
 @end

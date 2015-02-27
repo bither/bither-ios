@@ -20,9 +20,17 @@
 //
 
 #import "GlanceController.h"
+#import "TotalBalance.h"
+#import "WatchUnitUtil.h"
+#import "WatchMarket.h"
 
 
 @interface GlanceController()
+@property (weak, nonatomic) IBOutlet WKInterfaceLabel *lblBalance;
+@property (weak, nonatomic) IBOutlet WKInterfaceGroup *gMarket;
+@property (weak, nonatomic) IBOutlet WKInterfaceLabel *lblMarketName;
+@property (weak, nonatomic) IBOutlet WKInterfaceLabel *lblPrice;
+@property (weak, nonatomic) IBOutlet WKInterfaceImage *ivTrending;
 
 @end
 
@@ -31,12 +39,13 @@
 
 - (void)awakeWithContext:(id)context {
     [super awakeWithContext:context];
-
-    // Configure interface objects here.
+    [self.lblBalance setText:[WatchUnitUtil stringForAmount:[[TotalBalance alloc] init].total]];
+    WatchMarket* market = [WatchMarket getDefaultMarket];
+    [self.lblMarketName setText:market.getName];
+    [self.lblPrice setText:[NSString stringWithFormat:@"%@ %.2f", [WatchMarket getCurrencySymbol:[GroupFileUtil defaultCurrency]], market.ticker.getDefaultExchangePrice]];
 }
 
 - (void)willActivate {
-    // This method is called when watch view controller is about to be visible to user
     [super willActivate];
 }
 

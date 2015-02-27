@@ -39,6 +39,10 @@
 		0AD674971A7B4BDA007967DB /* ColdAddressListHDMCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AD674961A7B4BDA007967DB /* ColdAddressListHDMCell.m */; };
 		0AD6749C1A7B6229007967DB /* DialogWithActions.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AD6749B1A7B6229007967DB /* DialogWithActions.m */; };
 		0AD6749F1A7B9108007967DB /* DialogHDMSeedWordList.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AD6749E1A7B9108007967DB /* DialogHDMSeedWordList.m */; };
+		0AFBA9321AA01EF60059CB4B /* TotalBalance.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AFBA9311AA01EF60059CB4B /* TotalBalance.m */; };
+		0AFBA9351AA0275F0059CB4B /* WatchMarket.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AFBA9341AA0275F0059CB4B /* WatchMarket.m */; };
+		0AFBA9361AA028850059CB4B /* NSDictionary+Fromat.m in Sources */ = {isa = PBXBuildFile; fileRef = 4254086A1946CD17007AF99C /* NSDictionary+Fromat.m */; };
+		0AFBA93F1AA02C190059CB4B /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0AFBA9411AA02C190059CB4B /* Localizable.strings */; };
 		1BC270F1C2BEA60E0B3384AB /* DialogHDMAddressOptions.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BC27D1407586D2FCB8F01AC /* DialogHDMAddressOptions.m */; };
 		1BC27499EE579986A1439709 /* DialogHDMInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BC27E22C25A90DF1E5DA1DC /* DialogHDMInfo.m */; };
 		1BC275F3608609D0E72BFBE7 /* HDMTriangleBgView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BC27C837F7819A54B0A2E37 /* HDMTriangleBgView.m */; };
@@ -360,6 +364,16 @@
 		0AD6749B1A7B6229007967DB /* DialogWithActions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DialogWithActions.m; sourceTree = "<group>"; };
 		0AD6749D1A7B9108007967DB /* DialogHDMSeedWordList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DialogHDMSeedWordList.h; sourceTree = "<group>"; };
 		0AD6749E1A7B9108007967DB /* DialogHDMSeedWordList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DialogHDMSeedWordList.m; sourceTree = "<group>"; };
+		0AFBA9301AA01EF60059CB4B /* TotalBalance.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TotalBalance.h; sourceTree = "<group>"; };
+		0AFBA9311AA01EF60059CB4B /* TotalBalance.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TotalBalance.m; sourceTree = "<group>"; };
+		0AFBA9331AA0275F0059CB4B /* WatchMarket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WatchMarket.h; sourceTree = "<group>"; };
+		0AFBA9341AA0275F0059CB4B /* WatchMarket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WatchMarket.m; sourceTree = "<group>"; };
+		0AFBA9381AA02B350059CB4B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Interface.strings; sourceTree = "<group>"; };
+		0AFBA93A1AA02B350059CB4B /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Interface.strings"; sourceTree = "<group>"; };
+		0AFBA93C1AA02B360059CB4B /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Interface.strings"; sourceTree = "<group>"; };
+		0AFBA9401AA02C190059CB4B /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
+		0AFBA9431AA02C1E0059CB4B /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		0AFBA9441AA02C1F0059CB4B /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		0FED7A4051DB45218112FAC0 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		1BC272BC4509E4F880EAC6F9 /* AddHDMAddressViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddHDMAddressViewController.h; sourceTree = "<group>"; };
 		1BC275D3A11FAF859823CF7E /* DialogHDMAddressOptions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DialogHDMAddressOptions.h; sourceTree = "<group>"; };
@@ -834,6 +848,10 @@
 				0A4749781A9D7F0B003684E2 /* NotificationController.m */,
 				0A47497A1A9D7F0B003684E2 /* GlanceController.h */,
 				0A47497B1A9D7F0B003684E2 /* GlanceController.m */,
+				0AFBA9301AA01EF60059CB4B /* TotalBalance.h */,
+				0AFBA9311AA01EF60059CB4B /* TotalBalance.m */,
+				0AFBA9331AA0275F0059CB4B /* WatchMarket.h */,
+				0AFBA9341AA0275F0059CB4B /* WatchMarket.m */,
 				0A4182AC1A9DBB8600576A12 /* WatchStringUtil.h */,
 				0A4182AD1A9DBB8600576A12 /* WatchStringUtil.m */,
 				0A4182A11A9DB70500576A12 /* WatchUnitUtil.h */,
@@ -849,6 +867,7 @@
 			children = (
 				0A4749721A9D7F0B003684E2 /* Info.plist */,
 				0A4749731A9D7F0B003684E2 /* PushNotificationPayload.apns */,
+				0AFBA9411AA02C190059CB4B /* Localizable.strings */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -1703,6 +1722,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0A4749821A9D7F0B003684E2 /* bither-ios WatchKit App.app in Resources */,
+				0AFBA93F1AA02C190059CB4B /* Localizable.strings in Resources */,
 				0A47497E1A9D7F0B003684E2 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1798,7 +1818,10 @@
 			files = (
 				0A4182AE1A9DBB8600576A12 /* WatchStringUtil.m in Sources */,
 				0A52BDA61A9FFEB800BC8C3E /* GroupFileUtil.m in Sources */,
+				0AFBA9361AA028850059CB4B /* NSDictionary+Fromat.m in Sources */,
 				0A4182A31A9DB70500576A12 /* WatchUnitUtil.m in Sources */,
+				0AFBA9351AA0275F0059CB4B /* WatchMarket.m in Sources */,
+				0AFBA9321AA01EF60059CB4B /* TotalBalance.m in Sources */,
 				0A4749791A9D7F0B003684E2 /* NotificationController.m in Sources */,
 				0A4749761A9D7F0B003684E2 /* InterfaceController.m in Sources */,
 				0A47497C1A9D7F0B003684E2 /* GlanceController.m in Sources */,
@@ -2053,8 +2076,21 @@
 			isa = PBXVariantGroup;
 			children = (
 				0A4749891A9D7F0B003684E2 /* Base */,
+				0AFBA9381AA02B350059CB4B /* en */,
+				0AFBA93A1AA02B350059CB4B /* zh-Hans */,
+				0AFBA93C1AA02B360059CB4B /* zh-Hant */,
 			);
 			name = Interface.storyboard;
+			sourceTree = "<group>";
+		};
+		0AFBA9411AA02C190059CB4B /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				0AFBA9401AA02C190059CB4B /* Base */,
+				0AFBA9431AA02C1E0059CB4B /* zh-Hans */,
+				0AFBA9441AA02C1F0059CB4B /* zh-Hant */,
+			);
+			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
 		4276CEA6194C20810027D119 /* Localizable.strings */ = {
