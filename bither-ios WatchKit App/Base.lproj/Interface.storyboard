@@ -41,6 +41,7 @@
                                     </items>
                                 </group>
                             </items>
+                            <edgeInsets key="margins" left="8" right="8" top="5" bottom="5"/>
                         </group>
                     </items>
                     <edgeInsets key="margins" left="0.0" right="0.0" top="0.0" bottom="14"/>

@@ -22,6 +22,8 @@
 #import "WatchMarket.h"
 #import "NSDictionary+Fromat.h"
 
+#define RGBA(r, g, b, a) [UIColor colorWithRed:r/255.0 green:g/255.0 blue:b/255.0 alpha:a]
+
 #define VOLUME @"volume"
 #define LAST @"last"
 #define HIGH @"high"
@@ -121,6 +123,37 @@ static NSDictionary *_currenciesRate = nil;
         }
     }
     return _ticker;
+}
+
+-(UIColor *)color{
+    switch (self.marketType) {
+            //ffff9329
+        case HUOBIG:
+            return RGBA(255, 147, 41, 1);
+            //ff3bbf59
+        case BITSTAMPG:
+            return RGBA(59, 191, 89, 1);
+            //ff25bebc
+        case BTCEG:
+            return RGBA(37, 190, 188, 1);
+            //ff1587c6
+        case OKCOING:
+            return RGBA(21, 135, 198, 1);
+            //ff5b469d
+        case CHBTCG:
+            return RGBA(91, 70, 157, 1);
+            //fff93c25
+        case BTCCHINAG:
+            return RGBA(249, 60, 37, 1);
+            //ffa3bd0b
+        case BITFINEXG:
+            return RGBA(163, 189, 11, 1);
+            //ffe31f21
+        case MARKET796G:
+            return RGBA(227, 31, 33, 1);
+        default:
+            return nil;
+    }
 }
 
 +(NSArray *)getMarkets{

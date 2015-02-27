@@ -23,9 +23,13 @@
 #import "TotalBalance.h"
 #import "WatchUnitUtil.h"
 #import "WatchMarket.h"
+#import "WatchTrendingGraphicDrawer.h"
 
 
-@interface GlanceController()
+@interface GlanceController(){
+    WatchTrendingGraphicDrawer* tDrawer;
+    WatchMarket* market;
+}
 @property (weak, nonatomic) IBOutlet WKInterfaceLabel *lblBalance;
 @property (weak, nonatomic) IBOutlet WKInterfaceGroup *gMarket;
 @property (weak, nonatomic) IBOutlet WKInterfaceLabel *lblMarketName;
@@ -40,13 +44,26 @@
 - (void)awakeWithContext:(id)context {
     [super awakeWithContext:context];
     [self.lblBalance setText:[WatchUnitUtil stringForAmount:[[TotalBalance alloc] init].total]];
-    WatchMarket* market = [WatchMarket getDefaultMarket];
+    market = [WatchMarket getDefaultMarket];
+    [self.gMarket setBackgroundColor:market.color];
     [self.lblMarketName setText:market.getName];
     [self.lblPrice setText:[NSString stringWithFormat:@"%@ %.2f", [WatchMarket getCurrencySymbol:[GroupFileUtil defaultCurrency]], market.ticker.getDefaultExchangePrice]];
+    tDrawer = [[WatchTrendingGraphicDrawer alloc]initWithSize:CGSizeMake(200, 100)];
+    [self.ivTrending setImage:[tDrawer imageForData:[WatchTrendingGraphicData getEmptyData]]];
 }
 
 - (void)willActivate {
     [super willActivate];
+    [self refreshTrending];
+}
+
+-(void)refreshTrending{
+    [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(refreshTrending) object:nil];
+    [WatchTrendingGraphicData getTrendingGraphicData:market.marketType callback:^(WatchTrendingGraphicData *data) {
+        [self.ivTrending setImage:[tDrawer imageForData:data]];
+    } andErrorCallback:^(NSError *error) {
+        [self performSelector:@selector(refreshTrending) withObject:nil afterDelay:5];
+    }];
 }
 
 - (void)didDeactivate {

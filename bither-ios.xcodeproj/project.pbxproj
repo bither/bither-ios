@@ -26,6 +26,12 @@
 		0A515F7B1A36CAE3008292AF /* RawPrivateKeyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A515F7A1A36CAE3008292AF /* RawPrivateKeyViewController.m */; };
 		0A52BDA51A9FFC6400BC8C3E /* GroupFileUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A52BDA41A9FFC6400BC8C3E /* GroupFileUtil.m */; };
 		0A52BDA61A9FFEB800BC8C3E /* GroupFileUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A52BDA41A9FFC6400BC8C3E /* GroupFileUtil.m */; };
+		0A637B171AA0419C00696260 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A637B161AA0419C00696260 /* libPods.a */; };
+		0A637B1B1AA0427200696260 /* WatchTrendingGraphicData.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A637B1A1AA0427200696260 /* WatchTrendingGraphicData.m */; };
+		0A637B1F1AA0443D00696260 /* BaseApi.m in Sources */ = {isa = PBXBuildFile; fileRef = 4254083419469C9A007AF99C /* BaseApi.m */; };
+		0A637B201AA0445F00696260 /* BitherEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = 4254083819469C9A007AF99C /* BitherEngine.m */; };
+		0A637B231AA044C600696260 /* WatchApi.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A637B221AA044C600696260 /* WatchApi.m */; };
+		0A637B261AA0486300696260 /* WatchTrendingGraphicDrawer.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A637B251AA0486300696260 /* WatchTrendingGraphicDrawer.m */; };
 		0A6C0F5C1A4D548B00544B33 /* MessageSigningSetting.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A6C0F5B1A4D548B00544B33 /* MessageSigningSetting.m */; };
 		0A6C0F5F1A4D5E1900544B33 /* DialogSignMessageSelectAddress.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A6C0F5E1A4D5E1900544B33 /* DialogSignMessageSelectAddress.m */; };
 		0A93B6011A4A66080081D74D /* DialogSignMessageOutput.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A93B6001A4A66080081D74D /* DialogSignMessageOutput.m */; };
@@ -340,6 +346,13 @@
 		0A52BDA21A9FFC2B00BC8C3E /* bither-ios WatchKit Extension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "bither-ios WatchKit Extension.entitlements"; sourceTree = "<group>"; };
 		0A52BDA31A9FFC6400BC8C3E /* GroupFileUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GroupFileUtil.h; sourceTree = "<group>"; };
 		0A52BDA41A9FFC6400BC8C3E /* GroupFileUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GroupFileUtil.m; sourceTree = "<group>"; };
+		0A637B161AA0419C00696260 /* libPods.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libPods.a; path = "Pods/build/Debug-iphoneos/libPods.a"; sourceTree = "<group>"; };
+		0A637B191AA0427200696260 /* WatchTrendingGraphicData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WatchTrendingGraphicData.h; sourceTree = "<group>"; };
+		0A637B1A1AA0427200696260 /* WatchTrendingGraphicData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WatchTrendingGraphicData.m; sourceTree = "<group>"; };
+		0A637B211AA044C600696260 /* WatchApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WatchApi.h; sourceTree = "<group>"; };
+		0A637B221AA044C600696260 /* WatchApi.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WatchApi.m; sourceTree = "<group>"; };
+		0A637B241AA0486300696260 /* WatchTrendingGraphicDrawer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WatchTrendingGraphicDrawer.h; sourceTree = "<group>"; };
+		0A637B251AA0486300696260 /* WatchTrendingGraphicDrawer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WatchTrendingGraphicDrawer.m; sourceTree = "<group>"; };
 		0A6C0F5A1A4D548B00544B33 /* MessageSigningSetting.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageSigningSetting.h; sourceTree = "<group>"; };
 		0A6C0F5B1A4D548B00544B33 /* MessageSigningSetting.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageSigningSetting.m; sourceTree = "<group>"; };
 		0A6C0F5D1A4D5E1900544B33 /* DialogSignMessageSelectAddress.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DialogSignMessageSelectAddress.h; sourceTree = "<group>"; };
@@ -799,6 +812,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0A637B171AA0419C00696260 /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -848,6 +862,10 @@
 				0A4749781A9D7F0B003684E2 /* NotificationController.m */,
 				0A47497A1A9D7F0B003684E2 /* GlanceController.h */,
 				0A47497B1A9D7F0B003684E2 /* GlanceController.m */,
+				0A637B241AA0486300696260 /* WatchTrendingGraphicDrawer.h */,
+				0A637B251AA0486300696260 /* WatchTrendingGraphicDrawer.m */,
+				0A637B191AA0427200696260 /* WatchTrendingGraphicData.h */,
+				0A637B1A1AA0427200696260 /* WatchTrendingGraphicData.m */,
 				0AFBA9301AA01EF60059CB4B /* TotalBalance.h */,
 				0AFBA9311AA01EF60059CB4B /* TotalBalance.m */,
 				0AFBA9331AA0275F0059CB4B /* WatchMarket.h */,
@@ -856,6 +874,8 @@
 				0A4182AD1A9DBB8600576A12 /* WatchStringUtil.m */,
 				0A4182A11A9DB70500576A12 /* WatchUnitUtil.h */,
 				0A4182A21A9DB70500576A12 /* WatchUnitUtil.m */,
+				0A637B211AA044C600696260 /* WatchApi.h */,
+				0A637B221AA044C600696260 /* WatchApi.m */,
 				0A47497D1A9D7F0B003684E2 /* Images.xcassets */,
 				0A4749711A9D7F0B003684E2 /* Supporting Files */,
 			);
@@ -1116,6 +1136,7 @@
 		42D9B763193D6B5B00C85B89 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				0A637B161AA0419C00696260 /* libPods.a */,
 				ACBE75951A202E4900F49EE1 /* LocalAuthentication.framework */,
 				AC026C8019EE5FF500BC0152 /* libPods-Bitheri.a */,
 				AC026C8119EE5FF500BC0152 /* libPods-CocoaLumberjack.a */,
@@ -1819,10 +1840,15 @@
 				0A4182AE1A9DBB8600576A12 /* WatchStringUtil.m in Sources */,
 				0A52BDA61A9FFEB800BC8C3E /* GroupFileUtil.m in Sources */,
 				0AFBA9361AA028850059CB4B /* NSDictionary+Fromat.m in Sources */,
+				0A637B1B1AA0427200696260 /* WatchTrendingGraphicData.m in Sources */,
+				0A637B261AA0486300696260 /* WatchTrendingGraphicDrawer.m in Sources */,
 				0A4182A31A9DB70500576A12 /* WatchUnitUtil.m in Sources */,
+				0A637B1F1AA0443D00696260 /* BaseApi.m in Sources */,
+				0A637B231AA044C600696260 /* WatchApi.m in Sources */,
 				0AFBA9351AA0275F0059CB4B /* WatchMarket.m in Sources */,
 				0AFBA9321AA01EF60059CB4B /* TotalBalance.m in Sources */,
 				0A4749791A9D7F0B003684E2 /* NotificationController.m in Sources */,
+				0A637B201AA0445F00696260 /* BitherEngine.m in Sources */,
 				0A4749761A9D7F0B003684E2 /* InterfaceController.m in Sources */,
 				0A47497C1A9D7F0B003684E2 /* GlanceController.m in Sources */,
 			);
@@ -2139,6 +2165,7 @@
 /* Begin XCBuildConfiguration section */
 		0A4749901A9D7F0B003684E2 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = E7552F109D77434AC1A15A24 /* Pods.debug.xcconfig */;
 			buildSettings = {
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CODE_SIGN_ENTITLEMENTS = "bither-ios WatchKit Extension/bither-ios WatchKit Extension.entitlements";
@@ -2154,6 +2181,10 @@
 				INFOPLIST_FILE = "bither-ios WatchKit Extension/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Pods/build/Debug-iphoneos",
+				);
 				MTL_ENABLE_DEBUG_INFO = YES;
 				PRODUCT_NAME = "${TARGET_NAME}";
 				PROVISIONING_PROFILE = "";
@@ -2163,6 +2194,7 @@
 		};
 		0A4749911A9D7F0B003684E2 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6A924775F78B472633EFD7CF /* Pods.release.xcconfig */;
 			buildSettings = {
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CODE_SIGN_ENTITLEMENTS = "bither-ios WatchKit Extension/bither-ios WatchKit Extension.entitlements";
@@ -2175,6 +2207,10 @@
 				INFOPLIST_FILE = "bither-ios WatchKit Extension/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Pods/build/Debug-iphoneos",
+				);
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_NAME = "${TARGET_NAME}";
 				PROVISIONING_PROFILE = "";

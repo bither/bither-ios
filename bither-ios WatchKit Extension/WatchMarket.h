@@ -20,6 +20,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <WatchKit/WatchKit.h>
 #import "GroupFileUtil.h"
 
 @interface Ticker : NSObject
@@ -49,6 +50,7 @@
 
 @interface WatchMarket : NSObject
 @property (nonatomic, readonly) Ticker * ticker;
+@property (readonly) UIColor* color;
 @property (nonatomic,readwrite) GroupMarketType marketType;
 
 -(NSString *)getName;
