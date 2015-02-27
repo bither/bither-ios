@@ -62,6 +62,17 @@ static NSMutableDictionary * tgds;
     
 }
 
+-(BOOL)isEmpty{
+    BOOL empty = YES;
+    for(NSNumber* n in self.prices){
+        if(n.doubleValue != 0.5){
+            empty = NO;
+            break;
+        }
+    }
+    return empty;
+}
+
 +(WatchTrendingGraphicData *)format:(NSArray *)array{
     WatchTrendingGraphicData *tgd=[[WatchTrendingGraphicData alloc] init];
     double high=0;

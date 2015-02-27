@@ -8,7 +8,21 @@
         <!--Interface Controller-->
         <scene sceneID="aou-V4-d1y">
             <objects>
-                <controller id="AgC-eL-Hgc" customClass="InterfaceController"/>
+                <controller id="AgC-eL-Hgc" customClass="InterfaceController">
+                    <items>
+                        <group width="0.90000000000000002" height="0.80000000000000004" alignment="center" verticalAlignment="center" contentMode="scaleAspectFit" id="ysO-G9-RwS">
+                            <items>
+                                <label alignment="center" verticalAlignment="center" textAlignment="center" minimumScaleFactor="0.5" id="Je9-T4-j1G">
+                                    <fontDescription key="font" style="UICTFontTextStyleSubhead"/>
+                                </label>
+                            </items>
+                        </group>
+                    </items>
+                    <connections>
+                        <outlet property="gContainer" destination="ysO-G9-RwS" id="3rb-mn-gRz"/>
+                        <outlet property="lblTotal" destination="Je9-T4-j1G" id="KWW-zI-5uQ"/>
+                    </connections>
+                </controller>
             </objects>
             <point key="canvasLocation" x="235" y="347"/>
         </scene>
@@ -37,7 +51,7 @@
                                 </label>
                                 <group width="1" height="0.59999999999999998" alignment="left" id="HmR-0B-Mjo">
                                     <items>
-                                        <imageView width="0.90000000000000002" height="1" alignment="center" verticalAlignment="center" id="x2H-Cr-zl8"/>
+                                        <imageView width="0.90000000000000002" height="1" alignment="center" verticalAlignment="center" contentMode="scaleAspectFit" id="x2H-Cr-zl8"/>
                                     </items>
                                 </group>
                             </items>

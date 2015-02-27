@@ -32,6 +32,7 @@
 		0A637B201AA0445F00696260 /* BitherEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = 4254083819469C9A007AF99C /* BitherEngine.m */; };
 		0A637B231AA044C600696260 /* WatchApi.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A637B221AA044C600696260 /* WatchApi.m */; };
 		0A637B261AA0486300696260 /* WatchTrendingGraphicDrawer.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A637B251AA0486300696260 /* WatchTrendingGraphicDrawer.m */; };
+		0A637B291AA0608600696260 /* TotalBalanceDrawer.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A637B281AA0608600696260 /* TotalBalanceDrawer.m */; };
 		0A6C0F5C1A4D548B00544B33 /* MessageSigningSetting.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A6C0F5B1A4D548B00544B33 /* MessageSigningSetting.m */; };
 		0A6C0F5F1A4D5E1900544B33 /* DialogSignMessageSelectAddress.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A6C0F5E1A4D5E1900544B33 /* DialogSignMessageSelectAddress.m */; };
 		0A93B6011A4A66080081D74D /* DialogSignMessageOutput.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A93B6001A4A66080081D74D /* DialogSignMessageOutput.m */; };
@@ -353,6 +354,8 @@
 		0A637B221AA044C600696260 /* WatchApi.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WatchApi.m; sourceTree = "<group>"; };
 		0A637B241AA0486300696260 /* WatchTrendingGraphicDrawer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WatchTrendingGraphicDrawer.h; sourceTree = "<group>"; };
 		0A637B251AA0486300696260 /* WatchTrendingGraphicDrawer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WatchTrendingGraphicDrawer.m; sourceTree = "<group>"; };
+		0A637B271AA0608600696260 /* TotalBalanceDrawer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TotalBalanceDrawer.h; sourceTree = "<group>"; };
+		0A637B281AA0608600696260 /* TotalBalanceDrawer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TotalBalanceDrawer.m; sourceTree = "<group>"; };
 		0A6C0F5A1A4D548B00544B33 /* MessageSigningSetting.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageSigningSetting.h; sourceTree = "<group>"; };
 		0A6C0F5B1A4D548B00544B33 /* MessageSigningSetting.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageSigningSetting.m; sourceTree = "<group>"; };
 		0A6C0F5D1A4D5E1900544B33 /* DialogSignMessageSelectAddress.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DialogSignMessageSelectAddress.h; sourceTree = "<group>"; };
@@ -866,6 +869,8 @@
 				0A637B251AA0486300696260 /* WatchTrendingGraphicDrawer.m */,
 				0A637B191AA0427200696260 /* WatchTrendingGraphicData.h */,
 				0A637B1A1AA0427200696260 /* WatchTrendingGraphicData.m */,
+				0A637B271AA0608600696260 /* TotalBalanceDrawer.h */,
+				0A637B281AA0608600696260 /* TotalBalanceDrawer.m */,
 				0AFBA9301AA01EF60059CB4B /* TotalBalance.h */,
 				0AFBA9311AA01EF60059CB4B /* TotalBalance.m */,
 				0AFBA9331AA0275F0059CB4B /* WatchMarket.h */,
@@ -1839,6 +1844,7 @@
 			files = (
 				0A4182AE1A9DBB8600576A12 /* WatchStringUtil.m in Sources */,
 				0A52BDA61A9FFEB800BC8C3E /* GroupFileUtil.m in Sources */,
+				0A637B291AA0608600696260 /* TotalBalanceDrawer.m in Sources */,
 				0AFBA9361AA028850059CB4B /* NSDictionary+Fromat.m in Sources */,
 				0A637B1B1AA0427200696260 /* WatchTrendingGraphicData.m in Sources */,
 				0A637B261AA0486300696260 /* WatchTrendingGraphicDrawer.m in Sources */,

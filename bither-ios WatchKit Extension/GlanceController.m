@@ -48,8 +48,8 @@
     [self.gMarket setBackgroundColor:market.color];
     [self.lblMarketName setText:market.getName];
     [self.lblPrice setText:[NSString stringWithFormat:@"%@ %.2f", [WatchMarket getCurrencySymbol:[GroupFileUtil defaultCurrency]], market.ticker.getDefaultExchangePrice]];
-    tDrawer = [[WatchTrendingGraphicDrawer alloc]initWithSize:CGSizeMake(200, 100)];
-    [self.ivTrending setImage:[tDrawer imageForData:[WatchTrendingGraphicData getEmptyData]]];
+    tDrawer = [[WatchTrendingGraphicDrawer alloc]init];
+    [tDrawer setEmptyImage:self.ivTrending];
 }
 
 - (void)willActivate {

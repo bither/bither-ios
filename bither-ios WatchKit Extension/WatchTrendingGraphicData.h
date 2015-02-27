@@ -32,6 +32,7 @@
 @property (strong,nonatomic) NSArray * prices;
 @property (strong,nonatomic) NSMutableArray * rates;
 @property GroupMarketType marketType;
+@property (readonly) BOOL isEmpty;
 
 +(void)getTrendingGraphicData:(GroupMarketType) marketType callback:(void (^)(WatchTrendingGraphicData *data))callback andErrorCallback:(void (^)(NSError *error))errorCallback;
 

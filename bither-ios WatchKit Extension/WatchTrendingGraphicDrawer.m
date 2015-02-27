@@ -23,6 +23,7 @@
 
 #define kHorizontalPadding (2)
 #define kVerticalPadding (2)
+#define kTrendingGraphicEmptyImageCache (@"TrendingGraphicEmptyImage")
 
 @interface WatchTrendingGraphicDrawer(){
     CGSize size;
@@ -31,12 +32,23 @@
 
 @implementation WatchTrendingGraphicDrawer
 
--(instancetype)initWithSize:(CGSize)s{
+-(instancetype)init{
     self = [super init];
     if(self){
-        size = s;
+        size = CGSizeMake(200, 100);
     }
     return self;
+}
+
+-(void)setEmptyImage:(WKInterfaceImage*)iv{
+    WKInterfaceDevice *device = [WKInterfaceDevice currentDevice];
+    if([device.cachedImages.allKeys containsObject:kTrendingGraphicEmptyImageCache]){
+        [iv setImageNamed:kTrendingGraphicEmptyImageCache];
+        return;
+    }
+    UIImage* image = [self imageForData:[WatchTrendingGraphicData getEmptyData]];
+    [device addCachedImage:image name:kTrendingGraphicEmptyImageCache];
+    [iv setImageNamed:kTrendingGraphicEmptyImageCache];
 }
 
 -(UIImage*)imageForData:(WatchTrendingGraphicData*)data{

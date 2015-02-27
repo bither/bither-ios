@@ -20,9 +20,11 @@
 //
 
 #import "InterfaceController.h"
-
+#import "TotalBalanceDrawer.h"
 
 @interface InterfaceController()
+@property (weak, nonatomic) IBOutlet WKInterfaceLabel *lblTotal;
+@property (weak, nonatomic) IBOutlet WKInterfaceGroup *gContainer;
 
 @end
 
@@ -31,17 +33,14 @@
 
 - (void)awakeWithContext:(id)context {
     [super awakeWithContext:context];
-
-    // Configure interface objects here.
+    [TotalBalanceDrawer showTotalBalanceOn:self.gContainer andLabel:self.lblTotal];
 }
 
 - (void)willActivate {
-    // This method is called when watch view controller is about to be visible to user
     [super willActivate];
 }
 
 - (void)didDeactivate {
-    // This method is called when watch view controller is no longer visible
     [super didDeactivate];
 }
 

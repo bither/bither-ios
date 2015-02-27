@@ -1,5 +1,5 @@
 //
-//  WatchTrendingGraphicDrawer.h
+//  TotalBalanceDrawer.h
 //  bither-ios
 //
 //  Copyright 2014 http://Bither.net
@@ -20,15 +20,8 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "WatchTrendingGraphicData.h"
 #import <WatchKit/WatchKit.h>
-#define kEmptyImageCacheName (@"TrendingGraphicEmpty")
 
-#define kTrendingAnimationFrameCount (20)
-#define kTrendingAnimationDuration (0.3)
-
-@interface WatchTrendingGraphicDrawer : NSObject
--(void)setEmptyImage:(WKInterfaceImage*)iv;
--(UIImage*)imageForData:(WatchTrendingGraphicData*)data;
--(UIImage*)animatingImageFromData:(WatchTrendingGraphicData*)from toData:(WatchTrendingGraphicData*)to;
+@interface TotalBalanceDrawer : NSObject
++(void)showTotalBalanceOn:(WKInterfaceGroup*)group andLabel:(WKInterfaceLabel*)label;
 @end
