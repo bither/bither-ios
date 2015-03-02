@@ -174,7 +174,11 @@
 +(void)readFromURL:(NSURL*)url withCompletion:(void (^)(NSData *data, NSError *error))completion{
     NSFileCoordinator *fileCoordinator = [[NSFileCoordinator alloc] init];
     
-    BOOL successfulSecurityScopedResourceAccess = [url startAccessingSecurityScopedResource];
+    BOOL successfulSecurityScopedResourceAccess = NO;
+    
+    if([url respondsToSelector:@selector(startAccessingSecurityScopedResource)]){
+        successfulSecurityScopedResourceAccess = [url startAccessingSecurityScopedResource];
+    }
     
     NSFileAccessIntent *readingIntent = [NSFileAccessIntent readingIntentWithURL:url options:NSFileCoordinatorReadingWithoutChanges];
     
@@ -205,7 +209,11 @@
 +(void)writeToURL:(NSURL*)url withData:(NSData*)data withCompletion:(void (^)(NSError *error))completion{
     NSFileCoordinator *fileCoordinator = [[NSFileCoordinator alloc] init];
     
-    BOOL successfulSecurityScopedResourceAccess = [url startAccessingSecurityScopedResource];
+    BOOL successfulSecurityScopedResourceAccess = NO;
+    
+    if([url respondsToSelector:@selector(startAccessingSecurityScopedResource)]){
+        successfulSecurityScopedResourceAccess = [url startAccessingSecurityScopedResource];
+    }
     
     NSFileAccessIntent *writingIntent = [NSFileAccessIntent writingIntentWithURL:url options:NSFileCoordinatorWritingForReplacing];
     
