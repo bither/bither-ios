@@ -112,7 +112,7 @@
                                 <label alignment="right" text="￥1545.01" textAlignment="right" id="rZc-kv-Uj0">
                                     <fontDescription key="font" type="system" weight="heavy" pointSize="20"/>
                                 </label>
-                                <group width="1" height="0.59999999999999998" alignment="left" id="HmR-0B-Mjo">
+                                <group width="1" height="0.5" alignment="left" id="HmR-0B-Mjo">
                                     <items>
                                         <imageView width="0.90000000000000002" height="1" alignment="center" verticalAlignment="center" contentMode="scaleAspectFit" id="x2H-Cr-zl8"/>
                                     </items>
