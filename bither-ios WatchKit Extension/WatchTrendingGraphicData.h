@@ -21,6 +21,7 @@
 
 #import <Foundation/Foundation.h>
 #import "GroupFileUtil.h"
+#import "GroupUserDefaultUtil.h"
 
 #define TRENDING_GRAPIC_COUNT  25
 #define EXPORED_TIME  1 * 60 * 60

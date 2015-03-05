@@ -20,57 +20,14 @@
 //
 
 #import "GroupFileUtil.h"
-
-#define kBitherGroupName (@"group.net.bither")
+#import "CacheUtil.h"
 
 #define CURRENCIES_RATE (@"currencies_rate")
 #define MARKET_CACHE_DIR (@"market")
 #define EXCAHNGE_TICKER_NAME (@"exchange.ticker")
-#define DEFAULT_CURRENCY (@"default_currency")
-#define DEFAULT_BITCOIN_UNIT (@"default_bitcoin_unit")
 #define TOTAL_BALANCE (@"total_balance")
-#define DEFAULT_MARKET (@"default_market")
 
 @implementation GroupFileUtil
-
-+(GroupMarketType)defaultMarket{
-    NSString* s = [GroupFileUtil readFile:[GroupFileUtil defaultMarketFile]];
-    if(s){
-        return s.intValue;
-    }
-    if([GroupFileUtil localeIsChina]){
-        return HUOBIG;
-    }
-    return BITSTAMPG;
-}
-
-+(void)setDefaultMarket:(GroupMarketType)market{
-    [GroupFileUtil writeFile:[GroupFileUtil defaultMarketFile] content:[NSString stringWithFormat:@"%d", market]];
-}
-
-+(GroupCurrency)defaultCurrency{
-    NSString* s = [GroupFileUtil readFile:[GroupFileUtil defaultCurrencyFile]];
-    if(s){
-        return s.intValue;
-    }
-    return USDG;
-}
-
-+(void)setDefaultCurrency:(GroupCurrency)currency{
-    [GroupFileUtil writeFile:[GroupFileUtil defaultCurrencyFile] content:[NSString stringWithFormat:@"%d", currency]];
-}
-
-+(GroupBitcoinUnit)defaultBitcoinUnit{
-    NSString* s = [GroupFileUtil readFile:[GroupFileUtil defaultBitcoinUnitFile]];
-    if(s){
-        return s.intValue;
-    }
-    return UnitBTCG;
-}
-
-+(void)setDefaultBitcoinUnit:(GroupBitcoinUnit)unit{
-    [GroupFileUtil writeFile:[GroupFileUtil defaultBitcoinUnitFile] content:[NSString stringWithFormat:@"%d", unit]];
-}
 
 +(void)setTotalBalanceWithHDM:(int64_t)hdm hot:(int64_t)hot andCold:(int64_t)cold{
     NSDictionary* dict = @{@"hdm": @(hdm), @"hot": @(hot), @"cold": @(cold)};
@@ -100,8 +57,36 @@
     }
 }
 
-+(NSURL*)defaultMarketFile{
-    return [[GroupFileUtil documents] URLByAppendingPathComponent:DEFAULT_MARKET];
++(void)setTicker:(NSString*)content{
+    if([GroupFileUtil supported]){
+        [GroupFileUtil writeFile:[GroupFileUtil tickerFile] content:content];
+    } else {
+        [CacheUtil writeFile:[CacheUtil getTickerFile] content:content];
+    }
+}
+
++(NSString*)getTicker{
+    if([GroupFileUtil supported]){
+        return [GroupFileUtil readFile:[GroupFileUtil tickerFile]];
+    }else{
+        return [CacheUtil readFile:[CacheUtil getTickerFile]];
+    }
+}
+
++(void)setCurrencyRate:(NSString*)currencyRate{
+    if([GroupFileUtil supported]){
+        [GroupFileUtil writeFile:[GroupFileUtil currencyRateFile] content:currencyRate];
+    }else{
+        [CacheUtil writeFile:[CacheUtil getCurrenciesRateFile] content:currencyRate];
+    }
+}
+
++(NSString*)getCurrencyRate{
+    if([GroupFileUtil supported]){
+        return [GroupFileUtil readFile:[GroupFileUtil currencyRateFile]];
+    }else{
+        return [CacheUtil readFile:[CacheUtil getCurrenciesRateFile]];
+    }
 }
 
 +(NSURL*)currencyRateFile{
@@ -120,14 +105,6 @@
         NSLog(@"Shared market cache dir error: %@", error.localizedDescription);
         abort();
     }
-}
-
-+(NSURL*)defaultCurrencyFile{
-    return [[GroupFileUtil documents] URLByAppendingPathComponent:DEFAULT_CURRENCY];
-}
-
-+(NSURL*)defaultBitcoinUnitFile{
-    return [[GroupFileUtil documents] URLByAppendingPathComponent:DEFAULT_BITCOIN_UNIT];
 }
 
 +(NSURL*)totalBalanceFile{
@@ -172,13 +149,15 @@
 }
 
 +(void)readFromURL:(NSURL*)url withCompletion:(void (^)(NSData *data, NSError *error))completion{
+    if(![GroupFileUtil supported]){
+        if(completion){
+            completion(nil, [NSError errorWithDomain:@"group.net.bither" code:0 userInfo:nil]);
+        }
+        return;
+    }
     NSFileCoordinator *fileCoordinator = [[NSFileCoordinator alloc] init];
     
-    BOOL successfulSecurityScopedResourceAccess = NO;
-    
-    if([url respondsToSelector:@selector(startAccessingSecurityScopedResource)]){
-        successfulSecurityScopedResourceAccess = [url startAccessingSecurityScopedResource];
-    }
+    BOOL successfulSecurityScopedResourceAccess = [url startAccessingSecurityScopedResource];
     
     NSFileAccessIntent *readingIntent = [NSFileAccessIntent readingIntentWithURL:url options:NSFileCoordinatorReadingWithoutChanges];
     
@@ -207,13 +186,16 @@
 }
 
 +(void)writeToURL:(NSURL*)url withData:(NSData*)data withCompletion:(void (^)(NSError *error))completion{
+    if(![GroupFileUtil supported]){
+        if(completion){
+            completion([NSError errorWithDomain:@"group.net.bither" code:0 userInfo:nil]);
+        }
+        return;
+    }
+    
     NSFileCoordinator *fileCoordinator = [[NSFileCoordinator alloc] init];
     
-    BOOL successfulSecurityScopedResourceAccess = NO;
-    
-    if([url respondsToSelector:@selector(startAccessingSecurityScopedResource)]){
-        successfulSecurityScopedResourceAccess = [url startAccessingSecurityScopedResource];
-    }
+    BOOL successfulSecurityScopedResourceAccess = [url startAccessingSecurityScopedResource];
     
     NSFileAccessIntent *writingIntent = [NSFileAccessIntent writingIntentWithURL:url options:NSFileCoordinatorWritingForReplacing];
     
@@ -271,6 +253,10 @@
     });
     
     return queue;
+}
+
++(BOOL)supported{
+    return [[[NSFileCoordinator alloc] init] respondsToSelector:@selector(coordinateAccessWithIntents:queue:byAccessor:)];
 }
 
 +(BOOL)localeIsChina{

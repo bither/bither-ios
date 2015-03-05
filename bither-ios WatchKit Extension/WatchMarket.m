@@ -174,7 +174,7 @@ static NSDictionary *_currenciesRate = nil;
 
 +(NSArray*)readTickers{
     NSArray *tickers = nil;
-    NSString* s = [GroupFileUtil readFile:[GroupFileUtil tickerFile]];
+    NSString* s = [GroupFileUtil getTicker];
     if(s){
         NSError *error = nil;
         NSDictionary* dict = [NSJSONSerialization JSONObjectWithData:[s dataUsingEncoding:NSUTF8StringEncoding] options:0 error:&error];
@@ -186,11 +186,11 @@ static NSDictionary *_currenciesRate = nil;
 }
 
 +(WatchMarket *)getDefaultMarket{
-    return [[WatchMarket alloc] initWithMarketType:[GroupFileUtil defaultMarket]];
+    return [[WatchMarket alloc] initWithMarketType:[[GroupUserDefaultUtil instance] defaultMarket]];
 }
 
 + (double)getRateForMarket:(GroupMarketType)marketType {
-    GroupCurrency defaultCurrency = [GroupFileUtil defaultCurrency];
+    GroupCurrency defaultCurrency = [[GroupUserDefaultUtil instance] defaultCurrency];
     double rate = 1;
     GroupCurrency currency = [self getCurrencyForMarket:marketType];
     if (currency != defaultCurrency && [self getCurrenciesRate] != nil) {
@@ -220,7 +220,7 @@ static NSDictionary *_currenciesRate = nil;
 
 + (NSDictionary *)getCurrenciesRate{
     if (_currenciesRate == nil) {
-        NSString *currenciesRateStr = [GroupFileUtil readFile:[GroupFileUtil currencyRateFile]];
+        NSString *currenciesRateStr = [GroupFileUtil getCurrencyRate];
         if (currenciesRateStr == nil || currenciesRateStr.length == 0) {
             _currenciesRate = nil;
         } else {

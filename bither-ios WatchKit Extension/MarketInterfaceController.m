@@ -74,7 +74,7 @@
 }
 
 -(NSString*)stringForMoney:(double)money{
-    return [NSString stringWithFormat:@"%@ %.2f", [WatchMarket getCurrencySymbol:[GroupFileUtil defaultCurrency]], money];
+    return [NSString stringWithFormat:@"%@ %.2f", [WatchMarket getCurrencySymbol:[[GroupUserDefaultUtil instance] defaultCurrency]], money];
 }
 
 - (void)didDeactivate {

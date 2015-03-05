@@ -50,12 +50,12 @@ static NSDictionary *_currenciesRate = nil;
 
 + (void)setCurrenciesRate:(NSDictionary *)currenciesRate; {
     _currenciesRate = [self parseCurrenciesRate:currenciesRate];
-    [GroupFileUtil writeFile:[GroupFileUtil currencyRateFile] content:[currenciesRate jsonEncodedKeyValueString]];
+    [GroupFileUtil setCurrencyRate:[currenciesRate jsonEncodedKeyValueString]];
 }
 
 + (NSDictionary *)getCurrenciesRate; {
     if (_currenciesRate == nil) {
-        NSString *currenciesRateStr = [GroupFileUtil readFile:[GroupFileUtil currencyRateFile]];
+        NSString *currenciesRateStr = [GroupFileUtil getCurrencyRate];
         if (currenciesRateStr == nil || currenciesRateStr.length == 0) {
             _currenciesRate = nil;
         } else {

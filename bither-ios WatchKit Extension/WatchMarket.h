@@ -22,6 +22,7 @@
 #import <Foundation/Foundation.h>
 #import <WatchKit/WatchKit.h>
 #import "GroupFileUtil.h"
+#import "GroupUserDefaultUtil.h"
 
 @interface Ticker : NSObject
 @property (nonatomic,readwrite) double amount;

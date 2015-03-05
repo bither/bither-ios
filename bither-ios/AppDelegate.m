@@ -262,20 +262,22 @@ static StatusBarNotificationWindow* notificationWindow;
 }
 
 -(void)updateGroupBalance{
-    int64_t hdm = 0;
-    int64_t hot = 0;
-    int64_t cold = 0;
-    NSArray* allAddresses = [BTAddressManager instance].allAddresses;
-    for(BTAddress* a in allAddresses){
-        if(a.isHDM){
-            hdm += a.balance;
-        }else if(a.hasPrivKey){
-            hot+= a.balance;
-        }else{
-            cold+= a.balance;
+    if([GroupFileUtil supported]){
+        int64_t hdm = 0;
+        int64_t hot = 0;
+        int64_t cold = 0;
+        NSArray* allAddresses = [BTAddressManager instance].allAddresses;
+        for(BTAddress* a in allAddresses){
+            if(a.isHDM){
+                hdm += a.balance;
+            }else if(a.hasPrivKey){
+                hot+= a.balance;
+            }else{
+                cold+= a.balance;
+            }
         }
+        [GroupFileUtil setTotalBalanceWithHDM:hdm hot:hot andCold:cold];
     }
-    [GroupFileUtil setTotalBalanceWithHDM:hdm hot:hot andCold:cold];
 }
 
 -(void)callInHot:(VoidBlock)voidBlock{

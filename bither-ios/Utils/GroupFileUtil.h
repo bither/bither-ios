@@ -20,39 +20,23 @@
 //
 
 #import <Foundation/Foundation.h>
+#define kBitherGroupName (@"group.net.bither")
 
 @interface GroupFileUtil : NSObject
-typedef enum {
-    USDG, CNYG, EURG, GBPG, JPYG, KRWG, CADG, AUDG
-} GroupCurrency;
-
-typedef enum {
-    UnitBTCG, UnitbitsG
-} GroupBitcoinUnit;
-
-typedef enum {
-    BITSTAMPG = 1, BTCEG = 2, HUOBIG = 3, OKCOING = 4, BTCCHINAG = 5, CHBTCG = 6, BITFINEXG = 7, MARKET796G = 8
-} GroupMarketType;
-
-+(GroupMarketType)defaultMarket;
-
-+(void)setDefaultMarket:(GroupMarketType)market;
-
-+(GroupCurrency)defaultCurrency;
-
-+(void)setDefaultCurrency:(GroupCurrency)currency;
-
-+(GroupBitcoinUnit)defaultBitcoinUnit;
-
-+(void)setDefaultBitcoinUnit:(GroupBitcoinUnit)unit;
 
 +(void)setTotalBalanceWithHDM:(int64_t)hdm hot:(int64_t)hot andCold:(int64_t)cold;
 
 +(NSDictionary*)totalBalance;
 
-+(NSURL*)currencyRateFile;
++(void)setTicker:(NSString*)content;
 
-+(NSURL*)tickerFile;
++(NSString*)getTicker;
+
++(void)setCurrencyRate:(NSString*)currencyRate;
+
++(NSString*)getCurrencyRate;
+
++(BOOL)supported;
 
 +(NSString*)readFile:(NSURL*)url;
 

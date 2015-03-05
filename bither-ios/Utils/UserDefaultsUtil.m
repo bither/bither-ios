@@ -18,7 +18,7 @@
 #import "UserDefaultsUtil.h"
 #import "NSData+Hash.h"
 #import "StringUtil.h"
-#import "GroupFileUtil.h"
+#import "GroupUserDefaultUtil.h"
 
 #define PREFS_KEY_LAST_VERSION @"last_version"
 #define USER_DEFAULT_LAST_VER @"last_ver"
@@ -86,13 +86,13 @@ NSUserDefaults *userDefaults;
 -(void)setMarket:(MarketType) marketType{
     [userDefaults setInteger:marketType forKey:DEFAULT_MARKET];
     [userDefaults synchronize];
-    [GroupFileUtil setDefaultMarket:(GroupMarketType)marketType];
+    [[GroupUserDefaultUtil instance] setDefaultMarket:(GroupMarketType)marketType];
 }
 
 -(void)setExchangeType:(Currency) exchangeType{
     [userDefaults setInteger:exchangeType forKey:DEFAULT_EXCHANGE_RATE];
     [userDefaults synchronize];
-    [GroupFileUtil setDefaultCurrency:(GroupCurrency)exchangeType];
+    [[GroupUserDefaultUtil instance] setDefaultCurrency:(GroupCurrency)exchangeType];
 }
 -(Currency)getDefaultCurrency {
     NSInteger type=[self  getExchangeType];
@@ -226,7 +226,7 @@ NSUserDefaults *userDefaults;
 -(void)setBitcoinUnit:(BitcoinUnit)bitcoinUnit{
     [userDefaults setInteger:bitcoinUnit forKey:BITCOIN_UNIT];
     [userDefaults synchronize];
-    [GroupFileUtil setDefaultBitcoinUnit:(GroupBitcoinUnit)bitcoinUnit];
+    [[GroupUserDefaultUtil instance] setDefaultBitcoinUnit:(GroupBitcoinUnit)bitcoinUnit];
 }
 
 -(BitcoinUnit)getBitcoinUnit{

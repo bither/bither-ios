@@ -20,11 +20,12 @@
 //
 
 #import "WatchUnitUtil.h"
+#import "GroupUserDefaultUtil.h"
 
 @implementation WatchUnitUtil
 
 + (NSString *)stringForAmount:(int64_t)amount{
-    GroupBitcoinUnit unit = [GroupFileUtil defaultBitcoinUnit];
+    GroupBitcoinUnit unit = [[GroupUserDefaultUtil instance] defaultBitcoinUnit];
     NSString *sign = amount >= 0 ? @"" : @"-";
     uint64_t absValue = amount >= 0 ? amount : 0 - amount;
     NSUInteger unitSatoshis = [WatchUnitUtil satoshisForUnit:unit];

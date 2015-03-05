@@ -114,7 +114,7 @@
                                 </label>
                                 <group width="1" height="0.5" alignment="left" id="HmR-0B-Mjo">
                                     <items>
-                                        <imageView width="0.90000000000000002" height="1" alignment="center" verticalAlignment="center" contentMode="scaleAspectFit" id="x2H-Cr-zl8"/>
+                                        <imageView width="0.90000000000000002" height="1" alignment="center" verticalAlignment="center" id="x2H-Cr-zl8"/>
                                     </items>
                                 </group>
                             </items>

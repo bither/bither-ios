@@ -42,7 +42,7 @@ static BitherTime * bitherTime;
 -(void) start{
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0),^{
         NSError *error = nil;
-        NSData * data = [[GroupFileUtil readFile:[GroupFileUtil tickerFile]] dataUsingEncoding:NSUTF8StringEncoding];
+        NSData * data = [[GroupFileUtil getTicker] dataUsingEncoding:NSUTF8StringEncoding];
         if (data) {
             id returnValue = [NSJSONSerialization JSONObjectWithData:data options:0 error:&error];
             if (returnValue) {

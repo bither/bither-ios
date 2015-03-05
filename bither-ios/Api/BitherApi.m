@@ -131,7 +131,7 @@ static BitherApi *piApi;
     [self get:BITHER_EXCHANGE_TICKER withParams:nil networkType:BitherStats completed:^(MKNetworkOperation *completedOperation) {
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
             if (![StringUtil isEmpty:completedOperation.responseString]) {
-                [GroupFileUtil writeFile:[GroupFileUtil tickerFile] content:completedOperation.responseString];
+                [GroupFileUtil setTicker:completedOperation.responseString];
                 NSDictionary *dict = completedOperation.responseJSON;
                 [MarketUtil handlerResult:dict];
 
