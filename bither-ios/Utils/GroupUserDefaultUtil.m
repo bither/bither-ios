@@ -47,7 +47,12 @@ static GroupUserDefaultUtil *userDefaultsUtil;
 -(GroupMarketType)defaultMarket{
     if(userDefaults){
         NSInteger market=[userDefaults integerForKey:DEFAULT_MARKET];
-        return (GroupMarketType)market;
+        if(market > 0){
+            return (GroupMarketType)market;
+        }
+    }
+    if([self localeIsChina]){
+        return HUOBIG;
     }
     return BITSTAMPG;
 }
@@ -63,9 +68,10 @@ static GroupUserDefaultUtil *userDefaultsUtil;
     if(userDefaults){
         if ([userDefaults objectForKey:DEFAULT_EXCHANGE_RATE]){
             return (GroupCurrency)[userDefaults integerForKey:DEFAULT_EXCHANGE_RATE];
-        }else{
-            return USDG;
         }
+    }
+    if([self localeIsChina]){
+        return CNYG;
     }
     return USDG;
 }
@@ -89,5 +95,10 @@ static GroupUserDefaultUtil *userDefaultsUtil;
         [userDefaults setInteger:unit forKey:BITCOIN_UNIT];
         [userDefaults synchronize];
     }
+}
+
+-(BOOL)localeIsChina{
+    NSString * language = [[NSLocale preferredLanguages] objectAtIndex:0];
+    return  [language isEqualToString:@"zh-Hans"];
 }
 @end
