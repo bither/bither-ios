@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder.WatchKit.Storyboard" version="3.0" toolsVersion="7519.1" systemVersion="14C109" targetRuntime="watchKit" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="AgC-eL-Hgc">
+<document type="com.apple.InterfaceBuilder.WatchKit.Storyboard" version="3.0" toolsVersion="6751" systemVersion="14C1510" targetRuntime="watchKit" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="58z-ni-tOQ">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7513.1"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6736"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBWatchKitPlugin" version="3737"/>
     </dependencies>
     <scenes>
@@ -21,11 +21,10 @@
                     <connections>
                         <outlet property="gContainer" destination="ysO-G9-RwS" id="3rb-mn-gRz"/>
                         <outlet property="lblTotal" destination="Je9-T4-j1G" id="KWW-zI-5uQ"/>
-                        <segue destination="58z-ni-tOQ" kind="relationship" relationship="nextPage" id="LMa-ok-IlW"/>
                     </connections>
                 </controller>
             </objects>
-            <point key="canvasLocation" x="235" y="347"/>
+            <point key="canvasLocation" x="452" y="352"/>
         </scene>
         <!--Market Interface Controller-->
         <scene sceneID="2hb-rI-xfr">
@@ -34,9 +33,11 @@
                     <items>
                         <group width="1" height="1" alignment="center" verticalAlignment="center" layout="vertical" id="659-ka-I7p">
                             <items>
-                                <label alignment="left" text="OKCoin.CN" id="H6F-TW-cgD">
-                                    <fontDescription key="font" style="UICTFontTextStyleCaption2"/>
-                                </label>
+                                <button height="0.16" alignment="left" title="OKCoin.CN" id="W3h-2p-Vo1">
+                                    <connections>
+                                        <action selector="namePressed" destination="58z-ni-tOQ" id="kFm-bK-UGj"/>
+                                    </connections>
+                                </button>
                                 <label alignment="right" text="￥1545.01" textAlignment="right" minimumScaleFactor="0.80000000000000004" id="4ZY-6F-Lnf">
                                     <fontDescription key="font" type="system" weight="heavy" pointSize="25"/>
                                 </label>
@@ -76,18 +77,19 @@
                         </group>
                     </items>
                     <connections>
+                        <outlet property="btnName" destination="W3h-2p-Vo1" id="Wgo-fH-tcy"/>
                         <outlet property="gContainer" destination="659-ka-I7p" id="EmZ-BP-0oA"/>
                         <outlet property="ivTrending" destination="IDN-8h-XaF" id="3f4-39-8FC"/>
                         <outlet property="lblBuy" destination="Wma-yP-sVJ" id="U2E-ow-QIq"/>
                         <outlet property="lblHigh" destination="oLV-aM-wwV" id="UWm-2d-Le4"/>
                         <outlet property="lblLow" destination="mOW-Ci-NTh" id="8w0-GY-fdD"/>
-                        <outlet property="lblName" destination="H6F-TW-cgD" id="xC9-dH-VXQ"/>
                         <outlet property="lblPrice" destination="4ZY-6F-Lnf" id="SSH-xG-ack"/>
                         <outlet property="lblSell" destination="fG5-Y8-jhe" id="jVH-PV-Eiz"/>
+                        <segue destination="AgC-eL-Hgc" kind="relationship" relationship="nextPage" id="cK7-Sw-an2"/>
                     </connections>
                 </controller>
             </objects>
-            <point key="canvasLocation" x="418" y="347"/>
+            <point key="canvasLocation" x="226" y="352"/>
         </scene>
         <!--Glance Interface Controller-->
         <scene sceneID="BOz-TT-tkC">

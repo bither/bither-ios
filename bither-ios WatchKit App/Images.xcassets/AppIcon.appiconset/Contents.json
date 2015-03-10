@@ -33,9 +33,16 @@
     {
       "size" : "40x40",
       "idiom" : "watch",
-      "filename" : "bither_ios_80.png",
+      "scale" : "2x",
       "role" : "appLauncher",
-      "scale" : "2x"
+      "subtype" : "38mm"
+    },
+    {
+      "size" : "44x44",
+      "idiom" : "watch",
+      "scale" : "2x",
+      "role" : "longLook",
+      "subtype" : "42mm"
     },
     {
       "size" : "86x86",
@@ -52,6 +59,14 @@
       "filename" : "bither_ios_196.png",
       "role" : "quickLook",
       "subtype" : "42mm"
+    },
+    {
+      "size" : "40x40",
+      "idiom" : "watch",
+      "filename" : "bither_ios_80.png",
+      "unassigned" : true,
+      "role" : "appLauncher",
+      "scale" : "2x"
     }
   ],
   "info" : {

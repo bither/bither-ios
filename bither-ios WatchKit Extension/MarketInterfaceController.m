@@ -30,7 +30,7 @@
     WatchTrendingGraphicData *trending;
 }
 @property (weak, nonatomic) IBOutlet WKInterfaceGroup *gContainer;
-@property (weak, nonatomic) IBOutlet WKInterfaceLabel *lblName;
+@property (weak, nonatomic) IBOutlet WKInterfaceButton *btnName;
 @property (weak, nonatomic) IBOutlet WKInterfaceLabel *lblPrice;
 @property (weak, nonatomic) IBOutlet WKInterfaceImage *ivTrending;
 @property (weak, nonatomic) IBOutlet WKInterfaceLabel *lblHigh;
@@ -46,15 +46,28 @@
     [super awakeWithContext:context];
     market = [WatchMarket getDefaultMarket];
     tDrawer = [[WatchTrendingGraphicDrawer alloc]init];
+    trending = [WatchTrendingGraphicData getEmptyData];
+    [tDrawer setEmptyImage:self.ivTrending];
+    [self showMarket];
+}
+
+- (IBAction)namePressed {
+    GroupMarketType type = market.marketType;
+    if(type < MARKET796G){
+        type++;
+    } else {
+        type = BITSTAMPG;
+    }
+}
+
+- (void)showMarket{
     [self.gContainer setBackgroundColor:market.color];
-    [self.lblName setText:market.getName];
+    [self.btnName setTitle:market.getName];
     [self.lblPrice setText:[self stringForMoney:market.ticker.getDefaultExchangePrice]];
     [self.lblHigh setText:[self stringForMoney:market.ticker.getDefaultExchangeHigh]];
     [self.lblLow setText:[self stringForMoney:market.ticker.getDefaultExchangeLow]];
     [self.lblBuy setText:[NSString stringWithFormat:@"%@: %@", NSLocalizedString(@"buy", nil), [self stringForMoney:market.ticker.getDefaultExchangeBuy]]];
     [self.lblSell setText:[NSString stringWithFormat:@"%@: %@", NSLocalizedString(@"sell", nil), [self stringForMoney:market.ticker.getDefaultExchangeSell]]];
-    trending = [WatchTrendingGraphicData getEmptyData];
-    [tDrawer setEmptyImage:self.ivTrending];
 }
 
 - (void)willActivate {
