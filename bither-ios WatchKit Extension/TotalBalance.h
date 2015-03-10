@@ -1,5 +1,5 @@
 //
-//  CacheUtil.h
+//  TotalBalance.h
 //  bither-ios
 //
 //  Copyright 2014 http://Bither.net
@@ -15,15 +15,15 @@
 //  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 //  See the License for the specific language governing permissions and
 //  limitations under the License.
+//
+//  Created by songchenwen on 2015/2/27.
+//
 
 #import <Foundation/Foundation.h>
 
-@interface CacheUtil : NSObject
-+ (NSString *)getExchangeFile;
-+ (NSString *)getCurrenciesRateFile;
-+ (NSString *)getTickerFile;
-
-
-+(void)writeFile:(NSString *)fileName content:(NSString *)content;
-+(NSString*)readFile:(NSString*)fileName;
+@interface TotalBalance : NSObject
+-(uint64_t)hdm;
+-(uint64_t)hot;
+-(uint64_t)cold;
+-(uint64_t)total;
 @end

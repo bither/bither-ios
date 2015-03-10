@@ -1,5 +1,5 @@
 //
-//  CacheUtil.h
+//  WatchApi.h
 //  bither-ios
 //
 //  Copyright 2014 http://Bither.net
@@ -15,15 +15,18 @@
 //  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 //  See the License for the specific language governing permissions and
 //  limitations under the License.
+//
+//  Created by songchenwen on 2015/2/27.
+//
 
-#import <Foundation/Foundation.h>
+#import "BaseApi.h"
+#import "GroupUserDefaultUtil.h"
 
-@interface CacheUtil : NSObject
-+ (NSString *)getExchangeFile;
-+ (NSString *)getCurrenciesRateFile;
-+ (NSString *)getTickerFile;
+@interface WatchApi : BaseApi{
+    int version;
+}
 
-
-+(void)writeFile:(NSString *)fileName content:(NSString *)content;
-+(NSString*)readFile:(NSString*)fileName;
++ (WatchApi *)instance;
+-(void)getExchangeTrend:(GroupMarketType) marketType callback:(void (^)(NSArray *array)) callback andErrorCallBack:(void (^)(NSOperation *errorOp, NSError *error))errorCallback;
+- (void) getExchangeTicker:(void (^)(void))callback  andErrorCallBack:(void (^)(NSOperation *errorOp, NSError *error))errorCallback;
 @end

@@ -1,5 +1,5 @@
 //
-//  CacheUtil.h
+//  WatchMarketBgDrawer.h
 //  bither-ios
 //
 //  Copyright 2014 http://Bither.net
@@ -15,15 +15,17 @@
 //  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 //  See the License for the specific language governing permissions and
 //  limitations under the License.
+//
+//  Created by songchenwen on 2015/3/10.
+//
 
 #import <Foundation/Foundation.h>
+#import <WatchKit/WatchKit.h>
 
-@interface CacheUtil : NSObject
-+ (NSString *)getExchangeFile;
-+ (NSString *)getCurrenciesRateFile;
-+ (NSString *)getTickerFile;
+#define kWatchMarketBgAnimationFrameCount (20)
+#define kWatchMarketBgAnimationDuration (0.3)
 
-
-+(void)writeFile:(NSString *)fileName content:(NSString *)content;
-+(NSString*)readFile:(NSString*)fileName;
+@interface WatchMarketBgDrawer : NSObject
+-(instancetype)initWithFrom:(UIColor*)from to:(UIColor*)to;
+-(NSArray*)images;
 @end

@@ -1,5 +1,5 @@
 //
-//  CacheUtil.h
+//  WatchTrendingGraphicDrawer.h
 //  bither-ios
 //
 //  Copyright 2014 http://Bither.net
@@ -15,15 +15,20 @@
 //  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 //  See the License for the specific language governing permissions and
 //  limitations under the License.
+//
+//  Created by songchenwen on 2015/2/27.
+//
 
 #import <Foundation/Foundation.h>
+#import "WatchTrendingGraphicData.h"
+#import <WatchKit/WatchKit.h>
+#define kEmptyImageCacheName (@"TrendingGraphicEmpty")
 
-@interface CacheUtil : NSObject
-+ (NSString *)getExchangeFile;
-+ (NSString *)getCurrenciesRateFile;
-+ (NSString *)getTickerFile;
+#define kTrendingAnimationFrameCount (20)
+#define kTrendingAnimationDuration (0.3)
 
-
-+(void)writeFile:(NSString *)fileName content:(NSString *)content;
-+(NSString*)readFile:(NSString*)fileName;
+@interface WatchTrendingGraphicDrawer : NSObject
+-(void)setEmptyImage:(WKInterfaceImage*)iv;
+-(UIImage*)imageForData:(WatchTrendingGraphicData*)data;
+-(UIImage*)animatingImageFromData:(WatchTrendingGraphicData*)from toData:(WatchTrendingGraphicData*)to;
 @end

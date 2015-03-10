@@ -1,6 +1,6 @@
 //
-//  CacheUtil.h
-//  bither-ios
+//  InterfaceController.h
+//  bither-ios WatchKit Extension
 //
 //  Copyright 2014 http://Bither.net
 //
@@ -15,15 +15,13 @@
 //  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 //  See the License for the specific language governing permissions and
 //  limitations under the License.
+//
+//  Created by songchenwen on 2015/2/25.
+//
 
+#import <WatchKit/WatchKit.h>
 #import <Foundation/Foundation.h>
 
-@interface CacheUtil : NSObject
-+ (NSString *)getExchangeFile;
-+ (NSString *)getCurrenciesRateFile;
-+ (NSString *)getTickerFile;
+@interface InterfaceController : WKInterfaceController
 
-
-+(void)writeFile:(NSString *)fileName content:(NSString *)content;
-+(NSString*)readFile:(NSString*)fileName;
 @end

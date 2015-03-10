@@ -1,5 +1,5 @@
 //
-//  CacheUtil.h
+//  GroupFileUtil.h
 //  bither-ios
 //
 //  Copyright 2014 http://Bither.net
@@ -15,15 +15,30 @@
 //  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 //  See the License for the specific language governing permissions and
 //  limitations under the License.
+//
+//  Created by songchenwen on 2015/2/27.
+//
 
 #import <Foundation/Foundation.h>
+#define kBitherGroupName (@"group.net.bither")
 
-@interface CacheUtil : NSObject
-+ (NSString *)getExchangeFile;
-+ (NSString *)getCurrenciesRateFile;
-+ (NSString *)getTickerFile;
+@interface GroupFileUtil : NSObject
 
++(void)setTotalBalanceWithHDM:(int64_t)hdm hot:(int64_t)hot andCold:(int64_t)cold;
 
-+(void)writeFile:(NSString *)fileName content:(NSString *)content;
-+(NSString*)readFile:(NSString*)fileName;
++(NSDictionary*)totalBalance;
+
++(void)setTicker:(NSString*)content;
+
++(NSString*)getTicker;
+
++(void)setCurrencyRate:(NSString*)currencyRate;
+
++(NSString*)getCurrencyRate;
+
++(BOOL)supported;
+
++(NSString*)readFile:(NSURL*)url;
+
++(BOOL)writeFile:(NSURL*)url content:(NSString*)content;
 @end

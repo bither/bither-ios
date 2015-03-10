@@ -19,7 +19,7 @@
 #import "BitherTime.h"
 #import "BitherApi.h"
 #import "MarketUtil.h"
-#import "CacheUtil.h"
+#import "GroupFileUtil.h"
 
 static BitherTime * bitherTime;
 @interface BitherTime()
@@ -42,7 +42,7 @@ static BitherTime * bitherTime;
 -(void) start{
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0),^{
         NSError *error = nil;
-        NSData * data=[NSData dataWithContentsOfFile:[CacheUtil getTickerFile]];
+        NSData * data = [[GroupFileUtil getTicker] dataUsingEncoding:NSUTF8StringEncoding];
         if (data) {
             id returnValue = [NSJSONSerialization JSONObjectWithData:data options:0 error:&error];
             if (returnValue) {
