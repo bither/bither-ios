@@ -24,6 +24,7 @@
 #import "WatchUnitUtil.h"
 #import "WatchMarket.h"
 #import "WatchTrendingGraphicDrawer.h"
+#import "WatchApi.h"
 
 
 @interface GlanceController(){
@@ -45,16 +46,21 @@
     [super awakeWithContext:context];
     [self.lblBalance setText:[WatchUnitUtil stringForAmount:[[TotalBalance alloc] init].total]];
     market = [WatchMarket getDefaultMarket];
+    [self showMarket];
+    tDrawer = [[WatchTrendingGraphicDrawer alloc]init];
+    [tDrawer setEmptyImage:self.ivTrending];
+}
+
+- (void)showMarket{
     [self.gMarket setBackgroundColor:market.color];
     [self.lblMarketName setText:market.getName];
     [self.lblPrice setText:[NSString stringWithFormat:@"%@ %.2f", [WatchMarket getCurrencySymbol:[[GroupUserDefaultUtil instance] defaultCurrency]], market.ticker.getDefaultExchangePrice]];
-    tDrawer = [[WatchTrendingGraphicDrawer alloc]init];
-    [tDrawer setEmptyImage:self.ivTrending];
 }
 
 - (void)willActivate {
     [super willActivate];
     [self refreshTrending];
+    [self refreshTicker];
 }
 
 -(void)refreshTrending{
@@ -64,6 +70,18 @@
         [self.ivTrending startAnimatingWithImagesInRange:NSMakeRange(0, kTrendingAnimationFrameCount) duration:kTrendingAnimationDuration repeatCount:1];
     } andErrorCallback:^(NSError *error) {
         [self performSelector:@selector(refreshTrending) withObject:nil afterDelay:5];
+    }];
+}
+
+-(void)refreshTicker{
+    if(market.ticker){
+        return;
+    }
+    [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(refreshTicker) object:nil];
+    [[WatchApi instance]getExchangeTicker:^{
+        [self showMarket];
+    } andErrorCallBack:^(NSOperation *errorOp, NSError *error) {
+        [self performSelector:@selector(refreshTicker) withObject:nil afterDelay:2];
     }];
 }
 

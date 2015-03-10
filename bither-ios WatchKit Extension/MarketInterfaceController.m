@@ -24,6 +24,7 @@
 #import "WatchTrendingGraphicDrawer.h"
 #import "WatchMarketBgDrawer.h"
 #import "WatchUnitUtil.h"
+#import "WatchApi.h"
 
 @interface MarketInterfaceController (){
     WatchMarket* market;
@@ -64,6 +65,7 @@
     [self showMarket];
     [self showMarketBgFrom:fromColor];
     [self refreshTrending];
+    [self refreshTicker];
 }
 
 - (void)showMarket{
@@ -86,6 +88,19 @@
 - (void)willActivate {
     [super willActivate];
     [self refreshTrending];
+    [self refreshTicker];
+}
+
+-(void)refreshTicker{
+    if(market.ticker){
+        return;
+    }
+    [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(refreshTicker) object:nil];
+    [[WatchApi instance]getExchangeTicker:^{
+        [self showMarket];
+    } andErrorCallBack:^(NSOperation *errorOp, NSError *error) {
+        [self performSelector:@selector(refreshTicker) withObject:nil afterDelay:2];
+    }];
 }
 
 -(void)refreshTrending{
