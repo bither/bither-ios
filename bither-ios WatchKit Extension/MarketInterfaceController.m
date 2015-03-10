@@ -22,6 +22,7 @@
 #import "MarketInterfaceController.h"
 #import "WatchMarket.h"
 #import "WatchTrendingGraphicDrawer.h"
+#import "WatchMarketBgDrawer.h"
 #import "WatchUnitUtil.h"
 
 @interface MarketInterfaceController (){
@@ -47,9 +48,11 @@
     trending = [WatchTrendingGraphicData getEmptyData];
     [tDrawer setEmptyImage:self.ivTrending];
     [self showMarket];
+    [self showMarketBgFrom:nil];
 }
 
 - (IBAction)namePressed {
+    UIColor* fromColor = market.color;
     NSArray* markets = [WatchMarket getMarkets];
     NSUInteger index = [markets indexOfObject:market];
     if(index < markets.count - 1){
@@ -59,15 +62,25 @@
     }
     market = [markets objectAtIndex:index];
     [self showMarket];
+    [self showMarketBgFrom:fromColor];
     [self refreshTrending];
 }
 
 - (void)showMarket{
-    [self.gContainer setBackgroundColor:market.color];
     [self.btnName setTitle:market.getName];
     [self.lblPrice setText:[self stringForMoney:market.ticker.getDefaultExchangePrice]];
     [self.lblHigh setText:[self stringForMoney:market.ticker.getDefaultExchangeHigh]];
     [self.lblLow setText:[self stringForMoney:market.ticker.getDefaultExchangeLow]];
+}
+
+- (void)showMarketBgFrom:(UIColor*)from{
+    if(from){
+        NSArray* images = [[WatchMarketBgDrawer alloc]initWithFrom:from to:market.color].images;
+        [self.gContainer setBackgroundImage:[UIImage animatedImageWithImages:images duration:kWatchMarketBgAnimationDuration]];
+        [self.gContainer startAnimatingWithImagesInRange:NSMakeRange(0, images.count) duration:kWatchMarketBgAnimationDuration repeatCount:1];
+    }else{
+        [self.gContainer setBackgroundColor:market.color];
+    }
 }
 
 - (void)willActivate {

@@ -35,6 +35,7 @@
 		0A637B291AA0608600696260 /* TotalBalanceDrawer.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A637B281AA0608600696260 /* TotalBalanceDrawer.m */; };
 		0A6C0F5C1A4D548B00544B33 /* MessageSigningSetting.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A6C0F5B1A4D548B00544B33 /* MessageSigningSetting.m */; };
 		0A6C0F5F1A4D5E1900544B33 /* DialogSignMessageSelectAddress.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A6C0F5E1A4D5E1900544B33 /* DialogSignMessageSelectAddress.m */; };
+		0A6EB31D1AAE9DE200F59ED7 /* WatchMarketBgDrawer.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A6EB31C1AAE9DE200F59ED7 /* WatchMarketBgDrawer.m */; };
 		0A7F9D311AA83FA500D70BAC /* CacheUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 4269FF7A195A948A001213B9 /* CacheUtil.m */; };
 		0A8853AD1AA8466E00760014 /* GroupUserDefaultUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A8853AC1AA8466E00760014 /* GroupUserDefaultUtil.m */; };
 		0A8853AE1AA8466E00760014 /* GroupUserDefaultUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A8853AC1AA8466E00760014 /* GroupUserDefaultUtil.m */; };
@@ -364,6 +365,8 @@
 		0A6C0F5B1A4D548B00544B33 /* MessageSigningSetting.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageSigningSetting.m; sourceTree = "<group>"; };
 		0A6C0F5D1A4D5E1900544B33 /* DialogSignMessageSelectAddress.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DialogSignMessageSelectAddress.h; sourceTree = "<group>"; };
 		0A6C0F5E1A4D5E1900544B33 /* DialogSignMessageSelectAddress.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DialogSignMessageSelectAddress.m; sourceTree = "<group>"; };
+		0A6EB31B1AAE9DE200F59ED7 /* WatchMarketBgDrawer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WatchMarketBgDrawer.h; sourceTree = "<group>"; };
+		0A6EB31C1AAE9DE200F59ED7 /* WatchMarketBgDrawer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WatchMarketBgDrawer.m; sourceTree = "<group>"; };
 		0A8853AB1AA8466E00760014 /* GroupUserDefaultUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GroupUserDefaultUtil.h; sourceTree = "<group>"; };
 		0A8853AC1AA8466E00760014 /* GroupUserDefaultUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GroupUserDefaultUtil.m; sourceTree = "<group>"; };
 		0A93B5FF1A4A66080081D74D /* DialogSignMessageOutput.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DialogSignMessageOutput.h; sourceTree = "<group>"; };
@@ -875,6 +878,8 @@
 				0A4749781A9D7F0B003684E2 /* NotificationController.m */,
 				0A47497A1A9D7F0B003684E2 /* GlanceController.h */,
 				0A47497B1A9D7F0B003684E2 /* GlanceController.m */,
+				0A6EB31B1AAE9DE200F59ED7 /* WatchMarketBgDrawer.h */,
+				0A6EB31C1AAE9DE200F59ED7 /* WatchMarketBgDrawer.m */,
 				0A637B241AA0486300696260 /* WatchTrendingGraphicDrawer.h */,
 				0A637B251AA0486300696260 /* WatchTrendingGraphicDrawer.m */,
 				0A637B191AA0427200696260 /* WatchTrendingGraphicData.h */,
@@ -1855,6 +1860,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0A4182AE1A9DBB8600576A12 /* WatchStringUtil.m in Sources */,
+				0A6EB31D1AAE9DE200F59ED7 /* WatchMarketBgDrawer.m in Sources */,
 				0A52BDA61A9FFEB800BC8C3E /* GroupFileUtil.m in Sources */,
 				0A637B291AA0608600696260 /* TotalBalanceDrawer.m in Sources */,
 				0AFBA9361AA028850059CB4B /* NSDictionary+Fromat.m in Sources */,
