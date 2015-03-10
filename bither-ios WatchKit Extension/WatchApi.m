@@ -59,7 +59,8 @@ static WatchApi *piApi;
                 [GroupFileUtil setTicker:str];
                 NSDictionary *dict = completedOperation.responseJSON;
                 NSDictionary *currencies_rate_dict = dict[@"currencies_rate"];
-                [WatchMarket parseCurrenciesRate:currencies_rate_dict];
+                currencies_rate_dict = [WatchMarket parseCurrenciesRate:currencies_rate_dict];
+                [GroupFileUtil setCurrencyRate:[currencies_rate_dict jsonEncodedKeyValueString]];
                 if (callback) {
                     callback();
                 }

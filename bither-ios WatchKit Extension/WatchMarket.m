@@ -334,7 +334,7 @@ static NSMutableArray* markets;
     return name;
 }
 
-+ (NSDictionary *)parseCurrenciesRate:(NSDictionary *)dict; {
++ (NSDictionary *)parseCurrenciesRate:(NSDictionary *)dict {
     NSMutableDictionary *currenciesRate = [NSMutableDictionary dictionaryWithDictionary:dict];
     currenciesRate[@"USD"] = @1;
     return currenciesRate;
