@@ -30,6 +30,7 @@
 @interface GlanceController(){
     WatchTrendingGraphicDrawer* tDrawer;
     WatchMarket* market;
+    NSTimer *autoRefresh;
 }
 @property (weak, nonatomic) IBOutlet WKInterfaceLabel *lblBalance;
 @property (weak, nonatomic) IBOutlet WKInterfaceGroup *gMarket;
@@ -59,6 +60,12 @@
 
 - (void)willActivate {
     [super willActivate];
+    autoRefresh = [NSTimer timerWithTimeInterval:60 target:self selector:@selector(autoRefresh) userInfo:nil repeats:YES];
+    [[NSRunLoop currentRunLoop] addTimer:autoRefresh forMode:NSDefaultRunLoopMode];
+    [autoRefresh fire];
+}
+
+- (void)autoRefresh{
     [self refreshTrending];
     [self refreshTicker];
 }
@@ -74,18 +81,21 @@
 }
 
 -(void)refreshTicker{
-    if(market.ticker){
-        return;
-    }
     [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(refreshTicker) object:nil];
     [[WatchApi instance]getExchangeTicker:^{
-        [self showMarket];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self showMarket];
+        });
     } andErrorCallBack:^(NSOperation *errorOp, NSError *error) {
-        [self performSelector:@selector(refreshTicker) withObject:nil afterDelay:2];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self performSelector:@selector(refreshTicker) withObject:nil afterDelay:2];
+        });
     }];
 }
 
 - (void)didDeactivate {
+    [autoRefresh invalidate];
+    autoRefresh = nil;
     [super didDeactivate];
 }
 
