@@ -24,7 +24,6 @@ ErrorHandler errorHandler = ^(NSOperation *errorOp, NSError *error){
 };
 
 @interface BaseApi()
-@property (nonatomic ,readwrite) BOOL getCookieIsRunning;
 @end
 
 @implementation BaseApi
@@ -32,9 +31,6 @@ ErrorHandler errorHandler = ^(NSOperation *errorOp, NSError *error){
 - (instancetype)init
 {
     self = [super init];
-    if (self) {
-        self.getCookieIsRunning=NO;
-    }
     return self;
 }
 
@@ -61,6 +57,7 @@ ErrorHandler errorHandler = ^(NSOperation *errorOp, NSError *error){
 
 - (void)get:(NSString *)url withParams:(NSDictionary *)params networkType:(BitherNetworkType)networkType
   completed:(CompletedOperation)completedOperationParam andErrorCallback:(ErrorHandler)errorCallback; {
+        //NSLog(@"get 1:%@",url);
     [self get:url withParams:params networkType:networkType completed:completedOperationParam andErrorCallback:errorCallback ssl:NO];
 }
 
@@ -85,7 +82,7 @@ ErrorHandler errorHandler = ^(NSOperation *errorOp, NSError *error){
         //DLog(@"%@", [completedOperation responseString]);
         completedOperationParam(completedOperation);
     }errorHandler:^(MKNetworkOperation *completedOperation, NSError *error) {
-        NSLog(@"completedOperation:%@",completedOperation);
+       // NSLog(@"completedOperation:%@",completedOperation);
         if ( completedOperation.HTTPStatusCode == 403) {
             [self getCookie:^(MKNetworkOperation *completedOperation) {
             } andErrorCallBack:^(NSOperation *errorOp, NSError *error) {
@@ -123,7 +120,6 @@ ErrorHandler errorHandler = ^(NSOperation *errorOp, NSError *error){
     [post addCompletionHandler:^(MKNetworkOperation *completedOperation){
         completedOperationParam(completedOperation);
     }errorHandler:^(MKNetworkOperation *completedOperation, NSError *error) {
-        NSLog(@"completedOperation:%@",completedOperation);
         if (completedOperation.HTTPStatusCode == 403) {
             [self getCookie:^(MKNetworkOperation *completedOperation) {
             } andErrorCallBack:^(NSOperation *errorOp, NSError *error) {
@@ -139,23 +135,21 @@ ErrorHandler errorHandler = ^(NSOperation *errorOp, NSError *error){
 }
 -(void)getCookie:(CompletedOperation) completedOperationParam andErrorCallBack:(ErrorHandler) errorCallback{
     @synchronized(self) {
-        if (self.getCookieIsRunning) {
+        if ([[BitherEngine instance] getCookies].count >0) {
+            completedOperationParam(nil);
             return;
         }
-        self.getCookieIsRunning=YES;
         long long timestmap=((long long)[[NSDate date] timeIntervalSince1970])*FORMAT_TIMESTAMP_INTERVAL+215;
         NSMutableDictionary *md = [[NSMutableDictionary alloc] init];
         MKNetworkEngine *mkNetworkEngine=[self getNetworkEngine:BitherUser];
         [md setValue:[NSNumber numberWithLongLong:timestmap] forKey:TIME_STRING];
         MKNetworkOperation *post = [mkNetworkEngine operationWithPath:BITHER_GET_COOKIE_URL params:md httpMethod:HTTP_POST];
         [post addCompletionHandler:^(MKNetworkOperation *completedOperation){
-            self.getCookieIsRunning=NO;
             [[BitherEngine instance] setEngineCookie];
             if (completedOperationParam) {
                 completedOperationParam(completedOperation);
             }
         }errorHandler:^(MKNetworkOperation *completedOperation, NSError *error) {
-            self.getCookieIsRunning=NO;
             if (errorCallback) {
                 errorCallback(completedOperation,error);
             }

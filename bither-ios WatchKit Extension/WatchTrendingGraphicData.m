@@ -129,25 +129,25 @@ static NSMutableDictionary * tgds;
         }
     }
     
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0),^{
-        [[WatchApi instance] getExchangeTrend:marketType callback:^(NSArray *array) {
-            WatchTrendingGraphicData * tgd=[WatchTrendingGraphicData format:array];
-            [tgds setObject:tgd forKey:@(marketType)];
-            dispatch_async(dispatch_get_main_queue(), ^{
-                tgd.marketType = marketType;
-                if (callback) {
-                    callback(tgd);
-                }
-            });
-            
-        } andErrorCallBack:^(NSOperation *errorOp, NSError *error) {
-            dispatch_async(dispatch_get_main_queue(), ^{
-                if (errorCallback) {
-                    errorCallback(error);
-                }
-            });
-        }];
-    });
+    
+    [[WatchApi instance] getExchangeTrend:marketType callback:^(NSArray *array) {
+        WatchTrendingGraphicData * tgd=[WatchTrendingGraphicData format:array];
+        [tgds setObject:tgd forKey:@(marketType)];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            tgd.marketType = marketType;
+            if (callback) {
+                callback(tgd);
+            }
+        });
+        
+    } andErrorCallBack:^(NSOperation *errorOp, NSError *error) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            if (errorCallback) {
+                errorCallback(error);
+            }
+        });
+    }];
+
     
 }
 +(void)clearCache{
