@@ -156,8 +156,22 @@ static NSDictionary *_currenciesRate = nil;
     }
 }
 
+-(BOOL)isEqual:(id)object{
+    if([object isKindOfClass:[WatchMarket class]]){
+        if(((WatchMarket*) object).marketType == self.marketType){
+            return YES;
+        }
+    }
+    return NO;
+}
+
+static NSMutableArray* markets;
+
 +(NSArray *)getMarkets{
-    NSMutableArray* markets=[NSMutableArray new];
+    if(markets && markets.count > 0){
+        return markets;
+    }
+    markets=[NSMutableArray new];
     NSArray *tickers = [WatchMarket readTickers];
     for(GroupMarketType marketType=BITSTAMPG; marketType<=MARKET796G; marketType++){
         Ticker* t = nil;
@@ -186,6 +200,11 @@ static NSDictionary *_currenciesRate = nil;
 }
 
 +(WatchMarket *)getDefaultMarket{
+    for(WatchMarket* w in [WatchMarket getMarkets]){
+        if(w.marketType == [[GroupUserDefaultUtil instance] defaultMarket]){
+            return w;
+        }
+    }
     return [[WatchMarket alloc] initWithMarketType:[[GroupUserDefaultUtil instance] defaultMarket]];
 }
 

@@ -52,12 +52,16 @@
 }
 
 - (IBAction)namePressed {
-    GroupMarketType type = market.marketType;
-    if(type < MARKET796G){
-        type++;
-    } else {
-        type = BITSTAMPG;
+    NSArray* markets = [WatchMarket getMarkets];
+    NSUInteger index = [markets indexOfObject:market];
+    if(index < markets.count - 1){
+        index++;
+    }else{
+        index = 0;
     }
+    market = [markets objectAtIndex:index];
+    [self showMarket];
+    [self refreshTrending];
 }
 
 - (void)showMarket{
