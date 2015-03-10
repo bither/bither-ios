@@ -20,6 +20,9 @@
 //
 
 #import "WatchApi.h"
+#import "GroupFileUtil.h"
+#import "WatchStringUtil.h"
+#import "WatchMarket.h"
 
 static WatchApi *piApi;
 @implementation WatchApi
@@ -45,6 +48,31 @@ static WatchApi *piApi;
             errorCallback(errorOp, error);
         }
     }];
+}
+
+
+- (void)getExchangeTicker:(void (^)(void))callback  andErrorCallBack:(void (^)(NSOperation *errorOp, NSError *error))errorCallback{
+    [self get:BITHER_EXCHANGE_TICKER withParams:nil networkType:BitherStats completed:^(MKNetworkOperation *completedOperation) {
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+            NSString * str=completedOperation.responseString;
+            if (!(str==nil||str.length==0)) {
+                [GroupFileUtil setTicker:str];
+                NSDictionary *dict = completedOperation.responseJSON;
+                NSDictionary *currencies_rate_dict = dict[@"currencies_rate"];
+                [WatchMarket parseCurrenciesRate:currencies_rate_dict];
+                if (callback) {
+                    callback();
+                }
+            }
+            
+        });
+    } andErrorCallback:^(NSOperation *errorOp, NSError *error) {
+        if (errorCallback) {
+            errorCallback(errorOp, error);
+        }
+        
+    }];
+    
 }
 
 @end

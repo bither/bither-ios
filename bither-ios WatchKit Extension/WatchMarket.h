@@ -60,6 +60,7 @@
 +(NSArray *)getMarkets;
 +(WatchMarket *)getDefaultMarket;
 
++ (NSDictionary *)parseCurrenciesRate:(NSDictionary *)dict;
 + (double)getRateForMarket:(GroupMarketType)marketType;
 + (NSString *)getCurrencySymbol:(GroupCurrency)currency;
 @end
