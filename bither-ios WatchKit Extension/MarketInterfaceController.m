@@ -35,8 +35,6 @@
 @property (weak, nonatomic) IBOutlet WKInterfaceImage *ivTrending;
 @property (weak, nonatomic) IBOutlet WKInterfaceLabel *lblHigh;
 @property (weak, nonatomic) IBOutlet WKInterfaceLabel *lblLow;
-@property (weak, nonatomic) IBOutlet WKInterfaceLabel *lblSell;
-@property (weak, nonatomic) IBOutlet WKInterfaceLabel *lblBuy;
 
 @end
 
@@ -70,8 +68,6 @@
     [self.lblPrice setText:[self stringForMoney:market.ticker.getDefaultExchangePrice]];
     [self.lblHigh setText:[self stringForMoney:market.ticker.getDefaultExchangeHigh]];
     [self.lblLow setText:[self stringForMoney:market.ticker.getDefaultExchangeLow]];
-    [self.lblBuy setText:[NSString stringWithFormat:@"%@: %@", NSLocalizedString(@"buy", nil), [self stringForMoney:market.ticker.getDefaultExchangeBuy]]];
-    [self.lblSell setText:[NSString stringWithFormat:@"%@: %@", NSLocalizedString(@"sell", nil), [self stringForMoney:market.ticker.getDefaultExchangeSell]]];
 }
 
 - (void)willActivate {

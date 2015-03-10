@@ -39,36 +39,19 @@
                                     </connections>
                                 </button>
                                 <label alignment="right" text="￥1545.01" textAlignment="right" minimumScaleFactor="0.80000000000000004" id="4ZY-6F-Lnf">
-                                    <fontDescription key="font" type="system" weight="heavy" pointSize="25"/>
+                                    <fontDescription key="font" type="system" weight="heavy" pointSize="30"/>
                                 </label>
-                                <imageView width="0.90000000000000002" height="0.35999999999999999" alignment="center" id="IDN-8h-XaF">
-                                    <variation key="device=watch38mm" height="0.29999999999999999"/>
+                                <imageView width="0.90000000000000002" height="0.46000000000000002" alignment="center" id="IDN-8h-XaF">
+                                    <variation key="device=watch38mm" height="0.40000000000000002"/>
                                 </imageView>
-                                <group width="1" alignment="left" id="tpf-RW-COw">
+                                <group width="1" alignment="left" verticalAlignment="bottom" id="tpf-RW-COw">
                                     <items>
-                                        <group height="1" alignment="left" layout="vertical" id="Ly4-1t-pn8">
-                                            <items>
-                                                <label alignment="left" text="Label" minimumScaleFactor="0.50000000000000011" id="oLV-aM-wwV">
-                                                    <fontDescription key="font" type="system" weight="light" pointSize="11"/>
-                                                </label>
-                                                <label alignment="left" text="Label" minimumScaleFactor="0.50000000000000011" id="mOW-Ci-NTh">
-                                                    <fontDescription key="font" type="system" weight="light" pointSize="11"/>
-                                                </label>
-                                            </items>
-                                        </group>
-                                        <separator alignment="left" id="2vd-LV-pWp">
-                                            <color key="color" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                        </separator>
-                                        <group height="1" alignment="right" layout="vertical" id="QEh-TT-FYJ">
-                                            <items>
-                                                <label alignment="right" text="Label" textAlignment="right" minimumScaleFactor="0.50000000000000011" id="fG5-Y8-jhe">
-                                                    <fontDescription key="font" type="system" weight="light" pointSize="11"/>
-                                                </label>
-                                                <label alignment="right" text="Label" textAlignment="right" minimumScaleFactor="0.50000000000000011" id="Wma-yP-sVJ">
-                                                    <fontDescription key="font" type="system" weight="light" pointSize="11"/>
-                                                </label>
-                                            </items>
-                                        </group>
+                                        <label width="0.5" alignment="left" verticalAlignment="center" text="Label" minimumScaleFactor="0.50000000000000011" id="mOW-Ci-NTh">
+                                            <fontDescription key="font" type="system" weight="light" pointSize="11"/>
+                                        </label>
+                                        <label width="0.5" alignment="right" verticalAlignment="center" text="Label" textAlignment="right" minimumScaleFactor="0.50000000000000011" id="oLV-aM-wwV">
+                                            <fontDescription key="font" type="system" weight="light" pointSize="11"/>
+                                        </label>
                                     </items>
                                     <edgeInsets key="margins" left="0.0" right="0.0" top="7" bottom="0.0"/>
                                 </group>
@@ -80,11 +63,9 @@
                         <outlet property="btnName" destination="W3h-2p-Vo1" id="Wgo-fH-tcy"/>
                         <outlet property="gContainer" destination="659-ka-I7p" id="EmZ-BP-0oA"/>
                         <outlet property="ivTrending" destination="IDN-8h-XaF" id="3f4-39-8FC"/>
-                        <outlet property="lblBuy" destination="Wma-yP-sVJ" id="U2E-ow-QIq"/>
                         <outlet property="lblHigh" destination="oLV-aM-wwV" id="UWm-2d-Le4"/>
                         <outlet property="lblLow" destination="mOW-Ci-NTh" id="8w0-GY-fdD"/>
                         <outlet property="lblPrice" destination="4ZY-6F-Lnf" id="SSH-xG-ack"/>
-                        <outlet property="lblSell" destination="fG5-Y8-jhe" id="jVH-PV-Eiz"/>
                         <segue destination="AgC-eL-Hgc" kind="relationship" relationship="nextPage" id="cK7-Sw-an2"/>
                     </connections>
                 </controller>
