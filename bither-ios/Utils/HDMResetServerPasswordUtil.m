@@ -148,9 +148,11 @@
 
 - (void)handleResult:(NSString *)result byReader:(ScanQrCodeViewController *)reader {
     serverSignature = result;
-    [hdmIdCondition lock];
-    [hdmIdCondition signal];
-    [hdmIdCondition unlock];
+    [reader dismissViewControllerAnimated:YES completion:^{
+        [hdmIdCondition lock];
+        [hdmIdCondition signal];
+        [hdmIdCondition unlock];
+    }];
 }
 
 - (void)handleScanCancelByReader:(ScanQrCodeViewController *)reader {

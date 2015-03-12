@@ -297,7 +297,6 @@
     if(!hdmBid){
         return;
     }
-    result=[[result hexToData] base64EncodedStringWithOptions:0];
     [dp showInWindow:self.window completion:^{
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
             NSString* password = self.passwordGetter.password;
