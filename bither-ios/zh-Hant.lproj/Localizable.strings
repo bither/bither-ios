@@ -606,3 +606,9 @@
 
 "not_verify_bither_private_key_qrcode"="不是比太私鑰二維碼";
 
+// hdm reset server password
+"hdm_reset_server_password_password_wrong_confirm" = "HDM 服務器授權失效.\n使用 HDM 冷重新授權?";
+"hdm_reset_server_password_confirm" = "確認重置 HDM 服務器授權?";
+"hdm_reset_server_password_setting_name" = "重置 HDM 服務器授權";
+"hdm_reset_server_password_success" = "HDM 服務器授權已重置";
+
