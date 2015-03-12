@@ -126,7 +126,7 @@
     dispatch_sync(dispatch_get_main_queue(), ^{
         [dp showInWindow:vc.view.window];
     });
-    [hdmBid changeBidPasswordWithSignature:serverSignature andPassword:password andError:error];
+    [hdmBid changeBidPasswordWithSignature:serverSignature andPassword:password andError:&error];
     if (error) {
         if (error.isHttp400) {
             [self showMsg:error.msg];
