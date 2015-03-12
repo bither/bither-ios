@@ -297,7 +297,6 @@
     if(!hdmBid){
         return;
     }
-    result=[[result hexToData] base64EncodedStringWithOptions:0];
     [dp showInWindow:self.window completion:^{
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
             NSString* password = self.passwordGetter.password;
@@ -305,7 +304,7 @@
                 return;
             }
             __block NSError* error;
-            [hdmBid changeBidPasswordWithSignature:result andPassword:password andHotAddress:[BTAddressManager instance].hdmKeychain.firstAddressFromDb andError:&error];
+            [hdmBid changeBidPasswordWithSignature:result andPassword:password andError:&error];
             if(error){
                 dispatch_async(dispatch_get_main_queue(), ^{
                     [dp dismissWithCompletion:^{

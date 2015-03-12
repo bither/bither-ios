@@ -605,3 +605,9 @@
 "hdm_import_word_list_replace"="替换";
 
 "not_verify_bither_private_key_qrcode"="不是比太私钥二维码";
+
+// hdm reset server password
+"hdm_reset_server_password_password_wrong_confirm" = "HDM 服务器授权失效.\n使用 HDM 冷重新授权?";
+"hdm_reset_server_password_confirm" = "确认重置 HDM 服务器授权?";
+"hdm_reset_server_password_setting_name" = "重置 HDM 服务器授权";
+"hdm_reset_server_password_success" = "HDM 服务器授权已重置";
