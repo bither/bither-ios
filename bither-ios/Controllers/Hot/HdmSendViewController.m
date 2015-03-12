@@ -41,11 +41,14 @@
 #import "QRCodeTxTransport.h"
 #import "BTQRCodeUtil.h"
 #import "BTHDMBid+Api.h"
+#import "DialogAlert.h"
+#import "HDMResetServerPasswordUtil.h"
+#import "UIViewController+PiShowBanner.h"
 
 #define kBalanceFontSize (15)
 #define kSendButtonQrIconSize (20)
 
-@interface HdmSendViewController()<UITextFieldDelegate,ScanQrCodeDelegate,DialogSendTxConfirmDelegate>{
+@interface HdmSendViewController()<UITextFieldDelegate,ScanQrCodeDelegate,DialogSendTxConfirmDelegate,ShowBannerDelegete>{
     DialogProgressChangable *dp;
     BOOL signWithCold;
     BOOL isInRecovery;
@@ -71,8 +74,9 @@
 @end
 
 @interface RemoteSigFetcher : NSObject
--(instancetype) initWithIndex:(UInt32)index password:(NSString*)password unsignedHashes:(NSArray*)unsignedHashes andTx:(BTTx*)tx;
+-(instancetype) initWithIndex:(UInt32)index password:(NSString*)password unsignedHashes:(NSArray*)unsignedHashes tx:(BTTx*)tx vc:(UIViewController<ShowBannerDelegete> *)vc andDp:(DialogProgressChangable *)dp;
 -(NSArray *)sigs;
+@property BOOL userCancel;
 @property NSString *errorMsg;
 @end
 
@@ -175,9 +179,10 @@
                         return sigs;
                     };
                     NSArray* (^remoteFetcher)(UInt32 index, NSString* password, NSArray* unsignHashes, BTTx* tx) = ^NSArray *(UInt32 index, NSString *password, NSArray *unsignedHashes, BTTx *tx){
-                        RemoteSigFetcher *f = [[RemoteSigFetcher alloc] initWithIndex:index password:password unsignedHashes:unsignedHashes andTx:tx];
+                        RemoteSigFetcher *f = [[RemoteSigFetcher alloc] initWithIndex:index password:password unsignedHashes:unsignedHashes tx:tx vc:self andDp:dp];
                         NSArray *sigs = f.sigs;
                         errorMsg = f.errorMsg;
+                        userCanceled = f.userCancel;
                         return sigs;
                     };
                     @try{
@@ -259,6 +264,10 @@
             [self showBannerWithMessage:msg belowView:self.vTopBar];
         }];
     });
+}
+
+-(void)showBannerWithMessage:(NSString *)msg {
+    [self showBannerWithMessage:msg belowView:self.vTopBar];
 }
 
 - (IBAction)scanPressed:(id)sender {
@@ -555,15 +564,22 @@
     NSString* _password;
     NSArray *_unsignedHashes;
     BTTx* _tx;
+    BOOL toChangePassword;
+    UIViewController<ShowBannerDelegete> *vc;
+    DialogProgressChangable *dp;
 }
 
-- (instancetype)initWithIndex:(UInt32)index password:(NSString *)password unsignedHashes:(NSArray *)unsignedHashes andTx:(BTTx *)tx {
+- (instancetype)initWithIndex:(UInt32)index password:(NSString *)password unsignedHashes:(NSArray *)unsignedHashes tx:(BTTx*)tx vc:(UIViewController<ShowBannerDelegete> *)v andDp:(DialogProgressChangable *)d {
     self = [super init];
     if(self){
         _index = index;
         _password = password;
         _unsignedHashes = unsignedHashes;
         _tx = tx;
+        vc = v;
+        dp = d;
+        toChangePassword = NO;
+        self.userCancel = NO;
     }
     return self;
 }
@@ -580,14 +596,46 @@
     }
     if(error){
         if(error.isHttp400){
-            self.errorMsg = NSLocalizedString(@"hdm_address_sign_tx_server_error", nil);
+            if(error.code == HDMBID_PASSWORD_WRONG){
+                if(![self changePassword]){
+                    self.userCancel = YES;
+                    return nil;
+                }
+                return [self sigs];
+            }else{
+                self.errorMsg = NSLocalizedString(@"hdm_address_sign_tx_server_error", nil);
+            }
         }else{
             self.errorMsg = NSLocalizedString(@"Network failure.", nil);
         }
         return nil;
     }
     return array1;
+}
 
+- (BOOL)changePassword{
+    toChangePassword = NO;
+    __block NSCondition *condition = [NSCondition new];
+    dispatch_sync(dispatch_get_main_queue(), ^{
+        [[[DialogAlert alloc] initWithMessage:NSLocalizedString(@"hdm_reset_server_password_password_wrong_confirm", nil) confirm:^{
+            toChangePassword = YES;
+            [condition lock];
+            [condition signal];
+            [condition unlock];
+        } cancel:^{
+            toChangePassword = NO;
+            [condition lock];
+            [condition signal];
+            [condition unlock];
+        }] showInWindow:vc.view.window];
+    });
+    [condition lock];
+    [condition wait];
+    [condition unlock];
+    if(!toChangePassword){
+        return NO;
+    }
+    return [[[HDMResetServerPasswordUtil alloc] initWithViewController:vc dialogProgress:dp andPassword:_password] changeServerPassword];
 }
 
 @end
