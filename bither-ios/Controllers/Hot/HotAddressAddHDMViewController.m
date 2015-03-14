@@ -29,6 +29,7 @@
     UIImageView *flashingIv;
     CGFloat containerFullWidth;
     CGFloat containerFullTop;
+    BOOL shouldGoSingular;
 }
 @property(weak, nonatomic) IBOutlet UIView *vContainer;
 @property(weak, nonatomic) IBOutlet HDMTriangleBgView *vBg;
@@ -41,6 +42,10 @@
 @property(weak, nonatomic) IBOutlet UILabel *lblHot;
 @property(weak, nonatomic) IBOutlet UILabel *lblCold;
 @property(weak, nonatomic) IBOutlet UILabel *lblServer;
+@property (weak, nonatomic) IBOutlet UIView *vSingularModeContainer;
+@property (weak, nonatomic) IBOutlet UIView *vSingularModeRunning;
+@property (weak, nonatomic) IBOutlet UIView *vSingularModeChecking;
+@property (weak, nonatomic) IBOutlet UIButton *btnSingularModeCheck;
 
 @property HDMHotAddUtil *util;
 @end
@@ -51,6 +56,7 @@
     [super viewDidLoad];
     containerFullTop = self.vContainer.frame.origin.y;
     containerFullWidth = self.vContainer.frame.size.width;
+    shouldGoSingular = NO;
     [self configureContainerFull];
     if (!self.util) {
         self.util = [[HDMHotAddUtil alloc] initWithViewContoller:self];
@@ -203,7 +209,7 @@
 }
 
 - (BOOL)shouldGoSingularMode {
-    return NO;
+    return shouldGoSingular;
 }
 
 - (void)singularServerFinishWithWords:(NSArray *)words andColdQr:(NSString *)qr {
@@ -249,6 +255,13 @@
         }                completion:nil];
     }
 }
+
+- (IBAction)singularModeCheckPressed:(id)sender {
+}
+
+- (IBAction)singularModeInfoPressed:(id)sender {
+}
+
 
 - (IBAction)hotPressed:(id)sender {
     [self.util hot];

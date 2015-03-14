@@ -310,3 +310,9 @@
 
 /* Class = "IBUIButton"; normalTitle = "Generate"; ObjectID = "gHB-fo-cHb"; */
 "gHB-fo-cHb.normalTitle" = "增加";
+
+/* Class = "UIButton"; normalTitle = "Singular Mode"; ObjectID = "EXG-fG-TbM"; */
+"EXG-fG-TbM.normalTitle" = "单机模式";
+
+/* Class = "UILabel"; text = "Singular Mode"; ObjectID = "IzA-vJ-Ad6"; */
+"IzA-vJ-Ad6.text" = "单机模式";

@@ -262,6 +262,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0A2038F91AB3E5EC007CCB80 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/MainStoryboard.strings; sourceTree = "<group>"; };
 		0A259E231A47F19100D7F707 /* DialogSendOption.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DialogSendOption.h; sourceTree = "<group>"; };
 		0A259E241A47F19100D7F707 /* DialogSendOption.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DialogSendOption.m; sourceTree = "<group>"; };
 		0A259E261A47FDF600D7F707 /* DialogSelectChangeAddress.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DialogSelectChangeAddress.h; sourceTree = "<group>"; };
@@ -432,7 +433,6 @@
 		AC026C8619EE5FF500BC0152 /* libPods-Reachability.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libPods-Reachability.a"; path = "Pods/build/Debug-iphoneos/libPods-Reachability.a"; sourceTree = "<group>"; };
 		AC026C8719EE5FF500BC0152 /* libPods-RegexKitLite.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libPods-RegexKitLite.a"; path = "Pods/build/Debug-iphoneos/libPods-RegexKitLite.a"; sourceTree = "<group>"; };
 		AC026C8919EE5FF500BC0152 /* libPods.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libPods.a; path = "Pods/build/Debug-iphoneos/libPods.a"; sourceTree = "<group>"; };
-		AC1454A21A80C34F00E851B4 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/MainStoryboard.strings; sourceTree = "<group>"; };
 		AC1454A31A80D04D00E851B4 /* DialogOperationWorld.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DialogOperationWorld.h; sourceTree = "<group>"; };
 		AC1454A41A80D04D00E851B4 /* DialogOperationWorld.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DialogOperationWorld.m; sourceTree = "<group>"; };
 		AC1454A61A80D30E00E851B4 /* DialogReplaceWorld.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DialogReplaceWorld.h; sourceTree = "<group>"; };
@@ -1878,7 +1878,7 @@
 				42EFB5511949C52100376888 /* Base */,
 				AC229A7A196A466400A7FB5E /* zh-Hans */,
 				AC229A7B196A466900A7FB5E /* zh-Hant */,
-				AC1454A21A80C34F00E851B4 /* en */,
+				0A2038F91AB3E5EC007CCB80 /* en */,
 			);
 			name = MainStoryboard.storyboard;
 			sourceTree = "<group>";
