@@ -208,6 +208,9 @@
 - (void)onSingularModeBegin {
     self.vSingularModeChecking.hidden = YES;
     self.vSingularModeRunning.hidden = NO;
+    if ([self.parentViewController.parentViewController conformsToProtocol:@protocol(HDMSingularAddViewContainer)]) {
+        [((NSObject <HDMSingularAddViewContainer> *) self.parentViewController.parentViewController) setHDMSingularCancellable:NO];
+    }
 }
 
 - (BOOL)shouldGoSingularMode {
@@ -219,14 +222,19 @@
     self.vSingularModeRunning.hidden = YES;
     self.vSingularModeChecking.hidden = NO;
     [self.vBg removeAllLines];
+    if ([self.parentViewController.parentViewController conformsToProtocol:@protocol(HDMSingularAddViewContainer)]) {
+        [((NSObject <HDMSingularAddViewContainer> *) self.parentViewController.parentViewController) setHDMSingularCancellable:YES];
+    }
     self.util = [[HDMHotAddUtil alloc] initWithViewContoller:self];
 }
 
+- (IBAction)singularModeInfoPressed:(id)sender {
+    //TODO singularModeInfo
+}
+
 - (void)singularServerFinishWithWords:(NSArray *)words andColdQr:(NSString *)qr {
-    NSLog(@"singular mode finished");
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t) (1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        [self dismissViewControllerAnimated:YES completion:nil];
-    });
+
+    //TODO singular cold show
 }
 
 - (void)configureContainerFull {
@@ -276,10 +284,6 @@
     } else {
         [self.btnSingularModeCheck setImage:[UIImage imageNamed:@"btn_check_off_holo_light"] forState:UIControlStateNormal];
     }
-}
-
-- (IBAction)singularModeInfoPressed:(id)sender {
-
 }
 
 - (void)configureHDMSingularView {
