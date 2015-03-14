@@ -53,20 +53,22 @@
     NSArray *coldWords;
     NSString *coldQr;
 }
-@property(weak) UIViewController <HDMSingularDelegate> *controller;
+@property(weak) UIViewController *controller;
+@property(weak) NSObject <HDMSingularDelegate> *delegate;
 @end
 
 @implementation HDMSingular
-- (instancetype)initWithController:(UIViewController <HDMSingularDelegate> *)controller {
+- (instancetype)initWithController:(UIViewController *)controller andDelegate:(NSObject <HDMSingularDelegate> *)delegate {
     self = [super init];
     if (self) {
         self.controller = controller;
+        self.delegate = delegate;
         if (![BTAddressManager instance].hdmKeychain) {
-            [controller setSingularModeAvailable:YES];
+            [delegate setSingularModeAvailable:YES];
             running = NO;
             isSingularMode = NO;
         } else {
-            [controller setSingularModeAvailable:NO];
+            [delegate setSingularModeAvailable:NO];
             running = YES;
             isSingularMode = NO;
         }
@@ -77,8 +79,8 @@
 - (void)runningWithoutSingularMode {
     isSingularMode = NO;
     running = YES;
-    dispatch_sync(dispatch_get_main_queue(), ^{
-        [self.controller setSingularModeAvailable:NO];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self.delegate setSingularModeAvailable:NO];
     });
 }
 
@@ -87,7 +89,7 @@
 }
 
 - (BOOL)shouldGoSingularMode {
-    return self.controller.shouldGoSingularMode;
+    return self.delegate.shouldGoSingularMode;
 }
 
 - (void)setPassword:(NSString *)p {
@@ -99,29 +101,31 @@
         [NSException raise:@"hdm singular mode cannot run without password" format:nil];
     }
     [UIApplication sharedApplication].idleTimerDisabled = YES;
-    dispatch_sync(dispatch_get_main_queue(), ^{
-        [self.controller onSingularModeBegin];
-    });
+    running = YES;
+    isSingularMode = YES;
     if (xrandom) {
+        [self.delegate onSingularModeBegin];
         UEntropyViewController *uentropy = [[UEntropyViewController alloc] initWithPassword:password andDelegate:self];
         [self.controller presentViewController:uentropy animated:YES completion:nil];
     } else {
-        XRandom *xRandom = [[XRandom alloc] initWithDelegate:nil];
-        NSData *seed = [xRandom randomWithSize:64];
-        [self setEntropy:seed withXRandom:NO];
         dispatch_async(dispatch_get_main_queue(), ^{
-            [self.controller singularHotFinish];
+            [self.delegate onSingularModeBegin];
+        });
+        XRandom *xRandom = [[XRandom alloc] initWithDelegate:nil];
+        [self setSeed1:[xRandom randomWithSize:32] andSeed2:[xRandom randomWithSize:32] withXRandom:NO];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.delegate singularHotFinish];
         });
     }
 }
 
-- (void)setEntropy:(NSData *)entropy withXRandom:(BOOL)xrandom {
-    if (entropy.length < 64) {
+- (void)setSeed1:(NSData *)seed1 andSeed2:(NSData *)seed2 withXRandom:(BOOL)xrandom {
+    if (seed1.length < 32 || seed2.length < 32) {
         [self finishCleanUp];
         [NSException raise:@"hdm singular need 64 bytes entropy" format:nil];
     }
-    hotMnemonicSeed = [entropy subdataWithRange:NSMakeRange(0, 32)];
-    coldMnemonicSeed = [entropy subdataWithRange:NSMakeRange(32, 32)];
+    hotMnemonicSeed = seed1;
+    coldMnemonicSeed = seed2;
     [self initHotFirst];
     encryptedColdMnemonicSeed = [[BTEncryptData alloc] initWithData:coldMnemonicSeed andPassowrd:password andIsXRandom:xrandom];
     coldQr = [HDM_QR_CODE_FLAG stringByAppendingString:[BTEncryptData encryptedString:encryptedColdMnemonicSeed.toEncryptedString addIsCompressed:YES andIsXRandom:xrandom]];
@@ -137,7 +141,7 @@
         [self initColdFirst];
         hdmBid = [[BTHDMBid alloc] initWithHDMBid:coldFirst.key.address];
         dispatch_sync(dispatch_get_main_queue(), ^{
-            [self.controller singularColdFinish];
+            [self.delegate singularColdFinish];
         });
     });
 }
@@ -153,17 +157,17 @@
         if (error) {
             NSLog(error.debugDescription);
             dispatch_async(dispatch_get_main_queue(), ^{
-                [self.controller singularShowNetworkFailure];
+                [self.delegate singularShowNetworkFailure];
             });
             [self finishCleanUp];
             return;
         }
         NSData *sig = [coldFirst.key signHash:pre.hexToData];
-        [hdmBid changeBidPasswordWithSignature:[sig base64EncodedStringWithOptions:0] andPassword:password andHotAddress:hotFirstAddress andError:error];
+        [hdmBid changeBidPasswordWithSignature:[sig base64EncodedStringWithOptions:0] andPassword:password andHotAddress:hotFirstAddress andError:&error];
         if (error) {
             NSLog(error.debugDescription);
             dispatch_async(dispatch_get_main_queue(), ^{
-                [self.controller singularShowNetworkFailure];
+                [self.delegate singularShowNetworkFailure];
             });
             [self finishCleanUp];
             return;
@@ -175,13 +179,17 @@
         [[PeerUtil instance] stopPeer];
         __block HDMSingular *s = self;
         __block BTHDMBid *bid = hdmBid;
+        int count = HDM_ADDRESS_PER_SEED_PREPARE_COUNT - keychain.uncompletedAddressCount;
+        if (count > 0) {
+            [keychain prepareAddressesWithCount:count password:password andColdExternalPub:coldRoot];
+        }
         [keychain completeAddressesWithCount:1 password:password andFetchBlock:^(NSString *password, NSArray *partialPubs) {
             NSError *e;
             [bid createHDMAddress:partialPubs andPassword:password andError:&e];
             if (e) {
                 NSLog(error.debugDescription);
                 dispatch_async(dispatch_get_main_queue(), ^{
-                    [s.controller singularShowNetworkFailure];
+                    [s.delegate singularShowNetworkFailure];
                 });
                 [s finishCleanUp];
             }
@@ -190,7 +198,7 @@
         running = NO;
         isSingularMode = YES;
         [UIApplication sharedApplication].idleTimerDisabled = NO;
-        [self.controller singularServerFinishWithWords:coldWords andColdQr:coldQr];
+        [self.delegate singularServerFinishWithWords:coldWords andColdQr:coldQr];
     });
 }
 
@@ -220,10 +228,14 @@
     if (controller.testShouldCancel) {
         return;
     }
-    NSData *seed = [xrandom randomWithSize:64];
+    NSData *seed1 = [xrandom randomWithSize:32];
+    NSData *seed2 = [xrandom randomWithSize:32];
     progress += itemProgress * kProgressKeyRate;
     [controller onProgress:progress];
-    [self setEntropy:seed withXRandom:YES];
+    if (controller.testShouldCancel) {
+        return;
+    }
+    [self setSeed1:seed1 andSeed2:seed2 withXRandom:YES];
     progress += itemProgress * kProgressEncryptRate;
     [controller onProgress:progress];
     [collector stop];
@@ -232,7 +244,7 @@
     }
     [controller onSuccess];
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t) (1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        [self.controller singularHotFinish];
+        [self.delegate singularHotFinish];
     });
 }
 

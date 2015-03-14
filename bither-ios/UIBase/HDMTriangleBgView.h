@@ -20,7 +20,11 @@
 //
 
 #import <Foundation/Foundation.h>
+
 @interface HDMTriangleBgView : UIView
--(void)addLineFromView:(UIView*)fromView toView:(UIView*)toView;
--(void)addLineAnimatedFromView:(UIView*)fromView toView:(UIView*)toView completion:(void (^)())completion;
+- (void)addLineFromView:(UIView *)fromView toView:(UIView *)toView;
+
+- (void)addLineAnimatedFromView:(UIView *)fromView toView:(UIView *)toView completion:(void (^)())completion;
+
+- (void)removeAllLines;
 @end

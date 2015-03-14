@@ -38,7 +38,7 @@
 @end
 
 @interface HDMSingular : NSObject
-- (instancetype)initWithController:(UIViewController <HDMSingularDelegate> *)delegate;
+- (instancetype)initWithController:(UIViewController *)controller andDelegate:(NSObject <HDMSingularDelegate> *)delegate;
 
 - (void)runningWithoutSingularMode;
 

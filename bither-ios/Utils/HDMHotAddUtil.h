@@ -26,6 +26,8 @@
 
 - (void)singularServerFinishWithWords:(NSArray *)words andColdQr:(NSString *)qr;
 
+- (void)singularShowNetworkFailure;
+
 - (void)showMsg:(NSString *)msg;
 @end
 

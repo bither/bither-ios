@@ -42,10 +42,10 @@
 @property(weak, nonatomic) IBOutlet UILabel *lblHot;
 @property(weak, nonatomic) IBOutlet UILabel *lblCold;
 @property(weak, nonatomic) IBOutlet UILabel *lblServer;
-@property (weak, nonatomic) IBOutlet UIView *vSingularModeContainer;
-@property (weak, nonatomic) IBOutlet UIView *vSingularModeRunning;
-@property (weak, nonatomic) IBOutlet UIView *vSingularModeChecking;
-@property (weak, nonatomic) IBOutlet UIButton *btnSingularModeCheck;
+@property(weak, nonatomic) IBOutlet UIView *vSingularModeContainer;
+@property(weak, nonatomic) IBOutlet UIView *vSingularModeRunning;
+@property(weak, nonatomic) IBOutlet UIView *vSingularModeChecking;
+@property(weak, nonatomic) IBOutlet UIButton *btnSingularModeCheck;
 
 @property HDMHotAddUtil *util;
 @end
@@ -57,6 +57,7 @@
     containerFullTop = self.vContainer.frame.origin.y;
     containerFullWidth = self.vContainer.frame.size.width;
     shouldGoSingular = NO;
+    [self configureHDMSingularView];
     [self configureContainerFull];
     if (!self.util) {
         self.util = [[HDMHotAddUtil alloc] initWithViewContoller:self];
@@ -201,19 +202,31 @@
 }
 
 - (void)setSingularModeAvailable:(BOOL)available {
-
+    self.vSingularModeContainer.hidden = !available;
 }
 
 - (void)onSingularModeBegin {
-
+    self.vSingularModeChecking.hidden = YES;
+    self.vSingularModeRunning.hidden = NO;
 }
 
 - (BOOL)shouldGoSingularMode {
     return shouldGoSingular;
 }
 
-- (void)singularServerFinishWithWords:(NSArray *)words andColdQr:(NSString *)qr {
+- (void)singularShowNetworkFailure {
+    [self showMsg:NSLocalizedString(@"Network failure.", nil)];
+    self.vSingularModeRunning.hidden = YES;
+    self.vSingularModeChecking.hidden = NO;
+    [self.vBg removeAllLines];
+    self.util = [[HDMHotAddUtil alloc] initWithViewContoller:self];
+}
 
+- (void)singularServerFinishWithWords:(NSArray *)words andColdQr:(NSString *)qr {
+    NSLog(@"singular mode finished");
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t) (1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [self dismissViewControllerAnimated:YES completion:nil];
+    });
 }
 
 - (void)configureContainerFull {
@@ -257,11 +270,28 @@
 }
 
 - (IBAction)singularModeCheckPressed:(id)sender {
+    shouldGoSingular = !shouldGoSingular;
+    if (shouldGoSingular) {
+        [self.btnSingularModeCheck setImage:[UIImage imageNamed:@"btn_check_on_holo_light"] forState:UIControlStateNormal];
+    } else {
+        [self.btnSingularModeCheck setImage:[UIImage imageNamed:@"btn_check_off_holo_light"] forState:UIControlStateNormal];
+    }
 }
 
 - (IBAction)singularModeInfoPressed:(id)sender {
+
 }
 
+- (void)configureHDMSingularView {
+    CGFloat oriWidth = self.btnSingularModeCheck.frame.size.width;
+    [self.btnSingularModeCheck sizeToFit];
+    CGFloat deltaWidth = self.btnSingularModeCheck.frame.size.width - oriWidth;
+    CGRect frame = self.vSingularModeChecking.frame;
+    frame.size.width += deltaWidth;
+    frame.origin.x -= deltaWidth / 2;
+    self.vSingularModeChecking.frame = frame;
+    self.vSingularModeRunning.frame = frame;
+}
 
 - (IBAction)hotPressed:(id)sender {
     [self.util hot];

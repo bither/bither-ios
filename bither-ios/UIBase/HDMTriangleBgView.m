@@ -23,7 +23,7 @@
 
 #define kAnimDuration (0.8)
 
-@interface Line : NSObject{
+@interface Line : NSObject {
     NSTimeInterval beginAnimTime;
     BOOL animating;
     CADisplayLink *displayLink;
@@ -31,21 +31,23 @@
 @property CGPoint startPoint;
 @property CGPoint endPoint;
 @property CGFloat filledRate;
-@property (strong) void(^animCompletion)();
-@property (readonly) CGPoint drawEndPoint;
-@property (strong) CAShapeLayer* shapeLayer;
+@property(strong) void(^animCompletion)();
+@property(readonly) CGPoint drawEndPoint;
+@property(strong) CAShapeLayer *shapeLayer;
 
--(instancetype)initWithStartPoint:(CGPoint)startPoint andEndPoint:(CGPoint)endPoint;
--(instancetype)initWithStartPoint:(CGPoint)startPoint endPoint:(CGPoint)endPoint andFilledRate:(CGFloat)filledRate;
--(void)beginAnim:(void (^)())completion;
+- (instancetype)initWithStartPoint:(CGPoint)startPoint andEndPoint:(CGPoint)endPoint;
+
+- (instancetype)initWithStartPoint:(CGPoint)startPoint endPoint:(CGPoint)endPoint andFilledRate:(CGFloat)filledRate;
+
+- (void)beginAnim:(void (^)())completion;
 
 @end
 
 @implementation Line
 
--(instancetype)initWithStartPoint:(CGPoint)startPoint andEndPoint:(CGPoint)endPoint{
+- (instancetype)initWithStartPoint:(CGPoint)startPoint andEndPoint:(CGPoint)endPoint {
     self = [super init];
-    if(self){
+    if (self) {
         self.startPoint = startPoint;
         self.endPoint = endPoint;
         self.filledRate = 1;
@@ -54,9 +56,9 @@
     return self;
 }
 
--(instancetype)initWithStartPoint:(CGPoint)startPoint endPoint:(CGPoint)endPoint andFilledRate:(CGFloat)filledRate{
+- (instancetype)initWithStartPoint:(CGPoint)startPoint endPoint:(CGPoint)endPoint andFilledRate:(CGFloat)filledRate {
     self = [super init];
-    if(self){
+    if (self) {
         self.startPoint = startPoint;
         self.endPoint = endPoint;
         self.filledRate = filledRate;
@@ -65,7 +67,7 @@
     return self;
 }
 
--(void)firstConfigure{
+- (void)firstConfigure {
     self.shapeLayer = [CAShapeLayer layer];
     self.shapeLayer.lineWidth = 2;
     self.shapeLayer.strokeColor = [UIColor colorWithWhite:0 alpha:0.1].CGColor;
@@ -75,7 +77,7 @@
     displayLink = [CADisplayLink displayLinkWithTarget:self selector:@selector(handleDisplayLink:)];
     displayLink.paused = YES;
     [displayLink addToRunLoop:[NSRunLoop mainRunLoop] forMode:NSDefaultRunLoopMode];
-    if(self.rate == 1){
+    if (self.rate == 1) {
         [self draw];
     }
 }
@@ -87,24 +89,24 @@
     displayLink.paused = NO;
 }
 
--(void)animCompleted{
+- (void)animCompleted {
     displayLink.paused = YES;
     animating = NO;
     beginAnimTime = -1;
     self.filledRate = 1;
-    if(self.animCompletion){
+    if (self.animCompletion) {
         dispatch_async(dispatch_get_main_queue(), self.animCompletion);
     }
 }
 
-- (void)handleDisplayLink:(CADisplayLink *)link{
+- (void)handleDisplayLink:(CADisplayLink *)link {
     [self draw];
 }
 
-- (void)draw{
-    if(animating){
+- (void)draw {
+    if (animating) {
         self.filledRate = ([NSDate new].timeIntervalSince1970 - beginAnimTime) / kAnimDuration;
-        if(self.filledRate >= 1){
+        if (self.filledRate >= 1) {
             [self animCompleted];
         }
     }
@@ -119,12 +121,12 @@
     return CGPointMake((self.endPoint.x - self.startPoint.x) * rate + self.startPoint.x, (self.endPoint.y - self.startPoint.y) * rate + self.startPoint.y);
 }
 
-- (CGFloat)rate{
+- (CGFloat)rate {
     return MIN(MAX(0, self.filledRate), 1);
 }
 
--(BOOL)isEqual:(id)object {
-    if([object isKindOfClass:[Line class]]){
+- (BOOL)isEqual:(id)object {
+    if ([object isKindOfClass:[Line class]]) {
         Line *o = object;
         return CGPointEqualToPoint(self.startPoint, o.startPoint) && CGPointEqualToPoint(self.endPoint, o.endPoint);
     }
@@ -139,7 +141,7 @@
 
 - (instancetype)initWithCoder:(NSCoder *)aDecoder {
     self = [super initWithCoder:aDecoder];
-    if(self){
+    if (self) {
         [self firstConfigure];
     }
     return self;
@@ -153,7 +155,7 @@
     return self;
 }
 
-- (void)firstConfigure{
+- (void)firstConfigure {
     lines = [NSMutableArray new];
 }
 
@@ -165,26 +167,32 @@
     [self addLineAnimatedFromPoint:[self centerPointFor:fromView] toPoint:[self centerPointFor:toView] completion:completion];
 }
 
-- (CGPoint)centerPointFor:(UIView*)v{
+- (CGPoint)centerPointFor:(UIView *)v {
     CGPoint center = CGPointMake(v.frame.size.width / 2, v.frame.size.height / 2);
     return [self convertPoint:center fromView:v];
 }
 
-- (void)addLineFromPoint:(CGPoint)fromPoint toPoint:(CGPoint)toPoint{
-    Line* line = [[Line alloc] initWithStartPoint:fromPoint andEndPoint:toPoint];
-    if(![lines containsObject:line]){
+- (void)addLineFromPoint:(CGPoint)fromPoint toPoint:(CGPoint)toPoint {
+    Line *line = [[Line alloc] initWithStartPoint:fromPoint andEndPoint:toPoint];
+    if (![lines containsObject:line]) {
         [lines addObject:line];
         [self.layer addSublayer:line.shapeLayer];
     }
 }
 
-- (void)addLineAnimatedFromPoint:(CGPoint)fromPoint toPoint:(CGPoint)toPoint completion:(void (^)())completion{
-    Line* line = [[Line alloc] initWithStartPoint:fromPoint endPoint:toPoint andFilledRate:0];
-    if(![lines containsObject:line]){
+- (void)addLineAnimatedFromPoint:(CGPoint)fromPoint toPoint:(CGPoint)toPoint completion:(void (^)())completion {
+    Line *line = [[Line alloc] initWithStartPoint:fromPoint endPoint:toPoint andFilledRate:0];
+    if (![lines containsObject:line]) {
         [lines addObject:line];
         [self.layer addSublayer:line.shapeLayer];
         [line beginAnim:completion];
     }
 }
 
+- (void)removeAllLines {
+    for (Line *l in lines) {
+        [l.shapeLayer removeFromSuperlayer];
+    }
+    [lines removeAllObjects];
+}
 @end

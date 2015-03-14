@@ -23,13 +23,6 @@
 #import "NSError+HDMHttpErrorMessage.h"
 #import "PeerUtil.h"
 #import "BTHDMBid+Api.h"
-#import "NSString+Base58.h"
-#import "BTAddressProvider.h"
-#import "BTKey.h"
-
-
-@import MobileCoreServices;
-@import AVFoundation;
 
 
 #define kSaveProgress (0.1)
@@ -65,7 +58,7 @@
 }
 
 - (void)firstConfigure {
-    singular = [[HDMSingular alloc] initWithController:self.controller];
+    singular = [[HDMSingular alloc] initWithController:self.controller andDelegate:self];
     serverPressed = NO;
     hdmBid = nil;
     [self refreshHDMLimit];
@@ -402,7 +395,7 @@
 }
 
 - (void)afterPasswordDialogDismiss {
-    if (!dp.shown) {
+    if (!dp.shown && !self.controller.shouldGoSingularMode) {
         [dp showInWindow:self.window];
     }
 }
@@ -456,7 +449,7 @@
 }
 
 - (void)singularShowNetworkFailure {
-    [self.controller showMsg:NSLocalizedString(@"Network failure.", nil)];
+    [self.controller singularShowNetworkFailure];
 }
 
 - (BOOL)canCancel {
