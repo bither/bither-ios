@@ -169,13 +169,13 @@
             return;
         }
         BTHDMKeychain *keychain = [[BTHDMKeychain alloc] initWithMnemonicSeed:hotMnemonicSeed password:password andXRandom:encryptedColdMnemonicSeed.isXRandom];
-        //TODO backup singular
+        [keychain setSingularModeBackup:encryptedColdMnemonicSeed.toEncryptedString];
         [hdmBid save];
         [KeyUtil setHDKeyChain:keychain];
         [[PeerUtil instance] stopPeer];
         __block HDMSingular *s = self;
         __block BTHDMBid *bid = hdmBid;
-        NSArray *as = [keychain completeAddressesWithCount:1 password:password andFetchBlock:^(NSString *password, NSArray *partialPubs) {
+        [keychain completeAddressesWithCount:1 password:password andFetchBlock:^(NSString *password, NSArray *partialPubs) {
             NSError *e;
             [bid createHDMAddress:partialPubs andPassword:password andError:&e];
             if (e) {

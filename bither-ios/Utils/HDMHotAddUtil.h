@@ -7,19 +7,39 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "HDMSingular.h"
+
 @protocol HDMHotAddUtilDelegate
--(void)moveToHot:(BOOL) anim;
--(void)moveToCold:(BOOL) anim;
--(void)moveToServer:(BOOL) anim;
--(void)moveToFinal:(BOOL) animToFinish;
--(void)showMsg:(NSString*)msg;
+- (void)moveToHot:(BOOL)anim andCompletion:(void (^)())completion;
+
+- (void)moveToCold:(BOOL)anim andCompletion:(void (^)())completion;
+
+- (void)moveToServer:(BOOL)anim andCompletion:(void (^)())completion;
+
+- (void)moveToFinal:(BOOL)animToFinish andCompletion:(void (^)())completion;
+
+- (void)setSingularModeAvailable:(BOOL)available;
+
+- (void)onSingularModeBegin;
+
+- (BOOL)shouldGoSingularMode;
+
+- (void)singularServerFinishWithWords:(NSArray *)words andColdQr:(NSString *)qr;
+
+- (void)showMsg:(NSString *)msg;
 @end
 
-@interface HDMHotAddUtil : NSObject
--(instancetype)initWithViewContoller:(UIViewController<HDMHotAddUtilDelegate>*)controller;
--(void)hot;
--(void)cold;
--(void)server;
--(void)refreshHDMLimit;
-@property (readonly) BOOL isHDMKeychainLimited;
+@interface HDMHotAddUtil : NSObject <HDMSingularDelegate>
+- (instancetype)initWithViewContoller:(UIViewController <HDMHotAddUtilDelegate> *)controller;
+
+- (void)hot;
+
+- (void)cold;
+
+- (void)server;
+
+- (void)refreshHDMLimit;
+
+@property(readonly) BOOL isHDMKeychainLimited;
+@property(readonly) BOOL canCancel;
 @end
