@@ -620,3 +620,12 @@
 "hdm_singular_cold_seed_tab_qr" = "二维码";
 "hdm_singular_mode_info" = "单机模式只需要一部设备即可运行 HDM.\n不需要额外的冷钱包设备.\n但是您需要妥善保管好冷种子.\n冷种子是恢复 HDM 账户的唯一方法.";
 "hdm_singular_mode_cancel_warn" = "HDM 单机模式正在运行, 不能中断";
+
+// address alias
+"address_alias_manage" = "地址标签";
+"address_alias_add" = "设置地址标签";
+"address_alias_remove" = "删除地址标签";
+"address_alias_edit" = "编辑地址标签";
+"address_alias_input_label" = "输入此地址的标签";
+"address_alias_input_hint" = "标签";
+"address_alias_remove_confirm" = "删除此地址标签?";
