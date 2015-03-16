@@ -122,6 +122,14 @@
     }
 }
 
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
+    NSUInteger oriLength = textField.text.length;
+    if (oriLength + string.length - range.length > 20) {
+        return NO;
+    }
+    return YES;
+}
+
 - (void)cancelPressed:(id)sender {
     [self dismiss];
 }
@@ -136,18 +144,22 @@
     self.kc = nil;
 }
 
+- (void)dialogWillDismiss {
+    if ([self.tf isFirstResponder]) {
+        [self.tf resignFirstResponder];
+    }
+    [super dialogWillDismiss];
+}
+
+- (void)dialogDidShow {
+    [super dialogDidShow];
+    [self.tf becomeFirstResponder];
+}
+
 - (void)keyboardFrameChanged:(CGRect)frame {
     CGFloat totalHeight = frame.origin.y;
     CGFloat top = (totalHeight - self.frame.size.height) / 2;
     self.frame = CGRectMake(self.frame.origin.x, top, self.frame.size.width, self.frame.size.height);
-}
-
-- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
-    NSUInteger oriLength = textField.text.length;
-    if (oriLength + string.length - range.length > 20) {
-        return NO;
-    }
-    return YES;
 }
 
 - (void)configureTextField:(UITextField *)tf {
