@@ -33,6 +33,7 @@
 		1BC275F3608609D0E72BFBE7 /* HDMTriangleBgView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BC27C837F7819A54B0A2E37 /* HDMTriangleBgView.m */; };
 		1BC2778BC574DA2F816BC77A /* AddHDMAddressViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BC27FD66F3376A2C68612DD /* AddHDMAddressViewController.m */; };
 		1BC2790A618CFA47914E044C /* HDMSingular.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BC2781AE9973B4ACCEA9877 /* HDMSingular.m */; };
+		1BC27B4D826CA122FC56ADD2 /* DialogHDMSingularModeInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BC27929B0727E0D8B0296D4 /* DialogHDMSingularModeInfo.m */; };
 		1BC27DE93F1FECC0283202C2 /* DialogHDMSingularColdSeedChildWordsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BC274A14567F7D6DFEA009B /* DialogHDMSingularColdSeedChildWordsViewController.m */; };
 		1BC27F0F16D3294B59AF9604 /* DialogHDMSingularColdSeedChildQrViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BC27F93AA0BE5EBA695564A /* DialogHDMSingularColdSeedChildQrViewController.m */; };
 		1BC27F4819B6A68B81A47579 /* DialogHDMSingularColdSeed.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BC273B012114E6EDE40C4D9 /* DialogHDMSingularColdSeed.m */; };
@@ -314,9 +315,11 @@
 		1BC276629E14B5DAD717E3E9 /* DialogHDMSingularColdSeedChildWordsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DialogHDMSingularColdSeedChildWordsViewController.h; sourceTree = "<group>"; };
 		1BC2776F592A1DFABC1C6F21 /* HDMSingular.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HDMSingular.h; sourceTree = "<group>"; };
 		1BC2781AE9973B4ACCEA9877 /* HDMSingular.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HDMSingular.m; sourceTree = "<group>"; };
+		1BC27929B0727E0D8B0296D4 /* DialogHDMSingularModeInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DialogHDMSingularModeInfo.m; sourceTree = "<group>"; };
 		1BC2793F6A40C4838901BFF4 /* DialogHDMSingularColdSeedChildQrViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DialogHDMSingularColdSeedChildQrViewController.h; sourceTree = "<group>"; };
 		1BC279BF6C2A1E9DF4D86908 /* HDMTriangleBgView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HDMTriangleBgView.h; sourceTree = "<group>"; };
 		1BC27A0354887C3372BE01B1 /* HDMResetServerPasswordUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HDMResetServerPasswordUtil.m; sourceTree = "<group>"; };
+		1BC27A6D074A54DC92228A63 /* DialogHDMSingularModeInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DialogHDMSingularModeInfo.h; sourceTree = "<group>"; };
 		1BC27C837F7819A54B0A2E37 /* HDMTriangleBgView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HDMTriangleBgView.m; sourceTree = "<group>"; };
 		1BC27C882946AB67434912E5 /* DialogHDMInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DialogHDMInfo.h; sourceTree = "<group>"; };
 		1BC27D1407586D2FCB8F01AC /* DialogHDMAddressOptions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DialogHDMAddressOptions.m; sourceTree = "<group>"; };
@@ -1357,6 +1360,8 @@
 				1BC276629E14B5DAD717E3E9 /* DialogHDMSingularColdSeedChildWordsViewController.h */,
 				1BC27F93AA0BE5EBA695564A /* DialogHDMSingularColdSeedChildQrViewController.m */,
 				1BC2793F6A40C4838901BFF4 /* DialogHDMSingularColdSeedChildQrViewController.h */,
+				1BC27929B0727E0D8B0296D4 /* DialogHDMSingularModeInfo.m */,
+				1BC27A6D074A54DC92228A63 /* DialogHDMSingularModeInfo.h */,
 			);
 			path = Dialog;
 			sourceTree = "<group>";
@@ -1832,6 +1837,7 @@
 				1BC27F4819B6A68B81A47579 /* DialogHDMSingularColdSeed.m in Sources */,
 				1BC27DE93F1FECC0283202C2 /* DialogHDMSingularColdSeedChildWordsViewController.m in Sources */,
 				1BC27F0F16D3294B59AF9604 /* DialogHDMSingularColdSeedChildQrViewController.m in Sources */,
+				1BC27B4D826CA122FC56ADD2 /* DialogHDMSingularModeInfo.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

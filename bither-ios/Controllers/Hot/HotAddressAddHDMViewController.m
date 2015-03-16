@@ -25,6 +25,7 @@
 #import "HDMTriangleBgView.h"
 #import "DialogHDMInfo.h"
 #import "DialogHDMSingularColdSeed.h"
+#import "DialogHDMSingularModeInfo.h"
 
 @interface HotAddressAddHDMViewController () <HDMHotAddUtilDelegate> {
     UIImageView *flashingIv;
@@ -231,7 +232,7 @@
 }
 
 - (IBAction)singularModeInfoPressed:(id)sender {
-    //TODO singularModeInfo
+    [[[DialogHDMSingularModeInfo alloc] init] showFromView:sender];
 }
 
 - (void)singularServerFinishWithWords:(NSArray *)words andColdQr:(NSString *)qr {
