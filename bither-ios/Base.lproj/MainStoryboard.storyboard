@@ -4446,6 +4446,65 @@
             </objects>
             <point key="canvasLocation" x="3026" y="1827"/>
         </scene>
+        <!--DialogHDM Singular Cold Seed Child Qr View Controller-->
+        <scene sceneID="72Y-u6-Oky">
+            <objects>
+                <viewController storyboardIdentifier="DialogHDMSingularColdSeedChildQr" useStoryboardIdentifierAsRestorationIdentifier="YES" id="3iE-EB-ijc" customClass="DialogHDMSingularColdSeedChildQrViewController" propertyAccessControl="all" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="OU4-rf-8MJ">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="wIQ-PC-aBE">
+                                <rect key="frame" x="0.0" y="80" width="320" height="320"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    </view>
+                    <connections>
+                        <outlet property="iv" destination="wIQ-PC-aBE" id="K2Z-4C-BXr"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="d1a-mU-dCn" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3385" y="2549"/>
+        </scene>
+        <!--DialogHDM Singular Cold Seed Child Words View Controller-->
+        <scene sceneID="Rhb-PX-qVA">
+            <objects>
+                <viewController storyboardIdentifier="DialogHDMSingularColdSeedChildWords" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Snd-IG-GF6" customClass="DialogHDMSingularColdSeedChildWordsViewController" propertyAccessControl="all" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="LoQ-0S-Yhj">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" id="wyO-no-M9z">
+                                <rect key="frame" x="10" y="10" width="300" height="460"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="mN2-wj-ee4">
+                                        <rect key="frame" x="10" y="10" width="280" height="440"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    </view>
+                    <connections>
+                        <outlet property="lbl" destination="mN2-wj-ee4" id="GS2-2I-Dux"/>
+                        <outlet property="vContainer" destination="wyO-no-M9z" id="ApR-xE-pRm"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="zzC-j6-keN" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3779" y="2549"/>
+        </scene>
         <!--R Check View Controller-->
         <scene sceneID="LZ6-zZ-K31">
             <objects>

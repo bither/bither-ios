@@ -21,28 +21,33 @@
 
 @protocol PiPageViewControllerDelegate <NSObject>
 
--(void)pageIndexChanged:(int) index;
+- (void)pageIndexChanged:(int)index;
 
 @optional
--(UIViewController*)loadViewControllerAtIndex:(int)index;
+- (UIViewController *)loadViewControllerAtIndex:(int)index;
 
--(void)onViewController:(UIViewController*)viewController loadedAtIndex:(int)index;
+- (void)onViewController:(UIViewController *)viewController loadedAtIndex:(int)index;
 
--(void)onViewController:(UIViewController *)viewController visitedAtIndex:(int)index;
+- (void)onViewController:(UIViewController *)viewController visitedAtIndex:(int)index;
 @end
 
 
-@interface PiPageViewController : UIPageViewController<UIPageViewControllerDataSource, UIPageViewControllerDelegate,SwipeRightToPopScrollable>{
+@interface PiPageViewController : UIPageViewController <UIPageViewControllerDataSource, UIPageViewControllerDelegate, SwipeRightToPopScrollable> {
     int _index;
 }
 
-@property (nonatomic) int index;
-@property (weak, nonatomic) id<PiPageViewControllerDelegate> pageDelegate;
+@property(nonatomic) int index;
+@property(weak, nonatomic) id <PiPageViewControllerDelegate> pageDelegate;
 @property BOOL pageEnabled;
 
--(void)setIndex:(int)index animated:(BOOL)animated;
--(UIViewController*)currentViewController;
--(UIViewController*)viewControllerAtIndex:(int)index;
--(id)initWithStoryboard:(UIStoryboard*)storyboard andViewControllerIdentifiers:(NSArray*)identifiers;
+- (void)setIndex:(int)index animated:(BOOL)animated;
+
+- (UIViewController *)currentViewController;
+
+- (UIViewController *)viewControllerAtIndex:(int)index;
+
+- (id)initWithStoryboard:(UIStoryboard *)storyboard andViewControllerIdentifiers:(NSArray *)identifiers;
+
+- (id)initWithStoryboard:(UIStoryboard *)storyboard viewControllerIdentifiers:(NSArray *)identifiers andPageDelegate:(NSObject <PiPageViewControllerDelegate> *)pageDelegate;
 
 @end

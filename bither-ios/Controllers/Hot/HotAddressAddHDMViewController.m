@@ -24,6 +24,7 @@
 #import "HDMHotAddUtil.h"
 #import "HDMTriangleBgView.h"
 #import "DialogHDMInfo.h"
+#import "DialogHDMSingularColdSeed.h"
 
 @interface HotAddressAddHDMViewController () <HDMHotAddUtilDelegate> {
     UIImageView *flashingIv;
@@ -175,6 +176,7 @@
         self.lblHot.alpha = 0;
         self.lblCold.alpha = 0;
         self.lblServer.alpha = 0;
+        self.vSingularModeContainer.alpha = 0;
     }                completion:^(BOOL finished) {
         [UIView animateWithDuration:zoomDuration animations:^{
             [self configureContainerCompact];
@@ -233,8 +235,10 @@
 }
 
 - (void)singularServerFinishWithWords:(NSArray *)words andColdQr:(NSString *)qr {
-
-    //TODO singular cold show
+    __block HotAddressAddHDMViewController *s = self;
+    [[[DialogHDMSingularColdSeed alloc] initWithWords:words qr:qr parent:self.parentViewController.parentViewController andDismissAction:^{
+        [s finalAnimation];
+    }] show];
 }
 
 - (void)configureContainerFull {
