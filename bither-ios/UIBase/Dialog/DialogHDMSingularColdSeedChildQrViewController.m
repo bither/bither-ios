@@ -1,5 +1,5 @@
 //
-//  HDMTriangleBgView.h
+//  DialogHDMSingularColdSeedChildQrViewController.m
 //  bither-ios
 //
 //  Copyright 2014 http://Bither.net
@@ -16,15 +16,21 @@
 //  See the License for the specific language governing permissions and
 //  limitations under the License.
 //
-//  Created by songchenwen on 15/2/3.
+//  Created by songchenwen on 2015/3/16.
 //
 
-#import <Foundation/Foundation.h>
+#import "DialogHDMSingularColdSeedChildQrViewController.h"
+#import "QRCodeThemeUtil.h"
 
-@interface HDMTriangleBgView : UIView
-- (void)addLineFromView:(UIView *)fromView toView:(UIView *)toView;
+@interface DialogHDMSingularColdSeedChildQrViewController ()
+@property(weak, nonatomic) IBOutlet UIImageView *iv;
+@end
 
-- (void)addLineAnimatedFromView:(UIView *)fromView toView:(UIView *)toView completion:(void (^)())completion;
+@implementation DialogHDMSingularColdSeedChildQrViewController
 
-- (void)removeAllLines;
+- (void)setWords:(NSArray *)words andQr:(NSString *)qr {
+    [self loadView];
+    UIImage *image = [QRCodeThemeUtil qrCodeOfContent:qr andSize:self.view.frame.size.width margin:self.view.frame.size.width * 0.02 withTheme:[QRCodeTheme black]];
+    self.iv.image = image;
+}
 @end

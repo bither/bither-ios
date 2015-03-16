@@ -24,11 +24,14 @@
 #import "HDMHotAddUtil.h"
 #import "HDMTriangleBgView.h"
 #import "DialogHDMInfo.h"
+#import "DialogHDMSingularColdSeed.h"
+#import "DialogHDMSingularModeInfo.h"
 
-@interface HotAddressAddHDMViewController () <HDMHotAddUtilDelegate>{
-    UIImageView* flashingIv;
+@interface HotAddressAddHDMViewController () <HDMHotAddUtilDelegate> {
+    UIImageView *flashingIv;
     CGFloat containerFullWidth;
     CGFloat containerFullTop;
+    BOOL shouldGoSingular;
 }
 @property(weak, nonatomic) IBOutlet UIView *vContainer;
 @property(weak, nonatomic) IBOutlet HDMTriangleBgView *vBg;
@@ -41,6 +44,10 @@
 @property(weak, nonatomic) IBOutlet UILabel *lblHot;
 @property(weak, nonatomic) IBOutlet UILabel *lblCold;
 @property(weak, nonatomic) IBOutlet UILabel *lblServer;
+@property(weak, nonatomic) IBOutlet UIView *vSingularModeContainer;
+@property(weak, nonatomic) IBOutlet UIView *vSingularModeRunning;
+@property(weak, nonatomic) IBOutlet UIView *vSingularModeChecking;
+@property(weak, nonatomic) IBOutlet UIButton *btnSingularModeCheck;
 
 @property HDMHotAddUtil *util;
 @end
@@ -51,18 +58,20 @@
     [super viewDidLoad];
     containerFullTop = self.vContainer.frame.origin.y;
     containerFullWidth = self.vContainer.frame.size.width;
+    shouldGoSingular = NO;
+    [self configureHDMSingularView];
     [self configureContainerFull];
-    if(!self.util){
+    if (!self.util) {
         self.util = [[HDMHotAddUtil alloc] initWithViewContoller:self];
     }
 }
 
--(void)viewDidAppear:(BOOL)animated {
+- (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     [self showFlash:flashingIv];
 }
 
-- (void)moveToHot:(BOOL)anim {
+- (void)moveToHot:(BOOL)anim andCompletion:(void (^)())completion {
     self.btnHot.enabled = YES;
     self.btnHot.selected = NO;
     self.btnCold.enabled = NO;
@@ -70,9 +79,12 @@
     self.btnServer.enabled = NO;
     self.btnServer.selected = NO;
     [self showFlash:self.ivHotLight];
+    if (completion) {
+        completion();
+    }
 }
 
-- (void)moveToCold:(BOOL)anim {
+- (void)moveToCold:(BOOL)anim andCompletion:(void (^)())completion {
     self.btnHot.enabled = NO;
     self.btnHot.selected = YES;
     self.btnServer.enabled = NO;
@@ -82,16 +94,22 @@
         [self.vBg addLineFromView:self.btnHot toView:self.btnCold];
         self.btnCold.enabled = YES;
         [self showFlash:self.ivColdLight];
+        if (completion) {
+            completion();
+        }
     } else {
         [self stopAllFlash];
         [self.vBg addLineAnimatedFromView:self.btnHot toView:self.btnCold completion:^{
             [self showFlash:self.ivColdLight];
             self.btnCold.enabled = YES;
+            if (completion) {
+                completion();
+            }
         }];
     }
 }
 
-- (void)moveToServer:(BOOL)anim {
+- (void)moveToServer:(BOOL)anim andCompletion:(void (^)())completion {
     if (self.btnServer.enabled) {
         return;
     }
@@ -104,16 +122,22 @@
         [self.vBg addLineFromView:self.btnCold toView:self.btnServer];
         self.btnServer.enabled = YES;
         [self showFlash:self.ivServerLight];
+        if (completion) {
+            completion();
+        }
     } else {
         [self stopAllFlash];
         [self.vBg addLineAnimatedFromView:self.btnCold toView:self.btnServer completion:^{
             [self showFlash:self.ivServerLight];
             self.btnServer.enabled = YES;
+            if (completion) {
+                completion();
+            }
         }];
     }
 }
 
-- (void)moveToFinal:(BOOL)animToFinish {
+- (void)moveToFinal:(BOOL)animToFinish andCompletion:(void (^)())completion {
     [self.util refreshHDMLimit];
     self.btnHot.enabled = NO;
     self.btnHot.selected = YES;
@@ -129,14 +153,21 @@
             self.btnCold.enabled = YES;
             self.btnServer.enabled = YES;
         }
+        if (completion) {
+            completion();
+        }
     } else {
         [self.vBg addLineAnimatedFromView:self.btnServer toView:self.btnHot completion:^{
-            [self finalAnimation];
+            if (completion) {
+                completion();
+            } else {
+                [self finalAnimation];
+            }
         }];
     }
 }
 
-- (void)finalAnimation{
+- (void)finalAnimation {
     NSTimeInterval fadeDuration = 0.4;
     NSTimeInterval zoomDuration = 0.5;
     NSTimeInterval spinDuration = 2;
@@ -146,24 +177,25 @@
         self.lblHot.alpha = 0;
         self.lblCold.alpha = 0;
         self.lblServer.alpha = 0;
-    } completion:^(BOOL finished) {
+        self.vSingularModeContainer.alpha = 0;
+    }                completion:^(BOOL finished) {
         [UIView animateWithDuration:zoomDuration animations:^{
             [self configureContainerCompact];
-        } completion:^(BOOL finished) {
+        }                completion:^(BOOL finished) {
             self.vContainer.layer.anchorPoint = CGPointMake(0.5, 0.5);
-            CABasicAnimation* rotate =  [CABasicAnimation animationWithKeyPath: @"transform.rotation.z"];
+            CABasicAnimation *rotate = [CABasicAnimation animationWithKeyPath:@"transform.rotation.z"];
             rotate.removedOnCompletion = FALSE;
             rotate.fillMode = kCAFillModeForwards;
-            [rotate setToValue: [NSNumber numberWithFloat: -M_PI / 2]];
+            [rotate setToValue:[NSNumber numberWithFloat:-M_PI / 2]];
             rotate.repeatCount = 80;
-            rotate.duration = spinDuration/rotate.repeatCount;
+            rotate.duration = spinDuration / rotate.repeatCount;
             rotate.cumulative = TRUE;
             rotate.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseIn];
             [self.vContainer.layer addAnimation:rotate forKey:@"ROTATE"];
-            [UIView animateWithDuration:spinDuration - fadeOutOffset * 2 delay:fadeOutOffset options:UIViewAnimationCurveEaseIn|UIViewAnimationOptionBeginFromCurrentState animations:^{
+            [UIView animateWithDuration:spinDuration - fadeOutOffset * 2 delay:fadeOutOffset options:UIViewAnimationCurveEaseIn | UIViewAnimationOptionBeginFromCurrentState animations:^{
                 self.vContainer.alpha = 0.1;
                 self.vContainer.transform = CGAffineTransformMakeScale(2, 2);
-            } completion:^(BOOL finished) {
+            }                completion:^(BOOL finished) {
                 [self dismissViewControllerAnimated:YES completion:^{
                     [self.vContainer.layer removeAllAnimations];
                 }];
@@ -172,12 +204,50 @@
     }];
 }
 
-- (void)configureContainerFull{
+- (void)setSingularModeAvailable:(BOOL)available {
+    self.vSingularModeContainer.hidden = !available;
+}
+
+- (void)onSingularModeBegin {
+    self.vSingularModeChecking.hidden = YES;
+    self.vSingularModeRunning.hidden = NO;
+    if ([self.parentViewController.parentViewController conformsToProtocol:@protocol(HDMSingularAddViewContainer)]) {
+        [((NSObject <HDMSingularAddViewContainer> *) self.parentViewController.parentViewController) setHDMSingularCancellable:NO];
+    }
+}
+
+- (BOOL)shouldGoSingularMode {
+    return shouldGoSingular;
+}
+
+- (void)singularShowNetworkFailure {
+    [self showMsg:NSLocalizedString(@"Network failure.", nil)];
+    self.vSingularModeRunning.hidden = YES;
+    self.vSingularModeChecking.hidden = NO;
+    [self.vBg removeAllLines];
+    if ([self.parentViewController.parentViewController conformsToProtocol:@protocol(HDMSingularAddViewContainer)]) {
+        [((NSObject <HDMSingularAddViewContainer> *) self.parentViewController.parentViewController) setHDMSingularCancellable:YES];
+    }
+    self.util = [[HDMHotAddUtil alloc] initWithViewContoller:self];
+}
+
+- (IBAction)singularModeInfoPressed:(id)sender {
+    [[[DialogHDMSingularModeInfo alloc] init] showFromView:sender];
+}
+
+- (void)singularServerFinishWithWords:(NSArray *)words andColdQr:(NSString *)qr {
+    __block HotAddressAddHDMViewController *s = self;
+    [[[DialogHDMSingularColdSeed alloc] initWithWords:words qr:qr parent:self.parentViewController.parentViewController andDismissAction:^{
+        [s finalAnimation];
+    }] show];
+}
+
+- (void)configureContainerFull {
     CGFloat height = [self containerHeightForWidth:containerFullWidth];
     self.vContainer.frame = CGRectMake((self.view.frame.size.width - containerFullWidth) / 2, containerFullTop, containerFullWidth, height);
 }
 
-- (void)configureContainerCompact{
+- (void)configureContainerCompact {
     CGFloat btnWidth = self.btnHot.frame.size.width;
     CGFloat fullHeight = [self containerHeightForWidth:containerFullWidth];
     CGFloat width = btnWidth * 2;
@@ -185,7 +255,7 @@
     self.vContainer.frame = CGRectMake((self.view.frame.size.width - width) / 2, containerFullTop + (fullHeight - height) / 2, width, height);
 }
 
-- (CGFloat)containerHeightForWidth:(CGFloat)width{
+- (CGFloat)containerHeightForWidth:(CGFloat)width {
     CGFloat btnWidth = self.btnHot.frame.size.width;
     return (width - btnWidth) / 2 * tan(M_PI / 3) + btnWidth + self.lblServer.frame.size.height;
 }
@@ -208,8 +278,28 @@
         iv.hidden = NO;
         [UIView animateWithDuration:0.8 delay:0.2 options:UIViewAnimationCurveEaseInOut | UIViewAnimationOptionRepeat | UIViewAnimationOptionAutoreverse animations:^{
             iv.alpha = 1;
-        } completion:nil];
+        }                completion:nil];
     }
+}
+
+- (IBAction)singularModeCheckPressed:(id)sender {
+    shouldGoSingular = !shouldGoSingular;
+    if (shouldGoSingular) {
+        [self.btnSingularModeCheck setImage:[UIImage imageNamed:@"btn_check_on_holo_light"] forState:UIControlStateNormal];
+    } else {
+        [self.btnSingularModeCheck setImage:[UIImage imageNamed:@"btn_check_off_holo_light"] forState:UIControlStateNormal];
+    }
+}
+
+- (void)configureHDMSingularView {
+    CGFloat oriWidth = self.btnSingularModeCheck.frame.size.width;
+    [self.btnSingularModeCheck sizeToFit];
+    CGFloat deltaWidth = self.btnSingularModeCheck.frame.size.width - oriWidth;
+    CGRect frame = self.vSingularModeChecking.frame;
+    frame.size.width += deltaWidth;
+    frame.origin.x -= deltaWidth / 2;
+    self.vSingularModeChecking.frame = frame;
+    self.vSingularModeRunning.frame = frame;
 }
 
 - (IBAction)hotPressed:(id)sender {

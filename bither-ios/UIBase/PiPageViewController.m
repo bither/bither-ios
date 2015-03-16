@@ -46,6 +46,22 @@
     return self;
 }
 
+
+- (id)initWithStoryboard:(UIStoryboard *)storyboard viewControllerIdentifiers:(NSArray *)identifiers andPageDelegate:(NSObject <PiPageViewControllerDelegate> *)pageDelegate{
+    self = [super initWithTransitionStyle:UIPageViewControllerTransitionStyleScroll navigationOrientation:UIPageViewControllerNavigationOrientationHorizontal options: nil];
+    if(self){
+        self.pageDelegate = pageDelegate;
+        _pageEnabled = YES;
+        _storyboardPassedIn = storyboard;
+        _identifiers = identifiers;
+        _viewControllers = [[NSMutableDictionary alloc]init];
+        _inTransation = NO;
+        self.delegate = self;
+        self.dataSource = self;
+    }
+    return self;
+}
+
 -(void)viewDidLoad{
     if(_index == 0){
         _index = -1;

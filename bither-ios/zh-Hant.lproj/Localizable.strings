@@ -612,3 +612,11 @@
 "hdm_reset_server_password_setting_name" = "重置 HDM 服務器授權";
 "hdm_reset_server_password_success" = "HDM 服務器授權已重置";
 
+// hdm singular mode
+"hdm_singular_check_title" = "單機模式";
+"hdm_singular_cold_seed_remember_warn" = "HDM 冷種子非常重要.\n您必須自己妥善保存它.";
+"hdm_singular_cold_seed_remember_button" = "我已保存好 HDM 冷種子";
+"hdm_singular_cold_seed_tab_words" = "密語";
+"hdm_singular_cold_seed_tab_qr" = "二維碼";
+"hdm_singular_mode_info" = "單機模式只需要一部設備即可運行 HDM.\n不需要額外的冷錢包設備.\n但是您需要妥善保管好冷種子.\n冷種子是恢復 HDM 賬戶的唯一方法.";
+"hdm_singular_mode_cancel_warn" = "HDM 單機模式正在運行, 不能中斷";

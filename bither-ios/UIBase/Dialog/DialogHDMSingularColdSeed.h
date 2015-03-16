@@ -1,5 +1,5 @@
 //
-//  HDMTriangleBgView.h
+//  DialogHDMSingularColdSeed.h
 //  bither-ios
 //
 //  Copyright 2014 http://Bither.net
@@ -16,15 +16,18 @@
 //  See the License for the specific language governing permissions and
 //  limitations under the License.
 //
-//  Created by songchenwen on 15/2/3.
+//  Created by songchenwen on 2015/3/16.
 //
 
 #import <Foundation/Foundation.h>
 
-@interface HDMTriangleBgView : UIView
-- (void)addLineFromView:(UIView *)fromView toView:(UIView *)toView;
+@protocol DialogHDMSingularColdSeedChildViewController
+- (void)setWords:(NSArray *)words andQr:(NSString *)qr;
+@end
 
-- (void)addLineAnimatedFromView:(UIView *)fromView toView:(UIView *)toView completion:(void (^)())completion;
 
-- (void)removeAllLines;
+@interface DialogHDMSingularColdSeed : UIViewController
+- (instancetype)initWithWords:(NSArray *)words qr:(NSString *)qr parent:(UIViewController *)parent andDismissAction:(void (^)())dismissed;
+
+- (void)show;
 @end
