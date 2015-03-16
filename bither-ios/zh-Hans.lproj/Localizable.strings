@@ -611,3 +611,12 @@
 "hdm_reset_server_password_confirm" = "确认重置 HDM 服务器授权?";
 "hdm_reset_server_password_setting_name" = "重置 HDM 服务器授权";
 "hdm_reset_server_password_success" = "HDM 服务器授权已重置";
+
+// hdm singular mode
+"hdm_singular_check_title" = "单机模式";
+"hdm_singular_cold_seed_remember_warn" = "HDM 冷种子非常重要.\n您必须自己妥善保存它.";
+"hdm_singular_cold_seed_remember_button" = "我已保存好 HDM 冷种子";
+"hdm_singular_cold_seed_tab_words" = "密语";
+"hdm_singular_cold_seed_tab_qr" = "二维码";
+"hdm_singular_mode_info" = "单机模式只需要一部设备即可运行 HDM.\n不需要额外的冷钱包设备.\n但是您需要妥善保管好冷种子.\n冷种子是恢复 HDM 账户的唯一方法.";
+"hdm_singular_mode_cancel_warn" = "HDM 单机模式正在运行, 不能中断";

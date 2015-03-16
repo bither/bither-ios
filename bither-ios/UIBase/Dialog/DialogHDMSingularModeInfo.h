@@ -1,5 +1,5 @@
 //
-//  HDMTriangleBgView.h
+//  DialogHDMSingularModeInfo.h
 //  bither-ios
 //
 //  Copyright 2014 http://Bither.net
@@ -16,15 +16,13 @@
 //  See the License for the specific language governing permissions and
 //  limitations under the License.
 //
-//  Created by songchenwen on 15/2/3.
+//  Created by songchenwen on 2015/3/16.
 //
 
 #import <Foundation/Foundation.h>
+#import "DialogWithArrow.h"
 
-@interface HDMTriangleBgView : UIView
-- (void)addLineFromView:(UIView *)fromView toView:(UIView *)toView;
 
-- (void)addLineAnimatedFromView:(UIView *)fromView toView:(UIView *)toView completion:(void (^)())completion;
+@interface DialogHDMSingularModeInfo : DialogWithArrow
 
-- (void)removeAllLines;
 @end
