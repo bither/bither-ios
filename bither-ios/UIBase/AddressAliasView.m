@@ -23,6 +23,9 @@
 #import "AddressAliasView.h"
 #import "DialogAddressAlias.h"
 
+#define kMinWidth (31)
+#define kMinHeight (15)
+
 @interface AddressAliasView () <DialogAddressAliasDelegate> {
     BTAddress *_address;
 }
@@ -83,15 +86,15 @@
     }
     CGRect frame = self.frame;
     if ((self.autoresizingMask & UIViewAutoresizingFlexibleLeftMargin) == UIViewAutoresizingFlexibleLeftMargin && (self.autoresizingMask & UIViewAutoresizingFlexibleRightMargin) == UIViewAutoresizingFlexibleRightMargin) {
-        NSLog(@"align center");
+        NSLog(@"AddressAliasView align center");
         frame.origin.x -= (width - frame.size.width) / 2;
         frame.size.width = width;
     } else if ((self.autoresizingMask & UIViewAutoresizingFlexibleLeftMargin) == UIViewAutoresizingFlexibleLeftMargin) {
-        NSLog(@"align right");
+        NSLog(@"AddressAliasView align right");
         frame.origin.x -= (width - frame.size.width);
         frame.size.width = width;
     } else if ((self.autoresizingMask & UIViewAutoresizingFlexibleRightMargin) == UIViewAutoresizingFlexibleRightMargin) {
-        NSLog(@"align left");
+        NSLog(@"AddressAliasView align left");
         frame.size.width = width;
     }
     self.frame = frame;

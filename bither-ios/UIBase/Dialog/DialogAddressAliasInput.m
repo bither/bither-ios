@@ -130,12 +130,18 @@
     return YES;
 }
 
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    [self confirmPressed:nil];
+    return NO;
+}
+
 - (void)cancelPressed:(id)sender {
     [self dismiss];
 }
 
 - (void)dialogWillShow {
     self.kc = [[KeyboardController alloc] initWithDelegate:self];
+    self.tf.text = address.alias;
     [super dialogWillShow];
 }
 

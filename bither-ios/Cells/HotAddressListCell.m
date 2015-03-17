@@ -184,7 +184,7 @@
 - (void) handleTableviewCellLongPressed:(UILongPressGestureRecognizer *)gestureRecognizer {
     if (gestureRecognizer.state==UIGestureRecognizerStateBegan) {
         if(_btAddress.isHDM){
-            [[[DialogHDMAddressOptions alloc] initWithAddress:_btAddress] showInWindow:self.window];
+            [[[DialogHDMAddressOptions alloc] initWithAddress:_btAddress andAddressAliasDelegate:nil] showInWindow:self.window];
         }else{
             DialogAddressLongPressOptions *dialogPrivateKeyOptons=[[DialogAddressLongPressOptions alloc] initWithAddress:_btAddress andDelegate:self];
             [dialogPrivateKeyOptons showInWindow:self.window];

@@ -22,8 +22,9 @@
 #import <Foundation/Foundation.h>
 #import "DialogWithActions.h"
 #import "BTAddress.h"
+#import "DialogAddressAlias.h"
 
 
 @interface DialogHDMAddressOptions : DialogWithActions
--(instancetype)initWithAddress:(BTAddress *)address;
+- (instancetype)initWithAddress:(BTAddress *)address andAddressAliasDelegate:(NSObject <DialogAddressAliasDelegate> *)aliasDelegate;
 @end
