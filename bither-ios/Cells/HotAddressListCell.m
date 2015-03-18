@@ -40,6 +40,7 @@
 #import "BTAddressManager.h"
 #import "SignMessageViewController.h"
 #import "DialogHDMAddressOptions.h"
+#import "AddressAliasView.h"
 
 #define kUnconfirmedTxAmountLeftMargin (3)
 
@@ -64,6 +65,7 @@
 @property (weak, nonatomic) IBOutlet AmountButton *vUnconfirmedTxAmount;
 @property (weak, nonatomic) IBOutlet UIButton *btnAddressFull;
 @property (weak, nonatomic) IBOutlet UIImageView *ivSymbolBtc;
+@property (weak, nonatomic) IBOutlet AddressAliasView *btnAlias;
 @property (strong, nonatomic) UILongPressGestureRecognizer * longPress;
 @property (strong, nonatomic) UILongPressGestureRecognizer * xrandomLongPress;
 
@@ -141,6 +143,8 @@
     }else{
         self.lblBalanceMoney.text=@"--";
     }
+
+    self.btnAlias.address = address;
     isMovingToTrash = NO;
 }
 
@@ -184,7 +188,7 @@
 - (void) handleTableviewCellLongPressed:(UILongPressGestureRecognizer *)gestureRecognizer {
     if (gestureRecognizer.state==UIGestureRecognizerStateBegan) {
         if(_btAddress.isHDM){
-            [[[DialogHDMAddressOptions alloc] initWithAddress:_btAddress] showInWindow:self.window];
+            [[[DialogHDMAddressOptions alloc] initWithAddress:_btAddress andAddressAliasDelegate:nil] showInWindow:self.window];
         }else{
             DialogAddressLongPressOptions *dialogPrivateKeyOptons=[[DialogAddressLongPressOptions alloc] initWithAddress:_btAddress andDelegate:self];
             [dialogPrivateKeyOptons showInWindow:self.window];

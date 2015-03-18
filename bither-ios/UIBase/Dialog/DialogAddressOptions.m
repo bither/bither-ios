@@ -19,6 +19,7 @@
 #import "DialogAddressOptions.h"
 #import "NSString+Size.h"
 #import "UserDefaultsUtil.h"
+#import "DialogAddressAlias.h"
 
 #define kButtonHeight (44)
 #define kButtonEdgeInsets (UIEdgeInsetsMake(0, 10, 0, 10))
@@ -27,70 +28,83 @@
 
 #define kFontSize (16)
 
-@interface DialogAddressOptions(){
+@interface DialogAddressOptions () {
     NSString *_viewOnBlockChainInfoStr;
+    BTAddress *_address;
 }
+@property(weak) NSObject <DialogAddressAliasDelegate> *aliasDelegate;
 @end
 
 @implementation DialogAddressOptions
 
--(instancetype)initWithAddress:(BTAddress*)address andDelegate:(NSObject<DialogAddressOptionsDelegate>*)delegate{
-    NSString* viewStr = NSLocalizedString(@"View on Blockchain.info", nil);
-    NSString* manageStr = NSLocalizedString(@"private_key_management", nil);
+- (instancetype)initWithAddress:(BTAddress *)address delegate:(NSObject <DialogAddressOptionsDelegate> *)delegate andAliasDialog:(NSObject <DialogAddressAliasDelegate> *)aliasDelegate {
+    NSString *viewStr = NSLocalizedString(@"View on Blockchain.info", nil);
+    NSString *manageStr = NSLocalizedString(@"private_key_management", nil);
     CGFloat width = MAX(MAX([viewStr sizeWithRestrict:CGSizeMake(CGFLOAT_MAX, kButtonHeight) font:[UIFont systemFontOfSize:kFontSize]].width,
-                        [manageStr sizeWithRestrict:CGSizeMake(CGFLOAT_MAX, kButtonHeight) font:[UIFont systemFontOfSize:kFontSize]].width),
-                        [NSLocalizedString(@"address_option_view_on_blockmeta", nil) sizeWithRestrict:CGSizeMake(CGFLOAT_MAX, kButtonHeight) font:[UIFont systemFontOfSize:kFontSize]].width) +
-                        kButtonEdgeInsets.left + kButtonEdgeInsets.right;
+            [manageStr sizeWithRestrict:CGSizeMake(CGFLOAT_MAX, kButtonHeight) font:[UIFont systemFontOfSize:kFontSize]].width),
+            [NSLocalizedString(@"address_option_view_on_blockmeta", nil) sizeWithRestrict:CGSizeMake(CGFLOAT_MAX, kButtonHeight) font:[UIFont systemFontOfSize:kFontSize]].width) +
+            kButtonEdgeInsets.left + kButtonEdgeInsets.right;
     self = [super initWithFrame:CGRectMake(0, 0, width, kHeight)];
-    if(self){
-        _viewOnBlockChainInfoStr  = viewStr;
+    if (self) {
+        _viewOnBlockChainInfoStr = viewStr;
+        _address = address;
         self.delegate = delegate;
+        self.aliasDelegate = aliasDelegate;
         [self firstConfigureHasPrivateKey:address.hasPrivKey];
     }
     return self;
 }
 
--(void)firstConfigureHasPrivateKey:(BOOL)hasPrivateKey{
+- (void)firstConfigureHasPrivateKey:(BOOL)hasPrivateKey {
     self.bgInsets = UIEdgeInsetsMake(4, 16, 4, 16);
     CGFloat bottom = 0;
     bottom = [self createButtonWithText:_viewOnBlockChainInfoStr top:bottom action:@selector(viewOnBlockChainInfoPressed:)];
-    UIView *seperator = [[UIView alloc]initWithFrame:CGRectMake(0, bottom, self.frame.size.width, 1)];
+    UIView *seperator = [[UIView alloc] initWithFrame:CGRectMake(0, bottom, self.frame.size.width, 1)];
     seperator.autoresizingMask = UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleWidth;
     seperator.backgroundColor = [UIColor colorWithWhite:1 alpha:0.5];
     [self addSubview:seperator];
-    
-    if([UserDefaultsUtil instance].localeIsChina||[[UserDefaultsUtil instance] localeIsZHHant]){
+
+    if ([UserDefaultsUtil instance].localeIsChina || [[UserDefaultsUtil instance] localeIsZHHant]) {
         bottom += 1;
         bottom = [self createButtonWithText:NSLocalizedString(@"address_option_view_on_blockmeta", nil) top:bottom action:@selector(viewOnBlockMetaPressed:)];
-        UIView *seperator = [[UIView alloc]initWithFrame:CGRectMake(0, bottom, self.frame.size.width, 1)];
+        UIView *seperator = [[UIView alloc] initWithFrame:CGRectMake(0, bottom, self.frame.size.width, 1)];
         seperator.autoresizingMask = UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleWidth;
         seperator.backgroundColor = [UIColor colorWithWhite:1 alpha:0.5];
         [self addSubview:seperator];
     }
-    
-    if(hasPrivateKey){
+
+    if (hasPrivateKey) {
         bottom += 1;
         bottom = [self createButtonWithText:NSLocalizedString(@"private_key_management", nil) top:bottom action:@selector(privateKeyManagement:)];
-        UIView *seperator = [[UIView alloc]initWithFrame:CGRectMake(0, bottom, self.frame.size.width, 1)];
+        UIView *seperator = [[UIView alloc] initWithFrame:CGRectMake(0, bottom, self.frame.size.width, 1)];
         seperator.autoresizingMask = UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleWidth;
         seperator.backgroundColor = [UIColor colorWithWhite:1 alpha:0.5];
         [self addSubview:seperator];
-        
+
         bottom += 1;
         bottom = [self createButtonWithText:NSLocalizedString(@"sign_message_activity_name", nil) top:bottom action:@selector(signMessagePressed:)];
-        seperator = [[UIView alloc]initWithFrame:CGRectMake(0, bottom, self.frame.size.width, 1)];
+        seperator = [[UIView alloc] initWithFrame:CGRectMake(0, bottom, self.frame.size.width, 1)];
         seperator.autoresizingMask = UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleWidth;
         seperator.backgroundColor = [UIColor colorWithWhite:1 alpha:0.5];
         [self addSubview:seperator];
     } else {
         bottom += 1;
         bottom = [self createButtonWithText:NSLocalizedString(@"Stop Monitoring", nil) top:bottom action:@selector(stopMonitorPressed:)];
-        seperator = [[UIView alloc]initWithFrame:CGRectMake(0, bottom, self.frame.size.width, 1)];
+        seperator = [[UIView alloc] initWithFrame:CGRectMake(0, bottom, self.frame.size.width, 1)];
         seperator.autoresizingMask = UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleWidth;
         seperator.backgroundColor = [UIColor colorWithWhite:1 alpha:0.5];
         [self addSubview:seperator];
     }
-    
+
+    if (self.aliasDelegate) {
+        bottom += 1;
+        bottom = [self createButtonWithText:NSLocalizedString(@"address_alias_manage", nil) top:bottom action:@selector(addressAlias:)];
+        seperator = [[UIView alloc] initWithFrame:CGRectMake(0, bottom, self.frame.size.width, 1)];
+        seperator.autoresizingMask = UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleWidth;
+        seperator.backgroundColor = [UIColor colorWithWhite:1 alpha:0.5];
+        [self addSubview:seperator];
+    }
+
     bottom += 1;
     bottom = [self createButtonWithText:NSLocalizedString(@"Cancel", nil) top:bottom action:@selector(cancelPressed:)];
     CGRect frame = self.frame;
@@ -98,8 +112,8 @@
     self.frame = frame;
 }
 
--(CGFloat)createButtonWithText:(NSString*)text top:(CGFloat)top action:(SEL)selector{
-    UIButton *btn = [[UIButton alloc]initWithFrame:CGRectMake(0, top, self.frame.size.width, kButtonHeight)];
+- (CGFloat)createButtonWithText:(NSString *)text top:(CGFloat)top action:(SEL)selector {
+    UIButton *btn = [[UIButton alloc] initWithFrame:CGRectMake(0, top, self.frame.size.width, kButtonHeight)];
     [btn setBackgroundImage:nil forState:UIControlStateNormal];
     [btn setBackgroundImage:[UIImage imageNamed:@"card_foreground_pressed"] forState:UIControlStateHighlighted];
     btn.contentEdgeInsets = kButtonEdgeInsets;
@@ -114,55 +128,62 @@
     return CGRectGetMaxY(btn.frame);
 }
 
--(void)viewOnBlockChainInfoPressed:(id)sender{
+- (void)addressAlias:(id)sender {
+    __block UIWindow *w = self.window;
     [self dismissWithCompletion:^{
-        if(self.delegate && [self.delegate respondsToSelector:@selector(showAddressOnBlockChainInfo)]){
+        [[[DialogAddressAlias alloc] initWithAddress:_address andDelegate:self.aliasDelegate] showInWindow:w];
+    }];
+}
+
+- (void)viewOnBlockChainInfoPressed:(id)sender {
+    [self dismissWithCompletion:^{
+        if (self.delegate && [self.delegate respondsToSelector:@selector(showAddressOnBlockChainInfo)]) {
             [self.delegate showAddressOnBlockChainInfo];
         }
     }];
 }
 
--(void)viewOnBlockMetaPressed:(id)sender{
+- (void)viewOnBlockMetaPressed:(id)sender {
     [self dismissWithCompletion:^{
-        if(self.delegate && [self.delegate respondsToSelector:@selector(showAddressOnBlockMeta)]){
+        if (self.delegate && [self.delegate respondsToSelector:@selector(showAddressOnBlockMeta)]) {
             [self.delegate showAddressOnBlockMeta];
         }
     }];
 }
 
--(void)stopMonitorPressed:(id)sender{
+- (void)stopMonitorPressed:(id)sender {
     [self dismissWithCompletion:^{
-        if(self.delegate && [self.delegate respondsToSelector:@selector(stopMonitorAddress)]){
+        if (self.delegate && [self.delegate respondsToSelector:@selector(stopMonitorAddress)]) {
             [self.delegate stopMonitorAddress];
         }
     }];
 }
 
--(void)privateKeyManagement:(id)sender{
+- (void)privateKeyManagement:(id)sender {
     [self dismissWithCompletion:^{
-        if(self.delegate && [self.delegate respondsToSelector:@selector(showPrivateKeyManagement)]){
+        if (self.delegate && [self.delegate respondsToSelector:@selector(showPrivateKeyManagement)]) {
             [self.delegate showPrivateKeyManagement];
         }
     }];
 }
 
--(void)signMessagePressed:(id)sender{
+- (void)signMessagePressed:(id)sender {
     [self dismissWithCompletion:^{
-        if(self.delegate && [self.delegate respondsToSelector:@selector(signMessage)]){
+        if (self.delegate && [self.delegate respondsToSelector:@selector(signMessage)]) {
             [self.delegate signMessage];
         }
     }];
 }
 
--(void)privateKeyQrCodePressed:(id)sender{
+- (void)privateKeyQrCodePressed:(id)sender {
     [self dismissWithCompletion:^{
-        if(self.delegate && [self.delegate respondsToSelector:@selector(showPrivateKeyQrCode)]){
+        if (self.delegate && [self.delegate respondsToSelector:@selector(showPrivateKeyQrCode)]) {
             [self.delegate showPrivateKeyQrCode];
         }
     }];
 }
 
--(void)cancelPressed:(id)sender{
+- (void)cancelPressed:(id)sender {
     [self dismiss];
 }
 

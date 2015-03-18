@@ -1430,6 +1430,13 @@
                                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
+                                                                <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="sLp-Lc-uuW" customClass="AddressAliasView">
+                                                                    <rect key="frame" x="10" y="36" width="46" height="21"/>
+                                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                                    <state key="normal">
+                                                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                                    </state>
+                                                                </button>
                                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$0.00" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Nzn-0V-cau">
                                                                     <rect key="frame" x="195" y="36" width="95" height="21"/>
                                                                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
@@ -1539,6 +1546,7 @@
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <connections>
                                             <outlet property="btnAddressFull" destination="JHi-IQ-Uql" id="8qY-3Q-yDX"/>
+                                            <outlet property="btnAlias" destination="sLp-Lc-uuW" id="rYK-OI-elF"/>
                                             <outlet property="ivHighlighted" destination="Mof-u2-DPq" id="T4O-Vs-cAF"/>
                                             <outlet property="ivSymbolBtc" destination="S4M-Q7-ULL" id="VwQ-Bh-zzN"/>
                                             <outlet property="ivType" destination="cgi-Ad-bCG" id="XFr-OQ-kiq"/>
@@ -1787,6 +1795,13 @@
                                         <color key="shadowColor" red="0.0" green="0.0" blue="0.0" alpha="0.40000000000000002" colorSpace="calibratedRGB"/>
                                         <size key="shadowOffset" width="1" height="1"/>
                                     </label>
+                                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="dVb-2L-thG" customClass="AddressAliasView">
+                                        <rect key="frame" x="110" y="14" width="60" height="20"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                        <state key="normal">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                    </button>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="right" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="title_bar_seperator" id="Lkw-DI-U10">
                                         <rect key="frame" x="273" y="0.0" width="3" height="44"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" heightSizable="YES"/>
@@ -1809,6 +1824,8 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <connections>
+                        <outlet property="btnAddressAlias" destination="dVb-2L-thG" id="lXH-IA-ouq"/>
+                        <outlet property="lblTitle" destination="qNL-tR-Rjx" id="avh-Dp-jY9"/>
                         <outlet property="tableView" destination="l2G-jb-pXz" id="Zgg-8r-hM4"/>
                         <outlet property="vTopBar" destination="elF-KA-2kt" id="si3-vl-Via"/>
                     </connections>
@@ -2977,6 +2994,13 @@
                                                             <rect key="frame" x="0.0" y="89" width="300" height="25"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
+                                                                <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="K1k-aI-kFj" customClass="AddressAliasView">
+                                                                    <rect key="frame" x="16" y="2" width="46" height="21"/>
+                                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                                                    <state key="normal">
+                                                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                                    </state>
+                                                                </button>
                                                                 <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="xrandom_address_label_normal" highlightedImage="xrandom_address_label_pressed" id="5P1-t6-9UT">
                                                                     <rect key="frame" x="240" y="2" width="20" height="20"/>
                                                                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
@@ -3086,6 +3110,7 @@
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <connections>
+                                            <outlet property="btnAlias" destination="K1k-aI-kFj" id="Jhy-u5-N4T"/>
                                             <outlet property="ivQr" destination="JRm-fL-eya" id="gg5-Fz-LID"/>
                                             <outlet property="ivType" destination="PGA-6T-JXp" id="lF5-dF-XXc"/>
                                             <outlet property="ivXrandom" destination="5P1-t6-9UT" id="65q-MH-emP"/>
@@ -3939,7 +3964,7 @@
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <subviews>
                                                         <view contentMode="scaleToFill" id="8x5-z1-ICp">
-                                                            <rect key="frame" x="16" y="7" width="190" height="80"/>
+                                                            <rect key="frame" x="16" y="7" width="170" height="80"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                             <subviews>
                                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="bottom" lineBreakMode="middleTruncation" id="gkR-g6-1bI">
@@ -3954,7 +3979,7 @@
                                                                     </connections>
                                                                 </button>
                                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="kKw-54-5PB">
-                                                                    <rect key="frame" x="5" y="5" width="180" height="70"/>
+                                                                    <rect key="frame" x="5" y="5" width="160" height="70"/>
                                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                     <fontDescription key="fontDescription" name="CourierNewPSMT" family="Courier New" pointSize="18"/>
                                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -3985,6 +4010,13 @@
                                                                 <action selector="restorePressed:" destination="SML-Iv-N4f" eventType="touchUpInside" id="GQH-uQ-sbL"/>
                                                             </connections>
                                                         </button>
+                                                        <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="yel-VP-yeN" customClass="AddressAliasView">
+                                                            <rect key="frame" x="189" y="36" width="64" height="20"/>
+                                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                            <state key="normal">
+                                                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                            </state>
+                                                        </button>
                                                     </subviews>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 </view>
@@ -3994,6 +4026,7 @@
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <inset key="separatorInset" minX="16" minY="0.0" maxX="16" maxY="0.0"/>
                                         <connections>
+                                            <outlet property="btnAlias" destination="yel-VP-yeN" id="zc6-IG-sOG"/>
                                             <outlet property="lblAddress" destination="kKw-54-5PB" id="wwQ-Kd-VP9"/>
                                         </connections>
                                     </tableViewCell>

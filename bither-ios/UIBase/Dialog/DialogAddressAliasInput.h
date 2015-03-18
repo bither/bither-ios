@@ -1,5 +1,5 @@
 //
-//  DialogAddressOptions.h
+//  DialogAddressAliasInput.h
 //  bither-ios
 //
 //  Copyright 2014 http://Bither.net
@@ -15,28 +15,15 @@
 //  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 //  See the License for the specific language governing permissions and
 //  limitations under the License.
+//
+//  Created by songchenwen on 2015/3/16.
+//
 
+#import <Foundation/Foundation.h>
+#import "DialogAddressAlias.h"
 #import "DialogCentered.h"
-#import "Bitheri/BTAddress.h"
 
-@protocol DialogAddressAliasDelegate;
 
-@protocol DialogAddressOptionsDelegate <NSObject>
-- (void)stopMonitorAddress;
-
-- (void)showAddressOnBlockChainInfo;
-
-- (void)showAddressOnBlockMeta;
-
-- (void)showPrivateKeyQrCode;
-
-- (void)showPrivateKeyManagement;
-
-- (void)signMessage;
-@end
-
-@interface DialogAddressOptions : DialogCentered
-- (instancetype)initWithAddress:(BTAddress *)address delegate:(NSObject <DialogAddressOptionsDelegate> *)delegate andAliasDialog:(NSObject <DialogAddressAliasDelegate> *)aliasDelegate;
-
-@property(weak) NSObject <DialogAddressOptionsDelegate> *delegate;
+@interface DialogAddressAliasInput : DialogCentered
+- (instancetype)initWithAddress:(BTAddress *)address andDelegate:(NSObject <DialogAddressAliasDelegate> *)delegate;
 @end

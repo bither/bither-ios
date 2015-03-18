@@ -1,5 +1,5 @@
 //
-//  DialogHDMAddressOptions.h
+//  AddressAliasView.h
 //  bither-ios
 //
 //  Copyright 2014 http://Bither.net
@@ -16,15 +16,13 @@
 //  See the License for the specific language governing permissions and
 //  limitations under the License.
 //
-//  Created by songchenwen on 15/2/3.
+//  Created by songchenwen on 2015/3/16.
 //
 
 #import <Foundation/Foundation.h>
-#import "DialogWithActions.h"
 #import "BTAddress.h"
-#import "DialogAddressAlias.h"
 
-
-@interface DialogHDMAddressOptions : DialogWithActions
-- (instancetype)initWithAddress:(BTAddress *)address andAddressAliasDelegate:(NSObject <DialogAddressAliasDelegate> *)aliasDelegate;
+@interface AddressAliasView : UIButton
+@property BTAddress *address;
+@property CGFloat maxWidth;
 @end
