@@ -170,6 +170,14 @@
     [self addData:YES];
 }
 
+- (IBAction)deleteLastPressed:(id)sender {
+    [self.vData deleteLast];
+}
+
+- (IBAction)clearPressed:(id)sender {
+    [self.vData removeAllData];
+}
+
 - (IBAction)backPressed:(id)sender {
     [self.navigationController popViewControllerAnimated:YES];
 }
