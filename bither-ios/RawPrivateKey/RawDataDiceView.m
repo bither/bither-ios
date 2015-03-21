@@ -23,6 +23,8 @@
 #import "NSString+Base58.h"
 #import <openssl/bn.h>
 
+#define kDiceBorderWidthRate (0.07f)
+
 @interface RawDataDiceView () {
     NSUInteger restrictedWidth;
     NSUInteger restrictedHeight;
@@ -40,14 +42,17 @@
         if(d > 5){
             [NSException raise:@"RawDataDiceView not accepted dice value" format:@"RawDataDiceView not accepted dice value %d", d];
         }
+        NSUInteger index = data.length;
         [data appendFormat:@"%d", d];
-        UIImageView *v = ((UIImageView *) ((UIView *) self.subviews[1]).subviews[self.filledDataLength]).subviews[0];
+        UIView *v = ((UIView *) ((UIView *) self.subviews[1]).subviews[index]).subviews[0];
+        UIImageView * iv = (UIImageView *)v.subviews[1];
         [v.layer removeAllAnimations];
-        v.image = [UIImage imageNamed:[NSString stringWithFormat:@"dice_large_%d", d + 1]];
+        iv.image = [UIImage imageNamed:[NSString stringWithFormat:@"dice_large_%d", d + 1]];
         CGPoint center = CGPointMake(CGRectGetMidX(v.frame), CGRectGetMidY(v.frame));
         v.layer.anchorPoint = CGPointMake(0.5, 0.5);
         v.layer.position = center;
         v.transform = CGAffineTransformMakeScale(0, 0);
+        v.hidden = NO;
         [UIView animateWithDuration:0.5 animations:^{
             v.transform = CGAffineTransformIdentity;
         }];
@@ -60,12 +65,12 @@
         return;
     }
     [data deleteCharactersInRange:NSMakeRange(size - 1, 1)];
-    UIImageView *v = ((UIImageView *) ((UIView *) self.subviews[1]).subviews[size - 1]).subviews[0];
+    UIView *v = ((UIView *) ((UIView *) self.subviews[1]).subviews[size - 1]).subviews[0];
     [UIView animateWithDuration:0.5 animations:^{
         v.transform = CGAffineTransformMakeScale(0.01, 0.01);
     }                completion:^(BOOL finished) {
         if(finished){
-            v.image = nil;
+            v.hidden = YES;
         }
     }];
 }
@@ -77,7 +82,7 @@
     }
     data = [NSMutableString stringWithCapacity:self.dataLength];
     for (NSUInteger i = 0; i < size; i++) {
-        UIImageView *v = ((UIImageView *) ((UIView *) self.subviews[1]).subviews[i]).subviews[0];
+        UIView *v = ((UIView *) ((UIView *) self.subviews[1]).subviews[i]).subviews[0];
         CGPoint center = CGPointMake(CGRectGetMidX(v.frame), CGRectGetMidY(v.frame));
         v.layer.anchorPoint = CGPointMake(0.5, 0.5);
         v.layer.position = center;
@@ -85,7 +90,7 @@
             v.transform = CGAffineTransformMakeScale(0.01, 0.01);
         }                completion:^(BOOL finished) {
             if(finished){
-                v.image = nil;
+                v.hidden = YES;
             }
         }];
     }
@@ -149,6 +154,7 @@
 
     CGFloat width = (self.frame.size.width - 1) / column;
     CGFloat height = (self.frame.size.height - 1) / row;
+    CGFloat border = (MIN(width, height) - 1.0f) * kDiceBorderWidthRate;
     for (NSInteger y = 0; y < row; y++) {
         for (NSInteger x = 0; x < column; x++) {
             UIView *v = [[UIView alloc] initWithFrame:CGRectMake(x * width, y * height, width, height)];
@@ -156,8 +162,14 @@
             ivBg = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, width, height)];
             ivBg.image = [UIImage imageNamed:@"border_top_left"];
             ivBg.contentMode = UIViewContentModeScaleToFill;
-            UIImageView *inner = [[UIImageView alloc] initWithFrame:CGRectMake(1, 1, width - 1, height - 1)];
+            UIView *inner = [[UIView alloc] initWithFrame:CGRectMake(1, 1, width - 1, height - 1)];
             inner.backgroundColor = [UIColor clearColor];
+            UIImageView *ivF = [[UIImageView alloc] initWithFrame:CGRectMake(border, border, width - 1.0 - border * 2.0, height - 1.0 - border * 2.0)];
+            UIImageView *ivB = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, width - 1, height - 1)];
+            [ivB setImage:[UIImage imageNamed:@"btn_keyboard_key_white_normal"]];
+            inner.hidden = YES;
+            [inner addSubview:ivB];
+            [inner addSubview:ivF];
             [v addSubview:inner];
             [v addSubview:ivBg];
             [vContainer addSubview:v];

@@ -276,6 +276,7 @@
 		0A259E241A47F19100D7F707 /* DialogSendOption.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DialogSendOption.m; sourceTree = "<group>"; };
 		0A259E261A47FDF600D7F707 /* DialogSelectChangeAddress.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DialogSelectChangeAddress.h; sourceTree = "<group>"; };
 		0A259E271A47FDF600D7F707 /* DialogSelectChangeAddress.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DialogSelectChangeAddress.m; sourceTree = "<group>"; };
+		0A311B861ABD488A006E77A9 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/MainStoryboard.strings; sourceTree = "<group>"; };
 		0A4206281A494F1000562100 /* SignMessageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignMessageViewController.h; sourceTree = "<group>"; };
 		0A4206291A494F1000562100 /* SignMessageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignMessageViewController.m; sourceTree = "<group>"; };
 		0A43F43E1A81C6BF008171DB /* HdmSendViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HdmSendViewController.h; sourceTree = "<group>"; };
@@ -296,7 +297,6 @@
 		0A93B6051A4AA0520081D74D /* VerifyMessageSignatureViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VerifyMessageSignatureViewController.m; sourceTree = "<group>"; };
 		0AB63CB61ABD15C80018A546 /* RawPrivateKeyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RawPrivateKeyViewController.h; sourceTree = "<group>"; };
 		0AB63CB71ABD15C80018A546 /* RawPrivateKeyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RawPrivateKeyViewController.m; sourceTree = "<group>"; };
-		0AB63CBA1ABD16BB0018A546 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/MainStoryboard.strings; sourceTree = "<group>"; };
 		0AB63CBB1ABD1C700018A546 /* RawPrivateKeyDiceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RawPrivateKeyDiceViewController.h; sourceTree = "<group>"; };
 		0AB63CBC1ABD1C700018A546 /* RawPrivateKeyDiceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RawPrivateKeyDiceViewController.m; sourceTree = "<group>"; };
 		0AB8BC981A7F3194003C07D8 /* HotAddressAddHDMViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HotAddressAddHDMViewController.h; sourceTree = "<group>"; };
@@ -1938,7 +1938,7 @@
 				42EFB5511949C52100376888 /* Base */,
 				AC229A7A196A466400A7FB5E /* zh-Hans */,
 				AC229A7B196A466900A7FB5E /* zh-Hant */,
-				0AB63CBA1ABD16BB0018A546 /* en */,
+				0A311B861ABD488A006E77A9 /* en */,
 			);
 			name = MainStoryboard.storyboard;
 			sourceTree = "<group>";
