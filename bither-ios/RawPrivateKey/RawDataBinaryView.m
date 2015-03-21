@@ -1,5 +1,5 @@
 //
-//  RawDataView.m
+//  RawDataBinaryView.m
 //  bither-ios
 //
 //  Copyright 2014 http://Bither.net
@@ -16,10 +16,10 @@
 //  See the License for the specific language governing permissions and
 //  limitations under the License.
 
-#import "RawDataView.h"
+#import "RawDataBinaryView.h"
 #import "UIColor+Util.h"
 
-@interface RawDataView () {
+@interface RawDataBinaryView () {
     NSUInteger restrictedWidth;
     NSUInteger restrictedHeight;
     NSUInteger column;
@@ -29,7 +29,7 @@
 
 @end
 
-@implementation RawDataView
+@implementation RawDataBinaryView
 
 - (void)addData:(BOOL)d {
     if (self.filledDataLength < self.dataLength) {

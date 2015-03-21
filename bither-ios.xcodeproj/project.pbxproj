@@ -12,7 +12,7 @@
 		0A42062A1A494F1000562100 /* SignMessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A4206291A494F1000562100 /* SignMessageViewController.m */; };
 		0A43F4401A81C6BF008171DB /* HdmSendViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A43F43F1A81C6BF008171DB /* HdmSendViewController.m */; };
 		0A446C151A441393000CD25A /* DialogNetworkMonitorOption.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A446C141A441393000CD25A /* DialogNetworkMonitorOption.m */; };
-		0A515F781A36A2C0008292AF /* RawDataView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A515F771A36A2C0008292AF /* RawDataView.m */; };
+		0A515F781A36A2C0008292AF /* RawDataBinaryView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A515F771A36A2C0008292AF /* RawDataBinaryView.m */; };
 		0A515F7B1A36CAE3008292AF /* RawPrivateKeyBinaryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A515F7A1A36CAE3008292AF /* RawPrivateKeyBinaryViewController.m */; };
 		0A6C0F5C1A4D548B00544B33 /* MessageSigningSetting.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A6C0F5B1A4D548B00544B33 /* MessageSigningSetting.m */; };
 		0A6C0F5F1A4D5E1900544B33 /* DialogSignMessageSelectAddress.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A6C0F5E1A4D5E1900544B33 /* DialogSignMessageSelectAddress.m */; };
@@ -280,8 +280,8 @@
 		0A43F43F1A81C6BF008171DB /* HdmSendViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HdmSendViewController.m; sourceTree = "<group>"; };
 		0A446C131A441393000CD25A /* DialogNetworkMonitorOption.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DialogNetworkMonitorOption.h; sourceTree = "<group>"; };
 		0A446C141A441393000CD25A /* DialogNetworkMonitorOption.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DialogNetworkMonitorOption.m; sourceTree = "<group>"; };
-		0A515F761A36A2C0008292AF /* RawDataView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RawDataView.h; sourceTree = "<group>"; };
-		0A515F771A36A2C0008292AF /* RawDataView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RawDataView.m; sourceTree = "<group>"; };
+		0A515F761A36A2C0008292AF /* RawDataBinaryView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RawDataBinaryView.h; sourceTree = "<group>"; };
+		0A515F771A36A2C0008292AF /* RawDataBinaryView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RawDataBinaryView.m; sourceTree = "<group>"; };
 		0A515F791A36CAE3008292AF /* RawPrivateKeyBinaryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RawPrivateKeyBinaryViewController.h; sourceTree = "<group>"; };
 		0A515F7A1A36CAE3008292AF /* RawPrivateKeyBinaryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RawPrivateKeyBinaryViewController.m; sourceTree = "<group>"; };
 		0A6C0F5A1A4D548B00544B33 /* MessageSigningSetting.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageSigningSetting.h; sourceTree = "<group>"; };
@@ -788,8 +788,8 @@
 		0A515F721A36A293008292AF /* RawPrivateKey */ = {
 			isa = PBXGroup;
 			children = (
-				0A515F761A36A2C0008292AF /* RawDataView.h */,
-				0A515F771A36A2C0008292AF /* RawDataView.m */,
+				0A515F761A36A2C0008292AF /* RawDataBinaryView.h */,
+				0A515F771A36A2C0008292AF /* RawDataBinaryView.m */,
 				0A515F791A36CAE3008292AF /* RawPrivateKeyBinaryViewController.h */,
 				0A515F7A1A36CAE3008292AF /* RawPrivateKeyBinaryViewController.m */,
 				0AB63CB61ABD15C80018A546 /* RawPrivateKeyViewController.h */,
@@ -1680,7 +1680,7 @@
 				AC53ABE419D8FBB6007C095C /* UEntropyAnimatedTransition.m in Sources */,
 				AC6BAC6F196FA3410013B9E8 /* HotCheckPrivateKeyViewController.m in Sources */,
 				ACDDDC2419480DE00008A79D /* UIViewController+SwipeRightToPop.m in Sources */,
-				0A515F781A36A2C0008292AF /* RawDataView.m in Sources */,
+				0A515F781A36A2C0008292AF /* RawDataBinaryView.m in Sources */,
 				ACBEC018196D422D004301E0 /* BalanceButton.m in Sources */,
 				ACBEC021196FDC1E004301E0 /* DialogEditPassword.m in Sources */,
 				4254085F1946A219007AF99C /* UserDefaultsUtil.m in Sources */,

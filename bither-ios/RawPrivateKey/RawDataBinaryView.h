@@ -1,5 +1,5 @@
 //
-//  RawDataView.h
+//  RawDataBinaryView.h
 //  bither-ios
 //
 //  Copyright 2014 http://Bither.net
@@ -18,7 +18,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface RawDataView : UIView
+@interface RawDataBinaryView : UIView
 @property CGSize restrictedSize;
 @property CGSize dataSize;
 @property(readonly) NSUInteger dataLength;

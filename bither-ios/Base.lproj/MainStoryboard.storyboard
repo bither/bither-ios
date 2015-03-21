@@ -4234,7 +4234,7 @@
                                 <rect key="frame" x="10" y="56" width="300" height="425"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <subviews>
-                                    <view contentMode="scaleToFill" id="7kd-hJ-PA8" customClass="RawDataView">
+                                    <view contentMode="scaleToFill" id="7kd-hJ-PA8" customClass="RawDataBinaryView">
                                         <rect key="frame" x="0.0" y="0.0" width="300" height="210"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
