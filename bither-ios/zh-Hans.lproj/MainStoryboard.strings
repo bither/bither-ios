@@ -322,3 +322,12 @@
 
 /* Class = "UISegmentedControl"; aLp-gS-meD.segmentTitles[1] = "Binary"; ObjectID = "aLp-gS-meD"; */
 "aLp-gS-meD.segmentTitles[1]" = "二进制";
+
+/* Class = "UIButton"; normalTitle = "Add This Private Key"; ObjectID = "ckY-fV-MzW"; */
+"ckY-fV-MzW.normalTitle" = "添加此私钥";
+
+/* Class = "UILabel"; text = "Address"; ObjectID = "wb7-kB-0ec"; */
+"wb7-kB-0ec.text" = "地址";
+
+/* Class = "UILabel"; text = "Private Key"; ObjectID = "x9d-Sc-rrj"; */
+"x9d-Sc-rrj.text" = "私钥";

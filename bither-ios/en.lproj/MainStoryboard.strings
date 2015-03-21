@@ -155,6 +155,9 @@
 /* Class = "UILabel"; text = "Label"; ObjectID = "SLL-YQ-ttn"; */
 "SLL-YQ-ttn.text" = "Label";
 
+/* Class = "UIButton"; normalTitle = "C"; ObjectID = "UPg-jL-w07"; */
+"UPg-jL-w07.normalTitle" = "C";
+
 /* Class = "UILabel"; text = "Bither Hot: Online & Simple."; ObjectID = "V5M-8Z-afm"; */
 "V5M-8Z-afm.text" = "Bither Hot: Online & Simple.";
 
@@ -412,3 +415,12 @@
 
 /* Class = "UISegmentedControl"; aLp-gS-meD.segmentTitles[1] = "Binary"; ObjectID = "aLp-gS-meD"; */
 "aLp-gS-meD.segmentTitles[1]" = "Binary";
+
+/* Class = "UIButton"; normalTitle = "Add This Private Key"; ObjectID = "ckY-fV-MzW"; */
+"ckY-fV-MzW.normalTitle" = "Add This Private Key";
+
+/* Class = "UILabel"; text = "Address"; ObjectID = "wb7-kB-0ec"; */
+"wb7-kB-0ec.text" = "Address";
+
+/* Class = "UILabel"; text = "Private Key"; ObjectID = "x9d-Sc-rrj"; */
+"x9d-Sc-rrj.text" = "Private Key";
