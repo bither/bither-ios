@@ -316,3 +316,9 @@
 
 /* Class = "UILabel"; text = "Singular Mode"; ObjectID = "IzA-vJ-Ad6"; */
 "IzA-vJ-Ad6.text" = "单机模式";
+
+/* Class = "UISegmentedControl"; aLp-gS-meD.segmentTitles[0] = "Dice"; ObjectID = "aLp-gS-meD"; */
+"aLp-gS-meD.segmentTitles[0]" = "骰子";
+
+/* Class = "UISegmentedControl"; aLp-gS-meD.segmentTitles[1] = "Binary"; ObjectID = "aLp-gS-meD"; */
+"aLp-gS-meD.segmentTitles[1]" = "二进制";
