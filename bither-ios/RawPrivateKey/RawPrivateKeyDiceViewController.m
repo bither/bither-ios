@@ -2,13 +2,35 @@
 //  RawPrivateKeyDiceViewController.m
 //  bither-ios
 //
-//  Created by 宋辰文 on 15/3/21.
-//  Copyright (c) 2015年 Bither. All rights reserved.
+//  Copyright 2014 http://Bither.net
+//
+//  Licensed under the Apache License, Version 2.0 (the "License");
+//  you may not use this file except in compliance with the License.
+//  You may obtain a copy of the License at
+//
+//    http://www.apache.org/licenses/LICENSE-2.0
+//
+//  Unless required by applicable law or agreed to in writing, software
+//  distributed under the License is distributed on an "AS IS" BASIS,
+//  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+//  See the License for the specific language governing permissions and
+//  limitations under the License.
+//
+//  Created by songchenwen on 2015/3/21.
 //
 
 #import "RawPrivateKeyDiceViewController.h"
+#import "RawDataDiceView.h"
 
 @interface RawPrivateKeyDiceViewController ()
+@property (weak, nonatomic) IBOutlet RawDataDiceView *vData;
+@property (weak, nonatomic) IBOutlet UIView *vInput;
+@property (weak, nonatomic) IBOutlet UIView *vButtons;
+
+@property (weak, nonatomic) IBOutlet UIView *vShow;
+@property (weak, nonatomic) IBOutlet UILabel *lblPrivateKey;
+@property (weak, nonatomic) IBOutlet UILabel *lblAddress;
+@property (weak, nonatomic) IBOutlet UIButton *btnAdd;
 
 @end
 
@@ -16,22 +38,16 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+}
+- (IBAction)dicePressed:(UIButton*)sender {
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+- (IBAction)deletePressed:(id)sender {
 }
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+- (IBAction)clearPressed:(id)sender {
 }
-*/
+- (IBAction)addPressed:(id)sender {
+
+}
 
 @end

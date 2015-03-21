@@ -31,7 +31,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.page = [[PiPageViewController alloc] initWithStoryboard:self.storyboard viewControllerIdentifiers:@[@"RawPrivateKeyBinary"] andPageDelegate:self];
+    self.page = [[PiPageViewController alloc] initWithStoryboard:self.storyboard viewControllerIdentifiers:@[@"RawPrivateKeyDice", @"RawPrivateKeyBinary"] andPageDelegate:self];
     [self addChildViewController:self.page];
     self.page.view.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height);
     [self.view insertSubview:self.page.view atIndex:0];

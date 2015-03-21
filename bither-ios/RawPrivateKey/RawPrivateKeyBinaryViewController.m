@@ -18,7 +18,7 @@
 
 #import "RawPrivateKeyBinaryViewController.h"
 #import "UIViewController+PiShowBanner.h"
-#import "RawDataView.h"
+#import "RawDataBinaryView.h"
 #import "DialogProgress.h"
 #import "DialogPassword.h"
 #import "NSData+Hash.h"
@@ -35,7 +35,7 @@
 
 @interface RawPrivateKeyBinaryViewController ()<DialogPasswordDelegate>
 @property (weak, nonatomic) IBOutlet UIView *vInput;
-@property (weak, nonatomic) IBOutlet RawDataView *vData;
+@property (weak, nonatomic) IBOutlet RawDataBinaryView *vData;
 @property (weak, nonatomic) IBOutlet UIView *vButtons;
 
 @property (weak, nonatomic) IBOutlet UIView *vShow;
