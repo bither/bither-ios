@@ -67,6 +67,13 @@
         _index = -1;
         self.index = 0;
     }
+    for (UIView *v in self.view.subviews) {
+        if ([v isKindOfClass:[UIScrollView class]]) {
+            UIScrollView *s = v;
+            s.delaysContentTouches = NO;
+            s.canCancelContentTouches = YES;
+        }
+    }
 }
 
 - (void)pageViewController:(UIPageViewController *)pageViewController willTransitionToViewControllers:(NSArray *)pendingViewControllers{
