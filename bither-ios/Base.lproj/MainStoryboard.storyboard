@@ -4186,56 +4186,63 @@
                                         <rect key="frame" x="0.0" y="210" width="300" height="202"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" heightSizable="YES"/>
                                         <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="hQL-T3-YNx">
-                                                <rect key="frame" x="4" y="30" width="104" height="151"/>
-                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" heightSizable="YES"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="50"/>
-                                                <state key="normal" title="0" backgroundImage="btn_keyboard_key_white_normal">
-                                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                                </state>
-                                                <state key="highlighted" backgroundImage="btn_keyboard_key_white_pressed"/>
-                                                <connections>
-                                                    <action selector="zeroPressed:" destination="GLK-Cm-DMJ" eventType="touchUpInside" id="lOO-P9-7vq"/>
-                                                </connections>
-                                            </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="RIA-YK-ZlZ">
-                                                <rect key="frame" x="122" y="30" width="104" height="151"/>
-                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" heightSizable="YES"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="50"/>
-                                                <state key="normal" title="1" backgroundImage="btn_keyboard_key_white_normal">
-                                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                                </state>
-                                                <state key="highlighted" backgroundImage="btn_keyboard_key_white_pressed"/>
-                                                <connections>
-                                                    <action selector="onePressed:" destination="GLK-Cm-DMJ" eventType="touchUpInside" id="exL-mc-Hn4"/>
-                                                </connections>
-                                            </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="15W-7J-QeH">
-                                                <rect key="frame" x="239" y="30" width="60" height="70"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" heightSizable="YES" flexibleMaxY="YES"/>
-                                                <state key="normal" image="sym_keyboard_delete_holo_dark" backgroundImage="btn_keyboard_key_gray_normal">
-                                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                                </state>
-                                                <state key="highlighted" backgroundImage="btn_keyboard_key_gray_pressed"/>
-                                                <connections>
-                                                    <action selector="deleteLastPressed:" destination="GLK-Cm-DMJ" eventType="touchUpInside" id="lS7-mk-Ku9"/>
-                                                </connections>
-                                            </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="fhw-Xa-7ci">
-                                                <rect key="frame" x="239" y="109" width="60" height="72.5"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMinY="YES" heightSizable="YES"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="25"/>
-                                                <state key="normal" title="C" backgroundImage="btn_keyboard_key_gray_normal">
-                                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                                </state>
-                                                <state key="highlighted" backgroundImage="btn_keyboard_key_gray_pressed"/>
-                                                <connections>
-                                                    <action selector="clearPressed:" destination="GLK-Cm-DMJ" eventType="touchUpInside" id="Hvx-62-RaL"/>
-                                                </connections>
-                                            </button>
+                                            <view contentMode="scaleToFill" id="iwh-u4-lti">
+                                                <rect key="frame" x="0.0" y="30" width="300" height="151"/>
+                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                                <subviews>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="hQL-T3-YNx">
+                                                        <rect key="frame" x="4" y="0.0" width="104" height="151"/>
+                                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" heightSizable="YES"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="50"/>
+                                                        <state key="normal" title="0" backgroundImage="btn_keyboard_key_white_normal">
+                                                            <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                        </state>
+                                                        <state key="highlighted" backgroundImage="btn_keyboard_key_white_pressed"/>
+                                                        <connections>
+                                                            <action selector="zeroPressed:" destination="GLK-Cm-DMJ" eventType="touchUpInside" id="lOO-P9-7vq"/>
+                                                        </connections>
+                                                    </button>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="RIA-YK-ZlZ">
+                                                        <rect key="frame" x="121" y="0.0" width="104" height="151"/>
+                                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" heightSizable="YES"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="50"/>
+                                                        <state key="normal" title="1" backgroundImage="btn_keyboard_key_white_normal">
+                                                            <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                        </state>
+                                                        <state key="highlighted" backgroundImage="btn_keyboard_key_white_pressed"/>
+                                                        <connections>
+                                                            <action selector="onePressed:" destination="GLK-Cm-DMJ" eventType="touchUpInside" id="exL-mc-Hn4"/>
+                                                        </connections>
+                                                    </button>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="15W-7J-QeH">
+                                                        <rect key="frame" x="236" y="0.0" width="60" height="70"/>
+                                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                                                        <state key="normal" image="sym_keyboard_delete_holo_dark" backgroundImage="btn_keyboard_key_gray_normal">
+                                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                        </state>
+                                                        <state key="highlighted" backgroundImage="btn_keyboard_key_gray_pressed"/>
+                                                        <connections>
+                                                            <action selector="deleteLastPressed:" destination="GLK-Cm-DMJ" eventType="touchUpInside" id="lS7-mk-Ku9"/>
+                                                        </connections>
+                                                    </button>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="fhw-Xa-7ci">
+                                                        <rect key="frame" x="236" y="78" width="60" height="72.5"/>
+                                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMinY="YES" heightSizable="YES"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                                                        <state key="normal" title="C" backgroundImage="btn_keyboard_key_gray_normal">
+                                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                        </state>
+                                                        <state key="highlighted" backgroundImage="btn_keyboard_key_gray_pressed"/>
+                                                        <connections>
+                                                            <action selector="clearPressed:" destination="GLK-Cm-DMJ" eventType="touchUpInside" id="Hvx-62-RaL"/>
+                                                        </connections>
+                                                    </button>
+                                                </subviews>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                            </view>
                                         </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     </view>

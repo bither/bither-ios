@@ -37,6 +37,7 @@
         NSUInteger index = self.filledDataLength;
         CFBitVectorSetCount(data, index + 1);
         CFBitVectorSetBitAtIndex(data, index, d);
+        [v.layer removeAllAnimations];
         if (d) {
             v.backgroundColor = [UIColor parseColor:0xff9329];
         } else {
@@ -53,18 +54,18 @@
 }
 
 - (void)deleteLast {
-    if (self.filledDataLength <= 0) {
+    NSUInteger size = self.filledDataLength;
+    if (size <= 0) {
         return;
     }
-    CFBitVectorSetCount(data, self.filledDataLength - 1);
-    UIView *v = ((UIView *) ((UIView *) self.subviews[1]).subviews[self.filledDataLength - 1]).subviews[0];
-    CGPoint center = CGPointMake(CGRectGetMidX(v.frame), CGRectGetMidY(v.frame));
-    v.layer.anchorPoint = CGPointMake(0.5, 0.5);
-    v.layer.position = center;
+    CFBitVectorSetCount(data, size - 1);
+    UIView *v = ((UIView *) ((UIView *) self.subviews[1]).subviews[size - 1]).subviews[0];
     [UIView animateWithDuration:0.5 animations:^{
-        v.transform = CGAffineTransformMakeScale(0, 0);
+        v.transform = CGAffineTransformMakeScale(0.01, 0.01);
     }                completion:^(BOOL finished) {
-        v.backgroundColor = [UIColor clearColor];
+        if(finished){
+            v.backgroundColor = [UIColor clearColor];
+        }
     }];
 }
 
@@ -83,9 +84,11 @@
         v.layer.anchorPoint = CGPointMake(0.5, 0.5);
         v.layer.position = center;
         [UIView animateWithDuration:0.5 animations:^{
-            v.transform = CGAffineTransformMakeScale(0, 0);
+            v.transform = CGAffineTransformMakeScale(0.01, 0.01);
         }                completion:^(BOOL finished) {
-            v.backgroundColor = [UIColor clearColor];
+            if(finished){
+                v.backgroundColor = [UIColor clearColor];
+            }
         }];
     }
 }
