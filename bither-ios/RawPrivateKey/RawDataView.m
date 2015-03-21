@@ -19,7 +19,7 @@
 #import "RawDataView.h"
 #import "UIColor+Util.h"
 
-@interface RawDataView(){
+@interface RawDataView () {
     NSUInteger restrictedWidth;
     NSUInteger restrictedHeight;
     NSUInteger column;
@@ -31,15 +31,15 @@
 
 @implementation RawDataView
 
--(void)addData:(BOOL)d{
-    if(self.filledDataLength < self.dataLength){
-        UIView* v = ((UIView*)((UIView*)self.subviews[1]).subviews[self.filledDataLength]).subviews[0];
+- (void)addData:(BOOL)d {
+    if (self.filledDataLength < self.dataLength) {
+        UIView *v = ((UIView *) ((UIView *) self.subviews[1]).subviews[self.filledDataLength]).subviews[0];
         NSUInteger index = self.filledDataLength;
         CFBitVectorSetCount(data, index + 1);
         CFBitVectorSetBitAtIndex(data, index, d);
-        if(d){
+        if (d) {
             v.backgroundColor = [UIColor parseColor:0xff9329];
-        }else{
+        } else {
             v.backgroundColor = [UIColor parseColor:0x3bbf59];
         }
         CGPoint center = CGPointMake(CGRectGetMidX(v.frame), CGRectGetMidY(v.frame));
@@ -52,8 +52,46 @@
     }
 }
 
--(NSMutableData*)data{
-    if(self.filledDataLength < self.dataLength){
+- (void)deleteLast {
+    if (self.filledDataLength <= 0) {
+        return;
+    }
+    CFBitVectorSetCount(data, self.filledDataLength - 1);
+    UIView *v = ((UIView *) ((UIView *) self.subviews[1]).subviews[self.filledDataLength - 1]).subviews[0];
+    CGPoint center = CGPointMake(CGRectGetMidX(v.frame), CGRectGetMidY(v.frame));
+    v.layer.anchorPoint = CGPointMake(0.5, 0.5);
+    v.layer.position = center;
+    [UIView animateWithDuration:0.5 animations:^{
+        v.transform = CGAffineTransformMakeScale(0, 0);
+    }                completion:^(BOOL finished) {
+        v.backgroundColor = [UIColor clearColor];
+    }];
+}
+
+- (void)removeAllData {
+    NSUInteger size = self.filledDataLength;
+    if (size <= 0) {
+        return;
+    }
+    if (data) {
+        CFRelease(data);
+    }
+    data = CFBitVectorCreateMutable(NULL, column * row);
+    for (NSUInteger i = 0; i < size; i++) {
+        UIView *v = ((UIView *) ((UIView *) self.subviews[1]).subviews[i]).subviews[0];
+        CGPoint center = CGPointMake(CGRectGetMidX(v.frame), CGRectGetMidY(v.frame));
+        v.layer.anchorPoint = CGPointMake(0.5, 0.5);
+        v.layer.position = center;
+        [UIView animateWithDuration:0.5 animations:^{
+            v.transform = CGAffineTransformMakeScale(0, 0);
+        }                completion:^(BOOL finished) {
+            v.backgroundColor = [UIColor clearColor];
+        }];
+    }
+}
+
+- (NSMutableData *)data {
+    if (self.filledDataLength < self.dataLength) {
         return nil;
     }
     NSMutableData *result = [NSMutableData dataWithLength:self.dataLength / 8];
@@ -61,34 +99,34 @@
     return result;
 }
 
--(void)organizeView{
-    if(restrictedWidth <= 0 || restrictedHeight <= 0 || row <= 0 || column <= 0){
+- (void)organizeView {
+    if (restrictedWidth <= 0 || restrictedHeight <= 0 || row <= 0 || column <= 0) {
         return;
     }
-    for(NSInteger i = self.subviews.count - 1; i >= 0; i--){
+    for (NSInteger i = self.subviews.count - 1; i >= 0; i--) {
         [self.subviews[i] removeFromSuperview];
     }
     [self configureSize];
-    
-    UIImageView *ivBg = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height)];
+
+    UIImageView *ivBg = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height)];
     ivBg.image = [UIImage imageNamed:@"border_bottom_right"];
     ivBg.contentMode = UIViewContentModeScaleToFill;
     [self addSubview:ivBg];
-    
-    UIView* vContainer = [[UIView alloc]initWithFrame:CGRectMake(0, 0, self.frame.size.width - 1, self.frame.size.height - 1)];
+
+    UIView *vContainer = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width - 1, self.frame.size.height - 1)];
     vContainer.backgroundColor = [UIColor clearColor];
     [self addSubview:vContainer];
-    
+
     CGFloat width = (self.frame.size.width - 1) / column;
     CGFloat height = (self.frame.size.height - 1) / row;
-    for(NSInteger y = 0; y < row; y++){
-        for(NSInteger x = 0; x < column; x++){
-            UIView* v = [[UIView alloc]initWithFrame:CGRectMake(x * width, y * height, width, height)];
+    for (NSInteger y = 0; y < row; y++) {
+        for (NSInteger x = 0; x < column; x++) {
+            UIView *v = [[UIView alloc] initWithFrame:CGRectMake(x * width, y * height, width, height)];
             v.backgroundColor = [UIColor clearColor];
-            ivBg = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, width, height)];
+            ivBg = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, width, height)];
             ivBg.image = [UIImage imageNamed:@"border_top_left"];
             ivBg.contentMode = UIViewContentModeScaleToFill;
-            UIView* inner = [[UIView alloc]initWithFrame:CGRectMake(1, 1, width - 1, height -1)];
+            UIView *inner = [[UIView alloc] initWithFrame:CGRectMake(1, 1, width - 1, height - 1)];
             inner.backgroundColor = [UIColor clearColor];
             [v addSubview:inner];
             [v addSubview:ivBg];
@@ -97,50 +135,49 @@
     }
 }
 
--(void)configureSize{
+- (void)configureSize {
     NSUInteger width = restrictedWidth - 1;
     NSUInteger height = restrictedHeight - 1;
     width = width - width % column + 1;
     height = height - height % row + 1;
-    self.frame = CGRectMake(self.frame.origin.x - (width - self.frame.size.width)/2, self.frame.origin.y, width, height);
+    self.frame = CGRectMake(self.frame.origin.x - (width - self.frame.size.width) / 2, self.frame.origin.y, width, height);
 }
 
--(void)setRestrictedSize:(CGSize)restrictedSize{
+- (void)setRestrictedSize:(CGSize)restrictedSize {
     restrictedWidth = floorf(restrictedSize.width);
     restrictedHeight = floorf(restrictedSize.height);
     [self organizeView];
 }
 
--(CGSize)restrictedSize{
+- (CGSize)restrictedSize {
     return CGSizeMake(restrictedWidth, restrictedHeight);
 }
 
--(void)setDataSize:(CGSize)dataSize{
+- (void)setDataSize:(CGSize)dataSize {
     column = floorf(dataSize.width);
     row = floorf(dataSize.height);
-    if(data){
+    if (data) {
         CFRelease(data);
     }
     data = CFBitVectorCreateMutable(NULL, column * row);
     [self organizeView];
 }
 
--(CGSize)dataSize{
+- (CGSize)dataSize {
     return CGSizeMake(column, row);
 }
 
--(NSUInteger)dataLength{
+- (NSUInteger)dataLength {
     return column * row;
 }
 
-- (void)dealloc
-{
-    if(data){
+- (void)dealloc {
+    if (data) {
         CFRelease(data);
     }
 }
 
--(NSUInteger)filledDataLength{
+- (NSUInteger)filledDataLength {
     return CFBitVectorGetCount(data);
 }
 

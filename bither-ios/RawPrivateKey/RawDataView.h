@@ -21,8 +21,13 @@
 @interface RawDataView : UIView
 @property CGSize restrictedSize;
 @property CGSize dataSize;
-@property (readonly) NSUInteger dataLength;
-@property (readonly) NSUInteger filledDataLength;
-@property (readonly) NSMutableData* data;
--(void)addData:(BOOL)d;
+@property(readonly) NSUInteger dataLength;
+@property(readonly) NSUInteger filledDataLength;
+@property(readonly) NSMutableData *data;
+
+- (void)addData:(BOOL)d;
+
+- (void)deleteLast;
+
+- (void)removeAllData;
 @end
