@@ -34,8 +34,6 @@
 #define PARAMETERS_MIN_N @"0"
 
 @interface RawPrivateKeyBinaryViewController ()<DialogPasswordDelegate>
-@property (weak, nonatomic) IBOutlet UIView *vTopbar;
-
 @property (weak, nonatomic) IBOutlet UIView *vInput;
 @property (weak, nonatomic) IBOutlet RawDataView *vData;
 @property (weak, nonatomic) IBOutlet UIView *vButtons;
@@ -75,7 +73,7 @@
             if(![self checkData:data]){
                 dispatch_async(dispatch_get_main_queue(), ^{
                     [dpB dismissWithCompletion:^{
-                        [self showBannerWithMessage:NSLocalizedString(@"raw_private_key_not_safe", nil) belowView:self.vTopbar withCompletion:^{
+                        [self showBannerWithMessage:NSLocalizedString(@"raw_private_key_not_safe", nil) belowView:nil withCompletion:^{
                             self.vData.dataSize = CGSizeMake(16, 16);
                         }];
                     }];
@@ -176,10 +174,6 @@
 
 - (IBAction)clearPressed:(id)sender {
     [self.vData removeAllData];
-}
-
-- (IBAction)backPressed:(id)sender {
-    [self.navigationController popViewControllerAnimated:YES];
 }
 
 -(BOOL)checkData:(NSData*)data{
