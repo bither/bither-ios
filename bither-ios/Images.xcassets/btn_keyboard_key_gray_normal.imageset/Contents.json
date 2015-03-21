@@ -1,0 +1,50 @@
+{
+  "images" : [
+    {
+      "resizing" : {
+        "mode" : "9-part",
+        "center" : {
+          "mode" : "fill",
+          "width" : 1,
+          "height" : 1
+        },
+        "capInsets" : {
+          "bottom" : 24,
+          "top" : 24,
+          "right" : 10,
+          "left" : 9
+        }
+      },
+      "idiom" : "universal",
+      "filename" : "btn_keyboard_key_gray_normal.png",
+      "scale" : "1x"
+    },
+    {
+      "resizing" : {
+        "mode" : "9-part",
+        "center" : {
+          "mode" : "fill",
+          "width" : 1,
+          "height" : 1
+        },
+        "capInsets" : {
+          "bottom" : 48,
+          "top" : 49,
+          "right" : 20,
+          "left" : 19
+        }
+      },
+      "idiom" : "universal",
+      "filename" : "btn_keyboard_key_gray_normal@2x.png",
+      "scale" : "2x"
+    },
+    {
+      "idiom" : "universal",
+      "scale" : "3x"
+    }
+  ],
+  "info" : {
+    "version" : 1,
+    "author" : "xcode"
+  }
+}

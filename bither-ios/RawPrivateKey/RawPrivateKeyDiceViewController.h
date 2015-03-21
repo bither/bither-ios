@@ -1,5 +1,5 @@
 //
-//  RawPrivateKeyViewController.h
+//  RawPrivateKeyDiceViewController.h
 //  bither-ios
 //
 //  Copyright 2014 http://Bither.net
@@ -21,6 +21,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface RawPrivateKeyViewController : UIViewController
+@interface RawPrivateKeyDiceViewController : UIViewController
 
 @end

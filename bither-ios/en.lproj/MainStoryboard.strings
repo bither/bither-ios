@@ -47,9 +47,6 @@
 /* Class = "UITextField"; placeholder = "Bitcoin address"; ObjectID = "7eD-5T-1F7"; */
 "7eD-5T-1F7.placeholder" = "Bitcoin address";
 
-/* Class = "UILabel"; text = "Raw Private Key"; ObjectID = "7q1-Od-7M4"; */
-"7q1-Od-7M4.text" = "Raw Private Key";
-
 /* Class = "UILabel"; text = "How many private keys to generate?"; ObjectID = "8Qe-tr-XPb"; */
 "8Qe-tr-XPb.text" = "How many private keys to generate?";
 
@@ -77,6 +74,9 @@
 /* Class = "UISegmentedControl"; Cxt-9h-SUk.segmentTitles[1] = "Blocks"; ObjectID = "Cxt-9h-SUk"; */
 "Cxt-9h-SUk.segmentTitles[1]" = "Blocks";
 
+/* Class = "UIButton"; normalTitle = "Singular Mode"; ObjectID = "EXG-fG-TbM"; */
+"EXG-fG-TbM.normalTitle" = "Singular Mode";
+
 /* Class = "UILabel"; text = "Pay to"; ObjectID = "F4n-lA-Ige"; */
 "F4n-lA-Ige.text" = "Pay to";
 
@@ -103,6 +103,9 @@
 
 /* Class = "UILabel"; text = "Label"; ObjectID = "Irv-YA-qKK"; */
 "Irv-YA-qKK.text" = "Label";
+
+/* Class = "UILabel"; text = "Singular Mode"; ObjectID = "IzA-vJ-Ad6"; */
+"IzA-vJ-Ad6.text" = "Singular Mode";
 
 /* Class = "UILabel"; text = "How many HDM addresses to add?"; ObjectID = "KSX-eO-Uwn"; */
 "KSX-eO-Uwn.text" = "How many HDM addresses to add?";
@@ -151,6 +154,9 @@
 
 /* Class = "UILabel"; text = "Label"; ObjectID = "SLL-YQ-ttn"; */
 "SLL-YQ-ttn.text" = "Label";
+
+/* Class = "UIButton"; normalTitle = "C"; ObjectID = "UPg-jL-w07"; */
+"UPg-jL-w07.normalTitle" = "C";
 
 /* Class = "UILabel"; text = "Bither Hot: Online & Simple."; ObjectID = "V5M-8Z-afm"; */
 "V5M-8Z-afm.text" = "Bither Hot: Online & Simple.";
@@ -218,6 +224,9 @@
 /* Class = "UITextField"; placeholder = "Bitcoin address"; ObjectID = "fCj-hW-RGp"; */
 "fCj-hW-RGp.placeholder" = "Bitcoin address";
 
+/* Class = "UIButton"; normalTitle = "C"; ObjectID = "fhw-Xa-7ci"; */
+"fhw-Xa-7ci.normalTitle" = "C";
+
 /* Class = "UILabel"; text = "Pay to"; ObjectID = "g3O-Ch-Qm9"; */
 "g3O-Ch-Qm9.text" = "Pay to";
 
@@ -271,6 +280,9 @@
 
 /* Class = "UILabel"; text = "HDM Server"; ObjectID = "lnF-bS-z2z"; */
 "lnF-bS-z2z.text" = "HDM Server";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "mN2-wj-ee4"; */
+"mN2-wj-ee4.text" = "Label";
 
 /* Class = "UILabel"; text = "QR Code"; ObjectID = "mSg-tC-frD"; */
 "mSg-tC-frD.text" = "QR Code";
@@ -398,8 +410,17 @@
 /* Class = "UIButton"; normalTitle = "Add This Private Key"; ObjectID = "zjg-wy-EHw"; */
 "zjg-wy-EHw.normalTitle" = "Add This Private Key";
 
-/* Class = "UIButton"; normalTitle = "Singular Mode"; ObjectID = "EXG-fG-TbM"; */
-"EXG-fG-TbM.normalTitle" = "Singular Mode";
+/* Class = "UISegmentedControl"; aLp-gS-meD.segmentTitles[0] = "Dice"; ObjectID = "aLp-gS-meD"; */
+"aLp-gS-meD.segmentTitles[0]" = "Dice";
 
-/* Class = "UILabel"; text = "Singular Mode"; ObjectID = "IzA-vJ-Ad6"; */
-"IzA-vJ-Ad6.text" = "Singular Mode";
+/* Class = "UISegmentedControl"; aLp-gS-meD.segmentTitles[1] = "Binary"; ObjectID = "aLp-gS-meD"; */
+"aLp-gS-meD.segmentTitles[1]" = "Binary";
+
+/* Class = "UIButton"; normalTitle = "Add This Private Key"; ObjectID = "ckY-fV-MzW"; */
+"ckY-fV-MzW.normalTitle" = "Add This Private Key";
+
+/* Class = "UILabel"; text = "Address"; ObjectID = "wb7-kB-0ec"; */
+"wb7-kB-0ec.text" = "Address";
+
+/* Class = "UILabel"; text = "Private Key"; ObjectID = "x9d-Sc-rrj"; */
+"x9d-Sc-rrj.text" = "Private Key";

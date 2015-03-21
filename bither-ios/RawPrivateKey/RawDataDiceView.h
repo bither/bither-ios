@@ -1,5 +1,5 @@
 //
-//  RawPrivateKeyViewController.h
+//  RawDataDiceView.h
 //  bither-ios
 //
 //  Copyright 2014 http://Bither.net
@@ -19,8 +19,19 @@
 //  Created by songchenwen on 2015/3/21.
 //
 
-#import <UIKit/UIKit.h>
+#import <Foundation/Foundation.h>
 
-@interface RawPrivateKeyViewController : UIViewController
 
+@interface RawDataDiceView : UIView
+@property CGSize restrictedSize;
+@property CGSize dataSize;
+@property(readonly) NSUInteger dataLength;
+@property(readonly) NSUInteger filledDataLength;
+@property(readonly) NSMutableData *data;
+
+- (void)addData:(NSUInteger)d;
+
+- (void)deleteLast;
+
+- (void)removeAllData;
 @end

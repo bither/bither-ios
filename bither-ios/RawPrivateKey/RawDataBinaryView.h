@@ -1,5 +1,5 @@
 //
-//  RawPrivateKeyViewController.h
+//  RawDataBinaryView.h
 //  bither-ios
 //
 //  Copyright 2014 http://Bither.net
@@ -15,12 +15,19 @@
 //  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 //  See the License for the specific language governing permissions and
 //  limitations under the License.
-//
-//  Created by songchenwen on 2015/3/21.
-//
 
 #import <UIKit/UIKit.h>
 
-@interface RawPrivateKeyViewController : UIViewController
+@interface RawDataBinaryView : UIView
+@property CGSize restrictedSize;
+@property CGSize dataSize;
+@property(readonly) NSUInteger dataLength;
+@property(readonly) NSUInteger filledDataLength;
+@property(readonly) NSMutableData *data;
 
+- (void)addData:(BOOL)d;
+
+- (void)deleteLast;
+
+- (void)removeAllData;
 @end
