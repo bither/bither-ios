@@ -29,6 +29,7 @@
 #import "AppDelegate.h"
 #import "StringUtil.h"
 #import <Bitheri/BTAddressManager.h>
+#import <Bitheri/BTKey+BIP38.h>
 #import "DialogAddressLongPressOptions.h"
 #import "BitherSetting.h"
 #import "DialogProgress.h"
@@ -213,6 +214,13 @@
     [dialog showInWindow:self.view.window];
 }
 
+- (void)showBIP38PrivateKey {
+    _qrcodeType = BIP38;
+    DialogPassword *dialog = [[DialogPassword alloc] initWithDelegate:self];
+    [dialog showInWindow:self.view.window];
+}
+
+
 - (void)onPasswordEntered:(NSString *)password {
     __block NSString *bpassword = password;
     password = nil;
@@ -238,6 +246,19 @@
     } else {
         DialogProgress *dialogProgress = [[DialogProgress alloc] initWithMessage:NSLocalizedString(@"Please wait…", nil)];
         [dialogProgress showInWindow:vc.view.window];
+        if(_qrcodeType == BIP38){
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+                BTKey *key = [BTKey keyWithBitcoinj:self.address.encryptPrivKey andPassphrase:bpassword];
+                __block NSString *bip38 = [key BIP38KeyWithPassphrase:bpassword];
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [dialogProgress dismissWithCompletion:^{
+                        DialogPrivateKeyDecryptedQrCode *dialogPrivateKey = [[DialogPrivateKeyDecryptedQrCode alloc] initWithAddress:self.address.address privateKey:bip38];
+                        [dialogPrivateKey showInWindow:self.view.window];
+                    }];
+                });
+            });
+            return;
+        }
         [self decrypted:bpassword callback:^(id response) {
             [dialogProgress dismiss];
             if (_qrcodeType == Decrypetd) {

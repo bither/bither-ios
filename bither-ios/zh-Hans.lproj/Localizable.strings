@@ -405,6 +405,7 @@
 "Not match BIP38-private key format"="不符合BIP38私钥格式";
 "Scan BIP38-private key QR Code"="扫描BIP38私钥二维码";
 "Based on %@ %@"="基于 %@ %@";
+"address_detail_private_Key_qr_code_bip38" = "BIP38 私钥二维码";
 
 "xrandom_no_source"="无可用随机源";
 "xrandom_generating_failed"="生成失败";

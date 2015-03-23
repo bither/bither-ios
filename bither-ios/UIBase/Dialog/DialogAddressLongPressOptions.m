@@ -39,6 +39,9 @@
     if (!address.hasPrivKey) {
         viewStr = NSLocalizedString(@"Stop Monitoring", nil);
     }
+    if (NSLocalizedString(@"address_detail_private_Key_qr_code_bip38", nil).length >= viewStr.length){
+        viewStr = NSLocalizedString(@"address_detail_private_Key_qr_code_bip38", nil);
+    }
     self = [super initWithFrame:CGRectMake(0, 0, [viewStr sizeWithRestrict:CGSizeMake(CGFLOAT_MAX, kButtonHeight) font:[UIFont systemFontOfSize:kFontSize]].width + kButtonEdgeInsets.left + kButtonEdgeInsets.right, kHeight)];
     if (self) {
         _prirvateKeyQrCodeEncryptedStr = viewStr;
@@ -54,6 +57,9 @@
     NSString *viewStr = NSLocalizedString(@"Private Key QR Code (Decrypted)", nil);
     if (!address.hasPrivKey) {
         viewStr = NSLocalizedString(@"Stop Monitoring", nil);
+    }
+    if (NSLocalizedString(@"address_detail_private_Key_qr_code_bip38", nil).length >= viewStr.length){
+        viewStr = NSLocalizedString(@"address_detail_private_Key_qr_code_bip38", nil);
     }
     self = [super initWithFrame:CGRectMake(0, 0, [viewStr sizeWithRestrict:CGSizeMake(CGFLOAT_MAX, kButtonHeight) font:[UIFont systemFontOfSize:kFontSize]].width + kButtonEdgeInsets.left + kButtonEdgeInsets.right, kHeight)];
     if (self) {
@@ -75,6 +81,10 @@
 
         bottom += 1;
         bottom = [self createButtonWithText:NSLocalizedString(@"Private Key QR Code (Decrypted)", nil) top:bottom action:@selector(privateKeyDecryptedQrCodePressed:)];
+        [self addSubview:[self getSeperator:bottom]];
+
+        bottom += 1;
+        bottom = [self createButtonWithText:NSLocalizedString(@"address_detail_private_Key_qr_code_bip38", nil) top:bottom action:@selector(showBIP38PrivateKey:)];
         [self addSubview:[self getSeperator:bottom]];
 
         bottom += 1;
@@ -134,6 +144,15 @@
     __block BTAddress *a = self.address;
     [self dismissWithCompletion:^{
         [[[DialogAddressAlias alloc] initWithAddress:a andDelegate:self.aliasDelegate] showInWindow:w];
+    }];
+}
+
+- (void)showBIP38PrivateKey:(id)sender {
+    __block NSObject <DialogPrivateKeyOptionsDelegate> *delegate = self.delegate;
+    [self dismissWithCompletion:^{
+        if (delegate && [delegate respondsToSelector:@selector(showBIP38PrivateKey)]) {
+            [delegate showBIP38PrivateKey];
+        }
     }];
 }
 

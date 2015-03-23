@@ -16,6 +16,7 @@
 //  See the License for the specific language governing permissions and
 //  limitations under the License.
 
+#import <Bitheri/BTKey+BIP38.h>
 #import "HotAddressListCell.h"
 #import "StringUtil.h"
 #import "UnitUtil.h"
@@ -234,6 +235,12 @@
     [dialog showInWindow:self.window];
 }
 
+- (void)showBIP38PrivateKey {
+    _qrcodeType = BIP38;
+    DialogPassword *dialog = [[DialogPassword alloc] initWithDelegate:self];
+    [dialog showInWindow:self.window];
+}
+
 -(void)moveToTrash{
     if(_btAddress.balance > 0){
         [self showMsg:NSLocalizedString(@"trash_with_money_warn", nil)];
@@ -281,6 +288,19 @@
     }else{
         DialogProgress *dialogProgress=[[DialogProgress alloc] initWithMessage:NSLocalizedString(@"Please wait…", nil)];
         [dialogProgress showInWindow:self.window];
+        if(_qrcodeType == BIP38){
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+                BTKey *key = [BTKey keyWithBitcoinj:_btAddress.encryptPrivKey andPassphrase:bpassword];
+                __block NSString *bip38 = [key BIP38KeyWithPassphrase:bpassword];
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [dialogProgress dismissWithCompletion:^{
+                        DialogPrivateKeyDecryptedQrCode *dialogPrivateKey = [[DialogPrivateKeyDecryptedQrCode alloc] initWithAddress:_btAddress.address privateKey:bip38];
+                        [dialogPrivateKey showInWindow:self.window];
+                    }];
+                });
+            });
+            return;
+        }
         [self decrypted:bpassword callback:^(id response) {
             [dialogProgress dismiss];
             if (_qrcodeType==Decrypetd) {

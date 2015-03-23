@@ -35,6 +35,8 @@
 - (void)moveToTrash;
 
 - (void)signMessage;
+
+- (void)showBIP38PrivateKey;
 @end
 
 
