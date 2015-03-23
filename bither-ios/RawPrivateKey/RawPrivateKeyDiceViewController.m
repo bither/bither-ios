@@ -47,7 +47,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    CGFloat maxSize = MIN(self.vInput.frame.size.width, self.vInput.frame.size.height - 144) - 10;
+    CGFloat maxSize = MIN(self.vInput.frame.size.width, self.vInput.frame.size.height - 174) - 10;
     self.vData.restrictedSize = CGSizeMake(maxSize, maxSize);
     self.vData.dataSize = CGSizeMake(10, 10);
     CGRect frame = self.vButtons.frame;
