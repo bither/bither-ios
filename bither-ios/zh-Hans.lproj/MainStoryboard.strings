@@ -331,3 +331,18 @@
 
 /* Class = "UILabel"; text = "Private Key"; ObjectID = "x9d-Sc-rrj"; */
 "x9d-Sc-rrj.text" = "私钥";
+
+/* Class = "UITextField"; placeholder = "Bitcoin address"; ObjectID = "fCj-hW-RGp"; */
+"fCj-hW-RGp.placeholder" = "比特币地址";
+
+/* Class = "UILabel"; text = "Amount"; ObjectID = "aHu-iQ-TCR"; */
+"aHu-iQ-TCR.text" = "金额";
+
+/* Class = "UITextField"; placeholder = "Password"; ObjectID = "xmE-uG-hIe"; */
+"xmE-uG-hIe.placeholder" = "密码";
+
+/* Class = "UILabel"; text = "Password"; ObjectID = "mdF-6N-ecP"; */
+"mdF-6N-ecP.text" = "密码";
+
+/* Class = "UILabel"; text = "Balance:"; ObjectID = "hsE-yP-NwX"; */
+"hsE-yP-NwX.text" = "余额:";

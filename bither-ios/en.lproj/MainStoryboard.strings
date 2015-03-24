@@ -188,9 +188,6 @@
 /* Class = "UIButton"; normalTitle = "Send"; ObjectID = "Z5W-Ua-Lm5"; */
 "Z5W-Ua-Lm5.normalTitle" = "Send";
 
-/* Class = "UILabel"; text = "Amount"; ObjectID = "aHu-iQ-TCR"; */
-"aHu-iQ-TCR.text" = "Amount";
-
 /* Class = "UILabel"; text = "Label"; ObjectID = "bKW-aE-gcw"; */
 "bKW-aE-gcw.text" = "Label";
 
@@ -221,9 +218,6 @@
 /* Class = "UITextField"; placeholder = "0.00"; ObjectID = "eP1-s3-zSH"; */
 "eP1-s3-zSH.placeholder" = "0.00";
 
-/* Class = "UITextField"; placeholder = "Bitcoin address"; ObjectID = "fCj-hW-RGp"; */
-"fCj-hW-RGp.placeholder" = "Bitcoin address";
-
 /* Class = "UIButton"; normalTitle = "C"; ObjectID = "fhw-Xa-7ci"; */
 "fhw-Xa-7ci.normalTitle" = "C";
 
@@ -247,9 +241,6 @@
 
 /* Class = "UILabel"; text = "Private Key"; ObjectID = "he8-50-11R"; */
 "he8-50-11R.text" = "Private Key";
-
-/* Class = "UILabel"; text = "Balance:"; ObjectID = "hsE-yP-NwX"; */
-"hsE-yP-NwX.text" = "Balance:";
 
 /* Class = "UIButton"; normalTitle = "Next Word"; ObjectID = "ifX-vq-zRq"; */
 "ifX-vq-zRq.normalTitle" = "Next Word";
@@ -286,9 +277,6 @@
 
 /* Class = "UILabel"; text = "QR Code"; ObjectID = "mSg-tC-frD"; */
 "mSg-tC-frD.text" = "QR Code";
-
-/* Class = "UILabel"; text = "Password"; ObjectID = "mdF-6N-ecP"; */
-"mdF-6N-ecP.text" = "Password";
 
 /* Class = "UILabel"; text = "100"; ObjectID = "mjb-dF-Wjb"; */
 "mjb-dF-Wjb.text" = "100";
@@ -377,9 +365,6 @@
 /* Class = "UILabel"; text = "Signing Address"; ObjectID = "xhb-O8-bSH"; */
 "xhb-O8-bSH.text" = "Signing Address";
 
-/* Class = "UITextField"; placeholder = "Password"; ObjectID = "xmE-uG-hIe"; */
-"xmE-uG-hIe.placeholder" = "Password";
-
 /* Class = "UITextField"; placeholder = "Password"; ObjectID = "xmg-Xg-1Ns"; */
 "xmg-Xg-1Ns.placeholder" = "Password";
 
@@ -424,3 +409,18 @@
 
 /* Class = "UILabel"; text = "Private Key"; ObjectID = "x9d-Sc-rrj"; */
 "x9d-Sc-rrj.text" = "Private Key";
+
+/* Class = "UITextField"; placeholder = "Bitcoin address"; ObjectID = "fCj-hW-RGp"; */
+"fCj-hW-RGp.placeholder" = "Bitcoin address";
+
+/* Class = "UILabel"; text = "Amount"; ObjectID = "aHu-iQ-TCR"; */
+"aHu-iQ-TCR.text" = "Amount";
+
+/* Class = "UITextField"; placeholder = "Password"; ObjectID = "xmE-uG-hIe"; */
+"xmE-uG-hIe.placeholder" = "Password";
+
+/* Class = "UILabel"; text = "Password"; ObjectID = "mdF-6N-ecP"; */
+"mdF-6N-ecP.text" = "Password";
+
+/* Class = "UILabel"; text = "Balance:"; ObjectID = "hsE-yP-NwX"; */
+"hsE-yP-NwX.text" = "Balance:";
