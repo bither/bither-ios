@@ -192,6 +192,14 @@
             rotate.cumulative = TRUE;
             rotate.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseIn];
             [self.vContainer.layer addAnimation:rotate forKey:@"ROTATE"];
+            if ([[UIDevice currentDevice].systemVersion floatValue] < 8) {
+                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)((spinDuration - fadeOutOffset) * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                    [self dismissViewControllerAnimated:YES completion:^{
+                        [self.vContainer.layer removeAllAnimations];
+                    }];
+                });
+                return;
+            }
             [UIView animateWithDuration:spinDuration - fadeOutOffset * 2 delay:fadeOutOffset options:UIViewAnimationCurveEaseIn | UIViewAnimationOptionBeginFromCurrentState animations:^{
                 self.vContainer.alpha = 0.1;
                 self.vContainer.transform = CGAffineTransformMakeScale(2, 2);
