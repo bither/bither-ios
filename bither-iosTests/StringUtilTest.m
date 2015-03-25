@@ -81,8 +81,12 @@
     NSString * address =@"1HZwkjkeaoZfTSaJxDw6aKkxp45agDiEzN";
     XCTAssertTrue([[StringUtil shortenAddress:address] isEqualToString:@"1HZw..."], @"shorten address");
     NSString * formatAddress=[StringUtil formatAddress:address groupSize:4 lineSize:12];
-    XCTAssertTrue(formatAddress.length==42, @"format hash");
-    XCTAssertFalse([StringUtil isValidBitcoinBIP21Address:@"bitcoin:1N9RQVmxewa2sEVDvmnsj9NgLHJ3dUjitz?amount=0.00040845"],@"bip21");
+    XCTAssertTrue(formatAddress.length==43, @"format hash");
+    XCTAssertTrue([StringUtil isValidBitcoinBIP21Address:@"bitcoin:1N9RQVmxewa2sEVDvmnsj9NgLHJ3dUjitz?amount=0.00040845"],@"bip21");
+    XCTAssert([StringUtil validPassword:@"0aA`~!@#$%^&*()_-+={}[]|:;\\\"'<>,.?/"]);//"]);
+    XCTAssertFalse([StringUtil validPassword:@"ASDF简繁"]);
+    XCTAssert([StringUtil validPartialPassword:@"0aA`~!@#$%^&*()_-+={}[]|:;\\\"'<>,.?/"]);//"]);
+    XCTAssertFalse([StringUtil validPartialPassword:@"ASDF简繁"]);
 
 
     

@@ -20,6 +20,6 @@
 
 @property (weak) NSObject<PasswordGetterDelegate>* delegate;
 @property (weak) UIWindow* window;
-@property (readonly) NSString* password;
+@property NSString* password;
 @property (readonly) BOOL hasPassword;
 @end

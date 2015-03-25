@@ -50,25 +50,16 @@
     return  [pred evaluateWithObject:str];
 }
 +(BOOL)validPassword:(NSString *)str{
-    NSString * regex = @"[0-9,a-z,A-Z]{6,43}";
+    NSString * regex = @"[0-9a-zA-Z`~!@#$%^&*()_\\-+=|{}':;',\\[\\].\\\"\\\\<>/?]{6,43}";
     NSPredicate * pred = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", regex];
     return  [pred evaluateWithObject:str];
 }
 +(BOOL)validPartialPassword:(NSString *)str{
-    NSString * regex = @"[0-9,a-z,A-Z]{0,43}";
+    NSString * regex = @"[0-9a-zA-Z`~!@#$%^&*()_\\-+=|{}':;',\\[\\].\\\"\\\\<>/?]{0,43}";
     NSPredicate * pred = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", regex];
     return  [pred evaluateWithObject:str];
 }
-+(BOOL)validSimplePassword:(NSString *)str{
-    NSString * regex = @"[0-9a-zA-Z]{6,43}";
-    NSPredicate * pred = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", regex];
-    return  [pred evaluateWithObject:str];
-}
-+(BOOL)validSimplePartialPassword:(NSString *)str{
-    NSString * regex = @"[0-9a-zA-Z]{0,43}";
-    NSPredicate * pred = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", regex];
-    return  [pred evaluateWithObject:str];
-}
+
 
 //BIP21 https://github.com/bitcoin/bips/blob/master/bip-0021.mediawiki
 

@@ -63,12 +63,13 @@
     return [NSString stringWithFormat:@"bitid://hdm.bither.net/%@/password/%@/%lld", self.address, [[NSString hexWithData:self.password] toLowercaseStringWithEn], self.serviceRandom];
 }
 
-- (void)changeBidPasswordWithSignature:(NSString *)signature andPassword:(NSString *)password andHotAddress:(NSString *)hotAddress andError:(NSError **)err; {
+- (void)changeBidPasswordWithSignature:(NSString *)signature andPassword:(NSString *)password andHotAddress:(NSString *)hotFirstAddress andError:(NSError **)err; {
     NSString *message =[self getPreSignMessage];
     if (![self.address isEqualToString:[[BTKey signedMessageToKey:message andSignatureBase64:signature] address]]) {
         *err = [[NSError alloc] initWithDomain:ERR_API_400_DOMAIN code:1002 userInfo:nil];
         return;
     }
+    NSString *hotAddress = hotFirstAddress ? hotFirstAddress : [BTAddressManager instance].hdmKeychain.firstAddressFromDb;
     __block NSCondition *condition = [NSCondition new];
     __block NSError *e = nil;
     [[HDMApi instance] changeHDMPasswordWithHDMBid:self.address andPassword:self.password andSignature:signature andHotAddress:hotAddress callback:^{
@@ -86,12 +87,22 @@
     [condition wait];
     if (e == nil) {
         self.encryptedBitherPassword = [[[BTEncryptData alloc] initWithData:self.password andPassowrd:password] toEncryptedString];
-        [[BTAddressProvider instance] addHDMBid:self andPasswordSeed:[[[BTKey alloc] initWithSecret:self.password compressed:YES] address]];
+        if(!hotFirstAddress){
+            [self save];
+        }
     } else {
         *err = e;
     }
 
     [condition unlock];
+}
+
+- (void)changeBidPasswordWithSignature:(NSString *)signature andPassword:(NSString *)password andError:(NSError **)error{
+    [self changeBidPasswordWithSignature:[[signature hexToData] base64EncodedStringWithOptions:0] andPassword:password andHotAddress:nil andError:error];
+}
+
+- (void)save{
+    [[BTAddressProvider instance] addHDMBid:self andPasswordSeed:[[[BTKey alloc] initWithSecret:self.password compressed:YES] address]];
 }
 
 - (NSArray *)createHDMAddress:(NSArray *)pubsList andPassword:(NSString *)password andError:(NSError **)err; {

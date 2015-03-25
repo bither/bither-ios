@@ -50,6 +50,10 @@
     return password;
 }
 
+-(void)setPassword:(NSString *)p {
+    password = p;
+}
+
 -(BOOL)hasPassword{
     return password != nil;
 }

@@ -36,8 +36,6 @@
 }
 @property UILabel *lblAddress;
 @property UIImageView *iv;
-@property UIButton *btnShare;
-@property UIDocumentInteractionController *interactionController;
 @end
 
 @implementation DialogPrivateKeyDecryptedQrCode

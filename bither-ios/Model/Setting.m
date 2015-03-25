@@ -23,90 +23,82 @@
 #import "SelectViewController.h"
 #import "ImportPrivateKeySetting.h"
 #import "DialogEditPassword.h"
-#import "ScanQrCodeTransportViewController.h"
-#import "SignTransactionViewController.h"
 #import "QrCodeViewController.h"
-#import "QRCodeTxTransport.h"
 #import <bitheri/BTAddressManager.h>
+#import <Bitheri/BTHDMBid.h>
 #import "DialogProgress.h"
-#import "KeyUtil.h"
-#import "SendViewController.h"
-#import "UnsignedTransactionViewController.h"
-#import "BTSettings.h"
 #import "AdvanceViewController.h"
 #import "DialogAlert.h"
-#import "BTTxProvider.h"
 #import "PeerUtil.h"
-#import "TransactionsUtil.h"
 #import "BTQRCodeUtil.h"
 #import "ReloadTxSetting.h"
-#import "ImportPrivateKeySetting.h"
 #import "ImportBip38PrivateKeySetting.h"
-#import "NSString+Base58.h"
 #import "UnitUtil.h"
-#import "KeychainBackupUtil.h"
 #import "KeychainSetting.h"
-#import "BTQRCodeUtil.h"
 #import "MessageSigningSetting.h"
 #import "HDMRecoverSetting.h"
-#import "BTAddressProvider.h"
+#import "HDMResetServerPasswordUtil.h"
 
 @implementation Setting
 
-static Setting* ExchangeSetting;
-static Setting* MarketSetting;
-static Setting* BitcoinUnitSetting;
-static Setting* TransactionFeeSetting;
-static Setting* NetworkSetting;
-static Setting* AvatarSetting;
-static Setting* CheckSetting;
-static Setting* EditPasswordSetting;
-static Setting* ColdMonitorSetting;
-static Setting* AdvanceSetting;
-static Setting* reloadTxsSetting;
-static Setting* RCheckSetting;
-static Setting* QrCodeQualitySetting;
-static Setting* TrashCanSetting;
-static Setting* SwitchToColdSetting;
+static Setting *ExchangeSetting;
+static Setting *MarketSetting;
+static Setting *BitcoinUnitSetting;
+static Setting *TransactionFeeSetting;
+static Setting *NetworkSetting;
+static Setting *AvatarSetting;
+static Setting *CheckSetting;
+static Setting *EditPasswordSetting;
+static Setting *ColdMonitorSetting;
+static Setting *AdvanceSetting;
+static Setting *reloadTxsSetting;
+static Setting *RCheckSetting;
+static Setting *QrCodeQualitySetting;
+static Setting *TrashCanSetting;
+static Setting *SwitchToColdSetting;
+static Setting *HDMServerPasswordResetSetting;
 
--(instancetype)initWithName:(NSString *)name  icon:(UIImage *)icon {
-    self=[super init];
+- (instancetype)initWithName:(NSString *)name icon:(UIImage *)icon {
+    self = [super init];
     if (self) {
-        _settingName=name;
-        _icon=icon;
+        _settingName = name;
+        _icon = icon;
     }
     return self;
 }
--(void)selection{
-    
+
+- (void)selection {
+
 }
--(UIImage *)getIcon{
+
+- (UIImage *)getIcon {
     return _icon;
 }
 
-+(Setting * )getBitcoinUnitSetting{
-    if(!BitcoinUnitSetting){
-        BitcoinUnitSetting = [[Setting alloc]initWithName:NSLocalizedString(@"setting_name_bitcoin_unit", nil) icon:nil];
-        
-        [BitcoinUnitSetting setGetArrayBlock:^(){
++ (Setting *)getBitcoinUnitSetting {
+    if (!BitcoinUnitSetting) {
+        BitcoinUnitSetting = [[Setting alloc] initWithName:NSLocalizedString(@"setting_name_bitcoin_unit", nil) icon:nil];
+
+        [BitcoinUnitSetting setGetArrayBlock:^() {
             NSMutableArray *array = [NSMutableArray new];
             [array addObject:[Setting getBitcoinUnitDict:UnitBTC]];
             [array addObject:[Setting getBitcoinUnitDict:Unitbits]];
             return array;
         }];
-        [BitcoinUnitSetting setGetValueBlock:^(){
-            BitcoinUnit unit = [[UserDefaultsUtil instance]getBitcoinUnit];
+        [BitcoinUnitSetting setGetValueBlock:^() {
+            BitcoinUnit unit = [[UserDefaultsUtil instance] getBitcoinUnit];
             return [Setting attributedStrForBitcoinUnit:unit];
         }];
-        [BitcoinUnitSetting setResult:^(NSDictionary * dict){
+        [BitcoinUnitSetting setResult:^(NSDictionary *dict) {
             if ([[dict allKeys] containsObject:SETTING_VALUE]) {
                 [[UserDefaultsUtil instance] setBitcoinUnit:[dict getIntFromDict:SETTING_VALUE]];
                 [[NSNotificationCenter defaultCenter] postNotificationName:BitherBalanceChangedNotification object:nil];
             }
         }];
-        __block Setting* sself = BitcoinUnitSetting;
-        [BitcoinUnitSetting setSelectBlock:^(UIViewController * controller){
-            SelectViewController *selectController = [controller.storyboard instantiateViewControllerWithIdentifier:@"SelectViewController"];UINavigationController *nav = controller.navigationController;
+        __block Setting *sself = BitcoinUnitSetting;
+        [BitcoinUnitSetting setSelectBlock:^(UIViewController *controller) {
+            SelectViewController *selectController = [controller.storyboard instantiateViewControllerWithIdentifier:@"SelectViewController"];
+            UINavigationController *nav = controller.navigationController;
             selectController.setting = sself;
             [nav pushViewController:selectController animated:YES];
         }];
@@ -114,10 +106,10 @@ static Setting* SwitchToColdSetting;
     return BitcoinUnitSetting;
 }
 
-+(NSAttributedString*)attributedStrForBitcoinUnit:(BitcoinUnit)unit{
++ (NSAttributedString *)attributedStrForBitcoinUnit:(BitcoinUnit)unit {
     CGFloat fontSize = 18;
-    UIImage* image = [UIImage imageNamed:[NSString stringWithFormat:@"%@_black", [UnitUtil imageNameSlim:unit]]];
-    NSMutableAttributedString *attr = [[NSMutableAttributedString alloc]initWithString:[NSString stringWithFormat:@"  %@", [UnitUtil unitName:unit]] attributes:@{NSFontAttributeName: [UIFont systemFontOfSize:fontSize]}];
+    UIImage *image = [UIImage imageNamed:[NSString stringWithFormat:@"%@_black", [UnitUtil imageNameSlim:unit]]];
+    NSMutableAttributedString *attr = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"  %@", [UnitUtil unitName:unit]] attributes:@{NSFontAttributeName : [UIFont systemFontOfSize:fontSize]}];
     NSTextAttachment *attachment = [[NSTextAttachment alloc] init];
     attachment.image = image;
     CGRect bounds = attachment.bounds;
@@ -130,32 +122,32 @@ static Setting* SwitchToColdSetting;
     return attr;
 }
 
-+(NSDictionary *)getBitcoinUnitDict:(BitcoinUnit)unit{
++ (NSDictionary *)getBitcoinUnitDict:(BitcoinUnit)unit {
     BitcoinUnit defaultUnit = [[UserDefaultsUtil instance] getBitcoinUnit];
-    NSMutableDictionary *dict =[NSMutableDictionary new];
+    NSMutableDictionary *dict = [NSMutableDictionary new];
     [dict setObject:[NSNumber numberWithInt:unit] forKey:SETTING_VALUE];
     [dict setObject:[Setting attributedStrForBitcoinUnit:unit] forKey:SETTING_KEY_ATTRIBUTED];
     if (defaultUnit == unit) {
         [dict setObject:[NSNumber numberWithBool:YES] forKey:SETTING_IS_DEFAULT];
     }
     return dict;
-    
+
 }
 
-+(Setting * )getExchangeSetting{
-    if(!ExchangeSetting){
-        ExchangeSetting =[[Setting alloc] initWithName:NSLocalizedString(@"Default Currency", nil)  icon:nil ];
-        [ExchangeSetting setResult:^(NSDictionary * dict){
-            if ([[dict  allKeys] containsObject:SETTING_VALUE]) {
++ (Setting *)getExchangeSetting {
+    if (!ExchangeSetting) {
+        ExchangeSetting = [[Setting alloc] initWithName:NSLocalizedString(@"Default Currency", nil) icon:nil];
+        [ExchangeSetting setResult:^(NSDictionary *dict) {
+            if ([[dict allKeys] containsObject:SETTING_VALUE]) {
                 [[UserDefaultsUtil instance] setExchangeType:[dict getIntFromDict:SETTING_VALUE]];
             }
         }];
-        [ExchangeSetting setGetValueBlock:^(){
-            Currency defaultExchange= [[UserDefaultsUtil instance] getDefaultCurrency];
+        [ExchangeSetting setGetValueBlock:^() {
+            Currency defaultExchange = [[UserDefaultsUtil instance] getDefaultCurrency];
             return [NSString stringWithFormat:@"%@ %@", [BitherSetting getCurrencySymbol:defaultExchange], [BitherSetting getCurrencyName:defaultExchange]];
         }];
-        [ExchangeSetting setGetArrayBlock:^(){
-            NSMutableArray * array=[NSMutableArray new];
+        [ExchangeSetting setGetArrayBlock:^() {
+            NSMutableArray *array = [NSMutableArray new];
             [array addObject:[self getExchangeDict:USD]];
             [array addObject:[self getExchangeDict:CNY]];
             [array addObject:[self getExchangeDict:EUR]];
@@ -165,224 +157,233 @@ static Setting* SwitchToColdSetting;
             [array addObject:[self getExchangeDict:CAD]];
             [array addObject:[self getExchangeDict:AUD]];
             return array;
-            
+
         }];
-        __block Setting * sself= ExchangeSetting;
-        [ExchangeSetting setSelectBlock:^(UIViewController * controller){
-            SelectViewController *selectController = [controller.storyboard instantiateViewControllerWithIdentifier:@"SelectViewController"];UINavigationController *nav = controller.navigationController;
-            selectController.setting=sself;
+        __block Setting *sself = ExchangeSetting;
+        [ExchangeSetting setSelectBlock:^(UIViewController *controller) {
+            SelectViewController *selectController = [controller.storyboard instantiateViewControllerWithIdentifier:@"SelectViewController"];
+            UINavigationController *nav = controller.navigationController;
+            selectController.setting = sself;
             [nav pushViewController:selectController animated:YES];
-            
+
         }];
     }
     return ExchangeSetting;
 }
-+(NSDictionary *)getExchangeDict:(Currency)exchangeType{
-    Currency defaultExchange= [[UserDefaultsUtil instance] getDefaultCurrency];
-    NSMutableDictionary *dict=[NSMutableDictionary new];
+
++ (NSDictionary *)getExchangeDict:(Currency)exchangeType {
+    Currency defaultExchange = [[UserDefaultsUtil instance] getDefaultCurrency];
+    NSMutableDictionary *dict = [NSMutableDictionary new];
     [dict setObject:[NSNumber numberWithInt:exchangeType] forKey:SETTING_VALUE];
     [dict setObject:[NSString stringWithFormat:@"%@ %@", [BitherSetting getCurrencySymbol:exchangeType], [BitherSetting getCurrencyName:exchangeType]] forKey:SETTING_KEY];
-    if (defaultExchange==exchangeType) {
+    if (defaultExchange == exchangeType) {
         [dict setObject:[NSNumber numberWithBool:YES] forKey:SETTING_IS_DEFAULT];
     }
     return dict;
-    
+
 }
-+(Setting * )getMarketSetting{
-    if(!MarketSetting){
-        Setting * setting=[[Setting alloc] initWithName:NSLocalizedString(@"Default Exchange", nil) icon:nil ];
-        
-        [setting setGetValueBlock:^(){
+
++ (Setting *)getMarketSetting {
+    if (!MarketSetting) {
+        Setting *setting = [[Setting alloc] initWithName:NSLocalizedString(@"Default Exchange", nil) icon:nil];
+
+        [setting setGetValueBlock:^() {
             return [BitherSetting getMarketName:[[UserDefaultsUtil instance] getDefaultMarket]];
         }];
-        [setting setGetArrayBlock:^(){
-            MarketType defaultMarket=[[UserDefaultsUtil instance] getDefaultMarket];
-            NSMutableArray * array=[NSMutableArray new];
-            for (int i=BITSTAMP; i<=MARKET796; i++) {
-                NSMutableDictionary *dict=[NSMutableDictionary new];
+        [setting setGetArrayBlock:^() {
+            MarketType defaultMarket = [[UserDefaultsUtil instance] getDefaultMarket];
+            NSMutableArray *array = [NSMutableArray new];
+            for (int i = BITSTAMP; i <= MARKET796; i++) {
+                NSMutableDictionary *dict = [NSMutableDictionary new];
                 [dict setObject:[NSNumber numberWithInt:i] forKey:SETTING_VALUE];
                 [dict setObject:[BitherSetting getMarketName:i] forKey:SETTING_KEY];
-                if (i==defaultMarket) {
+                if (i == defaultMarket) {
                     [dict setObject:[NSNumber numberWithBool:YES] forKey:SETTING_IS_DEFAULT];
                 }
                 [array addObject:dict];
             }
             return array;
         }];
-        [setting setResult:^(NSDictionary * dict){
-            if ([[dict  allKeys] containsObject:SETTING_VALUE]) {
+        [setting setResult:^(NSDictionary *dict) {
+            if ([[dict allKeys] containsObject:SETTING_VALUE]) {
                 [[UserDefaultsUtil instance] setMarket:[dict getIntFromDict:SETTING_VALUE]];
             }
         }];
-        
-        __block Setting * sself=setting;
-        [setting setSelectBlock:^(UIViewController * controller){
-            SelectViewController *selectController = [controller.storyboard instantiateViewControllerWithIdentifier:@"SelectViewController"];UINavigationController *nav = controller.navigationController;
-            selectController.setting=sself;
+
+        __block Setting *sself = setting;
+        [setting setSelectBlock:^(UIViewController *controller) {
+            SelectViewController *selectController = [controller.storyboard instantiateViewControllerWithIdentifier:@"SelectViewController"];
+            UINavigationController *nav = controller.navigationController;
+            selectController.setting = sself;
             [nav pushViewController:selectController animated:YES];
-            
+
         }];
         MarketSetting = setting;
     }
     return MarketSetting;
 }
 
-+(Setting * )getTransactionFeeSetting{
-    if(!TransactionFeeSetting){
-        Setting *  setting=[[Setting alloc] initWithName:NSLocalizedString(@"Default Transaction Fee", nil) icon:nil ];
-        [setting setGetValueBlock:^(){
++ (Setting *)getTransactionFeeSetting {
+    if (!TransactionFeeSetting) {
+        Setting *setting = [[Setting alloc] initWithName:NSLocalizedString(@"Default Transaction Fee", nil) icon:nil];
+        [setting setGetValueBlock:^() {
             return [BitherSetting getTransactionFeeMode:[[UserDefaultsUtil instance] getTransactionFeeMode]];
         }];
-        [setting setGetArrayBlock:^(){
-            NSMutableArray * array=[NSMutableArray new];
+        [setting setGetArrayBlock:^() {
+            NSMutableArray *array = [NSMutableArray new];
             [array addObject:[self getTransactionFeeDict:Normal]];
             [array addObject:[self getTransactionFeeDict:Low]];
             return array;
-            
+
         }];
-        [setting setResult:^(NSDictionary * dict){
-            if ([[dict  allKeys] containsObject:SETTING_VALUE]) {
+        [setting setResult:^(NSDictionary *dict) {
+            if ([[dict allKeys] containsObject:SETTING_VALUE]) {
                 [[UserDefaultsUtil instance] setTransactionFeeMode:[dict getIntFromDict:SETTING_VALUE]];
             }
         }];
-        __block Setting * sself=setting;
-        [setting setSelectBlock:^(UIViewController * controller){
-            SelectViewController *selectController = [controller.storyboard instantiateViewControllerWithIdentifier:@"SelectViewController"];UINavigationController *nav = controller.navigationController;
-            selectController.setting=sself;
+        __block Setting *sself = setting;
+        [setting setSelectBlock:^(UIViewController *controller) {
+            SelectViewController *selectController = [controller.storyboard instantiateViewControllerWithIdentifier:@"SelectViewController"];
+            UINavigationController *nav = controller.navigationController;
+            selectController.setting = sself;
             [nav pushViewController:selectController animated:YES];
-            
+
         }];
         TransactionFeeSetting = setting;
     }
     return TransactionFeeSetting;
 }
-+(NSDictionary *)getTransactionFeeDict:(TransactionFeeMode)transcationFeeMode{
-    TransactionFeeMode defaultTxFeeMode=[[UserDefaultsUtil instance] getTransactionFeeMode];
-    NSMutableDictionary *dict=[NSMutableDictionary new];
+
++ (NSDictionary *)getTransactionFeeDict:(TransactionFeeMode)transcationFeeMode {
+    TransactionFeeMode defaultTxFeeMode = [[UserDefaultsUtil instance] getTransactionFeeMode];
+    NSMutableDictionary *dict = [NSMutableDictionary new];
     [dict setObject:[NSNumber numberWithInt:transcationFeeMode] forKey:SETTING_VALUE];
     [dict setObject:[BitherSetting getTransactionFeeMode:transcationFeeMode] forKey:SETTING_KEY];
-    if (defaultTxFeeMode==transcationFeeMode) {
+    if (defaultTxFeeMode == transcationFeeMode) {
         [dict setObject:[NSNumber numberWithBool:YES] forKey:SETTING_IS_DEFAULT];
     }
     return dict;
-    
+
 }
 
-+(Setting * )getNetworkSetting{
-    if(!NetworkSetting){
-        Setting *   setting=[[Setting alloc] initWithName:NSLocalizedString(@"Network Setting", nil) icon:nil ];
-        [setting setGetValueBlock:^(){
-            BOOL syncOnlyWifi=[[UserDefaultsUtil instance] getSyncBlockOnlyWifi];
++ (Setting *)getNetworkSetting {
+    if (!NetworkSetting) {
+        Setting *setting = [[Setting alloc] initWithName:NSLocalizedString(@"Network Setting", nil) icon:nil];
+        [setting setGetValueBlock:^() {
+            BOOL syncOnlyWifi = [[UserDefaultsUtil instance] getSyncBlockOnlyWifi];
             return [self getSyncName:syncOnlyWifi];
-            
+
         }];
-        [setting setGetArrayBlock:^(){
-            NSMutableArray * array=[NSMutableArray new];
+        [setting setGetArrayBlock:^() {
+            NSMutableArray *array = [NSMutableArray new];
             [array addObject:[self getSyncOnlyWifiDict:NO]];
             [array addObject:[self getSyncOnlyWifiDict:YES]];
             return array;
         }];
-        
-        [setting setResult:^(NSDictionary * dict){
+
+        [setting setResult:^(NSDictionary *dict) {
             if ([[dict allKeys] containsObject:SETTING_VALUE]) {
                 [[UserDefaultsUtil instance] setSyncBlockOnlyWifi:[dict getBoolFromDict:SETTING_VALUE]];
                 [[PeerUtil instance] startPeer];
             }
         }];
-        __block Setting * sself=setting;
-        [setting setSelectBlock:^(UIViewController * controller){
-            SelectViewController *selectController = [controller.storyboard instantiateViewControllerWithIdentifier:@"SelectViewController"];UINavigationController *nav = controller.navigationController;
-            selectController.setting=sself;
+        __block Setting *sself = setting;
+        [setting setSelectBlock:^(UIViewController *controller) {
+            SelectViewController *selectController = [controller.storyboard instantiateViewControllerWithIdentifier:@"SelectViewController"];
+            UINavigationController *nav = controller.navigationController;
+            selectController.setting = sself;
             [nav pushViewController:selectController animated:YES];
-            
+
         }];
         NetworkSetting = setting;
     }
     return NetworkSetting;
 }
 
-+(NSDictionary *)getSyncOnlyWifiDict:(BOOL)syncOnlyWifi{
-    BOOL defaultSyncOnlyWifi=[[UserDefaultsUtil instance] getSyncBlockOnlyWifi];
-    NSMutableDictionary *dict=[NSMutableDictionary new];
++ (NSDictionary *)getSyncOnlyWifiDict:(BOOL)syncOnlyWifi {
+    BOOL defaultSyncOnlyWifi = [[UserDefaultsUtil instance] getSyncBlockOnlyWifi];
+    NSMutableDictionary *dict = [NSMutableDictionary new];
     [dict setObject:[NSNumber numberWithBool:syncOnlyWifi] forKey:SETTING_VALUE];
     [dict setObject:[self getSyncName:syncOnlyWifi] forKey:SETTING_KEY];
-    if (defaultSyncOnlyWifi==syncOnlyWifi) {
+    if (defaultSyncOnlyWifi == syncOnlyWifi) {
         [dict setObject:[NSNumber numberWithBool:YES] forKey:SETTING_IS_DEFAULT];
     }
     return dict;
-    
+
 }
 
-+(NSString *)getSyncName:(BOOL)syncOnlyWifi{
++ (NSString *)getSyncName:(BOOL)syncOnlyWifi {
     if (syncOnlyWifi) {
         return NSLocalizedString(@"Sync over wifi only", nil);
-    }else{
+    } else {
         return NSLocalizedString(@"Sync always", nil);
     }
-    
-    
+
+
 }
-+(Setting *)getAdvanceSetting{
-    if(!AdvanceSetting){
-        Setting * setting=[[Setting alloc] initWithName:NSLocalizedString(@"Advance Options", nil) icon:[UIImage imageNamed:@"advance_button_icon"] ];
-        [setting setSelectBlock:^(UIViewController * controller){
+
++ (Setting *)getAdvanceSetting {
+    if (!AdvanceSetting) {
+        Setting *setting = [[Setting alloc] initWithName:NSLocalizedString(@"Advance Options", nil) icon:[UIImage imageNamed:@"advance_button_icon"]];
+        [setting setSelectBlock:^(UIViewController *controller) {
             AdvanceViewController *advanceController = [controller.storyboard instantiateViewControllerWithIdentifier:@"AdvanceViewController"];
-            advanceController.settings=[Setting advanceSettings];
+            advanceController.settings = [Setting advanceSettings];
             UINavigationController *nav = controller.navigationController;
             [nav pushViewController:advanceController animated:YES];
-            
+
         }];
         AdvanceSetting = setting;
     }
     return AdvanceSetting;
-    
+
 }
 
-+(Setting *)getAvatarSetting{
-    if(!AvatarSetting){
-        Setting * setting=[[Setting alloc] initWithName:NSLocalizedString(@"Set Avatar", nil) icon:[UIImage imageNamed:@"avatar_button_icon" ]];
-        [setting setSelectBlock:^(UIViewController * controller){
-            
++ (Setting *)getAvatarSetting {
+    if (!AvatarSetting) {
+        Setting *setting = [[Setting alloc] initWithName:NSLocalizedString(@"Set Avatar", nil) icon:[UIImage imageNamed:@"avatar_button_icon"]];
+        [setting setSelectBlock:^(UIViewController *controller) {
+
         }];
         AvatarSetting = setting;
     }
     return AvatarSetting;
-    
+
 }
-+(Setting *)getCheckSetting{
-    if(!CheckSetting){
-        Setting * setting=[[Setting alloc] initWithName:NSLocalizedString(@"Check Private Keys", nil) icon:[UIImage imageNamed:@"check_button_icon" ]];
-        [setting setSelectBlock:^(UIViewController * controller){
-            if([BTAddressManager instance].privKeyAddresses.count == 0 && ![BTAddressManager instance].hasHDMKeychain){
-                if([controller respondsToSelector:@selector(showMsg:)]){
+
++ (Setting *)getCheckSetting {
+    if (!CheckSetting) {
+        Setting *setting = [[Setting alloc] initWithName:NSLocalizedString(@"Check Private Keys", nil) icon:[UIImage imageNamed:@"check_button_icon"]];
+        [setting setSelectBlock:^(UIViewController *controller) {
+            if ([BTAddressManager instance].privKeyAddresses.count == 0 && ![BTAddressManager instance].hasHDMKeychain) {
+                if ([controller respondsToSelector:@selector(showMsg:)]) {
                     [controller performSelector:@selector(showMsg:) withObject:NSLocalizedString(@"No private keys", nil)];
                 }
                 return;
             }
-            HotCheckPrivateKeyViewController  *hotCheck = [controller.storyboard instantiateViewControllerWithIdentifier:@"HotCheckPrivateKeyViewController"];
+            HotCheckPrivateKeyViewController *hotCheck = [controller.storyboard instantiateViewControllerWithIdentifier:@"HotCheckPrivateKeyViewController"];
             UINavigationController *nav = controller.navigationController;
             [nav pushViewController:hotCheck animated:YES];
-            
-            
+
+
         }];
         CheckSetting = setting;
     }
     return CheckSetting;
-    
+
 }
 
-+(Setting *)getEditPasswordSetting{
-    if(!EditPasswordSetting){
-        Setting * setting=[[Setting alloc] initWithName:NSLocalizedString(@"Change Password", nil) icon:[UIImage imageNamed:@"edit_password_button_icon"] ];
-        [setting setSelectBlock:^(UIViewController * controller){
-            if(![BTPasswordSeed getPasswordSeed]){
-                if([controller respondsToSelector:@selector(showMsg:)]){
++ (Setting *)getEditPasswordSetting {
+    if (!EditPasswordSetting) {
+        Setting *setting = [[Setting alloc] initWithName:NSLocalizedString(@"Change Password", nil) icon:[UIImage imageNamed:@"edit_password_button_icon"]];
+        [setting setSelectBlock:^(UIViewController *controller) {
+            if (![BTPasswordSeed getPasswordSeed]) {
+                if ([controller respondsToSelector:@selector(showMsg:)]) {
                     [controller performSelector:@selector(showMsg:) withObject:NSLocalizedString(@"No private keys", nil)];
                 }
                 return;
             }
-            if([controller conformsToProtocol:@protocol(DialogEditPasswordDelegate)]){
-                [[[DialogEditPassword alloc]initWithDelegate:(NSObject<DialogEditPasswordDelegate>*)controller]showInWindow:controller.view.window];
+            if ([controller conformsToProtocol:@protocol(DialogEditPasswordDelegate)]) {
+                [[[DialogEditPassword alloc] initWithDelegate:(NSObject <DialogEditPasswordDelegate> *) controller] showInWindow:controller.view.window];
             }
         }];
         EditPasswordSetting = setting;
@@ -390,22 +391,22 @@ static Setting* SwitchToColdSetting;
     return EditPasswordSetting;
 }
 
-+(Setting*)getColdMonitorSetting{
-    if(!ColdMonitorSetting){
-        ColdMonitorSetting = [[Setting alloc]initWithName:NSLocalizedString(@"Watch Only QR Code", nil) icon:[UIImage imageNamed:@"qr_code_button_icon"]];
-        [ColdMonitorSetting setSelectBlock:^(UIViewController * controller){
-            NSArray* addresses = [BTAddressManager instance].privKeyAddresses;
-            NSMutableArray* pubKeys = [[NSMutableArray alloc]init];
-            for(BTAddress* a in addresses){
-                NSString * pubStr=@"";
++ (Setting *)getColdMonitorSetting {
+    if (!ColdMonitorSetting) {
+        ColdMonitorSetting = [[Setting alloc] initWithName:NSLocalizedString(@"Watch Only QR Code", nil) icon:[UIImage imageNamed:@"qr_code_button_icon"]];
+        [ColdMonitorSetting setSelectBlock:^(UIViewController *controller) {
+            NSArray *addresses = [BTAddressManager instance].privKeyAddresses;
+            NSMutableArray *pubKeys = [[NSMutableArray alloc] init];
+            for (BTAddress *a in addresses) {
+                NSString *pubStr = @"";
                 if (a.isFromXRandom) {
-                    pubStr=XRANDOM_FLAG;
+                    pubStr = XRANDOM_FLAG;
                 }
-                pubStr=[pubStr stringByAppendingString:[NSString hexWithData:a.pubKey]  ];
+                pubStr = [pubStr stringByAppendingString:[NSString hexWithData:a.pubKey]];
                 [pubKeys addObject:pubStr];
             }
-            QrCodeViewController* qrCtr = [controller.storyboard instantiateViewControllerWithIdentifier:@"QrCode"];
-            qrCtr.content =[BTQRCodeUtil joinedQRCode:pubKeys];
+            QrCodeViewController *qrCtr = [controller.storyboard instantiateViewControllerWithIdentifier:@"QrCode"];
+            qrCtr.content = [BTQRCodeUtil joinedQRCode:pubKeys];
             qrCtr.qrCodeTitle = NSLocalizedString(@"Watch Only QR Code", nil);
             qrCtr.qrCodeMsg = NSLocalizedString(@"Scan with Bither Hot to watch Bither Cold", nil);
             [controller.navigationController pushViewController:qrCtr animated:YES];
@@ -414,14 +415,14 @@ static Setting* SwitchToColdSetting;
     return ColdMonitorSetting;
 }
 
-+(Setting*)getRCheckSetting{
-    if(!RCheckSetting){
-        RCheckSetting = [[Setting alloc]initWithName:NSLocalizedString(@"setting_name_rcheck", nil) icon:[UIImage imageNamed:@"rcheck_button_icon"]];
-        [RCheckSetting setSelectBlock:^(UIViewController * controller){
-            if([BTAddressManager instance].allAddresses.count > 0){
++ (Setting *)getRCheckSetting {
+    if (!RCheckSetting) {
+        RCheckSetting = [[Setting alloc] initWithName:NSLocalizedString(@"setting_name_rcheck", nil) icon:[UIImage imageNamed:@"rcheck_button_icon"]];
+        [RCheckSetting setSelectBlock:^(UIViewController *controller) {
+            if ([BTAddressManager instance].allAddresses.count > 0) {
                 [controller.navigationController pushViewController:[controller.storyboard instantiateViewControllerWithIdentifier:@"rcheck"] animated:YES];
-            }else{
-                if([controller respondsToSelector:@selector(showMsg:)]){
+            } else {
+                if ([controller respondsToSelector:@selector(showMsg:)]) {
                     [controller performSelector:@selector(showMsg:) withObject:NSLocalizedString(@"rcheck_no_address", nil) afterDelay:0];
                 }
             }
@@ -430,14 +431,14 @@ static Setting* SwitchToColdSetting;
     return RCheckSetting;
 }
 
-+(Setting*)getTrashCanSetting{
-    if(!TrashCanSetting){
-        TrashCanSetting = [[Setting alloc]initWithName:NSLocalizedString(@"trash_can", nil) icon:[UIImage imageNamed:@"trash_can_button_icon"]];
-        [TrashCanSetting setSelectBlock:^(UIViewController * controller){
-            if([BTAddressManager instance].trashAddresses.count > 0){
++ (Setting *)getTrashCanSetting {
+    if (!TrashCanSetting) {
+        TrashCanSetting = [[Setting alloc] initWithName:NSLocalizedString(@"trash_can", nil) icon:[UIImage imageNamed:@"trash_can_button_icon"]];
+        [TrashCanSetting setSelectBlock:^(UIViewController *controller) {
+            if ([BTAddressManager instance].trashAddresses.count > 0) {
                 [controller.navigationController pushViewController:[controller.storyboard instantiateViewControllerWithIdentifier:@"trash_can"] animated:YES];
-            }else{
-                if([controller respondsToSelector:@selector(showMsg:)]){
+            } else {
+                if ([controller respondsToSelector:@selector(showMsg:)]) {
                     [controller performSelector:@selector(showMsg:) withObject:NSLocalizedString(@"trash_can_empty", nil) afterDelay:0];
                 }
             }
@@ -446,46 +447,47 @@ static Setting* SwitchToColdSetting;
     return TrashCanSetting;
 }
 
-+(Setting * )getSwitchToColdSetting{
-    if(!SwitchToColdSetting){
-        SwitchToColdSetting = [[Setting alloc]initWithName:NSLocalizedString(@"launch_sequence_switch_to_cold", nil) icon:nil];
-        [SwitchToColdSetting setSelectBlock:^(UIViewController * controller){
-            if([BTAddressManager instance].allAddresses.count == 0){
-                [[[DialogAlert alloc]initWithMessage:NSLocalizedString(@"launch_sequence_switch_to_cold_warn", nil) confirm:^{
++ (Setting *)getSwitchToColdSetting {
+    if (!SwitchToColdSetting) {
+        SwitchToColdSetting = [[Setting alloc] initWithName:NSLocalizedString(@"launch_sequence_switch_to_cold", nil) icon:nil];
+        [SwitchToColdSetting setSelectBlock:^(UIViewController *controller) {
+            if ([BTAddressManager instance].allAddresses.count == 0) {
+                [[[DialogAlert alloc] initWithMessage:NSLocalizedString(@"launch_sequence_switch_to_cold_warn", nil) confirm:^{
                     [[BTSettings instance] setAppMode:COLD];
                     [controller presentViewController:[controller.storyboard instantiateViewControllerWithIdentifier:@"ChooseModeViewController"] animated:YES completion:^{
-                        
+
                     }];
-                } cancel:nil] showInWindow:controller.view.window];
+                }                              cancel:nil] showInWindow:controller.view.window];
             }
         }];
     }
     return SwitchToColdSetting;
 }
 
-+(Setting*)getQrCodeQualitySetting{
-    if(!QrCodeQualitySetting){
-        Setting* setting = [[Setting alloc]initWithName:NSLocalizedString(@"qr_code_quality_setting_name", nil) icon:nil];
-        [setting setGetValueBlock:^(){
++ (Setting *)getQrCodeQualitySetting {
+    if (!QrCodeQualitySetting) {
+        Setting *setting = [[Setting alloc] initWithName:NSLocalizedString(@"qr_code_quality_setting_name", nil) icon:nil];
+        [setting setGetValueBlock:^() {
             QRQuality q = [BTQRCodeUtil qrQuality];
             return [self getQrCodeQualityName:q];
         }];
-        [setting setGetArrayBlock:^(){
-            NSMutableArray * array=[NSMutableArray new];
+        [setting setGetArrayBlock:^() {
+            NSMutableArray *array = [NSMutableArray new];
             [array addObject:[self getQrCodeQualityDict:NORMAL]];
             [array addObject:[self getQrCodeQualityDict:LOW]];
             return array;
         }];
-        
-        [setting setResult:^(NSDictionary * dict){
+
+        [setting setResult:^(NSDictionary *dict) {
             if ([[dict allKeys] containsObject:SETTING_VALUE]) {
                 [BTQRCodeUtil setQrQuality:[dict getIntFromDict:SETTING_VALUE]];
             }
         }];
-        __block Setting * sself=setting;
-        [setting setSelectBlock:^(UIViewController * controller){
-            SelectViewController *selectController = [controller.storyboard instantiateViewControllerWithIdentifier:@"SelectViewController"];UINavigationController *nav = controller.navigationController;
-            selectController.setting=sself;
+        __block Setting *sself = setting;
+        [setting setSelectBlock:^(UIViewController *controller) {
+            SelectViewController *selectController = [controller.storyboard instantiateViewControllerWithIdentifier:@"SelectViewController"];
+            UINavigationController *nav = controller.navigationController;
+            selectController.setting = sself;
             [nav pushViewController:selectController animated:YES];
         }];
         QrCodeQualitySetting = setting;
@@ -493,10 +495,36 @@ static Setting* SwitchToColdSetting;
     return QrCodeQualitySetting;
 }
 
++ (Setting *)getHDMServerPasswordResetSetting {
+    if (!HDMServerPasswordResetSetting) {
+        Setting *setting = [[Setting alloc] initWithName:NSLocalizedString(@"hdm_reset_server_password_setting_name", nil) icon:nil];
+        [setting setSelectBlock:^(UIViewController *controller) {
+            [[[DialogAlert alloc] initWithMessage:NSLocalizedString(@"hdm_reset_server_password_confirm", nil) confirm:^{
+                __block DialogProgress *dp = [[DialogProgress alloc] initWithMessage:NSLocalizedString(@"Please wait…", nil)];
+                [dp showInWindow:controller.view.window completion:^{
+                    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+                        __block BOOL result = [[[HDMResetServerPasswordUtil alloc] initWithViewController:controller andDialogProgress:dp] changeServerPassword];
+                        dispatch_sync(dispatch_get_main_queue(), ^{
+                            [dp dismissWithCompletion:^{
+                                if (result) {
+                                    if ([controller respondsToSelector:@selector(showBannerWithMessage:)]) {
+                                        [controller performSelector:@selector(showBannerWithMessage:) withObject:NSLocalizedString(@"hdm_reset_server_password_success", nil)];
+                                    }
+                                }
+                            }];
+                        });
+                    });
+                }];
+            }                              cancel:nil] showInWindow:controller.view.window];
+        }];
+        HDMServerPasswordResetSetting = setting;
+    }
+    return HDMServerPasswordResetSetting;
+}
 
-+(NSDictionary *)getQrCodeQualityDict:(QRQuality)quality{
++ (NSDictionary *)getQrCodeQualityDict:(QRQuality)quality {
     QRQuality q = [BTQRCodeUtil qrQuality];
-    NSMutableDictionary *dict=[NSMutableDictionary new];
+    NSMutableDictionary *dict = [NSMutableDictionary new];
     [dict setObject:[NSNumber numberWithInteger:quality] forKey:SETTING_VALUE];
     [dict setObject:[self getQrCodeQualityName:quality] forKey:SETTING_KEY];
     if (q == quality) {
@@ -505,7 +533,7 @@ static Setting* SwitchToColdSetting;
     return dict;
 }
 
-+(NSString *)getQrCodeQualityName:(QRQuality)quality{
++ (NSString *)getQrCodeQualityName:(QRQuality)quality {
     switch (quality) {
         case LOW:
             return NSLocalizedString(@"qr_code_quality_setting_low", nil);
@@ -515,25 +543,28 @@ static Setting* SwitchToColdSetting;
     }
 }
 
-+(NSArray*)advanceSettings{
++ (NSArray *)advanceSettings {
     NSMutableArray *array = [NSMutableArray new];
-    if ([[BTSettings instance] getAppMode]==HOT) {
+    if ([[BTSettings instance] getAppMode] == HOT) {
         [array addObject:[Setting getNetworkSetting]];
     }
     [array addObject:[Setting getEditPasswordSetting]];
     [array addObject:[PinCodeSetting getPinCodeSetting]];
-    if ([[BTSettings instance] getAppMode]==HOT) {
+    if ([[BTSettings instance] getAppMode] == HOT) {
         [array addObject:[Setting getRCheckSetting]];
     }
     [array addObject:[Setting getQrCodeQualitySetting]];
     [array addObject:[ImportPrivateKeySetting getImportPrivateKeySetting]];
     [array addObject:[ImportBip38PrivateKeySetting getImportBip38PrivateKeySetting]];
-    if( [[BTSettings instance] getAppMode]==HOT && [[BTAddressManager instance] hdmKeychain] == nil){
+    if ([[BTSettings instance] getAppMode] == HOT && [[BTAddressManager instance] hdmKeychain] == nil) {
         [array addObject:[HDMRecoverSetting getHDMRecoverSetting]];
+    }
+    if ([[BTSettings instance] getAppMode] == HOT && [BTHDMBid getHDMBidFromDb]) {
+        [array addObject:[Setting getHDMServerPasswordResetSetting]];
     }
     [array addObject:[MessageSigningSetting getMessageSigningSetting]];
     [array addObject:[Setting getTrashCanSetting]];
-    if ([[BTSettings instance] getAppMode]==HOT) {
+    if ([[BTSettings instance] getAppMode] == HOT) {
         [array addObject:[ReloadTxSetting getReloadTxsSetting]];
     }
 //    if ([[BTSettings instance] getAppMode] == HOT) {
@@ -542,8 +573,8 @@ static Setting* SwitchToColdSetting;
     return array;
 }
 
-+(Setting *)getKeychainSetting;{
-    return [KeychainSetting getKeychainSetting];    
++ (Setting *)getKeychainSetting; {
+    return [KeychainSetting getKeychainSetting];
 }
 @end
 

@@ -19,16 +19,24 @@
 #import "DialogCentered.h"
 #import "Bitheri/BTAddress.h"
 
+@protocol DialogAddressAliasDelegate;
+
 @protocol DialogAddressOptionsDelegate <NSObject>
--(void)stopMonitorAddress;
--(void)showAddressOnBlockChainInfo;
--(void)showAddressOnBlockMeta;
--(void)showPrivateKeyQrCode;
--(void)showPrivateKeyManagement;
--(void)signMessage;
+- (void)stopMonitorAddress;
+
+- (void)showAddressOnBlockChainInfo;
+
+- (void)showAddressOnBlockMeta;
+
+- (void)showPrivateKeyQrCode;
+
+- (void)showPrivateKeyManagement;
+
+- (void)signMessage;
 @end
 
 @interface DialogAddressOptions : DialogCentered
--(instancetype)initWithAddress:(BTAddress*)address andDelegate:(NSObject<DialogAddressOptionsDelegate>*)delegate;
-@property (weak) NSObject<DialogAddressOptionsDelegate>* delegate;
+- (instancetype)initWithAddress:(BTAddress *)address delegate:(NSObject <DialogAddressOptionsDelegate> *)delegate andAliasDialog:(NSObject <DialogAddressAliasDelegate> *)aliasDelegate;
+
+@property(weak) NSObject <DialogAddressOptionsDelegate> *delegate;
 @end

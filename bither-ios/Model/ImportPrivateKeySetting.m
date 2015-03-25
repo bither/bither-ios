@@ -91,6 +91,11 @@ static Setting* importPrivateKeySetting;
 
 -(void)actionSheet:(UIActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex{
     self.isImportHDM= buttonIndex==2;
+    if ([[BTSettings instance] getAppMode]!=COLD||[[BTAddressManager instance] hasHDMKeychain]){
+        if (buttonIndex>1){
+            return;
+        }
+    }
     switch(buttonIndex){
         case 0:
             [self scanQRCodeWithPrivateKey];
@@ -104,6 +109,9 @@ static Setting* importPrivateKeySetting;
         case 3:
             [self importWithHDMColdPhrase];
             break;
+        case 4:
+            break;
+
     }
 
 }

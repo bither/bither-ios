@@ -138,7 +138,7 @@ typedef enum {
 } CustomErrorFailed;
 
 typedef enum {
-    Text, Encrypted, Decrypetd
+    Text, Encrypted, Decrypetd, BIP38
 } PrivateKeyQrCodeType;
 
 typedef enum {
