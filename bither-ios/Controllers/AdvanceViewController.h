@@ -16,8 +16,9 @@
 //  limitations under the License.
 
 #import <UIKit/UIKit.h>
+#import "UIViewController+PiShowBanner.h"
 
-@interface AdvanceViewController : UIViewController
+@interface AdvanceViewController : UIViewController<ShowBannerDelegete>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (strong ,nonatomic)NSArray * settings;
 @end

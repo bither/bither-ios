@@ -405,6 +405,7 @@
 "Not match BIP38-private key format"="不符合BIP38私钥格式";
 "Scan BIP38-private key QR Code"="扫描BIP38私钥二维码";
 "Based on %@ %@"="基于 %@ %@";
+"address_detail_private_Key_qr_code_bip38" = "BIP38 私钥二维码";
 
 "xrandom_no_source"="无可用随机源";
 "xrandom_generating_failed"="生成失败";
@@ -605,3 +606,27 @@
 "hdm_import_word_list_replace"="替换";
 
 "not_verify_bither_private_key_qrcode"="不是比太私钥二维码";
+
+// hdm reset server password
+"hdm_reset_server_password_password_wrong_confirm" = "HDM 服务器授权失效.\n使用 HDM 冷重新授权?";
+"hdm_reset_server_password_confirm" = "确认重置 HDM 服务器授权?";
+"hdm_reset_server_password_setting_name" = "重置 HDM 服务器授权";
+"hdm_reset_server_password_success" = "HDM 服务器授权已重置";
+
+// hdm singular mode
+"hdm_singular_check_title" = "单机模式";
+"hdm_singular_cold_seed_remember_warn" = "HDM 冷种子非常重要.\n您必须自己妥善保存它.";
+"hdm_singular_cold_seed_remember_button" = "我已保存好 HDM 冷种子";
+"hdm_singular_cold_seed_tab_words" = "密语";
+"hdm_singular_cold_seed_tab_qr" = "二维码";
+"hdm_singular_mode_info" = "单机模式只需要一部设备即可运行 HDM.\n不需要额外的冷钱包设备.\n但是您需要妥善保管好冷种子.\n冷种子是恢复 HDM 账户的唯一方法.";
+"hdm_singular_mode_cancel_warn" = "HDM 单机模式正在运行, 不能中断";
+
+// address alias
+"address_alias_manage" = "地址标签";
+"address_alias_add" = "设置地址标签";
+"address_alias_remove" = "删除地址标签";
+"address_alias_edit" = "编辑地址标签";
+"address_alias_input_label" = "输入此地址的标签";
+"address_alias_input_hint" = "标签";
+"address_alias_remove_confirm" = "删除此地址标签?";

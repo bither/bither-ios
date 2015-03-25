@@ -19,19 +19,31 @@
 #import <Foundation/Foundation.h>
 #import "DialogCentered.h"
 #import "Bitheri/BTAddress.h"
+#import "DialogAddressAlias.h"
 
 @protocol DialogPrivateKeyOptionsDelegate <NSObject>
--(void)stopMonitorAddress;
--(void)resetMonitorAddress;
--(void)showPrivateKeyEncryptedQrCode;
--(void)showPrivateKeyDecryptedQrCode;
--(void)showPrivateKeyTextQrCode;
--(void)moveToTrash;
--(void)signMessage;
+- (void)stopMonitorAddress;
+
+- (void)resetMonitorAddress;
+
+- (void)showPrivateKeyEncryptedQrCode;
+
+- (void)showPrivateKeyDecryptedQrCode;
+
+- (void)showPrivateKeyTextQrCode;
+
+- (void)moveToTrash;
+
+- (void)signMessage;
+
+- (void)showBIP38PrivateKey;
 @end
 
 
 @interface DialogAddressLongPressOptions : DialogCentered
--(instancetype)initWithAddress:(BTAddress*)address andDelegate:(NSObject<DialogPrivateKeyOptionsDelegate>*)delegate;
-@property (weak) NSObject<DialogPrivateKeyOptionsDelegate>* delegate;
+- (instancetype)initWithAddress:(BTAddress *)address delegate:(NSObject <DialogPrivateKeyOptionsDelegate> *)delegate andAliasDelegate:(NSObject <DialogAddressAliasDelegate> *)aliasDelegate;
+
+- (instancetype)initWithAddress:(BTAddress *)address andDelegate:(NSObject <DialogPrivateKeyOptionsDelegate> *)delegate;
+
+@property(weak) NSObject <DialogPrivateKeyOptionsDelegate> *delegate;
 @end

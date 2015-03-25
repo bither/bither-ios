@@ -248,7 +248,7 @@
 "7q1-Od-7M4.text" = "原始私鑰";
 
 /* Class = "IBUIButton"; normalTitle = "Add This Private Key"; ObjectID = "zjg-wy-EHw"; */
-"zjg-wy-EHw.normalTitle" = "添加此私鑰";
+"zjg-wy-EHw.normalTitle" = "新增此私鑰";
 
 /* Class = "IBUILabel"; text = "Address"; ObjectID = "9VQ-qA-ave"; */
 "9VQ-qA-ave.text" = "地址";
@@ -318,3 +318,41 @@
 
 /* Class = "IBUIButton"; normalTitle = "Generate"; ObjectID = "gHB-fo-cHb"; */
 "gHB-fo-cHb.normalTitle" = "增加";
+
+/* Class = "UIButton"; normalTitle = "Singular Mode"; ObjectID = "EXG-fG-TbM"; */
+"EXG-fG-TbM.normalTitle" = "單機模式";
+
+/* Class = "UILabel"; text = "Singular Mode"; ObjectID = "IzA-vJ-Ad6"; */
+"IzA-vJ-Ad6.text" = "單機模式";
+
+/* Class = "UISegmentedControl"; aLp-gS-meD.segmentTitles[0] = "Dice"; ObjectID = "aLp-gS-meD"; */
+"aLp-gS-meD.segmentTitles[0]" = "骰子";
+
+/* Class = "UISegmentedControl"; aLp-gS-meD.segmentTitles[1] = "Binary"; ObjectID = "aLp-gS-meD"; */
+"aLp-gS-meD.segmentTitles[1]" = "二進位制";
+
+/* Class = "UIButton"; normalTitle = "Add This Private Key"; ObjectID = "ckY-fV-MzW"; */
+"ckY-fV-MzW.normalTitle" = "新增此私鑰";
+
+/* Class = "UILabel"; text = "Address"; ObjectID = "wb7-kB-0ec"; */
+"wb7-kB-0ec.text" = "地址";
+
+/* Class = "UILabel"; text = "Private Key"; ObjectID = "x9d-Sc-rrj"; */
+"x9d-Sc-rrj.text" = "私鑰";
+
+/* Class = "UITextField"; placeholder = "Bitcoin address"; ObjectID = "fCj-hW-RGp"; */
+"fCj-hW-RGp.placeholder" = "比特幣地址";
+
+/* Class = "UILabel"; text = "Amount"; ObjectID = "aHu-iQ-TCR"; */
+"aHu-iQ-TCR.text" = "金額";
+
+/* Class = "UITextField"; placeholder = "Password"; ObjectID = "xmE-uG-hIe"; */
+"xmE-uG-hIe.placeholder" = "密碼";
+
+/* Class = "UILabel"; text = "Password"; ObjectID = "mdF-6N-ecP"; */
+"mdF-6N-ecP.text" = "密碼";
+
+/* Class = "UILabel"; text = "Balance:"; ObjectID = "hsE-yP-NwX"; */
+"hsE-yP-NwX.text" = "餘額:";
+
+

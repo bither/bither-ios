@@ -21,6 +21,10 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol HDMSingularAddViewContainer
+- (void)setHDMSingularCancellable:(BOOL)cancellable;
+@end
+
 @interface HotAddressAddHDMViewController : UIViewController
 
 @end

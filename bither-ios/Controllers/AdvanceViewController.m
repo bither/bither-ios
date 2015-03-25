@@ -68,6 +68,10 @@
     [self showBannerWithMessage:msg belowView:self.vTopBar];
 }
 
+-(void)showBannerWithMessage:(NSString *)msg {
+    [self showMsg:msg];
+}
+
 //tableview delgate
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{

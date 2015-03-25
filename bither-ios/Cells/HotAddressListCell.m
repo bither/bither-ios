@@ -16,6 +16,7 @@
 //  See the License for the specific language governing permissions and
 //  limitations under the License.
 
+#import <Bitheri/BTKey+BIP38.h>
 #import "HotAddressListCell.h"
 #import "StringUtil.h"
 #import "UnitUtil.h"
@@ -40,6 +41,7 @@
 #import "BTAddressManager.h"
 #import "SignMessageViewController.h"
 #import "DialogHDMAddressOptions.h"
+#import "AddressAliasView.h"
 
 #define kUnconfirmedTxAmountLeftMargin (3)
 
@@ -64,6 +66,7 @@
 @property (weak, nonatomic) IBOutlet AmountButton *vUnconfirmedTxAmount;
 @property (weak, nonatomic) IBOutlet UIButton *btnAddressFull;
 @property (weak, nonatomic) IBOutlet UIImageView *ivSymbolBtc;
+@property (weak, nonatomic) IBOutlet AddressAliasView *btnAlias;
 @property (strong, nonatomic) UILongPressGestureRecognizer * longPress;
 @property (strong, nonatomic) UILongPressGestureRecognizer * xrandomLongPress;
 
@@ -141,6 +144,8 @@
     }else{
         self.lblBalanceMoney.text=@"--";
     }
+
+    self.btnAlias.address = address;
     isMovingToTrash = NO;
 }
 
@@ -184,7 +189,7 @@
 - (void) handleTableviewCellLongPressed:(UILongPressGestureRecognizer *)gestureRecognizer {
     if (gestureRecognizer.state==UIGestureRecognizerStateBegan) {
         if(_btAddress.isHDM){
-            [[[DialogHDMAddressOptions alloc] initWithAddress:_btAddress] showInWindow:self.window];
+            [[[DialogHDMAddressOptions alloc] initWithAddress:_btAddress andAddressAliasDelegate:nil] showInWindow:self.window];
         }else{
             DialogAddressLongPressOptions *dialogPrivateKeyOptons=[[DialogAddressLongPressOptions alloc] initWithAddress:_btAddress andDelegate:self];
             [dialogPrivateKeyOptons showInWindow:self.window];
@@ -227,6 +232,12 @@
 -(void)showPrivateKeyTextQrCode{
     _qrcodeType=Text;
     DialogPassword *dialog = [[DialogPassword alloc]initWithDelegate:self];
+    [dialog showInWindow:self.window];
+}
+
+- (void)showBIP38PrivateKey {
+    _qrcodeType = BIP38;
+    DialogPassword *dialog = [[DialogPassword alloc] initWithDelegate:self];
     [dialog showInWindow:self.window];
 }
 
@@ -277,6 +288,19 @@
     }else{
         DialogProgress *dialogProgress=[[DialogProgress alloc] initWithMessage:NSLocalizedString(@"Please wait…", nil)];
         [dialogProgress showInWindow:self.window];
+        if(_qrcodeType == BIP38){
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+                BTKey *key = [BTKey keyWithBitcoinj:_btAddress.encryptPrivKey andPassphrase:bpassword];
+                __block NSString *bip38 = [key BIP38KeyWithPassphrase:bpassword];
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [dialogProgress dismissWithCompletion:^{
+                        DialogPrivateKeyDecryptedQrCode *dialogPrivateKey = [[DialogPrivateKeyDecryptedQrCode alloc] initWithAddress:_btAddress.address privateKey:bip38];
+                        [dialogPrivateKey showInWindow:self.window];
+                    }];
+                });
+            });
+            return;
+        }
         [self decrypted:bpassword callback:^(id response) {
             [dialogProgress dismiss];
             if (_qrcodeType==Decrypetd) {

@@ -22,29 +22,39 @@
 #import "DialogHDMAddressOptions.h"
 #import "UserDefaultsUtil.h"
 
-@interface DialogHDMAddressOptions()
+@interface DialogHDMAddressOptions ()
 @property BTAddress *address;
+@property(weak) NSObject <DialogAddressAliasDelegate> *aliasDelegate;
 @end
+
 @implementation DialogHDMAddressOptions
-- (instancetype)initWithAddress:(BTAddress *)address {
+- (instancetype)initWithAddress:(BTAddress *)address andAddressAliasDelegate:(NSObject <DialogAddressAliasDelegate> *)aliasDelegate {
     NSMutableArray *actions = [NSMutableArray new];
     [actions addObject:[[Action alloc] initWithName:NSLocalizedString(@"View on Blockchain.info", nil) target:self andSelector:@selector(viewOnBlockchain)]];
-    if([UserDefaultsUtil instance].localeIsChina||[[UserDefaultsUtil instance] localeIsZHHant]) {
+    if ([UserDefaultsUtil instance].localeIsChina || [[UserDefaultsUtil instance] localeIsZHHant]) {
         [actions addObject:[[Action alloc] initWithName:NSLocalizedString(@"address_option_view_on_blockmeta", nil) target:self andSelector:@selector(viewOnBlockmeta)]];
     }
+    if (aliasDelegate) {
+        [actions addObject:[[Action alloc] initWithName:NSLocalizedString(@"address_alias_manage", nil) target:self andSelector:@selector(addressAlias)]];
+    }
     self = [super initWithActions:actions];
-    if(self){
+    if (self) {
         self.address = address;
+        self.aliasDelegate = aliasDelegate;
     }
     return self;
 }
 
--(void)viewOnBlockchain{
-    NSString *url = [NSString stringWithFormat:@"http://blockchain.info/address/%@",self.address.address];
+- (void)addressAlias {
+    [[[DialogAddressAlias alloc] initWithAddress:self.address andDelegate:self.aliasDelegate] showInWindow:self.window];
+}
+
+- (void)viewOnBlockchain {
+    NSString *url = [NSString stringWithFormat:@"http://blockchain.info/address/%@", self.address.address];
     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:url]];
 }
 
--(void)viewOnBlockmeta{
+- (void)viewOnBlockmeta {
     NSString *url = [NSString stringWithFormat:@"http://www.blockmeta.com/address/%@", self.address.address];
     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:url]];
 }
