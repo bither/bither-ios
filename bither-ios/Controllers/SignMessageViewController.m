@@ -18,7 +18,7 @@
 #import "DialogAddressQrCode.h"
 #import "KeyboardController.h"
 
-@interface SignMessageViewController ()<UITextViewDelegate, DialogPasswordDelegate, DialogSignMessageOutputDelegate, ScanQrCodeDelegate, DialogAddressQrCodeDelegate, KeyboardControllerDelegate>{
+@interface SignMessageViewController ()<UITextViewDelegate, DialogPasswordDelegate, DialogSignMessageOutputDelegate, ScanQrCodeDelegate, DialogAddressQrCodeDelegate, KeyboardControllerDelegate, UIScrollViewDelegate>{
     CGFloat _tvMinHeight;
 }
 @property (weak, nonatomic) IBOutlet UIView *vTopbar;
@@ -50,7 +50,9 @@
     self.ai.hidden = YES;
     self.vOutput.hidden = YES;
     self.lblAddress.text = [StringUtil formatAddress:self.address.address groupSize:4 lineSize:12];
+    self.sv.delegate = self;
     [self configureAddressFrame];
+    [self configureOutputFrame];
     self.ivQr.image = [QRCodeThemeUtil qrCodeOfContent:self.address.address andSize:self.ivQr.frame.size.width withTheme:[[QRCodeTheme themes] objectAtIndex:[[UserDefaultsUtil instance] getQrCodeTheme]]];
     [self.tvInput becomeFirstResponder];
 }
@@ -212,6 +214,10 @@
 
 - (IBAction)backPressed:(id)sender {
     [self.navigationController popViewControllerAnimated:YES];
+}
+
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView{
+    [self.view endEditing:YES];
 }
 
 // MARK: KeyboardControllerDelegate
