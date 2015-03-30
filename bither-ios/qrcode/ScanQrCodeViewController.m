@@ -337,9 +337,7 @@
                         }];
                     } else {
                         if (self.scanDelegate && [self.scanDelegate respondsToSelector:@selector(handleResult:byReader:)]) {
-                            [picker dismissViewControllerAnimated:YES completion:^{
-                                [self.scanDelegate handleResult:result byReader:self];
-                            }];
+                            [self.scanDelegate handleResult:result byReader:self];
                         }
                     }
                 }];

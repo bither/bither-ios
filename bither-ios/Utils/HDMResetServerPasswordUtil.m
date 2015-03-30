@@ -148,7 +148,7 @@
 
 - (void)handleResult:(NSString *)result byReader:(ScanQrCodeViewController *)reader {
     serverSignature = result;
-    [reader dismissViewControllerAnimated:YES completion:^{
+    [reader.presentingViewController dismissViewControllerAnimated:YES completion:^{
         [hdmIdCondition lock];
         [hdmIdCondition signal];
         [hdmIdCondition unlock];

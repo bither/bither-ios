@@ -145,7 +145,7 @@ static Setting* importPrivateKeySetting;
         if ([BTQRCodeUtil verifyQrcodeTransport:result] ) {
             [reader playSuccessSound];
             [reader vibrate];
-            [reader dismissViewControllerAnimated:YES completion:^{
+            [reader.presentingViewController dismissViewControllerAnimated:YES completion:^{
                 if (!isHDMSeed || [[BTQRCodeUtil splitQRCode:result] count] != 3){
                     [self showMsg:NSLocalizedString(@"import_hdm_cold_seed_format_error", nil)];
                 } else {
@@ -161,7 +161,7 @@ static Setting* importPrivateKeySetting;
         if ([BTQRCodeUtil verifyQrcodeTransport:result]) {
             [reader playSuccessSound];
             [reader vibrate];
-            [reader dismissViewControllerAnimated:YES completion:^{
+            [reader.presentingViewController dismissViewControllerAnimated:YES completion:^{
                 if (isHDMSeed){
                     [self showMsg:NSLocalizedString(@"can_not_import_hdm_cold_seed", nil)];
                 } else if([[BTQRCodeUtil splitQRCode:result] count] != 3){

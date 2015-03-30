@@ -200,7 +200,7 @@
         }
     }
     _qrWaitingInput = nil;
-    [reader dismissViewControllerAnimated:YES completion:nil];
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 @end

@@ -197,7 +197,7 @@
         [reader vibrate];
         if (isValidBitcoinAddress) {
             self.tfAddress.text = result;
-            [reader dismissViewControllerAnimated:YES completion:^{
+            [self dismissViewControllerAnimated:YES completion:^{
                 [self check];
                 [self.amtLink becomeFirstResponder];
             }];
@@ -209,7 +209,7 @@
                 self.amtLink.amount=amt;
             }
            
-            [reader dismissViewControllerAnimated:YES completion:^{
+            [self dismissViewControllerAnimated:YES completion:^{
                 [self check];
                 if (amt!=-1) {
                     [self.tfPassword becomeFirstResponder];
