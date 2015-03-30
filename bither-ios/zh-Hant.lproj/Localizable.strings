@@ -343,6 +343,7 @@
 "Enter your private key text"="輸入私鑰明文";
 "private key"="私鑰";
 "Only supports the compressed format of private key"="只支持壓縮格式的私鑰";
+"scan_qr_code_from_photo_wrong" = "沒有找到二維碼";
 
 //donate
 "Select an address to donate"="請選擇用來捐贈的地址";
@@ -422,6 +423,7 @@
 "Switched to old version QR Codes, sign with Bither Cold <1.1.0"="已切換到舊版二維碼，可用 <1.1.0的冷錢包簽名";
 "Switched to new version QR Codes, sign with Bither Cold ≧1.1.0"="已切換到新版二維碼，可用 ≧1.1.0的冷錢包簽名";
 "Camera Permission Required"="需要訪問攝像頭的權限";
+"scan_qr_code_from_photo_wrong" = "沒有找到二維碼";
 
 
 //avatar

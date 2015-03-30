@@ -55,6 +55,11 @@
     return self;
 }
 
+-(void)viewDidLoad{
+    [super viewDidLoad];
+    self.btnGallery.hidden = YES;
+}
+
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     _lastResult = nil;
