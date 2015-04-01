@@ -95,14 +95,14 @@ NSUserDefaults *userDefaults;
     [[GroupUserDefaultUtil instance] setDefaultCurrency:(GroupCurrency)exchangeType];
 }
 -(Currency)getDefaultCurrency {
-    NSInteger type=[self  getExchangeType];
+    NSInteger type=[self getExchangeType];
     if (type==-1) {
         [self setDefaultExchangeType];
     }
     return [self getExchangeType];
 }
 -(void) setDefaultExchangeType{
-  
+
     if ([self localeIsChina]) {
         [self setExchangeType:CNY];
     }else{

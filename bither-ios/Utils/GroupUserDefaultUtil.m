@@ -25,28 +25,28 @@
 #define DEFAULT_EXCHANGE_RATE @"default_exchange_rate"
 #define BITCOIN_UNIT @"bitcoin_unit"
 
-NSUserDefaults *userDefaults;
-static GroupUserDefaultUtil *userDefaultsUtil;
+NSUserDefaults *groupUserDefaults;
+static GroupUserDefaultUtil *groupUserDefaultsUtil;
 
 @implementation GroupUserDefaultUtil
 
 + (GroupUserDefaultUtil *)instance {
     @synchronized(self) {
-        if (userDefaultsUtil == nil) {
-            userDefaultsUtil = [[self alloc] init];
+        if (groupUserDefaultsUtil == nil) {
+            groupUserDefaultsUtil = [[self alloc] init];
             if([GroupFileUtil supported]){
-                userDefaults = [[NSUserDefaults alloc] initWithSuiteName:kBitherGroupName];
+                groupUserDefaults = [[NSUserDefaults alloc] initWithSuiteName:kBitherGroupName];
             } else {
-                userDefaults = nil;
+                groupUserDefaults = nil;
             }
         }
     }
-    return userDefaultsUtil;
+    return groupUserDefaultsUtil;
 }
 
 -(GroupMarketType)defaultMarket{
-    if(userDefaults){
-        NSInteger market=[userDefaults integerForKey:DEFAULT_MARKET];
+    if(groupUserDefaults){
+        NSInteger market=[groupUserDefaults integerForKey:DEFAULT_MARKET];
         if(market > 0){
             return (GroupMarketType)market;
         }
@@ -58,16 +58,16 @@ static GroupUserDefaultUtil *userDefaultsUtil;
 }
 
 -(void)setDefaultMarket:(GroupMarketType)market{
-    if(userDefaults){
-        [userDefaults setInteger:market forKey:DEFAULT_MARKET];
-        [userDefaults synchronize];
+    if(groupUserDefaults){
+        [groupUserDefaults setInteger:market forKey:DEFAULT_MARKET];
+        [groupUserDefaults synchronize];
     }
 }
 
 -(GroupCurrency)defaultCurrency{
-    if(userDefaults){
-        if ([userDefaults objectForKey:DEFAULT_EXCHANGE_RATE]){
-            return (GroupCurrency)[userDefaults integerForKey:DEFAULT_EXCHANGE_RATE];
+    if(groupUserDefaults){
+        if ([groupUserDefaults objectForKey:DEFAULT_EXCHANGE_RATE]){
+            return (GroupCurrency)[groupUserDefaults integerForKey:DEFAULT_EXCHANGE_RATE];
         }
     }
     if([self localeIsChina]){
@@ -77,23 +77,23 @@ static GroupUserDefaultUtil *userDefaultsUtil;
 }
 
 -(void)setDefaultCurrency:(GroupCurrency)currency{
-    if(userDefaults){
-        [userDefaults setInteger:currency forKey:DEFAULT_EXCHANGE_RATE];
-        [userDefaults synchronize];
+    if(groupUserDefaults){
+        [groupUserDefaults setInteger:currency forKey:DEFAULT_EXCHANGE_RATE];
+        [groupUserDefaults synchronize];
     }
 }
 
 -(GroupBitcoinUnit)defaultBitcoinUnit{
-    if(userDefaults && [userDefaults objectForKey:BITCOIN_UNIT]){
-        return (GroupBitcoinUnit)[userDefaults integerForKey:BITCOIN_UNIT];
+    if(groupUserDefaults && [groupUserDefaults objectForKey:BITCOIN_UNIT]){
+        return (GroupBitcoinUnit)[groupUserDefaults integerForKey:BITCOIN_UNIT];
     }
     return UnitBTCG;
 }
 
 -(void)setDefaultBitcoinUnit:(GroupBitcoinUnit)unit{
-    if(userDefaults){
-        [userDefaults setInteger:unit forKey:BITCOIN_UNIT];
-        [userDefaults synchronize];
+    if(groupUserDefaults){
+        [groupUserDefaults setInteger:unit forKey:BITCOIN_UNIT];
+        [groupUserDefaults synchronize];
     }
 }
 
