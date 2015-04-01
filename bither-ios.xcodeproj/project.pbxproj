@@ -22,8 +22,8 @@
 		0A47498A1A9D7F0B003684E2 /* Interface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0A4749881A9D7F0B003684E2 /* Interface.storyboard */; };
 		0A47498C1A9D7F0B003684E2 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0A47498B1A9D7F0B003684E2 /* Images.xcassets */; };
 		0A47498F1A9D7F0B003684E2 /* bither-ios WatchKit Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 0A47496F1A9D7F0B003684E2 /* bither-ios WatchKit Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		0A515F781A36A2C0008292AF /* RawDataView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A515F771A36A2C0008292AF /* RawDataView.m */; };
-		0A515F7B1A36CAE3008292AF /* RawPrivateKeyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A515F7A1A36CAE3008292AF /* RawPrivateKeyViewController.m */; };
+		0A515F781A36A2C0008292AF /* RawDataBinaryView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A515F771A36A2C0008292AF /* RawDataBinaryView.m */; };
+		0A515F7B1A36CAE3008292AF /* RawPrivateKeyBinaryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A515F7A1A36CAE3008292AF /* RawPrivateKeyBinaryViewController.m */; };
 		0A52BDA51A9FFC6400BC8C3E /* GroupFileUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A52BDA41A9FFC6400BC8C3E /* GroupFileUtil.m */; };
 		0A52BDA61A9FFEB800BC8C3E /* GroupFileUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A52BDA41A9FFC6400BC8C3E /* GroupFileUtil.m */; };
 		0A637B171AA0419C00696260 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A637B161AA0419C00696260 /* libPods.a */; };
@@ -33,8 +33,6 @@
 		0A637B231AA044C600696260 /* WatchApi.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A637B221AA044C600696260 /* WatchApi.m */; };
 		0A637B261AA0486300696260 /* WatchTrendingGraphicDrawer.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A637B251AA0486300696260 /* WatchTrendingGraphicDrawer.m */; };
 		0A637B291AA0608600696260 /* TotalBalanceDrawer.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A637B281AA0608600696260 /* TotalBalanceDrawer.m */; };
-		0A515F781A36A2C0008292AF /* RawDataBinaryView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A515F771A36A2C0008292AF /* RawDataBinaryView.m */; };
-		0A515F7B1A36CAE3008292AF /* RawPrivateKeyBinaryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A515F7A1A36CAE3008292AF /* RawPrivateKeyBinaryViewController.m */; };
 		0A6C0F5C1A4D548B00544B33 /* MessageSigningSetting.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A6C0F5B1A4D548B00544B33 /* MessageSigningSetting.m */; };
 		0A6C0F5F1A4D5E1900544B33 /* DialogSignMessageSelectAddress.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A6C0F5E1A4D5E1900544B33 /* DialogSignMessageSelectAddress.m */; };
 		0A6EB31D1AAE9DE200F59ED7 /* WatchMarketBgDrawer.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A6EB31C1AAE9DE200F59ED7 /* WatchMarketBgDrawer.m */; };
@@ -334,11 +332,11 @@
 		0A259E241A47F19100D7F707 /* DialogSendOption.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DialogSendOption.m; sourceTree = "<group>"; };
 		0A259E261A47FDF600D7F707 /* DialogSelectChangeAddress.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DialogSelectChangeAddress.h; sourceTree = "<group>"; };
 		0A259E271A47FDF600D7F707 /* DialogSelectChangeAddress.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DialogSelectChangeAddress.m; sourceTree = "<group>"; };
+		0A311B861ABD488A006E77A9 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/MainStoryboard.strings; sourceTree = "<group>"; };
 		0A4182A11A9DB70500576A12 /* WatchUnitUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WatchUnitUtil.h; sourceTree = "<group>"; };
 		0A4182A21A9DB70500576A12 /* WatchUnitUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WatchUnitUtil.m; sourceTree = "<group>"; };
 		0A4182AC1A9DBB8600576A12 /* WatchStringUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WatchStringUtil.h; sourceTree = "<group>"; };
 		0A4182AD1A9DBB8600576A12 /* WatchStringUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WatchStringUtil.m; sourceTree = "<group>"; };
-		0A311B861ABD488A006E77A9 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/MainStoryboard.strings; sourceTree = "<group>"; };
 		0A4206281A494F1000562100 /* SignMessageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignMessageViewController.h; sourceTree = "<group>"; };
 		0A4206291A494F1000562100 /* SignMessageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignMessageViewController.m; sourceTree = "<group>"; };
 		0A43F43E1A81C6BF008171DB /* HdmSendViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HdmSendViewController.h; sourceTree = "<group>"; };
@@ -359,10 +357,10 @@
 		0A4749871A9D7F0B003684E2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0A4749891A9D7F0B003684E2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Interface.storyboard; sourceTree = "<group>"; };
 		0A47498B1A9D7F0B003684E2 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		0A515F761A36A2C0008292AF /* RawDataView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RawDataView.h; sourceTree = "<group>"; };
-		0A515F771A36A2C0008292AF /* RawDataView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RawDataView.m; sourceTree = "<group>"; };
-		0A515F791A36CAE3008292AF /* RawPrivateKeyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RawPrivateKeyViewController.h; sourceTree = "<group>"; };
-		0A515F7A1A36CAE3008292AF /* RawPrivateKeyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RawPrivateKeyViewController.m; sourceTree = "<group>"; };
+		0A515F761A36A2C0008292AF /* RawDataBinaryView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RawDataBinaryView.h; sourceTree = "<group>"; };
+		0A515F771A36A2C0008292AF /* RawDataBinaryView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RawDataBinaryView.m; sourceTree = "<group>"; };
+		0A515F791A36CAE3008292AF /* RawPrivateKeyBinaryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RawPrivateKeyBinaryViewController.h; sourceTree = "<group>"; };
+		0A515F7A1A36CAE3008292AF /* RawPrivateKeyBinaryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RawPrivateKeyBinaryViewController.m; sourceTree = "<group>"; };
 		0A52BDA11A9FFBA400BC8C3E /* bither-ios.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "bither-ios.entitlements"; sourceTree = "<group>"; };
 		0A52BDA21A9FFC2B00BC8C3E /* bither-ios WatchKit Extension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "bither-ios WatchKit Extension.entitlements"; sourceTree = "<group>"; };
 		0A52BDA31A9FFC6400BC8C3E /* GroupFileUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GroupFileUtil.h; sourceTree = "<group>"; };
@@ -376,10 +374,6 @@
 		0A637B251AA0486300696260 /* WatchTrendingGraphicDrawer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WatchTrendingGraphicDrawer.m; sourceTree = "<group>"; };
 		0A637B271AA0608600696260 /* TotalBalanceDrawer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TotalBalanceDrawer.h; sourceTree = "<group>"; };
 		0A637B281AA0608600696260 /* TotalBalanceDrawer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TotalBalanceDrawer.m; sourceTree = "<group>"; };
-		0A515F761A36A2C0008292AF /* RawDataBinaryView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RawDataBinaryView.h; sourceTree = "<group>"; };
-		0A515F771A36A2C0008292AF /* RawDataBinaryView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RawDataBinaryView.m; sourceTree = "<group>"; };
-		0A515F791A36CAE3008292AF /* RawPrivateKeyBinaryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RawPrivateKeyBinaryViewController.h; sourceTree = "<group>"; };
-		0A515F7A1A36CAE3008292AF /* RawPrivateKeyBinaryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RawPrivateKeyBinaryViewController.m; sourceTree = "<group>"; };
 		0A6C0F5A1A4D548B00544B33 /* MessageSigningSetting.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageSigningSetting.h; sourceTree = "<group>"; };
 		0A6C0F5B1A4D548B00544B33 /* MessageSigningSetting.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageSigningSetting.m; sourceTree = "<group>"; };
 		0A6C0F5D1A4D5E1900544B33 /* DialogSignMessageSelectAddress.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DialogSignMessageSelectAddress.h; sourceTree = "<group>"; };
