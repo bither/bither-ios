@@ -20,41 +20,46 @@
 #import "StringUtil.h"
 #import "PlaySoundUtil.h"
 #import "UIBaseUtil.h"
-#import <QuartzCore/QuartzCore.h>
-#import <AudioToolbox/AudioToolbox.h>
+#import "UIViewController+SwipeRightToPop.h"
+#import "DialogProgress.h"
+#import "UIViewController+PiShowBanner.h"
 
-@interface ScanQrCodeViewController (){
-    NSString* _scanTitle;
-    NSString* _scanMessage;
-    NSString* _lastResult;
+@interface ScanQrCodeViewController () {
+    NSString *_scanTitle;
+    NSString *_scanMessage;
+    NSString *_lastResult;
+    BOOL fromGallery;
 }
 @property UILabel *lblTitle;
 @property UILabel *lblMessage;
-@property UIView  *vCamera;
-@property UIView* cameraOverlayView;
-@property (nonatomic, strong) AVCaptureSession *session;
-@property (nonatomic, strong) AVCaptureVideoPreviewLayer *preview;
+@property UIView *vCamera;
+@property UIView *cameraOverlayView;
+@property(nonatomic, strong) AVCaptureSession *session;
+@property(nonatomic, strong) AVCaptureVideoPreviewLayer *preview;
 @end
 
-@interface ScanQrCodeViewController (CameraOverlay)
--(void)configureCameraOverlay;
--(void)updateOverlay;
--(void)messageBreath;
+@interface ScanQrCodeViewController (CameraOverlay) <UIImagePickerControllerDelegate, UINavigationControllerDelegate>
+- (void)configureCameraOverlay;
+
+- (void)updateOverlay;
+
+- (void)messageBreath;
 @end
 
 @implementation ScanQrCodeViewController
 
--(void)viewDidLoad{
+- (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor blackColor];
-    self.vCamera = [[UIView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
+    self.vCamera = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
     self.vCamera.backgroundColor = [UIColor clearColor];
     self.vCamera.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
     [self.view addSubview:self.vCamera];
     [self configureCameraOverlay];
+    fromGallery = NO;
 }
 
--(void)viewWillAppear:(BOOL)animated{
+- (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     if ([AVCaptureDevice authorizationStatusForMediaType:AVMediaTypeVideo] == AVAuthorizationStatusDenied) {
         self.scanTitle = NSLocalizedString(@"Camera Permission Required", nil);
@@ -65,53 +70,52 @@
     AVCaptureDevice *device = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
     AVCaptureDeviceInput *input = [AVCaptureDeviceInput deviceInputWithDevice:device error:&error];
     AVCaptureMetadataOutput *output = [AVCaptureMetadataOutput new];
-    
+
     if (error) NSLog(@"%@", [error localizedDescription]);
-    
+
     if ([device lockForConfiguration:&error]) {
         if (device.isAutoFocusRangeRestrictionSupported) {
             device.autoFocusRangeRestriction = AVCaptureAutoFocusRangeRestrictionNear;
         }
-        
+
         if ([device isFocusModeSupported:AVCaptureFocusModeContinuousAutoFocus]) {
             device.focusMode = AVCaptureFocusModeContinuousAutoFocus;
         }
-        
+
         [device unlockForConfiguration];
     }
-    
+
     self.session = [AVCaptureSession new];
     if (input) [self.session addInput:input];
     [self.session addOutput:output];
     [output setMetadataObjectsDelegate:self queue:dispatch_get_main_queue()];
-    
+
     if ([output.availableMetadataObjectTypes containsObject:AVMetadataObjectTypeQRCode]) {
         output.metadataObjectTypes = @[AVMetadataObjectTypeQRCode];
     }
-    
+
     self.preview = [[AVCaptureVideoPreviewLayer alloc] initWithSession:self.session];
     self.preview.videoGravity = AVLayerVideoGravityResizeAspectFill;
     self.preview.frame = self.view.layer.bounds;
     [self.vCamera.layer addSublayer:self.preview];
-    
     dispatch_async(dispatch_queue_create("scan", NULL), ^{
         [self.session startRunning];
     });
 }
 
--(void)viewDidAppear:(BOOL)animated{
+- (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     [self messageBreath];
 }
 
--(instancetype)initWithDelegate:(NSObject<ScanQrCodeDelegate> *)delegate{
+- (instancetype)initWithDelegate:(NSObject <ScanQrCodeDelegate> *)delegate {
     self = [self initWithDelegate:delegate title:nil message:nil];
     return self;
 }
 
--(instancetype)initWithDelegate:(NSObject<ScanQrCodeDelegate> *)delegate title:(NSString *)title message:(NSString *)message{
+- (instancetype)initWithDelegate:(NSObject <ScanQrCodeDelegate> *)delegate title:(NSString *)title message:(NSString *)message {
     self = [self init];
-    if(self){
+    if (self) {
         self.scanDelegate = delegate;
         self.scanTitle = title;
         self.scanMessage = message;
@@ -119,12 +123,11 @@
     return self;
 }
 
--(void)viewWillDisappear:(BOOL)animated{
+- (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
 }
 
-- (void)viewDidDisappear:(BOOL)animated
-{
+- (void)viewDidDisappear:(BOOL)animated {
     [self.session removeOutput:self.session.outputs.firstObject];
     [self.session stopRunning];
     self.session = nil;
@@ -133,11 +136,14 @@
     [super viewDidDisappear:animated];
 }
 
-- (void)captureOutput:(AVCaptureOutput *)captureOutput didOutputMetadataObjects:(NSArray *)metadataObjects fromConnection:(AVCaptureConnection *)connection{
+- (void)captureOutput:(AVCaptureOutput *)captureOutput didOutputMetadataObjects:(NSArray *)metadataObjects fromConnection:(AVCaptureConnection *)connection {
+    if (fromGallery) {
+        return;
+    }
     for (AVMetadataMachineReadableCodeObject *o in metadataObjects) {
-        if ([o.type isEqual:AVMetadataObjectTypeQRCode]){
-            NSString* result = o.stringValue;
-            if(result && ![StringUtil compareString:result compare:_lastResult] && self.scanDelegate && [self.scanDelegate respondsToSelector:@selector(handleResult:byReader:)]){
+        if ([o.type isEqual:AVMetadataObjectTypeQRCode]) {
+            NSString *result = o.stringValue;
+            if (result && ![StringUtil compareString:result compare:_lastResult] && self.scanDelegate && [self.scanDelegate respondsToSelector:@selector(handleResult:byReader:)]) {
                 [self.scanDelegate handleResult:result byReader:self];
             }
             _lastResult = result;
@@ -146,25 +152,25 @@
     }
 }
 
--(BOOL)prefersStatusBarHidden{
+- (BOOL)prefersStatusBarHidden {
     return YES;
 }
 
--(void)setScanTitle:(NSString *)scanTitle{
+- (void)setScanTitle:(NSString *)scanTitle {
     _scanTitle = scanTitle;
     [self updateOverlay];
 }
 
--(NSString*)scanTitle{
+- (NSString *)scanTitle {
     return _scanTitle;
 }
 
--(void)setScanMessage:(NSString *)scanMessage{
+- (void)setScanMessage:(NSString *)scanMessage {
     _scanMessage = scanMessage;
     [self updateOverlay];
 }
 
--(NSString*)scanMessage{
+- (NSString *)scanMessage {
     return _scanMessage;
 }
 
@@ -186,22 +192,22 @@
 #define kMessageBreathDuration (1)
 #define kMessageBreathScale (0.96f)
 
-@implementation ScanQrCodeViewController(CameraOverlay)
+@implementation ScanQrCodeViewController (CameraOverlay)
 
--(void)configureCameraOverlay{
-    self.cameraOverlayView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
+- (void)configureCameraOverlay {
+    self.cameraOverlayView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
     self.cameraOverlayView.backgroundColor = [UIColor clearColor];
     self.cameraOverlayView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
     [self.view addSubview:self.cameraOverlayView];
-    
-    UIButton *btnCancel = [[UIButton alloc]initWithFrame:CGRectMake(kCancelButtonOffset, kCancelButtonOffset, kCancelButtonWidth, kCancelButtonHeight)];
+
+    UIButton *btnCancel = [[UIButton alloc] initWithFrame:CGRectMake(kCancelButtonOffset, kCancelButtonOffset, kCancelButtonWidth, kCancelButtonHeight)];
     btnCancel.autoresizingMask = UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleRightMargin;
     [btnCancel addTarget:self action:@selector(cancelClick:) forControlEvents:UIControlEventTouchUpInside];
     [btnCancel setImage:[UIImage imageNamed:@"scan_cancel"] forState:UIControlStateNormal];
     [btnCancel setImage:[UIImage imageNamed:@"scan_cancel_pressed"] forState:UIControlStateHighlighted];
     [self.cameraOverlayView addSubview:btnCancel];
-    
-    UIButton *btnFlash = [[UIButton alloc]initWithFrame:CGRectMake(self.view.frame.size.width - kCancelButtonWidth - kCancelButtonOffset, kCancelButtonOffset, kCancelButtonWidth, kCancelButtonHeight)];
+
+    UIButton *btnFlash = [[UIButton alloc] initWithFrame:CGRectMake(self.view.frame.size.width - kCancelButtonWidth - kCancelButtonOffset, kCancelButtonOffset, kCancelButtonWidth, kCancelButtonHeight)];
     btnFlash.autoresizingMask = UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleLeftMargin;
     [btnFlash addTarget:self action:@selector(flashClick:) forControlEvents:UIControlEventTouchUpInside];
     [btnFlash setImage:[UIImage imageNamed:@"flash_on"] forState:UIControlStateSelected];
@@ -209,8 +215,16 @@
     [btnFlash setBackgroundImage:[UIImage imageNamed:@"scan_overlay_button"] forState:UIControlStateNormal];
     [btnFlash setBackgroundImage:[UIImage imageNamed:@"scan_overlay_button_pressed"] forState:UIControlStateHighlighted];
     [self.cameraOverlayView addSubview:btnFlash];
-    
-    self.lblTitle = [[UILabel alloc]initWithFrame:CGRectMake(kHorizontalMargin, kTitleFromTop, self.cameraOverlayView.frame.size.width - 2 * kHorizontalMargin, 0)];
+
+    UIImage *galleryImage = [UIImage imageNamed:@"scan_from_gallery"];
+    self.btnGallery = [[UIButton alloc] initWithFrame:CGRectMake(kCancelButtonOffset, self.cameraOverlayView.frame.size.height - kCancelButtonOffset - galleryImage.size.height, galleryImage.size.width, galleryImage.size.height)];
+    [self.btnGallery setImage:galleryImage forState:UIControlStateNormal];
+    self.btnGallery.autoresizingMask = UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleRightMargin;
+    [self.btnGallery addTarget:self action:@selector(fromGalleryClick:) forControlEvents:UIControlEventTouchUpInside];
+    self.btnGallery.hidden = [[UIDevice currentDevice].systemVersion floatValue] < 8;
+    [self.cameraOverlayView addSubview:self.btnGallery];
+
+    self.lblTitle = [[UILabel alloc] initWithFrame:CGRectMake(kHorizontalMargin, kTitleFromTop, self.cameraOverlayView.frame.size.width - 2 * kHorizontalMargin, 0)];
     self.lblTitle.font = [UIFont boldSystemFontOfSize:kTitleFontSize];
     self.lblTitle.textColor = [UIColor colorWithWhite:1 alpha:kTitleAlpha];
     self.lblTitle.backgroundColor = [UIColor clearColor];
@@ -220,8 +234,8 @@
     self.lblTitle.shadowColor = [UIColor colorWithWhite:0 alpha:0.9];
     self.lblTitle.shadowOffset = CGSizeMake(1, 1);
     [self.cameraOverlayView addSubview:self.lblTitle];
-    
-    self.lblMessage = [[UILabel alloc]initWithFrame:CGRectMake(kHorizontalMargin, self.cameraOverlayView.frame.size.height - kMessageFromBottom, self.view.frame.size.width - 2 * kHorizontalMargin, 0)];
+
+    self.lblMessage = [[UILabel alloc] initWithFrame:CGRectMake(kHorizontalMargin, self.cameraOverlayView.frame.size.height - kMessageFromBottom, self.view.frame.size.width - 2 * kHorizontalMargin, 0)];
     self.lblMessage.font = [UIFont systemFontOfSize:kMessageFontSize];
     self.lblMessage.textColor = [UIColor colorWithWhite:1 alpha:kMessageAlpha];
     self.lblMessage.backgroundColor = [UIColor clearColor];
@@ -234,54 +248,54 @@
     [self updateOverlay];
 }
 
--(void)messageBreath{
+- (void)messageBreath {
     [UIView animateWithDuration:kMessageBreathDuration animations:^{
-        if(CGAffineTransformEqualToTransform(self.lblMessage.transform, CGAffineTransformIdentity)){
+        if (CGAffineTransformEqualToTransform(self.lblMessage.transform, CGAffineTransformIdentity)) {
             self.lblMessage.transform = CGAffineTransformMakeScale(kMessageBreathScale, kMessageBreathScale);
-        }else{
-            self.lblMessage.transform =  CGAffineTransformIdentity;
+        } else {
+            self.lblMessage.transform = CGAffineTransformIdentity;
         }
-    } completion:^(BOOL finished) {
-        if(finished){
+    }                completion:^(BOOL finished) {
+        if (finished) {
             [self messageBreath];
         }
     }];
 }
 
--(void)updateOverlay{
-    if(self.lblTitle){
-        if([StringUtil isEmpty:self.scanTitle]){
+- (void)updateOverlay {
+    if (self.lblTitle) {
+        if ([StringUtil isEmpty:self.scanTitle]) {
             self.lblTitle.text = @"";
-        }else{
+        } else {
             self.lblTitle.text = self.scanTitle;
             [self configureLabel:self.lblTitle aroundLine:kTitleFromTop];
         }
     }
-    if(self.lblMessage){
-        if([StringUtil isEmpty:self.scanMessage]){
+    if (self.lblMessage) {
+        if ([StringUtil isEmpty:self.scanMessage]) {
             self.lblMessage.text = @"";
-        }else{
+        } else {
             self.lblMessage.text = self.scanMessage;
             [self configureLabel:self.lblMessage aroundLine:self.cameraOverlayView.frame.size.height - kMessageFromBottom];
         }
     }
 }
 
--(void)configureLabel:(UILabel*)lbl aroundLine:(CGFloat)top{
-    CGFloat height = [lbl.text boundingRectWithSize:CGSizeMake(lbl.frame.size.width, CGFLOAT_MAX) options:NSStringDrawingUsesLineFragmentOrigin|NSStringDrawingUsesFontLeading attributes:@{NSFontAttributeName: lbl.font, NSParagraphStyleAttributeName:[NSParagraphStyle defaultParagraphStyle]} context:nil].size.height;
+- (void)configureLabel:(UILabel *)lbl aroundLine:(CGFloat)top {
+    CGFloat height = [lbl.text boundingRectWithSize:CGSizeMake(lbl.frame.size.width, CGFLOAT_MAX) options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading attributes:@{NSFontAttributeName : lbl.font, NSParagraphStyleAttributeName : [NSParagraphStyle defaultParagraphStyle]} context:nil].size.height;
     height = ceilf(height);
     lbl.frame = CGRectMake(lbl.frame.origin.x, top - height / 2, lbl.frame.size.width, height);
 }
 
--(void)cancelClick:(id)sender{
+- (void)cancelClick:(id)sender {
     [self dismissViewControllerAnimated:YES completion:^{
-        if(self.scanDelegate && [self.scanDelegate respondsToSelector:@selector(handleScanCancelByReader:)]){
+        if (self.scanDelegate && [self.scanDelegate respondsToSelector:@selector(handleScanCancelByReader:)]) {
             [self.scanDelegate handleScanCancelByReader:self];
         }
     }];
 }
 
--(void)flashClick:(UIButton*)sender{
+- (void)flashClick:(UIButton *)sender {
     sender.selected = !sender.selected;
     NSError *error = nil;
     AVCaptureDevice *device = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
@@ -291,6 +305,51 @@
     }
 }
 
+- (void)fromGalleryClick:(UIButton *)sender {
+    UIImagePickerController *picker = [[UIImagePickerController alloc] init];
+    picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+    picker.delegate = self;
+    picker.shouldSwipeRightToPop = NO;
+    fromGallery = YES;
+    [self presentViewController:picker animated:YES completion:nil];
+}
+
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
+    __block DialogProgress *dp = [[DialogProgress alloc] initWithMessage:NSLocalizedString(@"Please wait…", nil)];
+    [dp showInWindow:picker.view.window completion:^{
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+            NSString *result = nil;
+            UIImage *img = [info objectForKey:UIImagePickerControllerOriginalImage];
+            if (img) {
+                CIDetector *detector = [CIDetector detectorOfType:@"CIDetectorTypeQRCode" context:nil options:@{CIDetectorAccuracy : CIDetectorAccuracyHigh}];
+                NSArray *features = [detector featuresInImage:[[CIImage alloc] initWithImage:img]];
+                if (features && features.count > 0) {
+                    CIQRCodeFeature *qr = features[0];
+                    result = qr.messageString;
+                }
+            }
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [dp dismissWithCompletion:^{
+                    if (!result) {
+                        fromGallery = NO;
+                        [picker dismissViewControllerAnimated:YES completion:^{
+                            [self showBannerWithMessage:NSLocalizedString(@"scan_qr_code_from_photo_wrong", nil) belowView:nil belowTop:0 autoHideIn:1 withCompletion:nil];
+                        }];
+                    } else {
+                        if (self.scanDelegate && [self.scanDelegate respondsToSelector:@selector(handleResult:byReader:)]) {
+                            [self.scanDelegate handleResult:result byReader:self];
+                        }
+                    }
+                }];
+            });
+        });
+    }];
+}
+
+- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
+    fromGallery = NO;
+    [picker dismissViewControllerAnimated:YES completion:nil];
+}
 @end
 
 
@@ -298,10 +357,10 @@
 #define kShakeDuration (0.04f)
 #define kShakeWaveSize (5)
 
-@implementation ScanQrCodeViewController(Functions)
+@implementation ScanQrCodeViewController (Functions)
 
 
--(void)vibrate{
+- (void)vibrate {
     AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
     [self.lblMessage.layer removeAllAnimations];
     [self.lblMessage shakeTime:kShakeTime interval:kShakeDuration length:kShakeWaveSize completion:^{
@@ -309,7 +368,7 @@
     }];
 }
 
--(void)playSuccessSound{
+- (void)playSuccessSound {
     [PlaySoundUtil playSound:@"qr_code_scanned" callback:nil];
 }
 

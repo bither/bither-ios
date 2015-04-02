@@ -17,7 +17,6 @@
 //  limitations under the License.
 
 #import "CacheUtil.h"
-#import "FileUtil.h"
 
 #define BITHER_BACKUP_SDCARD_DIR @"BitherBackup"
 #define BITHER_BACKUP_ROM_DIR @"backup"
@@ -47,21 +46,39 @@
 
 @implementation CacheUtil
 + (NSString *)getExchangeFile {
-    NSString *cacheDir = [FileUtil cachePathForFileName:@""];
+    NSString *cacheDir = [CacheUtil cachePathForFileName:@""];
     return [cacheDir stringByAppendingPathComponent:EXCHANGERATE];
 }
 
 + (NSString *)getCurrenciesRateFile; {
-    NSString *cacheDir = [FileUtil cachePathForFileName:@""];
+    NSString *cacheDir = [CacheUtil cachePathForFileName:@""];
     return [cacheDir stringByAppendingPathComponent:CURRENCIES_RATE];
 }
 
 + (NSString *)getTickerFile {
-    NSString *marketDir = [FileUtil cachePathForFileName:MARKET_CAHER];
-    if (![FileUtil fileExists:marketDir]) {
-        [FileUtil createDirectory:marketDir];
+    NSFileManager* fileManager = [NSFileManager defaultManager];
+    NSString *marketDir = [CacheUtil cachePathForFileName:MARKET_CAHER];
+    if (![fileManager fileExistsAtPath:marketDir]) {
+        BOOL fileExists=[fileManager fileExistsAtPath:marketDir];
+        if(!fileExists){
+            [fileManager createDirectoryAtPath:marketDir withIntermediateDirectories:YES attributes:nil error:nil];
+        }
     }
     return [marketDir stringByAppendingPathComponent:EXCAHNGE_TICKER_NAME];
 }
 
++(void)writeFile:(NSString *)fileName content:(NSString *)content {
+    [content writeToFile:fileName atomically:YES encoding:NSUTF8StringEncoding error:nil];
+}
+
++(NSString*)readFile:(NSString*)fileName{
+    NSData * data=[NSData dataWithContentsOfFile:[CacheUtil getTickerFile]];
+    return [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+}
+
++(NSString *)cachePathForFileName:(NSString *)fileName{
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
+    NSString *documentsPath = [paths objectAtIndex:0];
+    return [documentsPath stringByAppendingPathComponent:fileName];
+}
 @end

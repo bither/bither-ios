@@ -1,0 +1,66 @@
+//
+//  WatchMarket.h
+//  bither-ios
+//
+//  Copyright 2014 http://Bither.net
+//
+//  Licensed under the Apache License, Version 2.0 (the "License");
+//  you may not use this file except in compliance with the License.
+//  You may obtain a copy of the License at
+//
+//    http://www.apache.org/licenses/LICENSE-2.0
+//
+//  Unless required by applicable law or agreed to in writing, software
+//  distributed under the License is distributed on an "AS IS" BASIS,
+//  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+//  See the License for the specific language governing permissions and
+//  limitations under the License.
+//
+//  Created by songchenwen on 2015/2/27.
+//
+
+#import <Foundation/Foundation.h>
+#import <WatchKit/WatchKit.h>
+#import "GroupFileUtil.h"
+#import "GroupUserDefaultUtil.h"
+
+@interface Ticker : NSObject
+@property (nonatomic,readwrite) double amount;
+@property (nonatomic,readwrite) double level;
+@property (nonatomic,readwrite) double high;
+@property (nonatomic,readwrite) double low;
+@property (nonatomic,readwrite) double pNew;
+@property (nonatomic,readwrite) double amp;
+@property (nonatomic,readwrite) double open;
+@property (nonatomic,readwrite) double sell;
+@property (nonatomic,readwrite) double buy;
+@property (nonatomic,readwrite) double total;
+@property (nonatomic,strong) NSDate *date;
+@property (nonatomic,readwrite) GroupMarketType marketType;
+
+-(double)getDefaultExchangeHigh;
+-(double)getDefaultExchangeLow;
+-(double)getDefaultExchangePrice;
+-(double)getDefaultExchangeSell;
+-(double)getDefaultExchangeBuy;
+
++(Ticker *)formatTicker:(NSDictionary *)dict market:(GroupMarketType) marketType;
++(NSArray *)formatList:(NSDictionary * )dict;
+
+@end
+
+@interface WatchMarket : NSObject
+@property (nonatomic, readonly) Ticker * ticker;
+@property (readonly) UIColor* color;
+@property (nonatomic,readwrite) GroupMarketType marketType;
+
+-(NSString *)getName;
+
+
++(NSArray *)getMarkets;
++(WatchMarket *)getDefaultMarket;
+
++ (NSDictionary *)parseCurrenciesRate:(NSDictionary *)dict;
++ (double)getRateForMarket:(GroupMarketType)marketType;
++ (NSString *)getCurrencySymbol:(GroupCurrency)currency;
+@end

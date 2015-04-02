@@ -23,6 +23,7 @@
 
 @property (strong, nonatomic) NSString *scanTitle;
 @property (strong, nonatomic) NSString *scanMessage;
+@property UIButton* btnGallery;
 
 @end
 

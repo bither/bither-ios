@@ -53,7 +53,7 @@ static Setting* SignTransactionSetting;
         signController.tx = tx;
         [self.controller.navigationController pushViewController:signController animated:NO];
     }
-    [reader dismissViewControllerAnimated:YES completion:^{
+    [reader.presentingViewController dismissViewControllerAnimated:YES completion:^{
         if(!tx){
             if([self.controller respondsToSelector:@selector(showMsg:)]){
                 [self.controller performSelector:@selector(showMsg:) withObject:NSLocalizedString(@"Scan unsigned transaction failed", nil)];

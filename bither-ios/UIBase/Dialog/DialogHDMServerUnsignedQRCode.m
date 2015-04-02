@@ -44,7 +44,7 @@
     btn = [UIButton buttonWithType:UIButtonTypeCustom];
     [btn setBackgroundImage:[UIImage imageNamed:@"dialog_btn_bg_normal"] forState:UIControlStateNormal];
     btn.adjustsImageWhenHighlighted = YES;
-    [btn setTitle:NSLocalizedString(@"hdm_keychain_add_unsigned_server_qr_code_title", nil) forState:UIControlStateNormal];
+    [btn setTitle:NSLocalizedString(@"hdm_keychain_add_scan_signed_server_qr_code_action", nil) forState:UIControlStateNormal];
     btn.titleLabel.font = [UIFont systemFontOfSize:kDialogAlertButtonFontSize];
     [btn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     CGFloat btnWidth = [btn sizeThatFits:CGSizeMake(CGFLOAT_MAX, kButtonHeight)].width;

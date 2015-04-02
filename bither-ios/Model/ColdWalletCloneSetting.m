@@ -46,7 +46,7 @@ static Setting* CloneQrSetting;
 }
 
 -(void)handleResult:(NSString *)result byReader:(ScanQrCodeViewController *)reader{
-    [reader dismissViewControllerAnimated:YES completion:^{
+    [reader.presentingViewController dismissViewControllerAnimated:YES completion:^{
         if([BTQRCodeUtil splitQRCode:result].count % 3 == 0){
             self.scanContent = result;
             DialogPassword *dialog = [[DialogPassword alloc]initWithDelegate:self];

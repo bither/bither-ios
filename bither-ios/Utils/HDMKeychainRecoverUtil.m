@@ -202,7 +202,7 @@
     if([BTUtils isEmpty:result]){
         return;
     }
-    [reader dismissViewControllerAnimated:YES completion:^{
+    [reader.presentingViewController dismissViewControllerAnimated:YES completion:^{
         if(afterQRScanSelector && [self respondsToSelector:afterQRScanSelector]){
             [self performSelector:afterQRScanSelector withObject:result];
         }

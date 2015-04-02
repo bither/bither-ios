@@ -69,7 +69,7 @@
 }
 
 - (void)handleResult:(NSString *)result byReader:(ScanQrCodeViewController *)reader {
-    [reader dismissViewControllerAnimated:YES completion:^{
+    [self dismissViewControllerAnimated:YES completion:^{
         NSData* pub = [result hexToData];
         if(!pub){
             [self showMsg:NSLocalizedString(@"hdm_address_add_need_cold_pub", nil)];

@@ -289,7 +289,7 @@
         [reader vibrate];
         if (isValidBitcoinAddress) {
             self.tfAddress.text = result;
-            [reader dismissViewControllerAnimated:YES completion:^{
+            [reader.presentingViewController dismissViewControllerAnimated:YES completion:^{
                 [self check];
                 [self.amtLink becomeFirstResponder];
             }];
@@ -301,7 +301,7 @@
                 self.amtLink.amount = amt;
             }
 
-            [reader dismissViewControllerAnimated:YES completion:^{
+            [reader.presentingViewController dismissViewControllerAnimated:YES completion:^{
                 [self check];
                 if (amt != -1) {
                     [self.tfPassword becomeFirstResponder];
@@ -497,7 +497,7 @@
 }
 
 - (void)handleResult:(NSString *)result byReader:(ScanQrCodeViewController *)reader {
-    [reader dismissViewControllerAnimated:YES completion:^{
+    [reader.presentingViewController dismissViewControllerAnimated:YES completion:^{
         [_dp showInWindow:_controller.view.window completion:^{
             NSArray *strs = [BTQRCodeUtil splitQRCode:result];
             NSMutableArray *signatures = [[NSMutableArray alloc] init];

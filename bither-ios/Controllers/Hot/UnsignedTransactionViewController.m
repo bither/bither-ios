@@ -245,7 +245,7 @@
         if(isValidBitcoinAddress||isValidBitcoinBIP21Address){
             [reader playSuccessSound];
             [reader vibrate];
-            [reader dismissViewControllerAnimated:YES completion:^{
+            [reader.presentingViewController dismissViewControllerAnimated:YES completion:^{
                 if (isValidBitcoinAddress) {
                     self.tfAddress.text = result;
                     [self.amtLink becomeFirstResponder];
@@ -265,7 +265,7 @@
             [reader vibrate];
         }
     }else{
-        [reader dismissViewControllerAnimated:YES completion:^{
+        [reader.presentingViewController dismissViewControllerAnimated:YES completion:^{
             self.btnSend.enabled = NO;
             NSArray *strs =[BTQRCodeUtil splitQRCode:result];
             NSMutableArray *sigs = [[NSMutableArray alloc]init];

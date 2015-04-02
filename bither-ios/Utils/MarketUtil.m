@@ -18,7 +18,6 @@
 
 #import "MarketUtil.h"
 #import <Bitheri/BTUtils.h>
-#import "CacheUtil.h"
 #import "NSDictionary+Fromat.h"
 #import "ExchangeUtil.h"
 

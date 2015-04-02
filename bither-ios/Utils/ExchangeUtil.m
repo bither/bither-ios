@@ -17,11 +17,11 @@
 //  limitations under the License.
 
 #import "ExchangeUtil.h"
-#import "CacheUtil.h"
 #import "FileUtil.h"
 #import "BTUtils.h"
 #import "StringUtil.h"
 #import "UserDefaultsUtil.h"
+#import "GroupFileUtil.h"
 
 //static double rate = -1;
 static NSDictionary *_currenciesRate = nil;
@@ -50,12 +50,12 @@ static NSDictionary *_currenciesRate = nil;
 
 + (void)setCurrenciesRate:(NSDictionary *)currenciesRate; {
     _currenciesRate = [self parseCurrenciesRate:currenciesRate];
-    [BTUtils writeFile:[CacheUtil getCurrenciesRateFile] content:[currenciesRate jsonEncodedKeyValueString]];
+    [GroupFileUtil setCurrencyRate:[currenciesRate jsonEncodedKeyValueString]];
 }
 
 + (NSDictionary *)getCurrenciesRate; {
     if (_currenciesRate == nil) {
-        NSString *currenciesRateStr = [BTUtils readFile:[CacheUtil getCurrenciesRateFile]];
+        NSString *currenciesRateStr = [GroupFileUtil getCurrencyRate];
         if (currenciesRateStr == nil || currenciesRateStr.length == 0) {
             _currenciesRate = nil;
         } else {

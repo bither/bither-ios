@@ -54,6 +54,9 @@
 +(void)notification:(NSString *)msg dict:(NSDictionary * )dict{
     
     UILocalNotification *notification=[[UILocalNotification alloc] init];
+    if ([notification respondsToSelector:@selector(setCategory:)]) {
+        notification.category = @"Transaction";
+    }
     if (notification!=nil) {
         notification.fireDate=[NSDate new];
         notification.repeatInterval=0;

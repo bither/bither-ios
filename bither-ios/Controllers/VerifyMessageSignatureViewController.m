@@ -13,7 +13,7 @@
 #import "KeyboardController.h"
 #import "BTPrivateKeyUtil.h"
 
-@interface VerifyMessageSignatureViewController ()<UITextViewDelegate, UITextFieldDelegate, ScanQrCodeDelegate, KeyboardControllerDelegate>{
+@interface VerifyMessageSignatureViewController ()<UITextViewDelegate, UITextFieldDelegate, ScanQrCodeDelegate, KeyboardControllerDelegate, UIScrollViewDelegate>{
     NSObject<UITextInput>* _qrWaitingInput;
     CGFloat _tvMinHeight;
 }
@@ -40,6 +40,7 @@
     self.tfAddress.delegate = self;
     self.tvMessage.delegate = self;
     self.tvSignature.delegate = self;
+    self.sv.delegate = self;
     _tvMinHeight = MIN(self.tvMessage.frame.size.height, self.tvSignature.frame.size.height);
     [self textViewDidChange:self.tvMessage];
     [self.tfAddress becomeFirstResponder];
@@ -179,6 +180,10 @@
     [self presentViewController:[[ScanQrCodeViewController alloc] initWithDelegate:self] animated:YES completion:nil];
 }
 
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView{
+    [self.view endEditing:YES];
+}
+
 -(void)handleResult:(NSString*)result byReader:(ScanQrCodeViewController*)reader{
     if([StringUtil isEmpty:result]){
         return;
@@ -195,7 +200,7 @@
         }
     }
     _qrWaitingInput = nil;
-    [reader dismissViewControllerAnimated:YES completion:nil];
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 @end

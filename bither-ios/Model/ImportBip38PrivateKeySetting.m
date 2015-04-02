@@ -90,7 +90,7 @@ static Setting* importPrivateKeySetting;
         _result=result;
         [reader playSuccessSound];
         [reader vibrate];
-        [reader dismissViewControllerAnimated:YES completion:^{
+        [reader.presentingViewController dismissViewControllerAnimated:YES completion:^{
             DialogPassword *dialog = [[DialogPassword alloc]initWithDelegate:self];
             [dialog showInWindow:self.controller.view.window];
             

@@ -23,7 +23,7 @@
 #import "MarketUtil.h"
 #import "BitherSetting.h"
 #import "BTUtils.h"
-#import "CacheUtil.h"
+#import "GroupFileUtil.h"
 
 static BitherApi *piApi;
 
@@ -131,7 +131,7 @@ static BitherApi *piApi;
     [self get:BITHER_EXCHANGE_TICKER withParams:nil networkType:BitherStats completed:^(MKNetworkOperation *completedOperation) {
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
             if (![StringUtil isEmpty:completedOperation.responseString]) {
-                [BTUtils writeFile:[CacheUtil getTickerFile] content:completedOperation.responseString];
+                [GroupFileUtil setTicker:completedOperation.responseString];
                 NSDictionary *dict = completedOperation.responseJSON;
                 [MarketUtil handlerResult:dict];
 

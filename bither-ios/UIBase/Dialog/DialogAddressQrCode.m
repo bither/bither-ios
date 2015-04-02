@@ -178,7 +178,7 @@
 }
 
 -(UIImage*)currentQrCode{
-    UIView *v = [self.sv.subviews objectAtIndex:[self currentIndex]];
+    UIView *v = [self.sv.subviews objectAtIndex:[self currentIndex] * 2];
     if([v isKindOfClass:[UIImageView class]]){
         UIImageView* iv = (UIImageView*)v;
         return iv.image;

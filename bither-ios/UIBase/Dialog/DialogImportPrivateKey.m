@@ -264,7 +264,7 @@
 }
 
 -(void)handleResult:(NSString*)result byReader:(ScanQrCodeViewController*)reader{
-    [reader dismissViewControllerAnimated:YES completion:^{
+    [reader.presentingViewController dismissViewControllerAnimated:YES completion:^{
         if(result.isValidBitcoinPrivateKey){
             self.tfKey.text = result;
         }
