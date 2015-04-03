@@ -28,7 +28,7 @@
 		<string>UIInterfaceOrientationPortraitUpsideDown</string>
 	</array>
 	<key>WKCompanionAppBundleIdentifier</key>
-	<string>net.bither</string>
+	<string>net.bither.ent</string>
 	<key>WKWatchKitApp</key>
 	<true/>
 </dict>
