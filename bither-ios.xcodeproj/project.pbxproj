@@ -2036,7 +2036,7 @@
 				TargetAttributes = {
 					0A47496E1A9D7F0B003684E2 = {
 						CreatedOnToolsVersion = 6.3;
-						DevelopmentTeam = 6887Q2ZK67;
+						DevelopmentTeam = 3X35C63XX6;
 						SystemCapabilities = {
 							com.apple.ApplicationGroups.iOS = {
 								enabled = 1;
@@ -2045,10 +2045,10 @@
 					};
 					0A4749801A9D7F0B003684E2 = {
 						CreatedOnToolsVersion = 6.3;
-						DevelopmentTeam = 6887Q2ZK67;
+						DevelopmentTeam = 3X35C63XX6;
 					};
 					42D9B760193D6B5B00C85B89 = {
-						DevelopmentTeam = 6887Q2ZK67;
+						DevelopmentTeam = 3X35C63XX6;
 						SystemCapabilities = {
 							com.apple.ApplicationGroups.iOS = {
 								enabled = 1;
@@ -2793,7 +2793,7 @@
 					"$(PROJECT_DIR)/Pods/build/Debug-iphoneos",
 				);
 				MTL_ENABLE_DEBUG_INFO = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = net.bither.watchkitextension;
+				PRODUCT_BUNDLE_IDENTIFIER = net.bither.ent.watchkitextension;
 				PRODUCT_NAME = "${TARGET_NAME}";
 				SKIP_INSTALL = YES;
 			};
@@ -2817,7 +2817,7 @@
 					"$(PROJECT_DIR)/Pods/build/Debug-iphoneos",
 				);
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_BUNDLE_IDENTIFIER = net.bither.watchkitextension;
+				PRODUCT_BUNDLE_IDENTIFIER = net.bither.ent.watchkitextension;
 				PRODUCT_NAME = "${TARGET_NAME}";
 				SKIP_INSTALL = YES;
 			};
@@ -2840,7 +2840,7 @@
 				INFOPLIST_FILE = "bither-ios WatchKit App/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
 				MTL_ENABLE_DEBUG_INFO = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = net.bither.watchkitapp;
+				PRODUCT_BUNDLE_IDENTIFIER = net.bither.ent.watchkitapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = 4;
@@ -2862,7 +2862,7 @@
 				INFOPLIST_FILE = "bither-ios WatchKit App/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_BUNDLE_IDENTIFIER = net.bither.watchkitapp;
+				PRODUCT_BUNDLE_IDENTIFIER = net.bither.ent.watchkitapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = 4;
@@ -2958,7 +2958,7 @@
 				GCC_PREFIX_HEADER = "bither-ios/bither-ios-Prefix.pch";
 				INFOPLIST_FILE = "bither-ios/bither-ios-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
-				PRODUCT_BUNDLE_IDENTIFIER = net.bither;
+				PRODUCT_BUNDLE_IDENTIFIER = net.bither.ent;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = 1;
 				USER_HEADER_SEARCH_PATHS = "${SRCROOT}/**";
@@ -2981,7 +2981,7 @@
 				GCC_PREFIX_HEADER = "bither-ios/bither-ios-Prefix.pch";
 				INFOPLIST_FILE = "bither-ios/bither-ios-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
-				PRODUCT_BUNDLE_IDENTIFIER = net.bither;
+				PRODUCT_BUNDLE_IDENTIFIER = net.bither.ent;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = 1;
 				USER_HEADER_SEARCH_PATHS = "${SRCROOT}/**";
