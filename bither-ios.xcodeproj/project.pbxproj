@@ -2367,7 +2367,7 @@
 				);
 				IBSC_MODULE = bither_ios_WatchKit_Extension;
 				INFOPLIST_FILE = "bither-ios WatchKit App/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
@@ -2390,7 +2390,7 @@
 				GCC_NO_COMMON_BLOCKS = YES;
 				IBSC_MODULE = bither_ios_WatchKit_Extension;
 				INFOPLIST_FILE = "bither-ios WatchKit App/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
