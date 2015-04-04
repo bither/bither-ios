@@ -1,5 +1,6 @@
 /* Localized versions of Info.plist keys */
 
 {
-	CFBundleDisplayName = "比太";
+    CFBundleDisplayName = "比太";
+    CFBundleName = "比太";
 }

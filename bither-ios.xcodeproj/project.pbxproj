@@ -12,6 +12,7 @@
 		0A4182A31A9DB70500576A12 /* WatchUnitUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A4182A21A9DB70500576A12 /* WatchUnitUtil.m */; };
 		0A4182AE1A9DBB8600576A12 /* WatchStringUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A4182AD1A9DBB8600576A12 /* WatchStringUtil.m */; };
 		0A42062A1A494F1000562100 /* SignMessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A4206291A494F1000562100 /* SignMessageViewController.m */; };
+		0A4279471ACF74C300429EB2 /* infoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0A4279491ACF74C300429EB2 /* infoPlist.strings */; };
 		0A43F4401A81C6BF008171DB /* HdmSendViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A43F43F1A81C6BF008171DB /* HdmSendViewController.m */; };
 		0A446C151A441393000CD25A /* DialogNetworkMonitorOption.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A446C141A441393000CD25A /* DialogNetworkMonitorOption.m */; };
 		0A4749761A9D7F0B003684E2 /* InterfaceController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A4749751A9D7F0B003684E2 /* InterfaceController.m */; };
@@ -44,6 +45,7 @@
 		0A948DCA1AA080E600359F64 /* MarketInterfaceController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A948DC91AA080E600359F64 /* MarketInterfaceController.m */; };
 		0AB63CB81ABD15C80018A546 /* RawPrivateKeyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AB63CB71ABD15C80018A546 /* RawPrivateKeyViewController.m */; };
 		0AB63CBD1ABD1C700018A546 /* RawPrivateKeyDiceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AB63CBC1ABD1C700018A546 /* RawPrivateKeyDiceViewController.m */; };
+		0AB7226F1ACF6F4500D4B4FB /* infoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0AB722711ACF6F4500D4B4FB /* infoPlist.strings */; };
 		0AB8BC9A1A7F3194003C07D8 /* HotAddressAddHDMViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AB8BC991A7F3194003C07D8 /* HotAddressAddHDMViewController.m */; };
 		0AB8BCA51A7F445D003C07D8 /* DialogHDMKeychainAddHot.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AB8BCA41A7F445D003C07D8 /* DialogHDMKeychainAddHot.m */; };
 		0AB8BCAB1A7F6DEE003C07D8 /* DialogHDMServerUnsignedQRCode.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AB8BCAA1A7F6DEE003C07D8 /* DialogHDMServerUnsignedQRCode.m */; };
@@ -339,6 +341,9 @@
 		0A4182AD1A9DBB8600576A12 /* WatchStringUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WatchStringUtil.m; sourceTree = "<group>"; };
 		0A4206281A494F1000562100 /* SignMessageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignMessageViewController.h; sourceTree = "<group>"; };
 		0A4206291A494F1000562100 /* SignMessageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignMessageViewController.m; sourceTree = "<group>"; };
+		0A4279481ACF74C300429EB2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/infoPlist.strings; sourceTree = "<group>"; };
+		0A42794A1ACF74C400429EB2 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/infoPlist.strings"; sourceTree = "<group>"; };
+		0A42794B1ACF74C500429EB2 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/infoPlist.strings"; sourceTree = "<group>"; };
 		0A43F43E1A81C6BF008171DB /* HdmSendViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HdmSendViewController.h; sourceTree = "<group>"; };
 		0A43F43F1A81C6BF008171DB /* HdmSendViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HdmSendViewController.m; sourceTree = "<group>"; };
 		0A446C131A441393000CD25A /* DialogNetworkMonitorOption.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DialogNetworkMonitorOption.h; sourceTree = "<group>"; };
@@ -392,6 +397,9 @@
 		0AB63CB71ABD15C80018A546 /* RawPrivateKeyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RawPrivateKeyViewController.m; sourceTree = "<group>"; };
 		0AB63CBB1ABD1C700018A546 /* RawPrivateKeyDiceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RawPrivateKeyDiceViewController.h; sourceTree = "<group>"; };
 		0AB63CBC1ABD1C700018A546 /* RawPrivateKeyDiceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RawPrivateKeyDiceViewController.m; sourceTree = "<group>"; };
+		0AB722701ACF6F4500D4B4FB /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/infoPlist.strings; sourceTree = "<group>"; };
+		0AB722721ACF6F4700D4B4FB /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/infoPlist.strings"; sourceTree = "<group>"; };
+		0AB722731ACF6F4800D4B4FB /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/infoPlist.strings"; sourceTree = "<group>"; };
 		0AB8BC981A7F3194003C07D8 /* HotAddressAddHDMViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HotAddressAddHDMViewController.h; sourceTree = "<group>"; };
 		0AB8BC991A7F3194003C07D8 /* HotAddressAddHDMViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HotAddressAddHDMViewController.m; sourceTree = "<group>"; };
 		0AB8BCA31A7F445D003C07D8 /* DialogHDMKeychainAddHot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DialogHDMKeychainAddHot.h; sourceTree = "<group>"; };
@@ -944,6 +952,7 @@
 				0A4749721A9D7F0B003684E2 /* Info.plist */,
 				0A4749731A9D7F0B003684E2 /* PushNotificationPayload.apns */,
 				0AFBA9411AA02C190059CB4B /* Localizable.strings */,
+				0A4279491ACF74C300429EB2 /* infoPlist.strings */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -962,6 +971,7 @@
 			isa = PBXGroup;
 			children = (
 				0A4749871A9D7F0B003684E2 /* Info.plist */,
+				0AB722711ACF6F4500D4B4FB /* infoPlist.strings */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -1826,6 +1836,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0A4749821A9D7F0B003684E2 /* bither-ios WatchKit App.app in Resources */,
+				0A4279471ACF74C300429EB2 /* infoPlist.strings in Resources */,
 				0AFBA93F1AA02C190059CB4B /* Localizable.strings in Resources */,
 				0A47497E1A9D7F0B003684E2 /* Images.xcassets in Resources */,
 			);
@@ -1837,6 +1848,7 @@
 			files = (
 				0A47498A1A9D7F0B003684E2 /* Interface.storyboard in Resources */,
 				0A47498C1A9D7F0B003684E2 /* Images.xcassets in Resources */,
+				0AB7226F1ACF6F4500D4B4FB /* infoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2199,6 +2211,16 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		0A4279491ACF74C300429EB2 /* infoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				0A4279481ACF74C300429EB2 /* Base */,
+				0A42794A1ACF74C400429EB2 /* zh-Hant */,
+				0A42794B1ACF74C500429EB2 /* zh-Hans */,
+			);
+			name = infoPlist.strings;
+			sourceTree = "<group>";
+		};
 		0A4749881A9D7F0B003684E2 /* Interface.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -2208,6 +2230,16 @@
 				0AFBA93C1AA02B360059CB4B /* zh-Hant */,
 			);
 			name = Interface.storyboard;
+			sourceTree = "<group>";
+		};
+		0AB722711ACF6F4500D4B4FB /* infoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				0AB722701ACF6F4500D4B4FB /* Base */,
+				0AB722721ACF6F4700D4B4FB /* zh-Hans */,
+				0AB722731ACF6F4800D4B4FB /* zh-Hant */,
+			);
+			name = infoPlist.strings;
 			sourceTree = "<group>";
 		};
 		0AFBA9411AA02C190059CB4B /* Localizable.strings */ = {
