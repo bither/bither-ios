@@ -18,6 +18,8 @@
 #import <Foundation/Foundation.h>
 #import "BitherEngine.h"
 
+#define kMKNetworkKitRequestTimeOutInSeconds 10
+
 #define BITHER_GET_COOKIE_URL @"api/v1/cookie"
 #define BITHER_GET_ONE_SPVBLOCK_API @"api/v1/block/spv/one"
 #define BITHER_IN_SIGNATURES_API  @"api/v1/address/%@/insignature/%d"
