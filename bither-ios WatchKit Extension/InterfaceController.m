@@ -25,7 +25,6 @@
 @interface InterfaceController()
 @property (weak, nonatomic) IBOutlet WKInterfaceLabel *lblTotal;
 @property (weak, nonatomic) IBOutlet WKInterfaceGroup *gContainer;
-
 @end
 
 
@@ -33,11 +32,11 @@
 
 - (void)awakeWithContext:(id)context {
     [super awakeWithContext:context];
-    [TotalBalanceDrawer showTotalBalanceOn:self.gContainer andLabel:self.lblTotal];
 }
 
 - (void)willActivate {
     [super willActivate];
+    [TotalBalanceDrawer showTotalBalanceOn:self.gContainer andLabel:self.lblTotal];
 }
 
 - (void)didDeactivate {
