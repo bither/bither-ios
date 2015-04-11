@@ -97,6 +97,8 @@
         if([[BTSettings instance]getAppMode]==HOT && ![[BlockUtil instance]syncSpvFinish]){
             [BlockUtil instance].delegate = self;
             [[BlockUtil instance] syncSpvBlock];
+            self.vHotProgress.hidden = NO;
+            self.vHotRetry.hidden = YES;
             [self showHotWait];
             
         }

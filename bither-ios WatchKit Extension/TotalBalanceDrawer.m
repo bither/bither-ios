@@ -55,7 +55,7 @@
     UIImage* image = [TotalBalanceDrawer imageForTotalBalance:t];
     WKInterfaceDevice *device = [WKInterfaceDevice currentDevice];
     [device addCachedImage:image name:kTotalBalanceCacheImage];
-    dispatch_sync(dispatch_get_main_queue(), ^{
+    dispatch_async(dispatch_get_main_queue(), ^{
         [label setText:[WatchUnitUtil stringForAmount:t.total]];
         [group setBackgroundImageNamed:kTotalBalanceCacheImage];
     });

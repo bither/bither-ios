@@ -45,6 +45,7 @@
     statusBarBg.backgroundColor = [UIColor colorWithRed:56.0/255.0 green:61.0/255.0 blue:64.0/255.0 alpha:1];
     [self.view addSubview:statusBarBg];
     [self.view addSubview:container];
+    container.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     self.vStatusBarBg = statusBarBg;
     self.vContainer = container;
 }
@@ -71,6 +72,7 @@
     [self.vContainer addSubview:controller.view];
     controller.view.clipsToBounds = YES;
     controller.view.frame = CGRectMake(0, 0, self.vContainer.frame.size.width, self.vContainer.frame.size.height);
+    controller.view.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
 }
 
 -(UIStatusBarStyle)preferredStatusBarStyle{
