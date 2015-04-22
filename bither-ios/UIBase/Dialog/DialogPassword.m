@@ -21,6 +21,7 @@
 #import "KeyboardController.h"
 #import "UIBaseUtil.h"
 #import "PasswordStrengthUtil.h"
+#import "DialogAlert.h"
 #import <AudioToolbox/AudioToolbox.h>
 
 #define kOuterPadding (1)
@@ -86,18 +87,26 @@
         if (![StringUtil compareString:pc compare:p]) {
             [self showError:NSLocalizedString(@"Passwords not same.", nil)];
         } else {
-            if ([self isNewSetPassword]) {
-                if ([StringUtil validPassword:p]) {
-                    [self dismissWithPassword:p];
-                } else {
-                    [self showError:NSLocalizedString(@"Invalid password", nil)];
+            if ([StringUtil validPassword:p]) {
+                if ([[UserDefaultsUtil instance] getPasswordStrengthCheck]) {
+                    PasswordStrengthUtil *strength = [PasswordStrengthUtil checkPassword:p];
+                    if (!strength.passed) {
+                        [self.tfPassword becomeFirstResponder];
+                        [self shakeStrength];
+                        return;
+                    }
+                    if (strength.warning) {
+                        __block DialogPassword *d = self;
+                        __block NSString *pw = p;
+                        [[[DialogAlert alloc] initWithMessage:[NSString stringWithFormat:NSLocalizedString(@"password_strength_warning", nil), strength.name] confirm:^{
+                            [d dismissWithPassword:pw];
+                        }                              cancel:nil] showInWindow:self.window];
+                        return;
+                    }
                 }
+                [self dismissWithPassword:p];
             } else {
-                if ([StringUtil validPassword:p]) {
-                    [self dismissWithPassword:p];
-                } else {
-                    [self showError:NSLocalizedString(@"Invalid password", nil)];
-                }
+                [self showError:NSLocalizedString(@"Invalid password", nil)];
             }
         }
     } else {
@@ -135,12 +144,19 @@
 - (void)showError:(NSString *)error {
     self.lblSubTitle.text = error;
     self.lblSubTitle.textColor = [UIColor redColor];
+    self.vStrength.hidden = YES;
+    self.lblSubTitle.hidden = NO;
     [self shake];
 }
 
 - (void)shake {
     AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
     [self shakeTime:kShakeTime interval:kShakeDuration length:kShakeWaveSize];
+}
+
+- (void)shakeStrength {
+    AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
+    [self.vStrength shakeTime:kShakeTime interval:kShakeDuration length:kShakeWaveSize];
 }
 
 - (void)dismissError {
@@ -382,12 +398,11 @@
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
     [self dismissError];
+    [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(configureStrength) object:nil];
     if ([self isNewSetPassword]) {
         if ([StringUtil validPartialPassword:string]) {
             if (textField.text.length - range.length + string.length <= 43) {
-                if (textField == self.tfPassword) {
-                    [self configureStrength:[textField.text stringByReplacingCharactersInRange:range withString:string]];
-                }
+                [self performSelector:@selector(configureStrength) withObject:nil afterDelay:0.1];
                 return YES;
             }
         }
@@ -403,7 +418,8 @@
     return NO;
 }
 
-- (void)configureStrength:(NSString *)password {
+- (void)configureStrength {
+    NSString* password = self.tfPassword.text;
     if ([self isNewSetPassword] && password.length > 0) {
         self.vStrength.hidden = NO;
         self.lblSubTitle.hidden = YES;

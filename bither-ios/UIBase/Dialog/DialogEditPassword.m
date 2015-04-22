@@ -22,6 +22,7 @@
 #import "StringUtil.h"
 #import "UIBaseUtil.h"
 #import "PasswordStrengthUtil.h"
+#import "DialogAlert.h"
 #import <AudioToolbox/AudioToolbox.h>
 #import <Bitheri/BTAddressManager.h>
 #import <Bitheri/BTAddressProvider.h>
@@ -88,6 +89,27 @@
         [self shake];
         return;
     }
+    if ([[UserDefaultsUtil instance] getPasswordStrengthCheck]) {
+        PasswordStrengthUtil *strength = [PasswordStrengthUtil checkPassword:nP];
+        if (!strength.passed) {
+            [self.tfPasswordNew becomeFirstResponder];
+            [self shakeStrength];
+            return;
+        }
+        if (strength.warning) {
+            __block DialogEditPassword *d = self;
+            [[[DialogAlert alloc] initWithMessage:[NSString stringWithFormat:NSLocalizedString(@"password_strength_warning", nil), strength.name] confirm:^{
+                [d edit];
+            }                              cancel:nil] showInWindow:self.window];
+            return;
+        }
+    }
+    [self edit];
+}
+
+- (void)edit {
+    __block NSString *p = self.tfPassword.text;
+    __block NSString *nP = self.tfPasswordNew.text;
     self.vChecking.hidden = NO;
     self.vContent.hidden = YES;
     [self endEditing:YES];
@@ -131,12 +153,22 @@
 - (void)showError:(NSString *)error {
     self.lblSubTitle.text = error;
     self.lblSubTitle.textColor = [UIColor redColor];
+    self.vStrength.hidden = YES;
+    self.lblSubTitle.hidden = NO;
+    CGRect frame = self.tfPassword.frame;
+    frame.origin.y = CGRectGetMaxY(self.lblSubTitle.frame) + kInnerMargin;
+    self.tfPassword.frame = frame;
     [self shake];
 }
 
 - (void)shake {
     AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
     [self shakeTime:kShakeTime interval:kShakeDuration length:kShakeWaveSize];
+}
+
+- (void)shakeStrength {
+    AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
+    [self.vStrength shakeTime:kShakeTime interval:kShakeDuration length:kShakeWaveSize];
 }
 
 - (void)dismissError {
@@ -331,11 +363,12 @@
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
     [self dismissError];
+    [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(configureStrength) object:nil];
     if ([textField isEqual:self.tfPasswordNew] || [textField isEqual:self.tfPasswordConfirm]) {
         if ([StringUtil validPartialPassword:string]) {
             if (textField.text.length - range.length + string.length <= 43) {
-                if (textField == self.tfPasswordNew) {
-                    [self configureStrength:[textField.text stringByReplacingCharactersInRange:range withString:string]];
+                if (textField == self.tfPasswordNew || textField == self.tfPasswordConfirm) {
+                    [self performSelector:@selector(configureStrength) withObject:nil afterDelay:0.1];
                 }
                 return YES;
             }
@@ -352,7 +385,8 @@
     return NO;
 }
 
-- (void)configureStrength:(NSString *)password {
+- (void)configureStrength {
+    NSString *password = self.tfPasswordNew.text;
     if (password.length > 0 && !self.tfPassword.isFirstResponder) {
         if (!self.lblSubTitle.hidden) {
             self.lblSubTitle.hidden = YES;
@@ -388,7 +422,7 @@
 }
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField {
-    [self configureStrength:self.tfPasswordNew.text];
+    [self configureStrength];
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {

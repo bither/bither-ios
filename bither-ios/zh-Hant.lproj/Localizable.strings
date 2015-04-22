@@ -639,7 +639,7 @@
 "password_strength_medium" = "中等";
 "password_strength_strong" = "較強";
 "password_strength_very_strong" = "很強";
-"password_strength_warning" = "確定使用強度%s的密碼?";
+"password_strength_warning" = "確定使用強度%@的密碼?";
 "password_strength_check" = "密碼強度檢查";
 "password_strength_check_on" = "開";
 "password_strength_check_off" = "關";

@@ -15,6 +15,7 @@
 //  See the License for the specific language governing permissions and
 //  limitations under the License.
 
+#import <AssertMacros.h>
 #import "UserDefaultsUtil.h"
 #import "NSData+Hash.h"
 #import "StringUtil.h"
@@ -41,6 +42,8 @@
 #define PIN_CODE @"pin_code"
 
 #define KEYCHAIN_MODE @"keychain_mode"
+
+#define PASSWORD_STRENGTH_CHECK @"password_strength_check"
 
 static UserDefaultsUtil *userDefaultsUtil;
 
@@ -325,6 +328,17 @@ NSUserDefaults *userDefaults;
     [userDefaults synchronize];
 }
 
+- (void)setPasswordStrengthCheck:(BOOL)check {
+    [userDefaults setBool:check forKey:PASSWORD_STRENGTH_CHECK];
+    [userDefaults synchronize];
+}
+
+- (BOOL)getPasswordStrengthCheck {
+    if (![userDefaults objectForKey:PASSWORD_STRENGTH_CHECK]) {
+        return YES;
+    }
+    return [userDefaults boolForKey:PASSWORD_STRENGTH_CHECK];
+}
 
 @end
 

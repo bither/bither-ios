@@ -638,7 +638,7 @@
 "password_strength_medium" = "中等";
 "password_strength_strong" = "较强";
 "password_strength_very_strong" = "很强";
-"password_strength_warning" = "确定使用强度%s的密码?";
+"password_strength_warning" = "确定使用强度%@的密码?";
 "password_strength_check" = "密码强度检查";
 "password_strength_check_on" = "开";
 "password_strength_check_off" = "关";

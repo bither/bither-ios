@@ -72,4 +72,7 @@
 
 -(KeychainMode) getKeychainMode;
 -(void)setKeychainMode :(KeychainMode ) keychainMode;
+
+- (void)setPasswordStrengthCheck:(BOOL)check;
+- (BOOL)getPasswordStrengthCheck;
 @end
