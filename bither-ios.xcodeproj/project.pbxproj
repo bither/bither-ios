@@ -68,6 +68,7 @@
 		1BC2778BC574DA2F816BC77A /* AddHDMAddressViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BC27FD66F3376A2C68612DD /* AddHDMAddressViewController.m */; };
 		1BC2790A618CFA47914E044C /* HDMSingular.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BC2781AE9973B4ACCEA9877 /* HDMSingular.m */; };
 		1BC27B4D826CA122FC56ADD2 /* DialogHDMSingularModeInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BC27929B0727E0D8B0296D4 /* DialogHDMSingularModeInfo.m */; };
+		1BC27B9CF936EC5ABAAB2D32 /* PasswordStrengthUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BC272D7D8F09A8A3DB14204 /* PasswordStrengthUtil.m */; };
 		1BC27D87BF2AC41578912E98 /* DialogAddressAliasInput.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BC275DC3786E9C937D6FF7D /* DialogAddressAliasInput.m */; };
 		1BC27DE93F1FECC0283202C2 /* DialogHDMSingularColdSeedChildWordsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BC274A14567F7D6DFEA009B /* DialogHDMSingularColdSeedChildWordsViewController.m */; };
 		1BC27F0F16D3294B59AF9604 /* DialogHDMSingularColdSeedChildQrViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BC27F93AA0BE5EBA695564A /* DialogHDMSingularColdSeedChildQrViewController.m */; };
@@ -429,7 +430,9 @@
 		0FED7A4051DB45218112FAC0 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		1BC27043CB19B6031727B679 /* DialogHDMSingularColdSeed.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DialogHDMSingularColdSeed.h; sourceTree = "<group>"; };
 		1BC270628E82FFBA24125AEB /* HDMResetServerPasswordUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HDMResetServerPasswordUtil.h; sourceTree = "<group>"; };
+		1BC272B77D3B4123842B7220 /* PasswordStrengthUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PasswordStrengthUtil.h; sourceTree = "<group>"; };
 		1BC272BC4509E4F880EAC6F9 /* AddHDMAddressViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddHDMAddressViewController.h; sourceTree = "<group>"; };
+		1BC272D7D8F09A8A3DB14204 /* PasswordStrengthUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PasswordStrengthUtil.m; sourceTree = "<group>"; };
 		1BC273B012114E6EDE40C4D9 /* DialogHDMSingularColdSeed.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DialogHDMSingularColdSeed.m; sourceTree = "<group>"; };
 		1BC274A14567F7D6DFEA009B /* DialogHDMSingularColdSeedChildWordsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DialogHDMSingularColdSeedChildWordsViewController.m; sourceTree = "<group>"; };
 		1BC275D3A11FAF859823CF7E /* DialogHDMAddressOptions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DialogHDMAddressOptions.h; sourceTree = "<group>"; };
@@ -1160,6 +1163,8 @@
 				1BC270628E82FFBA24125AEB /* HDMResetServerPasswordUtil.h */,
 				1BC2781AE9973B4ACCEA9877 /* HDMSingular.m */,
 				1BC2776F592A1DFABC1C6F21 /* HDMSingular.h */,
+				1BC272D7D8F09A8A3DB14204 /* PasswordStrengthUtil.m */,
+				1BC272B77D3B4123842B7220 /* PasswordStrengthUtil.h */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -2173,6 +2178,7 @@
 				1BC27D87BF2AC41578912E98 /* DialogAddressAliasInput.m in Sources */,
 				1BC273956C6D9E8D480F865A /* AddressAliasView.m in Sources */,
 				1BC271A2775231786F6E597C /* RawDataDiceView.m in Sources */,
+				1BC27B9CF936EC5ABAAB2D32 /* PasswordStrengthUtil.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

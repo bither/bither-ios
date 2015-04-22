@@ -632,3 +632,15 @@
 "address_alias_input_label" = "輸入此地址的標籤";
 "address_alias_input_hint" = "標籤";
 "address_alias_remove_confirm" = "刪除此地址標籤?";
+
+// password strength
+"password_strength_weak" = "較弱";
+"password_strength_normal" = "一般";
+"password_strength_medium" = "中等";
+"password_strength_strong" = "較強";
+"password_strength_very_strong" = "很強";
+"password_strength_warning" = "確定使用強度%s的密碼?";
+"password_strength_check" = "密碼強度檢查";
+"password_strength_check_on" = "開";
+"password_strength_check_off" = "關";
+"password_strength_check_off_warn" = "確認關閉密碼強度檢查?";
