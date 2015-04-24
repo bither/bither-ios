@@ -643,3 +643,19 @@
 "password_strength_check_on" = "开";
 "password_strength_check_off" = "关";
 "password_strength_check_off_warn" = "确认关闭密码强度检查?";
+
+// add hd account
+"add_hd_account_label" = "生成新的 HD 账户";
+"add_hd_account_button" = "生成";
+"add_hd_account_tab_hd" = "HD 账户";
+"add_hd_account_tab_other" = "其它";
+"add_hd_account_other_hdm" = "生成 HDM 账户";
+"add_hd_account_other_private" = "生成普通私钥";
+"add_hd_account_view_label" = "已有 HD 账户";
+"add_hd_account_seed_qr_code" = "HD 账户种子二维码";
+"add_hd_account_seed_qr_phrase" = "HD 账户密语";
+"add_hd_account_show_seed_label" = "HD 种子能够用来恢复 HD 账户,\n请安全地保管它.";
+"add_hd_account_show_seed_button" = "我已经保管好了 HD 种子";
+
+// show hd account
+"address_group_hd" = "HD 账户";
