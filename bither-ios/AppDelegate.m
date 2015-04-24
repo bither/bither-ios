@@ -79,6 +79,10 @@ static StatusBarNotificationWindow* notificationWindow;
         [self loadViewController];
     }
     
+    if([[UIApplication sharedApplication] respondsToSelector:@selector(registerUserNotificationSettings:)]){
+        [[UIApplication sharedApplication] registerUserNotificationSettings:[UIUserNotificationSettings settingsForTypes:UIUserNotificationTypeBadge|UIUserNotificationTypeSound categories:nil]];
+    }
+    
     [self updateGroupBalance];
     
     //   [[BTSettings instance] openBitheriConsole];
