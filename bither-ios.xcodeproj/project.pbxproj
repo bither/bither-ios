@@ -50,6 +50,8 @@
 		0AB8BCA51A7F445D003C07D8 /* DialogHDMKeychainAddHot.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AB8BCA41A7F445D003C07D8 /* DialogHDMKeychainAddHot.m */; };
 		0AB8BCAB1A7F6DEE003C07D8 /* DialogHDMServerUnsignedQRCode.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AB8BCAA1A7F6DEE003C07D8 /* DialogHDMServerUnsignedQRCode.m */; };
 		0AB8BCB11A7F8656003C07D8 /* NSConditionTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AB8BCB01A7F8656003C07D8 /* NSConditionTest.m */; };
+		0AD4EA711AEA308100DC8C0E /* HotAddressAddHDAccountViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AD4EA701AEA308100DC8C0E /* HotAddressAddHDAccountViewController.m */; };
+		0AD4EA741AEA30C600DC8C0E /* HotAddressAddOtherViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AD4EA731AEA30C600DC8C0E /* HotAddressAddOtherViewController.m */; };
 		0AD674921A79E6E4007967DB /* ColdAddressAddHDMViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AD674911A79E6E4007967DB /* ColdAddressAddHDMViewController.m */; };
 		0AD674941A79F2B8007967DB /* BIP39EnglishWords.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0AD674931A79F2B8007967DB /* BIP39EnglishWords.plist */; };
 		0AD674971A7B4BDA007967DB /* ColdAddressListHDMCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AD674961A7B4BDA007967DB /* ColdAddressListHDMCell.m */; };
@@ -407,7 +409,11 @@
 		0AB8BCA91A7F6DEE003C07D8 /* DialogHDMServerUnsignedQRCode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DialogHDMServerUnsignedQRCode.h; sourceTree = "<group>"; };
 		0AB8BCAA1A7F6DEE003C07D8 /* DialogHDMServerUnsignedQRCode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DialogHDMServerUnsignedQRCode.m; sourceTree = "<group>"; };
 		0AB8BCB01A7F8656003C07D8 /* NSConditionTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSConditionTest.m; sourceTree = "<group>"; };
-		0AD4EA6E1AEA2EB400DC8C0E /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/MainStoryboard.strings; sourceTree = "<group>"; };
+		0AD4EA6F1AEA308100DC8C0E /* HotAddressAddHDAccountViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HotAddressAddHDAccountViewController.h; sourceTree = "<group>"; };
+		0AD4EA701AEA308100DC8C0E /* HotAddressAddHDAccountViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HotAddressAddHDAccountViewController.m; sourceTree = "<group>"; };
+		0AD4EA721AEA30C600DC8C0E /* HotAddressAddOtherViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HotAddressAddOtherViewController.h; sourceTree = "<group>"; };
+		0AD4EA731AEA30C600DC8C0E /* HotAddressAddOtherViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HotAddressAddOtherViewController.m; sourceTree = "<group>"; };
+		0AD4EA761AEA355100DC8C0E /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/MainStoryboard.strings; sourceTree = "<group>"; };
 		0AD674901A79E6E4007967DB /* ColdAddressAddHDMViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ColdAddressAddHDMViewController.h; sourceTree = "<group>"; };
 		0AD674911A79E6E4007967DB /* ColdAddressAddHDMViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ColdAddressAddHDMViewController.m; sourceTree = "<group>"; };
 		0AD674931A79F2B8007967DB /* BIP39EnglishWords.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = BIP39EnglishWords.plist; sourceTree = "<group>"; };
@@ -1067,6 +1073,10 @@
 				1BC272BC4509E4F880EAC6F9 /* AddHDMAddressViewController.h */,
 				0A43F43E1A81C6BF008171DB /* HdmSendViewController.h */,
 				0A43F43F1A81C6BF008171DB /* HdmSendViewController.m */,
+				0AD4EA6F1AEA308100DC8C0E /* HotAddressAddHDAccountViewController.h */,
+				0AD4EA701AEA308100DC8C0E /* HotAddressAddHDAccountViewController.m */,
+				0AD4EA721AEA30C600DC8C0E /* HotAddressAddOtherViewController.h */,
+				0AD4EA731AEA30C600DC8C0E /* HotAddressAddOtherViewController.m */,
 			);
 			path = Hot;
 			sourceTree = "<group>";
@@ -2011,6 +2021,7 @@
 				4268FE2C194ACD57007A4C30 /* OptionColdViewController.m in Sources */,
 				AC45D84119878BAB00AF5C2C /* DialogAddressLongPressOptions.m in Sources */,
 				4269FF75195A8872001213B9 /* Market.m in Sources */,
+				0AD4EA711AEA308100DC8C0E /* HotAddressAddHDAccountViewController.m in Sources */,
 				0AD674921A79E6E4007967DB /* ColdAddressAddHDMViewController.m in Sources */,
 				DA641E8B196E7BC20095DF42 /* GCCrashInstallation.m in Sources */,
 				0AD6749C1A7B6229007967DB /* DialogWithActions.m in Sources */,
@@ -2020,6 +2031,7 @@
 				AC808B8C19D56757004E78A3 /* XRandom.m in Sources */,
 				AC3CDB5B1962A3C800C74B4C /* TransactionConfidenceView.m in Sources */,
 				0A446C151A441393000CD25A /* DialogNetworkMonitorOption.m in Sources */,
+				0AD4EA741AEA30C600DC8C0E /* HotAddressAddOtherViewController.m in Sources */,
 				AC8912F21A7F62FE003797C4 /* WorldListCell.m in Sources */,
 				0A8853AD1AA8466E00760014 /* GroupUserDefaultUtil.m in Sources */,
 				0AB8BC9A1A7F3194003C07D8 /* HotAddressAddHDMViewController.m in Sources */,
@@ -2294,7 +2306,7 @@
 				42EFB5511949C52100376888 /* Base */,
 				AC229A7A196A466400A7FB5E /* zh-Hans */,
 				AC229A7B196A466900A7FB5E /* zh-Hant */,
-				0AD4EA6E1AEA2EB400DC8C0E /* en */,
+				0AD4EA761AEA355100DC8C0E /* en */,
 			);
 			name = MainStoryboard.storyboard;
 			sourceTree = "<group>";

@@ -501,6 +501,78 @@
             </objects>
             <point key="canvasLocation" x="1886" y="2518"/>
         </scene>
+        <!--Hot Address Add Other View Controller-->
+        <scene sceneID="zHH-LN-IF3">
+            <objects>
+                <viewController storyboardIdentifier="HotAddressAddOther" useStoryboardIdentifierAsRestorationIdentifier="YES" id="xvs-oH-D5k" customClass="HotAddressAddOtherViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="1TF-KI-Yb2">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="6Hg-AT-ig0" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-129" y="990"/>
+        </scene>
+        <!--Hot Address AddHD Account View Controller-->
+        <scene sceneID="mQg-KC-U8W">
+            <objects>
+                <viewController storyboardIdentifier="HotAddressAddHDAccount" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Ol0-pR-tVl" customClass="HotAddressAddHDAccountViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="nTY-o3-XcW">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Generate New HD Account" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="bUN-jt-wO1">
+                                <rect key="frame" x="22" y="43" width="276" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" selected="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="XT4-oP-8zX">
+                                <rect key="frame" x="22" y="81" width="242" height="30"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <state key="normal" image="xrandom_checkbox_checked">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="xrandomCheckPressed:" destination="Ol0-pR-tVl" eventType="touchUpInside" id="xoe-P5-Vee"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Woz-yU-gM9">
+                                <rect key="frame" x="268" y="81" width="30" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" image="xrandom_info_icon_normal">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted" image="xrandom_info_icon_pressed"/>
+                                <connections>
+                                    <action selector="xrandomInfoPressed:" destination="Ol0-pR-tVl" eventType="touchUpInside" id="am5-e4-1oN"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" id="LrS-g8-zv9">
+                                <rect key="frame" x="20" y="137" width="280" height="42"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Generate" backgroundImage="button_lightblue">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted" backgroundImage="button_lightblue_pressed"/>
+                                <connections>
+                                    <action selector="generatePressed:" destination="Ol0-pR-tVl" eventType="touchUpInside" id="luv-Cb-j2q"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    </view>
+                    <connections>
+                        <outlet property="btnXRandomCheck" destination="XT4-oP-8zX" id="O1f-Ua-tbq"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="qNZ-en-y59" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="245" y="990"/>
+        </scene>
         <!--Hot Address Add View Controller-->
         <scene sceneID="f24-aG-9de">
             <objects>
@@ -537,7 +609,7 @@
                                             <action selector="cancelPressed:" destination="ao7-9N-6vp" eventType="touchUpInside" id="waI-zl-a1o"/>
                                         </connections>
                                     </button>
-                                    <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="0" id="oZb-Bk-280">
+                                    <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="0" id="oZb-Bk-280" propertyAccessControl="all">
                                         <rect key="frame" x="70" y="8" width="180" height="29"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                         <segments>

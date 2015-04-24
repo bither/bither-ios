@@ -344,3 +344,8 @@
 /* Class = "UISegmentedControl"; oZb-Bk-280.segmentTitles[1] = "Others"; ObjectID = "oZb-Bk-280"; */
 "oZb-Bk-280.segmentTitles[1]" = "其它";
 
+/* Class = "UIButton"; normalTitle = "Generate"; ObjectID = "LrS-g8-zv9"; */
+"LrS-g8-zv9.normalTitle" = "生成";
+
+/* Class = "UILabel"; text = "Generate New HD Account"; ObjectID = "bUN-jt-wO1"; */
+"bUN-jt-wO1.text" = "生成新的 HD 账户";

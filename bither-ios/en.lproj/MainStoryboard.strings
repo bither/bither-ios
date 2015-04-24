@@ -113,6 +113,9 @@
 /* Class = "UILabel"; text = "Add HDM Address"; ObjectID = "Kfd-Dg-pnE"; */
 "Kfd-Dg-pnE.text" = "Add HDM Address";
 
+/* Class = "UIButton"; normalTitle = "Generate"; ObjectID = "LrS-g8-zv9"; */
+"LrS-g8-zv9.normalTitle" = "Generate";
+
 /* Class = "UITextField"; placeholder = "0.00"; ObjectID = "MAT-xt-p4f"; */
 "MAT-xt-p4f.placeholder" = "0.00";
 
@@ -205,6 +208,9 @@
 
 /* Class = "UILabel"; text = "marketName"; ObjectID = "bOH-Sj-yMG"; */
 "bOH-Sj-yMG.text" = "marketName";
+
+/* Class = "UILabel"; text = "Generate New HD Account"; ObjectID = "bUN-jt-wO1"; */
+"bUN-jt-wO1.text" = "Generate New HD Account";
 
 /* Class = "UILabel"; text = "Label"; ObjectID = "bb9-gm-2j7"; */
 "bb9-gm-2j7.text" = "Label";
