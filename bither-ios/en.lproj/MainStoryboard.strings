@@ -188,6 +188,15 @@
 /* Class = "UIButton"; normalTitle = "Send"; ObjectID = "Z5W-Ua-Lm5"; */
 "Z5W-Ua-Lm5.normalTitle" = "Send";
 
+/* Class = "UILabel"; text = "Amount"; ObjectID = "aHu-iQ-TCR"; */
+"aHu-iQ-TCR.text" = "Amount";
+
+/* Class = "UISegmentedControl"; aLp-gS-meD.segmentTitles[0] = "Dice"; ObjectID = "aLp-gS-meD"; */
+"aLp-gS-meD.segmentTitles[0]" = "Dice";
+
+/* Class = "UISegmentedControl"; aLp-gS-meD.segmentTitles[1] = "Binary"; ObjectID = "aLp-gS-meD"; */
+"aLp-gS-meD.segmentTitles[1]" = "Binary";
+
 /* Class = "UILabel"; text = "Label"; ObjectID = "bKW-aE-gcw"; */
 "bKW-aE-gcw.text" = "Label";
 
@@ -212,11 +221,17 @@
 /* Class = "UILabel"; text = "1JT3"; ObjectID = "cdq-og-ME5"; */
 "cdq-og-ME5.text" = "1JT3";
 
+/* Class = "UIButton"; normalTitle = "Add This Private Key"; ObjectID = "ckY-fV-MzW"; */
+"ckY-fV-MzW.normalTitle" = "Add This Private Key";
+
 /* Class = "UILabel"; text = "Can not find private key"; ObjectID = "eEx-7U-SVT"; */
 "eEx-7U-SVT.text" = "Can not find private key";
 
 /* Class = "UITextField"; placeholder = "0.00"; ObjectID = "eP1-s3-zSH"; */
 "eP1-s3-zSH.placeholder" = "0.00";
+
+/* Class = "UITextField"; placeholder = "Bitcoin address"; ObjectID = "fCj-hW-RGp"; */
+"fCj-hW-RGp.placeholder" = "Bitcoin address";
 
 /* Class = "UIButton"; normalTitle = "C"; ObjectID = "fhw-Xa-7ci"; */
 "fhw-Xa-7ci.normalTitle" = "C";
@@ -241,6 +256,9 @@
 
 /* Class = "UILabel"; text = "Private Key"; ObjectID = "he8-50-11R"; */
 "he8-50-11R.text" = "Private Key";
+
+/* Class = "UILabel"; text = "Balance:"; ObjectID = "hsE-yP-NwX"; */
+"hsE-yP-NwX.text" = "Balance:";
 
 /* Class = "UIButton"; normalTitle = "Next Word"; ObjectID = "ifX-vq-zRq"; */
 "ifX-vq-zRq.normalTitle" = "Next Word";
@@ -278,6 +296,9 @@
 /* Class = "UILabel"; text = "QR Code"; ObjectID = "mSg-tC-frD"; */
 "mSg-tC-frD.text" = "QR Code";
 
+/* Class = "UILabel"; text = "Password"; ObjectID = "mdF-6N-ecP"; */
+"mdF-6N-ecP.text" = "Password";
+
 /* Class = "UILabel"; text = "100"; ObjectID = "mjb-dF-Wjb"; */
 "mjb-dF-Wjb.text" = "100";
 
@@ -296,14 +317,11 @@
 /* Class = "UILabel"; text = "Amount"; ObjectID = "nyJ-oV-7hM"; */
 "nyJ-oV-7hM.text" = "Amount";
 
-/* Class = "UISegmentedControl"; oZb-Bk-280.segmentTitles[0] = "Private"; ObjectID = "oZb-Bk-280"; */
-"oZb-Bk-280.segmentTitles[0]" = "Private";
+/* Class = "UISegmentedControl"; oZb-Bk-280.segmentTitles[0] = "HD Account"; ObjectID = "oZb-Bk-280"; */
+"oZb-Bk-280.segmentTitles[0]" = "HD Account";
 
-/* Class = "UISegmentedControl"; oZb-Bk-280.segmentTitles[1] = "Monitor"; ObjectID = "oZb-Bk-280"; */
-"oZb-Bk-280.segmentTitles[1]" = "Monitor";
-
-/* Class = "UISegmentedControl"; oZb-Bk-280.segmentTitles[2] = "HDM"; ObjectID = "oZb-Bk-280"; */
-"oZb-Bk-280.segmentTitles[2]" = "HDM";
+/* Class = "UISegmentedControl"; oZb-Bk-280.segmentTitles[1] = "Others"; ObjectID = "oZb-Bk-280"; */
+"oZb-Bk-280.segmentTitles[1]" = "Others";
 
 /* Class = "UILabel"; text = "Label"; ObjectID = "p9x-vk-IwH"; */
 "p9x-vk-IwH.text" = "Label";
@@ -359,11 +377,20 @@
 /* Class = "UILabel"; text = "name"; ObjectID = "viE-UV-mZx"; */
 "viE-UV-mZx.text" = "name";
 
+/* Class = "UILabel"; text = "Address"; ObjectID = "wb7-kB-0ec"; */
+"wb7-kB-0ec.text" = "Address";
+
+/* Class = "UILabel"; text = "Private Key"; ObjectID = "x9d-Sc-rrj"; */
+"x9d-Sc-rrj.text" = "Private Key";
+
 /* Class = "UITextField"; placeholder = "0.00"; ObjectID = "xBU-Zh-e2V"; */
 "xBU-Zh-e2V.placeholder" = "0.00";
 
 /* Class = "UILabel"; text = "Signing Address"; ObjectID = "xhb-O8-bSH"; */
 "xhb-O8-bSH.text" = "Signing Address";
+
+/* Class = "UITextField"; placeholder = "Password"; ObjectID = "xmE-uG-hIe"; */
+"xmE-uG-hIe.placeholder" = "Password";
 
 /* Class = "UITextField"; placeholder = "Password"; ObjectID = "xmg-Xg-1Ns"; */
 "xmg-Xg-1Ns.placeholder" = "Password";
@@ -394,33 +421,3 @@
 
 /* Class = "UIButton"; normalTitle = "Add This Private Key"; ObjectID = "zjg-wy-EHw"; */
 "zjg-wy-EHw.normalTitle" = "Add This Private Key";
-
-/* Class = "UISegmentedControl"; aLp-gS-meD.segmentTitles[0] = "Dice"; ObjectID = "aLp-gS-meD"; */
-"aLp-gS-meD.segmentTitles[0]" = "Dice";
-
-/* Class = "UISegmentedControl"; aLp-gS-meD.segmentTitles[1] = "Binary"; ObjectID = "aLp-gS-meD"; */
-"aLp-gS-meD.segmentTitles[1]" = "Binary";
-
-/* Class = "UIButton"; normalTitle = "Add This Private Key"; ObjectID = "ckY-fV-MzW"; */
-"ckY-fV-MzW.normalTitle" = "Add This Private Key";
-
-/* Class = "UILabel"; text = "Address"; ObjectID = "wb7-kB-0ec"; */
-"wb7-kB-0ec.text" = "Address";
-
-/* Class = "UILabel"; text = "Private Key"; ObjectID = "x9d-Sc-rrj"; */
-"x9d-Sc-rrj.text" = "Private Key";
-
-/* Class = "UITextField"; placeholder = "Bitcoin address"; ObjectID = "fCj-hW-RGp"; */
-"fCj-hW-RGp.placeholder" = "Bitcoin address";
-
-/* Class = "UILabel"; text = "Amount"; ObjectID = "aHu-iQ-TCR"; */
-"aHu-iQ-TCR.text" = "Amount";
-
-/* Class = "UITextField"; placeholder = "Password"; ObjectID = "xmE-uG-hIe"; */
-"xmE-uG-hIe.placeholder" = "Password";
-
-/* Class = "UILabel"; text = "Password"; ObjectID = "mdF-6N-ecP"; */
-"mdF-6N-ecP.text" = "Password";
-
-/* Class = "UILabel"; text = "Balance:"; ObjectID = "hsE-yP-NwX"; */
-"hsE-yP-NwX.text" = "Balance:";

@@ -293,15 +293,6 @@
 /* Class = "IBUILabel"; text = "HDM Server"; ObjectID = "lnF-bS-z2z"; */
 "lnF-bS-z2z.text" = "HDM 服务器";
 
-/* Class = "IBUISegmentedControl"; oZb-Bk-280.segmentTitles[0] = "Private Key"; ObjectID = "oZb-Bk-280"; */
-"oZb-Bk-280.segmentTitles[0]" = "私钥";
-
-/* Class = "IBUISegmentedControl"; oZb-Bk-280.segmentTitles[1] = "Watch Only"; ObjectID = "oZb-Bk-280"; */
-"oZb-Bk-280.segmentTitles[1]" = "监控";
-
-/* Class = "IBUISegmentedControl"; oZb-Bk-280.segmentTitles[2] = "HDM"; ObjectID = "oZb-Bk-280"; */
-"oZb-Bk-280.segmentTitles[2]" = "HDM";
-
 /* Class = "IBUILabel"; text = "How many HDM addresses to add?"; ObjectID = "KSX-eO-Uwn"; */
 "KSX-eO-Uwn.text" = "增加多少个 HDM 地址?";
 
@@ -346,3 +337,10 @@
 
 /* Class = "UILabel"; text = "Balance:"; ObjectID = "hsE-yP-NwX"; */
 "hsE-yP-NwX.text" = "余额:";
+
+/* Class = "UISegmentedControl"; oZb-Bk-280.segmentTitles[0] = "HD Account"; ObjectID = "oZb-Bk-280"; */
+"oZb-Bk-280.segmentTitles[0]" = "HD 账户";
+
+/* Class = "UISegmentedControl"; oZb-Bk-280.segmentTitles[1] = "Others"; ObjectID = "oZb-Bk-280"; */
+"oZb-Bk-280.segmentTitles[1]" = "其它";
+

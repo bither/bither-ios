@@ -171,12 +171,6 @@
 /* Class = "IBUILabel"; text = "Generate New Private Keys"; ObjectID = "oGZ-jk-Y8A"; */
 "oGZ-jk-Y8A.text" = "生成新私鑰";
 
-/* Class = "IBUISegmentedControl"; oZb-Bk-280.segmentTitles[0] = "Private Key"; ObjectID = "oZb-Bk-280"; */
-"oZb-Bk-280.segmentTitles[0]" = "熱錢包地址";
-
-/* Class = "IBUISegmentedControl"; oZb-Bk-280.segmentTitles[1] = "Watch Only"; ObjectID = "oZb-Bk-280"; */
-"oZb-Bk-280.segmentTitles[1]" = "冷錢包地址";
-
 /* Class = "IBUILabel"; text = "Detail"; ObjectID = "qNL-tR-Rjx"; */
 "qNL-tR-Rjx.text" = "詳情";
 
@@ -301,15 +295,6 @@
 /* Class = "IBUILabel"; text = "HDM Server"; ObjectID = "lnF-bS-z2z"; */
 "lnF-bS-z2z.text" = "HDM 服務器";
 
-/* Class = "IBUISegmentedControl"; oZb-Bk-280.segmentTitles[0] = "Private Key"; ObjectID = "oZb-Bk-280"; */
-"oZb-Bk-280.segmentTitles[0]" = "私鑰";
-
-/* Class = "IBUISegmentedControl"; oZb-Bk-280.segmentTitles[1] = "Watch Only"; ObjectID = "oZb-Bk-280"; */
-"oZb-Bk-280.segmentTitles[1]" = "監控";
-
-/* Class = "IBUISegmentedControl"; oZb-Bk-280.segmentTitles[2] = "HDM"; ObjectID = "oZb-Bk-280"; */
-"oZb-Bk-280.segmentTitles[2]" = "HDM";
-
 /* Class = "IBUILabel"; text = "How many HDM addresses to add?"; ObjectID = "KSX-eO-Uwn"; */
 "KSX-eO-Uwn.text" = "增加多少個 HDM 地址?";
 
@@ -355,4 +340,9 @@
 /* Class = "UILabel"; text = "Balance:"; ObjectID = "hsE-yP-NwX"; */
 "hsE-yP-NwX.text" = "餘額:";
 
+/* Class = "UISegmentedControl"; oZb-Bk-280.segmentTitles[0] = "HD Account"; ObjectID = "oZb-Bk-280"; */
+"oZb-Bk-280.segmentTitles[0]" = "HD 賬戶";
+
+/* Class = "UISegmentedControl"; oZb-Bk-280.segmentTitles[1] = "Others"; ObjectID = "oZb-Bk-280"; */
+"oZb-Bk-280.segmentTitles[1]" = "其它";
 
