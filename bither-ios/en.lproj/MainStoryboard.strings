@@ -146,6 +146,9 @@
 /* Class = "UILabel"; text = "100"; ObjectID = "PJH-te-Brg"; */
 "PJH-te-Brg.text" = "100";
 
+/* Class = "UILabel"; text = "Generate HDM Account"; ObjectID = "Pgs-ev-QNu"; */
+"Pgs-ev-QNu.text" = "Generate HDM Account";
+
 /* Class = "UILabel"; text = "Label"; ObjectID = "Plt-58-S4m"; */
 "Plt-58-S4m.text" = "Label";
 
@@ -157,6 +160,9 @@
 
 /* Class = "UILabel"; text = "Import HDM Phrase"; ObjectID = "Qwn-YF-uwn"; */
 "Qwn-YF-uwn.text" = "Import HDM Phrase";
+
+/* Class = "UILabel"; text = "Generate Normal Private Keys"; ObjectID = "R90-Bo-e0X"; */
+"R90-Bo-e0X.text" = "Generate Normal Private Keys";
 
 /* Class = "UIButton"; normalTitle = "1"; ObjectID = "RIA-YK-ZlZ"; */
 "RIA-YK-ZlZ.normalTitle" = "1";

@@ -523,6 +523,9 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <state key="highlighted" backgroundImage="button_lightblue_pressed"/>
+                                <connections>
+                                    <action selector="qrPressed:" destination="BVS-cG-ONY" eventType="touchUpInside" id="3lR-Id-H7g"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" id="Ces-kP-XIs">
                                 <rect key="frame" x="20" y="159" width="280" height="42"/>
@@ -532,6 +535,9 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <state key="highlighted" backgroundImage="button_lightblue_pressed"/>
+                                <connections>
+                                    <action selector="phrasePressed:" destination="BVS-cG-ONY" eventType="touchUpInside" id="U75-iN-Yvs"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -557,6 +563,9 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <state key="highlighted" backgroundImage="button_lightblue_pressed"/>
+                                <connections>
+                                    <action selector="privateKeyPressed:" destination="xvs-oH-D5k" eventType="touchUpInside" id="72j-YM-13P"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" id="tee-1q-g6I">
                                 <rect key="frame" x="20" y="117" width="280" height="42"/>
@@ -566,6 +575,9 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <state key="highlighted" backgroundImage="button_lightblue_pressed"/>
+                                <connections>
+                                    <action selector="hdmPressed:" destination="xvs-oH-D5k" eventType="touchUpInside" id="LuT-4C-OtT"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -705,7 +717,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" id="8fT-hN-B3F">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="50"/>
+                                <rect key="frame" x="0.0" y="34" width="320" height="50"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="HDM = HD + Multisig" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="14f-Li-LUz">
@@ -730,7 +742,7 @@
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </view>
                             <view contentMode="scaleToFill" id="zbm-8V-vqp">
-                                <rect key="frame" x="20" y="70" width="280" height="264"/>
+                                <rect key="frame" x="20" y="104" width="280" height="264"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" id="mFg-w8-DC5" userLabel="vBg" customClass="HDMTriangleBgView">
@@ -835,7 +847,7 @@
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </view>
                             <view contentMode="scaleToFill" id="HRl-KR-f1n">
-                                <rect key="frame" x="0.0" y="361" width="320" height="40"/>
+                                <rect key="frame" x="0.0" y="395" width="320" height="40"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <view hidden="YES" contentMode="scaleToFill" id="cmZ-C1-qGV">
@@ -891,8 +903,49 @@
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </view>
+                            <view contentMode="scaleToFill" id="A7x-sl-Iol" userLabel="TopBar">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="action_bar_black_bg_tile_horizontal" id="5dO-EF-IFf">
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    </imageView>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Generate HDM Account" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Pgs-ev-QNu">
+                                        <rect key="frame" x="55" y="0.0" width="267" height="44"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" heightSizable="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                        <color key="shadowColor" red="0.0" green="0.0" blue="0.0" alpha="0.40000000000000002" colorSpace="calibratedRGB"/>
+                                        <size key="shadowOffset" width="1" height="1"/>
+                                    </label>
+                                    <view clipsSubviews="YES" alpha="0.80000001192092896" contentMode="scaleToFill" id="j01-YH-nQc" userLabel="Seperator">
+                                        <rect key="frame" x="44" y="0.0" width="1" height="44"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" heightSizable="YES"/>
+                                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                    </view>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="0Zh-TN-eA2" userLabel="btnCancel">
+                                        <rect key="frame" x="0.0" y="0.0" width="44" height="44"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" heightSizable="YES"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                        <state key="normal" image="action_bar_glyph_cancel">
+                                            <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <state key="highlighted" backgroundImage="add_finance_top_bar_cancel_button_pressed.png">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="cancelPressed:" destination="ao7-9N-6vp" eventType="touchUpInside" id="62d-oe-Ba9"/>
+                                            <action selector="cancelPressed:" destination="DVL-1f-gD0" eventType="touchUpInside" id="CAC-Ov-14f"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                            </view>
                         </subviews>
-                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="0.80000000000000004" green="0.80000000000000004" blue="0.80000000000000004" alpha="1" colorSpace="deviceRGB"/>
                     </view>
                     <connections>
                         <outlet property="btnCold" destination="lme-4G-Bm5" id="FzJ-ea-uN1"/>
@@ -910,6 +963,7 @@
                         <outlet property="vSingularModeChecking" destination="N2e-Hg-iOJ" id="eP7-of-rcQ"/>
                         <outlet property="vSingularModeContainer" destination="HRl-KR-f1n" id="Tlf-lS-vu1"/>
                         <outlet property="vSingularModeRunning" destination="cmZ-C1-qGV" id="rYR-hZ-R6f"/>
+                        <outlet property="vTopbar" destination="A7x-sl-Iol" id="Ron-aa-6N6"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="z6q-MZ-bAx" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -925,12 +979,12 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <pickerView contentMode="scaleToFill" id="hEQ-cn-z22">
-                                <rect key="frame" x="0.0" y="60" width="320" height="162"/>
+                                <rect key="frame" x="0.0" y="115" width="320" height="162"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </pickerView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" id="vhW-ec-Y0h">
-                                <rect key="frame" x="20" y="283" width="280" height="42"/>
+                                <rect key="frame" x="20" y="338" width="280" height="42"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Generate" backgroundImage="button_lightblue">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -942,13 +996,13 @@
                                 </connections>
                             </button>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="How many private keys to generate?" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="8Qe-tr-XPb">
-                                <rect key="frame" x="20" y="16" width="280" height="21"/>
+                                <rect key="frame" x="20" y="71" width="280" height="21"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" selected="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="ySW-x6-06q">
-                                <rect key="frame" x="20" y="240" width="242" height="30"/>
+                                <rect key="frame" x="20" y="295" width="242" height="30"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                 <state key="normal" image="xrandom_checkbox_checked">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -958,7 +1012,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="lQX-qn-8mY">
-                                <rect key="frame" x="270" y="240" width="30" height="30"/>
+                                <rect key="frame" x="270" y="295" width="30" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" image="xrandom_info_icon_normal">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -968,12 +1022,54 @@
                                     <action selector="xrandomInfoPressed:" destination="5gP-20-5H4" eventType="touchUpInside" id="7Zb-ui-h9H"/>
                                 </connections>
                             </button>
+                            <view contentMode="scaleToFill" id="uVs-hR-Cxq" userLabel="TopBar">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="action_bar_black_bg_tile_horizontal" id="40T-8n-RA9">
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    </imageView>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Generate Normal Private Keys" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="R90-Bo-e0X">
+                                        <rect key="frame" x="55" y="0.0" width="267" height="44"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" heightSizable="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                        <color key="shadowColor" red="0.0" green="0.0" blue="0.0" alpha="0.40000000000000002" colorSpace="calibratedRGB"/>
+                                        <size key="shadowOffset" width="1" height="1"/>
+                                    </label>
+                                    <view clipsSubviews="YES" alpha="0.80000001192092896" contentMode="scaleToFill" id="OhL-ta-eTD" userLabel="Seperator">
+                                        <rect key="frame" x="44" y="0.0" width="1" height="44"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" heightSizable="YES"/>
+                                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                    </view>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="soM-aZ-LHo" userLabel="btnCancel">
+                                        <rect key="frame" x="0.0" y="0.0" width="44" height="44"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" heightSizable="YES"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                        <state key="normal" image="action_bar_glyph_cancel">
+                                            <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <state key="highlighted" backgroundImage="add_finance_top_bar_cancel_button_pressed.png">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="cancelPressed:" destination="ao7-9N-6vp" eventType="touchUpInside" id="Ray-1E-cUB"/>
+                                            <action selector="cancelPressed:" destination="5gP-20-5H4" eventType="touchUpInside" id="eLa-ut-2vj"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                            </view>
                         </subviews>
-                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="0.80000000000000004" green="0.80000000000000004" blue="0.80000000000000004" alpha="1" colorSpace="deviceRGB"/>
                     </view>
                     <connections>
                         <outlet property="btnXRandomCheck" destination="ySW-x6-06q" id="oQc-a4-SVt"/>
                         <outlet property="pvCount" destination="hEQ-cn-z22" id="dCV-cX-iRg"/>
+                        <outlet property="vTopbar" destination="uVs-hR-Cxq" id="1u2-LL-Mtn"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WDt-5p-YdX" userLabel="First Responder" sceneMemberID="firstResponder"/>

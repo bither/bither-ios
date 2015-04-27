@@ -39,6 +39,7 @@
 @interface HotAddressAddPrivateKeyViewController ()
 @property (weak, nonatomic) IBOutlet UIPickerView *pvCount;
 @property (weak, nonatomic) IBOutlet UIButton *btnXRandomCheck;
+@property (weak, nonatomic) IBOutlet UIView *vTopbar;
 @property int countToGenerate;
 @end
 
@@ -152,9 +153,9 @@
             dispatch_async(dispatch_get_main_queue(), ^{
                 [d dismissWithCompletion:^{
                     if(result){
-                        [self.parentViewController dismissViewControllerAnimated:YES completion:nil];
+                        [self.parentViewController.presentingViewController.presentingViewController dismissViewControllerAnimated:YES completion:nil];
                     } else {
-                        [self showBannerWithMessage:NSLocalizedString(@"xrandom_generating_failed", nil) belowView:nil belowTop:0 autoHideIn:1 withCompletion:nil];
+                        [self showBannerWithMessage:NSLocalizedString(@"xrandom_generating_failed", nil) belowView:self.vTopbar];
                     }
                 }];
             });
@@ -241,11 +242,14 @@
     [controller onSuccess];
     
 }
+- (IBAction)cancelPressed:(id)sender {
+    [self.parentViewController dismissViewControllerAnimated:YES completion:nil];
+}
 
 -(void)successFinish:(UEntropyViewController*)controller{
     UInt32 count = self.countToGenerate;
     __block UIWindow* window = controller.view.window;
-    [controller.presentingViewController.presentingViewController dismissViewControllerAnimated:YES completion:^{
+    [controller.presentingViewController.presentingViewController.presentingViewController dismissViewControllerAnimated:YES completion:^{
         DialogAlert* alert = [[DialogAlert alloc]initWithMessage:[NSString stringWithFormat:NSLocalizedString(@"xrandom_final_confirm", nil), count] confirm:nil cancel:nil];
         [alert showInWindow:window];
     }];

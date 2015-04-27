@@ -28,7 +28,7 @@
 #define kHDView (@"HotAddressAddHDAccountView")
 #define kOther (@"HotAddressAddOther")
 
-@interface HotAddressAddViewController () <HDMSingularAddViewContainer> {
+@interface HotAddressAddViewController () {
 }
 @property(strong, nonatomic) PiPageViewController *page;
 @property(weak, nonatomic) IBOutlet UIView *vTopBar;

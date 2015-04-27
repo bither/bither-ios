@@ -48,6 +48,7 @@
 @property(weak, nonatomic) IBOutlet UIView *vSingularModeRunning;
 @property(weak, nonatomic) IBOutlet UIView *vSingularModeChecking;
 @property(weak, nonatomic) IBOutlet UIButton *btnSingularModeCheck;
+@property (weak, nonatomic) IBOutlet UIView *vTopbar;
 
 @property HDMHotAddUtil *util;
 @end
@@ -194,7 +195,7 @@
             [self.vContainer.layer addAnimation:rotate forKey:@"ROTATE"];
             if ([[UIDevice currentDevice].systemVersion floatValue] < 8) {
                 dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)((spinDuration - fadeOutOffset) * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                    [self dismissViewControllerAnimated:YES completion:^{
+                    [self.parentViewController.presentingViewController.presentingViewController dismissViewControllerAnimated:YES completion:^{
                         [self.vContainer.layer removeAllAnimations];
                     }];
                 });
@@ -204,7 +205,7 @@
                 self.vContainer.alpha = 0.1;
                 self.vContainer.transform = CGAffineTransformMakeScale(2, 2);
             }                completion:^(BOOL finished) {
-                [self dismissViewControllerAnimated:YES completion:^{
+                [self.parentViewController.presentingViewController.presentingViewController dismissViewControllerAnimated:YES completion:^{
                     [self.vContainer.layer removeAllAnimations];
                 }];
             }];
@@ -219,9 +220,6 @@
 - (void)onSingularModeBegin {
     self.vSingularModeChecking.hidden = YES;
     self.vSingularModeRunning.hidden = NO;
-    if ([self.parentViewController.parentViewController conformsToProtocol:@protocol(HDMSingularAddViewContainer)]) {
-        [((NSObject <HDMSingularAddViewContainer> *) self.parentViewController.parentViewController) setHDMSingularCancellable:NO];
-    }
 }
 
 - (BOOL)shouldGoSingularMode {
@@ -233,9 +231,6 @@
     self.vSingularModeRunning.hidden = YES;
     self.vSingularModeChecking.hidden = NO;
     [self.vBg removeAllLines];
-    if ([self.parentViewController.parentViewController conformsToProtocol:@protocol(HDMSingularAddViewContainer)]) {
-        [((NSObject <HDMSingularAddViewContainer> *) self.parentViewController.parentViewController) setHDMSingularCancellable:YES];
-    }
     self.util = [[HDMHotAddUtil alloc] initWithViewContoller:self];
 }
 
@@ -245,7 +240,7 @@
 
 - (void)singularServerFinishWithWords:(NSArray *)words andColdQr:(NSString *)qr {
     __block HotAddressAddHDMViewController *s = self;
-    [[[DialogHDMSingularColdSeed alloc] initWithWords:words qr:qr parent:self.parentViewController.parentViewController andDismissAction:^{
+    [[[DialogHDMSingularColdSeed alloc] initWithWords:words qr:qr parent:self andDismissAction:^{
         [s finalAnimation];
     }] show];
 }
@@ -326,7 +321,15 @@
     [[[DialogHDMInfo alloc] init] showInWindow:self.view.window];
 }
 
+- (IBAction)cancelPressed:(id)sender {
+    if(!self.util.canCancel){
+        [self showBannerWithMessage:NSLocalizedString(@"hdm_singular_mode_cancel_warn", nil) belowView:self.vTopbar];
+        return;
+    }
+    [self.parentViewController dismissViewControllerAnimated:YES completion:nil];
+}
+
 - (void)showMsg:(NSString *)msg {
-    [self showBannerWithMessage:msg belowView:nil belowTop:0 autoHideIn:1 withCompletion:nil];
+    [self showBannerWithMessage:msg belowView:self.vTopbar];
 }
 @end

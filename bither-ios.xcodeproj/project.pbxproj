@@ -365,6 +365,7 @@
 		0A4749871A9D7F0B003684E2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0A4749891A9D7F0B003684E2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Interface.storyboard; sourceTree = "<group>"; };
 		0A47498B1A9D7F0B003684E2 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		0A493B5D1AEE064100C06C73 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/MainStoryboard.strings; sourceTree = "<group>"; };
 		0A515F761A36A2C0008292AF /* RawDataBinaryView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RawDataBinaryView.h; sourceTree = "<group>"; };
 		0A515F771A36A2C0008292AF /* RawDataBinaryView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RawDataBinaryView.m; sourceTree = "<group>"; };
 		0A515F791A36CAE3008292AF /* RawPrivateKeyBinaryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RawPrivateKeyBinaryViewController.h; sourceTree = "<group>"; };
@@ -410,7 +411,6 @@
 		0AB8BCA91A7F6DEE003C07D8 /* DialogHDMServerUnsignedQRCode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DialogHDMServerUnsignedQRCode.h; sourceTree = "<group>"; };
 		0AB8BCAA1A7F6DEE003C07D8 /* DialogHDMServerUnsignedQRCode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DialogHDMServerUnsignedQRCode.m; sourceTree = "<group>"; };
 		0AB8BCB01A7F8656003C07D8 /* NSConditionTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSConditionTest.m; sourceTree = "<group>"; };
-		0AC7B9E71AEDDF610086B6BF /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/MainStoryboard.strings; sourceTree = "<group>"; };
 		0AD4EA6F1AEA308100DC8C0E /* HotAddressAddHDAccountViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HotAddressAddHDAccountViewController.h; sourceTree = "<group>"; };
 		0AD4EA701AEA308100DC8C0E /* HotAddressAddHDAccountViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HotAddressAddHDAccountViewController.m; sourceTree = "<group>"; };
 		0AD4EA721AEA30C600DC8C0E /* HotAddressAddOtherViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HotAddressAddOtherViewController.h; sourceTree = "<group>"; };
@@ -2312,7 +2312,7 @@
 				42EFB5511949C52100376888 /* Base */,
 				AC229A7A196A466400A7FB5E /* zh-Hans */,
 				AC229A7B196A466900A7FB5E /* zh-Hant */,
-				0AC7B9E71AEDDF610086B6BF /* en */,
+				0A493B5D1AEE064100C06C73 /* en */,
 			);
 			name = MainStoryboard.storyboard;
 			sourceTree = "<group>";

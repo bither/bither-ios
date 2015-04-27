@@ -20,9 +20,16 @@
 //
 
 #import "HotAddressAddHDAccountViewViewController.h"
+@interface HotAddressAddHDAccountViewViewController()
 
+@end
 
-@implementation HotAddressAddHDAccountViewViewController {
+@implementation HotAddressAddHDAccountViewViewController
 
+- (IBAction)qrPressed:(id)sender {
 }
+
+- (IBAction)phrasePressed:(id)sender {
+}
+
 @end

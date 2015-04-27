@@ -364,3 +364,9 @@
 
 /* Class = "UIButton"; normalTitle = "HD Account Seed Phrase"; ObjectID = "Ces-kP-XIs"; */
 "Ces-kP-XIs.normalTitle" = "HD 账户密语";
+
+/* Class = "UILabel"; text = "Generate Normal Private Keys"; ObjectID = "R90-Bo-e0X"; */
+"R90-Bo-e0X.text" = "生成普通私钥";
+
+/* Class = "UILabel"; text = "Generate HDM Account"; ObjectID = "Pgs-ev-QNu"; */
+"Pgs-ev-QNu.text" = "生成 HDM 账户";

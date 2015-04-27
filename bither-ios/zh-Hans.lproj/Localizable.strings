@@ -656,6 +656,8 @@
 "add_hd_account_seed_qr_phrase" = "HD 账户密语";
 "add_hd_account_show_seed_label" = "HD 种子能够用来恢复 HD 账户,\n请安全地保管它.";
 "add_hd_account_show_seed_button" = "我已经保管好了 HD 种子";
+"private_key_count_limit" = "已达私钥数量上限";
+"watch_only_address_count_limit" = "已达到监控地址上限";
 
 // show hd account
 "address_group_hd" = "HD 账户";

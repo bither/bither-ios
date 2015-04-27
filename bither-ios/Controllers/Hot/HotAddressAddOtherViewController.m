@@ -6,7 +6,11 @@
 //  Copyright (c) 2015年 Bither. All rights reserved.
 //
 
+#import <Bitheri/BTAddressManager.h>
 #import "HotAddressAddOtherViewController.h"
+#import "BitherSetting.h"
+#import "UIViewController+PiShowBanner.h"
+#import "IOS7ContainerViewController.h"
 
 @interface HotAddressAddOtherViewController ()
 
@@ -16,22 +20,23 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+- (IBAction)privateKeyPressed:(id)sender {
+    if ([BTAddressManager instance].privKeyAddresses.count >= PRIVATE_KEY_OF_HOT_COUNT_LIMIT) {
+        [self showBannerWithMessage:NSLocalizedString(@"private_key_count_limit", nil) belowView:nil belowTop:0 autoHideIn:1 withCompletion:nil];
+        return;
+    }
+    IOS7ContainerViewController *container = [[IOS7ContainerViewController alloc] init];
+    container.controller = [self.storyboard instantiateViewControllerWithIdentifier:@"HotAddressAddPrivateKey"];
+    [self presentViewController:container animated:YES completion:nil];
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+- (IBAction)hdmPressed:(id)sender {
+    IOS7ContainerViewController *container = [[IOS7ContainerViewController alloc] init];
+    container.controller = [self.storyboard instantiateViewControllerWithIdentifier:@"HotAddressAddHDM"];
+    [self presentViewController:container animated:YES completion:nil];
 }
-*/
+
 
 @end
