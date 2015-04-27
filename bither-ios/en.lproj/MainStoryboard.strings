@@ -32,6 +32,9 @@
 /* Class = "UILabel"; text = "Label"; ObjectID = "5Mm-vi-wGE"; */
 "5Mm-vi-wGE.text" = "Label";
 
+/* Class = "UIButton"; normalTitle = "HD Account Seed QR Code"; ObjectID = "5p5-q5-NIv"; */
+"5p5-q5-NIv.normalTitle" = "HD Account Seed QR Code";
+
 /* Class = "UILabel"; text = "Label"; ObjectID = "6FL-zM-ekJ"; */
 "6FL-zM-ekJ.text" = "Label";
 
@@ -67,6 +70,9 @@
 
 /* Class = "UILabel"; text = "Signature"; ObjectID = "CJp-QT-laa"; */
 "CJp-QT-laa.text" = "Signature";
+
+/* Class = "UIButton"; normalTitle = "HD Account Seed Phrase"; ObjectID = "Ces-kP-XIs"; */
+"Ces-kP-XIs.normalTitle" = "HD Account Seed Phrase";
 
 /* Class = "UISegmentedControl"; Cxt-9h-SUk.segmentTitles[0] = "Peers"; ObjectID = "Cxt-9h-SUk"; */
 "Cxt-9h-SUk.segmentTitles[0]" = "Peers";
@@ -313,6 +319,9 @@
 
 /* Class = "UILabel"; text = "Sign Transaction"; ObjectID = "mpu-26-YRO"; */
 "mpu-26-YRO.text" = "Sign Transaction";
+
+/* Class = "UILabel"; text = "You already have an HD account."; ObjectID = "nBS-fJ-qtL"; */
+"nBS-fJ-qtL.text" = "You already have an HD account.";
 
 /* Class = "UILabel"; text = "Password"; ObjectID = "nGP-EM-iOS"; */
 "nGP-EM-iOS.text" = "Password";

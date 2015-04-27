@@ -355,3 +355,12 @@
 
 /* Class = "UIButton"; normalTitle = "Generate HDM Account"; ObjectID = "tee-1q-g6I"; */
 "tee-1q-g6I.normalTitle" = "生成 HDM 账户";
+
+/* Class = "UILabel"; text = "You already have an HD account."; ObjectID = "nBS-fJ-qtL"; */
+"nBS-fJ-qtL.text" = "已有 HD 账户";
+
+/* Class = "UIButton"; normalTitle = "HD Account Seed QR Code"; ObjectID = "5p5-q5-NIv"; */
+"5p5-q5-NIv.normalTitle" = "HD 账户种子二维码";
+
+/* Class = "UIButton"; normalTitle = "HD Account Seed Phrase"; ObjectID = "Ces-kP-XIs"; */
+"Ces-kP-XIs.normalTitle" = "HD 账户密语";

@@ -78,7 +78,6 @@
 
 - (void)pageIndexChanged:(int)index {
     self.vTab.selectedSegmentIndex = index;
-
 }
 
 - (IBAction)tabChanged:(id)sender {

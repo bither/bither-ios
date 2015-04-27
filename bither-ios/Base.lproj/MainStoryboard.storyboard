@@ -501,6 +501,46 @@
             </objects>
             <point key="canvasLocation" x="1886" y="2518"/>
         </scene>
+        <!--Hot Address AddHD Account View View Controller-->
+        <scene sceneID="RHj-pS-g3P">
+            <objects>
+                <viewController storyboardIdentifier="HotAddressAddHDAccountView" useStoryboardIdentifierAsRestorationIdentifier="YES" id="BVS-cG-ONY" customClass="HotAddressAddHDAccountViewViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="EYx-9c-fbH">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You already have an HD account." lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="nBS-fJ-qtL">
+                                <rect key="frame" x="22" y="43" width="276" height="21"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" id="5p5-q5-NIv">
+                                <rect key="frame" x="20" y="90" width="280" height="42"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="HD Account Seed QR Code" backgroundImage="button_lightblue">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted" backgroundImage="button_lightblue_pressed"/>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" id="Ces-kP-XIs">
+                                <rect key="frame" x="20" y="159" width="280" height="42"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="HD Account Seed Phrase" backgroundImage="button_lightblue">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted" backgroundImage="button_lightblue_pressed"/>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="de6-nc-qOd" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-506" y="990"/>
+        </scene>
         <!--Hot Address Add Other View Controller-->
         <scene sceneID="zHH-LN-IF3">
             <objects>
