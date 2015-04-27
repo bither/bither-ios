@@ -30,10 +30,8 @@
 #import "PeerUtil.h"
 #import "DialogHDMSingularColdSeed.h"
 
-@import MobileCoreServices;
 @import AVFoundation;
 
-#import <Bitheri/BTPrivateKeyUtil.h>
 #import <Bitheri/BTHDAccount.h>
 #import <Bitheri/BTAddressManager.h>
 
