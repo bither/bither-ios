@@ -351,3 +351,10 @@
 
 /* Class = "UILabel"; text = "Generate New HD Account"; ObjectID = "bUN-jt-wO1"; */
 "bUN-jt-wO1.text" = "生成新的 HD 賬戶";
+
+/* Class = "UIButton"; normalTitle = "Generate Normal Private Keys"; ObjectID = "aa4-oP-TVf"; */
+"aa4-oP-TVf.normalTitle" = "生成普通私鑰";
+
+/* Class = "UIButton"; normalTitle = "Generate HDM Account"; ObjectID = "tee-1q-g6I"; */
+"tee-1q-g6I.normalTitle" = "生成 HDM 賬戶";
+

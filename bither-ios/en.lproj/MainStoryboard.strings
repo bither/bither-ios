@@ -200,6 +200,9 @@
 /* Class = "UISegmentedControl"; aLp-gS-meD.segmentTitles[1] = "Binary"; ObjectID = "aLp-gS-meD"; */
 "aLp-gS-meD.segmentTitles[1]" = "Binary";
 
+/* Class = "UIButton"; normalTitle = "Generate Normal Private Keys"; ObjectID = "aa4-oP-TVf"; */
+"aa4-oP-TVf.normalTitle" = "Generate Normal Private Keys";
+
 /* Class = "UILabel"; text = "Label"; ObjectID = "bKW-aE-gcw"; */
 "bKW-aE-gcw.text" = "Label";
 
@@ -358,6 +361,9 @@
 
 /* Class = "UILabel"; text = "Sign Message"; ObjectID = "sn3-Rm-dRd"; */
 "sn3-Rm-dRd.text" = "Sign Message";
+
+/* Class = "UIButton"; normalTitle = "Generate HDM Account"; ObjectID = "tee-1q-g6I"; */
+"tee-1q-g6I.normalTitle" = "Generate HDM Account";
 
 /* Class = "UILabel"; text = "Fee"; ObjectID = "uBs-uD-RbW"; */
 "uBs-uD-RbW.text" = "Fee";
