@@ -30,7 +30,7 @@
 
 #define kPadding (10)
 
-@interface HotAddressListSectionHeader(){
+@interface HotAddressListSectionHeader () {
     NSUInteger _section;
 }
 
@@ -38,71 +38,75 @@
 
 @implementation HotAddressListSectionHeader
 
--(instancetype)initWithSize:(CGSize)size isHDM:(BOOL)hdm isPrivate:(BOOL)isPrivate section:(NSUInteger)section delegate:(NSObject<SectionHeaderPressedDelegate>*)delegate{
+- (instancetype)initWithSize:(CGSize)size isHD:(BOOL)hd isHDM:(BOOL)hdm isPrivate:(BOOL)isPrivate section:(NSUInteger)section delegate:(NSObject <SectionHeaderPressedDelegate> *)delegate {
     self = [super initWithFrame:CGRectMake(0, 0, size.width, size.height)];
-    if(self){
+    if (self) {
         self.delegate = delegate;
         _section = section;
         BOOL folded = NO;
-        if(delegate && [delegate respondsToSelector:@selector(isSectionFolded:)]){
+        if (delegate && [delegate respondsToSelector:@selector(isSectionFolded:)]) {
             folded = [delegate isSectionFolded:section];
         }
-        [self isHDM:hdm isPrivate:isPrivate isFolded:folded];
+        [self isHD:hd isHDM:hdm isPrivate:isPrivate isFolded:folded];
     }
     return self;
 }
 
--(void)isHDM:(BOOL)isHDM isPrivate:(BOOL)isPrivate isFolded:(BOOL)isFolded{
-    UIButton *btn = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height)];
+- (void)isHD:(BOOL)isHD isHDM:(BOOL)isHDM isPrivate:(BOOL)isPrivate isFolded:(BOOL)isFolded {
+    UIButton *btn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height)];
     btn.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
     [btn setBackgroundImage:[UIImage imageWithColor:[UIColor parseColor:kBackgroundColor]] forState:UIControlStateNormal];
     [btn setBackgroundImage:[UIImage imageWithColor:[UIColor parseColor:kBackgroundColorPressed]] forState:UIControlStateHighlighted];
     [btn addTarget:self action:@selector(pressed:) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:btn];
-    
-    UIImageView *ivIndicator = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"list_item_address_group_indicator"]];
-    ivIndicator.frame = CGRectMake(kPadding, (self.frame.size.height - ivIndicator.frame.size.height)/2, ivIndicator.frame.size.width, ivIndicator.frame.size.height);
-    if(isFolded){
+
+    UIImageView *ivIndicator = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"list_item_address_group_indicator"]];
+    ivIndicator.frame = CGRectMake(kPadding, (self.frame.size.height - ivIndicator.frame.size.height) / 2, ivIndicator.frame.size.width, ivIndicator.frame.size.height);
+    if (isFolded) {
         ivIndicator.transform = CGAffineTransformIdentity;
-    }else{
+    } else {
         ivIndicator.transform = CGAffineTransformMakeRotation(M_PI_2);
     }
     ivIndicator.autoresizingMask = UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin;
     [self addSubview:ivIndicator];
-    
+
     UIImage *typeImage = nil;
-    if(isHDM){
+    if (isHD) {
+        typeImage = [UIImage imageNamed:@"address_type_hd"];
+    } else if (isHDM) {
         typeImage = [UIImage imageNamed:@"address_type_hdm"];
-    }else if(isPrivate){
+    } else if (isPrivate) {
         typeImage = [UIImage imageNamed:@"address_type_private"];
-    }else{
+    } else {
         typeImage = [UIImage imageNamed:@"address_type_watchonly"];
     }
-    UIImageView *ivType = [[UIImageView alloc]initWithImage:typeImage];
+    UIImageView *ivType = [[UIImageView alloc] initWithImage:typeImage];
     ivType.contentMode = UIViewContentModeCenter;
     ivType.frame = CGRectMake(self.frame.size.width - self.frame.size.height - kPadding, 0, self.frame.size.height, self.frame.size.height);
     ivType.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleHeight;
     [self addSubview:ivType];
-    
-    UILabel *lbl = [[UILabel alloc]initWithFrame:CGRectMake(CGRectGetMaxY(ivIndicator.frame) + kMargin, 0, self.frame.size.width - ivIndicator.frame.size.width - ivType.frame.size.width - kMargin * 2, self.frame.size.height)];
+
+    UILabel *lbl = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxY(ivIndicator.frame) + kMargin, 0, self.frame.size.width - ivIndicator.frame.size.width - ivType.frame.size.width - kMargin * 2, self.frame.size.height)];
     lbl.backgroundColor = [UIColor clearColor];
     lbl.font = [UIFont systemFontOfSize:kFontSize];
     lbl.textColor = [UIColor parseColor:kTextColor];
     lbl.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-    if(isHDM){
-        if([BTAddressManager instance].hdmKeychain.isInRecovery){
+    if (isHD) {
+        lbl.text = NSLocalizedString(@"address_group_hd", nil);
+    } else if (isHDM) {
+        if ([BTAddressManager instance].hdmKeychain.isInRecovery) {
             lbl.text = NSLocalizedString(@"address_group_hdm_recovery", nil);
-        }else{
+        } else {
             lbl.text = NSLocalizedString(@"address_group_hdm_hot", nil);
         }
-    }else if(isPrivate){
+    } else if (isPrivate) {
         lbl.text = NSLocalizedString(@"Hot Wallet Address", nil);
-    }else{
+    } else {
         lbl.text = NSLocalizedString(@"Cold Wallet Address", nil);
     }
     [self addSubview:lbl];
 
-    if(isHDM){
+    if (isHDM) {
         UIButton *btnHDMAdd = [[UIButton alloc] initWithFrame:ivType.frame];
         [btnHDMAdd setBackgroundImage:nil forState:UIControlStateNormal];
         [btnHDMAdd setBackgroundImage:[UIImage imageWithColor:[UIColor colorWithWhite:0 alpha:0.1]] forState:UIControlStateHighlighted];
@@ -123,20 +127,20 @@
     }
 }
 
--(void)pressed:(id)sender{
-    if(self.delegate && [self.delegate respondsToSelector:@selector(sectionHeaderPressed:)]){
+- (void)pressed:(id)sender {
+    if (self.delegate && [self.delegate respondsToSelector:@selector(sectionHeaderPressed:)]) {
         [self.delegate sectionHeaderPressed:_section];
     }
 }
 
--(void)hdmAddPressed:(id)sender{
-    if(self.delegate && [self.delegate respondsToSelector:@selector(hdmAddPressed)]){
+- (void)hdmAddPressed:(id)sender {
+    if (self.delegate && [self.delegate respondsToSelector:@selector(hdmAddPressed)]) {
         [self.delegate hdmAddPressed];
     }
 }
 
--(void)hdmSeedPressed:(id)sender{
-    if(self.delegate && [self.delegate respondsToSelector:@selector(hdmSeedPressed)]){
+- (void)hdmSeedPressed:(id)sender {
+    if (self.delegate && [self.delegate respondsToSelector:@selector(hdmSeedPressed)]) {
         [self.delegate hdmSeedPressed];
     }
 }
