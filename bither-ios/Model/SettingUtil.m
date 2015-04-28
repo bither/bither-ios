@@ -28,13 +28,13 @@
 
 @implementation SettingUtil
 
-+(NSArray *)hotSettings{
-    NSMutableArray * array=[NSMutableArray new];
++ (NSArray *)hotSettings {
+    NSMutableArray *array = [NSMutableArray new];
     [array addObject:[Setting getBitcoinUnitSetting]];
     [array addObject:[Setting getExchangeSetting]];
     [array addObject:[Setting getMarketSetting]];
     [array addObject:[Setting getTransactionFeeSetting]];
-    if([BTAddressManager instance].allAddresses.count == 0 && [BTAddressManager instance].trashAddresses.count == 0 && ![BTAddressManager instance].hdmKeychain){
+    if ([BTAddressManager instance].allAddresses.count == 0 && [BTAddressManager instance].trashAddresses.count == 0 && ![BTAddressManager instance].hdmKeychain && ![BTAddressManager instance].hasHDAccount) {
         [array addObject:[Setting getSwitchToColdSetting]];
     }
     [array addObject:[AvatarSetting getAvatarSetting]];
@@ -45,19 +45,17 @@
 }
 
 
-
-+(NSArray*)coldSettings{
++ (NSArray *)coldSettings {
     NSMutableArray *array = [NSMutableArray new];
     [array addObject:[SignTransactionScanSetting getSignTransactionSetting]];
     [array addObject:[ColdWalletCloneSetting getCloneSetting]];
-    if([BTAddressManager instance].privKeyAddresses.count > 0){
+    if ([BTAddressManager instance].privKeyAddresses.count > 0) {
         [array addObject:[Setting getColdMonitorSetting]];
     }
     [array addObject:[Setting getBitcoinUnitSetting]];
     [array addObject:[Setting getAdvanceSetting]];
     return array;
 }
-
 
 
 @end
