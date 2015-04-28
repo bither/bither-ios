@@ -1,4 +1,5 @@
-//  TransactionsUtil.h
+//
+//  DialogHDSendConfirm.h
 //  bither-ios
 //
 //  Copyright 2014 http://Bither.net
@@ -14,18 +15,15 @@
 //  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 //  See the License for the specific language governing permissions and
 //  limitations under the License.
-
+//
+//  Created by songchenwen on 15/4/28.
+//
 
 #import <Foundation/Foundation.h>
-#import "BitherSetting.h"
-#import "BTAddress.h"
+#import "DialogSendTxConfirm.h"
 
-@interface TransactionsUtil : NSObject
+@interface DialogHDSendTxConfirm : DialogCentered
+- (instancetype)initWithTx:(BTTx *)tx to:(NSString *)toAddress delegate:(NSObject <DialogSendTxConfirmDelegate> *)delegate;
 
-+(void)checkAddress:(NSArray *) addressList callback:(IdResponseBlock)callback andErrorCallback:(ErrorBlock)errorBlcok;
-
-+(NSArray *)getTransactions:(NSDictionary *) dict storeBlockHeight:(uint32_t) storeBlockHeigth;
-+(void) syncWallet:(VoidBlock) voidBlock andErrorCallBack:(ErrorHandler)errorCallback;
-
-+(NSString *)getCompleteTxForError:(NSError *) error;
+@property(weak) NSObject <DialogSendTxConfirmDelegate> *delegate;
 @end

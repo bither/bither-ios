@@ -1,4 +1,5 @@
-//  TransactionsUtil.h
+//
+//  SendViewController.h
 //  bither-ios
 //
 //  Copyright 2014 http://Bither.net
@@ -15,17 +16,13 @@
 //  See the License for the specific language governing permissions and
 //  limitations under the License.
 
+#import <UIKit/UIKit.h>
+#import <Bitheri/BTAddress.h>
+#import "SendViewController.h"
 
-#import <Foundation/Foundation.h>
-#import "BitherSetting.h"
-#import "BTAddress.h"
-
-@interface TransactionsUtil : NSObject
-
-+(void)checkAddress:(NSArray *) addressList callback:(IdResponseBlock)callback andErrorCallback:(ErrorBlock)errorBlcok;
-
-+(NSArray *)getTransactions:(NSDictionary *) dict storeBlockHeight:(uint32_t) storeBlockHeigth;
-+(void) syncWallet:(VoidBlock) voidBlock andErrorCallBack:(ErrorHandler)errorCallback;
-
-+(NSString *)getCompleteTxForError:(NSError *) error;
+@interface HDAccountSendViewController : UIViewController
+@property BTHDAccount *address;
+@property NSString *toAddress;
+@property uint64_t amount;
+@property(weak) NSObject <SendDelegate> *sendDelegate;
 @end

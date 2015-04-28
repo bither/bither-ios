@@ -373,3 +373,23 @@
 /* Class = "UILabel"; text = "Generate HDM Account"; ObjectID = "Pgs-ev-QNu"; */
 "Pgs-ev-QNu.text" = "生成 HDM 賬戶";
 
+/* Class = "UITextField"; placeholder = "Bitcoin address"; ObjectID = "3Xg-gQ-PrT"; */
+"3Xg-gQ-PrT.placeholder" = "比特幣地址";
+
+/* Class = "UIButton"; normalTitle = "Send"; ObjectID = "7HM-O3-12p"; */
+"7HM-O3-12p.normalTitle" = "發送";
+
+/* Class = "UILabel"; text = "Balance:"; ObjectID = "ECV-qg-2mZ"; */
+"ECV-qg-2mZ.text" = "餘額:";
+
+/* Class = "UILabel"; text = "Amount"; ObjectID = "jBb-nb-rnn"; */
+"jBb-nb-rnn.text" = "金額";
+
+/* Class = "UITextField"; placeholder = "Password"; ObjectID = "qjQ-dU-y8s"; */
+"qjQ-dU-y8s.placeholder" = "密碼";
+
+/* Class = "UILabel"; text = "Pay to"; ObjectID = "tBQ-pH-ztd"; */
+"tBQ-pH-ztd.text" = "發送給";
+
+/* Class = "UILabel"; text = "Password"; ObjectID = "v46-EP-4NU"; */
+"v46-EP-4NU.text" = "密碼";

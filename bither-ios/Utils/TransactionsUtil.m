@@ -220,7 +220,6 @@
             }
         }];
     }
-    
 }
 
 + (NSArray *)getTxs:(NSDictionary *)dict;{
@@ -402,26 +401,6 @@
         
     }];
     
-}
-+(void)completeInputsForAddress:(BTAddress *)address callback:(VoidBlock) callback andErrorCallBack:(ErrorHandler)errorCallback{
-        uint32_t fromBlock=[address needCompleteInSignature];
-        if(fromBlock>0) {
-            [TransactionsUtil completeInputsForAddressForApi:address fromBlock:fromBlock callback:callback andErrorCallBack:errorCallback];
-        }else{
-            if (callback) {
-                callback();
-            }
-        }
-}
-
-+(void)completeInputsForAddressInBackground:(BTAddress *)address{
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0),^{
-        uint32_t fromBlock=[address needCompleteInSignature];
-        if(fromBlock>0) {
-            [TransactionsUtil completeInputsForAddressForApi:address fromBlock:fromBlock callback:nil andErrorCallBack:nil];
-        }
-        
-    });
 }
 +(NSArray *)getInSignature:(NSString *) result{
     NSMutableArray * resultList=[NSMutableArray new];

@@ -627,9 +627,6 @@ static Setting *PasswordStrengthCheckSetting;
     }
     [array addObject:[Setting getEditPasswordSetting]];
     [array addObject:[PinCodeSetting getPinCodeSetting]];
-    if ([[BTSettings instance] getAppMode] == HOT) {
-        [array addObject:[Setting getRCheckSetting]];
-    }
     [array addObject:[Setting getQrCodeQualitySetting]];
     [array addObject:[ImportPrivateKeySetting getImportPrivateKeySetting]];
     [array addObject:[ImportBip38PrivateKeySetting getImportBip38PrivateKeySetting]];
