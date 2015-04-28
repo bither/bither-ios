@@ -661,6 +661,8 @@
 "add_hd_account_show_seed_button" = "我已經保管好了 HD 種子";
 "private_key_count_limit" = "已達私鑰數量上限";
 "watch_only_address_count_limit" = "已達到監控地址上限";
+"import_hd_account_seed_qr_code" = "來自 HD 種子二維碼";
+"import_hd_account_seed_phrase" = "來自 HD 密語";
 
 // show hd account
 "address_group_hd" = "HD 賬戶";
