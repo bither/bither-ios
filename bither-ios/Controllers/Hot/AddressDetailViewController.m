@@ -38,11 +38,13 @@
 #import "SignMessageViewController.h"
 #import "DialogHDMAddressOptions.h"
 #import "AddressAliasView.h"
+#import "DialogHDAccountOptions.h"
 
 @interface AddressDetailViewController () <UITableViewDataSource, UITableViewDelegate, DialogAddressOptionsDelegate
         , DialogPasswordDelegate, DialogPrivateKeyOptionsDelegate> {
     NSMutableArray *_txs;
     PrivateKeyQrCodeType _qrcodeType;
+    DialogHDAccountOptions *dialogHDAccountOptions;
     BOOL isMovingToTrash;
     BOOL hasMore;
     BOOL isLoading;
@@ -184,7 +186,10 @@
 }
 
 - (IBAction)optionPressed:(id)sender {
-    if (self.address.isHDM) {
+    if (self.address.isHDAccount) {
+        dialogHDAccountOptions = [[DialogHDAccountOptions alloc] initWithHDAccount:self.address];
+        [dialogHDAccountOptions showInWindow:self.view.window];
+    } else if (self.address.isHDM) {
         [[[DialogHDMAddressOptions alloc] initWithAddress:self.address andAddressAliasDelegate:self.btnAddressAlias] showInWindow:self.view.window];
     } else {
         DialogAddressOptions *dialog = [[DialogAddressOptions alloc] initWithAddress:self.address delegate:self andAliasDialog:self.btnAddressAlias];
@@ -246,7 +251,7 @@
     } else {
         DialogProgress *dialogProgress = [[DialogProgress alloc] initWithMessage:NSLocalizedString(@"Please wait…", nil)];
         [dialogProgress showInWindow:vc.view.window];
-        if(_qrcodeType == BIP38){
+        if (_qrcodeType == BIP38) {
             dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
                 BTKey *key = [BTKey keyWithBitcoinj:self.address.encryptPrivKey andPassphrase:bpassword];
                 __block NSString *bip38 = [key BIP38KeyWithPassphrase:bpassword];
