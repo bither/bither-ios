@@ -136,7 +136,7 @@
                 [self.tableView reloadData];
                 [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:YES];
             });
-            if ([BTAddressManager instance].hdAccount) {
+            if ([[BTAddressManager instance].hdAccount checkWithPassword:password]) {
                 hdDanger = NO;
                 safeCount++;
             } else {
