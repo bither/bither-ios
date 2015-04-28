@@ -37,8 +37,6 @@
 
 #define kSaveProgress (0.1)
 #define kStartProgress (0.01)
-#define kProgressKeyRate (0.5)
-#define kProgressEncryptRate (0.5)
 #define kMinGeneratingTime (2.4)
 
 @interface HotAddressAddHDAccountViewController () <DialogPasswordDelegate, UEntropyViewControllerDelegate> {
@@ -146,8 +144,8 @@
     while (!account) {
         @try {
             NSData *seed = [xrandom randomWithSize:16];
-            if (progress < 1.0 - kSaveProgress - kProgressEncryptRate) {
-                progress += itemProgress * kProgressEncryptRate;
+            if (progress < 1.0 - kSaveProgress - itemProgress) {
+                progress += itemProgress;
                 [controller onProgress:progress];
             }
 
@@ -158,7 +156,7 @@
         }
     }
 
-    progress += itemProgress * kProgressEncryptRate;
+    progress += itemProgress;
     [controller onProgress:progress];
 
     words = [account seedWords:password];

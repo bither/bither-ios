@@ -358,7 +358,7 @@ static Setting *PasswordStrengthCheckSetting;
     if (!CheckSetting) {
         Setting *setting = [[Setting alloc] initWithName:NSLocalizedString(@"Check Private Keys", nil) icon:[UIImage imageNamed:@"check_button_icon"]];
         [setting setSelectBlock:^(UIViewController *controller) {
-            if ([BTAddressManager instance].privKeyAddresses.count == 0 && ![BTAddressManager instance].hasHDMKeychain) {
+            if ([BTAddressManager instance].privKeyAddresses.count == 0 && ![BTAddressManager instance].hasHDMKeychain && ![BTAddressManager instance].hasHDAccount) {
                 if ([controller respondsToSelector:@selector(showMsg:)]) {
                     [controller performSelector:@selector(showMsg:) withObject:NSLocalizedString(@"No private keys", nil)];
                 }
