@@ -36,6 +36,8 @@
 #import "BTEncryptData.h"
 #import "ImportHDMCold.h"
 #import "ImportHDMColdSeedController.h"
+#import "ImportHDAccountSeedController.h"
+#import "PeerUtil.h"
 
 @interface CheckPasswordDelegate : NSObject <DialogPasswordDelegate>
 @property(nonatomic, strong) UIViewController *controller;
@@ -53,6 +55,7 @@
 
 @interface ImportPrivateKeySetting ()
 @property(nonatomic, readwrite) BOOL isImportHDM;
+@property(nonatomic, readwrite) BOOL isImportHDAccount;
 @end
 
 @implementation ImportPrivateKeySetting
@@ -98,7 +101,8 @@ static Setting *importPrivateKeySetting;
 
 - (void)actionSheet:(UIActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex {
     self.isImportHDM = buttonIndex == 2;
-    if ([[BTSettings instance] getAppMode] != COLD || [[BTAddressManager instance] hasHDMKeychain]) {
+    self.isImportHDAccount = NO;
+    if (([[BTSettings instance] getAppMode] != COLD || [[BTAddressManager instance] hasHDMKeychain]) && ([[BTSettings instance] getAppMode] != HOT || [BTAddressManager instance].hasHDAccount)) {
         if (buttonIndex > 1) {
             return;
         }
@@ -112,6 +116,7 @@ static Setting *importPrivateKeySetting;
             break;
         case 2:
             if ([[BTSettings instance] getAppMode] == HOT && ![BTAddressManager instance].hasHDAccount) {
+                self.isImportHDAccount = YES;
                 [self scanQRCodeWithHDAccount];
             } else {
                 [self scanQRCodeWithHDMColdSeed];
@@ -131,10 +136,13 @@ static Setting *importPrivateKeySetting;
 }
 
 - (void)scanQRCodeWithHDAccount {
-
+    ScanQrCodeViewController *scan = [[ScanQrCodeViewController alloc] initWithDelegate:self title:NSLocalizedString(@"import_hd_account_seed_qr_scan_title", nil) message:NSLocalizedString(@"import_hd_account_seed_qr_scan_message", nil)];
+    [self.controller presentViewController:scan animated:YES completion:nil];
 }
 
 - (void)importWithHDAccountPhrase {
+    ImportHDAccountSeedController *vc = [self.controller.storyboard instantiateViewControllerWithIdentifier:@"ImportHDAccountSeed"];
+    [self.controller.navigationController pushViewController:vc animated:YES];
 }
 
 - (void)scanQRCodeWithPrivateKey {
@@ -157,11 +165,29 @@ static Setting *importPrivateKeySetting;
     ImportHDMColdSeedController *advanceController = [self.controller.storyboard instantiateViewControllerWithIdentifier:@"ImportHDMColdSeedController"];
     UINavigationController *nav = self.controller.navigationController;
     [nav pushViewController:advanceController animated:YES];
-
-
 }
 
 - (void)handleResult:(NSString *)result byReader:(ScanQrCodeViewController *)reader {
+    if (self.isImportHDAccount) {
+        NSRange range = [result rangeOfString:HD_QR_CODE_FLAT];
+        BOOL isHDSeed = range.location == 0 && range.length == HD_QR_CODE_FLAT.length;
+        if ([BTQRCodeUtil verifyQrcodeTransport:result]) {
+            [reader playSuccessSound];
+            [reader vibrate];
+            [reader.presentingViewController dismissViewControllerAnimated:YES completion:^{
+                if (!isHDSeed || [[BTQRCodeUtil splitQRCode:result] count] != 3) {
+                    [self showMsg:NSLocalizedString(@"import_hd_account_seed_format_error", nil)];
+                } else {
+                    _result = result;
+                    DialogPassword *dialog = [[DialogPassword alloc] initWithDelegate:self];
+                    [dialog showInWindow:self.controller.view.window];
+                }
+            }];
+        } else {
+            [reader vibrate];
+        }
+        return;
+    }
     NSRange range = [result rangeOfString:HDM_QR_CODE_FLAG];
     bool isHDMSeed = range.location == 0;
     if (self.isImportHDM) {
@@ -205,8 +231,40 @@ static Setting *importPrivateKeySetting;
 
 - (void)onPasswordEntered:(NSString *)password {
     DialogProgress *dp = [[DialogProgress alloc] initWithMessage:NSLocalizedString(@"Please wait…", nil)];
-    if (self.isImportHDM) {
-
+    if (self.isImportHDAccount) {
+        [dp showInWindow:self.controller.view.window completion:^{
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+                BTPasswordSeed *passwordSeed = [BTPasswordSeed getPasswordSeed];
+                if (passwordSeed) {
+                    if (![passwordSeed checkPassword:password]) {
+                        dispatch_async(dispatch_get_main_queue(), ^{
+                            [dp dismissWithCompletion:^{
+                                [self showMsg:NSLocalizedString(@"Password of the private key to import is different from ours. Import failed.", nil)];
+                            }];
+                        });
+                        return;
+                    }
+                }
+                BTHDAccount *account = [[BTHDAccount alloc] initWithEncryptedMnemonicSeed:[[BTEncryptData alloc] initWithStr:[_result substringFromIndex:1]] password:password andSyncedComplete:NO];
+                if (!account) {
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        [dp dismissWithCompletion:^{
+                            [self showMsg:NSLocalizedString(@"Import failed.", nil)];
+                        }];
+                    });
+                    return;
+                }
+                [[PeerUtil instance] stopPeer];
+                [BTAddressManager instance].hdAccount = account;
+                [[PeerUtil instance] startPeer];
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [dp dismissWithCompletion:^{
+                        [self showMsg:NSLocalizedString(@"Import success.", nil)];
+                    }];
+                });
+            });
+        }];
+    } else if (self.isImportHDM) {
         [dp showInWindow:self.controller.view.window completion:^{
             dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
                 BTPasswordSeed *passwordSeed = [BTPasswordSeed getPasswordSeed];
@@ -263,7 +321,7 @@ static Setting *importPrivateKeySetting;
 
 - (BOOL)checkPassword:(NSString *)password {
     NSString *checkKeyStr = _result;
-    if (self.isImportHDM) {
+    if (self.isImportHDM || self.isImportHDAccount) {
         checkKeyStr = [checkKeyStr substringFromIndex:1];
     }
     BTEncryptData *encryptedData = [[BTEncryptData alloc] initWithStr:checkKeyStr];

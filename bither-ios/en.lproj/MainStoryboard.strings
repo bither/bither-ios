@@ -131,6 +131,9 @@
 /* Class = "UILabel"; text = "Add HDM Address"; ObjectID = "Kfd-Dg-pnE"; */
 "Kfd-Dg-pnE.text" = "Add HDM Address";
 
+/* Class = "UIButton"; normalTitle = "Next Word"; ObjectID = "LUd-2F-jCf"; */
+"LUd-2F-jCf.normalTitle" = "Next Word";
+
 /* Class = "UIButton"; normalTitle = "Generate"; ObjectID = "LrS-g8-zv9"; */
 "LrS-g8-zv9.normalTitle" = "Generate";
 
@@ -418,6 +421,9 @@
 
 /* Class = "UILabel"; text = "Balance:"; ObjectID = "uiN-WE-JlS"; */
 "uiN-WE-JlS.text" = "Balance:";
+
+/* Class = "UILabel"; text = "Import HD Seed Phrase"; ObjectID = "uoc-uG-k6M"; */
+"uoc-uG-k6M.text" = "Import HD Seed Phrase";
 
 /* Class = "UIButton"; normalTitle = "Sign Transaction"; ObjectID = "v27-0r-WIj"; */
 "v27-0r-WIj.normalTitle" = "Sign Transaction";

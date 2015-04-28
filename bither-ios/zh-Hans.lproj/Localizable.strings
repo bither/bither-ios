@@ -662,6 +662,9 @@
 "watch_only_address_count_limit" = "已达到监控地址上限";
 "import_hd_account_seed_qr_code" = "来自 HD 种子二维码";
 "import_hd_account_seed_phrase" = "来自 HD 密语";
+"import_hd_account_seed_qr_scan_title" = "导入 HD 账户";
+"import_hd_account_seed_qr_scan_message" = "扫描 HD 种子二维码";
+"import_hd_account_seed_format_error"="不是 HD 账户种子";
 
 // show hd account
 "address_group_hd" = "HD 账户";

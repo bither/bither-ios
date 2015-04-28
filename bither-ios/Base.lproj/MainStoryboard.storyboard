@@ -5625,10 +5625,112 @@
             </objects>
             <point key="canvasLocation" x="2982" y="-53"/>
         </scene>
+        <!--ImportHD Account Seed Controller-->
+        <scene sceneID="hT9-78-EKG">
+            <objects>
+                <viewController storyboardIdentifier="ImportHDAccountSeed" useStoryboardIdentifierAsRestorationIdentifier="YES" id="5Ka-5H-aY8" customClass="ImportHDAccountSeedController" propertyAccessControl="all" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Tlx-1F-paJ">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" id="nXe-jp-90e" userLabel="TopBar">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="ui_topnav_titlebar_background.png" id="ZN5-hs-fUY">
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="47"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    </imageView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="iC6-US-9xo">
+                                        <rect key="frame" x="0.0" y="0.0" width="44" height="44"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" heightSizable="YES"/>
+                                        <state key="normal" image="title_bar_back">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <state key="highlighted" backgroundImage="card_foreground_pressed"/>
+                                        <connections>
+                                            <action selector="backPressed:" destination="5Ka-5H-aY8" eventType="touchUpInside" id="E3g-gq-VHy"/>
+                                        </connections>
+                                    </button>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="title_bar_seperator" id="x23-mq-nR3">
+                                        <rect key="frame" x="44" y="0.0" width="3" height="44"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" heightSizable="YES"/>
+                                    </imageView>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Import HD Seed Phrase" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="uoc-uG-k6M">
+                                        <rect key="frame" x="55" y="0.0" width="265" height="47"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
+                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                        <color key="shadowColor" red="0.0" green="0.0" blue="0.0" alpha="0.40000000000000002" colorSpace="calibratedRGB"/>
+                                        <size key="shadowOffset" width="1" height="1"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" id="pyj-wp-2GL">
+                                        <rect key="frame" x="276" y="0.0" width="44" height="44"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" heightSizable="YES"/>
+                                        <state key="normal" image="action_bar_glyph_done" backgroundImage="action_bar_dark_right_green_button_enabled">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <state key="highlighted" backgroundImage="action_bar_dark_right_green_button_enabled_pressed"/>
+                                        <connections>
+                                            <action selector="donePressed:" destination="5Ka-5H-aY8" eventType="touchUpInside" id="Kyd-Nq-qBg"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            </view>
+                            <view contentMode="scaleToFill" id="b87-bH-7c5">
+                                <rect key="frame" x="0.0" y="44" width="320" height="480"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.25882352939999997" green="0.36862745099999999" blue="0.47843137250000001" alpha="1" colorSpace="calibratedRGB"/>
+                            </view>
+                            <view contentMode="scaleToFill" id="hLq-7k-sBR">
+                                <rect key="frame" x="0.0" y="434" width="320" height="46"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" id="bzg-Jw-rz7">
+                                        <rect key="frame" x="8" y="8" width="210" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" id="LUd-2F-jCf">
+                                        <rect key="frame" x="230" y="2" width="80" height="42"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                        <state key="normal" title="Next Word" backgroundImage="button_lightblue">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <state key="highlighted" backgroundImage="button_lightblue_pressed"/>
+                                        <connections>
+                                            <action selector="addWorld:" destination="5Ka-5H-aY8" eventType="touchUpInside" id="zqH-Ut-lj7"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <connections>
+                        <outlet property="btnDone" destination="pyj-wp-2GL" id="fGr-bX-Fzi"/>
+                        <outlet property="inputView" destination="hLq-7k-sBR" id="Ohc-9i-JbV"/>
+                        <outlet property="tfKey" destination="bzg-Jw-rz7" id="eul-kG-gQy"/>
+                        <outlet property="topBar" destination="nXe-jp-90e" id="UJU-tQ-J9f"/>
+                        <outlet property="worldListView" destination="b87-bH-7c5" id="CGO-H4-mAx"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="rav-wZ-lZh" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1405" y="-2865"/>
+        </scene>
     </scenes>
     <resources>
         <image name="action_bar_black_bg_tile_horizontal" width="7" height="37"/>
+        <image name="action_bar_dark_right_green_button_enabled" width="5" height="37"/>
+        <image name="action_bar_dark_right_green_button_enabled_pressed" width="5" height="37"/>
         <image name="action_bar_glyph_cancel" width="42" height="42"/>
+        <image name="action_bar_glyph_done" width="36" height="36"/>
         <image name="add_address_button_icon" width="60" height="60"/>
         <image name="add_address_button_icon_pressed" width="60" height="60"/>
         <image name="add_finance_top_bar_cancel_button_pressed.png" width="1" height="47"/>

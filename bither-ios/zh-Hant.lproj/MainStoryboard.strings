@@ -393,3 +393,9 @@
 
 /* Class = "UILabel"; text = "Password"; ObjectID = "v46-EP-4NU"; */
 "v46-EP-4NU.text" = "密碼";
+
+/* Class = "UILabel"; text = "Import HD Seed Phrase"; ObjectID = "uoc-uG-k6M"; */
+"uoc-uG-k6M.text" = "匯入 HD 密語";
+
+/* Class = "UIButton"; normalTitle = "Next Word"; ObjectID = "LUd-2F-jCf"; */
+"LUd-2F-jCf.normalTitle" = "下一單詞";
