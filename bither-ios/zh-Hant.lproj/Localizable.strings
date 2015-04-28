@@ -652,6 +652,8 @@
 "add_hd_account_tab_other" = "其它";
 "add_hd_account_other_hdm" = "生成 HDM 賬戶";
 "add_hd_account_other_private" = "生成普通私鑰";
+"add_hd_account_monitor" = "一鍵監控冷錢包";
+"add_hd_account_monitor_success" = "監控成功";
 "add_hd_account_view_label" = "已有 HD 賬戶";
 "add_hd_account_seed_qr_code" = "HD 賬戶種子二維碼";
 "add_hd_account_seed_qr_phrase" = "HD 賬戶密語";

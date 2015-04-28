@@ -24,12 +24,14 @@
 #import "ColdWalletCloneSetting.h"
 #import "BTAddressManager.h"
 #import "AvatarSetting.h"
+#import "MonitorSetting.h"
 
 
 @implementation SettingUtil
 
 + (NSArray *)hotSettings {
     NSMutableArray *array = [NSMutableArray new];
+    [array addObject:[MonitorSetting getMonitorSetting]];
     [array addObject:[Setting getBitcoinUnitSetting]];
     [array addObject:[Setting getExchangeSetting]];
     [array addObject:[Setting getMarketSetting]];
