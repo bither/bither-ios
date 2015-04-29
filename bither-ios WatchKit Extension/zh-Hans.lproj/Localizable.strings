@@ -25,3 +25,6 @@
 
 "buy" = "买一";
 "sell" = "卖一";
+
+// show hd account
+"address_group_hd" = "HD 账户";
