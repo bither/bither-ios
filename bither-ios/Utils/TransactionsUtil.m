@@ -33,6 +33,7 @@
 #import "StringUtil.h"
 #import "UnitUtil.h"
 #import "BTAddressProvider.h"
+#import "BTHDAccountProvider.h"
 
 
 #define BLOCK_COUNT  @"block_count"
@@ -187,9 +188,14 @@
     __block  NSInteger index=0;
     addresses=[addresses reverseObjectEnumerator].allObjects;
     [TransactionsUtil getMyTx:addresses index:index callback:^{
-        if (voidBlock) {
-            voidBlock();
-        }
+       [TransactionsUtil getMyTxForHDAccount:EXTERNAL_ROOT_PATH index:0 callback:^{
+           [TransactionsUtil getMyTxForHDAccount:INTERNAL_ROOT_PATH index:0 callback:^{
+               if (voidBlock){
+                   voidBlock();
+               }
+           } andErrorCallBack:errorCallback];
+
+       } andErrorCallBack:errorCallback];
     } andErrorCallBack:errorCallback];
     
 }
@@ -222,33 +228,92 @@
     }
 }
 
-+ (NSArray *)getTxs:(NSDictionary *)dict;{
-    NSArray *array=[[BTBlockChain instance] getAllBlocks];
-    NSMutableDictionary *dictionary=[NSMutableDictionary new];
-    BTBlock *minBlock=[array objectAtIndex:array.count-1];
-    uint32_t  minBlockNo= minBlock.blockNo;
-    for(BTBlock *block in array){
-        if(block.blockNo<minBlockNo){
-            minBlockNo=block.blockNo;
++(void)getMyTxForHDAccount:(PathType) pathType  index:(int)index
+                  callback:(VoidBlock)callback andErrorCallBack:(ErrorHandler)errorCallback{
+    int unSyncedCount=[[BTHDAccountProvider instance] unSyncedCountOfPath:pathType];
+    BTHDAccountAddress *address= [[BTHDAccountProvider instance] addressForPath:pathType index:index];
+    index++;
+    if (unSyncedCount==0){
+        if (callback){
+            callback();
         }
-        [dictionary setObject:block forKey:[NSNumber numberWithInt:block.blockNo]];
-    };
-    NSMutableArray *txs = [NSMutableArray new];
-    for (NSArray *each in dict[@"tx"]) {
-        BTTx *tx = [[BTTx alloc] initWithMessage:[NSData dataFromBase64String:each[1]]];
-        tx.blockNo = (uint32_t) [each[0] intValue];
-        BTBlock * block;
-        if (tx.blockNo<minBlockNo){
-            block= [dictionary objectForKey:[NSNumber numberWithInt:minBlockNo]];
-        } else{
-            block= [dictionary objectForKey:[NSNumber numberWithInt:tx.blockNo]];
-        }
+    }else{
+        [TransactionsUtil getTxForHDAccount:pathType index:index hdAddress:address callback:^(void){
+            int  unSyncedCountInBlock=[[BTHDAccountProvider instance] unSyncedCountOfPath:pathType];
+            if(unSyncedCountInBlock==0){
+                if(callback){
+                    callback();
+                }
+            }else{
+                [TransactionsUtil getMyTxForHDAccount:pathType index:index
+                                             callback:callback andErrorCallBack:errorCallback];
+            }
 
-        [tx setTxTime:block.blockTime];
-        [txs addObject:tx];
+        } andErrorCallBack:errorCallback];
     }
-    return txs;
+
+
 }
+
++(void)getTxForHDAccount:(PathType) pathType index:(int)index hdAddress:(BTHDAccountAddress *) address
+                callback:(VoidBlock)callback andErrorCallBack:(ErrorHandler)errorCallback{
+    __block NSMutableArray *allTxs = [NSMutableArray new];
+    __block int tmpBlockCount = 0;
+    __block int tmpTxCnt = 0;
+    __block int page = 1;
+    if (address.isSyncedComplete){
+        if (callback){
+            callback();
+        }
+    }
+    ErrorHandler errorHandler = ^(NSOperation *errorOp, NSError *error) {
+        if (errorCallback) {
+            errorCallback(errorOp,error);
+        }
+        NSLog(@"get my transcation api %@",errorOp);
+    };
+
+    DictResponseBlock nextPageBlock = ^(NSDictionary * dict) {
+        int blockCount = [dict[@"block_count"] intValue];
+        int txCnt = [dict[@"tx_cnt"] intValue];
+        if (blockCount != tmpBlockCount && txCnt != tmpTxCnt) {
+            // may be server data updated
+        }
+        NSArray *txs = [TransactionsUtil getTxs:dict];
+        [allTxs addObjectsFromArray:txs];
+        if ([allTxs count] < txCnt) {
+            page += 1;
+            [[BitherApi instance] getTransactionApi:address.address withPage:page callback:nextPageBlock andErrorCallBack:errorHandler];
+        } else {
+            [[BTAddressManager instance].hdAccount initTxs:[[BTAddressManager instance] compressTxsForApi:allTxs andAddress:address.address]];
+            [address setIsSyncedComplete:YES];
+            [[BTAddressManager instance].hdAccount updateSyncComplete:address];
+
+            if (allTxs.count>0 ){
+                [[BTAddressManager instance].hdAccount updateIssuedIndex:pathType index:index];
+                [[BTAddressManager instance].hdAccount supplyEnoughKeys:NO];
+            } else{
+                [[BTHDAccountProvider instance] updateSyncdForIndex:pathType index:index];
+            }
+
+            uint32_t storeHeight=[[BTBlockChain instance] lastBlock].blockNo;
+            if (blockCount < storeHeight && storeHeight - blockCount < 100) {
+                [[BTBlockChain instance] rollbackBlock:(uint32_t) blockCount];
+            }
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [[NSNotificationCenter defaultCenter] postNotificationName:BitherAddressNotification object:address.address];
+            });
+            if (callback) {
+                callback();
+            }
+        }
+    };
+
+    [[BitherApi instance] getTransactionApi:address.address withPage:page callback:nextPageBlock andErrorCallBack:errorHandler];
+
+}
+
+
 +(void)getTxs:(BTAddress *) address callback:(VoidBlock)callback andErrorCallBack:(ErrorHandler)errorCallback{
     __block NSMutableArray *allTxs = [NSMutableArray new];
     __block int tmpBlockCount = 0;
@@ -350,6 +415,34 @@
 }
 
 
+
++ (NSArray *)getTxs:(NSDictionary *)dict;{
+    NSArray *array=[[BTBlockChain instance] getAllBlocks];
+    NSMutableDictionary *dictionary=[NSMutableDictionary new];
+    BTBlock *minBlock=[array objectAtIndex:array.count-1];
+    uint32_t  minBlockNo= minBlock.blockNo;
+    for(BTBlock *block in array){
+        if(block.blockNo<minBlockNo){
+            minBlockNo=block.blockNo;
+        }
+        [dictionary setObject:block forKey:[NSNumber numberWithInt:block.blockNo]];
+    };
+    NSMutableArray *txs = [NSMutableArray new];
+    for (NSArray *each in dict[@"tx"]) {
+        BTTx *tx = [[BTTx alloc] initWithMessage:[NSData dataFromBase64String:each[1]]];
+        tx.blockNo = (uint32_t) [each[0] intValue];
+        BTBlock * block;
+        if (tx.blockNo<minBlockNo){
+            block= [dictionary objectForKey:[NSNumber numberWithInt:minBlockNo]];
+        } else{
+            block= [dictionary objectForKey:[NSNumber numberWithInt:tx.blockNo]];
+        }
+
+        [tx setTxTime:block.blockTime];
+        [txs addObject:tx];
+    }
+    return txs;
+}
 
 + (NSString *)getCompleteTxForError:(NSError *)error {
     NSString *msg = @"";
