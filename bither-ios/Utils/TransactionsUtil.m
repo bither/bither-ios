@@ -175,10 +175,6 @@
 
 +(void) syncWallet:(VoidBlock) voidBlock andErrorCallBack:(ErrorHandler)errorCallback{
     NSArray * addresses=[[BTAddressManager instance] allAddresses];
-    if (addresses.count==0) {
-        voidBlock();
-        return;
-    }
     if ([[BTAddressManager instance] allSyncComplete]) {
         if (voidBlock) {
             voidBlock();
@@ -201,6 +197,12 @@
 }
 
 +(void)getMyTx:(NSArray *)addresses  index:(NSInteger)index  callback:(VoidBlock)callback andErrorCallBack:(ErrorHandler)errorCallback{
+    if (index==addresses.count) {
+        if (callback) {
+            callback();
+        }
+        return;
+    }
     BTAddress * address=[addresses objectAtIndex:index];
     index=index+1;
     if (address.isSyncComplete) {
@@ -290,10 +292,10 @@
             [[BTAddressManager instance].hdAccount updateSyncComplete:address];
 
             if (allTxs.count>0 ){
-                [[BTAddressManager instance].hdAccount updateIssuedIndex:pathType index:index];
+                [[BTAddressManager instance].hdAccount updateIssuedIndex:pathType index:index-1];
                 [[BTAddressManager instance].hdAccount supplyEnoughKeys:NO];
             } else{
-                [[BTHDAccountProvider instance] updateSyncdForIndex:pathType index:index];
+                [[BTHDAccountProvider instance] updateSyncdForIndex:pathType index:index-1];
             }
 
             uint32_t storeHeight=[[BTBlockChain instance] lastBlock].blockNo;
