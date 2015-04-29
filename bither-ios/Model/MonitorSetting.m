@@ -113,6 +113,9 @@ static Setting *monitorSetting;
     dispatch_async(dispatch_get_main_queue(), ^{
         [dp dismissWithCompletion:^{
             [self showMsg:NSLocalizedString(@"add_hd_account_monitor_success", nil)];
+            if (self.vc && [self.vc respondsToSelector:@selector(reload)]) {
+                [self.vc performSelector:@selector(reload)];
+            }
         }];
     });
 }
