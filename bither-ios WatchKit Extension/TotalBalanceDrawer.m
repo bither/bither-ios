@@ -30,17 +30,18 @@
 #define kCircleGapRate (0.03f)
 #define kCircleMinRate (0.12f)
 #define RGBA(r, g, b, a) [UIColor colorWithRed:r/255.0 green:g/255.0 blue:b/255.0 alpha:a]
+#define kHDColor (RGBA(194, 253, 70, 1))
 #define kHDMColor (RGBA(38, 230, 91, 1))
 #define kHotColor (RGBA(254, 39, 93, 1))
 #define kColdColor (RGBA(36, 182, 212, 1))
 
 @implementation TotalBalanceDrawer
 
-+(void)showTotalBalanceOn:(WKInterfaceGroup*)group andLabel:(WKInterfaceLabel*)label{
++ (void)showTotalBalanceOn:(WKInterfaceGroup *)group andLabel:(WKInterfaceLabel *)label {
     WKInterfaceDevice *device = [WKInterfaceDevice currentDevice];
-    if([device.cachedImages.allKeys containsObject:kTotalBalanceCacheImage]){
+    if ([device.cachedImages.allKeys containsObject:kTotalBalanceCacheImage]) {
         [group setBackgroundImageNamed:kTotalBalanceCacheImage];
-        TotalBalance *t = [[TotalBalance alloc]init];
+        TotalBalance *t = [[TotalBalance alloc] init];
         [label setText:[WatchUnitUtil stringForAmount:t.total]];
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
             [TotalBalanceDrawer refreshTotalBalanceOn:group andLabel:label];
@@ -50,9 +51,9 @@
     [TotalBalanceDrawer refreshTotalBalanceOn:group andLabel:label];
 }
 
-+(void)refreshTotalBalanceOn:(WKInterfaceGroup*)group andLabel:(WKInterfaceLabel*)label{
-    TotalBalance *t = [[TotalBalance alloc]init];
-    UIImage* image = [TotalBalanceDrawer imageForTotalBalance:t];
++ (void)refreshTotalBalanceOn:(WKInterfaceGroup *)group andLabel:(WKInterfaceLabel *)label {
+    TotalBalance *t = [[TotalBalance alloc] init];
+    UIImage *image = [TotalBalanceDrawer imageForTotalBalance:t];
     WKInterfaceDevice *device = [WKInterfaceDevice currentDevice];
     [device addCachedImage:image name:kTotalBalanceCacheImage];
     dispatch_async(dispatch_get_main_queue(), ^{
@@ -61,18 +62,21 @@
     });
 }
 
-+(UIImage*)imageForTotalBalance:(TotalBalance*)t{
++ (UIImage *)imageForTotalBalance:(TotalBalance *)t {
     NSUInteger parts = 0;
-    if(t.hdm > 0){
+    if (t.hd > 0) {
         parts++;
     }
-    if(t.hot > 0){
+    if (t.hdm > 0) {
         parts++;
     }
-    if(t.cold > 0){
+    if (t.hot > 0) {
         parts++;
     }
-    
+    if (t.cold > 0) {
+        parts++;
+    }
+
     CGSize size = CGSizeMake(kImageSize, kImageSize);
     CGRect circleRect = CGRectMake(kStrokeWidth / 2, kStrokeWidth / 2, size.width - kStrokeWidth, size.height - kStrokeWidth);
     UIGraphicsBeginImageContext(size);
@@ -81,85 +85,102 @@
     CGContextSetLineCap(context, kCGLineCapRound);
     CGContextSetLineJoin(context, kCGLineJoinRound);
     CGContextSetLineWidth(context, kStrokeWidth);
-    
-    
+
+
     // bg
-    UIColor* bgColor = [UIColor colorWithWhite:1 alpha:0.1];
-    if(parts == 1){
-        if(t.hdm > 0){
+    UIColor *bgColor = [UIColor colorWithWhite:1 alpha:0.1];
+    if (parts == 1) {
+        if (t.hd > 0) {
+            bgColor = kHDColor;
+        } else if (t.hdm > 0) {
             bgColor = kHDMColor;
-        }else if(t.hot > 0){
+        } else if (t.hot > 0) {
             bgColor = kHotColor;
-        }else if(t.cold > 0){
+        } else if (t.cold > 0) {
             bgColor = kColdColor;
         }
     }
     CGContextSetStrokeColorWithColor(context, [bgColor CGColor]);
     CGContextAddEllipseInRect(context, circleRect);
     CGContextStrokePath(context);
-    
-    
-    if(parts > 1){
-        double total = (double)t.total;
-        double hdmAmount = (double)t.hdm;
-        double hotAmount = (double)t.hot;
-        double coldAmount = (double)t.cold;
-        
+
+
+    if (parts > 1) {
+        double total = (double) t.total;
+        double hdAmount = (double) t.hd;
+        double hdmAmount = (double) t.hdm;
+        double hotAmount = (double) t.hot;
+        double coldAmount = (double) t.cold;
+
+        double hd = 0;
         double hdm = 0;
         double hot = 0;
         double cold = 0;
-        
-        if(hdmAmount > 0 && hdmAmount < total * kCircleMinRate){
+
+        if (hdAmount > 0 && hdAmount < total * kCircleMinRate) {
+            double delta = total * kCircleMinRate - hdAmount;
+            total += delta;
+            hdAmount += delta;
+        }
+
+        if (hdmAmount > 0 && hdmAmount < total * kCircleMinRate) {
             double delta = total * kCircleMinRate - hdmAmount;
             total += delta;
             hdmAmount += delta;
         }
-        
-        if(hotAmount > 0 && hotAmount < total * kCircleMinRate){
+
+        if (hotAmount > 0 && hotAmount < total * kCircleMinRate) {
             double delta = total * kCircleMinRate - hotAmount;
             total += delta;
             hotAmount += delta;
         }
-        if(coldAmount > 0 && coldAmount < total * kCircleMinRate){
+        if (coldAmount > 0 && coldAmount < total * kCircleMinRate) {
             double delta = total * kCircleMinRate - coldAmount;
             total += delta;
             coldAmount += delta;
         }
-        
-        if(hdmAmount > 0){
+
+        if (hdAmount > 0) {
+            hd = hdAmount / total;
+        }
+        if (hdmAmount > 0) {
             hdm = hdmAmount / total;
         }
-        if(hotAmount > 0){
+        if (hotAmount > 0) {
             hot = hotAmount / total;
         }
-        if(coldAmount > 0){
+        if (coldAmount > 0) {
             cold = coldAmount / total;
         }
-        
+
         CGFloat start = CGFLOAT_MIN;
-        if(hdm > 0){
+        if (hd > 0) {
+            CGContextSetStrokeColorWithColor(context, [kHDColor CGColor]);
+            start = [TotalBalanceDrawer drawArc:context rate:hd andStart:start];
+        }
+        if (hdm > 0) {
             CGContextSetStrokeColorWithColor(context, [kHDMColor CGColor]);
             start = [TotalBalanceDrawer drawArc:context rate:hdm andStart:start];
         }
-        if(hot > 0){
+        if (hot > 0) {
             CGContextSetStrokeColorWithColor(context, [kHotColor CGColor]);
             start = [TotalBalanceDrawer drawArc:context rate:hot andStart:start];
         }
-        if(cold > 0){
+        if (cold > 0) {
             CGContextSetStrokeColorWithColor(context, [kColdColor CGColor]);
             start = [TotalBalanceDrawer drawArc:context rate:cold andStart:start];
         }
     }
-    
-    UIImage* result = UIGraphicsGetImageFromCurrentImageContext();
+
+    UIImage *result = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
     return result;
 }
 
-+(CGFloat)drawArc:(CGContextRef)context rate:(double)rate andStart:(CGFloat)start{
++ (CGFloat)drawArc:(CGContextRef)context rate:(double)rate andStart:(CGFloat)start {
     CGFloat total = M_PI * 2.0;
     CGFloat delta = total * rate;
-    if(start == CGFLOAT_MIN){
+    if (start == CGFLOAT_MIN) {
         start = 0.0 - total / 4.0 - delta / 2.0;
     }
     CGFloat end = start + delta;

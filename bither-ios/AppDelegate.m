@@ -38,33 +38,34 @@
 #import "SystemUtil.h"
 #import "GroupFileUtil.h"
 
-@interface AppDelegate()
+@interface AppDelegate ()
 @end
-static StatusBarNotificationWindow* notificationWindow;
+
+static StatusBarNotificationWindow *notificationWindow;
+
 @implementation AppDelegate
 
-- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
-{
-    if ([[BTSettings instance] getAppMode]==COLD) {
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    if ([[BTSettings instance] getAppMode] == COLD) {
         [[UIApplication sharedApplication] setMinimumBackgroundFetchInterval:UIApplicationBackgroundFetchIntervalNever];
-    }else{
+    } else {
         [[UIApplication sharedApplication] setMinimumBackgroundFetchInterval:UIApplicationBackgroundFetchIntervalMinimum];
     }
 
     [[BTPeerManager instance] initAddress];
-    
-    if([[BTSettings instance] needChooseMode]){
+
+    if ([[BTSettings instance] needChooseMode]) {
         [[BTSettings instance] setAppMode:HOT];
     }
-    
+
     [CrashLog initCrashLog];
-    if ([UpgradeUtil needUpgradeKeyFromFileToDB]){
-        DialogProgress * dp=[[DialogProgress alloc] initWithMessage:NSLocalizedString(@"Please wait…", nil)];
-        __block  DialogProgress* sslfDp=dp;
+    if ([UpgradeUtil needUpgradeKeyFromFileToDB]) {
+        DialogProgress *dp = [[DialogProgress alloc] initWithMessage:NSLocalizedString(@"Please wait…", nil)];
+        __block  DialogProgress *sslfDp = dp;
         [dp showInWindow:self.window completion:^{
-            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0),^{
-                BOOL  success = [UpgradeUtil upgradeKeyFromFileToDB];
-                if (success){
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+                BOOL success = [UpgradeUtil upgradeKeyFromFileToDB];
+                if (success) {
                     [[UserDefaultsUtil instance] setLastVersion:[SystemUtil getVersionCode]];
                     dispatch_async(dispatch_get_main_queue(), ^{
                         [sslfDp dismissWithCompletion:^{
@@ -75,29 +76,30 @@ static StatusBarNotificationWindow* notificationWindow;
                 }
             });
         }];
-    }else{
+    } else {
         [self loadViewController];
     }
-    
-    if([[UIApplication sharedApplication] respondsToSelector:@selector(registerUserNotificationSettings:)]){
-        [[UIApplication sharedApplication] registerUserNotificationSettings:[UIUserNotificationSettings settingsForTypes:UIUserNotificationTypeBadge|UIUserNotificationTypeSound categories:nil]];
+
+    if ([[UIApplication sharedApplication] respondsToSelector:@selector(registerUserNotificationSettings:)]) {
+        [[UIApplication sharedApplication] registerUserNotificationSettings:[UIUserNotificationSettings settingsForTypes:UIUserNotificationTypeBadge | UIUserNotificationTypeSound categories:nil]];
     }
-    
+
     [self updateGroupBalance];
-    
+
     //   [[BTSettings instance] openBitheriConsole];
 
     return YES;
 }
--(void)loadViewController{
+
+- (void)loadViewController {
     UIStoryboard *storyboard = self.window.rootViewController.storyboard;
-    if(![[BTSettings instance] needChooseMode]){
-        IOS7ContainerViewController *container = [[IOS7ContainerViewController alloc]init];
-        if ([[BTSettings instance] getAppMode]==HOT && [[BlockUtil instance] syncSpvFinish]) {
+    if (![[BTSettings instance] needChooseMode]) {
+        IOS7ContainerViewController *container = [[IOS7ContainerViewController alloc] init];
+        if ([[BTSettings instance] getAppMode] == HOT && [[BlockUtil instance] syncSpvFinish]) {
             container.controller = [storyboard instantiateViewControllerWithIdentifier:@"BitherHot"];
             self.window.rootViewController = container;
         }
-        if([[BTSettings instance] getAppMode]==COLD && ![NetworkUtil isEnableWIFI] && ![NetworkUtil isEnable3G]){
+        if ([[BTSettings instance] getAppMode] == COLD && ![NetworkUtil isEnableWIFI] && ![NetworkUtil isEnable3G]) {
             container.controller = [storyboard instantiateViewControllerWithIdentifier:@"BitherCold"];
             self.window.rootViewController = container;
         }
@@ -114,32 +116,30 @@ static StatusBarNotificationWindow* notificationWindow;
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reachabilityChange) name:kReachabilityChangedNotification object:nil];
 
     }];
-    notificationWindow = [[StatusBarNotificationWindow alloc]initWithOriWindow:self.window];
+    notificationWindow = [[StatusBarNotificationWindow alloc] initWithOriWindow:self.window];
     [[PinCodeUtil instance] becomeActive];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(notification:) name:BitherBalanceChangedNotification object:nil];
 
 }
 
--(void)notification:(NSNotification *)notification{
-    NSArray * array=[notification object];
+- (void)notification:(NSNotification *)notification {
+    NSArray *array = [notification object];
     [NotificationUtil notificationTx:array];
     [self updateGroupBalance];
 }
 
-- (void)applicationDidEnterBackground:(UIApplication *)application
-{
+- (void)applicationDidEnterBackground:(UIApplication *)application {
     // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
     // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
     [self callInHot:^{
-        [[BitherTime instance]pause];
+        [[BitherTime instance] pause];
     }];
     [self callInCold:^{
         [[NSNotificationCenter defaultCenter] removeObserver:self name:kReachabilityChangedNotification object:nil];
     }];
 }
 
-- (void)applicationWillEnterForeground:(UIApplication *)application
-{
+- (void)applicationWillEnterForeground:(UIApplication *)application {
     [self callInHot:^{
         [[BitherTime instance] resume];
         [TrendingGraphicData clearCache];
@@ -148,46 +148,44 @@ static StatusBarNotificationWindow* notificationWindow;
         }
     }];
     [self callInCold:^{
-        if ([NetworkUtil isEnable3G]||[NetworkUtil isEnableWIFI]) {
-            if ([NetworkUtil isEnable3G]||[NetworkUtil isEnableWIFI]) {
-                UIViewController * chooseModeViewController=[self.coldController.storyboard instantiateViewControllerWithIdentifier:@"ChooseModeViewController"];
+        if ([NetworkUtil isEnable3G] || [NetworkUtil isEnableWIFI]) {
+            if ([NetworkUtil isEnable3G] || [NetworkUtil isEnableWIFI]) {
+                UIViewController *chooseModeViewController = [self.coldController.storyboard instantiateViewControllerWithIdentifier:@"ChooseModeViewController"];
                 [self.coldController presentViewController:chooseModeViewController animated:YES completion:nil];
             }
         }
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reachabilityChange) name:kReachabilityChangedNotification object:nil];
-        
+
     }];
     // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
 }
 
-- (void)applicationDidBecomeActive:(UIApplication *)application
-{
+- (void)applicationDidBecomeActive:(UIApplication *)application {
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
 }
 
-- (void)applicationWillTerminate:(UIApplication *)application
-{
+- (void)applicationWillTerminate:(UIApplication *)application {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
 
--(void)application:(UIApplication *)application performFetchWithCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler{
+- (void)application:(UIApplication *)application performFetchWithCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler {
     //TODO time of fetch
-    if ([[BTSettings instance] getAppMode]==COLD) {
+    if ([[BTSettings instance] getAppMode] == COLD) {
         completionHandler(UIBackgroundFetchResultNoData);
         return;
     }
     DDLogDebug(@"perform fetch begin");
-    __block id  syncFailedObserver = nil;
+    __block id syncFailedObserver = nil;
     __block void (^completion)(UIBackgroundFetchResult) = completionHandler;
     BTPeerManager *m = [BTPeerManager instance];
-    
+
 //    if (m.syncProgress >= 1.0) {
 //        if (completion) completion(UIBackgroundFetchResultNoData);
 //        return;
 //    }
-    
+
     // timeout after 25 seconds
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 25*NSEC_PER_SEC), dispatch_get_main_queue(), ^{
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 25 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
         if (syncFailedObserver) [[NSNotificationCenter defaultCenter] removeObserver:syncFailedObserver];
         syncFailedObserver = nil;
         double syncProgress = m.syncProgress;
@@ -200,12 +198,12 @@ static StatusBarNotificationWindow* notificationWindow;
             DDLogDebug(@"perform fetch 25sec UIBackgroundFetchResultNoData");
         }
         completion = nil;
-        
-      //  if (syncFinishedObserver) [[NSNotificationCenter defaultCenter] removeObserver:syncFinishedObserver];
+
+        //  if (syncFinishedObserver) [[NSNotificationCenter defaultCenter] removeObserver:syncFinishedObserver];
 
         //TODO: XXXX disconnect
     });
-    
+
 //    syncFinishedObserver =
 //    [[NSNotificationCenter defaultCenter] addObserverForName:BTPeerManagerSyncFinishedNotification object:nil
 //                                                       queue:nil usingBlock:^(NSNotification *note) {
@@ -220,106 +218,112 @@ static StatusBarNotificationWindow* notificationWindow;
 //                                                       }];
 //    
     syncFailedObserver =
-    [[NSNotificationCenter defaultCenter] addObserverForName:BTPeerManagerSyncFailedNotification object:nil
-                                                       queue:nil usingBlock:^(NSNotification *note) {
-                                                               DDLogDebug(@"perform fetch BTPeerManagerSyncFailedNotification");
-                                                           [self stopPeerWithFetch];
-                                                           if (syncFailedObserver) [[NSNotificationCenter defaultCenter] removeObserver:syncFailedObserver];
-                                                           // syncFinishedObserver = syncFailedObserver = nil;
-                                                           syncFailedObserver=nil;
-                                                           if (completion) completion(UIBackgroundFetchResultFailed);
-                                                           completion = nil;
-                                                           
+            [[NSNotificationCenter defaultCenter] addObserverForName:BTPeerManagerSyncFailedNotification object:nil
+                                                               queue:nil usingBlock:^(NSNotification *note) {
+                        DDLogDebug(@"perform fetch BTPeerManagerSyncFailedNotification");
+                        [self stopPeerWithFetch];
+                        if (syncFailedObserver) [[NSNotificationCenter defaultCenter] removeObserver:syncFailedObserver];
+                        // syncFinishedObserver = syncFailedObserver = nil;
+                        syncFailedObserver = nil;
+                        if (completion) completion(UIBackgroundFetchResultFailed);
+                        completion = nil;
+
 //                                                           if (syncFinishedObserver) [[NSNotificationCenter defaultCenter] removeObserver:syncFinishedObserver];
-                                                         }];
-    
+                    }];
+
     [[PeerUtil instance] startPeer];
 }
--(void)stopPeerWithFetch{
+
+- (void)stopPeerWithFetch {
     UIApplicationState state = [UIApplication sharedApplication].applicationState;
-    if (state==UIApplicationStateBackground) {
+    if (state == UIApplicationStateBackground) {
         if ([[BTPeerManager instance] connected]) {
             [[BTPeerManager instance] stop];
         }
-        
+
     }
 }
 
-- (void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification*)notification{
-    NSDictionary* dic  = notification.userInfo;
-    NSLog(@"user info = %@",[dic objectForKey:@"key"]);
+- (void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification {
+    NSDictionary *dic = notification.userInfo;
+    NSLog(@"user info = %@", [dic objectForKey:@"key"]);
     application.applicationIconBadgeNumber = 0;
-    
-    if([(NSNumber*)dic[@"ApplicationForeground"] boolValue] && dic[@"TxNotificationType"] && [(NSNumber*)dic[@"TxNotificationType"] integerValue] == txReceive){
-        NSString* address = dic[@"address"];
-        int64_t diff = [(NSNumber*)dic[@"diff"] longLongValue];
-        if(diff != 0){
+
+    if ([(NSNumber *) dic[@"ApplicationForeground"] boolValue] && dic[@"TxNotificationType"] && [(NSNumber *) dic[@"TxNotificationType"] integerValue] == txReceive) {
+        NSString *address = dic[@"address"];
+        int64_t diff = [(NSNumber *) dic[@"diff"] longLongValue];
+        if (diff != 0) {
             [PlaySoundUtil playSound:@"coins_received" extension:@"wav" callback:nil];
-            NSString* notification = [NSString stringWithFormat:@"%@ %@ %@", diff >= 0 ? NSLocalizedString(@"Received", nil) : NSLocalizedString(@"Sent", nil), diff >= 0 ? [UnitUtil stringForAmount:diff] : [UnitUtil stringForAmount:0 - diff], [UnitUtil unitName]];
+            NSString *notification = [NSString stringWithFormat:@"%@ %@ %@", diff >= 0 ? NSLocalizedString(@"Received", nil) : NSLocalizedString(@"Sent", nil), diff >= 0 ? [UnitUtil stringForAmount:diff] : [UnitUtil stringForAmount:0 - diff], [UnitUtil unitName]];
             [notificationWindow showNotification:notification withAddress:address color:diff > 0 ? [UIColor greenColor] : [UIColor redColor]];
         }
     }
 }
 
-+(StatusBarNotificationWindow*)notificationWindow{
++ (StatusBarNotificationWindow *)notificationWindow {
     return notificationWindow;
 }
 
--(void)updateGroupBalance{
-    if([GroupFileUtil supported]){
+- (void)updateGroupBalance {
+    if ([GroupFileUtil supported]) {
         int64_t hdm = 0;
         int64_t hot = 0;
         int64_t cold = 0;
-        NSArray* allAddresses = [BTAddressManager instance].allAddresses;
-        for(BTAddress* a in allAddresses){
-            if(a.isHDM){
+        NSArray *allAddresses = [BTAddressManager instance].allAddresses;
+        for (BTAddress *a in allAddresses) {
+            if (a.isHDM) {
                 hdm += a.balance;
-            }else if(a.hasPrivKey){
-                hot+= a.balance;
-            }else{
-                cold+= a.balance;
+            } else if (a.hasPrivKey) {
+                hot += a.balance;
+            } else {
+                cold += a.balance;
             }
         }
-        [GroupFileUtil setTotalBalanceWithHDM:hdm hot:hot andCold:cold];
+        int64_t hd = 0;
+        if ([BTAddressManager instance].hasHDAccount) {
+            hd = [BTAddressManager instance].hdAccount.balance;
+        }
+        [GroupFileUtil setTotalBalanceWithHD:hd HDM:hdm hot:hot andCold:cold];
     }
 }
 
--(void)callInHot:(VoidBlock)voidBlock{
-    if ([[BTSettings instance] getAppMode]==HOT) {
-        if (voidBlock) {
-            voidBlock();
-        }
-    }
-}
--(void)callInCold:(VoidBlock) voidBlock{
-    if ([[BTSettings instance] getAppMode]==COLD) {
+- (void)callInHot:(VoidBlock)voidBlock {
+    if ([[BTSettings instance] getAppMode] == HOT) {
         if (voidBlock) {
             voidBlock();
         }
     }
 }
 
-- (void)applicationWillResignActive:(UIApplication *)application
-{
+- (void)callInCold:(VoidBlock)voidBlock {
+    if ([[BTSettings instance] getAppMode] == COLD) {
+        if (voidBlock) {
+            voidBlock();
+        }
+    }
+}
+
+- (void)applicationWillResignActive:(UIApplication *)application {
     application.applicationIconBadgeNumber = 0;
 }
-- (void)dealloc
-{
+
+- (void)dealloc {
     [[NSNotificationCenter defaultCenter] removeObserver:self name:BitherBalanceChangedNotification object:nil];
     [self callInCold:^{
         [[NSNotificationCenter defaultCenter] removeObserver:self name:kReachabilityChangedNotification object:nil];
     }];
-    
+
     [[BitherTime instance] stop];
 }
--(void)reachabilityChange{
+
+- (void)reachabilityChange {
     [self callInCold:^{
-        if ([NetworkUtil isEnable3G]||[NetworkUtil isEnableWIFI]) {
-            UIViewController * chooseModeViewController=[self.coldController.storyboard instantiateViewControllerWithIdentifier:@"ChooseModeViewController"];
+        if ([NetworkUtil isEnable3G] || [NetworkUtil isEnableWIFI]) {
+            UIViewController *chooseModeViewController = [self.coldController.storyboard instantiateViewControllerWithIdentifier:@"ChooseModeViewController"];
             [self.coldController presentViewController:chooseModeViewController animated:YES completion:nil];
         }
     }];
-    
+
 
 }
 @end
