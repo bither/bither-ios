@@ -245,7 +245,7 @@ static Setting *importPrivateKeySetting;
                         return;
                     }
                 }
-                BTHDAccount *account = [[BTHDAccount alloc] initWithEncryptedMnemonicSeed:[[BTEncryptData alloc] initWithStr:[_result substringFromIndex:1]] password:password andSyncedComplete:NO];
+                BTHDAccount *account = [[BTHDAccount alloc] initWithEncryptedMnemonicSeed:[[BTEncryptData alloc] initWithStr:[_result substringFromIndex:1]] password:password syncedComplete:NO andGenerationCallback:nil];
                 if (!account) {
                     dispatch_async(dispatch_get_main_queue(), ^{
                         [dp dismissWithCompletion:^{

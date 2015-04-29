@@ -35,7 +35,7 @@
 #import <Bitheri/BTHDAccount.h>
 #import <Bitheri/BTAddressManager.h>
 
-#define kSaveProgress (0.1)
+#define kSaveProgress (0.03)
 #define kStartProgress (0.01)
 #define kMinGeneratingTime (2.4)
 
@@ -99,7 +99,7 @@
             while (!account) {
                 @try {
                     NSData *seed = [xRandom randomWithSize:16];
-                    account = [[BTHDAccount alloc] initWithMnemonicSeed:seed password:password andFromXRandom:NO];
+                    account = [[BTHDAccount alloc] initWithMnemonicSeed:seed password:password fromXRandom:NO andGenerationCallback:nil];
                 }
                 @catch (NSException *exception) {
                     NSLog(@"generate HD Account error %@", exception.debugDescription);
@@ -129,7 +129,7 @@
 
 - (void)onUEntropyGeneratingWithController:(UEntropyViewController *)controller collector:(UEntropyCollector *)collector andPassword:(NSString *)password {
     float progress = kStartProgress;
-    float itemProgress = (1.0 - kStartProgress - kSaveProgress) / 2;
+    float generationProgress = 1.0 - kStartProgress - kSaveProgress;
     NSTimeInterval startGeneratingTime = [[NSDate date] timeIntervalSince1970];
     [collector onResume];
     [collector start];
@@ -144,19 +144,17 @@
     while (!account) {
         @try {
             NSData *seed = [xrandom randomWithSize:16];
-            if (progress < 1.0 - kSaveProgress - itemProgress) {
-                progress += itemProgress;
-                [controller onProgress:progress];
-            }
-
-            account = [[BTHDAccount alloc] initWithMnemonicSeed:seed password:password andFromXRandom:YES];
+            __block UEntropyViewController *c = controller;
+            account = [[BTHDAccount alloc] initWithMnemonicSeed:seed password:password fromXRandom:YES andGenerationCallback:^(CGFloat p) {
+                [c onProgress:kStartProgress + p * generationProgress];
+            }];
         }
         @catch (NSException *exception) {
             NSLog(@"generate HD Account error %@", exception.debugDescription);
         }
     }
 
-    progress += itemProgress;
+    progress = 1.0 - kSaveProgress;
     [controller onProgress:progress];
 
     words = [account seedWords:password];

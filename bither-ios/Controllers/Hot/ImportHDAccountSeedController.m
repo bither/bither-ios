@@ -167,7 +167,7 @@
                 });
                 return;
             }
-            BTHDAccount *account = [[BTHDAccount alloc] initWithMnemonicSeed:mnemonicCodeSeed password:password fromXRandom:NO andSyncedComplete:NO];
+            BTHDAccount *account = [[BTHDAccount alloc] initWithMnemonicSeed:mnemonicCodeSeed password:password fromXRandom:NO syncedComplete:NO andGenerationCallback:nil];
             if (!account) {
                 dispatch_async(dispatch_get_main_queue(), ^{
                     [self showMsg:NSLocalizedString(@"import_hdm_cold_seed_format_error", nil)];
