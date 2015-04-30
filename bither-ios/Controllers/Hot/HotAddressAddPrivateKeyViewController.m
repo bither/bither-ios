@@ -27,6 +27,7 @@
 #import "DialogXrandomInfo.h"
 #import "UIViewController+PiShowBanner.h"
 #import "BTPrivateKeyUtil.h"
+
 @import MobileCoreServices;
 @import AVFoundation;
 
@@ -37,93 +38,108 @@
 #define kMinGeneratingTime (2.4)
 
 @interface HotAddressAddPrivateKeyViewController ()
-@property (weak, nonatomic) IBOutlet UIPickerView *pvCount;
-@property (weak, nonatomic) IBOutlet UIButton *btnXRandomCheck;
-@property (weak, nonatomic) IBOutlet UIView *vTopbar;
+@property(weak, nonatomic) IBOutlet UIPickerView *pvCount;
+@property(weak, nonatomic) IBOutlet UIButton *btnXRandomCheck;
+@property(weak, nonatomic) IBOutlet UIView *vTopbar;
+@property(weak, nonatomic) IBOutlet UIView *vContainer;
 @property int countToGenerate;
 @end
 
-@interface HotAddressAddPrivateKeyViewController (DialogPassword)<DialogPasswordDelegate>
+@interface HotAddressAddPrivateKeyViewController (DialogPassword) <DialogPasswordDelegate>
 @end
 
-@interface HotAddressAddPrivateKeyViewController(UIPickerViewDataSource)<UIPickerViewDataSource,UIPickerViewDelegate>
+@interface HotAddressAddPrivateKeyViewController (UIPickerViewDataSource) <UIPickerViewDataSource, UIPickerViewDelegate>
 @end
 
-@interface HotAddressAddPrivateKeyViewController(UEntropy)<UEntropyViewControllerDelegate>
+@interface HotAddressAddPrivateKeyViewController (UEntropy) <UEntropyViewControllerDelegate>
 @end
 
 @implementation HotAddressAddPrivateKeyViewController
--(id)initWithCoder:(NSCoder *)aDecoder{
-    self=[super initWithCoder:aDecoder];
+- (id)initWithCoder:(NSCoder *)aDecoder {
+    self = [super initWithCoder:aDecoder];
     if (self) {
     }
     return self;
 }
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
+
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
     }
     return self;
 }
 
-- (void)viewDidLoad{
+- (void)viewDidLoad {
     [super viewDidLoad];
-    if([[BTSettings instance] getAppMode] == COLD){
+    CGRect frame = self.vContainer.frame;
+    if ([[BTSettings instance] getAppMode] == COLD) {
+        self.vTopbar.hidden = YES;
+        frame.origin.y = 0;
         self.limit = PRIVATE_KEY_OF_COLD_COUNT_LIMIT;
-    }else{
+    } else {
+        self.vTopbar.hidden = NO;
+        frame.origin.y = CGRectGetMaxY(self.vTopbar.frame);
         self.limit = PRIVATE_KEY_OF_HOT_COUNT_LIMIT;
     }
+    self.vContainer.frame = frame;
     self.countToGenerate = 1;
     self.pvCount.delegate = self;
     self.pvCount.dataSource = self;
 }
 
+- (UIViewController *)successDismissingViewController {
+    if ([[BTSettings instance] getAppMode] == COLD) {
+        return self.parentViewController.parentViewController.parentViewController.presentingViewController;
+    } else {
+        return self.parentViewController.presentingViewController.presentingViewController;
+    }
+}
+
 - (IBAction)generatePressed:(id)sender {
-    if(self.btnXRandomCheck.selected && (
-                [AVCaptureDevice authorizationStatusForMediaType:AVMediaTypeVideo] == AVAuthorizationStatusNotDetermined ||
-                [AVCaptureDevice authorizationStatusForMediaType:AVMediaTypeAudio] == AVAuthorizationStatusNotDetermined )
-                ){
+    if (self.btnXRandomCheck.selected && (
+            [AVCaptureDevice authorizationStatusForMediaType:AVMediaTypeVideo] == AVAuthorizationStatusNotDetermined ||
+                    [AVCaptureDevice authorizationStatusForMediaType:AVMediaTypeAudio] == AVAuthorizationStatusNotDetermined)
+            ) {
         [self getPermissions:^{
-            DialogPassword *d = [[DialogPassword alloc]initWithDelegate:self];
+            DialogPassword *d = [[DialogPassword alloc] initWithDelegate:self];
             [d showInWindow:self.view.window];
         }];
-    }else{
-        DialogPassword *d = [[DialogPassword alloc]initWithDelegate:self];
+    } else {
+        DialogPassword *d = [[DialogPassword alloc] initWithDelegate:self];
         [d showInWindow:self.view.window];
     }
 }
 
-- (IBAction)xrandomCheckPressed:(id)sender{
-    if(!self.btnXRandomCheck.selected){
+- (IBAction)xrandomCheckPressed:(id)sender {
+    if (!self.btnXRandomCheck.selected) {
         self.btnXRandomCheck.selected = YES;
         [self.btnXRandomCheck setImage:[UIImage imageNamed:@"xrandom_checkbox_checked"] forState:UIControlStateNormal];
-    }else{
-        DialogAlert *alert = [[DialogAlert alloc]initWithMessage:NSLocalizedString(@"XRandom increases randomness.\nSure to disable?", nil) confirm:^{
+    } else {
+        DialogAlert *alert = [[DialogAlert alloc] initWithMessage:NSLocalizedString(@"XRandom increases randomness.\nSure to disable?", nil) confirm:^{
             self.btnXRandomCheck.selected = NO;
             [self.btnXRandomCheck setImage:[UIImage imageNamed:@"xrandom_checkbox_normal"] forState:UIControlStateNormal];
-        } cancel:nil];
+        }                                                  cancel:nil];
         [alert showInWindow:self.view.window];
     }
 }
 
 - (IBAction)xrandomInfoPressed:(id)sender {
-    [[[DialogXrandomInfo alloc]initWithGuide:YES]showInWindow:self.view.window];
+    [[[DialogXrandomInfo alloc] initWithGuide:YES] showInWindow:self.view.window];
 }
 
--(void)getPermisionFor:(NSString*)mediaType completion:(void(^)(BOOL))completion{
+- (void)getPermisionFor:(NSString *)mediaType completion:(void (^)(BOOL))completion {
     AVAuthorizationStatus authStatus = [AVCaptureDevice authorizationStatusForMediaType:mediaType];
-    if(authStatus == AVAuthorizationStatusNotDetermined){
+    if (authStatus == AVAuthorizationStatusNotDetermined) {
         [AVCaptureDevice requestAccessForMediaType:mediaType completionHandler:^(BOOL granted) {
             completion(granted);
         }];
-    }else{
+    } else {
         completion(authStatus == AVAuthorizationStatusAuthorized);
     }
 }
 
--(void)getPermissions:(void(^)())completion{
-    __weak __block HotAddressAddPrivateKeyViewController* c = self;
+- (void)getPermissions:(void (^)())completion {
+    __weak __block HotAddressAddPrivateKeyViewController *c = self;
     [[[DialogXrandomInfo alloc] initWithPermission:^{
         [c getPermisionFor:AVMediaTypeVideo completion:^(BOOL result) {
             [c getPermisionFor:AVMediaTypeAudio completion:^(BOOL result) {
@@ -135,25 +151,25 @@
 
 @end
 
-@implementation HotAddressAddPrivateKeyViewController(DialogPassword)
+@implementation HotAddressAddPrivateKeyViewController (DialogPassword)
 
--(void)onPasswordEntered:(NSString *)password{
-    if(self.btnXRandomCheck.selected){
-        UEntropyViewController* uentropy = [[UEntropyViewController alloc]initWithPassword:password andDelegate:self];
+- (void)onPasswordEntered:(NSString *)password {
+    if (self.btnXRandomCheck.selected) {
+        UEntropyViewController *uentropy = [[UEntropyViewController alloc] initWithPassword:password andDelegate:self];
         [self presentViewController:uentropy animated:YES completion:nil];
-    }else{
-        DialogProgress *d = [[DialogProgress alloc]initWithMessage:NSLocalizedString(@"Please wait…", nil)];
+    } else {
+        DialogProgress *d = [[DialogProgress alloc] initWithMessage:NSLocalizedString(@"Please wait…", nil)];
         d.touchOutSideToDismiss = NO;
         [d showInWindow:self.view.window];
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
             [UIApplication sharedApplication].idleTimerDisabled = YES;
-            XRandom *xRandom=[[XRandom alloc] initWithDelegate:nil];
+            XRandom *xRandom = [[XRandom alloc] initWithDelegate:nil];
             BOOL result = [KeyUtil addPrivateKeyByRandom:xRandom passphras:password count:self.countToGenerate];
             [UIApplication sharedApplication].idleTimerDisabled = NO;
             dispatch_async(dispatch_get_main_queue(), ^{
                 [d dismissWithCompletion:^{
-                    if(result){
-                        [self.parentViewController.presentingViewController.presentingViewController dismissViewControllerAnimated:YES completion:nil];
+                    if (result) {
+                        [self.successDismissingViewController dismissViewControllerAnimated:YES completion:nil];
                     } else {
                         [self showBannerWithMessage:NSLocalizedString(@"xrandom_generating_failed", nil) belowView:self.vTopbar];
                     }
@@ -165,30 +181,30 @@
 
 @end
 
-@implementation HotAddressAddPrivateKeyViewController(UIPickerViewDataSource)
+@implementation HotAddressAddPrivateKeyViewController (UIPickerViewDataSource)
 
-- (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView{
+- (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView {
     return 1;
 }
 
-- (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component{
-    NSUInteger preCount =[BTAddressManager instance].privKeyAddresses.count;
+- (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component {
+    NSUInteger preCount = [BTAddressManager instance].privKeyAddresses.count;
     return self.limit - preCount;
 }
 
-- (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component{
+- (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component {
     return [NSString stringWithFormat:@"%ld", row + 1];
 }
 
-- (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component{
-    self.countToGenerate = (int)(row + 1);
+- (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
+    self.countToGenerate = (int) (row + 1);
 }
 
 @end
 
 @implementation HotAddressAddPrivateKeyViewController (UEntropy)
 
--(void)onUEntropyGeneratingWithController:(UEntropyViewController*)controller collector:(UEntropyCollector*)collector andPassword:(NSString*)password{
+- (void)onUEntropyGeneratingWithController:(UEntropyViewController *)controller collector:(UEntropyCollector *)collector andPassword:(NSString *)password {
     UInt32 count = self.countToGenerate;
     float progress = kStartProgress;
     float itemProgress = (1.0 - kStartProgress - kSaveProgress) / (float) count;
@@ -196,27 +212,27 @@
     [collector onResume];
     [collector start];
     [controller onProgress:progress];
-    XRandom* xrandom = [[XRandom alloc]initWithDelegate:collector];
-    NSMutableArray *addresses=[NSMutableArray new];
-    
-    for(int i = 0; i < count; i++){
-        if(controller.testShouldCancel){
+    XRandom *xrandom = [[XRandom alloc] initWithDelegate:collector];
+    NSMutableArray *addresses = [NSMutableArray new];
+
+    for (int i = 0; i < count; i++) {
+        if (controller.testShouldCancel) {
             return;
         }
-        
-        NSData* data = [xrandom randomWithSize:32];
-        if(data){
+
+        NSData *data = [xrandom randomWithSize:32];
+        if (data) {
             BTKey *key = [BTKey keyWithSecret:data compressed:YES];
-            key.isFromXRandom=YES;
-            NSLog(@"uentropy outcome data %d/%lu", i + 1, (unsigned long)count);
+            key.isFromXRandom = YES;
+            NSLog(@"uentropy outcome data %d/%lu", i + 1, (unsigned long) count);
             progress += itemProgress * kProgressKeyRate;
             [controller onProgress:progress];
-            if(controller.testShouldCancel){
+            if (controller.testShouldCancel) {
                 return;
             }
-            
+
             NSString *privateKeyString = [BTPrivateKeyUtil getPrivateKeyString:key passphrase:password];
-            if(!privateKeyString){
+            if (!privateKeyString) {
                 [controller onFailed];
                 return;
             }
@@ -224,33 +240,35 @@
             [addresses addObject:btAddress];
             progress += itemProgress * kProgressEncryptRate;
             [controller onProgress:progress];
-        }else{
+        } else {
             [controller onFailed];
             return;
         }
     }
-    
-    if(controller.testShouldCancel){
+
+    if (controller.testShouldCancel) {
         return;
     }
-    
+
     [collector stop];
     [KeyUtil addAddressList:addresses];
     while ([[NSDate new] timeIntervalSince1970] - startGeneratingTime < kMinGeneratingTime) {
-        
+
     }
     [controller onSuccess];
-    
+
 }
+
 - (IBAction)cancelPressed:(id)sender {
     [self.parentViewController dismissViewControllerAnimated:YES completion:nil];
 }
 
--(void)successFinish:(UEntropyViewController*)controller{
+- (void)successFinish:(UEntropyViewController *)controller {
     UInt32 count = self.countToGenerate;
-    __block UIWindow* window = controller.view.window;
-    [controller.presentingViewController.presentingViewController.presentingViewController dismissViewControllerAnimated:YES completion:^{
-        DialogAlert* alert = [[DialogAlert alloc]initWithMessage:[NSString stringWithFormat:NSLocalizedString(@"xrandom_final_confirm", nil), count] confirm:nil cancel:nil];
+    __block UIWindow *window = controller.view.window;
+    __block UIViewController *dismissingVc = self.successDismissingViewController;
+    [dismissingVc dismissViewControllerAnimated:YES completion:^{
+        DialogAlert *alert = [[DialogAlert alloc] initWithMessage:[NSString stringWithFormat:NSLocalizedString(@"xrandom_final_confirm", nil), count] confirm:nil cancel:nil];
         [alert showInWindow:window];
     }];
 }

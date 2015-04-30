@@ -978,50 +978,57 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <pickerView contentMode="scaleToFill" id="hEQ-cn-z22">
-                                <rect key="frame" x="0.0" y="115" width="320" height="162"/>
+                            <view contentMode="scaleToFill" id="Rk4-nx-4bl">
+                                <rect key="frame" x="0.0" y="44" width="320" height="350"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="lQX-qn-8mY">
+                                        <rect key="frame" x="270" y="251" width="30" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
+                                        <state key="normal" image="xrandom_info_icon_normal">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <state key="highlighted" image="xrandom_info_icon_pressed"/>
+                                        <connections>
+                                            <action selector="xrandomInfoPressed:" destination="5gP-20-5H4" eventType="touchUpInside" id="7Zb-ui-h9H"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" selected="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="ySW-x6-06q">
+                                        <rect key="frame" x="20" y="251" width="242" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                        <state key="normal" image="xrandom_checkbox_checked">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="xrandomCheckPressed:" destination="5gP-20-5H4" eventType="touchUpInside" id="hKH-V6-HFy"/>
+                                        </connections>
+                                    </button>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="How many private keys to generate?" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="8Qe-tr-XPb">
+                                        <rect key="frame" x="20" y="27" width="280" height="21"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <pickerView contentMode="scaleToFill" id="hEQ-cn-z22">
+                                        <rect key="frame" x="0.0" y="71" width="320" height="162"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                    </pickerView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" id="vhW-ec-Y0h">
+                                        <rect key="frame" x="20" y="294" width="280" height="42"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                        <state key="normal" title="Generate" backgroundImage="button_lightblue">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <state key="highlighted" backgroundImage="button_lightblue_pressed"/>
+                                        <connections>
+                                            <action selector="generatePressed:" destination="5gP-20-5H4" eventType="touchUpInside" id="bQ0-Xs-ZrO"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                            </pickerView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" id="vhW-ec-Y0h">
-                                <rect key="frame" x="20" y="338" width="280" height="42"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Generate" backgroundImage="button_lightblue">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <state key="highlighted" backgroundImage="button_lightblue_pressed"/>
-                                <connections>
-                                    <action selector="generatePressed:" destination="5gP-20-5H4" eventType="touchUpInside" id="bQ0-Xs-ZrO"/>
-                                </connections>
-                            </button>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="How many private keys to generate?" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="8Qe-tr-XPb">
-                                <rect key="frame" x="20" y="71" width="280" height="21"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <button opaque="NO" contentMode="scaleToFill" selected="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="ySW-x6-06q">
-                                <rect key="frame" x="20" y="295" width="242" height="30"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                <state key="normal" image="xrandom_checkbox_checked">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="xrandomCheckPressed:" destination="5gP-20-5H4" eventType="touchUpInside" id="hKH-V6-HFy"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="lQX-qn-8mY">
-                                <rect key="frame" x="270" y="295" width="30" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" image="xrandom_info_icon_normal">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <state key="highlighted" image="xrandom_info_icon_pressed"/>
-                                <connections>
-                                    <action selector="xrandomInfoPressed:" destination="5gP-20-5H4" eventType="touchUpInside" id="7Zb-ui-h9H"/>
-                                </connections>
-                            </button>
+                            </view>
                             <view contentMode="scaleToFill" id="uVs-hR-Cxq" userLabel="TopBar">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
@@ -1069,6 +1076,7 @@
                     <connections>
                         <outlet property="btnXRandomCheck" destination="ySW-x6-06q" id="oQc-a4-SVt"/>
                         <outlet property="pvCount" destination="hEQ-cn-z22" id="dCV-cX-iRg"/>
+                        <outlet property="vContainer" destination="Rk4-nx-4bl" id="FXW-a3-d8Z"/>
                         <outlet property="vTopbar" destination="uVs-hR-Cxq" id="1u2-LL-Mtn"/>
                     </connections>
                 </viewController>
