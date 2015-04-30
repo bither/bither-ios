@@ -97,7 +97,7 @@ PODS:
 
 DEPENDENCIES:
   - AFNetworking (~> 2.0)
-  - Bitheri (from `https://github.com/bither/bitheri.git`, tag `v1.3.4`)
+  - Bitheri (from `https://github.com/bither/bitheri.git`, branch `develop`)
   - FXBlurView
   - KSCrash (~> 0.0.3)
   - MKNetworkKit (~> 0.87)
@@ -106,13 +106,13 @@ DEPENDENCIES:
 
 EXTERNAL SOURCES:
   Bitheri:
+    :branch: develop
     :git: https://github.com/bither/bitheri.git
-    :tag: v1.3.4
 
 CHECKOUT OPTIONS:
   Bitheri:
+    :commit: 9580ac3711621fd637f6998b5f7ea7c1d556f50c
     :git: https://github.com/bither/bitheri.git
-    :tag: v1.3.4
 
 SPEC CHECKSUMS:
   AFNetworking: 10e85a00bb0f475124e4ff2677bf15693b2c1523
