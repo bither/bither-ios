@@ -156,7 +156,6 @@
 		AC17158D1969359900337AB5 /* DialogPrivateKeyEncryptedQrCode.m in Sources */ = {isa = PBXBuildFile; fileRef = AC17158C1969359900337AB5 /* DialogPrivateKeyEncryptedQrCode.m */; };
 		AC202AD0196B8B7A00033EC1 /* Setting.m in Sources */ = {isa = PBXBuildFile; fileRef = AC202ACF196B8B7A00033EC1 /* Setting.m */; };
 		AC202AD3196BD97A00033EC1 /* SettingListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AC202AD2196BD97A00033EC1 /* SettingListCell.m */; };
-		AC229A70196A40B500A7FB5E /* update_storyboard_strings.sh in Resources */ = {isa = PBXBuildFile; fileRef = AC229A6F196A40B500A7FB5E /* update_storyboard_strings.sh */; };
 		AC275EE419B59B0100F1C02F /* BlockCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AC275EE319B59B0100F1C02F /* BlockCell.m */; };
 		AC275EE719B5B9D800F1C02F /* PeerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AC275EE619B5B9D800F1C02F /* PeerCell.m */; };
 		AC2F3295195C02C3001B7439 /* AmountButton.m in Sources */ = {isa = PBXBuildFile; fileRef = AC2F3294195C02C3001B7439 /* AmountButton.m */; };
@@ -615,7 +614,6 @@
 		AC202ACF196B8B7A00033EC1 /* Setting.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Setting.m; sourceTree = "<group>"; };
 		AC202AD1196BD97A00033EC1 /* SettingListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SettingListCell.h; path = Cells/SettingListCell.h; sourceTree = "<group>"; };
 		AC202AD2196BD97A00033EC1 /* SettingListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SettingListCell.m; path = Cells/SettingListCell.m; sourceTree = "<group>"; };
-		AC229A6F196A40B500A7FB5E /* update_storyboard_strings.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = update_storyboard_strings.sh; sourceTree = "<group>"; };
 		AC229A7A196A466400A7FB5E /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/MainStoryboard.strings"; sourceTree = "<group>"; };
 		AC229A7B196A466900A7FB5E /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/MainStoryboard.strings"; sourceTree = "<group>"; };
 		AC275EE219B59B0100F1C02F /* BlockCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BlockCell.h; sourceTree = "<group>"; };
@@ -1361,7 +1359,6 @@
 		AC229A6E196A40B500A7FB5E /* sh */ = {
 			isa = PBXGroup;
 			children = (
-				AC229A6F196A40B500A7FB5E /* update_storyboard_strings.sh */,
 			);
 			path = sh;
 			sourceTree = "<group>";
@@ -1902,7 +1899,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				AC6163A01966524A0055C9D0 /* coins_received.wav in Resources */,
-				AC229A70196A40B500A7FB5E /* update_storyboard_strings.sh in Resources */,
 				4276CEA4194C20810027D119 /* Localizable.strings in Resources */,
 				0AD674941A79F2B8007967DB /* BIP39EnglishWords.plist in Resources */,
 				AC53ABED19D94230007C095C /* xrandom_close_sound.mp3 in Resources */,
