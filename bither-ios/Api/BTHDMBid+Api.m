@@ -102,7 +102,7 @@
 }
 
 - (void)save{
-    [[BTAddressProvider instance] addHDMBid:self andPasswordSeed:[[[BTKey alloc] initWithSecret:self.password compressed:YES] address]];
+    [[BTAddressProvider instance] addHDMBid:self andAddressOfPS:[[[BTKey alloc] initWithSecret:self.password compressed:YES] address]];
 }
 
 - (NSArray *)createHDMAddress:(NSArray *)pubsList andPassword:(NSString *)password andError:(NSError **)err; {
@@ -184,7 +184,7 @@
             [pubsList addObject:pubs];
         }
         self.encryptedBitherPassword = [[[BTEncryptData alloc] initWithData:self.password andPassowrd:password] toEncryptedString];
-        [[BTAddressProvider instance] addHDMBid:self andPasswordSeed:[[[BTKey alloc] initWithSecret:self.password compressed:YES] address]];
+        [[BTAddressProvider instance] addHDMBid:self andAddressOfPS:[[[BTKey alloc] initWithSecret:self.password compressed:YES] address]];
     } else {
         *err = e;
     }

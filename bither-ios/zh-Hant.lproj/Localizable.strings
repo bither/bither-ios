@@ -632,3 +632,40 @@
 "address_alias_input_label" = "輸入此地址的標籤";
 "address_alias_input_hint" = "標籤";
 "address_alias_remove_confirm" = "刪除此地址標籤?";
+
+// password strength
+"password_strength_weak" = "較弱";
+"password_strength_normal" = "一般";
+"password_strength_medium" = "中等";
+"password_strength_strong" = "較強";
+"password_strength_very_strong" = "很強";
+"password_strength_warning" = "確定使用強度%@的密碼?";
+"password_strength_check" = "密碼強度檢查";
+"password_strength_check_on" = "開";
+"password_strength_check_off" = "關";
+"password_strength_check_off_warn" = "確認關閉密碼強度檢查?";
+
+// add hd account
+"add_hd_account_label" = "生成新的 HD 賬戶";
+"add_hd_account_button" = "生成";
+"add_hd_account_tab_hd" = "HD 賬戶";
+"add_hd_account_tab_other" = "其它";
+"add_hd_account_other_hdm" = "生成 HDM 賬戶";
+"add_hd_account_other_private" = "生成普通私鑰";
+"add_hd_account_monitor" = "一鍵監控冷錢包";
+"add_hd_account_monitor_success" = "監控成功";
+"add_hd_account_view_label" = "已有 HD 賬戶";
+"add_hd_account_seed_qr_code" = "HD 賬戶種子二維碼";
+"add_hd_account_seed_qr_phrase" = "HD 賬戶密語";
+"add_hd_account_show_seed_label" = "HD 種子能夠用來恢復 HD 賬戶,\n請安全地保管它.";
+"add_hd_account_show_seed_button" = "我已經保管好了 HD 種子";
+"private_key_count_limit" = "已達私鑰數量上限";
+"watch_only_address_count_limit" = "已達到監控地址上限";
+"import_hd_account_seed_qr_code" = "來自 HD 種子二維碼";
+"import_hd_account_seed_phrase" = "來自 HD 密語";
+"import_hd_account_seed_qr_scan_title" = "導入 HD 賬戶";
+"import_hd_account_seed_qr_scan_message" = "掃描 HD 種子二維碼";
+"import_hd_account_seed_format_error"="不是 HD 賬戶種子";
+
+// show hd account
+"address_group_hd" = "HD 賬戶";

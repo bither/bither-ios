@@ -29,5 +29,7 @@
 @interface DialogHDMSingularColdSeed : UIViewController
 - (instancetype)initWithWords:(NSArray *)words qr:(NSString *)qr parent:(UIViewController *)parent andDismissAction:(void (^)())dismissed;
 
+- (instancetype)initWithWords:(NSArray *)words qr:(NSString *)qr parent:(UIViewController *)parent warn:(NSString *)warn button:(NSString *)button andDismissAction:(void (^)())dismissed;
+
 - (void)show;
 @end

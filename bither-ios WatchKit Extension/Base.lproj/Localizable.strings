@@ -30,3 +30,6 @@
 
 "buy" = "Buy";
 "sell" = "Sell";
+
+// show hd account
+"address_group_hd" = "HD Account";

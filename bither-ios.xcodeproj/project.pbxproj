@@ -50,6 +50,8 @@
 		0AB8BCA51A7F445D003C07D8 /* DialogHDMKeychainAddHot.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AB8BCA41A7F445D003C07D8 /* DialogHDMKeychainAddHot.m */; };
 		0AB8BCAB1A7F6DEE003C07D8 /* DialogHDMServerUnsignedQRCode.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AB8BCAA1A7F6DEE003C07D8 /* DialogHDMServerUnsignedQRCode.m */; };
 		0AB8BCB11A7F8656003C07D8 /* NSConditionTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AB8BCB01A7F8656003C07D8 /* NSConditionTest.m */; };
+		0AD4EA711AEA308100DC8C0E /* HotAddressAddHDAccountViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AD4EA701AEA308100DC8C0E /* HotAddressAddHDAccountViewController.m */; };
+		0AD4EA741AEA30C600DC8C0E /* HotAddressAddOtherViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AD4EA731AEA30C600DC8C0E /* HotAddressAddOtherViewController.m */; };
 		0AD674921A79E6E4007967DB /* ColdAddressAddHDMViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AD674911A79E6E4007967DB /* ColdAddressAddHDMViewController.m */; };
 		0AD674941A79F2B8007967DB /* BIP39EnglishWords.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0AD674931A79F2B8007967DB /* BIP39EnglishWords.plist */; };
 		0AD674971A7B4BDA007967DB /* ColdAddressListHDMCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AD674961A7B4BDA007967DB /* ColdAddressListHDMCell.m */; };
@@ -62,17 +64,24 @@
 		1BC270F1C2BEA60E0B3384AB /* DialogHDMAddressOptions.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BC27D1407586D2FCB8F01AC /* DialogHDMAddressOptions.m */; };
 		1BC271A2775231786F6E597C /* RawDataDiceView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BC27F4ABF122CEF5DCDD706 /* RawDataDiceView.m */; };
 		1BC273956C6D9E8D480F865A /* AddressAliasView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BC279D47F4CCF0091934456 /* AddressAliasView.m */; };
+		1BC27403EB7CEBFFDD178CF2 /* DialogHDAccountOptions.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BC27DB53D5E5AD5BA309DAB /* DialogHDAccountOptions.m */; };
 		1BC27499EE579986A1439709 /* DialogHDMInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BC27E22C25A90DF1E5DA1DC /* DialogHDMInfo.m */; };
 		1BC275ACC2D220D9CE5212D5 /* HDMResetServerPasswordUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BC27A0354887C3372BE01B1 /* HDMResetServerPasswordUtil.m */; };
 		1BC275F3608609D0E72BFBE7 /* HDMTriangleBgView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BC27C837F7819A54B0A2E37 /* HDMTriangleBgView.m */; };
 		1BC2778BC574DA2F816BC77A /* AddHDMAddressViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BC27FD66F3376A2C68612DD /* AddHDMAddressViewController.m */; };
+		1BC278DC0AFAEBC2E04D03CE /* DialogHDSendTxConfirm.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BC27547024F497C795FF72C /* DialogHDSendTxConfirm.m */; };
 		1BC2790A618CFA47914E044C /* HDMSingular.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BC2781AE9973B4ACCEA9877 /* HDMSingular.m */; };
 		1BC27B4D826CA122FC56ADD2 /* DialogHDMSingularModeInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BC27929B0727E0D8B0296D4 /* DialogHDMSingularModeInfo.m */; };
+		1BC27B9CF936EC5ABAAB2D32 /* PasswordStrengthUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BC272D7D8F09A8A3DB14204 /* PasswordStrengthUtil.m */; };
+		1BC27D41D243E139BCFBE2DA /* MonitorSetting.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BC274BD8D2697288769077A /* MonitorSetting.m */; };
+		1BC27D72EB9AFE29CF0F98C2 /* HotAddressAddHDAccountViewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BC27A57EBF012BA70BB064C /* HotAddressAddHDAccountViewViewController.m */; };
 		1BC27D87BF2AC41578912E98 /* DialogAddressAliasInput.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BC275DC3786E9C937D6FF7D /* DialogAddressAliasInput.m */; };
 		1BC27DE93F1FECC0283202C2 /* DialogHDMSingularColdSeedChildWordsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BC274A14567F7D6DFEA009B /* DialogHDMSingularColdSeedChildWordsViewController.m */; };
 		1BC27F0F16D3294B59AF9604 /* DialogHDMSingularColdSeedChildQrViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BC27F93AA0BE5EBA695564A /* DialogHDMSingularColdSeedChildQrViewController.m */; };
 		1BC27F4819B6A68B81A47579 /* DialogHDMSingularColdSeed.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BC273B012114E6EDE40C4D9 /* DialogHDMSingularColdSeed.m */; };
+		1BC27F74516BB973EA28A144 /* ImportHDAccountSeedController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BC27E40C2AFE8213E54D92E /* ImportHDAccountSeedController.m */; };
 		1BC27FE46C243D52B180F1C2 /* DialogAddressAlias.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BC27F75690D4B3C844742B2 /* DialogAddressAlias.m */; };
+		1BC27FE47C62F779EDE01FA5 /* HDAccountSendViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BC27B56B8528116430BB2D8 /* HDAccountSendViewController.m */; };
 		4217A3731951235D00063746 /* Depth.m in Sources */ = {isa = PBXBuildFile; fileRef = 4217A3721951235D00063746 /* Depth.m */; };
 		4217A39019512DC000063746 /* TransactionsUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 4217A38F19512DC000063746 /* TransactionsUtil.m */; };
 		421B037C19495315003A45F1 /* TabButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 421B037B19495315003A45F1 /* TabButton.m */; };
@@ -147,7 +156,6 @@
 		AC17158D1969359900337AB5 /* DialogPrivateKeyEncryptedQrCode.m in Sources */ = {isa = PBXBuildFile; fileRef = AC17158C1969359900337AB5 /* DialogPrivateKeyEncryptedQrCode.m */; };
 		AC202AD0196B8B7A00033EC1 /* Setting.m in Sources */ = {isa = PBXBuildFile; fileRef = AC202ACF196B8B7A00033EC1 /* Setting.m */; };
 		AC202AD3196BD97A00033EC1 /* SettingListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AC202AD2196BD97A00033EC1 /* SettingListCell.m */; };
-		AC229A70196A40B500A7FB5E /* update_storyboard_strings.sh in Resources */ = {isa = PBXBuildFile; fileRef = AC229A6F196A40B500A7FB5E /* update_storyboard_strings.sh */; };
 		AC275EE419B59B0100F1C02F /* BlockCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AC275EE319B59B0100F1C02F /* BlockCell.m */; };
 		AC275EE719B5B9D800F1C02F /* PeerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AC275EE619B5B9D800F1C02F /* PeerCell.m */; };
 		AC2F3295195C02C3001B7439 /* AmountButton.m in Sources */ = {isa = PBXBuildFile; fileRef = AC2F3294195C02C3001B7439 /* AmountButton.m */; };
@@ -334,7 +342,6 @@
 		0A259E241A47F19100D7F707 /* DialogSendOption.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DialogSendOption.m; sourceTree = "<group>"; };
 		0A259E261A47FDF600D7F707 /* DialogSelectChangeAddress.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DialogSelectChangeAddress.h; sourceTree = "<group>"; };
 		0A259E271A47FDF600D7F707 /* DialogSelectChangeAddress.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DialogSelectChangeAddress.m; sourceTree = "<group>"; };
-		0A311B861ABD488A006E77A9 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/MainStoryboard.strings; sourceTree = "<group>"; };
 		0A4182A11A9DB70500576A12 /* WatchUnitUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WatchUnitUtil.h; sourceTree = "<group>"; };
 		0A4182A21A9DB70500576A12 /* WatchUnitUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WatchUnitUtil.m; sourceTree = "<group>"; };
 		0A4182AC1A9DBB8600576A12 /* WatchStringUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WatchStringUtil.h; sourceTree = "<group>"; };
@@ -370,6 +377,7 @@
 		0A52BDA21A9FFC2B00BC8C3E /* bither-ios WatchKit Extension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "bither-ios WatchKit Extension.entitlements"; sourceTree = "<group>"; };
 		0A52BDA31A9FFC6400BC8C3E /* GroupFileUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GroupFileUtil.h; sourceTree = "<group>"; };
 		0A52BDA41A9FFC6400BC8C3E /* GroupFileUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GroupFileUtil.m; sourceTree = "<group>"; };
+		0A593D6D1AEF7B6900E47769 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/MainStoryboard.strings; sourceTree = "<group>"; };
 		0A637B161AA0419C00696260 /* libPods.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libPods.a; path = "Pods/build/Debug-iphoneos/libPods.a"; sourceTree = "<group>"; };
 		0A637B191AA0427200696260 /* WatchTrendingGraphicData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WatchTrendingGraphicData.h; sourceTree = "<group>"; };
 		0A637B1A1AA0427200696260 /* WatchTrendingGraphicData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WatchTrendingGraphicData.m; sourceTree = "<group>"; };
@@ -407,6 +415,10 @@
 		0AB8BCA91A7F6DEE003C07D8 /* DialogHDMServerUnsignedQRCode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DialogHDMServerUnsignedQRCode.h; sourceTree = "<group>"; };
 		0AB8BCAA1A7F6DEE003C07D8 /* DialogHDMServerUnsignedQRCode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DialogHDMServerUnsignedQRCode.m; sourceTree = "<group>"; };
 		0AB8BCB01A7F8656003C07D8 /* NSConditionTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSConditionTest.m; sourceTree = "<group>"; };
+		0AD4EA6F1AEA308100DC8C0E /* HotAddressAddHDAccountViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HotAddressAddHDAccountViewController.h; sourceTree = "<group>"; };
+		0AD4EA701AEA308100DC8C0E /* HotAddressAddHDAccountViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HotAddressAddHDAccountViewController.m; sourceTree = "<group>"; };
+		0AD4EA721AEA30C600DC8C0E /* HotAddressAddOtherViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HotAddressAddOtherViewController.h; sourceTree = "<group>"; };
+		0AD4EA731AEA30C600DC8C0E /* HotAddressAddOtherViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HotAddressAddOtherViewController.m; sourceTree = "<group>"; };
 		0AD674901A79E6E4007967DB /* ColdAddressAddHDMViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ColdAddressAddHDMViewController.h; sourceTree = "<group>"; };
 		0AD674911A79E6E4007967DB /* ColdAddressAddHDMViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ColdAddressAddHDMViewController.m; sourceTree = "<group>"; };
 		0AD674931A79F2B8007967DB /* BIP39EnglishWords.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = BIP39EnglishWords.plist; sourceTree = "<group>"; };
@@ -429,11 +441,16 @@
 		0FED7A4051DB45218112FAC0 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		1BC27043CB19B6031727B679 /* DialogHDMSingularColdSeed.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DialogHDMSingularColdSeed.h; sourceTree = "<group>"; };
 		1BC270628E82FFBA24125AEB /* HDMResetServerPasswordUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HDMResetServerPasswordUtil.h; sourceTree = "<group>"; };
+		1BC272B77D3B4123842B7220 /* PasswordStrengthUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PasswordStrengthUtil.h; sourceTree = "<group>"; };
 		1BC272BC4509E4F880EAC6F9 /* AddHDMAddressViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddHDMAddressViewController.h; sourceTree = "<group>"; };
+		1BC272D7D8F09A8A3DB14204 /* PasswordStrengthUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PasswordStrengthUtil.m; sourceTree = "<group>"; };
 		1BC273B012114E6EDE40C4D9 /* DialogHDMSingularColdSeed.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DialogHDMSingularColdSeed.m; sourceTree = "<group>"; };
 		1BC274A14567F7D6DFEA009B /* DialogHDMSingularColdSeedChildWordsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DialogHDMSingularColdSeedChildWordsViewController.m; sourceTree = "<group>"; };
+		1BC274BD8D2697288769077A /* MonitorSetting.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MonitorSetting.m; sourceTree = "<group>"; };
+		1BC27547024F497C795FF72C /* DialogHDSendTxConfirm.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DialogHDSendTxConfirm.m; sourceTree = "<group>"; };
 		1BC275D3A11FAF859823CF7E /* DialogHDMAddressOptions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DialogHDMAddressOptions.h; sourceTree = "<group>"; };
 		1BC275DC3786E9C937D6FF7D /* DialogAddressAliasInput.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DialogAddressAliasInput.m; sourceTree = "<group>"; };
+		1BC275F4AC68C90C62611462 /* MonitorSetting.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MonitorSetting.h; sourceTree = "<group>"; };
 		1BC276629E14B5DAD717E3E9 /* DialogHDMSingularColdSeedChildWordsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DialogHDMSingularColdSeedChildWordsViewController.h; sourceTree = "<group>"; };
 		1BC276E93FD60E26C3995145 /* DialogAddressAlias.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DialogAddressAlias.h; sourceTree = "<group>"; };
 		1BC2776F592A1DFABC1C6F21 /* HDMSingular.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HDMSingular.h; sourceTree = "<group>"; };
@@ -444,12 +461,21 @@
 		1BC279D47F4CCF0091934456 /* AddressAliasView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddressAliasView.m; sourceTree = "<group>"; };
 		1BC279FF88C655F194D43821 /* RawDataDiceView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RawDataDiceView.h; sourceTree = "<group>"; };
 		1BC27A0354887C3372BE01B1 /* HDMResetServerPasswordUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HDMResetServerPasswordUtil.m; sourceTree = "<group>"; };
+		1BC27A57EBF012BA70BB064C /* HotAddressAddHDAccountViewViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HotAddressAddHDAccountViewViewController.m; sourceTree = "<group>"; };
 		1BC27A6D074A54DC92228A63 /* DialogHDMSingularModeInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DialogHDMSingularModeInfo.h; sourceTree = "<group>"; };
+		1BC27B56B8528116430BB2D8 /* HDAccountSendViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HDAccountSendViewController.m; sourceTree = "<group>"; };
+		1BC27BA86ED865920451634D /* DialogHDSendTxConfirm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DialogHDSendTxConfirm.h; sourceTree = "<group>"; };
 		1BC27C837F7819A54B0A2E37 /* HDMTriangleBgView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HDMTriangleBgView.m; sourceTree = "<group>"; };
 		1BC27C882946AB67434912E5 /* DialogHDMInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DialogHDMInfo.h; sourceTree = "<group>"; };
 		1BC27D1407586D2FCB8F01AC /* DialogHDMAddressOptions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DialogHDMAddressOptions.m; sourceTree = "<group>"; };
+		1BC27DB53D5E5AD5BA309DAB /* DialogHDAccountOptions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DialogHDAccountOptions.m; sourceTree = "<group>"; };
+		1BC27DE0604D8AD2A25328A6 /* HDAccountSendViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HDAccountSendViewController.h; sourceTree = "<group>"; };
+		1BC27E13FEFFBE4CF5CF0468 /* DialogHDAccountOptions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DialogHDAccountOptions.h; sourceTree = "<group>"; };
 		1BC27E22C25A90DF1E5DA1DC /* DialogHDMInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DialogHDMInfo.m; sourceTree = "<group>"; };
+		1BC27E353461EDC4DD0986D5 /* ImportHDAccountSeedController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImportHDAccountSeedController.h; sourceTree = "<group>"; };
+		1BC27E40C2AFE8213E54D92E /* ImportHDAccountSeedController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImportHDAccountSeedController.m; sourceTree = "<group>"; };
 		1BC27E6AA6DAE72B7A20FDB3 /* DialogAddressAliasInput.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DialogAddressAliasInput.h; sourceTree = "<group>"; };
+		1BC27EFBA370531DE1AB1492 /* HotAddressAddHDAccountViewViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HotAddressAddHDAccountViewViewController.h; sourceTree = "<group>"; };
 		1BC27F4ABF122CEF5DCDD706 /* RawDataDiceView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RawDataDiceView.m; sourceTree = "<group>"; };
 		1BC27F4E505FDE8D0565C0AA /* AddressAliasView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddressAliasView.h; sourceTree = "<group>"; };
 		1BC27F75690D4B3C844742B2 /* DialogAddressAlias.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DialogAddressAlias.m; sourceTree = "<group>"; };
@@ -588,7 +614,6 @@
 		AC202ACF196B8B7A00033EC1 /* Setting.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Setting.m; sourceTree = "<group>"; };
 		AC202AD1196BD97A00033EC1 /* SettingListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SettingListCell.h; path = Cells/SettingListCell.h; sourceTree = "<group>"; };
 		AC202AD2196BD97A00033EC1 /* SettingListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SettingListCell.m; path = Cells/SettingListCell.m; sourceTree = "<group>"; };
-		AC229A6F196A40B500A7FB5E /* update_storyboard_strings.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = update_storyboard_strings.sh; sourceTree = "<group>"; };
 		AC229A7A196A466400A7FB5E /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/MainStoryboard.strings"; sourceTree = "<group>"; };
 		AC229A7B196A466900A7FB5E /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/MainStoryboard.strings"; sourceTree = "<group>"; };
 		AC275EE219B59B0100F1C02F /* BlockCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BlockCell.h; sourceTree = "<group>"; };
@@ -1064,6 +1089,16 @@
 				1BC272BC4509E4F880EAC6F9 /* AddHDMAddressViewController.h */,
 				0A43F43E1A81C6BF008171DB /* HdmSendViewController.h */,
 				0A43F43F1A81C6BF008171DB /* HdmSendViewController.m */,
+				0AD4EA6F1AEA308100DC8C0E /* HotAddressAddHDAccountViewController.h */,
+				0AD4EA701AEA308100DC8C0E /* HotAddressAddHDAccountViewController.m */,
+				0AD4EA721AEA30C600DC8C0E /* HotAddressAddOtherViewController.h */,
+				0AD4EA731AEA30C600DC8C0E /* HotAddressAddOtherViewController.m */,
+				1BC27A57EBF012BA70BB064C /* HotAddressAddHDAccountViewViewController.m */,
+				1BC27EFBA370531DE1AB1492 /* HotAddressAddHDAccountViewViewController.h */,
+				1BC27B56B8528116430BB2D8 /* HDAccountSendViewController.m */,
+				1BC27DE0604D8AD2A25328A6 /* HDAccountSendViewController.h */,
+				1BC27E40C2AFE8213E54D92E /* ImportHDAccountSeedController.m */,
+				1BC27E353461EDC4DD0986D5 /* ImportHDAccountSeedController.h */,
 			);
 			path = Hot;
 			sourceTree = "<group>";
@@ -1160,6 +1195,8 @@
 				1BC270628E82FFBA24125AEB /* HDMResetServerPasswordUtil.h */,
 				1BC2781AE9973B4ACCEA9877 /* HDMSingular.m */,
 				1BC2776F592A1DFABC1C6F21 /* HDMSingular.h */,
+				1BC272D7D8F09A8A3DB14204 /* PasswordStrengthUtil.m */,
+				1BC272B77D3B4123842B7220 /* PasswordStrengthUtil.h */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -1322,7 +1359,6 @@
 		AC229A6E196A40B500A7FB5E /* sh */ = {
 			isa = PBXGroup;
 			children = (
-				AC229A6F196A40B500A7FB5E /* update_storyboard_strings.sh */,
 			);
 			path = sh;
 			sourceTree = "<group>";
@@ -1587,6 +1623,10 @@
 				1BC276E93FD60E26C3995145 /* DialogAddressAlias.h */,
 				1BC275DC3786E9C937D6FF7D /* DialogAddressAliasInput.m */,
 				1BC27E6AA6DAE72B7A20FDB3 /* DialogAddressAliasInput.h */,
+				1BC27DB53D5E5AD5BA309DAB /* DialogHDAccountOptions.m */,
+				1BC27E13FEFFBE4CF5CF0468 /* DialogHDAccountOptions.h */,
+				1BC27547024F497C795FF72C /* DialogHDSendTxConfirm.m */,
+				1BC27BA86ED865920451634D /* DialogHDSendTxConfirm.h */,
 			);
 			path = Dialog;
 			sourceTree = "<group>";
@@ -1664,6 +1704,8 @@
 				DC0D6773769B40A704B784B4 /* ImportHDMCold.h */,
 				DC0769FAB5B4727E089E23CC /* HDMRecoverSetting.m */,
 				DC01B0277E3ECFEB18F87712 /* HDMRecoverSetting.h */,
+				1BC274BD8D2697288769077A /* MonitorSetting.m */,
+				1BC275F4AC68C90C62611462 /* MonitorSetting.h */,
 			);
 			name = Setting;
 			sourceTree = "<group>";
@@ -1857,7 +1899,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				AC6163A01966524A0055C9D0 /* coins_received.wav in Resources */,
-				AC229A70196A40B500A7FB5E /* update_storyboard_strings.sh in Resources */,
 				4276CEA4194C20810027D119 /* Localizable.strings in Resources */,
 				0AD674941A79F2B8007967DB /* BIP39EnglishWords.plist in Resources */,
 				AC53ABED19D94230007C095C /* xrandom_close_sound.mp3 in Resources */,
@@ -2006,6 +2047,7 @@
 				4268FE2C194ACD57007A4C30 /* OptionColdViewController.m in Sources */,
 				AC45D84119878BAB00AF5C2C /* DialogAddressLongPressOptions.m in Sources */,
 				4269FF75195A8872001213B9 /* Market.m in Sources */,
+				0AD4EA711AEA308100DC8C0E /* HotAddressAddHDAccountViewController.m in Sources */,
 				0AD674921A79E6E4007967DB /* ColdAddressAddHDMViewController.m in Sources */,
 				DA641E8B196E7BC20095DF42 /* GCCrashInstallation.m in Sources */,
 				0AD6749C1A7B6229007967DB /* DialogWithActions.m in Sources */,
@@ -2015,6 +2057,7 @@
 				AC808B8C19D56757004E78A3 /* XRandom.m in Sources */,
 				AC3CDB5B1962A3C800C74B4C /* TransactionConfidenceView.m in Sources */,
 				0A446C151A441393000CD25A /* DialogNetworkMonitorOption.m in Sources */,
+				0AD4EA741AEA30C600DC8C0E /* HotAddressAddOtherViewController.m in Sources */,
 				AC8912F21A7F62FE003797C4 /* WorldListCell.m in Sources */,
 				0A8853AD1AA8466E00760014 /* GroupUserDefaultUtil.m in Sources */,
 				0AB8BC9A1A7F3194003C07D8 /* HotAddressAddHDMViewController.m in Sources */,
@@ -2173,6 +2216,13 @@
 				1BC27D87BF2AC41578912E98 /* DialogAddressAliasInput.m in Sources */,
 				1BC273956C6D9E8D480F865A /* AddressAliasView.m in Sources */,
 				1BC271A2775231786F6E597C /* RawDataDiceView.m in Sources */,
+				1BC27B9CF936EC5ABAAB2D32 /* PasswordStrengthUtil.m in Sources */,
+				1BC27D72EB9AFE29CF0F98C2 /* HotAddressAddHDAccountViewViewController.m in Sources */,
+				1BC27403EB7CEBFFDD178CF2 /* DialogHDAccountOptions.m in Sources */,
+				1BC27FE47C62F779EDE01FA5 /* HDAccountSendViewController.m in Sources */,
+				1BC278DC0AFAEBC2E04D03CE /* DialogHDSendTxConfirm.m in Sources */,
+				1BC27D41D243E139BCFBE2DA /* MonitorSetting.m in Sources */,
+				1BC27F74516BB973EA28A144 /* ImportHDAccountSeedController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2288,7 +2338,7 @@
 				42EFB5511949C52100376888 /* Base */,
 				AC229A7A196A466400A7FB5E /* zh-Hans */,
 				AC229A7B196A466900A7FB5E /* zh-Hant */,
-				0A311B861ABD488A006E77A9 /* en */,
+				0A593D6D1AEF7B6900E47769 /* en */,
 			);
 			name = MainStoryboard.storyboard;
 			sourceTree = "<group>";
@@ -2382,8 +2432,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;

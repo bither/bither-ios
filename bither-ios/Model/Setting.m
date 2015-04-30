@@ -38,6 +38,9 @@
 #import "MessageSigningSetting.h"
 #import "HDMRecoverSetting.h"
 #import "HDMResetServerPasswordUtil.h"
+#import "AppDelegate.h"
+#import "UIBaseUtil.h"
+#import "IOS7ContainerViewController.h"
 
 @implementation Setting
 
@@ -57,6 +60,7 @@ static Setting *QrCodeQualitySetting;
 static Setting *TrashCanSetting;
 static Setting *SwitchToColdSetting;
 static Setting *HDMServerPasswordResetSetting;
+static Setting *PasswordStrengthCheckSetting;
 
 - (instancetype)initWithName:(NSString *)name icon:(UIImage *)icon {
     self = [super init];
@@ -354,7 +358,7 @@ static Setting *HDMServerPasswordResetSetting;
     if (!CheckSetting) {
         Setting *setting = [[Setting alloc] initWithName:NSLocalizedString(@"Check Private Keys", nil) icon:[UIImage imageNamed:@"check_button_icon"]];
         [setting setSelectBlock:^(UIViewController *controller) {
-            if ([BTAddressManager instance].privKeyAddresses.count == 0 && ![BTAddressManager instance].hasHDMKeychain) {
+            if ([BTAddressManager instance].privKeyAddresses.count == 0 && ![BTAddressManager instance].hasHDMKeychain && ![BTAddressManager instance].hasHDAccount) {
                 if ([controller respondsToSelector:@selector(showMsg:)]) {
                     [controller performSelector:@selector(showMsg:) withObject:NSLocalizedString(@"No private keys", nil)];
                 }
@@ -522,6 +526,79 @@ static Setting *HDMServerPasswordResetSetting;
     return HDMServerPasswordResetSetting;
 }
 
++ (Setting *)getPasswordStrengthSetting {
+    if (!PasswordStrengthCheckSetting) {
+        Setting *setting = [[Setting alloc] initWithName:NSLocalizedString(@"password_strength_check", nil) icon:nil];
+        [setting setGetValueBlock:^() {
+            if ([[UserDefaultsUtil instance] getPasswordStrengthCheck]) {
+                return NSLocalizedString(@"password_strength_check_on", nil);
+            } else {
+                return NSLocalizedString(@"password_strength_check_off", nil);
+            }
+        }];
+        [setting setGetArrayBlock:^() {
+            BOOL check = [[UserDefaultsUtil instance] getPasswordStrengthCheck];
+            NSMutableArray *array = [NSMutableArray new];
+            NSMutableDictionary *dict = [NSMutableDictionary new];
+            [dict setObject:[NSNumber numberWithBool:YES] forKey:SETTING_VALUE];
+            [dict setObject:NSLocalizedString(@"password_strength_check_on", nil) forKey:SETTING_KEY];
+            [dict setObject:[NSNumber numberWithBool:check] forKey:SETTING_IS_DEFAULT];
+            [array addObject:dict];
+
+            dict = [NSMutableDictionary new];
+            [dict setObject:[NSNumber numberWithBool:NO] forKey:SETTING_VALUE];
+            [dict setObject:NSLocalizedString(@"password_strength_check_off", nil) forKey:SETTING_KEY];
+            [dict setObject:[NSNumber numberWithBool:!check] forKey:SETTING_IS_DEFAULT];
+            [array addObject:dict];
+
+            return array;
+        }];
+
+        [setting setResult:^(NSDictionary *dict) {
+            if ([[dict allKeys] containsObject:SETTING_VALUE]) {
+                BOOL check = [dict getBoolFromDict:SETTING_VALUE];
+                if (check) {
+                    [[UserDefaultsUtil instance] setPasswordStrengthCheck:check];
+                } else {
+                    UIWindow *window = ApplicationDelegate.window;
+                    __block AdvanceViewController *a = nil;
+                    UINavigationController *nav = nil;
+                    if ([window.topViewController isKindOfClass:[UINavigationController class]]) {
+                        nav = window.topViewController;
+                    } else if ([window.topViewController isKindOfClass:[IOS7ContainerViewController class]]) {
+                        IOS7ContainerViewController *c = window.topViewController;
+                        if ([c.controller isKindOfClass:[UINavigationController class]]) {
+                            nav = c.controller;
+                        }
+                    }
+                    if (nav) {
+                        for (NSUInteger index = nav.viewControllers.count - 1; index >= MAX(0, nav.viewControllers.count - 2); index--) {
+                            if ([nav.viewControllers[index] isKindOfClass:[AdvanceViewController class]]) {
+                                a = nav.viewControllers[index];
+                            }
+                        }
+                    }
+                    [[[DialogAlert alloc] initWithMessage:NSLocalizedString(@"password_strength_check_off_warn", nil) confirm:^{
+                        [[UserDefaultsUtil instance] setPasswordStrengthCheck:NO];
+                        if (a) {
+                            [a reload];
+                        }
+                    }                              cancel:nil] showInWindow:window];
+                }
+            }
+        }];
+        __block Setting *a = setting;
+        [setting setSelectBlock:^(UIViewController *controller) {
+            SelectViewController *selectController = [controller.storyboard instantiateViewControllerWithIdentifier:@"SelectViewController"];
+            UINavigationController *nav = controller.navigationController;
+            selectController.setting = a;
+            [nav pushViewController:selectController animated:YES];
+        }];
+        PasswordStrengthCheckSetting = setting;
+    }
+    return PasswordStrengthCheckSetting;
+}
+
 + (NSDictionary *)getQrCodeQualityDict:(QRQuality)quality {
     QRQuality q = [BTQRCodeUtil qrQuality];
     NSMutableDictionary *dict = [NSMutableDictionary new];
@@ -550,9 +627,6 @@ static Setting *HDMServerPasswordResetSetting;
     }
     [array addObject:[Setting getEditPasswordSetting]];
     [array addObject:[PinCodeSetting getPinCodeSetting]];
-    if ([[BTSettings instance] getAppMode] == HOT) {
-        [array addObject:[Setting getRCheckSetting]];
-    }
     [array addObject:[Setting getQrCodeQualitySetting]];
     [array addObject:[ImportPrivateKeySetting getImportPrivateKeySetting]];
     [array addObject:[ImportBip38PrivateKeySetting getImportBip38PrivateKeySetting]];
@@ -563,6 +637,7 @@ static Setting *HDMServerPasswordResetSetting;
         [array addObject:[Setting getHDMServerPasswordResetSetting]];
     }
     [array addObject:[MessageSigningSetting getMessageSigningSetting]];
+    [array addObject:[Setting getPasswordStrengthSetting]];
     [array addObject:[Setting getTrashCanSetting]];
     if ([[BTSettings instance] getAppMode] == HOT) {
         [array addObject:[ReloadTxSetting getReloadTxsSetting]];

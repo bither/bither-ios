@@ -17,9 +17,5 @@
 
 #import <UIKit/UIKit.h>
 
-
-
-
-
 @interface CheckViewController : UIViewController
 @end

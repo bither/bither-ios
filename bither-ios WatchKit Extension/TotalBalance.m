@@ -22,43 +22,47 @@
 #import "TotalBalance.h"
 #import "GroupFileUtil.h"
 
-@interface TotalBalance(){
-    NSDictionary* dict;
+@interface TotalBalance () {
+    NSDictionary *dict;
 }
 @end
 
 @implementation TotalBalance
 
--(instancetype)init{
+- (instancetype)init {
     self = [super init];
-    if(self){
+    if (self) {
         dict = [GroupFileUtil totalBalance];
     }
     return self;
 }
 
--(uint64_t)hdm{
+- (uint64_t)hd {
+    return [self getValue:@"hd"];
+}
+
+- (uint64_t)hdm {
     return [self getValue:@"hdm"];
 }
 
--(uint64_t)hot{
+- (uint64_t)hot {
     return [self getValue:@"hot"];
 }
 
--(uint64_t)cold{
+- (uint64_t)cold {
     return [self getValue:@"cold"];
 }
 
--(uint64_t)total{
-    return self.hdm + self.hot + self.cold;
+- (uint64_t)total {
+    return self.hdm + self.hot + self.cold + self.hd;
 }
 
--(uint64_t)getValue:(NSString*)key{
-    if(dict){
-        NSNumber* n = [dict objectForKey:key];
-        if(n){
+- (uint64_t)getValue:(NSString *)key {
+    if (dict) {
+        NSNumber *n = [dict objectForKey:key];
+        if (n) {
             return n.longLongValue;
-        }else{
+        } else {
             return 0;
         }
     }

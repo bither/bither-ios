@@ -24,7 +24,7 @@
 
 @interface GroupFileUtil : NSObject
 
-+(void)setTotalBalanceWithHDM:(int64_t)hdm hot:(int64_t)hot andCold:(int64_t)cold;
++(void)setTotalBalanceWithHD:(int64_t)hd HDM:(int64_t)hdm hot:(int64_t)hot andCold:(int64_t)cold;
 
 +(NSDictionary*)totalBalance;
 

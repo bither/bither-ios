@@ -131,7 +131,6 @@
     if (![[BTPeerManager instance] connected]) {
         [[PeerUtil instance] startPeer];
     }
-    [TransactionsUtil completeInputsForAddressInBackground:self.address];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -204,24 +203,18 @@
                         errorMsg = NSLocalizedString(@"Password wrong.", nil);
                     }
                     if (signResult) {
-                        if ([self.address checkRValuesForTx:tx]) {
-                            __block NSString *addressBlock = toAddress;
-                            dispatch_async(dispatch_get_main_queue(), ^{
-                                if (!signWithCold && !isInRecovery) {
-                                    [dp dismissWithCompletion:^{
-                                        [dp changeToMessage:NSLocalizedString(@"Please wait…", nil)];
-                                        DialogSendTxConfirm *dialog = [[DialogSendTxConfirm alloc] initWithTx:tx from:self.address to:addressBlock changeTo:self.dialogSelectChangeAddress.changeAddress.address delegate:self];
-                                        [dialog showInWindow:self.view.window];
-                                    }];
-                                } else {
-                                    [self onSendTxConfirmed:tx];
-                                }
-                            });
-                        } else {
-                            dispatch_async(dispatch_get_main_queue(), ^{
-                                [self sendPressed:self.btnSend];
-                            });
-                        }
+                        __block NSString *addressBlock = toAddress;
+                        dispatch_async(dispatch_get_main_queue(), ^{
+                            if (!signWithCold && !isInRecovery) {
+                                [dp dismissWithCompletion:^{
+                                    [dp changeToMessage:NSLocalizedString(@"Please wait…", nil)];
+                                    DialogSendTxConfirm *dialog = [[DialogSendTxConfirm alloc] initWithTx:tx from:self.address to:addressBlock changeTo:self.dialogSelectChangeAddress.changeAddress.address delegate:self];
+                                    [dialog showInWindow:self.view.window];
+                                }];
+                            } else {
+                                [self onSendTxConfirmed:tx];
+                            }
+                        });
                     } else {
                         if (userCanceled) {
                             dispatch_async(dispatch_get_main_queue(), ^{

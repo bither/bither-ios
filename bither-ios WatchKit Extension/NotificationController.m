@@ -23,16 +23,16 @@
 #import "WatchStringUtil.h"
 #import "WatchUnitUtil.h"
 
-@interface NotificationController()
-@property (weak, nonatomic) IBOutlet WKInterfaceLabel *lblAddress;
-@property (weak, nonatomic) IBOutlet WKInterfaceLabel *lblAmount;
+@interface NotificationController ()
+@property(weak, nonatomic) IBOutlet WKInterfaceLabel *lblAddress;
+@property(weak, nonatomic) IBOutlet WKInterfaceLabel *lblAmount;
 @end
 
 @implementation NotificationController
 
 - (instancetype)init {
     self = [super init];
-    if (self){
+    if (self) {
         [self.lblAmount setHidden:YES];
         [self.lblAddress setHidden:YES];
     }
@@ -48,7 +48,7 @@
 }
 
 - (void)didReceiveLocalNotification:(UILocalNotification *)localNotification withCompletion:(void (^)(WKUserNotificationInterfaceType))completionHandler {
-    if([self processNotification:localNotification.userInfo]){
+    if ([self processNotification:localNotification.userInfo]) {
         completionHandler(WKUserNotificationInterfaceTypeCustom);
     } else {
         completionHandler(WKUserNotificationInterfaceTypeDefault);
@@ -56,24 +56,28 @@
 }
 
 - (void)didReceiveRemoteNotification:(NSDictionary *)remoteNotification withCompletion:(void (^)(WKUserNotificationInterfaceType))completionHandler {
-    if([self processNotification:remoteNotification]){
+    if ([self processNotification:remoteNotification]) {
         completionHandler(WKUserNotificationInterfaceTypeCustom);
     } else {
         completionHandler(WKUserNotificationInterfaceTypeDefault);
     }
 }
 
-- (BOOL)processNotification:(NSDictionary*)notice{
-    NSString* address = [notice objectForKey:@"address"];
-    if(!address){
+- (BOOL)processNotification:(NSDictionary *)notice {
+    NSString *address = [notice objectForKey:@"address"];
+    if (!address) {
         return NO;
     }
-    long long diff = ((NSNumber*)[notice objectForKey:@"diff"]).longLongValue;
-    [self.lblAddress setText:[WatchStringUtil formatAddress:address groupSize:4 lineSize:12]];
-    if(diff >= 0){
+    long long diff = ((NSNumber *) [notice objectForKey:@"diff"]).longLongValue;
+    if ([address isEqualToString:@"HDAccount"]) {
+        [self.lblAddress setText:NSLocalizedString(@"address_group_hd", nil)];
+    } else {
+        [self.lblAddress setText:[WatchStringUtil formatAddress:address groupSize:4 lineSize:12]];
+    }
+    if (diff >= 0) {
         [self.lblAmount setText:[NSString stringWithFormat:@"+ %@", [WatchUnitUtil stringForAmount:diff]]];
         [self.lblAmount setTextColor:[UIColor greenColor]];
-    }else{
+    } else {
         [self.lblAmount setText:[NSString stringWithFormat:@"- %@", [WatchUnitUtil stringForAmount:-diff]]];
         [self.lblAmount setTextColor:[UIColor redColor]];
     }

@@ -21,4 +21,5 @@
 @interface AdvanceViewController : UIViewController<ShowBannerDelegete>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (strong ,nonatomic)NSArray * settings;
+-(void)reload;
 @end

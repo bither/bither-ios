@@ -31,7 +31,7 @@
 @end
 
 @interface HotAddressListSectionHeader : UIView
--(instancetype)initWithSize:(CGSize)size isHDM:(BOOL)hdm isPrivate:(BOOL)isPrivate section:(NSUInteger)section  delegate:(NSObject<SectionHeaderPressedDelegate>*)delegate;
+-(instancetype)initWithSize:(CGSize)size isHD:(BOOL)hd isHDM:(BOOL)hdm isPrivate:(BOOL)isPrivate section:(NSUInteger)section  delegate:(NSObject<SectionHeaderPressedDelegate>*)delegate;
 
 @property (weak) NSObject<SectionHeaderPressedDelegate>* delegate;
 @end

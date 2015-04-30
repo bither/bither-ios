@@ -101,7 +101,6 @@
     if (![[BTPeerManager instance] connected]) {
         [[PeerUtil instance] startPeer];
     }
-    [TransactionsUtil completeInputsForAddressInBackground:self.address];
 }
 
 -(void)viewDidAppear:(BOOL)animated{
@@ -276,17 +275,7 @@
             if(success){
                 [dp showInWindow:self.view.window completion:^{
                     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
-                        if([self.address checkRValuesForTx:self.tx]){
-                            [self finalSend];
-                        } else {
-                            needConfirm = NO;
-                            dispatch_async(dispatch_get_main_queue(), ^{
-                                [dp dismissWithCompletion:^{
-                                    needConfirm = YES;
-                                    self.btnSend.enabled = YES;
-                                }];
-                            });
-                        }
+                        [self finalSend];
                     });
                 }];
             }else{

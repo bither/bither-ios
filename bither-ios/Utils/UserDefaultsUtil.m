@@ -15,10 +15,12 @@
 //  See the License for the specific language governing permissions and
 //  limitations under the License.
 
+#import <AssertMacros.h>
 #import "UserDefaultsUtil.h"
 #import "NSData+Hash.h"
 #import "StringUtil.h"
 #import "GroupUserDefaultUtil.h"
+#import "QRCodeThemeUtil.h"
 
 #define PREFS_KEY_LAST_VERSION @"last_version"
 #define USER_DEFAULT_LAST_VER @"last_ver"
@@ -41,6 +43,8 @@
 
 #define KEYCHAIN_MODE @"keychain_mode"
 
+#define PASSWORD_STRENGTH_CHECK @"password_strength_check"
+
 static UserDefaultsUtil *userDefaultsUtil;
 
 NSUserDefaults *userDefaults;
@@ -48,215 +52,237 @@ NSUserDefaults *userDefaults;
 @implementation UserDefaultsUtil
 
 + (UserDefaultsUtil *)instance {
-    @synchronized(self) {
+    @synchronized (self) {
         if (userDefaultsUtil == nil) {
             userDefaultsUtil = [[self alloc] init];
-            userDefaults = [NSUserDefaults  standardUserDefaults];
+            userDefaults = [NSUserDefaults standardUserDefaults];
         }
     }
     return userDefaultsUtil;
 }
 
--(NSInteger)getLastVersion{
+- (NSInteger)getLastVersion {
     return [userDefaults integerForKey:USER_DEFAULT_LAST_VER];
 }
 
--(void)setLastVersion:(NSInteger) version{
+- (void)setLastVersion:(NSInteger)version {
     [userDefaults setInteger:version forKey:USER_DEFAULT_LAST_VER];
     [userDefaults synchronize];
 }
--(MarketType)getDefaultMarket{
+
+- (MarketType)getDefaultMarket {
     if (![userDefaults objectForKey:DEFAULT_MARKET]) {
         [self setDefaultMarket];
     }
     return [self getMarket];
 }
--(MarketType) getMarket{
-    NSInteger market=[userDefaults integerForKey:DEFAULT_MARKET];
+
+- (MarketType)getMarket {
+    NSInteger market = [userDefaults integerForKey:DEFAULT_MARKET];
     return market;
 }
--(void)setDefaultMarket{
-    if ([self localeIsChina]){
+
+- (void)setDefaultMarket {
+    if ([self localeIsChina]) {
         [self setMarket:HUOBI];
-    }else{
+    } else {
         [self setMarket:BITSTAMP];
     }
 
 }
--(void)setMarket:(MarketType) marketType{
+
+- (void)setMarket:(MarketType)marketType {
     [userDefaults setInteger:marketType forKey:DEFAULT_MARKET];
     [userDefaults synchronize];
-    [[GroupUserDefaultUtil instance] setDefaultMarket:(GroupMarketType)marketType];
+    [[GroupUserDefaultUtil instance] setDefaultMarket:(GroupMarketType) marketType];
 }
 
--(void)setExchangeType:(Currency) exchangeType{
+- (void)setExchangeType:(Currency)exchangeType {
     [userDefaults setInteger:exchangeType forKey:DEFAULT_EXCHANGE_RATE];
     [userDefaults synchronize];
-    [[GroupUserDefaultUtil instance] setDefaultCurrency:(GroupCurrency)exchangeType];
+    [[GroupUserDefaultUtil instance] setDefaultCurrency:(GroupCurrency) exchangeType];
 }
--(Currency)getDefaultCurrency {
-    NSInteger type=[self getExchangeType];
-    if (type==-1) {
+
+- (Currency)getDefaultCurrency {
+    NSInteger type = [self getExchangeType];
+    if (type == -1) {
         [self setDefaultExchangeType];
     }
     return [self getExchangeType];
 }
--(void) setDefaultExchangeType{
+
+- (void)setDefaultExchangeType {
 
     if ([self localeIsChina]) {
         [self setExchangeType:CNY];
-    }else{
+    } else {
         [self setExchangeType:USD];
     }
 }
--(BOOL)localeIsChina{
-    NSString * language = [[NSLocale preferredLanguages] objectAtIndex:0];
-    return  [language isEqualToString:@"zh-Hans"];
+
+- (BOOL)localeIsChina {
+    NSString *language = [[NSLocale preferredLanguages] objectAtIndex:0];
+    return [language isEqualToString:@"zh-Hans"];
 }
 
--(BOOL)localeIsZHHant{
-    NSString * language = [[NSLocale preferredLanguages] objectAtIndex:0];
-    return  [language isEqualToString:@"zh-Hant"];
+- (BOOL)localeIsZHHant {
+    NSString *language = [[NSLocale preferredLanguages] objectAtIndex:0];
+    return [language isEqualToString:@"zh-Hant"];
 }
 
--(NSInteger) getExchangeType{
-    if ([userDefaults objectForKey:DEFAULT_EXCHANGE_RATE]){
+- (NSInteger)getExchangeType {
+    if ([userDefaults objectForKey:DEFAULT_EXCHANGE_RATE]) {
         return [userDefaults integerForKey:DEFAULT_EXCHANGE_RATE];
-    }else{
+    } else {
         return -1;
     }
 }
 
 
-
-
--(long long)getLastCheckPrivateKeyTime{
+- (long long)getLastCheckPrivateKeyTime {
     return [[userDefaults objectForKey:LAST_CHECK_PRIVATE_KEY_TIME] longLongValue];
 }
--(void)setLastCheckPrivateKeyTime:(long long)time{
+
+- (void)setLastCheckPrivateKeyTime:(long long)time {
     [userDefaults setObject:[NSNumber numberWithLongLong:time] forKey:LAST_CHECK_PRIVATE_KEY_TIME];
     [userDefaults synchronize];
 }
 
--(long long)getLastBackupKeyTime{
+- (long long)getLastBackupKeyTime {
     return [[userDefaults objectForKey:LAST_BACK_UP_PRIVATE_KEY_TIME] longLongValue];
 }
--(void)setLastBackupKeyTime:(long long) time{
+
+- (void)setLastBackupKeyTime:(long long)time {
     [userDefaults setObject:[NSNumber numberWithLongLong:time] forKey:LAST_BACK_UP_PRIVATE_KEY_TIME];
     [userDefaults synchronize];
 }
--(BOOL)hasPrivateKey{
+
+- (BOOL)hasPrivateKey {
     return [userDefaults boolForKey:HAS_PRIVATE_KEY];
 }
 
--(void)setHasPrivateKey:(BOOL) hasPrivateKey{
+- (void)setHasPrivateKey:(BOOL)hasPrivateKey {
     [userDefaults setBool:hasPrivateKey forKey:HAS_PRIVATE_KEY];
     [userDefaults synchronize];
 }
 
--(BOOL)getSyncBlockOnlyWifi{
+- (BOOL)getSyncBlockOnlyWifi {
     return [userDefaults boolForKey:SYNC_BLOCK_ONLY_WIFI];
 }
--(void)setSyncBlockOnlyWifi:(BOOL)onlyWifi{
+
+- (void)setSyncBlockOnlyWifi:(BOOL)onlyWifi {
     [userDefaults setBool:onlyWifi forKey:SYNC_BLOCK_ONLY_WIFI];
     [userDefaults synchronize];
 }
--(BOOL)getDownloadSpvFinish{
+
+- (BOOL)getDownloadSpvFinish {
     return [userDefaults boolForKey:DOWNLOAD_SPV_FINISH];
 }
--(void)setDownloadSpvFinish:(BOOL)finish{
+
+- (void)setDownloadSpvFinish:(BOOL)finish {
     [userDefaults setBool:finish forKey:DOWNLOAD_SPV_FINISH];
     [userDefaults synchronize];
 }
 
--(BTPasswordSeed *)getPasswordSeedForOldVersion {
-    NSString * str=[userDefaults stringForKey:PASSWORD_SEED];
+- (BTPasswordSeed *)getPasswordSeedForOldVersion {
+    NSString *str = [userDefaults stringForKey:PASSWORD_SEED];
     if ([StringUtil isEmpty:str]) {
         return nil;
     }
     return [[BTPasswordSeed alloc] initWithString:str];
 }
 
--(void)setPasswordSeed:(BTPasswordSeed *)passwordSeed{
+- (void)setPasswordSeed:(BTPasswordSeed *)passwordSeed {
     [userDefaults setValue:[passwordSeed toPasswordSeedString] forKey:PASSWORD_SEED];
     [userDefaults synchronize];
 
 }
--(TransactionFeeMode) getTransactionFeeMode{
+
+- (TransactionFeeMode)getTransactionFeeMode {
     if ([userDefaults objectForKey:TRANSACTION_FEE_MODE]) {
-        if ([userDefaults integerForKey:TRANSACTION_FEE_MODE]==Low) {
+        if ([userDefaults integerForKey:TRANSACTION_FEE_MODE] == Low) {
             return Low;
-        }else{
+        } else {
             return Normal;
         }
-    }else{
+    } else {
         return Normal;
     }
 }
--(void)setTransactionFeeMode :(TransactionFeeMode ) feeMode{
+
+- (void)setTransactionFeeMode:(TransactionFeeMode)feeMode {
     if (!feeMode) {
-        feeMode=Normal;
+        feeMode = Normal;
     }
     [userDefaults setInteger:feeMode forKey:TRANSACTION_FEE_MODE];
     [userDefaults synchronize];
 }
--(BOOL) hasUserAvatar{
-     return [StringUtil isEmpty:[self getUserAvatar]];
+
+- (BOOL)hasUserAvatar {
+    return [StringUtil isEmpty:[self getUserAvatar]];
 
 }
 
--(NSString *)getUserAvatar{
+- (NSString *)getUserAvatar {
     return [userDefaults stringForKey:USER_AVATAR];
 }
 
--(void) setUserAvatar:(NSString *)avatar{
+- (void)setUserAvatar:(NSString *)avatar {
     [userDefaults setObject:avatar forKey:USER_AVATAR];
     [userDefaults synchronize];
 }
--(NSInteger)getQrCodeTheme{
-    return [userDefaults integerForKey:FANCY_QR_CODE_THEME];
+
+- (NSInteger)getQrCodeTheme {
+    NSInteger index = [userDefaults integerForKey:FANCY_QR_CODE_THEME];
+    if (index < 0) {
+        index = 0;
+    }
+    if (index >= [QRCodeTheme themes].count) {
+        index = [QRCodeTheme themes].count - 1;
+    }
+    return index;
 }
 
--(void)setQrCodeTheme:(NSInteger) qrCodeTheme{
+- (void)setQrCodeTheme:(NSInteger)qrCodeTheme {
     [userDefaults setInteger:qrCodeTheme forKey:FANCY_QR_CODE_THEME];
     [userDefaults synchronize];
 }
 
 
--(void)setBitcoinUnit:(BitcoinUnit)bitcoinUnit{
+- (void)setBitcoinUnit:(BitcoinUnit)bitcoinUnit {
     [userDefaults setInteger:bitcoinUnit forKey:BITCOIN_UNIT];
     [userDefaults synchronize];
-    [[GroupUserDefaultUtil instance] setDefaultBitcoinUnit:(GroupBitcoinUnit)bitcoinUnit];
+    [[GroupUserDefaultUtil instance] setDefaultBitcoinUnit:(GroupBitcoinUnit) bitcoinUnit];
 }
 
--(BitcoinUnit)getBitcoinUnit{
-    if([userDefaults objectForKey:BITCOIN_UNIT]){
+- (BitcoinUnit)getBitcoinUnit {
+    if ([userDefaults objectForKey:BITCOIN_UNIT]) {
         return [userDefaults integerForKey:BITCOIN_UNIT];
     }
     return UnitBTC;
 }
 
--(void)setPinCode:(NSString*)code{
-    if(!code || code.length == 0){
+- (void)setPinCode:(NSString *)code {
+    if (!code || code.length == 0) {
         [self deletePinCode];
         return;
     }
     NSUInteger salt;
-    NSData* randomBytes = [NSData randomWithSize:sizeof(salt)];
+    NSData *randomBytes = [NSData randomWithSize:sizeof(salt)];
     [randomBytes getBytes:&salt length:sizeof(salt)];
-    
-    NSString *beforeHashStr = [NSString stringWithFormat:@"%@%lu", code, (unsigned long)salt];
-    
+
+    NSString *beforeHashStr = [NSString stringWithFormat:@"%@%lu", code, (unsigned long) salt];
+
     [userDefaults setObject:[NSString stringWithFormat:@"%lu;%lu", salt, [beforeHashStr hash]] forKey:PIN_CODE];
     [userDefaults synchronize];
 }
 
--(BOOL)hasPinCode{
+- (BOOL)hasPinCode {
     NSString *hash = [userDefaults objectForKey:PIN_CODE];
-    if(!hash || hash.length == 0){
+    if (!hash || hash.length == 0) {
         return NO;
     }
-    NSArray* strs = [hash componentsSeparatedByString:@";"];
+    NSArray *strs = [hash componentsSeparatedByString:@";"];
     if (strs.count != 2) {
         [self deletePinCode];
         return NO;
@@ -264,37 +290,37 @@ NSUserDefaults *userDefaults;
     return YES;
 }
 
--(void)deletePinCode{
+- (void)deletePinCode {
     [userDefaults removeObjectForKey:PIN_CODE];
     [userDefaults synchronize];
 }
 
--(BOOL)checkPinCode:(NSString*)code{
-    if([self hasPinCode]){
+- (BOOL)checkPinCode:(NSString *)code {
+    if ([self hasPinCode]) {
         NSString *hash = [userDefaults objectForKey:PIN_CODE];
-        NSArray* strs = [hash componentsSeparatedByString:@";"];
-        NSString* saltStr = strs[0];
+        NSArray *strs = [hash componentsSeparatedByString:@";"];
+        NSString *saltStr = strs[0];
         hash = strs[1];
-        NSString* codeHash = [NSString stringWithFormat:@"%@%@", code, saltStr];
+        NSString *codeHash = [NSString stringWithFormat:@"%@%@", code, saltStr];
         return [StringUtil compareString:hash compare:[NSString stringWithFormat:@"%lu", [codeHash hash]]];
-    }else{
+    } else {
         return YES;
     }
 }
 
--(KeychainMode) getKeychainMode{
+- (KeychainMode)getKeychainMode {
     if ([userDefaults objectForKey:KEYCHAIN_MODE]) {
-        if ([userDefaults integerForKey:KEYCHAIN_MODE]==Off) {
+        if ([userDefaults integerForKey:KEYCHAIN_MODE] == Off) {
             return Off;
-        }else{
+        } else {
             return On;
         }
-    }else{
+    } else {
         return Off;
     }
 }
 
--(void)setKeychainMode :(KeychainMode ) keychainMode{
+- (void)setKeychainMode:(KeychainMode)keychainMode {
     if (!keychainMode) {
         keychainMode = Off;
     }
@@ -302,6 +328,17 @@ NSUserDefaults *userDefaults;
     [userDefaults synchronize];
 }
 
+- (void)setPasswordStrengthCheck:(BOOL)check {
+    [userDefaults setBool:check forKey:PASSWORD_STRENGTH_CHECK];
+    [userDefaults synchronize];
+}
+
+- (BOOL)getPasswordStrengthCheck {
+    if (![userDefaults objectForKey:PASSWORD_STRENGTH_CHECK]) {
+        return YES;
+    }
+    return [userDefaults boolForKey:PASSWORD_STRENGTH_CHECK];
+}
 
 @end
 

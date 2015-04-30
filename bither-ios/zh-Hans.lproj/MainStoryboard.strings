@@ -293,15 +293,6 @@
 /* Class = "IBUILabel"; text = "HDM Server"; ObjectID = "lnF-bS-z2z"; */
 "lnF-bS-z2z.text" = "HDM 服务器";
 
-/* Class = "IBUISegmentedControl"; oZb-Bk-280.segmentTitles[0] = "Private Key"; ObjectID = "oZb-Bk-280"; */
-"oZb-Bk-280.segmentTitles[0]" = "私钥";
-
-/* Class = "IBUISegmentedControl"; oZb-Bk-280.segmentTitles[1] = "Watch Only"; ObjectID = "oZb-Bk-280"; */
-"oZb-Bk-280.segmentTitles[1]" = "监控";
-
-/* Class = "IBUISegmentedControl"; oZb-Bk-280.segmentTitles[2] = "HDM"; ObjectID = "oZb-Bk-280"; */
-"oZb-Bk-280.segmentTitles[2]" = "HDM";
-
 /* Class = "IBUILabel"; text = "How many HDM addresses to add?"; ObjectID = "KSX-eO-Uwn"; */
 "KSX-eO-Uwn.text" = "增加多少个 HDM 地址?";
 
@@ -346,3 +337,63 @@
 
 /* Class = "UILabel"; text = "Balance:"; ObjectID = "hsE-yP-NwX"; */
 "hsE-yP-NwX.text" = "余额:";
+
+/* Class = "UISegmentedControl"; oZb-Bk-280.segmentTitles[0] = "HD Account"; ObjectID = "oZb-Bk-280"; */
+"oZb-Bk-280.segmentTitles[0]" = "HD 账户";
+
+/* Class = "UISegmentedControl"; oZb-Bk-280.segmentTitles[1] = "Others"; ObjectID = "oZb-Bk-280"; */
+"oZb-Bk-280.segmentTitles[1]" = "其它";
+
+/* Class = "UIButton"; normalTitle = "Generate"; ObjectID = "LrS-g8-zv9"; */
+"LrS-g8-zv9.normalTitle" = "生成";
+
+/* Class = "UILabel"; text = "Generate New HD Account"; ObjectID = "bUN-jt-wO1"; */
+"bUN-jt-wO1.text" = "生成新的 HD 账户";
+
+/* Class = "UIButton"; normalTitle = "Generate Normal Private Keys"; ObjectID = "aa4-oP-TVf"; */
+"aa4-oP-TVf.normalTitle" = "生成普通私钥";
+
+/* Class = "UIButton"; normalTitle = "Generate HDM Account"; ObjectID = "tee-1q-g6I"; */
+"tee-1q-g6I.normalTitle" = "生成 HDM 账户";
+
+/* Class = "UILabel"; text = "You already have an HD account."; ObjectID = "nBS-fJ-qtL"; */
+"nBS-fJ-qtL.text" = "已有 HD 账户";
+
+/* Class = "UIButton"; normalTitle = "HD Account Seed QR Code"; ObjectID = "5p5-q5-NIv"; */
+"5p5-q5-NIv.normalTitle" = "HD 账户种子二维码";
+
+/* Class = "UIButton"; normalTitle = "HD Account Seed Phrase"; ObjectID = "Ces-kP-XIs"; */
+"Ces-kP-XIs.normalTitle" = "HD 账户密语";
+
+/* Class = "UILabel"; text = "Generate Normal Private Keys"; ObjectID = "R90-Bo-e0X"; */
+"R90-Bo-e0X.text" = "生成普通私钥";
+
+/* Class = "UILabel"; text = "Generate HDM Account"; ObjectID = "Pgs-ev-QNu"; */
+"Pgs-ev-QNu.text" = "生成 HDM 账户";
+
+/* Class = "UITextField"; placeholder = "Bitcoin address"; ObjectID = "3Xg-gQ-PrT"; */
+"3Xg-gQ-PrT.placeholder" = "比特币地址";
+
+/* Class = "UIButton"; normalTitle = "Send"; ObjectID = "7HM-O3-12p"; */
+"7HM-O3-12p.normalTitle" = "发送";
+
+/* Class = "UILabel"; text = "Balance:"; ObjectID = "ECV-qg-2mZ"; */
+"ECV-qg-2mZ.text" = "余额:";
+
+/* Class = "UILabel"; text = "Amount"; ObjectID = "jBb-nb-rnn"; */
+"jBb-nb-rnn.text" = "金额";
+
+/* Class = "UITextField"; placeholder = "Password"; ObjectID = "qjQ-dU-y8s"; */
+"qjQ-dU-y8s.placeholder" = "密码";
+
+/* Class = "UILabel"; text = "Pay to"; ObjectID = "tBQ-pH-ztd"; */
+"tBQ-pH-ztd.text" = "发送给";
+
+/* Class = "UILabel"; text = "Password"; ObjectID = "v46-EP-4NU"; */
+"v46-EP-4NU.text" = "密码";
+
+/* Class = "UILabel"; text = "Import HD Seed Phrase"; ObjectID = "uoc-uG-k6M"; */
+"uoc-uG-k6M.text" = "导入 HD 密语";
+
+/* Class = "UIButton"; normalTitle = "Next Word"; ObjectID = "LUd-2F-jCf"; */
+"LUd-2F-jCf.normalTitle" = "下一单词";

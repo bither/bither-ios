@@ -88,6 +88,10 @@
     return 1;
 }
 
+-(void)reload{
+    [self.tableView reloadData];
+}
+
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     Setting *setting=[self.settings objectAtIndex:indexPath.row];
     if (setting.selectBlock) {

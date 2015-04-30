@@ -91,7 +91,6 @@
     if (![[BTPeerManager instance] connected]) {
         [[PeerUtil instance] startPeer];
     }
-    [TransactionsUtil completeInputsForAddressInBackground:self.address];
 }
 
 -(void)viewDidAppear:(BOOL)animated{
@@ -129,20 +128,14 @@
                         return;
                     }
                     if([self.address signTransaction:tx withPassphrase:self.tfPassword.text]){
-                        if([self.address checkRValuesForTx:tx]){
-                            __block NSString * addressBlock = toAddress;
-                            dispatch_async(dispatch_get_main_queue(), ^{
-                                [dp dismissWithCompletion:^{
-                                    [dp changeToMessage:NSLocalizedString(@"Please wait…", nil)];
-                                    DialogSendTxConfirm *dialog = [[DialogSendTxConfirm alloc]initWithTx:tx from:self.address to:addressBlock changeTo:self.dialogSelectChangeAddress.changeAddress.address delegate:self];
-                                    [dialog showInWindow:self.view.window];
-                                }];
-                            });
-                        } else {
-                            dispatch_async(dispatch_get_main_queue(), ^{
-                                [self sendPressed:self.btnSend];
-                            });
-                        }
+                        __block NSString * addressBlock = toAddress;
+                        dispatch_async(dispatch_get_main_queue(), ^{
+                            [dp dismissWithCompletion:^{
+                                [dp changeToMessage:NSLocalizedString(@"Please wait…", nil)];
+                                DialogSendTxConfirm *dialog = [[DialogSendTxConfirm alloc]initWithTx:tx from:self.address to:addressBlock changeTo:self.dialogSelectChangeAddress.changeAddress.address delegate:self];
+                                [dialog showInWindow:self.view.window];
+                            }];
+                        });
                     }else{
                         [self showSendResult:NSLocalizedString(@"Password wrong.", nil) dialog:dp];
                     }

@@ -42,74 +42,77 @@
 #import "SignMessageViewController.h"
 #import "DialogHDMAddressOptions.h"
 #import "AddressAliasView.h"
+#import "DialogHDAccountOptions.h"
 
 #define kUnconfirmedTxAmountLeftMargin (3)
 
 #define kBalanceFontSize (19)
 
-@interface HotAddressListCell ()<DialogAddressFullDelegate,DialogPrivateKeyOptionsDelegate,DialogPasswordDelegate>{
-    BTAddress * _btAddress;
+@interface HotAddressListCell () <DialogAddressFullDelegate, DialogPrivateKeyOptionsDelegate, DialogPasswordDelegate> {
+    BTAddress *_btAddress;
+    DialogHDAccountOptions *dialogHDAccountOptions;
     PrivateKeyQrCodeType _qrcodeType;
     BOOL isMovingToTrash;
 }
 
-@property (weak, nonatomic) IBOutlet UILabel *lblAddress;
-@property (weak, nonatomic) IBOutlet UILabel *lblBalanceBtc;
-@property (weak, nonatomic) IBOutlet UILabel *lblBalanceMoney;
-@property (weak, nonatomic) IBOutlet UIImageView *ivType;
-@property (weak, nonatomic) IBOutlet UIImageView *ivXrandom;
-@property (weak, nonatomic) IBOutlet UILabel *lblTransactionCount;
-@property (weak, nonatomic) IBOutlet UIImageView *ivHighlighted;
-@property (weak, nonatomic) IBOutlet UIView *vNoUnconfirmedTx;
-@property (weak, nonatomic) IBOutlet UIView *vUnconfirmedTx;
-@property (weak, nonatomic) IBOutlet TransactionConfidenceView *vUnconfirmedTxConfidence;
-@property (weak, nonatomic) IBOutlet AmountButton *vUnconfirmedTxAmount;
-@property (weak, nonatomic) IBOutlet UIButton *btnAddressFull;
-@property (weak, nonatomic) IBOutlet UIImageView *ivSymbolBtc;
-@property (weak, nonatomic) IBOutlet AddressAliasView *btnAlias;
-@property (strong, nonatomic) UILongPressGestureRecognizer * longPress;
-@property (strong, nonatomic) UILongPressGestureRecognizer * xrandomLongPress;
+@property(weak, nonatomic) IBOutlet UILabel *lblAddress;
+@property(weak, nonatomic) IBOutlet UILabel *lblBalanceBtc;
+@property(weak, nonatomic) IBOutlet UILabel *lblBalanceMoney;
+@property(weak, nonatomic) IBOutlet UIImageView *ivType;
+@property(weak, nonatomic) IBOutlet UIImageView *ivXrandom;
+@property(weak, nonatomic) IBOutlet UILabel *lblTransactionCount;
+@property(weak, nonatomic) IBOutlet UIImageView *ivHighlighted;
+@property(weak, nonatomic) IBOutlet UIView *vNoUnconfirmedTx;
+@property(weak, nonatomic) IBOutlet UIView *vUnconfirmedTx;
+@property(weak, nonatomic) IBOutlet TransactionConfidenceView *vUnconfirmedTxConfidence;
+@property(weak, nonatomic) IBOutlet AmountButton *vUnconfirmedTxAmount;
+@property(weak, nonatomic) IBOutlet UIButton *btnAddressFull;
+@property(weak, nonatomic) IBOutlet UIImageView *ivSymbolBtc;
+@property(weak, nonatomic) IBOutlet AddressAliasView *btnAlias;
+@property(strong, nonatomic) UILongPressGestureRecognizer *longPress;
+@property(strong, nonatomic) UILongPressGestureRecognizer *xrandomLongPress;
 
 @end
 
 @implementation HotAddressListCell
 
-- (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
-{
+- (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
     }
     return self;
 }
 
--(void)setAddress:(BTAddress*)address{
-    _btAddress=address;
+- (void)setAddress:(BTAddress *)address {
+    _btAddress = address;
     self.vUnconfirmedTxAmount.alignLeft = YES;
     self.lblAddress.text = [StringUtil shortenAddress:address.address];
     CGFloat width = [self widthForLabel:self.lblAddress maxWidth:self.frame.size.width];
     self.lblAddress.frame = CGRectMake(self.lblAddress.frame.origin.x, self.lblAddress.frame.origin.y, width, self.lblAddress.frame.size.height);
-    if (self.longPress==nil) {
-        self.longPress=[[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleTableviewCellLongPressed:)];
+    if (self.longPress == nil) {
+        self.longPress = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleTableviewCellLongPressed:)];
     }
     if (![[self.ivType gestureRecognizers] containsObject:self.longPress]) {
         [self.ivType addGestureRecognizer:self.longPress];
     }
-    if(address.isHDM){
+    if (address.isHDAccount) {
+        self.ivType.image = [UIImage imageNamed:@"address_type_hd"];
+    } else if (address.isHDM) {
         self.ivType.image = [UIImage imageNamed:@"address_type_hdm"];
-    }else if(address.hasPrivKey){
+    } else if (address.hasPrivKey) {
         self.ivType.image = [UIImage imageNamed:@"address_type_private"];
-    }else{
+    } else {
         self.ivType.image = [UIImage imageNamed:@"address_type_watchonly"];
     }
-    
-    if(!self.xrandomLongPress){
-        self.xrandomLongPress = [[UILongPressGestureRecognizer alloc]initWithTarget:self action:@selector(handleXrandomLabelLongPressed:)];
+
+    if (!self.xrandomLongPress) {
+        self.xrandomLongPress = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleXrandomLabelLongPressed:)];
         [self.ivXrandom addGestureRecognizer:self.xrandomLongPress];
     }
     self.ivXrandom.hidden = !address.isFromXRandom;
-    
+
     self.lblBalanceBtc.attributedText = [UnitUtil attributedStringForAmount:address.balance withFontSize:kBalanceFontSize];
-    
+
     width = [self.lblBalanceBtc.attributedText sizeWithRestrict:CGSizeMake(CGFLOAT_MAX, self.lblBalanceBtc.frame.size.height)].width;
     self.lblBalanceBtc.frame = CGRectMake(CGRectGetMaxX(self.lblBalanceBtc.frame) - width, self.lblBalanceBtc.frame.origin.y, width, self.lblBalanceBtc.frame.size.height);
     self.ivSymbolBtc.frame = CGRectMake(CGRectGetMinX(self.lblBalanceBtc.frame) - self.ivSymbolBtc.frame.size.width - 2, self.ivSymbolBtc.frame.origin.y, self.ivSymbolBtc.frame.size.width, self.ivSymbolBtc.frame.size.height);
@@ -118,7 +121,7 @@
 //        self.lblTransactionCount.text = [NSString string];
     self.vNoUnconfirmedTx.hidden = NO;
     self.vUnconfirmedTx.hidden = YES;
-    
+
     uint32_t txCount = address.txCount;
     BTTx *recentlyTx = address.recentlyTx;
     if (txCount > 0 && recentlyTx != nil) {
@@ -138,100 +141,104 @@
     CGRect frame = self.btnAddressFull.frame;
     frame.origin.x = CGRectGetMaxX(self.lblAddress.frame) + 5;
     self.btnAddressFull.frame = frame;
-    if ([MarketUtil getDefaultNewPrice]>0) {
-        double balanceMoney=([MarketUtil getDefaultNewPrice]*address.balance)/pow(10, 8);
-        self.lblBalanceMoney.text=[StringUtil formatPrice:balanceMoney];
-    }else{
-        self.lblBalanceMoney.text=@"--";
+    if ([MarketUtil getDefaultNewPrice] > 0) {
+        double balanceMoney = ([MarketUtil getDefaultNewPrice] * address.balance) / pow(10, 8);
+        self.lblBalanceMoney.text = [StringUtil formatPrice:balanceMoney];
+    } else {
+        self.lblBalanceMoney.text = @"--";
     }
 
     self.btnAlias.address = address;
     isMovingToTrash = NO;
 }
 
--(CGFloat)widthForLabel:(UILabel*)lbl maxWidth:(CGFloat)maxWidth{
-    CGFloat width = [lbl.text boundingRectWithSize:CGSizeMake(maxWidth, lbl.frame.size.height) options:NSStringDrawingUsesLineFragmentOrigin|NSStringDrawingUsesFontLeading attributes:@{NSFontAttributeName: lbl.font, NSParagraphStyleAttributeName:[NSParagraphStyle defaultParagraphStyle]} context:nil].size.width;
+- (CGFloat)widthForLabel:(UILabel *)lbl maxWidth:(CGFloat)maxWidth {
+    CGFloat width = [lbl.text boundingRectWithSize:CGSizeMake(maxWidth, lbl.frame.size.height) options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading attributes:@{NSFontAttributeName : lbl.font, NSParagraphStyleAttributeName : [NSParagraphStyle defaultParagraphStyle]} context:nil].size.width;
     width = ceilf(width);
     return width;
 }
+
 - (IBAction)addressFullPressed:(id)sender {
-    [[[DialogAddressFull alloc]initWithDelegate:self]showFromView:self.btnAddressFull];
+    [[[DialogAddressFull alloc] initWithDelegate:self] showFromView:self.btnAddressFull];
 }
 
--(NSUInteger)dialogAddressFullRowCount{
+- (NSUInteger)dialogAddressFullRowCount {
     return 1;
 }
 
--(NSString*)dialogAddressFullAddressForRow:(NSUInteger)row{
+- (NSString *)dialogAddressFullAddressForRow:(NSUInteger)row {
     return _btAddress.address;
 }
 
--(int64_t)dialogAddressFullAmountForRow:(NSUInteger)row{
+- (int64_t)dialogAddressFullAmountForRow:(NSUInteger)row {
     return 0;
 }
 
--(BOOL)dialogAddressFullDoubleColumn{
+- (BOOL)dialogAddressFullDoubleColumn {
     return NO;
 }
 
--(void)showMsg:(NSString*)msg{
-    UIViewController* ctr = self.getUIViewController;
-    if([ctr respondsToSelector:@selector(showMsg:)]){
+- (void)showMsg:(NSString *)msg {
+    UIViewController *ctr = self.getUIViewController;
+    if ([ctr respondsToSelector:@selector(showMsg:)]) {
         [ctr performSelector:@selector(showMsg:) withObject:msg];
     }
 }
 
--(void)setHighlighted:(BOOL)highlighted animated:(BOOL)animated{
+- (void)setHighlighted:(BOOL)highlighted animated:(BOOL)animated {
     [super setHighlighted:highlighted animated:animated];
     self.ivHighlighted.highlighted = highlighted;
 }
 
-- (void) handleTableviewCellLongPressed:(UILongPressGestureRecognizer *)gestureRecognizer {
-    if (gestureRecognizer.state==UIGestureRecognizerStateBegan) {
-        if(_btAddress.isHDM){
+- (void)handleTableviewCellLongPressed:(UILongPressGestureRecognizer *)gestureRecognizer {
+    if (gestureRecognizer.state == UIGestureRecognizerStateBegan) {
+        if (_btAddress.isHDAccount) {
+            dialogHDAccountOptions = [[DialogHDAccountOptions alloc] initWithHDAccount:[BTAddressManager instance].hdAccount];
+            [dialogHDAccountOptions showInWindow:self.window];
+        } else if (_btAddress.isHDM) {
             [[[DialogHDMAddressOptions alloc] initWithAddress:_btAddress andAddressAliasDelegate:nil] showInWindow:self.window];
-        }else{
-            DialogAddressLongPressOptions *dialogPrivateKeyOptons=[[DialogAddressLongPressOptions alloc] initWithAddress:_btAddress andDelegate:self];
+        } else {
+            DialogAddressLongPressOptions *dialogPrivateKeyOptons = [[DialogAddressLongPressOptions alloc] initWithAddress:_btAddress andDelegate:self];
             [dialogPrivateKeyOptons showInWindow:self.window];
         }
     }
 }
 
--(void)handleXrandomLabelLongPressed:(UILongPressGestureRecognizer*)gesture{
-    if(gesture.state == UIGestureRecognizerStateBegan){
-        [[[DialogXrandomInfo alloc]init] showInWindow:self.window];
+- (void)handleXrandomLabelLongPressed:(UILongPressGestureRecognizer *)gesture {
+    if (gesture.state == UIGestureRecognizerStateBegan) {
+        [[[DialogXrandomInfo alloc] init] showInWindow:self.window];
     }
 }
 
 //DialogPrivateKeyOptionsDelegate
--(void)stopMonitorAddress{
-    [[[DialogAlert alloc]initWithMessage:NSLocalizedString(@"Sure to stop monitoring this address?", nil) confirm:^{
+- (void)stopMonitorAddress {
+    [[[DialogAlert alloc] initWithMessage:NSLocalizedString(@"Sure to stop monitoring this address?", nil) confirm:^{
         [KeyUtil stopMonitor:_btAddress];
-        if (self.viewController&&[self.viewController isMemberOfClass:[HotAddressViewController class]]) {
-            HotAddressViewController * hotAddressViewController=(HotAddressViewController*)self.viewController;
+        if (self.viewController && [self.viewController isMemberOfClass:[HotAddressViewController class]]) {
+            HotAddressViewController *hotAddressViewController = (HotAddressViewController *) self.viewController;
             [hotAddressViewController reload];
         }
-    } cancel:nil]showInWindow:self.window];
+    }                              cancel:nil] showInWindow:self.window];
 }
 
--(void)resetMonitorAddress{
+- (void)resetMonitorAddress {
 }
 
--(void)showPrivateKeyDecryptedQrCode{
-    _qrcodeType=Decrypetd;
-    DialogPassword *dialog = [[DialogPassword alloc]initWithDelegate:self];
+- (void)showPrivateKeyDecryptedQrCode {
+    _qrcodeType = Decrypetd;
+    DialogPassword *dialog = [[DialogPassword alloc] initWithDelegate:self];
     [dialog showInWindow:self.window];
 }
 
--(void)showPrivateKeyEncryptedQrCode{
-    _qrcodeType=Encrypted;
-    DialogPassword *dialog = [[DialogPassword alloc]initWithDelegate:self];
+- (void)showPrivateKeyEncryptedQrCode {
+    _qrcodeType = Encrypted;
+    DialogPassword *dialog = [[DialogPassword alloc] initWithDelegate:self];
     [dialog showInWindow:self.window];
 }
 
--(void)showPrivateKeyTextQrCode{
-    _qrcodeType=Text;
-    DialogPassword *dialog = [[DialogPassword alloc]initWithDelegate:self];
+- (void)showPrivateKeyTextQrCode {
+    _qrcodeType = Text;
+    DialogPassword *dialog = [[DialogPassword alloc] initWithDelegate:self];
     [dialog showInWindow:self.window];
 }
 
@@ -241,38 +248,38 @@
     [dialog showInWindow:self.window];
 }
 
--(void)moveToTrash{
-    if(_btAddress.balance > 0){
+- (void)moveToTrash {
+    if (_btAddress.balance > 0) {
         [self showMsg:NSLocalizedString(@"trash_with_money_warn", nil)];
-    }else{
+    } else {
         isMovingToTrash = YES;
-        DialogPassword* dp = [[DialogPassword alloc]initWithDelegate:self];
+        DialogPassword *dp = [[DialogPassword alloc] initWithDelegate:self];
         [dp showInWindow:self.window];
     }
 }
 
--(void)signMessage{
-    if(!_btAddress.hasPrivKey){
+- (void)signMessage {
+    if (!_btAddress.hasPrivKey) {
         return;
     }
-    SignMessageViewController* sign = [self.getUIViewController.storyboard instantiateViewControllerWithIdentifier:@"SignMessage"];
+    SignMessageViewController *sign = [self.getUIViewController.storyboard instantiateViewControllerWithIdentifier:@"SignMessage"];
     sign.address = _btAddress;
     [self.getUIViewController.navigationController pushViewController:sign animated:YES];
 }
 
 //DialogPasswordDelegate
--(void)onPasswordEntered:(NSString *)password{
-    __block NSString * bpassword=password;
-    password=nil;
-    if(isMovingToTrash){
+- (void)onPasswordEntered:(NSString *)password {
+    __block NSString *bpassword = password;
+    password = nil;
+    if (isMovingToTrash) {
         isMovingToTrash = NO;
-        DialogProgress *dp = [[DialogProgress alloc]initWithMessage:NSLocalizedString(@"trashing_private_key", nil)];
+        DialogProgress *dp = [[DialogProgress alloc] initWithMessage:NSLocalizedString(@"trashing_private_key", nil)];
         [dp showInWindow:self.window completion:^{
             dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
                 [[BTAddressManager instance] trashPrivKey:_btAddress];
                 dispatch_async(dispatch_get_main_queue(), ^{
                     [dp dismissWithCompletion:^{
-                        UIViewController* vc = self.getUIViewController;
+                        UIViewController *vc = self.getUIViewController;
                         if (vc && [vc respondsToSelector:@selector(reload)]) {
                             [vc performSelector:@selector(reload) withObject:nil];
                         }
@@ -282,13 +289,13 @@
         }];
         return;
     }
-    if(_qrcodeType==Encrypted){
-        DialogPrivateKeyEncryptedQrCode *dialog = [[DialogPrivateKeyEncryptedQrCode alloc]initWithAddress:_btAddress];
+    if (_qrcodeType == Encrypted) {
+        DialogPrivateKeyEncryptedQrCode *dialog = [[DialogPrivateKeyEncryptedQrCode alloc] initWithAddress:_btAddress];
         [dialog showInWindow:self.window];
-    }else{
-        DialogProgress *dialogProgress=[[DialogProgress alloc] initWithMessage:NSLocalizedString(@"Please wait…", nil)];
+    } else {
+        DialogProgress *dialogProgress = [[DialogProgress alloc] initWithMessage:NSLocalizedString(@"Please wait…", nil)];
         [dialogProgress showInWindow:self.window];
-        if(_qrcodeType == BIP38){
+        if (_qrcodeType == BIP38) {
             dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
                 BTKey *key = [BTKey keyWithBitcoinj:_btAddress.encryptPrivKey andPassphrase:bpassword];
                 __block NSString *bip38 = [key BIP38KeyWithPassphrase:bpassword];
@@ -303,31 +310,32 @@
         }
         [self decrypted:bpassword callback:^(id response) {
             [dialogProgress dismiss];
-            if (_qrcodeType==Decrypetd) {
-                DialogPrivateKeyDecryptedQrCode *dialogPrivateKey=[[DialogPrivateKeyDecryptedQrCode alloc]initWithAddress:_btAddress.address privateKey:response];
+            if (_qrcodeType == Decrypetd) {
+                DialogPrivateKeyDecryptedQrCode *dialogPrivateKey = [[DialogPrivateKeyDecryptedQrCode alloc] initWithAddress:_btAddress.address privateKey:response];
                 [dialogPrivateKey showInWindow:self.window];
-                
-            }else{
-                DialogPrivateKeyText *dialogPrivateKeyText=[[DialogPrivateKeyText alloc] initWithPrivateKeyStr:response];
+
+            } else {
+                DialogPrivateKeyText *dialogPrivateKeyText = [[DialogPrivateKeyText alloc] initWithPrivateKeyStr:response];
                 [dialogPrivateKeyText showInWindow:self.window];
-            
+
             }
-            bpassword=nil;
-            response=nil;
-        } ];
+            bpassword = nil;
+            response = nil;
+        }];
     }
 
 }
--(void)decrypted:(NSString*)password callback:(IdResponseBlock )callback{
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0),^{
-        BTKey * key =[BTKey keyWithBitcoinj:_btAddress.encryptPrivKey andPassphrase:password];
-        __block NSString * privateKey=key.privateKey;
+
+- (void)decrypted:(NSString *)password callback:(IdResponseBlock)callback {
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+        BTKey *key = [BTKey keyWithBitcoinj:_btAddress.encryptPrivKey andPassphrase:password];
+        __block NSString *privateKey = key.privateKey;
         dispatch_async(dispatch_get_main_queue(), ^{
             if (callback) {
                 callback(privateKey);
             }
         });
-        key=nil;
+        key = nil;
     });
 }
 

@@ -24,9 +24,11 @@
 #import "BTTxProvider.h"
 #import "DialogAlert.h"
 #import "TransactionsUtil.h"
+#import "BTHDAccountProvider.h"
 #import "AdvanceViewController.h"
 #import "UserDefaultsUtil.h"
 #import "BTAddressProvider.h"
+
 
 static double reloadTime;
 static Setting *reloadTxsSetting;
@@ -55,6 +57,7 @@ static Setting *reloadTxsSetting;
             [address updateSyncComplete];
         }
         [[BTTxProvider instance] clearAllTx];
+        [[BTHDAccountProvider instance] setSyncdNotComplete];
         [TransactionsUtil syncWallet:^{
             [[PeerUtil instance] startPeer];
             if (dialogProgrees) {

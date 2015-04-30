@@ -16,61 +16,65 @@
 //  See the License for the specific language governing permissions and
 //  limitations under the License.
 
+#import <Bitheri/BTUtils.h>
 #import "NotificationUtil.h"
 #import "BTAddressManager.h"
 #import "UnitUtil.h"
 #import "AppDelegate.h"
 
 @implementation NotificationUtil
-+(void)notificationTx:(NSArray *) array{
-    if ([array objectAtIndex:0]==[NSNull null]||[array objectAtIndex:1] ==[NSNull null]) {
++ (void)notificationTx:(NSArray *)array {
+    if ([array objectAtIndex:0] == [NSNull null] || [array objectAtIndex:1] == [NSNull null]) {
         return;
     }
-    NSString * address=[array objectAtIndex:0];
-    long long diff=[[array objectAtIndex:1] longLongValue];
-    NSString * typeString=diff<0?NSLocalizedString(@"Send:", nil):NSLocalizedString(@"Received:",nil);
-    long long diffValue=diff;
-    if (diff<0) {
-        diffValue=0-diff;
+    NSString *address = [array objectAtIndex:0];
+    long long diff = [[array objectAtIndex:1] longLongValue];
+    NSString *typeString = diff < 0 ? NSLocalizedString(@"Send:", nil) : NSLocalizedString(@"Received:", nil);
+    long long diffValue = diff;
+    if (diff < 0) {
+        diffValue = 0 - diff;
     }
-    NSString * balanceString=[[UnitUtil stringForAmount:diff] stringByAppendingString:[NSString stringWithFormat:@" %@", [UnitUtil unitName]]];
-    NSString * msg=[NSString stringWithFormat:@"%@ %@%@",address,typeString,balanceString];
-    NSMutableDictionary* infoDic =[NSMutableDictionary new];
+    NSString *balanceString = [[UnitUtil stringForAmount:diff] stringByAppendingString:[NSString stringWithFormat:@" %@", [UnitUtil unitName]]];
+    NSString *msg = [NSString stringWithFormat:@"%@ %@%@", address, typeString, balanceString];
+    if ([BTUtils compareString:address compare:kHDAccountPlaceHolder]) {
+        msg = [NSString stringWithFormat:@"%@ %@%@", NSLocalizedString(@"address_group_hd", nil), typeString, balanceString];
+    }
+    NSMutableDictionary *infoDic = [NSMutableDictionary new];
     [infoDic setValue:address forKey:@"address"];
-    TxNotificationType txNotificationType=-1;
-    if ([array objectAtIndex:3]!=[NSNull null]) {
-        txNotificationType=[[array objectAtIndex:3] intValue];
+    TxNotificationType txNotificationType = -1;
+    if ([array objectAtIndex:3] != [NSNull null]) {
+        txNotificationType = [[array objectAtIndex:3] intValue];
         [infoDic setValue:[array objectAtIndex:3] forKey:@"TxNotificationType"];
     }
     UIApplicationState state = [UIApplication sharedApplication].applicationState;
-    [infoDic setValue:[NSNumber numberWithBool:state==UIApplicationStateActive] forKey:ApplicationForeground];
+    [infoDic setValue:[NSNumber numberWithBool:state == UIApplicationStateActive] forKey:ApplicationForeground];
     [infoDic setValue:[NSNumber numberWithLongLong:diff] forKey:@"diff"];
-    NSLog(@"%@",infoDic);
-    if (txNotificationType==txReceive||txNotificationType==txSend) {
+    NSLog(@"%@", infoDic);
+    if (txNotificationType == txReceive || txNotificationType == txSend) {
         [self notification:msg dict:infoDic];
     }
 }
 
-+(void)notification:(NSString *)msg dict:(NSDictionary * )dict{
-    
-    UILocalNotification *notification=[[UILocalNotification alloc] init];
++ (void)notification:(NSString *)msg dict:(NSDictionary *)dict {
+
+    UILocalNotification *notification = [[UILocalNotification alloc] init];
     if ([notification respondsToSelector:@selector(setCategory:)]) {
         notification.category = @"Transaction";
     }
-    if (notification!=nil) {
-        notification.fireDate=[NSDate new];
-        notification.repeatInterval=0;
-        
-        notification.timeZone=[NSTimeZone defaultTimeZone];
-        notification.soundName =@"coins_received.wav";
-        notification.alertBody=msg;
-        notification.hasAction=NO;
+    if (notification != nil) {
+        notification.fireDate = [NSDate new];
+        notification.repeatInterval = 0;
+
+        notification.timeZone = [NSTimeZone defaultTimeZone];
+        notification.soundName = @"coins_received.wav";
+        notification.alertBody = msg;
+        notification.hasAction = NO;
         notification.applicationIconBadgeNumber = [UIApplication sharedApplication].applicationIconBadgeNumber + 1;
         notification.userInfo = dict;
 
         [[UIApplication sharedApplication] scheduleLocalNotification:notification];
     }
-    
+
 }
 
 

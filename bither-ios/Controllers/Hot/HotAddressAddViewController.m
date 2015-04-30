@@ -24,15 +24,11 @@
 #import "BitherSetting.h"
 #import "HotAddressAddHDMViewController.h"
 
-#define kPrivate (@"HotAddressAddPrivateKey")
-#define kMonitor (@"HotAddressAddWatchOnly")
-#define kHDM (@"HotAddressAddHDM")
+#define kHD (@"HotAddressAddHDAccount")
+#define kHDView (@"HotAddressAddHDAccountView")
+#define kOther (@"HotAddressAddOther")
 
-@interface HotAddressAddViewController () <HDMSingularAddViewContainer> {
-    BOOL privateKeyLimited;
-    BOOL watchOnlyLimited;
-    NSMutableArray *pages;
-    BOOL cancellable;
+@interface HotAddressAddViewController () {
 }
 @property(strong, nonatomic) PiPageViewController *page;
 @property(weak, nonatomic) IBOutlet UIView *vTopBar;
@@ -57,14 +53,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self configurePage];
-    cancellable = YES;
 }
 
 - (IBAction)cancelPressed:(id)sender {
-    if (!cancellable) {
-        [self showMessage:NSLocalizedString(@"hdm_singular_mode_cancel_warn", nil)];
-        return;
-    }
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
@@ -77,71 +68,22 @@
 @implementation HotAddressAddViewController (PageViewControllerDelegate)
 
 - (void)configurePage {
-    privateKeyLimited = [BTAddressManager instance].privKeyAddresses.count >= PRIVATE_KEY_OF_HOT_COUNT_LIMIT;
-    watchOnlyLimited = [BTAddressManager instance].watchOnlyAddresses.count >= WATCH_ONLY_COUNT_LIMIT;
-    pages = [NSMutableArray new];
-    if (!privateKeyLimited) {
-        [pages addObject:kPrivate];
-    }
-    if (!watchOnlyLimited) {
-        [pages addObject:kMonitor];
-    }
-    [pages addObject:kHDM];
-    self.page = [[PiPageViewController alloc] initWithStoryboard:self.storyboard andViewControllerIdentifiers:pages];
+    self.page = [[PiPageViewController alloc] initWithStoryboard:self.storyboard andViewControllerIdentifiers:@[([BTAddressManager instance].hasHDAccount ? kHDView : kHD), kOther]];
     self.page.pageDelegate = self;
     [self addChildViewController:self.page];
     self.page.view.frame = CGRectMake(0, CGRectGetMaxY(self.vTopBar.frame), self.view.frame.size.width, self.view.frame.size.height - CGRectGetMaxY(self.vTopBar.frame));
     [self.view insertSubview:self.page.view atIndex:0];
-    if (!privateKeyLimited) {
-        self.vTab.selectedSegmentIndex = 0;
-    } else if (!watchOnlyLimited) {
-        self.vTab.selectedSegmentIndex = 1;
-    } else {
-        self.vTab.selectedSegmentIndex = 2;
-    }
-    [self.vTab setEnabled:!privateKeyLimited forSegmentAtIndex:0];
-    [self.vTab setEnabled:!watchOnlyLimited forSegmentAtIndex:1];
+    self.vTab.selectedSegmentIndex = 0;
 }
 
 - (void)pageIndexChanged:(int)index {
-    NSString *page = pages[index];
-    self.vTab.selectedSegmentIndex = [self indexOfPage:page];
-
+    self.vTab.selectedSegmentIndex = index;
 }
 
 - (IBAction)tabChanged:(id)sender {
-    if (self.vTab.selectedSegmentIndex != [self indexOfPage:pages[self.page.index]]) {
-        [self.page setIndex:[pages indexOfObject:[self pageForIndex:self.vTab.selectedSegmentIndex]] animated:YES];
+    if (self.vTab.selectedSegmentIndex != self.page.index) {
+        [self.page setIndex:self.vTab.selectedSegmentIndex animated:YES];
     }
-}
-
-- (int)indexOfPage:(NSString *)page {
-    if ([BTUtils compareString:page compare:kHDM]) {
-        return 2;
-    } else if ([BTUtils compareString:page compare:kMonitor]) {
-        return 1;
-    } else {
-        return 0;
-    }
-}
-
-- (NSString *)pageForIndex:(int)index {
-    switch (index) {
-        case 2:
-            return kHDM;
-        case 1:
-            return kMonitor;
-        default:
-            return kPrivate;
-    }
-}
-
-- (void)setHDMSingularCancellable:(BOOL)c {
-    cancellable = c;
-    [self.vTab setEnabled:cancellable && !privateKeyLimited forSegmentAtIndex:0];
-    [self.vTab setEnabled:cancellable && !watchOnlyLimited forSegmentAtIndex:1];
-    self.page.pageEnabled = cancellable;
-    NSLog(@"hdm singular mode cancellabl: %d", cancellable);
 }
 
 @end

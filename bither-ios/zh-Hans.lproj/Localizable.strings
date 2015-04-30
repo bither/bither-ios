@@ -631,3 +631,40 @@
 "address_alias_input_label" = "输入此地址的标签";
 "address_alias_input_hint" = "标签";
 "address_alias_remove_confirm" = "删除此地址标签?";
+
+// password strength
+"password_strength_weak" = "较弱";
+"password_strength_normal" = "一般";
+"password_strength_medium" = "中等";
+"password_strength_strong" = "较强";
+"password_strength_very_strong" = "很强";
+"password_strength_warning" = "确定使用强度%@的密码?";
+"password_strength_check" = "密码强度检查";
+"password_strength_check_on" = "开";
+"password_strength_check_off" = "关";
+"password_strength_check_off_warn" = "确认关闭密码强度检查?";
+
+// add hd account
+"add_hd_account_label" = "生成新的 HD 账户";
+"add_hd_account_button" = "生成";
+"add_hd_account_tab_hd" = "HD 账户";
+"add_hd_account_tab_other" = "其它";
+"add_hd_account_other_hdm" = "生成 HDM 账户";
+"add_hd_account_other_private" = "生成普通私钥";
+"add_hd_account_monitor" = "一键监控冷钱包";
+"add_hd_account_monitor_success" = "监控成功";
+"add_hd_account_view_label" = "已有 HD 账户";
+"add_hd_account_seed_qr_code" = "HD 账户种子二维码";
+"add_hd_account_seed_qr_phrase" = "HD 账户密语";
+"add_hd_account_show_seed_label" = "HD 种子能够用来恢复 HD 账户,\n请安全地保管它.";
+"add_hd_account_show_seed_button" = "我已经保管好了 HD 种子";
+"private_key_count_limit" = "已达私钥数量上限";
+"watch_only_address_count_limit" = "已达到监控地址上限";
+"import_hd_account_seed_qr_code" = "来自 HD 种子二维码";
+"import_hd_account_seed_phrase" = "来自 HD 密语";
+"import_hd_account_seed_qr_scan_title" = "导入 HD 账户";
+"import_hd_account_seed_qr_scan_message" = "扫描 HD 种子二维码";
+"import_hd_account_seed_format_error"="不是 HD 账户种子";
+
+// show hd account
+"address_group_hd" = "HD 账户";
