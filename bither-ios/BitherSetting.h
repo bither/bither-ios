@@ -22,7 +22,7 @@
 
 #define BitherMarketUpdateNotification  @"BitherMarketUpdateNotification"
 #define BitherAddressNotification  @"BitherAddressNotification"
-#define DONATE_ADDRESS  @"1BsTwoMaX3aYx9Nc8GdgHZzzAGmG669bC3"
+#define DONATE_ADDRESS  @"1BitherUnNvB2NsfxMnbS35kS3DTPr7PW5"
 #define DONATE_AMOUNT (100000)
 
 #define RGBA(r, g, b, a) [UIColor colorWithRed:r/255.0 green:g/255.0 blue:b/255.0 alpha:a]

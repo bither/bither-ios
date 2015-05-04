@@ -669,3 +669,7 @@
 
 // show hd account
 "address_group_hd" = "HD 賬戶";
+
+// bither team address
+"bither_team_address" = "開發者地址";
+"bither_team_address_copied" = "開發者地址已複製";

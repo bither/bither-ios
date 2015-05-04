@@ -668,3 +668,7 @@
 
 // show hd account
 "address_group_hd" = "HD 账户";
+
+// bither team address
+"bither_team_address" = "开发者地址";
+"bither_team_address_copied" = "开发者地址已复制";
