@@ -105,7 +105,7 @@
 "FGf-zH-Ia6.text" = "name";
 
 /* Class = "UILabel"; text = "Advance Options"; ObjectID = "FzN-AZ-zUK"; */
-"FzN-AZ-zUK.text" = "Advance Options";
+"FzN-AZ-zUK.text" = "Advanced Options";
 
 /* Class = "UIButton"; normalTitle = "Sign"; ObjectID = "GHf-wI-Umw"; */
 "GHf-wI-Umw.normalTitle" = "Sign";
