@@ -672,3 +672,7 @@
 // bither team address
 "bither_team_address" = "开发者地址";
 "bither_team_address_copied" = "开发者地址已复制";
+
+// vanity address length
+"vanity_address_length" = "荣耀地址位数";
+"vanity_address_none" = "无";
