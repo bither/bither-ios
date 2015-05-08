@@ -25,6 +25,7 @@
 #import "WatchMarketBgDrawer.h"
 #import "WatchUnitUtil.h"
 #import "WatchApi.h"
+#import "WatchPageConfiguration.h"
 
 @interface MarketInterfaceController (){
     WatchMarket* market;
@@ -87,6 +88,9 @@
 }
 
 - (void)willActivate {
+    if([WatchPageConfiguration configurePagesFor:@[@"Market", @"Balance"]]){
+        return;
+    }
     [super willActivate];
     autoRefresh = [NSTimer timerWithTimeInterval:60 target:self selector:@selector(autoRefresh) userInfo:nil repeats:YES];
     [[NSRunLoop currentRunLoop] addTimer:autoRefresh forMode:NSDefaultRunLoopMode];

@@ -43,6 +43,7 @@
 		0A93B6011A4A66080081D74D /* DialogSignMessageOutput.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A93B6001A4A66080081D74D /* DialogSignMessageOutput.m */; };
 		0A93B6061A4AA0520081D74D /* VerifyMessageSignatureViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A93B6051A4AA0520081D74D /* VerifyMessageSignatureViewController.m */; };
 		0A948DCA1AA080E600359F64 /* MarketInterfaceController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A948DC91AA080E600359F64 /* MarketInterfaceController.m */; };
+		0AAAEE331AFC83EE00F6E3BB /* WatchPageConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AAAEE321AFC83EE00F6E3BB /* WatchPageConfiguration.m */; };
 		0AB63CB81ABD15C80018A546 /* RawPrivateKeyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AB63CB71ABD15C80018A546 /* RawPrivateKeyViewController.m */; };
 		0AB63CBD1ABD1C700018A546 /* RawPrivateKeyDiceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AB63CBC1ABD1C700018A546 /* RawPrivateKeyDiceViewController.m */; };
 		0AB7226F1ACF6F4500D4B4FB /* infoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0AB722711ACF6F4500D4B4FB /* infoPlist.strings */; };
@@ -402,6 +403,8 @@
 		0A93B6051A4AA0520081D74D /* VerifyMessageSignatureViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VerifyMessageSignatureViewController.m; sourceTree = "<group>"; };
 		0A948DC81AA080E600359F64 /* MarketInterfaceController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MarketInterfaceController.h; sourceTree = "<group>"; };
 		0A948DC91AA080E600359F64 /* MarketInterfaceController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MarketInterfaceController.m; sourceTree = "<group>"; };
+		0AAAEE311AFC83EE00F6E3BB /* WatchPageConfiguration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WatchPageConfiguration.h; sourceTree = "<group>"; };
+		0AAAEE321AFC83EE00F6E3BB /* WatchPageConfiguration.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WatchPageConfiguration.m; sourceTree = "<group>"; };
 		0AB63CB61ABD15C80018A546 /* RawPrivateKeyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RawPrivateKeyViewController.h; sourceTree = "<group>"; };
 		0AB63CB71ABD15C80018A546 /* RawPrivateKeyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RawPrivateKeyViewController.m; sourceTree = "<group>"; };
 		0AB63CBB1ABD1C700018A546 /* RawPrivateKeyDiceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RawPrivateKeyDiceViewController.h; sourceTree = "<group>"; };
@@ -968,6 +971,8 @@
 				0A4182A21A9DB70500576A12 /* WatchUnitUtil.m */,
 				0A637B211AA044C600696260 /* WatchApi.h */,
 				0A637B221AA044C600696260 /* WatchApi.m */,
+				0AAAEE311AFC83EE00F6E3BB /* WatchPageConfiguration.h */,
+				0AAAEE321AFC83EE00F6E3BB /* WatchPageConfiguration.m */,
 				0A47497D1A9D7F0B003684E2 /* Images.xcassets */,
 				0A4749711A9D7F0B003684E2 /* Supporting Files */,
 			);
@@ -1985,6 +1990,7 @@
 				0AFBA9361AA028850059CB4B /* NSDictionary+Fromat.m in Sources */,
 				0A637B1B1AA0427200696260 /* WatchTrendingGraphicData.m in Sources */,
 				0A637B261AA0486300696260 /* WatchTrendingGraphicDrawer.m in Sources */,
+				0AAAEE331AFC83EE00F6E3BB /* WatchPageConfiguration.m in Sources */,
 				0A8853AE1AA8466E00760014 /* GroupUserDefaultUtil.m in Sources */,
 				0A4182A31A9DB70500576A12 /* WatchUnitUtil.m in Sources */,
 				0A637B1F1AA0443D00696260 /* BaseApi.m in Sources */,
