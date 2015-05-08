@@ -27,12 +27,13 @@
 #define kQrCodeMargin (8)
 #define kButtonSize (40)
 #define kButtonBottomDistance (20)
-#define kLabelAddressMargin (40)
+#define kLabelAddressMargin (46)
 #define kLabelAddressHeight (15)
 #define kLabelAddressFontSize (13)
-#define kVanitySizeRate (0.7f)
+#define kVanitySizeRate (0.6f)
 #define kVanityShareQrSizeRate (0.9f)
-#define kVanityShareMargin (26)
+#define kVanityShareMargin (32)
+#define kVanityShareWaterMarkHeightRate (0.1f)
 #define kVanityAddressGlowColor (0x00bbff)
 #define kVanityAddressTextColor (0xd8f5ff)
 #define kVanityAddressQrBgColor (0x2b2f32)
@@ -149,7 +150,7 @@
             [qrCodeImage drawInRect:CGRectMake(0, 0, qrCodeImage.size.width, qrCodeImage.size.height)];
             int w = qrCodeImage.size.width * 0.24f;
             if (self.shouldShowVanity) {
-                w = w * 0.8f;
+                w = w * 0.9f;
             }
             int borderW = (qrCodeImage.size.width - w) / 2;
             int borderH = (qrCodeImage.size.height - w) / 2;
@@ -235,23 +236,27 @@
 - (UIImage *)editQrForVanity:(UIImage *)qr {
     self.lblAddress.opaque = NO;
     UIImage *imgLbl = [self.lblAddress generateImage];
+    UIImage *waterMark = [UIImage imageNamed:@"pin_code_water_mark"];
     CGFloat qrSize = qr.size.width / [UIScreen mainScreen].scale * kVanitySizeRate * kVanityShareQrSizeRate;
-    CGSize size = CGSizeMake(MAX(imgLbl.size.width, qrSize) + kVanityShareMargin * 2, kVanityShareMargin * 2 + qrSize + kVanityShareMargin + imgLbl.size.height);
+    CGFloat waterMarkHeight = qrSize * kVanityShareWaterMarkHeightRate;
+    CGFloat waterMarkWidth = waterMarkHeight * waterMark.size.width / waterMark.size.height;
+    CGSize size = CGSizeMake(MAX(imgLbl.size.width, qrSize) + kVanityShareMargin * 2, kVanityShareMargin * 2 + qrSize + kVanityShareMargin + imgLbl.size.height + waterMarkHeight);
 
     UIGraphicsBeginImageContextWithOptions(size, NO, 0);
     CGContextRef context = UIGraphicsGetCurrentContext();
 
     UIColor *bg = [UIColor parseColor:kVanityAddressQrBgColor];
     [bg setFill];
-    [bg setStroke];
-    [[UIBezierPath bezierPathWithRect:CGRectMake(0, 0, size.width, size.height)] fill];
+    CGContextFillRect(context, CGRectMake(0, 0, size.width, size.height + 1));
 
     [imgLbl drawInRect:CGRectMake((size.width - imgLbl.size.width) / 2, kVanityShareMargin, imgLbl.size.width, imgLbl.size.height)];
 
     CGContextSaveGState(context);
     CGContextSetShadow(context, CGSizeMake(0, 6), 6);
-    [qr drawInRect:CGRectMake((size.width - qrSize) / 2, size.height - qrSize - kVanityShareMargin, qrSize, qrSize)];
+    [qr drawInRect:CGRectMake((size.width - qrSize) / 2, size.height - qrSize - kVanityShareMargin - waterMarkHeight, qrSize, qrSize)];
     CGContextRestoreGState(context);
+
+    [waterMark drawInRect:CGRectMake((size.width - waterMarkWidth) / 2, size.height - kVanityShareMargin / 2 - waterMarkHeight, waterMarkWidth, waterMarkHeight)];
 
     UIImage *img = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
