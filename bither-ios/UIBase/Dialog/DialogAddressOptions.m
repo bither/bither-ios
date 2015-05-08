@@ -20,6 +20,7 @@
 #import "NSString+Size.h"
 #import "UserDefaultsUtil.h"
 #import "DialogAddressAlias.h"
+#import "DialogEditVanityLength.h"
 
 #define kButtonHeight (44)
 #define kButtonEdgeInsets (UIEdgeInsetsMake(0, 10, 0, 10))
@@ -87,13 +88,6 @@
         seperator.autoresizingMask = UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleWidth;
         seperator.backgroundColor = [UIColor colorWithWhite:1 alpha:0.5];
         [self addSubview:seperator];
-    } else {
-        bottom += 1;
-        bottom = [self createButtonWithText:NSLocalizedString(@"Stop Monitoring", nil) top:bottom action:@selector(stopMonitorPressed:)];
-        seperator = [[UIView alloc] initWithFrame:CGRectMake(0, bottom, self.frame.size.width, 1)];
-        seperator.autoresizingMask = UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleWidth;
-        seperator.backgroundColor = [UIColor colorWithWhite:1 alpha:0.5];
-        [self addSubview:seperator];
     }
 
     if (self.aliasDelegate) {
@@ -103,10 +97,19 @@
         seperator.autoresizingMask = UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleWidth;
         seperator.backgroundColor = [UIColor colorWithWhite:1 alpha:0.5];
         [self addSubview:seperator];
-    } else {
+    }
+
+    bottom += 1;
+    bottom = [self createButtonWithText:NSLocalizedString(@"vanity_address_length", nil) top:bottom action:@selector(vanityLength:)];
+    seperator = [[UIView alloc] initWithFrame:CGRectMake(0, bottom, self.frame.size.width, 1)];
+    seperator.autoresizingMask = UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleWidth;
+    seperator.backgroundColor = [UIColor colorWithWhite:1 alpha:0.5];
+    [self addSubview:seperator];
+
+    if (!hasPrivateKey) {
         bottom += 1;
         bottom = [self createButtonWithText:NSLocalizedString(@"Stop Monitoring", nil) top:bottom action:@selector(stopMonitorPressed:)];
-        seperator = [[UIView alloc]initWithFrame:CGRectMake(0, bottom, self.frame.size.width, 1)];
+        seperator = [[UIView alloc] initWithFrame:CGRectMake(0, bottom, self.frame.size.width, 1)];
         seperator.autoresizingMask = UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleWidth;
         seperator.backgroundColor = [UIColor colorWithWhite:1 alpha:0.5];
         [self addSubview:seperator];
@@ -133,6 +136,13 @@
     [btn addTarget:self action:selector forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:btn];
     return CGRectGetMaxY(btn.frame);
+}
+
+- (void)vanityLength:(id)sender {
+    __block UIWindow *w = self.window;
+    [self dismissWithCompletion:^{
+        [[[DialogEditVanityLength alloc] initWithAddress:_address] showInWindow:w];
+    }];
 }
 
 - (void)addressAlias:(id)sender {

@@ -111,7 +111,7 @@ EXTERNAL SOURCES:
 
 CHECKOUT OPTIONS:
   Bitheri:
-    :commit: 03e831eb676bb9e729721889c4694bcbde9757b3
+    :commit: b4e543192581469f09aa72bc76b4aa89074e5003
     :git: https://github.com/bither/bitheri.git
 
 SPEC CHECKSUMS:
@@ -127,4 +127,4 @@ SPEC CHECKSUMS:
   RegexKitLite: c0e4c12e6e7de0769f3a3ed679f0f61604170661
   SimpleKeychain: 8de48eb1de10c6403911a6be52e127e5b5d31404
 
-COCOAPODS: 0.36.4
+COCOAPODS: 0.37.0

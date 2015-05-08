@@ -61,6 +61,7 @@
         defaults = [UserDefaultsUtil instance];
         _shareFileName = address.address;
         _broderImage = [UIImage imageNamed:@"avatar_for_fancy_qr_code_overlay"];
+        vanityLength = address.vanityLen;
         [self firstConfigure];
     }
     return self;
@@ -240,7 +241,7 @@
     UIGraphicsBeginImageContextWithOptions(size, NO, 0);
     CGContextRef context = UIGraphicsGetCurrentContext();
 
-    UIColor* bg = [UIColor parseColor:kVanityAddressQrBgColor];
+    UIColor *bg = [UIColor parseColor:kVanityAddressQrBgColor];
     [bg setFill];
     [bg setStroke];
     [[UIBezierPath bezierPathWithRect:CGRectMake(0, 0, size.width, size.height)] fill];
