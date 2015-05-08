@@ -201,6 +201,9 @@ static BOOL _isUnitTest = NO;
             //ffe31f21
         case MARKET796:
             return RGBA(227, 31, 33, 1);
+            // TODO
+            // BtcTrade RGBA(168, 88, 0, 1);
+            // coinbase RGBA(21, 103, 177, 1);
         default:
             return nil;
     }
