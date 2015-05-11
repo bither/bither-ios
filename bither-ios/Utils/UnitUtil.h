@@ -21,33 +21,40 @@
 
 @interface UnitUtil : NSObject
 
-+(NSString*)unitName:(BitcoinUnit)unit;
++ (NSString *)unitName:(BitcoinUnit)unit;
 
-+(NSString*)unitName;
++ (NSString *)unitName;
 
-+(NSUInteger)satoshisForUnit:(BitcoinUnit)unit;
++ (NSUInteger)satoshisForUnit:(BitcoinUnit)unit;
 
-+(NSUInteger)satoshis;
++ (NSUInteger)satoshis;
 
-+(NSUInteger)boldAfterDot:(BitcoinUnit)unit;
++ (NSUInteger)boldAfterDot:(BitcoinUnit)unit;
 
-+(NSUInteger)boldAfterDot;
++ (NSUInteger)boldAfterDot;
 
-+(NSString*)imageName:(BitcoinUnit)unit;
++ (NSString *)imageName:(BitcoinUnit)unit;
 
-+(NSString*)imageName;
++ (NSString *)imageName;
 
-+(NSString*)imageNameSlim:(BitcoinUnit)unit;
++ (NSString *)imageNameSlim:(BitcoinUnit)unit;
 
-+(NSString*)imageNameSlim;
++ (NSString *)imageNameSlim;
 
 + (int64_t)amountForString:(NSString *)string;
+
 + (int64_t)amountForString:(NSString *)string unit:(BitcoinUnit)unit;
+
 + (NSString *)stringForAmount:(int64_t)amount;
+
 + (NSString *)stringForAmount:(int64_t)amount unit:(BitcoinUnit)unit;
-+(NSMutableAttributedString*)attributedStringForAmount:(int64_t)amout withFontSize:(CGFloat)size;
-+(NSMutableAttributedString*)attributedStringWithSymbolForAmount:(int64_t)amount withFontSize:(CGFloat)size color:(UIColor*)color;
-+(NSMutableAttributedString*)stringWithSymbolForAmount:(int64_t)amount withFontSize:(CGFloat)size color:(UIColor*)color;
-+(void)stringWithSymbolForAmount:(int64_t)amount source:(NSMutableAttributedString*)str;
+
++ (NSMutableAttributedString *)attributedStringForAmount:(int64_t)amout withFontSize:(CGFloat)size;
+
++ (NSMutableAttributedString *)attributedStringWithSymbolForAmount:(int64_t)amount withFontSize:(CGFloat)size color:(UIColor *)color;
+
++ (NSMutableAttributedString *)stringWithSymbolForAmount:(int64_t)amount withFontSize:(CGFloat)size color:(UIColor *)color;
+
++ (void)stringWithSymbolForAmount:(int64_t)amount source:(NSMutableAttributedString *)str;
 
 @end

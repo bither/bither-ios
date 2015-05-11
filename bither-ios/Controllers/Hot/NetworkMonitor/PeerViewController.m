@@ -18,22 +18,20 @@
 
 #import "PeerViewController.h"
 #import "BTPeerManager.h"
-#import "BTSettings.h"
 #import "PeerCell.h"
 #import "UIViewController+ConfigureTableView.h"
 #import "BitherSetting.h"
 
-@interface PeerViewController ()<UITableViewDataSource,UITableViewDelegate>
-@property (weak, nonatomic) IBOutlet UITableView *tableView;
-@property (strong,nonatomic) NSMutableArray * peers;
-@property (readwrite,nonatomic) BOOL needRefresh;
+@interface PeerViewController () <UITableViewDataSource, UITableViewDelegate>
+@property(weak, nonatomic) IBOutlet UITableView *tableView;
+@property(strong, nonatomic) NSMutableArray *peers;
+@property(readwrite, nonatomic) BOOL needRefresh;
 
 @end
 
 @implementation PeerViewController
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
@@ -41,57 +39,58 @@
     return self;
 }
 
-- (void)viewDidLoad
-{
+- (void)viewDidLoad {
     [super viewDidLoad];
-    self.peers=[NSMutableArray new];
-    self.tableView.delegate=self;
-    self.tableView.dataSource=self;
+    self.peers = [NSMutableArray new];
+    self.tableView.delegate = self;
+    self.tableView.dataSource = self;
     [self configureHeaderAndFooterNoLogo:self.tableView background:ColorBg];
     [self loadPeerData];
-    
+
 }
--(void)viewWillAppear:(BOOL)animated{
+
+- (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    self.needRefresh=YES;
+    self.needRefresh = YES;
     [self refresh];
 }
--(void)viewWillDisappear:(BOOL)animated{
+
+- (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
-    self.needRefresh=NO;
+    self.needRefresh = NO;
 }
 
 
+- (void)refresh {
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t) (1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
 
--(void)refresh{
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-      
         [self loadPeerData];
         if (self.needRefresh) {
             [self refresh];
         }
     });
 }
--(void) loadPeerData{
+
+- (void)loadPeerData {
     [self.peers removeAllObjects];
-    for(BTPeer * peer in  [BTPeerManager instance].connectedPeers){
-       [self.peers addObject:peer];
+    for (BTPeer *peer in  [BTPeerManager instance].connectedPeers) {
+        [self.peers addObject:peer];
     }
-   
+
     [self.peers sortUsingComparator:^NSComparisonResult(id obj1, id obj2) {
-        BTPeer * peer1=obj1;
-        BTPeer * peer2=obj2;
-        if (peer1.version>0&&peer2.version==0) {
+        BTPeer *peer1 = obj1;
+        BTPeer *peer2 = obj2;
+        if (peer1.version > 0 && peer2.version == 0) {
             return NSOrderedAscending;
         }
-        if (peer1.version==0&&peer2.version>0) {
+        if (peer1.version == 0 && peer2.version > 0) {
             return NSOrderedDescending;
         }
-        if (peer1.peerAddress>peer2.peerAddress) {
+        if (peer1.peerAddress > peer2.peerAddress) {
             return NSOrderedAscending;
-        }else if(peer1.peerAddress==peer2.peerAddress){
-            return  NSOrderedSame;
-        }else{
+        } else if (peer1.peerAddress == peer2.peerAddress) {
+            return NSOrderedSame;
+        } else {
             return NSOrderedDescending;
         }
     }];
@@ -100,31 +99,30 @@
     }
 }
 
-- (void)didReceiveMemoryWarning
-{
+- (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
 
 //tableview delgate
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return self.peers.count;
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    
-    PeerCell *cell = (PeerCell*)[tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+
+    PeerCell *cell = (PeerCell *) [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
     [cell setPeer:[self.peers objectAtIndex:indexPath.row]];
     return cell;
 }
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return 1;
 }
 
--(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+
     [self.tableView deselectRowAtIndexPath:indexPath animated:NO];
 }
 

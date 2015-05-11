@@ -16,9 +16,11 @@
 //  limitations under the License.
 
 #import "DialogCentered.h"
+
 #define kDialogAlertLabelFontSize 16
 
 @interface DialogAlert : DialogCentered
--(id)initWithAttributedMessage:(NSAttributedString*) message confirm:(void(^)())confirm cancel:(void(^)()) cancel;
--(id)initWithMessage:(NSString*) message confirm:(void(^)())confirm cancel:(void(^)()) cancel;
+- (id)initWithAttributedMessage:(NSAttributedString *)message confirm:(void (^)())confirm cancel:(void (^)())cancel;
+
+- (id)initWithMessage:(NSString *)message confirm:(void (^)())confirm cancel:(void (^)())cancel;
 @end

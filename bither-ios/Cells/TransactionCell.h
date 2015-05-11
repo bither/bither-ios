@@ -21,5 +21,5 @@
 #import <Bitheri/BTAddress.h>
 
 @interface TransactionCell : UITableViewCell
--(void)showTx:(BTTx*)tx byAddress:(BTAddress*)address;
+- (void)showTx:(BTTx *)tx byAddress:(BTAddress *)address;
 @end

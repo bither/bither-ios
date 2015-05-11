@@ -18,6 +18,7 @@
 
 #import <Foundation/Foundation.h>
 #import "BitherSetting.h"
+
 #define  SETTING_KEY @"key"
 #define  SETTING_KEY_ATTRIBUTED @"key_attributed"
 #define  SETTING_VALUE @"VALUE"
@@ -25,28 +26,38 @@
 
 @interface Setting : NSObject
 
-@property (nonatomic,strong) NSString * settingName;
-@property (nonatomic,strong) UIImage * icon;
+@property(nonatomic, strong) NSString *settingName;
+@property(nonatomic, strong) UIImage *icon;
 
 
-@property (nonatomic ,strong) GetValueBlock  getValueBlock;
-@property (nonatomic ,strong) GetArrayBlock getArrayBlock;
-@property (nonatomic ,strong) DictResponseBlock result;
-@property (nonatomic ,strong)ViewControllerBlock selectBlock;
+@property(nonatomic, strong) GetValueBlock getValueBlock;
+@property(nonatomic, strong) GetArrayBlock getArrayBlock;
+@property(nonatomic, strong) DictResponseBlock result;
+@property(nonatomic, strong) ViewControllerBlock selectBlock;
 
--(instancetype) initWithName:(NSString *)name icon:(UIImage*)icon ;
+- (instancetype)initWithName:(NSString *)name icon:(UIImage *)icon;
 
--(void)selection;
--(UIImage *)getIcon;
+- (void)selection;
 
-+(Setting * )getMarketSetting;
-+(Setting * )getExchangeSetting;
-+(Setting * )getBitcoinUnitSetting;
-+(Setting * )getTransactionFeeSetting;
-+(Setting * )getCheckSetting;
-+(Setting * )getAdvanceSetting;
-+(Setting * )getColdMonitorSetting;
-+(Setting * )getTrashCanSetting;
-+(Setting * )getSwitchToColdSetting;
-+(Setting *)getKeychainSetting;
+- (UIImage *)getIcon;
+
++ (Setting *)getMarketSetting;
+
++ (Setting *)getExchangeSetting;
+
++ (Setting *)getBitcoinUnitSetting;
+
++ (Setting *)getTransactionFeeSetting;
+
++ (Setting *)getCheckSetting;
+
++ (Setting *)getAdvanceSetting;
+
++ (Setting *)getColdMonitorSetting;
+
++ (Setting *)getTrashCanSetting;
+
++ (Setting *)getSwitchToColdSetting;
+
++ (Setting *)getKeychainSetting;
 @end

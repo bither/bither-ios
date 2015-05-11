@@ -419,7 +419,7 @@
 }
 
 - (void)configureStrength {
-    NSString* password = self.tfPassword.text;
+    NSString *password = self.tfPassword.text;
     if ([self isNewSetPassword] && password.length > 0) {
         self.vStrength.hidden = NO;
         self.lblSubTitle.hidden = YES;

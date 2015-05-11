@@ -19,6 +19,6 @@
 #import <UIKit/UIKit.h>
 
 @interface HotAddressAddPrivateKeyViewController : UIViewController
-@property (nonatomic,readwrite) NSInteger limit;
+@property(nonatomic, readwrite) NSInteger limit;
 
 @end

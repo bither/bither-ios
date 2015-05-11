@@ -17,8 +17,9 @@
 //  limitations under the License.
 
 #import <UIKit/UIKit.h>
+
 @import AVFoundation;
 
 @interface AudioVisualizerView : UIView
--(void)showConnectionData:(AVCaptureConnection *)connection;
+- (void)showConnectionData:(AVCaptureConnection *)connection;
 @end

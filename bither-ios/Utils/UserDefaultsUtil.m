@@ -15,10 +15,7 @@
 //  See the License for the specific language governing permissions and
 //  limitations under the License.
 
-#import <AssertMacros.h>
 #import "UserDefaultsUtil.h"
-#import "NSData+Hash.h"
-#import "StringUtil.h"
 #import "GroupUserDefaultUtil.h"
 #import "QRCodeThemeUtil.h"
 
@@ -79,12 +76,12 @@ NSUserDefaults *userDefaults;
 
 - (MarketType)getMarket {
     NSInteger market = [userDefaults integerForKey:DEFAULT_MARKET];
-    return market;
+    return [GroupUtil getMarketType:market];
 }
 
 - (void)setDefaultMarket {
     if ([self localeIsChina]) {
-        [self setMarket:HUOBI];
+        [self setMarket:BTCCHINA];
     } else {
         [self setMarket:BITSTAMP];
     }
@@ -94,7 +91,7 @@ NSUserDefaults *userDefaults;
 - (void)setMarket:(MarketType)marketType {
     [userDefaults setInteger:marketType forKey:DEFAULT_MARKET];
     [userDefaults synchronize];
-    [[GroupUserDefaultUtil instance] setDefaultMarket:(GroupMarketType) marketType];
+    [[GroupUserDefaultUtil instance] setDefaultMarket:[GroupUtil getMarketValue:marketType]];
 }
 
 - (void)setExchangeType:(Currency)exchangeType {

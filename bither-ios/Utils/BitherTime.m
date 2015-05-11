@@ -21,9 +21,10 @@
 #import "MarketUtil.h"
 #import "GroupFileUtil.h"
 
-static BitherTime * bitherTime;
-@interface BitherTime()
-@property (nonatomic ,strong) NSTimer *timer;
+static BitherTime *bitherTime;
+
+@interface BitherTime ()
+@property(nonatomic, strong) NSTimer *timer;
 
 @end
 
@@ -31,7 +32,7 @@ static BitherTime * bitherTime;
 @implementation BitherTime
 
 + (BitherTime *)instance {
-    @synchronized(self) {
+    @synchronized (self) {
         if (bitherTime == nil) {
             bitherTime = [[self alloc] init];
         }
@@ -39,50 +40,54 @@ static BitherTime * bitherTime;
     return bitherTime;
 }
 
--(void) start{
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0),^{
+- (void)start {
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
         NSError *error = nil;
-        NSData * data = [[GroupFileUtil getTicker] dataUsingEncoding:NSUTF8StringEncoding];
+        NSData *data = [[GroupFileUtil getTicker] dataUsingEncoding:NSUTF8StringEncoding];
         if (data) {
             id returnValue = [NSJSONSerialization JSONObjectWithData:data options:0 error:&error];
             if (returnValue) {
-              [MarketUtil handlerResult:returnValue];
+                [MarketUtil handlerResult:returnValue];
             }
-        
+
         }
         [self updateTicker];
         dispatch_async(dispatch_get_main_queue(), ^{
             if (!self.timer) {
-                self.timer=[NSTimer scheduledTimerWithTimeInterval:60 target:self selector:@selector(updateTicker) userInfo:nil repeats:YES];
+                self.timer = [NSTimer scheduledTimerWithTimeInterval:60 target:self selector:@selector(updateTicker) userInfo:nil repeats:YES];
 
-                
+
             }
         });
-        
+
     });
-    
+
 }
--(void)pause{
+
+- (void)pause {
     if (![self.timer isValid]) {
         return;
     }
     [self.timer setFireDate:[NSDate distantFuture]];
 }
--(void)resume{
+
+- (void)resume {
     if (![self.timer isValid]) {
         return;
     }
     [self.timer setFireDate:[NSDate date]];
 }
--(void) stop{
+
+- (void)stop {
     if (self.timer) {
         [self.timer invalidate];
-        self.timer=nil;
+        self.timer = nil;
     }
-    
+
 }
--(void)updateTicker{
-   
+
+- (void)updateTicker {
+
     [[BitherApi instance] getExchangeTicker:nil andErrorCallBack:nil];
 }
 

@@ -19,5 +19,5 @@
 #import <Foundation/Foundation.h>
 
 @interface NSString (Size)
--(CGSize)sizeWithRestrict:(CGSize)restr font:(UIFont*)font;
+- (CGSize)sizeWithRestrict:(CGSize)restr font:(UIFont *)font;
 @end

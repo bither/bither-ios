@@ -21,6 +21,6 @@
 
 @interface SelectViewController : UIViewController
 
-@property(nonatomic,strong)Setting * setting;
+@property(nonatomic, strong) Setting *setting;
 
 @end

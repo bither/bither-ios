@@ -19,10 +19,10 @@
 #import "MarketListCell.h"
 #import "UserDefaultsUtil.H"
 
-@interface MarketListCell()
+@interface MarketListCell ()
 
-@property (weak, nonatomic) IBOutlet UILabel *lbMarketName;
-@property (weak, nonatomic) IBOutlet UILabel *lbPrice;
+@property(weak, nonatomic) IBOutlet UILabel *lbMarketName;
+@property(weak, nonatomic) IBOutlet UILabel *lbPrice;
 
 @end
 
@@ -30,19 +30,19 @@
 @implementation MarketListCell
 
 
--(void)setMarket:(Market *)market{
-    self.lbMarketName.text=[market getName];
-    self.lbMarketName.textColor=[BitherSetting getMarketColor:market.marketType];
+- (void)setMarket:(Market *)market {
+    self.lbMarketName.text = [market getName];
+    self.lbMarketName.textColor = [GroupUtil getMarketColor:market.marketType];
     if (market.ticker) {
-        NSString * symobl= [BitherSetting getCurrencySymbol:[[UserDefaultsUtil instance] getDefaultCurrency]];
-        
-        self.lbPrice.text=[NSString stringWithFormat:@"%@%.2f",symobl, [market.ticker getDefaultExchangePrice] ];
-    }else{
-        self.lbPrice.text=@"--";
+        NSString *symobl = [BitherSetting getCurrencySymbol:[[UserDefaultsUtil instance] getDefaultCurrency]];
+
+        self.lbPrice.text = [NSString stringWithFormat:@"%@%.2f", symobl, [market.ticker getDefaultExchangePrice]];
+    } else {
+        self.lbPrice.text = @"--";
     }
 }
 
--(UIEdgeInsets)layoutMargins{
+- (UIEdgeInsets)layoutMargins {
     return UIEdgeInsetsZero;
 }
 

@@ -20,7 +20,8 @@
 
 @interface SettingUtil : NSObject
 
-+(NSArray*)hotSettings;
-+(NSArray*)coldSettings;
++ (NSArray *)hotSettings;
+
++ (NSArray *)coldSettings;
 
 @end

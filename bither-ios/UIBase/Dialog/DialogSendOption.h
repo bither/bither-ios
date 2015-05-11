@@ -19,11 +19,11 @@
 #import "DialogCentered.h"
 
 @protocol DialogSendOptionDelegate <NSObject>
--(void)selectChangeAddress;
+- (void)selectChangeAddress;
 @end
 
 @interface DialogSendOption : DialogCentered
--(instancetype)initWithDelegate:(NSObject<DialogSendOptionDelegate>*)delegate;
+- (instancetype)initWithDelegate:(NSObject <DialogSendOptionDelegate> *)delegate;
 
-@property (weak) NSObject<DialogSendOptionDelegate>* delegate;
+@property(weak) NSObject <DialogSendOptionDelegate> *delegate;
 @end

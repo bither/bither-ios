@@ -19,36 +19,35 @@
 #import "DataCheckUtil.h"
 
 
-
-
 @implementation DataCheckUtil
-+(NSString*)CheckUserName:(NSString *)userName{
++ (NSString *)CheckUserName:(NSString *)userName {
     if ([userName length] > 0) {
-        if ([userName length]>10) {
-            return NSLocalizedString(@"Nickname length can not be more than 10",@"username_can_not_be_more_than_10_words");
+        if ([userName length] > 10) {
+            return NSLocalizedString(@"Nickname length can not be more than 10", @"username_can_not_be_more_than_10_words");
         }
-        if([DataCheckUtil CheckSpecialChar:userName]) {
+        if ([DataCheckUtil CheckSpecialChar:userName]) {
             NSString *prompt = @"[`'\"@%\\/\\(\\)\\[\\]\\<\\>\\{\\} ]";
-            return [NSString stringWithFormat:NSLocalizedString(@"The user name cannot contain %@ and spaces", nil),prompt];
+            return [NSString stringWithFormat:NSLocalizedString(@"The user name cannot contain %@ and spaces", nil), prompt];
         }
     }
     return nil;
 
 }
-+(BOOL) CheckEmailString:(NSString *)email {
+
++ (BOOL)CheckEmailString:(NSString *)email {
     NSString *emailPattern = @"[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}";
-    NSError * error;
-    NSRegularExpression *emailRegex = [NSRegularExpression regularExpressionWithPattern:emailPattern options:NSRegularExpressionCaseInsensitive error:&error ];
-    NSInteger result=[emailRegex numberOfMatchesInString:email options:NSMatchingReportProgress range:NSMakeRange(0, [email length])];
-   return result>0;
+    NSError *error;
+    NSRegularExpression *emailRegex = [NSRegularExpression regularExpressionWithPattern:emailPattern options:NSRegularExpressionCaseInsensitive error:&error];
+    NSInteger result = [emailRegex numberOfMatchesInString:email options:NSMatchingReportProgress range:NSMakeRange(0, [email length])];
+    return result > 0;
 }
 
-+(BOOL) CheckEmailAndSetImage:(NSString *)email imageView:(UIImageView *) imageView {
++ (BOOL)CheckEmailAndSetImage:(NSString *)email imageView:(UIImageView *)imageView {
     NSString *emailPattern = @"[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}";
-    NSError * error;
-    NSRegularExpression *emailRegex = [NSRegularExpression regularExpressionWithPattern:emailPattern options:NSRegularExpressionCaseInsensitive error:&error ];
-    NSInteger result=[emailRegex numberOfMatchesInString:email options:NSMatchingReportProgress range:NSMakeRange(0, [email length])];
-    if( result!= 0) {
+    NSError *error;
+    NSRegularExpression *emailRegex = [NSRegularExpression regularExpressionWithPattern:emailPattern options:NSRegularExpressionCaseInsensitive error:&error];
+    NSInteger result = [emailRegex numberOfMatchesInString:email options:NSMatchingReportProgress range:NSMakeRange(0, [email length])];
+    if (result != 0) {
         imageView.image = [UIImage imageNamed:@"success"];
         return YES;
     }
@@ -59,21 +58,21 @@
 }
 
 
-+(BOOL) CheckSpecialChar:(NSString *) userName {
++ (BOOL)CheckSpecialChar:(NSString *)userName {
     NSError *error;
     NSString *userNamePattern = @"[`'\"@%\\/\\(\\)\\[\\]\\<\\>\\{\\} ]";
-    NSRegularExpression *userNameRegex = [NSRegularExpression regularExpressionWithPattern:userNamePattern options:NSRegularExpressionCaseInsensitive error:&error ];
+    NSRegularExpression *userNameRegex = [NSRegularExpression regularExpressionWithPattern:userNamePattern options:NSRegularExpressionCaseInsensitive error:&error];
     NSArray *matches = [userNameRegex matchesInString:userName
-                                      options:0
-                                        range:NSMakeRange(0, [userName length])];
-    return matches.count>0;
+                                              options:0
+                                                range:NSMakeRange(0, [userName length])];
+    return matches.count > 0;
 }
 
-+(BOOL) CheckUserNameAndSetImage:(NSString *)userName imageView:(UIImageView *) imageView {
++ (BOOL)CheckUserNameAndSetImage:(NSString *)userName imageView:(UIImageView *)imageView {
     NSError *error;
     NSString *userNamePattern = @"^[`'\"@%\\/\\(\\)\\[\\]\\<\\>\\{\\} ]$";
-    NSRegularExpression *userNameRegex = [NSRegularExpression regularExpressionWithPattern:userNamePattern options:NSRegularExpressionCaseInsensitive error:&error ];
-    
+    NSRegularExpression *userNameRegex = [NSRegularExpression regularExpressionWithPattern:userNamePattern options:NSRegularExpressionCaseInsensitive error:&error];
+
     if ([userNameRegex numberOfMatchesInString:userName options:NSMatchingReportProgress range:NSMakeRange(0, [userName length])] != 0) {
         imageView.image = [UIImage imageNamed:@"success"];
         return YES;
@@ -84,12 +83,12 @@
     }
 }
 
-+ (BOOL)CheckTagName:(NSString *) tagName;{
++ (BOOL)CheckTagName:(NSString *)tagName; {
     NSError *error;
     NSString *tagNamePattern = @"^[^ `\"'@%\\\\\\/<>{}\\[\\]\\(\\)#]+$";
-    NSRegularExpression *tagNameRegex = [NSRegularExpression regularExpressionWithPattern:tagNamePattern options:NSRegularExpressionCaseInsensitive error:&error ];
-    
-    if ([tagNameRegex numberOfMatchesInString:tagName options:NSMatchingReportProgress range:NSMakeRange(0, [tagName length])] != 0){
+    NSRegularExpression *tagNameRegex = [NSRegularExpression regularExpressionWithPattern:tagNamePattern options:NSRegularExpressionCaseInsensitive error:&error];
+
+    if ([tagNameRegex numberOfMatchesInString:tagName options:NSMatchingReportProgress range:NSMakeRange(0, [tagName length])] != 0) {
         return YES;
     }
     else {

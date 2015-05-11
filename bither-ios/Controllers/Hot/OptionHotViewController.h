@@ -18,8 +18,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface OptionHotViewController : UIViewController< UIScrollViewDelegate>
-
+@interface OptionHotViewController : UIViewController <UIScrollViewDelegate>
 
 
 @end

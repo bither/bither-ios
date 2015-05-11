@@ -10,16 +10,18 @@
 
 @protocol PasswordGetterDelegate
 @optional
--(void)beforePasswordDialogShow;
--(void)afterPasswordDialogDismiss;
+- (void)beforePasswordDialogShow;
+
+- (void)afterPasswordDialogDismiss;
 @end
 
 @interface PasswordGetter : NSObject
--(instancetype)initWithWindow:(UIWindow*)window;
--(instancetype)initWithWindow:(UIWindow *)window andDelegate:(NSObject<PasswordGetterDelegate>*)delegate;
+- (instancetype)initWithWindow:(UIWindow *)window;
 
-@property (weak) NSObject<PasswordGetterDelegate>* delegate;
-@property (weak) UIWindow* window;
-@property NSString* password;
-@property (readonly) BOOL hasPassword;
+- (instancetype)initWithWindow:(UIWindow *)window andDelegate:(NSObject <PasswordGetterDelegate> *)delegate;
+
+@property(weak) NSObject <PasswordGetterDelegate> *delegate;
+@property(weak) UIWindow *window;
+@property NSString *password;
+@property(readonly) BOOL hasPassword;
 @end

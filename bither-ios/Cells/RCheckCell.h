@@ -20,5 +20,5 @@
 
 @interface RCheckCell : UITableViewCell
 
--(void)showAddress:(NSString*)address checking:(BOOL)checking checked:(BOOL)checked safe:(BOOL)safe;
+- (void)showAddress:(NSString *)address checking:(BOOL)checking checked:(BOOL)checked safe:(BOOL)safe;
 @end

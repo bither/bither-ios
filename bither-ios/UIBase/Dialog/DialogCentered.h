@@ -19,18 +19,27 @@
 #import <UIKit/UIKit.h>
 
 @interface DialogCentered : UIView
-@property (nonatomic) UIEdgeInsets bgInsets;
-@property (strong, nonatomic) UIImage* backgroundImage;
-@property (nonatomic) BOOL touchOutSideToDismiss;
-@property (nonatomic) BOOL shown;
-@property (nonatomic) CGFloat dimAmount;
--(void)showInWindow:(UIWindow*)window completion:(void(^)())completion;
--(void)showInWindow:(UIWindow*)window;
--(void)dismissWithCompletion:(void(^)())completion;
--(void)dismiss;
--(void)dialogWillShow;
--(void)dialogDidShow;
--(void)dialogWillDismiss;
--(void)dialogDidDismiss;
--(void)resize;
+@property(nonatomic) UIEdgeInsets bgInsets;
+@property(strong, nonatomic) UIImage *backgroundImage;
+@property(nonatomic) BOOL touchOutSideToDismiss;
+@property(nonatomic) BOOL shown;
+@property(nonatomic) CGFloat dimAmount;
+
+- (void)showInWindow:(UIWindow *)window completion:(void (^)())completion;
+
+- (void)showInWindow:(UIWindow *)window;
+
+- (void)dismissWithCompletion:(void (^)())completion;
+
+- (void)dismiss;
+
+- (void)dialogWillShow;
+
+- (void)dialogDidShow;
+
+- (void)dialogWillDismiss;
+
+- (void)dialogDidDismiss;
+
+- (void)resize;
 @end

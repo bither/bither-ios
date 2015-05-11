@@ -21,19 +21,19 @@
 
 static NetworkUtil *netWorkUtil;
 
-@interface NetworkUtil()
-@property(nonatomic,strong)    CBCentralManager *cbcnetralMaager;
+@interface NetworkUtil ()
+@property(nonatomic, strong) CBCentralManager *cbcnetralMaager;
 @end
 
 @implementation NetworkUtil
 
-+ (BOOL) isEnableWIFI {
-    NetworkStatus networkStatus=[[Reachability reachabilityForLocalWiFi] currentReachabilityStatus];
++ (BOOL)isEnableWIFI {
+    NetworkStatus networkStatus = [[Reachability reachabilityForLocalWiFi] currentReachabilityStatus];
     return networkStatus == ReachableViaWiFi;
 }
 
-+ (BOOL) isEnable3G {
-     NetworkStatus networkStatus=[[Reachability reachabilityForInternetConnection] currentReachabilityStatus];
++ (BOOL)isEnable3G {
+    NetworkStatus networkStatus = [[Reachability reachabilityForInternetConnection] currentReachabilityStatus];
     return networkStatus == ReachableViaWWAN;
 }
 

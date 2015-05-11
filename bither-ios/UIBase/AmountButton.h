@@ -20,17 +20,18 @@
 
 @protocol AmountButtonFrameChangeListener <NSObject>
 
--(void)amountButtonFrameChanged:(CGRect)frame;
+- (void)amountButtonFrameChanged:(CGRect)frame;
 
 @end
 
-@interface AmountButton : UIView{
+@interface AmountButton : UIView {
     int64_t _amount;
 }
 @property UIButton *btn;
 @property UILabel *lbl;
 @property uint64_t amount;
 @property BOOL alignLeft;
-@property (weak) NSObject<AmountButtonFrameChangeListener>* frameChangeListener;
--(void)configureBg;
+@property(weak) NSObject <AmountButtonFrameChangeListener> *frameChangeListener;
+
+- (void)configureBg;
 @end

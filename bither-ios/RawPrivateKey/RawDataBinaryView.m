@@ -63,7 +63,7 @@
     [UIView animateWithDuration:0.5 animations:^{
         v.transform = CGAffineTransformMakeScale(0.01, 0.01);
     }                completion:^(BOOL finished) {
-        if(finished){
+        if (finished) {
             v.backgroundColor = [UIColor clearColor];
         }
     }];
@@ -86,7 +86,7 @@
         [UIView animateWithDuration:0.5 animations:^{
             v.transform = CGAffineTransformMakeScale(0.01, 0.01);
         }                completion:^(BOOL finished) {
-            if(finished){
+            if (finished) {
                 v.backgroundColor = [UIColor clearColor];
             }
         }];

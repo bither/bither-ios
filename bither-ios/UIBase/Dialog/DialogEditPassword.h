@@ -17,10 +17,13 @@
 //  limitations under the License.
 
 #import "DialogCentered.h"
+
 @protocol DialogEditPasswordDelegate <NSObject>
--(void)showMsg:(NSString*)msg;
+- (void)showMsg:(NSString *)msg;
 @end
+
 @interface DialogEditPassword : DialogCentered
--(instancetype)initWithDelegate:(NSObject<DialogEditPasswordDelegate>*)delegate;
-@property (weak) NSObject<DialogEditPasswordDelegate> *delegate;
+- (instancetype)initWithDelegate:(NSObject <DialogEditPasswordDelegate> *)delegate;
+
+@property(weak) NSObject <DialogEditPasswordDelegate> *delegate;
 @end

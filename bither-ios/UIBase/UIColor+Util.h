@@ -19,8 +19,11 @@
 #import <UIKit/UIKit.h>
 
 @interface UIColor (Util)
-+(UIColor*)parseColor: (int)colorString;
-+(UIColor*)r:(int) r g:(int) g b:(int) b;
-+(UIColor*)r:(int) r g:(int) g b:(int) b a:(int) a;
-+(UIImage*) gradientFromColor:(UIColor*)c1 toColor:(UIColor*)c2 withHeight:(int)height;
++ (UIColor *)parseColor:(int)colorString;
+
++ (UIColor *)r:(int)r g:(int)g b:(int)b;
+
++ (UIColor *)r:(int)r g:(int)g b:(int)b a:(int)a;
+
++ (UIImage *)gradientFromColor:(UIColor *)c1 toColor:(UIColor *)c2 withHeight:(int)height;
 @end

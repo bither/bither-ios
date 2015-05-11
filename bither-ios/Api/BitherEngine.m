@@ -25,10 +25,10 @@ static MKNetworkEngine *bcNetworkEngine;
 static MKNetworkEngine *hdmNetworkEngine;
 
 @implementation BitherEngine
-+(BitherEngine *)instance{
-    @synchronized(self) {
-        if (bitherEngine==nil) {
-            bitherEngine=[[self alloc] init];
++ (BitherEngine *)instance {
+    @synchronized (self) {
+        if (bitherEngine == nil) {
+            bitherEngine = [[self alloc] init];
             NSMutableDictionary *headerFields = [NSMutableDictionary dictionary];
             [headerFields setValue:@"application/json" forKey:@"Accept"];
             userNetworkEngine = [[MKNetworkEngine alloc] initWithHostName:@"bu.getcai.com" customHeaderFields:headerFields];
@@ -61,32 +61,34 @@ static MKNetworkEngine *hdmNetworkEngine;
     return hdmNetworkEngine;
 }
 
--(NSArray*)getCookies{
-    NSArray * cookies=[[NSHTTPCookieStorage sharedHTTPCookieStorage] cookiesForURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://%@", userNetworkEngine.readonlyHostName]]];
+- (NSArray *)getCookies {
+    NSArray *cookies = [[NSHTTPCookieStorage sharedHTTPCookieStorage] cookiesForURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://%@", userNetworkEngine.readonlyHostName]]];
     return cookies;
 }
--(void)setEngineCookie{
+
+- (void)setEngineCookie {
     [self setCookieOfDomain:statsNetworkEngine.readonlyHostName];
     [self setCookieOfDomain:bitcoinNetworkEngine.readonlyHostName];
 
 }
--(void)setCookieOfDomain:(NSString * )domain{
-    NSHTTPCookieStorage *cookieStorage=[NSHTTPCookieStorage sharedHTTPCookieStorage];
-    NSArray * cookies=[cookieStorage cookiesForURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://%@", userNetworkEngine.readonlyHostName]]];
-    for(NSHTTPCookie * cookie in cookies){
+
+- (void)setCookieOfDomain:(NSString *)domain {
+    NSHTTPCookieStorage *cookieStorage = [NSHTTPCookieStorage sharedHTTPCookieStorage];
+    NSArray *cookies = [cookieStorage cookiesForURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://%@", userNetworkEngine.readonlyHostName]]];
+    for (NSHTTPCookie *cookie in cookies) {
         NSMutableDictionary *cookieProperties = [NSMutableDictionary dictionary];
         [cookieProperties setObject:cookie.name forKey:NSHTTPCookieName];
         [cookieProperties setObject:cookie.value forKey:NSHTTPCookieValue];
         [cookieProperties setObject:domain forKey:NSHTTPCookieDomain];
         [cookieProperties setObject:domain forKey:NSHTTPCookieOriginURL];
         [cookieProperties setObject:cookie.path forKey:NSHTTPCookiePath];
-        [cookieProperties setObject:[NSNumber numberWithInt:cookie.version ] forKey:NSHTTPCookieVersion];
+        [cookieProperties setObject:[NSNumber numberWithInt:cookie.version] forKey:NSHTTPCookieVersion];
         [cookieProperties setObject:cookie.expiresDate forKey:NSHTTPCookieExpires];
         NSHTTPCookie *newCookie = [NSHTTPCookie cookieWithProperties:cookieProperties];
         [cookieStorage setCookie:newCookie];
     }
-    NSArray * cookies1=[[NSHTTPCookieStorage sharedHTTPCookieStorage] cookiesForURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://%@",domain]]];
-    NSLog(@"cook %@",cookies1);
+    NSArray *cookies1 = [[NSHTTPCookieStorage sharedHTTPCookieStorage] cookiesForURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://%@", domain]]];
+    NSLog(@"cook %@", cookies1);
 }
 
 @end

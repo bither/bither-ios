@@ -23,9 +23,10 @@
 #define ApplicationForeground @"ApplicationForeground"
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
-@property (strong, nonatomic) UIViewController *coldController;
-@property (strong, nonatomic) UIWindow *window;
-+(StatusBarNotificationWindow*)notificationWindow;
+@property(strong, nonatomic) UIViewController *coldController;
+@property(strong, nonatomic) UIWindow *window;
+
++ (StatusBarNotificationWindow *)notificationWindow;
 @end
 
 

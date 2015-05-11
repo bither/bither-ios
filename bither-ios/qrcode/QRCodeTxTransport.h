@@ -21,19 +21,21 @@
 #define NO_HDM_INDEX  -1
 
 @interface QRCodeTxTransport : NSObject
-@property (nonatomic,strong) NSArray * hashList;
-@property (nonatomic,strong) NSString * myAddress;
-@property (nonatomic,strong) NSString * toAddress;
-@property (nonatomic,strong) NSString * changeAddress;
-@property (nonatomic,readwrite) long long to;
-@property (nonatomic,readwrite) long long fee;
-@property (nonatomic,readwrite) long long changeAmt;
-@property (nonatomic,readwrite) int hdmIndex;
+@property(nonatomic, strong) NSArray *hashList;
+@property(nonatomic, strong) NSString *myAddress;
+@property(nonatomic, strong) NSString *toAddress;
+@property(nonatomic, strong) NSString *changeAddress;
+@property(nonatomic, readwrite) long long to;
+@property(nonatomic, readwrite) long long fee;
+@property(nonatomic, readwrite) long long changeAmt;
+@property(nonatomic, readwrite) int hdmIndex;
 
 
-+(NSString *)getPreSignString :(QRCodeTxTransport *)qrCodeTransport;
-+(NSString *)oldGetPreSignString:(QRCodeTxTransport *)qrCodeTx;
-+(QRCodeTxTransport *)formatQRCodeTransport:(NSString *)str;
++ (NSString *)getPreSignString:(QRCodeTxTransport *)qrCodeTransport;
+
++ (NSString *)oldGetPreSignString:(QRCodeTxTransport *)qrCodeTx;
+
++ (QRCodeTxTransport *)formatQRCodeTransport:(NSString *)str;
 
 
 @end

@@ -20,18 +20,17 @@
 #import "PiPageViewController.h"
 #import "DialogNetworkMonitorOption.h"
 
-@interface NetworkMonitorViewController ()<PiPageViewControllerDelegate>
+@interface NetworkMonitorViewController () <PiPageViewControllerDelegate>
 
-@property (strong, nonatomic)PiPageViewController *page;
-@property (weak, nonatomic) IBOutlet UISegmentedControl *vTab;
-@property (weak, nonatomic) IBOutlet UIView *vTopBar;
+@property(strong, nonatomic) PiPageViewController *page;
+@property(weak, nonatomic) IBOutlet UISegmentedControl *vTab;
+@property(weak, nonatomic) IBOutlet UIView *vTopBar;
 
 @end
 
 @implementation NetworkMonitorViewController
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
@@ -39,24 +38,23 @@
     return self;
 }
 
-- (void)viewDidLoad
-{
+- (void)viewDidLoad {
     [super viewDidLoad];
     [self configurePage];
 }
 
-- (void)didReceiveMemoryWarning
-{
+- (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
 - (IBAction)back:(id)sender {
     [self.navigationController popViewControllerAnimated:YES];
 }
 
 
--(void)configurePage{
-    self.page = [[PiPageViewController alloc]initWithStoryboard:self.storyboard andViewControllerIdentifiers:[[NSArray alloc] initWithObjects:@"PeerViewController", @"BlockViewController", nil]];
+- (void)configurePage {
+    self.page = [[PiPageViewController alloc] initWithStoryboard:self.storyboard andViewControllerIdentifiers:[[NSArray alloc] initWithObjects:@"PeerViewController", @"BlockViewController", nil]];
     self.page.pageDelegate = self;
     [self addChildViewController:self.page];
     self.page.view.frame = CGRectMake(0, CGRectGetMaxY(self.vTopBar.frame), self.view.frame.size.width, self.view.frame.size.height - CGRectGetMaxY(self.vTopBar.frame));
@@ -65,16 +63,16 @@
 }
 
 - (IBAction)optionPressed:(id)sender {
-    [[[DialogNetworkMonitorOption alloc]init]showInWindow:self.view.window];
+    [[[DialogNetworkMonitorOption alloc] init] showInWindow:self.view.window];
 }
 
--(void)pageIndexChanged:(int) index{
+- (void)pageIndexChanged:(int)index {
     self.vTab.selectedSegmentIndex = index;
 }
 
 - (IBAction)tabChanged:(id)sender {
-    if(self.vTab.selectedSegmentIndex != self.page.index){
-        [self.page setIndex:(int)self.vTab.selectedSegmentIndex animated:YES];
+    if (self.vTab.selectedSegmentIndex != self.page.index) {
+        [self.page setIndex:(int) self.vTab.selectedSegmentIndex animated:YES];
     }
 }
 @end

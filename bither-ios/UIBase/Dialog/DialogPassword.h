@@ -20,21 +20,25 @@
 
 @protocol DialogPasswordDelegate <NSObject>
 
--(void)onPasswordEntered:(NSString*)password;
+- (void)onPasswordEntered:(NSString *)password;
 
 @optional
--(BOOL)notToCheckPassword;
--(BOOL)checkPassword:(NSString*)password;
--(NSString*)passwordTitle;
--(NSString*)passwordSubTitle;
--(void)dialogPasswordCanceled;
+- (BOOL)notToCheckPassword;
+
+- (BOOL)checkPassword:(NSString *)password;
+
+- (NSString *)passwordTitle;
+
+- (NSString *)passwordSubTitle;
+
+- (void)dialogPasswordCanceled;
 
 @end
 
 @interface DialogPassword : DialogCentered
 
--(instancetype)initWithDelegate:(id<DialogPasswordDelegate>)delegate;
+- (instancetype)initWithDelegate:(id <DialogPasswordDelegate>)delegate;
 
-@property (weak) id<DialogPasswordDelegate> delegate;
+@property(weak) id <DialogPasswordDelegate> delegate;
 
 @end

@@ -12,9 +12,9 @@
 
 @implementation NSError (HDMHttpErrorMessage)
 
--(NSString*)msg{
-    if(self.isHttp400){
-        switch (self.code){
+- (NSString *)msg {
+    if (self.isHttp400) {
+        switch (self.code) {
             case HDMBID_IS_ALREADY_EXISTS:
                 return NSLocalizedString(@"hdm_exception_bid_already_exists", nil);
             case MESSAGE_SIGNATURE_IS_WRONG:
@@ -26,7 +26,7 @@
     return NSLocalizedString(@"Network failure.", nil);
 }
 
--(BOOL)isHttp400{
+- (BOOL)isHttp400 {
     return [BTUtils compareString:self.domain compare:ERR_API_400_DOMAIN];
 }
 @end

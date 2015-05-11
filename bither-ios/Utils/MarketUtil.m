@@ -17,37 +17,35 @@
 //  limitations under the License.
 
 #import "MarketUtil.h"
-#import <Bitheri/BTUtils.h>
-#import "NSDictionary+Fromat.h"
 #import "ExchangeUtil.h"
 
-static NSMutableArray * markets;
+static NSMutableArray *markets;
 
 @implementation MarketUtil
-+(NSArray *)getMarkets{
-    if (markets&&markets.count>0) {
++ (NSArray *)getMarkets {
+    if (markets && markets.count > 0) {
         return markets;
     }
-    @synchronized(markets){
-        if (markets.count==0) {
-            markets=[NSMutableArray new];
-            for(MarketType marketType=BITSTAMP;marketType<=MARKET796;marketType++){
+    @synchronized (markets) {
+        if (markets.count == 0) {
+            markets = [NSMutableArray new];
+            for (MarketType marketType = BITSTAMP; marketType <= MARKET796; marketType++) {
                 [markets addObject:[[Market alloc] initWithMarketType:marketType]];
             }
         }
         return markets;
-    
+
     }
 }
 
-+(Market *)getMarket:(MarketType)marketType{
-    if (!markets||markets.count==0) {
++ (Market *)getMarket:(MarketType)marketType {
+    if (!markets || markets.count == 0) {
         [self getMarkets];
     }
-    @synchronized(markets){
-        if (markets.count>0) {
-            for(Market  * market in markets){
-                if (market.marketType==marketType) {
+    @synchronized (markets) {
+        if (markets.count > 0) {
+            for (Market *market in markets) {
+                if (market.marketType == marketType) {
                     return market;
                 }
             }
@@ -55,24 +53,26 @@ static NSMutableArray * markets;
     }
     return nil;
 }
-+(Market *)getDefaultMarket{
-    MarketType marketType=[[UserDefaultsUtil instance] getDefaultMarket];
+
++ (Market *)getDefaultMarket {
+    MarketType marketType = [[UserDefaultsUtil instance] getDefaultMarket];
     return [self getMarket:marketType];
-    
+
 }
-+(Ticker *)getTickerOfDefaultMarket{
-    Market * market=[self getDefaultMarket];
+
++ (Ticker *)getTickerOfDefaultMarket {
+    Market *market = [self getDefaultMarket];
     if (!market) {
         return market.ticker;
     }
     return nil;
 }
 
-+(void)setTickerList:(NSArray *)array{
-    if (array&&array.count>0) {
-        @synchronized(markets){
-            for(Ticker * ticker in array){
-                Market * market=[self getMarket:ticker.marketType];
++ (void)setTickerList:(NSArray *)array {
+    if (array && array.count > 0) {
+        @synchronized (markets) {
+            for (Ticker *ticker in array) {
+                Market *market = [self getMarket:ticker.marketType];
                 if (market) {
                     [market setTicker:ticker];
                 }
@@ -80,24 +80,26 @@ static NSMutableArray * markets;
         }
     }
 }
-+(void)handlerResult:(NSDictionary *)dict{
+
++ (void)handlerResult:(NSDictionary *)dict {
 //    double currentRate=[dict getDoubleFromDict:@"currency_rate"];
 //    [ExchangeUtil setExchangeRate:currentRate];
     NSDictionary *currencies_rate_dict = dict[@"currencies_rate"];
     [ExchangeUtil setCurrenciesRate:currencies_rate_dict];
-    NSArray * array=[Ticker formatList:dict];
+    NSArray *array = [Ticker formatList:dict];
     [self setTickerList:array];
     dispatch_async(dispatch_get_main_queue(), ^{
         [[NSNotificationCenter defaultCenter] postNotificationName:BitherMarketUpdateNotification object:nil];
     });
     NSLog(@"get ticker from network");
-    
+
 }
-+(double)getDefaultNewPrice{
-    Market * market=[self getDefaultMarket];
+
++ (double)getDefaultNewPrice {
+    Market *market = [self getDefaultMarket];
     if (market.ticker) {
         return [market.ticker getDefaultExchangePrice];
-    }else{
+    } else {
         return -1;
     }
 }

@@ -21,7 +21,8 @@
 
 ///@description  播放音效
 @interface PlaySoundUtil : NSObject
-+(void)playSound:(NSString*) soundName callback:(void(^)()) callback;
-+(void)playSound:(NSString*) soundName extension:(NSString*)extension callback:(void(^)()) callback;
++ (void)playSound:(NSString *)soundName callback:(void (^)())callback;
+
++ (void)playSound:(NSString *)soundName extension:(NSString *)extension callback:(void (^)())callback;
 
 @end

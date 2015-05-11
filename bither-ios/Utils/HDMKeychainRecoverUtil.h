@@ -20,9 +20,10 @@
 
 @interface HDMKeychainRecoverUtil : NSObject
 
--(instancetype)initWithViewContoller:(UIViewController*)controller;
+- (instancetype)initWithViewContoller:(UIViewController *)controller;
 
--(BOOL)canRecover;
--(void)revovery;
+- (BOOL)canRecover;
+
+- (void)revovery;
 
 @end

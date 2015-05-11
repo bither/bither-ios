@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface UIImage (ImageRenderToColor)
--(UIImage*)renderToColor:(UIColor*)color;
+- (UIImage *)renderToColor:(UIColor *)color;
 @end

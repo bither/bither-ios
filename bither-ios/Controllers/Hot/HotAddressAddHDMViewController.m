@@ -48,7 +48,7 @@
 @property(weak, nonatomic) IBOutlet UIView *vSingularModeRunning;
 @property(weak, nonatomic) IBOutlet UIView *vSingularModeChecking;
 @property(weak, nonatomic) IBOutlet UIButton *btnSingularModeCheck;
-@property (weak, nonatomic) IBOutlet UIView *vTopbar;
+@property(weak, nonatomic) IBOutlet UIView *vTopbar;
 
 @property HDMHotAddUtil *util;
 @end
@@ -194,7 +194,7 @@
             rotate.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseIn];
             [self.vContainer.layer addAnimation:rotate forKey:@"ROTATE"];
             if ([[UIDevice currentDevice].systemVersion floatValue] < 8) {
-                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)((spinDuration - fadeOutOffset) * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t) ((spinDuration - fadeOutOffset) * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                     [self.parentViewController.presentingViewController.presentingViewController dismissViewControllerAnimated:YES completion:^{
                         [self.vContainer.layer removeAllAnimations];
                     }];
@@ -322,7 +322,7 @@
 }
 
 - (IBAction)cancelPressed:(id)sender {
-    if(!self.util.canCancel){
+    if (!self.util.canCancel) {
         [self showBannerWithMessage:NSLocalizedString(@"hdm_singular_mode_cancel_warn", nil) belowView:self.vTopbar];
         return;
     }

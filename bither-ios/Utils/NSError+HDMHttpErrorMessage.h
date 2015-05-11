@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 
 @interface NSError (HDMHttpErrorMessage)
--(NSString*)msg;
--(BOOL)isHttp400;
+- (NSString *)msg;
+
+- (BOOL)isHttp400;
 @end

@@ -20,7 +20,6 @@
 //
 
 #import "DialogHDSendTxConfirm.h"
-#import "DialogSendTxConfirm.h"
 #import "UnitUtil.h"
 #import "StringUtil.h"
 

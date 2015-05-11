@@ -18,9 +18,7 @@
 #import "AdvanceViewController.h"
 #import "SettingListCell.h"
 #import "DialogEditPassword.h"
-#import "UIViewController+PiShowBanner.h"
 #import "UIViewController+ConfigureTableView.h"
-#import "BTSettings.h"
 #import "DialogBlackQrCode.h"
 
 @interface AdvanceViewController () <UITableViewDataSource, UITableViewDelegate, DialogEditPasswordDelegate>

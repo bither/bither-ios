@@ -9,5 +9,5 @@
 #import "Setting.h"
 
 @interface MessageSigningSetting : Setting
-+(MessageSigningSetting*)getMessageSigningSetting;
++ (MessageSigningSetting *)getMessageSigningSetting;
 @end

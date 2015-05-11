@@ -19,10 +19,7 @@
 #import <Bitheri/BTUtils.h>
 #import <Bitheri/BTAddressProvider.h>
 #import <Bitheri/BTAddressManager.h>
-#import <Bitheri/BTEncryptData.h>
 #import "BTHDMBid+Api.h"
-#import "BitherApi.h"
-#import "BTHDMAddress.h"
 #import "HDMApi.h"
 
 @implementation BTHDMBid (Api)
@@ -37,7 +34,7 @@
         serviceRandom = [response longLongValue];
         [condition signal];
         [condition unlock];
-    } andErrorCallBack:^(NSOperation *errorOp, NSError *error) {
+    }                                andErrorCallBack:^(NSOperation *errorOp, NSError *error) {
         [condition lock];
         e = error;
         [condition signal];
@@ -64,7 +61,7 @@
 }
 
 - (void)changeBidPasswordWithSignature:(NSString *)signature andPassword:(NSString *)password andHotAddress:(NSString *)hotFirstAddress andError:(NSError **)err; {
-    NSString *message =[self getPreSignMessage];
+    NSString *message = [self getPreSignMessage];
     if (![self.address isEqualToString:[[BTKey signedMessageToKey:message andSignatureBase64:signature] address]]) {
         *err = [[NSError alloc] initWithDomain:ERR_API_400_DOMAIN code:1002 userInfo:nil];
         return;
@@ -76,7 +73,7 @@
         [condition lock];
         [condition signal];
         [condition unlock];
-    } andErrorCallBack:^(NSOperation *errorOp, NSError *error) {
+    }                             andErrorCallBack:^(NSOperation *errorOp, NSError *error) {
         [condition lock];
         e = error;
         [condition signal];
@@ -87,7 +84,7 @@
     [condition wait];
     if (e == nil) {
         self.encryptedBitherPassword = [[[BTEncryptData alloc] initWithData:self.password andPassowrd:password] toEncryptedString];
-        if(!hotFirstAddress){
+        if (!hotFirstAddress) {
             [self save];
         }
     } else {
@@ -97,11 +94,11 @@
     [condition unlock];
 }
 
-- (void)changeBidPasswordWithSignature:(NSString *)signature andPassword:(NSString *)password andError:(NSError **)error{
+- (void)changeBidPasswordWithSignature:(NSString *)signature andPassword:(NSString *)password andError:(NSError **)error {
     [self changeBidPasswordWithSignature:[[signature hexToData] base64EncodedStringWithOptions:0] andPassword:password andHotAddress:nil andError:error];
 }
 
-- (void)save{
+- (void)save {
     [[BTAddressProvider instance] addHDMBid:self andAddressOfPS:[[[BTKey alloc] initWithSecret:self.password compressed:YES] address]];
 }
 
@@ -124,7 +121,7 @@
         remotes = array;
         [condition signal];
         [condition unlock];
-    } andErrorCallBack:^(NSOperation *errorOp, NSError *error) {
+    }                            andErrorCallBack:^(NSOperation *errorOp, NSError *error) {
         [condition lock];
         e = error;
         [condition signal];
@@ -163,7 +160,7 @@
         pubDict = dict;
         [condition signal];
         [condition unlock];
-    } andErrorCallBack:^(NSOperation *errorOp, NSError *error) {
+    }                             andErrorCallBack:^(NSOperation *errorOp, NSError *error) {
         [condition lock];
         e = error;
         [condition signal];
@@ -194,20 +191,20 @@
     return pubsList;
 }
 
-- (NSArray *)signatureByRemoteWithPassword:(NSString *)password andUnsignHash:(NSArray *)unsignHashes andIndex:(int)index andError:(NSError **)err;{
+- (NSArray *)signatureByRemoteWithPassword:(NSString *)password andUnsignHash:(NSArray *)unsignHashes andIndex:(int)index andError:(NSError **)err; {
     __block NSCondition *condition = [NSCondition new];
     __block NSArray *signatures = nil;
     __block NSError *e = nil;
-    NSData* p = [[[BTEncryptData alloc] initWithStr:self.encryptedBitherPassword] decrypt:password];
-    if(!p){
+    NSData *p = [[[BTEncryptData alloc] initWithStr:self.encryptedBitherPassword] decrypt:password];
+    if (!p) {
         [BTHDMPasswordWrongException raise:@"hdm server password decrypt error" format:nil];
     }
-    [[HDMApi instance] signatureByRemoteWithHDMBid:self.address andPassword:p andUnsignHash:unsignHashes andIndex:index callback:^(NSArray * array) {
+    [[HDMApi instance] signatureByRemoteWithHDMBid:self.address andPassword:p andUnsignHash:unsignHashes andIndex:index callback:^(NSArray *array) {
         [condition lock];
         signatures = array;
         [condition signal];
         [condition unlock];
-    } andErrorCallBack:^(NSOperation *errorOp, NSError *error) {
+    }                             andErrorCallBack:^(NSOperation *errorOp, NSError *error) {
         [condition lock];
         e = error;
         [condition signal];

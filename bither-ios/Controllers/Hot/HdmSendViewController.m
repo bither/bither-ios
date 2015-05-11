@@ -43,7 +43,6 @@
 #import "BTHDMBid+Api.h"
 #import "DialogAlert.h"
 #import "HDMResetServerPasswordUtil.h"
-#import "UIViewController+PiShowBanner.h"
 
 #define kBalanceFontSize (15)
 #define kSendButtonQrIconSize (20)

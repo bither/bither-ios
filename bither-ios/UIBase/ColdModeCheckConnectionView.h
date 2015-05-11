@@ -19,5 +19,5 @@
 #import <UIKit/UIKit.h>
 
 @interface ColdModeCheckConnectionView : UIView
--(void)beginCheck:(void (^)(BOOL passed))completion;
+- (void)beginCheck:(void (^)(BOOL passed))completion;
 @end

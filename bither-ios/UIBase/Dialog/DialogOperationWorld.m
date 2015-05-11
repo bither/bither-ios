@@ -18,7 +18,6 @@
 
 #import "DialogOperationWorld.h"
 #import "NSString+Size.h"
-#import "UserDefaultsUtil.h"
 
 #define kButtonHeight (44)
 #define kButtonEdgeInsets (UIEdgeInsetsMake(0, 10, 0, 10))
@@ -27,51 +26,51 @@
 
 #define kFontSize (16)
 
-@interface DialogOperationWorld(){
+@interface DialogOperationWorld () {
     NSString *_viewOnBlockChainInfoStr;
 }
-@property (nonatomic,strong)NSString * world;
-@property (nonatomic,readwrite) int index;
+@property(nonatomic, strong) NSString *world;
+@property(nonatomic, readwrite) int index;
 @end
 
 @implementation DialogOperationWorld
 
--(instancetype)initWithDelegate:(NSObject<DialogOperationDelegate>*)delegate world:(NSString *)world index:(int)index{
-    NSString* viewStr = NSLocalizedString(@"View on Blockchain.info", nil);
-    NSString* manageStr = NSLocalizedString(@"private_key_management", nil);
+- (instancetype)initWithDelegate:(NSObject <DialogOperationDelegate> *)delegate world:(NSString *)world index:(int)index {
+    NSString *viewStr = NSLocalizedString(@"View on Blockchain.info", nil);
+    NSString *manageStr = NSLocalizedString(@"private_key_management", nil);
     CGFloat width = MAX(MAX([viewStr sizeWithRestrict:CGSizeMake(CGFLOAT_MAX, kButtonHeight) font:[UIFont systemFontOfSize:kFontSize]].width,
-                        [manageStr sizeWithRestrict:CGSizeMake(CGFLOAT_MAX, kButtonHeight) font:[UIFont systemFontOfSize:kFontSize]].width),
-                        [NSLocalizedString(@"address_option_view_on_blockmeta", nil) sizeWithRestrict:CGSizeMake(CGFLOAT_MAX, kButtonHeight) font:[UIFont systemFontOfSize:kFontSize]].width) +
-                        kButtonEdgeInsets.left + kButtonEdgeInsets.right;
+            [manageStr sizeWithRestrict:CGSizeMake(CGFLOAT_MAX, kButtonHeight) font:[UIFont systemFontOfSize:kFontSize]].width),
+            [NSLocalizedString(@"address_option_view_on_blockmeta", nil) sizeWithRestrict:CGSizeMake(CGFLOAT_MAX, kButtonHeight) font:[UIFont systemFontOfSize:kFontSize]].width) +
+            kButtonEdgeInsets.left + kButtonEdgeInsets.right;
     self = [super initWithFrame:CGRectMake(0, 0, width, kHeight)];
-    if(self){
-        _viewOnBlockChainInfoStr  = viewStr;
+    if (self) {
+        _viewOnBlockChainInfoStr = viewStr;
         self.delegate = delegate;
         [self firstConfigureHasPrivateKey];
     }
-    self.world=world;
-    self.index=index;
+    self.world = world;
+    self.index = index;
     return self;
 }
 
--(void)firstConfigureHasPrivateKey{
+- (void)firstConfigureHasPrivateKey {
     self.bgInsets = UIEdgeInsetsMake(4, 16, 4, 16);
     CGFloat bottom = 0;
     bottom = [self createButtonWithText:NSLocalizedString(@"hdm_import_word_list_replace", nil) top:bottom action:@selector(replaceWorld:)];
-    UIView *seperator = [[UIView alloc]initWithFrame:CGRectMake(0, bottom, self.frame.size.width, 1)];
+    UIView *seperator = [[UIView alloc] initWithFrame:CGRectMake(0, bottom, self.frame.size.width, 1)];
     seperator.autoresizingMask = UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleWidth;
     seperator.backgroundColor = [UIColor colorWithWhite:1 alpha:0.5];
     [self addSubview:seperator];
-    
-    
+
+
     bottom += 1;
     bottom = [self createButtonWithText:NSLocalizedString(@"hdm_import_word_list_delete", nil) top:bottom action:@selector(deleteWorld:)];
-    seperator = [[UIView alloc]initWithFrame:CGRectMake(0, bottom, self.frame.size.width, 1)];
+    seperator = [[UIView alloc] initWithFrame:CGRectMake(0, bottom, self.frame.size.width, 1)];
     seperator.autoresizingMask = UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleWidth;
     seperator.backgroundColor = [UIColor colorWithWhite:1 alpha:0.5];
     [self addSubview:seperator];
-    
-    
+
+
     bottom += 1;
     bottom = [self createButtonWithText:NSLocalizedString(@"Cancel", nil) top:bottom action:@selector(cancelPressed:)];
     CGRect frame = self.frame;
@@ -79,8 +78,8 @@
     self.frame = frame;
 }
 
--(CGFloat)createButtonWithText:(NSString*)text top:(CGFloat)top action:(SEL)selector{
-    UIButton *btn = [[UIButton alloc]initWithFrame:CGRectMake(0, top, self.frame.size.width, kButtonHeight)];
+- (CGFloat)createButtonWithText:(NSString *)text top:(CGFloat)top action:(SEL)selector {
+    UIButton *btn = [[UIButton alloc] initWithFrame:CGRectMake(0, top, self.frame.size.width, kButtonHeight)];
     [btn setBackgroundImage:nil forState:UIControlStateNormal];
     [btn setBackgroundImage:[UIImage imageNamed:@"card_foreground_pressed"] forState:UIControlStateHighlighted];
     btn.contentEdgeInsets = kButtonEdgeInsets;
@@ -95,23 +94,23 @@
     return CGRectGetMaxY(btn.frame);
 }
 
--(void)replaceWorld:(id)sender{
+- (void)replaceWorld:(id)sender {
     [self dismissWithCompletion:^{
-        DialogReplaceWorld * dialogReplaceWorld=[[DialogReplaceWorld alloc] initWithDelegate:self.delegate world:self.world index:self.index];
+        DialogReplaceWorld *dialogReplaceWorld = [[DialogReplaceWorld alloc] initWithDelegate:self.delegate world:self.world index:self.index];
         [dialogReplaceWorld showInWindow:self.window];
     }];
 }
 
--(void)deleteWorld:(id)sender{
+- (void)deleteWorld:(id)sender {
     [self dismissWithCompletion:^{
-        if(self.delegate && [self.delegate respondsToSelector:@selector(deleteWorld:index:)]){
+        if (self.delegate && [self.delegate respondsToSelector:@selector(deleteWorld:index:)]) {
             [self.delegate deleteWorld:self.world index:self.index];
         }
     }];
 }
 
 
--(void)cancelPressed:(id)sender{
+- (void)cancelPressed:(id)sender {
     [self dismiss];
 }
 

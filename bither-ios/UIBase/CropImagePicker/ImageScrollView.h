@@ -19,7 +19,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ImageScrollView : UIScrollView<UIScrollViewDelegate>
+@interface ImageScrollView : UIScrollView <UIScrollViewDelegate>
 @property CGFloat rotation;
-@property (strong, nonatomic) UIImage* image;
+@property(strong, nonatomic) UIImage *image;
 @end

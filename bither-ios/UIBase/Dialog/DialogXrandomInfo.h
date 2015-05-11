@@ -9,6 +9,7 @@
 #import "DialogCentered.h"
 
 @interface DialogXrandomInfo : DialogCentered
--(instancetype)initWithGuide:(BOOL)guide;
--(instancetype)initWithPermission:(void(^)())completion;
+- (instancetype)initWithGuide:(BOOL)guide;
+
+- (instancetype)initWithPermission:(void (^)())completion;
 @end

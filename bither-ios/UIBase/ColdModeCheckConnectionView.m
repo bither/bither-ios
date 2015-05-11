@@ -29,13 +29,12 @@
 #define kIndicatorOffset (6)
 #define kLabelTopOffset (60)
 
-@interface ColdModeCheckConnectionView()
+@interface ColdModeCheckConnectionView ()
 @end
 
 @implementation ColdModeCheckConnectionView
 
-- (id)initWithFrame:(CGRect)frame
-{
+- (id)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
         [self firstConfigure];
@@ -43,24 +42,24 @@
     return self;
 }
 
--(id)initWithCoder:(NSCoder *)aDecoder{
+- (id)initWithCoder:(NSCoder *)aDecoder {
     self = [super initWithCoder:aDecoder];
-    if(self){
+    if (self) {
         [self firstConfigure];
     }
     return self;
 }
 
--(void)firstConfigure{
+- (void)firstConfigure {
     self.clipsToBounds = YES;
-    UIActivityIndicatorView *p = [[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
+    UIActivityIndicatorView *p = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
     [self addSubview:p];
-    p.frame = CGRectMake((self.frame.size.width - p.frame.size.width)/2, self.frame.size.height/2 - p.frame.size.height - kIndicatorOffset - kLabelTopOffset, p.frame.size.width, p.frame.size.width);
-    p.autoresizingMask = UIViewAutoresizingFlexibleBottomMargin|UIViewAutoresizingFlexibleTopMargin|UIViewAutoresizingFlexibleLeftMargin|UIViewAutoresizingFlexibleRightMargin;
+    p.frame = CGRectMake((self.frame.size.width - p.frame.size.width) / 2, self.frame.size.height / 2 - p.frame.size.height - kIndicatorOffset - kLabelTopOffset, p.frame.size.width, p.frame.size.width);
+    p.autoresizingMask = UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin;
     [p startAnimating];
-    for(int i = 0; i < 2; i++){
-        UILabel *lbl = [[UILabel alloc]initWithFrame:CGRectMake(0, self.frame.size.height/2, self.frame.size.width, kLabelHeight)];
-        lbl.autoresizingMask = UIViewAutoresizingFlexibleBottomMargin|UIViewAutoresizingFlexibleTopMargin|UIViewAutoresizingFlexibleLeftMargin|UIViewAutoresizingFlexibleRightMargin;
+    for (int i = 0; i < 2; i++) {
+        UILabel *lbl = [[UILabel alloc] initWithFrame:CGRectMake(0, self.frame.size.height / 2, self.frame.size.width, kLabelHeight)];
+        lbl.autoresizingMask = UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin;
         lbl.backgroundColor = [UIColor clearColor];
         lbl.textColor = [UIColor whiteColor];
         lbl.textAlignment = NSTextAlignmentCenter;
@@ -70,29 +69,29 @@
     }
 }
 
--(void)beginCheck:(void (^)(BOOL passed))completion{
+- (void)beginCheck:(void (^)(BOOL passed))completion {
     BOOL noWifi = ![NetworkUtil isEnableWIFI];
     BOOL no3G = ![NetworkUtil isEnable3G];
-    [self animateLabel:(UILabel*)[self.subviews objectAtIndex:1] checking:NSLocalizedString(@"Checking WIFI", nil) error:NSLocalizedString(@"Please turn off WIFI", nil) passed:noWifi complete:^{
-        UIView* pb = ((UIView*)[self.subviews objectAtIndex:0]);
-        if(noWifi){
-            [self animateLabel:(UILabel*)[self.subviews objectAtIndex:2] checking:NSLocalizedString(@"Checking Cellular Data", nil) error:NSLocalizedString(@"Please turn off Cellular Data", nil) passed:no3G complete:^{
+    [self animateLabel:(UILabel *) [self.subviews objectAtIndex:1] checking:NSLocalizedString(@"Checking WIFI", nil) error:NSLocalizedString(@"Please turn off WIFI", nil) passed:noWifi complete:^{
+        UIView *pb = ((UIView *) [self.subviews objectAtIndex:0]);
+        if (noWifi) {
+            [self animateLabel:(UILabel *) [self.subviews objectAtIndex:2] checking:NSLocalizedString(@"Checking Cellular Data", nil) error:NSLocalizedString(@"Please turn off Cellular Data", nil) passed:no3G complete:^{
                 pb.hidden = YES;
-                if(completion){
+                if (completion) {
                     completion(noWifi && no3G);
                 }
             }];
-        }else{
+        } else {
             pb.hidden = YES;
-            if(completion){
+            if (completion) {
                 completion(noWifi && no3G);
             }
         }
     }];
 }
 
--(void)animateLabel:(UILabel*)label checking:(NSString*)checking error:(NSString*)error passed:(BOOL)passed complete:(void(^)()) completion{
-    if(label.hidden && [StringUtil isEmpty:label.text]){
+- (void)animateLabel:(UILabel *)label checking:(NSString *)checking error:(NSString *)error passed:(BOOL)passed complete:(void (^)())completion {
+    if (label.hidden && [StringUtil isEmpty:label.text]) {
         CGAffineTransform defaultTransaform = CGAffineTransformMakeScale(kLabelCheckScale, kLabelCheckScale);
         label.text = checking;
         CGRect frame = label.frame;
@@ -104,53 +103,53 @@
         [UIView animateWithDuration:kLabelAnimDuration animations:^{
             label.alpha = 1;
             label.transform = CGAffineTransformTranslate(defaultTransaform, 0, kLabelHeight);
-        } completion:^(BOOL finished) {
-            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(kLabelAnimDelay * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                if(!passed){
+        }                completion:^(BOOL finished) {
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t) (kLabelAnimDelay * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                if (!passed) {
                     label.text = error;
                 }
                 [UIView animateWithDuration:kLabelAnimDuration animations:^{
-                    if(passed){
+                    if (passed) {
                         label.alpha = 0;
                         label.transform = defaultTransaform;
-                    }else{
+                    } else {
                         label.transform = CGAffineTransformIdentity;
                     }
-                } completion:^(BOOL finished) {
+                }                completion:^(BOOL finished) {
                     label.hidden = passed;
-                    if(completion){
+                    if (completion) {
                         completion();
                     }
                 }];
             });
         }];
-    }else if(passed && !label.hidden){
+    } else if (passed && !label.hidden) {
         [UIView animateWithDuration:kLabelAnimDuration animations:^{
             label.transform = CGAffineTransformMakeScale(kLabelCheckScale, kLabelCheckScale);
             label.alpha = 0;
-        } completion:^(BOOL finished) {
+        }                completion:^(BOOL finished) {
             label.hidden = YES;
-            if(completion){
+            if (completion) {
                 completion();
             }
         }];
-    }else if(completion){
+    } else if (completion) {
         completion();
     }
 }
 
--(CGFloat)getLabelTop:(NSUInteger)index{
-    if(index <= 1){
+- (CGFloat)getLabelTop:(NSUInteger)index {
+    if (index <= 1) {
         return self.frame.size.height / 2 - kLabelTopOffset;
     }
-    UIView* v = [self.subviews objectAtIndex:index - 1];
-    if(v.hidden){
-        if(index > 1){
+    UIView *v = [self.subviews objectAtIndex:index - 1];
+    if (v.hidden) {
+        if (index > 1) {
             return [self getLabelTop:index - 1];
-        }else{
+        } else {
             return self.frame.size.height / 2 - kLabelTopOffset;
         }
-    }else{
+    } else {
         return CGRectGetMaxY(v.frame);
     }
 }

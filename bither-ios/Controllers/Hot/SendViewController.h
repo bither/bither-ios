@@ -18,14 +18,15 @@
 
 #import <UIKit/UIKit.h>
 #import <Bitheri/BTAddress.h>
+
 @protocol SendDelegate
 @optional
--(void)sendSuccessed:(BTTx*)tx;
+- (void)sendSuccessed:(BTTx *)tx;
 @end
 
 @interface SendViewController : UIViewController
 @property BTAddress *address;
-@property NSString* toAddress;
+@property NSString *toAddress;
 @property uint64_t amount;
-@property (weak) NSObject<SendDelegate> *sendDelegate;
+@property(weak) NSObject <SendDelegate> *sendDelegate;
 @end

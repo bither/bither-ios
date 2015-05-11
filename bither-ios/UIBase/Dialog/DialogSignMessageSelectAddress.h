@@ -8,13 +8,14 @@
 
 #import "DialogCentered.h"
 #import "BTAddressManager.h"
+
 @protocol DialogSignMessageSelectAddressDelegate
--(void)signMessageWithAddress:(BTAddress*)address;
+- (void)signMessageWithAddress:(BTAddress *)address;
 @end
 
 @interface DialogSignMessageSelectAddress : DialogCentered
 
--(instancetype)initWithDelegate:(NSObject<DialogSignMessageSelectAddressDelegate>*)delegate;
+- (instancetype)initWithDelegate:(NSObject <DialogSignMessageSelectAddressDelegate> *)delegate;
 
-@property (weak) NSObject<DialogSignMessageSelectAddressDelegate>* delegate;
+@property(weak) NSObject <DialogSignMessageSelectAddressDelegate> *delegate;
 @end

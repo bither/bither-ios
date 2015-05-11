@@ -21,5 +21,5 @@
 #import "BTAddress.h"
 
 @interface DialogTxConfirmation : DialogWithArrow
--(instancetype)initWithTx:(BTTx*)tx andAddress:(BTAddress*)address;
+- (instancetype)initWithTx:(BTTx *)tx andAddress:(BTAddress *)address;
 @end

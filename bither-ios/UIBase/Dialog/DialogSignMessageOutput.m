@@ -26,33 +26,33 @@
 
 @implementation DialogSignMessageOutput
 
--(instancetype)initWithDelegate:(NSObject<DialogSignMessageOutputDelegate>*)delegate{
+- (instancetype)initWithDelegate:(NSObject <DialogSignMessageOutputDelegate> *)delegate {
     CGFloat width = [NSLocalizedString(@"sign_message_output_qr", nil) sizeWithRestrict:CGSizeMake(CGFLOAT_MAX, kButtonHeight) font:[UIFont systemFontOfSize:kFontSize]].width;
     width = MAX(width, kMinWidth);
     self = [super initWithFrame:CGRectMake(0, 0, width, kButtonHeight * 3 + 2)];
-    if(self){
+    if (self) {
         self.delegate = delegate;
         [self firstConfigure];
     }
     return self;
 }
 
--(void)firstConfigure{
+- (void)firstConfigure {
     self.bgInsets = UIEdgeInsetsMake(4, 16, 4, 16);
     CGFloat bottom = 0;
     bottom = [self createButtonWithText:NSLocalizedString(@"sign_message_output_copy", nil) top:bottom action:@selector(copyPressed:)];
-    UIView *seperator = [[UIView alloc]initWithFrame:CGRectMake(0, bottom, self.frame.size.width, 1)];
+    UIView *seperator = [[UIView alloc] initWithFrame:CGRectMake(0, bottom, self.frame.size.width, 1)];
     seperator.autoresizingMask = UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleWidth;
     seperator.backgroundColor = [UIColor colorWithWhite:1 alpha:0.5];
     [self addSubview:seperator];
-    
+
     bottom += 1;
     bottom = [self createButtonWithText:NSLocalizedString(@"sign_message_output_qr", nil) top:bottom action:@selector(qrPressed:)];
-    seperator = [[UIView alloc]initWithFrame:CGRectMake(0, bottom, self.frame.size.width, 1)];
+    seperator = [[UIView alloc] initWithFrame:CGRectMake(0, bottom, self.frame.size.width, 1)];
     seperator.autoresizingMask = UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleWidth;
     seperator.backgroundColor = [UIColor colorWithWhite:1 alpha:0.5];
     [self addSubview:seperator];
-    
+
     bottom += 1;
     bottom = [self createButtonWithText:NSLocalizedString(@"Cancel", nil) top:bottom action:@selector(cancelPressed:)];
     CGRect frame = self.frame;
@@ -60,28 +60,28 @@
     self.frame = frame;
 }
 
--(void)copyPressed:(id)sender{
+- (void)copyPressed:(id)sender {
     [self dismissWithCompletion:^{
-        if(self.delegate && [self.delegate respondsToSelector:@selector(copyOutput)]){
+        if (self.delegate && [self.delegate respondsToSelector:@selector(copyOutput)]) {
             [self.delegate copyOutput];
         }
     }];
 }
 
--(void)qrPressed:(id)sender{
+- (void)qrPressed:(id)sender {
     [self dismissWithCompletion:^{
-        if(self.delegate && [self.delegate respondsToSelector:@selector(qrOutput)]){
+        if (self.delegate && [self.delegate respondsToSelector:@selector(qrOutput)]) {
             [self.delegate qrOutput];
         }
     }];
 }
 
--(void)cancelPressed:(id)sender{
+- (void)cancelPressed:(id)sender {
     [self dismiss];
 }
 
--(CGFloat)createButtonWithText:(NSString*)text top:(CGFloat)top action:(SEL)selector{
-    UIButton *btn = [[UIButton alloc]initWithFrame:CGRectMake(0, top, self.frame.size.width, kButtonHeight)];
+- (CGFloat)createButtonWithText:(NSString *)text top:(CGFloat)top action:(SEL)selector {
+    UIButton *btn = [[UIButton alloc] initWithFrame:CGRectMake(0, top, self.frame.size.width, kButtonHeight)];
     [btn setBackgroundImage:nil forState:UIControlStateNormal];
     [btn setBackgroundImage:[UIImage imageNamed:@"card_foreground_pressed"] forState:UIControlStateHighlighted];
     btn.contentEdgeInsets = kButtonEdgeInsets;

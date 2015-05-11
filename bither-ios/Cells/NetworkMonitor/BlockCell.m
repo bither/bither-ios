@@ -20,17 +20,16 @@
 #import "NSString+Base58.h"
 #import "DateUtil.h"
 
-@interface BlockCell()
-@property (weak, nonatomic) IBOutlet UILabel *lbBlockNo;
-@property (weak, nonatomic) IBOutlet UILabel *lbTime;
-@property (weak, nonatomic) IBOutlet UILabel *lbBlockHash;
+@interface BlockCell ()
+@property(weak, nonatomic) IBOutlet UILabel *lbBlockNo;
+@property(weak, nonatomic) IBOutlet UILabel *lbTime;
+@property(weak, nonatomic) IBOutlet UILabel *lbBlockHash;
 
 @end
 
 @implementation BlockCell
 
-- (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
-{
+- (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         // Initialization code
@@ -38,22 +37,20 @@
     return self;
 }
 
-- (void)awakeFromNib
-{
+- (void)awakeFromNib {
     // Initialization code
 }
 
-- (void)setSelected:(BOOL)selected animated:(BOOL)animated
-{
+- (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
 
     // Configure the view for the selected state
 }
 
--(void)setBlock:(BTBlock *)block{
-    self.lbBlockNo.text=[NSString stringWithFormat:@"%d",block.blockNo];
-    NSString * blockHash=[[NSString hexWithHash:block.blockHash] toLowercaseStringWithEn];
-    self.lbBlockHash.text=blockHash;
-    self.lbTime.text=[DateUtil getRelativeDate:[NSDate dateWithTimeIntervalSince1970:block.blockTime]];
+- (void)setBlock:(BTBlock *)block {
+    self.lbBlockNo.text = [NSString stringWithFormat:@"%d", block.blockNo];
+    NSString *blockHash = [[NSString hexWithHash:block.blockHash] toLowercaseStringWithEn];
+    self.lbBlockHash.text = blockHash;
+    self.lbTime.text = [DateUtil getRelativeDate:[NSDate dateWithTimeIntervalSince1970:block.blockTime]];
 }
 @end

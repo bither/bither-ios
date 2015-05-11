@@ -27,6 +27,6 @@
 }
 
 + (WatchApi *)instance;
--(void)getExchangeTrend:(GroupMarketType) marketType callback:(void (^)(NSArray *array)) callback andErrorCallBack:(void (^)(NSOperation *errorOp, NSError *error))errorCallback;
+-(void)getExchangeTrend:(MarketType) marketType callback:(void (^)(NSArray *array)) callback andErrorCallBack:(void (^)(NSOperation *errorOp, NSError *error))errorCallback;
 - (void) getExchangeTicker:(void (^)(void))callback  andErrorCallBack:(void (^)(NSOperation *errorOp, NSError *error))errorCallback;
 @end

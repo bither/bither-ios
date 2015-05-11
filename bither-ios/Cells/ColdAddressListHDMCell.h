@@ -10,5 +10,5 @@
 #import "BTHDMKeychain.h"
 
 @interface ColdAddressListHDMCell : UITableViewCell
-@property BTHDMKeychain* keychain;
+@property BTHDMKeychain *keychain;
 @end

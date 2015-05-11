@@ -17,15 +17,16 @@
 //  limitations under the License.
 
 #import <Foundation/Foundation.h>
+
 @protocol KeyboardControllerDelegate
--(void)keyboardFrameChanged:(CGRect)frame;
+- (void)keyboardFrameChanged:(CGRect)frame;
 @end
 
 ///@description  Responds to keyboard frame change event. Init in viewWillAppear, release in viewDidDisappear.
 @interface KeyboardController : NSObject
 
--(id)initWithDelegate:(NSObject<KeyboardControllerDelegate>*)delegate;
+- (id)initWithDelegate:(NSObject <KeyboardControllerDelegate> *)delegate;
 
-@property (weak, nonatomic) NSObject<KeyboardControllerDelegate>* delegate;
+@property(weak, nonatomic) NSObject <KeyboardControllerDelegate> *delegate;
 
 @end

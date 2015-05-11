@@ -20,5 +20,5 @@
 #import "AudioVisualizerView.h"
 
 @interface UEntropyMic : NSObject <UEntropySource>
--(instancetype)initWithView:(AudioVisualizerView*)view andCollector:(UEntropyCollector*)collector;
+- (instancetype)initWithView:(AudioVisualizerView *)view andCollector:(UEntropyCollector *)collector;
 @end

@@ -20,17 +20,16 @@
 #import "TransactionConfidenceView.h"
 #import "DialogTxConfirmation.h"
 
-@interface TransactionConfidenceView()
+@interface TransactionConfidenceView ()
 @property UIButton *btn;
 @property int confirmationCnt;
-@property BTTx* tx;
+@property BTTx *tx;
 @property BTAddress *address;
 @end
 
 @implementation TransactionConfidenceView
 
-- (instancetype)initWithFrame:(CGRect)frame
-{
+- (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
         [self firstConfigure];
@@ -38,15 +37,15 @@
     return self;
 }
 
--(instancetype)initWithCoder:(NSCoder *)aDecoder{
+- (instancetype)initWithCoder:(NSCoder *)aDecoder {
     self = [super initWithCoder:aDecoder];
-    if(self){
+    if (self) {
         [self firstConfigure];
     }
     return self;
 }
 
--(void)firstConfigure{
+- (void)firstConfigure {
     self.backgroundColor = [UIColor clearColor];
     self.btn = [UIButton buttonWithType:UIButtonTypeCustom];
     self.btn.frame = CGRectMake(0, 0, self.frame.size.width, self.frame.size.height);
@@ -62,16 +61,16 @@
     self.tx = tx;
     self.address = address;
     self.confirmationCnt = tx.confirmationCnt;
-    if(tx.confirmationCnt <= 6){
+    if (tx.confirmationCnt <= 6) {
         [self.btn setImage:[UIImage imageNamed:[NSString stringWithFormat:@"transaction_confirmation_icon_%d", tx.confirmationCnt]] forState:UIControlStateNormal];
-    }else if(tx.confirmationCnt < 100){
+    } else if (tx.confirmationCnt < 100) {
         [self.btn setImage:[UIImage imageNamed:@"transaction_confirmation_icon_6"] forState:UIControlStateNormal];
-    }else{
+    } else {
         [self.btn setImage:[UIImage imageNamed:@"transaction_confirmation_icon_100"] forState:UIControlStateNormal];
     }
 }
 
--(void)pressed:(id)sender{
+- (void)pressed:(id)sender {
     DialogTxConfirmation *dialog = [[DialogTxConfirmation alloc] initWithTx:self.tx andAddress:self.address];
     [dialog showFromView:self];
 }

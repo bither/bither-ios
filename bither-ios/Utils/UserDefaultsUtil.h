@@ -26,53 +26,76 @@
 + (UserDefaultsUtil *)instance;
 
 
--(NSInteger)getLastVersion;
--(void)setLastVersion:(NSInteger) version;
+- (NSInteger)getLastVersion;
 
--(MarketType) getDefaultMarket;
--(void)setMarket:(MarketType) marketType;
+- (void)setLastVersion:(NSInteger)version;
 
--(void)setExchangeType:(Currency) exchangeType;
--(Currency)getDefaultCurrency;
+- (MarketType)getDefaultMarket;
 
--(void)setBitcoinUnit:(BitcoinUnit)bitcoinUnit;
--(BitcoinUnit)getBitcoinUnit;
+- (void)setMarket:(MarketType)marketType;
 
--(long long)getLastCheckPrivateKeyTime;
--(void)setLastCheckPrivateKeyTime:(long long)time;
+- (void)setExchangeType:(Currency)exchangeType;
 
--(long long)getLastBackupKeyTime;
--(void)setLastBackupKeyTime:(long long) time;
--(BOOL)hasPrivateKey;
+- (Currency)getDefaultCurrency;
 
--(void)setHasPrivateKey:(BOOL) hasPrivateKey;
+- (void)setBitcoinUnit:(BitcoinUnit)bitcoinUnit;
 
--(BOOL)getSyncBlockOnlyWifi;
--(void)setSyncBlockOnlyWifi:(BOOL)onlyWifi;
--(BOOL)getDownloadSpvFinish;
--(void)setDownloadSpvFinish:(BOOL)finish;
--(BTPasswordSeed *)getPasswordSeedForOldVersion;
+- (BitcoinUnit)getBitcoinUnit;
+
+- (long long)getLastCheckPrivateKeyTime;
+
+- (void)setLastCheckPrivateKeyTime:(long long)time;
+
+- (long long)getLastBackupKeyTime;
+
+- (void)setLastBackupKeyTime:(long long)time;
+
+- (BOOL)hasPrivateKey;
+
+- (void)setHasPrivateKey:(BOOL)hasPrivateKey;
+
+- (BOOL)getSyncBlockOnlyWifi;
+
+- (void)setSyncBlockOnlyWifi:(BOOL)onlyWifi;
+
+- (BOOL)getDownloadSpvFinish;
+
+- (void)setDownloadSpvFinish:(BOOL)finish;
+
+- (BTPasswordSeed *)getPasswordSeedForOldVersion;
 //-(void)setPasswordSeed:(BTPasswordSeed *)passwordSeed;
 
--(TransactionFeeMode) getTransactionFeeMode;
--(void)setTransactionFeeMode :(TransactionFeeMode ) feeMode;
--(BOOL) hasUserAvatar;
--(NSString *)getUserAvatar;
--(void) setUserAvatar:(NSString *)avatar;
--(NSInteger) getQrCodeTheme;
--(void)setQrCodeTheme:(NSInteger) qrCodeTheme;
+- (TransactionFeeMode)getTransactionFeeMode;
 
--(void)setPinCode:(NSString*)code;
--(BOOL)hasPinCode;
--(void)deletePinCode;
--(BOOL)checkPinCode:(NSString*)code;
+- (void)setTransactionFeeMode:(TransactionFeeMode)feeMode;
 
--(BOOL)localeIsChina;
--(BOOL)localeIsZHHant;
+- (BOOL)hasUserAvatar;
 
--(KeychainMode) getKeychainMode;
--(void)setKeychainMode :(KeychainMode ) keychainMode;
+- (NSString *)getUserAvatar;
+
+- (void)setUserAvatar:(NSString *)avatar;
+
+- (NSInteger)getQrCodeTheme;
+
+- (void)setQrCodeTheme:(NSInteger)qrCodeTheme;
+
+- (void)setPinCode:(NSString *)code;
+
+- (BOOL)hasPinCode;
+
+- (void)deletePinCode;
+
+- (BOOL)checkPinCode:(NSString *)code;
+
+- (BOOL)localeIsChina;
+
+- (BOOL)localeIsZHHant;
+
+- (KeychainMode)getKeychainMode;
+
+- (void)setKeychainMode:(KeychainMode)keychainMode;
 
 - (void)setPasswordStrengthCheck:(BOOL)check;
+
 - (BOOL)getPasswordStrengthCheck;
 @end

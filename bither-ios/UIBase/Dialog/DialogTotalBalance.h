@@ -22,9 +22,9 @@
 #import "DialogWithArrow.h"
 
 @protocol DialogTotalBalanceDismissListener <NSObject>
--(void)dialogDismissed;
+- (void)dialogDismissed;
 @end
 
 @interface DialogTotalBalance : DialogWithArrow
-@property (weak) NSObject<DialogTotalBalanceDismissListener>* listener;
+@property(weak) NSObject <DialogTotalBalanceDismissListener> *listener;
 @end

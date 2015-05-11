@@ -1,4 +1,4 @@
-        //
+//
 //  HotViewController.m
 //  bither-ios
 //
@@ -26,25 +26,24 @@
 #import "BTAddressManager.h"
 #import "UIViewController+PiShowBanner.h"
 #import "UploadAndDowloadFileFactory.h"
-#import "BTSettings.h"
 
 
 @interface HotViewController ()
-@property (strong, nonatomic) NSArray* tabButtons;
-@property (strong, nonatomic) IBOutlet TabButton *tabMarket;
-@property (strong, nonatomic) IBOutlet HotAddressTabButton *tabAddress;
-@property (strong, nonatomic) IBOutlet TabButton *tabSetting;
-@property (weak, nonatomic) IBOutlet UIView *vTabe;
-@property (weak, nonatomic) IBOutlet UIProgressView *pvSync;
-@property (strong, nonatomic) PiPageViewController *page;
+@property(strong, nonatomic) NSArray *tabButtons;
+@property(strong, nonatomic) IBOutlet TabButton *tabMarket;
+@property(strong, nonatomic) IBOutlet HotAddressTabButton *tabAddress;
+@property(strong, nonatomic) IBOutlet TabButton *tabSetting;
+@property(weak, nonatomic) IBOutlet UIView *vTabe;
+@property(weak, nonatomic) IBOutlet UIProgressView *pvSync;
+@property(strong, nonatomic) PiPageViewController *page;
 @end
 
 @implementation HotViewController
 
--(void)loadView{
+- (void)loadView {
     [super loadView];
     [self initTabs];
-    self.page = [[PiPageViewController alloc]initWithStoryboard:self.storyboard andViewControllerIdentifiers:[[NSArray alloc] initWithObjects:@"tab_market",@"tab_hot_address",@"tab_option_hot", nil]];
+    self.page = [[PiPageViewController alloc] initWithStoryboard:self.storyboard andViewControllerIdentifiers:[[NSArray alloc] initWithObjects:@"tab_market", @"tab_hot_address", @"tab_option_hot", nil]];
     self.page.pageDelegate = self;
     [self addChildViewController:self.page];
     self.page.index = 1;
@@ -55,78 +54,77 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(syncProgress:) name:BTPeerManagerSyncProgressNotification object:nil];
 }
 
--(void)initTabs{
-    self.tabButtons = [[NSArray alloc]initWithObjects:self.tabMarket, self.tabAddress, self.tabSetting, nil];
+- (void)initTabs {
+    self.tabButtons = [[NSArray alloc] initWithObjects:self.tabMarket, self.tabAddress, self.tabSetting, nil];
     self.tabMarket.imageUnselected = [UIImage imageNamed:@"tab_market"];
     self.tabMarket.imageSelected = [UIImage imageNamed:@"tab_market_checked"];
     self.tabAddress.imageUnselected = [UIImage imageNamed:@"tab_main"];
     self.tabAddress.imageSelected = [UIImage imageNamed:@"tab_main_checked"];
     self.tabAddress.selected = YES;
-    self.tabSetting.imageUnselected=[UIImage imageNamed:@"tab_option"];
-    self.tabSetting.imageSelected=[UIImage imageNamed:@"tab_option_checked"];
-    for(int i = 0;i < self.tabButtons.count; i++){
-        TabButton* tab = [self.tabButtons objectAtIndex:i];
+    self.tabSetting.imageUnselected = [UIImage imageNamed:@"tab_option"];
+    self.tabSetting.imageSelected = [UIImage imageNamed:@"tab_option_checked"];
+    for (int i = 0; i < self.tabButtons.count; i++) {
+        TabButton *tab = [self.tabButtons objectAtIndex:i];
         tab.index = i;
         tab.delegate = self;
     }
 }
 
-- (void)viewDidLoad
-{
+- (void)viewDidLoad {
     [super viewDidLoad];
     isInit = YES;
     cnt = 4;
     self.dict = [[NSMutableDictionary alloc] init];
     [self.view bringSubviewToFront:self.addAddressBtn];
     [self initApp];
- 
-    
+
+
 }
 
 #pragma mark - TabBar delegate
--(void)setTabBarSelectedItem:(int) index{
-    for(int i = 0;i<self.tabButtons.count;i++){
-        TabButton *tabButton = (TabButton*)[self.tabButtons objectAtIndex:i];
-        if(i == index){
+
+- (void)setTabBarSelectedItem:(int)index {
+    for (int i = 0; i < self.tabButtons.count; i++) {
+        TabButton *tabButton = (TabButton *) [self.tabButtons objectAtIndex:i];
+        if (i == index) {
             tabButton.selected = YES;
-        }else{
+        } else {
             tabButton.selected = NO;
         }
     }
 }
 
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+
 }
-- (void)didReceiveMemoryWarning
-{
+
+- (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
 
-- (void)viewWillAppear:(BOOL)animated;{
+- (void)viewWillAppear:(BOOL)animated; {
     [self.navigationController setNavigationBarHidden:YES animated:NO];
     if (![[BTPeerManager instance] connected]) {
         [[PeerUtil instance] startPeer];
     }
-   
+
 }
 
--(void)pageIndexChanged:(int)index{
-    for(int i = 0; i < self.tabButtons.count; i++){
+- (void)pageIndexChanged:(int)index {
+    for (int i = 0; i < self.tabButtons.count; i++) {
         TabButton *tab = [self.tabButtons objectAtIndex:i];
         tab.selected = i == index;
     }
 }
 
--(void)tabButtonPressed:(int)index{
-    if(index != self.page.index){
+- (void)tabButtonPressed:(int)index {
+    if (index != self.page.index) {
         [self.page setIndex:index animated:YES];
-    }else{
-        UIViewController *controller= [self.page viewControllerAtIndex:index];
-        if(controller){
-           // [controller refresh];
+    } else {
+        UIViewController *controller = [self.page viewControllerAtIndex:index];
+        if (controller) {
+            // [controller refresh];
         }
     }
 }
@@ -141,70 +139,73 @@
     self.page = nil;
     [super viewDidUnload];
 }
--(void)dealloc{
-    [[NSNotificationCenter defaultCenter]removeObserver:self];
+
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
--(void)fromPushNoification{
-    NSArray * viewControllers=self.navigationController.viewControllers;
-    if (viewControllers&&viewControllers.count>0) {
-        if (self!=[viewControllers objectAtIndex:viewControllers.count-1]) {
+
+- (void)fromPushNoification {
+    NSArray *viewControllers = self.navigationController.viewControllers;
+    if (viewControllers && viewControllers.count > 0) {
+        if (self != [viewControllers objectAtIndex:viewControllers.count - 1]) {
             [self.navigationController popToViewController:self animated:NO];
         }
     }
     int index = 3;
-    if(index != self.page.index){
+    if (index != self.page.index) {
         self.page.pageEnabled = NO;
         [self performSelector:@selector(toMeViewController) withObject:self afterDelay:0.8];
-    }else{
-        UIViewController * controller = [self.page viewControllerAtIndex:index];
+    } else {
+        UIViewController *controller = [self.page viewControllerAtIndex:index];
         if ([controller respondsToSelector:@selector(refresh)]) {
-           // [controller refresh];
+            // [controller refresh];
         }
     }
 }
--(void)toMeViewController{
+
+- (void)toMeViewController {
     self.page.pageEnabled = YES;
     [self.page setIndex:3 animated:YES];
 }
 
 - (IBAction)addPressed:(id)sender {
-    if([BTAddressManager instance].privKeyAddresses.count >= PRIVATE_KEY_OF_HOT_COUNT_LIMIT && [BTAddressManager instance].watchOnlyAddresses.count >= WATCH_ONLY_COUNT_LIMIT){
+    if ([BTAddressManager instance].privKeyAddresses.count >= PRIVATE_KEY_OF_HOT_COUNT_LIMIT && [BTAddressManager instance].watchOnlyAddresses.count >= WATCH_ONLY_COUNT_LIMIT) {
         [self showBannerWithMessage:NSLocalizedString(@"reach_address_count_limit", nil) belowView:self.vTabe];
         return;
     }
-    IOS7ContainerViewController* container = [[IOS7ContainerViewController alloc]init];
+    IOS7ContainerViewController *container = [[IOS7ContainerViewController alloc] init];
     container.controller = [self.storyboard instantiateViewControllerWithIdentifier:@"HotAddressAdd"];
     [self presentViewController:container animated:YES completion:nil];
 }
 
--(void)syncProgress:(NSNotification *)notification{
+- (void)syncProgress:(NSNotification *)notification {
     [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(delayHidePvSync) object:nil];
-    if(notification && notification.object && [notification.object isKindOfClass:[NSNumber class]]){
-        double progress = ((NSNumber*) notification.object).doubleValue;
-        if(progress >= 0 && progress <= 1){
+    if (notification && notification.object && [notification.object isKindOfClass:[NSNumber class]]) {
+        double progress = ((NSNumber *) notification.object).doubleValue;
+        if (progress >= 0 && progress <= 1) {
             self.pvSync.hidden = NO;
             progress = MAX(0.2, progress);
             [UIView animateWithDuration:0.5 animations:^{
                 [self.pvSync setProgress:progress animated:YES];
             }];
         }
-        if(progress < 0 || progress >= 1){
+        if (progress < 0 || progress >= 1) {
             [self performSelector:@selector(delayHidePvSync) withObject:nil afterDelay:0.5];
         }
-    }else{
+    } else {
         self.pvSync.hidden = YES;
     }
 }
 
--(void)delayHidePvSync{
+- (void)delayHidePvSync {
     [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(delayHidePvSync) object:nil];
     self.pvSync.hidden = YES;
     self.pvSync.progress = 0;
 }
 
--(void)initApp{
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0),^{
-        UploadAndDowloadFileFactory * uploadAndDowload=[[UploadAndDowloadFileFactory alloc ] init];
+- (void)initApp {
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+        UploadAndDowloadFileFactory *uploadAndDowload = [[UploadAndDowloadFileFactory alloc] init];
         [uploadAndDowload uploadAvatar:nil andErrorCallBack:nil];
         [uploadAndDowload dowloadAvatar:nil andErrorCallBack:nil];
     });

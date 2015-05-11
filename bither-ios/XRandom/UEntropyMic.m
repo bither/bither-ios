@@ -17,47 +17,45 @@
 //  limitations under the License.
 
 #import "UEntropyMic.h"
-@import MobileCoreServices;
-@import AVFoundation;
 
-@interface UEntropyMic()<AVCaptureAudioDataOutputSampleBufferDelegate>{
+@interface UEntropyMic () <AVCaptureAudioDataOutputSampleBufferDelegate> {
     AVCaptureDevice *device;
     AVCaptureSession *session;
     dispatch_queue_t queue;
     BOOL paused;
 }
 
-@property (weak) UEntropyCollector *collector;
-@property (weak) AudioVisualizerView* view;
+@property(weak) UEntropyCollector *collector;
+@property(weak) AudioVisualizerView *view;
 @end
 
 @implementation UEntropyMic
 
--(instancetype)initWithView:(AudioVisualizerView*)view andCollector:(UEntropyCollector*)collector{
+- (instancetype)initWithView:(AudioVisualizerView *)view andCollector:(UEntropyCollector *)collector {
     self = [super init];
-    if(self){
+    if (self) {
         AVAuthorizationStatus authStatus = [AVCaptureDevice authorizationStatusForMediaType:AVMediaTypeAudio];
-        if(authStatus == AVAuthorizationStatusDenied){
+        if (authStatus == AVAuthorizationStatusDenied) {
             dispatch_async(dispatch_get_main_queue(), ^{
                 self.view.hidden = YES;
-                [collector onError:[[NSError alloc]initWithDomain:kUEntropySourceErrorDomain code:kUEntropySourceMicCode userInfo:@{kUEntropySourceErrorDescKey: @"no mic"}] fromSource:self];
+                [collector onError:[[NSError alloc] initWithDomain:kUEntropySourceErrorDomain code:kUEntropySourceMicCode userInfo:@{kUEntropySourceErrorDescKey : @"no mic"}] fromSource:self];
             });
             return self;
         }
-        device = [AVCaptureDevice defaultDeviceWithMediaType: AVMediaTypeAudio];
-        if(!device){
+        device = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeAudio];
+        if (!device) {
             dispatch_async(dispatch_get_main_queue(), ^{
                 self.view.hidden = YES;
-                [collector onError:[[NSError alloc]initWithDomain:kUEntropySourceErrorDomain code:kUEntropySourceMicCode userInfo:@{kUEntropySourceErrorDescKey: @"no mic"}] fromSource:self];
+                [collector onError:[[NSError alloc] initWithDomain:kUEntropySourceErrorDomain code:kUEntropySourceMicCode userInfo:@{kUEntropySourceErrorDescKey : @"no mic"}] fromSource:self];
             });
             return self;
         }
         queue = dispatch_queue_create("UEntropyMic", NULL);
-        session = [[AVCaptureSession alloc]init];
+        session = [[AVCaptureSession alloc] init];
         AVCaptureAudioDataOutput *output = [AVCaptureAudioDataOutput new];
         [output setSampleBufferDelegate:self queue:queue];
         [session addOutput:output];
-        
+
         self.collector = collector;
         self.view = view;
         paused = YES;
@@ -65,71 +63,71 @@
     return self;
 }
 
--(void)onResume{
-    if(!paused){
+- (void)onResume {
+    if (!paused) {
         return;
     }
-    if(!device){
+    if (!device) {
         return;
     }
     paused = NO;
-    if(session && session.isRunning){
+    if (session && session.isRunning) {
         [session stopRunning];
     }
     NSError *error = nil;
-    AVCaptureInput *input = [[AVCaptureDeviceInput alloc]initWithDevice: device error: &error];
-    if(error){
+    AVCaptureInput *input = [[AVCaptureDeviceInput alloc] initWithDevice:device error:&error];
+    if (error) {
         self.view.hidden = YES;
-        [self.collector onError:[[NSError alloc]initWithDomain:kUEntropySourceErrorDomain code:kUEntropySourceMicCode userInfo:@{kUEntropySourceErrorDescKey: error.debugDescription }] fromSource:self];
+        [self.collector onError:[[NSError alloc] initWithDomain:kUEntropySourceErrorDomain code:kUEntropySourceMicCode userInfo:@{kUEntropySourceErrorDescKey : error.debugDescription}] fromSource:self];
         return;
     }
-    if(self.view.hidden){
+    if (self.view.hidden) {
         self.view.hidden = NO;
     }
     [session addInput:input];
     [session startRunning];
 }
 
-- (void)captureOutput:(AVCaptureOutput *)captureOutput didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer fromConnection:(AVCaptureConnection *)connection{
-    if(sampleBuffer == NULL)
+- (void)captureOutput:(AVCaptureOutput *)captureOutput didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer fromConnection:(AVCaptureConnection *)connection {
+    if (sampleBuffer == NULL)
         return;
     AudioBufferList audioBufferList;
-    NSMutableData *data=[[NSMutableData alloc] init];
+    NSMutableData *data = [[NSMutableData alloc] init];
     CMBlockBufferRef blockBuffer;
     CMSampleBufferGetAudioBufferListWithRetainedBlockBuffer(sampleBuffer, NULL, &audioBufferList, sizeof(audioBufferList), NULL, NULL, 0, &blockBuffer);
-    
-    for(int y = 0; y < audioBufferList.mNumberBuffers; y++ ){
+
+    for (int y = 0; y < audioBufferList.mNumberBuffers; y++) {
         AudioBuffer audioBuffer = audioBufferList.mBuffers[y];
-        Float32 *frame = (Float32*)audioBuffer.mData;
+        Float32 *frame = (Float32 *) audioBuffer.mData;
         [data appendBytes:frame length:audioBuffer.mDataByteSize];
     }
-    
+
     [self.collector onNewData:data fromSource:self];
     [self.view showConnectionData:connection];
     CFRelease(blockBuffer);
 }
 
--(void)onPause{
-    if(paused){
+- (void)onPause {
+    if (paused) {
         return;
     }
-    if(!device){
+    if (!device) {
         return;
     }
     paused = YES;
-    if(session && session.isRunning){
+    if (session && session.isRunning) {
         [session stopRunning];
-        for(AVCaptureInput *i in [NSArray arrayWithArray:session.inputs]){
+        for (AVCaptureInput *i in [NSArray arrayWithArray:session.inputs]) {
             [session removeInput:i];
         }
     }
 }
 
--(NSString*)name{
+- (NSString *)name {
     return @"Mic";
 }
 
--(NSUInteger)byteCountFromSingleFrame{
+- (NSUInteger)byteCountFromSingleFrame {
     return 4;
 }
 @end

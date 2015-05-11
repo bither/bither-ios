@@ -19,7 +19,8 @@
 #import "ScanQrCodeViewController.h"
 
 @interface ScanQrCodeTransportViewController : ScanQrCodeViewController
--(instancetype)initWithDelegate:(NSObject<ScanQrCodeDelegate> *)delegate title:(NSString *)title pageName:(NSString *)pageName;
-@property (weak) NSObject<ScanQrCodeDelegate>* delegate;
-@property (strong, nonatomic) NSString* pageName;
+- (instancetype)initWithDelegate:(NSObject <ScanQrCodeDelegate> *)delegate title:(NSString *)title pageName:(NSString *)pageName;
+
+@property(weak) NSObject <ScanQrCodeDelegate> *delegate;
+@property(strong, nonatomic) NSString *pageName;
 @end

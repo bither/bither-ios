@@ -18,6 +18,7 @@
 
 #import <Foundation/Foundation.h>
 #import "XRandom.h"
+
 #define kUEntropySourceErrorDomain (@"UEntropySource")
 #define kUEntropySourceCameraCode (1)
 #define kUEntropySourceMicCode (2)
@@ -25,26 +26,33 @@
 #define kUEntropySourceErrorDescKey (@"Desc")
 
 @protocol UEntropySource
--(void)onResume;
--(void)onPause;
+- (void)onResume;
+
+- (void)onPause;
 
 @optional
--(NSString*)name;
--(NSUInteger)byteCountFromSingleFrame;
+- (NSString *)name;
+
+- (NSUInteger)byteCountFromSingleFrame;
 @end
 
 @protocol UEntropyCollectorDelegate <NSObject>
--(void)onNoSourceAvailable;
+- (void)onNoSourceAvailable;
 @end
 
 @interface UEntropyCollector : NSObject <UEntropySource, UEntropyDelegate>
-@property (weak) NSObject<UEntropyCollectorDelegate> *delegate;
-@property (strong) NSMutableSet *sources;
+@property(weak) NSObject <UEntropyCollectorDelegate> *delegate;
+@property(strong) NSMutableSet *sources;
 
--(instancetype)initWithDelegate:(NSObject<UEntropyCollectorDelegate>*) delegate;
--(void)addSource:(NSObject<UEntropySource>*)source,...;
--(void)start;
--(void)stop;
--(void)onNewData:(NSData*)data fromSource:(NSObject<UEntropySource>*) source;
--(void)onError:(NSError*)error fromSource:(NSObject<UEntropySource>*) source;
+- (instancetype)initWithDelegate:(NSObject <UEntropyCollectorDelegate> *)delegate;
+
+- (void)addSource:(NSObject <UEntropySource> *)source, ...;
+
+- (void)start;
+
+- (void)stop;
+
+- (void)onNewData:(NSData *)data fromSource:(NSObject <UEntropySource> *)source;
+
+- (void)onError:(NSError *)error fromSource:(NSObject <UEntropySource> *)source;
 @end

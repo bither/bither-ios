@@ -20,11 +20,12 @@
 #import "TabButton.h"
 
 
-@interface ColdViewController : UIViewController<TabButtonPressedDelegate,PiPageViewControllerDelegate>{
+@interface ColdViewController : UIViewController <TabButtonPressedDelegate, PiPageViewControllerDelegate> {
     int cnt;
     BOOL isInit;
 }
--(void)toChooseModeViewController;
-@property (strong, nonatomic) IBOutlet UIButton *addAddressBtn;
-@property (nonatomic, strong) NSMutableDictionary *dict;
+- (void)toChooseModeViewController;
+
+@property(strong, nonatomic) IBOutlet UIButton *addAddressBtn;
+@property(nonatomic, strong) NSMutableDictionary *dict;
 @end

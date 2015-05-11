@@ -18,98 +18,97 @@
 
 #import "QRCodeTransportPage.h"
 #import "BTQRCodeUtil.h"
-#import "BitherSetting.h"
 #import "StringUtil.h"
-#import "BTQRCodeUtil.h"
 
 @implementation QRCodeTransportPage
-+(QRCodeTransportPage *)formatQrCodeString:(NSString *)text{
++ (QRCodeTransportPage *)formatQrCodeString:(NSString *)text {
     if (![BTQRCodeUtil verifyQrcodeTransport:text]) {
         return nil;
     }
-    QRCodeTransportPage * qrCodePage=[[QRCodeTransportPage alloc] init];
-    NSArray * strArray=[BTQRCodeUtil splitQRCode:text];;
-    if ([StringUtil isPureLongLong:[strArray objectAtIndex:0]]&&[StringUtil isPureLongLong:[strArray objectAtIndex:1]]) {
-        NSString * sumPageStr=strArray[0];
-        NSString * currentPageStr=strArray[1];
-        NSInteger length=sumPageStr.length +currentPageStr.length+2;
-        [qrCodePage setSumPage:[sumPageStr intValue]+1];
+    QRCodeTransportPage *qrCodePage = [[QRCodeTransportPage alloc] init];
+    NSArray *strArray = [BTQRCodeUtil splitQRCode:text];;
+    if ([StringUtil isPureLongLong:[strArray objectAtIndex:0]] && [StringUtil isPureLongLong:[strArray objectAtIndex:1]]) {
+        NSString *sumPageStr = strArray[0];
+        NSString *currentPageStr = strArray[1];
+        NSInteger length = sumPageStr.length + currentPageStr.length + 2;
+        [qrCodePage setSumPage:[sumPageStr intValue] + 1];
         [qrCodePage setCurrentPage:[currentPageStr intValue]];
         [qrCodePage setContent:[text substringFromIndex:length]];
-        
-    }else{
+
+    } else {
         [qrCodePage setSumPage:1];
         [qrCodePage setContent:text];
     }
     return qrCodePage;
 
 }
-+(NSString *)formatQRCodeTran:(NSArray *)qrCodeTransportPages{
-    NSString * transportString=@"";
-    for(QRCodeTransportPage*  qrPage in qrCodeTransportPages){
+
++ (NSString *)formatQRCodeTran:(NSArray *)qrCodeTransportPages {
+    NSString *transportString = @"";
+    for (QRCodeTransportPage *qrPage in qrCodeTransportPages) {
         if (![StringUtil isEmpty:[qrPage content]]) {
-           transportString= [transportString stringByAppendingString:[qrPage content]];
+            transportString = [transportString stringByAppendingString:[qrPage content]];
         }
     }
     return [BTQRCodeUtil decodeQrCodeString:transportString];
-    
+
 }
 
-+(NSArray *) getQrCodeStringList:(NSString *)str{
-    str=[BTQRCodeUtil encodeQrCodeString:str];
-    NSMutableArray *array=[NSMutableArray new];
-    NSInteger num=[BTQRCodeUtil getNumOfQrCodeString:str.length];
-    NSInteger sumLength=str.length+num*6;
-    NSInteger pageSize=sumLength/num;
-    for (NSInteger i=0; i<num; i++) {
-        NSInteger start=i*pageSize;
-        NSInteger end=(i+1)*pageSize;
-        if (start>str.length-1) {
++ (NSArray *)getQrCodeStringList:(NSString *)str {
+    str = [BTQRCodeUtil encodeQrCodeString:str];
+    NSMutableArray *array = [NSMutableArray new];
+    NSInteger num = [BTQRCodeUtil getNumOfQrCodeString:str.length];
+    NSInteger sumLength = str.length + num * 6;
+    NSInteger pageSize = sumLength / num;
+    for (NSInteger i = 0; i < num; i++) {
+        NSInteger start = i * pageSize;
+        NSInteger end = (i + 1) * pageSize;
+        if (start > str.length - 1) {
             continue;
         }
-        if (end>str.length) {
-            end=str.length;
+        if (end > str.length) {
+            end = str.length;
         }
-        NSString * splitStr=[str substringWithRange:NSMakeRange(start, end-start)];
-        NSString *pageString=@"";
-        if (num>1) {
-            NSArray * array=[[NSArray alloc] initWithObjects:[NSString stringWithFormat:@"%d",num-1],[NSString stringWithFormat:@"%d",i],@"", nil];
-            pageString=[BTQRCodeUtil joinedQRCode:array];
+        NSString *splitStr = [str substringWithRange:NSMakeRange(start, end - start)];
+        NSString *pageString = @"";
+        if (num > 1) {
+            NSArray *array = [[NSArray alloc] initWithObjects:[NSString stringWithFormat:@"%d", num - 1], [NSString stringWithFormat:@"%d", i], @"", nil];
+            pageString = [BTQRCodeUtil joinedQRCode:array];
         }
         [array addObject:[pageString stringByAppendingString:splitStr]];
     }
-    return  array;
+    return array;
 }
 
-+(NSArray *) oldGetQrCodeStringList:(NSString *)str{
-    str=[BTQRCodeUtil oldEncodeQrCodeString:str];
-    NSMutableArray *array=[NSMutableArray new];
-    NSInteger num=[BTQRCodeUtil getNumOfQrCodeString:str.length];
-    NSInteger sumLength=str.length+num*6;
-    NSInteger pageSize=sumLength/num;
-    for (NSInteger i=0; i<num; i++) {
-        NSInteger start=i*pageSize;
-        NSInteger end=(i+1)*pageSize;
-        if (start>str.length-1) {
++ (NSArray *)oldGetQrCodeStringList:(NSString *)str {
+    str = [BTQRCodeUtil oldEncodeQrCodeString:str];
+    NSMutableArray *array = [NSMutableArray new];
+    NSInteger num = [BTQRCodeUtil getNumOfQrCodeString:str.length];
+    NSInteger sumLength = str.length + num * 6;
+    NSInteger pageSize = sumLength / num;
+    for (NSInteger i = 0; i < num; i++) {
+        NSInteger start = i * pageSize;
+        NSInteger end = (i + 1) * pageSize;
+        if (start > str.length - 1) {
             continue;
         }
-        if (end>str.length) {
-            end=str.length;
+        if (end > str.length) {
+            end = str.length;
         }
-        NSString * splitStr=[str substringWithRange:NSMakeRange(start, end-start)];
-        NSString *pageString=@"";
-        if (num>1) {
-            NSArray * array=[[NSArray alloc] initWithObjects:[NSString stringWithFormat:@"%d",num-1],[NSString stringWithFormat:@"%d",i],@"", nil];
-            pageString=[BTQRCodeUtil oldJoinedQRCode:array];
+        NSString *splitStr = [str substringWithRange:NSMakeRange(start, end - start)];
+        NSString *pageString = @"";
+        if (num > 1) {
+            NSArray *array = [[NSArray alloc] initWithObjects:[NSString stringWithFormat:@"%d", num - 1], [NSString stringWithFormat:@"%d", i], @"", nil];
+            pageString = [BTQRCodeUtil oldJoinedQRCode:array];
         }
         [array addObject:[pageString stringByAppendingString:splitStr]];
     }
-    return  array;
+    return array;
 }
 
 
--(BOOL)hasNextPage{
-    return self.currentPage+1<self.sumPage;
+- (BOOL)hasNextPage {
+    return self.currentPage + 1 < self.sumPage;
 }
 
 @end

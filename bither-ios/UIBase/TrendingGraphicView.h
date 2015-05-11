@@ -22,5 +22,6 @@
 
 @interface TrendingGraphicView : UIView
 @property MarketType marketType;
--(void)setData:(TrendingGraphicData*)data;
+
+- (void)setData:(TrendingGraphicData *)data;
 @end

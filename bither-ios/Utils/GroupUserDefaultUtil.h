@@ -20,6 +20,8 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "GroupUtil.h"
+
 typedef enum {
     USDG, CNYG, EURG, GBPG, JPYG, KRWG, CADG, AUDG
 } GroupCurrency;
@@ -28,24 +30,20 @@ typedef enum {
     UnitBTCG, UnitbitsG
 } GroupBitcoinUnit;
 
-typedef enum {
-    BITSTAMPG = 1, BTCEG = 2, HUOBIG = 3, OKCOING = 4, BTCCHINAG = 5, CHBTCG = 6, BITFINEXG = 7, MARKET796G = 8
-} GroupMarketType;
-
 @interface GroupUserDefaultUtil : NSObject
 
 + (GroupUserDefaultUtil *)instance;
 
--(GroupMarketType)defaultMarket;
+- (MarketType)defaultMarket;
 
--(void)setDefaultMarket:(GroupMarketType)market;
+- (void)setDefaultMarket:(MarketType)market;
 
--(GroupCurrency)defaultCurrency;
+- (GroupCurrency)defaultCurrency;
 
--(void)setDefaultCurrency:(GroupCurrency)currency;
+- (void)setDefaultCurrency:(GroupCurrency)currency;
 
--(GroupBitcoinUnit)defaultBitcoinUnit;
+- (GroupBitcoinUnit)defaultBitcoinUnit;
 
--(void)setDefaultBitcoinUnit:(GroupBitcoinUnit)unit;
+- (void)setDefaultBitcoinUnit:(GroupBitcoinUnit)unit;
 
 @end

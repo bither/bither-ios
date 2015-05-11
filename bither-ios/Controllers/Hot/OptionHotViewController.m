@@ -19,81 +19,78 @@
 #import "OptionHotViewController.h"
 #import "UserDefaultsUtil.h"
 #import "SettingListCell.h"
-#import "SelectViewController.h"
-#import "AppDelegate.h"
 #import "UIViewController+PiShowBanner.h"
-#import "DialogEditPassword.h"
-#import "BitherSetting.h"
 #import "UIViewController+ConfigureTableView.h"
 #import "SettingUtil.h"
 
 
-@interface OptionHotViewController ()<UITableViewDataSource,UITableViewDelegate>
-@property (weak, nonatomic) IBOutlet UITableView *tableView;
+@interface OptionHotViewController () <UITableViewDataSource, UITableViewDelegate>
+@property(weak, nonatomic) IBOutlet UITableView *tableView;
 
-@property (strong, nonatomic) NSArray * settings;
+@property(strong, nonatomic) NSArray *settings;
 
 
 @end
 
 @implementation OptionHotViewController
 
--(void)viewDidLoad{
+- (void)viewDidLoad {
     [super viewDidLoad];
-    self.tableView.dataSource=self;
-    self.tableView.delegate=self;
-    if([self.tableView respondsToSelector:@selector(setLayoutMargins:)]){
+    self.tableView.dataSource = self;
+    self.tableView.delegate = self;
+    if ([self.tableView respondsToSelector:@selector(setLayoutMargins:)]) {
         self.tableView.layoutMargins = UIEdgeInsetsZero;
     }
-    NSString * version=[NSString stringWithFormat:@"Bither Hot %@", [[[NSBundle mainBundle]infoDictionary]objectForKey:CFBundleShortVersionString]];
+    NSString *version = [NSString stringWithFormat:@"Bither Hot %@", [[[NSBundle mainBundle] infoDictionary] objectForKey:CFBundleShortVersionString]];
     [self configureHeaderAndFooter:self.tableView background:ColorBg isHot:YES version:version];
     [self reload];
 }
--(void)reload{
+
+- (void)reload {
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        self.settings=[SettingUtil hotSettings];
+        self.settings = [SettingUtil hotSettings];
         dispatch_async(dispatch_get_main_queue(), ^{
             [self.tableView reloadData];
         });
     });
 }
 
--(void)viewWillAppear:(BOOL)animated{
+- (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [self reload];
 }
 
 
--(void)viewWillDisappear:(BOOL)animated{
+- (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
 }
 
--(void)viewDidDisappear:(BOOL)animated{
+- (void)viewDidDisappear:(BOOL)animated {
     [super viewDidDisappear:animated];
 }
 
--(void)showMsg:(NSString *)msg{
+- (void)showMsg:(NSString *)msg {
     [self showBannerWithMessage:msg belowView:nil belowTop:0 autoHideIn:1 withCompletion:nil];
 }
 
 //tableview delgate
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return self.settings.count;
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    SettingListCell *cell = (SettingListCell*)[tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    SettingListCell *cell = (SettingListCell *) [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
     [cell setSetting:[self.settings objectAtIndex:indexPath.row]];
     return cell;
 }
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return 1;
 }
 
--(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    Setting *setting=[self.settings objectAtIndex:indexPath.row];
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    Setting *setting = [self.settings objectAtIndex:indexPath.row];
     if (setting.selectBlock) {
         setting.selectBlock(self);
     }

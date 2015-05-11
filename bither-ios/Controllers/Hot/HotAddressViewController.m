@@ -22,8 +22,6 @@
 #import "HotAddressListSectionHeader.h"
 #import "AddressDetailViewController.h"
 #import "UIViewController+PiShowBanner.h"
-#import "UIBaseUtil.h"
-#import "KeyUtil.h"
 #import "BitherSetting.h"
 #import "DialogWithActions.h"
 #import "DialogPassword.h"

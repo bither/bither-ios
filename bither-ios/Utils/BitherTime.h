@@ -19,11 +19,15 @@
 #import <Foundation/Foundation.h>
 
 @interface BitherTime : NSObject
-+ (BitherTime *)instance ;
--(void) start;
--(void) stop;
--(void)pause;
--(void)resume;
++ (BitherTime *)instance;
+
+- (void)start;
+
+- (void)stop;
+
+- (void)pause;
+
+- (void)resume;
 
 
 @end

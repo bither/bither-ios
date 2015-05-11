@@ -19,5 +19,5 @@
 #import "UEntropyCollector.h"
 
 @interface UEntropyCamera : NSObject <UEntropySource>
--(instancetype)initWithViewController:(UIView*)view andCollector:(UEntropyCollector*)collector;
+- (instancetype)initWithViewController:(UIView *)view andCollector:(UEntropyCollector *)collector;
 @end

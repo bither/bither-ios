@@ -21,9 +21,11 @@
 #import "Setting.h"
 #import "SendViewController.h"
 
-@interface DonationSetting : Setting<UIActionSheetDelegate,SendDelegate>
--(instancetype)init;
-@property (weak) UIViewController* controller;
-@property NSMutableArray* addresses;
-+(Setting *)getDonateSetting;
+@interface DonationSetting : Setting <UIActionSheetDelegate, SendDelegate>
+- (instancetype)init;
+
+@property(weak) UIViewController *controller;
+@property NSMutableArray *addresses;
+
++ (Setting *)getDonateSetting;
 @end

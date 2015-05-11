@@ -27,12 +27,12 @@
 #define KEYCHAIN_KEY_SEP @";"
 #define KEYCHAIN_KEY_CONTENT_SEP @"/"
 
-@interface KeychainBackupUtil()
+@interface KeychainBackupUtil ()
 
-@property (nonatomic, strong) NSArray *localKeys;
-@property (nonatomic, strong) NSArray *localTrashs;
-@property (nonatomic, strong) NSArray *keychainKeys;
-@property (nonatomic, strong) NSArray *keychainTrashes;
+@property(nonatomic, strong) NSArray *localKeys;
+@property(nonatomic, strong) NSArray *localTrashs;
+@property(nonatomic, strong) NSArray *keychainKeys;
+@property(nonatomic, strong) NSArray *keychainTrashes;
 
 @end
 
@@ -44,7 +44,7 @@
     dispatch_once(&onceToken, ^{
         singleton = [self new];
     });
-    
+
     return singleton;
 }
 
@@ -203,7 +203,7 @@
                 [[BTAddressManager instance] addAddress:address];
             }
         }
-        
+
         // add key to keychain
         NSMutableArray *keychainPubKeys = [NSMutableArray new];
         for (NSString *key in self.keychainKeys) {
@@ -240,7 +240,7 @@
                 return NO;
             }
         }
-        
+
         NSMutableArray *localPubKeys = [NSMutableArray new];
         for (NSString *key in self.localKeys) {
             [localPubKeys addObject:[key componentsSeparatedByString:KEYCHAIN_KEY_CONTENT_SEP][0]];
@@ -256,7 +256,7 @@
                 [needAddAddress addObject:address];
             }
         }
-        
+
         // add key to keychain
         NSMutableArray *keychainPubKeys = [NSMutableArray new];
         for (NSString *key in self.keychainKeys) {
@@ -273,7 +273,7 @@
                 [needUpdateAddress addObject:address];
             }
         }
-        
+
         for (BTAddress *address in needUpdateAddress) {
 //            [address savePrivate];
         }
@@ -301,14 +301,14 @@
     return key == nil || key.length == 0;
 }
 
-- (BOOL)uploadKeychain;{
+- (BOOL)uploadKeychain; {
     [self updateLocal];
     [[A0SimpleKeychain keychain] setString:[self.localKeys componentsJoinedByString:KEYCHAIN_KEY_SEP] forKey:KEYCHAIN_KEY];
 //    [KeychainUtil setKeychainString:[self.localKeys componentsJoinedByString:KEYCHAIN_KEY_SEP] andKey:KEYCHAIN_KEY andAuthenticated:NO];
     return YES;
 }
 
-- (BOOL)cleanKeychain;{
+- (BOOL)cleanKeychain; {
     [[A0SimpleKeychain keychain] deleteEntryForKey:KEYCHAIN_KEY];
     [[A0SimpleKeychain keychain] deleteEntryForKey:KEYCHAIN_TRASH];
     return YES;

@@ -18,44 +18,45 @@
 
 #import "DialogWithArrow.h"
 #import "UIBaseUtil.h"
+
 #define kArrowWidth (19)
 #define kArrowHeight (9)
 
 #define kMinHorizontalMargin (10)
 
-@interface DialogWithArrow()
-@property (weak) UIView *fromView;
-@property UIImageView* ivArrow;
+@interface DialogWithArrow ()
+@property(weak) UIView *fromView;
+@property UIImageView *ivArrow;
 @end
 
 @implementation DialogWithArrow
 
--(void)showFromView:(UIView *)view{
+- (void)showFromView:(UIView *)view {
     [self showFromView:view completion:nil];
 }
 
--(void)showFromView:(UIView *)view completion:(void (^)())completion{
+- (void)showFromView:(UIView *)view completion:(void (^)())completion {
     self.fromView = view;
-    self.ivArrow = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, kArrowWidth, kArrowHeight)];
+    self.ivArrow = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, kArrowWidth, kArrowHeight)];
     [self addSubview:self.ivArrow];
     [self showInWindow:view.window completion:completion];
 }
 
--(void)dialogWillShow{
+- (void)dialogWillShow {
     [super dialogWillShow];
     CGRect fromViewInWindowFrame = [self.fromView.window.topViewController.view convertRect:CGRectMake(0, 0, self.fromView.frame.size.width, self.fromView.frame.size.height) fromView:self.fromView];
-    CGFloat x = CGRectGetMidX(fromViewInWindowFrame) - self.frame.size.width/2;
+    CGFloat x = CGRectGetMidX(fromViewInWindowFrame) - self.frame.size.width / 2;
     x = MIN(MAX(x, self.bgInsets.left + kMinHorizontalMargin), self.fromView.window.topViewController.view.frame.size.width - self.bgInsets.right - self.frame.size.width - kMinHorizontalMargin);
     CGFloat y = 0;
     CGFloat arrowY = 0;
     BOOL isArrowOnTop = [self isArrowOnTop];
-    if(isArrowOnTop){
+    if (isArrowOnTop) {
         self.ivArrow.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
         self.ivArrow.contentMode = UIViewContentModeBottom;
         self.ivArrow.image = [UIImage imageNamed:@"dialog_arrow_top"];
         arrowY = -self.bgInsets.top - kArrowHeight;
         y = CGRectGetMaxY(fromViewInWindowFrame) + kArrowHeight + self.bgInsets.top;
-    }else{
+    } else {
         self.ivArrow.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
         self.ivArrow.contentMode = UIViewContentModeTop;
         self.ivArrow.image = [UIImage imageNamed:@"dialog_arrow_bottom"];
@@ -68,19 +69,19 @@
     self.ivArrow.frame = CGRectMake(arrowX, arrowY, kArrowWidth, kArrowHeight);
 }
 
--(BOOL)arrowAlwaysOnTop{
+- (BOOL)arrowAlwaysOnTop {
     return NO;
 }
 
--(BOOL)isArrowOnTop{
-    if(self.arrowAlwaysOnTop){
+- (BOOL)isArrowOnTop {
+    if (self.arrowAlwaysOnTop) {
         return YES;
     }
     CGFloat dialogHeight = self.frame.size.height + self.bgInsets.bottom + self.bgInsets.top;
     CGFloat windowHeight = self.fromView.window.topViewController.view.frame.size.height;
     CGFloat fromViewTop = [self.fromView.window.topViewController.view convertPoint:CGPointMake(0, 0) fromView:self.fromView].y;
     CGFloat fromViewBottom = [self.fromView.window.topViewController.view convertPoint:CGPointMake(0, self.fromView.frame.size.height) fromView:self.fromView].y;
-    if(fromViewBottom + dialogHeight + kArrowHeight > windowHeight){
+    if (fromViewBottom + dialogHeight + kArrowHeight > windowHeight) {
         return NO;
     }
     return YES;

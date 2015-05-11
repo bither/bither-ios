@@ -19,6 +19,7 @@
 #import <UIKit/UIKit.h>
 
 @interface HotAddressViewController : UIViewController
--(void)reload;
--(void)showMsg:(NSString*)msg;
+- (void)reload;
+
+- (void)showMsg:(NSString *)msg;
 @end

@@ -9,5 +9,5 @@
 #import "DialogCentered.h"
 
 @interface DialogHDMSeedWordList : DialogCentered
--(instancetype)initWithWords:(NSArray*)words;
+- (instancetype)initWithWords:(NSArray *)words;
 @end

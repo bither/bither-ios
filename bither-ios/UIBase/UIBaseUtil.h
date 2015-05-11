@@ -20,8 +20,9 @@
 #import <QuartzCore/QuartzCore.h>
 
 @interface UIView (FindUIViewController)
-- (UIViewController *) getUIViewController;
-- (id) traverseResponderChainForUIViewController;
+- (UIViewController *)getUIViewController;
+
+- (id)traverseResponderChainForUIViewController;
 @end
 
 @interface UIView (GenerateImage)
@@ -29,14 +30,15 @@
 @end
 
 @interface UIView (Shake)
--(void)shakeTime:(NSInteger)time interval:(double)interval length:(CGFloat)length;
--(void)shakeTime:(NSInteger)time interval:(double)interval length:(CGFloat)length completion:(void(^)())completion;
+- (void)shakeTime:(NSInteger)time interval:(double)interval length:(CGFloat)length;
+
+- (void)shakeTime:(NSInteger)time interval:(double)interval length:(CGFloat)length completion:(void (^)())completion;
 @end
 
 @interface UIBaseUtil : NSObject
-+(void)makeButtonBgResizable:(UIButton*)button;
++ (void)makeButtonBgResizable:(UIButton *)button;
 @end
 
-@interface UIWindow(TopViewController)
--(UIViewController*)topViewController;
+@interface UIWindow (TopViewController)
+- (UIViewController *)topViewController;
 @end

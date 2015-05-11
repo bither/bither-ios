@@ -17,143 +17,140 @@
 //  limitations under the License.
 
 #import "SignTransactionViewController.h"
-#import "BitherSetting.h"
 #import "StringUtil.h"
 #import "UnitUtil.h"
 #import "DialogProgress.h"
 #import <Bitheri/BTAddressManager.h>
-#import "UIViewController+PiShowBanner.h"
 #import "DialogPassword.h"
 #import "QrCodeViewController.h"
 #import "BTQRCodeUtil.h"
-#import "BTBIP32Key.h"
 
-@interface SignTransactionViewController ()<DialogPasswordDelegate>{
+@interface SignTransactionViewController () <DialogPasswordDelegate> {
     BTAddress *address;
 }
-@property (weak, nonatomic) IBOutlet UIView *vTopBar;
-@property (weak, nonatomic) IBOutlet UILabel *lblFrom;
-@property (weak, nonatomic) IBOutlet UILabel *lblTo;
-@property (weak, nonatomic) IBOutlet UILabel *lblAmount;
-@property (weak, nonatomic) IBOutlet UILabel *lblFee;
-@property (weak, nonatomic) IBOutlet UILabel *lblNoPrivateKey;
-@property (weak, nonatomic) IBOutlet UIButton *btnSign;
-@property (weak, nonatomic) IBOutlet UIView *vChange;
-@property (weak, nonatomic) IBOutlet UIView *vBottom;
-@property (weak, nonatomic) IBOutlet UILabel *lblChangeAddress;
-@property (weak, nonatomic) IBOutlet UILabel *lblChangeAmount;
+@property(weak, nonatomic) IBOutlet UIView *vTopBar;
+@property(weak, nonatomic) IBOutlet UILabel *lblFrom;
+@property(weak, nonatomic) IBOutlet UILabel *lblTo;
+@property(weak, nonatomic) IBOutlet UILabel *lblAmount;
+@property(weak, nonatomic) IBOutlet UILabel *lblFee;
+@property(weak, nonatomic) IBOutlet UILabel *lblNoPrivateKey;
+@property(weak, nonatomic) IBOutlet UIButton *btnSign;
+@property(weak, nonatomic) IBOutlet UIView *vChange;
+@property(weak, nonatomic) IBOutlet UIView *vBottom;
+@property(weak, nonatomic) IBOutlet UILabel *lblChangeAddress;
+@property(weak, nonatomic) IBOutlet UILabel *lblChangeAmount;
 
 @end
 
 @implementation SignTransactionViewController
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil{
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
     }
     return self;
 }
 
-- (void)viewDidLoad{
+- (void)viewDidLoad {
     [super viewDidLoad];
     self.lblFrom.text = self.tx.myAddress;
     self.lblTo.text = self.tx.toAddress;
     self.lblAmount.attributedText = [UnitUtil attributedStringWithSymbolForAmount:self.tx.to withFontSize:14 color:self.lblAmount.textColor];
     self.lblFee.attributedText = [UnitUtil attributedStringWithSymbolForAmount:self.tx.fee withFontSize:14 color:self.lblAmount.textColor];
-    
-    if(self.tx.changeAmt > 0 && ![StringUtil isEmpty:self.tx.changeAddress]){
+
+    if (self.tx.changeAmt > 0 && ![StringUtil isEmpty:self.tx.changeAddress]) {
         self.vChange.hidden = NO;
         self.lblChangeAddress.text = self.tx.changeAddress;
         self.lblChangeAmount.attributedText = [UnitUtil attributedStringWithSymbolForAmount:self.tx.changeAmt withFontSize:14 color:self.lblChangeAmount.textColor];
-    }else{
+    } else {
         self.vChange.hidden = YES;
     }
-    
+
     CGRect bottomFrame = self.vBottom.frame;
-    if(!self.vChange.hidden){
+    if (!self.vChange.hidden) {
         bottomFrame.origin.y = CGRectGetMaxY(self.vChange.frame);
-    }else{
+    } else {
         bottomFrame.origin.y = self.vChange.frame.origin.y;
     }
     self.vBottom.frame = bottomFrame;
-    
+
     NSArray *privKeys = [BTAddressManager instance].privKeyAddresses;
-    if(self.tx.hdmIndex >= 0){
-        if([BTAddressManager instance].hdmKeychain){
+    if (self.tx.hdmIndex >= 0) {
+        if ([BTAddressManager instance].hdmKeychain) {
             self.btnSign.hidden = NO;
             self.lblNoPrivateKey.hidden = YES;
-        }else{
+        } else {
             self.btnSign.hidden = YES;
             self.lblNoPrivateKey.hidden = NO;
         }
-    }else{
+    } else {
         address = nil;
-        for(BTAddress *a in privKeys){
-            if([StringUtil compareString:a.address compare:self.tx.myAddress]){
+        for (BTAddress *a in privKeys) {
+            if ([StringUtil compareString:a.address compare:self.tx.myAddress]) {
                 address = a;
                 break;
             }
         }
-        if(address){
+        if (address) {
             self.btnSign.hidden = NO;
             self.lblNoPrivateKey.hidden = YES;
-        }else{
+        } else {
             self.btnSign.hidden = YES;
             self.lblNoPrivateKey.hidden = NO;
         }
     }
 }
 
--(void)onPasswordEntered:(NSString*)password{
-    if((!address && self.tx.hdmIndex < 0) || (self.tx.hdmIndex >= 0 && ![BTAddressManager instance].hasHDMKeychain)){
+- (void)onPasswordEntered:(NSString *)password {
+    if ((!address && self.tx.hdmIndex < 0) || (self.tx.hdmIndex >= 0 && ![BTAddressManager instance].hasHDMKeychain)) {
         return;
     }
-    __block NSString *bpassword=password;
-    password=nil;
-    DialogProgress* dp = [[DialogProgress alloc]initWithMessage:NSLocalizedString(@"Signing Transaction", nil)];
+    __block NSString *bpassword = password;
+    password = nil;
+    DialogProgress *dp = [[DialogProgress alloc] initWithMessage:NSLocalizedString(@"Signing Transaction", nil)];
     [dp showInWindow:self.view.window completion:^{
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-            NSMutableArray *hashesData = [[NSMutableArray alloc]init];
-            for(NSString* h in self.tx.hashList){
+            NSMutableArray *hashesData = [[NSMutableArray alloc] init];
+            for (NSString *h in self.tx.hashList) {
                 [hashesData addObject:[h hexToData]];
             }
-            NSMutableArray* strHashes = [[NSMutableArray alloc]init];
-            if(self.tx.hdmIndex >= 0){
-                BTBIP32Key* key = [[BTAddressManager instance].hdmKeychain externalKeyWithIndex:self.tx.hdmIndex andPassword:bpassword];
-                for(NSData *hash in hashesData){
-                    [strHashes addObject:[NSString hexWithData :[key.key sign:hash]]];
+            NSMutableArray *strHashes = [[NSMutableArray alloc] init];
+            if (self.tx.hdmIndex >= 0) {
+                BTBIP32Key *key = [[BTAddressManager instance].hdmKeychain externalKeyWithIndex:self.tx.hdmIndex andPassword:bpassword];
+                for (NSData *hash in hashesData) {
+                    [strHashes addObject:[NSString hexWithData:[key.key sign:hash]]];
                 }
-            }else{
+            } else {
                 NSArray *hashes = [address signHashes:hashesData withPassphrase:bpassword];
-                for(NSData* hash in hashes){
-                    [strHashes addObject:[NSString hexWithData:hash] ];
+                for (NSData *hash in hashes) {
+                    [strHashes addObject:[NSString hexWithData:hash]];
                 }
             }
             dispatch_async(dispatch_get_main_queue(), ^{
-                QrCodeViewController* controller = [self.storyboard instantiateViewControllerWithIdentifier:@"QrCode"];
+                QrCodeViewController *controller = [self.storyboard instantiateViewControllerWithIdentifier:@"QrCode"];
                 controller.content = [BTQRCodeUtil joinedQRCode:strHashes];
                 controller.qrCodeMsg = NSLocalizedString(@"Scan with Bither Hot to sign tx", nil);
                 controller.qrCodeTitle = NSLocalizedString(@"Signed Transaction", nil);
                 [dp dismissWithCompletion:^{
                     [self.navigationController pushViewController:controller animated:YES];
                 }];
-                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.8 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t) (0.8 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                     UINavigationController *nav = self.navigationController;
-                    NSMutableArray* array = [[NSMutableArray alloc]initWithArray:nav.viewControllers];
+                    NSMutableArray *array = [[NSMutableArray alloc] initWithArray:nav.viewControllers];
                     [array removeObject:self];
                     nav.viewControllers = array;
                 });
             });
-            bpassword=nil;
+            bpassword = nil;
         });
     }];
 }
 
 - (IBAction)signButtonPressed:(id)sender {
-    if((!address && self.tx.hdmIndex < 0) || (self.tx.hdmIndex >= 0 && ![BTAddressManager instance].hasHDMKeychain)){
+    if ((!address && self.tx.hdmIndex < 0) || (self.tx.hdmIndex >= 0 && ![BTAddressManager instance].hasHDMKeychain)) {
         return;
     }
-    [[[DialogPassword alloc]initWithDelegate:self]showInWindow:self.view.window];
+    [[[DialogPassword alloc] initWithDelegate:self] showInWindow:self.view.window];
 }
 
 - (IBAction)backPressed:(id)sender {

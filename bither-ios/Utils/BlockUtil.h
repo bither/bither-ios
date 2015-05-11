@@ -23,25 +23,25 @@
 @protocol DowloadSpvDelegate <NSObject>
 @optional
 
--(void)success;
--(void)error;
+- (void)success;
+
+- (void)error;
 
 @end
 
 
-
 @interface BlockUtil : NSObject
 
-@property (nonatomic,weak)id<DowloadSpvDelegate> delegate;
+@property(nonatomic, weak) id <DowloadSpvDelegate> delegate;
 
 + (BlockUtil *)instance;
 
 + (BTBlock *)formatBlcok:(NSDictionary *)dict;
 
 
-- (void) syncSpvBlock;
-- (BOOL) syncSpvFinish;
+- (void)syncSpvBlock;
 
+- (BOOL)syncSpvFinish;
 
 
 @end

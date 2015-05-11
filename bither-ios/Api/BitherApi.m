@@ -16,13 +16,7 @@
 //  limitations under the License.
 
 #import "BitherApi.h"
-#import "TransactionsUtil.h"
-#import "NSDictionary+Fromat.h"
-#import "ExchangeUtil.h"
-#import "Ticker.h"
 #import "MarketUtil.h"
-#import "BitherSetting.h"
-#import "BTUtils.h"
 #import "GroupFileUtil.h"
 
 static BitherApi *piApi;
@@ -39,7 +33,7 @@ static BitherApi *piApi;
 }
 
 - (void)getSpvBlock:(DictResponseBlock)callback andErrorCallBack:(ErrorHandler)errorCallback {
-    [self get:BITHER_GET_ONE_SPVBLOCK_API withParams:nil networkType:BitherBitcoin completed:^(MKNetworkOperation *completedOperation) {
+    [self          get:BITHER_GET_ONE_SPVBLOCK_API withParams:nil networkType:BitherBitcoin completed:^(MKNetworkOperation *completedOperation) {
         if (![StringUtil isEmpty:completedOperation.responseString]) {
             NSLog(@"spv: %s", [completedOperation.responseString UTF8String]);
             NSDictionary *dict = [completedOperation responseJSON];
@@ -58,7 +52,7 @@ static BitherApi *piApi;
 
 - (void)getInSignaturesApi:(NSString *)address fromBlock:(int)blockNo callback:(IdResponseBlock)callback andErrorCallBack:(ErrorHandler)errorCallback {
     NSString *url = [NSString stringWithFormat:BITHER_IN_SIGNATURES_API, address, blockNo];
-    [self get:url withParams:nil networkType:BitherBitcoin completed:^(MKNetworkOperation *completedOperation) {
+    [self          get:url withParams:nil networkType:BitherBitcoin completed:^(MKNetworkOperation *completedOperation) {
         if (callback) {
             callback(completedOperation.responseString);
         }
@@ -72,8 +66,8 @@ static BitherApi *piApi;
 }
 
 - (void)getExchangeTrend:(MarketType)marketType callback:(ArrayResponseBlock)callback andErrorCallBack:(ErrorHandler)errorCallback {
-    NSString *url = [NSString stringWithFormat:BITHER_TREND_URL, marketType];
-    [self get:url withParams:nil networkType:BitherStats completed:^(MKNetworkOperation *completedOperation) {
+    NSString *url = [NSString stringWithFormat:BITHER_TREND_URL, [GroupUtil getMarketValue:marketType]];
+    [self          get:url withParams:nil networkType:BitherStats completed:^(MKNetworkOperation *completedOperation) {
         if (callback) {
             callback(completedOperation.responseJSON);
         }
@@ -89,9 +83,9 @@ static BitherApi *piApi;
     //[];
 }
 
--(void)getTransactionApi:(NSString *)address withPage:(int)page callback:(DictResponseBlock) callback andErrorCallBack:(ErrorHandler)errorCallback; {
+- (void)getTransactionApi:(NSString *)address withPage:(int)page callback:(DictResponseBlock)callback andErrorCallBack:(ErrorHandler)errorCallback; {
     NSString *url = [NSString stringWithFormat:BC_ADDRESS_TX_URL, address, page];
-    [self get:url withParams:nil networkType:BitherBC completed:^(MKNetworkOperation *completedOperation) {
+    [self          get:url withParams:nil networkType:BitherBC completed:^(MKNetworkOperation *completedOperation) {
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
             NSLog(@"%@", completedOperation.responseString);
             if (![StringUtil isEmpty:completedOperation.responseString]) {
@@ -107,9 +101,10 @@ static BitherApi *piApi;
         }
     }];
 }
+
 - (void)getMyTransactionApi:(NSString *)address callback:(DictResponseBlock)callback andErrorCallBack:(ErrorHandler)errorCallback {
     NSString *url = [NSString stringWithFormat:BC_ADDRESS_STAT_URL, address];
-    [self get:url withParams:nil networkType:BitherBC completed:^(MKNetworkOperation *completedOperation) {
+    [self          get:url withParams:nil networkType:BitherBC completed:^(MKNetworkOperation *completedOperation) {
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
             NSLog(@"%@", completedOperation.responseString);
             if (![StringUtil isEmpty:completedOperation.responseString]) {
@@ -128,7 +123,7 @@ static BitherApi *piApi;
 }
 
 - (void)getExchangeTicker:(VoidBlock)callback andErrorCallBack:(ErrorHandler)errorCallback {
-    [self get:BITHER_EXCHANGE_TICKER withParams:nil networkType:BitherStats completed:^(MKNetworkOperation *completedOperation) {
+    [self          get:BITHER_EXCHANGE_TICKER withParams:nil networkType:BitherStats completed:^(MKNetworkOperation *completedOperation) {
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
             if (![StringUtil isEmpty:completedOperation.responseString]) {
                 [GroupFileUtil setTicker:completedOperation.responseString];
@@ -153,7 +148,7 @@ static BitherApi *piApi;
 - (void)uploadCrash:(NSString *)data callback:(DictResponseBlock)callback andErrorCallBack:(ErrorHandler)errorCallback {
     NSMutableDictionary *dict = [NSMutableDictionary new];
     dict[@"error_msg"] = data;
-    [self post:BITHER_ERROR_API withParams:dict networkType:BitherUser completed:^(MKNetworkOperation *completedOperation) {
+    [self         post:BITHER_ERROR_API withParams:dict networkType:BitherUser completed:^(MKNetworkOperation *completedOperation) {
         if (callback) {
             callback(nil);
         }

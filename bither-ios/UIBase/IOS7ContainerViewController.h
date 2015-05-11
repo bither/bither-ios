@@ -18,12 +18,12 @@
 
 #import <UIKit/UIKit.h>
 
-@interface UIViewController(IOS7Container)
--(UIView*)rootContainer;
+@interface UIViewController (IOS7Container)
+- (UIView *)rootContainer;
 @end
 
 @interface IOS7ContainerViewController : UIViewController
-@property (nonatomic, weak) UIViewController* controller;
-@property (nonatomic, weak) UIView* vContainer;
-@property (nonatomic, weak) UIView* vStatusBarBg;
+@property(nonatomic, weak) UIViewController *controller;
+@property(nonatomic, weak) UIView *vContainer;
+@property(nonatomic, weak) UIView *vStatusBarBg;
 @end

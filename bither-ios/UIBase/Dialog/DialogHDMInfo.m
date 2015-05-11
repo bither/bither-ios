@@ -33,9 +33,9 @@
 #define kMinHorizontalGap (30)
 
 @implementation DialogHDMInfo
--(instancetype)init{
-    UIImage* img = [UIImage imageNamed:@"hdm_label"];
-    NSString* note = NSLocalizedString(@"hdm_seed_generation_notice", nil);
+- (instancetype)init {
+    UIImage *img = [UIImage imageNamed:@"hdm_label"];
+    NSString *note = NSLocalizedString(@"hdm_seed_generation_notice", nil);
     UITextView *tv = [[UITextView alloc] initWithFrame:CGRectMake(0, img.size.height + kVerticalMargin, [UIScreen mainScreen].bounds.size.width - kMinHorizontalGap * 2, 0)];
     tv.textColor = [UIColor whiteColor];
     tv.font = [UIFont systemFontOfSize:kNoteFontSize];
@@ -44,7 +44,7 @@
     tv.text = note;
     CGSize noteSize = [tv sizeThatFits:CGSizeMake(tv.frame.size.width, CGFLOAT_MAX)];
     self = [super initWithFrame:CGRectMake(0, 0, noteSize.width, img.size.height + kVerticalMargin + noteSize.height + kButtonTop + kButtonHeight)];
-    if(self){
+    if (self) {
         UIImageView *iv = [[UIImageView alloc] initWithImage:img];
         UILabel *lbl = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 0, img.size.height)];
         lbl.textColor = [UIColor whiteColor];
@@ -65,7 +65,7 @@
         UIButton *btn = [[UIButton alloc] initWithFrame:CGRectMake(kButtonHorizontalMargin, CGRectGetMaxY(tv.frame) + kButtonTop, self.frame.size.width - kButtonHorizontalMargin * 2, kButtonHeight)];
         [btn setBackgroundImage:[UIImage imageNamed:@"dialog_btn_bg_normal"] forState:UIControlStateNormal];
         [btn setTitle:NSLocalizedString(@"OK", nil) forState:UIControlStateNormal];
-        [btn setTitleColor:[UIColor whiteColor]forState:UIControlStateNormal];
+        [btn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         btn.titleLabel.font = [UIFont systemFontOfSize:kButtonFontSize];
         [btn addTarget:self action:@selector(dismiss) forControlEvents:UIControlEventTouchUpInside];
 

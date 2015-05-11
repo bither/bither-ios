@@ -20,16 +20,19 @@
 
 @interface QRCodeTransportPage : NSObject
 
-@property (nonatomic,readwrite) int currentPage;
-@property (nonatomic,readwrite) int sumPage;
-@property (nonatomic,strong) NSString * content;
+@property(nonatomic, readwrite) int currentPage;
+@property(nonatomic, readwrite) int sumPage;
+@property(nonatomic, strong) NSString *content;
 
-+(QRCodeTransportPage *) formatQrCodeString:(NSString *) text;
-+(NSString *) formatQRCodeTran:(NSArray *)qrCodeTransportPages;
-+(NSArray *) getQrCodeStringList:(NSString *)str;
-+(NSArray *) oldGetQrCodeStringList:(NSString *)str;
++ (QRCodeTransportPage *)formatQrCodeString:(NSString *)text;
+
++ (NSString *)formatQRCodeTran:(NSArray *)qrCodeTransportPages;
+
++ (NSArray *)getQrCodeStringList:(NSString *)str;
+
++ (NSArray *)oldGetQrCodeStringList:(NSString *)str;
 
 
--(BOOL) hasNextPage;
+- (BOOL)hasNextPage;
 
 @end

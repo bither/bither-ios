@@ -20,7 +20,9 @@
 
 @protocol Scrollable <NSObject>
 @optional
--(BOOL)canScrollHorizontal;
--(BOOL)canScrollVertical;
--(void)configureTopOffset:(CGFloat)topOffset;
+- (BOOL)canScrollHorizontal;
+
+- (BOOL)canScrollVertical;
+
+- (void)configureTopOffset:(CGFloat)topOffset;
 @end

@@ -19,5 +19,5 @@
 #import <UIKit/UIKit.h>
 
 @interface ColdAddressViewController : UIViewController
--(void)showMsg:(NSString*)msg;
+- (void)showMsg:(NSString *)msg;
 @end

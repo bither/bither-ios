@@ -20,11 +20,11 @@
 #import "TabButton.h"
 
 
-@interface HotViewController : UIViewController<TabButtonPressedDelegate,PiPageViewControllerDelegate>{
+@interface HotViewController : UIViewController <TabButtonPressedDelegate, PiPageViewControllerDelegate> {
     int cnt;
     BOOL isInit;
 }
 
-@property (strong, nonatomic) IBOutlet UIButton *addAddressBtn;
-@property (nonatomic, strong) NSMutableDictionary *dict;
+@property(strong, nonatomic) IBOutlet UIButton *addAddressBtn;
+@property(nonatomic, strong) NSMutableDictionary *dict;
 @end

@@ -21,6 +21,6 @@
 
 @interface BlockCell : UITableViewCell
 
--(void)setBlock:(BTBlock *) block;
+- (void)setBlock:(BTBlock *)block;
 
 @end

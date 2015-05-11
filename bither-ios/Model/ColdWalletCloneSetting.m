@@ -26,49 +26,50 @@
 #import "BTAddressManager.h"
 
 
-static Setting* CloneScanSetting;
-static Setting* CloneQrSetting;
+static Setting *CloneScanSetting;
+static Setting *CloneQrSetting;
 
 @implementation ColdWalletCloneSetting
 
--(instancetype)init{
+- (instancetype)init {
     self = [super initWithName:NSLocalizedString(@"Cold Wallet Clone", nil) icon:[UIImage imageNamed:@"scan_button_icon"]];
-    if(self){
+    if (self) {
         __weak ColdWalletCloneSetting *d = self;
-        [self setSelectBlock:^(UIViewController * controller){
+        [self setSelectBlock:^(UIViewController *controller) {
             d.scanContent = nil;
             d.controller = controller;
-            ScanQrCodeTransportViewController *scan = [[ScanQrCodeTransportViewController alloc]initWithDelegate:d title:NSLocalizedString(@"Scan The Clone Source", nil) pageName:NSLocalizedString(@"clone QR code", nil)];
+            ScanQrCodeTransportViewController *scan = [[ScanQrCodeTransportViewController alloc] initWithDelegate:d title:NSLocalizedString(@"Scan The Clone Source", nil) pageName:NSLocalizedString(@"clone QR code", nil)];
             [controller presentViewController:scan animated:YES completion:nil];
         }];
     }
     return self;
 }
 
--(void)handleResult:(NSString *)result byReader:(ScanQrCodeViewController *)reader{
+- (void)handleResult:(NSString *)result byReader:(ScanQrCodeViewController *)reader {
     [reader.presentingViewController dismissViewControllerAnimated:YES completion:^{
-        if([BTQRCodeUtil splitQRCode:result].count % 3 == 0){
+        if ([BTQRCodeUtil splitQRCode:result].count % 3 == 0) {
             self.scanContent = result;
-            DialogPassword *dialog = [[DialogPassword alloc]initWithDelegate:self];
+            DialogPassword *dialog = [[DialogPassword alloc] initWithDelegate:self];
             [dialog showInWindow:self.controller.view.window];
-        }else{
+        } else {
             [self showMsg:NSLocalizedString(@"Clone failed.", nil)];
         }
     }];
 }
 
--(void)onPasswordEntered:(NSString*)password{
-    DialogProgress* dp = [[DialogProgress alloc]initWithMessage:NSLocalizedString(@"Cloning...", nil)];
+- (void)onPasswordEntered:(NSString *)password {
+    DialogProgress *dp = [[DialogProgress alloc] initWithMessage:NSLocalizedString(@"Cloning...", nil)];
     [dp showInWindow:self.controller.view.window completion:^{
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-            NSArray *commponent =[BTQRCodeUtil splitQRCode:self.scanContent];
-            NSMutableArray* keys = [[NSMutableArray alloc]init];
-            for(int i = 0; i < commponent.count; i+=3){
-                NSString* s =[BTQRCodeUtil joinedQRCode:[commponent subarrayWithRange:NSMakeRange(i, 3)]];                [keys addObject:s];
+            NSArray *commponent = [BTQRCodeUtil splitQRCode:self.scanContent];
+            NSMutableArray *keys = [[NSMutableArray alloc] init];
+            for (int i = 0; i < commponent.count; i += 3) {
+                NSString *s = [BTQRCodeUtil joinedQRCode:[commponent subarrayWithRange:NSMakeRange(i, 3)]];
+                [keys addObject:s];
             }
             BOOL result = [KeyUtil addBitcoinjKey:keys withPassphrase:password error:nil];
             dispatch_async(dispatch_get_main_queue(), ^{
-                if([self.controller respondsToSelector:@selector(reload)]){
+                if ([self.controller respondsToSelector:@selector(reload)]) {
                     [self.controller performSelector:@selector(reload)];
                 }
                 [dp dismissWithCompletion:^{
@@ -79,29 +80,29 @@ static Setting* CloneQrSetting;
     }];
 }
 
--(BOOL)notToCheckPassword{
+- (BOOL)notToCheckPassword {
     return YES;
 }
 
--(NSString*)passwordTitle{
+- (NSString *)passwordTitle {
     return NSLocalizedString(@"Enter source password", nil);
 }
 
--(void)showMsg:(NSString*)msg{
-    if([self.controller respondsToSelector:@selector(showMsg:)]){
+- (void)showMsg:(NSString *)msg {
+    if ([self.controller respondsToSelector:@selector(showMsg:)]) {
         [self.controller performSelector:@selector(showMsg:) withObject:msg];
     }
 }
 
-+(Setting*)getCloneSetting{
-    if([BTAddressManager instance].privKeyAddresses.count > 0||[[BTAddressManager instance] hasHDMKeychain]){
-        if(!CloneQrSetting){
-            CloneQrSetting = [[CloneQrCodeSetting alloc]init];
++ (Setting *)getCloneSetting {
+    if ([BTAddressManager instance].privKeyAddresses.count > 0 || [[BTAddressManager instance] hasHDMKeychain]) {
+        if (!CloneQrSetting) {
+            CloneQrSetting = [[CloneQrCodeSetting alloc] init];
         }
         return CloneQrSetting;
-    }else{
-        if(!CloneScanSetting){
-            CloneScanSetting = [[ColdWalletCloneSetting alloc]init];
+    } else {
+        if (!CloneScanSetting) {
+            CloneScanSetting = [[ColdWalletCloneSetting alloc] init];
         }
         return CloneScanSetting;
     }

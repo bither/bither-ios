@@ -211,6 +211,7 @@
 		AC8912F21A7F62FE003797C4 /* WorldListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AC8912F11A7F62FE003797C4 /* WorldListCell.m */; };
 		AC8F0DCA196CF4E400CCD0F9 /* SelectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AC8F0DC9196CF4E400CCD0F9 /* SelectViewController.m */; };
 		AC8F0DCD196D054A00CCD0F9 /* SelectListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AC8F0DCC196D054A00CCD0F9 /* SelectListCell.m */; };
+		AC9B35ED1AFF46BC004B10FD /* GroupUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = DC08C1C370321C08C785C9E1 /* GroupUtil.m */; };
 		AC9BBCFE19D268AB00E58BA7 /* UpgradeUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = AC9BBCFD19D268AB00E58BA7 /* UpgradeUtil.m */; };
 		AC9BC61019D18102003B88B5 /* SystemUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = AC9BC60F19D18102003B88B5 /* SystemUtil.m */; };
 		ACA11DCA19F64D560087D39C /* RCheckViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ACA11DC919F64D560087D39C /* RCheckViewController.m */; };
@@ -295,6 +296,7 @@
 		DAB2C8761A206F080011EE2F /* KeychainBackupUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = DAB2C8751A206F080011EE2F /* KeychainBackupUtil.m */; };
 		DAD0FFF51A81D08D008AEAA2 /* HDMApiTest.m in Sources */ = {isa = PBXBuildFile; fileRef = DAD0FFF41A81D08D008AEAA2 /* HDMApiTest.m */; };
 		DAD0FFF61A81D41B008AEAA2 /* hdm.bither.net.cer in Resources */ = {isa = PBXBuildFile; fileRef = D61D0299B4CDCCFC6D0BA161 /* hdm.bither.net.cer */; };
+		DC02BC2D62776189E7335151 /* GroupUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = DC08C1C370321C08C785C9E1 /* GroupUtil.m */; };
 		DC0448DAEF65BD227897D240 /* HDMKeychainRecoverUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = DC0CC84409CD956F1FA008BF /* HDMKeychainRecoverUtil.m */; };
 		DC06422DA44A6DA77DCFBB2D /* ImportHDMCold.m in Sources */ = {isa = PBXBuildFile; fileRef = DC0A375AE83A8BA37F3FA65F /* ImportHDMCold.m */; };
 		DC075758EE0F48911D8D4CE8 /* ImportHDMColdSeedController.m in Sources */ = {isa = PBXBuildFile; fileRef = DC07A672CCAD76ED66B72B91 /* ImportHDMColdSeedController.m */; };
@@ -889,7 +891,9 @@
 		DC03155DE24560F766E286C4 /* HDMKeychainRecoverUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HDMKeychainRecoverUtil.h; sourceTree = "<group>"; };
 		DC0769FAB5B4727E089E23CC /* HDMRecoverSetting.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HDMRecoverSetting.m; sourceTree = "<group>"; };
 		DC07A672CCAD76ED66B72B91 /* ImportHDMColdSeedController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImportHDMColdSeedController.m; sourceTree = "<group>"; };
+		DC08C1C370321C08C785C9E1 /* GroupUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GroupUtil.m; sourceTree = "<group>"; };
 		DC0A375AE83A8BA37F3FA65F /* ImportHDMCold.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImportHDMCold.m; sourceTree = "<group>"; };
+		DC0C45B833B681E58F7812DB /* GroupUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GroupUtil.h; sourceTree = "<group>"; };
 		DC0CC84409CD956F1FA008BF /* HDMKeychainRecoverUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HDMKeychainRecoverUtil.m; sourceTree = "<group>"; };
 		DC0D6773769B40A704B784B4 /* ImportHDMCold.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImportHDMCold.h; sourceTree = "<group>"; };
 		DC0E3B0A73BF05166C9733A1 /* ImportHDMColdSeedController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImportHDMColdSeedController.h; sourceTree = "<group>"; };
@@ -1205,6 +1209,8 @@
 				1BC2776F592A1DFABC1C6F21 /* HDMSingular.h */,
 				1BC272D7D8F09A8A3DB14204 /* PasswordStrengthUtil.m */,
 				1BC272B77D3B4123842B7220 /* PasswordStrengthUtil.h */,
+				DC08C1C370321C08C785C9E1 /* GroupUtil.m */,
+				DC0C45B833B681E58F7812DB /* GroupUtil.h */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -1983,6 +1989,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AC9B35ED1AFF46BC004B10FD /* GroupUtil.m in Sources */,
 				0A4182AE1A9DBB8600576A12 /* WatchStringUtil.m in Sources */,
 				0A6EB31D1AAE9DE200F59ED7 /* WatchMarketBgDrawer.m in Sources */,
 				0A52BDA61A9FFEB800BC8C3E /* GroupFileUtil.m in Sources */,
@@ -2235,6 +2242,7 @@
 				1BC27D41D243E139BCFBE2DA /* MonitorSetting.m in Sources */,
 				1BC27F74516BB973EA28A144 /* ImportHDAccountSeedController.m in Sources */,
 				1BC27056253378BF3E96EBA0 /* DialogEditVanityLength.m in Sources */,
+				DC02BC2D62776189E7335151 /* GroupUtil.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

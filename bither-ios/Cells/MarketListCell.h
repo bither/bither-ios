@@ -20,6 +20,6 @@
 #import "Market.h"
 
 @interface MarketListCell : UITableViewCell
--(void)setMarket:(Market *)market;
+- (void)setMarket:(Market *)market;
 
 @end

@@ -18,7 +18,6 @@
 
 #import "DialogAddressQrCode.h"
 #import "UIImage+ImageWithColor.h"
-#import "QRCodeThemeUtil.h"
 #import "UserDefaultsUtil.h"
 #import "UIBaseUtil.h"
 #import "FileUtil.h"

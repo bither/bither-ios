@@ -21,13 +21,12 @@
 @implementation CrashLog
 
 + (void)initCrashLog; {
-    GCCrashInstallation *installation = (GCCrashInstallation *)[GCCrashInstallation sharedInstance];
+    GCCrashInstallation *installation = (GCCrashInstallation *) [GCCrashInstallation sharedInstance];
     [installation install];
-    [installation sendAllReportsWithCompletion:^(NSArray *filteredReports, BOOL completed, NSError *error)
-     {
-         // Stuff to do when report sending is complete
-         //id i = [[NSArray new] objectAtIndex:0];
-     }];
+    [installation sendAllReportsWithCompletion:^(NSArray *filteredReports, BOOL completed, NSError *error) {
+        // Stuff to do when report sending is complete
+        //id i = [[NSArray new] objectAtIndex:0];
+    }];
 }
 
 @end

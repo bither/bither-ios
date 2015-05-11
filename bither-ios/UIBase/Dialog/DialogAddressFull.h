@@ -19,14 +19,19 @@
 #import "DialogWithArrow.h"
 
 @protocol DialogAddressFullDelegate <NSObject>
--(NSUInteger)dialogAddressFullRowCount;
--(NSString*)dialogAddressFullAddressForRow:(NSUInteger)row;
--(int64_t)dialogAddressFullAmountForRow:(NSUInteger)row;
--(BOOL)dialogAddressFullDoubleColumn;
--(void)showMsg:(NSString*)msg;
+- (NSUInteger)dialogAddressFullRowCount;
+
+- (NSString *)dialogAddressFullAddressForRow:(NSUInteger)row;
+
+- (int64_t)dialogAddressFullAmountForRow:(NSUInteger)row;
+
+- (BOOL)dialogAddressFullDoubleColumn;
+
+- (void)showMsg:(NSString *)msg;
 @end
 
 @interface DialogAddressFull : DialogWithArrow
--(instancetype)initWithDelegate:(NSObject<DialogAddressFullDelegate>*)delegate;
-@property (weak) NSObject<DialogAddressFullDelegate> *delegate;
+- (instancetype)initWithDelegate:(NSObject <DialogAddressFullDelegate> *)delegate;
+
+@property(weak) NSObject <DialogAddressFullDelegate> *delegate;
 @end

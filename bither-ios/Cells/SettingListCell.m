@@ -18,50 +18,49 @@
 
 #import "SettingListCell.h"
 
-@interface SettingListCell()
-@property (weak, nonatomic) IBOutlet UIImageView *ivIcon;
-@property (weak, nonatomic) IBOutlet UILabel *lbName;
-@property (weak, nonatomic) IBOutlet UILabel *lbValue;
-@property (weak, nonatomic) IBOutlet UIImageView *ivHighlighted;
+@interface SettingListCell ()
+@property(weak, nonatomic) IBOutlet UIImageView *ivIcon;
+@property(weak, nonatomic) IBOutlet UILabel *lbName;
+@property(weak, nonatomic) IBOutlet UILabel *lbValue;
+@property(weak, nonatomic) IBOutlet UIImageView *ivHighlighted;
 
 @end
 
 @implementation SettingListCell
 
--(void)setSetting:(Setting *) setting{
-    self.lbName.text=setting.settingName;
+- (void)setSetting:(Setting *)setting {
+    self.lbName.text = setting.settingName;
     if (setting.icon) {
-        self.lbValue.hidden=YES;
-        self.ivIcon.hidden=NO;
-        self.ivIcon.image=[setting getIcon];
-    }else{
-        self.lbValue.hidden=NO;
-        self.ivIcon.hidden=YES;
+        self.lbValue.hidden = YES;
+        self.ivIcon.hidden = NO;
+        self.ivIcon.image = [setting getIcon];
+    } else {
+        self.lbValue.hidden = NO;
+        self.ivIcon.hidden = YES;
         if (setting.getValueBlock) {
             self.lbValue.text = nil;
             self.lbValue.attributedText = nil;
-            NSObject* value = setting.getValueBlock();
-            if([value isKindOfClass:[NSAttributedString class]]){
-                self.lbValue.attributedText = (NSAttributedString*)value;
-            }else if([value isKindOfClass:[NSString class]]){
-                self.lbValue.text = (NSString*)value;
+            NSObject *value = setting.getValueBlock();
+            if ([value isKindOfClass:[NSAttributedString class]]) {
+                self.lbValue.attributedText = (NSAttributedString *) value;
+            } else if ([value isKindOfClass:[NSString class]]) {
+                self.lbValue.text = (NSString *) value;
             }
-        }else{
-            self.lbValue.text=@"";
+        } else {
+            self.lbValue.text = @"";
             self.lbValue.attributedText = nil;
         }
     }
 }
 
-- (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
-{
+- (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
     }
     return self;
 }
 
--(void)setHighlighted:(BOOL)highlighted animated:(BOOL)animated{
+- (void)setHighlighted:(BOOL)highlighted animated:(BOOL)animated {
     [super setHighlighted:highlighted animated:animated];
     self.ivHighlighted.highlighted = highlighted;
 }

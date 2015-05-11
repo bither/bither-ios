@@ -10,13 +10,13 @@
 
 @interface DialogProgressChangable : DialogCentered
 
--(id)initWithMessage:(NSString*)message;
+- (id)initWithMessage:(NSString *)message;
 
--(void)changeToMessage:(NSString*)message icon:(UIImage*)icon completion:(void(^)())completion;
+- (void)changeToMessage:(NSString *)message icon:(UIImage *)icon completion:(void (^)())completion;
 
--(void)changeToMessage:(NSString*)message completion:(void(^)())completion;
+- (void)changeToMessage:(NSString *)message completion:(void (^)())completion;
 
--(void)changeToMessage:(NSString*)message;
+- (void)changeToMessage:(NSString *)message;
 
--(void)changeToMessage:(NSString*)message icon:(UIImage*)icon;
+- (void)changeToMessage:(NSString *)message icon:(UIImage *)icon;
 @end

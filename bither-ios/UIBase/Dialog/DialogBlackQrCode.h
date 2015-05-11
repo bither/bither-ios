@@ -19,6 +19,7 @@
 #import "DialogCentered.h"
 
 @interface DialogBlackQrCode : DialogCentered
--(instancetype)initWithContent:(NSString*)content;
--(instancetype)initWithContent:(NSString*)content andTitle:(NSString*)title;
+- (instancetype)initWithContent:(NSString *)content;
+
+- (instancetype)initWithContent:(NSString *)content andTitle:(NSString *)title;
 @end

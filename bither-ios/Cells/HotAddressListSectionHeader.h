@@ -20,18 +20,19 @@
 
 @protocol SectionHeaderPressedDelegate <NSObject>
 
--(void)sectionHeaderPressed:(NSUInteger)section;
+- (void)sectionHeaderPressed:(NSUInteger)section;
 
--(BOOL)isSectionFolded:(NSUInteger)section;
+- (BOOL)isSectionFolded:(NSUInteger)section;
 
 @optional
--(void)hdmAddPressed;
--(void)hdmSeedPressed;
+- (void)hdmAddPressed;
+
+- (void)hdmSeedPressed;
 
 @end
 
 @interface HotAddressListSectionHeader : UIView
--(instancetype)initWithSize:(CGSize)size isHD:(BOOL)hd isHDM:(BOOL)hdm isPrivate:(BOOL)isPrivate section:(NSUInteger)section  delegate:(NSObject<SectionHeaderPressedDelegate>*)delegate;
+- (instancetype)initWithSize:(CGSize)size isHD:(BOOL)hd isHDM:(BOOL)hdm isPrivate:(BOOL)isPrivate section:(NSUInteger)section delegate:(NSObject <SectionHeaderPressedDelegate> *)delegate;
 
-@property (weak) NSObject<SectionHeaderPressedDelegate>* delegate;
+@property(weak) NSObject <SectionHeaderPressedDelegate> *delegate;
 @end

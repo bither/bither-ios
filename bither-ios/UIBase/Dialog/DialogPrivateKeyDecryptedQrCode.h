@@ -20,5 +20,5 @@
 #import "DialogCentered.h"
 
 @interface DialogPrivateKeyDecryptedQrCode : DialogCentered
--(instancetype)initWithAddress:(NSString*)address privateKey:(NSString*)privateStr;
+- (instancetype)initWithAddress:(NSString *)address privateKey:(NSString *)privateStr;
 @end

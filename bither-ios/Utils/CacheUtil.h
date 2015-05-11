@@ -20,10 +20,13 @@
 
 @interface CacheUtil : NSObject
 + (NSString *)getExchangeFile;
+
 + (NSString *)getCurrenciesRateFile;
+
 + (NSString *)getTickerFile;
 
 
-+(void)writeFile:(NSString *)fileName content:(NSString *)content;
-+(NSString*)readFile:(NSString*)fileName;
++ (void)writeFile:(NSString *)fileName content:(NSString *)content;
+
++ (NSString *)readFile:(NSString *)fileName;
 @end

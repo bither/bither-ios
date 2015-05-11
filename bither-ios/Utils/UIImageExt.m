@@ -17,13 +17,13 @@
 
 #import "UIImageExt.h"
 
-@implementation UIImage(UIImageExt)
-- (UIImage *)scaleToSize:(CGSize)size{
-   // NSLog(@"w:%f,s:%f",self.size.width,self.scale);
-    if (self.size.width*self.scale>size.width&&self.size.height*self.scale>size.height) {
+@implementation UIImage (UIImageExt)
+- (UIImage *)scaleToSize:(CGSize)size {
+    // NSLog(@"w:%f,s:%f",self.size.width,self.scale);
+    if (self.size.width * self.scale > size.width && self.size.height * self.scale > size.height) {
         UIGraphicsBeginImageContext(size);
         [self drawInRect:CGRectMake(0, 0, size.width, size.height)];
-        UIImage* scaledImage = UIGraphicsGetImageFromCurrentImageContext();
+        UIImage *scaledImage = UIGraphicsGetImageFromCurrentImageContext();
         UIGraphicsEndImageContext();
         return scaledImage;
     }

@@ -1,4 +1,3 @@
-
 //
 //  PeerUtil.m
 //  bither-ios
@@ -25,19 +24,16 @@
 #import "BTPeerManager.h"
 #import "BlockUtil.h"
 #import "NetworkUtil.h"
-#import "NSDictionary+Fromat.h"
-#import "NetworkUtil.h"
-#import "UserDefaultsUtil.h"
 
 
-static BOOL isRunning=NO;
-static BOOL addObserver=NO;
-static PeerUtil * peerUtil;
+static BOOL isRunning = NO;
+static BOOL addObserver = NO;
+static PeerUtil *peerUtil;
 
 @implementation PeerUtil
 
 + (PeerUtil *)instance {
-    @synchronized(self) {
+    @synchronized (self) {
         if (peerUtil == nil) {
             peerUtil = [[self alloc] init];
         }
@@ -46,28 +42,29 @@ static PeerUtil * peerUtil;
 }
 
 
--(void)startPeer{
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0),^{
-        if ([[BTSettings instance] getAppMode]!=COLD) {
-            
+- (void)startPeer {
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+        if ([[BTSettings instance] getAppMode] != COLD) {
+
             if ([[BlockUtil instance] syncSpvFinish]) {
                 if ([[BTPeerManager instance] doneSyncFromSPV]) {
                     [self syncSpvFromBitcoinDone];
-                }else{
+                } else {
                     if (![[BTPeerManager instance] connected]) {
                         [[BTPeerManager instance] start];
                     }
                     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(syncSpvFromBitcoinDone) name:BTPeerManagerSyncFromSPVFinishedNotification object:nil];
-                    addObserver=YES;
+                    addObserver = YES;
                 }
-                
-            }else{
+
+            } else {
                 [[BlockUtil instance] syncSpvBlock];
             }
         }
     });
 }
--(void) syncSpvFromBitcoinDone{
+
+- (void)syncSpvFromBitcoinDone {
     if (addObserver) {
         [[NSNotificationCenter defaultCenter] removeObserver:self name:BTPeerManagerSyncFromSPVFinishedNotification object:nil];
     }
@@ -75,28 +72,28 @@ static PeerUtil * peerUtil;
         [[BTPeerManager instance] stop];
     }
     if (!isRunning) {
-        isRunning=YES;
+        isRunning = YES;
         [TransactionsUtil syncWallet:^{
             [self connectPeer];
-            isRunning=NO;
-        } andErrorCallBack:^(NSOperation *errorOp, NSError *error) {
-            isRunning=NO;
+            isRunning = NO;
+        }           andErrorCallBack:^(NSOperation *errorOp, NSError *error) {
+            isRunning = NO;
         }];
     }
 }
 
--(void) connectPeer{
-    BOOL downloadSpvFinish=[[UserDefaultsUtil instance ] getDownloadSpvFinish]&&[[BTPeerManager instance] doneSyncFromSPV];
-    BOOL walletIsSyncComplete=[[BTAddressManager instance] allSyncComplete];
-    BOOL networkIsAvailable=![[UserDefaultsUtil instance] getSyncBlockOnlyWifi]||[NetworkUtil isEnableWIFI];
+- (void)connectPeer {
+    BOOL downloadSpvFinish = [[UserDefaultsUtil instance] getDownloadSpvFinish] && [[BTPeerManager instance] doneSyncFromSPV];
+    BOOL walletIsSyncComplete = [[BTAddressManager instance] allSyncComplete];
+    BOOL networkIsAvailable = ![[UserDefaultsUtil instance] getSyncBlockOnlyWifi] || [NetworkUtil isEnableWIFI];
     // BOOL netWorkState=[NetworkUtil isEnableWIFI]||![[UserDefaultsUtil instance] getSyncBlockOnlyWifi];
-    BTPeerManager * peerManager=[BTPeerManager instance];
-    if (networkIsAvailable&&downloadSpvFinish && walletIsSyncComplete ) {
+    BTPeerManager *peerManager = [BTPeerManager instance];
+    if (networkIsAvailable && downloadSpvFinish && walletIsSyncComplete) {
         if (![peerManager connected]) {
             [peerManager start];
         }
-        
-    }else{
+
+    } else {
         if ([peerManager connected]) {
             [peerManager stop];
         }
@@ -104,11 +101,9 @@ static PeerUtil * peerUtil;
 }
 
 
--(void)stopPeer{
+- (void)stopPeer {
     [[BTPeerManager instance] stop];
 }
-
-
 
 
 @end

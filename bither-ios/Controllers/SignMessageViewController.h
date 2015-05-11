@@ -11,5 +11,6 @@
 
 @interface SignMessageViewController : UIViewController
 @property BTAddress *address;
--(void)showMsg:(NSString*)msg;
+
+- (void)showMsg:(NSString *)msg;
 @end

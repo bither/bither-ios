@@ -20,6 +20,7 @@
 #import <UIKit/UIKit.h>
 
 @interface CropImageViewController : UIViewController
--(id)initWithInfo:(NSDictionary*)info;
-@property (weak, nonatomic) id<UIImagePickerControllerDelegate> delegate;
+- (id)initWithInfo:(NSDictionary *)info;
+
+@property(weak, nonatomic) id <UIImagePickerControllerDelegate> delegate;
 @end

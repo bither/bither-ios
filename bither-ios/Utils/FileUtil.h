@@ -21,27 +21,36 @@
 
 @interface FileUtil : NSObject
 //TODO no backup of itunes
-+(NSString *)documentsPathForFileName:(NSString *)fileName;
-+(NSString *)cachePathForFileName:(NSString *)fileName;
-+(void)createDirectory:(NSString *)filePath;
-+(BOOL)fileExists:(NSString *)fileFullName;
-+(BOOL)removeFile:(NSString *) fileFullName;
-+(void)copyFile:(NSString *)fromFile toFile:(NSString *)toFile;
++ (NSString *)documentsPathForFileName:(NSString *)fileName;
 
-+(void)createFileAtPath:(NSString *)fileName data:(NSData *)data ;
++ (NSString *)cachePathForFileName:(NSString *)fileName;
+
++ (void)createDirectory:(NSString *)filePath;
+
++ (BOOL)fileExists:(NSString *)fileFullName;
+
++ (BOOL)removeFile:(NSString *)fileFullName;
+
++ (void)copyFile:(NSString *)fromFile toFile:(NSString *)toFile;
+
++ (void)createFileAtPath:(NSString *)fileName data:(NSData *)data;
 
 
++ (void)saveImage:(NSString *)fileFullName image:(UIImage *)image;
 
-+(void)saveImage:(NSString*) fileFullName image:(UIImage*)image;
-+(void)saveImage:(NSString*) fileFullName image:(UIImage*)image compressionQuality:(float)quality;
++ (void)saveImage:(NSString *)fileFullName image:(UIImage *)image compressionQuality:(float)quality;
 
-+(void)cleanCache :(int)uploadCount path:(NSString *)path;
-+(NSArray *)filesByModDate: (NSString *)fullPath;
++ (void)cleanCache:(int)uploadCount path:(NSString *)path;
 
-+(void)deleteTmpImageForShareWithName:(NSString*)name;
-+(NSURL*)saveTmpImageForShare:(UIImage*)image fileName:(NSString*)name;
++ (NSArray *)filesByModDate:(NSString *)fullPath;
 
-+(NSString *)getAvatarDir;
-+(NSString *)getSmallAvatarDir;
-+(NSString *)getUploadAvatarDir;
++ (void)deleteTmpImageForShareWithName:(NSString *)name;
+
++ (NSURL *)saveTmpImageForShare:(UIImage *)image fileName:(NSString *)name;
+
++ (NSString *)getAvatarDir;
+
++ (NSString *)getSmallAvatarDir;
+
++ (NSString *)getUploadAvatarDir;
 @end

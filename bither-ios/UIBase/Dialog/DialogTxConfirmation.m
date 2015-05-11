@@ -25,7 +25,7 @@
 #define kVerticalGap (4)
 #define kPartSize (24)
 
-@interface DialogTxConfirmation()
+@interface DialogTxConfirmation ()
 @property BTTx *tx;
 @property BTAddress *address;
 @property UIActivityIndicatorView *ai;
@@ -38,42 +38,42 @@
 
 @implementation DialogTxConfirmation
 
--(instancetype)initWithTx:(BTTx*)tx andAddress:(BTAddress*)address{
+- (instancetype)initWithTx:(BTTx *)tx andAddress:(BTAddress *)address {
     int cnt = tx.confirmationCnt;
     NSString *str;
-    if(cnt <= 100){
+    if (cnt <= 100) {
         str = [NSString stringWithFormat:NSLocalizedString(@"Confirmation: %d", nil), cnt];
-    }else{
+    } else {
         str = NSLocalizedString(@"Confirmation: 100+", nil);
     }
 
-    CGSize lblSize = [str boundingRectWithSize:CGSizeMake(kMaxWidth, CGFLOAT_MAX) options:NSStringDrawingUsesLineFragmentOrigin|NSStringDrawingUsesFontLeading attributes:@{NSFontAttributeName: [UIFont systemFontOfSize:kFontSize], NSParagraphStyleAttributeName:[NSParagraphStyle defaultParagraphStyle]} context:nil].size;
+    CGSize lblSize = [str boundingRectWithSize:CGSizeMake(kMaxWidth, CGFLOAT_MAX) options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading attributes:@{NSFontAttributeName : [UIFont systemFontOfSize:kFontSize], NSParagraphStyleAttributeName : [NSParagraphStyle defaultParagraphStyle]} context:nil].size;
     lblSize.height = ceilf(lblSize.height);
     lblSize.width = ceilf(lblSize.width);
     CGSize size = CGSizeMake(lblSize.width, lblSize.height);
 
     BOOL shouldShowSigningInfo = [DialogTxConfirmation shouldShowSigningInfo:tx andAddress:address];
 
-    if(shouldShowSigningInfo){
+    if (shouldShowSigningInfo) {
         size.height += kVerticalGap + kPartSize;
         size.width = MAX(size.width, kPartSize * 2);
     }
 
     self = [super initWithFrame:CGRectMake(0, 0, size.width, size.height)];
 
-    if(self){
+    if (self) {
         self.address = address;
         self.tx = tx;
         self.shouldShowSigningInfo = shouldShowSigningInfo;
         self.bgInsets = UIEdgeInsetsMake(8, 12, 8, 12);
-        UILabel *lbl = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, lblSize.width, lblSize.height)];
+        UILabel *lbl = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, lblSize.width, lblSize.height)];
         lbl.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
         lbl.font = [UIFont systemFontOfSize:kFontSize];
         lbl.textColor = [UIColor whiteColor];
         lbl.textAlignment = NSTextAlignmentCenter;
         lbl.text = str;
         [self addSubview:lbl];
-        if(self.shouldShowSigningInfo) {
+        if (self.shouldShowSigningInfo) {
             [self firstConfigure];
         }
     }
@@ -81,7 +81,7 @@
     return self;
 }
 
-- (void)firstConfigure{
+- (void)firstConfigure {
     CGFloat top = self.frame.size.height - kPartSize;
     self.ai = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
     self.ai.frame = CGRectMake(0, (self.ai.frame.size.height - kPartSize) / 2 + top, self.ai.frame.size.width, self.ai.frame.size.height);
@@ -104,8 +104,8 @@
     [self addSubview:self.ivServer];
 }
 
--(void)dialogWillShow {
-    if(self.shouldShowSigningInfo){
+- (void)dialogWillShow {
+    if (self.shouldShowSigningInfo) {
         self.ai.hidden = NO;
         self.ivHot.hidden = YES;
         self.ivCold.hidden = YES;
@@ -114,28 +114,28 @@
     [super dialogWillShow];
 }
 
--(void)dialogDidShow {
+- (void)dialogDidShow {
     [super dialogDidShow];
-    if(!self.shouldShowSigningInfo){
+    if (!self.shouldShowSigningInfo) {
         return;
     }
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
-        BTHDMAddress *hdm = (BTHDMAddress *)self.address;
-        NSArray* signingPubs = [self.tx.ins[0] getP2SHPubKeys];
+        BTHDMAddress *hdm = (BTHDMAddress *) self.address;
+        NSArray *signingPubs = [self.tx.ins[0] getP2SHPubKeys];
         BOOL isHot = NO;
         BOOL isCold = NO;
         BOOL isServer = NO;
 
-        for(NSData* pub in signingPubs){
-            if(!isHot && [pub isEqualToData:hdm.pubHot]){
+        for (NSData *pub in signingPubs) {
+            if (!isHot && [pub isEqualToData:hdm.pubHot]) {
                 isHot = YES;
                 continue;
             }
-            if(!isCold && [pub isEqualToData:hdm.pubCold]){
+            if (!isCold && [pub isEqualToData:hdm.pubCold]) {
                 isCold = YES;
                 continue;
             }
-            if(!isServer && [pub isEqualToData:hdm.pubRemote]){
+            if (!isServer && [pub isEqualToData:hdm.pubRemote]) {
                 isServer = YES;
                 continue;
             }
@@ -144,19 +144,19 @@
             self.ai.hidden = YES;
             CGFloat left = -1;
             CGRect frame = self.ivHot.frame;
-            if(isHot){
+            if (isHot) {
                 self.ivHot.hidden = NO;
                 frame.origin.x = left;
                 self.ivHot.frame = frame;
                 left += kPartSize;
             }
-            if(isCold){
+            if (isCold) {
                 self.ivCold.hidden = NO;
                 frame.origin.x = left;
                 self.ivCold.frame = frame;
                 left += kPartSize;
             }
-            if(isServer){
+            if (isServer) {
                 self.ivServer.hidden = NO;
                 frame.origin.x = left;
                 self.ivServer.frame = frame;
@@ -165,7 +165,7 @@
     });
 }
 
-+(BOOL)shouldShowSigningInfo:(BTTx*)tx andAddress:(BTAddress*)address{
++ (BOOL)shouldShowSigningInfo:(BTTx *)tx andAddress:(BTAddress *)address {
     return address.isHDM && [tx deltaAmountFrom:address] < 0;
 }
 

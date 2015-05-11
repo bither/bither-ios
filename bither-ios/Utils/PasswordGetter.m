@@ -8,26 +8,27 @@
 
 #import "PasswordGetter.h"
 #import "DialogPassword.h"
-@interface PasswordGetter()<DialogPasswordDelegate>{
-    NSString* password;
+
+@interface PasswordGetter () <DialogPasswordDelegate> {
+    NSString *password;
     NSCondition *condition;
 }
 @end
 
 @implementation PasswordGetter
 
--(instancetype)initWithWindow:(UIWindow*)window{
+- (instancetype)initWithWindow:(UIWindow *)window {
     self = [super init];
-    if(self){
+    if (self) {
         self.window = window;
         condition = [NSCondition new];
     }
     return self;
 }
 
--(instancetype)initWithWindow:(UIWindow *)window andDelegate:(NSObject<PasswordGetterDelegate>*)delegate{
+- (instancetype)initWithWindow:(UIWindow *)window andDelegate:(NSObject <PasswordGetterDelegate> *)delegate {
     self = [super init];
-    if(self){
+    if (self) {
         self.window = window;
         self.delegate = delegate;
         condition = [NSCondition new];
@@ -35,13 +36,13 @@
     return self;
 }
 
--(NSString*)password{
-    if(!password){
+- (NSString *)password {
+    if (!password) {
         dispatch_async(dispatch_get_main_queue(), ^{
-            if(self.delegate && [self.delegate respondsToSelector:@selector(beforePasswordDialogShow)]){
+            if (self.delegate && [self.delegate respondsToSelector:@selector(beforePasswordDialogShow)]) {
                 [self.delegate beforePasswordDialogShow];
             }
-            [[[DialogPassword alloc]initWithDelegate:self]showInWindow:self.window];
+            [[[DialogPassword alloc] initWithDelegate:self] showInWindow:self.window];
         });
         [condition lock];
         [condition wait];
@@ -50,29 +51,29 @@
     return password;
 }
 
--(void)setPassword:(NSString *)p {
+- (void)setPassword:(NSString *)p {
     password = p;
 }
 
--(BOOL)hasPassword{
+- (BOOL)hasPassword {
     return password != nil;
 }
 
--(void)onPasswordEntered:(NSString*)p{
+- (void)onPasswordEntered:(NSString *)p {
     password = p;
     [self signalReturn];
 }
 
--(void)signalReturn{
+- (void)signalReturn {
     [condition lock];
     [condition signal];
     [condition unlock];
-    if(self.delegate && [self.delegate respondsToSelector:@selector(afterPasswordDialogDismiss)]){
+    if (self.delegate && [self.delegate respondsToSelector:@selector(afterPasswordDialogDismiss)]) {
         [self.delegate afterPasswordDialogDismiss];
     }
 }
 
--(void)dialogPasswordCanceled{
+- (void)dialogPasswordCanceled {
     password = nil;
     [self signalReturn];
 }

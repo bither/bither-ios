@@ -16,13 +16,10 @@
 //  See the License for the specific language governing permissions and
 //  limitations under the License.
 
-#import <Bitheri/BTUtils.h>
 #import "HotAddressAddViewController.h"
 #import "UIViewController+PiShowBanner.h"
 #import "PiPageViewController.h"
 #import "BTAddressManager.h"
-#import "BitherSetting.h"
-#import "HotAddressAddHDMViewController.h"
 
 #define kHD (@"HotAddressAddHDAccount")
 #define kHDView (@"HotAddressAddHDAccountView")

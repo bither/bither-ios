@@ -19,13 +19,17 @@
 #import <UIKit/UIKit.h>
 
 @protocol ShowBannerDelegete <NSObject>
--(void) showBannerWithMessage:(NSString*)msg;
+- (void)showBannerWithMessage:(NSString *)msg;
 @end
 
 @interface UIViewController (PiShowBanner)
--(void) showBannerWithMessage:(NSString*)msg belowView:(UIView*) topView;
--(void) showBannerWithMessage:(NSString *)msg belowView:(UIView*) topView withCompletion:(void(^)())completion;
--(void) showBannerWithMessage:(NSString *)msg belowView:(UIView*) topView autoHideIn:(NSTimeInterval)secs;
--(void) showBannerWithMessage:(NSString *)msg belowView:(UIView*) topView autoHideIn:(NSTimeInterval)secs withCompletion:(void(^)())completion;
--(void) showBannerWithMessage:(NSString *)msg belowView:(UIView*) topView belowTop:(CGFloat)top autoHideIn:(NSTimeInterval)secs withCompletion:(void(^)())completion;
+- (void)showBannerWithMessage:(NSString *)msg belowView:(UIView *)topView;
+
+- (void)showBannerWithMessage:(NSString *)msg belowView:(UIView *)topView withCompletion:(void (^)())completion;
+
+- (void)showBannerWithMessage:(NSString *)msg belowView:(UIView *)topView autoHideIn:(NSTimeInterval)secs;
+
+- (void)showBannerWithMessage:(NSString *)msg belowView:(UIView *)topView autoHideIn:(NSTimeInterval)secs withCompletion:(void (^)())completion;
+
+- (void)showBannerWithMessage:(NSString *)msg belowView:(UIView *)topView belowTop:(CGFloat)top autoHideIn:(NSTimeInterval)secs withCompletion:(void (^)())completion;
 @end

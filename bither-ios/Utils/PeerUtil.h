@@ -21,9 +21,10 @@
 
 @interface PeerUtil : NSObject
 + (PeerUtil *)instance;
-- (void)startPeer;
--(void)stopPeer;
 
+- (void)startPeer;
+
+- (void)stopPeer;
 
 
 @end

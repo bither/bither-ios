@@ -11,7 +11,7 @@
 
 @implementation UIImage (ImageRenderToColor)
 
--(UIImage*)renderToColor:(UIColor*)color{
+- (UIImage *)renderToColor:(UIColor *)color {
     CIImage *bg = [CIImage imageWithCGImage:[UIImage imageWithColor:[UIColor colorWithWhite:0 alpha:0] size:self.size].CGImage];
     CIImage *fg = [CIImage imageWithCGImage:[UIImage imageWithColor:color size:self.size].CGImage];
     CIFilter *alphaBlendFilter = [CIFilter filterWithName:@"CIBlendWithAlphaMask" keysAndValues:@"inputImage", fg, @"inputBackgroundImage", bg, @"inputMaskImage", [CIImage imageWithCGImage:self.CGImage], nil];

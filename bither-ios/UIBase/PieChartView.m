@@ -19,7 +19,6 @@
 
 #import "PieChartView.h"
 #import "BitherSetting.h"
-#import <QuartzCore/QuartzCore.h>
 
 #define kDefaultStartAngle (-M_PI_2)
 #define kTransformDuration (0.4f)

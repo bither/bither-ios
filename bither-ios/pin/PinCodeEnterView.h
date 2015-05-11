@@ -20,22 +20,25 @@
 #import "PinCodeDotsView.h"
 
 @protocol PinCodeEnterViewDelegate <NSObject>
--(void)onEntered:(NSString*) code;
+- (void)onEntered:(NSString *)code;
 @end
 
 @interface PinCodeEnterView : UIView
 
-@property UILabel* label;
-@property PinCodeDotsView* dv;
-@property PinCodeDotsView* dvNew;
-@property (weak) NSObject<PinCodeEnterViewDelegate>* delegate;
+@property UILabel *label;
+@property PinCodeDotsView *dv;
+@property PinCodeDotsView *dvNew;
+@property(weak) NSObject <PinCodeEnterViewDelegate> *delegate;
 @property NSUInteger pinCodeLength;
-@property NSString* msg;
+@property NSString *msg;
 @property BOOL enabled;
-@property NSString* text;
+@property NSString *text;
 
--(void)clearText;
--(void)vibrate;
--(void)animateToNext;
--(void)shakeToClear;
+- (void)clearText;
+
+- (void)vibrate;
+
+- (void)animateToNext;
+
+- (void)shakeToClear;
 @end

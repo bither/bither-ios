@@ -32,7 +32,7 @@
 }
 
 - (NSDictionary *)toTrim:(NSDictionary *)report {
-    NSMutableDictionary *newReport = [NSMutableDictionary dictionaryWithDictionary:(NSDictionary *)[report copy]];
+    NSMutableDictionary *newReport = [NSMutableDictionary dictionaryWithDictionary:(NSDictionary *) [report copy]];
     [newReport removeObjectForKey:@"binary_images"];
     return newReport;
 }

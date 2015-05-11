@@ -35,8 +35,6 @@
 #import "DialogAlert.h"
 #import "KeyUtil.h"
 #import "HotAddressViewController.h"
-#import "BitherSetting.h"
-#import "UIImage+ImageRenderToColor.h"
 #import "DialogXrandomInfo.h"
 #import "BTAddressManager.h"
 #import "SignMessageViewController.h"

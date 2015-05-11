@@ -17,11 +17,9 @@
 
 #import "HDMKeychainRecoverUtil.h"
 #import "BTAddressManager.h"
-#import "BTHDMAddress.h"
 #import "BTHDMBid+Api.h"
 #import "DialogAlert.h"
 #import "ScanQrCodeTransportViewController.h"
-#import "BTQRCodeUtil.h"
 #import "BTUtils.h"
 #import "PasswordGetter.h"
 #import "DialogProgress.h"
@@ -31,17 +29,17 @@
 #import "BTHDMKeychainRecover.h"
 #import "KeyUtil.h"
 
-@interface HDMKeychainRecoverUtil()<PasswordGetterDelegate,ScanQrCodeDelegate>{
-    PasswordGetter* _passwordGetter;
+@interface HDMKeychainRecoverUtil () <PasswordGetterDelegate, ScanQrCodeDelegate> {
+    PasswordGetter *_passwordGetter;
     DialogProgress *dp;
     SEL afterQRScanSelector;
-    NSData * coldRoot;
-    BTHDMBid * hdmBid;
-    NSString * hdmBidSignature;
+    NSData *coldRoot;
+    BTHDMBid *hdmBid;
+    NSString *hdmBidSignature;
 
 }
 
-@property (weak) UIViewController* controller;
+@property(weak) UIViewController *controller;
 
 
 @end
@@ -50,29 +48,31 @@
 
 }
 
--(instancetype)initWithViewContoller:(UIViewController*)controller{
+- (instancetype)initWithViewContoller:(UIViewController *)controller {
     self = [super init];
-    if(self){
+    if (self) {
         self.controller = controller;
         [self firstConfigure];
     }
     return self;
 }
 
--(void)firstConfigure{
+- (void)firstConfigure {
     hdmBid = nil;
-    dp = [[DialogProgress alloc]initWithMessage:NSLocalizedString(@"Please wait…", nil)];
+    dp = [[DialogProgress alloc] initWithMessage:NSLocalizedString(@"Please wait…", nil)];
     dp.touchOutSideToDismiss = NO;
 }
 
--(BOOL)canRecover {
-    return [[BTAddressManager instance] hdmKeychain]== nil;
+- (BOOL)canRecover {
+    return [[BTAddressManager instance] hdmKeychain] == nil;
 }
--(void)revovery {
+
+- (void)revovery {
     [self getColdRoot];
 }
--(void )getColdRoot{
-    if (coldRoot== nil) {
+
+- (void)getColdRoot {
+    if (coldRoot == nil) {
         [[[DialogAlert alloc] initWithMessage:NSLocalizedString(@"hdm_keychain_add_scan_cold", nil) confirm:^{
             afterQRScanSelector = @selector(coldScanned:);
             ScanQrCodeViewController *scan = [[ScanQrCodeViewController alloc] initWithDelegate:self];
@@ -83,34 +83,34 @@
 }
 
 
--(void)coldScanned:(NSString*)result{
+- (void)coldScanned:(NSString *)result {
     coldRoot = [result hexToData];
-    if(!coldRoot){
+    if (!coldRoot) {
         [self showMsg:NSLocalizedString(@"hdm_keychain_add_scan_cold", nil)];
         return;
     }
 
-    if(!dp.shown && self.passwordGetter.hasPassword ){
+    if (!dp.shown && self.passwordGetter.hasPassword) {
         [dp showInWindow:self.controller.view.window];
     }
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
-        NSString* password = self.passwordGetter.password;
-        if(!password){
+        NSString *password = self.passwordGetter.password;
+        if (!password) {
             dispatch_async(dispatch_get_main_queue(), ^{
                 [dp dismiss];
             });
-            return ;
+            return;
         }
         [self initHDMBidFromColdRoot];
         dispatch_async(dispatch_get_main_queue(), ^{
-                [self server];
+            [self server];
         });
     });
 }
 
 
--(void)server{
-    if(!coldRoot && !hdmBid){
+- (void)server {
+    if (!coldRoot && !hdmBid) {
         //serverPressed = YES;
         [self getColdRoot];
         return;
@@ -119,23 +119,23 @@
 
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
         [self initHDMBidFromColdRoot];
-        NSError* error;
-        NSString* preSign = [hdmBid getPreSignHashAndError:&error];
-        if(error && !preSign){
+        NSError *error;
+        NSString *preSign = [hdmBid getPreSignHashAndError:&error];
+        if (error && !preSign) {
             dispatch_async(dispatch_get_main_queue(), ^{
                 [dp dismissWithCompletion:^{
                     [self showMsg:error.msg];
                 }];
 
             });
-        }else{
+        } else {
             dispatch_async(dispatch_get_main_queue(), ^{
                 [dp dismissWithCompletion:^{
-                    [[[DialogHDMServerUnsignedQRCode alloc]initWithContent:preSign andAction:^{
+                    [[[DialogHDMServerUnsignedQRCode alloc] initWithContent:preSign andAction:^{
                         afterQRScanSelector = @selector(serverScanned:);
-                        ScanQrCodeViewController* scan = [[ScanQrCodeViewController alloc]initWithDelegate:self];
+                        ScanQrCodeViewController *scan = [[ScanQrCodeViewController alloc] initWithDelegate:self];
                         [self.controller presentViewController:scan animated:YES completion:nil];
-                    }]showInWindow:self.controller.view.window];
+                    }] showInWindow:self.controller.view.window];
                 }];
             });
         }
@@ -143,22 +143,20 @@
 }
 
 
-
-
--(void)serverScanned:(NSString*)result{
-    if(!hdmBid){
+- (void)serverScanned:(NSString *)result {
+    if (!hdmBid) {
         return;
     }
-    __block NSString * blockResult=[[result hexToData] base64EncodedStringWithOptions:0];
+    __block NSString *blockResult = [[result hexToData] base64EncodedStringWithOptions:0];
     [dp showInWindow:self.controller.view.window completion:^{
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
-            NSString* password = self.passwordGetter.password;
-            if(!password){
+            NSString *password = self.passwordGetter.password;
+            if (!password) {
                 return;
             }
-            [[PeerUtil instance]stopPeer];
-            __block NSError* error;
-            __block NSArray * as=  [hdmBid recoverHDMWithSignature:blockResult andPassword:password andError:&error];
+            [[PeerUtil instance] stopPeer];
+            __block NSError *error;
+            __block NSArray *as = [hdmBid recoverHDMWithSignature:blockResult andPassword:password andError:&error];
             if (!error) {
                 BTHDMKeychain *keychain = [[BTHDMKeychainRecover alloc] initWithColdExternalRootPub:coldRoot password:password andFetchBlock:^NSArray *(NSString *password) {
                     return as;
@@ -167,43 +165,42 @@
             }
             dispatch_async(dispatch_get_main_queue(), ^{
                 [dp dismissWithCompletion:^{
-                    if(error) {
+                    if (error) {
                         if (error && error.isHttp400) {
                             [self showMsg:error.msg];
                         } else {
                             [self showMsg:NSLocalizedString(@"Network failure.", nil)];
                         }
-                    } else{
+                    } else {
                         [self showMsg:NSLocalizedString(@"hdm_keychain_recovery_message", nil)];
                     }
                 }];
             });
-            [[PeerUtil instance]startPeer];
+            [[PeerUtil instance] startPeer];
 
         });
     }];
 }
 
--(void)initHDMBidFromColdRoot{
-    if(hdmBid){
+- (void)initHDMBidFromColdRoot {
+    if (hdmBid) {
         return;
     }
-    BTBIP32Key* root = [[BTBIP32Key alloc]initWithMasterPubKey:[NSData dataWithBytes:coldRoot.bytes length:coldRoot.length]];
-    BTBIP32Key* key = [root deriveSoftened:0];
-    NSString* address = key.key.address;
+    BTBIP32Key *root = [[BTBIP32Key alloc] initWithMasterPubKey:[NSData dataWithBytes:coldRoot.bytes length:coldRoot.length]];
+    BTBIP32Key *key = [root deriveSoftened:0];
+    NSString *address = key.key.address;
     [root wipe];
     [key wipe];
-    hdmBid = [[BTHDMBid alloc]initWithHDMBid:address];
+    hdmBid = [[BTHDMBid alloc] initWithHDMBid:address];
 }
 
 
-
--(void)handleResult:(NSString*)result byReader:(ScanQrCodeViewController*)reader{
-    if([BTUtils isEmpty:result]){
+- (void)handleResult:(NSString *)result byReader:(ScanQrCodeViewController *)reader {
+    if ([BTUtils isEmpty:result]) {
         return;
     }
     [reader.presentingViewController dismissViewControllerAnimated:YES completion:^{
-        if(afterQRScanSelector && [self respondsToSelector:afterQRScanSelector]){
+        if (afterQRScanSelector && [self respondsToSelector:afterQRScanSelector]) {
             [self performSelector:afterQRScanSelector withObject:result];
         }
         afterQRScanSelector = nil;
@@ -211,31 +208,29 @@
     }];
 }
 
--(void)showMsg:(NSString*)msg{
-    if(self.controller && [self.controller respondsToSelector:@selector(showMsg:)]){
+- (void)showMsg:(NSString *)msg {
+    if (self.controller && [self.controller respondsToSelector:@selector(showMsg:)]) {
         [self.controller performSelector:@selector(showMsg:) withObject:msg];
     }
 }
 
 
-
 - (PasswordGetter *)passwordGetter {
-    if(!_passwordGetter){
+    if (!_passwordGetter) {
         _passwordGetter = [[PasswordGetter alloc] initWithWindow:self.controller.view.window andDelegate:self];
     }
     return _passwordGetter;
 }
 
 
-
--(void)beforePasswordDialogShow{
-    if(dp.shown){
+- (void)beforePasswordDialogShow {
+    if (dp.shown) {
         [dp dismiss];
     }
 }
 
--(void)afterPasswordDialogDismiss{
-    if(!dp.shown){
+- (void)afterPasswordDialogDismiss {
+    if (!dp.shown) {
         [dp showInWindow:self.controller.view.window];
     }
 }

@@ -19,5 +19,5 @@
 #import <Foundation/Foundation.h>
 
 @interface NSAttributedString (Size)
--(CGSize)sizeWithRestrict:(CGSize)restr;
+- (CGSize)sizeWithRestrict:(CGSize)restr;
 @end

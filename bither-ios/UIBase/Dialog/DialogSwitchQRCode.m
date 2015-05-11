@@ -26,29 +26,29 @@
 
 #define kFontSize (16)
 
-@interface DialogSwitchQRCode(){
+@interface DialogSwitchQRCode () {
     NSString *switchQRCodeStr;
 }
 @end
 
 @implementation DialogSwitchQRCode
 
--(instancetype)initWithDelegate:(NSObject<DialogSwitchQRCodeDelegate>*)delegate{
-    NSString* viewStr = NSLocalizedString(@"Switch QRCode", nil);
+- (instancetype)initWithDelegate:(NSObject <DialogSwitchQRCodeDelegate> *)delegate {
+    NSString *viewStr = NSLocalizedString(@"Switch QRCode", nil);
     self = [super initWithFrame:CGRectMake(0, 0, [viewStr sizeWithRestrict:CGSizeMake(CGFLOAT_MAX, kButtonHeight) font:[UIFont systemFontOfSize:kFontSize]].width + kButtonEdgeInsets.left + kButtonEdgeInsets.right, kHeight)];
-    if(self){
-        switchQRCodeStr  = viewStr;
+    if (self) {
+        switchQRCodeStr = viewStr;
         self.delegate = delegate;
         [self firstConfigureHasPrivateKey];
     }
     return self;
 }
 
--(void)firstConfigureHasPrivateKey{
+- (void)firstConfigureHasPrivateKey {
     self.bgInsets = UIEdgeInsetsMake(4, 16, 4, 16);
     CGFloat bottom = 0;
     bottom = [self createButtonWithText:switchQRCodeStr top:bottom action:@selector(viewOnBlockChainInfoPressed:)];
-    UIView *seperator = [[UIView alloc]initWithFrame:CGRectMake(0, bottom, self.frame.size.width, 1)];
+    UIView *seperator = [[UIView alloc] initWithFrame:CGRectMake(0, bottom, self.frame.size.width, 1)];
     seperator.autoresizingMask = UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleWidth;
     seperator.backgroundColor = [UIColor colorWithWhite:1 alpha:0.5];
     [self addSubview:seperator];
@@ -59,8 +59,8 @@
     self.frame = frame;
 }
 
--(CGFloat)createButtonWithText:(NSString*)text top:(CGFloat)top action:(SEL)selector{
-    UIButton *btn = [[UIButton alloc]initWithFrame:CGRectMake(0, top, self.frame.size.width, kButtonHeight)];
+- (CGFloat)createButtonWithText:(NSString *)text top:(CGFloat)top action:(SEL)selector {
+    UIButton *btn = [[UIButton alloc] initWithFrame:CGRectMake(0, top, self.frame.size.width, kButtonHeight)];
     [btn setBackgroundImage:nil forState:UIControlStateNormal];
     [btn setBackgroundImage:[UIImage imageNamed:@"card_foreground_pressed"] forState:UIControlStateHighlighted];
     btn.contentEdgeInsets = kButtonEdgeInsets;
@@ -75,19 +75,18 @@
     return CGRectGetMaxY(btn.frame);
 }
 
--(void)viewOnBlockChainInfoPressed:(id)sender{
+- (void)viewOnBlockChainInfoPressed:(id)sender {
     [self dismissWithCompletion:^{
-        if(self.delegate && [self.delegate respondsToSelector:@selector(switchQRCode)]){
+        if (self.delegate && [self.delegate respondsToSelector:@selector(switchQRCode)]) {
             [self.delegate switchQRCode];
         }
     }];
 }
 
 
--(void)cancelPressed:(id)sender{
+- (void)cancelPressed:(id)sender {
     [self dismiss];
 }
-
 
 
 @end

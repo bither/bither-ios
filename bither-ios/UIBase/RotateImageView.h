@@ -19,7 +19,9 @@
 #import <UIKit/UIKit.h>
 
 @interface RotateImageView : UIImageView
--(void)rotate;
--(void)reset;
--(void)resetWithCompletion:(void(^)()) completion;
+- (void)rotate;
+
+- (void)reset;
+
+- (void)resetWithCompletion:(void (^)())completion;
 @end

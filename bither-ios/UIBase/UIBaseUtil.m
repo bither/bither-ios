@@ -18,12 +18,12 @@
 #import "UIBaseUtil.h"
 
 @implementation UIView (FindUIViewController)
-- (UIViewController *) getUIViewController {
+- (UIViewController *)getUIViewController {
     // convenience function for casting and to "mask" the recursive function
-    return (UIViewController *)[self traverseResponderChainForUIViewController];
+    return (UIViewController *) [self traverseResponderChainForUIViewController];
 }
 
-- (id) traverseResponderChainForUIViewController {
+- (id)traverseResponderChainForUIViewController {
     id nextResponder = [self nextResponder];
     if ([nextResponder isKindOfClass:[UIViewController class]]) {
         return nextResponder;
@@ -38,51 +38,51 @@
 
 @implementation UIView (GenerateImage)
 
-- (UIImage *)generateImage{
+- (UIImage *)generateImage {
     CGSize pageSize = self.frame.size;
     UIGraphicsBeginImageContextWithOptions(pageSize, self.opaque, 0);
     CGContextRef context = UIGraphicsGetCurrentContext();
     [self.layer renderInContext:context];
     UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
-    
+
     return image;
-    
+
 }
 
 @end
 
-@implementation UIView(Shake)
+@implementation UIView (Shake)
 
--(void)shakeTime:(NSInteger)time interval:(double)interval length:(CGFloat)length{
+- (void)shakeTime:(NSInteger)time interval:(double)interval length:(CGFloat)length {
     [self shakeTime:time interval:interval length:length completion:nil];
 }
 
--(void)shakeTime:(NSInteger)time interval:(double)interval length:(CGFloat)length completion:(void (^)())completion{
+- (void)shakeTime:(NSInteger)time interval:(double)interval length:(CGFloat)length completion:(void (^)())completion {
     [self shakeIndex:0 total:time interval:interval length:length completion:completion];
 }
 
--(void)shakeIndex:(NSInteger)index total:(NSInteger)total interval:(double)interval length:(CGFloat)length completion:(void (^)())completion{
-    if(index < total){
+- (void)shakeIndex:(NSInteger)index total:(NSInteger)total interval:(double)interval length:(CGFloat)length completion:(void (^)())completion {
+    if (index < total) {
         double duration = interval;
-        if(index == 0 || index == total - 1){
+        if (index == 0 || index == total - 1) {
             duration = duration / 2;
         }
         [UIView animateWithDuration:duration animations:^{
-            if(index == total - 1){
+            if (index == total - 1) {
                 self.transform = CGAffineTransformIdentity;
-            }else{
-                if(index % 2 == 0){
+            } else {
+                if (index % 2 == 0) {
                     self.transform = CGAffineTransformMakeTranslation(-length, 0);
-                }else{
+                } else {
                     self.transform = CGAffineTransformMakeTranslation(length, 0);
                 }
             }
-        } completion:^(BOOL finished) {
+        }                completion:^(BOOL finished) {
             [self shakeIndex:index + 1 total:total interval:interval length:length completion:completion];
         }];
-    }else{
-        if(completion){
+    } else {
+        if (completion) {
             completion();
         }
     }
@@ -90,17 +90,17 @@
 
 @end
 
-@implementation UIWindow(TopViewController)
+@implementation UIWindow (TopViewController)
 
 
--(UIViewController*)topViewController{
+- (UIViewController *)topViewController {
     return [self topPresentedViewController:self.rootViewController];
 }
 
--(UIViewController*)topPresentedViewController:(UIViewController*)root{
-    if(root.presentedViewController){
+- (UIViewController *)topPresentedViewController:(UIViewController *)root {
+    if (root.presentedViewController) {
         return [self topPresentedViewController:root.presentedViewController];
-    }else{
+    } else {
         return root;
     }
 }
@@ -108,11 +108,11 @@
 @end
 
 @implementation UIBaseUtil
-+(void)makeButtonBgResizable:(UIButton *)button{
-    UIImage* normalBg = [button backgroundImageForState:UIControlStateNormal];
-    UIImage* highlightedBg = [button backgroundImageForState:UIControlStateHighlighted];
-    normalBg = [normalBg resizableImageWithCapInsets:UIEdgeInsetsMake(normalBg.size.height/2, normalBg.size.width/2, normalBg.size.height/2, normalBg.size.width/2)];
-    highlightedBg = [highlightedBg resizableImageWithCapInsets:UIEdgeInsetsMake(highlightedBg.size.height/2, highlightedBg.size.width/2, highlightedBg.size.height/2, highlightedBg.size.width/2)];
++ (void)makeButtonBgResizable:(UIButton *)button {
+    UIImage *normalBg = [button backgroundImageForState:UIControlStateNormal];
+    UIImage *highlightedBg = [button backgroundImageForState:UIControlStateHighlighted];
+    normalBg = [normalBg resizableImageWithCapInsets:UIEdgeInsetsMake(normalBg.size.height / 2, normalBg.size.width / 2, normalBg.size.height / 2, normalBg.size.width / 2)];
+    highlightedBg = [highlightedBg resizableImageWithCapInsets:UIEdgeInsetsMake(highlightedBg.size.height / 2, highlightedBg.size.width / 2, highlightedBg.size.height / 2, highlightedBg.size.width / 2)];
     [button setBackgroundImage:normalBg forState:UIControlStateNormal];
     [button setBackgroundImage:highlightedBg forState:UIControlStateHighlighted];
 }

@@ -21,10 +21,10 @@
 #import "DialogPassword.h"
 #import "DialogKeychainBackupDiff.h"
 
-@interface KeychainSetting : Setting<DialogPasswordDelegate, DialogKeychainBackupDiffDelegate>
+@interface KeychainSetting : Setting <DialogPasswordDelegate, DialogKeychainBackupDiffDelegate>
 
-@property(nonatomic,strong) UIViewController * controller;
+@property(nonatomic, strong) UIViewController *controller;
 
-+(Setting *)getKeychainSetting;
++ (Setting *)getKeychainSetting;
 
 @end

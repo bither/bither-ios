@@ -26,27 +26,27 @@
 
 @implementation DialogSendOption
 
--(instancetype)initWithDelegate:(NSObject<DialogSendOptionDelegate>*)delegate{
-    NSString* str = NSLocalizedString(@"select_change_address_option_name", nil);
+- (instancetype)initWithDelegate:(NSObject <DialogSendOptionDelegate> *)delegate {
+    NSString *str = NSLocalizedString(@"select_change_address_option_name", nil);
     CGFloat width = [str sizeWithRestrict:CGSizeMake(CGFLOAT_MAX, kButtonHeight) font:[UIFont systemFontOfSize:kFontSize]].width + kButtonEdgeInsets.left + kButtonEdgeInsets.right;
     width = MAX(kMinWidth, width);
     self = [super initWithFrame:CGRectMake(0, 0, width, kButtonHeight * 2 + 1)];
-    if(self){
+    if (self) {
         self.delegate = delegate;
         [self firstConfigure];
     }
     return self;
 }
 
--(void)firstConfigure{
+- (void)firstConfigure {
     self.bgInsets = UIEdgeInsetsMake(4, 16, 4, 16);
     CGFloat bottom = 0;
     bottom = [self createButtonWithText:NSLocalizedString(@"select_change_address_option_name", nil) top:bottom action:@selector(selectChangeAddressPressed:)];
-    UIView *seperator = [[UIView alloc]initWithFrame:CGRectMake(0, bottom, self.frame.size.width, 1)];
+    UIView *seperator = [[UIView alloc] initWithFrame:CGRectMake(0, bottom, self.frame.size.width, 1)];
     seperator.autoresizingMask = UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleWidth;
     seperator.backgroundColor = [UIColor colorWithWhite:1 alpha:0.5];
     [self addSubview:seperator];
-    
+
     bottom += 1;
     bottom = [self createButtonWithText:NSLocalizedString(@"Cancel", nil) top:bottom action:@selector(cancelPressed:)];
     CGRect frame = self.frame;
@@ -54,21 +54,21 @@
     self.frame = frame;
 }
 
--(void)selectChangeAddressPressed:(id)sender{
-    __weak __block NSObject<DialogSendOptionDelegate>* d = self.delegate;
+- (void)selectChangeAddressPressed:(id)sender {
+    __weak __block NSObject <DialogSendOptionDelegate> *d = self.delegate;
     [self dismissWithCompletion:^{
-        if(d && [d respondsToSelector:@selector(selectChangeAddress)]){
+        if (d && [d respondsToSelector:@selector(selectChangeAddress)]) {
             [d selectChangeAddress];
         }
     }];
 }
 
--(void)cancelPressed:(id)sender{
+- (void)cancelPressed:(id)sender {
     [self dismiss];
 }
 
--(CGFloat)createButtonWithText:(NSString*)text top:(CGFloat)top action:(SEL)selector{
-    UIButton *btn = [[UIButton alloc]initWithFrame:CGRectMake(0, top, self.frame.size.width, kButtonHeight)];
+- (CGFloat)createButtonWithText:(NSString *)text top:(CGFloat)top action:(SEL)selector {
+    UIButton *btn = [[UIButton alloc] initWithFrame:CGRectMake(0, top, self.frame.size.width, kButtonHeight)];
     [btn setBackgroundImage:nil forState:UIControlStateNormal];
     [btn setBackgroundImage:[UIImage imageNamed:@"card_foreground_pressed"] forState:UIControlStateHighlighted];
     btn.contentEdgeInsets = kButtonEdgeInsets;
