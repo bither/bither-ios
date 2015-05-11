@@ -21,11 +21,13 @@
 
 #import "GroupUserDefaultUtil.h"
 #import "GroupFileUtil.h"
+#import "QRCodeThemeUtil.h"
 
 #define DEFAULT_MARKET @"default_market"
 #define DEFAULT_EXCHANGE_RATE @"default_exchange_rate"
 #define BITCOIN_UNIT @"bitcoin_unit"
 #define PAYMENT_ADDRESS @"payment_address"
+#define FANCY_QR_CODE_THEME @"fancy_qr_code_theme"
 
 NSUserDefaults *groupUserDefaults;
 static GroupUserDefaultUtil *groupUserDefaultsUtil;
@@ -97,6 +99,22 @@ static GroupUserDefaultUtil *groupUserDefaultsUtil;
         [groupUserDefaults setInteger:unit forKey:BITCOIN_UNIT];
         [groupUserDefaults synchronize];
     }
+}
+
+- (NSInteger)getQrCodeTheme {
+    NSInteger index = [groupUserDefaults integerForKey:FANCY_QR_CODE_THEME];
+    if (index < 0) {
+        index = 0;
+    }
+    if (index >= [QRCodeTheme themes].count) {
+        index = [QRCodeTheme themes].count - 1;
+    }
+    return index;
+}
+
+- (void)setQrCodeTheme:(NSInteger)qrCodeTheme {
+    [groupUserDefaults setInteger:qrCodeTheme forKey:FANCY_QR_CODE_THEME];
+    [groupUserDefaults synchronize];
 }
 
 - (void)setPaymentAddress:(NSString *)address {

@@ -19,6 +19,7 @@
 #import "QRCodeThemeUtil.h"
 #import "UIImage+ImageWithColor.h"
 #import "UIColor+Util.h"
+@import UIKit;
 
 @implementation QRCodeThemeUtil
 

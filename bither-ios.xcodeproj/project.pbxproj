@@ -58,6 +58,10 @@
 		0AD674971A7B4BDA007967DB /* ColdAddressListHDMCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AD674961A7B4BDA007967DB /* ColdAddressListHDMCell.m */; };
 		0AD6749C1A7B6229007967DB /* DialogWithActions.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AD6749B1A7B6229007967DB /* DialogWithActions.m */; };
 		0AD6749F1A7B9108007967DB /* DialogHDMSeedWordList.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AD6749E1A7B9108007967DB /* DialogHDMSeedWordList.m */; };
+		0AE142621B00924C0070C580 /* PaymentInterfaceController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AE142611B00924C0070C580 /* PaymentInterfaceController.m */; };
+		0AE142631B0094140070C580 /* QRCodeThemeUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = ACEE7D1C19D3F9F500932B39 /* QRCodeThemeUtil.m */; };
+		0AE142641B00941B0070C580 /* UIColor+Util.m in Sources */ = {isa = PBXBuildFile; fileRef = ACDDDC3519483A840008A79D /* UIColor+Util.m */; };
+		0AE142651B0094220070C580 /* UIImage+ImageWithColor.m in Sources */ = {isa = PBXBuildFile; fileRef = AC33089419556F7A00D8F621 /* UIImage+ImageWithColor.m */; };
 		0AFBA9321AA01EF60059CB4B /* TotalBalance.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AFBA9311AA01EF60059CB4B /* TotalBalance.m */; };
 		0AFBA9351AA0275F0059CB4B /* WatchMarket.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AFBA9341AA0275F0059CB4B /* WatchMarket.m */; };
 		0AFBA9361AA028850059CB4B /* NSDictionary+Fromat.m in Sources */ = {isa = PBXBuildFile; fileRef = 4254086A1946CD17007AF99C /* NSDictionary+Fromat.m */; };
@@ -435,6 +439,8 @@
 		0AD6749B1A7B6229007967DB /* DialogWithActions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DialogWithActions.m; sourceTree = "<group>"; };
 		0AD6749D1A7B9108007967DB /* DialogHDMSeedWordList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DialogHDMSeedWordList.h; sourceTree = "<group>"; };
 		0AD6749E1A7B9108007967DB /* DialogHDMSeedWordList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DialogHDMSeedWordList.m; sourceTree = "<group>"; };
+		0AE142601B00924C0070C580 /* PaymentInterfaceController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PaymentInterfaceController.h; sourceTree = "<group>"; };
+		0AE142611B00924C0070C580 /* PaymentInterfaceController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PaymentInterfaceController.m; sourceTree = "<group>"; };
 		0AFBA9301AA01EF60059CB4B /* TotalBalance.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TotalBalance.h; sourceTree = "<group>"; };
 		0AFBA9311AA01EF60059CB4B /* TotalBalance.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TotalBalance.m; sourceTree = "<group>"; };
 		0AFBA9331AA0275F0059CB4B /* WatchMarket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WatchMarket.h; sourceTree = "<group>"; };
@@ -954,6 +960,8 @@
 				0A52BDA21A9FFC2B00BC8C3E /* bither-ios WatchKit Extension.entitlements */,
 				0A4749741A9D7F0B003684E2 /* InterfaceController.h */,
 				0A4749751A9D7F0B003684E2 /* InterfaceController.m */,
+				0AE142601B00924C0070C580 /* PaymentInterfaceController.h */,
+				0AE142611B00924C0070C580 /* PaymentInterfaceController.m */,
 				0A948DC81AA080E600359F64 /* MarketInterfaceController.h */,
 				0A948DC91AA080E600359F64 /* MarketInterfaceController.m */,
 				0A4749771A9D7F0B003684E2 /* NotificationController.h */,
@@ -1994,16 +2002,20 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0AE142651B0094220070C580 /* UIImage+ImageWithColor.m in Sources */,
 				AC9B35ED1AFF46BC004B10FD /* GroupUtil.m in Sources */,
 				0A4182AE1A9DBB8600576A12 /* WatchStringUtil.m in Sources */,
 				0A6EB31D1AAE9DE200F59ED7 /* WatchMarketBgDrawer.m in Sources */,
 				0A52BDA61A9FFEB800BC8C3E /* GroupFileUtil.m in Sources */,
 				0A637B291AA0608600696260 /* TotalBalanceDrawer.m in Sources */,
 				0AFBA9361AA028850059CB4B /* NSDictionary+Fromat.m in Sources */,
+				0AE142621B00924C0070C580 /* PaymentInterfaceController.m in Sources */,
+				0AE142641B00941B0070C580 /* UIColor+Util.m in Sources */,
 				0A637B1B1AA0427200696260 /* WatchTrendingGraphicData.m in Sources */,
 				0A637B261AA0486300696260 /* WatchTrendingGraphicDrawer.m in Sources */,
 				0AAAEE331AFC83EE00F6E3BB /* WatchPageConfiguration.m in Sources */,
 				0A8853AE1AA8466E00760014 /* GroupUserDefaultUtil.m in Sources */,
+				0AE142631B0094140070C580 /* QRCodeThemeUtil.m in Sources */,
 				0A4182A31A9DB70500576A12 /* WatchUnitUtil.m in Sources */,
 				0A637B1F1AA0443D00696260 /* BaseApi.m in Sources */,
 				0A7F9D311AA83FA500D70BAC /* CacheUtil.m in Sources */,

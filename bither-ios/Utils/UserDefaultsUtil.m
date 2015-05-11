@@ -241,12 +241,16 @@ NSUserDefaults *userDefaults;
     if (index >= [QRCodeTheme themes].count) {
         index = [QRCodeTheme themes].count - 1;
     }
+    if (index != [GroupUserDefaultUtil instance].getQrCodeTheme) {
+        [[GroupUserDefaultUtil instance] setQrCodeTheme:index];
+    }
     return index;
 }
 
 - (void)setQrCodeTheme:(NSInteger)qrCodeTheme {
     [userDefaults setInteger:qrCodeTheme forKey:FANCY_QR_CODE_THEME];
     [userDefaults synchronize];
+    [[GroupUserDefaultUtil instance] setQrCodeTheme:qrCodeTheme];
 }
 
 
@@ -363,18 +367,3 @@ NSUserDefaults *userDefaults;
 }
 
 @end
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

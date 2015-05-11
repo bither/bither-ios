@@ -26,6 +26,20 @@
             </objects>
             <point key="canvasLocation" x="452" y="352"/>
         </scene>
+        <!--Payment-->
+        <scene sceneID="qny-5m-8aD">
+            <objects>
+                <controller identifier="Payment" id="HtR-PG-mH2" customClass="PaymentInterfaceController">
+                    <items>
+                        <imageView width="0.90000000000000002" height="1" alignment="center" contentMode="scaleAspectFit" id="Qle-mQ-hNO"/>
+                    </items>
+                    <connections>
+                        <outlet property="ivQr" destination="Qle-mQ-hNO" id="PES-7u-WNz"/>
+                    </connections>
+                </controller>
+            </objects>
+            <point key="canvasLocation" x="647" y="352"/>
+        </scene>
         <!--Market-->
         <scene sceneID="2hb-rI-xfr">
             <objects>

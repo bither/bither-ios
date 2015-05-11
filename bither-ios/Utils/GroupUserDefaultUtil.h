@@ -46,6 +46,10 @@ typedef enum {
 
 - (void)setDefaultBitcoinUnit:(GroupBitcoinUnit)unit;
 
+- (NSInteger)getQrCodeTheme;
+
+- (void)setQrCodeTheme:(NSInteger)qrCodeTheme;
+
 - (void)setPaymentAddress:(NSString *)address;
 
 - (NSString *)paymentAddress;
