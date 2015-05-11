@@ -29,6 +29,7 @@
 @interface PaymentInterfaceController ()
 @property(weak, nonatomic) IBOutlet WKInterfaceImage *ivQr;
 @property NSString *currentAddress;
+@property NSUInteger currentQrTheme;
 @end
 
 @implementation PaymentInterfaceController
@@ -53,8 +54,9 @@
     if (!payment || payment.length == 0) {
         return;
     }
-    if (self.currentAddress == nil || ![self.currentAddress isEqualToString:[GroupUserDefaultUtil instance].paymentAddress]) {
+    if (self.currentAddress == nil || ![self.currentAddress isEqualToString:[GroupUserDefaultUtil instance].paymentAddress] || self.currentQrTheme != [GroupUserDefaultUtil instance].getQrCodeTheme) {
         self.currentAddress = payment;
+        self.currentQrTheme = [GroupUserDefaultUtil instance].getQrCodeTheme;
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
             UIImage *qr = [QRCodeThemeUtil qrCodeOfContent:payment andSize:kQrImageSize withTheme:[[QRCodeTheme themes] objectAtIndex:[GroupUserDefaultUtil instance].getQrCodeTheme]];
             [[WKInterfaceDevice currentDevice] addCachedImage:qr name:kPaymentAddressQrCache];
@@ -70,6 +72,3 @@
 }
 
 @end
-
-
-

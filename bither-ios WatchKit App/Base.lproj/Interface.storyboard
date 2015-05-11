@@ -10,7 +10,7 @@
             <objects>
                 <controller identifier="Balance" id="AgC-eL-Hgc" customClass="InterfaceController">
                     <items>
-                        <group width="0.90000000000000002" height="0.80000000000000004" alignment="center" verticalAlignment="center" contentMode="scaleAspectFit" id="ysO-G9-RwS">
+                        <group width="1" height="1" alignment="center" verticalAlignment="center" contentMode="scaleAspectFit" id="ysO-G9-RwS">
                             <items>
                                 <label alignment="center" verticalAlignment="center" textAlignment="center" minimumScaleFactor="0.5" id="Je9-T4-j1G">
                                     <fontDescription key="font" style="UICTFontTextStyleSubhead"/>
@@ -31,7 +31,7 @@
             <objects>
                 <controller identifier="Payment" id="HtR-PG-mH2" customClass="PaymentInterfaceController">
                     <items>
-                        <imageView width="0.90000000000000002" height="1" alignment="center" contentMode="scaleAspectFit" id="Qle-mQ-hNO"/>
+                        <imageView width="1" height="1" alignment="center" contentMode="scaleAspectFit" id="Qle-mQ-hNO"/>
                     </items>
                     <connections>
                         <outlet property="ivQr" destination="Qle-mQ-hNO" id="PES-7u-WNz"/>
