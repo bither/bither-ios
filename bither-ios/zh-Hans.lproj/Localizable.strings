@@ -677,3 +677,7 @@
 // vanity address length
 "vanity_address_length" = "荣耀地址位数";
 "vanity_address_none" = "无";
+
+// payment address setting
+"payment_address_setting" = "收款地址";
+"payment_address_none" = "无";

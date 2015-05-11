@@ -46,4 +46,8 @@ typedef enum {
 
 - (void)setDefaultBitcoinUnit:(GroupBitcoinUnit)unit;
 
+- (void)setPaymentAddress:(NSString *)address;
+
+- (NSString *)paymentAddress;
+
 @end

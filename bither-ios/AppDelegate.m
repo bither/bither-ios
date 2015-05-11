@@ -17,6 +17,7 @@
 //  limitations under the License.
 
 
+#import <Bitheri/BTUtils.h>
 #import "AppDelegate.h"
 #import "BTAddressManager.h"
 #import "BTPeerManager.h"
@@ -84,6 +85,7 @@ static StatusBarNotificationWindow *notificationWindow;
         [[UIApplication sharedApplication] registerUserNotificationSettings:[UIUserNotificationSettings settingsForTypes:UIUserNotificationTypeBadge | UIUserNotificationTypeSound | UIUserNotificationTypeAlert categories:nil]];
     }
 
+    [self hdAccountPaymentAddressChanged:nil];
     [self updateGroupBalance];
 
     //   [[BTSettings instance] openBitheriConsole];
@@ -119,7 +121,7 @@ static StatusBarNotificationWindow *notificationWindow;
     notificationWindow = [[StatusBarNotificationWindow alloc] initWithOriWindow:self.window];
     [[PinCodeUtil instance] becomeActive];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(notification:) name:BitherBalanceChangedNotification object:nil];
-
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(hdAccountPaymentAddressChanged:) name:kHDAccountPaymentAddressChangedNotification object:nil];
 }
 
 - (void)notification:(NSNotification *)notification {
@@ -175,6 +177,7 @@ static StatusBarNotificationWindow *notificationWindow;
         return;
     }
     DDLogDebug(@"perform fetch begin");
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(hdAccountPaymentAddressChanged:) name:kHDAccountPaymentAddressChangedNotification object:nil];
     __block id syncFailedObserver = nil;
     __block void (^completion)(UIBackgroundFetchResult) = completionHandler;
     BTPeerManager *m = [BTPeerManager instance];
@@ -312,8 +315,33 @@ static StatusBarNotificationWindow *notificationWindow;
     [self callInCold:^{
         [[NSNotificationCenter defaultCenter] removeObserver:self name:kReachabilityChangedNotification object:nil];
     }];
-
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:kHDAccountPaymentAddressChangedNotification object:nil];
     [[BitherTime instance] stop];
+}
+
+- (void)hdAccountPaymentAddressChanged:(NSNotification *)notification {
+    if (![BTAddressManager instance].hasHDAccount) {
+        return;
+    }
+    UserDefaultsUtil *defaults = [UserDefaultsUtil instance];
+    BTHDAccount *account = [BTAddressManager instance].hdAccount;
+    NSString *paymentAddress = defaults.paymentAddress;
+    BOOL notConfigured = paymentAddress == nil;
+    BOOL shouldChange;
+    if (notConfigured) {
+        shouldChange = YES;
+    } else {
+        if ([BTUtils isEmpty:paymentAddress]) {
+            shouldChange = NO;
+        } else {
+            shouldChange = [account getBelongAccountAddressesFromAdresses:@[paymentAddress]].count > 0;
+        }
+    }
+    if (shouldChange) {
+        if (![BTUtils compareString:account.address compare:paymentAddress]) {
+            [defaults setPaymentAddress:account.address];
+        }
+    }
 }
 
 - (void)reachabilityChange {
@@ -323,8 +351,6 @@ static StatusBarNotificationWindow *notificationWindow;
             [self.coldController presentViewController:chooseModeViewController animated:YES completion:nil];
         }
     }];
-
-
 }
 @end
 

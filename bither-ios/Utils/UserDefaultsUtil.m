@@ -15,6 +15,8 @@
 //  See the License for the specific language governing permissions and
 //  limitations under the License.
 
+#import <AssertMacros.h>
+#import <Bitheri/BTUtils.h>
 #import "UserDefaultsUtil.h"
 #import "GroupUserDefaultUtil.h"
 #import "QRCodeThemeUtil.h"
@@ -41,6 +43,8 @@
 #define KEYCHAIN_MODE @"keychain_mode"
 
 #define PASSWORD_STRENGTH_CHECK @"password_strength_check"
+
+#define PAYMENT_ADDRESS @"payment_address"
 
 static UserDefaultsUtil *userDefaultsUtil;
 
@@ -335,6 +339,27 @@ NSUserDefaults *userDefaults;
         return YES;
     }
     return [userDefaults boolForKey:PASSWORD_STRENGTH_CHECK];
+}
+
+- (void)setPaymentAddress:(NSString *)address {
+    if ([BTUtils compareString:address compare:self.paymentAddress]) {
+        return;
+    }
+    if (address) {
+        [userDefaults setObject:address forKey:PAYMENT_ADDRESS];
+    } else {
+        [userDefaults setObject:@"" forKey:PAYMENT_ADDRESS];
+    }
+    [userDefaults synchronize];
+    if ([BTUtils isEmpty:address]) {
+        [[GroupUserDefaultUtil instance] setPaymentAddress:nil];
+    } else {
+        [[GroupUserDefaultUtil instance] setPaymentAddress:address];
+    }
+}
+
+- (NSString *)paymentAddress {
+    return [userDefaults objectForKey:PAYMENT_ADDRESS];
 }
 
 @end

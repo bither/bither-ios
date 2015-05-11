@@ -62,6 +62,7 @@
 		0AFBA9351AA0275F0059CB4B /* WatchMarket.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AFBA9341AA0275F0059CB4B /* WatchMarket.m */; };
 		0AFBA9361AA028850059CB4B /* NSDictionary+Fromat.m in Sources */ = {isa = PBXBuildFile; fileRef = 4254086A1946CD17007AF99C /* NSDictionary+Fromat.m */; };
 		0AFBA93F1AA02C190059CB4B /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0AFBA9411AA02C190059CB4B /* Localizable.strings */; };
+		1BC2705059CAA4F55CEFCADB /* PaymentAddressSetting.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BC275821CC95E0F138A889D /* PaymentAddressSetting.m */; };
 		1BC27056253378BF3E96EBA0 /* DialogEditVanityLength.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BC27877DFCC22281F0DEAD8 /* DialogEditVanityLength.m */; };
 		1BC270F1C2BEA60E0B3384AB /* DialogHDMAddressOptions.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BC27D1407586D2FCB8F01AC /* DialogHDMAddressOptions.m */; };
 		1BC271A2775231786F6E597C /* RawDataDiceView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BC27F4ABF122CEF5DCDD706 /* RawDataDiceView.m */; };
@@ -455,6 +456,7 @@
 		1BC274A14567F7D6DFEA009B /* DialogHDMSingularColdSeedChildWordsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DialogHDMSingularColdSeedChildWordsViewController.m; sourceTree = "<group>"; };
 		1BC274BD8D2697288769077A /* MonitorSetting.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MonitorSetting.m; sourceTree = "<group>"; };
 		1BC27547024F497C795FF72C /* DialogHDSendTxConfirm.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DialogHDSendTxConfirm.m; sourceTree = "<group>"; };
+		1BC275821CC95E0F138A889D /* PaymentAddressSetting.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PaymentAddressSetting.m; sourceTree = "<group>"; };
 		1BC275D3A11FAF859823CF7E /* DialogHDMAddressOptions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DialogHDMAddressOptions.h; sourceTree = "<group>"; };
 		1BC275DC3786E9C937D6FF7D /* DialogAddressAliasInput.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DialogAddressAliasInput.m; sourceTree = "<group>"; };
 		1BC275F4AC68C90C62611462 /* MonitorSetting.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MonitorSetting.h; sourceTree = "<group>"; };
@@ -483,6 +485,7 @@
 		1BC27E353461EDC4DD0986D5 /* ImportHDAccountSeedController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImportHDAccountSeedController.h; sourceTree = "<group>"; };
 		1BC27E40C2AFE8213E54D92E /* ImportHDAccountSeedController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImportHDAccountSeedController.m; sourceTree = "<group>"; };
 		1BC27E6AA6DAE72B7A20FDB3 /* DialogAddressAliasInput.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DialogAddressAliasInput.h; sourceTree = "<group>"; };
+		1BC27E906F8D1A224F6EF6F2 /* PaymentAddressSetting.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PaymentAddressSetting.h; sourceTree = "<group>"; };
 		1BC27EFBA370531DE1AB1492 /* HotAddressAddHDAccountViewViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HotAddressAddHDAccountViewViewController.h; sourceTree = "<group>"; };
 		1BC27F4ABF122CEF5DCDD706 /* RawDataDiceView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RawDataDiceView.m; sourceTree = "<group>"; };
 		1BC27F4E505FDE8D0565C0AA /* AddressAliasView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddressAliasView.h; sourceTree = "<group>"; };
@@ -1722,6 +1725,8 @@
 				DC01B0277E3ECFEB18F87712 /* HDMRecoverSetting.h */,
 				1BC274BD8D2697288769077A /* MonitorSetting.m */,
 				1BC275F4AC68C90C62611462 /* MonitorSetting.h */,
+				1BC275821CC95E0F138A889D /* PaymentAddressSetting.m */,
+				1BC27E906F8D1A224F6EF6F2 /* PaymentAddressSetting.h */,
 			);
 			name = Setting;
 			sourceTree = "<group>";
@@ -2243,6 +2248,7 @@
 				1BC27F74516BB973EA28A144 /* ImportHDAccountSeedController.m in Sources */,
 				1BC27056253378BF3E96EBA0 /* DialogEditVanityLength.m in Sources */,
 				DC02BC2D62776189E7335151 /* GroupUtil.m in Sources */,
+				1BC2705059CAA4F55CEFCADB /* PaymentAddressSetting.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

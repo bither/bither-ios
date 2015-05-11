@@ -41,6 +41,7 @@
 #import "AppDelegate.h"
 #import "UIBaseUtil.h"
 #import "IOS7ContainerViewController.h"
+#import "PaymentAddressSetting.h"
 
 @implementation Setting
 
@@ -638,6 +639,9 @@ static Setting *PasswordStrengthCheckSetting;
     }
     [array addObject:[MessageSigningSetting getMessageSigningSetting]];
     [array addObject:[Setting getPasswordStrengthSetting]];
+    if ([[BTSettings instance] getAppMode] == HOT && ([BTAddressManager instance].allAddresses.count > 0 || [BTAddressManager instance].hasHDAccount)) {
+        [array addObject:[PaymentAddressSetting setting]];
+    }
     [array addObject:[Setting getTrashCanSetting]];
     if ([[BTSettings instance] getAppMode] == HOT) {
         [array addObject:[ReloadTxSetting getReloadTxsSetting]];

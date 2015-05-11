@@ -98,4 +98,8 @@
 - (void)setPasswordStrengthCheck:(BOOL)check;
 
 - (BOOL)getPasswordStrengthCheck;
+
+- (void)setPaymentAddress:(NSString *)address;
+
+- (NSString *)paymentAddress;
 @end

@@ -25,6 +25,7 @@
 #define DEFAULT_MARKET @"default_market"
 #define DEFAULT_EXCHANGE_RATE @"default_exchange_rate"
 #define BITCOIN_UNIT @"bitcoin_unit"
+#define PAYMENT_ADDRESS @"payment_address"
 
 NSUserDefaults *groupUserDefaults;
 static GroupUserDefaultUtil *groupUserDefaultsUtil;
@@ -96,6 +97,20 @@ static GroupUserDefaultUtil *groupUserDefaultsUtil;
         [groupUserDefaults setInteger:unit forKey:BITCOIN_UNIT];
         [groupUserDefaults synchronize];
     }
+}
+
+- (void)setPaymentAddress:(NSString *)address {
+    if (address) {
+        [groupUserDefaults setObject:address forKey:PAYMENT_ADDRESS];
+    } else {
+        [groupUserDefaults removeObjectForKey:PAYMENT_ADDRESS];
+    }
+    NSLog(@"set payment address %@", address);
+    [groupUserDefaults synchronize];
+}
+
+- (NSString *)paymentAddress {
+    return [groupUserDefaults objectForKey:PAYMENT_ADDRESS];
 }
 
 - (BOOL)localeIsChina {

@@ -678,3 +678,7 @@
 // vanity address length
 "vanity_address_length" = "榮耀地址位數";
 "vanity_address_none" = "無";
+
+// payment address setting
+"payment_address_setting" = "收款地址";
+"payment_address_none" = "無";
