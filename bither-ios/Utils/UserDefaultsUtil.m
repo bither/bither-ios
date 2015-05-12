@@ -93,9 +93,9 @@ NSUserDefaults *userDefaults;
 }
 
 - (void)setMarket:(MarketType)marketType {
-    [userDefaults setInteger:marketType forKey:DEFAULT_MARKET];
+    [userDefaults setInteger:[GroupUtil getMarketValue:marketType] forKey:DEFAULT_MARKET];
     [userDefaults synchronize];
-    [[GroupUserDefaultUtil instance] setDefaultMarket:[GroupUtil getMarketValue:marketType]];
+    [[GroupUserDefaultUtil instance] setDefaultMarket:marketType];
 }
 
 - (void)setExchangeType:(Currency)exchangeType {

@@ -97,6 +97,8 @@
 + (int)getMarketValue:(MarketType)marketType {
 
     switch (marketType) {
+        case BITSTAMP:
+            return 1;
         case BTCE:
             return 2;
         case HUOBI:
