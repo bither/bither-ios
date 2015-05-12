@@ -37,6 +37,7 @@
 @property (weak, nonatomic) IBOutlet WKInterfaceLabel *lblMarketName;
 @property (weak, nonatomic) IBOutlet WKInterfaceLabel *lblPrice;
 @property (weak, nonatomic) IBOutlet WKInterfaceImage *ivTrending;
+@property (weak, nonatomic) IBOutlet WKInterfaceImage *ivSymbol;
 
 @end
 
@@ -46,6 +47,7 @@
 - (void)awakeWithContext:(id)context {
     [super awakeWithContext:context];
     [self.lblBalance setText:[WatchUnitUtil stringForAmount:[[TotalBalance alloc] init].total]];
+    [self.ivSymbol setImageNamed:[WatchUnitUtil imageNameOfSymbol]];
     market = [WatchMarket getDefaultMarket];
     [self showMarket];
     tDrawer = [[WatchTrendingGraphicDrawer alloc]init];

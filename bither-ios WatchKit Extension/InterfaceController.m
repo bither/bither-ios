@@ -24,6 +24,7 @@
 
 @interface InterfaceController()
 @property (weak, nonatomic) IBOutlet WKInterfaceLabel *lblTotal;
+@property (weak, nonatomic) IBOutlet WKInterfaceImage *ivSymbol;
 @property (weak, nonatomic) IBOutlet WKInterfaceGroup *gContainer;
 @end
 
@@ -36,7 +37,7 @@
 
 - (void)willActivate {
     [super willActivate];
-    [TotalBalanceDrawer showTotalBalanceOn:self.gContainer andLabel:self.lblTotal];
+    [TotalBalanceDrawer showTotalBalanceOn:self.gContainer label:self.lblTotal andImage:self.ivSymbol];
 }
 
 - (void)didDeactivate {

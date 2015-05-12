@@ -12,14 +12,20 @@
                     <items>
                         <group width="1" height="1" alignment="center" verticalAlignment="center" contentMode="scaleAspectFit" id="ysO-G9-RwS">
                             <items>
-                                <label alignment="center" verticalAlignment="center" textAlignment="center" minimumScaleFactor="0.5" id="Je9-T4-j1G">
-                                    <fontDescription key="font" style="UICTFontTextStyleSubhead"/>
-                                </label>
+                                <group alignment="center" verticalAlignment="center" id="nID-FP-cBf">
+                                    <items>
+                                        <imageView width="10" alignment="left" verticalAlignment="center" image="symbol_bits_slim" contentMode="scaleAspectFit" id="t9y-ga-hnE"/>
+                                        <label alignment="center" verticalAlignment="center" textAlignment="center" minimumScaleFactor="0.5" id="Je9-T4-j1G">
+                                            <fontDescription key="font" style="UICTFontTextStyleSubhead"/>
+                                        </label>
+                                    </items>
+                                </group>
                             </items>
                         </group>
                     </items>
                     <connections>
                         <outlet property="gContainer" destination="ysO-G9-RwS" id="3rb-mn-gRz"/>
+                        <outlet property="ivSymbol" destination="t9y-ga-hnE" id="I2D-MF-nYl"/>
                         <outlet property="lblTotal" destination="Je9-T4-j1G" id="KWW-zI-5uQ"/>
                     </connections>
                 </controller>
@@ -96,9 +102,14 @@
                                 <label alignment="left" text="Balance:" textAlignment="left" id="XPt-1T-tH8">
                                     <fontDescription key="font" style="UICTFontTextStyleFootnote"/>
                                 </label>
-                                <label width="136" alignment="center" verticalAlignment="center" text="0.0bits" textAlignment="right" id="7Ix-BB-mEU">
-                                    <fontDescription key="font" style="UICTFontTextStyleCaption2"/>
-                                </label>
+                                <group alignment="right" verticalAlignment="bottom" id="Eb8-mB-hyy">
+                                    <items>
+                                        <imageView width="10" alignment="right" verticalAlignment="center" image="symbol_bits_slim" contentMode="scaleAspectFit" id="MXv-ZP-itn"/>
+                                        <label alignment="right" verticalAlignment="center" text="0.0bits" textAlignment="right" id="7Ix-BB-mEU">
+                                            <fontDescription key="font" style="UICTFontTextStyleCaption2"/>
+                                        </label>
+                                    </items>
+                                </group>
                             </items>
                         </group>
                         <group alignment="left" layout="vertical" id="uCw-4Q-Ouw">
@@ -121,6 +132,7 @@
                     <edgeInsets key="margins" left="0.0" right="0.0" top="0.0" bottom="14"/>
                     <connections>
                         <outlet property="gMarket" destination="uCw-4Q-Ouw" id="Vpf-Jd-6eW"/>
+                        <outlet property="ivSymbol" destination="MXv-ZP-itn" id="O7Y-7v-Xk3"/>
                         <outlet property="ivTrending" destination="x2H-Cr-zl8" id="T14-7z-Y9B"/>
                         <outlet property="lblBalance" destination="7Ix-BB-mEU" id="hZA-m4-P4S"/>
                         <outlet property="lblMarketName" destination="8eu-gz-MK9" id="t2w-gr-upc"/>
@@ -151,16 +163,26 @@
             <objects>
                 <controller id="gdX-wl-uQE" customClass="NotificationController">
                     <items>
-                        <label alignment="left" text="+ 1000 BTC" id="MhE-8h-MLo">
-                            <fontDescription key="font" style="UICTFontTextStyleHeadline"/>
-                        </label>
+                        <group alignment="left" id="UOr-Sf-DWc">
+                            <items>
+                                <label alignment="left" verticalAlignment="center" id="Ug6-FH-Jle">
+                                    <fontDescription key="font" style="UICTFontTextStyleHeadline"/>
+                                </label>
+                                <imageView width="10" alignment="left" verticalAlignment="center" contentMode="scaleAspectFit" id="Pd8-Uu-f2f"/>
+                                <label alignment="left" verticalAlignment="center" id="MhE-8h-MLo">
+                                    <fontDescription key="font" style="UICTFontTextStyleHeadline"/>
+                                </label>
+                            </items>
+                        </group>
                         <label alignment="left" text="1Nc9 oEok W91H UohU pHt4 Y7Di sQXL uEBi 77 " numberOfLines="0" id="tBx-UV-KWa">
                             <fontDescription key="font" style="UICTFontTextStyleFootnote"/>
                         </label>
                     </items>
                     <connections>
+                        <outlet property="ivSymbol" destination="Pd8-Uu-f2f" id="bY3-9U-NdH"/>
                         <outlet property="lblAddress" destination="tBx-UV-KWa" id="8Rp-7N-7pT"/>
                         <outlet property="lblAmount" destination="MhE-8h-MLo" id="YwB-bG-IrN"/>
+                        <outlet property="lblSign" destination="Ug6-FH-Jle" id="gY4-b7-Hpg"/>
                     </connections>
                 </controller>
             </objects>

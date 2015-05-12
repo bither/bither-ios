@@ -26,4 +26,9 @@
 
 + (NSString *)stringForAmount:(int64_t)amount;
 
++ (NSString *)imageNameOfSymbol;
+
++ (NSString *)imageNameOfGreenSymbol;
+
++ (NSString *)imageNameOfRedSymbol;
 @end

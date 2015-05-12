@@ -26,6 +26,8 @@
 @interface NotificationController ()
 @property(weak, nonatomic) IBOutlet WKInterfaceLabel *lblAddress;
 @property(weak, nonatomic) IBOutlet WKInterfaceLabel *lblAmount;
+@property (weak, nonatomic) IBOutlet WKInterfaceImage *ivSymbol;
+@property (weak, nonatomic) IBOutlet WKInterfaceLabel *lblSign;
 @end
 
 @implementation NotificationController
@@ -75,11 +77,18 @@
         [self.lblAddress setText:[WatchStringUtil formatAddress:address groupSize:4 lineSize:12]];
     }
     if (diff >= 0) {
-        [self.lblAmount setText:[NSString stringWithFormat:@"+ %@", [WatchUnitUtil stringForAmount:diff]]];
+        [self.lblAmount setText:[WatchUnitUtil stringForAmount:diff]];
         [self.lblAmount setTextColor:[UIColor greenColor]];
+        [self.lblSign setText:@"+"];
+        [self.lblSign setTextColor:[UIColor greenColor]];
+        [self.ivSymbol setImageNamed:[WatchUnitUtil imageNameOfGreenSymbol]];
     } else {
-        [self.lblAmount setText:[NSString stringWithFormat:@"- %@", [WatchUnitUtil stringForAmount:-diff]]];
+        [self.lblAmount setText:[WatchUnitUtil stringForAmount:-diff]];
         [self.lblAmount setTextColor:[UIColor redColor]];
+        [self.lblSign setText:@"-"];
+        [self.lblSign setTextColor:[UIColor redColor]];
+        [self.ivSymbol setImageNamed:[WatchUnitUtil imageNameOfRedSymbol]];
+        
     }
     [self.lblAmount setHidden:NO];
     [self.lblAddress setHidden:NO];
