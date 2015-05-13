@@ -24,7 +24,7 @@
 #import "QRCodeThemeUtil.h"
 
 #define kPaymentAddressQrCache @"PaymentAddressQrCache"
-#define kQrImageSize (300)
+#define kQrImageSize (340)
 
 @interface PaymentInterfaceController ()
 @property(weak, nonatomic) IBOutlet WKInterfaceImage *ivQr;

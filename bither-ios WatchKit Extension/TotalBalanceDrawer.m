@@ -26,7 +26,7 @@
 #define kTotalBalanceCacheImage (@"TotalBalance")
 
 #define kStrokeWidth (20.0f)
-#define kImageSize (300)
+#define kImageSize (340)
 #define kCircleGapRate (0.03f)
 #define kCircleMinRate (0.12f)
 #define RGBA(r, g, b, a) [UIColor colorWithRed:r/255.0 green:g/255.0 blue:b/255.0 alpha:a]

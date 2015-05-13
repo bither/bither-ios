@@ -14,7 +14,7 @@
                             <items>
                                 <group alignment="center" verticalAlignment="center" id="nID-FP-cBf">
                                     <items>
-                                        <imageView width="10" alignment="left" verticalAlignment="center" image="symbol_bits_slim" contentMode="scaleAspectFit" id="t9y-ga-hnE"/>
+                                        <imageView width="10" alignment="left" verticalAlignment="center" contentMode="scaleAspectFit" id="t9y-ga-hnE"/>
                                         <label alignment="center" verticalAlignment="center" textAlignment="center" minimumScaleFactor="0.5" id="Je9-T4-j1G">
                                             <fontDescription key="font" style="UICTFontTextStyleSubhead"/>
                                         </label>
@@ -102,10 +102,10 @@
                                 <label alignment="left" text="Balance:" textAlignment="left" id="XPt-1T-tH8">
                                     <fontDescription key="font" style="UICTFontTextStyleFootnote"/>
                                 </label>
-                                <group alignment="right" verticalAlignment="bottom" id="Eb8-mB-hyy">
+                                <group alignment="right" id="Eb8-mB-hyy">
                                     <items>
-                                        <imageView width="10" alignment="right" verticalAlignment="center" image="symbol_bits_slim" contentMode="scaleAspectFit" id="MXv-ZP-itn"/>
-                                        <label alignment="right" verticalAlignment="center" text="0.0bits" textAlignment="right" id="7Ix-BB-mEU">
+                                        <imageView width="10" alignment="right" verticalAlignment="center" contentMode="scaleAspectFit" id="MXv-ZP-itn"/>
+                                        <label alignment="right" verticalAlignment="center" textAlignment="right" id="7Ix-BB-mEU">
                                             <fontDescription key="font" style="UICTFontTextStyleCaption2"/>
                                         </label>
                                     </items>

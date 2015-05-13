@@ -326,16 +326,16 @@ static StatusBarNotificationWindow *notificationWindow;
     UserDefaultsUtil *defaults = [UserDefaultsUtil instance];
     BTHDAccount *account = [BTAddressManager instance].hdAccount;
     NSString *paymentAddress = defaults.paymentAddress;
-    BOOL notConfigured = paymentAddress == nil;
+    BOOL configured = paymentAddress != nil;
     BOOL shouldChange;
-    if (notConfigured) {
-        shouldChange = YES;
-    } else {
+    if (configured) {
         if ([BTUtils isEmpty:paymentAddress]) {
             shouldChange = NO;
         } else {
             shouldChange = [account getBelongAccountAddressesFromAdresses:@[paymentAddress]].count > 0;
         }
+    } else {
+        shouldChange = YES;
     }
     if (shouldChange) {
         if (![BTUtils compareString:account.address compare:paymentAddress]) {
