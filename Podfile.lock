@@ -111,7 +111,7 @@ EXTERNAL SOURCES:
 
 CHECKOUT OPTIONS:
   Bitheri:
-    :commit: 309d3c9263364059ded80c19f0274cd6173a86ec
+    :commit: 7d96a1a6f547c9bfd0d111259a1af5fe2dbada96
     :git: https://github.com/bither/bitheri.git
 
 SPEC CHECKSUMS:
