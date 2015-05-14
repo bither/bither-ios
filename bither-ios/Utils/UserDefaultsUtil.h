@@ -102,4 +102,9 @@
 - (void)setPaymentAddress:(NSString *)address;
 
 - (NSString *)paymentAddress;
+
+- (void)setFirstRunDialogShown:(BOOL)shown;
+
+- (BOOL)firstRunDialogShown;
+
 @end

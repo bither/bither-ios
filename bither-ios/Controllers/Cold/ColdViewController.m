@@ -23,6 +23,7 @@
 #import "AppDelegate.h"
 #import "BTAddressManager.h"
 #import "UIViewController+PiShowBanner.h"
+#import "DialogFirstRunWarning.h"
 
 
 @interface ColdViewController ()
@@ -51,10 +52,9 @@
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-//    if([[UserDefaultsUtil instance] vaildUserId]<1){
-//        [self performSegueWithIdentifier:@"MainToSplash" sender:self];
-//        return;
-//    }
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.6 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [DialogFirstRunWarning show:self.view.window];
+    });
 }
 
 - (void)initTabs {
@@ -180,4 +180,5 @@
     UIViewController *chooseModeViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"ChooseModeViewController"];
     [self presentViewController:chooseModeViewController animated:YES completion:nil];
 }
+
 @end

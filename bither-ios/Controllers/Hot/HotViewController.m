@@ -26,6 +26,7 @@
 #import "BTAddressManager.h"
 #import "UIViewController+PiShowBanner.h"
 #import "UploadAndDowloadFileFactory.h"
+#import "DialogFirstRunWarning.h"
 
 
 @interface HotViewController ()
@@ -176,6 +177,13 @@
     IOS7ContainerViewController *container = [[IOS7ContainerViewController alloc] init];
     container.controller = [self.storyboard instantiateViewControllerWithIdentifier:@"HotAddressAdd"];
     [self presentViewController:container animated:YES completion:nil];
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.6 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [DialogFirstRunWarning show:self.view.window];
+    });
 }
 
 - (void)syncProgress:(NSNotification *)notification {
