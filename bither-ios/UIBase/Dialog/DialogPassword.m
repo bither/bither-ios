@@ -96,11 +96,14 @@
                         return;
                     }
                     if (strength.warning) {
+                        [self endEditing:YES];
                         __block DialogPassword *d = self;
                         __block NSString *pw = p;
                         [[[DialogAlert alloc] initWithMessage:[NSString stringWithFormat:NSLocalizedString(@"password_strength_warning", nil), strength.name] confirm:^{
                             [d dismissWithPassword:pw];
-                        }                              cancel:nil] showInWindow:self.window];
+                        }                              cancel:^{
+                            [self.tfPassword becomeFirstResponder];
+                        }] showInWindow:self.window];
                         return;
                     }
                 }
