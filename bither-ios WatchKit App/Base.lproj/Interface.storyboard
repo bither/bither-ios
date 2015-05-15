@@ -14,9 +14,9 @@
                             <items>
                                 <group width="0.80000000000000004" alignment="center" verticalAlignment="center" id="nID-FP-cBf">
                                     <items>
-                                        <imageView width="11" alignment="center" verticalAlignment="center" contentMode="scaleAspectFit" id="t9y-ga-hnE"/>
-                                        <label alignment="center" verticalAlignment="center" textAlignment="center" minimumScaleFactor="0.90000000000000002" id="Je9-T4-j1G">
-                                            <fontDescription key="font" type="system" pointSize="16"/>
+                                        <imageView width="10" alignment="center" verticalAlignment="center" contentMode="scaleAspectFit" id="t9y-ga-hnE"/>
+                                        <label alignment="center" verticalAlignment="center" textAlignment="center" id="Je9-T4-j1G">
+                                            <fontDescription key="font" style="UICTFontTextStyleSubhead"/>
                                         </label>
                                     </items>
                                 </group>
