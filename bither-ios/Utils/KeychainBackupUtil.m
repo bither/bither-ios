@@ -73,7 +73,7 @@
 - (NSArray *)getLocalKeys; {
     NSMutableArray *keys = [NSMutableArray new];
     for (BTAddress *address in [BTAddressManager instance].privKeyAddresses) {
-        [keys addObject:[NSString stringWithFormat:@"%@/%@", [NSString hexWithData:address.pubKey], address.encryptPrivKey]];
+        [keys addObject:[NSString stringWithFormat:@"%@/%@", [NSString hexWithData:address.pubKey], address.fullEncryptPrivKey]];
     }
     return keys;
 }
@@ -269,7 +269,7 @@
                 BTAddress *address = [[BTAddress alloc] initWithWithPubKey:array[0] encryptPrivKey:[[array subarrayWithRange:NSMakeRange(1, 3)] componentsJoinedByString:KEYCHAIN_KEY_CONTENT_SEP]];
                 // todo:
 //                address.encryptPrivKey = [address reEncryptPrivKeyWithOldPassphrase:localPassword andNewPassphrase:keychainPassword];
-                [allKeys addObject:[@[array[0], address.encryptPrivKey] componentsJoinedByString:KEYCHAIN_KEY_CONTENT_SEP]];
+                [allKeys addObject:[@[array[0], address.fullEncryptPrivKey] componentsJoinedByString:KEYCHAIN_KEY_CONTENT_SEP]];
                 [needUpdateAddress addObject:address];
             }
         }

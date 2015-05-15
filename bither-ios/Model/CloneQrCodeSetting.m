@@ -41,7 +41,7 @@
     NSArray *addresses = [BTAddressManager instance].privKeyAddresses;
     NSMutableArray *keys = [[NSMutableArray alloc] init];
     for (BTAddress *a in addresses) {
-        [keys addObject:[BTQRCodeUtil replaceNewQRCode:a.encryptPrivKey]];
+        [keys addObject:[BTQRCodeUtil replaceNewQRCode:a.fullEncryptPrivKey]];
     }
     if ([[BTAddressManager instance] hasHDMKeychain]) {
         BTHDMKeychain *keychain = [[BTAddressManager instance] hdmKeychain];
