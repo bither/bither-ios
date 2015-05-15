@@ -219,7 +219,7 @@
         [dialogProgress showInWindow:self.window];
         if (_qrcodeType == BIP38) {
             dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
-                BTKey *key = [BTKey keyWithBitcoinj:_btAddress.encryptPrivKey andPassphrase:bpassword];
+                BTKey *key = [BTKey keyWithBitcoinj:_btAddress.fullEncryptPrivKey andPassphrase:bpassword];
                 __block NSString *bip38 = [key BIP38KeyWithPassphrase:bpassword];
                 dispatch_async(dispatch_get_main_queue(), ^{
                     [dialogProgress dismissWithCompletion:^{
@@ -251,7 +251,7 @@
 
 - (void)decrypted:(NSString *)password callback:(IdResponseBlock)callback {
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
-        BTKey *key = [BTKey keyWithBitcoinj:_btAddress.encryptPrivKey andPassphrase:password];
+        BTKey *key = [BTKey keyWithBitcoinj:_btAddress.fullEncryptPrivKey andPassphrase:password];
         __block NSString *privateKey = key.privateKey;
         dispatch_async(dispatch_get_main_queue(), ^{
             if (callback) {
