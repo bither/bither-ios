@@ -12,11 +12,11 @@
                     <items>
                         <group width="1" height="1" alignment="center" verticalAlignment="center" contentMode="scaleAspectFit" id="ysO-G9-RwS">
                             <items>
-                                <group alignment="center" verticalAlignment="center" id="nID-FP-cBf">
+                                <group width="0.80000000000000004" alignment="center" verticalAlignment="center" id="nID-FP-cBf">
                                     <items>
-                                        <imageView width="10" alignment="left" verticalAlignment="center" contentMode="scaleAspectFit" id="t9y-ga-hnE"/>
-                                        <label alignment="center" verticalAlignment="center" textAlignment="center" minimumScaleFactor="0.5" id="Je9-T4-j1G">
-                                            <fontDescription key="font" style="UICTFontTextStyleSubhead"/>
+                                        <imageView width="11" alignment="center" verticalAlignment="center" contentMode="scaleAspectFit" id="t9y-ga-hnE"/>
+                                        <label alignment="center" verticalAlignment="center" textAlignment="center" minimumScaleFactor="0.90000000000000002" id="Je9-T4-j1G">
+                                            <fontDescription key="font" type="system" pointSize="16"/>
                                         </label>
                                     </items>
                                 </group>
