@@ -282,6 +282,7 @@
             if (allTxs.count > 0) {
                 [[BTAddressManager instance].hdAccount updateIssuedIndex:pathType index:index - 1];
                 [[BTAddressManager instance].hdAccount supplyEnoughKeys:NO];
+                [[NSNotificationCenter defaultCenter] postNotificationName:kHDAccountPaymentAddressChangedNotification object:[BTAddressManager instance].hdAccount.address userInfo:@{kHDAccountPaymentAddressChangedNotificationFirstAdding : @(NO)}];
             } else {
                 [[BTHDAccountProvider instance] updateSyncdForIndex:pathType index:index - 1];
             }

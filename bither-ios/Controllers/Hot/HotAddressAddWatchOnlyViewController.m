@@ -88,6 +88,14 @@
         }
         BTKey *key = [BTKey keyWithPublicKey:[pubStr hexToData]];
         key.isFromXRandom = isXRandom;
+        if(!key.publicKey){
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [dp dismissWithCompletion:^{
+                    [self showMsg:NSLocalizedString(@"Monitor Bither Cold failed.", nil)];
+                }];
+            });
+            return;
+        }
         BTAddress *btAddress = [[BTAddress alloc] initWithKey:key encryptPrivKey:nil isXRandom:key.isFromXRandom];
         [addressList addObject:btAddress];
         [addressStrList addObject:key.address];

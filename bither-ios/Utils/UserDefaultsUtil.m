@@ -46,6 +46,8 @@
 
 #define PAYMENT_ADDRESS @"payment_address"
 
+#define FIRST_RUN_DIALOG_SHOWN @"first_run_dialog_shown"
+
 static UserDefaultsUtil *userDefaultsUtil;
 
 NSUserDefaults *userDefaults;
@@ -364,6 +366,15 @@ NSUserDefaults *userDefaults;
 
 - (NSString *)paymentAddress {
     return [userDefaults objectForKey:PAYMENT_ADDRESS];
+}
+
+- (void)setFirstRunDialogShown:(BOOL)shown{
+    [userDefaults setBool:shown forKey:FIRST_RUN_DIALOG_SHOWN];
+    [userDefaults synchronize];
+}
+
+- (BOOL)firstRunDialogShown{
+    return [userDefaults boolForKey:FIRST_RUN_DIALOG_SHOWN];
 }
 
 @end

@@ -62,12 +62,23 @@ static Setting *CloneQrSetting;
     [dp showInWindow:self.controller.view.window completion:^{
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
             NSArray *commponent = [BTQRCodeUtil splitQRCode:self.scanContent];
+            BTHDMKeychain *keychain = nil;
             NSMutableArray *keys = [[NSMutableArray alloc] init];
             for (int i = 0; i < commponent.count; i += 3) {
-                NSString *s = [BTQRCodeUtil joinedQRCode:[commponent subarrayWithRange:NSMakeRange(i, 3)]];
-                [keys addObject:s];
+                if ([commponent[i] rangeOfString:HDM_QR_CODE_FLAG].location == 0) {
+                    NSString *s = [BTQRCodeUtil joinedQRCode:[commponent subarrayWithRange:NSMakeRange(i, 3)]];
+                    s = [s substringFromIndex:1];
+                    keychain = [[BTHDMKeychain alloc] initWithEncrypted:s password:password andFetchBlock:nil];
+                } else {
+                    NSString *s = [BTQRCodeUtil joinedQRCode:[commponent subarrayWithRange:NSMakeRange(i, 3)]];
+                    [keys addObject:s];
+                }
+            }
+            if (keychain) {
+                [KeyUtil setHDKeyChain:keychain];
             }
             BOOL result = [KeyUtil addBitcoinjKey:keys withPassphrase:password error:nil];
+
             dispatch_async(dispatch_get_main_queue(), ^{
                 if ([self.controller respondsToSelector:@selector(reload)]) {
                     [self.controller performSelector:@selector(reload)];

@@ -682,3 +682,8 @@
 // payment address setting
 "payment_address_setting" = "收款地址";
 "payment_address_none" = "無";
+
+// first run dialog
+"first_run_dialog_title" = "為了保護您的比特幣:";
+"first_run_dialog_line_1" = "請不要卸載比太錢包";
+"first_run_dialog_line_2" = "請牢記您的密碼";
