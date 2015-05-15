@@ -20,7 +20,7 @@ PODS:
   - AFNetworking/UIKit (2.5.3):
     - AFNetworking/NSURLConnection
     - AFNetworking/NSURLSession
-  - Bitheri (1.3.4):
+  - Bitheri (1.3.5):
     - CocoaLumberjack (~> 1.9.1)
     - FMDB (~> 2.3)
     - OpenSSL (= 1.0.110)
@@ -111,12 +111,12 @@ EXTERNAL SOURCES:
 
 CHECKOUT OPTIONS:
   Bitheri:
-    :commit: e349906c4ce6c4c317e9dd9656d933fffc970130
+    :commit: bde393a2959831a279bc47e2dad1bd7f25aaf97b
     :git: https://github.com/bither/bitheri.git
 
 SPEC CHECKSUMS:
   AFNetworking: e1d86c2a96bb5d2e7408da36149806706ee122fe
-  Bitheri: 30875a66a611a4fd2feac490f20387b064e63b1b
+  Bitheri: c109496169d60f5a5a05d113deffa08fc340b758
   CocoaLumberjack: 628fca2e88ef06f7cf6817309aa405f325d9a6fa
   FMDB: 96e8f1bcc1329e269330f99770ad4285d9003e52
   FXBlurView: c6d23f3d35af2c6282296a2930f61c6e2c788d01
@@ -127,4 +127,4 @@ SPEC CHECKSUMS:
   RegexKitLite: c0e4c12e6e7de0769f3a3ed679f0f61604170661
   SimpleKeychain: 8de48eb1de10c6403911a6be52e127e5b5d31404
 
-COCOAPODS: 0.37.0
+COCOAPODS: 0.37.1
