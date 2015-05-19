@@ -76,6 +76,7 @@
                               [[UEntropySensor alloc] initWithView:vSensor andCollecor:self.collector],
                     nil];
     dpStopping = [[DialogProgress alloc] initWithMessage:NSLocalizedString(@"xrandom_stopping", nil)];
+    dpStopping.touchOutSideToDismiss = NO;
     [self configureOverlay];
 }
 
