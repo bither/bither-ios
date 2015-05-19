@@ -108,9 +108,13 @@
     }
 }
 
+- (NSString *)getToAddress {
+    return [StringUtil removeBlankSpaceString:self.tfAddress.text];
+}
+
 - (IBAction)sendPressed:(id)sender {
     if ([self checkValues]) {
-        if ([StringUtil compareString:[self.tfAddress.text stringByReplacingOccurrencesOfString:@" " withString:@""] compare:self.dialogSelectChangeAddress.changeAddress.address]) {
+        if ([StringUtil compareString:[self getToAddress] compare:self.dialogSelectChangeAddress.changeAddress.address]) {
             [self showBannerWithMessage:NSLocalizedString(@"select_change_address_change_to_same_warn", nil) belowView:self.vTopBar];
             return;
         }
@@ -120,7 +124,7 @@
             dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
                 u_int64_t value = self.amtLink.amount;
                 NSError *error;
-                NSString *toAddress = [self.tfAddress.text stringByReplacingOccurrencesOfString:@" " withString:@""];
+                NSString *toAddress = [self getToAddress];
                 self.tx = [self.address txForAmounts:@[@(value)] andAddress:@[toAddress] andChangeAddress:self.dialogSelectChangeAddress.changeAddress.address andError:&error];
                 if (error) {
                     NSString *msg = [TransactionsUtil getCompleteTxForError:error];
@@ -159,7 +163,7 @@
     qr.cancelWarning = NSLocalizedString(@"Give up signing?", nil);
     QRCodeTxTransport *txTrans = [[QRCodeTxTransport alloc] init];
     txTrans.fee = self.tx.feeForTransaction;
-    txTrans.to = [tx amountSentTo:self.tfAddress.text];
+    txTrans.to = [tx amountSentTo:[self getToAddress]];
     txTrans.myAddress = self.address.address;
     txTrans.toAddress = self.tfAddress.text;
     NSString *changeAddress = self.dialogSelectChangeAddress.changeAddress.address;
@@ -300,14 +304,14 @@
 }
 
 - (BOOL)checkValues {
-    BOOL validAddress = [self.tfAddress.text isValidBitcoinAddress];
+    BOOL validAddress = [[self getToAddress] isValidBitcoinAddress];
     int64_t amount = self.amtLink.amount;
     return validAddress && amount > 0;
 }
 
 - (void)check {
     self.btnSend.enabled = [self checkValues];
-    if ([StringUtil compareString:self.tfAddress.text compare:DONATE_ADDRESS]) {
+    if ([StringUtil compareString:[self getToAddress] compare:DONATE_ADDRESS]) {
         [self.btnSend setTitle:NSLocalizedString(@"Donate", nil) forState:UIControlStateNormal];
         self.lblPayTo.text = NSLocalizedString(@"Donate to developers", nil);
     } else {

@@ -106,7 +106,7 @@
                 }
                 u_int64_t value = self.amtLink.amount;
                 NSError *error;
-                NSString *toAddress = [self.tfAddress.text stringByReplacingOccurrencesOfString:@" " withString:@""];
+                NSString *toAddress = [self getToAddress];
                 BTTx *tx = [self.address newTxToAddress:toAddress withAmount:value password:self.tfPassword.text andError:&error];
                 if (error) {
                     NSString *msg = [TransactionsUtil getCompleteTxForError:error];
@@ -159,6 +159,10 @@
             [self showBannerWithMessage:msg belowView:self.vTopBar];
         }];
     });
+}
+
+- (NSString *)getToAddress {
+    return [StringUtil removeBlankSpaceString:self.tfAddress.text];
 }
 
 - (IBAction)scanPressed:(id)sender {
@@ -226,14 +230,14 @@
 
 - (BOOL)checkValues {
     BOOL validPassword = [StringUtil validPassword:self.tfPassword.text];
-    BOOL validAddress = [self.tfAddress.text isValidBitcoinAddress];
+    BOOL validAddress = [[self getToAddress] isValidBitcoinAddress];
     int64_t amount = self.amtLink.amount;
     return validAddress && validPassword && amount > 0;
 }
 
 - (void)check {
     self.btnSend.enabled = [self checkValues];
-    if ([StringUtil compareString:self.tfAddress.text compare:DONATE_ADDRESS]) {
+    if ([StringUtil compareString:[self getToAddress] compare:DONATE_ADDRESS]) {
         [self.btnSend setTitle:NSLocalizedString(@"Donate", nil) forState:UIControlStateNormal];
         self.lblPayTo.text = NSLocalizedString(@"Donate to developers", nil);
     } else {

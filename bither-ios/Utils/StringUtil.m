@@ -190,6 +190,10 @@
     return [NSData dataFromBase64String:str];
 }
 
++ (NSString *)removeBlankSpaceString:(NSString *)str {
+    return [str stringByReplacingOccurrencesOfString:@" " withString:@""];
+}
+
 @end
 
 

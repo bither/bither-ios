@@ -61,4 +61,6 @@
 
 + (NSData *)getUrlSaleBase64:(NSString *)str;
 
++ (NSString *)removeBlankSpaceString:(NSString *)str;
+
 @end
