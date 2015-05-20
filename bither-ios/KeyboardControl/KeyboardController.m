@@ -20,33 +20,33 @@
 
 @implementation KeyboardController
 
--(id)initWithDelegate:(NSObject<KeyboardControllerDelegate>*)delegate{
+- (id)initWithDelegate:(NSObject <KeyboardControllerDelegate> *)delegate {
     self = [super init];
-    if(self){
+    if (self) {
         self.delegate = delegate;
-        [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(keyboardWasShown:) name:UIKeyboardWillShowNotification object:nil];
-        [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(keyboardWasShown:) name:UIKeyboardWillChangeFrameNotification object:nil];
-        [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(keyboardWasShown:) name:UIKeyboardWillHideNotification object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWasShown:) name:UIKeyboardWillShowNotification object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWasShown:) name:UIKeyboardWillChangeFrameNotification object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWasShown:) name:UIKeyboardWillHideNotification object:nil];
     }
     return self;
 }
 
--(void)keyboardWasShown:(NSNotification*)aNotification{
-    if(self.delegate && [self.delegate respondsToSelector:@selector(keyboardFrameChanged:)]){
-        NSDictionary* info = [aNotification userInfo];
+- (void)keyboardWasShown:(NSNotification *)aNotification {
+    if (self.delegate && [self.delegate respondsToSelector:@selector(keyboardFrameChanged:)]) {
+        NSDictionary *info = [aNotification userInfo];
         CGRect frame = CGRectMake(0.0f, [[UIScreen mainScreen] bounds].size.height, 0.0f, 0.0f);
-        if([[info allKeys]containsObject:UIKeyboardFrameEndUserInfoKey]){
+        if ([[info allKeys] containsObject:UIKeyboardFrameEndUserInfoKey]) {
             frame = [[info objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];
         }
-        if(![UIApplication sharedApplication].isStatusBarHidden){
+        if (![UIApplication sharedApplication].isStatusBarHidden) {
             frame.origin.y = frame.origin.y - [UIApplication sharedApplication].statusBarFrame.origin.y - [UIApplication sharedApplication].statusBarFrame.size.height;
         }
         double duration = 0;
         UIViewAnimationCurve curve = UIViewAnimationCurveEaseInOut;
-        if([info.allKeys containsObject:UIKeyboardAnimationDurationUserInfoKey]){
+        if ([info.allKeys containsObject:UIKeyboardAnimationDurationUserInfoKey]) {
             duration = [[info objectForKey:UIKeyboardAnimationDurationUserInfoKey] doubleValue];
         }
-        if([info.allKeys containsObject:UIKeyboardAnimationCurveUserInfoKey]){
+        if ([info.allKeys containsObject:UIKeyboardAnimationCurveUserInfoKey]) {
             curve = [[info objectForKey:UIKeyboardAnimationCurveUserInfoKey] integerValue];
         }
         [UIView beginAnimations:nil context:NULL];
@@ -58,7 +58,7 @@
     }
 }
 
--(void)dealloc{
+- (void)dealloc {
     [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillChangeFrameNotification object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillHideNotification object:nil];

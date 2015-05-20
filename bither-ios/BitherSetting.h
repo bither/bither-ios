@@ -19,13 +19,14 @@
 #import <Foundation/Foundation.h>
 #import "MKNetworkEngine.h"
 #import "BTSettings.h"
+#import "GroupUtil.h"
 
 #define BitherMarketUpdateNotification  @"BitherMarketUpdateNotification"
 #define BitherAddressNotification  @"BitherAddressNotification"
-#define DONATE_ADDRESS  @"1BsTwoMaX3aYx9Nc8GdgHZzzAGmG669bC3"
+#define DONATE_ADDRESS  @"1BitherUnNvB2NsfxMnbS35kS3DTPr7PW5"
 #define DONATE_AMOUNT (100000)
 
-#define RGBA(r, g, b, a) [UIColor colorWithRed:r/255.0 green:g/255.0 blue:b/255.0 alpha:a]
+
 #define PRIVATE_KEY_OF_HOT_COUNT_LIMIT (50)
 #define PRIVATE_KEY_OF_COLD_COUNT_LIMIT (150)
 #define WATCH_ONLY_COUNT_LIMIT (150)
@@ -91,24 +92,33 @@
 #define HDM_SERVICE_SIGNATURE_FAILED 2002
 
 typedef void (^DictResponseBlock)(NSDictionary *dict);
+
 typedef void (^IdResponseBlock)(id response);
+
 typedef void (^ArrayResponseBlock)(NSArray *array);
+
 typedef void (^ImageResponseBlock)(UIImage *image, NSURL *url);
+
 typedef void (^ErrorHandler)(NSOperation *errorOp, NSError *error);
+
 typedef void (^CompletedOperation)(MKNetworkOperation *completedOperation);
+
 typedef void (^ResponseFormat)(MKNetworkOperation *completedOperation);
+
 typedef void (^LongResponseBlock)(long long num);
+
 typedef void (^StringBlock)(NSString *string);
+
 typedef void (^VoidBlock)(void);
+
 typedef void (^ErrorBlock)(NSError *error);
+
 typedef void (^ViewControllerBlock)(UIViewController *controller);
+
 typedef NSObject *(^GetValueBlock)(void);
+
 typedef NSArray *(^GetArrayBlock)(void);
 
-
-typedef enum {
-    BITSTAMP = 1, BTCE = 2, HUOBI = 3, OKCOIN = 4, BTCCHINA = 5, CHBTC = 6, BITFINEX = 7, MARKET796 = 8
-} MarketType;
 
 typedef enum {
     ONE_MINUTE = 1, FIVE_MINUTES = 5, ONE_HOUR = 60, ONE_DAY = 1440
@@ -147,14 +157,20 @@ typedef enum {
 
 @interface BitherSetting : NSObject
 
-+ (NSString *)getMarketName:(MarketType)marketType;
-+ (NSString *)getMarketDomain:(MarketType)marketType;
+
 + (NSString *)getCurrencySymbol:(Currency)currency;
+
 + (NSString *)getCurrencyName:(Currency)currency;
+
 + (Currency)getCurrencyFromName:(NSString *)currencyName;
+
 + (NSString *)getTransactionFeeMode:(TransactionFeeMode)transactionFee;
-+ (UIColor *)getMarketColor:(MarketType)marketType;
-+ (NSString *)getKeychainMode:(KeychainMode) keychainMode;
+
+
++ (NSString *)getKeychainMode:(KeychainMode)keychainMode;
+
 + (BOOL)isUnitTest;
+
 + (void)setIsUnitTest:(BOOL)isUnitTest;
+
 @end

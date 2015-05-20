@@ -36,8 +36,8 @@ static WatchApi *piApi;
     return piApi;
 }
 
-- (void)getExchangeTrend:(GroupMarketType) marketType callback:(void (^)(NSArray *array)) callback andErrorCallBack:(void (^)(NSOperation *errorOp, NSError *error))errorCallback{
-    NSString *url = [NSString stringWithFormat:BITHER_TREND_URL, marketType];
+- (void)getExchangeTrend:(MarketType) marketType callback:(void (^)(NSArray *array)) callback andErrorCallBack:(void (^)(NSOperation *errorOp, NSError *error))errorCallback{
+    NSString *url = [NSString stringWithFormat:BITHER_TREND_URL, [GroupUtil getMarketValue:marketType]];
     [self get:url withParams:nil networkType:BitherStats completed:^(MKNetworkOperation *completedOperation) {
         if (callback) {
             callback(completedOperation.responseJSON);

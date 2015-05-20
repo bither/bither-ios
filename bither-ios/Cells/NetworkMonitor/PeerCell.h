@@ -20,6 +20,6 @@
 #import "BTPeer.h"
 
 @interface PeerCell : UITableViewCell
--(void)setPeer:(BTPeer *)peer;
+- (void)setPeer:(BTPeer *)peer;
 
 @end

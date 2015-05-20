@@ -18,19 +18,18 @@
 
 #import "PeerCell.h"
 
-@interface PeerCell()
-@property (weak, nonatomic) IBOutlet UILabel *lbAddress;
-@property (weak, nonatomic) IBOutlet UILabel *lbBlocks;
-@property (weak, nonatomic) IBOutlet UILabel *lbVersion;
-@property (weak, nonatomic) IBOutlet UILabel *lbProtocol;
-@property (weak, nonatomic) IBOutlet UILabel *lbPing;
+@interface PeerCell ()
+@property(weak, nonatomic) IBOutlet UILabel *lbAddress;
+@property(weak, nonatomic) IBOutlet UILabel *lbBlocks;
+@property(weak, nonatomic) IBOutlet UILabel *lbVersion;
+@property(weak, nonatomic) IBOutlet UILabel *lbProtocol;
+@property(weak, nonatomic) IBOutlet UILabel *lbPing;
 
 @end
 
 @implementation PeerCell
 
-- (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
-{
+- (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         // Initialization code
@@ -38,40 +37,39 @@
     return self;
 }
 
-- (void)awakeFromNib
-{
+- (void)awakeFromNib {
     // Initialization code
 }
 
-- (void)setSelected:(BOOL)selected animated:(BOOL)animated
-{
+- (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
 
     // Configure the view for the selected state
 }
--(void)setPeer:(BTPeer *)peer{
-    self.lbAddress.text=peer.host;
-   
-    if (peer.status==BTPeerStatusConnected) {
+
+- (void)setPeer:(BTPeer *)peer {
+    self.lbAddress.text = peer.host;
+
+    if (peer.status == BTPeerStatusConnected) {
         if (peer.userAgent.length > 20) {
-            self.lbVersion.text= [NSString stringWithFormat:@"%@...", [peer.userAgent substringToIndex:20]];
+            self.lbVersion.text = [NSString stringWithFormat:@"%@...", [peer.userAgent substringToIndex:20]];
         } else {
             self.lbVersion.text = peer.userAgent;
         }
-        self.lbVersion.text= peer.userAgent;
-        self.lbProtocol.text=[NSString stringWithFormat:@"protocol: %d",(int)peer.version];
-        self.lbBlocks.text=[NSString stringWithFormat:@"%d blocks",(int)peer.displayLastBlock];
-        self.lbPing.text=[NSString stringWithFormat:@"⇆ %ld ms",(long)(peer.pingTime*1000)];
-        
-    }else{
-        self.lbVersion.text=@"----";
-        self.lbProtocol.text=[NSString stringWithFormat:@"protocol: %@",@"--"];
-        self.lbBlocks.text=[NSString stringWithFormat:@"%@ blocks",@"--"];
-        self.lbPing.text=[NSString stringWithFormat:@"%@ ms",@"--"];
-        
+        self.lbVersion.text = peer.userAgent;
+        self.lbProtocol.text = [NSString stringWithFormat:@"protocol: %d", (int) peer.version];
+        self.lbBlocks.text = [NSString stringWithFormat:@"%d blocks", (int) peer.displayLastBlock];
+        self.lbPing.text = [NSString stringWithFormat:@"⇆ %ld ms", (long) (peer.pingTime * 1000)];
+
+    } else {
+        self.lbVersion.text = @"----";
+        self.lbProtocol.text = [NSString stringWithFormat:@"protocol: %@", @"--"];
+        self.lbBlocks.text = [NSString stringWithFormat:@"%@ blocks", @"--"];
+        self.lbPing.text = [NSString stringWithFormat:@"%@ ms", @"--"];
+
     }
-    
-    
+
+
 }
 
 @end

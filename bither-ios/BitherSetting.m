@@ -24,63 +24,6 @@ static BOOL _isUnitTest = NO;
 
 @implementation BitherSetting
 
-+ (NSString *)getMarketName:(MarketType)marketType {
-    NSString *name;
-    switch (marketType) {
-        case HUOBI:
-            name = NSLocalizedString(@"HUOBI", nil);
-            break;
-        case BITSTAMP:
-            name = NSLocalizedString(@"Bitstamp", nil);
-            break;
-        case BTCE:
-            name = NSLocalizedString(@"BTC-E", nil);
-            break;
-        case OKCOIN:
-            name = NSLocalizedString(@"OKCoin.CN", nil);
-            break;
-        case CHBTC:
-            name = NSLocalizedString(@"CHBTC", nil);
-            break;
-        case BTCCHINA:
-            name = NSLocalizedString(@"BTCChina", nil);
-            break;
-        case BITFINEX:
-            name = NSLocalizedString(@"Bitfinex", nil);
-            break;
-        case MARKET796:
-            name = NSLocalizedString(@"796", nil);
-            break;
-        default:
-            name = NSLocalizedString(@"HUOBI", nil);
-            break;
-    }
-    return name;
-
-}
-
-+ (NSString *)getMarketDomain:(MarketType)marketType {
-    switch (marketType) {
-        case HUOBI:
-            return @"huobi.com";
-        case BITSTAMP:
-            return @"bitstamp.net";
-        case BTCE:
-            return @"btc-e.com";
-        case OKCOIN:
-            return @"okcoin.cn";
-        case CHBTC:
-            return @"chbtc.com";
-        case BTCCHINA:
-            return @"btcchina.com";
-        case BITFINEX:
-            return @"bitfinex.com";
-        case MARKET796:
-            return @"796.com";
-        default:
-            return nil;
-    }
-}
 
 + (NSString *)getCurrencySymbol:(Currency)currency; {
     switch (currency) {
@@ -129,7 +72,7 @@ static BOOL _isUnitTest = NO;
 }
 
 + (Currency)getCurrencyFromName:(NSString *)currencyName; {
-    if (currencyName == nil || currencyName.length == 0){
+    if (currencyName == nil || currencyName.length == 0) {
         return USD;
     }
     if ([currencyName isEqualToString:@"USD"]) {
@@ -167,42 +110,11 @@ static BOOL _isUnitTest = NO;
     }
 }
 
-+ (NSString *)getKeychainMode:(KeychainMode) keychainMode {
++ (NSString *)getKeychainMode:(KeychainMode)keychainMode {
     if (keychainMode == Off) {
         return NSLocalizedString(@"keychain_backup_off", nil);
     } else {
         return NSLocalizedString(@"keychain_backup_on", nil);
-    }
-}
-
-+ (UIColor *)getMarketColor:(MarketType)marketType {
-    switch (marketType) {
-        //ffff9329
-        case HUOBI:
-            return RGBA(255, 147, 41, 1);
-            //ff3bbf59
-        case BITSTAMP:
-            return RGBA(59, 191, 89, 1);
-            //ff25bebc
-        case BTCE:
-            return RGBA(37, 190, 188, 1);
-            //ff1587c6
-        case OKCOIN:
-            return RGBA(21, 135, 198, 1);
-            //ff5b469d
-        case CHBTC:
-            return RGBA(91, 70, 157, 1);
-            //fff93c25
-        case BTCCHINA:
-            return RGBA(249, 60, 37, 1);
-            //ffa3bd0b
-        case BITFINEX:
-            return RGBA(163, 189, 11, 1);
-            //ffe31f21
-        case MARKET796:
-            return RGBA(227, 31, 33, 1);
-        default:
-            return nil;
     }
 }
 

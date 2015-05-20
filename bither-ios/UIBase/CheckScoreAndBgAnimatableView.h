@@ -19,24 +19,30 @@
 #import <UIKit/UIKit.h>
 
 #define kCheckScoreAndBgAnimatableViewDefaultAnimationDuration (0.6f)
-@protocol CheckScoreAndBgAnimatableViewDelegate<NSObject>
+
+@protocol CheckScoreAndBgAnimatableViewDelegate <NSObject>
 @optional
--(void)displayScore:(NSUInteger)score;
--(void)onAnimation:(NSInteger)animationId beginWithScore:(NSUInteger)score;
--(void)onAnimation:(NSInteger)animationId endWithScore:(NSUInteger)score;
+- (void)displayScore:(NSUInteger)score;
+
+- (void)onAnimation:(NSInteger)animationId beginWithScore:(NSUInteger)score;
+
+- (void)onAnimation:(NSInteger)animationId endWithScore:(NSUInteger)score;
 @end
 
-@interface CheckScoreAndBgAnimatableView : UIView{
+@interface CheckScoreAndBgAnimatableView : UIView {
     NSUInteger _score;
 }
 @property NSUInteger score;
 @property NSUInteger targetScore;
-@property (weak) NSObject<CheckScoreAndBgAnimatableViewDelegate>* delegate;
+@property(weak) NSObject <CheckScoreAndBgAnimatableViewDelegate> *delegate;
 
--(void)setBeginColor:(UIColor*)color;
--(void)setMiddleColor:(UIColor*)color;
--(void)setEndColor:(UIColor*)color;
+- (void)setBeginColor:(UIColor *)color;
 
--(void)animateToScore:(NSUInteger)score withAnimationId:(NSUInteger)animationId;
--(void)animateToScore:(NSUInteger)score withAnimationId:(NSUInteger)animationId andDuration:(NSTimeInterval)duration;
+- (void)setMiddleColor:(UIColor *)color;
+
+- (void)setEndColor:(UIColor *)color;
+
+- (void)animateToScore:(NSUInteger)score withAnimationId:(NSUInteger)animationId;
+
+- (void)animateToScore:(NSUInteger)score withAnimationId:(NSUInteger)animationId andDuration:(NSTimeInterval)duration;
 @end

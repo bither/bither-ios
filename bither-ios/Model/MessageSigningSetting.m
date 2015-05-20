@@ -11,25 +11,26 @@
 #import "DialogSignMessageSelectAddress.h"
 #import "SignMessageViewController.h"
 
-@interface MessageSigningSetting()<UIActionSheetDelegate, DialogSignMessageSelectAddressDelegate>
-@property (weak) UIViewController* controller;
+@interface MessageSigningSetting () <UIActionSheetDelegate, DialogSignMessageSelectAddressDelegate>
+@property(weak) UIViewController *controller;
 @end
 
-static MessageSigningSetting* S;
+static MessageSigningSetting *S;
+
 @implementation MessageSigningSetting
 
-+(MessageSigningSetting*)getMessageSigningSetting{
-    if(!S){
-        S = [[MessageSigningSetting alloc]init];
++ (MessageSigningSetting *)getMessageSigningSetting {
+    if (!S) {
+        S = [[MessageSigningSetting alloc] init];
     }
     return S;
 }
 
--(instancetype)init{
+- (instancetype)init {
     self = [super initWithName:NSLocalizedString(@"sign_message_setting_name", nil) icon:nil];
-    if(self){
-        __weak MessageSigningSetting* s = self;
-        [self setSelectBlock:^(UIViewController * controller){
+    if (self) {
+        __weak MessageSigningSetting *s = self;
+        [self setSelectBlock:^(UIViewController *controller) {
             s.controller = controller;
             [s show];
         }];
@@ -37,9 +38,9 @@ static MessageSigningSetting* S;
     return self;
 }
 
--(void)show{
-    UIActionSheet* actionSheet = [[UIActionSheet alloc]initWithTitle:NSLocalizedString(@"sign_message_setting_name", nil) delegate:self cancelButtonTitle:nil destructiveButtonTitle:nil otherButtonTitles:nil];
-    if([BTAddressManager instance].privKeyAddresses.count > 0){
+- (void)show {
+    UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:NSLocalizedString(@"sign_message_setting_name", nil) delegate:self cancelButtonTitle:nil destructiveButtonTitle:nil otherButtonTitles:nil];
+    if ([BTAddressManager instance].privKeyAddresses.count > 0) {
         [actionSheet addButtonWithTitle:NSLocalizedString(@"sign_message_activity_name", nil)];
     }
     [actionSheet addButtonWithTitle:NSLocalizedString(@"verify_message_signature_activity_name", nil)];
@@ -49,8 +50,8 @@ static MessageSigningSetting* S;
 }
 
 
-- (void)actionSheet:(UIActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex{
-    if(buttonIndex < 0){
+- (void)actionSheet:(UIActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex {
+    if (buttonIndex < 0) {
         return;
     }
     NSInteger reverseIndex = actionSheet.numberOfButtons - 2 - buttonIndex;
@@ -59,14 +60,14 @@ static MessageSigningSetting* S;
             [self.controller.navigationController pushViewController:[self.controller.storyboard instantiateViewControllerWithIdentifier:@"VerifyMessageSignature"] animated:YES];
             break;
         case 1:
-            [[[DialogSignMessageSelectAddress alloc]initWithDelegate:self]showInWindow:self.controller.view.window];
+            [[[DialogSignMessageSelectAddress alloc] initWithDelegate:self] showInWindow:self.controller.view.window];
         default:
             break;
     }
 }
 
--(void)signMessageWithAddress:(BTAddress *)address{
-    SignMessageViewController* sign = [self.controller.storyboard instantiateViewControllerWithIdentifier:@"SignMessage"];
+- (void)signMessageWithAddress:(BTAddress *)address {
+    SignMessageViewController *sign = [self.controller.storyboard instantiateViewControllerWithIdentifier:@"SignMessage"];
     sign.address = address;
     [self.controller.navigationController pushViewController:sign animated:YES];
 }

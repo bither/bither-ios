@@ -41,6 +41,7 @@
 #import "AppDelegate.h"
 #import "UIBaseUtil.h"
 #import "IOS7ContainerViewController.h"
+#import "PaymentAddressSetting.h"
 
 @implementation Setting
 
@@ -192,7 +193,7 @@ static Setting *PasswordStrengthCheckSetting;
         Setting *setting = [[Setting alloc] initWithName:NSLocalizedString(@"Default Exchange", nil) icon:nil];
 
         [setting setGetValueBlock:^() {
-            return [BitherSetting getMarketName:[[UserDefaultsUtil instance] getDefaultMarket]];
+            return [GroupUtil getMarketName:[[UserDefaultsUtil instance] getDefaultMarket]];
         }];
         [setting setGetArrayBlock:^() {
             MarketType defaultMarket = [[UserDefaultsUtil instance] getDefaultMarket];
@@ -200,7 +201,7 @@ static Setting *PasswordStrengthCheckSetting;
             for (int i = BITSTAMP; i <= MARKET796; i++) {
                 NSMutableDictionary *dict = [NSMutableDictionary new];
                 [dict setObject:[NSNumber numberWithInt:i] forKey:SETTING_VALUE];
-                [dict setObject:[BitherSetting getMarketName:i] forKey:SETTING_KEY];
+                [dict setObject:[GroupUtil getMarketName:i] forKey:SETTING_KEY];
                 if (i == defaultMarket) {
                     [dict setObject:[NSNumber numberWithBool:YES] forKey:SETTING_IS_DEFAULT];
                 }
@@ -638,6 +639,9 @@ static Setting *PasswordStrengthCheckSetting;
     }
     [array addObject:[MessageSigningSetting getMessageSigningSetting]];
     [array addObject:[Setting getPasswordStrengthSetting]];
+    if ([[BTSettings instance] getAppMode] == HOT && ([BTAddressManager instance].allAddresses.count > 0 || [BTAddressManager instance].hasHDAccount)) {
+        [array addObject:[PaymentAddressSetting setting]];
+    }
     [array addObject:[Setting getTrashCanSetting]];
     if ([[BTSettings instance] getAppMode] == HOT) {
         [array addObject:[ReloadTxSetting getReloadTxsSetting]];

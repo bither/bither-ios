@@ -16,8 +16,6 @@
 #import "ScanQrCodeViewController.h"
 #import "UIBaseUtil.h"
 #import "BTUtils.h"
-#import "NSString+Base58.h"
-#import "BTQRCodeUtil.h"
 
 @interface ColdAddressListHDMCell () <DialogPasswordDelegate, ScanQrCodeDelegate> {
     BTHDMKeychain *_keychain;

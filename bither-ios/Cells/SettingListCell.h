@@ -20,5 +20,5 @@
 #import "Setting.h"
 
 @interface SettingListCell : UITableViewCell
--(void)setSetting:(Setting *) setting;
+- (void)setSetting:(Setting *)setting;
 @end

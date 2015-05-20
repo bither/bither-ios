@@ -56,27 +56,27 @@
 }
 
 + (NSString *)getTickerFile {
-    NSFileManager* fileManager = [NSFileManager defaultManager];
+    NSFileManager *fileManager = [NSFileManager defaultManager];
     NSString *marketDir = [CacheUtil cachePathForFileName:MARKET_CAHER];
     if (![fileManager fileExistsAtPath:marketDir]) {
-        BOOL fileExists=[fileManager fileExistsAtPath:marketDir];
-        if(!fileExists){
+        BOOL fileExists = [fileManager fileExistsAtPath:marketDir];
+        if (!fileExists) {
             [fileManager createDirectoryAtPath:marketDir withIntermediateDirectories:YES attributes:nil error:nil];
         }
     }
     return [marketDir stringByAppendingPathComponent:EXCAHNGE_TICKER_NAME];
 }
 
-+(void)writeFile:(NSString *)fileName content:(NSString *)content {
++ (void)writeFile:(NSString *)fileName content:(NSString *)content {
     [content writeToFile:fileName atomically:YES encoding:NSUTF8StringEncoding error:nil];
 }
 
-+(NSString*)readFile:(NSString*)fileName{
-    NSData * data=[NSData dataWithContentsOfFile:[CacheUtil getTickerFile]];
++ (NSString *)readFile:(NSString *)fileName {
+    NSData *data = [NSData dataWithContentsOfFile:[CacheUtil getTickerFile]];
     return [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
 }
 
-+(NSString *)cachePathForFileName:(NSString *)fileName{
++ (NSString *)cachePathForFileName:(NSString *)fileName {
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
     NSString *documentsPath = [paths objectAtIndex:0];
     return [documentsPath stringByAppendingPathComponent:fileName];

@@ -25,30 +25,30 @@
 
 @implementation CloneQrCodeSetting
 
--(instancetype)init{
+- (instancetype)init {
     self = [super initWithName:NSLocalizedString(@"Cold Wallet Clone QR Code", nil) icon:[UIImage imageNamed:@"qr_code_button_icon"]];
-    if(self){
+    if (self) {
         __weak CloneQrCodeSetting *d = self;
-        [self setSelectBlock:^(UIViewController * controller){
+        [self setSelectBlock:^(UIViewController *controller) {
             d.controller = controller;
-            [[[DialogPassword alloc]initWithDelegate:d] showInWindow:controller.view.window];
+            [[[DialogPassword alloc] initWithDelegate:d] showInWindow:controller.view.window];
         }];
     }
     return self;
 }
 
--(void)onPasswordEntered:(NSString *)password{
+- (void)onPasswordEntered:(NSString *)password {
     NSArray *addresses = [BTAddressManager instance].privKeyAddresses;
-    NSMutableArray* keys = [[NSMutableArray alloc]init];
-    for(BTAddress* a in addresses){
-        [keys addObject:[BTQRCodeUtil replaceNewQRCode:a.encryptPrivKey ]];
+    NSMutableArray *keys = [[NSMutableArray alloc] init];
+    for (BTAddress *a in addresses) {
+        [keys addObject:[BTQRCodeUtil replaceNewQRCode:a.fullEncryptPrivKey]];
     }
-    if([[BTAddressManager instance] hasHDMKeychain]){
-        BTHDMKeychain * keychain=[[BTAddressManager instance] hdmKeychain];
+    if ([[BTAddressManager instance] hasHDMKeychain]) {
+        BTHDMKeychain *keychain = [[BTAddressManager instance] hdmKeychain];
         [keys addObject:[keychain getFullEncryptPrivKeyWithHDMFlag]];
     }
-    QrCodeViewController* qrController = [self.controller.storyboard instantiateViewControllerWithIdentifier:@"QrCode"];
-    qrController.content =[BTQRCodeUtil joinedQRCode:keys];
+    QrCodeViewController *qrController = [self.controller.storyboard instantiateViewControllerWithIdentifier:@"QrCode"];
+    qrController.content = [BTQRCodeUtil joinedQRCode:keys];
     qrController.qrCodeTitle = NSLocalizedString(@"Cold Wallet Clone QR Code", nil);
     qrController.qrCodeMsg = NSLocalizedString(@"Scan by clone destination", nil);
     [self.controller.navigationController pushViewController:qrController animated:YES];

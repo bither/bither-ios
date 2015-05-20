@@ -20,13 +20,15 @@
 
 @protocol DialogKeychainBackupDiffDelegate <NSObject>
 
--(void)onAccept;
--(void)onDeny;
+- (void)onAccept;
+
+- (void)onDeny;
 
 @end
 
 @interface DialogKeychainBackupDiff : DialogCentered
--(instancetype)initWithDiffs:(NSArray*)diffs andDelegate:(NSObject<DialogKeychainBackupDiffDelegate>*)delegate;
-@property NSArray* diffs;
-@property (weak) NSObject<DialogKeychainBackupDiffDelegate>* delegate;
+- (instancetype)initWithDiffs:(NSArray *)diffs andDelegate:(NSObject <DialogKeychainBackupDiffDelegate> *)delegate;
+
+@property NSArray *diffs;
+@property(weak) NSObject <DialogKeychainBackupDiffDelegate> *delegate;
 @end

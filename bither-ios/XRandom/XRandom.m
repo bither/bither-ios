@@ -19,7 +19,6 @@
 #import "XRandom.h"
 #import "NSData+Hash.h"
 #import "NSMutableData+Bitcoin.h"
-#import "StringUtil.h"
 #import "NSString+Base58.h"
 
 #define PARAMETERS_N @"fffffffffffffffffffffffffffffffebaaedce6af48a03bbfd25e8cd0364141"
@@ -27,46 +26,45 @@
 
 @implementation XRandom
 
--(instancetype)initWithDelegate:(id<UEntropyDelegate>)delegate{
+- (instancetype)initWithDelegate:(id <UEntropyDelegate>)delegate {
     self = [super init];
-    if(self){
+    if (self) {
         self.delegate = delegate;
     }
     return self;
 }
 
--(NSData *)randomWithSize:(NSInteger)size{
-    NSMutableData * xRandomData=[NSMutableData new];
-    NSData * uRandomData=nil;
-    NSData * uEntropyData=nil;
-    
-    while ([xRandomData compare:[PARAMETERS_MIN_N hexToData]]==0||[xRandomData compare:[PARAMETERS_N hexToData]]>=0) {
-        while (uRandomData==nil) {
-            uRandomData=[NSData randomWithSize:size];
+- (NSData *)randomWithSize:(NSInteger)size {
+    NSMutableData *xRandomData = [NSMutableData new];
+    NSData *uRandomData = nil;
+    NSData *uEntropyData = nil;
+
+    while ([xRandomData compare:[PARAMETERS_MIN_N hexToData]] == 0 || [xRandomData compare:[PARAMETERS_N hexToData]] >= 0) {
+        while (uRandomData == nil) {
+            uRandomData = [NSData randomWithSize:size];
         }
         if ([self.delegate respondsToSelector:@selector(randomWithSize:)]) {
-            while (uEntropyData==nil) {
-                uEntropyData=[self.delegate randomWithSize:size];
+            while (uEntropyData == nil) {
+                uEntropyData = [self.delegate randomWithSize:size];
             }
         }
-        if (uEntropyData!=nil) {
-            Byte* uRandomBytes=(Byte*)uRandomData.bytes;
-            Byte* uEntropyBytes=(Byte*)uEntropyData.bytes;
-            for (int i=0; i<size; i++) {
-                Byte byte=uRandomBytes[i]^uEntropyBytes[i];
+        if (uEntropyData != nil) {
+            Byte *uRandomBytes = (Byte *) uRandomData.bytes;
+            Byte *uEntropyBytes = (Byte *) uEntropyData.bytes;
+            for (int i = 0; i < size; i++) {
+                Byte byte = uRandomBytes[i] ^uEntropyBytes[i];
                 [xRandomData appendUInt8:byte];
             }
-            
-        }else{
+
+        } else {
             [xRandomData appendData:uRandomData];
         }
     }
-   
-    
+
+
     return xRandomData;
 
 }
-
 
 
 @end

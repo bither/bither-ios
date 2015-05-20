@@ -21,7 +21,6 @@
 #import "UserDefaultsUtil.h"
 
 
-
 ///@description   API
 @interface BitherApi : BaseApi {
     int version;
@@ -29,16 +28,19 @@
 
 + (BitherApi *)instance;
 
--(void)getSpvBlock:(DictResponseBlock) callback andErrorCallBack:(ErrorHandler)errorCallback;
+- (void)getSpvBlock:(DictResponseBlock)callback andErrorCallBack:(ErrorHandler)errorCallback;
 
--(void)getInSignaturesApi:(NSString *)address fromBlock:(int) blockNo callback:(IdResponseBlock) callback andErrorCallBack:(ErrorHandler)errorCallback;
+- (void)getInSignaturesApi:(NSString *)address fromBlock:(int)blockNo callback:(IdResponseBlock)callback andErrorCallBack:(ErrorHandler)errorCallback;
 
--(void)getTransactionApi:(NSString *)address withPage:(int)page callback:(DictResponseBlock) callback andErrorCallBack:(ErrorHandler)errorCallback;
--(void)getMyTransactionApi:(NSString *)address callback:(DictResponseBlock) callback andErrorCallBack:(ErrorHandler)errorCallback;
--(void)getExchangeTicker:(VoidBlock) callback andErrorCallBack:(ErrorHandler)errorCallback;
+- (void)getTransactionApi:(NSString *)address withPage:(int)page callback:(DictResponseBlock)callback andErrorCallBack:(ErrorHandler)errorCallback;
+
+- (void)getMyTransactionApi:(NSString *)address callback:(DictResponseBlock)callback andErrorCallBack:(ErrorHandler)errorCallback;
+
+- (void)getExchangeTicker:(VoidBlock)callback andErrorCallBack:(ErrorHandler)errorCallback;
+
 - (void)uploadCrash:(NSString *)data callback:(DictResponseBlock)callback andErrorCallBack:(ErrorHandler)errorCallback;
 
--(void)getExchangeTrend:(MarketType) marketType callback:(ArrayResponseBlock) callback andErrorCallBack:(ErrorHandler)errorCallback;
+- (void)getExchangeTrend:(MarketType)marketType callback:(ArrayResponseBlock)callback andErrorCallBack:(ErrorHandler)errorCallback;
 
 //#pragma mark - hdm api
 //- (void)getHDMPasswordRandomWithHDMBid:(NSString *) hdmBid callback:(IdResponseBlock) callback andErrorCallBack:(ErrorHandler)errorCallback;

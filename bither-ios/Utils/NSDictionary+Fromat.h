@@ -18,23 +18,34 @@
 
 #import <Foundation/Foundation.h>
 
-@interface NSDictionary(Fromat)
-- (int)getIntFromDict:(NSString *) key andDefault:(int) defaultValue;
-- (long)getLongFromDict:(NSString *) key  andDefault:(long) defaultValue;
-- (long long)getLongLongFromDict:(NSString *) key  andDefault:(long long) defaultValue;
-- (float)getFloatFromDict:(NSString *) key andDefault:(float) defaultValue;
-- (double)getDoubleFromDict:(NSString *) key  andDefault:(double) defaultValue;
-- (NSString *)getStringFromDict:(NSString *) key  andDefault:(NSString *) defaultValue;
+@interface NSDictionary (Fromat)
+- (int)getIntFromDict:(NSString *)key andDefault:(int)defaultValue;
 
-- (BOOL )getBoolFromDict:(NSString *) key  andDefault:(BOOL ) defaultValue;
+- (long)getLongFromDict:(NSString *)key andDefault:(long)defaultValue;
 
-- (int)getIntFromDict:(NSString *) key ;
-- (long)getLongFromDict:(NSString *) key  ;
-- (long long)getLongLongFromDict:(NSString *) key  ;
-- (float)getFloatFromDict:(NSString *) key ;
-- (double)getDoubleFromDict:(NSString *) key  ;
-- (NSString *)getStringFromDict:(NSString *) key  ;
-- (BOOL)getBoolFromDict:(NSString *) key ;
+- (long long)getLongLongFromDict:(NSString *)key andDefault:(long long)defaultValue;
+
+- (float)getFloatFromDict:(NSString *)key andDefault:(float)defaultValue;
+
+- (double)getDoubleFromDict:(NSString *)key andDefault:(double)defaultValue;
+
+- (NSString *)getStringFromDict:(NSString *)key andDefault:(NSString *)defaultValue;
+
+- (BOOL)getBoolFromDict:(NSString *)key andDefault:(BOOL)defaultValue;
+
+- (int)getIntFromDict:(NSString *)key;
+
+- (long)getLongFromDict:(NSString *)key;
+
+- (long long)getLongLongFromDict:(NSString *)key;
+
+- (float)getFloatFromDict:(NSString *)key;
+
+- (double)getDoubleFromDict:(NSString *)key;
+
+- (NSString *)getStringFromDict:(NSString *)key;
+
+- (BOOL)getBoolFromDict:(NSString *)key;
 
 
 @end

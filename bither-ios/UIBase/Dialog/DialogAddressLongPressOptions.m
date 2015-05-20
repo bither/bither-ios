@@ -39,7 +39,7 @@
     if (!address.hasPrivKey) {
         viewStr = NSLocalizedString(@"Stop Monitoring", nil);
     }
-    if (NSLocalizedString(@"address_detail_private_Key_qr_code_bip38", nil).length >= viewStr.length){
+    if (NSLocalizedString(@"address_detail_private_Key_qr_code_bip38", nil).length >= viewStr.length) {
         viewStr = NSLocalizedString(@"address_detail_private_Key_qr_code_bip38", nil);
     }
     self = [super initWithFrame:CGRectMake(0, 0, [viewStr sizeWithRestrict:CGSizeMake(CGFLOAT_MAX, kButtonHeight) font:[UIFont systemFontOfSize:kFontSize]].width + kButtonEdgeInsets.left + kButtonEdgeInsets.right, kHeight)];
@@ -58,7 +58,7 @@
     if (!address.hasPrivKey) {
         viewStr = NSLocalizedString(@"Stop Monitoring", nil);
     }
-    if (NSLocalizedString(@"address_detail_private_Key_qr_code_bip38", nil).length >= viewStr.length){
+    if (NSLocalizedString(@"address_detail_private_Key_qr_code_bip38", nil).length >= viewStr.length) {
         viewStr = NSLocalizedString(@"address_detail_private_Key_qr_code_bip38", nil);
     }
     self = [super initWithFrame:CGRectMake(0, 0, [viewStr sizeWithRestrict:CGSizeMake(CGFLOAT_MAX, kButtonHeight) font:[UIFont systemFontOfSize:kFontSize]].width + kButtonEdgeInsets.left + kButtonEdgeInsets.right, kHeight)];

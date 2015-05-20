@@ -19,6 +19,7 @@
 #import <Foundation/Foundation.h>
 
 @interface PinCodeUtil : NSObject
-+(PinCodeUtil*)instance;
--(void)becomeActive;
++ (PinCodeUtil *)instance;
+
+- (void)becomeActive;
 @end

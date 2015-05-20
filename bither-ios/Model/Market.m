@@ -21,21 +21,23 @@
 
 @implementation Market
 
--(instancetype)initWithMarketType:(MarketType)marketType{
-    self=[super init];
+- (instancetype)initWithMarketType:(MarketType)marketType {
+    self = [super init];
     if (self) {
-        _marketType=marketType;
+        _marketType = marketType;
     }
     return self;
 }
 
--(NSString *)getName{
-    return [BitherSetting getMarketName:self.marketType];
+- (NSString *)getName {
+    return [GroupUtil getMarketName:self.marketType];
 }
--(NSString *)getDomainName{
-    return [BitherSetting getMarketDomain:self.marketType];
+
+- (NSString *)getDomainName {
+    return [GroupUtil getMarketDomain:self.marketType];
 }
--(NSString *)getUrl{
-    return  [@"http://" stringByAppendingString:[BitherSetting getMarketDomain:self.marketType]];
+
+- (NSString *)getUrl {
+    return [@"http://www." stringByAppendingString:[GroupUtil getMarketDomain:self.marketType]];
 }
 @end

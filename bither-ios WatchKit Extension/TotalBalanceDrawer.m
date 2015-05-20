@@ -26,7 +26,7 @@
 #define kTotalBalanceCacheImage (@"TotalBalance")
 
 #define kStrokeWidth (20.0f)
-#define kImageSize (300)
+#define kImageSize (340)
 #define kCircleGapRate (0.03f)
 #define kCircleMinRate (0.12f)
 #define RGBA(r, g, b, a) [UIColor colorWithRed:r/255.0 green:g/255.0 blue:b/255.0 alpha:a]
@@ -37,27 +37,29 @@
 
 @implementation TotalBalanceDrawer
 
-+ (void)showTotalBalanceOn:(WKInterfaceGroup *)group andLabel:(WKInterfaceLabel *)label {
++ (void)showTotalBalanceOn:(WKInterfaceGroup*)group label:(WKInterfaceLabel*)label andImage:(WKInterfaceImage*)iv{
     WKInterfaceDevice *device = [WKInterfaceDevice currentDevice];
     if ([device.cachedImages.allKeys containsObject:kTotalBalanceCacheImage]) {
         [group setBackgroundImageNamed:kTotalBalanceCacheImage];
         TotalBalance *t = [[TotalBalance alloc] init];
         [label setText:[WatchUnitUtil stringForAmount:t.total]];
+        [iv setImageNamed:[WatchUnitUtil imageNameOfSymbol]];
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
-            [TotalBalanceDrawer refreshTotalBalanceOn:group andLabel:label];
+            [TotalBalanceDrawer refreshTotalBalanceOn:group label:label andImage:iv];
         });
         return;
     }
-    [TotalBalanceDrawer refreshTotalBalanceOn:group andLabel:label];
+    [TotalBalanceDrawer refreshTotalBalanceOn:group label:label andImage:iv];
 }
 
-+ (void)refreshTotalBalanceOn:(WKInterfaceGroup *)group andLabel:(WKInterfaceLabel *)label {
++ (void)refreshTotalBalanceOn:(WKInterfaceGroup *)group label:(WKInterfaceLabel*)label andImage:(WKInterfaceImage*)iv{
     TotalBalance *t = [[TotalBalance alloc] init];
     UIImage *image = [TotalBalanceDrawer imageForTotalBalance:t];
     WKInterfaceDevice *device = [WKInterfaceDevice currentDevice];
     [device addCachedImage:image name:kTotalBalanceCacheImage];
     dispatch_async(dispatch_get_main_queue(), ^{
         [label setText:[WatchUnitUtil stringForAmount:t.total]];
+        [iv setImageNamed:[WatchUnitUtil imageNameOfSymbol]];
         [group setBackgroundImageNamed:kTotalBalanceCacheImage];
     });
 }

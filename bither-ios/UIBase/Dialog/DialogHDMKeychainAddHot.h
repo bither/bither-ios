@@ -9,5 +9,5 @@
 #import "DialogCentered.h"
 
 @interface DialogHDMKeychainAddHot : DialogCentered
--(instancetype)initWithBlock:(void(^)(BOOL))block;
+- (instancetype)initWithBlock:(void (^)(BOOL))block;
 @end

@@ -6,4 +6,4 @@ pod "AFNetworking", "~> 2.0"
 pod 'RegexKitLite', '~> 4.0'
 pod 'SimpleKeychain'
 pod 'FXBlurView'
-pod 'Bitheri', :git => 'https://github.com/bither/bitheri.git', :tag => 'v1.3.4'
+pod 'Bitheri', :git => 'https://github.com/bither/bitheri.git', :tag => 'v1.3.5'

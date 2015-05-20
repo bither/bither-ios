@@ -24,7 +24,7 @@
 
 @interface HdmSendViewController : UIViewController
 @property BTHDMAddress *address;
-@property NSString* toAddress;
+@property NSString *toAddress;
 @property uint64_t amount;
-@property (weak) NSObject<SendDelegate> *sendDelegate;
+@property(weak) NSObject <SendDelegate> *sendDelegate;
 @end

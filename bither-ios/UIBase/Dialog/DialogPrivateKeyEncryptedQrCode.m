@@ -29,7 +29,7 @@
 #define kShareBottomFontSize (16)
 #define kShareBottomImageMargin (3)
 
-@interface DialogPrivateKeyEncryptedQrCode()<UIDocumentInteractionControllerDelegate>{
+@interface DialogPrivateKeyEncryptedQrCode () <UIDocumentInteractionControllerDelegate> {
     NSString *_encrytedPrivateKey;
     NSString *_shareFileName;
     NSString *_address;
@@ -42,50 +42,50 @@
 
 @implementation DialogPrivateKeyEncryptedQrCode
 
--(instancetype)initWithAddress:(BTAddress*)address{
-    if(!address.hasPrivKey){
+- (instancetype)initWithAddress:(BTAddress *)address {
+    if (!address.hasPrivKey) {
         return nil;
     }
     self = [super initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.width + (kShareBottomDistance + kShareBottomHeight) * 2)];
-    if(self){
+    if (self) {
         _address = address.address;
-        _encrytedPrivateKey = [BTQRCodeUtil replaceNewQRCode:[address.encryptPrivKey toUppercaseStringWithEn]];
+        _encrytedPrivateKey = [BTQRCodeUtil replaceNewQRCode:[address.fullEncryptPrivKey toUppercaseStringWithEn]];
         _shareFileName = [NSString stringWithFormat:@"%@_private_key", address.address];
         [self firstConfigure];
     }
     return self;
 }
 
--(void)firstConfigure{
+- (void)firstConfigure {
     self.backgroundImage = [UIImage imageWithColor:[UIColor colorWithWhite:1 alpha:0]];
     self.bgInsets = UIEdgeInsetsMake(10, 0, 10, 0);
     self.dimAmount = 0.8f;
-    self.iv = [[UIImageView alloc]initWithFrame:CGRectMake(0, kShareBottomDistance + kShareBottomHeight, self.frame.size.width, self.frame.size.width)];
-    self.iv.image = [QRCodeThemeUtil qrCodeOfContent:_encrytedPrivateKey andSize:self.frame.size.width margin:self.frame.size.width * 0.03f  withTheme:[QRCodeTheme black]];
+    self.iv = [[UIImageView alloc] initWithFrame:CGRectMake(0, kShareBottomDistance + kShareBottomHeight, self.frame.size.width, self.frame.size.width)];
+    self.iv.image = [QRCodeThemeUtil qrCodeOfContent:_encrytedPrivateKey andSize:self.frame.size.width margin:self.frame.size.width * 0.03f withTheme:[QRCodeTheme black]];
     [self addSubview:self.iv];
-    UIButton* btnDismiss = [[UIButton alloc]initWithFrame:self.iv.frame];
+    UIButton *btnDismiss = [[UIButton alloc] initWithFrame:self.iv.frame];
     [btnDismiss setBackgroundImage:nil forState:UIControlStateNormal];
     [btnDismiss addTarget:self action:@selector(dismiss) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:btnDismiss];
-    
-    UIButton *btn = [[UIButton alloc]initWithFrame:CGRectMake(0, self.frame.size.height - kShareBottomHeight, 0, kShareBottomHeight)];
+
+    UIButton *btn = [[UIButton alloc] initWithFrame:CGRectMake(0, self.frame.size.height - kShareBottomHeight, 0, kShareBottomHeight)];
     [btn setTitle:NSLocalizedString(@"Back up private key", nil) forState:UIControlStateNormal];
     [btn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [btn setTitleColor:[UIColor colorWithWhite:1 alpha:0.5] forState:UIControlStateHighlighted];
     btn.contentEdgeInsets = UIEdgeInsetsMake(0, kShareBottomHeight + kShareBottomImageMargin, 0, 0);
     btn.titleLabel.font = [UIFont systemFontOfSize:kShareBottomFontSize];
-    UIImageView *iv = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, kShareBottomHeight, kShareBottomHeight)];
+    UIImageView *iv = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, kShareBottomHeight, kShareBottomHeight)];
     iv.autoresizingMask = UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleRightMargin;
     iv.image = [UIImage imageNamed:@"fancy_qr_code_share_normal"];
     [btn addSubview:iv];
     [btn sizeToFit];
     CGRect frame = btn.frame;
-    frame.origin.x = (self.frame.size.width - frame.size.width)/2;
+    frame.origin.x = (self.frame.size.width - frame.size.width) / 2;
     btn.frame = frame;
     [btn addTarget:self action:@selector(sharePressed:) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:btn];
 
-    self.lblAddress = [[UILabel alloc]initWithFrame:CGRectZero];
+    self.lblAddress = [[UILabel alloc] initWithFrame:CGRectZero];
     self.lblAddress.font = [UIFont fontWithName:@"Courier New" size:16];
     self.lblAddress.textColor = [UIColor whiteColor];
     self.lblAddress.numberOfLines = 0;
@@ -95,23 +95,24 @@
     [self addSubview:self.lblAddress];
 }
 
--(void)documentInteractionController:(UIDocumentInteractionController *)controller didEndSendingToApplication:(NSString *)application{
+- (void)documentInteractionController:(UIDocumentInteractionController *)controller didEndSendingToApplication:(NSString *)application {
     [self dismiss];
 }
 
--(void)dialogDidDismiss{
+- (void)dialogDidDismiss {
     [FileUtil deleteTmpImageForShareWithName:_shareFileName];
 }
 
--(void)sharePressed:(id)sender{
-    NSURL* url = [FileUtil saveTmpImageForShare:self.iv.image fileName:_shareFileName];
+- (void)sharePressed:(id)sender {
+    NSURL *url = [FileUtil saveTmpImageForShare:self.iv.image fileName:_shareFileName];
     self.interactionController = [UIDocumentInteractionController interactionControllerWithURL:url];
     UIView *fromView = self.window.topViewController.view;
     self.interactionController.delegate = self;
     [self.interactionController presentOptionsMenuFromRect:CGRectMake(0, 0, fromView.frame.size.width, fromView.frame.size.height) inView:fromView animated:YES];
 }
-- (BOOL)pointInside:(CGPoint)point withEvent:(UIEvent *)event{
-    if(point.y < self.iv.frame.origin.y || (point.y > CGRectGetMaxY(self.iv.frame) && point.y < CGRectGetMaxY(self.iv.frame) + kShareBottomDistance)){
+
+- (BOOL)pointInside:(CGPoint)point withEvent:(UIEvent *)event {
+    if (point.y < self.iv.frame.origin.y || (point.y > CGRectGetMaxY(self.iv.frame) && point.y < CGRectGetMaxY(self.iv.frame) + kShareBottomDistance)) {
         return NO;
     }
     return [super pointInside:point withEvent:event];

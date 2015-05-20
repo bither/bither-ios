@@ -21,8 +21,6 @@
 #import "UIImage+ImageWithColor.h"
 #import "QRCodeThemeUtil.h"
 #import "StringUtil.h"
-#import "FileUtil.h"
-#import "UIBaseUtil.h"
 
 
 #define kShareBottomDistance (20)
@@ -30,7 +28,7 @@
 #define kShareBottomFontSize (16)
 #define kShareBottomImageMargin (3)
 
-@interface DialogPrivateKeyDecryptedQrCode()<UIDocumentInteractionControllerDelegate>{
+@interface DialogPrivateKeyDecryptedQrCode () <UIDocumentInteractionControllerDelegate> {
     NSString *_privateStr;
     NSString *_address;
 }
@@ -40,30 +38,30 @@
 
 @implementation DialogPrivateKeyDecryptedQrCode
 
--(instancetype)initWithAddress:(NSString*)address privateKey:(NSString*)privateStr{
-   
+- (instancetype)initWithAddress:(NSString *)address privateKey:(NSString *)privateStr {
+
     self = [super initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.width + (kShareBottomDistance + kShareBottomHeight) * 2)];
-    if(self){
-        _privateStr=privateStr;
+    if (self) {
+        _privateStr = privateStr;
         _address = address;
         [self firstConfigure];
     }
     return self;
 }
 
--(void)firstConfigure{
+- (void)firstConfigure {
     self.backgroundImage = [UIImage imageWithColor:[UIColor colorWithWhite:1 alpha:0]];
     self.bgInsets = UIEdgeInsetsMake(10, 0, 10, 0);
     self.dimAmount = 0.8f;
-    self.iv = [[UIImageView alloc]initWithFrame:CGRectMake(0, kShareBottomDistance + kShareBottomHeight, self.frame.size.width, self.frame.size.width)];
+    self.iv = [[UIImageView alloc] initWithFrame:CGRectMake(0, kShareBottomDistance + kShareBottomHeight, self.frame.size.width, self.frame.size.width)];
     self.iv.image = [QRCodeThemeUtil qrCodeOfContent:_privateStr andSize:self.frame.size.width margin:self.frame.size.width * 0.03f withTheme:[QRCodeTheme black]];
     [self addSubview:self.iv];
-    UIButton* btnDismiss = [[UIButton alloc]initWithFrame:self.iv.frame];
+    UIButton *btnDismiss = [[UIButton alloc] initWithFrame:self.iv.frame];
     [btnDismiss setBackgroundImage:nil forState:UIControlStateNormal];
     [btnDismiss addTarget:self action:@selector(dismiss) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:btnDismiss];
-    
-    self.lblAddress = [[UILabel alloc]initWithFrame:CGRectZero];
+
+    self.lblAddress = [[UILabel alloc] initWithFrame:CGRectZero];
     self.lblAddress.font = [UIFont fontWithName:@"Courier New" size:16];
     self.lblAddress.textColor = [UIColor whiteColor];
     self.lblAddress.numberOfLines = 0;
@@ -73,17 +71,18 @@
     [self addSubview:self.lblAddress];
 }
 
--(void)documentInteractionController:(UIDocumentInteractionController *)controller didEndSendingToApplication:(NSString *)application{
+- (void)documentInteractionController:(UIDocumentInteractionController *)controller didEndSendingToApplication:(NSString *)application {
     [self dismiss];
 }
 
-- (BOOL)pointInside:(CGPoint)point withEvent:(UIEvent *)event{
-    if(point.y < self.iv.frame.origin.y || (point.y > CGRectGetMaxY(self.iv.frame) && point.y < CGRectGetMaxY(self.iv.frame) + kShareBottomDistance)){
+- (BOOL)pointInside:(CGPoint)point withEvent:(UIEvent *)event {
+    if (point.y < self.iv.frame.origin.y || (point.y > CGRectGetMaxY(self.iv.frame) && point.y < CGRectGetMaxY(self.iv.frame) + kShareBottomDistance)) {
         return NO;
     }
     return [super pointInside:point withEvent:event];
 }
--(void)dealloc{
-    _privateStr=@"";
+
+- (void)dealloc {
+    _privateStr = @"";
 }
 @end

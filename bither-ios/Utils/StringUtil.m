@@ -19,9 +19,6 @@
 #import "BitherSetting.h"
 #import "UnitUtil.h"
 #import "UserDefaultsUtil.h"
-#import "UIImage+ImageRenderToColor.h"
-#import "NSData+MKBase64.h"
-
 
 
 #define BTC         @"\xC9\x83"     // capital B with stroke (utf-8)
@@ -33,152 +30,168 @@
 
 @implementation StringUtil
 
-+(NSString *)formatPrice:(double) value{
-    NSString * symobl= [BitherSetting getCurrencySymbol:[[UserDefaultsUtil instance] getDefaultCurrency]];
-    return  [NSString stringWithFormat:@"%@%.2f",symobl, value];
-}
-+(NSString * )formatDouble:(double) value{
-    return [NSString stringWithFormat:@"%.2f",value];
++ (NSString *)formatPrice:(double)value {
+    NSString *symobl = [BitherSetting getCurrencySymbol:[[UserDefaultsUtil instance] getDefaultCurrency]];
+    return [NSString stringWithFormat:@"%@%.2f", symobl, value];
 }
 
-+(BOOL)isEmpty:(NSString *)str{
-    return str==nil||str.length==0;
++ (NSString *)formatDouble:(double)value {
+    return [NSString stringWithFormat:@"%.2f", value];
 }
-+(BOOL)validEmail:(NSString *)str{
-    NSString * regex = @"(^[a-zA-Z0-9\\+\\.\\_\\%\\-\\+]{1,256}\\@[a-zA-Z0-9][a-zA-Z0-9\\-]{0,64}(\\.[a-zA-Z0-9][a-zA-Z0-9\\-]{0,25})$)";
-    NSPredicate * pred = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", regex];
-    return  [pred evaluateWithObject:str];
+
++ (BOOL)isEmpty:(NSString *)str {
+    return str == nil || str.length == 0;
 }
-+(BOOL)validPassword:(NSString *)str{
-    NSString * regex = @"[0-9a-zA-Z`~!@#$%^&*()_\\-+=|{}':;',\\[\\].\\\"\\\\<>/?]{6,43}";
-    NSPredicate * pred = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", regex];
-    return  [pred evaluateWithObject:str];
+
++ (BOOL)validEmail:(NSString *)str {
+    NSString *regex = @"(^[a-zA-Z0-9\\+\\.\\_\\%\\-\\+]{1,256}\\@[a-zA-Z0-9][a-zA-Z0-9\\-]{0,64}(\\.[a-zA-Z0-9][a-zA-Z0-9\\-]{0,25})$)";
+    NSPredicate *pred = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", regex];
+    return [pred evaluateWithObject:str];
 }
-+(BOOL)validPartialPassword:(NSString *)str{
-    NSString * regex = @"[0-9a-zA-Z`~!@#$%^&*()_\\-+=|{}':;',\\[\\].\\\"\\\\<>/?]{0,43}";
-    NSPredicate * pred = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", regex];
-    return  [pred evaluateWithObject:str];
+
++ (BOOL)validPassword:(NSString *)str {
+    NSString *regex = @"[0-9a-zA-Z`~!@#$%^&*()_\\-+=|{}':;',\\[\\].\\\"\\\\<>/?]{6,43}";
+    NSPredicate *pred = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", regex];
+    return [pred evaluateWithObject:str];
+}
+
++ (BOOL)validPartialPassword:(NSString *)str {
+    NSString *regex = @"[0-9a-zA-Z`~!@#$%^&*()_\\-+=|{}':;',\\[\\].\\\"\\\\<>/?]{0,43}";
+    NSPredicate *pred = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", regex];
+    return [pred evaluateWithObject:str];
 }
 
 
 //BIP21 https://github.com/bitcoin/bips/blob/master/bip-0021.mediawiki
 
-+(BOOL)isValidBitcoinBIP21Address:(NSString *)str{
++ (BOOL)isValidBitcoinBIP21Address:(NSString *)str {
     NSError *error;
     NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:BIP21ADDRESS_REGEX options:0 error:&error];
-    NSArray * matchs= [regex matchesInString:str options:0 range:NSMakeRange(0, str.length)];
-    return  matchs.count>0;
-    
-    
+    NSArray *matchs = [regex matchesInString:str options:0 range:NSMakeRange(0, str.length)];
+    return matchs.count > 0;
+
+
 }
-+(NSString*)getAddressFormBIP21Address:(NSString *)str{
+
++ (NSString *)getAddressFormBIP21Address:(NSString *)str {
     NSError *error;
     NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:BIP21ADDRESS_REGEX options:0 error:&error];
-    NSArray * matchs= [regex matchesInString:str options:0 range:NSMakeRange(0, str.length)];
-    if (matchs.count>0) {
-        NSTextCheckingResult *match =[matchs objectAtIndex:0];
-        NSRange  range=[match rangeAtIndex:2];
-        return  [str substringWithRange:range];
-    }else{
+    NSArray *matchs = [regex matchesInString:str options:0 range:NSMakeRange(0, str.length)];
+    if (matchs.count > 0) {
+        NSTextCheckingResult *match = [matchs objectAtIndex:0];
+        NSRange range = [match rangeAtIndex:2];
+        return [str substringWithRange:range];
+    } else {
         return @"";
     }
 }
-+(uint64_t)getAmtFormBIP21Address:(NSString *)str{
+
++ (uint64_t)getAmtFormBIP21Address:(NSString *)str {
     NSError *error;
     NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:BIP21AMT_REGEX options:0 error:&error];
-    NSArray * matchs= [regex matchesInString:str options:0 range:NSMakeRange(0, str.length)];
-    if (matchs.count>0) {
-        NSTextCheckingResult *match =[matchs objectAtIndex:0];
-        NSRange  range=[match rangeAtIndex:2];
-        return  [UnitUtil amountForString:[str substringWithRange:range] unit:UnitBTC];
-    }else{
+    NSArray *matchs = [regex matchesInString:str options:0 range:NSMakeRange(0, str.length)];
+    if (matchs.count > 0) {
+        NSTextCheckingResult *match = [matchs objectAtIndex:0];
+        NSRange range = [match rangeAtIndex:2];
+        return [UnitUtil amountForString:[str substringWithRange:range] unit:UnitBTC];
+    } else {
         return -1;
     }
 }
 
 
-+(BOOL)isPureLongLong:(NSString *)string{
-    NSScanner * scan=[NSScanner scannerWithString:string];
++ (BOOL)isPureLongLong:(NSString *)string {
+    NSScanner *scan = [NSScanner scannerWithString:string];
     long long val;
-    return [scan scanLongLong:&val]&&[scan isAtEnd];
+    return [scan scanLongLong:&val] && [scan isAtEnd];
 }
-+(BOOL)isPureFloat:(NSString *)string{
-    NSScanner * scan=[NSScanner scannerWithString:string];
+
++ (BOOL)isPureFloat:(NSString *)string {
+    NSScanner *scan = [NSScanner scannerWithString:string];
     float val;
-    return [scan scanFloat:&val] &&[scan isAtEnd];
+    return [scan scanFloat:&val] && [scan isAtEnd];
 }
 
 
-+(NSString *)intToString:(int)num{
-    return [ NSString stringWithFormat:@"%d",num];
++ (NSString *)intToString:(int)num {
+    return [NSString stringWithFormat:@"%d", num];
 }
-+(NSString *)longToString:(long)num{
-    return  [NSString stringWithFormat:@"%ld",num];
+
++ (NSString *)longToString:(long)num {
+    return [NSString stringWithFormat:@"%ld", num];
 }
-+(BOOL)compareString:(NSString *)original compare:(NSString *)compare{
-    if (original==nil) {
-        if (compare==nil) {
+
++ (BOOL)compareString:(NSString *)original compare:(NSString *)compare {
+    if (original == nil) {
+        if (compare == nil) {
             return YES;
-        }else{
+        } else {
             return NO;
         }
-    }else{
-        if(compare==nil){
+    } else {
+        if (compare == nil) {
             return NO;
-        }else{
+        } else {
             return [original isEqualToString:compare];
         }
     }
 }
 
-+(NSString *)shortenAddress:(NSString *)address{
-    if (!address||address.length<=4) {
++ (NSString *)shortenAddress:(NSString *)address {
+    if (!address || address.length <= 4) {
         return address;
-    }else{
+    } else {
         return [[address substringToIndex:4] stringByAppendingString:@"..."];
     }
 }
-+(NSString *)formatAddress:(NSString *)address groupSize:(NSInteger)groupSize  lineSize:(NSInteger) lineSize{
-    NSInteger len=address.length;
-    NSString * result=@"";
-    
-    for (NSInteger i=0; i<len; i+=groupSize) {
-        NSInteger end=groupSize;
-        if (i+groupSize>len) {
-            end=len-i;
+
++ (NSString *)formatAddress:(NSString *)address groupSize:(NSInteger)groupSize lineSize:(NSInteger)lineSize {
+    NSInteger len = address.length;
+    NSString *result = @"";
+
+    for (NSInteger i = 0; i < len; i += groupSize) {
+        NSInteger end = groupSize;
+        if (i + groupSize > len) {
+            end = len - i;
         }
-        NSString * part=[address substringWithRange:NSMakeRange(i,end)];
-        result=[result stringByAppendingString:part];
-        if (end<len) {
-            BOOL endOfLine=lineSize>0&&(i+end)%lineSize==0;
+        NSString *part = [address substringWithRange:NSMakeRange(i, end)];
+        result = [result stringByAppendingString:part];
+        if (end < len) {
+            BOOL endOfLine = lineSize > 0 && (i + end) % lineSize == 0;
             if (endOfLine) {
-               result= [result stringByAppendingString:@"\n"];
-            }else{
-               result= [result stringByAppendingString:@" "];
+                result = [result stringByAppendingString:@"\n"];
+            } else {
+                result = [result stringByAppendingString:@" "];
             }
         }
     }
     return result;
 }
 
-+(NSString *)longToHex:(long long) value{
++ (NSString *)longToHex:(long long)value {
     NSNumber *number;
     NSString *hexString;
     number = [NSNumber numberWithLongLong:value];
     hexString = [NSString stringWithFormat:@"%qx", [number longLongValue]];
     return hexString;
-    
+
 }
-+(long long)hexToLong:(NSString *)hex{
-    NSScanner* pScanner = [NSScanner scannerWithString: hex];
+
++ (long long)hexToLong:(NSString *)hex {
+    NSScanner *pScanner = [NSScanner scannerWithString:hex];
     unsigned long long iValue;
-    [pScanner scanHexLongLong: &iValue];
+    [pScanner scanHexLongLong:&iValue];
     return iValue;
 }
-+(NSData *)getUrlSaleBase64:(NSString *)str{
-    str=[str stringByReplacingOccurrencesOfString:@"-" withString:@"+"];
-    str=[str stringByReplacingOccurrencesOfString:@"_" withString:@"/"];
+
++ (NSData *)getUrlSaleBase64:(NSString *)str {
+    str = [str stringByReplacingOccurrencesOfString:@"-" withString:@"+"];
+    str = [str stringByReplacingOccurrencesOfString:@"_" withString:@"/"];
     return [NSData dataFromBase64String:str];
+}
+
++ (NSString *)removeBlankSpaceString:(NSString *)str {
+    return [str stringByReplacingOccurrencesOfString:@" " withString:@""];
 }
 
 @end

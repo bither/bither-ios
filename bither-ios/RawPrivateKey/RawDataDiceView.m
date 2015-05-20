@@ -39,13 +39,13 @@
 
 - (void)addData:(NSUInteger)d {
     if (self.filledDataLength < self.dataLength) {
-        if(d > 5){
+        if (d > 5) {
             [NSException raise:@"RawDataDiceView not accepted dice value" format:@"RawDataDiceView not accepted dice value %d", d];
         }
         NSUInteger index = data.length;
         [data appendFormat:@"%d", d];
         UIView *v = ((UIView *) ((UIView *) self.subviews[1]).subviews[index]).subviews[0];
-        UIImageView * iv = (UIImageView *)v.subviews[1];
+        UIImageView *iv = (UIImageView *) v.subviews[1];
         [v.layer removeAllAnimations];
         iv.image = [UIImage imageNamed:[NSString stringWithFormat:@"dice_large_%d", d + 1]];
         CGPoint center = CGPointMake(CGRectGetMidX(v.frame), CGRectGetMidY(v.frame));
@@ -69,7 +69,7 @@
     [UIView animateWithDuration:0.5 animations:^{
         v.transform = CGAffineTransformMakeScale(0.01, 0.01);
     }                completion:^(BOOL finished) {
-        if(finished){
+        if (finished) {
             v.hidden = YES;
         }
     }];
@@ -89,7 +89,7 @@
         [UIView animateWithDuration:0.5 animations:^{
             v.transform = CGAffineTransformMakeScale(0.01, 0.01);
         }                completion:^(BOOL finished) {
-            if(finished){
+            if (finished) {
                 v.hidden = YES;
             }
         }];
@@ -100,7 +100,7 @@
     if (self.filledDataLength < self.dataLength) {
         return nil;
     }
-    NSData* PN = [@"fffffffffffffffffffffffffffffffebaaedce6af48a03bbfd25e8cd0364141" hexToData];
+    NSData *PN = [@"fffffffffffffffffffffffffffffffebaaedce6af48a03bbfd25e8cd0364141" hexToData];
     NSMutableData *d = [NSMutableData dataWithCapacity:33];
 
     BN_CTX *ctx = BN_CTX_new();

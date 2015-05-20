@@ -43,6 +43,7 @@
 		0A93B6011A4A66080081D74D /* DialogSignMessageOutput.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A93B6001A4A66080081D74D /* DialogSignMessageOutput.m */; };
 		0A93B6061A4AA0520081D74D /* VerifyMessageSignatureViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A93B6051A4AA0520081D74D /* VerifyMessageSignatureViewController.m */; };
 		0A948DCA1AA080E600359F64 /* MarketInterfaceController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A948DC91AA080E600359F64 /* MarketInterfaceController.m */; };
+		0AAAEE331AFC83EE00F6E3BB /* WatchPageConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AAAEE321AFC83EE00F6E3BB /* WatchPageConfiguration.m */; };
 		0AB63CB81ABD15C80018A546 /* RawPrivateKeyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AB63CB71ABD15C80018A546 /* RawPrivateKeyViewController.m */; };
 		0AB63CBD1ABD1C700018A546 /* RawPrivateKeyDiceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AB63CBC1ABD1C700018A546 /* RawPrivateKeyDiceViewController.m */; };
 		0AB7226F1ACF6F4500D4B4FB /* infoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0AB722711ACF6F4500D4B4FB /* infoPlist.strings */; };
@@ -57,15 +58,22 @@
 		0AD674971A7B4BDA007967DB /* ColdAddressListHDMCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AD674961A7B4BDA007967DB /* ColdAddressListHDMCell.m */; };
 		0AD6749C1A7B6229007967DB /* DialogWithActions.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AD6749B1A7B6229007967DB /* DialogWithActions.m */; };
 		0AD6749F1A7B9108007967DB /* DialogHDMSeedWordList.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AD6749E1A7B9108007967DB /* DialogHDMSeedWordList.m */; };
+		0AE142621B00924C0070C580 /* PaymentInterfaceController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AE142611B00924C0070C580 /* PaymentInterfaceController.m */; };
+		0AE142631B0094140070C580 /* QRCodeThemeUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = ACEE7D1C19D3F9F500932B39 /* QRCodeThemeUtil.m */; };
+		0AE142641B00941B0070C580 /* UIColor+Util.m in Sources */ = {isa = PBXBuildFile; fileRef = ACDDDC3519483A840008A79D /* UIColor+Util.m */; };
+		0AE142651B0094220070C580 /* UIImage+ImageWithColor.m in Sources */ = {isa = PBXBuildFile; fileRef = AC33089419556F7A00D8F621 /* UIImage+ImageWithColor.m */; };
 		0AFBA9321AA01EF60059CB4B /* TotalBalance.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AFBA9311AA01EF60059CB4B /* TotalBalance.m */; };
 		0AFBA9351AA0275F0059CB4B /* WatchMarket.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AFBA9341AA0275F0059CB4B /* WatchMarket.m */; };
 		0AFBA9361AA028850059CB4B /* NSDictionary+Fromat.m in Sources */ = {isa = PBXBuildFile; fileRef = 4254086A1946CD17007AF99C /* NSDictionary+Fromat.m */; };
 		0AFBA93F1AA02C190059CB4B /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0AFBA9411AA02C190059CB4B /* Localizable.strings */; };
+		1BC2705059CAA4F55CEFCADB /* PaymentAddressSetting.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BC275821CC95E0F138A889D /* PaymentAddressSetting.m */; };
+		1BC27056253378BF3E96EBA0 /* DialogEditVanityLength.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BC27877DFCC22281F0DEAD8 /* DialogEditVanityLength.m */; };
 		1BC270F1C2BEA60E0B3384AB /* DialogHDMAddressOptions.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BC27D1407586D2FCB8F01AC /* DialogHDMAddressOptions.m */; };
 		1BC271A2775231786F6E597C /* RawDataDiceView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BC27F4ABF122CEF5DCDD706 /* RawDataDiceView.m */; };
 		1BC273956C6D9E8D480F865A /* AddressAliasView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BC279D47F4CCF0091934456 /* AddressAliasView.m */; };
 		1BC27403EB7CEBFFDD178CF2 /* DialogHDAccountOptions.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BC27DB53D5E5AD5BA309DAB /* DialogHDAccountOptions.m */; };
 		1BC27499EE579986A1439709 /* DialogHDMInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BC27E22C25A90DF1E5DA1DC /* DialogHDMInfo.m */; };
+		1BC2754DD71C0DC8E65322FC /* DialogFirstRunWarning.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BC27C00DACC9C35CFA2C99A /* DialogFirstRunWarning.m */; };
 		1BC275ACC2D220D9CE5212D5 /* HDMResetServerPasswordUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BC27A0354887C3372BE01B1 /* HDMResetServerPasswordUtil.m */; };
 		1BC275F3608609D0E72BFBE7 /* HDMTriangleBgView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BC27C837F7819A54B0A2E37 /* HDMTriangleBgView.m */; };
 		1BC2778BC574DA2F816BC77A /* AddHDMAddressViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BC27FD66F3376A2C68612DD /* AddHDMAddressViewController.m */; };
@@ -209,6 +217,7 @@
 		AC8912F21A7F62FE003797C4 /* WorldListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AC8912F11A7F62FE003797C4 /* WorldListCell.m */; };
 		AC8F0DCA196CF4E400CCD0F9 /* SelectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AC8F0DC9196CF4E400CCD0F9 /* SelectViewController.m */; };
 		AC8F0DCD196D054A00CCD0F9 /* SelectListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AC8F0DCC196D054A00CCD0F9 /* SelectListCell.m */; };
+		AC9B35ED1AFF46BC004B10FD /* GroupUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = DC08C1C370321C08C785C9E1 /* GroupUtil.m */; };
 		AC9BBCFE19D268AB00E58BA7 /* UpgradeUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = AC9BBCFD19D268AB00E58BA7 /* UpgradeUtil.m */; };
 		AC9BC61019D18102003B88B5 /* SystemUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = AC9BC60F19D18102003B88B5 /* SystemUtil.m */; };
 		ACA11DCA19F64D560087D39C /* RCheckViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ACA11DC919F64D560087D39C /* RCheckViewController.m */; };
@@ -293,6 +302,7 @@
 		DAB2C8761A206F080011EE2F /* KeychainBackupUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = DAB2C8751A206F080011EE2F /* KeychainBackupUtil.m */; };
 		DAD0FFF51A81D08D008AEAA2 /* HDMApiTest.m in Sources */ = {isa = PBXBuildFile; fileRef = DAD0FFF41A81D08D008AEAA2 /* HDMApiTest.m */; };
 		DAD0FFF61A81D41B008AEAA2 /* hdm.bither.net.cer in Resources */ = {isa = PBXBuildFile; fileRef = D61D0299B4CDCCFC6D0BA161 /* hdm.bither.net.cer */; };
+		DC02BC2D62776189E7335151 /* GroupUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = DC08C1C370321C08C785C9E1 /* GroupUtil.m */; };
 		DC0448DAEF65BD227897D240 /* HDMKeychainRecoverUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = DC0CC84409CD956F1FA008BF /* HDMKeychainRecoverUtil.m */; };
 		DC06422DA44A6DA77DCFBB2D /* ImportHDMCold.m in Sources */ = {isa = PBXBuildFile; fileRef = DC0A375AE83A8BA37F3FA65F /* ImportHDMCold.m */; };
 		DC075758EE0F48911D8D4CE8 /* ImportHDMColdSeedController.m in Sources */ = {isa = PBXBuildFile; fileRef = DC07A672CCAD76ED66B72B91 /* ImportHDMColdSeedController.m */; };
@@ -401,6 +411,8 @@
 		0A93B6051A4AA0520081D74D /* VerifyMessageSignatureViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VerifyMessageSignatureViewController.m; sourceTree = "<group>"; };
 		0A948DC81AA080E600359F64 /* MarketInterfaceController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MarketInterfaceController.h; sourceTree = "<group>"; };
 		0A948DC91AA080E600359F64 /* MarketInterfaceController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MarketInterfaceController.m; sourceTree = "<group>"; };
+		0AAAEE311AFC83EE00F6E3BB /* WatchPageConfiguration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WatchPageConfiguration.h; sourceTree = "<group>"; };
+		0AAAEE321AFC83EE00F6E3BB /* WatchPageConfiguration.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WatchPageConfiguration.m; sourceTree = "<group>"; };
 		0AB63CB61ABD15C80018A546 /* RawPrivateKeyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RawPrivateKeyViewController.h; sourceTree = "<group>"; };
 		0AB63CB71ABD15C80018A546 /* RawPrivateKeyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RawPrivateKeyViewController.m; sourceTree = "<group>"; };
 		0AB63CBB1ABD1C700018A546 /* RawPrivateKeyDiceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RawPrivateKeyDiceViewController.h; sourceTree = "<group>"; };
@@ -428,6 +440,8 @@
 		0AD6749B1A7B6229007967DB /* DialogWithActions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DialogWithActions.m; sourceTree = "<group>"; };
 		0AD6749D1A7B9108007967DB /* DialogHDMSeedWordList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DialogHDMSeedWordList.h; sourceTree = "<group>"; };
 		0AD6749E1A7B9108007967DB /* DialogHDMSeedWordList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DialogHDMSeedWordList.m; sourceTree = "<group>"; };
+		0AE142601B00924C0070C580 /* PaymentInterfaceController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PaymentInterfaceController.h; sourceTree = "<group>"; };
+		0AE142611B00924C0070C580 /* PaymentInterfaceController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PaymentInterfaceController.m; sourceTree = "<group>"; };
 		0AFBA9301AA01EF60059CB4B /* TotalBalance.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TotalBalance.h; sourceTree = "<group>"; };
 		0AFBA9311AA01EF60059CB4B /* TotalBalance.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TotalBalance.m; sourceTree = "<group>"; };
 		0AFBA9331AA0275F0059CB4B /* WatchMarket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WatchMarket.h; sourceTree = "<group>"; };
@@ -443,11 +457,13 @@
 		1BC270628E82FFBA24125AEB /* HDMResetServerPasswordUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HDMResetServerPasswordUtil.h; sourceTree = "<group>"; };
 		1BC272B77D3B4123842B7220 /* PasswordStrengthUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PasswordStrengthUtil.h; sourceTree = "<group>"; };
 		1BC272BC4509E4F880EAC6F9 /* AddHDMAddressViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddHDMAddressViewController.h; sourceTree = "<group>"; };
+		1BC272BEEDF6A790805D3988 /* DialogEditVanityLength.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DialogEditVanityLength.h; sourceTree = "<group>"; };
 		1BC272D7D8F09A8A3DB14204 /* PasswordStrengthUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PasswordStrengthUtil.m; sourceTree = "<group>"; };
 		1BC273B012114E6EDE40C4D9 /* DialogHDMSingularColdSeed.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DialogHDMSingularColdSeed.m; sourceTree = "<group>"; };
 		1BC274A14567F7D6DFEA009B /* DialogHDMSingularColdSeedChildWordsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DialogHDMSingularColdSeedChildWordsViewController.m; sourceTree = "<group>"; };
 		1BC274BD8D2697288769077A /* MonitorSetting.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MonitorSetting.m; sourceTree = "<group>"; };
 		1BC27547024F497C795FF72C /* DialogHDSendTxConfirm.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DialogHDSendTxConfirm.m; sourceTree = "<group>"; };
+		1BC275821CC95E0F138A889D /* PaymentAddressSetting.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PaymentAddressSetting.m; sourceTree = "<group>"; };
 		1BC275D3A11FAF859823CF7E /* DialogHDMAddressOptions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DialogHDMAddressOptions.h; sourceTree = "<group>"; };
 		1BC275DC3786E9C937D6FF7D /* DialogAddressAliasInput.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DialogAddressAliasInput.m; sourceTree = "<group>"; };
 		1BC275F4AC68C90C62611462 /* MonitorSetting.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MonitorSetting.h; sourceTree = "<group>"; };
@@ -455,6 +471,8 @@
 		1BC276E93FD60E26C3995145 /* DialogAddressAlias.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DialogAddressAlias.h; sourceTree = "<group>"; };
 		1BC2776F592A1DFABC1C6F21 /* HDMSingular.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HDMSingular.h; sourceTree = "<group>"; };
 		1BC2781AE9973B4ACCEA9877 /* HDMSingular.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HDMSingular.m; sourceTree = "<group>"; };
+		1BC27877DFCC22281F0DEAD8 /* DialogEditVanityLength.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DialogEditVanityLength.m; sourceTree = "<group>"; };
+		1BC27927EF16B56C4B06CCBB /* DialogFirstRunWarning.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DialogFirstRunWarning.h; sourceTree = "<group>"; };
 		1BC27929B0727E0D8B0296D4 /* DialogHDMSingularModeInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DialogHDMSingularModeInfo.m; sourceTree = "<group>"; };
 		1BC2793F6A40C4838901BFF4 /* DialogHDMSingularColdSeedChildQrViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DialogHDMSingularColdSeedChildQrViewController.h; sourceTree = "<group>"; };
 		1BC279BF6C2A1E9DF4D86908 /* HDMTriangleBgView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HDMTriangleBgView.h; sourceTree = "<group>"; };
@@ -465,6 +483,7 @@
 		1BC27A6D074A54DC92228A63 /* DialogHDMSingularModeInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DialogHDMSingularModeInfo.h; sourceTree = "<group>"; };
 		1BC27B56B8528116430BB2D8 /* HDAccountSendViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HDAccountSendViewController.m; sourceTree = "<group>"; };
 		1BC27BA86ED865920451634D /* DialogHDSendTxConfirm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DialogHDSendTxConfirm.h; sourceTree = "<group>"; };
+		1BC27C00DACC9C35CFA2C99A /* DialogFirstRunWarning.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DialogFirstRunWarning.m; sourceTree = "<group>"; };
 		1BC27C837F7819A54B0A2E37 /* HDMTriangleBgView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HDMTriangleBgView.m; sourceTree = "<group>"; };
 		1BC27C882946AB67434912E5 /* DialogHDMInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DialogHDMInfo.h; sourceTree = "<group>"; };
 		1BC27D1407586D2FCB8F01AC /* DialogHDMAddressOptions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DialogHDMAddressOptions.m; sourceTree = "<group>"; };
@@ -475,6 +494,7 @@
 		1BC27E353461EDC4DD0986D5 /* ImportHDAccountSeedController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImportHDAccountSeedController.h; sourceTree = "<group>"; };
 		1BC27E40C2AFE8213E54D92E /* ImportHDAccountSeedController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImportHDAccountSeedController.m; sourceTree = "<group>"; };
 		1BC27E6AA6DAE72B7A20FDB3 /* DialogAddressAliasInput.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DialogAddressAliasInput.h; sourceTree = "<group>"; };
+		1BC27E906F8D1A224F6EF6F2 /* PaymentAddressSetting.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PaymentAddressSetting.h; sourceTree = "<group>"; };
 		1BC27EFBA370531DE1AB1492 /* HotAddressAddHDAccountViewViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HotAddressAddHDAccountViewViewController.h; sourceTree = "<group>"; };
 		1BC27F4ABF122CEF5DCDD706 /* RawDataDiceView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RawDataDiceView.m; sourceTree = "<group>"; };
 		1BC27F4E505FDE8D0565C0AA /* AddressAliasView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddressAliasView.h; sourceTree = "<group>"; };
@@ -883,7 +903,9 @@
 		DC03155DE24560F766E286C4 /* HDMKeychainRecoverUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HDMKeychainRecoverUtil.h; sourceTree = "<group>"; };
 		DC0769FAB5B4727E089E23CC /* HDMRecoverSetting.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HDMRecoverSetting.m; sourceTree = "<group>"; };
 		DC07A672CCAD76ED66B72B91 /* ImportHDMColdSeedController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImportHDMColdSeedController.m; sourceTree = "<group>"; };
+		DC08C1C370321C08C785C9E1 /* GroupUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GroupUtil.m; sourceTree = "<group>"; };
 		DC0A375AE83A8BA37F3FA65F /* ImportHDMCold.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImportHDMCold.m; sourceTree = "<group>"; };
+		DC0C45B833B681E58F7812DB /* GroupUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GroupUtil.h; sourceTree = "<group>"; };
 		DC0CC84409CD956F1FA008BF /* HDMKeychainRecoverUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HDMKeychainRecoverUtil.m; sourceTree = "<group>"; };
 		DC0D6773769B40A704B784B4 /* ImportHDMCold.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImportHDMCold.h; sourceTree = "<group>"; };
 		DC0E3B0A73BF05166C9733A1 /* ImportHDMColdSeedController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImportHDMColdSeedController.h; sourceTree = "<group>"; };
@@ -941,6 +963,8 @@
 				0A52BDA21A9FFC2B00BC8C3E /* bither-ios WatchKit Extension.entitlements */,
 				0A4749741A9D7F0B003684E2 /* InterfaceController.h */,
 				0A4749751A9D7F0B003684E2 /* InterfaceController.m */,
+				0AE142601B00924C0070C580 /* PaymentInterfaceController.h */,
+				0AE142611B00924C0070C580 /* PaymentInterfaceController.m */,
 				0A948DC81AA080E600359F64 /* MarketInterfaceController.h */,
 				0A948DC91AA080E600359F64 /* MarketInterfaceController.m */,
 				0A4749771A9D7F0B003684E2 /* NotificationController.h */,
@@ -965,6 +989,8 @@
 				0A4182A21A9DB70500576A12 /* WatchUnitUtil.m */,
 				0A637B211AA044C600696260 /* WatchApi.h */,
 				0A637B221AA044C600696260 /* WatchApi.m */,
+				0AAAEE311AFC83EE00F6E3BB /* WatchPageConfiguration.h */,
+				0AAAEE321AFC83EE00F6E3BB /* WatchPageConfiguration.m */,
 				0A47497D1A9D7F0B003684E2 /* Images.xcassets */,
 				0A4749711A9D7F0B003684E2 /* Supporting Files */,
 			);
@@ -1197,6 +1223,8 @@
 				1BC2776F592A1DFABC1C6F21 /* HDMSingular.h */,
 				1BC272D7D8F09A8A3DB14204 /* PasswordStrengthUtil.m */,
 				1BC272B77D3B4123842B7220 /* PasswordStrengthUtil.h */,
+				DC08C1C370321C08C785C9E1 /* GroupUtil.m */,
+				DC0C45B833B681E58F7812DB /* GroupUtil.h */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -1627,6 +1655,10 @@
 				1BC27E13FEFFBE4CF5CF0468 /* DialogHDAccountOptions.h */,
 				1BC27547024F497C795FF72C /* DialogHDSendTxConfirm.m */,
 				1BC27BA86ED865920451634D /* DialogHDSendTxConfirm.h */,
+				1BC27877DFCC22281F0DEAD8 /* DialogEditVanityLength.m */,
+				1BC272BEEDF6A790805D3988 /* DialogEditVanityLength.h */,
+				1BC27C00DACC9C35CFA2C99A /* DialogFirstRunWarning.m */,
+				1BC27927EF16B56C4B06CCBB /* DialogFirstRunWarning.h */,
 			);
 			path = Dialog;
 			sourceTree = "<group>";
@@ -1706,6 +1738,8 @@
 				DC01B0277E3ECFEB18F87712 /* HDMRecoverSetting.h */,
 				1BC274BD8D2697288769077A /* MonitorSetting.m */,
 				1BC275F4AC68C90C62611462 /* MonitorSetting.h */,
+				1BC275821CC95E0F138A889D /* PaymentAddressSetting.m */,
+				1BC27E906F8D1A224F6EF6F2 /* PaymentAddressSetting.h */,
 			);
 			name = Setting;
 			sourceTree = "<group>";
@@ -1973,14 +2007,20 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0AE142651B0094220070C580 /* UIImage+ImageWithColor.m in Sources */,
+				AC9B35ED1AFF46BC004B10FD /* GroupUtil.m in Sources */,
 				0A4182AE1A9DBB8600576A12 /* WatchStringUtil.m in Sources */,
 				0A6EB31D1AAE9DE200F59ED7 /* WatchMarketBgDrawer.m in Sources */,
 				0A52BDA61A9FFEB800BC8C3E /* GroupFileUtil.m in Sources */,
 				0A637B291AA0608600696260 /* TotalBalanceDrawer.m in Sources */,
 				0AFBA9361AA028850059CB4B /* NSDictionary+Fromat.m in Sources */,
+				0AE142621B00924C0070C580 /* PaymentInterfaceController.m in Sources */,
+				0AE142641B00941B0070C580 /* UIColor+Util.m in Sources */,
 				0A637B1B1AA0427200696260 /* WatchTrendingGraphicData.m in Sources */,
 				0A637B261AA0486300696260 /* WatchTrendingGraphicDrawer.m in Sources */,
+				0AAAEE331AFC83EE00F6E3BB /* WatchPageConfiguration.m in Sources */,
 				0A8853AE1AA8466E00760014 /* GroupUserDefaultUtil.m in Sources */,
+				0AE142631B0094140070C580 /* QRCodeThemeUtil.m in Sources */,
 				0A4182A31A9DB70500576A12 /* WatchUnitUtil.m in Sources */,
 				0A637B1F1AA0443D00696260 /* BaseApi.m in Sources */,
 				0A7F9D311AA83FA500D70BAC /* CacheUtil.m in Sources */,
@@ -2223,6 +2263,10 @@
 				1BC278DC0AFAEBC2E04D03CE /* DialogHDSendTxConfirm.m in Sources */,
 				1BC27D41D243E139BCFBE2DA /* MonitorSetting.m in Sources */,
 				1BC27F74516BB973EA28A144 /* ImportHDAccountSeedController.m in Sources */,
+				1BC27056253378BF3E96EBA0 /* DialogEditVanityLength.m in Sources */,
+				DC02BC2D62776189E7335151 /* GroupUtil.m in Sources */,
+				1BC2705059CAA4F55CEFCADB /* PaymentAddressSetting.m in Sources */,
+				1BC2754DD71C0DC8E65322FC /* DialogFirstRunWarning.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

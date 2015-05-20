@@ -21,27 +21,32 @@
 
 @interface Ticker : NSObject
 
-@property (nonatomic,readwrite) double amount;
-@property (nonatomic,readwrite) double level;
-@property (nonatomic,readwrite) double high;
-@property (nonatomic,readwrite) double low;
-@property (nonatomic,readwrite) double pNew;
-@property (nonatomic,readwrite) double amp;
-@property (nonatomic,readwrite) double open;
-@property (nonatomic,readwrite) double sell;
-@property (nonatomic,readwrite) double buy;
-@property (nonatomic,readwrite) double total;
-@property (nonatomic,strong) NSDate *date;
-@property (nonatomic,readwrite) MarketType marketType;
+@property(nonatomic, readwrite) double amount;
+@property(nonatomic, readwrite) double level;
+@property(nonatomic, readwrite) double high;
+@property(nonatomic, readwrite) double low;
+@property(nonatomic, readwrite) double pNew;
+@property(nonatomic, readwrite) double amp;
+@property(nonatomic, readwrite) double open;
+@property(nonatomic, readwrite) double sell;
+@property(nonatomic, readwrite) double buy;
+@property(nonatomic, readwrite) double total;
+@property(nonatomic, strong) NSDate *date;
+@property(nonatomic, readwrite) MarketType marketType;
 
--(double)getDefaultExchangeHigh;
--(double)getDefaultExchangeLow;
--(double)getDefaultExchangePrice;
--(double)getDefaultExchangeSell;
--(double)getDefaultExchangeBuy;
+- (double)getDefaultExchangeHigh;
 
-+(Ticker *)formatTicker:(NSDictionary *)dict market:(MarketType) marketType;
-+(NSArray *)formatList:(NSDictionary * )dict;
+- (double)getDefaultExchangeLow;
+
+- (double)getDefaultExchangePrice;
+
+- (double)getDefaultExchangeSell;
+
+- (double)getDefaultExchangeBuy;
+
++ (Ticker *)formatTicker:(NSDictionary *)dict market:(MarketType)marketType;
+
++ (NSArray *)formatList:(NSDictionary *)dict;
 
 
 @end

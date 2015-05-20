@@ -22,10 +22,11 @@
 
 @interface TransactionsUtil : NSObject
 
-+(void)checkAddress:(NSArray *) addressList callback:(IdResponseBlock)callback andErrorCallback:(ErrorBlock)errorBlcok;
++ (void)checkAddress:(NSArray *)addressList callback:(IdResponseBlock)callback andErrorCallback:(ErrorBlock)errorBlcok;
 
-+(NSArray *)getTransactions:(NSDictionary *) dict storeBlockHeight:(uint32_t) storeBlockHeigth;
-+(void) syncWallet:(VoidBlock) voidBlock andErrorCallBack:(ErrorHandler)errorCallback;
++ (NSArray *)getTransactions:(NSDictionary *)dict storeBlockHeight:(uint32_t)storeBlockHeigth;
 
-+(NSString *)getCompleteTxForError:(NSError *) error;
++ (void)syncWallet:(VoidBlock)voidBlock andErrorCallBack:(ErrorHandler)errorCallback;
+
++ (NSString *)getCompleteTxForError:(NSError *)error;
 @end

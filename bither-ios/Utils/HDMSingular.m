@@ -27,7 +27,6 @@
 #import "BTHDMBid+Api.h"
 #import "BTAddressManager.h"
 #import "UEntropyViewController.h"
-#import "ScanQrCodeViewController.h"
 #import "KeyUtil.h"
 #import "PeerUtil.h"
 

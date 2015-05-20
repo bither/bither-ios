@@ -22,10 +22,9 @@
 @interface NetworkUtil : NSObject
 
 
-+ (BOOL) isEnableWIFI;
++ (BOOL)isEnableWIFI;
 
-+ (BOOL) isEnable3G ;
-
++ (BOOL)isEnable3G;
 
 
 @end

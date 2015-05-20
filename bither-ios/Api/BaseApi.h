@@ -38,18 +38,20 @@
 #define BC_ADDRESS_STAT_URL @"api/v2/address/%@/transaction/stat"
 
 
-
-
 @interface BaseApi : NSObject
 
 #pragma mark-get
--(void)get:(NSString *)url withParams:(NSDictionary *) params networkType:(BitherNetworkType) networkType completed:(CompletedOperation) completedOperationParam andErrorCallback:(ErrorHandler) errorCallback;
--(void)get:(NSString *)url withParams:(NSDictionary *) params networkType:(BitherNetworkType) networkType completed:(CompletedOperation) completedOperationParam andErrorCallback:(ErrorHandler) errorCallback ssl:(BOOL)ssl;
+
+- (void)get:(NSString *)url withParams:(NSDictionary *)params networkType:(BitherNetworkType)networkType completed:(CompletedOperation)completedOperationParam andErrorCallback:(ErrorHandler)errorCallback;
+
+- (void)get:(NSString *)url withParams:(NSDictionary *)params networkType:(BitherNetworkType)networkType completed:(CompletedOperation)completedOperationParam andErrorCallback:(ErrorHandler)errorCallback ssl:(BOOL)ssl;
 
 
 #pragma mark-post
--(void)post:(NSString *)url withParams:(NSDictionary *) params networkType:(BitherNetworkType) networkType completed:(CompletedOperation) completedOperationParam andErrorCallBack:(ErrorHandler) errorCallback;
--(void)post:(NSString *)url withParams:(NSDictionary *) params networkType:(BitherNetworkType) networkType completed:(CompletedOperation) completedOperationParam andErrorCallBack:(ErrorHandler) errorCallback ssl:(BOOL)ssl;
+
+- (void)post:(NSString *)url withParams:(NSDictionary *)params networkType:(BitherNetworkType)networkType completed:(CompletedOperation)completedOperationParam andErrorCallBack:(ErrorHandler)errorCallback;
+
+- (void)post:(NSString *)url withParams:(NSDictionary *)params networkType:(BitherNetworkType)networkType completed:(CompletedOperation)completedOperationParam andErrorCallBack:(ErrorHandler)errorCallback ssl:(BOOL)ssl;
 
 
 @end

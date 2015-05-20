@@ -16,9 +16,8 @@
 //  limitations under the License.
 
 #import <AssertMacros.h>
+#import <Bitheri/BTUtils.h>
 #import "UserDefaultsUtil.h"
-#import "NSData+Hash.h"
-#import "StringUtil.h"
 #import "GroupUserDefaultUtil.h"
 #import "QRCodeThemeUtil.h"
 
@@ -44,6 +43,10 @@
 #define KEYCHAIN_MODE @"keychain_mode"
 
 #define PASSWORD_STRENGTH_CHECK @"password_strength_check"
+
+#define PAYMENT_ADDRESS @"payment_address"
+
+#define FIRST_RUN_DIALOG_SHOWN @"first_run_dialog_shown"
 
 static UserDefaultsUtil *userDefaultsUtil;
 
@@ -79,12 +82,12 @@ NSUserDefaults *userDefaults;
 
 - (MarketType)getMarket {
     NSInteger market = [userDefaults integerForKey:DEFAULT_MARKET];
-    return market;
+    return [GroupUtil getMarketType:market];
 }
 
 - (void)setDefaultMarket {
     if ([self localeIsChina]) {
-        [self setMarket:HUOBI];
+        [self setMarket:BTCCHINA];
     } else {
         [self setMarket:BITSTAMP];
     }
@@ -92,9 +95,9 @@ NSUserDefaults *userDefaults;
 }
 
 - (void)setMarket:(MarketType)marketType {
-    [userDefaults setInteger:marketType forKey:DEFAULT_MARKET];
+    [userDefaults setInteger:[GroupUtil getMarketValue:marketType] forKey:DEFAULT_MARKET];
     [userDefaults synchronize];
-    [[GroupUserDefaultUtil instance] setDefaultMarket:(GroupMarketType) marketType];
+    [[GroupUserDefaultUtil instance] setDefaultMarket:marketType];
 }
 
 - (void)setExchangeType:(Currency)exchangeType {
@@ -240,12 +243,16 @@ NSUserDefaults *userDefaults;
     if (index >= [QRCodeTheme themes].count) {
         index = [QRCodeTheme themes].count - 1;
     }
+    if (index != [GroupUserDefaultUtil instance].getQrCodeTheme) {
+        [[GroupUserDefaultUtil instance] setQrCodeTheme:index];
+    }
     return index;
 }
 
 - (void)setQrCodeTheme:(NSInteger)qrCodeTheme {
     [userDefaults setInteger:qrCodeTheme forKey:FANCY_QR_CODE_THEME];
     [userDefaults synchronize];
+    [[GroupUserDefaultUtil instance] setQrCodeTheme:qrCodeTheme];
 }
 
 
@@ -340,19 +347,34 @@ NSUserDefaults *userDefaults;
     return [userDefaults boolForKey:PASSWORD_STRENGTH_CHECK];
 }
 
+- (void)setPaymentAddress:(NSString *)address {
+    if ([BTUtils compareString:address compare:self.paymentAddress]) {
+        return;
+    }
+    if (address) {
+        [userDefaults setObject:address forKey:PAYMENT_ADDRESS];
+    } else {
+        [userDefaults setObject:@"" forKey:PAYMENT_ADDRESS];
+    }
+    [userDefaults synchronize];
+    if ([BTUtils isEmpty:address]) {
+        [[GroupUserDefaultUtil instance] setPaymentAddress:nil];
+    } else {
+        [[GroupUserDefaultUtil instance] setPaymentAddress:address];
+    }
+}
+
+- (NSString *)paymentAddress {
+    return [userDefaults objectForKey:PAYMENT_ADDRESS];
+}
+
+- (void)setFirstRunDialogShown:(BOOL)shown{
+    [userDefaults setBool:shown forKey:FIRST_RUN_DIALOG_SHOWN];
+    [userDefaults synchronize];
+}
+
+- (BOOL)firstRunDialogShown{
+    return [userDefaults boolForKey:FIRST_RUN_DIALOG_SHOWN];
+}
+
 @end
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

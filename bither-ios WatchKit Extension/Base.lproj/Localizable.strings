@@ -27,6 +27,8 @@
 "CHBTC" = "CHBTC";
 "HUOBI" = "HUOBI";
 "OKCoin.CN" = "OKCoin.CN";
+"BtcTrade" = "BtcTrade";
+"Coinbase" = "Coinbase";
 
 "buy" = "Buy";
 "sell" = "Sell";

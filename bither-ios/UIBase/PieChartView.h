@@ -19,8 +19,9 @@
 #import <UIKit/UIKit.h>
 
 @interface PieChartView : UIView
-@property NSArray* amounts;
+@property NSArray *amounts;
 @property CGFloat startAngle;
 @property CGFloat totalAngle;
--(UIColor*)colorForIndex:(NSInteger)index;
+
+- (UIColor *)colorForIndex:(NSInteger)index;
 @end

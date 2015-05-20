@@ -20,12 +20,12 @@
 
 #define IOS7DeltaTopOffset ([[UIDevice currentDevice].systemVersion floatValue] >= 7 ? 20 : 0)
 
-@implementation UIViewController(IOS7Container)
+@implementation UIViewController (IOS7Container)
 
--(UIView*)rootContainer{
+- (UIView *)rootContainer {
     UIViewController *root = self.view.window.rootViewController;
-    if([root isKindOfClass:[IOS7ContainerViewController class]]){
-        return ((IOS7ContainerViewController*)root).vContainer;
+    if ([root isKindOfClass:[IOS7ContainerViewController class]]) {
+        return ((IOS7ContainerViewController *) root).vContainer;
     }
     return self.view.window;
 }
@@ -36,13 +36,13 @@
 
 @implementation IOS7ContainerViewController
 
--(void)loadView{
+- (void)loadView {
     [super loadView];
     self.view.backgroundColor = [UIColor clearColor];
-    UIView* container = [[UIView alloc]initWithFrame:CGRectMake(0, IOS7DeltaTopOffset, self.view.frame.size.width, self.view.frame.size.height - IOS7DeltaTopOffset)];
+    UIView *container = [[UIView alloc] initWithFrame:CGRectMake(0, IOS7DeltaTopOffset, self.view.frame.size.width, self.view.frame.size.height - IOS7DeltaTopOffset)];
     container.backgroundColor = [UIColor clearColor];
-    UIView *statusBarBg = [[UIView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, IOS7DeltaTopOffset)];
-    statusBarBg.backgroundColor = [UIColor colorWithRed:56.0/255.0 green:61.0/255.0 blue:64.0/255.0 alpha:1];
+    UIView *statusBarBg = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, IOS7DeltaTopOffset)];
+    statusBarBg.backgroundColor = [UIColor colorWithRed:56.0 / 255.0 green:61.0 / 255.0 blue:64.0 / 255.0 alpha:1];
     [self.view addSubview:statusBarBg];
     [self.view addSubview:container];
     container.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
@@ -50,21 +50,20 @@
     self.vContainer = container;
 }
 
-- (void)didReceiveMemoryWarning
-{
+- (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
 }
 
--(UIViewController*)controller{
-    if(self.childViewControllers.count > 0){
+- (UIViewController *)controller {
+    if (self.childViewControllers.count > 0) {
         return [self.childViewControllers objectAtIndex:0];
     }
     return nil;
 }
 
--(void)setController:(UIViewController *)controller{
+- (void)setController:(UIViewController *)controller {
     [self view];
-    for (UIViewController* c in self.childViewControllers) {
+    for (UIViewController *c in self.childViewControllers) {
         [c.view removeFromSuperview];
         [c removeFromParentViewController];
     }
@@ -75,7 +74,7 @@
     controller.view.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
 }
 
--(UIStatusBarStyle)preferredStatusBarStyle{
+- (UIStatusBarStyle)preferredStatusBarStyle {
     return UIStatusBarStyleLightContent;
 }
 

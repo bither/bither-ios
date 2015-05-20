@@ -21,6 +21,6 @@
 
 @interface SystemUtil : NSObject
 
-+(NSInteger)getVersionCode;
++ (NSInteger)getVersionCode;
 
 @end

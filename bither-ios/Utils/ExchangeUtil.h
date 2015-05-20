@@ -23,8 +23,12 @@
 //+ (void)setExchangeRate:(double)exchangeRate;
 //+ (double)getExchangeRate;
 + (void)setCurrenciesRate:(NSDictionary *)currenciesRate;
+
 + (NSDictionary *)getCurrenciesRate;
+
 + (double)getRate:(Currency)currency;
+
 + (double)getRateForMarket:(MarketType)marketType;
+
 + (Currency)getCurrencyForMarket:(MarketType)marketType;
 @end

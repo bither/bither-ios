@@ -8,15 +8,18 @@
 
 #import "DialogCentered.h"
 
-@interface Action: NSObject
-@property NSString* name;
+@interface Action : NSObject
+@property NSString *name;
 @property SEL selector;
-@property (weak) NSObject* target;
--(instancetype)initWithName:(NSString*)name target:(NSObject*)target andSelector:(SEL)selector;
--(void)perform;
+@property(weak) NSObject *target;
+
+- (instancetype)initWithName:(NSString *)name target:(NSObject *)target andSelector:(SEL)selector;
+
+- (void)perform;
 @end
 
 @interface DialogWithActions : DialogCentered
-@property NSArray* actions;
--(instancetype)initWithActions:(NSArray*)actions;
+@property NSArray *actions;
+
+- (instancetype)initWithActions:(NSArray *)actions;
 @end

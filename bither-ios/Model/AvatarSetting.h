@@ -21,7 +21,8 @@
 #import "ImagePickerFromGalleryViewController.h"
 #import "ImagePickerFromCameraViewController.h"
 
-@interface AvatarSetting : Setting<UIActionSheetDelegate,UIImagePickerControllerDelegate>
-@property(nonatomic,strong) UIViewController * controller;
-+(Setting *)getAvatarSetting;
+@interface AvatarSetting : Setting <UIActionSheetDelegate, UIImagePickerControllerDelegate>
+@property(nonatomic, strong) UIViewController *controller;
+
++ (Setting *)getAvatarSetting;
 @end

@@ -24,16 +24,18 @@
 
 @protocol DialogOperationDelegate <NSObject>
 
--(void)replaceWorld:(NSString *)newWorld index:(int)index;
--(void)deleteWorld:(NSString *)world index:(int)index;
--(void)beginOperation;
+- (void)replaceWorld:(NSString *)newWorld index:(int)index;
+
+- (void)deleteWorld:(NSString *)world index:(int)index;
+
+- (void)beginOperation;
 
 @end
 
 @interface DialogReplaceWorld : DialogCentered
 
--(instancetype)initWithDelegate:(id<DialogOperationDelegate>)delegate world:(NSString*) world index:(int)index;
+- (instancetype)initWithDelegate:(id <DialogOperationDelegate>)delegate world:(NSString *)world index:(int)index;
 
-@property (weak) id<DialogOperationDelegate> delegate;
+@property(weak) id <DialogOperationDelegate> delegate;
 
 @end

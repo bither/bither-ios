@@ -19,6 +19,7 @@
 #import <Foundation/Foundation.h>
 
 @interface NotificationUtil : NSObject
-+(void)notification:(NSString *)msg dict:(NSDictionary * )dict;
-+(void)notificationTx:(NSArray *) array;
++ (void)notification:(NSString *)msg dict:(NSDictionary *)dict;
+
++ (void)notificationTx:(NSArray *)array;
 @end

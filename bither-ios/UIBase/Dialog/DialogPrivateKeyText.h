@@ -21,5 +21,5 @@
 
 @interface DialogPrivateKeyText : DialogCentered
 
--(instancetype)initWithPrivateKeyStr:(NSString *)str;
+- (instancetype)initWithPrivateKeyStr:(NSString *)str;
 @end

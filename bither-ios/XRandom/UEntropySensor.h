@@ -25,6 +25,6 @@
 #define kUEntropySensorMagnetometer (@"Magnetometer")
 #define kUEntropySensorBrightness (@"Brightness")
 
-@interface UEntropySensor : NSObject<UEntropySource>
--(instancetype) initWithView:(SensorVisualizerView*)view andCollecor:(UEntropyCollector*) collector;
+@interface UEntropySensor : NSObject <UEntropySource>
+- (instancetype)initWithView:(SensorVisualizerView *)view andCollecor:(UEntropyCollector *)collector;
 @end

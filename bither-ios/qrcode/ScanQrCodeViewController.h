@@ -19,34 +19,37 @@
 #import <UIKit/UIKit.h>
 #import <AVFoundation/AVFoundation.h>
 
-@interface ScanQrCodeViewController : UIViewController<AVCaptureMetadataOutputObjectsDelegate>
+@interface ScanQrCodeViewController : UIViewController <AVCaptureMetadataOutputObjectsDelegate>
 
-@property (strong, nonatomic) NSString *scanTitle;
-@property (strong, nonatomic) NSString *scanMessage;
-@property UIButton* btnGallery;
+@property(strong, nonatomic) NSString *scanTitle;
+@property(strong, nonatomic) NSString *scanMessage;
+@property UIButton *btnGallery;
 
 @end
 
 
 @protocol ScanQrCodeDelegate
 
--(void)handleResult:(NSString*)result byReader:(ScanQrCodeViewController*)reader;
+- (void)handleResult:(NSString *)result byReader:(ScanQrCodeViewController *)reader;
 
 @optional
--(void)handleScanCancelByReader:(ScanQrCodeViewController *)reader;
+- (void)handleScanCancelByReader:(ScanQrCodeViewController *)reader;
 @end
 
 
-@interface ScanQrCodeViewController()
+@interface ScanQrCodeViewController ()
 
--(instancetype)initWithDelegate:(NSObject<ScanQrCodeDelegate>*)delegate;
--(instancetype)initWithDelegate:(NSObject<ScanQrCodeDelegate>*)delegate title:(NSString*)title message:(NSString*)message;
-@property (weak) NSObject<ScanQrCodeDelegate>* scanDelegate;
+- (instancetype)initWithDelegate:(NSObject <ScanQrCodeDelegate> *)delegate;
+
+- (instancetype)initWithDelegate:(NSObject <ScanQrCodeDelegate> *)delegate title:(NSString *)title message:(NSString *)message;
+
+@property(weak) NSObject <ScanQrCodeDelegate> *scanDelegate;
 @end
 
 @interface ScanQrCodeViewController (Functions)
 
--(void)vibrate;
--(void)playSuccessSound;
+- (void)vibrate;
+
+- (void)playSuccessSound;
 
 @end

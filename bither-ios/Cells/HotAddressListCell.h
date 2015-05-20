@@ -21,7 +21,8 @@
 
 
 @interface HotAddressListCell : UITableViewCell
-@property (weak,nonatomic) UIViewController * viewController;
--(void)setAddress:(BTAddress*)address;
+@property(weak, nonatomic) UIViewController *viewController;
+
+- (void)setAddress:(BTAddress *)address;
 
 @end

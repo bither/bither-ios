@@ -1,35 +1,55 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder.WatchKit.Storyboard" version="3.0" toolsVersion="6751" systemVersion="14C1514" targetRuntime="watchKit" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="58z-ni-tOQ">
+<document type="com.apple.InterfaceBuilder.WatchKit.Storyboard" version="3.0" toolsVersion="7702" systemVersion="14D136" targetRuntime="watchKit" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="58z-ni-tOQ">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6736"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7701"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBWatchKitPlugin" version="3737"/>
     </dependencies>
     <scenes>
-        <!--Interface Controller-->
+        <!--Balance-->
         <scene sceneID="aou-V4-d1y">
             <objects>
-                <controller id="AgC-eL-Hgc" customClass="InterfaceController">
+                <controller identifier="Balance" id="AgC-eL-Hgc" customClass="InterfaceController">
                     <items>
-                        <group width="0.90000000000000002" height="0.80000000000000004" alignment="center" verticalAlignment="center" contentMode="scaleAspectFit" id="ysO-G9-RwS">
+                        <group width="1" height="1" alignment="center" verticalAlignment="center" contentMode="scaleAspectFit" id="ysO-G9-RwS">
                             <items>
-                                <label alignment="center" verticalAlignment="center" textAlignment="center" minimumScaleFactor="0.5" id="Je9-T4-j1G">
-                                    <fontDescription key="font" style="UICTFontTextStyleSubhead"/>
-                                </label>
+                                <group width="0.80000000000000004" alignment="center" verticalAlignment="center" id="nID-FP-cBf">
+                                    <items>
+                                        <imageView width="10" alignment="center" verticalAlignment="center" contentMode="scaleAspectFit" id="t9y-ga-hnE"/>
+                                        <label alignment="center" verticalAlignment="center" textAlignment="center" id="Je9-T4-j1G">
+                                            <fontDescription key="font" style="UICTFontTextStyleSubhead"/>
+                                        </label>
+                                    </items>
+                                </group>
                             </items>
                         </group>
                     </items>
                     <connections>
                         <outlet property="gContainer" destination="ysO-G9-RwS" id="3rb-mn-gRz"/>
+                        <outlet property="ivSymbol" destination="t9y-ga-hnE" id="I2D-MF-nYl"/>
                         <outlet property="lblTotal" destination="Je9-T4-j1G" id="KWW-zI-5uQ"/>
                     </connections>
                 </controller>
             </objects>
             <point key="canvasLocation" x="452" y="352"/>
         </scene>
-        <!--Market Interface Controller-->
+        <!--Payment-->
+        <scene sceneID="qny-5m-8aD">
+            <objects>
+                <controller identifier="Payment" id="HtR-PG-mH2" customClass="PaymentInterfaceController">
+                    <items>
+                        <imageView width="1" height="1" alignment="center" contentMode="scaleAspectFit" id="Qle-mQ-hNO"/>
+                    </items>
+                    <connections>
+                        <outlet property="ivQr" destination="Qle-mQ-hNO" id="PES-7u-WNz"/>
+                    </connections>
+                </controller>
+            </objects>
+            <point key="canvasLocation" x="647" y="352"/>
+        </scene>
+        <!--Market-->
         <scene sceneID="2hb-rI-xfr">
             <objects>
-                <controller id="58z-ni-tOQ" customClass="MarketInterfaceController">
+                <controller identifier="Market" id="58z-ni-tOQ" customClass="MarketInterfaceController">
                     <items>
                         <group width="1" height="1" alignment="center" verticalAlignment="center" layout="vertical" id="659-ka-I7p">
                             <items>
@@ -82,9 +102,14 @@
                                 <label alignment="left" text="Balance:" textAlignment="left" id="XPt-1T-tH8">
                                     <fontDescription key="font" style="UICTFontTextStyleFootnote"/>
                                 </label>
-                                <label width="136" alignment="center" verticalAlignment="center" text="0.0bits" textAlignment="right" id="7Ix-BB-mEU">
-                                    <fontDescription key="font" style="UICTFontTextStyleCaption2"/>
-                                </label>
+                                <group alignment="right" id="Eb8-mB-hyy">
+                                    <items>
+                                        <imageView width="10" alignment="right" verticalAlignment="center" contentMode="scaleAspectFit" id="MXv-ZP-itn"/>
+                                        <label alignment="right" verticalAlignment="center" textAlignment="right" id="7Ix-BB-mEU">
+                                            <fontDescription key="font" style="UICTFontTextStyleCaption2"/>
+                                        </label>
+                                    </items>
+                                </group>
                             </items>
                         </group>
                         <group alignment="left" layout="vertical" id="uCw-4Q-Ouw">
@@ -107,6 +132,7 @@
                     <edgeInsets key="margins" left="0.0" right="0.0" top="0.0" bottom="14"/>
                     <connections>
                         <outlet property="gMarket" destination="uCw-4Q-Ouw" id="Vpf-Jd-6eW"/>
+                        <outlet property="ivSymbol" destination="MXv-ZP-itn" id="O7Y-7v-Xk3"/>
                         <outlet property="ivTrending" destination="x2H-Cr-zl8" id="T14-7z-Y9B"/>
                         <outlet property="lblBalance" destination="7Ix-BB-mEU" id="hZA-m4-P4S"/>
                         <outlet property="lblMarketName" destination="8eu-gz-MK9" id="t2w-gr-upc"/>
@@ -137,16 +163,26 @@
             <objects>
                 <controller id="gdX-wl-uQE" customClass="NotificationController">
                     <items>
-                        <label alignment="left" text="+ 1000 BTC" id="MhE-8h-MLo">
-                            <fontDescription key="font" style="UICTFontTextStyleHeadline"/>
-                        </label>
+                        <group alignment="left" id="UOr-Sf-DWc">
+                            <items>
+                                <label alignment="left" verticalAlignment="center" id="Ug6-FH-Jle">
+                                    <fontDescription key="font" style="UICTFontTextStyleHeadline"/>
+                                </label>
+                                <imageView width="10" alignment="left" verticalAlignment="center" contentMode="scaleAspectFit" id="Pd8-Uu-f2f"/>
+                                <label alignment="left" verticalAlignment="center" id="MhE-8h-MLo">
+                                    <fontDescription key="font" style="UICTFontTextStyleHeadline"/>
+                                </label>
+                            </items>
+                        </group>
                         <label alignment="left" text="1Nc9 oEok W91H UohU pHt4 Y7Di sQXL uEBi 77 " numberOfLines="0" id="tBx-UV-KWa">
                             <fontDescription key="font" style="UICTFontTextStyleFootnote"/>
                         </label>
                     </items>
                     <connections>
+                        <outlet property="ivSymbol" destination="Pd8-Uu-f2f" id="bY3-9U-NdH"/>
                         <outlet property="lblAddress" destination="tBx-UV-KWa" id="8Rp-7N-7pT"/>
                         <outlet property="lblAmount" destination="MhE-8h-MLo" id="YwB-bG-IrN"/>
+                        <outlet property="lblSign" destination="Ug6-FH-Jle" id="gY4-b7-Hpg"/>
                     </connections>
                 </controller>
             </objects>

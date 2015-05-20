@@ -28,14 +28,20 @@ typedef enum {
 
 @interface BitherEngine : NSObject
 
-+(BitherEngine*)instance;
++ (BitherEngine *)instance;
 
--(MKNetworkEngine*)getUserNetworkEngine;
--(MKNetworkEngine *)getStatsNetworkEngine;
--(MKNetworkEngine *)getBitcoinNetworkEngine;
--(MKNetworkEngine *)getBCNetworkEngine;
--(MKNetworkEngine *)getHDMNetworkEngine;
--(void)setEngineCookie;
--(NSArray*)getCookies;
+- (MKNetworkEngine *)getUserNetworkEngine;
+
+- (MKNetworkEngine *)getStatsNetworkEngine;
+
+- (MKNetworkEngine *)getBitcoinNetworkEngine;
+
+- (MKNetworkEngine *)getBCNetworkEngine;
+
+- (MKNetworkEngine *)getHDMNetworkEngine;
+
+- (void)setEngineCookie;
+
+- (NSArray *)getCookies;
 
 @end

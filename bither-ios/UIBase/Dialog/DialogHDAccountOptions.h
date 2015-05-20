@@ -26,5 +26,5 @@
 
 
 @interface DialogHDAccountOptions : DialogWithActions
--(instancetype)initWithHDAccount:(BTHDAccount *)account;
+- (instancetype)initWithHDAccount:(BTHDAccount *)account;
 @end

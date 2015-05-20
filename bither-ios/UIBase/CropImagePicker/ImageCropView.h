@@ -20,6 +20,7 @@
 #import <UIKit/UIKit.h>
 
 @interface ImageCropView : UIView
-@property (strong, nonatomic) UIImage *image;
--(UIImage*)croppedImage;
+@property(strong, nonatomic) UIImage *image;
+
+- (UIImage *)croppedImage;
 @end

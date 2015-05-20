@@ -19,10 +19,13 @@
 #import <UIKit/UIKit.h>
 
 @interface StatusBarNotificationWindow : UIWindow
--(instancetype)initWithOriWindow:(UIWindow*)ori;
-@property (weak) UIWindow* oriWindow;
-@property NSString* notificationAddress;
-@property UIButton* btn;
--(void)showNotification:(NSString*)notification withAddress:(NSString*)address color:(UIColor*)color;
--(void)removeNotification;
+- (instancetype)initWithOriWindow:(UIWindow *)ori;
+
+@property(weak) UIWindow *oriWindow;
+@property NSString *notificationAddress;
+@property UIButton *btn;
+
+- (void)showNotification:(NSString *)notification withAddress:(NSString *)address color:(UIColor *)color;
+
+- (void)removeNotification;
 @end

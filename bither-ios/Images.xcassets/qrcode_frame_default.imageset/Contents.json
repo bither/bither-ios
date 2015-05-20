@@ -1,50 +1,50 @@
 {
-  "images" : [
+  "images": [
     {
-      "resizing" : {
-        "mode" : "9-part",
-        "center" : {
-          "mode" : "stretch",
-          "width" : 1,
-          "height" : 1
+      "resizing": {
+        "mode": "9-part",
+        "center": {
+          "mode": "stretch",
+          "width": 1,
+          "height": 1
         },
-        "capInsets" : {
-          "bottom" : 34,
-          "top" : 36,
-          "right" : 36,
-          "left" : 34
+        "capInsets": {
+          "bottom": 34,
+          "top": 36,
+          "right": 36,
+          "left": 34
         }
       },
-      "idiom" : "universal",
-      "filename" : "qrcode_frame_default.png",
-      "scale" : "1x"
+      "idiom": "universal",
+      "filename": "qrcode_frame_default.png",
+      "scale": "1x"
     },
     {
-      "resizing" : {
-        "mode" : "9-part",
-        "center" : {
-          "mode" : "stretch",
-          "width" : 1,
-          "height" : 1
+      "resizing": {
+        "mode": "9-part",
+        "center": {
+          "mode": "stretch",
+          "width": 1,
+          "height": 1
         },
-        "capInsets" : {
-          "bottom" : 73,
-          "top" : 68,
-          "right" : 71,
-          "left" : 70
+        "capInsets": {
+          "bottom": 73,
+          "top": 68,
+          "right": 71,
+          "left": 70
         }
       },
-      "idiom" : "universal",
-      "filename" : "qrcode_frame_default@2x.png",
-      "scale" : "2x"
+      "idiom": "universal",
+      "filename": "qrcode_frame_default@2x.png",
+      "scale": "2x"
     },
     {
-      "idiom" : "universal",
-      "scale" : "3x"
+      "idiom": "universal",
+      "scale": "3x"
     }
   ],
-  "info" : {
-    "version" : 1,
-    "author" : "xcode"
+  "info": {
+    "version": 1,
+    "author": "xcode"
   }
 }

@@ -19,5 +19,5 @@
 #import "DialogCentered.h"
 
 @interface DialogProgress : DialogCentered
--(id)initWithMessage:(NSString*)message;
+- (id)initWithMessage:(NSString *)message;
 @end

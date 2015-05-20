@@ -17,7 +17,6 @@
 //  limitations under the License.
 #import <Bitheri/NSData+Bitcoin.h>
 #import <Bitheri/NSMutableData+Bitcoin.h>
-#import <Bitheri/NSString+Base58.h>
 #import "HDMApi.h"
 #import "AFHTTPRequestOperationManager.h"
 
@@ -27,7 +26,7 @@ static HDMApi *hdmApi;
     AFHTTPRequestOperationManager *manager;
 }
 
-+ (HDMApi *)instance;{
++ (HDMApi *)instance; {
     @synchronized (self) {
         if (hdmApi == nil) {
             hdmApi = [[self alloc] init];
@@ -52,14 +51,14 @@ static HDMApi *hdmApi;
     return self;
 }
 
-- (void)getHDMPasswordRandomWithHDMBid:(NSString *) hdmBid callback:(IdResponseBlock) callback andErrorCallBack:(ErrorHandler)errorCallback;{
-    NSString *url = [NSString stringWithFormat:@"https://hdm.bither.net/api/v1/%@/hdm/password",hdmBid];
+- (void)getHDMPasswordRandomWithHDMBid:(NSString *)hdmBid callback:(IdResponseBlock)callback andErrorCallBack:(ErrorHandler)errorCallback; {
+    NSString *url = [NSString stringWithFormat:@"https://hdm.bither.net/api/v1/%@/hdm/password", hdmBid];
     AFHTTPRequestOperation *op = [manager GET:url parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSNumber *random = @([operation.responseString longLongValue]);
         if (callback != nil) {
             callback(random);
         }
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+    }                                 failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         if (errorCallback) {
             NSError *e = [self formatHttpErrorWithOperation:operation];
             errorCallback(operation, e);
@@ -76,7 +75,7 @@ static HDMApi *hdmApi;
     [manager POST:url parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSError *error = nil;
         NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:operation.responseData options:0 error:&error];
-        if(error) DLog(@"JSON Parsing Error: %@", error);
+        if (error) DLog(@"JSON Parsing Error: %@", error);
 
         if (dict != nil && [dict[@"result"] isEqualToString:@"ok"]) {
             if (callback != nil) {
@@ -87,7 +86,7 @@ static HDMApi *hdmApi;
                 errorCallback(operation, error);
             }
         }
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+    }     failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         if (errorCallback) {
             NSError *e = [self formatHttpErrorWithOperation:operation];
             errorCallback(operation, e);
@@ -96,17 +95,17 @@ static HDMApi *hdmApi;
 };
 
 - (void)createHDMAddressWithHDMBid:(NSString *)hdmBid andPassword:(NSData *)password start:(int)start end:(int)end
-                           pubHots:(NSArray *) pubHots pubColds:(NSArray *)pubColds
+                           pubHots:(NSArray *)pubHots pubColds:(NSArray *)pubColds
                           callback:(ArrayResponseBlock)callback andErrorCallBack:(ErrorHandler)errorCallback; {
-    NSDictionary *params = @{@"password" : [password base64EncodedString], @"start" : @(start), @"end": @(end),
-            @"pub_hot": [self connect:pubHots], @"pub_cold": [self connect:pubColds]};
+    NSDictionary *params = @{@"password" : [password base64EncodedString], @"start" : @(start), @"end" : @(end),
+            @"pub_hot" : [self connect:pubHots], @"pub_cold" : [self connect:pubColds]};
     NSString *url = [NSString stringWithFormat:@"https://hdm.bither.net/api/v1/%@/hdm/address/create", hdmBid];
     [manager POST:url parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSArray *pubRemotes = [self split:operation.responseString];
         if (callback != nil) {
             callback(pubRemotes);
         }
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+    }     failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         if (errorCallback) {
             NSError *e = [self formatHttpErrorWithOperation:operation];
             errorCallback(operation, e);
@@ -115,15 +114,15 @@ static HDMApi *hdmApi;
 }
 
 - (void)signatureByRemoteWithHDMBid:(NSString *)hdmBid andPassword:(NSData *)password andUnsignHash:(NSArray *)unsignHashes andIndex:(int)index
-                           callback:(ArrayResponseBlock) callback andErrorCallBack:(ErrorHandler)errorCallback;{
-    NSDictionary *params = @{@"password" : [password base64EncodedString], @"unsign": [self connect:unsignHashes]};
+                           callback:(ArrayResponseBlock)callback andErrorCallBack:(ErrorHandler)errorCallback; {
+    NSDictionary *params = @{@"password" : [password base64EncodedString], @"unsign" : [self connect:unsignHashes]};
     NSString *url = [NSString stringWithFormat:@"https://hdm.bither.net/api/v1/%@/hdm/address/%d/signature", hdmBid, index];
     [manager POST:url parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSArray *signatures = [self split:operation.responseString];
         if (callback != nil) {
             callback(signatures);
         }
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+    }     failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         if (errorCallback) {
             NSError *e = [self formatHttpErrorWithOperation:operation];
             errorCallback(operation, e);
@@ -138,7 +137,7 @@ static HDMApi *hdmApi;
     [manager POST:url parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSError *error = nil;
         NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithDictionary:[NSJSONSerialization JSONObjectWithData:operation.responseData options:0 error:&error]];
-        if(error) DLog(@"JSON Parsing Error: %@", error);
+        if (error) DLog(@"JSON Parsing Error: %@", error);
 
         if (dict != nil) {
             dict[@"pub_hot"] = [self split:dict[@"pub_hot"]];
@@ -152,7 +151,7 @@ static HDMApi *hdmApi;
                 errorCallback(operation, error);
             }
         }
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+    }     failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         if (errorCallback) {
             NSError *e = [self formatHttpErrorWithOperation:operation];
             errorCallback(operation, e);
@@ -160,7 +159,7 @@ static HDMApi *hdmApi;
     }];
 }
 
-- (NSString *)connect:(NSArray *)dataList;{
+- (NSString *)connect:(NSArray *)dataList; {
     NSMutableData *result = [NSMutableData secureData];
     for (NSData *each in dataList) {
         [result appendUInt8:(uint8_t) each.length];
@@ -184,7 +183,7 @@ static HDMApi *hdmApi;
 }
 
 - (NSError *)formatHttpErrorWithOperation:(AFHTTPRequestOperation *)operation; {
-    if (((NSHTTPURLResponse *)operation.response).statusCode == 400) {
+    if (((NSHTTPURLResponse *) operation.response).statusCode == 400) {
         NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:operation.responseData options:0 error:nil];
         if (dict != nil) {
             return [[NSError alloc] initWithDomain:ERR_API_400_DOMAIN code:[dict.allKeys[0] intValue] userInfo:dict];
@@ -192,7 +191,7 @@ static HDMApi *hdmApi;
             return [[NSError alloc] initWithDomain:ERR_API_400_DOMAIN code:-1 userInfo:nil];
         }
 
-    } else if (((NSHTTPURLResponse *)operation.response).statusCode == 500) {
+    } else if (((NSHTTPURLResponse *) operation.response).statusCode == 500) {
         return [[NSError alloc] initWithDomain:ERR_API_500_DOMAIN code:-1 userInfo:nil];
     }
     return [[NSError alloc] initWithDomain:ERR_API_500_DOMAIN code:-1 userInfo:nil];

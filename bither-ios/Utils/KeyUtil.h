@@ -22,9 +22,13 @@
 #import "BTHDMKeychain.h"
 
 @interface KeyUtil : NSObject
-+(BOOL)addPrivateKeyByRandom:(XRandom*)xRandom  passphras:(NSString *)password count:(int) count;
-+(BOOL)addBitcoinjKey:(NSArray *)array withPassphrase:(NSString *)passphrase error:(NSError **)aError;
-+(BOOL)addAddressList:(NSArray *)array ;
-+(void)stopMonitor:(BTAddress *)address;
-+(void)setHDKeyChain:(BTHDMKeychain *)keychain;
++ (BOOL)addPrivateKeyByRandom:(XRandom *)xRandom passphras:(NSString *)password count:(int)count;
+
++ (BOOL)addBitcoinjKey:(NSArray *)array withPassphrase:(NSString *)passphrase error:(NSError **)aError;
+
++ (BOOL)addAddressList:(NSArray *)array;
+
++ (void)stopMonitor:(BTAddress *)address;
+
++ (void)setHDKeyChain:(BTHDMKeychain *)keychain;
 @end

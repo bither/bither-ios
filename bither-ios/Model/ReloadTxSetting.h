@@ -20,11 +20,12 @@
 #import "Setting.h"
 #import "DialogPassword.h"
 
-@interface ReloadTxSetting : Setting<DialogPasswordDelegate>
-@property (weak)UIViewController *controller;
--(void)showDialogPassword;
+@interface ReloadTxSetting : Setting <DialogPasswordDelegate>
+@property(weak) UIViewController *controller;
 
-+(Setting *)getReloadTxsSetting;
+- (void)showDialogPassword;
+
++ (Setting *)getReloadTxsSetting;
 
 
 @end

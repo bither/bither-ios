@@ -21,41 +21,41 @@
 #import "QRCodeTxTransport.h"
 #import "SignTransactionViewController.h"
 
-static Setting* SignTransactionSetting;
+static Setting *SignTransactionSetting;
 
 @implementation SignTransactionScanSetting
 
-+(Setting*)getSignTransactionSetting{
-    if(!SignTransactionSetting){
-        SignTransactionScanSetting* setting = [[SignTransactionScanSetting alloc]init];
++ (Setting *)getSignTransactionSetting {
+    if (!SignTransactionSetting) {
+        SignTransactionScanSetting *setting = [[SignTransactionScanSetting alloc] init];
         SignTransactionSetting = setting;
     }
     return SignTransactionSetting;
 }
 
--(instancetype)init{
+- (instancetype)init {
     self = [super initWithName:NSLocalizedString(@"Sign Transaction", nil) icon:[UIImage imageNamed:@"scan_button_icon"]];
-    if(self){
+    if (self) {
         __weak SignTransactionScanSetting *d = self;
-        [self setSelectBlock:^(UIViewController * controller){
+        [self setSelectBlock:^(UIViewController *controller) {
             d.controller = controller;
-            ScanQrCodeTransportViewController *scan = [[ScanQrCodeTransportViewController alloc]initWithDelegate:d title:NSLocalizedString(@"Scan Unsigned TX", nil) pageName:NSLocalizedString(@"unsigned tx QR code", nil)];
+            ScanQrCodeTransportViewController *scan = [[ScanQrCodeTransportViewController alloc] initWithDelegate:d title:NSLocalizedString(@"Scan Unsigned TX", nil) pageName:NSLocalizedString(@"unsigned tx QR code", nil)];
             [controller presentViewController:scan animated:YES completion:nil];
         }];
     }
     return self;
 }
 
--(void)handleResult:(NSString *)result byReader:(ScanQrCodeViewController *)reader{
+- (void)handleResult:(NSString *)result byReader:(ScanQrCodeViewController *)reader {
     QRCodeTxTransport *tx = [QRCodeTxTransport formatQRCodeTransport:result];
-    if(tx){
-        SignTransactionViewController* signController = [self.controller.storyboard instantiateViewControllerWithIdentifier:@"SignTransaction"];
+    if (tx) {
+        SignTransactionViewController *signController = [self.controller.storyboard instantiateViewControllerWithIdentifier:@"SignTransaction"];
         signController.tx = tx;
         [self.controller.navigationController pushViewController:signController animated:NO];
     }
     [reader.presentingViewController dismissViewControllerAnimated:YES completion:^{
-        if(!tx){
-            if([self.controller respondsToSelector:@selector(showMsg:)]){
+        if (!tx) {
+            if ([self.controller respondsToSelector:@selector(showMsg:)]) {
                 [self.controller performSelector:@selector(showMsg:) withObject:NSLocalizedString(@"Scan unsigned transaction failed", nil)];
             }
         }

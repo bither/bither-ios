@@ -22,12 +22,11 @@
 #import "ImportPrivateKey.h"
 
 
-
 @interface DialogImportPrivateKey : DialogCentered
 
--(instancetype)initWithDelegate:(id<DialogImportKeyDelegate>)delegate importPrivateKeyType:(ImportPrivateKeyType) importPrivateKeyType;
+- (instancetype)initWithDelegate:(id <DialogImportKeyDelegate>)delegate importPrivateKeyType:(ImportPrivateKeyType)importPrivateKeyType;
 
-@property (weak) id<DialogImportKeyDelegate> delegate;
-@property (nonatomic,readwrite) ImportPrivateKeyType importPrivateKeyType;
+@property(weak) id <DialogImportKeyDelegate> delegate;
+@property(nonatomic, readwrite) ImportPrivateKeyType importPrivateKeyType;
 
 @end

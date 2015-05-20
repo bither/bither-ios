@@ -25,5 +25,6 @@
 @property NSString *qrCodeTitle;
 @property NSString *qrCodeMsg;
 @property BOOL hasChangeAddress;
--(void)setFinishAction:(NSString*)actionName target:(NSObject*)target selector:(SEL)selector;
+
+- (void)setFinishAction:(NSString *)actionName target:(NSObject *)target selector:(SEL)selector;
 @end

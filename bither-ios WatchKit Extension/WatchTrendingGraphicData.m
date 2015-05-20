@@ -115,7 +115,7 @@ static NSMutableDictionary * tgds;
     return _emptyData;
 }
 
-+(void)getTrendingGraphicData:(GroupMarketType) marketType callback:(void (^)(WatchTrendingGraphicData *data))callback andErrorCallback:(void (^)(NSError *error))errorCallback{
++(void)getTrendingGraphicData:(MarketType) marketType callback:(void (^)(WatchTrendingGraphicData *data))callback andErrorCallback:(void (^)(NSError *error))errorCallback{
     if (tgds==nil) {
         tgds=[NSMutableDictionary new];
     }

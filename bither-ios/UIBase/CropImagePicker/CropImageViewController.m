@@ -21,53 +21,52 @@
 #import "ImageCropView.h"
 
 @interface CropImageViewController ()
-@property (nonatomic, strong) NSDictionary *info;
-@property (nonatomic, strong) ImageCropView *icv;
+@property(nonatomic, strong) NSDictionary *info;
+@property(nonatomic, strong) ImageCropView *icv;
 @end
 
 @implementation CropImageViewController
--(id)initWithInfo:(NSDictionary*)info{
+- (id)initWithInfo:(NSDictionary *)info {
     self = [super init];
-    if(self){
+    if (self) {
         self.info = info;
     }
     return self;
 }
 
-- (void)viewDidLoad
-{
+- (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor blackColor];
     self.navigationItem.leftItemsSupplementBackButton = NO;
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancelPressed:)];
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancelPressed:)];
     self.navigationItem.title = NSLocalizedString(@"Move And Scale", @"Crop Image");
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(donePressed:)];
-    self.icv = [[ImageCropView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(donePressed:)];
+    self.icv = [[ImageCropView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
     [self.view addSubview:self.icv];
 }
 
--(void)viewWillAppear:(BOOL)animated{
+- (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    self.navigationController.navigationBarHidden=NO;
+    self.navigationController.navigationBarHidden = NO;
     self.icv.image = [self.info objectForKey:UIImagePickerControllerOriginalImage];
 }
 
--(void)cancelPressed:(id)sender{
+- (void)cancelPressed:(id)sender {
     [self.navigationController popViewControllerAnimated:YES];
 }
 
--(UIStatusBarStyle)preferredStatusBarStyle{
+- (UIStatusBarStyle)preferredStatusBarStyle {
     return UIStatusBarStyleLightContent;
 }
 
--(BOOL)automaticallyAdjustsScrollViewInsets{
+- (BOOL)automaticallyAdjustsScrollViewInsets {
     return NO;
 }
 
--(void)donePressed:(id)sender{
+- (void)donePressed:(id)sender {
     [self dismissViewControllerAnimated:YES completion:^{
         [self.info setValue:self.icv.croppedImage forKey:UIImagePickerControllerEditedImage];
-        [self.delegate imagePickerController:(UIImagePickerController*)self.navigationController didFinishPickingMediaWithInfo:self.info];
+        [self.delegate imagePickerController:(UIImagePickerController *) self.navigationController didFinishPickingMediaWithInfo:self.info];
     }];
 }
 

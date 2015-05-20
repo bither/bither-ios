@@ -16,6 +16,6 @@
 //  limitations under the License.
 #import <UIKit/UIKit.h>
 
-@interface OptionColdViewController : UIViewController< UIScrollViewDelegate>
+@interface OptionColdViewController : UIViewController <UIScrollViewDelegate>
 
 @end

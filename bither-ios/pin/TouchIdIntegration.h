@@ -19,7 +19,9 @@
 #import <Foundation/Foundation.h>
 
 @interface TouchIdIntegration : NSObject
-+(TouchIdIntegration*)instance;
--(BOOL)hasTouchId;
--(void)checkTouchId:(void (^)(BOOL success, BOOL denied))completion;
++ (TouchIdIntegration *)instance;
+
+- (BOOL)hasTouchId;
+
+- (void)checkTouchId:(void (^)(BOOL success, BOOL denied))completion;
 @end

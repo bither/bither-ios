@@ -17,25 +17,36 @@
 //  limitations under the License.
 
 #import <Foundation/Foundation.h>
+@import UIKit;
 
 @interface QRCodeTheme : NSObject
--(instancetype)initWithFg:(UIColor*)fg bg:(UIColor*)bg;
-@property UIColor* fg;
-@property UIColor* bg;
-+(QRCodeTheme*)yellow;
-+(QRCodeTheme*)green;
-+(QRCodeTheme*)blue;
-+(QRCodeTheme*)red;
-+(QRCodeTheme*)purple;
-+(QRCodeTheme*)black;
-+(NSArray*)themes;
-+(NSInteger)indexOfTheme:(QRCodeTheme*)theme;
+- (instancetype)initWithFg:(UIColor *)fg bg:(UIColor *)bg;
+
+@property UIColor *fg;
+@property UIColor *bg;
+
++ (QRCodeTheme *)yellow;
+
++ (QRCodeTheme *)green;
+
++ (QRCodeTheme *)blue;
+
++ (QRCodeTheme *)red;
+
++ (QRCodeTheme *)purple;
+
++ (QRCodeTheme *)black;
+
++ (NSArray *)themes;
+
++ (NSInteger)indexOfTheme:(QRCodeTheme *)theme;
 @end
 
 @interface QRCodeThemeUtil : NSObject
 
-+(UIImage*)qrCodeOfContent:(NSString*)content andSize:(CGFloat)size withTheme:(QRCodeTheme*)theme;
-+(UIImage*)qrCodeOfContent:(NSString*)content andSize:(CGFloat)size margin:(CGFloat)margin withTheme:(QRCodeTheme*)theme;
++ (UIImage *)qrCodeOfContent:(NSString *)content andSize:(CGFloat)size withTheme:(QRCodeTheme *)theme;
+
++ (UIImage *)qrCodeOfContent:(NSString *)content andSize:(CGFloat)size margin:(CGFloat)margin withTheme:(QRCodeTheme *)theme;
 
 @end
 

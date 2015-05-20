@@ -25,49 +25,50 @@
 
 #define kCausePinCodeBackgroundTime (60)
 
-@interface PinCodeUtil()
-@property NSDate* backgroundDate;
+@interface PinCodeUtil ()
+@property NSDate *backgroundDate;
 @end
 
-static PinCodeUtil* util;
+static PinCodeUtil *util;
+
 @implementation PinCodeUtil
 
-+(PinCodeUtil*)instance{
-    if(!util){
-        util = [[PinCodeUtil alloc]init];
++ (PinCodeUtil *)instance {
+    if (!util) {
+        util = [[PinCodeUtil alloc] init];
     }
     return util;
 }
 
--(instancetype)init{
+- (instancetype)init {
     self = [super init];
-    if(self){
-        [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(resignActive) name:UIApplicationWillResignActiveNotification object:nil];
-        [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(becomeActive) name:UIApplicationDidBecomeActiveNotification object:nil];
+    if (self) {
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(resignActive) name:UIApplicationWillResignActiveNotification object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(becomeActive) name:UIApplicationDidBecomeActiveNotification object:nil];
     }
     return self;
 }
 
--(void)becomeActive{
+- (void)becomeActive {
     [FXBlurView setUpdatesDisabled];
-    __block __weak UIViewController* vc = self.topVC;
+    __block __weak UIViewController *vc = self.topVC;
     [self removeBlur:vc];
-    if([[UserDefaultsUtil instance]hasPinCode]){
-        if(!self.backgroundDate || [[NSDate new] timeIntervalSinceDate:self.backgroundDate] > kCausePinCodeBackgroundTime){
-            if(![vc isKindOfClass:[PinCodeViewController class]]){
+    if ([[UserDefaultsUtil instance] hasPinCode]) {
+        if (!self.backgroundDate || [[NSDate new] timeIntervalSinceDate:self.backgroundDate] > kCausePinCodeBackgroundTime) {
+            if (![vc isKindOfClass:[PinCodeViewController class]]) {
                 [self addBlur];
-                UIView* blurView = vc.view.subviews[vc.view.subviews.count - 1];
-                UIViewController* pin = [self.rootVC.storyboard instantiateViewControllerWithIdentifier:@"PinCode"];
-                __block __weak UIView* pinView = pin.view;
+                UIView *blurView = vc.view.subviews[vc.view.subviews.count - 1];
+                UIViewController *pin = [self.rootVC.storyboard instantiateViewControllerWithIdentifier:@"PinCode"];
+                __block __weak UIView *pinView = pin.view;
                 pinView.alpha = 0;
                 [vc presentViewController:pin animated:NO completion:^{
                     [blurView removeFromSuperview];
                     [pinView.window insertSubview:blurView atIndex:0];
                     blurView.frame = CGRectMake(0, CGRectGetMaxY([UIApplication sharedApplication].statusBarFrame), pinView.window.frame.size.width * 2, pinView.window.frame.size.height * 2);
-                    
+
                     [UIView animateWithDuration:0.3 animations:^{
                         pinView.alpha = 1;
-                    } completion:^(BOOL finished) {
+                    }                completion:^(BOOL finished) {
                         [self removeBlur:vc];
                         [blurView removeFromSuperview];
                     }];
@@ -77,23 +78,23 @@ static PinCodeUtil* util;
     }
 }
 
--(void)resignActive{
-    if(![self.topVC isKindOfClass:[PinCodeViewController class]]){
-        if([UserDefaultsUtil instance].hasPinCode){
+- (void)resignActive {
+    if (![self.topVC isKindOfClass:[PinCodeViewController class]]) {
+        if ([UserDefaultsUtil instance].hasPinCode) {
             [self addBlur];
         }
         self.backgroundDate = [NSDate new];
     }
 }
 
--(void)addBlur{
-    UIViewController* vc = self.topVC;
-    if([vc isKindOfClass:[PinCodeViewController class]]){
+- (void)addBlur {
+    UIViewController *vc = self.topVC;
+    if ([vc isKindOfClass:[PinCodeViewController class]]) {
         return;
     }
-    UIView* v = vc.view;
-    if(![v.subviews[v.subviews.count - 1] isKindOfClass:[FXBlurView class]]){
-        FXBlurView* blur = [[FXBlurView alloc]initWithFrame:CGRectMake(0, 0, v.frame.size.width, v.frame.size.height)];
+    UIView *v = vc.view;
+    if (![v.subviews[v.subviews.count - 1] isKindOfClass:[FXBlurView class]]) {
+        FXBlurView *blur = [[FXBlurView alloc] initWithFrame:CGRectMake(0, 0, v.frame.size.width, v.frame.size.height)];
         blur.underlyingView = v;
         blur.dynamic = NO;
         blur.blurRadius = 20;
@@ -102,43 +103,43 @@ static PinCodeUtil* util;
     }
 }
 
--(void)removeBlur:(UIViewController*)vc{
-    if(!vc){
+- (void)removeBlur:(UIViewController *)vc {
+    if (!vc) {
         return;
     }
-    UIView* v = vc.view;
+    UIView *v = vc.view;
     NSUInteger subViewCount = v.subviews.count;
     NSMutableArray *viewsToRemove = [NSMutableArray new];
-    for(NSInteger i = subViewCount - 1; i >= 0; i--){
-        UIView* subView = v.subviews[i];
-        if([subView isKindOfClass:[FXBlurView class]]){
+    for (NSInteger i = subViewCount - 1; i >= 0; i--) {
+        UIView *subView = v.subviews[i];
+        if ([subView isKindOfClass:[FXBlurView class]]) {
             [viewsToRemove addObject:subView];
-        }else{
+        } else {
             break;
         }
     }
-    for(UIView* v in viewsToRemove){
+    for (UIView *v in viewsToRemove) {
         [v removeFromSuperview];
     }
 }
 
--(UIViewController*)rootVC{
-    UIViewController* rootVC = ((AppDelegate*)[UIApplication sharedApplication].delegate).window.rootViewController;
-    if([rootVC isKindOfClass:[IOS7ContainerViewController class]]){
-        rootVC = ((IOS7ContainerViewController*)rootVC).controller;
+- (UIViewController *)rootVC {
+    UIViewController *rootVC = ((AppDelegate *) [UIApplication sharedApplication].delegate).window.rootViewController;
+    if ([rootVC isKindOfClass:[IOS7ContainerViewController class]]) {
+        rootVC = ((IOS7ContainerViewController *) rootVC).controller;
     }
     return rootVC;
 }
 
--(UIViewController*)topVC{
-    UIViewController* vc = [self rootVC];
+- (UIViewController *)topVC {
+    UIViewController *vc = [self rootVC];
     while (vc.presentedViewController) {
         vc = vc.presentedViewController;
     }
     return vc;
 }
 
--(void)dealloc{
+- (void)dealloc {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 @end

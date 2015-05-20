@@ -37,7 +37,7 @@
 @interface TrashCanCell () {
     BTAddress *_address;
 }
-@property (weak, nonatomic) IBOutlet AddressAliasView *btnAlias;
+@property(weak, nonatomic) IBOutlet AddressAliasView *btnAlias;
 @property(weak, nonatomic) IBOutlet UILabel *lblAddress;
 @end
 

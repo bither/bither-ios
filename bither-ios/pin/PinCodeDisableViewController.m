@@ -21,13 +21,13 @@
 #import "UIViewController+PiShowBanner.h"
 #import "UserDefaultsUtil.h"
 
-@interface PinCodeDisableViewController ()<PinCodeEnterViewDelegate>{
+@interface PinCodeDisableViewController () <PinCodeEnterViewDelegate> {
     UserDefaultsUtil *d;
 }
 
-@property (weak, nonatomic) IBOutlet PinCodeEnterView *vEnter;
-@property (weak, nonatomic) IBOutlet UIView *vTopBar;
-@property (weak, nonatomic) IBOutlet UILabel *lblTitle;
+@property(weak, nonatomic) IBOutlet PinCodeEnterView *vEnter;
+@property(weak, nonatomic) IBOutlet UIView *vTopBar;
+@property(weak, nonatomic) IBOutlet UILabel *lblTitle;
 @end
 
 @implementation PinCodeDisableViewController
@@ -41,11 +41,11 @@
     [self.vEnter becomeFirstResponder];
 }
 
--(void)onEntered:(NSString*) code{
+- (void)onEntered:(NSString *)code {
     if (!code || code.length == 0) {
         return;
     }
-    if([d checkPinCode:code]){
+    if ([d checkPinCode:code]) {
         [d deletePinCode];
         [self.navigationController popViewControllerAnimated:YES];
     } else {
@@ -58,7 +58,7 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 
--(void)showMsg:(NSString*)msg{
+- (void)showMsg:(NSString *)msg {
     [self showBannerWithMessage:msg belowView:self.vTopBar];
 }
 

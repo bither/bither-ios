@@ -24,13 +24,13 @@
 #import "UIViewController+PiShowBanner.h"
 
 @interface HDMResetServerPasswordUtil : NSObject
-- (instancetype)initWithViewController:(UIViewController<ShowBannerDelegete> *)vc;
+- (instancetype)initWithViewController:(UIViewController <ShowBannerDelegete> *)vc;
 
-- (instancetype)initWithViewController:(UIViewController<ShowBannerDelegete> *)vc andDialogProgress:(DialogProgress *)dp;
+- (instancetype)initWithViewController:(UIViewController <ShowBannerDelegete> *)vc andDialogProgress:(DialogProgress *)dp;
 
-- (instancetype)initWithViewController:(UIViewController<ShowBannerDelegete> *)vc andPassword:(NSString *)password;
+- (instancetype)initWithViewController:(UIViewController <ShowBannerDelegete> *)vc andPassword:(NSString *)password;
 
-- (instancetype)initWithViewController:(UIViewController<ShowBannerDelegete> *)vc dialogProgress:(DialogProgress *)dp andPassword:(NSString *)password;
+- (instancetype)initWithViewController:(UIViewController <ShowBannerDelegete> *)vc dialogProgress:(DialogProgress *)dp andPassword:(NSString *)password;
 
 - (void)setPassword:(NSString *)password;
 

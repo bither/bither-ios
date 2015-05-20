@@ -28,27 +28,27 @@
 
 @implementation DialogNetworkMonitorOption
 
--(instancetype)init{
-    NSString* str = NSLocalizedString(@"network_monitor_clear_peers", nil);
+- (instancetype)init {
+    NSString *str = NSLocalizedString(@"network_monitor_clear_peers", nil);
     CGFloat width = [str sizeWithRestrict:CGSizeMake(CGFLOAT_MAX, kButtonHeight) font:[UIFont systemFontOfSize:kFontSize]].width + kButtonEdgeInsets.left + kButtonEdgeInsets.right;
     width = MAX(kMinWidth, width);
     self = [super initWithFrame:CGRectMake(0, 0, width, kHeight)];
-    if(self){
+    if (self) {
         [self firstConfigure];
     }
     return self;
 }
 
 
--(void)firstConfigure{
+- (void)firstConfigure {
     self.bgInsets = UIEdgeInsetsMake(4, 16, 4, 16);
     CGFloat bottom = 0;
     bottom = [self createButtonWithText:NSLocalizedString(@"network_monitor_clear_peers", nil) top:bottom action:@selector(clearPeerPressed:)];
-    UIView *seperator = [[UIView alloc]initWithFrame:CGRectMake(0, bottom, self.frame.size.width, 1)];
+    UIView *seperator = [[UIView alloc] initWithFrame:CGRectMake(0, bottom, self.frame.size.width, 1)];
     seperator.autoresizingMask = UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleWidth;
     seperator.backgroundColor = [UIColor colorWithWhite:1 alpha:0.5];
     [self addSubview:seperator];
-    
+
     bottom += 1;
     bottom = [self createButtonWithText:NSLocalizedString(@"Cancel", nil) top:bottom action:@selector(cancelPressed:)];
     CGRect frame = self.frame;
@@ -56,20 +56,20 @@
     self.frame = frame;
 }
 
--(void)clearPeerPressed:(id)sender{
+- (void)clearPeerPressed:(id)sender {
     [self dismissWithCompletion:^{
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
-            [[BTPeerManager instance]clearPeerAndRestart];
+            [[BTPeerManager instance] clearPeerAndRestart];
         });
     }];
 }
 
--(void)cancelPressed:(id)sender{
+- (void)cancelPressed:(id)sender {
     [self dismiss];
 }
 
--(CGFloat)createButtonWithText:(NSString*)text top:(CGFloat)top action:(SEL)selector{
-    UIButton *btn = [[UIButton alloc]initWithFrame:CGRectMake(0, top, self.frame.size.width, kButtonHeight)];
+- (CGFloat)createButtonWithText:(NSString *)text top:(CGFloat)top action:(SEL)selector {
+    UIButton *btn = [[UIButton alloc] initWithFrame:CGRectMake(0, top, self.frame.size.width, kButtonHeight)];
     [btn setBackgroundImage:nil forState:UIControlStateNormal];
     [btn setBackgroundImage:[UIImage imageNamed:@"card_foreground_pressed"] forState:UIControlStateHighlighted];
     btn.contentEdgeInsets = kButtonEdgeInsets;

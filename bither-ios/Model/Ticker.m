@@ -30,29 +30,34 @@
 
 
 @implementation Ticker
--(double)getDefaultExchangeBuy{
-    return self.buy* [ExchangeUtil getRateForMarket:self.marketType];
+- (double)getDefaultExchangeBuy {
+    return self.buy * [ExchangeUtil getRateForMarket:self.marketType];
 }
--(double)getDefaultExchangeHigh{
-    return self.high* [ExchangeUtil getRateForMarket:self.marketType];
+
+- (double)getDefaultExchangeHigh {
+    return self.high * [ExchangeUtil getRateForMarket:self.marketType];
 }
--(double) getDefaultExchangeLow{
-    return self.low* [ExchangeUtil getRateForMarket:self.marketType];
+
+- (double)getDefaultExchangeLow {
+    return self.low * [ExchangeUtil getRateForMarket:self.marketType];
 }
--(double)getDefaultExchangePrice{
+
+- (double)getDefaultExchangePrice {
     return self.pNew * [ExchangeUtil getRateForMarket:self.marketType];
 }
--(double)getDefaultExchangeSell{
+
+- (double)getDefaultExchangeSell {
     return self.sell * [ExchangeUtil getRateForMarket:self.marketType];
 }
-+(Ticker *)formatTicker:(NSDictionary *)dict market:(MarketType) marketType{
-    Ticker * ticker=[[Ticker alloc] init];
-    [ticker setAmount:[dict getDoubleFromDict:VOLUME]/pow(10, 8)];
-    [ticker setHigh:[dict getDoubleFromDict:HIGH]/100];
-    [ticker setLow:[dict getDoubleFromDict:LOW]/100];
-    [ticker setPNew:[dict getDoubleFromDict:LAST]/100];
-    [ticker setBuy:[dict getDoubleFromDict:BID]/100];
-    [ticker setSell:[dict getDoubleFromDict:ASK]/100];
+
++ (Ticker *)formatTicker:(NSDictionary *)dict market:(MarketType)marketType {
+    Ticker *ticker = [[Ticker alloc] init];
+    [ticker setAmount:[dict getDoubleFromDict:VOLUME] / pow(10, 8)];
+    [ticker setHigh:[dict getDoubleFromDict:HIGH] / 100];
+    [ticker setLow:[dict getDoubleFromDict:LOW] / 100];
+    [ticker setPNew:[dict getDoubleFromDict:LAST] / 100];
+    [ticker setBuy:[dict getDoubleFromDict:BID] / 100];
+    [ticker setSell:[dict getDoubleFromDict:ASK] / 100];
     [ticker setAmp:-1];
     [ticker setTotal:-1];
     [ticker setLevel:-1];
@@ -60,13 +65,14 @@
     [ticker setMarketType:marketType];
     return ticker;
 }
-+(NSArray *)formatList:(NSDictionary *)dict{
-    NSMutableArray * array=[NSMutableArray new];
-    for(MarketType marketType=BITSTAMP;marketType<=MARKET796;marketType++){
-        NSString * key=[NSString stringWithFormat:@"%d",marketType];
+
++ (NSArray *)formatList:(NSDictionary *)dict {
+    NSMutableArray *array = [NSMutableArray new];
+    for (MarketType marketType = BITSTAMP; marketType <= MARKET796; marketType++) {
+        NSString *key = [NSString stringWithFormat:@"%d", [GroupUtil getMarketValue:marketType]];
         if ([[dict allKeys] containsObject:key]) {
-            NSDictionary *tickerDict=[dict objectForKey:key];
-            Ticker * ticker=[self formatTicker:tickerDict market:marketType];
+            NSDictionary *tickerDict = [dict objectForKey:key];
+            Ticker *ticker = [self formatTicker:tickerDict market:marketType];
             [array addObject:ticker];
         }
     }

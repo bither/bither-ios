@@ -21,10 +21,14 @@
 @interface DataCheckUtil : NSObject
 
 
-+(BOOL)CheckEmailString:(NSString *) email;
-+(BOOL) CheckEmailAndSetImage:(NSString *)email imageView:(UIImageView *) imageView;
-+(NSString*) CheckUserName:(NSString *) userName;
-+(BOOL) CheckUserNameAndSetImage:(NSString *)userName imageView:(UIImageView *) imageView;
-+ (BOOL)CheckTagName:(NSString *) tagName;
++ (BOOL)CheckEmailString:(NSString *)email;
+
++ (BOOL)CheckEmailAndSetImage:(NSString *)email imageView:(UIImageView *)imageView;
+
++ (NSString *)CheckUserName:(NSString *)userName;
+
++ (BOOL)CheckUserNameAndSetImage:(NSString *)userName imageView:(UIImageView *)imageView;
+
++ (BOOL)CheckTagName:(NSString *)tagName;
 
 @end

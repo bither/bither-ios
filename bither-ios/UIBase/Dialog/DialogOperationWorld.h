@@ -22,6 +22,7 @@
 
 
 @interface DialogOperationWorld : DialogCentered
--(instancetype)initWithDelegate:(NSObject<DialogOperationDelegate>*)delegate world:(NSString*) world index:(int)index;
-@property (weak) NSObject<DialogOperationDelegate>* delegate;
+- (instancetype)initWithDelegate:(NSObject <DialogOperationDelegate> *)delegate world:(NSString *)world index:(int)index;
+
+@property(weak) NSObject <DialogOperationDelegate> *delegate;
 @end

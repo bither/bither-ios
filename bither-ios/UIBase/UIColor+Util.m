@@ -20,35 +20,34 @@
 
 @implementation UIColor (Util)
 
-+(UIColor*)parseColor: (int)colorString{
++ (UIColor *)parseColor:(int)colorString {
     return [UIColor r:((colorString & 0xFF0000) >> 16) g:((colorString & 0xFF00) >> 8) b:(colorString & 0xFF)];
 }
 
-+(UIColor*)r:(int) r g:(int) g b:(int) b{
++ (UIColor *)r:(int)r g:(int)g b:(int)b {
     return [UIColor r:r g:g b:b a:255];
 }
 
-+(UIColor*)r:(int) r g:(int) g b:(int) b a:(int) a{
++ (UIColor *)r:(int)r g:(int)g b:(int)b a:(int)a {
     return [UIColor colorWithRed:[UIColor comp:r] green:[UIColor comp:g] blue:[UIColor comp:b] alpha:[UIColor comp:a]];
 }
 
-+(float)comp:(int)i{
-    return (float)i/255.0f;
++ (float)comp:(int)i {
+    return (float) i / 255.0f;
 }
 
-+ (UIImage*)gradientFromColor:(UIColor*)c1 toColor:(UIColor*)c2 withHeight:(int)height
-{
++ (UIImage *)gradientFromColor:(UIColor *)c1 toColor:(UIColor *)c2 withHeight:(int)height {
     CGSize size = CGSizeMake(1, height);
     UIGraphicsBeginImageContextWithOptions(size, NO, 0);
     CGContextRef context = UIGraphicsGetCurrentContext();
     CGColorSpaceRef colorspace = CGColorSpaceCreateDeviceRGB();
-    
-    NSArray* colors = [NSArray arrayWithObjects:(id)c1.CGColor, (id)c2.CGColor, nil];
-    CGGradientRef gradient = CGGradientCreateWithColors(colorspace, (CFArrayRef)colors, NULL);
+
+    NSArray *colors = [NSArray arrayWithObjects:(id) c1.CGColor, (id) c2.CGColor, nil];
+    CGGradientRef gradient = CGGradientCreateWithColors(colorspace, (CFArrayRef) colors, NULL);
     CGContextDrawLinearGradient(context, gradient, CGPointMake(0, 0), CGPointMake(0, size.height), 0);
-    
+
     UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
-    
+
     CGGradientRelease(gradient);
     CGColorSpaceRelease(colorspace);
     UIGraphicsEndImageContext();

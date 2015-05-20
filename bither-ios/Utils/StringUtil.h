@@ -19,30 +19,48 @@
 #import "RegexKitLite.h"
 #import <CoreLocation/CoreLocation.h>
 
-@interface StringUtil : NSObject{
-    
+@interface StringUtil : NSObject {
+
 }
 
-+(NSString *)formatPrice:(double) value;
-+(NSString * )formatDouble:(double) value;
++ (NSString *)formatPrice:(double)value;
 
-+(BOOL) isEmpty:(NSString *) str;
-+(BOOL)validEmail:(NSString*)str;
-+(BOOL)validPassword:(NSString *)str;
-+(BOOL)validPartialPassword:(NSString *)str;
-+(BOOL)isValidBitcoinBIP21Address:(NSString *)str;
-+(NSString*)getAddressFormBIP21Address:(NSString *)str;
-+(uint64_t)getAmtFormBIP21Address:(NSString *)str;
-+(NSString *) intToString:(int) num;
-+(NSString *)longToString:(long) num;
-+(BOOL)isPureLongLong:(NSString *)string;
-+(BOOL)isPureFloat:(NSString *)string;
++ (NSString *)formatDouble:(double)value;
 
-+(BOOL)compareString:(NSString *) original compare:(NSString *)compare;+(NSString *)shortenAddress:(NSString *)address;
-+(NSString *)formatAddress:(NSString *)address groupSize:(NSInteger)groupSize  lineSize:(NSInteger) lineSize;
-+(NSString *)longToHex:(long long) value;
-+(long long)hexToLong:(NSString *)hex;
++ (BOOL)isEmpty:(NSString *)str;
 
-+(NSData *)getUrlSaleBase64:(NSString *)str;
++ (BOOL)validEmail:(NSString *)str;
+
++ (BOOL)validPassword:(NSString *)str;
+
++ (BOOL)validPartialPassword:(NSString *)str;
+
++ (BOOL)isValidBitcoinBIP21Address:(NSString *)str;
+
++ (NSString *)getAddressFormBIP21Address:(NSString *)str;
+
++ (uint64_t)getAmtFormBIP21Address:(NSString *)str;
+
++ (NSString *)intToString:(int)num;
+
++ (NSString *)longToString:(long)num;
+
++ (BOOL)isPureLongLong:(NSString *)string;
+
++ (BOOL)isPureFloat:(NSString *)string;
+
++ (BOOL)compareString:(NSString *)original compare:(NSString *)compare;
+
++ (NSString *)shortenAddress:(NSString *)address;
+
++ (NSString *)formatAddress:(NSString *)address groupSize:(NSInteger)groupSize lineSize:(NSInteger)lineSize;
+
++ (NSString *)longToHex:(long long)value;
+
++ (long long)hexToLong:(NSString *)hex;
+
++ (NSData *)getUrlSaleBase64:(NSString *)str;
+
++ (NSString *)removeBlankSpaceString:(NSString *)str;
 
 @end

@@ -21,7 +21,7 @@
 #define kPadding (1)
 #define kStrokeWidth (1.5f)
 
-@interface PinCodeDotsView(){
+@interface PinCodeDotsView () {
     UIColor *_dotColor;
     NSUInteger _filledCount;
     NSUInteger _totalDotCount;
@@ -31,7 +31,7 @@
 
 @implementation PinCodeDotsView
 
--(void)drawRect:(CGRect)rect{
+- (void)drawRect:(CGRect)rect {
     CGContextRef context = UIGraphicsGetCurrentContext();
     CGContextClearRect(context, rect);
     CGContextSetLineWidth(context, kStrokeWidth);
@@ -39,7 +39,7 @@
     [self.dotColor setStroke];
     CGFloat height = rect.size.height;
     CGFloat width = rect.size.width;
-    if(height == 0 || width == 0){
+    if (height == 0 || width == 0) {
         return;
     }
     CGFloat size = height - kStrokeWidth * 2.0f;
@@ -49,43 +49,43 @@
          i < self.totalDotCount;
          i++) {
         dotRect.origin.x = i * (size + distance) + kStrokeWidth;
-        if(i < self.filledCount){
+        if (i < self.filledCount) {
             CGContextFillEllipseInRect(context, dotRect);
-        }else{
+        } else {
             CGContextStrokeEllipseInRect(context, dotRect);
         }
     }
 }
 
--(UIColor*)dotColor{
-    if(!_dotColor){
+- (UIColor *)dotColor {
+    if (!_dotColor) {
         self.dotColor = [UIColor colorWithWhite:0.8f alpha:0.92f];
     }
     return _dotColor;
 }
 
--(void)setDotColor:(UIColor *)dotColor{
+- (void)setDotColor:(UIColor *)dotColor {
     _dotColor = dotColor;
     [self setNeedsDisplay];
 }
 
--(NSUInteger)filledCount{
+- (NSUInteger)filledCount {
     return _filledCount;
 }
 
--(void)setFilledCount:(NSUInteger)filledCount{
+- (void)setFilledCount:(NSUInteger)filledCount {
     _filledCount = filledCount;
     [self setNeedsDisplay];
 }
 
--(NSUInteger)totalDotCount{
-    if(_totalDotCount == 0){
+- (NSUInteger)totalDotCount {
+    if (_totalDotCount == 0) {
         self.totalDotCount = 4;
     }
     return _totalDotCount;
 }
 
--(void)setTotalDotCount:(NSUInteger)totalDotCount{
+- (void)setTotalDotCount:(NSUInteger)totalDotCount {
     _totalDotCount = totalDotCount;
     [self setNeedsDisplay];
 }

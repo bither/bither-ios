@@ -19,5 +19,5 @@
 #import <UIKit/UIKit.h>
 
 @interface HotAddressAddViewController : UIViewController
--(void)showMessage:(NSString*)msg;
+- (void)showMessage:(NSString *)msg;
 @end

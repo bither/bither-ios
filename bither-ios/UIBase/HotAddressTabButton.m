@@ -7,7 +7,6 @@
 //
 
 #import "HotAddressTabButton.h"
-#import "StringUtil.h"
 #import "UIColor+Util.h"
 #import <Bitheri/BTSettings.h>
 #import "BTAddressManager.h"

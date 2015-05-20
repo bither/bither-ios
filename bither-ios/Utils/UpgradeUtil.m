@@ -20,9 +20,9 @@
 #import <Bitheri/BTTxProvider.h>
 #import "UpgradeUtil.h"
 #import "UserDefaultsUtil.h"
-#import "BTUtils.h"
 #import "BTAddressManager.h"
 #import "SystemUtil.h"
+
 #define UPGRADE_PUBLIC_KEY_VERSION 110
 #define UPGRADE_KEY_FROM_FILE_TO_DB 131
 
@@ -63,10 +63,10 @@
     return success;
 }
 
-+ (BOOL)checkVersion;{
++ (BOOL)checkVersion; {
     __block BOOL success = YES;
     if ([UpgradeUtil needUpgradeKeyFromFileToDB]) {
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0),^{
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
             success &= [UpgradeUtil upgradeKeyFromFileToDB];
         });
     }

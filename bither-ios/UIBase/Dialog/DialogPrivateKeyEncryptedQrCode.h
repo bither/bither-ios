@@ -20,5 +20,5 @@
 #import <Bitheri/BTAddress.h>
 
 @interface DialogPrivateKeyEncryptedQrCode : DialogCentered
--(instancetype)initWithAddress:(BTAddress*)address;
+- (instancetype)initWithAddress:(BTAddress *)address;
 @end

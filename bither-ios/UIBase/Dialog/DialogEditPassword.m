@@ -19,13 +19,11 @@
 #import "DialogEditPassword.h"
 #import "UserDefaultsUtil.h"
 #import "KeyboardController.h"
-#import "StringUtil.h"
 #import "UIBaseUtil.h"
 #import "PasswordStrengthUtil.h"
 #import "DialogAlert.h"
 #import <AudioToolbox/AudioToolbox.h>
 #import <Bitheri/BTAddressManager.h>
-#import <Bitheri/BTAddressProvider.h>
 
 #define kOuterPadding (1)
 #define kInnerMargin (10)
@@ -97,10 +95,13 @@
             return;
         }
         if (strength.warning) {
+            [self endEditing:YES];
             __block DialogEditPassword *d = self;
             [[[DialogAlert alloc] initWithMessage:[NSString stringWithFormat:NSLocalizedString(@"password_strength_warning", nil), strength.name] confirm:^{
                 [d edit];
-            }                              cancel:nil] showInWindow:self.window];
+            }                              cancel:^{
+                [self.tfPasswordNew becomeFirstResponder];
+            }] showInWindow:self.window];
             return;
         }
     }

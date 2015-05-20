@@ -18,16 +18,10 @@
 
 #import "GCCrashInstallation.h"
 //#import "KSCrashInstallation+Private.h"
-#import <KSCrash/KSCrashInstallation.h>
-#import <KSCrash/KSCrashAdvanced.h>
-#import <KSCrash/KSCrash.h>
-#import <KSCrash/KSCrashReportSinkStandard.h>
-#import <KSCrash/KSCrashReportStore.h>
-#import <KSCrash/KSCrashReportWriter.h>
 
 @implementation GCCrashInstallation
 
-- (id)init{
+- (id)init {
     self = [super init];
     if (self) {
         self.url = [NSURL URLWithString:@""];
@@ -36,7 +30,7 @@
 }
 //@synthesize url = _url;
 
-- (id<KSCrashReportFilter>)sink {
+- (id <KSCrashReportFilter>)sink {
     GCCrashReportSink *sink = [GCCrashReportSink sink];
     return [KSCrashReportFilterPipeline filterWithFilters:[sink defaultCrashReportFilterSet], nil];
 }

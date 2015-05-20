@@ -21,16 +21,16 @@
 
 @protocol UEntropyDelegate <NSObject>
 
--(NSData *)randomWithSize:(NSInteger)size;
+- (NSData *)randomWithSize:(NSInteger)size;
 
 @end
 
 
 @interface XRandom : NSObject
--(instancetype)initWithDelegate:(id<UEntropyDelegate>)delegate ;
+- (instancetype)initWithDelegate:(id <UEntropyDelegate>)delegate;
 
--(NSData *)randomWithSize:(NSInteger)size;
+- (NSData *)randomWithSize:(NSInteger)size;
 
-@property (weak) id<UEntropyDelegate> delegate;
+@property(weak) id <UEntropyDelegate> delegate;
 
 @end

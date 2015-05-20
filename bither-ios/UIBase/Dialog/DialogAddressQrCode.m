@@ -18,23 +18,35 @@
 
 #import "DialogAddressQrCode.h"
 #import "UIImage+ImageWithColor.h"
-#import "QRCodeThemeUtil.h"
 #import "UserDefaultsUtil.h"
 #import "UIBaseUtil.h"
 #import "FileUtil.h"
+#import "UIColor+Util.h"
 
 #define kQrCodeMargin (8)
 #define kButtonSize (40)
 #define kButtonBottomDistance (20)
+#define kLabelAddressMargin (46)
+#define kLabelAddressHeight (15)
+#define kLabelAddressFontSize (13)
+#define kVanitySizeRate (0.6f)
+#define kVanityShareQrSizeRate (0.9f)
+#define kVanityShareMargin (32)
+#define kVanityShareWaterMarkHeightRate (0.1f)
+#define kVanityAddressGlowColor (0x00bbff)
+#define kVanityAddressTextColor (0xd8f5ff)
+#define kVanityAddressQrBgColor (0x2b2f32)
 
 @interface DialogAddressQrCode () <UIDocumentInteractionControllerDelegate> {
     UserDefaultsUtil *defaults;
     NSString *_shareFileName;
     UIImage *_broderImage;
     UIImage *_avatarImage;
+    NSInteger vanityLength;
 }
 @property NSString *address;
 @property UIScrollView *sv;
+@property UILabel *lblAddress;
 @property UIDocumentInteractionController *interactionController;
 @property(strong, nonatomic) UIActivityIndicatorView *riv;
 @end
@@ -49,6 +61,7 @@
         defaults = [UserDefaultsUtil instance];
         _shareFileName = address.address;
         _broderImage = [UIImage imageNamed:@"avatar_for_fancy_qr_code_overlay"];
+        vanityLength = address.vanityLen;
         [self firstConfigure];
     }
     return self;
@@ -77,11 +90,30 @@
         UIButton *btnDismiss = [[UIButton alloc] initWithFrame:iv.frame];
         [btnDismiss setBackgroundImage:nil forState:UIControlStateNormal];
         [btnDismiss addTarget:self action:@selector(dismiss) forControlEvents:UIControlEventTouchUpInside];
+
+        if (self.shouldShowVanity) {
+            iv.transform = CGAffineTransformMakeScale(kVanitySizeRate, kVanitySizeRate);
+            iv.layer.shadowColor = [UIColor blackColor].CGColor;
+            iv.layer.shadowRadius = 6;
+            iv.layer.shadowOpacity = 1;
+            iv.layer.shadowOffset = CGSizeMake(0, 3);
+        }
+
         [self.sv addSubview:iv];
         [self.sv addSubview:btnDismiss];
         [self setQRImage:[themes objectAtIndex:i] iv:iv last:i == themes.count - 1];
 
     }
+
+    self.lblAddress = [[UILabel alloc] initWithFrame:CGRectMake(0, CGRectGetMinY(self.sv.frame) - kLabelAddressHeight - kLabelAddressMargin + (self.shouldShowVanity ? self.sv.frame.size.width * (1.0f - kVanitySizeRate) / 2 : 0), self.frame.size.width, kLabelAddressHeight)];
+    self.lblAddress.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin;
+    self.lblAddress.backgroundColor = [UIColor clearColor];
+    self.lblAddress.textAlignment = NSTextAlignmentCenter;
+    self.lblAddress.textColor = [UIColor whiteColor];
+    self.lblAddress.font = [UIFont boldSystemFontOfSize:kLabelAddressFontSize];
+    self.lblAddress.text = self.address;
+    [self addSubview:self.lblAddress];
+    [self configureAddressLabel];
 
     int buttonCount = 2;
     CGFloat buttonMargin = (self.frame.size.width - kButtonSize * buttonCount) / (buttonCount + 1);
@@ -99,7 +131,6 @@
     [btn setBackgroundImage:nil forState:UIControlStateNormal];
     [btn addTarget:self action:@selector(savePressed:) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:btn];
-
 }
 
 - (void)setQRImage:(QRCodeTheme *)theme iv:(UIImageView *)iv last:(BOOL)isLast {
@@ -117,6 +148,9 @@
             UIGraphicsBeginImageContextWithOptions(CGSizeMake(qrCodeImage.size.width, qrCodeImage.size.height), NO, 0);
             [qrCodeImage drawInRect:CGRectMake(0, 0, qrCodeImage.size.width, qrCodeImage.size.height)];
             int w = qrCodeImage.size.width * 0.24f;
+            if (self.shouldShowVanity) {
+                w = w * 0.9f;
+            }
             int borderW = (qrCodeImage.size.width - w) / 2;
             int borderH = (qrCodeImage.size.height - w) / 2;
             CGRect rect = CGRectMake(borderW, borderH, w, w);
@@ -171,7 +205,6 @@
 - (void)dialogWillShow {
     [super dialogWillShow];
     self.sv.contentOffset = CGPointMake([defaults getQrCodeTheme] * self.sv.frame.size.width, 0);
-    NSArray *themes = [QRCodeTheme themes];
 }
 
 - (int)currentIndex {
@@ -189,9 +222,72 @@
     UIView *v = [self.sv.subviews objectAtIndex:[self currentIndex] * 2];
     if ([v isKindOfClass:[UIImageView class]]) {
         UIImageView *iv = (UIImageView *) v;
-        return iv.image;
+        UIImage *qr = iv.image;
+        if (self.shouldShowVanity) {
+            return [self editQrForVanity:qr];
+        } else {
+            return qr;
+        }
     }
     return nil;
+}
+
+- (UIImage *)editQrForVanity:(UIImage *)qr {
+    self.lblAddress.opaque = NO;
+    UIImage *imgLbl = [self.lblAddress generateImage];
+    UIImage *waterMark = [UIImage imageNamed:@"pin_code_water_mark"];
+    CGFloat qrSize = qr.size.width / [UIScreen mainScreen].scale * kVanitySizeRate * kVanityShareQrSizeRate;
+    CGFloat waterMarkHeight = qrSize * kVanityShareWaterMarkHeightRate;
+    CGFloat waterMarkWidth = waterMarkHeight * waterMark.size.width / waterMark.size.height;
+    CGSize size = CGSizeMake(MAX(imgLbl.size.width, qrSize) + kVanityShareMargin * 2, kVanityShareMargin * 2 + qrSize + kVanityShareMargin + imgLbl.size.height + waterMarkHeight);
+
+    UIGraphicsBeginImageContextWithOptions(size, NO, 0);
+    CGContextRef context = UIGraphicsGetCurrentContext();
+
+    UIColor *bg = [UIColor parseColor:kVanityAddressQrBgColor];
+    [bg setFill];
+    CGContextFillRect(context, CGRectMake(0, 0, size.width, size.height + 1));
+
+    [imgLbl drawInRect:CGRectMake((size.width - imgLbl.size.width) / 2, kVanityShareMargin, imgLbl.size.width, imgLbl.size.height)];
+
+    CGContextSaveGState(context);
+    CGContextSetShadow(context, CGSizeMake(0, 6), 6);
+    [qr drawInRect:CGRectMake((size.width - qrSize) / 2, size.height - qrSize - kVanityShareMargin - waterMarkHeight, qrSize, qrSize)];
+    CGContextRestoreGState(context);
+
+    [waterMark drawInRect:CGRectMake((size.width - waterMarkWidth) / 2, size.height - kVanityShareMargin / 2 - waterMarkHeight, waterMarkWidth, waterMarkHeight)];
+
+    UIImage *img = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return img;
+}
+
+- (void)configureAddressLabel {
+    if (self.shouldShowVanity) {
+        NSMutableAttributedString *attr = [[NSMutableAttributedString alloc] initWithString:self.address attributes:@{NSFontAttributeName : [UIFont boldSystemFontOfSize:kLabelAddressFontSize]}];
+        NSShadow *shadow = [[NSShadow alloc] init];
+        shadow.shadowBlurRadius = 6;
+        shadow.shadowOffset = CGSizeZero;
+        shadow.shadowColor = [UIColor parseColor:kVanityAddressGlowColor];
+
+        [attr addAttributes:@{NSShadowAttributeName : shadow,
+                NSForegroundColorAttributeName : [UIColor parseColor:kVanityAddressTextColor],
+                NSFontAttributeName : [UIFont boldSystemFontOfSize:kLabelAddressFontSize * 1.3f]
+        }             range:NSMakeRange(0, vanityLength)];
+
+        NSAttributedString *space = [[NSAttributedString alloc] initWithString:@"" attributes:@{NSFontAttributeName : [UIFont systemFontOfSize:kLabelAddressFontSize * 0.6f]}];
+        [attr insertAttributedString:space atIndex:vanityLength];
+
+        self.lblAddress.text = nil;
+        self.lblAddress.attributedText = attr;
+        [self.lblAddress sizeToFit];
+        CGRect frame = self.lblAddress.frame;
+        frame.origin.x = (self.frame.size.width - frame.size.width) / 2;
+        self.lblAddress.frame = frame;
+    } else {
+        self.lblAddress.attributedText = nil;
+        self.lblAddress.text = self.address;
+    }
 }
 
 - (void)dialogWillDismiss {
@@ -203,6 +299,10 @@
             [self.delegate qrCodeThemeChanged:[[QRCodeTheme themes] objectAtIndex:index]];
         }
     }
+}
+
+- (BOOL)shouldShowVanity {
+    return vanityLength > 0;
 }
 
 - (BOOL)pointInside:(CGPoint)point withEvent:(UIEvent *)event {

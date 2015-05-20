@@ -20,32 +20,30 @@
 #import "DialogAddressFull.h"
 #import "StringUtil.h"
 #import "NSString+Size.h"
-#import "NSString+Base58.h"
 
-@interface CheckPrivateKeyCell()<DialogAddressFullDelegate>{
+@interface CheckPrivateKeyCell () <DialogAddressFullDelegate> {
     NSString *_address;
 }
-@property (weak, nonatomic) IBOutlet UILabel *lbl;
-@property (weak, nonatomic) IBOutlet UIButton *btnFullAddress;
-@property (weak, nonatomic) IBOutlet UIImageView *ivSafe;
-@property (weak, nonatomic) IBOutlet UIImageView *ivDanger;
-@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *vChecking;
+@property(weak, nonatomic) IBOutlet UILabel *lbl;
+@property(weak, nonatomic) IBOutlet UIButton *btnFullAddress;
+@property(weak, nonatomic) IBOutlet UIImageView *ivSafe;
+@property(weak, nonatomic) IBOutlet UIImageView *ivDanger;
+@property(weak, nonatomic) IBOutlet UIActivityIndicatorView *vChecking;
 @end
 
 @implementation CheckPrivateKeyCell
 
-- (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
-{
+- (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
     }
     return self;
 }
 
--(void)showAddress:(NSString*)address checking:(BOOL)checking checked:(BOOL)checked safe:(BOOL)safe{
+- (void)showAddress:(NSString *)address checking:(BOOL)checking checked:(BOOL)checked safe:(BOOL)safe {
     _address = address;
-    if([StringUtil isValidBitcoinBIP21Address:address] || address.isValidBitcoinAddress){
-        self.lbl.text = [NSString stringWithFormat:NSLocalizedString(@"Private key of %@", nil),[StringUtil shortenAddress:address]];
+    if ([StringUtil isValidBitcoinBIP21Address:address] || address.isValidBitcoinAddress) {
+        self.lbl.text = [NSString stringWithFormat:NSLocalizedString(@"Private key of %@", nil), [StringUtil shortenAddress:address]];
         self.btnFullAddress.hidden = NO;
     } else {
         self.lbl.text = address;
@@ -58,18 +56,18 @@
     frame = self.btnFullAddress.frame;
     frame.origin.x = CGRectGetMaxX(self.lbl.frame) + 5;
     self.btnFullAddress.frame = frame;
-    if(checking){
+    if (checking) {
         self.vChecking.hidden = NO;
         self.ivSafe.hidden = YES;
         self.ivDanger.hidden = YES;
         [self.vChecking startAnimating];
-    }else{
+    } else {
         self.vChecking.hidden = YES;
         [self.vChecking stopAnimating];
-        if(checked){
+        if (checked) {
             self.ivSafe.hidden = !safe;
             self.ivDanger.hidden = safe;
-        }else{
+        } else {
             self.ivSafe.hidden = YES;
             self.ivDanger.hidden = YES;
         }
@@ -77,30 +75,30 @@
 }
 
 - (IBAction)fullAddressPressed:(id)sender {
-    [[[DialogAddressFull alloc]initWithDelegate:self]showFromView:sender];
+    [[[DialogAddressFull alloc] initWithDelegate:self] showFromView:sender];
 }
 
--(NSUInteger)dialogAddressFullRowCount{
+- (NSUInteger)dialogAddressFullRowCount {
     return 1;
 }
 
--(NSString*)dialogAddressFullAddressForRow:(NSUInteger)row{
+- (NSString *)dialogAddressFullAddressForRow:(NSUInteger)row {
     return _address;
 }
 
--(int64_t)dialogAddressFullAmountForRow:(NSUInteger)row{
+- (int64_t)dialogAddressFullAmountForRow:(NSUInteger)row {
     return 0;
 }
 
--(BOOL)dialogAddressFullDoubleColumn{
+- (BOOL)dialogAddressFullDoubleColumn {
     return NO;
 }
 
--(void)showMsg:(NSString*)msg{
-    
+- (void)showMsg:(NSString *)msg {
+
 }
 
--(UIEdgeInsets)layoutMargins{
+- (UIEdgeInsets)layoutMargins {
     return UIEdgeInsetsZero;
 }
 

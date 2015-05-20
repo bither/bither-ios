@@ -20,11 +20,11 @@
 
 @implementation UIImage (ImageWithColor)
 
-+(UIImage*)imageWithColor:(UIColor*)color{
++ (UIImage *)imageWithColor:(UIColor *)color {
     return [UIImage imageWithColor:color size:CGSizeMake(1, 1)];
 }
 
-+(UIImage*)imageWithColor:(UIColor*)color size:(CGSize) size{
++ (UIImage *)imageWithColor:(UIColor *)color size:(CGSize)size {
     CGRect rect = CGRectMake(0, 0, size.width, size.height);
     UIGraphicsBeginImageContextWithOptions(rect.size, NO, 0);
     [color setFill];

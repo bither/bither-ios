@@ -42,9 +42,39 @@
     
     NSString* point = strSatoshis.length > 0 ? @"." : @"";
     
-    return [NSString stringWithFormat:@"%@%llu%@%@%@", sign, coins, point, strSatoshis, [WatchUnitUtil unitName:unit]];
+    return [NSString stringWithFormat:@"%@%llu%@%@", sign, coins, point, strSatoshis];
 }
 
++ (NSString *)imageNameOfSymbol{
+    switch ([[GroupUserDefaultUtil instance] defaultBitcoinUnit]) {
+        case UnitbitsG:
+            return @"symbol_bits_slim";
+        case UnitBTCG:
+        default:
+            return @"symbol_btc_slim";
+    }
+}
+
+
++ (NSString *)imageNameOfGreenSymbol{
+    switch ([[GroupUserDefaultUtil instance] defaultBitcoinUnit]) {
+        case UnitbitsG:
+            return @"symbol_bits_green_slim";
+        case UnitBTCG:
+        default:
+            return @"symbol_btc_green_slim";
+    }
+}
+
++ (NSString *)imageNameOfRedSymbol{
+    switch ([[GroupUserDefaultUtil instance] defaultBitcoinUnit]) {
+        case UnitbitsG:
+            return @"symbol_bits_red_slim";
+        case UnitBTCG:
+        default:
+            return @"symbol_btc_red_slim";
+    }
+}
 
 +(NSString*)unitName:(GroupBitcoinUnit)unit{
     switch (unit) {

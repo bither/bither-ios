@@ -22,13 +22,14 @@
 #import "TabButtonPressedDelegate.h"
 
 @interface TabButton : UIView
-@property (nonatomic) BOOL selected;
-@property (strong, nonatomic) UIImage* imageUnselected;
-@property (strong, nonatomic) UIImage* imageSelected;
-@property (strong, nonatomic) UIButton* button;
-@property (nonatomic) NSInteger badget;
+@property(nonatomic) BOOL selected;
+@property(strong, nonatomic) UIImage *imageUnselected;
+@property(strong, nonatomic) UIImage *imageSelected;
+@property(strong, nonatomic) UIButton *button;
+@property(nonatomic) NSInteger badget;
 @property int index;
-@property (weak, nonatomic) id<TabButtonPressedDelegate> delegate;
-@property (strong, nonatomic) UIImageView* iv;
--(void)buttonPressed:(id)sender;
+@property(weak, nonatomic) id <TabButtonPressedDelegate> delegate;
+@property(strong, nonatomic) UIImageView *iv;
+
+- (void)buttonPressed:(id)sender;
 @end

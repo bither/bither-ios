@@ -20,9 +20,11 @@
 #include "Setting.h"
 #import "ScanQrCodeViewController.h"
 
-@interface SignTransactionScanSetting : Setting<ScanQrCodeDelegate>
--(instancetype)init;
-@property (weak) UIViewController* controller;
-+(Setting*)getSignTransactionSetting;
+@interface SignTransactionScanSetting : Setting <ScanQrCodeDelegate>
+- (instancetype)init;
+
+@property(weak) UIViewController *controller;
+
++ (Setting *)getSignTransactionSetting;
 @end
 

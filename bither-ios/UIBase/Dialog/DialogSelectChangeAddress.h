@@ -20,6 +20,7 @@
 #import "BTAddressManager.h"
 
 @interface DialogSelectChangeAddress : DialogCentered
--(instancetype)initWithFromAddress:(BTAddress*)fromAddress;
-@property(readonly) BTAddress* changeAddress;
+- (instancetype)initWithFromAddress:(BTAddress *)fromAddress;
+
+@property(readonly) BTAddress *changeAddress;
 @end

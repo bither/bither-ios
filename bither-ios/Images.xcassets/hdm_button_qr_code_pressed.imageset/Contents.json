@@ -1,22 +1,22 @@
 {
-  "images" : [
+  "images": [
     {
-      "idiom" : "universal",
-      "scale" : "1x",
-      "filename" : "hdm_button_qr_code_pressed.png"
+      "idiom": "universal",
+      "scale": "1x",
+      "filename": "hdm_button_qr_code_pressed.png"
     },
     {
-      "idiom" : "universal",
-      "scale" : "2x",
-      "filename" : "hdm_button_qr_code_pressed@2x.png"
+      "idiom": "universal",
+      "scale": "2x",
+      "filename": "hdm_button_qr_code_pressed@2x.png"
     },
     {
-      "idiom" : "universal",
-      "scale" : "3x"
+      "idiom": "universal",
+      "scale": "3x"
     }
   ],
-  "info" : {
-    "version" : 1,
-    "author" : "xcode"
+  "info": {
+    "version": 1,
+    "author": "xcode"
   }
 }

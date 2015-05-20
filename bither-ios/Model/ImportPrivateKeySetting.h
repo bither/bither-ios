@@ -25,12 +25,13 @@
 #import "DialogImportPrivateKey.h"
 #import "Setting.h"
 
-@interface ImportPrivateKeySetting : Setting<UIActionSheetDelegate,ScanQrCodeDelegate,DialogPasswordDelegate,DialogImportKeyDelegate>{
-    NSString * _result;
+@interface ImportPrivateKeySetting : Setting <UIActionSheetDelegate, ScanQrCodeDelegate, DialogPasswordDelegate, DialogImportKeyDelegate> {
+    NSString *_result;
 }
 
-@property(nonatomic,strong) UIViewController * controller;
-+(Setting *)getImportPrivateKeySetting;
+@property(nonatomic, strong) UIViewController *controller;
+
++ (Setting *)getImportPrivateKeySetting;
 
 
 @end

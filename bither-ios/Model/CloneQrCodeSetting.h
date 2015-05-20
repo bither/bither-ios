@@ -21,7 +21,8 @@
 #import "Setting.h"
 #import "DialogPassword.h"
 
-@interface CloneQrCodeSetting : Setting<DialogPasswordDelegate>
--(instancetype)init;
-@property (weak) UIViewController* controller;
+@interface CloneQrCodeSetting : Setting <DialogPasswordDelegate>
+- (instancetype)init;
+
+@property(weak) UIViewController *controller;
 @end

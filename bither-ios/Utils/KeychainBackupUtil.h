@@ -27,13 +27,20 @@ typedef enum {
 + (instancetype)instance;
 
 - (void)update;
+
 - (NSArray *)checkWithKeychain;
+
 - (BOOL)canSync;
+
 - (BOOL)syncKeysWithoutPassword;
+
 - (BOOL)syncKeysWithKeychainPassword:(NSString *)keychainPassword andLocalPassword:(NSString *)localPassword;
 
 - (BOOL)existKeySame;
+
 - (BOOL)isFirstUseKeychain;
+
 - (BOOL)uploadKeychain;
+
 - (BOOL)cleanKeychain;
 @end

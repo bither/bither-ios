@@ -23,6 +23,7 @@
 #import <WatchKit/WatchKit.h>
 #import "GroupFileUtil.h"
 #import "GroupUserDefaultUtil.h"
+#import "GroupUtil.h"
 
 @interface Ticker : NSObject
 @property (nonatomic,readwrite) double amount;
@@ -36,7 +37,7 @@
 @property (nonatomic,readwrite) double buy;
 @property (nonatomic,readwrite) double total;
 @property (nonatomic,strong) NSDate *date;
-@property (nonatomic,readwrite) GroupMarketType marketType;
+@property (nonatomic,readwrite) MarketType marketType;
 
 -(double)getDefaultExchangeHigh;
 -(double)getDefaultExchangeLow;
@@ -44,7 +45,7 @@
 -(double)getDefaultExchangeSell;
 -(double)getDefaultExchangeBuy;
 
-+(Ticker *)formatTicker:(NSDictionary *)dict market:(GroupMarketType) marketType;
++(Ticker *)formatTicker:(NSDictionary *)dict market:(MarketType) marketType;
 +(NSArray *)formatList:(NSDictionary * )dict;
 
 @end
@@ -52,7 +53,7 @@
 @interface WatchMarket : NSObject
 @property (nonatomic, readonly) Ticker * ticker;
 @property (readonly) UIColor* color;
-@property (nonatomic,readwrite) GroupMarketType marketType;
+@property (nonatomic,readwrite) MarketType marketType;
 
 -(NSString *)getName;
 
@@ -60,7 +61,8 @@
 +(NSArray *)getMarkets;
 +(WatchMarket *)getDefaultMarket;
 
+
 + (NSDictionary *)parseCurrenciesRate:(NSDictionary *)dict;
-+ (double)getRateForMarket:(GroupMarketType)marketType;
++ (double)getRateForMarket:(MarketType)marketType;
 + (NSString *)getCurrencySymbol:(GroupCurrency)currency;
 @end

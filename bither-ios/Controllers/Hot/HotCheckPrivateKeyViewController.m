@@ -22,7 +22,7 @@
 
 @interface HotCheckPrivateKeyViewController ()
 
-@property (weak, nonatomic) IBOutlet UIView *topBar;
+@property(weak, nonatomic) IBOutlet UIView *topBar;
 
 @end
 
@@ -32,23 +32,21 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
     }
     return self;
 }
 
-- (void)viewDidLoad
-{
+- (void)viewDidLoad {
     [super viewDidLoad];
 }
 
--(void)viewWillAppear:(BOOL)animated{
+- (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    CheckViewController *checkViewController=(CheckViewController *)[self.storyboard instantiateViewControllerWithIdentifier:@"tab_check"];
-    [self addChildViewController: checkViewController];
+    CheckViewController *checkViewController = (CheckViewController *) [self.storyboard instantiateViewControllerWithIdentifier:@"tab_check"];
+    [self addChildViewController:checkViewController];
     [self.view insertSubview:checkViewController.view atIndex:0];
     checkViewController.view.frame = CGRectMake(0, TabBarHeight, self.view.frame.size.width, self.view.frame.size.height - TabBarHeight);
 }

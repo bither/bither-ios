@@ -17,32 +17,33 @@
 //  limitations under the License.
 
 #import "DialogRCheckInfo.h"
+
 #define kButtonFontSize (15)
 #define kButtonHeight (36)
 #define kInnerMargin (10)
 #define kOuterPadding (26)
 
-@interface DialogRCheckInfo(){
+@interface DialogRCheckInfo () {
     CGFloat width;
 }
 @end
 
 @implementation DialogRCheckInfo
--(instancetype)init{
+- (instancetype)init {
     self = [super initWithFrame:CGRectZero];
-    if(self){
+    if (self) {
         [self firstConfigure];
     }
     return self;
 }
 
--(void)firstConfigure{
+- (void)firstConfigure {
     self.touchOutSideToDismiss = YES;
     width = [UIScreen mainScreen].bounds.size.width - kOuterPadding * 2 - self.bgInsets.left - self.bgInsets.right;
-    UIImageView* iv = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"rcheck_info_logo"]];
-    iv.frame = CGRectMake((width - iv.frame.size.width)/2, 0, iv.frame.size.width, iv.frame.size.height);
-    
-    UITextView* tv = [[UITextView alloc]initWithFrame:CGRectZero];
+    UIImageView *iv = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"rcheck_info_logo"]];
+    iv.frame = CGRectMake((width - iv.frame.size.width) / 2, 0, iv.frame.size.width, iv.frame.size.height);
+
+    UITextView *tv = [[UITextView alloc] initWithFrame:CGRectZero];
     tv.backgroundColor = [UIColor clearColor];
     tv.textColor = [UIColor whiteColor];
     tv.font = [UIFont systemFontOfSize:kButtonFontSize];
@@ -50,22 +51,22 @@
     tv.text = NSLocalizedString(@"rcheck_info", nil);
     CGSize tvSize = [tv sizeThatFits:CGSizeMake(width, CGFLOAT_MAX)];
     tv.frame = CGRectMake(0, CGRectGetMaxY(iv.frame) + kInnerMargin / 2, width, tvSize.height);
-    
-    UIButton *btnConfirm = [[UIButton alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(tv.frame) + kInnerMargin * 2, width, kButtonHeight)];
+
+    UIButton *btnConfirm = [[UIButton alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(tv.frame) + kInnerMargin * 2, width, kButtonHeight)];
     [btnConfirm setBackgroundImage:[UIImage imageNamed:@"dialog_btn_bg_normal"] forState:UIControlStateNormal];
     btnConfirm.titleLabel.font = [UIFont systemFontOfSize:kButtonFontSize];
     [btnConfirm setTitle:NSLocalizedString(@"OK", nil) forState:UIControlStateNormal];
     [btnConfirm setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     btnConfirm.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleTopMargin;
     [btnConfirm addTarget:self action:@selector(confirmPressed:) forControlEvents:UIControlEventTouchUpInside];
-    
+
     self.frame = CGRectMake(0, 0, width, CGRectGetMaxY(btnConfirm.frame));
     [self addSubview:iv];
     [self addSubview:tv];
     [self addSubview:btnConfirm];
 }
 
--(void)confirmPressed:(id)sender{
+- (void)confirmPressed:(id)sender {
     [self dismiss];
 }
 @end

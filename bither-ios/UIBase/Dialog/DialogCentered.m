@@ -25,21 +25,22 @@
 #define kDimAmount 0.5
 #define kAnimScale 0.9
 
-@interface DialogCentered(){
+@interface DialogCentered () {
     CGRect windowFrame;
     BOOL _touchOutsideNotToDismiss;
     CGFloat _dimAmount;
 }
-@property (nonatomic, weak) UIViewController* topVC;
-@property (nonatomic, strong) UIViewController* vc;
-@property (nonatomic, strong) UIImageView* ivBg;
-@property (nonatomic, strong) UIButton* btnModal;
+@property(nonatomic, weak) UIViewController *topVC;
+@property(nonatomic, strong) UIViewController *vc;
+@property(nonatomic, strong) UIImageView *ivBg;
+@property(nonatomic, strong) UIButton *btnModal;
 @end
+
 @implementation DialogCentered
 
--(void)showInWindow:(UIWindow*)window completion:(void(^)())completion{
-    if(self.shown){
-        if(completion){
+- (void)showInWindow:(UIWindow *)window completion:(void (^)())completion {
+    if (self.shown) {
+        if (completion) {
             completion();
         }
         return;
@@ -56,56 +57,56 @@
     self.alpha = 0;
     [self dialogWillShow];
     self.transform = CGAffineTransformMakeScale(kAnimScale, kAnimScale);
-    
-    if(self.vc == nil){
-        self.vc = [[UIViewController alloc]init];
+
+    if (self.vc == nil) {
+        self.vc = [[UIViewController alloc] init];
     }
     self.vc.view.backgroundColor = [UIColor clearColor];
-    if(self.btnModal.superview ==nil){
+    if (self.btnModal.superview == nil) {
         [self.vc.view addSubview:self.btnModal];
     }
-    if(self.superview == nil){
+    if (self.superview == nil) {
         [self.vc.view addSubview:self];
     }
     [self.topVC addChildViewController:self.vc];
     [self.topVC.view addSubview:self.vc.view];
-    [UIView animateWithDuration:kShowAnimDuration delay:0 options:UIViewAnimationOptionCurveEaseOut|UIViewAnimationOptionBeginFromCurrentState animations:^(){
+    [UIView animateWithDuration:kShowAnimDuration delay:0 options:UIViewAnimationOptionCurveEaseOut | UIViewAnimationOptionBeginFromCurrentState animations:^() {
         self.btnModal.alpha = self.dimAmount;
         self.alpha = 1;
         self.transform = CGAffineTransformIdentity;
-    } completion:^(BOOL finished) {
-        if(completion){
+    }                completion:^(BOOL finished) {
+        if (completion) {
             completion();
         }
         [self dialogDidShow];
     }];
 }
 
--(void)resize{
+- (void)resize {
     [self adjustSize];
     [self adjustOriPoint];
     [self initBg];
 }
 
--(void)showInWindow:(UIWindow *)window{
+- (void)showInWindow:(UIWindow *)window {
     [self showInWindow:window completion:nil];
 }
 
--(void)dismissWithCompletion:(void(^)())completion{
-    if(!self.shown){
-        if(completion){
+- (void)dismissWithCompletion:(void (^)())completion {
+    if (!self.shown) {
+        if (completion) {
             completion();
         }
         return;
     }
     [self dialogWillDismiss];
     [self.btnModal removeTarget:self action:@selector(modalTouch:) forControlEvents:UIControlEventTouchUpInside];
-    [UIView animateWithDuration:kDismissAnimDuration delay:0 options:UIViewAnimationOptionCurveEaseIn|UIViewAnimationOptionBeginFromCurrentState  animations:^{
+    [UIView animateWithDuration:kDismissAnimDuration delay:0 options:UIViewAnimationOptionCurveEaseIn | UIViewAnimationOptionBeginFromCurrentState animations:^{
         self.btnModal.alpha = 0;
         self.alpha = 0;
         self.transform = CGAffineTransformMakeScale(kAnimScale, kAnimScale);
-    } completion:^(BOOL finished) {
-        if(completion){
+    }                completion:^(BOOL finished) {
+        if (completion) {
             completion();
         }
         // must remove these views in this sequence
@@ -120,19 +121,19 @@
     }];
 }
 
--(void)dismiss{
+- (void)dismiss {
     [self dismissWithCompletion:nil];
 }
 
--(void)modalTouch:(id)sender{
-    if(self.touchOutSideToDismiss){
+- (void)modalTouch:(id)sender {
+    if (self.touchOutSideToDismiss) {
         [self dismiss];
     }
 }
 
--(void)initModal{
-    if(!self.btnModal){
-        self.btnModal = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, windowFrame.size.width, windowFrame.size.height)];
+- (void)initModal {
+    if (!self.btnModal) {
+        self.btnModal = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, windowFrame.size.width, windowFrame.size.height)];
         self.btnModal.backgroundColor = [UIColor blackColor];
         self.btnModal.alpha = self.dimAmount;
     }
@@ -140,79 +141,79 @@
     [self.btnModal addTarget:self action:@selector(modalTouch:) forControlEvents:UIControlEventTouchUpInside];
 }
 
--(void)initBg{
-    if(!self.backgroundImage){
+- (void)initBg {
+    if (!self.backgroundImage) {
         self.backgroundImage = [UIImage imageNamed:@"center_dialog_background"];
     }
     self.ivBg.image = self.backgroundImage;
     self.ivBg.frame = CGRectMake(-self.bgInsets.left, -self.bgInsets.top, self.frame.size.width + self.bgInsets.left + self.bgInsets.right, self.frame.size.height + self.bgInsets.top + self.bgInsets.bottom);
 }
 
--(void)adjustOriPoint{
-    float x = (windowFrame.size.width - self.frame.size.width)/2;
-    float y = (windowFrame.size.height - self.frame.size.height)/2 + [UIApplication sharedApplication].statusBarFrame.size.height;
+- (void)adjustOriPoint {
+    float x = (windowFrame.size.width - self.frame.size.width) / 2;
+    float y = (windowFrame.size.height - self.frame.size.height) / 2 + [UIApplication sharedApplication].statusBarFrame.size.height;
     CGRect frame = self.frame;
     frame.origin = CGPointMake(x, y);
     self.frame = frame;
 }
 
--(UIImageView* )ivBg{
-    if(!_ivBg){
-        _ivBg = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height)];
+- (UIImageView *)ivBg {
+    if (!_ivBg) {
+        _ivBg = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height)];
         [self insertSubview:_ivBg atIndex:0];
     }
     return _ivBg;
 }
 
--(UIEdgeInsets)bgInsets{
-    if(UIEdgeInsetsEqualToEdgeInsets(_bgInsets, UIEdgeInsetsZero)){
+- (UIEdgeInsets)bgInsets {
+    if (UIEdgeInsetsEqualToEdgeInsets(_bgInsets, UIEdgeInsetsZero)) {
         _bgInsets = kDefaultInsets;
     }
     return _bgInsets;
 }
 
--(void)adjustSize{
-    if(self.frame.size.width > windowFrame.size.width - self.bgInsets.left - self.bgInsets.right || self.frame.size.height > windowFrame.size.height - self.bgInsets.top - self.bgInsets.bottom){
+- (void)adjustSize {
+    if (self.frame.size.width > windowFrame.size.width - self.bgInsets.left - self.bgInsets.right || self.frame.size.height > windowFrame.size.height - self.bgInsets.top - self.bgInsets.bottom) {
         CGRect frame = self.frame;
         frame.size.width = fminf(frame.size.width, windowFrame.size.width - self.bgInsets.left - self.bgInsets.right);
         frame.size.height = fminf(frame.size.height, windowFrame.size.height - self.bgInsets.top - self.bgInsets.bottom);
-        self.frame =frame;
+        self.frame = frame;
     }
 }
 
--(void)setDimAmount:(CGFloat)dimAmount{
+- (void)setDimAmount:(CGFloat)dimAmount {
     _dimAmount = dimAmount;
 }
 
--(CGFloat)dimAmount{
-    if(_dimAmount == 0){
+- (CGFloat)dimAmount {
+    if (_dimAmount == 0) {
         _dimAmount = kDimAmount;
     }
     return _dimAmount;
 }
 
--(void)setTouchOutSideToDismiss:(BOOL)touchOutSideToDismiss{
+- (void)setTouchOutSideToDismiss:(BOOL)touchOutSideToDismiss {
     _touchOutsideNotToDismiss = !touchOutSideToDismiss;
 }
 
--(BOOL)touchOutSideToDismiss{
+- (BOOL)touchOutSideToDismiss {
     return !_touchOutsideNotToDismiss;
 }
 
--(void)dialogWillShow{
-    
+- (void)dialogWillShow {
+
 }
 
--(void)dialogDidShow{
-    
+- (void)dialogDidShow {
+
 }
 
--(void)dialogWillDismiss{
-    
+- (void)dialogWillDismiss {
+
 }
 
--(void)dialogDidDismiss{
-    
+- (void)dialogDidDismiss {
+
 }
 
 @end

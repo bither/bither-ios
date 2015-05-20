@@ -18,13 +18,10 @@
 #import <UIKit/UIKit.h>
 
 
-
-
-
-@interface MarketViewController : UIViewController{
+@interface MarketViewController : UIViewController {
 //    TopViewDelegate *topViewDelegate;
 }
-@property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
+@property(weak, nonatomic) IBOutlet UICollectionView *collectionView;
 
-@property (nonatomic, strong) NSMutableArray *topArray;
+@property(nonatomic, strong) NSMutableArray *topArray;
 @end

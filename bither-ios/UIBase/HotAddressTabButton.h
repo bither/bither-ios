@@ -10,6 +10,6 @@
 
 @interface HotAddressTabButton : TabButton
 
--(void)setAmount:(int64_t)amount;
+- (void)setAmount:(int64_t)amount;
 
 @end

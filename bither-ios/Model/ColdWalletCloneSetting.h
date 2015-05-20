@@ -22,11 +22,12 @@
 #import "DialogPassword.h"
 
 
-@interface ColdWalletCloneSetting : Setting<ScanQrCodeDelegate,DialogPasswordDelegate>
+@interface ColdWalletCloneSetting : Setting <ScanQrCodeDelegate, DialogPasswordDelegate>
 
--(instancetype)init;
-@property (weak) UIViewController* controller;
-@property NSString* scanContent;
+- (instancetype)init;
 
-+(Setting*)getCloneSetting;
+@property(weak) UIViewController *controller;
+@property NSString *scanContent;
+
++ (Setting *)getCloneSetting;
 @end

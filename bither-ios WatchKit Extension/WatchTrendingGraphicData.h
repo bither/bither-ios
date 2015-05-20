@@ -32,10 +32,10 @@
 @property (readwrite,nonatomic) double low;
 @property (strong,nonatomic) NSArray * prices;
 @property (strong,nonatomic) NSMutableArray * rates;
-@property GroupMarketType marketType;
+@property MarketType marketType;
 @property (readonly) BOOL isEmpty;
 
-+(void)getTrendingGraphicData:(GroupMarketType) marketType callback:(void (^)(WatchTrendingGraphicData *data))callback andErrorCallback:(void (^)(NSError *error))errorCallback;
++(void)getTrendingGraphicData:(MarketType) marketType callback:(void (^)(WatchTrendingGraphicData *data))callback andErrorCallback:(void (^)(NSError *error))errorCallback;
 
 +(instancetype)getEmptyData;
 +(void)clearCache;

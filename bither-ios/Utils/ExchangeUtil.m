@@ -18,9 +18,6 @@
 
 #import "ExchangeUtil.h"
 #import "FileUtil.h"
-#import "BTUtils.h"
-#import "StringUtil.h"
-#import "UserDefaultsUtil.h"
 #import "GroupFileUtil.h"
 
 //static double rate = -1;
@@ -105,11 +102,13 @@ static NSDictionary *_currenciesRate = nil;
         case OKCOIN:
         case BTCCHINA:
         case CHBTC:
+        case BTCTRADE:
             return CNY;
         case BTCE:
         case BITSTAMP:
         case MARKET796:
         case BITFINEX:
+        case COINBASE:
             return USD;
         default:
             return CNY;

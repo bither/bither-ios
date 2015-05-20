@@ -21,13 +21,13 @@
 #import "DialogCentered.h"
 
 @protocol DialogSwitchQRCodeDelegate <NSObject>
--(void)switchQRCode;
+- (void)switchQRCode;
 
 @end
 
 @interface DialogSwitchQRCode : DialogCentered
-@property (weak) NSObject<DialogSwitchQRCodeDelegate>* delegate;
+@property(weak) NSObject <DialogSwitchQRCodeDelegate> *delegate;
 
--(instancetype)initWithDelegate:(NSObject<DialogSwitchQRCodeDelegate>*)delegate;
+- (instancetype)initWithDelegate:(NSObject <DialogSwitchQRCodeDelegate> *)delegate;
 
 @end

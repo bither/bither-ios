@@ -27,78 +27,78 @@
 #define kTopMargin (30)
 #define kBottomMargin (40)
 
-@interface PinCodeEnterView() <UIKeyInput>{
+@interface PinCodeEnterView () <UIKeyInput> {
     NSUInteger _pinCodeLength;
-    NSString* _msg;
-    UIView* topView;
-    UIView* bottomView;
-    NSString* _text;
+    NSString *_msg;
+    UIView *topView;
+    UIView *bottomView;
+    NSString *_text;
 }
 
 @end
 
 @implementation PinCodeEnterView
--(instancetype)initWithFrame:(CGRect)frame{
+- (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
-    if(self){
+    if (self) {
         [self firstConfigure];
     }
     return self;
 }
 
--(instancetype)initWithCoder:(NSCoder *)aDecoder{
+- (instancetype)initWithCoder:(NSCoder *)aDecoder {
     self = [super initWithCoder:aDecoder];
-    if(self){
+    if (self) {
         [self firstConfigure];
     }
     return self;
 }
 
--(void)firstConfigure{
+- (void)firstConfigure {
     _text = [NSString new];
     self.pinCodeLength = 4;
     self.enabled = YES;
-    topView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height / 2)];
+    topView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height / 2)];
     topView.backgroundColor = [UIColor clearColor];
     topView.autoresizingMask = UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
-    bottomView = [[UIView alloc]initWithFrame:CGRectMake(0, self.frame.size.height / 2, self.frame.size.width, self.frame.size.height / 2)];
+    bottomView = [[UIView alloc] initWithFrame:CGRectMake(0, self.frame.size.height / 2, self.frame.size.width, self.frame.size.height / 2)];
     bottomView.backgroundColor = [UIColor clearColor];
     bottomView.autoresizingMask = UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
     [self addSubview:topView];
     [self addSubview:bottomView];
-    
-    UIImageView* ivMark = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"pin_code_water_mark"]];
+
+    UIImageView *ivMark = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"pin_code_water_mark"]];
     ivMark.frame = CGRectMake((self.frame.size.width - ivMark.frame.size.width) / 2, topView.frame.size.height - kTopMargin - ivMark.frame.size.height, ivMark.frame.size.width, ivMark.frame.size.height);
     ivMark.autoresizingMask = UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin;
     [topView addSubview:ivMark];
-    
-    self.label = [[UILabel alloc]initWithFrame:CGRectMake(kPadding, topView.frame.size.height - kFontSize * 1.2f / 2.0f, topView.frame.size.width - kPadding * 2, kFontSize * 1.2f)];
+
+    self.label = [[UILabel alloc] initWithFrame:CGRectMake(kPadding, topView.frame.size.height - kFontSize * 1.2f / 2.0f, topView.frame.size.width - kPadding * 2, kFontSize * 1.2f)];
     self.label.backgroundColor = [UIColor clearColor];
-    self.label.autoresizingMask = UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin |UIViewAutoresizingFlexibleWidth;
+    self.label.autoresizingMask = UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleWidth;
     self.label.textAlignment = NSTextAlignmentCenter;
     self.label.font = [UIFont systemFontOfSize:kFontSize];
     self.label.textColor = [UIColor whiteColor];
     [self addSubview:self.label];
-    
-    self.dv = [[PinCodeDotsView alloc]initWithFrame:CGRectMake((bottomView.frame.size.width - kDotsViewWidth)/2, kBottomMargin, kDotsViewWidth, kDotsViewHeight)];
+
+    self.dv = [[PinCodeDotsView alloc] initWithFrame:CGRectMake((bottomView.frame.size.width - kDotsViewWidth) / 2, kBottomMargin, kDotsViewWidth, kDotsViewHeight)];
     self.dv.backgroundColor = [UIColor clearColor];
     self.dv.autoresizingMask = UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin;
     [bottomView addSubview:self.dv];
-    
-    self.dvNew = [[PinCodeDotsView alloc]initWithFrame:CGRectMake(bottomView.frame.size.width, kBottomMargin, kDotsViewWidth, kDotsViewHeight)];
+
+    self.dvNew = [[PinCodeDotsView alloc] initWithFrame:CGRectMake(bottomView.frame.size.width, kBottomMargin, kDotsViewWidth, kDotsViewHeight)];
     self.dvNew.backgroundColor = [UIColor clearColor];
     self.dvNew.autoresizingMask = UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin;
     [bottomView addSubview:self.dvNew];
 }
 
--(void)animateToNext{
+- (void)animateToNext {
     self.enabled = NO;
     __block CGRect dvFrame = self.dv.frame;
     __block CGRect dvNewFrame = self.dvNew.frame;
     [UIView animateWithDuration:0.4f animations:^{
         self.dv.frame = CGRectMake(-self.dv.frame.size.width, self.dv.frame.origin.y, self.dv.frame.size.width, self.dv.frame.size.height);
         self.dvNew.frame = dvFrame;
-    } completion:^(BOOL finished) {
+    }                completion:^(BOOL finished) {
         self.dv.frame = dvFrame;
         self.dvNew.frame = dvNewFrame;
         [self clearText];
@@ -106,7 +106,7 @@
     }];
 }
 
--(void)shakeToClear{
+- (void)shakeToClear {
     self.enabled = NO;
     [self clearText];
     [self vibrate];
@@ -115,64 +115,64 @@
     }];
 }
 
--(void)vibrate{
+- (void)vibrate {
     AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
 }
 
--(void)clearText{
+- (void)clearText {
     self.text = @"";
 }
 
--(UIKeyboardType)keyboardType{
+- (UIKeyboardType)keyboardType {
     return UIKeyboardTypeNumberPad;
 }
 
--(BOOL)isSecureTextEntry{
+- (BOOL)isSecureTextEntry {
     return YES;
 }
 
--(BOOL)canBecomeFirstResponder{
+- (BOOL)canBecomeFirstResponder {
     return YES;
 }
 
-- (BOOL)hasText{
+- (BOOL)hasText {
     return _text && _text.length > 0;
 }
 
-- (void)insertText:(NSString *)text{
-    if(_text.length < self.pinCodeLength && self.enabled){
+- (void)insertText:(NSString *)text {
+    if (_text.length < self.pinCodeLength && self.enabled) {
         _text = [_text stringByAppendingString:text];
         [self onTextChanged];
     }
 }
 
-- (void)deleteBackward{
-    if(self.hasText && self.enabled){
+- (void)deleteBackward {
+    if (self.hasText && self.enabled) {
         _text = [_text substringToIndex:_text.length - 1];
         [self onTextChanged];
     }
 }
 
-- (void)onTextChanged{
+- (void)onTextChanged {
     self.dv.filledCount = _text.length;
-    if(_text.length >= self.pinCodeLength){
-        if(self.delegate && [self.delegate respondsToSelector:@selector(onEntered:)]){
+    if (_text.length >= self.pinCodeLength) {
+        if (self.delegate && [self.delegate respondsToSelector:@selector(onEntered:)]) {
             [self.delegate performSelector:@selector(onEntered:) withObject:_text afterDelay:0.1];
         }
     }
 }
 
--(void)setPinCodeLength:(NSUInteger)pinCodeLength{
+- (void)setPinCodeLength:(NSUInteger)pinCodeLength {
     _pinCodeLength = pinCodeLength;
     self.dv.totalDotCount = pinCodeLength;
     self.dvNew.totalDotCount = pinCodeLength;
 }
 
--(NSUInteger)pinCodeLength{
+- (NSUInteger)pinCodeLength {
     return _pinCodeLength;
 }
 
--(void)setMsg:(NSString *)msg{
+- (void)setMsg:(NSString *)msg {
     _msg = msg;
     self.label.text = msg;
     CGSize size = [self.label sizeThatFits:CGSizeMake(self.frame.size.width - kPadding * 2, kBottomMargin + kTopMargin)];
@@ -180,16 +180,16 @@
     self.label.frame = CGRectMake(kPadding, topView.frame.size.height - size.height / 2.0f, topView.frame.size.width - kPadding * 2, size.height);
 }
 
--(NSString*)msg{
+- (NSString *)msg {
     return _msg;
 }
 
--(void)setText:(NSString *)text{
+- (void)setText:(NSString *)text {
     _text = text;
     [self onTextChanged];
 }
 
--(NSString*)text{
+- (NSString *)text {
     return _text;
 }
 

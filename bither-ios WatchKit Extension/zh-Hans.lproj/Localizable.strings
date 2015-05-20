@@ -22,6 +22,7 @@
 "HUOBI"="火币网";
 "CHBTC"="中国比特币";
 "BTCChina"="比特币中国";
+"BtcTrade" = "比特币交易网";
 
 "buy" = "买一";
 "sell" = "卖一";

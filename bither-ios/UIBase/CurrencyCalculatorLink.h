@@ -19,13 +19,17 @@
 
 #import <Foundation/Foundation.h>
 
-@interface CurrencyCalculatorLink : NSObject<UITextFieldDelegate>
-@property (weak, nonatomic) IBOutlet UITextField *tfBtc;
-@property (weak, nonatomic) IBOutlet UITextField *tfCurrency;
-@property (weak, nonatomic) NSObject<UITextFieldDelegate>* delegate;
+@interface CurrencyCalculatorLink : NSObject <UITextFieldDelegate>
+@property(weak, nonatomic) IBOutlet UITextField *tfBtc;
+@property(weak, nonatomic) IBOutlet UITextField *tfCurrency;
+@property(weak, nonatomic) NSObject <UITextFieldDelegate> *delegate;
 @property u_int64_t amount;
--(BOOL)isLinked:(UITextField*)textField;
--(void)becomeFirstResponder;
--(BOOL)isFirstResponder;
--(void)resignFirstResponder;
+
+- (BOOL)isLinked:(UITextField *)textField;
+
+- (void)becomeFirstResponder;
+
+- (BOOL)isFirstResponder;
+
+- (void)resignFirstResponder;
 @end

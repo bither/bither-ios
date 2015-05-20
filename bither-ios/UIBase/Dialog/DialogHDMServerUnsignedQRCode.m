@@ -13,32 +13,34 @@
 #define kButtonHeight (40)
 #define kDialogAlertLabelAndBtnDistance 14
 
-@interface DialogHDMServerUnsignedQRCode(){
+@interface DialogHDMServerUnsignedQRCode () {
     void(^block)();
+
     void(^cancel)();
+
     UIButton *btn;
 }
 @end
 
 @implementation DialogHDMServerUnsignedQRCode
 
--(instancetype)initWithContent:(NSString *)content action:(void(^)())b andCancel:(void(^)())c{
+- (instancetype)initWithContent:(NSString *)content action:(void (^)())b andCancel:(void (^)())c {
     self = [super initWithContent:content andTitle:NSLocalizedString(@"hdm_keychain_add_unsigned_server_qr_code_title", nil)];
-    if(self){
+    if (self) {
         [self configureWithAction:b andCancel:c];
     }
     return self;
 }
 
--(instancetype)initWithContent:(NSString *)content andAction:(void(^)())b{
+- (instancetype)initWithContent:(NSString *)content andAction:(void (^)())b {
     self = [super initWithContent:content andTitle:NSLocalizedString(@"hdm_keychain_add_unsigned_server_qr_code_title", nil)];
-    if(self){
+    if (self) {
         [self configureWithAction:b andCancel:nil];
     }
     return self;
 }
 
--(void)configureWithAction:(void(^)())b andCancel:(void(^)())c{
+- (void)configureWithAction:(void (^)())b andCancel:(void (^)())c {
     block = b;
     cancel = c;
     btn = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -51,31 +53,31 @@
     btnWidth = ceilf(btnWidth) + 20;
     CGFloat screenWidth = [UIScreen mainScreen].bounds.size.width;
     CGFloat screenHeight = [UIScreen mainScreen].bounds.size.height;
-    btn.frame = CGRectMake((screenWidth - btnWidth)/2, screenHeight - (screenHeight - screenWidth - kButtonHeight * 2)/4 - kButtonHeight, btnWidth, kButtonHeight);
+    btn.frame = CGRectMake((screenWidth - btnWidth) / 2, screenHeight - (screenHeight - screenWidth - kButtonHeight * 2) / 4 - kButtonHeight, btnWidth, kButtonHeight);
     [btn addTarget:self action:@selector(scanPressed:) forControlEvents:UIControlEventTouchUpInside];
 }
 
--(void)scanPressed:(id)sender{
+- (void)scanPressed:(id)sender {
     [self dismissWithCompletion:block];
 }
 
--(void)showInWindow:(UIWindow *)window completion:(void (^)())completion {
+- (void)showInWindow:(UIWindow *)window completion:(void (^)())completion {
     [super showInWindow:window completion:completion];
-    if(!btn.superview){
+    if (!btn.superview) {
         [self.superview addSubview:btn];
     }
 }
 
--(void)dismiss{
-    [[[DialogAlert alloc]initWithMessage:NSLocalizedString(@"hdm_keychain_add_unsigned_server_qr_code_dismiss_confirm", nil) confirm:^{
+- (void)dismiss {
+    [[[DialogAlert alloc] initWithMessage:NSLocalizedString(@"hdm_keychain_add_unsigned_server_qr_code_dismiss_confirm", nil) confirm:^{
         [self doDismiss];
-        if(cancel){
+        if (cancel) {
             cancel();
         }
-    } cancel:nil] showInWindow:self.window];
+    }                              cancel:nil] showInWindow:self.window];
 }
 
--(void)doDismiss{
+- (void)doDismiss {
     [super dismiss];
 }
 

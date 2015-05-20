@@ -19,7 +19,8 @@
 
 #import <Foundation/Foundation.h>
 
-@interface UEntropyAnimatedTransition : NSObject<UIViewControllerAnimatedTransitioning>
--(instancetype)initWithPresenting:(BOOL)presenting;
+@interface UEntropyAnimatedTransition : NSObject <UIViewControllerAnimatedTransitioning>
+- (instancetype)initWithPresenting:(BOOL)presenting;
+
 @property BOOL presenting;
 @end

@@ -22,15 +22,19 @@
 
 @interface MarketUtil : NSObject
 
-+(NSArray *)getMarkets;
-+(Market *)getMarket:(MarketType) marketType;
-+(Market *)getDefaultMarket;
-+(Ticker *)getTickerOfDefaultMarket;
-+(void)setTickerList:(NSArray *)array;
-+(void)handlerResult:(NSDictionary *)dict;
-+(double)getDefaultNewPrice;
++ (NSArray *)getMarkets;
 
++ (Market *)getMarket:(MarketType)marketType;
 
++ (Market *)getDefaultMarket;
+
++ (Ticker *)getTickerOfDefaultMarket;
+
++ (void)setTickerList:(NSArray *)array;
+
++ (void)handlerResult:(NSDictionary *)dict;
+
++ (double)getDefaultNewPrice;
 
 
 @end

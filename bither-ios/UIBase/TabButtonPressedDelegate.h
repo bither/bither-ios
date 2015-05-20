@@ -19,6 +19,6 @@
 
 @protocol TabButtonPressedDelegate <NSObject>
 
--(void)tabButtonPressed:(int)index;
+- (void)tabButtonPressed:(int)index;
 
 @end

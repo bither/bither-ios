@@ -20,47 +20,47 @@
 #import "StringUtil.h"
 #import "QRCodeTransportPage.h"
 
-@interface ScanQrCodeTransportViewController ()<ScanQrCodeDelegate>{
+@interface ScanQrCodeTransportViewController () <ScanQrCodeDelegate> {
     NSString *_pageName;
-    NSMutableArray* _pages;
+    NSMutableArray *_pages;
     NSInteger _totalPage;
-    NSString* _lastResult;
+    NSString *_lastResult;
 }
 @end
 
 @implementation ScanQrCodeTransportViewController
 
--(instancetype)init{
+- (instancetype)init {
     self = [super init];
-    if(self){
-        _pages = [[NSMutableArray alloc]init];
+    if (self) {
+        _pages = [[NSMutableArray alloc] init];
         _totalPage = 1;
     }
     return self;
 }
 
--(instancetype)initWithDelegate:(NSObject<ScanQrCodeDelegate> *)delegate title:(NSString *)title message:(NSString *)message{
+- (instancetype)initWithDelegate:(NSObject <ScanQrCodeDelegate> *)delegate title:(NSString *)title message:(NSString *)message {
     self = [super initWithDelegate:self title:title message:message];
-    if(self){
+    if (self) {
         self.delegate = delegate;
     }
     return self;
 }
 
--(instancetype)initWithDelegate:(NSObject<ScanQrCodeDelegate> *)delegate title:(NSString *)title pageName:(NSString *)pageName{
+- (instancetype)initWithDelegate:(NSObject <ScanQrCodeDelegate> *)delegate title:(NSString *)title pageName:(NSString *)pageName {
     self = [self initWithDelegate:delegate title:title message:nil];
-    if(self){
+    if (self) {
         self.pageName = pageName;
     }
     return self;
 }
 
--(void)viewDidLoad{
+- (void)viewDidLoad {
     [super viewDidLoad];
     self.btnGallery.hidden = YES;
 }
 
--(void)viewWillAppear:(BOOL)animated{
+- (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     _lastResult = nil;
     [_pages removeAllObjects];
@@ -68,41 +68,41 @@
     self.scanMessage = [self pageMessage];
 }
 
--(NSString*)pageMessage{
-    if(_pages.count == 0){
+- (NSString *)pageMessage {
+    if (_pages.count == 0) {
         return [NSString stringWithFormat:NSLocalizedString(@"Scan %@", nil), self.pageName];
-    }else{
+    } else {
         return [NSString stringWithFormat:NSLocalizedString(@"Scan %@\nPage %d, Total %d", nil), self.pageName, _pages.count + 1, _totalPage];
     }
 }
 
--(void)setPageName:(NSString *)pageName{
+- (void)setPageName:(NSString *)pageName {
     _pageName = pageName;
     [self setScanMessage:[self pageMessage]];
 }
 
--(NSString*)pageName{
+- (NSString *)pageName {
     return _pageName;
 }
 
--(void)handleScanCancelByReader:(ScanQrCodeViewController *)reader {
-    if(self.delegate && [self.delegate respondsToSelector:@selector(handleScanCancelByReader:)]){
+- (void)handleScanCancelByReader:(ScanQrCodeViewController *)reader {
+    if (self.delegate && [self.delegate respondsToSelector:@selector(handleScanCancelByReader:)]) {
         [self.delegate handleScanCancelByReader:self];
     }
 }
 
--(void)handleResult:(NSString *)result byReader:(ScanQrCodeViewController *)reader{
-    if(![StringUtil compareString:_lastResult compare:result]){
+- (void)handleResult:(NSString *)result byReader:(ScanQrCodeViewController *)reader {
+    if (![StringUtil compareString:_lastResult compare:result]) {
         _lastResult = result;
         QRCodeTransportPage *page = [QRCodeTransportPage formatQrCodeString:result];
-        if(page && page.currentPage == _pages.count){
+        if (page && page.currentPage == _pages.count) {
             _totalPage = page.sumPage;
             [_pages addObject:page];
             [reader playSuccessSound];
-            
-            if(!page.hasNextPage){
-                NSString* r = [QRCodeTransportPage formatQRCodeTran:_pages];
-                if(self.delegate && [self.delegate respondsToSelector:@selector(handleResult:byReader:)]){
+
+            if (!page.hasNextPage) {
+                NSString *r = [QRCodeTransportPage formatQRCodeTran:_pages];
+                if (self.delegate && [self.delegate respondsToSelector:@selector(handleResult:byReader:)]) {
                     [self.delegate handleResult:r byReader:self];
                 }
             }

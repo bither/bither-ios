@@ -19,11 +19,13 @@
 #import "DialogCentered.h"
 
 @protocol DialogSignMessageOutputDelegate <NSObject>
--(void)copyOutput;
--(void)qrOutput;
+- (void)copyOutput;
+
+- (void)qrOutput;
 @end
 
 @interface DialogSignMessageOutput : DialogCentered
--(instancetype)initWithDelegate:(NSObject<DialogSignMessageOutputDelegate>*)delegate;
-@property (weak) NSObject<DialogSignMessageOutputDelegate>* delegate;
+- (instancetype)initWithDelegate:(NSObject <DialogSignMessageOutputDelegate> *)delegate;
+
+@property(weak) NSObject <DialogSignMessageOutputDelegate> *delegate;
 @end

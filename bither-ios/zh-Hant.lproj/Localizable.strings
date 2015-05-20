@@ -287,6 +287,7 @@
 "HUOBI"="火幣網";
 "CHBTC"="中國比特幣";
 "BTCChina"="比特幣中國";
+"BtcTrade" = "比特幣交易網";
 
 "QR Code Style"="二維碼風格";
 "Yellow"="黃";
@@ -669,3 +670,20 @@
 
 // show hd account
 "address_group_hd" = "HD 賬戶";
+
+// bither team address
+"bither_team_address" = "開發者地址";
+"bither_team_address_copied" = "開發者地址已複製";
+
+// vanity address length
+"vanity_address_length" = "榮耀地址位數";
+"vanity_address_none" = "無";
+
+// payment address setting
+"payment_address_setting" = "收款地址";
+"payment_address_none" = "無";
+
+// first run dialog
+"first_run_dialog_title" = "為了保護您的比特幣:";
+"first_run_dialog_line_1" = "請不要卸載比太錢包";
+"first_run_dialog_line_2" = "請牢記您的密碼";

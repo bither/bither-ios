@@ -28,20 +28,19 @@
 #import "BTPrivateKeyUtil.h"
 #import "KeyUtil.h"
 #import <openssl/ecdsa.h>
-#import <openssl/obj_mac.h>
 
 #define PARAMETERS_N @"fffffffffffffffffffffffffffffffebaaedce6af48a03bbfd25e8cd0364141"
 #define PARAMETERS_MIN_N @"0"
 
-@interface RawPrivateKeyBinaryViewController ()<DialogPasswordDelegate>
-@property (weak, nonatomic) IBOutlet UIView *vInput;
-@property (weak, nonatomic) IBOutlet RawDataBinaryView *vData;
-@property (weak, nonatomic) IBOutlet UIView *vButtons;
+@interface RawPrivateKeyBinaryViewController () <DialogPasswordDelegate>
+@property(weak, nonatomic) IBOutlet UIView *vInput;
+@property(weak, nonatomic) IBOutlet RawDataBinaryView *vData;
+@property(weak, nonatomic) IBOutlet UIView *vButtons;
 
-@property (weak, nonatomic) IBOutlet UIView *vShow;
-@property (weak, nonatomic) IBOutlet UILabel *lblPrivateKey;
-@property (weak, nonatomic) IBOutlet UILabel *lblAddress;
-@property (weak, nonatomic) IBOutlet UIButton *btnAdd;
+@property(weak, nonatomic) IBOutlet UIView *vShow;
+@property(weak, nonatomic) IBOutlet UILabel *lblPrivateKey;
+@property(weak, nonatomic) IBOutlet UILabel *lblAddress;
+@property(weak, nonatomic) IBOutlet UIButton *btnAdd;
 
 @end
 
@@ -58,19 +57,19 @@
     self.btnAdd.frame = frame;
 }
 
--(void)handleData{
-    DialogProgress *dp = [[DialogProgress alloc]initWithMessage:NSLocalizedString(@"Please wait…", nil)];
-     __weak __block DialogProgress* dpB = dp;
+- (void)handleData {
+    DialogProgress *dp = [[DialogProgress alloc] initWithMessage:NSLocalizedString(@"Please wait…", nil)];
+    __weak __block DialogProgress *dpB = dp;
     [dp showInWindow:self.view.window completion:^{
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
-            NSMutableData* data = self.vData.data;
-            if(!data){
+            NSMutableData *data = self.vData.data;
+            if (!data) {
                 dispatch_async(dispatch_get_main_queue(), ^{
                     [dpB dismiss];
                 });
                 return;
             }
-            if(![self checkData:data]){
+            if (![self checkData:data]) {
                 dispatch_async(dispatch_get_main_queue(), ^{
                     [dpB dismissWithCompletion:^{
                         [self showBannerWithMessage:NSLocalizedString(@"raw_private_key_not_safe", nil) belowView:nil withCompletion:^{
@@ -81,7 +80,7 @@
                 return;
             }
             data = [self modDataByN:data];
-            BTKey* key = [[BTKey alloc]initWithSecret:data compressed:YES];
+            BTKey *key = [[BTKey alloc] initWithSecret:data compressed:YES];
             NSString *privateKey = key.privateKey;
             NSString *address = key.address;
             dispatch_async(dispatch_get_main_queue(), ^{
@@ -95,34 +94,34 @@
     }];
 }
 
--(void)addData:(BOOL)d{
-    if(self.vData.filledDataLength < self.vData.dataLength){
+- (void)addData:(BOOL)d {
+    if (self.vData.filledDataLength < self.vData.dataLength) {
         [self.vData addData:d];
-        if(self.vData.filledDataLength >= self.vData.dataLength){
+        if (self.vData.filledDataLength >= self.vData.dataLength) {
             [self performSelector:@selector(handleData) withObject:nil afterDelay:0.5];
         }
     }
 }
 
 - (IBAction)addPressed:(id)sender {
-    [[[DialogPassword alloc]initWithDelegate:self] showInWindow:self.view.window];
+    [[[DialogPassword alloc] initWithDelegate:self] showInWindow:self.view.window];
 }
 
--(void)onPasswordEntered:(NSString*)password{
-    DialogProgress* dp = [[DialogProgress alloc]initWithMessage:NSLocalizedString(@"Please wait…", nil)];
-    __weak __block DialogProgress* dpB = dp;
-    __weak __block UIViewController* vc = self;
+- (void)onPasswordEntered:(NSString *)password {
+    DialogProgress *dp = [[DialogProgress alloc] initWithMessage:NSLocalizedString(@"Please wait…", nil)];
+    __weak __block DialogProgress *dpB = dp;
+    __weak __block UIViewController *vc = self;
     [dp showInWindow:self.view.window completion:^{
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
-            NSMutableData* data = self.vData.data;
-            if(!data){
+            NSMutableData *data = self.vData.data;
+            if (!data) {
                 dispatch_async(dispatch_get_main_queue(), ^{
                     [dpB dismiss];
                 });
                 return;
             }
             data = [self modDataByN:data];
-            BTKey* key = [[BTKey alloc]initWithSecret:data compressed:YES];
+            BTKey *key = [[BTKey alloc] initWithSecret:data compressed:YES];
             NSString *privateKeyString = [BTPrivateKeyUtil getPrivateKeyString:key passphrase:password];
             BTAddress *address = [[BTAddress alloc] initWithKey:key encryptPrivKey:privateKeyString isXRandom:NO];
             [KeyUtil addAddressList:@[address]];
@@ -135,21 +134,21 @@
     }];
 }
 
--(NSMutableData*)modDataByN:(NSMutableData*)data{
-    if([data compare:[PARAMETERS_N hexToData]] > 0){
+- (NSMutableData *)modDataByN:(NSMutableData *)data {
+    if ([data compare:[PARAMETERS_N hexToData]] > 0) {
         BN_CTX *ctx = BN_CTX_new();
         BN_CTX_start(ctx);
         BIGNUM *n = BN_bin2bn([PARAMETERS_N hexToData].bytes, 32, NULL);
         BIGNUM *p = BN_bin2bn(data.bytes, 32, NULL);
-        if(BN_mod(p, p, n, ctx) == 1){
+        if (BN_mod(p, p, n, ctx) == 1) {
             NSLog(@"mod success");
-        }else{
+        } else {
             NSLog(@"mod failed");
         }
-        data = [[NSMutableData alloc]initWithLength:data.length];
+        data = [[NSMutableData alloc] initWithLength:data.length];
         int32_t num_bytes = BN_num_bytes(p);
         int32_t copied_bytes = BN_bn2bin(p, &data.mutableBytes[data.length - num_bytes]);
-        if(num_bytes != copied_bytes){
+        if (num_bytes != copied_bytes) {
             NSLog(@"length not match %d, %d", num_bytes, copied_bytes);
         }
         BN_free(n);
@@ -176,8 +175,8 @@
     [self.vData removeAllData];
 }
 
--(BOOL)checkData:(NSData*)data{
-    if([data compare:[PARAMETERS_N hexToData]] == 0 || [data compare:[PARAMETERS_MIN_N hexToData]] == 0){
+- (BOOL)checkData:(NSData *)data {
+    if ([data compare:[PARAMETERS_N hexToData]] == 0 || [data compare:[PARAMETERS_MIN_N hexToData]] == 0) {
         return NO;
     }
     return YES;

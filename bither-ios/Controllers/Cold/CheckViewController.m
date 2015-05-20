@@ -165,7 +165,7 @@
         dispatch_sync(dispatch_get_main_queue(), ^{
             [self.vHeader animateToScore:floorf((float) safeCount / (float) totalCount * 100.0f) withAnimationId:kAddScoreAnimPrefix - 1];
             [self.tableView reloadData];
-            [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:(([BTAddressManager instance].hasHDAccount && [BTAddressManager instance].hasHDMKeychain)? 1 : 0) inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:YES];
+            [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:(([BTAddressManager instance].hasHDAccount && [BTAddressManager instance].hasHDMKeychain) ? 1 : 0) inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:YES];
         });
         for (BTAddress *a in privateKeys) {
             BOOL result = [[[BTPasswordSeed alloc] initWithBTAddress:a] checkPassword:password];

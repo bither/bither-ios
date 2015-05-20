@@ -23,5 +23,5 @@
 #import <WatchKit/WatchKit.h>
 
 @interface TotalBalanceDrawer : NSObject
-+(void)showTotalBalanceOn:(WKInterfaceGroup*)group andLabel:(WKInterfaceLabel*)label;
++(void)showTotalBalanceOn:(WKInterfaceGroup*)group label:(WKInterfaceLabel*)label andImage:(WKInterfaceImage*)iv;
 @end

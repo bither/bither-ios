@@ -20,16 +20,22 @@
 
 @protocol SwipeRightToPopScrollable <NSObject, UIGestureRecognizerDelegate>
 - (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer;
-- (NSArray*)viewsToHandle;
+
+- (NSArray *)viewsToHandle;
 @end
 
 @interface UIViewController (SwipeRightToPop)
 @property BOOL shouldSwipeRightToPop;   // should be set before viewDidAppear
 @property BOOL inSwipeRightToPop;
 @property BOOL shown;
--(void)handleScrollViewForSwipeRightToPop:(UIScrollView*)sv;
--(void)handleScrollableForSwipeRightToPop:(id<SwipeRightToPopScrollable>)scrollable;
--(void)willAnimToPopForSwipeRight;
--(void)didAnimToResetForSwipeRightToPop;
--(void)reload;
+
+- (void)handleScrollViewForSwipeRightToPop:(UIScrollView *)sv;
+
+- (void)handleScrollableForSwipeRightToPop:(id <SwipeRightToPopScrollable>)scrollable;
+
+- (void)willAnimToPopForSwipeRight;
+
+- (void)didAnimToResetForSwipeRightToPop;
+
+- (void)reload;
 @end

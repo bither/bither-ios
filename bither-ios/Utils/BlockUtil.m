@@ -18,13 +18,9 @@
 
 #import "BlockUtil.h"
 #import "NSDictionary+Fromat.h"
-#import "NSString+Base58.h"
-#import "NSData+Hash.h"
-#import "NSData+Bitcoin.h"
 #import "BTBlockChain.h"
 #import "BitherSetting.h"
 #import "BitherApi.h"
-#import "UserDefaultsUtil.h"
 #import "BTPeerManager.h"
 
 
@@ -36,9 +32,9 @@
 #define NONCE  @"nonce"
 #define BLOCK_NO  @"block_no"
 
-@interface BlockUtil()
+@interface BlockUtil ()
 
-@property (nonatomic,strong) BTBlockChain * blockChain;
+@property(nonatomic, strong) BTBlockChain *blockChain;
 
 @end
 
@@ -47,80 +43,82 @@
 static BlockUtil *blockUtil;
 
 + (BlockUtil *)instance {
-    @synchronized(self) {
+    @synchronized (self) {
         if (blockUtil == nil) {
             blockUtil = [[self alloc] init];
-           
+
         }
     }
     return blockUtil;
 }
-- (instancetype)init
-{
+
+- (instancetype)init {
     self = [super init];
     if (self) {
-        self.blockChain=[BTBlockChain instance];
+        self.blockChain = [BTBlockChain instance];
     }
     return self;
 }
 
-+(BTBlock*)formatBlcok:(NSDictionary *)dict{
-    uint32_t ver=[dict getIntFromDict:VER andDefault:1];
-    NSData * pevBlock=[[[dict getStringFromDict:PREV_BLOCK] hexToData] reverse];
-    NSLog(@"pevBlock : %s",[[NSString hexWithData:pevBlock ] UTF8String]);
-    NSData * mrklRoot=[[[dict getStringFromDict:MRKL_ROOT] hexToData] reverse];
-    NSLog(@"mrklRoot : %s",[[NSString hexWithData:mrklRoot ] UTF8String]);
-    uint32_t time=[dict getIntFromDict:TIME];
-    uint32_t bits=[dict getIntFromDict:BITS];
-    uint32_t nonce=[dict getIntFromDict:NONCE];
-    int blockNo=[dict getIntFromDict:BLOCK_NO];
-    BTBlock * block=[[BTBlock alloc] initWithVersion:ver prevBlock:pevBlock merkleRoot:mrklRoot timestamp:time target:bits nonce:nonce height:blockNo];
++ (BTBlock *)formatBlcok:(NSDictionary *)dict {
+    uint32_t ver = [dict getIntFromDict:VER andDefault:1];
+    NSData *pevBlock = [[[dict getStringFromDict:PREV_BLOCK] hexToData] reverse];
+    NSLog(@"pevBlock : %s", [[NSString hexWithData:pevBlock] UTF8String]);
+    NSData *mrklRoot = [[[dict getStringFromDict:MRKL_ROOT] hexToData] reverse];
+    NSLog(@"mrklRoot : %s", [[NSString hexWithData:mrklRoot] UTF8String]);
+    uint32_t time = [dict getIntFromDict:TIME];
+    uint32_t bits = [dict getIntFromDict:BITS];
+    uint32_t nonce = [dict getIntFromDict:NONCE];
+    int blockNo = [dict getIntFromDict:BLOCK_NO];
+    BTBlock *block = [[BTBlock alloc] initWithVersion:ver prevBlock:pevBlock merkleRoot:mrklRoot timestamp:time target:bits nonce:nonce height:blockNo];
     return block;
-    
+
 }
 
--(void)syncSpvBlock{
+- (void)syncSpvBlock {
     [self dowloadSpvBlock:^{
         if ([[BTPeerManager instance] doneSyncFromSPV]) {
             if ([self.delegate respondsToSelector:@selector(success)]) {
                 [self.delegate success];
             }
-        }else{
+        } else {
             if ([self.delegate respondsToSelector:@selector(success)]) {
                 [self.delegate success];
             }
         }
     }];
-    
+
 }
--(void)dowloadSpvBlock:(VoidBlock) callback{
+
+- (void)dowloadSpvBlock:(VoidBlock)callback {
     if ([[UserDefaultsUtil instance] getDownloadSpvFinish]) {
         if (callback) {
             callback();
         }
-    }else{
+    } else {
         [[BitherApi instance] getSpvBlock:^(NSDictionary *dict) {
-            BTBlock * block=[BlockUtil formatBlcok:dict];
-            if (block.blockNo%2016!=0) {
+            BTBlock *block = [BlockUtil formatBlcok:dict];
+            if (block.blockNo % 2016 != 0) {
                 if ([self.delegate respondsToSelector:@selector(error)]) {
                     [self.delegate error];
                 }
-            }else{
+            } else {
                 [[UserDefaultsUtil instance] setDownloadSpvFinish:true];
                 [self.blockChain addSPVBlock:block];
                 if (callback) {
                     callback();
                 }
             }
-        } andErrorCallBack:^(NSOperation *errorOp, NSError *error) {
+        }                andErrorCallBack:^(NSOperation *errorOp, NSError *error) {
             if ([self.delegate respondsToSelector:@selector(error)]) {
                 [self.delegate error];
             }
         }];
     }
-    
+
 }
--(BOOL)syncSpvFinish{
+
+- (BOOL)syncSpvFinish {
     return [[UserDefaultsUtil instance] getDownloadSpvFinish];
 }
 

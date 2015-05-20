@@ -19,8 +19,8 @@
 #import "NSAttributedString+Size.h"
 
 @implementation NSAttributedString (Size)
--(CGSize)sizeWithRestrict:(CGSize)restr{
-    CGSize size = [self boundingRectWithSize:restr options:NSStringDrawingUsesLineFragmentOrigin|NSStringDrawingUsesFontLeading context:nil].size;
+- (CGSize)sizeWithRestrict:(CGSize)restr {
+    CGSize size = [self boundingRectWithSize:restr options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading context:nil].size;
     size.width = ceilf(size.width);
     size.height = ceilf(size.height);
     return size;

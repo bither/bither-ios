@@ -20,6 +20,7 @@
 #import <Bitheri/BTAddress.h>
 
 @interface AddressDetailViewController : UIViewController
-@property (strong) BTAddress *address;
--(void)showMessage:(NSString*)msg;
+@property(strong) BTAddress *address;
+
+- (void)showMessage:(NSString *)msg;
 @end

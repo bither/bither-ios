@@ -20,5 +20,5 @@
 #import <Bitheri/BTAddress.h>
 
 @interface ColdAddressListCell : UITableViewCell
--(void)showAddress:(BTAddress*)address;
+- (void)showAddress:(BTAddress *)address;
 @end

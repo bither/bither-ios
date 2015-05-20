@@ -20,7 +20,7 @@
 
 @implementation BalanceButton
 
--(void)configureBg{
+- (void)configureBg {
     [self.btn setBackgroundImage:[UIImage imageNamed:@"button_small_blue_normal"] forState:UIControlStateNormal];
     [self.btn setBackgroundImage:[UIImage imageNamed:@"button_small_blue_pressed"] forState:UIControlStateHighlighted];
 }

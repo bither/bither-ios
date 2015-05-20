@@ -21,6 +21,6 @@
 
 @protocol DialogImportKeyDelegate <NSObject>
 
--(void)onPrivateKeyEntered:(NSString*)privateKey;
+- (void)onPrivateKeyEntered:(NSString *)privateKey;
 
 @end

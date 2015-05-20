@@ -9,6 +9,7 @@
 #import "DialogBlackQrCode.h"
 
 @interface DialogHDMServerUnsignedQRCode : DialogBlackQrCode
--(instancetype)initWithContent:(NSString *)content andAction:(void(^)())block;
--(instancetype)initWithContent:(NSString *)content action:(void(^)())block andCancel:(void(^)())cancel;
+- (instancetype)initWithContent:(NSString *)content andAction:(void (^)())block;
+
+- (instancetype)initWithContent:(NSString *)content action:(void (^)())block andCancel:(void (^)())cancel;
 @end

@@ -23,13 +23,13 @@
 #import "UserDefaultsUtil.h"
 #import "TouchIdIntegration.h"
 
-@interface PinCodeViewController ()<PinCodeEnterViewDelegate>{
+@interface PinCodeViewController () <PinCodeEnterViewDelegate> {
     UserDefaultsUtil *d;
-    TouchIdIntegration* touchId;
+    TouchIdIntegration *touchId;
     BOOL giveUpTouchId;
 }
 
-@property (weak, nonatomic) IBOutlet PinCodeEnterView *vEnter;
+@property(weak, nonatomic) IBOutlet PinCodeEnterView *vEnter;
 @end
 
 @implementation PinCodeViewController
@@ -43,57 +43,57 @@
     touchId = [TouchIdIntegration instance];
 }
 
--(void)viewDidAppear:(BOOL)animated{
+- (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     [self.vEnter becomeFirstResponder];
     [self invokeTouchId];
 }
 
--(void)invokeTouchId{
-    if(touchId.hasTouchId){
+- (void)invokeTouchId {
+    if (touchId.hasTouchId) {
         giveUpTouchId = NO;
         [touchId checkTouchId:^(BOOL success, BOOL denied) {
-            if(success){
+            if (success) {
                 [self.vEnter resignFirstResponder];
                 [self dismissViewControllerAnimated:YES completion:nil];
             } else {
-                if(denied){
+                if (denied) {
                     [self.vEnter shakeToClear];
                 }
                 giveUpTouchId = YES;
-                [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(becomeActive) name:UIApplicationDidBecomeActiveNotification object:nil];
+                [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(becomeActive) name:UIApplicationDidBecomeActiveNotification object:nil];
             }
         }];
     }
 }
 
--(void)onEntered:(NSString*) code{
-    if([d checkPinCode:code]){
+- (void)onEntered:(NSString *)code {
+    if ([d checkPinCode:code]) {
         [self.vEnter resignFirstResponder];
         [self dismissViewControllerAnimated:YES completion:nil];
-    }else{
+    } else {
         [self.vEnter shakeToClear];
     }
 }
 
--(void)showMsg:(NSString*)msg{
+- (void)showMsg:(NSString *)msg {
     [self showBannerWithMessage:msg belowView:nil belowTop:0 autoHideIn:1 withCompletion:nil];
 }
 
--(void)becomeActive{
-    if(giveUpTouchId){
+- (void)becomeActive {
+    if (giveUpTouchId) {
         giveUpTouchId = NO;
-    }else{
+    } else {
         [[NSNotificationCenter defaultCenter] removeObserver:self];
         [self invokeTouchId];
     }
 }
 
--(void)dealloc{
+- (void)dealloc {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
--(UIStatusBarStyle)preferredStatusBarStyle{
+- (UIStatusBarStyle)preferredStatusBarStyle {
     return UIStatusBarStyleLightContent;
 }
 

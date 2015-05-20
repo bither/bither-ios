@@ -20,14 +20,16 @@
 #import "Ticker.h"
 
 @interface Market : NSObject
-@property (nonatomic,strong) Ticker * ticker;
-@property (nonatomic,readwrite) MarketType marketType;
+@property(nonatomic, strong) Ticker *ticker;
+@property(nonatomic, readwrite) MarketType marketType;
 
--(instancetype)initWithMarketType:(MarketType) marketType;
+- (instancetype)initWithMarketType:(MarketType)marketType;
 
--(NSString *)getName;
--(NSString *)getUrl;
--(NSString *)getDomainName;
+- (NSString *)getName;
+
+- (NSString *)getUrl;
+
+- (NSString *)getDomainName;
 
 
 @end

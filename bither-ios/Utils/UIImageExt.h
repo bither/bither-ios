@@ -18,6 +18,6 @@
 
 #import <Foundation/Foundation.h>
 
-@interface UIImage(UIImageExt)
+@interface UIImage (UIImageExt)
 - (UIImage *)scaleToSize:(CGSize)size;
 @end

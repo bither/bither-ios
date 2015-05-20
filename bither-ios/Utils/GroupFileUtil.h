@@ -20,25 +20,26 @@
 //
 
 #import <Foundation/Foundation.h>
+
 #define kBitherGroupName (@"group.net.bither")
 
 @interface GroupFileUtil : NSObject
 
-+(void)setTotalBalanceWithHD:(int64_t)hd HDM:(int64_t)hdm hot:(int64_t)hot andCold:(int64_t)cold;
++ (void)setTotalBalanceWithHD:(int64_t)hd HDM:(int64_t)hdm hot:(int64_t)hot andCold:(int64_t)cold;
 
-+(NSDictionary*)totalBalance;
++ (NSDictionary *)totalBalance;
 
-+(void)setTicker:(NSString*)content;
++ (void)setTicker:(NSString *)content;
 
-+(NSString*)getTicker;
++ (NSString *)getTicker;
 
-+(void)setCurrencyRate:(NSString*)currencyRate;
++ (void)setCurrencyRate:(NSString *)currencyRate;
 
-+(NSString*)getCurrencyRate;
++ (NSString *)getCurrencyRate;
 
-+(BOOL)supported;
++ (BOOL)supported;
 
-+(NSString*)readFile:(NSURL*)url;
++ (NSString *)readFile:(NSURL *)url;
 
-+(BOOL)writeFile:(NSURL*)url content:(NSString*)content;
++ (BOOL)writeFile:(NSURL *)url content:(NSString *)content;
 @end

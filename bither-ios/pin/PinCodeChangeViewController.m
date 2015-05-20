@@ -20,17 +20,16 @@
 #import "PinCodeEnterView.h"
 #import "UIViewController+PiShowBanner.h"
 #import "UserDefaultsUtil.h"
-#import "StringUtil.h"
 
-@interface PinCodeChangeViewController ()<PinCodeEnterViewDelegate>{
+@interface PinCodeChangeViewController () <PinCodeEnterViewDelegate> {
     UserDefaultsUtil *d;
-    NSString* firstPin;
+    NSString *firstPin;
     BOOL passedOld;
 }
 
-@property (weak, nonatomic) IBOutlet PinCodeEnterView *vEnter;
-@property (weak, nonatomic) IBOutlet UIView *vTopBar;
-@property (weak, nonatomic) IBOutlet UILabel *lblTitle;
+@property(weak, nonatomic) IBOutlet PinCodeEnterView *vEnter;
+@property(weak, nonatomic) IBOutlet UIView *vTopBar;
+@property(weak, nonatomic) IBOutlet UILabel *lblTitle;
 @end
 
 @implementation PinCodeChangeViewController
@@ -45,12 +44,12 @@
     [self.vEnter becomeFirstResponder];
 }
 
--(void)onEntered:(NSString*) code{
+- (void)onEntered:(NSString *)code {
     if (!code || code.length == 0) {
         return;
     }
     if (!passedOld) {
-        if ([d checkPinCode: code]) {
+        if ([d checkPinCode:code]) {
             passedOld = YES;
             [self.vEnter animateToNext];
             self.vEnter.msg = NSLocalizedString(@"pin_code_setting_change_new_msg", nil);
@@ -82,7 +81,7 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 
--(void)showMsg:(NSString*)msg{
+- (void)showMsg:(NSString *)msg {
     [self showBannerWithMessage:msg belowView:self.vTopBar];
 }
 

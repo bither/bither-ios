@@ -17,7 +17,6 @@
 //  limitations under the License.
 
 #import "DialogBalanceDetail.h"
-#import "StringUtil.h"
 #import "UnitUtil.h"
 #import "NSString+Size.h"
 #import "NSAttributedString+Size.h"
@@ -31,15 +30,15 @@
 
 @implementation DialogBalanceDetail
 
--(instancetype)initWithAddress:(BTAddress*)address{
+- (instancetype)initWithAddress:(BTAddress *)address {
     self = [super initWithFrame:CGRectMake(0, 0, 200, kLabelHeight * 3)];
-    if(self){
+    if (self) {
         [self configureViews:address];
     }
     return self;
 }
 
--(void)configureViews:(BTAddress*)address{
+- (void)configureViews:(BTAddress *)address {
     self.bgInsets = UIEdgeInsetsMake(6, 16, 6, 16);
     NSString *txCountLabel = NSLocalizedString(@"balance_detail_transaction_count", nil);
     NSString *txCount = [NSString stringWithFormat:@"%d", address.txCount];
@@ -56,26 +55,26 @@
     int64_t sent = received - address.balance;
     NSAttributedString *receivedStr = [UnitUtil attributedStringForAmount:received withFontSize:kCountFontSize];
     NSAttributedString *sentStr = [UnitUtil attributedStringForAmount:sent withFontSize:kCountFontSize];
-    
+
     CGFloat maxWidth = kMinWidth;
     CGSize restrictSize = CGSizeMake(CGFLOAT_MAX, CGFLOAT_MAX);
-    UIFont* labelFont = [UIFont systemFontOfSize:kLabelFontSize];
-    UIFont* countFont = [UIFont systemFontOfSize:kCountFontSize];
+    UIFont *labelFont = [UIFont systemFontOfSize:kLabelFontSize];
+    UIFont *countFont = [UIFont systemFontOfSize:kCountFontSize];
     CGFloat width = [txCountLabel sizeWithRestrict:restrictSize font:labelFont].width + [txCount sizeWithRestrict:restrictSize font:countFont].width + kMinHorizontalMargin;
-    if(width > maxWidth){
+    if (width > maxWidth) {
         maxWidth = width;
     }
     width = [receivedLabel sizeWithRestrict:restrictSize font:labelFont].width + [receivedStr sizeWithRestrict:restrictSize].width + kMinHorizontalMargin;
-    if(width > maxWidth){
+    if (width > maxWidth) {
         maxWidth = width;
     }
     width = [sentLabel sizeWithRestrict:restrictSize font:labelFont].width + [sentStr sizeWithRestrict:restrictSize].width + kMinHorizontalMargin;
-    if(width > maxWidth){
+    if (width > maxWidth) {
         maxWidth = width;
     }
     self.frame = CGRectMake(0, 0, maxWidth, kLabelHeight * 3);
-    
-    UILabel* lbl = [self labelForTop:0 align:NSTextAlignmentLeft width:maxWidth];
+
+    UILabel *lbl = [self labelForTop:0 align:NSTextAlignmentLeft width:maxWidth];
     lbl.text = txCountLabel;
     lbl = [self labelForTop:0 align:NSTextAlignmentRight width:maxWidth];
     lbl.text = txCount;
@@ -89,11 +88,11 @@
     lbl.attributedText = sentStr;
 }
 
--(UILabel*)labelForTop:(CGFloat)top align:(NSTextAlignment)align width:(CGFloat) width{
-    UILabel* lbl = [[UILabel alloc]initWithFrame:CGRectMake(0, top, width, kLabelHeight)];
-    if(align == NSTextAlignmentLeft){
+- (UILabel *)labelForTop:(CGFloat)top align:(NSTextAlignment)align width:(CGFloat)width {
+    UILabel *lbl = [[UILabel alloc] initWithFrame:CGRectMake(0, top, width, kLabelHeight)];
+    if (align == NSTextAlignmentLeft) {
         lbl.font = [UIFont systemFontOfSize:kLabelFontSize];
-    }else{
+    } else {
         lbl.font = [UIFont systemFontOfSize:kCountFontSize];
     }
     lbl.textColor = [UIColor whiteColor];

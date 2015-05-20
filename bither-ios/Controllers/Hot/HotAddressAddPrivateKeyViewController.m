@@ -28,7 +28,6 @@
 #import "UIViewController+PiShowBanner.h"
 #import "BTPrivateKeyUtil.h"
 
-@import MobileCoreServices;
 @import AVFoundation;
 
 #define kSaveProgress (0.1)

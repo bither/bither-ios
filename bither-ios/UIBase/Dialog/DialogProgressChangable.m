@@ -7,6 +7,7 @@
 //
 
 #import "DialogProgressChangable.h"
+
 #define kDialogProgressLabelMaxWidth 200
 #define kDialogProgressLabelMaxHeight 200
 #define kDialogProgressLabelFontSize 14
@@ -15,27 +16,27 @@
 #define kDialogProgressHorizotalPadding 10
 #define kDialogProgressVerticalPadding 5
 
-@interface DialogProgressChangable()
-@property (strong, nonatomic) UIActivityIndicatorView* riv;
-@property (strong, nonatomic) UIImageView* ivIcon;
-@property (strong, nonatomic) UILabel* lbl;
+@interface DialogProgressChangable ()
+@property(strong, nonatomic) UIActivityIndicatorView *riv;
+@property(strong, nonatomic) UIImageView *ivIcon;
+@property(strong, nonatomic) UILabel *lbl;
 @end
 
 @implementation DialogProgressChangable
 
--(id)initWithMessage:(NSString *)message{
+- (id)initWithMessage:(NSString *)message {
     self = [super init];
-    if(self){
+    if (self) {
         CGSize constrainedSize = CGSizeMake(kDialogProgressLabelMaxWidth, kDialogProgressLabelMaxHeight);
         CGSize lableSize = [message sizeWithFont:[UIFont systemFontOfSize:kDialogProgressLabelFontSize] constrainedToSize:constrainedSize];
         self.riv = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
         self.frame = CGRectMake(0, 0, self.riv.frame.size.width + kDialogProgressMargin + lableSize.width + kDialogProgressHorizotalPadding * 2, fmaxf(lableSize.height + kDialogProgressVerticalPadding * 2, kDialogProgressMinHeight));
-        self.riv.frame = CGRectMake(kDialogProgressHorizotalPadding, (self.frame.size.height - self.riv.frame.size.height)/2, self.riv.frame.size.width, self.riv.frame.size.height);
+        self.riv.frame = CGRectMake(kDialogProgressHorizotalPadding, (self.frame.size.height - self.riv.frame.size.height) / 2, self.riv.frame.size.width, self.riv.frame.size.height);
         [self addSubview:self.riv];
-        self.ivIcon = [[UIImageView alloc]initWithFrame:self.riv.frame];
+        self.ivIcon = [[UIImageView alloc] initWithFrame:self.riv.frame];
         self.ivIcon.hidden = YES;
         [self addSubview:self.ivIcon];
-        self.lbl = [[UILabel alloc]initWithFrame:CGRectMake(self.riv.frame.origin.x + self.riv.frame.size.width + kDialogProgressMargin, (self.frame.size.height - lableSize.height)/2, lableSize.width, lableSize.height)];
+        self.lbl = [[UILabel alloc] initWithFrame:CGRectMake(self.riv.frame.origin.x + self.riv.frame.size.width + kDialogProgressMargin, (self.frame.size.height - lableSize.height) / 2, lableSize.width, lableSize.height)];
         self.lbl.backgroundColor = [UIColor clearColor];
         self.lbl.numberOfLines = 1;
         self.lbl.font = [UIFont systemFontOfSize:kDialogProgressLabelFontSize];
@@ -48,92 +49,92 @@
     return self;
 }
 
--(void)showInWindow:(UIWindow *)window completion:(void (^)())completion{
-    if([self shown]){
-        if(completion){
+- (void)showInWindow:(UIWindow *)window completion:(void (^)())completion {
+    if ([self shown]) {
+        if (completion) {
             completion();
         }
-    }else{
+    } else {
         [super showInWindow:window completion:completion];
     }
 }
 
--(void)dismissWithCompletion:(void (^)())completion{
-    if([self shown]){
+- (void)dismissWithCompletion:(void (^)())completion {
+    if ([self shown]) {
         [super dismissWithCompletion:completion];
-    }else{
-        if(completion){
+    } else {
+        if (completion) {
             completion();
         }
     }
 }
 
--(void)dialogWillShow{
+- (void)dialogWillShow {
     [super dialogWillShow];
 }
 
--(void)dialogDidDismiss{
+- (void)dialogDidDismiss {
     [super dialogDidDismiss];
 }
 
--(void)changeToMessage:(NSString*)message icon:(UIImage*)icon completion:(void(^)())completion{
+- (void)changeToMessage:(NSString *)message icon:(UIImage *)icon completion:(void (^)())completion {
     dispatch_async(dispatch_get_main_queue(), ^{
-        if(icon){
+        if (icon) {
             self.ivIcon.image = icon;
             self.ivIcon.hidden = NO;
             self.riv.hidden = YES;
-        }else{
+        } else {
             self.ivIcon.image = nil;
             self.ivIcon.hidden = YES;
             self.riv.hidden = NO;
         }
-        if(message){
+        if (message) {
             CGSize constrainedSize = CGSizeMake(kDialogProgressLabelMaxWidth, kDialogProgressLabelMaxHeight);
             CGSize lableSize = [message sizeWithFont:[UIFont systemFontOfSize:kDialogProgressLabelFontSize] constrainedToSize:constrainedSize];
             self.lbl.text = message;
-            if([self shown]){
-                if(CGSizeEqualToSize(lableSize, self.lbl.frame.size)){
-                    if(completion){
+            if ([self shown]) {
+                if (CGSizeEqualToSize(lableSize, self.lbl.frame.size)) {
+                    if (completion) {
                         completion();
                     }
-                }else{
+                } else {
                     [UIView animateWithDuration:0.2 animations:^{
                         self.frame = CGRectMake(self.frame.origin.x, self.frame.origin.y, self.riv.frame.size.width + kDialogProgressMargin + lableSize.width + kDialogProgressHorizotalPadding * 2, fmaxf(lableSize.height + kDialogProgressVerticalPadding * 2, kDialogProgressMinHeight));
                         [self resize];
-                        self.lbl.frame = CGRectMake(self.riv.frame.origin.x + self.riv.frame.size.width + kDialogProgressMargin, (self.frame.size.height - lableSize.height)/2, lableSize.width, lableSize.height);
-                    } completion:^(BOOL finished) {
-                        if(completion){
+                        self.lbl.frame = CGRectMake(self.riv.frame.origin.x + self.riv.frame.size.width + kDialogProgressMargin, (self.frame.size.height - lableSize.height) / 2, lableSize.width, lableSize.height);
+                    }                completion:^(BOOL finished) {
+                        if (completion) {
                             completion();
                         }
                     }];
                 }
-            }else{
-                if(!CGSizeEqualToSize(lableSize, self.lbl.frame.size)){
+            } else {
+                if (!CGSizeEqualToSize(lableSize, self.lbl.frame.size)) {
                     self.frame = CGRectMake(self.frame.origin.x, self.frame.origin.y, self.riv.frame.size.width + kDialogProgressMargin + lableSize.width + kDialogProgressHorizotalPadding * 2, fmaxf(lableSize.height + kDialogProgressVerticalPadding * 2, kDialogProgressMinHeight));
                     [self resize];
-                    self.lbl.frame = CGRectMake(self.riv.frame.origin.x + self.riv.frame.size.width + kDialogProgressMargin, (self.frame.size.height - lableSize.height)/2, lableSize.width, lableSize.height);
+                    self.lbl.frame = CGRectMake(self.riv.frame.origin.x + self.riv.frame.size.width + kDialogProgressMargin, (self.frame.size.height - lableSize.height) / 2, lableSize.width, lableSize.height);
                 }
-                if(completion){
+                if (completion) {
                     completion();
                 }
             }
-        }else{
-            if(completion){
+        } else {
+            if (completion) {
                 completion();
             }
         }
     });
 }
 
--(void)changeToMessage:(NSString*)message completion:(void(^)())completion{
+- (void)changeToMessage:(NSString *)message completion:(void (^)())completion {
     [self changeToMessage:message icon:nil completion:completion];
 }
 
--(void)changeToMessage:(NSString*)message{
+- (void)changeToMessage:(NSString *)message {
     [self changeToMessage:message icon:nil completion:nil];
 }
 
--(void)changeToMessage:(NSString*)message icon:(UIImage*)icon{
+- (void)changeToMessage:(NSString *)message icon:(UIImage *)icon {
     [self changeToMessage:message icon:icon completion:nil];
 }
 

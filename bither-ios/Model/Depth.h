@@ -20,7 +20,7 @@
 #import "BitherSetting.h"
 
 @interface Depth : NSObject
-@property (nonatomic ,readwrite) MarketType marketType;
+@property(nonatomic, readwrite) MarketType marketType;
 //@property
 
 

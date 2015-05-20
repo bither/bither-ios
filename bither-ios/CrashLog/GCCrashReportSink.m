@@ -18,17 +18,13 @@
 
 #import "GCCrashReportSink.h"
 #import <KSCrash/KSCrashReportFilterAppleFmt.h>
-#import <KSCrash/KSCrashReportFilterJSON.h>
-#import <KSCrash/KSCrashReportFilterGZip.h>
-#import <KSCrash/KSCrashReportFilterBasic.h>
-#import <KSCrash/KSCrashReportFilter.h>
 #import <KSCrash/KSCrashCallCompletion.h>
 #import "BitherApi.h"
 
 
 @implementation GCCrashReportSink
 
-+ (GCCrashReportSink *)sink{
++ (GCCrashReportSink *)sink {
     return [[self alloc] init];
 }
 
@@ -45,7 +41,7 @@
             //            [KSCrashReportFilterStringToData filter],
             //            [KSCrashReportFilterGZipCompress filterWithCompressionLevel:-1],
             self,
-            nil];
+                    nil];
 }
 
 - (void)filterReports:(NSArray *)reports
@@ -55,7 +51,7 @@
         for (NSString *data in reports) {
             [bitherApi uploadCrash:data callback:^(NSDictionary *dict) {
                 kscrash_i_callCompletion(onCompletion, reports, YES, nil);
-            } andErrorCallBack:^(NSOperation *errorOp, NSError *error) {
+            }     andErrorCallBack:^(NSOperation *errorOp, NSError *error) {
                 kscrash_i_callCompletion(onCompletion, reports, NO, nil);
             }];
         }
