@@ -105,7 +105,7 @@ static Setting *monitorSetting;
         }
         BTKey *key = [BTKey keyWithPublicKey:[pubStr hexToData]];
         key.isFromXRandom = isXRandom;
-        if(!key.publicKey){
+        if (!key.publicKey) {
             dispatch_async(dispatch_get_main_queue(), ^{
                 [dp dismissWithCompletion:^{
                     [self showMsg:NSLocalizedString(@"Monitor Bither Cold failed.", nil)];
@@ -113,7 +113,7 @@ static Setting *monitorSetting;
             });
             return;
         }
-        BTAddress *btAddress = [[BTAddress alloc] initWithKey:key encryptPrivKey:nil isXRandom:key.isFromXRandom];
+        BTAddress *btAddress = [[BTAddress alloc] initWithKey:key encryptPrivKey:nil isSyncComplete:NO isXRandom:key.isFromXRandom];
         [addressList addObject:btAddress];
         [addressStrList addObject:key.address];
     }
