@@ -1,6 +1,0 @@
-/* Localized versions of Info.plist keys */
-
-{
-    CFBundleDisplayName = "Bither";
-    CFBundleName = "Bither";
-}
