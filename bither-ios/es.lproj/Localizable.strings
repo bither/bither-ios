@@ -11,7 +11,7 @@
 "Amount:" = "Importe:";
 
 /* No comment provided by engineer. */
-"Back up private key" = "Copie respaldo de clave privada";
+"Back up private key" = "Copia de respaldo de clave privada";
 
 /* No comment provided by engineer. */
 "Bither Cold Watch Only QR Code" = "Bither Cold Watch Only QR Code";
@@ -272,6 +272,10 @@
 
 /* No comment provided by engineer. */
 "Scan Bitcoin Address" = "Escanear dirección de bitcoin";
+/****************************************************************/
+/****************************************************************/
+/****************************************************************/
+/****************************************************************/
 
 /* No comment provided by engineer. */
 "Scan Bither Cold to sign" = "Scan Bither Cold to sign";
