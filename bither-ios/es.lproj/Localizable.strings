@@ -1,0 +1,753 @@
+/* No comment provided by engineer. */
+"%0.f mins ago" = "%0.f mins ago";
+
+/* No comment provided by engineer. */
+"%d hour ago" = "%d hour ago";
+
+/* No comment provided by engineer. */
+"Address copied." = "Address copied.";
+
+/* No comment provided by engineer. */
+"Amount:" = "Importe:";
+
+/* No comment provided by engineer. */
+"Back up private key" = "Copie respaldo de clave privada";
+
+/* No comment provided by engineer. */
+"Bither Cold Watch Only QR Code" = "Bither Cold Watch Only QR Code";
+
+/* No comment provided by engineer. */
+"Bitstamp" = "Bitstamp";
+
+/* No comment provided by engineer. */
+"BTC-E" = "BTC-E";
+
+/* No comment provided by engineer. */
+"BTCChina" = "BTCChina";
+"796" = "796";
+"Bitfinex" = "Bitfinex";
+"BtcTrade" = "BtcTrade";
+"Coinbase" = "Coinbase";
+
+/* No comment provided by engineer. */
+"Buy: %@" = "Compra: %@";
+
+/* dialogAlertCancel */
+"Cancel" = "Cancelar";
+
+/* No comment provided by engineer. */
+"Change Password" = "Cambio de contraseña";
+
+/* No comment provided by engineer. */
+"Change password failed" = "Falló cambio de contraseña";
+
+/* No comment provided by engineer. */
+"Change password success" = "Cambio de contraseña";
+
+/* No comment provided by engineer. */
+"Changing password\nDo not turn off the screen" = "Cambiando contraseña\nNo apague la pantalla";
+
+/* No comment provided by engineer. */
+"CHBTC" = "CHBTC";
+
+/* No comment provided by engineer. */
+"Check Private Keys" = "Revisar llaves privadas";
+
+/* No comment provided by engineer. */
+"Checking Cellular Data" = "Comprobando data celular";
+
+/* No comment provided by engineer. */
+"Checking password…" = "Comprobando contraseña…";
+
+/* No comment provided by engineer. */
+"Checking private keys..." = "Revisando llaves privadas...";
+
+/* No comment provided by engineer. */
+"Checking WIFI" = "Comprobando WIFI";
+
+/* No comment provided by engineer. */
+"Clone failed." = "Falló clon.";
+
+/* No comment provided by engineer. */
+"clone QR code" = "clonar código QR";
+
+/* No comment provided by engineer. */
+"Clone success." = "Clon exitoso.";
+
+/* No comment provided by engineer. */
+"Cloning..." = "Clonando...";
+
+/* No comment provided by engineer. */
+"Cold Wallet Address" = "Dirección de cartera fría";
+
+/* No comment provided by engineer. */
+"Cold Wallet Clone" = "Clon de cartera fría";
+
+/* No comment provided by engineer. */
+"Cold Wallet Clone QR Code" = "Codigo QR de cartera fría";
+
+/* No comment provided by engineer. */
+"Confirm New Password" = "Comprobar contraseña nueva";
+
+/* No comment provided by engineer. */
+"Confirmation: %d" = "Confrimación: %d";
+
+/* No comment provided by engineer. */
+"Confirmation: 100+" = "Confrimación: 100+";
+
+/* No comment provided by engineer. */
+"Default Currency" = "Moneda por defecto";
+
+/* No comment provided by engineer. */
+"Default Exchange" = "Mercado por defecto";
+
+/* No comment provided by engineer. */
+"Default Transaction Fee" = "Cargo de transacción por defecto";
+
+/* No comment provided by engineer. */
+"Donate" = "Donar";
+
+/* No comment provided by engineer. */
+"Donate to developers" = "Donar a los programadores";
+
+/* No comment provided by engineer. */
+"Enter original password" = "Introduzca contraseña original";
+
+/* No comment provided by engineer. */
+"Enter password of wallet" = "Introduzca contraseña de la cartera";
+
+/* No comment provided by engineer. */
+"Enter source password" = "Introduzca la clave fuente";
+
+/* No comment provided by engineer. */
+"Enter your private key text" = "Introduzca el texto de la clave privada";
+
+/* No comment provided by engineer. */
+"Fee:" = "Cuota:";
+
+/* No comment provided by engineer. */
+"Finish" = "Finalizar";
+
+/* No comment provided by engineer. */
+"From Bither Private Key QR Code" = "De código QR de clave privada de Bither";
+
+/* No comment provided by engineer. */
+"From Private Key Text" = "De clave privada de Bither";
+
+/* No comment provided by engineer. */
+"Give up signing?" = "¿Se rinde a firmar?\nEscanear con Bither Frío para firmar.";
+
+/* No comment provided by engineer. */
+"Hot Wallet Address" = "Dirección de cartera caliente";
+
+/* No comment provided by engineer. */
+"HUOBI" = "HUOBI";
+
+/* No comment provided by engineer. */
+"Import failed." = "Importación falló.";
+
+/* No comment provided by engineer. */
+"Import Private Key" = "Importar clave privada";
+
+/* No comment provided by engineer. */
+"Import success." = "Importación exitosa.";
+
+/* No comment provided by engineer. */
+"Invalid password" = ""Contraseña invalida";
+
+/* No comment provided by engineer. */
+"Just now" = "En este momento";
+
+/* No comment provided by engineer. */
+"Length: 6 - 43" = "Longitud: 6 - 43";
+
+/* No comment provided by engineer. */
+"Low" = "Baja";
+
+/* No comment provided by engineer. */
+"Me" = "Mio";
+
+/* No comment provided by engineer. */
+"Monitor Bither Cold failed." = "Falló monitoreo de Bither Fría.";
+
+/* No comment provided by engineer. */
+"Network Setting" = "Configuración De Red";
+
+/* No comment provided by engineer. */
+"New Password" ="Nueva Contraseña";
+
+/* No comment provided by engineer. */
+"New passwords not same" = "Contraseñas nuevas no identicas";
+
+/* No comment provided by engineer. */
+"Next Page" = "Siguiente Página";
+
+/* username_can_not_be_more_than_10_words */
+"Nickname length can not be more than 10" = "Longitud de Apodo no puede ser más de 10"
+
+
+/* No comment provided by engineer. */
+"No bitcoins available for donation." = "No hay bitcoins disponibles para la donación.";
+
+/* No comment provided by engineer. */
+"No private keys" = "No hay claves privadas"
+
+/* No comment provided by engineer. */
+"Normal" = "Normal";
+
+/* No comment provided by engineer. */
+"Not match private key format" = "El formato de clave privada no coincide";
+
+/* dialogAlertConfirm */
+"OK" = "OK";
+
+/* No comment provided by engineer. */
+"OKCoin.CN" = "OKCoin.CN";
+
+/* No comment provided by engineer. */
+"Old Password" = "Contraseña Anterior";
+
+/* No comment provided by engineer. */
+"Only supports the compressed format of private key" = "Compatible solo con el formato de clave privada comprimida";
+
+/* No comment provided by engineer. */
+"Password" = "Contraseña";
+
+/* No comment provided by engineer. */
+"Password Confirm" = "Contraseña Confirmada";
+
+/* No comment provided by engineer. */
+"Password of the private key to import is different from ours. Import failed." = "Contraseña de la clave privada a importar es distinta de la nuestra. La importación falló.";
+
+/* No comment provided by engineer. */
+"Password wrong." = "Contraseña errada.";
+
+/* No comment provided by engineer. */
+"Passwords not same." = "Contraseñas no son iguales.";
+
+/* No comment provided by engineer. */
+"Pay to" = "Pagarle a";
+
+/* No comment provided by engineer. */
+"Please turn off Cellular Data" = "Please turn off Cellular Data";
+
+/* No comment provided by engineer. */
+"Please turn off WIFI" = "Please turn off WIFI";
+
+/* No comment provided by engineer. */
+"Please wait…" = "Please wait…";
+
+/* No comment provided by engineer. */
+"private key" = "private key";
+
+/* No comment provided by engineer. */
+"Private key of %@" = "Private key of %@";
+
+/* No comment provided by engineer. */
+"Private Key QR Code" = "Private Key QR Code";
+
+/* No comment provided by engineer. */
+"Private keys are safe." = "Private keys are safe.";
+
+/* No comment provided by engineer. */
+"Private keys in danger." = "Private keys in danger.";
+
+/* No comment provided by engineer. */
+"QR Code" = "QR Code";
+
+/* No comment provided by engineer. */
+"QR Code saved." = "QR Code saved.";
+
+/* No comment provided by engineer. */
+"Received" = "Received";
+
+/* No comment provided by engineer. */
+"Received:" = "Received:";
+
+/* No comment provided by engineer. */
+"Scan %@" = "Scan %@";
+
+/* No comment provided by engineer. */
+"Scan %@\nPage %d, Total %d" = "Scan %1$@\nPage %2$d, Total %3$d";
+
+/* No comment provided by engineer. */
+"Scan Bitcoin Address" = "Scan Bitcoin Address";
+
+/* No comment provided by engineer. */
+"Scan Bither Cold to sign" = "Scan Bither Cold to sign";
+
+/* No comment provided by engineer. */
+"Scan by clone destination" = "Scan by clone destination";
+
+/* No comment provided by engineer. */
+"Scan Private Key QR Code" = "Scan Private Key QR Code";
+
+/* No comment provided by engineer. */
+"Scan QR Code for Bitcoin address" = "Scan QR Code for Bitcoin address";
+
+/* No comment provided by engineer. */
+"Scan QR code No.1 provided by Bither" = "Scan QR code No.1 provided by Bither";
+
+/* No comment provided by engineer. */
+"Scan The Clone Source" = "Scan The Clone Source";
+
+/* No comment provided by engineer. */
+"Scan to watch Bither Cold" = "Scan to watch Bither Cold";
+
+/* No comment provided by engineer. */
+"Scan unsigned transaction failed" = "Scan unsigned transaction failed";
+
+/* No comment provided by engineer. */
+"Scan Unsigned TX" = "Scan Unsigned TX";
+
+/* No comment provided by engineer. */
+"Scan with Bither Cold" = "Scan with Bither Cold";
+
+/* No comment provided by engineer. */
+"Scan with Bither Hot to sign tx" = "Scan with Bither Hot to sign tx";
+
+/* No comment provided by engineer. */
+"Scan with Bither Hot to watch Bither Cold" = "Scan with Bither Hot to watch Bither Cold";
+
+/* No comment provided by engineer. */
+"Select an address to donate" = "Select an address to donate";
+
+/* No comment provided by engineer. */
+"Sell: %@" = "Sell: %@";
+
+/* No comment provided by engineer. */
+"Send" = "Send";
+
+/* No comment provided by engineer. */
+"Send failed." = "Send failed.";
+
+/* No comment provided by engineer. */
+"Send success." = "Send success.";
+
+/* No comment provided by engineer. */
+"Send:" = "Send:";
+
+/* No comment provided by engineer. */
+"Sent" = "Sent";
+
+/* No comment provided by engineer. */
+"Set Avatar" = "Set Avatar";
+
+/* No comment provided by engineer. */
+"Set Password" = "Set Password";
+
+/* No comment provided by engineer. */
+"Sign Transaction" = "Sign Transaction";
+
+/* No comment provided by engineer. */
+"Sign Trasaction" = "Sign Trasaction";
+
+/* No comment provided by engineer. */
+"Signed Transaction" = "Signed Transaction";
+
+/* No comment provided by engineer. */
+"Signing Transaction" = "Signing Transaction";
+
+/* No comment provided by engineer. */
+"Stop Monitoring" = "Stop Monitoring";
+
+/* No comment provided by engineer. */
+"Sure to stop monitoring this address?" = "Sure to stop monitoring this address?";
+
+/* No comment provided by engineer. */
+"Sync always" = "Sync always";
+
+/* No comment provided by engineer. */
+"Sync over wifi only" = "Sync over wifi only";
+
+/* No comment provided by engineer. */
+"Thank you for donating." = "Thank you for donating.";
+
+/* No comment provided by engineer. */
+"The user name cannot contain %@ and spaces" = "The user name cannot contain %@ and spaces";
+
+/* No comment provided by engineer. */
+"Unknown Address" = "Unknown Address";
+
+/* No comment provided by engineer. */
+"unsigned tx QR code" = "unsigned tx QR code";
+
+/* No comment provided by engineer. */
+"View on Blockchain.info" = "View on Blockchain.info";
+
+/* No comment provided by engineer. */
+"Watch Only QR Code" = "Watch Only QR Code";
+
+/* No comment provided by engineer. */
+"yesterday %@" = "yesterday %@";
+
+/* No comment provided by engineer. */
+"You will send to:" = "You will send to:";
+
+"Signed TX QR Code" = "Signed TX QR Code";
+
+"Page %d, Total %ld" = "Page %1$d, Total %2$d";
+
+"No transactions found for this address,\nit has probably not been used on the network yet." = "No transactions found for this address,\nit has probably not been used on the network yet.";
+
+"Private Key QR Code (Encrypted)"="Private Key QR Code (Encrypted)";
+"Private Key QR Code (Decrypted)"="Private Key QR Code (Decrypted)";
+"Private Key"="Private Key";
+
+
+"choose_mode_cold_confirm" = "Once mode is set, it can\'t be changed.\nBither Cold need to be run on a offline phone.\nSet this phone as Bither Cold?";
+"choose_mode_warm_confirm" = "Once mode is set, it can\'t be changed.\nBither Hot is an online bitcoin wallet.\nSet this phone as Bither Hot?";
+
+"balance_detail_transaction_count" = "Transacción";
+"balance_detail_total_incoming" = "Recivido";
+"balance_detail_total_outgoing" = "Enviado";
+
+/* network error */
+"Network failure." = "Sin conexión de red.";
+
+"Cannot monitor address with large amount of transactions."="Cannot monitor address with large amount of transactions.";
+"Cannot monitor address with special transactions."="Cannot monitor address with special transactions.";
+"Cannot import private key with large amount of transactions."="Cannot import private key with large amount of transactions.";
+"Cannot import private key with special transactions."="Cannot import private key with special transactions.";
+
+
+"Can\'t import Bither Cold private key."="Can\'t import Bither Cold private key.";
+"This private key already exists."="This private key already exists.";
+
+"Advance Options"="Configuración avanzada";
+
+
+"Send failed. Sending coins this few will be igored."="Send failed. Sending coins this few will be igored.";
+"%@ BTC to be confirmed."="%@ BTC to be confirmed.";
+"Send failed. You don\'t have enough coins available for transaction fee."="Send failed. You don\'t have enough coins available for transaction fee.";
+"Send failed. You don\'t have enough coins available."="Send failed. You don\'t have enough coins available.";
+"Send failed. Lack of %@ BTC."="Send failed. Lack of %@ BTC. ";
+"Send failed. Transaction size is to large."="Send failed. Transaction size is to large.";
+"Please wait for another confirmation."="Please wait for another confirmation.";
+
+"Total BTC prefix"="Total: ";
+
+"Reload Transactions data"="Reload Transactions data";
+"Reload Transactions data?\nNeed long time.\nConsume network data.\nRecommand trying only with wrong data."="Reload Transactions data?\nNeed long time.\nConsume network data.\nRecommand trying only with wrong data.";
+"Reload transactions data failed , Please retry again."="Reload transactions data failed , Please retry again.";
+"Reload transactions data success"="Reload transactions data success ";
+"You can only reload transactions data in a hour.."="You can only reload transactions data in a hour..";
+
+"XRandom increases randomness.\nSure to disable?"="XRandom increases randomness.\nSure to disable?";
+
+
+
+//bip38
+"BIP38-private key"="BIP38-private key";
+"Import BIP38-private key"="Import BIP38-private key";
+"From BIP38-private key QR Code"="From BIP38-private key QR Code";
+"From BIP38-private key text"="From BIP38-private key text";
+"Enter password of BIP38-private key" ="Enter password of BIP38-private key";
+"Enter your BIP38-private key"="Enter your BIP38-private key ";
+"Not match BIP38-private key format"="Not match BIP38-private key format";
+"Scan BIP38-private key QR Code"="Scan BIP38-private key QR Code";
+"address_detail_private_Key_qr_code_bip38" = "BIP38 Private Key QR Code";
+
+"Based on %@ %@"="Based on %@ %@";
+
+"xrandom_no_source"="No entropy source available.";
+"xrandom_generating_failed"="Generating failed";
+"xrandom_cancel_confirm"="Stop generating?";
+"xrandom_final_confirm"="You have generated %lu private keys from XRandom.";
+"xrandom_stopping"="Stopping…";
+"xrandom_info_detail"="XRandom gathers data from sources to improve randomness.\n\nThe sources are sensors on your device like camera, microphone, magnetic sensor, gravity sensor, etc.";
+"xrandom_info_guide"="\n\nShaking or rotating your device while gathering can improve randomness.";
+"xrandom_info_get_permissions"="Get Permissions";
+"reach_address_count_limit"="Reach address count limit";
+
+
+
+// qrcode
+"Camera Permission Required"="Camera Permission Required";
+"Switch QRCode"="Switch QRCode";
+"Switched to old version QR Codes, sign with Bither Cold <1.1.0"="Switched to old version QR Codes, sign with Bither Cold <1.1.0";
+"Switched to new version QR Codes, sign with Bither Cold ≧1.1.0"="Switched to new version QR Codes, sign with Bither Cold ≧1.1.0";
+"scan_qr_code_from_photo_wrong" = "No QR Code Found";
+
+//avatar
+"Set Avatar"="Set Avatar";
+"From Camera"="From Camera";
+"From Gallery"="From Gallery";
+
+
+/* Crop Photo */
+"Move And Scale" = "Move And Scale";
+
+/* RCheck */
+"rcheck_address_danger_title" = "%@'s r-value in danger";
+"rcheck_address_title" = "r-values of %@";
+"rcheck_button" = "RCheck";
+"rcheck_danger" = "r-value in danger.";
+"rcheck_no_address" = "You have no address to check r-value.";
+"rcheck_recalculate" = "RCheck failed. Resign Tx.";
+"rcheck_safe" = "r-value safe.";
+"rchecking" = "Checking r-values";
+"setting_name_rcheck" = "Check r-value";
+"rchecking_new_tx" = "RCheck";
+"rcheck_new_tx_success" = "RCheck";
+"rcheck_info" = "Duplicated r values in an address' transaction history might result in exposing the private key.\n\nRCheck will check all the r values in history to make sure no duplicated found.";
+"rcheck_fail_recalculate_confirm" = "RCheck failed. Resign Tx?";
+
+/* trash */
+"trash_private_key" = "Move to Trash Can";
+"trash_with_money_warn" = "This address still has some bitcoin.\nYou can't move it to trash can.";
+"trashing_private_key" = "Moving";
+"trash_can" = "Trash Can";
+"trash_can_empty" = "No address in trash can";
+"trash_address_restore" = "Restore Address?";
+
+/* bitcoin unit */
+"setting_name_bitcoin_unit" = "Default Unit";
+
+/* launch sequence */
+"launch_sequence_switch_to_cold" = "Switch to Bither Cold";
+"launch_sequence_switch_to_cold_warn" = "Set this phone as Bither Cold?\n\nBither Cold need to be run on a offline phone.\nYou can monitor Bither Cold by Bither Hot.\nOnce set you can't switch back.";
+
+/* pin code */
+"pin_code_enter_notice" = "Enter your PIN code";
+"pin_code_setting_name" = "PIN Code";
+"pin_code_setting_open" = "Enable PIN Code";
+"pin_code_setting_close" = "Disable PIN Code";
+"pin_code_setting_change" = "Change PIN Code";
+"pin_code_setting_open_msg" = "Enter your PIN code";
+"pin_code_setting_open_repeat_msg" = "Enter your PIN code again";
+"pin_code_setting_open_repeat_wrong" = "PIN codes are not same";
+"pin_code_setting_change_old_msg" = "Enter your old PIN code";
+"pin_code_setting_change_old_wrong" = "Old PIN code is wrong";
+"pin_code_setting_change_new_msg" = "Enter your new PIN code";
+"pin_code_setting_change_new_repeat_msg" = "Enter your new PIN code again";
+"pin_code_setting_change_repeat_wrong" = "New PIN codes are not same";
+"pin_code_setting_close_wrong" = "PIN code is wrong";
+"pin_code_touch_id_promot" = "Unlock Bither";
+
+/* keychain backup */
+"keychain_backup" = "iCloud Keychain Backup";
+"keychain_backup_on" = "On";
+"keychain_backup_off" = "Off";
+"keychain_backup_enable" = "Enable iCloud Keychain Backup?";
+"keychain_backup_disable" = "Disable iCloud Keychain Backup?";
+"keychain_backup_add_from_local" = "Added by this device";
+"keychain_backup_add_from_keychain" = "Added on keychain";
+"keychain_backup_trash_from_local" = "Trashed by this device";
+"keychain_backup_trash_from_keychain" = "Trashed on keychain";
+"keychain_backup_diff_warn" = "iCloud Keychain Backup has diffs below\ncontinue?";
+"keychain_backup_diff_warn_yes" = "Yes";
+"keychain_backup_diff_warn_no" = "No";
+
+/* Private Key Management */
+"private_key_management" = "Private Key Management";
+
+// Raw Private Key
+"raw_private_key_not_safe" = "This private key is not safe";
+
+// QR Code Precision
+"qr_code_quality_setting_name" = "QR Code Precision";
+"qr_code_quality_setting_normal" = "Normal";
+"qr_code_quality_setting_low" = "Low";
+
+// Blockmeta
+"address_option_view_on_blockmeta" = "View on BlockMeta.com";
+
+// Network Monitor Options
+"network_monitor_clear_peers" = "Clear Peers";
+
+// Manual Delete Transaction
+"manual_delete_transaction_warning" = "Delete this transaction?";
+
+"old_version_no_support_change_adress"="old version QR Code does not support change address selection";
+
+// Select Change Address
+"select_change_address_option_name" = "Select Change Address";
+"select_change_address_label" = "Select Change Address";
+"send_confirm_change_to_label" = "Change to:";
+"sign_transaction_change_to_label" = "Change to:";
+"sign_transaction_change_amount_label" = "Cambiar Importe:";
+"select_change_address_change_to_same_warn" = "Pay to address & change address can't be same";
+
+// Sign Message
+"sign_message_activity_name" = "Sign Message";
+"sign_message_button" = "Sign";
+"sign_message_output_copy" = "Copy";
+"sign_message_output_qr" = "Show QR Code";
+"sign_message_output_copied" = "Content Copied";
+"sign_message_input_hint" = "Message to sign";
+"sign_message_select_address" = "Select address to sign message";
+
+// Verify Message Signature
+"verify_message_signature_activity_name" = "Verify Message Signature";
+"verify_message_signature_verify_success" = "Signature is correct";
+"verify_message_signature_verify_failed" = "Signature is not correct";
+"verify_message_signature_verify_button" = "Verify";
+"verify_message_signature_verify_button_verifying" = "Verifying…";
+"verify_message_signature_verify_button_reverify" = "Reverify";
+"sign_message_setting_name" = "Message Signing";
+
+"add_address_watch_only_scanned_address_warning" = "Bither can only monitor Bither Cold monitor QR code,\nnot other addresses.";
+
+// Cold Add HDM
+"hdm_seed_generation_notice" = "HDM is the hybrid of Hierarchical Deterministic & Multisig technics.\n\nHDM uses Multisig to avoid HD wallet\'s vulnerability.\n\nBither uses 2 of 3 Multisig for HDM.\n\nThe 3 keys are generated from 3 HD seeds by Bither Hot, Bither Cold & HDM server.";
+"hdm_cold_pub_key_qr_code_name" = "HDM Cold Account QR Code";
+"hdm_server_qr_code_name" = "HDM Server QR Code";
+"hdm_cold_seed_qr_code" = "HDM Cold Seed QR Code";
+"hdm_hot_seed_qr_code" = "HDM Hot Seed QR Code";
+"hdm_cold_seed_word_list" = "HDM Cold Phrase";
+"hdm_hot_seed_word_list" = "HDM Hot Phrase";
+
+// HDM Check
+"hdm_keychain_check_title_cold" = "HDM Cold";
+"hdm_keychain_check_title_hot" = "HDM Hot";
+
+// Hot Add HDM
+"hdm_keychain_add_hot" = "HDM Hot";
+"hdm_keychain_add_cold" = "HDM Cold";
+"hdm_keychain_add_server" = "HDM Server";
+"hdm_keychain_add_hot_confirm" = "Generate HDM Hot account";
+"hdm_keychain_add_scan_cold" = "Scan HDM Cold Account QR Code";
+"hdm_keychain_add_unsigned_server_qr_code_title" = "Choose HDM Server QR Code on Bither Cold";
+"hdm_keychain_add_scan_signed_server_qr_code_action" = "Scan Signed Server QR Code";
+"hdm_keychain_add_sign_server_qr_code_error" = "Signing server QR code is wrong";
+"hdm_keychain_add_signed_server_qr_code_title" = "Signed Server QR Code";
+"hdm_exception_bid_already_exists" = "HDM Cold account is already bound to another Hot account";
+"hdm_keychain_add_unsigned_server_qr_code_dismiss_confirm" = "Give up signing?";
+
+// Show HDM Address
+"address_group_hdm_hot" = "HDM Hot";
+"hdm_address_sign_tx_server_error" = "HDM server signing went wrong";
+
+// HDM Hot Address Add
+"hdm_address_count_limit" = "Reached HDM address count limit";
+"activity_name_add_hdm_address" = "Add HDM Address";
+"hdm_address_add_count_label" = "How many HDM addresses to add?";
+"hdm_address_add_need_cold_pub" = "Need HDM Cold account QR code to continue.";
+"hdm_address_add_button" = "Add";
+"hdm_address_add_cold_pub_not_match" = "HDM Cold account is not same as before";
+
+// HDM Send
+"hdm_send_with_cold" = "Sign with HDM Cold";
+"hdm_send_with_server" = "Sign with HDM Server";
+"hdm_send_with_cold_no_requested_seed" = "You don\'t have the requested HDM Cold account";
+
+"import_hdm_cold_seed_qr_code"="From HDM Cold Seed QR Code";
+"import_hdm_cold_seed_phrase"="From HDM Cold Phrase";
+"import_hdm_cold_seed_format_error"="Not match HDM cod seed format";
+"can_not_import_hdm_cold_seed"="Can not import HDM Cold Seed";
+"import_hdm_cold_seed_qr_code_scan_title"="Scan HDM Cold Seed QR Code";
+
+
+//hdm recovery
+"hdm_keychain_recovery_setting_name"="HDM Account Recovery";
+"hdm_keychain_recovery_warn"="HDM Account is in recovery";
+"hdm_keychain_recovery_no_addresses"="No HDM address to recover";
+"hdm_keychain_recovery_message"="Send bitcoins from HDM recovery account to other addresses ASAP";
+"address_group_hdm_recovery"="HDM Recovery";
+"activity_name_hdm_import_word_list"="Import HDM Phrase";
+"hdm_import_word_list_input_hint"="Next Word";
+"hdm_import_word_list_empty_message"="Enter HDM Phrase";
+"hdm_import_word_list_wrong_word_warn"="Invalid word";
+"hdm_import_word_list_delete"="Delete";
+"hdm_import_word_list_replace"="Replace";
+"not_verify_bither_private_key_qrcode"="Not verify Bither private key QR Code";
+
+// hdm reset server password
+"hdm_reset_server_password_password_wrong_confirm" = "HDM Server authentication failed.\nUse HDM Cold to reauthorize?";
+"hdm_reset_server_password_confirm" = "Reset HDM Server authentication?";
+"hdm_reset_server_password_setting_name" = "Reset HDM Server Authentication";
+"hdm_reset_server_password_success" = "HDM Server Authentication is reset.";
+
+// hdm singular mode
+"hdm_singular_check_title" = "Singular Mode";
+"hdm_singular_cold_seed_remember_warn" = "HDM Cold seed is very important.\nYou must save it by yourself.";
+"hdm_singular_cold_seed_remember_button" = "I have saved my HDM Cold seed.";
+"hdm_singular_cold_seed_tab_words" = "Seed Phrase";
+"hdm_singular_cold_seed_tab_qr" = "QR Code";
+"hdm_singular_mode_info" = "Singular Mode runs on one device.\nDo not need Bither Cold.\nBut you need to keep Cold seed safely.\nCold seed is the only way to recover.";
+"hdm_singular_mode_cancel_warn" = "HDM singular mode can not be interrupted.";
+
+// address alias
+"address_alias_manage" = "Address Tag";
+"address_alias_add" = "Set Address Tag";
+"address_alias_remove" = "Remove Address Tag";
+"address_alias_edit" = "Edit Address Tag";
+"address_alias_input_label" = "Enter tag for this address";
+"address_alias_input_hint" = "Tag";
+"address_alias_remove_confirm" = "Remove tag for this address?";
+
+// password strength
+"password_strength_weak" = "Weak";
+"password_strength_normal" = "Normal";
+"password_strength_medium" = "Medium";
+"password_strength_strong" = "Strong";
+"password_strength_very_strong" = "Very Strong";
+"password_strength_warning" = "Sure to use %@ strength password?";
+"password_strength_check" = "Password Strength Check";
+"password_strength_check_on" = "On";
+"password_strength_check_off" = "Off";
+"password_strength_check_off_warn" = "Sure to turn off password strength check?";
+
+// add hd account
+"add_hd_account_label" = "Generate New HD Account";
+"add_hd_account_button" = "Generate";
+"add_hd_account_tab_hd" = "HD Account";
+"add_hd_account_tab_other" = "Others";
+"add_hd_account_other_hdm" = "Generate HDM Account";
+"add_hd_account_other_private" = "Generate Normal Private Keys";
+"add_hd_account_monitor" = "Monitor Bither Cold";
+"add_hd_account_monitor_success" = "Monitor Success";
+"add_hd_account_view_label" = "You already have an HD account.";
+"add_hd_account_seed_qr_code" = "HD Account Seed QR Code";
+"add_hd_account_seed_qr_phrase" = "HD Account Seed Phrase";
+"add_hd_account_show_seed_label" = "HD seed can be used to recover HD account.\nPlease keep it somewhere safe.";
+"add_hd_account_show_seed_button" = "I have kept it safely.";
+"private_key_count_limit" = "Reached private key count limit";
+"watch_only_address_count_limit" = "Reached watch only address count limit";
+"import_hd_account_seed_qr_code" = "From HD Account Seed QR Code";
+"import_hd_account_seed_phrase" = "From HD Account Phrase";
+"import_hd_account_seed_qr_scan_title" = "Import HD Account";
+"import_hd_account_seed_qr_scan_message" = "Scan HD Account Seed QR Code";
+"import_hd_account_seed_format_error"="Not match HD account seed format";
+
+"add_hd_account_label" = "Generar nueva cuenta HD";
+"add_hd_account_button" = "Generar";
+"add_hd_account_tab_hd" = "Cuenta HD";
+"add_hd_account_tab_other" = "Otras";
+"add_hd_account_other_hdm" = "Generar cuenta HD";
+"add_hd_account_other_private" = "Generar claves privadas normales";
+"add_hd_account_monitor" = "Monitorear Bither frío";
+"add_hd_account_monitor_success" = "Monitoreo exitoso";
+"add_hd_account_view_label" = "Ya tiene una cuenta HD.";
+"add_hd_account_seed_qr_code" = "Semilla en código QR de la cuenta HD";
+"add_hd_account_seed_qr_phrase" = "Frase semilla de cuenta HD";
+"add_hd_account_show_seed_label" = "Semilla HD puede ser usada para recuperar cuenta HD.\nGuardese en un lugar seguro.";
+"add_hd_account_show_seed_button" = "La guardé a salvo.";
+"private_key_count_limit" = "Reached private key count limit";
+"watch_only_address_count_limit" = "Reached watch only address count limit";
+"import_hd_account_seed_qr_code" = "From HD Account Seed QR Code";
+"import_hd_account_seed_phrase" = "From HD Account Phrase";
+"import_hd_account_seed_qr_scan_title" = "Import HD Account";
+"import_hd_account_seed_qr_scan_message" = "Scan HD Account Seed QR Code";
+"import_hd_account_seed_format_error"="Not match HD account seed format";
+
+// show hd account
+"address_group_hd" = "Cuenta HD";
+
+// bither team address
+"bither_team_address" = "Dirección del programador";
+"bither_team_address_copied" = "Dirección del programador copiada";
+
+// vanity address length
+"vanity_address_length" = "Longitud de dirección Vanidosa";
+"vanity_address_none" = "Ninguna";
+
+// payment address setting
+"payment_address_setting" = "Dirección de Pago";
+"payment_address_none" = "Ninguna";
+
+// first run dialog
+"first_run_dialog_title" = "Para proteger su bitcoin:";
+"first_run_dialog_line_1" = "NUNCA DESINSTALE Bither.";
+"first_run_dialog_line_2" = "NUNCA OLVIDE su contraseña.";
