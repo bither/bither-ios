@@ -123,7 +123,7 @@
 "Enter your private key text" = "Introduzca el texto de la clave privada";
 
 /* No comment provided by engineer. */
-"Fee:" = "Cuota:";
+"Fee:" = "Tasa:";
 
 /* No comment provided by engineer. */
 "Finish" = "Finalizar";
@@ -165,7 +165,7 @@
 "Low" = "Baja";
 
 /* No comment provided by engineer. */
-"Me" = "Mio";
+"Me" = "Yo";
 
 /* No comment provided by engineer. */
 "Monitor Bither Cold failed." = "Falló monitoreo de Bither Fría.";
@@ -183,7 +183,7 @@
 "Next Page" = "Siguiente Página";
 
 /* username_can_not_be_more_than_10_words */
-"Nickname length can not be more than 10" = "Longitud de Apodo no puede ser más de 10"
+"Nickname length can not be more than 10" = "Longitud del Apodo no puede ser más de 10"
 
 
 /* No comment provided by engineer. */
@@ -226,52 +226,52 @@
 "Passwords not same." = "Contraseñas no son iguales.";
 
 /* No comment provided by engineer. */
-"Pay to" = "Pagarle a";
+"Pay to" = "Pagar a";
 
 /* No comment provided by engineer. */
-"Please turn off Cellular Data" = "Please turn off Cellular Data";
+"Please turn off Cellular Data" = "Por favor apague data por celular";
 
 /* No comment provided by engineer. */
-"Please turn off WIFI" = "Please turn off WIFI";
+"Please turn off WIFI" = "Por favor apague WIFI";
 
 /* No comment provided by engineer. */
-"Please wait…" = "Please wait…";
+"Please wait…" = "Espere por favor…";
 
 /* No comment provided by engineer. */
-"private key" = "private key";
+"private key" = "llave privada";
 
 /* No comment provided by engineer. */
-"Private key of %@" = "Private key of %@";
+"Private key of %@" = "LLave privada de %@";
 
 /* No comment provided by engineer. */
-"Private Key QR Code" = "Private Key QR Code";
+"Private Key QR Code" = "Códio QR de LLave privada";
 
 /* No comment provided by engineer. */
-"Private keys are safe." = "Private keys are safe.";
+"Private keys are safe." = "LLaves privadas a salvo.";
 
 /* No comment provided by engineer. */
-"Private keys in danger." = "Private keys in danger.";
+"Private keys in danger." = "LLaves privadas en peligro.";
 
 /* No comment provided by engineer. */
-"QR Code" = "QR Code";
+"QR Code" = "Código QR";
 
 /* No comment provided by engineer. */
-"QR Code saved." = "QR Code saved.";
+"QR Code saved." = "Código QR grabado.";
 
 /* No comment provided by engineer. */
-"Received" = "Received";
+"Received" = "Recivido";
 
 /* No comment provided by engineer. */
-"Received:" = "Received:";
+"Received:" = "Recivido:";
 
 /* No comment provided by engineer. */
-"Scan %@" = "Scan %@";
+"Scan %@" = "Escanear %@";
 
 /* No comment provided by engineer. */
-"Scan %@\nPage %d, Total %d" = "Scan %1$@\nPage %2$d, Total %3$d";
+"Scan %@\nPage %d, Total %d" = "Escanear %1$@\nPágina %2$d, Total %3$d";
 
 /* No comment provided by engineer. */
-"Scan Bitcoin Address" = "Scan Bitcoin Address";
+"Scan Bitcoin Address" = "Escanear dirección de bitcoin";
 
 /* No comment provided by engineer. */
 "Scan Bither Cold to sign" = "Scan Bither Cold to sign";
