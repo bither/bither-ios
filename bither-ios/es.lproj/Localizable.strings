@@ -272,19 +272,19 @@
 
 /* No comment provided by engineer. */
 "Scan Bitcoin Address" = "Escanear dirección de bitcoin";
-/****************************************************************/
-/****************************************************************/
-/****************************************************************/
-/****************************************************************/
 
 /* No comment provided by engineer. */
-"Scan Bither Cold to sign" = "Scan Bither Cold to sign";
+"Scan Bither Cold to sign" = "Escanear Bither frío para firmar";
 
 /* No comment provided by engineer. */
-"Scan by clone destination" = "Scan by clone destination";
+"Scan by clone destination" = "Escanear por por destino clonado";
 
 /* No comment provided by engineer. */
-"Scan Private Key QR Code" = "Scan Private Key QR Code";
+"Scan Private Key QR Code" = "Escanear código QR privado";
+/****************************************************************/
+/****************************************************************/
+/****************************************************************/
+/****************************************************************/
 
 /* No comment provided by engineer. */
 "Scan QR Code for Bitcoin address" = "Scan QR Code for Bitcoin address";
