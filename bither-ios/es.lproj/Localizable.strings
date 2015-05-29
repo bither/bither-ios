@@ -274,17 +274,13 @@
 "Scan Bitcoin Address" = "Escanear dirección de bitcoin";
 
 /* No comment provided by engineer. */
-"Scan Bither Cold to sign" = "Escanear Bither frío para firmar";
+"Scan Bither Cold to sign" = "Escanear Bither Frío para firmar";
 
 /* No comment provided by engineer. */
 "Scan by clone destination" = "Escanear por por destino clonado";
 
 /* No comment provided by engineer. */
 "Scan Private Key QR Code" = "Escanear código QR privado";
-/****************************************************************/
-/****************************************************************/
-/****************************************************************/
-/****************************************************************/
 
 /* No comment provided by engineer. */
 "Scan QR Code for Bitcoin address" = "Escanear código QR para dirección de Bitcoin";
@@ -296,7 +292,7 @@
 "Scan The Clone Source" = "Escanear la fuente clon";
 
 /* No comment provided by engineer. */
-"Scan to watch Bither Cold" = "Scan to watch Bither Cold";
+"Scan to watch Bither Cold" = "Escanear para observar Bither Frío";
 
 /* No comment provided by engineer. */
 "Scan unsigned transaction failed" = "Scan unsigned transaction failed";
@@ -308,10 +304,10 @@
 "Scan with Bither Cold" = "Scan with Bither Cold";
 
 /* No comment provided by engineer. */
-"Scan with Bither Hot to sign tx" = "Scan with Bither Hot to sign tx";
+"Scan with Bither Hot to sign tx" = "Scan with Bither Caliente to sign tx";
 
 /* No comment provided by engineer. */
-"Scan with Bither Hot to watch Bither Cold" = "Scan with Bither Hot to watch Bither Cold";
+"Scan with Bither Hot to watch Bither Cold" = "Scan with Bither Caliente to watch Bither Cold";
 
 /* No comment provided by engineer. */
 "Select an address to donate" = "Select an address to donate";
@@ -324,6 +320,10 @@
 
 /* No comment provided by engineer. */
 "Send failed." = "Send failed.";
+/****************************************************************/
+/****************************************************************/
+/****************************************************************/
+/****************************************************************/
 
 /* No comment provided by engineer. */
 "Send success." = "Send success.";
@@ -400,7 +400,7 @@
 
 
 "choose_mode_cold_confirm" = "Once mode is set, it can\'t be changed.\nBither Cold need to be run on a offline phone.\nSet this phone as Bither Cold?";
-"choose_mode_warm_confirm" = "Once mode is set, it can\'t be changed.\nBither Hot is an online bitcoin wallet.\nSet this phone as Bither Hot?";
+"choose_mode_warm_confirm" = "Once mode is set, it can\'t be changed.\nBither Caliente is an online bitcoin wallet.\nSet this phone as Bither Caliente?";
 
 "balance_detail_transaction_count" = "Transacción";
 "balance_detail_total_incoming" = "Recivido";
@@ -510,7 +510,7 @@
 
 /* launch sequence */
 "launch_sequence_switch_to_cold" = "Switch to Bither Cold";
-"launch_sequence_switch_to_cold_warn" = "Set this phone as Bither Cold?\n\nBither Cold need to be run on a offline phone.\nYou can monitor Bither Cold by Bither Hot.\nOnce set you can't switch back.";
+"launch_sequence_switch_to_cold_warn" = "Set this phone as Bither Cold?\n\nBither Cold need to be run on a offline phone.\nYou can monitor Bither Cold by Bither Caliente.\nOnce set you can't switch back.";
 
 /* pin code */
 "pin_code_enter_notice" = "Enter your PIN code";
@@ -583,34 +583,34 @@
 "sign_message_select_address" = "Select address to sign message";
 
 // Verify Message Signature
-"verify_message_signature_activity_name" = "Verify Message Signature";
-"verify_message_signature_verify_success" = "Signature is correct";
-"verify_message_signature_verify_failed" = "Signature is not correct";
-"verify_message_signature_verify_button" = "Verify";
-"verify_message_signature_verify_button_verifying" = "Verifying…";
-"verify_message_signature_verify_button_reverify" = "Reverify";
-"sign_message_setting_name" = "Message Signing";
+"verify_message_signature_activity_name" = "Verificar firma de mensaje";
+"verify_message_signature_verify_success" = "Firma es correcta";
+"verify_message_signature_verify_failed" = "Firma NO es correcta";
+"verify_message_signature_verify_button" = "Verificar";
+"verify_message_signature_verify_button_verifying" = "Verificando…";
+"verify_message_signature_verify_button_reverify" = "Reverificar";
+"sign_message_setting_name" = "Firma de Mensaje";
 
 "add_address_watch_only_scanned_address_warning" = "Bither can only monitor Bither Cold monitor QR code,\nnot other addresses.";
 
 // Cold Add HDM
-"hdm_seed_generation_notice" = "HDM is the hybrid of Hierarchical Deterministic & Multisig technics.\n\nHDM uses Multisig to avoid HD wallet\'s vulnerability.\n\nBither uses 2 of 3 Multisig for HDM.\n\nThe 3 keys are generated from 3 HD seeds by Bither Hot, Bither Cold & HDM server.";
+"hdm_seed_generation_notice" = "HDM is the hybrid of Hierarchical Deterministic & Multisig technics.\n\nHDM uses Multisig to avoid HD wallet\'s vulnerability.\n\nBither uses 2 of 3 Multisig for HDM.\n\nThe 3 keys are generated from 3 HD seeds by Bither Caliente, Bither Cold & HDM server.";
 "hdm_cold_pub_key_qr_code_name" = "HDM Cold Account QR Code";
 "hdm_server_qr_code_name" = "HDM Server QR Code";
 "hdm_cold_seed_qr_code" = "HDM Cold Seed QR Code";
-"hdm_hot_seed_qr_code" = "HDM Hot Seed QR Code";
+"hdm_hot_seed_qr_code" = "HDM Caliente Seed QR Code";
 "hdm_cold_seed_word_list" = "HDM Cold Phrase";
-"hdm_hot_seed_word_list" = "HDM Hot Phrase";
+"hdm_hot_seed_word_list" = "HDM Caliente Phrase";
 
 // HDM Check
 "hdm_keychain_check_title_cold" = "HDM Cold";
-"hdm_keychain_check_title_hot" = "HDM Hot";
+"hdm_keychain_check_title_hot" = "HDM Caliente";
 
 // Hot Add HDM
-"hdm_keychain_add_hot" = "HDM Hot";
+"hdm_keychain_add_hot" = "HDM Caliente";
 "hdm_keychain_add_cold" = "HDM Cold";
 "hdm_keychain_add_server" = "HDM Server";
-"hdm_keychain_add_hot_confirm" = "Generate HDM Hot account";
+"hdm_keychain_add_hot_confirm" = "Generate HDM Caliente account";
 "hdm_keychain_add_scan_cold" = "Scan HDM Cold Account QR Code";
 "hdm_keychain_add_unsigned_server_qr_code_title" = "Choose HDM Server QR Code on Bither Cold";
 "hdm_keychain_add_scan_signed_server_qr_code_action" = "Scan Signed Server QR Code";
@@ -620,7 +620,7 @@
 "hdm_keychain_add_unsigned_server_qr_code_dismiss_confirm" = "Give up signing?";
 
 // Show HDM Address
-"address_group_hdm_hot" = "HDM Hot";
+"address_group_hdm_hot" = "HDM Caliente";
 "hdm_address_sign_tx_server_error" = "HDM server signing went wrong";
 
 // HDM Hot Address Add
@@ -641,7 +641,7 @@
 "import_hdm_cold_seed_format_error"="Not match HDM cod seed format";
 "can_not_import_hdm_cold_seed"="Can not import HDM Cold Seed";
 "import_hdm_cold_seed_qr_code_scan_title"="Scan HDM Cold Seed QR Code";
-
+*********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************   
 
 //hdm recovery
 "hdm_keychain_recovery_setting_name"="HDM Account Recovery";
@@ -664,70 +664,49 @@
 "hdm_reset_server_password_success" = "HDM Server Authentication is reset.";
 
 // hdm singular mode
-"hdm_singular_check_title" = "Singular Mode";
-"hdm_singular_cold_seed_remember_warn" = "HDM Cold seed is very important.\nYou must save it by yourself.";
-"hdm_singular_cold_seed_remember_button" = "I have saved my HDM Cold seed.";
-"hdm_singular_cold_seed_tab_words" = "Seed Phrase";
-"hdm_singular_cold_seed_tab_qr" = "QR Code";
-"hdm_singular_mode_info" = "Singular Mode runs on one device.\nDo not need Bither Cold.\nBut you need to keep Cold seed safely.\nCold seed is the only way to recover.";
-"hdm_singular_mode_cancel_warn" = "HDM singular mode can not be interrupted.";
+"hdm_singular_check_title" = "Modo singular";
+"hdm_singular_cold_seed_remember_warn" = "La semilla HDM Fría es muy importante.\nLa debe salvar por su cuenta.";
+"hdm_singular_cold_seed_remember_button" = "He guardado my semilla HD Fría.";
+"hdm_singular_cold_seed_tab_words" = "Frase de semilla";
+"hdm_singular_cold_seed_tab_qr" = "Código QR";
+"hdm_singular_mode_info" = "Modo singular corre en un dispositivo.\ No necesita Bither Frío.\n Pero necesita guardar la semilla con seguridad.\La semilla fría es la única manera de recuperar.";
+"hdm_singular_mode_cancel_warn" = "Modo singular HDM no puede interrumpirse.";
 
 // address alias
-"address_alias_manage" = "Address Tag";
-"address_alias_add" = "Set Address Tag";
-"address_alias_remove" = "Remove Address Tag";
-"address_alias_edit" = "Edit Address Tag";
-"address_alias_input_label" = "Enter tag for this address";
-"address_alias_input_hint" = "Tag";
-"address_alias_remove_confirm" = "Remove tag for this address?";
+"address_alias_manage" = "Etiqueta de dirección";
+"address_alias_add" = "Fijar etiqueta de direccíon";
+"address_alias_remove" = "Quitar etiqueta de direccíon";
+"address_alias_edit" = "Editar etiqueta de direccíon";
+"address_alias_input_label" = "Añadir etiqueta de direccíon";
+"address_alias_input_hint" = "Etiqueta";
+"address_alias_remove_confirm" = "Quitarle el etiqueta a esta dirección?";
 
 // password strength
-"password_strength_weak" = "Weak";
+"password_strength_weak" = "Debil";
 "password_strength_normal" = "Normal";
-"password_strength_medium" = "Medium";
-"password_strength_strong" = "Strong";
-"password_strength_very_strong" = "Very Strong";
-"password_strength_warning" = "Sure to use %@ strength password?";
-"password_strength_check" = "Password Strength Check";
+"password_strength_medium" = "Media";
+"password_strength_strong" = "Fuerte";
+"password_strength_very_strong" = "Muy fuerte";
+"password_strength_warning" = "Seguro quiere la contraseña de %@ resitencia?";
+"password_strength_check" = "Chequeo de resistencia de contraseña";
 "password_strength_check_on" = "On";
 "password_strength_check_off" = "Off";
-"password_strength_check_off_warn" = "Sure to turn off password strength check?";
+"password_strength_check_off_warn" = "De verdad apagar verificación de resistencia de contraseña?";
 
 // add hd account
-"add_hd_account_label" = "Generate New HD Account";
-"add_hd_account_button" = "Generate";
-"add_hd_account_tab_hd" = "HD Account";
-"add_hd_account_tab_other" = "Others";
-"add_hd_account_other_hdm" = "Generate HDM Account";
-"add_hd_account_other_private" = "Generate Normal Private Keys";
-"add_hd_account_monitor" = "Monitor Bither Cold";
-"add_hd_account_monitor_success" = "Monitor Success";
-"add_hd_account_view_label" = "You already have an HD account.";
-"add_hd_account_seed_qr_code" = "HD Account Seed QR Code";
-"add_hd_account_seed_qr_phrase" = "HD Account Seed Phrase";
-"add_hd_account_show_seed_label" = "HD seed can be used to recover HD account.\nPlease keep it somewhere safe.";
-"add_hd_account_show_seed_button" = "I have kept it safely.";
-"private_key_count_limit" = "Reached private key count limit";
-"watch_only_address_count_limit" = "Reached watch only address count limit";
-"import_hd_account_seed_qr_code" = "From HD Account Seed QR Code";
-"import_hd_account_seed_phrase" = "From HD Account Phrase";
-"import_hd_account_seed_qr_scan_title" = "Import HD Account";
-"import_hd_account_seed_qr_scan_message" = "Scan HD Account Seed QR Code";
-"import_hd_account_seed_format_error"="Not match HD account seed format";
-
 "add_hd_account_label" = "Generar nueva cuenta HD";
 "add_hd_account_button" = "Generar";
 "add_hd_account_tab_hd" = "Cuenta HD";
 "add_hd_account_tab_other" = "Otras";
 "add_hd_account_other_hdm" = "Generar cuenta HD";
 "add_hd_account_other_private" = "Generar claves privadas normales";
-"add_hd_account_monitor" = "Monitorear Bither frío";
+"add_hd_account_monitor" = "Monitorear Bither Frío";
 "add_hd_account_monitor_success" = "Monitoreo exitoso";
 "add_hd_account_view_label" = "Ya tiene una cuenta HD.";
 "add_hd_account_seed_qr_code" = "Semilla en código QR de la cuenta HD";
 "add_hd_account_seed_qr_phrase" = "Frase semilla de cuenta HD";
 "add_hd_account_show_seed_label" = "Semilla HD puede ser usada para recuperar cuenta HD.\nGuardese en un lugar seguro.";
-"add_hd_account_show_seed_button" = "La guardé a salvo.";
+"add_hd_account_show_seed_button" = "Guardada a salvo.";
 "private_key_count_limit" = "Alcanzó la cantidad límite de llaves privadas";
 "watch_only_address_count_limit" = "Alcanzó el límite de direcciones a observar";
 "import_hd_account_seed_qr_code" = "Del código QR de la semilla de la cuenta HD";
@@ -748,7 +727,7 @@
 "vanity_address_none" = "Ninguna";
 
 // payment address setting
-"payment_address_setting" = "Dirección de Pago";
+"payment_address_setting" = "Dirección de pago";
 "payment_address_none" = "Ninguna";
 
 // first run dialog
