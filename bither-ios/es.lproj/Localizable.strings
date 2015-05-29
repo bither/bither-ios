@@ -287,13 +287,13 @@
 /****************************************************************/
 
 /* No comment provided by engineer. */
-"Scan QR Code for Bitcoin address" = "Scan QR Code for Bitcoin address";
+"Scan QR Code for Bitcoin address" = "Escanear código QR para dirección de Bitcoin";
 
 /* No comment provided by engineer. */
-"Scan QR code No.1 provided by Bither" = "Scan QR code No.1 provided by Bither";
+"Scan QR code No.1 provided by Bither" = "Escanear código QR No.1 proveido por Bither";
 
 /* No comment provided by engineer. */
-"Scan The Clone Source" = "Scan The Clone Source";
+"Scan The Clone Source" = "Escanear la fuente clon";
 
 /* No comment provided by engineer. */
 "Scan to watch Bither Cold" = "Scan to watch Bither Cold";
@@ -728,13 +728,13 @@
 "add_hd_account_seed_qr_phrase" = "Frase semilla de cuenta HD";
 "add_hd_account_show_seed_label" = "Semilla HD puede ser usada para recuperar cuenta HD.\nGuardese en un lugar seguro.";
 "add_hd_account_show_seed_button" = "La guardé a salvo.";
-"private_key_count_limit" = "Reached private key count limit";
-"watch_only_address_count_limit" = "Reached watch only address count limit";
-"import_hd_account_seed_qr_code" = "From HD Account Seed QR Code";
-"import_hd_account_seed_phrase" = "From HD Account Phrase";
-"import_hd_account_seed_qr_scan_title" = "Import HD Account";
-"import_hd_account_seed_qr_scan_message" = "Scan HD Account Seed QR Code";
-"import_hd_account_seed_format_error"="Not match HD account seed format";
+"private_key_count_limit" = "Alcanzó la cantidad límite de llaves privadas";
+"watch_only_address_count_limit" = "Alcanzó el límite de direcciones a observar";
+"import_hd_account_seed_qr_code" = "Del código QR de la semilla de la cuenta HD";
+"import_hd_account_seed_phrase" = "De la frase para la cuenta HD";
+"import_hd_account_seed_qr_scan_title" = "Importar cuenta HD";
+"import_hd_account_seed_qr_scan_message" = "Escanear código QR de la semilla de la cuenta HD";
+"import_hd_account_seed_format_error"="El formato de semilla para cuentas HD no es valido";
 
 // show hd account
 "address_group_hd" = "Cuenta HD";
