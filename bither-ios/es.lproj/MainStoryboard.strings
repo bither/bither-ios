@@ -210,7 +210,7 @@
 "XCg-Ta-A0q.normalTitle" = "Reintentar";
 
 /* Class = "UILabel"; text = "Label"; ObjectID = "XVA-OX-iFc"; */
-"XVA-OX-iFc.text" = "Retry";
+"XVA-OX-iFc.text" = "Etiqueta";
 
 /* Class = "UILabel"; text = "Building Wallet…"; ObjectID = "YDg-IR-7hP"; */
 "YDg-IR-7hP.text" = "Elaborando cartera…";
@@ -255,40 +255,40 @@
 "bq1-3M-RqW.text" = "Etiqueta";
 
 /* Class = "UILabel"; text = "value"; ObjectID = "cAB-ok-gus"; */
-"cAB-ok-gus.text" = "value";
+"cAB-ok-gus.text" = "valor";
 
 /* Class = "UILabel"; text = "1JT3"; ObjectID = "cdq-og-ME5"; */
 "cdq-og-ME5.text" = "1JT3";
 
 /* Class = "UIButton"; normalTitle = "Add This Private Key"; ObjectID = "ckY-fV-MzW"; */
-"ckY-fV-MzW.normalTitle" = "Add This Private Key";
+"ckY-fV-MzW.normalTitle" = "Añadir esta llave privada";
 
 /* Class = "UILabel"; text = "Can not find private key"; ObjectID = "eEx-7U-SVT"; */
-"eEx-7U-SVT.text" = "Can not find private key";
+"eEx-7U-SVT.text" = "No se encuentra la llave privada";
 
 /* Class = "UITextField"; placeholder = "0.00"; ObjectID = "eP1-s3-zSH"; */
 "eP1-s3-zSH.placeholder" = "0.00";
 
 /* Class = "UITextField"; placeholder = "Bitcoin address"; ObjectID = "fCj-hW-RGp"; */
-"fCj-hW-RGp.placeholder" = "Bitcoin address";
+"fCj-hW-RGp.placeholder" = "Dirección de bitcoin";
 
 /* Class = "UIButton"; normalTitle = "C"; ObjectID = "fhw-Xa-7ci"; */
 "fhw-Xa-7ci.normalTitle" = "C";
 
 /* Class = "UILabel"; text = "Pay to"; ObjectID = "g3O-Ch-Qm9"; */
-"g3O-Ch-Qm9.text" = "Pay to";
+"g3O-Ch-Qm9.text" = "Pagar a";
 
 /* Class = "UIButton"; normalTitle = "Generate"; ObjectID = "gHB-fo-cHb"; */
-"gHB-fo-cHb.normalTitle" = "Generate";
+"gHB-fo-cHb.normalTitle" = "Generar";
 
 /* Class = "UILabel"; text = "Change to"; ObjectID = "gL9-bD-fq2"; */
-"gL9-bD-fq2.text" = "Change to";
+"gL9-bD-fq2.text" = "Cambiar a";
 
 /* Class = "UILabel"; text = "Label"; ObjectID = "gbe-Xl-yCZ"; */
 "gbe-Xl-yCZ.text" = "Etiqueta";
 
 /* Class = "UILabel"; text = "Verify Message Signature"; ObjectID = "gvK-WF-XJl"; */
-"gvK-WF-XJl.text" = "Verify Message Signature";
+"gvK-WF-XJl.text" = "Verificar firma del mensaje";
 
 /* Class = "UILabel"; text = "Label"; ObjectID = "hBl-Md-UWA"; */
 "hBl-Md-UWA.text" = "Etiqueta";
@@ -297,25 +297,25 @@
 "hQL-T3-YNx.normalTitle" = "0";
 
 /* Class = "UILabel"; text = "Private Key"; ObjectID = "he8-50-11R"; */
-"he8-50-11R.text" = "Private Key";
+"he8-50-11R.text" = "LLave privada";
 
 /* Class = "UILabel"; text = "Balance:"; ObjectID = "hsE-yP-NwX"; */
 "hsE-yP-NwX.text" = "Balance:";
 
 /* Class = "UIButton"; normalTitle = "Next Word"; ObjectID = "ifX-vq-zRq"; */
-"ifX-vq-zRq.normalTitle" = "Next Word";
+"ifX-vq-zRq.normalTitle" = "Próxima palabra";
 
 /* Class = "UILabel"; text = "Change Amount"; ObjectID = "ipI-cb-OYV"; */
-"ipI-cb-OYV.text" = "Change Amount";
+"ipI-cb-OYV.text" = "Cambiar cantidad";
 
 /* Class = "UILabel"; text = "Amount"; ObjectID = "jBb-nb-rnn"; */
-"jBb-nb-rnn.text" = "Amount";
+"jBb-nb-rnn.text" = "Cantidad";
 
 /* Class = "UILabel"; text = "%"; ObjectID = "jDX-wx-Vm4"; */
 "jDX-wx-Vm4.text" = "%";
 
 /* Class = "UILabel"; text = "Network failure."; ObjectID = "jQj-PR-DVU"; */
-"jQj-PR-DVU.text" = "Network failure.";
+"jQj-PR-DVU.text" = "Fallo en la red.";
 
 /* Class = "UILabel"; text = "Label"; ObjectID = "kKw-54-5PB"; */
 "kKw-54-5PB.text" = "Etiqueta";
@@ -438,19 +438,19 @@
 "vi1-Kv-pOT.text" = "$";
 
 /* Class = "UILabel"; text = "name"; ObjectID = "viE-UV-mZx"; */
-"viE-UV-mZx.text" = "name";
+"viE-UV-mZx.text" = "nombre";
 
 /* Class = "UILabel"; text = "Address"; ObjectID = "wb7-kB-0ec"; */
-"wb7-kB-0ec.text" = "Address";
+"wb7-kB-0ec.text" = "Dirección";
 
 /* Class = "UILabel"; text = "Private Key"; ObjectID = "x9d-Sc-rrj"; */
-"x9d-Sc-rrj.text" = "Private Key";
+"x9d-Sc-rrj.text" = "LLave privada";
 
 /* Class = "UITextField"; placeholder = "0.00"; ObjectID = "xBU-Zh-e2V"; */
 "xBU-Zh-e2V.placeholder" = "0.00";
 
 /* Class = "UILabel"; text = "Signing Address"; ObjectID = "xhb-O8-bSH"; */
-"xhb-O8-bSH.text" = "Signing Address";
+"xhb-O8-bSH.text" = "Firmando dirección";
 
 /* Class = "UITextField"; placeholder = "Password"; ObjectID = "xmE-uG-hIe"; */
 "xmE-uG-hIe.placeholder" = "Contraseña"
