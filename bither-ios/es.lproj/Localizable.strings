@@ -1,11 +1,11 @@
 /* No comment provided by engineer. */
-"%0.f mins ago" = "%0.f mins ago";
+"%0.f mins ago" = "Hace %0.f minutos";
 
 /* No comment provided by engineer. */
-"%d hour ago" = "%d hour ago";
+"%d hour ago" = "Hace %d horas";
 
 /* No comment provided by engineer. */
-"Address copied." = "Address copied.";
+"Address copied." = "Dirección copiada.";
 
 /* No comment provided by engineer. */
 "Amount:" = "Importe:";
@@ -14,7 +14,7 @@
 "Back up private key" = "Copia de respaldo de clave privada";
 
 /* No comment provided by engineer. */
-"Bither Cold Watch Only QR Code" = "Bither Cold Watch Only QR Code";
+"Bither Cold Watch Only QR Code" = "Bither Frío código QR solo para observar";
 
 /* No comment provided by engineer. */
 "Bitstamp" = "Bitstamp";
