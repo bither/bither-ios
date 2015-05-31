@@ -1,4 +1,4 @@
-/* No comment provided by engineer. */
+                                                               /* No comment provided by engineer. */
 "%0.f mins ago" = "Hace %0.f minutos";
 
 /* No comment provided by engineer. */
@@ -90,10 +90,10 @@
 "Confirm New Password" = "Comprobar contraseña nueva";
 
 /* No comment provided by engineer. */
-"Confirmation: %d" = "Confrimación: %d";
+"Confirmation: %d" = "Confirmación: %d";
 
 /* No comment provided by engineer. */
-"Confirmation: 100+" = "Confrimación: 100+";
+"Confirmation: 100+" = "Confirmación: 100+";
 
 /* No comment provided by engineer. */
 "Default Currency" = "Moneda por defecto";
@@ -271,7 +271,7 @@
 "Scan %@\nPage %d, Total %d" = "Escanear %1$@\nPágina %2$d, Total %3$d";
 
 /* No comment provided by engineer. */
-"Scan Bitcoin Address" = "Escanear dirección de bitcoin";
+"Scan Bitcoin Address" = "Escanear dirección de Bitcoin";
 
 /* No comment provided by engineer. */
 "Scan Bither Cold to sign" = "Escanear Bither Frío para firmar";
@@ -337,40 +337,41 @@
 "Set Password" = "Fijar contraseña";
 
 /* No comment provided by engineer. */
-"Sign Transaction" = "Sign Transaction";
+"Sign Transaction" = "Firmar Transacción";
 
 /* No comment provided by engineer. */
-"Sign Trasaction" = "Sign Trasaction";
+/* mispelling error repeated? signing transaction*/
+"Sign Trasaction" = "Firmando transacción";
 
 /* No comment provided by engineer. */
-"Signed Transaction" = "Signed Transaction";
+"Signed Transaction" = "Transacción firmada";
 
 /* No comment provided by engineer. */
-"Signing Transaction" = "Signing Transaction";
+"Signing Transaction" = "Firmando transacción";
 
 /* No comment provided by engineer. */
-"Stop Monitoring" = "Stop Monitoring";
+"Stop Monitoring" = "Parar de vigilar";
 
 /* No comment provided by engineer. */
-"Sure to stop monitoring this address?" = "Sure to stop monitoring this address?";
+"Sure to stop monitoring this address?" = "Seguro que quiere parar de vigilar esta dirección?";
 
 /* No comment provided by engineer. */
-"Sync always" = "Sync always";
+"Sync always" = "Sync siempre";
 
 /* No comment provided by engineer. */
-"Sync over wifi only" = "Sync over wifi only";
+"Sync over wifi only" = "Sync con wifi solamente";
 
 /* No comment provided by engineer. */
-"Thank you for donating." = "Thank you for donating.";
+"Thank you for donating." = "Gracias por donar.";
 
 /* No comment provided by engineer. */
-"The user name cannot contain %@ and spaces" = "The user name cannot contain %@ and spaces";
+"The user name cannot contain %@ and spaces" = "El usuarion no puede tener %@ y espacios";
 
 /* No comment provided by engineer. */
-"Unknown Address" = "Unknown Address";
+"Unknown Address" = "Dirección desconocida";
 
 /* No comment provided by engineer. */
-"unsigned tx QR code" = "unsigned tx QR code";
+"unsigned tx QR code" = "Código QR de TX sin firmar";
 
 /* No comment provided by engineer. */
 "View on Blockchain.info" = "Ver en Blockchain.info";
@@ -410,7 +411,7 @@
 "Cannot import private key with large amount of transactions."="No se puede importar llave privada con un gran número de transacciones.";
 "Cannot import private key with special transactions."="No se puede importar llave privada con transacciones especiales.";
 
-"Can\'t import Bither Cold private key."="No se puede importar llave privada Bither Cold.";
+"Can\'t import Bither Cold private key."="No se puede importar llave privada Bither Frío.";
 "This private key already exists."="Esta llave privada ya existe.";
 
 "Advance Options"="Configuración avanzada";
@@ -463,25 +464,25 @@
 // qrcode
 "Camera Permission Required"="Camera Permission Required";
 "Switch QRCode"="Switch QRCode";
-"Switched to old version QR Codes, sign with Bither Cold <1.1.0"="Switched to old version QR Codes, sign with Bither Cold <1.1.0";
-"Switched to new version QR Codes, sign with Bither Cold ≧1.1.0"="Switched to new version QR Codes, sign with Bither Cold ≧1.1.0";
+"Switched to old version QR Codes, sign with Bither Cold <1.1.0"="Switched to old version QR Codes, sign with Bither Frío <1.1.0";
+"Switched to new version QR Codes, sign with Bither Cold ≧1.1.0"="Switched to new version QR Codes, sign with Bither Frío ≧1.1.0";
 "scan_qr_code_from_photo_wrong" = "No QR Code Found";
 
 //avatar
-"Set Avatar"="Set Avatar";
-"From Camera"="From Camera";
-"From Gallery"="From Gallery";
+"Set Avatar"="Fijar Avatar";
+"From Camera"="De la camara";
+"From Gallery"="De la galería";
 
 
 /* Crop Photo */
-"Move And Scale" = "Move And Scale";
+"Move And Scale" = "Mover y encuadrar";
 
 /* RCheck */
-"rcheck_address_danger_title" = "%@'s r-value in danger";
-"rcheck_address_title" = "r-values of %@";
-"rcheck_button" = "RCheck";
-"rcheck_danger" = "r-value in danger.";
-"rcheck_no_address" = "You have no address to check r-value.";
+"rcheck_address_danger_title" = "%@'s valor-R en peligro";
+"rcheck_address_title" = "Valor-R de %@";
+"rcheck_button" = "ChequeoR";
+"rcheck_danger" = "valor-R en peligro.";
+"rcheck_no_address" = "You have no address to check valor-R.";
 "rcheck_recalculate" = "RCheck failed. Resign Tx.";
 "rcheck_safe" = "r-value safe.";
 "rchecking" = "Checking r-values";
@@ -503,8 +504,8 @@
 "setting_name_bitcoin_unit" = "Default Unit";
 
 /* launch sequence */
-"launch_sequence_switch_to_cold" = "Switch to Bither Cold";
-"launch_sequence_switch_to_cold_warn" = "Set this phone as Bither Cold?\n\nBither Cold need to be run on a offline phone.\nYou can monitor Bither Cold by Bither Caliente.\nOnce set you can't switch back.";
+"launch_sequence_switch_to_cold" = "Switch to Bither Frío";
+"launch_sequence_switch_to_cold_warn" = "Set this phone as Bither Frío?\n\nBither Frío need to be run on a offline phone.\nYou can monitor Bither Frío by Bither Caliente.\nOnce set you can't switch back.";
 
 /* pin code */
 "pin_code_enter_notice" = "Enter your PIN code";
@@ -585,32 +586,32 @@
 "verify_message_signature_verify_button_reverify" = "Reverificar";
 "sign_message_setting_name" = "Firma de Mensaje";
 
-"add_address_watch_only_scanned_address_warning" = "Bither can only monitor Bither Cold monitor QR code,\nnot other addresses.";
+"add_address_watch_only_scanned_address_warning" = "Bither can only monitor Bither Frío monitor QR code,\nnot other addresses.";
 
 // Cold Add HDM
-"hdm_seed_generation_notice" = "HDM is the hybrid of Hierarchical Deterministic & Multisig technics.\n\nHDM uses Multisig to avoid HD wallet\'s vulnerability.\n\nBither uses 2 of 3 Multisig for HDM.\n\nThe 3 keys are generated from 3 HD seeds by Bither Caliente, Bither Cold & HDM server.";
-"hdm_cold_pub_key_qr_code_name" = "HDM Cold Account QR Code";
+"hdm_seed_generation_notice" = "HDM is the hybrid of Hierarchical Deterministic & Multisig technics.\n\nHDM uses Multisig to avoid HD wallet\'s vulnerability.\n\nBither uses 2 of 3 Multisig for HDM.\n\nThe 3 keys are generated from 3 HD seeds by Bither Caliente, Bither Frío & HDM server.";
+"hdm_cold_pub_key_qr_code_name" = "HDM Frío Account QR Code";
 "hdm_server_qr_code_name" = "HDM Server QR Code";
-"hdm_cold_seed_qr_code" = "HDM Cold Seed QR Code";
+"hdm_cold_seed_qr_code" = "HDM Frío Seed QR Code";
 "hdm_hot_seed_qr_code" = "HDM Caliente Seed QR Code";
-"hdm_cold_seed_word_list" = "HDM Cold Phrase";
+"hdm_cold_seed_word_list" = "HDM Frío Phrase";
 "hdm_hot_seed_word_list" = "HDM Caliente Phrase";
 
 // HDM Check
-"hdm_keychain_check_title_cold" = "HDM Cold";
+"hdm_keychain_check_title_cold" = "HDM Frío";
 "hdm_keychain_check_title_hot" = "HDM Caliente";
 
 // Hot Add HDM
 "hdm_keychain_add_hot" = "HDM Caliente";
-"hdm_keychain_add_cold" = "HDM Cold";
+"hdm_keychain_add_cold" = "HDM Frío";
 "hdm_keychain_add_server" = "HDM Server";
 "hdm_keychain_add_hot_confirm" = "Generate HDM Caliente account";
-"hdm_keychain_add_scan_cold" = "Scan HDM Cold Account QR Code";
-"hdm_keychain_add_unsigned_server_qr_code_title" = "Choose HDM Server QR Code on Bither Cold";
+"hdm_keychain_add_scan_cold" = "Scan HDM Frío Account QR Code";
+"hdm_keychain_add_unsigned_server_qr_code_title" = "Choose HDM Server QR Code on Bither Frío";
 "hdm_keychain_add_scan_signed_server_qr_code_action" = "Scan Signed Server QR Code";
 "hdm_keychain_add_sign_server_qr_code_error" = "Signing server QR code is wrong";
 "hdm_keychain_add_signed_server_qr_code_title" = "Signed Server QR Code";
-"hdm_exception_bid_already_exists" = "HDM Cold account is already bound to another Hot account";
+"hdm_exception_bid_already_exists" = "HDM Frío account is already bound to another Hot account";
 "hdm_keychain_add_unsigned_server_qr_code_dismiss_confirm" = "Give up signing?";
 
 // Show HDM Address
@@ -621,20 +622,20 @@
 "hdm_address_count_limit" = "Reached HDM address count limit";
 "activity_name_add_hdm_address" = "Add HDM Address";
 "hdm_address_add_count_label" = "How many HDM addresses to add?";
-"hdm_address_add_need_cold_pub" = "Need HDM Cold account QR code to continue.";
+"hdm_address_add_need_cold_pub" = "Need HDM Frío account QR code to continue.";
 "hdm_address_add_button" = "Add";
-"hdm_address_add_cold_pub_not_match" = "HDM Cold account is not same as before";
+"hdm_address_add_cold_pub_not_match" = "HDM Frío account is not same as before";
 
 // HDM Send
-"hdm_send_with_cold" = "Sign with HDM Cold";
+"hdm_send_with_cold" = "Sign with HDM Frío";
 "hdm_send_with_server" = "Sign with HDM Server";
-"hdm_send_with_cold_no_requested_seed" = "You don\'t have the requested HDM Cold account";
+"hdm_send_with_cold_no_requested_seed" = "You don\'t have the requested HDM Frío account";
 
-"import_hdm_cold_seed_qr_code"="From HDM Cold Seed QR Code";
-"import_hdm_cold_seed_phrase"="From HDM Cold Phrase";
+"import_hdm_cold_seed_qr_code"="From HDM Frío Seed QR Code";
+"import_hdm_cold_seed_phrase"="From HDM Frío Phrase";
 "import_hdm_cold_seed_format_error"="Not match HDM cod seed format";
-"can_not_import_hdm_cold_seed"="Can not import HDM Cold Seed";
-"import_hdm_cold_seed_qr_code_scan_title"="Scan HDM Cold Seed QR Code";
+"can_not_import_hdm_cold_seed"="Can not import HDM Frío Seed";
+"import_hdm_cold_seed_qr_code_scan_title"="Scan HDM Frío Seed QR Code";
 *********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************   
 
 //hdm recovery
@@ -652,7 +653,7 @@
 "not_verify_bither_private_key_qrcode"="Not verify Bither private key QR Code";
 
 // hdm reset server password
-"hdm_reset_server_password_password_wrong_confirm" = "HDM Server authentication failed.\nUse HDM Cold to reauthorize?";
+"hdm_reset_server_password_password_wrong_confirm" = "HDM Server authentication failed.\nUse HDM Frío to reauthorize?";
 "hdm_reset_server_password_confirm" = "Reset HDM Server authentication?";
 "hdm_reset_server_password_setting_name" = "Reset HDM Server Authentication";
 "hdm_reset_server_password_success" = "HDM Server Authentication is reset.";
