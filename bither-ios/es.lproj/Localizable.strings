@@ -259,10 +259,10 @@
 "QR Code saved." = "Código QR grabado.";
 
 /* No comment provided by engineer. */
-"Received" = "Recivido";
+"Received" = "Recibido";
 
 /* No comment provided by engineer. */
-"Received:" = "Recivido:";
+"Received:" = "Recibido:";
 
 /* No comment provided by engineer. */
 "Scan %@" = "Escanear %@";
@@ -295,50 +295,46 @@
 "Scan to watch Bither Cold" = "Escanear para observar Bither Frío";
 
 /* No comment provided by engineer. */
-"Scan unsigned transaction failed" = "Scan unsigned transaction failed";
+"Scan unsigned transaction failed" = "Falló el escaneo de transacción sin firmar";
 
 /* No comment provided by engineer. */
-"Scan Unsigned TX" = "Scan Unsigned TX";
+"Scan Unsigned TX" = "Escaneo de TX sin firmar";
 
 /* No comment provided by engineer. */
-"Scan with Bither Cold" = "Scan with Bither Cold";
+"Scan with Bither Cold" = "Escanear con Bither Frío";
 
 /* No comment provided by engineer. */
-"Scan with Bither Hot to sign tx" = "Scan with Bither Caliente to sign tx";
+"Scan with Bither Hot to sign tx" = "Escanear con Bither Caliente para firmar TX";
 
 /* No comment provided by engineer. */
-"Scan with Bither Hot to watch Bither Cold" = "Scan with Bither Caliente to watch Bither Cold";
+"Scan with Bither Hot to watch Bither Cold" = "Escanear con Bither Caliente para vigilar Bither Frío";
 
 /* No comment provided by engineer. */
-"Select an address to donate" = "Select an address to donate";
+"Select an address to donate" = "Seleccione una dirección con la que desee donar";
 
 /* No comment provided by engineer. */
-"Sell: %@" = "Sell: %@";
+"Sell: %@" = "Vender: %@";
 
 /* No comment provided by engineer. */
-"Send" = "Send";
+"Send" = "Enviar";
 
 /* No comment provided by engineer. */
-"Send failed." = "Send failed.";
-/****************************************************************/
-/****************************************************************/
-/****************************************************************/
-/****************************************************************/
+"Send failed." = "Envio falló.";
 
 /* No comment provided by engineer. */
-"Send success." = "Send success.";
+"Send success." = "Envio exitoso.";
 
 /* No comment provided by engineer. */
-"Send:" = "Send:";
+"Send:" = "Enviar:";
 
 /* No comment provided by engineer. */
-"Sent" = "Sent";
+"Sent" = "Enviado";
 
 /* No comment provided by engineer. */
-"Set Avatar" = "Set Avatar";
+"Set Avatar" = "Fijar Avatar";
 
 /* No comment provided by engineer. */
-"Set Password" = "Set Password";
+"Set Password" = "Fijar contraseña";
 
 /* No comment provided by engineer. */
 "Sign Transaction" = "Sign Transaction";
@@ -377,68 +373,66 @@
 "unsigned tx QR code" = "unsigned tx QR code";
 
 /* No comment provided by engineer. */
-"View on Blockchain.info" = "View on Blockchain.info";
+"View on Blockchain.info" = "Ver en Blockchain.info";
 
 /* No comment provided by engineer. */
-"Watch Only QR Code" = "Watch Only QR Code";
+"Watch Only QR Code" = "Código QR solo para vigilar";
 
 /* No comment provided by engineer. */
-"yesterday %@" = "yesterday %@";
+"yesterday %@" = "ayer %@";
 
 /* No comment provided by engineer. */
-"You will send to:" = "You will send to:";
+"You will send to:" = "Va a enviarle a:";
 
-"Signed TX QR Code" = "Signed TX QR Code";
+"Signed TX QR Code" = "Código QR de TX firmada";
 
-"Page %d, Total %ld" = "Page %1$d, Total %2$d";
+"Page %d, Total %ld" = "Página %1$d, Total %2$d";
 
-"No transactions found for this address,\nit has probably not been used on the network yet." = "No transactions found for this address,\nit has probably not been used on the network yet.";
+"No transactions found for this address,\nit has probably not been used on the network yet." = "No se encontraron transacciones para esta direccíon,\probablemente aun no se ha usado en la red.";
 
-"Private Key QR Code (Encrypted)"="Private Key QR Code (Encrypted)";
-"Private Key QR Code (Decrypted)"="Private Key QR Code (Decrypted)";
-"Private Key"="Private Key";
+"Private Key QR Code (Encrypted)"="Código QR de llave privada (cifrado)";
+"Private Key QR Code (Decrypted)"="Código QR de llave privada (descifrado)";
+"Private Key"="LLave privada";
 
 
-"choose_mode_cold_confirm" = "Once mode is set, it can\'t be changed.\nBither Cold need to be run on a offline phone.\nSet this phone as Bither Cold?";
-"choose_mode_warm_confirm" = "Once mode is set, it can\'t be changed.\nBither Caliente is an online bitcoin wallet.\nSet this phone as Bither Caliente?";
+"choose_mode_cold_confirm" = "Una vez fijado el modo, no se puede cambiar.\nBither Frío tiene que correr en un telefono desconectado.\nFijar este telefono como Bither Frío?";
+"choose_mode_warm_confirm" = "Una vez fijado el modo, no se puede cambiar.\nBither Caliente es una cartera de bitcoin en linea.\nFijar este telefono como Bither Caliente?";
 
 "balance_detail_transaction_count" = "Transacción";
-"balance_detail_total_incoming" = "Recivido";
+"balance_detail_total_incoming" = "Recibido";
 "balance_detail_total_outgoing" = "Enviado";
 
 /* network error */
 "Network failure." = "Sin conexión de red.";
 
-"Cannot monitor address with large amount of transactions."="Cannot monitor address with large amount of transactions.";
-"Cannot monitor address with special transactions."="Cannot monitor address with special transactions.";
-"Cannot import private key with large amount of transactions."="Cannot import private key with large amount of transactions.";
-"Cannot import private key with special transactions."="Cannot import private key with special transactions.";
+"Cannot monitor address with large amount of transactions."="No puede vigilarse dirección con un gran número de transacciones.";
+"Cannot monitor address with special transactions."="No puede vigilarse dirección con transacciones especiales.";
+"Cannot import private key with large amount of transactions."="No se puede importar llave privada con un gran número de transacciones.";
+"Cannot import private key with special transactions."="No se puede importar llave privada con transacciones especiales.";
 
-
-"Can\'t import Bither Cold private key."="Can\'t import Bither Cold private key.";
-"This private key already exists."="This private key already exists.";
+"Can\'t import Bither Cold private key."="No se puede importar llave privada Bither Cold.";
+"This private key already exists."="Esta llave privada ya existe.";
 
 "Advance Options"="Configuración avanzada";
 
 
-"Send failed. Sending coins this few will be igored."="Send failed. Sending coins this few will be igored.";
-"%@ BTC to be confirmed."="%@ BTC to be confirmed.";
-"Send failed. You don\'t have enough coins available for transaction fee."="Send failed. You don\'t have enough coins available for transaction fee.";
-"Send failed. You don\'t have enough coins available."="Send failed. You don\'t have enough coins available.";
-"Send failed. Lack of %@ BTC."="Send failed. Lack of %@ BTC. ";
-"Send failed. Transaction size is to large."="Send failed. Transaction size is to large.";
-"Please wait for another confirmation."="Please wait for another confirmation.";
+"Send failed. Sending coins this few will be igored."="Falló envio. Enviar tan pocas monedas será ignorado.";
+"%@ BTC to be confirmed."="%@ BTC por confirmar.";
+"Send failed. You don\'t have enough coins available for transaction fee."="Falló envio. No tiene suficiente monedas para para el importe de transacción.";
+"Send failed. You don\'t have enough coins available."="Falló envio. No tiene suficientes monedas disponibles.";
+"Send failed. Lack of %@ BTC."="Falló envio. Faltan %@ BTC. ";
+"Send failed. Transaction size is to large."="Falló envio. El tamaño de la transacción es muy grande.";
+"Please wait for another confirmation."="Por favor espere por otra confirmación.";
 
 "Total BTC prefix"="Total: ";
 
-"Reload Transactions data"="Reload Transactions data";
-"Reload Transactions data?\nNeed long time.\nConsume network data.\nRecommand trying only with wrong data."="Reload Transactions data?\nNeed long time.\nConsume network data.\nRecommand trying only with wrong data.";
-"Reload transactions data failed , Please retry again."="Reload transactions data failed , Please retry again.";
-"Reload transactions data success"="Reload transactions data success ";
-"You can only reload transactions data in a hour.."="You can only reload transactions data in a hour..";
+"Reload Transactions data"="Recargar data de transacciones";
+"Reload Transactions data?\nNeed long time.\nConsume network data.\nRecommand trying only with wrong data."="Recargar data de transacciones?\nNecesita mucho tiempo.\nConsume data de la red.\nEs recomendable probar solo con data errada.";
+"Reload transactions data failed , Please retry again."="Recarga de datos de transacciones falló, por favor intente de nuevo.";
+"Reload transactions data success"="Recarga de datos de transacciones exitosa";
+"You can only reload transactions data in a hour.."="Solo se puede recargar los datos de transacciones una vez por hora..";
 
-"XRandom increases randomness.\nSure to disable?"="XRandom increases randomness.\nSure to disable?";
-
+"XRandom increases randomness.\nSure to disable?"="XRandom aumenta increases aleatoriedad.\nSeguro que quiere deshabilitarlo?";
 
 
 //bip38
