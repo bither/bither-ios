@@ -332,7 +332,7 @@ static StatusBarNotificationWindow *notificationWindow;
         if ([BTUtils isEmpty:paymentAddress]) {
             shouldChange = NO;
         } else {
-            shouldChange = [account getBelongAccountAddressesFromAdresses:@[paymentAddress]].count > 0;
+            shouldChange = [account getBelongAccountAddressesFromAddresses:@[paymentAddress]].count > 0;
         }
     } else {
         shouldChange = YES;

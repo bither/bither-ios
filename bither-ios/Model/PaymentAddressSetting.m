@@ -96,7 +96,7 @@ static PaymentAddressSetting *paymentAddressSetting;
 
 - (BOOL)isHDAccountAddress:(NSString *)address {
     if ([BTAddressManager instance].hasHDAccount) {
-        return [[BTAddressManager instance].hdAccount getBelongAccountAddressesFromAdresses:@[address]].count > 0;
+        return [[BTAddressManager instance].hdAccount getBelongAccountAddressesFromAddresses:@[address]].count > 0;
     }
     return NO;
 }

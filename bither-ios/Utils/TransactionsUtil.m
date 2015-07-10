@@ -15,6 +15,7 @@
 //  See the License for the specific language governing permissions and
 //  limitations under the License.
 
+#import <Bitheri/BTHDAccountAddressProvider.h>
 #import "TransactionsUtil.h"
 #import "NSDictionary+Fromat.h"
 #import "DateUtil.h"
@@ -172,8 +173,9 @@
     __block  NSInteger index = 0;
     addresses = [addresses reverseObjectEnumerator].allObjects;
     [TransactionsUtil getMyTx:addresses index:index callback:^{
-        [TransactionsUtil getMyTxForHDAccount:EXTERNAL_ROOT_PATH index:0 callback:^{
-            [TransactionsUtil getMyTxForHDAccount:INTERNAL_ROOT_PATH index:0 callback:^{
+        int hdAccountId = [[[BTAddressManager instance] hdAccount] getHDAccountId];
+        [TransactionsUtil getMyTxForHDAccount:hdAccountId pathType:EXTERNAL_ROOT_PATH index:0 callback:^{
+            [TransactionsUtil getMyTxForHDAccount:hdAccountId pathType:INTERNAL_ROOT_PATH index:0 callback:^{
                 if (voidBlock) {
                     voidBlock();
                 }
@@ -218,35 +220,34 @@
     }
 }
 
-+ (void)getMyTxForHDAccount:(PathType)pathType index:(int)index
++ (void)getMyTxForHDAccount:(int)hdAccountId pathType:(PathType)pathType index:(int)index
                    callback:(VoidBlock)callback andErrorCallBack:(ErrorHandler)errorCallback {
-    int unSyncedCount = [[BTHDAccountProvider instance] unSyncedCountOfPath:pathType];
-    BTHDAccountAddress *address = [[BTHDAccountProvider instance] addressForPath:pathType index:index];
+    int unSyncedCount = [[BTHDAccountAddressProvider instance] getUnSyncedAddressCountByHDAccountId:hdAccountId pathType:pathType];
+    BTHDAccountAddress *address = [[BTHDAccountAddressProvider instance] getAddressByHDAccountId:hdAccountId path:pathType index:index];
     index++;
     if (unSyncedCount == 0) {
         if (callback) {
             callback();
         }
     } else {
-        [TransactionsUtil getTxForHDAccount:pathType index:index hdAddress:address callback:^(void) {
-            int unSyncedCountInBlock = [[BTHDAccountProvider instance] unSyncedCountOfPath:pathType];
+        [TransactionsUtil getTxForHDAccountAddress:address callback:^(void) {
+            int unSyncedCountInBlock = [[BTHDAccountAddressProvider instance] getUnSyncedAddressCountByHDAccountId:hdAccountId pathType:pathType];
             if (unSyncedCountInBlock == 0) {
                 if (callback) {
                     callback();
                 }
             } else {
-                [TransactionsUtil getMyTxForHDAccount:pathType index:index
+                [TransactionsUtil getMyTxForHDAccount:hdAccountId pathType:pathType index:index
                                              callback:callback andErrorCallBack:errorCallback];
             }
-
-        }                  andErrorCallBack:errorCallback];
+        }                         andErrorCallBack:errorCallback];
     }
 
 
 }
 
-+ (void)getTxForHDAccount:(PathType)pathType index:(int)index hdAddress:(BTHDAccountAddress *)address
-                 callback:(VoidBlock)callback andErrorCallBack:(ErrorHandler)errorCallback {
++ (void)getTxForHDAccountAddress:(BTHDAccountAddress *)address
+                        callback:(VoidBlock)callback andErrorCallBack:(ErrorHandler)errorCallback {
     __block NSMutableArray *allTxs = [NSMutableArray new];
     __block int tmpBlockCount = 0;
     __block int tmpTxCnt = 0;
@@ -280,11 +281,11 @@
             [[BTAddressManager instance].hdAccount updateSyncComplete:address];
 
             if (allTxs.count > 0) {
-                [[BTAddressManager instance].hdAccount updateIssuedIndex:pathType index:index - 1];
+                [[BTAddressManager instance].hdAccount updateIssuedIndex:address.pathType index:address.index - 1];
                 [[BTAddressManager instance].hdAccount supplyEnoughKeys:NO];
                 [[NSNotificationCenter defaultCenter] postNotificationName:kHDAccountPaymentAddressChangedNotification object:[BTAddressManager instance].hdAccount.address userInfo:@{kHDAccountPaymentAddressChangedNotificationFirstAdding : @(NO)}];
             } else {
-                [[BTHDAccountProvider instance] updateSyncdForIndex:pathType index:index - 1];
+                [[BTHDAccountAddressProvider instance] updateSyncedCompleteByHDAccountId:address.hdAccountId address:address];
             }
 
             uint32_t storeHeight = [[BTBlockChain instance] lastBlock].blockNo;
