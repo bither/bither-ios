@@ -64,7 +64,7 @@ static Setting *importPrivateKeySetting;
                                             destructiveButtonTitle:nil
                                                  otherButtonTitles:NSLocalizedString(@"From Bither Private Key QR Code", nil), NSLocalizedString(@"From Private Key Text", nil), NSLocalizedString(@"import_hdm_cold_seed_qr_code", nil), NSLocalizedString(@"import_hdm_cold_seed_phrase", nil), nil];
             } else {
-                if ([[BTSettings instance] getAppMode] == HOT && ![BTAddressManager instance].hasHDAccount) {
+                if ([[BTSettings instance] getAppMode] == HOT && ![BTAddressManager instance].hasHDAccountHot) {
                     actionSheet = [[UIActionSheet alloc] initWithTitle:NSLocalizedString(@"Import Private Key", nil)
                                                               delegate:sself cancelButtonTitle:NSLocalizedString(@"Cancel", nil)
                                                 destructiveButtonTitle:nil
@@ -89,7 +89,7 @@ static Setting *importPrivateKeySetting;
 - (void)actionSheet:(UIActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex {
     self.isImportHDM = buttonIndex == 2;
     self.isImportHDAccount = NO;
-    if (([[BTSettings instance] getAppMode] != COLD || [[BTAddressManager instance] hasHDMKeychain]) && ([[BTSettings instance] getAppMode] != HOT || [BTAddressManager instance].hasHDAccount)) {
+    if (([[BTSettings instance] getAppMode] != COLD || [[BTAddressManager instance] hasHDMKeychain]) && ([[BTSettings instance] getAppMode] != HOT || [BTAddressManager instance].hasHDAccountHot)) {
         if (buttonIndex > 1) {
             return;
         }
@@ -102,7 +102,7 @@ static Setting *importPrivateKeySetting;
             [self importPrivateKey];
             break;
         case 2:
-            if ([[BTSettings instance] getAppMode] == HOT && ![BTAddressManager instance].hasHDAccount) {
+            if ([[BTSettings instance] getAppMode] == HOT && ![BTAddressManager instance].hasHDAccountHot) {
                 self.isImportHDAccount = YES;
                 [self scanQRCodeWithHDAccount];
             } else {
@@ -110,7 +110,7 @@ static Setting *importPrivateKeySetting;
             }
             break;
         case 3:
-            if ([[BTSettings instance] getAppMode] == HOT && ![BTAddressManager instance].hasHDAccount) {
+            if ([[BTSettings instance] getAppMode] == HOT && ![BTAddressManager instance].hasHDAccountHot) {
                 [self importWithHDAccountPhrase];
             } else {
                 [self importWithHDMColdPhrase];
@@ -242,7 +242,7 @@ static Setting *importPrivateKeySetting;
                     return;
                 }
                 [[PeerUtil instance] stopPeer];
-                [BTAddressManager instance].hdAccount = account;
+                [BTAddressManager instance].hdAccountHot = account;
                 [[PeerUtil instance] startPeer];
                 dispatch_async(dispatch_get_main_queue(), ^{
                     [dp dismissWithCompletion:^{

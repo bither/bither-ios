@@ -175,7 +175,7 @@
                 return;
             }
             [[PeerUtil instance] stopPeer];
-            [BTAddressManager instance].hdAccount = account;
+            [BTAddressManager instance].hdAccountHot = account;
             [[PeerUtil instance] startPeer];
             dispatch_async(dispatch_get_main_queue(), ^{
                 [dp dismissWithCompletion:^{

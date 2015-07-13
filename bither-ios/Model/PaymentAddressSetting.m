@@ -59,7 +59,7 @@ static PaymentAddressSetting *paymentAddressSetting;
     [self setGetArrayBlock:^NSArray * {
         NSMutableArray *a = [NSMutableArray new];
         [a addObject:[self dictForNone]];
-        if ([BTAddressManager instance].hasHDAccount) {
+        if ([BTAddressManager instance].hasHDAccountHot) {
             [a addObject:[self dictForHDAccount]];
         }
         for (BTAddress *address in [BTAddressManager instance].allAddresses) {
@@ -91,12 +91,12 @@ static PaymentAddressSetting *paymentAddressSetting;
 }
 
 - (NSDictionary *)dictForHDAccount {
-    return @{SETTING_KEY : NSLocalizedString(@"address_group_hd", nil), SETTING_VALUE : [BTAddressManager instance].hdAccount.address, SETTING_IS_DEFAULT : @([self isHDAccountAddress:[UserDefaultsUtil instance].paymentAddress])};
+    return @{SETTING_KEY : NSLocalizedString(@"address_group_hd", nil), SETTING_VALUE : [BTAddressManager instance].hdAccountHot.address, SETTING_IS_DEFAULT : @([self isHDAccountAddress:[UserDefaultsUtil instance].paymentAddress])};
 }
 
 - (BOOL)isHDAccountAddress:(NSString *)address {
-    if ([BTAddressManager instance].hasHDAccount) {
-        return [[BTAddressManager instance].hdAccount getBelongAccountAddressesFromAddresses:@[address]].count > 0;
+    if ([BTAddressManager instance].hasHDAccountHot) {
+        return [[BTAddressManager instance].hdAccountHot getBelongAccountAddressesFromAddresses:@[address]].count > 0;
     }
     return NO;
 }

@@ -283,8 +283,8 @@ static StatusBarNotificationWindow *notificationWindow;
             }
         }
         int64_t hd = 0;
-        if ([BTAddressManager instance].hasHDAccount) {
-            hd = [BTAddressManager instance].hdAccount.balance;
+        if ([BTAddressManager instance].hasHDAccountHot) {
+            hd = [BTAddressManager instance].hdAccountHot.balance;
         }
         [GroupFileUtil setTotalBalanceWithHD:hd HDM:hdm hot:hot andCold:cold];
     }
@@ -320,11 +320,11 @@ static StatusBarNotificationWindow *notificationWindow;
 }
 
 - (void)hdAccountPaymentAddressChanged:(NSNotification *)notification {
-    if (![BTAddressManager instance].hasHDAccount) {
+    if (![BTAddressManager instance].hasHDAccountHot) {
         return;
     }
     UserDefaultsUtil *defaults = [UserDefaultsUtil instance];
-    BTHDAccount *account = [BTAddressManager instance].hdAccount;
+    BTHDAccount *account = [BTAddressManager instance].hdAccountHot;
     NSString *paymentAddress = defaults.paymentAddress;
     BOOL configured = paymentAddress != nil;
     BOOL shouldChange;

@@ -359,7 +359,7 @@ static Setting *PasswordStrengthCheckSetting;
     if (!CheckSetting) {
         Setting *setting = [[Setting alloc] initWithName:NSLocalizedString(@"Check Private Keys", nil) icon:[UIImage imageNamed:@"check_button_icon"]];
         [setting setSelectBlock:^(UIViewController *controller) {
-            if ([BTAddressManager instance].privKeyAddresses.count == 0 && ![BTAddressManager instance].hasHDMKeychain && ![BTAddressManager instance].hasHDAccount) {
+            if ([BTAddressManager instance].privKeyAddresses.count == 0 && ![BTAddressManager instance].hasHDMKeychain && ![BTAddressManager instance].hasHDAccountHot) {
                 if ([controller respondsToSelector:@selector(showMsg:)]) {
                     [controller performSelector:@selector(showMsg:) withObject:NSLocalizedString(@"No private keys", nil)];
                 }
@@ -639,7 +639,7 @@ static Setting *PasswordStrengthCheckSetting;
     }
     [array addObject:[MessageSigningSetting getMessageSigningSetting]];
     [array addObject:[Setting getPasswordStrengthSetting]];
-    if ([[BTSettings instance] getAppMode] == HOT && ([BTAddressManager instance].allAddresses.count > 0 || [BTAddressManager instance].hasHDAccount)) {
+    if ([[BTSettings instance] getAppMode] == HOT && ([BTAddressManager instance].allAddresses.count > 0 || [BTAddressManager instance].hasHDAccountHot)) {
         [array addObject:[PaymentAddressSetting setting]];
     }
     [array addObject:[Setting getTrashCanSetting]];

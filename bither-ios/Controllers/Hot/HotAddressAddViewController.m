@@ -65,7 +65,7 @@
 @implementation HotAddressAddViewController (PageViewControllerDelegate)
 
 - (void)configurePage {
-    self.page = [[PiPageViewController alloc] initWithStoryboard:self.storyboard andViewControllerIdentifiers:@[([BTAddressManager instance].hasHDAccount ? kHDView : kHD), kOther]];
+    self.page = [[PiPageViewController alloc] initWithStoryboard:self.storyboard andViewControllerIdentifiers:@[([BTAddressManager instance].hasHDAccountHot ? kHDView : kHD), kOther]];
     self.page.pageDelegate = self;
     [self addChildViewController:self.page];
     self.page.view.frame = CGRectMake(0, CGRectGetMaxY(self.vTopBar.frame), self.view.frame.size.width, self.view.frame.size.height - CGRectGetMaxY(self.vTopBar.frame));

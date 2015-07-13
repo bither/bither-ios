@@ -87,8 +87,8 @@
     if ([topVc isKindOfClass:[AddressDetailViewController class]] && ([StringUtil compareString:self.notificationAddress compare:[(AddressDetailViewController *) topVc address].address] || ([[(AddressDetailViewController *) topVc address] isKindOfClass:[BTHDAccount class]] && [StringUtil compareString:self.notificationAddress compare:kHDAccountPlaceHolder]))) {
 
     } else {
-        if ([StringUtil compareString:self.notificationAddress compare:kHDAccountPlaceHolder] && [BTAddressManager instance].hasHDAccount) {
-            BTHDAccount *account = [BTAddressManager instance].hdAccount;
+        if ([StringUtil compareString:self.notificationAddress compare:kHDAccountPlaceHolder] && [BTAddressManager instance].hasHDAccountHot) {
+            BTHDAccount *account = [BTAddressManager instance].hdAccountHot;
             AddressDetailViewController *detail = [nav.storyboard instantiateViewControllerWithIdentifier:@"AddressDetail"];
             detail.address = account;
             [nav pushViewController:detail animated:YES];

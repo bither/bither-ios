@@ -46,13 +46,13 @@
 
 - (void)onPasswordEntered:(NSString *)password {
     if (qr) {
-        [[[DialogBlackQrCode alloc] initWithContent:[BTAddressManager instance].hdAccount.getQRCodeFullEncryptPrivKey andTitle:NSLocalizedString(@"add_hd_account_seed_qr_code", nil)] showInWindow:self.view.window];
+        [[[DialogBlackQrCode alloc] initWithContent:[BTAddressManager instance].hdAccountHot.getQRCodeFullEncryptPrivKey andTitle:NSLocalizedString(@"add_hd_account_seed_qr_code", nil)] showInWindow:self.view.window];
     } else {
         __block DialogProgress *dp = [[DialogProgress alloc] initWithMessage:NSLocalizedString(@"Please wait…", nil)];
         dp.touchOutSideToDismiss = NO;
         [dp showInWindow:self.view.window completion:^{
             dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
-                __block NSArray *words = [[BTAddressManager instance].hdAccount seedWords:password];
+                __block NSArray *words = [[BTAddressManager instance].hdAccountHot seedWords:password];
                 dispatch_async(dispatch_get_main_queue(), ^{
                     [dp dismissWithCompletion:^{
                         [[[DialogHDMSeedWordList alloc] initWithWords:words] showInWindow:self.view.window];

@@ -173,7 +173,7 @@
     __block  NSInteger index = 0;
     addresses = [addresses reverseObjectEnumerator].allObjects;
     [TransactionsUtil getMyTx:addresses index:index callback:^{
-        int hdAccountId = [[[BTAddressManager instance] hdAccount] getHDAccountId];
+        int hdAccountId = [[[BTAddressManager instance] hdAccountHot] getHDAccountId];
         [TransactionsUtil getMyTxForHDAccount:hdAccountId pathType:EXTERNAL_ROOT_PATH index:0 callback:^{
             [TransactionsUtil getMyTxForHDAccount:hdAccountId pathType:INTERNAL_ROOT_PATH index:0 callback:^{
                 if (voidBlock) {
@@ -276,14 +276,14 @@
             page += 1;
             [[BitherApi instance] getTransactionApi:address.address withPage:page callback:nextPageBlock andErrorCallBack:errorHandler];
         } else {
-            [[BTAddressManager instance].hdAccount initTxs:[[BTAddressManager instance] compressTxsForApi:allTxs andAddress:address.address]];
+            [[BTAddressManager instance].hdAccountHot initTxs:[[BTAddressManager instance] compressTxsForApi:allTxs andAddress:address.address]];
             [address setIsSyncedComplete:YES];
-            [[BTAddressManager instance].hdAccount updateSyncComplete:address];
+            [[BTAddressManager instance].hdAccountHot updateSyncComplete:address];
 
             if (allTxs.count > 0) {
-                [[BTAddressManager instance].hdAccount updateIssuedIndex:address.pathType index:address.index - 1];
-                [[BTAddressManager instance].hdAccount supplyEnoughKeys:NO];
-                [[NSNotificationCenter defaultCenter] postNotificationName:kHDAccountPaymentAddressChangedNotification object:[BTAddressManager instance].hdAccount.address userInfo:@{kHDAccountPaymentAddressChangedNotificationFirstAdding : @(NO)}];
+                [[BTAddressManager instance].hdAccountHot updateIssuedIndex:address.pathType index:address.index - 1];
+                [[BTAddressManager instance].hdAccountHot supplyEnoughKeys:NO];
+                [[NSNotificationCenter defaultCenter] postNotificationName:kHDAccountPaymentAddressChangedNotification object:[BTAddressManager instance].hdAccountHot.address userInfo:@{kHDAccountPaymentAddressChangedNotificationFirstAdding : @(NO)}];
             } else {
                 [[BTHDAccountAddressProvider instance] updateSyncedCompleteByHDAccountId:address.hdAccountId address:address];
             }

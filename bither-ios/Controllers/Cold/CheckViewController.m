@@ -78,7 +78,7 @@
 }
 
 - (IBAction)checkPressed:(id)sender {
-    if ([BTAddressManager instance].privKeyAddresses.count > 0 || [BTAddressManager instance].hasHDMKeychain || [BTAddressManager instance].hasHDAccount) {
+    if ([BTAddressManager instance].privKeyAddresses.count > 0 || [BTAddressManager instance].hasHDMKeychain || [BTAddressManager instance].hasHDAccountHot) {
         if (!self.checking) {
             [[[DialogPassword alloc] initWithDelegate:self] showInWindow:self.view.window];
         }
@@ -123,20 +123,20 @@
         NSUInteger safeCount = 0;
         NSString *password = _password;
         _password = nil;
-        if ([BTAddressManager instance].hasHDAccount) {
+        if ([BTAddressManager instance].hasHDAccountHot) {
             totalCount++;
         }
         if ([BTAddressManager instance].hasHDMKeychain) {
             totalCount++;
         }
-        if ([BTAddressManager instance].hasHDAccount) {
+        if ([BTAddressManager instance].hasHDAccountHot) {
             hdChecking = YES;
             dispatch_sync(dispatch_get_main_queue(), ^{
                 [self.vHeader animateToScore:floorf((float) safeCount / (float) totalCount * 100.0f) withAnimationId:kAddScoreAnimPrefix - 2];
                 [self.tableView reloadData];
                 [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:YES];
             });
-            if ([[BTAddressManager instance].hdAccount checkWithPassword:password]) {
+            if ([[BTAddressManager instance].hdAccountHot checkWithPassword:password]) {
                 hdDanger = NO;
                 safeCount++;
             } else {
@@ -165,7 +165,7 @@
         dispatch_sync(dispatch_get_main_queue(), ^{
             [self.vHeader animateToScore:floorf((float) safeCount / (float) totalCount * 100.0f) withAnimationId:kAddScoreAnimPrefix - 1];
             [self.tableView reloadData];
-            [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:(([BTAddressManager instance].hasHDAccount && [BTAddressManager instance].hasHDMKeychain) ? 1 : 0) inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:YES];
+            [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:(([BTAddressManager instance].hasHDAccountHot && [BTAddressManager instance].hasHDMKeychain) ? 1 : 0) inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:YES];
         });
         for (BTAddress *a in privateKeys) {
             BOOL result = [[[BTPasswordSeed alloc] initWithBTAddress:a] checkPassword:password];
@@ -205,12 +205,12 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return privateKeys.count + ([BTAddressManager instance].hasHDMKeychain ? 1 : 0) + ([BTAddressManager instance].hasHDAccount ? 1 : 0);
+    return privateKeys.count + ([BTAddressManager instance].hasHDMKeychain ? 1 : 0) + ([BTAddressManager instance].hasHDAccountHot ? 1 : 0);
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     NSUInteger index = indexPath.row;
-    if ([BTAddressManager instance].hasHDAccount) {
+    if ([BTAddressManager instance].hasHDAccountHot) {
         if (indexPath.row == 0) {
             CheckPrivateKeyCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
             [cell showAddress:NSLocalizedString(@"add_hd_account_tab_hd", nil) checking:hdChecking checked:!hdChecking safe:!hdDanger];
@@ -219,7 +219,7 @@
         index--;
     }
     if ([BTAddressManager instance].hasHDMKeychain) {
-        if (indexPath.row == ([BTAddressManager instance].hasHDAccount ? 1 : 0)) {
+        if (indexPath.row == ([BTAddressManager instance].hasHDAccountHot ? 1 : 0)) {
             NSString *hdmTitle = [BTSettings instance].getAppMode == COLD ? NSLocalizedString(@"hdm_keychain_check_title_cold", nil) : NSLocalizedString(@"hdm_keychain_check_title_hot", nil);
             CheckPrivateKeyCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
             [cell showAddress:hdmTitle checking:hdmChecking checked:!hdmChecking && checkingIndex >= 0 safe:!hdmDanger];

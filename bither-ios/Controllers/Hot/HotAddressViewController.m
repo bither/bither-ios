@@ -85,7 +85,7 @@ typedef enum {
         [_hdms addObjectsFromArray:[BTAddressManager instance].hdmKeychain.addresses];
     }
     [self.tableView reloadData];
-    self.ivNoAddress.hidden = !(_privateKeys.count == 0 && _watchOnlys.count == 0 && _hdms.count == 0 && ![BTAddressManager instance].hasHDAccount);
+    self.ivNoAddress.hidden = !(_privateKeys.count == 0 && _watchOnlys.count == 0 && _hdms.count == 0 && ![BTAddressManager instance].hasHDAccountHot);
 }
 
 - (void)receivedNotifications {
@@ -114,7 +114,7 @@ typedef enum {
     HotAddressListCell *cell = (HotAddressListCell *) [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
     switch ([self sectionTypeForIndex:indexPath.section]) {
         case SectionHD:
-            [cell setAddress:[BTAddressManager instance].hdAccount];
+            [cell setAddress:[BTAddressManager instance].hdAccountHot];
             break;
         case SectionPrivate:
             [cell setAddress:[_privateKeys objectAtIndex:indexPath.row]];
@@ -132,7 +132,7 @@ typedef enum {
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     NSInteger sections = 0;
-    if ([BTAddressManager instance].hasHDAccount) {
+    if ([BTAddressManager instance].hasHDAccountHot) {
         sections++;
     }
     if (_privateKeys.count > 0) {
@@ -156,7 +156,7 @@ typedef enum {
     BTAddress *address;
     switch ([self sectionTypeForIndex:indexPath.section]) {
         case SectionHD:
-            address = [BTAddressManager instance].hdAccount;
+            address = [BTAddressManager instance].hdAccountHot;
             break;
         case SectionPrivate:
             address = [_privateKeys objectAtIndex:indexPath.row];
@@ -277,7 +277,7 @@ typedef enum {
 
 - (NSUInteger)sectionIndexForType:(SectionType)type {
     if (type == SectionHD) {
-        if ([BTAddressManager instance].hasHDAccount) {
+        if ([BTAddressManager instance].hasHDAccountHot) {
             return 0;
         } else {
             return -1;
@@ -288,7 +288,7 @@ typedef enum {
             return -1;
         }
         NSUInteger index = 0;
-        if ([BTAddressManager instance].hasHDAccount) {
+        if ([BTAddressManager instance].hasHDAccountHot) {
             index++;
         }
         return index;
@@ -298,7 +298,7 @@ typedef enum {
             return -1;
         }
         NSUInteger index = 0;
-        if ([BTAddressManager instance].hasHDAccount) {
+        if ([BTAddressManager instance].hasHDAccountHot) {
             index++;
         }
         if (_hdms.count > 0) {
@@ -311,7 +311,7 @@ typedef enum {
             return -1;
         }
         NSUInteger index = 0;
-        if ([BTAddressManager instance].hasHDAccount) {
+        if ([BTAddressManager instance].hasHDAccountHot) {
             index++;
         }
         if (_hdms.count > 0) {

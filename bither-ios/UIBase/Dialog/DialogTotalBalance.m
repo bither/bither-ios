@@ -74,8 +74,8 @@
         total += a.balance;
     }
 
-    if ([BTAddressManager instance].hasHDAccount) {
-        hd = [BTAddressManager instance].hdAccount.balance;
+    if ([BTAddressManager instance].hasHDAccountHot) {
+        hd = [BTAddressManager instance].hdAccountHot.balance;
         total += hd;
     }
 
