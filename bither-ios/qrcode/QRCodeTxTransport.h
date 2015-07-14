@@ -19,6 +19,15 @@
 #import <Foundation/Foundation.h>
 
 #define NO_HDM_INDEX  -1
+#define TX_TRANSPORT_VERSION (@"V")
+
+typedef enum {
+    TxTransportTypeNormalPrivateKey = 1,
+    TxTransportTypeServiceHDM = 2,
+    TxTransportTypeColdHDM = 3,
+    TxTransportTypeDesktopHDM = 4,
+    TxTransportTypeColdHD = 5
+} TxTransportType;
 
 @interface QRCodeTxTransport : NSObject
 @property(nonatomic, strong) NSArray *hashList;
@@ -29,6 +38,8 @@
 @property(nonatomic, readwrite) long long fee;
 @property(nonatomic, readwrite) long long changeAmt;
 @property(nonatomic, readwrite) int hdmIndex;
+@property(nonatomic, readwrite) TxTransportType txTransportType;
+@property(nonatomic, readwrite) NSArray *pathTypeIndexes;
 
 
 + (NSString *)getPreSignString:(QRCodeTxTransport *)qrCodeTransport;
