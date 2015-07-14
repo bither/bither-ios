@@ -176,11 +176,15 @@
         int hdAccountId = [[[BTAddressManager instance] hdAccountHot] getHDAccountId];
         [TransactionsUtil getMyTxForHDAccount:hdAccountId pathType:EXTERNAL_ROOT_PATH index:0 callback:^{
             [TransactionsUtil getMyTxForHDAccount:hdAccountId pathType:INTERNAL_ROOT_PATH index:0 callback:^{
-                if (voidBlock) {
-                    voidBlock();
-                }
+                int hdAccountIdMonitor = [[[BTAddressManager instance] hdAccountMonitored] getHDAccountId];
+                [TransactionsUtil getMyTxForHDAccount:hdAccountIdMonitor pathType:INTERNAL_ROOT_PATH index:0 callback:^{
+                    [TransactionsUtil getMyTxForHDAccount:hdAccountIdMonitor pathType:INTERNAL_ROOT_PATH index:0 callback:^{
+                        if (voidBlock) {
+                            voidBlock();
+                        }
+                    }                    andErrorCallBack:errorCallback];
+                }                    andErrorCallBack:errorCallback];
             }                    andErrorCallBack:errorCallback];
-
         }                    andErrorCallBack:errorCallback];
     }        andErrorCallBack:errorCallback];
 
