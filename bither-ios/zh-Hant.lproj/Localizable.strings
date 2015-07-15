@@ -684,3 +684,6 @@
 "first_run_dialog_title" = "為了保護您的比特幣:";
 "first_run_dialog_line_1" = "請不要卸載比太錢包";
 "first_run_dialog_line_2" = "請牢記您的密碼";
+
+// hd cold
+"hdm_cold_seed_count_limit" = "您只能生成一個 HDM 賬戶";

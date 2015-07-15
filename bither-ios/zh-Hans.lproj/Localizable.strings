@@ -683,3 +683,6 @@
 "first_run_dialog_title" = "为了保护您的比特币:";
 "first_run_dialog_line_1" = "请不要卸载比太钱包";
 "first_run_dialog_line_2" = "请牢记您的密码";
+
+// hd cold
+"hdm_cold_seed_count_limit" = "您只能生成一个 HDM 账户";

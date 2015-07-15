@@ -274,12 +274,6 @@
 /* Class = "IBUILabel"; text = "Signature"; ObjectID = "CJp-QT-laa"; */
 "CJp-QT-laa.text" = "簽名";
 
-/* Class = "IBUISegmentedControl"; pIA-ee-e58.segmentTitles[0] = "Private"; ObjectID = "pIA-ee-e58"; */
-"pIA-ee-e58.segmentTitles[0]" = "私鑰";
-
-/* Class = "IBUISegmentedControl"; pIA-ee-e58.segmentTitles[1] = "HDM"; ObjectID = "pIA-ee-e58"; */
-"pIA-ee-e58.segmentTitles[1]" = "HDM";
-
 /* Class = "IBUIButton"; normalTitle = "Generate"; ObjectID = "2fh-9Q-YV2"; */
 "2fh-9Q-YV2.normalTitle" = "生成";
 
@@ -399,3 +393,9 @@
 
 /* Class = "UIButton"; normalTitle = "Next Word"; ObjectID = "LUd-2F-jCf"; */
 "LUd-2F-jCf.normalTitle" = "下一單詞";
+
+/* Class = "IBUISegmentedControl"; pIA-ee-e58.segmentTitles[0] = "Private"; ObjectID = "pIA-ee-e58"; */
+"pIA-ee-e58.segmentTitles[0]" = "冷 HD 賬戶";
+
+/* Class = "IBUISegmentedControl"; pIA-ee-e58.segmentTitles[1] = "HDM"; ObjectID = "pIA-ee-e58"; */
+"pIA-ee-e58.segmentTitles[1]" = "其它";

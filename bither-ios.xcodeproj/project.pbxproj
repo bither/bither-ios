@@ -37,6 +37,9 @@
 		0A6C0F5C1A4D548B00544B33 /* MessageSigningSetting.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A6C0F5B1A4D548B00544B33 /* MessageSigningSetting.m */; };
 		0A6C0F5F1A4D5E1900544B33 /* DialogSignMessageSelectAddress.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A6C0F5E1A4D5E1900544B33 /* DialogSignMessageSelectAddress.m */; };
 		0A6EB31D1AAE9DE200F59ED7 /* WatchMarketBgDrawer.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A6EB31C1AAE9DE200F59ED7 /* WatchMarketBgDrawer.m */; };
+		0A75FC351B5613DA00F062B0 /* ColdAddressAddHDAccountViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A75FC341B5613DA00F062B0 /* ColdAddressAddHDAccountViewController.m */; };
+		0A75FC381B5613FA00F062B0 /* ColdAddressAddOtherViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A75FC371B5613FA00F062B0 /* ColdAddressAddOtherViewController.m */; };
+		0A75FC3B1B5629E100F062B0 /* ColdAddressAddHDAccountViewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A75FC3A1B5629E100F062B0 /* ColdAddressAddHDAccountViewViewController.m */; };
 		0A7F9D311AA83FA500D70BAC /* CacheUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 4269FF7A195A948A001213B9 /* CacheUtil.m */; };
 		0A8853AD1AA8466E00760014 /* GroupUserDefaultUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A8853AC1AA8466E00760014 /* GroupUserDefaultUtil.m */; };
 		0A8853AE1AA8466E00760014 /* GroupUserDefaultUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A8853AC1AA8466E00760014 /* GroupUserDefaultUtil.m */; };
@@ -387,7 +390,6 @@
 		0A52BDA21A9FFC2B00BC8C3E /* bither-ios WatchKit Extension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "bither-ios WatchKit Extension.entitlements"; sourceTree = "<group>"; };
 		0A52BDA31A9FFC6400BC8C3E /* GroupFileUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GroupFileUtil.h; sourceTree = "<group>"; };
 		0A52BDA41A9FFC6400BC8C3E /* GroupFileUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GroupFileUtil.m; sourceTree = "<group>"; };
-		0A593D6D1AEF7B6900E47769 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/MainStoryboard.strings; sourceTree = "<group>"; };
 		0A637B161AA0419C00696260 /* libPods.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libPods.a; path = "Pods/build/Debug-iphoneos/libPods.a"; sourceTree = "<group>"; };
 		0A637B191AA0427200696260 /* WatchTrendingGraphicData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WatchTrendingGraphicData.h; sourceTree = "<group>"; };
 		0A637B1A1AA0427200696260 /* WatchTrendingGraphicData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WatchTrendingGraphicData.m; sourceTree = "<group>"; };
@@ -403,6 +405,13 @@
 		0A6C0F5E1A4D5E1900544B33 /* DialogSignMessageSelectAddress.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DialogSignMessageSelectAddress.m; sourceTree = "<group>"; };
 		0A6EB31B1AAE9DE200F59ED7 /* WatchMarketBgDrawer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WatchMarketBgDrawer.h; sourceTree = "<group>"; };
 		0A6EB31C1AAE9DE200F59ED7 /* WatchMarketBgDrawer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WatchMarketBgDrawer.m; sourceTree = "<group>"; };
+		0A75FC331B5613DA00F062B0 /* ColdAddressAddHDAccountViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ColdAddressAddHDAccountViewController.h; sourceTree = "<group>"; };
+		0A75FC341B5613DA00F062B0 /* ColdAddressAddHDAccountViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ColdAddressAddHDAccountViewController.m; sourceTree = "<group>"; };
+		0A75FC361B5613FA00F062B0 /* ColdAddressAddOtherViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ColdAddressAddOtherViewController.h; sourceTree = "<group>"; };
+		0A75FC371B5613FA00F062B0 /* ColdAddressAddOtherViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ColdAddressAddOtherViewController.m; sourceTree = "<group>"; };
+		0A75FC391B5629E100F062B0 /* ColdAddressAddHDAccountViewViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ColdAddressAddHDAccountViewViewController.h; sourceTree = "<group>"; };
+		0A75FC3A1B5629E100F062B0 /* ColdAddressAddHDAccountViewViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ColdAddressAddHDAccountViewViewController.m; sourceTree = "<group>"; };
+		0A75FC3F1B562AF400F062B0 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/MainStoryboard.strings; sourceTree = "<group>"; };
 		0A8853AB1AA8466E00760014 /* GroupUserDefaultUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GroupUserDefaultUtil.h; sourceTree = "<group>"; };
 		0A8853AC1AA8466E00760014 /* GroupUserDefaultUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GroupUserDefaultUtil.m; sourceTree = "<group>"; };
 		0A93B5FF1A4A66080081D74D /* DialogSignMessageOutput.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DialogSignMessageOutput.h; sourceTree = "<group>"; };
@@ -1248,6 +1257,12 @@
 				0AD674911A79E6E4007967DB /* ColdAddressAddHDMViewController.m */,
 				DC07A672CCAD76ED66B72B91 /* ImportHDMColdSeedController.m */,
 				DC0E3B0A73BF05166C9733A1 /* ImportHDMColdSeedController.h */,
+				0A75FC331B5613DA00F062B0 /* ColdAddressAddHDAccountViewController.h */,
+				0A75FC341B5613DA00F062B0 /* ColdAddressAddHDAccountViewController.m */,
+				0A75FC361B5613FA00F062B0 /* ColdAddressAddOtherViewController.h */,
+				0A75FC371B5613FA00F062B0 /* ColdAddressAddOtherViewController.m */,
+				0A75FC391B5629E100F062B0 /* ColdAddressAddHDAccountViewViewController.h */,
+				0A75FC3A1B5629E100F062B0 /* ColdAddressAddHDAccountViewViewController.m */,
 			);
 			path = Cold;
 			sourceTree = "<group>";
@@ -2073,12 +2088,14 @@
 				ACBEC018196D422D004301E0 /* BalanceButton.m in Sources */,
 				ACBEC021196FDC1E004301E0 /* DialogEditPassword.m in Sources */,
 				4254085F1946A219007AF99C /* UserDefaultsUtil.m in Sources */,
+				0A75FC381B5613FA00F062B0 /* ColdAddressAddOtherViewController.m in Sources */,
 				ACD6DFCF196B99BF009D8031 /* DialogBlackQrCode.m in Sources */,
 				ACD6DFD5196BDC9F009D8031 /* NSAttributedString+Size.m in Sources */,
 				ACEE7D3319D3FBE500932B39 /* SettingUtil.m in Sources */,
 				ACEEB8E419B46ED200F2789C /* BlockViewController.m in Sources */,
 				AC808B8519D52D21004E78A3 /* ImportBip38PrivateKeySetting.m in Sources */,
 				AC53ABAD19D27875007C095C /* UEntropyViewController.m in Sources */,
+				0A75FC3B1B5629E100F062B0 /* ColdAddressAddHDAccountViewViewController.m in Sources */,
 				AC454DD81A1ED7E7000AF4ED /* PinCodeDotsView.m in Sources */,
 				ACF4B17419668D5700CE24FD /* MarketListCell.m in Sources */,
 				ACD6DFD2196BA83B009D8031 /* ColdAddressAddViewController.m in Sources */,
@@ -2242,6 +2259,7 @@
 				1BC275F3608609D0E72BFBE7 /* HDMTriangleBgView.m in Sources */,
 				1BC27499EE579986A1439709 /* DialogHDMInfo.m in Sources */,
 				D61D0E640B2A2C7E6874FDEA /* HDMApi.m in Sources */,
+				0A75FC351B5613DA00F062B0 /* ColdAddressAddHDAccountViewController.m in Sources */,
 				1BC270F1C2BEA60E0B3384AB /* DialogHDMAddressOptions.m in Sources */,
 				DC0C00F6FC8AA88E26580598 /* HDMRecoverSetting.m in Sources */,
 				DC0448DAEF65BD227897D240 /* HDMKeychainRecoverUtil.m in Sources */,
@@ -2382,7 +2400,7 @@
 				42EFB5511949C52100376888 /* Base */,
 				AC229A7A196A466400A7FB5E /* zh-Hans */,
 				AC229A7B196A466900A7FB5E /* zh-Hant */,
-				0A593D6D1AEF7B6900E47769 /* en */,
+				0A75FC3F1B562AF400F062B0 /* en */,
 			);
 			name = MainStoryboard.storyboard;
 			sourceTree = "<group>";
