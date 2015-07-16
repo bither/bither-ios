@@ -72,6 +72,7 @@
 		0AFBA93F1AA02C190059CB4B /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0AFBA9411AA02C190059CB4B /* Localizable.strings */; };
 		1BC2705059CAA4F55CEFCADB /* PaymentAddressSetting.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BC275821CC95E0F138A889D /* PaymentAddressSetting.m */; };
 		1BC27056253378BF3E96EBA0 /* DialogEditVanityLength.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BC27877DFCC22281F0DEAD8 /* DialogEditVanityLength.m */; };
+		1BC270C71B4F214F2FB09057 /* MonitorHDAccountSetting.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BC273BD34F2497C13B90911 /* MonitorHDAccountSetting.m */; };
 		1BC270F1C2BEA60E0B3384AB /* DialogHDMAddressOptions.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BC27D1407586D2FCB8F01AC /* DialogHDMAddressOptions.m */; };
 		1BC271A2775231786F6E597C /* RawDataDiceView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BC27F4ABF122CEF5DCDD706 /* RawDataDiceView.m */; };
 		1BC273956C6D9E8D480F865A /* AddressAliasView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BC279D47F4CCF0091934456 /* AddressAliasView.m */; };
@@ -472,6 +473,7 @@
 		1BC272BEEDF6A790805D3988 /* DialogEditVanityLength.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DialogEditVanityLength.h; sourceTree = "<group>"; };
 		1BC272D7D8F09A8A3DB14204 /* PasswordStrengthUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PasswordStrengthUtil.m; sourceTree = "<group>"; };
 		1BC273B012114E6EDE40C4D9 /* DialogHDMSingularColdSeed.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DialogHDMSingularColdSeed.m; sourceTree = "<group>"; };
+		1BC273BD34F2497C13B90911 /* MonitorHDAccountSetting.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MonitorHDAccountSetting.m; sourceTree = "<group>"; };
 		1BC274A14567F7D6DFEA009B /* DialogHDMSingularColdSeedChildWordsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DialogHDMSingularColdSeedChildWordsViewController.m; sourceTree = "<group>"; };
 		1BC274BD8D2697288769077A /* MonitorSetting.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MonitorSetting.m; sourceTree = "<group>"; };
 		1BC27547024F497C795FF72C /* DialogHDSendTxConfirm.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DialogHDSendTxConfirm.m; sourceTree = "<group>"; };
@@ -489,6 +491,7 @@
 		1BC2793F6A40C4838901BFF4 /* DialogHDMSingularColdSeedChildQrViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DialogHDMSingularColdSeedChildQrViewController.h; sourceTree = "<group>"; };
 		1BC279BF6C2A1E9DF4D86908 /* HDMTriangleBgView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HDMTriangleBgView.h; sourceTree = "<group>"; };
 		1BC279D47F4CCF0091934456 /* AddressAliasView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddressAliasView.m; sourceTree = "<group>"; };
+		1BC279EFF7BFA87701631FCF /* MonitorHDAccountSetting.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MonitorHDAccountSetting.h; sourceTree = "<group>"; };
 		1BC279FF88C655F194D43821 /* RawDataDiceView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RawDataDiceView.h; sourceTree = "<group>"; };
 		1BC27A0354887C3372BE01B1 /* HDMResetServerPasswordUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HDMResetServerPasswordUtil.m; sourceTree = "<group>"; };
 		1BC27A57EBF012BA70BB064C /* HotAddressAddHDAccountViewViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HotAddressAddHDAccountViewViewController.m; sourceTree = "<group>"; };
@@ -1760,6 +1763,8 @@
 				1BC275F4AC68C90C62611462 /* MonitorSetting.h */,
 				1BC275821CC95E0F138A889D /* PaymentAddressSetting.m */,
 				1BC27E906F8D1A224F6EF6F2 /* PaymentAddressSetting.h */,
+				1BC273BD34F2497C13B90911 /* MonitorHDAccountSetting.m */,
+				1BC279EFF7BFA87701631FCF /* MonitorHDAccountSetting.h */,
 			);
 			name = Setting;
 			sourceTree = "<group>";
@@ -2291,6 +2296,7 @@
 				DC02BC2D62776189E7335151 /* GroupUtil.m in Sources */,
 				1BC2705059CAA4F55CEFCADB /* PaymentAddressSetting.m in Sources */,
 				1BC2754DD71C0DC8E65322FC /* DialogFirstRunWarning.m in Sources */,
+				1BC270C71B4F214F2FB09057 /* MonitorHDAccountSetting.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
