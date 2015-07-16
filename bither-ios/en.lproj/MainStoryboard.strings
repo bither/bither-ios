@@ -50,6 +50,9 @@
 /* Class = "UIButton"; normalTitle = "Send"; ObjectID = "7HM-O3-12p"; */
 "7HM-O3-12p.normalTitle" = "Send";
 
+/* Class = "UILabel"; text = "Generate HDM Account"; ObjectID = "7VR-SE-47k"; */
+"7VR-SE-47k.text" = "Generate HDM Account";
+
 /* Class = "UITextField"; placeholder = "0.00"; ObjectID = "7XS-yb-Fb3"; */
 "7XS-yb-Fb3.placeholder" = "0.00";
 
@@ -277,6 +280,9 @@
 
 /* Class = "UIButton"; normalTitle = "Add This Private Key"; ObjectID = "ckY-fV-MzW"; */
 "ckY-fV-MzW.normalTitle" = "Add This Private Key";
+
+/* Class = "UILabel"; text = "Cold HD Account"; ObjectID = "dU2-IG-q9c"; */
+"dU2-IG-q9c.text" = "Cold HD Account";
 
 /* Class = "UILabel"; text = "Can not find private key"; ObjectID = "eEx-7U-SVT"; */
 "eEx-7U-SVT.text" = "Can not find private key";
