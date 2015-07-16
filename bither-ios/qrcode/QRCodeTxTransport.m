@@ -85,7 +85,7 @@
 }
 
 + (BOOL)hasVersion:(NSString *)str {
-    NSString *regexStr = @"[V][\\\\d{1,3}]";
+    NSString *regexStr = @"[V][\\d{1,3}]";
     NSError *error;
     NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:regexStr options:0 error:&error];
     NSArray *matches = [regex matchesInString:str
