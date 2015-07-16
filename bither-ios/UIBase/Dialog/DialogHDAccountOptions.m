@@ -36,8 +36,12 @@
 @implementation DialogHDAccountOptions
 
 - (instancetype)initWithHDAccount:(BTHDAccount *)account {
-    self = [super initWithActions:@[[[Action alloc] initWithName:NSLocalizedString(@"add_hd_account_seed_qr_code", nil) target:nil andSelector:@selector(qrPressed)],
-            [[Action alloc] initWithName:NSLocalizedString(@"add_hd_account_seed_qr_phrase", nil) target:nil andSelector:@selector(phrasePressed)]]];
+    NSMutableArray *actions = [NSMutableArray new];
+    if (account.hasPrivKey) {
+        [actions addObjectsFromArray:@[[[Action alloc] initWithName:NSLocalizedString(@"add_hd_account_seed_qr_code", nil) target:nil andSelector:@selector(qrPressed)],
+                [[Action alloc] initWithName:NSLocalizedString(@"add_hd_account_seed_qr_phrase", nil) target:nil andSelector:@selector(phrasePressed)]]];
+    }
+    self = [super initWithActions:actions];
     if (self) {
         hdAccount = account;
     }

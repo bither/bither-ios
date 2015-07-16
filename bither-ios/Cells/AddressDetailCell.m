@@ -82,7 +82,7 @@
     self.btnAmount.frameChangeListener = self;
 
     CGPoint sendOri = self.btnSend.frame.origin;
-    if (!address.hasPrivKey && !address.isHDM || (address.isHDM && ((BTHDMAddress *) address).isInRecovery)) {
+    if (!address.hasPrivKey && !address.isHDM || (address.isHDM && ((BTHDMAddress *) address).isInRecovery) || (address.isHDAccount && !address.hasPrivKey)) {
         UIImageView *iv = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"unsigned_transaction_button_icon"]];
         CGFloat margin = (self.btnSend.frame.size.height - kSendButtonQrIconSize) / 2;
         iv.frame = CGRectMake(self.btnSend.frame.size.width - kSendButtonQrIconSize - margin, margin, kSendButtonQrIconSize, kSendButtonQrIconSize);
@@ -131,10 +131,14 @@
 
 - (IBAction)sendPressed:(id)sender {
     if (self.address.isHDAccount) {
-        HDAccountSendViewController *send = [self.getUIViewController.storyboard instantiateViewControllerWithIdentifier:@"HDAccountSend"];
-        send.address = self.address;
-        send.sendDelegate = self;
-        [self.getUIViewController.navigationController pushViewController:send animated:YES];
+        if (self.address.hasPrivKey) {
+            HDAccountSendViewController *send = [self.getUIViewController.storyboard instantiateViewControllerWithIdentifier:@"HDAccountSend"];
+            send.address = self.address;
+            send.sendDelegate = self;
+            [self.getUIViewController.navigationController pushViewController:send animated:YES];
+        } else {
+            //TODO Monitored HD Send
+        }
     } else if (self.address.isHDM) {
         HdmSendViewController *send = [self.getUIViewController.storyboard instantiateViewControllerWithIdentifier:@"HdmSend"];
         send.address = (BTHDMAddress *) self.address;
