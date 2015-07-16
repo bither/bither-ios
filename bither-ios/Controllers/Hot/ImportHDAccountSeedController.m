@@ -167,16 +167,26 @@
                 });
                 return;
             }
-            BTHDAccount *account = [[BTHDAccount alloc] initWithMnemonicSeed:mnemonicCodeSeed password:password fromXRandom:NO syncedComplete:NO andGenerationCallback:nil];
-            if (!account) {
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    [self showMsg:NSLocalizedString(@"import_hdm_cold_seed_format_error", nil)];
-                });
-                return;
+            if ([BTSettings instance].getAppMode == HOT) {
+                BTHDAccount *account = [[BTHDAccount alloc] initWithMnemonicSeed:mnemonicCodeSeed password:password fromXRandom:NO syncedComplete:NO andGenerationCallback:nil];
+                if (!account) {
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        [self showMsg:NSLocalizedString(@"import_hdm_cold_seed_format_error", nil)];
+                    });
+                    return;
+                }
+                [[PeerUtil instance] stopPeer];
+                [BTAddressManager instance].hdAccountHot = account;
+                [[PeerUtil instance] startPeer];
+            } else {
+                BTHDAccountCold *account = [[BTHDAccountCold alloc] initWithMnemonicSeed:mnemonicCodeSeed andPassword:password];
+                if (!account) {
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        [self showMsg:NSLocalizedString(@"import_hdm_cold_seed_format_error", nil)];
+                    });
+                    return;
+                }
             }
-            [[PeerUtil instance] stopPeer];
-            [BTAddressManager instance].hdAccountHot = account;
-            [[PeerUtil instance] startPeer];
             dispatch_async(dispatch_get_main_queue(), ^{
                 [dp dismissWithCompletion:^{
                     [s.navigationController popViewControllerAnimated:YES];
