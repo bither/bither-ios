@@ -41,6 +41,10 @@
     return [self getValue:@"hd"];
 }
 
+- (uint64_t)hdMonitored {
+    return [self getValue:@"hdMonitored"];
+}
+
 - (uint64_t)hdm {
     return [self getValue:@"hdm"];
 }
@@ -54,7 +58,7 @@
 }
 
 - (uint64_t)total {
-    return self.hdm + self.hot + self.cold + self.hd;
+    return self.hdm + self.hot + self.cold + self.hd + self.hdMonitored;
 }
 
 - (uint64_t)getValue:(NSString *)key {

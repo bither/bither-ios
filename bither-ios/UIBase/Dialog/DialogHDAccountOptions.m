@@ -56,6 +56,11 @@
 }
 
 - (void)showOldAddresses {
+    if (hdAccount.issuedExternalIndex < 0) {
+        if (self.delegate) {
+            [self.delegate showBannerWithMessage:NSLocalizedString(@"hd_account_old_addresses_zero", nil)];
+        }
+    }
     [[DialogOldAddressesOfHDAccount alloc] initWithAccount:hdAccount andDeleget:self.delegate];
 }
 

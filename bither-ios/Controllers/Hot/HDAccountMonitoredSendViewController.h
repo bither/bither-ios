@@ -1,5 +1,5 @@
 //
-//  TotalBalance.h
+//  SendViewController.h
 //  bither-ios
 //
 //  Copyright 2014 http://Bither.net
@@ -15,17 +15,14 @@
 //  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 //  See the License for the specific language governing permissions and
 //  limitations under the License.
-//
-//  Created by songchenwen on 2015/2/27.
-//
 
-#import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
+#import <Bitheri/BTAddress.h>
+#import "SendViewController.h"
 
-@interface TotalBalance : NSObject
--(uint64_t)hd;
--(uint64_t)hdMonitored;
--(uint64_t)hdm;
--(uint64_t)hot;
--(uint64_t)cold;
--(uint64_t)total;
+@interface HDAccountMonitoredSendViewController : UIViewController
+@property BTHDAccount *address;
+@property NSString *toAddress;
+@property uint64_t amount;
+@property(weak) NSObject <SendDelegate> *sendDelegate;
 @end
