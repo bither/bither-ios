@@ -61,7 +61,7 @@
             [self.delegate showBannerWithMessage:NSLocalizedString(@"hd_account_old_addresses_zero", nil)];
         }
     }
-    [[DialogOldAddressesOfHDAccount alloc] initWithAccount:hdAccount andDeleget:self.delegate];
+    [[[DialogOldAddressesOfHDAccount alloc] initWithAccount:hdAccount andDeleget:self.delegate] showInWindow:_window];
 }
 
 - (void)qrPressed {

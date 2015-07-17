@@ -92,14 +92,14 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     DialogOldAddressesOfHDAccountCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
-    [cell showAddress:[_account addressForPath:EXTERNAL_ROOT_PATH atIndex:indexPath.row]];
+    [cell showAddress:[_account addressForPath:EXTERNAL_ROOT_PATH atIndex:indexPath.row].address];
     cell.vSeperator.hidden = indexPath.row == _account.issuedExternalIndex;
     cell.delegate = self;
     return cell;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    NSString *address = [_account addressForPath:EXTERNAL_ROOT_PATH atIndex:indexPath.row];
+    NSString *address = [_account addressForPath:EXTERNAL_ROOT_PATH atIndex:indexPath.row].address;
     if (address.length > 30) {
         address = [StringUtil formatAddress:address groupSize:kAddressGroupSize lineSize:kAddressLineSize];
     }
@@ -122,7 +122,7 @@
     NSUInteger columnCount = 2;
     CGFloat firstColumnWidth = 0;
     CGFloat secondColumnWidth = 30;
-    NSString *address = [account addressForPath:EXTERNAL_ROOT_PATH atIndex:0];
+    NSString *address = [account addressForPath:EXTERNAL_ROOT_PATH atIndex:0].address;
     if (address.length > 30) {
         address = [StringUtil formatAddress:address groupSize:kAddressGroupSize lineSize:kAddressLineSize];
     }
@@ -170,7 +170,7 @@
     self.lblAddress.numberOfLines = 3;
 
     CGFloat btnSize = 30;
-    self.btnShow = [[UIButton alloc] initWithFrame:CGRectMake(CGRectGetMaxX(self.lblAddress.frame) + kColumnMargin, (self.frame.size.height - btnSize) / 2, btnSize, btnSize)];
+    self.btnShow = [[UIButton alloc] initWithFrame:CGRectMake(CGRectGetMaxX(self.lblAddress.frame) + kColumnMargin + 8, (self.frame.size.height - btnSize) / 2, btnSize, btnSize)];
     self.btnShow.autoresizingMask = UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleLeftMargin;
     self.btnShow.contentMode = UIViewContentModeCenter;
     [self.btnShow setImage:[UIImage imageNamed:@"address_full_show_button"] forState:UIControlStateNormal];
@@ -208,7 +208,6 @@
     if ([UserDefaultsUtil instance].localeIsChina || [[UserDefaultsUtil instance] localeIsZHHant]) {
         [array addObject:[[Action alloc] initWithName:NSLocalizedString(@"address_option_view_on_blockmeta", nil) target:self andSelector:@selector(showOnBlockMeta)]];
     }
-    [array addObject:[[Action alloc] initWithName:NSLocalizedString(@"address_alias_manage", nil) target:s andSelector:@selector(alias)]];
     __block DialogWithActions *dialog = [[DialogWithActions alloc] initWithActions:array];
     __block UIWindow *window = self.window;
     [self.delegate dismissWithCompletion:^{
