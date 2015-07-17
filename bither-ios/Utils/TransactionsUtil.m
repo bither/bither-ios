@@ -329,14 +329,14 @@
             page += 1;
             [[BitherApi instance] getTransactionApi:address.address withPage:page callback:nextPageBlock andErrorCallBack:errorHandler];
         } else {
-            [[BTAddressManager instance].hdAccountHot initTxs:[[BTAddressManager instance] compressTxsForApi:allTxs andAddress:address.address]];
+            [[[BTAddressManager instance] getHDAccountByHDAccountId:address.hdAccountId] initTxs:[[BTAddressManager instance] compressTxsForApi:txs andAddress:address.address]];
             [address setIsSyncedComplete:YES];
             [[BTHDAccountAddressProvider instance] updateSyncedCompleteByHDAccountId:address.hdAccountId address:address];
 
             if (allTxs.count > 0) {
-                [[BTAddressManager instance].hdAccountHot updateIssuedIndex:address.pathType index:address.index - 1];
-                [[BTAddressManager instance].hdAccountHot supplyEnoughKeys:NO];
-                [[NSNotificationCenter defaultCenter] postNotificationName:kHDAccountPaymentAddressChangedNotification object:[BTAddressManager instance].hdAccountHot.address userInfo:@{kHDAccountPaymentAddressChangedNotificationFirstAdding : @(NO)}];
+                [[[BTAddressManager instance] getHDAccountByHDAccountId:address.hdAccountId] updateIssuedIndex:address.pathType index:address.index - 1];
+                [[[BTAddressManager instance] getHDAccountByHDAccountId:address.hdAccountId] supplyEnoughKeys:NO];
+                [[NSNotificationCenter defaultCenter] postNotificationName:kHDAccountPaymentAddressChangedNotification object:[[BTAddressManager instance] getHDAccountByHDAccountId:address.hdAccountId].address userInfo:@{kHDAccountPaymentAddressChangedNotificationFirstAdding : @(NO)}];
             } else {
                 [[BTHDAccountAddressProvider instance] updateSyncedByHDAccountId:address.hdAccountId pathType:address.pathType index:address.index];
             }
