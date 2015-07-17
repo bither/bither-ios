@@ -265,7 +265,7 @@
         NSArray *txs = [TransactionsUtil getTxs:dict];
 
         [[[BTAddressManager instance] getHDAccountByHDAccountId:address.hdAccountId] initTxs:[[BTAddressManager instance] compressTxsForApi:txs andAddress:address.address]];
-        if (txCnt > txs.count || txs.count == 0) {
+        if (txCnt > txs.count && txs.count != 0) {
             page += 1;
             [[BitherApi instance] getTransactionApi:address.address withPage:page callback:nextPageBlock andErrorCallBack:errorHandler];
         } else {
@@ -315,7 +315,7 @@
         NSArray *txs = [TransactionsUtil getTxs:dict];
 
         [address initTxs:[[BTAddressManager instance] compressTxsForApi:txs andAddress:address.address]];
-        if (txCnt > txs.count || txs.count == 0) {
+        if (txCnt > txs.count && txs.count != 0) {
             page += 1;
             [[BitherApi instance] getTransactionApi:address.address withPage:page callback:nextPageBlock andErrorCallBack:errorHandler];
         } else {
