@@ -84,11 +84,10 @@ static BitherApi *piApi;
 }
 
 - (void)getTransactionApi:(NSString *)address withPage:(int)page callback:(DictResponseBlock)callback andErrorCallBack:(ErrorHandler)errorCallback; {
-    NSLog(@"%@ %d", address, page);
     NSString *url = [NSString stringWithFormat:BC_ADDRESS_TX_URL, address, page];
     [self          get:url withParams:nil networkType:BitherBC completed:^(MKNetworkOperation *completedOperation) {
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
-            NSLog(@"%@", completedOperation.responseString);
+            DDLogDebug(@"api response:%@", completedOperation.responseString);
             if (![StringUtil isEmpty:completedOperation.responseString]) {
                 NSDictionary *dict = completedOperation.responseJSON;
                 if (callback) {
@@ -107,7 +106,7 @@ static BitherApi *piApi;
     NSString *url = [NSString stringWithFormat:BC_ADDRESS_STAT_URL, address];
     [self          get:url withParams:nil networkType:BitherBC completed:^(MKNetworkOperation *completedOperation) {
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
-            NSLog(@"%@", completedOperation.responseString);
+            DDLogDebug(@"api response:%@", completedOperation.responseString);
             if (![StringUtil isEmpty:completedOperation.responseString]) {
                 NSDictionary *dict = completedOperation.responseJSON;
                 if (callback) {

@@ -51,7 +51,7 @@
     UIApplicationState state = [UIApplication sharedApplication].applicationState;
     [infoDic setValue:[NSNumber numberWithBool:state == UIApplicationStateActive] forKey:ApplicationForeground];
     [infoDic setValue:[NSNumber numberWithLongLong:diff] forKey:@"diff"];
-    NSLog(@"%@", infoDic);
+    DDLogDebug(@"notify:%@", infoDic);
     if (txNotificationType == txReceive || txNotificationType == txSend) {
         [self notification:msg dict:infoDic];
     }

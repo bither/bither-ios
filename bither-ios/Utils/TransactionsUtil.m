@@ -261,15 +261,17 @@
     };
 
     __block DictResponseBlock nextPageBlock = ^(NSDictionary *dict) {
-        int blockCount = [dict[@"block_count"] intValue];
         int txCnt = [dict[@"tx_cnt"] intValue];
         NSArray *txs = [TransactionsUtil getTxs:dict];
+
         [[[BTAddressManager instance] getHDAccountByHDAccountId:address.hdAccountId] initTxs:[[BTAddressManager instance] compressTxsForApi:txs andAddress:address.address]];
-        if (txs.count > 0) {
+        if (txCnt > txs.count || txs.count == 0) {
             page += 1;
             [[BitherApi instance] getTransactionApi:address.address withPage:page callback:nextPageBlock andErrorCallBack:errorHandler];
         } else {
             nextPageBlock = nil;
+
+            int blockCount = [dict[@"block_count"] intValue];
             uint32_t storeHeight = [[BTBlockChain instance] lastBlock].blockNo;
             if (blockCount < storeHeight && storeHeight - blockCount < 100) {
                 [[BTBlockChain instance] rollbackBlock:(uint32_t) blockCount];
@@ -309,13 +311,16 @@
     };
 
     __block DictResponseBlock nextPageBlock = ^(NSDictionary *dict) {
+        int txCnt = [dict[@"tx_cnt"] intValue];
         NSArray *txs = [TransactionsUtil getTxs:dict];
+
         [address initTxs:[[BTAddressManager instance] compressTxsForApi:txs andAddress:address.address]];
-        if (txs.count > 0) {
+        if (txCnt > txs.count || txs.count == 0) {
             page += 1;
             [[BitherApi instance] getTransactionApi:address.address withPage:page callback:nextPageBlock andErrorCallBack:errorHandler];
         } else {
             nextPageBlock = nil;
+
             int blockCount = [dict[@"block_count"] intValue];
             uint32_t storeHeight = [[BTBlockChain instance] lastBlock].blockNo;
             if (blockCount < storeHeight && storeHeight - blockCount < 100) {
