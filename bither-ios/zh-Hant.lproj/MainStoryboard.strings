@@ -405,3 +405,15 @@
 
 /* Class = "UILabel"; text = "Cold HD Account"; ObjectID = "dU2-IG-q9c"; */
 "dU2-IG-q9c.text" = "冷 HD 賬戶";
+
+/* Class = "UITextField"; placeholder = "Bitcoin address"; ObjectID = "8hY-cL-7RN"; */
+"8hY-cL-7RN.placeholder" = "比特币地址";
+
+/* Class = "UILabel"; text = "Amount"; ObjectID = "I3O-1Q-uKd"; */
+"I3O-1Q-uKd.text" = "金额";
+
+/* Class = "UIButton"; normalTitle = "Send"; ObjectID = "x5l-Rf-4Wi"; */
+"x5l-Rf-4Wi.normalTitle" = "发送";
+
+/* Class = "UILabel"; text = "Balance:"; ObjectID = "3TU-hn-ytB"; */
+"3TU-hn-ytB.text" = "余额:";

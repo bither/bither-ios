@@ -20,6 +20,9 @@
 /* Class = "UILabel"; text = "Label"; ObjectID = "38x-NI-gXk"; */
 "38x-NI-gXk.text" = "Label";
 
+/* Class = "UILabel"; text = "Balance:"; ObjectID = "3TU-hn-ytB"; */
+"3TU-hn-ytB.text" = "Balance:";
+
 /* Class = "UITextField"; placeholder = "Bitcoin address"; ObjectID = "3Xg-gQ-PrT"; */
 "3Xg-gQ-PrT.placeholder" = "Bitcoin address";
 
@@ -64,6 +67,9 @@
 
 /* Class = "UILabel"; text = "How many private keys to generate?"; ObjectID = "8Qe-tr-XPb"; */
 "8Qe-tr-XPb.text" = "How many private keys to generate?";
+
+/* Class = "UITextField"; placeholder = "Bitcoin address"; ObjectID = "8hY-cL-7RN"; */
+"8hY-cL-7RN.placeholder" = "Bitcoin address";
 
 /* Class = "UILabel"; text = "3899.23"; ObjectID = "97C-RC-ZTW"; */
 "97C-RC-ZTW.text" = "3899.23";
@@ -122,8 +128,14 @@
 /* Class = "UIButton"; normalTitle = "Sign"; ObjectID = "GHf-wI-Umw"; */
 "GHf-wI-Umw.normalTitle" = "Sign";
 
+/* Class = "UITextField"; placeholder = "0.00"; ObjectID = "GVX-sd-NfW"; */
+"GVX-sd-NfW.placeholder" = "0.00";
+
 /* Class = "UILabel"; text = "Balance:"; ObjectID = "GbZ-iW-rIX"; */
 "GbZ-iW-rIX.text" = "Balance:";
+
+/* Class = "UILabel"; text = "Amount"; ObjectID = "I3O-1Q-uKd"; */
+"I3O-1Q-uKd.text" = "Amount";
 
 /* Class = "UILabel"; text = "low"; ObjectID = "I5M-vR-w4V"; */
 "I5M-vR-w4V.text" = "low";
@@ -151,6 +163,9 @@
 
 /* Class = "UITextField"; placeholder = "0.00"; ObjectID = "MAT-xt-p4f"; */
 "MAT-xt-p4f.placeholder" = "0.00";
+
+/* Class = "UITextField"; placeholder = "0.00"; ObjectID = "MIP-Nt-FOw"; */
+"MIP-Nt-FOw.placeholder" = "0.00";
 
 /* Class = "UILabel"; text = "Label"; ObjectID = "MSV-4p-BLw"; */
 "MSV-4p-BLw.text" = "Label";
@@ -274,6 +289,9 @@
 
 /* Class = "UILabel"; text = "value"; ObjectID = "cAB-ok-gus"; */
 "cAB-ok-gus.text" = "value";
+
+/* Class = "UILabel"; text = "Pay to"; ObjectID = "cad-Yu-nIO"; */
+"cad-Yu-nIO.text" = "Pay to";
 
 /* Class = "UILabel"; text = "1JT3"; ObjectID = "cdq-og-ME5"; */
 "cdq-og-ME5.text" = "1JT3";
@@ -470,6 +488,9 @@
 /* Class = "UIButton"; normalTitle = "Generate HDM Account"; ObjectID = "wlv-4l-4pf"; */
 "wlv-4l-4pf.normalTitle" = "Generate HDM Account";
 
+/* Class = "UIButton"; normalTitle = "Send"; ObjectID = "x5l-Rf-4Wi"; */
+"x5l-Rf-4Wi.normalTitle" = "Send";
+
 /* Class = "UILabel"; text = "Private Key"; ObjectID = "x9d-Sc-rrj"; */
 "x9d-Sc-rrj.text" = "Private Key";
 
@@ -484,6 +505,9 @@
 
 /* Class = "UITextField"; placeholder = "Password"; ObjectID = "xmg-Xg-1Ns"; */
 "xmg-Xg-1Ns.placeholder" = "Password";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "yA2-xI-ef0"; */
+"yA2-xI-ef0.text" = "Label";
 
 /* Class = "UILabel"; text = "Setting"; ObjectID = "yOF-tp-J78"; */
 "yOF-tp-J78.text" = "Setting";
@@ -511,3 +535,15 @@
 
 /* Class = "UIButton"; normalTitle = "Add This Private Key"; ObjectID = "zjg-wy-EHw"; */
 "zjg-wy-EHw.normalTitle" = "Add This Private Key";
+
+/* Class = "UITextField"; placeholder = "Bitcoin address"; ObjectID = "8hY-cL-7RN"; */
+"8hY-cL-7RN.placeholder" = "Bitcoin address";
+
+/* Class = "UILabel"; text = "Amount"; ObjectID = "I3O-1Q-uKd"; */
+"I3O-1Q-uKd.text" = "Amount";
+
+/* Class = "UIButton"; normalTitle = "Send"; ObjectID = "x5l-Rf-4Wi"; */
+"x5l-Rf-4Wi.normalTitle" = "Send";
+
+/* Class = "UILabel"; text = "Balance:"; ObjectID = "3TU-hn-ytB"; */
+"3TU-hn-ytB.text" = "Balance:";

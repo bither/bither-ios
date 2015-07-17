@@ -30,6 +30,7 @@
 #import "DialogBalanceDetail.h"
 #import "HdmSendViewController.h"
 #import "HDAccountSendViewController.h"
+#import "HDAccountMonitoredSendViewController.h"
 
 #define kAddressGroupSize (4)
 #define kAddressLineSize (12)
@@ -137,7 +138,10 @@
             send.sendDelegate = self;
             [self.getUIViewController.navigationController pushViewController:send animated:YES];
         } else {
-            //TODO Monitored HD Send
+            HDAccountMonitoredSendViewController *send = [self.getUIViewController.storyboard instantiateViewControllerWithIdentifier:@"HDAccountMonitoredSend"];
+            send.address = self.address;
+            send.sendDelegate = self;
+            [self.getUIViewController.navigationController pushViewController:send animated:YES];
         }
     } else if (self.address.isHDM) {
         HdmSendViewController *send = [self.getUIViewController.storyboard instantiateViewControllerWithIdentifier:@"HdmSend"];
