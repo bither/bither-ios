@@ -172,21 +172,52 @@
     }
     __block  NSInteger index = 0;
     addresses = [addresses reverseObjectEnumerator].allObjects;
-    [TransactionsUtil getMyTx:addresses index:index callback:^{
-        int hdAccountId = [[[BTAddressManager instance] hdAccountHot] getHDAccountId];
-        [TransactionsUtil getMyTxForHDAccount:hdAccountId pathType:EXTERNAL_ROOT_PATH index:0 callback:^{
-            [TransactionsUtil getMyTxForHDAccount:hdAccountId pathType:INTERNAL_ROOT_PATH index:0 callback:^{
-                int hdAccountIdMonitor = [[[BTAddressManager instance] hdAccountMonitored] getHDAccountId];
-                [TransactionsUtil getMyTxForHDAccount:hdAccountIdMonitor pathType:INTERNAL_ROOT_PATH index:0 callback:^{
-                    [TransactionsUtil getMyTxForHDAccount:hdAccountIdMonitor pathType:INTERNAL_ROOT_PATH index:0 callback:^{
-                        if (voidBlock) {
-                            voidBlock();
-                        }
-                    }                    andErrorCallBack:errorCallback];
-                }                    andErrorCallBack:errorCallback];
-            }                    andErrorCallBack:errorCallback];
-        }                    andErrorCallBack:errorCallback];
-    }        andErrorCallBack:errorCallback];
+    __block int completeCount = 0;
+    int needCompleteCount = addresses.count + [[BTAddressManager instance] hasHDAccountHot] + [[BTAddressManager instance] hasHDAccountMonitored];
+    for (BTAddress *address in addresses) {
+        [TransactionsUtil getTxs:address callback:^{
+            completeCount += 1;
+            if (completeCount == needCompleteCount) {
+                if (voidBlock) {
+                    voidBlock();
+                }
+            }
+        } andErrorCallBack:errorCallback];
+    }
+
+    NSMutableArray *hdAccounts = [NSMutableArray new];
+    if ([[BTAddressManager instance] hasHDAccountHot]) {
+        [hdAccounts addObject:[[BTAddressManager instance] hdAccountHot]];
+    }
+    if ([[BTAddressManager instance] hasHDAccountMonitored]) {
+        [hdAccounts addObject:[[BTAddressManager instance] hdAccountMonitored]];
+    }
+    for (BTHDAccount *account in hdAccounts) {
+        [TransactionsUtil getMyTxForHDAccount:account.getHDAccountId callback:^{
+            completeCount += 1;
+            if (completeCount == needCompleteCount) {
+                if (voidBlock) {
+                    voidBlock();
+                }
+            }
+        } andErrorCallBack:errorCallback];
+    }
+
+//    [TransactionsUtil getMyTx:addresses index:index callback:^{
+//        int hdAccountId = [[[BTAddressManager instance] hdAccountHot] getHDAccountId];
+////        [TransactionsUtil getMyTxForHDAccount:hdAccountId pathType:EXTERNAL_ROOT_PATH index:0 callback:^{
+////            [TransactionsUtil getMyTxForHDAccount:hdAccountId pathType:INTERNAL_ROOT_PATH index:0 callback:^{
+//                int hdAccountIdMonitor = [[[BTAddressManager instance] hdAccountMonitored] getHDAccountId];
+//                [TransactionsUtil getMyTxForHDAccount:hdAccountIdMonitor pathType:EXTERNAL_ROOT_PATH index:0 callback:^{
+//                    [TransactionsUtil getMyTxForHDAccount:hdAccountIdMonitor pathType:INTERNAL_ROOT_PATH index:0 callback:^{
+//                        if (voidBlock) {
+//                            voidBlock();
+//                        }
+//                    }                    andErrorCallBack:errorCallback];
+//                }                    andErrorCallBack:errorCallback];
+////            }                    andErrorCallBack:errorCallback];
+////        }                    andErrorCallBack:errorCallback];
+//    }        andErrorCallBack:errorCallback];
 
 }
 
@@ -221,6 +252,24 @@
                 errorCallback(errorOp, error);
             }
         }];
+    }
+}
+
++ (void)getMyTxForHDAccount:(int)hdAccountId callback:(VoidBlock)callback andErrorCallBack:(ErrorHandler)errorCallback {
+    NSMutableArray *pathArray = [NSMutableArray new];
+    [pathArray addObject:@(EXTERNAL_ROOT_PATH)];
+    [pathArray addObject:@(INTERNAL_ROOT_PATH)];
+    __block int completeCount = 0;
+    int needCompleteCount = pathArray.count;
+    for (NSNumber *pathType in pathArray){
+        [TransactionsUtil getMyTxForHDAccount:hdAccountId pathType:(PathType) [pathType intValue] index:0 callback:^{
+            completeCount += 1;
+            if (completeCount == needCompleteCount) {
+                if (callback) {
+                    callback();
+                }
+            }
+        } andErrorCallBack:errorCallback];
     }
 }
 
@@ -282,14 +331,14 @@
         } else {
             [[BTAddressManager instance].hdAccountHot initTxs:[[BTAddressManager instance] compressTxsForApi:allTxs andAddress:address.address]];
             [address setIsSyncedComplete:YES];
-            [[BTAddressManager instance].hdAccountHot updateSyncComplete:address];
+            [[BTHDAccountAddressProvider instance] updateSyncedCompleteByHDAccountId:address.hdAccountId address:address];
 
             if (allTxs.count > 0) {
                 [[BTAddressManager instance].hdAccountHot updateIssuedIndex:address.pathType index:address.index - 1];
                 [[BTAddressManager instance].hdAccountHot supplyEnoughKeys:NO];
                 [[NSNotificationCenter defaultCenter] postNotificationName:kHDAccountPaymentAddressChangedNotification object:[BTAddressManager instance].hdAccountHot.address userInfo:@{kHDAccountPaymentAddressChangedNotificationFirstAdding : @(NO)}];
             } else {
-                [[BTHDAccountAddressProvider instance] updateSyncedCompleteByHDAccountId:address.hdAccountId address:address];
+                [[BTHDAccountAddressProvider instance] updateSyncedByHDAccountId:address.hdAccountId pathType:address.pathType index:address.index];
             }
 
             uint32_t storeHeight = [[BTBlockChain instance] lastBlock].blockNo;
