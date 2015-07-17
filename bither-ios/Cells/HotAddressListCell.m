@@ -191,7 +191,10 @@
 - (void)handleTableviewCellLongPressed:(UILongPressGestureRecognizer *)gestureRecognizer {
     if (gestureRecognizer.state == UIGestureRecognizerStateBegan) {
         if (_btAddress.isHDAccount) {
-            dialogHDAccountOptions = [[DialogHDAccountOptions alloc] initWithHDAccount:[BTAddressManager instance].hdAccountHot];
+            if (!_btAddress.hasPrivKey) {
+                return;
+            }
+            dialogHDAccountOptions = [[DialogHDAccountOptions alloc] initWithHDAccount:[BTAddressManager instance].hdAccountHot andDelegate:nil];
             [dialogHDAccountOptions showInWindow:self.window];
         } else if (_btAddress.isHDM) {
             [[[DialogHDMAddressOptions alloc] initWithAddress:_btAddress andAddressAliasDelegate:nil] showInWindow:self.window];

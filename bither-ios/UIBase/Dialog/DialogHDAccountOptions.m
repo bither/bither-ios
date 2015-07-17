@@ -25,23 +25,38 @@
 #import "DialogBlackQrCode.h"
 #import "DialogProgress.h"
 #import "DialogHDMSeedWordList.h"
+#import "DialogOldAddressesOfHDAccount.h"
+#import "UIViewController+PiShowBanner.h"
 
 @interface DialogHDAccountOptions () <DialogPasswordDelegate> {
     BOOL qr;
     BTHDAccount *hdAccount;
     UIWindow *_window;
 }
+@property(weak) NSObject <ShowBannerDelegete> *delegate;
 @end
 
 @implementation DialogHDAccountOptions
 
-- (instancetype)initWithHDAccount:(BTHDAccount *)account {
-    self = [super initWithActions:@[[[Action alloc] initWithName:NSLocalizedString(@"add_hd_account_seed_qr_code", nil) target:nil andSelector:@selector(qrPressed)],
-            [[Action alloc] initWithName:NSLocalizedString(@"add_hd_account_seed_qr_phrase", nil) target:nil andSelector:@selector(phrasePressed)]]];
+- (instancetype)initWithHDAccount:(BTHDAccount *)account andDelegate:(NSObject <ShowBannerDelegete> *)delegate {
+    NSMutableArray *actions = [NSMutableArray new];
+    if (account.hasPrivKey) {
+        [actions addObjectsFromArray:@[[[Action alloc] initWithName:NSLocalizedString(@"add_hd_account_seed_qr_code", nil) target:nil andSelector:@selector(qrPressed)],
+                [[Action alloc] initWithName:NSLocalizedString(@"add_hd_account_seed_qr_phrase", nil) target:nil andSelector:@selector(phrasePressed)]]];
+    }
+    if (delegate) {
+        [actions addObject:[[Action alloc] initWithName:NSLocalizedString(@"hd_account_old_addresses", nil) target:nil andSelector:@selector(showOldAddresses)]];
+    }
+    self = [super initWithActions:actions];
     if (self) {
         hdAccount = account;
+        self.delegate = delegate;
     }
     return self;
+}
+
+- (void)showOldAddresses {
+    [[DialogOldAddressesOfHDAccount alloc] initWithAccount:hdAccount andDeleget:self.delegate];
 }
 
 - (void)qrPressed {

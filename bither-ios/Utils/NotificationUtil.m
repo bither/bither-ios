@@ -38,6 +38,8 @@
     NSString *msg = [NSString stringWithFormat:@"%@ %@%@", address, typeString, balanceString];
     if ([BTUtils compareString:address compare:kHDAccountPlaceHolder]) {
         msg = [NSString stringWithFormat:@"%@ %@%@", NSLocalizedString(@"address_group_hd", nil), typeString, balanceString];
+    } else if ([BTUtils compareString:address compare:kHDAccountMonitoredPlaceHolder]) {
+        msg = [NSString stringWithFormat:@"%@ %@%@", NSLocalizedString(@"hd_account_cold_address_list_label", nil), typeString, balanceString];
     }
     NSMutableDictionary *infoDic = [NSMutableDictionary new];
     [infoDic setValue:address forKey:@"address"];

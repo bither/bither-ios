@@ -84,10 +84,15 @@
 
 - (void)toDetail:(UINavigationController *)nav {
     UIViewController *topVc = nav.topViewController;
-    if ([topVc isKindOfClass:[AddressDetailViewController class]] && ([StringUtil compareString:self.notificationAddress compare:[(AddressDetailViewController *) topVc address].address] || ([[(AddressDetailViewController *) topVc address] isKindOfClass:[BTHDAccount class]] && [StringUtil compareString:self.notificationAddress compare:kHDAccountPlaceHolder]))) {
+    if ([topVc isKindOfClass:[AddressDetailViewController class]] && ([StringUtil compareString:self.notificationAddress compare:[(AddressDetailViewController *) topVc address].address] || ([[(AddressDetailViewController *) topVc address] isKindOfClass:[BTHDAccount class]] && ((BTHDAccount *) [(AddressDetailViewController *) topVc address]).hasPrivKey && [StringUtil compareString:self.notificationAddress compare:kHDAccountPlaceHolder]) || ([[(AddressDetailViewController *) topVc address] isKindOfClass:[BTHDAccount class]] && !((BTHDAccount *) [(AddressDetailViewController *) topVc address]).hasPrivKey && [StringUtil compareString:self.notificationAddress compare:kHDAccountMonitoredPlaceHolder]))) {
 
     } else {
-        if ([StringUtil compareString:self.notificationAddress compare:kHDAccountPlaceHolder] && [BTAddressManager instance].hasHDAccountHot) {
+        if ([StringUtil compareString:self.notificationAddress compare:kHDAccountMonitoredPlaceHolder] && [BTAddressManager instance].hasHDAccountMonitored) {
+            BTHDAccount *account = [BTAddressManager instance].hdAccountMonitored;
+            AddressDetailViewController *detail = [nav.storyboard instantiateViewControllerWithIdentifier:@"AddressDetail"];
+            detail.address = account;
+            [nav pushViewController:detail animated:YES];
+        } else if ([StringUtil compareString:self.notificationAddress compare:kHDAccountPlaceHolder] && [BTAddressManager instance].hasHDAccountHot) {
             BTHDAccount *account = [BTAddressManager instance].hdAccountHot;
             AddressDetailViewController *detail = [nav.storyboard instantiateViewControllerWithIdentifier:@"AddressDetail"];
             detail.address = account;
