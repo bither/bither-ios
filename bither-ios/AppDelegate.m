@@ -286,7 +286,11 @@ static StatusBarNotificationWindow *notificationWindow;
         if ([BTAddressManager instance].hasHDAccountHot) {
             hd = [BTAddressManager instance].hdAccountHot.balance;
         }
-        [GroupFileUtil setTotalBalanceWithHD:hd HDM:hdm hot:hot andCold:cold];
+        int64_t hdMonitored = 0;
+        if ([BTAddressManager instance].hasHDAccountMonitored) {
+            hdMonitored = [BTAddressManager instance].hdAccountMonitored.balance;
+        }
+        [GroupFileUtil setTotalBalanceWithHD:hd hdMonitored:hdMonitored hot:hot andCold:cold HDM:hdm];
     }
 }
 
