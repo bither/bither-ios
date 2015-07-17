@@ -1,5 +1,5 @@
 //
-//  DialogHDAccountOptions.h
+//  DialogOldAddressesOfHDAccount.h
 //  bither-ios
 //
 //  Copyright 2014 http://Bither.net
@@ -16,16 +16,14 @@
 //  See the License for the specific language governing permissions and
 //  limitations under the License.
 //
-//  Created by songchenwen on 15/4/27.
+//  Created by songchenwen on 15/7/17.
 //
 
 #import <Foundation/Foundation.h>
-#import "DialogWithActions.h"
+#import "DialogCentered.h"
+#import <Bitheri/BTHDAccount.h>
+#import "UIViewController+PiShowBanner.h"
 
-@class BTHDAccount;
-@protocol ShowBannerDelegete;
-
-
-@interface DialogHDAccountOptions : DialogWithActions
-- (instancetype)initWithHDAccount:(BTHDAccount *)account andDelegate:(NSObject <ShowBannerDelegete> *)delegate;
+@interface DialogOldAddressesOfHDAccount : DialogCentered
+- (instancetype)initWithAccount:(BTHDAccount *)account andDeleget:(NSObject <ShowBannerDelegete> *)delegate;
 @end

@@ -41,7 +41,7 @@
 #import "DialogHDAccountOptions.h"
 
 @interface AddressDetailViewController () <UITableViewDataSource, UITableViewDelegate, DialogAddressOptionsDelegate
-        , DialogPasswordDelegate, DialogPrivateKeyOptionsDelegate> {
+        , DialogPasswordDelegate, DialogPrivateKeyOptionsDelegate, ShowBannerDelegete> {
     NSMutableArray *_txs;
     PrivateKeyQrCodeType _qrcodeType;
     DialogHDAccountOptions *dialogHDAccountOptions;
@@ -187,7 +187,7 @@
 
 - (IBAction)optionPressed:(id)sender {
     if (self.address.isHDAccount) {
-        dialogHDAccountOptions = [[DialogHDAccountOptions alloc] initWithHDAccount:self.address];
+        dialogHDAccountOptions = [[DialogHDAccountOptions alloc] initWithHDAccount:self.address andDelegate:self];
         [dialogHDAccountOptions showInWindow:self.view.window];
     } else if (self.address.isHDM) {
         [[[DialogHDMAddressOptions alloc] initWithAddress:self.address andAddressAliasDelegate:self.btnAddressAlias] showInWindow:self.view.window];
@@ -381,6 +381,10 @@
         });
         key = nil;
     });
+}
+
+- (void)showBannerWithMessage:(NSString *)msg {
+    [self showMessage:msg];
 }
 
 - (void)resetMonitorAddress {
