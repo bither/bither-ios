@@ -23,6 +23,7 @@
 
 @interface TotalBalance : NSObject
 -(uint64_t)hd;
+-(uint64_t)hdMonitored;
 -(uint64_t)hdm;
 -(uint64_t)hot;
 -(uint64_t)cold;
