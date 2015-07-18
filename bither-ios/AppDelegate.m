@@ -324,26 +324,39 @@ static StatusBarNotificationWindow *notificationWindow;
 }
 
 - (void)hdAccountPaymentAddressChanged:(NSNotification *)notification {
-    if (![BTAddressManager instance].hasHDAccountHot) {
+    if (![BTAddressManager instance].hasHDAccountHot && ![BTAddressManager instance].hasHDAccountMonitored) {
         return;
     }
     UserDefaultsUtil *defaults = [UserDefaultsUtil instance];
-    BTHDAccount *account = [BTAddressManager instance].hdAccountHot;
+    BTHDAccount *accountHot = [BTAddressManager instance].hdAccountHot;
+    BTHDAccount *accountMonitored = [BTAddressManager instance].hdAccountMonitored;
     NSString *paymentAddress = defaults.paymentAddress;
     BOOL configured = paymentAddress != nil;
-    BOOL shouldChange;
+    BOOL shouldChange = NO;
+    BTHDAccount *targetAccount = nil;
     if (configured) {
         if ([BTUtils isEmpty:paymentAddress]) {
             shouldChange = NO;
         } else {
-            shouldChange = [account getBelongAccountAddressesFromAddresses:@[paymentAddress]].count > 0;
+            if (accountHot) {
+                shouldChange = [accountHot getBelongAccountAddressesFromAddresses:@[paymentAddress]].count > 0;
+                if (shouldChange) {
+                    targetAccount = accountHot;
+                }
+            }
+            if (!shouldChange && accountMonitored) {
+                shouldChange = [accountMonitored getBelongAccountAddressesFromAddresses:@[paymentAddress]].count > 0;
+                if (shouldChange) {
+                    targetAccount = accountMonitored;
+                }
+            }
         }
     } else {
         shouldChange = YES;
     }
-    if (shouldChange) {
-        if (![BTUtils compareString:account.address compare:paymentAddress]) {
-            [defaults setPaymentAddress:account.address];
+    if (shouldChange && targetAccount) {
+        if (![BTUtils compareString:targetAccount.address compare:paymentAddress]) {
+            [defaults setPaymentAddress:targetAccount.address];
         }
     }
 }

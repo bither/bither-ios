@@ -48,8 +48,11 @@ static PaymentAddressSetting *paymentAddressSetting;
     [self setGetValueBlock:^NSObject * {
         NSString *a = [UserDefaultsUtil instance].paymentAddress;
         if (![BTUtils isEmpty:a]) {
-            if ([self isHDAccountAddress:a]) {
+            if ([self isHDAccountHotAddress:a]) {
                 return NSLocalizedString(@"address_group_hd", nil);
+            }
+            if ([self isHDAccountMonitoredAddress:a]){
+                return NSLocalizedString(@"hd_account_cold_address_list_label", nil);
             }
             return [StringUtil shortenAddress:a];
         } else {
@@ -60,7 +63,10 @@ static PaymentAddressSetting *paymentAddressSetting;
         NSMutableArray *a = [NSMutableArray new];
         [a addObject:[self dictForNone]];
         if ([BTAddressManager instance].hasHDAccountHot) {
-            [a addObject:[self dictForHDAccount]];
+            [a addObject:[self dictForHDAccountHot]];
+        }
+        if ([BTAddressManager instance].hasHDAccountMonitored) {
+            [a addObject:[self dictForHDAccountMonitored]];
         }
         for (BTAddress *address in [BTAddressManager instance].allAddresses) {
             [a addObject:[self dictForAddress:address.address]];
@@ -90,13 +96,24 @@ static PaymentAddressSetting *paymentAddressSetting;
     return @{SETTING_KEY : [StringUtil shortenAddress:a], SETTING_VALUE : a, SETTING_IS_DEFAULT : @([BTUtils compareString:[UserDefaultsUtil instance].paymentAddress compare:a])};
 }
 
-- (NSDictionary *)dictForHDAccount {
-    return @{SETTING_KEY : NSLocalizedString(@"address_group_hd", nil), SETTING_VALUE : [BTAddressManager instance].hdAccountHot.address, SETTING_IS_DEFAULT : @([self isHDAccountAddress:[UserDefaultsUtil instance].paymentAddress])};
+- (NSDictionary *)dictForHDAccountHot {
+    return @{SETTING_KEY : NSLocalizedString(@"address_group_hd", nil), SETTING_VALUE : [BTAddressManager instance].hdAccountHot.address, SETTING_IS_DEFAULT : @([self isHDAccountHotAddress:[UserDefaultsUtil instance].paymentAddress])};
 }
 
-- (BOOL)isHDAccountAddress:(NSString *)address {
+- (NSDictionary *)dictForHDAccountMonitored {
+    return @{SETTING_KEY : NSLocalizedString(@"hd_account_cold_address_list_label", nil), SETTING_VALUE : [BTAddressManager instance].hdAccountMonitored.address, SETTING_IS_DEFAULT : @([self isHDAccountMonitoredAddress:[UserDefaultsUtil instance].paymentAddress])};
+}
+
+- (BOOL)isHDAccountHotAddress:(NSString *)address {
     if ([BTAddressManager instance].hasHDAccountHot) {
         return [[BTAddressManager instance].hdAccountHot getBelongAccountAddressesFromAddresses:@[address]].count > 0;
+    }
+    return NO;
+}
+
+- (BOOL)isHDAccountMonitoredAddress:(NSString *)address {
+    if ([BTAddressManager instance].hasHDAccountMonitored) {
+        return [[BTAddressManager instance].hdAccountMonitored getBelongAccountAddressesFromAddresses:@[address]].count > 0;
     }
     return NO;
 }
