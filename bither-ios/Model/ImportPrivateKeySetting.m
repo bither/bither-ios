@@ -83,6 +83,9 @@ static Setting *importPrivateKeySetting;
 
 
 - (void)actionSheet:(UIActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex {
+    if(buttonIndex < 0 || buttonIndex >= self.buttons.count || buttonIndex == actionSheet.cancelButtonIndex){
+        return;
+    }
     NSString *button = [self.buttons objectAtIndex:buttonIndex];
     if ([StringUtil isEmpty:button]) {
         return;
@@ -219,7 +222,17 @@ static Setting *importPrivateKeySetting;
                     }
                 }
                 if ([BTSettings instance].getAppMode == HOT) {
-                    BTHDAccount *account = [[BTHDAccount alloc] initWithEncryptedMnemonicSeed:[[BTEncryptData alloc] initWithStr:[_result substringFromIndex:1]] password:password syncedComplete:NO andGenerationCallback:nil];
+                    BTHDAccount *account;
+                    @try {
+                        account = [[BTHDAccount alloc] initWithEncryptedMnemonicSeed:[[BTEncryptData alloc] initWithStr:[_result substringFromIndex:1]] password:password syncedComplete:NO andGenerationCallback:nil];
+                    } @catch (NSException *e) {
+                        if ([e isKindOfClass:[DuplicatedHDAccountException class]]) {
+                            dispatch_async(dispatch_get_main_queue(), ^{
+                                [self showMsg:NSLocalizedString(@"import_hd_account_failed_duplicated", nil)];
+                            });
+                            return;
+                        }
+                    }
                     if (!account) {
                         dispatch_async(dispatch_get_main_queue(), ^{
                             [dp dismissWithCompletion:^{

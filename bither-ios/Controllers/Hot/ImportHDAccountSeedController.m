@@ -168,7 +168,18 @@
                 return;
             }
             if ([BTSettings instance].getAppMode == HOT) {
-                BTHDAccount *account = [[BTHDAccount alloc] initWithMnemonicSeed:mnemonicCodeSeed password:password fromXRandom:NO syncedComplete:NO andGenerationCallback:nil];
+                BTHDAccount *account;
+                @try {
+                    account = [[BTHDAccount alloc] initWithMnemonicSeed:mnemonicCodeSeed password:password fromXRandom:NO syncedComplete:NO andGenerationCallback:nil];
+                } @catch (NSException *e) {
+                    if ([e isKindOfClass:[DuplicatedHDAccountException class]]) {
+                        dispatch_async(dispatch_get_main_queue(), ^{
+                            [self showMsg:NSLocalizedString(@"import_hd_account_failed_duplicated", nil)];
+                        });
+                        return;
+                    }
+                }
+
                 if (!account) {
                     dispatch_async(dispatch_get_main_queue(), ^{
                         [self showMsg:NSLocalizedString(@"import_hdm_cold_seed_format_error", nil)];

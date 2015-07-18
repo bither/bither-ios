@@ -697,6 +697,7 @@
 "monitor_cold_hd_account_limit" = "只能监控 1 个冷 HD 账户";
 "monitor_cold_hd_account_failed" = "监控冷 HD 账户失败";
 "monitor_cold_hd_account_failed_duplicated" = "监控失败. 这个账户已经存在.";
+"import_hd_account_failed_duplicated" = "导入失败. 这个账户已经存在.";
 "monitor_cold_hd_account_success" = "监控冷 HD 账户成功";
 "hd_account_old_addresses" = "旧地址列表";
 "hd_account_old_addresses_zero" = "目前还没有使用过的地址";
