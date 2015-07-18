@@ -105,6 +105,9 @@ static PaymentAddressSetting *paymentAddressSetting;
 }
 
 - (BOOL)isHDAccountHotAddress:(NSString *)address {
+    if(!address){
+        return NO;
+    }
     if ([BTAddressManager instance].hasHDAccountHot) {
         return [[BTAddressManager instance].hdAccountHot getBelongAccountAddressesFromAddresses:@[address]].count > 0;
     }
@@ -112,6 +115,9 @@ static PaymentAddressSetting *paymentAddressSetting;
 }
 
 - (BOOL)isHDAccountMonitoredAddress:(NSString *)address {
+    if (!address){
+        return NO;
+    }
     if ([BTAddressManager instance].hasHDAccountMonitored) {
         return [[BTAddressManager instance].hdAccountMonitored getBelongAccountAddressesFromAddresses:@[address]].count > 0;
     }
