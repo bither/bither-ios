@@ -236,6 +236,7 @@ static Setting *PasswordStrengthCheckSetting;
         }];
         [setting setGetArrayBlock:^() {
             NSMutableArray *array = [NSMutableArray new];
+            [array addObject:[self getTransactionFeeDict:High]];
             [array addObject:[self getTransactionFeeDict:Normal]];
             [array addObject:[self getTransactionFeeDict:Low]];
             return array;

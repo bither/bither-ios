@@ -309,6 +309,7 @@
 "Default Transaction Fee"="默认手续费";
 "Normal"="正常";
 "Low"="较低";
+"High" = "较高";
 "fast confirmation"="较快确认";
 "slow confirmation"="较慢确认";
 "Donate"="捐赠";

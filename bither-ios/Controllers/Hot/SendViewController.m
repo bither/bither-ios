@@ -80,7 +80,7 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    [BTSettings instance].feeBase = ([[UserDefaultsUtil instance] getTransactionFeeMode] == Low ? 1000 : 10000);
+    [BTSettings instance].feeBase = [[UserDefaultsUtil instance] getTransactionFeeMode];
     if (![[BTPeerManager instance] connected]) {
         [[PeerUtil instance] startPeer];
     }

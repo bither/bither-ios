@@ -105,6 +105,8 @@ static BOOL _isUnitTest = NO;
 + (NSString *)getTransactionFeeMode:(TransactionFeeMode)transactionFee {
     if (transactionFee == Normal) {
         return NSLocalizedString(@"Normal", nil);
+    } else if (transactionFee == High) {
+        return NSLocalizedString(@"High", nil);
     } else {
         return NSLocalizedString(@"Low", nil);
     }
