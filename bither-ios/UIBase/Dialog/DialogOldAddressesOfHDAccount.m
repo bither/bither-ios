@@ -26,6 +26,7 @@
 #import "UIViewController+PiShowBanner.h"
 #import "DialogWithActions.h"
 #import "UserDefaultsUtil.h"
+#import "DialogShowAddressOnNet.h"
 
 #define kAddressFontSize (16)
 #define kAddressButtonPadding (4)
@@ -202,27 +203,11 @@
 }
 
 - (void)showPresssed:(id)sender {
-    NSMutableArray *array = [NSMutableArray new];
-    __block DialogOldAddressesOfHDAccountCell *s = self;
-    [array addObject:[[Action alloc] initWithName:NSLocalizedString(@"View on Blockchain.info", nil) target:s andSelector:@selector(showOnBlockchain)]];
-    if ([UserDefaultsUtil instance].localeIsChina || [[UserDefaultsUtil instance] localeIsZHHant]) {
-        [array addObject:[[Action alloc] initWithName:NSLocalizedString(@"address_option_view_on_blockmeta", nil) target:self andSelector:@selector(showOnBlockMeta)]];
-    }
-    __block DialogWithActions *dialog = [[DialogWithActions alloc] initWithActions:array];
+    __block DialogShowAddressOnNet *dialog = [[DialogShowAddressOnNet alloc] initWithAddress:_address];
     __block UIWindow *window = self.window;
     [self.delegate dismissWithCompletion:^{
         [dialog showInWindow:window];
     }];
-}
-
-- (void)showOnBlockchain {
-    NSString *url = [NSString stringWithFormat:@"http://blockchain.info/address/%@", _address];
-    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:url]];
-}
-
-- (void)showOnBlockMeta {
-    NSString *url = [NSString stringWithFormat:@"http://www.blockmeta.com/address/%@", _address];
-    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:url]];
 }
 
 - (void)copyAddress:(id)sender {

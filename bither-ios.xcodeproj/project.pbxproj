@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0A0961381B5CBAD300D554A6 /* DialogShowAddressOnNet.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A0961371B5CBAD300D554A6 /* DialogShowAddressOnNet.m */; };
 		0A0BA9B21B575D2400885812 /* ColdAddressListHDCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A0BA9B11B575D2400885812 /* ColdAddressListHDCell.m */; };
 		0A259E251A47F19100D7F707 /* DialogSendOption.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A259E241A47F19100D7F707 /* DialogSendOption.m */; };
 		0A259E281A47FDF600D7F707 /* DialogSelectChangeAddress.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A259E271A47FDF600D7F707 /* DialogSelectChangeAddress.m */; };
@@ -355,6 +356,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		0A0961361B5CBAD300D554A6 /* DialogShowAddressOnNet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DialogShowAddressOnNet.h; sourceTree = "<group>"; };
+		0A0961371B5CBAD300D554A6 /* DialogShowAddressOnNet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DialogShowAddressOnNet.m; sourceTree = "<group>"; };
 		0A0BA9B01B575D2400885812 /* ColdAddressListHDCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ColdAddressListHDCell.h; path = Cells/ColdAddressListHDCell.h; sourceTree = "<group>"; };
 		0A0BA9B11B575D2400885812 /* ColdAddressListHDCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ColdAddressListHDCell.m; path = Cells/ColdAddressListHDCell.m; sourceTree = "<group>"; };
 		0A259E231A47F19100D7F707 /* DialogSendOption.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DialogSendOption.h; sourceTree = "<group>"; };
@@ -1692,6 +1695,8 @@
 				1BC27927EF16B56C4B06CCBB /* DialogFirstRunWarning.h */,
 				1BC273B0D05D3DAE2B6C685A /* DialogOldAddressesOfHDAccount.m */,
 				1BC27B1C49FCCA6BDE3C42D3 /* DialogOldAddressesOfHDAccount.h */,
+				0A0961361B5CBAD300D554A6 /* DialogShowAddressOnNet.h */,
+				0A0961371B5CBAD300D554A6 /* DialogShowAddressOnNet.m */,
 			);
 			path = Dialog;
 			sourceTree = "<group>";
@@ -2132,6 +2137,7 @@
 				ACA11DCD19F74FA10087D39C /* RCheckCell.m in Sources */,
 				ACE7E71819EB8DE100F7AA3A /* ImagePickerFromCameraViewController.m in Sources */,
 				AC808B8C19D56757004E78A3 /* XRandom.m in Sources */,
+				0A0961381B5CBAD300D554A6 /* DialogShowAddressOnNet.m in Sources */,
 				AC3CDB5B1962A3C800C74B4C /* TransactionConfidenceView.m in Sources */,
 				0A446C151A441393000CD25A /* DialogNetworkMonitorOption.m in Sources */,
 				0AD4EA741AEA30C600DC8C0E /* HotAddressAddOtherViewController.m in Sources */,
