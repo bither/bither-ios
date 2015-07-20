@@ -92,6 +92,12 @@
     if ([StringUtil compareString:self.address.address compare:[AppDelegate notificationWindow].notificationAddress]) {
         [[AppDelegate notificationWindow] removeNotification];
     }
+    if (self.address.isHDAccount && self.address.hasPrivKey && [StringUtil compareString:kHDAccountPlaceHolder compare:[AppDelegate notificationWindow].notificationAddress]) {
+        [[AppDelegate notificationWindow] removeNotification];
+    }
+    if (self.address.isHDAccount && !self.address.hasPrivKey && [StringUtil compareString:kHDAccountMonitoredPlaceHolder compare:[AppDelegate notificationWindow].notificationAddress]) {
+        [[AppDelegate notificationWindow] removeNotification];
+    }
     [self refresh];
 }
 
