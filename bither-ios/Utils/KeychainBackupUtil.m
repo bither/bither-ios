@@ -199,7 +199,7 @@
         for (NSString *key in self.keychainKeys) {
             NSArray *array = [key componentsSeparatedByString:KEYCHAIN_KEY_CONTENT_SEP];
             if (![localPubKeys containsObject:array[0]]) {
-                BTAddress *address = [[BTAddress alloc] initWithWithPubKey:array[0] encryptPrivKey:[[array subarrayWithRange:NSMakeRange(1, 3)] componentsJoinedByString:KEYCHAIN_KEY_CONTENT_SEP]];
+                BTAddress *address = [[BTAddress alloc] initWithWithPubKey:array[0] encryptPrivKey:[[array subarrayWithRange:NSMakeRange(1, 3)] componentsJoinedByString:KEYCHAIN_KEY_CONTENT_SEP] isSyncComplete:NO];
                 [[BTAddressManager instance] addAddress:address];
             }
         }
@@ -234,7 +234,7 @@
         // check all keychain password
         for (NSString *key in self.keychainKeys) {
             NSArray *array = [key componentsSeparatedByString:KEYCHAIN_KEY_CONTENT_SEP];
-            BTAddress *address = [[BTAddress alloc] initWithWithPubKey:array[0] encryptPrivKey:[[array subarrayWithRange:NSMakeRange(1, 3)] componentsJoinedByString:KEYCHAIN_KEY_CONTENT_SEP]];
+            BTAddress *address = [[BTAddress alloc] initWithWithPubKey:array[0] encryptPrivKey:[[array subarrayWithRange:NSMakeRange(1, 3)] componentsJoinedByString:KEYCHAIN_KEY_CONTENT_SEP] isSyncComplete:NO];
             BTPasswordSeed *seed = [[BTPasswordSeed alloc] initWithBTAddress:address];
             if (![seed checkPassword:keychainPassword]) {
                 return NO;
@@ -249,7 +249,7 @@
         NSMutableArray *needAddAddress = [NSMutableArray new];
         for (NSString *key in self.keychainKeys) {
             NSArray *array = [key componentsSeparatedByString:KEYCHAIN_KEY_CONTENT_SEP];
-            BTAddress *address = [[BTAddress alloc] initWithWithPubKey:array[0] encryptPrivKey:[[array subarrayWithRange:NSMakeRange(1, 3)] componentsJoinedByString:KEYCHAIN_KEY_CONTENT_SEP]];
+            BTAddress *address = [[BTAddress alloc] initWithWithPubKey:array[0] encryptPrivKey:[[array subarrayWithRange:NSMakeRange(1, 3)] componentsJoinedByString:KEYCHAIN_KEY_CONTENT_SEP] isSyncComplete:NO];
             if ([localPubKeys containsObject:array[0]]) {
                 [needUpdateAddress addObject:address];
             } else {
@@ -266,7 +266,7 @@
         for (NSString *key in self.localKeys) {
             NSArray *array = [key componentsSeparatedByString:KEYCHAIN_KEY_CONTENT_SEP];
             if (![keychainPubKeys containsObject:array[0]]) {
-                BTAddress *address = [[BTAddress alloc] initWithWithPubKey:array[0] encryptPrivKey:[[array subarrayWithRange:NSMakeRange(1, 3)] componentsJoinedByString:KEYCHAIN_KEY_CONTENT_SEP]];
+                BTAddress *address = [[BTAddress alloc] initWithWithPubKey:array[0] encryptPrivKey:[[array subarrayWithRange:NSMakeRange(1, 3)] componentsJoinedByString:KEYCHAIN_KEY_CONTENT_SEP] isSyncComplete:NO];
                 // todo:
 //                address.encryptPrivKey = [address reEncryptPrivKeyWithOldPassphrase:localPassword andNewPassphrase:keychainPassword];
                 [allKeys addObject:[@[array[0], address.fullEncryptPrivKey] componentsJoinedByString:KEYCHAIN_KEY_CONTENT_SEP]];

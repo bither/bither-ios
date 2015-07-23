@@ -53,7 +53,11 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.lblFrom.text = self.tx.myAddress;
+    if (self.tx.txTransportType == TxTransportTypeColdHD) {
+        self.lblFrom.text = NSLocalizedString(@"hd_account_cold_address_list_label", nil);
+    } else {
+        self.lblFrom.text = self.tx.myAddress;
+    }
     self.lblTo.text = self.tx.toAddress;
     self.lblAmount.attributedText = [UnitUtil attributedStringWithSymbolForAmount:self.tx.to withFontSize:14 color:self.lblAmount.textColor];
     self.lblFee.attributedText = [UnitUtil attributedStringWithSymbolForAmount:self.tx.fee withFontSize:14 color:self.lblAmount.textColor];
@@ -75,7 +79,15 @@
     self.vBottom.frame = bottomFrame;
 
     NSArray *privKeys = [BTAddressManager instance].privKeyAddresses;
-    if (self.tx.hdmIndex >= 0) {
+    if (self.tx.txTransportType == TxTransportTypeColdHD) {
+        if ([BTAddressManager instance].hasHDAccountCold) {
+            self.btnSign.hidden = NO;
+            self.lblNoPrivateKey.hidden = YES;
+        } else {
+            self.btnSign.hidden = YES;
+            self.lblNoPrivateKey.hidden = NO;
+        }
+    } else if (self.tx.hdmIndex >= 0 || self.tx.txTransportType == TxTransportTypeColdHDM) {
         if ([BTAddressManager instance].hdmKeychain) {
             self.btnSign.hidden = NO;
             self.lblNoPrivateKey.hidden = YES;
@@ -102,7 +114,7 @@
 }
 
 - (void)onPasswordEntered:(NSString *)password {
-    if ((!address && self.tx.hdmIndex < 0) || (self.tx.hdmIndex >= 0 && ![BTAddressManager instance].hasHDMKeychain)) {
+    if ((!address && self.tx.hdmIndex < 0 && self.tx.txTransportType != TxTransportTypeColdHD) || (self.tx.hdmIndex >= 0 && ![BTAddressManager instance].hasHDMKeychain) || (self.tx.txTransportType == TxTransportTypeColdHD && ![BTAddressManager instance].hasHDAccountCold)) {
         return;
     }
     __block NSString *bpassword = password;
@@ -115,7 +127,12 @@
                 [hashesData addObject:[h hexToData]];
             }
             NSMutableArray *strHashes = [[NSMutableArray alloc] init];
-            if (self.tx.hdmIndex >= 0) {
+            if (self.tx.txTransportType == TxTransportTypeColdHD) {
+                NSArray *sigs = [[BTAddressManager instance].hdAccountCold signHashHexes:self.tx.hashList paths:self.tx.pathTypeIndexes andPassword:bpassword];
+                for (NSData *data in sigs) {
+                    [strHashes addObject:[NSString hexWithData:data]];
+                }
+            } else if (self.tx.hdmIndex >= 0) {
                 BTBIP32Key *key = [[BTAddressManager instance].hdmKeychain externalKeyWithIndex:self.tx.hdmIndex andPassword:bpassword];
                 for (NSData *hash in hashesData) {
                     [strHashes addObject:[NSString hexWithData:[key.key sign:hash]]];
@@ -147,7 +164,7 @@
 }
 
 - (IBAction)signButtonPressed:(id)sender {
-    if ((!address && self.tx.hdmIndex < 0) || (self.tx.hdmIndex >= 0 && ![BTAddressManager instance].hasHDMKeychain)) {
+    if ((!address && self.tx.hdmIndex < 0 && self.tx.txTransportType != TxTransportTypeColdHD) || (self.tx.hdmIndex >= 0 && ![BTAddressManager instance].hasHDMKeychain) || (self.tx.txTransportType == TxTransportTypeColdHD && ![BTAddressManager instance].hasHDAccountCold)) {
         return;
     }
     [[[DialogPassword alloc] initWithDelegate:self] showInWindow:self.view.window];

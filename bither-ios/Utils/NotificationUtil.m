@@ -38,6 +38,8 @@
     NSString *msg = [NSString stringWithFormat:@"%@ %@%@", address, typeString, balanceString];
     if ([BTUtils compareString:address compare:kHDAccountPlaceHolder]) {
         msg = [NSString stringWithFormat:@"%@ %@%@", NSLocalizedString(@"address_group_hd", nil), typeString, balanceString];
+    } else if ([BTUtils compareString:address compare:kHDAccountMonitoredPlaceHolder]) {
+        msg = [NSString stringWithFormat:@"%@ %@%@", NSLocalizedString(@"hd_account_cold_address_list_label", nil), typeString, balanceString];
     }
     NSMutableDictionary *infoDic = [NSMutableDictionary new];
     [infoDic setValue:address forKey:@"address"];
@@ -49,7 +51,7 @@
     UIApplicationState state = [UIApplication sharedApplication].applicationState;
     [infoDic setValue:[NSNumber numberWithBool:state == UIApplicationStateActive] forKey:ApplicationForeground];
     [infoDic setValue:[NSNumber numberWithLongLong:diff] forKey:@"diff"];
-    NSLog(@"%@", infoDic);
+    DDLogDebug(@"notify:%@", infoDic);
     if (txNotificationType == txReceive || txNotificationType == txSend) {
         [self notification:msg dict:infoDic];
     }

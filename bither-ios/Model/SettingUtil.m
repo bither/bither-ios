@@ -25,6 +25,7 @@
 #import "BTAddressManager.h"
 #import "AvatarSetting.h"
 #import "MonitorSetting.h"
+#import "MonitorHDAccountSetting.h"
 
 
 @implementation SettingUtil
@@ -32,11 +33,12 @@
 + (NSArray *)hotSettings {
     NSMutableArray *array = [NSMutableArray new];
     [array addObject:[MonitorSetting getMonitorSetting]];
+    [array addObject:[MonitorHDAccountSetting getMonitorHDAccountSetting]];
     [array addObject:[Setting getBitcoinUnitSetting]];
     [array addObject:[Setting getExchangeSetting]];
     [array addObject:[Setting getMarketSetting]];
     [array addObject:[Setting getTransactionFeeSetting]];
-    if ([BTAddressManager instance].allAddresses.count == 0 && [BTAddressManager instance].trashAddresses.count == 0 && ![BTAddressManager instance].hdmKeychain && ![BTAddressManager instance].hasHDAccount) {
+    if ([BTAddressManager instance].allAddresses.count == 0 && [BTAddressManager instance].trashAddresses.count == 0 && ![BTAddressManager instance].hdmKeychain && ![BTAddressManager instance].hasHDAccountHot) {
         [array addObject:[Setting getSwitchToColdSetting]];
     }
     [array addObject:[AvatarSetting getAvatarSetting]];

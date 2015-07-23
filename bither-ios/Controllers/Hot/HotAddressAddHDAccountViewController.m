@@ -107,14 +107,14 @@
             }
             words = [account seedWords:password];
             [[PeerUtil instance] stopPeer];
-            [BTAddressManager instance].hdAccount = account;
+            [BTAddressManager instance].hdAccountHot = account;
             [[PeerUtil instance] startPeer];
             [UIApplication sharedApplication].idleTimerDisabled = NO;
             dispatch_async(dispatch_get_main_queue(), ^{
                 [d dismissWithCompletion:^{
                     if (account) {
                         __block HotAddressAddHDAccountViewController *s = self;
-                        [[[DialogHDMSingularColdSeed alloc] initWithWords:words qr:[BTAddressManager instance].hdAccount.getQRCodeFullEncryptPrivKey parent:self warn:NSLocalizedString(@"add_hd_account_show_seed_label", nil) button:NSLocalizedString(@"add_hd_account_show_seed_button", nil) andDismissAction:^{
+                        [[[DialogHDMSingularColdSeed alloc] initWithWords:words qr:[BTAddressManager instance].hdAccountHot.getQRCodeFullEncryptPrivKey parent:self warn:NSLocalizedString(@"add_hd_account_show_seed_label", nil) button:NSLocalizedString(@"add_hd_account_show_seed_button", nil) andDismissAction:^{
                             [s.parentViewController dismissViewControllerAnimated:YES completion:nil];
                         }] show];
                     } else {
@@ -166,7 +166,7 @@
     [collector stop];
 
     [[PeerUtil instance] stopPeer];
-    [BTAddressManager instance].hdAccount = account;
+    [BTAddressManager instance].hdAccountHot = account;
     [[PeerUtil instance] startPeer];
 
     while ([[NSDate new] timeIntervalSince1970] - startGeneratingTime < kMinGeneratingTime) {
@@ -178,7 +178,7 @@
 
 - (void)successFinish:(UEntropyViewController *)controller {
     __block HotAddressAddHDAccountViewController *s = self;
-    [[[DialogHDMSingularColdSeed alloc] initWithWords:words qr:[BTAddressManager instance].hdAccount.getQRCodeFullEncryptPrivKey parent:controller warn:NSLocalizedString(@"add_hd_account_show_seed_label", nil) button:NSLocalizedString(@"add_hd_account_show_seed_button", nil) andDismissAction:^{
+    [[[DialogHDMSingularColdSeed alloc] initWithWords:words qr:[BTAddressManager instance].hdAccountHot.getQRCodeFullEncryptPrivKey parent:controller warn:NSLocalizedString(@"add_hd_account_show_seed_label", nil) button:NSLocalizedString(@"add_hd_account_show_seed_button", nil) andDismissAction:^{
         [s.parentViewController.presentingViewController dismissViewControllerAnimated:YES completion:nil];
     }] show];
 

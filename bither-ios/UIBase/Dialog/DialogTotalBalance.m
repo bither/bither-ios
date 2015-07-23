@@ -28,7 +28,7 @@
 
 #define kForegroundInsetsRate (0.05f)
 #define kChartSize (260)
-#define kChartSizeSmall (220)
+#define kChartSizeSmall (210)
 #define kTopLabelFontSize (18)
 #define kVerticalGap (5)
 #define kBottomLabelFontSize (13)
@@ -37,6 +37,7 @@
 @interface DialogTotalBalance () {
     int64_t total;
     int64_t hd;
+    int64_t hdMonitored;
     int64_t hdm;
     int64_t hot;
     int64_t cold;
@@ -57,6 +58,7 @@
 
 - (void)firstConfigure {
     hd = 0;
+    hdMonitored = 0;
     hdm = 0;
     hot = 0;
     cold = 0;
@@ -74,13 +76,17 @@
         total += a.balance;
     }
 
-    if ([BTAddressManager instance].hasHDAccount) {
-        hd = [BTAddressManager instance].hdAccount.balance;
+    if ([BTAddressManager instance].hasHDAccountHot) {
+        hd = [BTAddressManager instance].hdAccountHot.balance;
         total += hd;
+    }
+    if ([BTAddressManager instance].hasHDAccountMonitored){
+        hdMonitored = [BTAddressManager instance].hdAccountMonitored.balance;
+        total += hdMonitored;
     }
 
     CGFloat chartSize = kChartSize;
-    int rowCount = (hdm > 0 ? 1 : 0) + (hot > 0 ? 1 : 0) + (cold > 0 ? 1 : 0) + (hd > 0 ? 1 : 0);
+    int rowCount = (hdm > 0 ? 1 : 0) + (hot > 0 ? 1 : 0) + (cold > 0 ? 1 : 0) + (hd > 0 ? 1 : 0) + (hdMonitored > 0 ? 1 : 0);
     if (rowCount > 2 && [UIScreen mainScreen].bounds.size.height <= 480) {
         chartSize = kChartSizeSmall;
     }
@@ -131,12 +137,40 @@
             bottom = CGRectGetMaxY(lbl.frame);
         }
     }
+    if (hdMonitored > 0) {
+        UILabel *lbl = [[UILabel alloc] initWithFrame:CGRectMake(kBottomHorizontalMargin, bottom + kVerticalGap, self.frame.size.width - kBottomHorizontalMargin * 2, kBottomLabelFontSize * 1.2)];
+        lbl.font = [UIFont systemFontOfSize:kBottomLabelFontSize];
+        lbl.textColor = [UIColor whiteColor];
+        lbl.textAlignment = NSTextAlignmentLeft;
+        lbl.attributedText = [self stringAddDotColor:[self.chart colorForIndex:1] string:NSLocalizedString(@"hd_account_cold_address_list_label", nil)];
+        [self addSubview:lbl];
+
+        lbl = [[UILabel alloc] initWithFrame:CGRectMake(kBottomHorizontalMargin, bottom + kVerticalGap, self.frame.size.width - kBottomHorizontalMargin * 2, kBottomLabelFontSize * 1.2)];
+        lbl.font = [UIFont systemFontOfSize:kBottomLabelFontSize];
+        lbl.textColor = [UIColor whiteColor];
+        lbl.textAlignment = NSTextAlignmentRight;
+        lbl.attributedText = [UnitUtil stringWithSymbolForAmount:hdMonitored withFontSize:kBottomLabelFontSize color:lbl.textColor];
+        [self addSubview:lbl];
+
+        bottom = CGRectGetMaxY(lbl.frame);
+
+        if (price > 0) {
+            lbl = [[UILabel alloc] initWithFrame:CGRectMake(kBottomHorizontalMargin, bottom + kVerticalGap - 4, self.frame.size.width - kBottomHorizontalMargin * 2, kBottomLabelFontSize * 1.2)];
+            lbl.font = [UIFont systemFontOfSize:kBottomLabelFontSize];
+            lbl.textColor = [UIColor whiteColor];
+            lbl.textAlignment = NSTextAlignmentRight;
+            lbl.text = [NSString stringWithFormat:@"%@ %.2f", symbol, (price * hdMonitored) / pow(10, 8)];
+            [self addSubview:lbl];
+
+            bottom = CGRectGetMaxY(lbl.frame);
+        }
+    }
     if (hdm > 0) {
         UILabel *lbl = [[UILabel alloc] initWithFrame:CGRectMake(kBottomHorizontalMargin, bottom + kVerticalGap, self.frame.size.width - kBottomHorizontalMargin * 2, kBottomLabelFontSize * 1.2)];
         lbl.font = [UIFont systemFontOfSize:kBottomLabelFontSize];
         lbl.textColor = [UIColor whiteColor];
         lbl.textAlignment = NSTextAlignmentLeft;
-        lbl.attributedText = [self stringAddDotColor:[self.chart colorForIndex:1] string:@"HDM"];
+        lbl.attributedText = [self stringAddDotColor:[self.chart colorForIndex:2] string:@"HDM"];
         [self addSubview:lbl];
 
         lbl = [[UILabel alloc] initWithFrame:CGRectMake(kBottomHorizontalMargin, bottom + kVerticalGap, self.frame.size.width - kBottomHorizontalMargin * 2, kBottomLabelFontSize * 1.2)];
@@ -165,7 +199,7 @@
         lbl.font = [UIFont systemFontOfSize:kBottomLabelFontSize];
         lbl.textColor = [UIColor whiteColor];
         lbl.textAlignment = NSTextAlignmentLeft;
-        lbl.attributedText = [self stringAddDotColor:[self.chart colorForIndex:2] string:NSLocalizedString(@"Hot Wallet Address", nil)];
+        lbl.attributedText = [self stringAddDotColor:[self.chart colorForIndex:3] string:NSLocalizedString(@"Hot Wallet Address", nil)];
         [self addSubview:lbl];
 
         lbl = [[UILabel alloc] initWithFrame:CGRectMake(kBottomHorizontalMargin, bottom + kVerticalGap, self.frame.size.width - kBottomHorizontalMargin * 2, kBottomLabelFontSize * 1.2)];
@@ -194,7 +228,7 @@
         lbl.font = [UIFont systemFontOfSize:kBottomLabelFontSize];
         lbl.textColor = [UIColor whiteColor];
         lbl.textAlignment = NSTextAlignmentLeft;
-        lbl.attributedText = [self stringAddDotColor:[self.chart colorForIndex:3] string:NSLocalizedString(@"Cold Wallet Address", nil)];
+        lbl.attributedText = [self stringAddDotColor:[self.chart colorForIndex:4] string:NSLocalizedString(@"Cold Wallet Address", nil)];
         [self addSubview:lbl];
 
         lbl = [[UILabel alloc] initWithFrame:CGRectMake(kBottomHorizontalMargin, bottom + kVerticalGap, self.frame.size.width - kBottomHorizontalMargin * 2, kBottomLabelFontSize * 1.2)];
@@ -231,7 +265,7 @@
 
 - (void)dialogDidShow {
     [super dialogDidShow];
-    [self.chart setAmounts:@[@(hd), @(hdm), @(hot), @(cold)]];
+    [self.chart setAmounts:@[@(hd), @(hdMonitored), @(hdm), @(hot), @(cold)]];
     [self.chart setNeedsDisplay];
 
 }

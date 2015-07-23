@@ -178,8 +178,11 @@
         for (BTAddress *a in addresses) {
             balance += a.balance;
         }
-        if ([BTAddressManager instance].hasHDAccount) {
-            balance += [BTAddressManager instance].hdAccount.balance;
+        if ([BTAddressManager instance].hasHDAccountHot) {
+            balance += [BTAddressManager instance].hdAccountHot.balance;
+        }
+        if ([BTAddressManager instance].hasHDAccountMonitored) {
+            balance += [BTAddressManager instance].hdAccountMonitored.balance;
         }
         dispatch_async(dispatch_get_main_queue(), ^{
             [self setAmount:balance];

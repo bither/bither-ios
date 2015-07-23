@@ -70,28 +70,18 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    CGRect frame = self.vContainer.frame;
     if ([[BTSettings instance] getAppMode] == COLD) {
-        self.vTopbar.hidden = YES;
-        frame.origin.y = 0;
         self.limit = PRIVATE_KEY_OF_COLD_COUNT_LIMIT;
     } else {
-        self.vTopbar.hidden = NO;
-        frame.origin.y = CGRectGetMaxY(self.vTopbar.frame);
         self.limit = PRIVATE_KEY_OF_HOT_COUNT_LIMIT;
     }
-    self.vContainer.frame = frame;
     self.countToGenerate = 1;
     self.pvCount.delegate = self;
     self.pvCount.dataSource = self;
 }
 
 - (UIViewController *)successDismissingViewController {
-    if ([[BTSettings instance] getAppMode] == COLD) {
-        return self.parentViewController.parentViewController.parentViewController.presentingViewController;
-    } else {
-        return self.parentViewController.presentingViewController.presentingViewController;
-    }
+    return self.parentViewController.presentingViewController.presentingViewController;
 }
 
 - (IBAction)generatePressed:(id)sender {
@@ -235,7 +225,7 @@
                 [controller onFailed];
                 return;
             }
-            BTAddress *btAddress = [[BTAddress alloc] initWithKey:key encryptPrivKey:privateKeyString isXRandom:YES];
+            BTAddress *btAddress = [[BTAddress alloc] initWithKey:key encryptPrivKey:privateKeyString isSyncComplete:YES isXRandom:YES];
             [addresses addObject:btAddress];
             progress += itemProgress * kProgressEncryptRate;
             [controller onProgress:progress];

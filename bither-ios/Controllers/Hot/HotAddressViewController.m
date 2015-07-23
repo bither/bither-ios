@@ -31,7 +31,7 @@
 #import "IOS7ContainerViewController.h"
 
 typedef enum {
-    SectionHD = 0, SectionHDM = 1, SectionPrivate = 2, SectionWatchOnly = 3
+    SectionHD = 0, SectionHdMonitored = 1, SectionHDM = 2, SectionPrivate = 3, SectionWatchOnly = 4
 } SectionType;
 
 @interface HotAddressViewController () <UITableViewDataSource, UITableViewDelegate, SectionHeaderPressedDelegate, DialogPasswordDelegate> {
@@ -85,7 +85,7 @@ typedef enum {
         [_hdms addObjectsFromArray:[BTAddressManager instance].hdmKeychain.addresses];
     }
     [self.tableView reloadData];
-    self.ivNoAddress.hidden = !(_privateKeys.count == 0 && _watchOnlys.count == 0 && _hdms.count == 0 && ![BTAddressManager instance].hasHDAccount);
+    self.ivNoAddress.hidden = !(_privateKeys.count == 0 && _watchOnlys.count == 0 && _hdms.count == 0 && ![BTAddressManager instance].hasHDAccountHot && ![BTAddressManager instance].hasHDAccountMonitored);
 }
 
 - (void)receivedNotifications {
@@ -98,6 +98,8 @@ typedef enum {
     }
     switch ([self sectionTypeForIndex:section]) {
         case SectionHD:
+            return 1;
+        case SectionHdMonitored:
             return 1;
         case SectionHDM:
             return _hdms.count;
@@ -114,7 +116,10 @@ typedef enum {
     HotAddressListCell *cell = (HotAddressListCell *) [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
     switch ([self sectionTypeForIndex:indexPath.section]) {
         case SectionHD:
-            [cell setAddress:[BTAddressManager instance].hdAccount];
+            [cell setAddress:[BTAddressManager instance].hdAccountHot];
+            break;
+        case SectionHdMonitored:
+            [cell setAddress:[BTAddressManager instance].hdAccountMonitored];
             break;
         case SectionPrivate:
             [cell setAddress:[_privateKeys objectAtIndex:indexPath.row]];
@@ -132,7 +137,10 @@ typedef enum {
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     NSInteger sections = 0;
-    if ([BTAddressManager instance].hasHDAccount) {
+    if ([BTAddressManager instance].hasHDAccountHot) {
+        sections++;
+    }
+    if ([BTAddressManager instance].hasHDAccountMonitored) {
         sections++;
     }
     if (_privateKeys.count > 0) {
@@ -149,14 +157,17 @@ typedef enum {
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
     SectionType type = [self sectionTypeForIndex:section];
-    return [[HotAddressListSectionHeader alloc] initWithSize:CGSizeMake(tableView.frame.size.width, tableView.sectionHeaderHeight) isHD:type == SectionHD isHDM:type == SectionHDM isPrivate:type == SectionPrivate section:section delegate:self];
+    return [[HotAddressListSectionHeader alloc] initWithSize:CGSizeMake(tableView.frame.size.width, tableView.sectionHeaderHeight) isHD:type == SectionHD isHdMonitored:type == SectionHdMonitored isHDM:type == SectionHDM isPrivate:type == SectionPrivate section:section delegate:self];
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     BTAddress *address;
     switch ([self sectionTypeForIndex:indexPath.section]) {
         case SectionHD:
-            address = [BTAddressManager instance].hdAccount;
+            address = [BTAddressManager instance].hdAccountHot;
+            break;
+        case SectionHdMonitored:
+            address = [BTAddressManager instance].hdAccountMonitored;
             break;
         case SectionPrivate:
             address = [_privateKeys objectAtIndex:indexPath.row];
@@ -263,6 +274,9 @@ typedef enum {
     if (section == [self sectionIndexForType:SectionHD]) {
         return SectionHD;
     }
+    if (section == [self sectionIndexForType:SectionHdMonitored]) {
+        return SectionHdMonitored;
+    }
     if (section == [self sectionIndexForType:SectionHDM]) {
         return SectionHDM;
     }
@@ -277,18 +291,31 @@ typedef enum {
 
 - (NSUInteger)sectionIndexForType:(SectionType)type {
     if (type == SectionHD) {
-        if ([BTAddressManager instance].hasHDAccount) {
+        if ([BTAddressManager instance].hasHDAccountHot) {
             return 0;
         } else {
             return -1;
         }
+    }
+    if (type == SectionHdMonitored) {
+        if (![BTAddressManager instance].hasHDAccountMonitored) {
+            return -1;
+        }
+        NSUInteger index = 0;
+        if ([BTAddressManager instance].hasHDAccountHot) {
+            index++;
+        }
+        return index;
     }
     if (type == SectionHDM) {
         if (_hdms.count == 0) {
             return -1;
         }
         NSUInteger index = 0;
-        if ([BTAddressManager instance].hasHDAccount) {
+        if ([BTAddressManager instance].hasHDAccountHot) {
+            index++;
+        }
+        if ([BTAddressManager instance].hasHDAccountMonitored) {
             index++;
         }
         return index;
@@ -298,7 +325,10 @@ typedef enum {
             return -1;
         }
         NSUInteger index = 0;
-        if ([BTAddressManager instance].hasHDAccount) {
+        if ([BTAddressManager instance].hasHDAccountHot) {
+            index++;
+        }
+        if ([BTAddressManager instance].hasHDAccountMonitored) {
             index++;
         }
         if (_hdms.count > 0) {
@@ -311,7 +341,10 @@ typedef enum {
             return -1;
         }
         NSUInteger index = 0;
-        if ([BTAddressManager instance].hasHDAccount) {
+        if ([BTAddressManager instance].hasHDAccountHot) {
+            index++;
+        }
+        if ([BTAddressManager instance].hasHDAccountMonitored) {
             index++;
         }
         if (_hdms.count > 0) {

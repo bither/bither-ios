@@ -43,6 +43,7 @@
 @interface ImportPrivateKeySetting ()
 @property(nonatomic, readwrite) BOOL isImportHDM;
 @property(nonatomic, readwrite) BOOL isImportHDAccount;
+@property NSArray *buttons;
 @end
 
 @implementation ImportPrivateKeySetting
@@ -56,27 +57,22 @@ static Setting *importPrivateKeySetting;
         __weak ImportPrivateKeySetting *sself = scanPrivateKeySetting;
         [scanPrivateKeySetting setSelectBlock:^(UIViewController *controller) {
             sself.controller = controller;
+            NSMutableArray *buttons = [NSMutableArray new];
             UIActionSheet *actionSheet = nil;
+            [buttons addObjectsFromArray:@[NSLocalizedString(@"From Bither Private Key QR Code", nil), NSLocalizedString(@"From Private Key Text", nil)]];
             if ([[BTSettings instance] getAppMode] == COLD && ![[BTAddressManager instance] hasHDMKeychain]) {
-
-                actionSheet = [[UIActionSheet alloc] initWithTitle:NSLocalizedString(@"Import Private Key", nil)
-                                                          delegate:sself cancelButtonTitle:NSLocalizedString(@"Cancel", nil)
-                                            destructiveButtonTitle:nil
-                                                 otherButtonTitles:NSLocalizedString(@"From Bither Private Key QR Code", nil), NSLocalizedString(@"From Private Key Text", nil), NSLocalizedString(@"import_hdm_cold_seed_qr_code", nil), NSLocalizedString(@"import_hdm_cold_seed_phrase", nil), nil];
-            } else {
-                if ([[BTSettings instance] getAppMode] == HOT && ![BTAddressManager instance].hasHDAccount) {
-                    actionSheet = [[UIActionSheet alloc] initWithTitle:NSLocalizedString(@"Import Private Key", nil)
-                                                              delegate:sself cancelButtonTitle:NSLocalizedString(@"Cancel", nil)
-                                                destructiveButtonTitle:nil
-                                                     otherButtonTitles:NSLocalizedString(@"From Bither Private Key QR Code", nil), NSLocalizedString(@"From Private Key Text", nil), NSLocalizedString(@"import_hd_account_seed_qr_code", nil), NSLocalizedString(@"import_hd_account_seed_phrase", nil), nil];
-                } else {
-                    actionSheet = [[UIActionSheet alloc] initWithTitle:NSLocalizedString(@"Import Private Key", nil)
-                                                              delegate:sself cancelButtonTitle:NSLocalizedString(@"Cancel", nil)
-                                                destructiveButtonTitle:nil
-                                                     otherButtonTitles:NSLocalizedString(@"From Bither Private Key QR Code", nil), NSLocalizedString(@"From Private Key Text", nil), nil];
-                }
+                [buttons addObjectsFromArray:@[NSLocalizedString(@"import_hdm_cold_seed_qr_code", nil), NSLocalizedString(@"import_hdm_cold_seed_phrase", nil)]];
             }
-
+            if (([BTSettings instance].getAppMode == COLD && ![BTAddressManager instance].hasHDAccountCold) || ([BTSettings instance].getAppMode == HOT && ![BTAddressManager instance].hasHDAccountHot)) {
+                [buttons addObjectsFromArray:@[NSLocalizedString(@"import_hd_account_seed_qr_code", nil), NSLocalizedString(@"import_hd_account_seed_phrase", nil)]];
+            }
+            actionSheet = [[UIActionSheet alloc] initWithTitle:NSLocalizedString(@"Import Private Key", nil) delegate:sself cancelButtonTitle:nil destructiveButtonTitle:nil otherButtonTitles:nil];
+            for (NSString *title in buttons) {
+                [actionSheet addButtonWithTitle:title];
+            }
+            [actionSheet addButtonWithTitle:NSLocalizedString(@"Cancel", nil)];
+            actionSheet.cancelButtonIndex = buttons.count;
+            sself.buttons = buttons;
             actionSheet.actionSheetStyle = UIActionSheetStyleDefault;
             [actionSheet showInView:controller.navigationController.view];
         }];
@@ -87,38 +83,31 @@ static Setting *importPrivateKeySetting;
 
 
 - (void)actionSheet:(UIActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex {
-    self.isImportHDM = buttonIndex == 2;
-    self.isImportHDAccount = NO;
-    if (([[BTSettings instance] getAppMode] != COLD || [[BTAddressManager instance] hasHDMKeychain]) && ([[BTSettings instance] getAppMode] != HOT || [BTAddressManager instance].hasHDAccount)) {
-        if (buttonIndex > 1) {
-            return;
-        }
+    if(buttonIndex < 0 || buttonIndex >= self.buttons.count || buttonIndex == actionSheet.cancelButtonIndex){
+        return;
     }
-    switch (buttonIndex) {
-        case 0:
-            [self scanQRCodeWithPrivateKey];
-            break;
-        case 1:
-            [self importPrivateKey];
-            break;
-        case 2:
-            if ([[BTSettings instance] getAppMode] == HOT && ![BTAddressManager instance].hasHDAccount) {
-                self.isImportHDAccount = YES;
-                [self scanQRCodeWithHDAccount];
-            } else {
-                [self scanQRCodeWithHDMColdSeed];
-            }
-            break;
-        case 3:
-            if ([[BTSettings instance] getAppMode] == HOT && ![BTAddressManager instance].hasHDAccount) {
-                [self importWithHDAccountPhrase];
-            } else {
-                [self importWithHDMColdPhrase];
-            }
-            break;
-        case 4:
-            break;
-
+    NSString *button = [self.buttons objectAtIndex:buttonIndex];
+    if ([StringUtil isEmpty:button]) {
+        return;
+    }
+    self.isImportHDM = NO;
+    self.isImportHDAccount = NO;
+    if ([StringUtil compareString:button compare:NSLocalizedString(@"From Bither Private Key QR Code", nil)]) {
+        [self scanQRCodeWithPrivateKey];
+    } else if ([StringUtil compareString:button compare:NSLocalizedString(@"From Private Key Text", nil)]) {
+        [self importPrivateKey];
+    } else if ([StringUtil compareString:button compare:NSLocalizedString(@"import_hdm_cold_seed_qr_code", nil)]) {
+        self.isImportHDM = YES;
+        [self scanQRCodeWithHDMColdSeed];
+    } else if ([StringUtil compareString:button compare:NSLocalizedString(@"import_hdm_cold_seed_phrase", nil)]) {
+        self.isImportHDM = YES;
+        [self importWithHDMColdPhrase];
+    } else if ([StringUtil compareString:button compare:NSLocalizedString(@"import_hd_account_seed_qr_code", nil)]) {
+        self.isImportHDAccount = YES;
+        [self scanQRCodeWithHDAccount];
+    } else if ([StringUtil compareString:button compare:NSLocalizedString(@"import_hd_account_seed_phrase", nil)]) {
+        self.isImportHDAccount = YES;
+        [self importWithHDAccountPhrase];
     }
 }
 
@@ -232,18 +221,40 @@ static Setting *importPrivateKeySetting;
                         return;
                     }
                 }
-                BTHDAccount *account = [[BTHDAccount alloc] initWithEncryptedMnemonicSeed:[[BTEncryptData alloc] initWithStr:[_result substringFromIndex:1]] password:password syncedComplete:NO andGenerationCallback:nil];
-                if (!account) {
-                    dispatch_async(dispatch_get_main_queue(), ^{
-                        [dp dismissWithCompletion:^{
-                            [self showMsg:NSLocalizedString(@"Import failed.", nil)];
-                        }];
-                    });
-                    return;
+                if ([BTSettings instance].getAppMode == HOT) {
+                    BTHDAccount *account;
+                    @try {
+                        account = [[BTHDAccount alloc] initWithEncryptedMnemonicSeed:[[BTEncryptData alloc] initWithStr:[_result substringFromIndex:1]] password:password syncedComplete:NO andGenerationCallback:nil];
+                    } @catch (NSException *e) {
+                        if ([e isKindOfClass:[DuplicatedHDAccountException class]]) {
+                            dispatch_async(dispatch_get_main_queue(), ^{
+                                [self showMsg:NSLocalizedString(@"import_hd_account_failed_duplicated", nil)];
+                            });
+                            return;
+                        }
+                    }
+                    if (!account) {
+                        dispatch_async(dispatch_get_main_queue(), ^{
+                            [dp dismissWithCompletion:^{
+                                [self showMsg:NSLocalizedString(@"Import failed.", nil)];
+                            }];
+                        });
+                        return;
+                    }
+                    [[PeerUtil instance] stopPeer];
+                    [BTAddressManager instance].hdAccountHot = account;
+                    [[PeerUtil instance] startPeer];
+                } else {
+                    BTHDAccountCold *account = [[BTHDAccountCold alloc] initWithEncryptedMnemonicSeed:[[BTEncryptData alloc] initWithStr:[_result substringFromIndex:1]] andPassword:password];
+                    if (!account) {
+                        dispatch_async(dispatch_get_main_queue(), ^{
+                            [dp dismissWithCompletion:^{
+                                [self showMsg:NSLocalizedString(@"Import failed.", nil)];
+                            }];
+                        });
+                        return;
+                    }
                 }
-                [[PeerUtil instance] stopPeer];
-                [BTAddressManager instance].hdAccount = account;
-                [[PeerUtil instance] startPeer];
                 dispatch_async(dispatch_get_main_queue(), ^{
                     [dp dismissWithCompletion:^{
                         [self showMsg:NSLocalizedString(@"Import success.", nil)];
@@ -324,7 +335,6 @@ static CheckPasswordDelegate *checkPasswordDelegate;
 //delegate of dialogImportPrivateKey
 - (void)onPrivateKeyEntered:(NSString *)privateKey {
     [self showCheckPassword:privateKey];
-
 }
 
 - (void)showCheckPassword:(NSString *)privateKey {

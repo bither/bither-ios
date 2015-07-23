@@ -272,12 +272,6 @@
 /* Class = "IBUILabel"; text = "Signature"; ObjectID = "CJp-QT-laa"; */
 "CJp-QT-laa.text" = "签名";
 
-/* Class = "IBUISegmentedControl"; pIA-ee-e58.segmentTitles[0] = "Private"; ObjectID = "pIA-ee-e58"; */
-"pIA-ee-e58.segmentTitles[0]" = "私钥";
-
-/* Class = "IBUISegmentedControl"; pIA-ee-e58.segmentTitles[1] = "HDM"; ObjectID = "pIA-ee-e58"; */
-"pIA-ee-e58.segmentTitles[1]" = "HDM";
-
 /* Class = "IBUIButton"; normalTitle = "Generate"; ObjectID = "2fh-9Q-YV2"; */
 "2fh-9Q-YV2.normalTitle" = "生成";
 
@@ -397,3 +391,27 @@
 
 /* Class = "UIButton"; normalTitle = "Next Word"; ObjectID = "LUd-2F-jCf"; */
 "LUd-2F-jCf.normalTitle" = "下一单词";
+
+/* Class = "IBUISegmentedControl"; pIA-ee-e58.segmentTitles[0] = "Private"; ObjectID = "pIA-ee-e58"; */
+"pIA-ee-e58.segmentTitles[0]" = "冷 HD 账户";
+
+/* Class = "IBUISegmentedControl"; pIA-ee-e58.segmentTitles[1] = "HDM"; ObjectID = "pIA-ee-e58"; */
+"pIA-ee-e58.segmentTitles[1]" = "其它";
+
+/* Class = "UILabel"; text = "Generate HDM Account"; ObjectID = "7VR-SE-47k"; */
+"7VR-SE-47k.text" = "生成 HDM 账户";
+
+/* Class = "UILabel"; text = "Cold HD Account"; ObjectID = "dU2-IG-q9c"; */
+"dU2-IG-q9c.text" = "冷 HD 账户";
+
+/* Class = "UITextField"; placeholder = "Bitcoin address"; ObjectID = "8hY-cL-7RN"; */
+"8hY-cL-7RN.placeholder" = "比特币地址";
+
+/* Class = "UILabel"; text = "Amount"; ObjectID = "I3O-1Q-uKd"; */
+"I3O-1Q-uKd.text" = "金额";
+
+/* Class = "UIButton"; normalTitle = "Send"; ObjectID = "x5l-Rf-4Wi"; */
+"x5l-Rf-4Wi.normalTitle" = "发送";
+
+/* Class = "UILabel"; text = "Balance:"; ObjectID = "3TU-hn-ytB"; */
+"3TU-hn-ytB.text" = "余额:";

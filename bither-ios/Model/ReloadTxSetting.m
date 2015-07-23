@@ -25,6 +25,7 @@
 #import "DialogAlert.h"
 #import "TransactionsUtil.h"
 #import "BTHDAccountProvider.h"
+#import "BTHDAccountAddressProvider.h"
 
 
 static double reloadTime;
@@ -56,7 +57,7 @@ static Setting *reloadTxsSetting;
             [address updateSyncComplete];
         }
         [[BTTxProvider instance] clearAllTx];
-        [[BTHDAccountProvider instance] setSyncdNotComplete];
+        [[BTHDAccountAddressProvider instance] setSyncedAllNotComplete];
         [TransactionsUtil syncWallet:^{
             [[PeerUtil instance] startPeer];
             if (dialogProgrees) {

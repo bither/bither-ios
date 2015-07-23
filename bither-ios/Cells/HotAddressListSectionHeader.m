@@ -38,7 +38,7 @@
 
 @implementation HotAddressListSectionHeader
 
-- (instancetype)initWithSize:(CGSize)size isHD:(BOOL)hd isHDM:(BOOL)hdm isPrivate:(BOOL)isPrivate section:(NSUInteger)section delegate:(NSObject <SectionHeaderPressedDelegate> *)delegate {
+- (instancetype)initWithSize:(CGSize)size isHD:(BOOL)hd isHdMonitored:(BOOL)hdMonitored isHDM:(BOOL)hdm isPrivate:(BOOL)isPrivate section:(NSUInteger)section delegate:(NSObject <SectionHeaderPressedDelegate> *)delegate {
     self = [super initWithFrame:CGRectMake(0, 0, size.width, size.height)];
     if (self) {
         self.delegate = delegate;
@@ -47,12 +47,12 @@
         if (delegate && [delegate respondsToSelector:@selector(isSectionFolded:)]) {
             folded = [delegate isSectionFolded:section];
         }
-        [self isHD:hd isHDM:hdm isPrivate:isPrivate isFolded:folded];
+        [self isHD:hd isHdMonitored:hdMonitored isHDM:hdm isPrivate:isPrivate isFolded:folded];
     }
     return self;
 }
 
-- (void)isHD:(BOOL)isHD isHDM:(BOOL)isHDM isPrivate:(BOOL)isPrivate isFolded:(BOOL)isFolded {
+- (void)isHD:(BOOL)isHD isHdMonitored:(BOOL)isHdMonitored isHDM:(BOOL)isHDM isPrivate:(BOOL)isPrivate isFolded:(BOOL)isFolded {
     UIButton *btn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height)];
     btn.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
     [btn setBackgroundImage:[UIImage imageWithColor:[UIColor parseColor:kBackgroundColor]] forState:UIControlStateNormal];
@@ -71,7 +71,7 @@
     [self addSubview:ivIndicator];
 
     UIImage *typeImage = nil;
-    if (isHD) {
+    if (isHD || isHdMonitored) {
         typeImage = [UIImage imageNamed:@"address_type_hd"];
     } else if (isHDM) {
         typeImage = [UIImage imageNamed:@"address_type_hdm"];
@@ -93,6 +93,8 @@
     lbl.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     if (isHD) {
         lbl.text = NSLocalizedString(@"address_group_hd", nil);
+    } else if (isHdMonitored) {
+        lbl.text = NSLocalizedString(@"hd_account_cold_address_list_label", nil);
     } else if (isHDM) {
         if ([BTAddressManager instance].hdmKeychain.isInRecovery) {
             lbl.text = NSLocalizedString(@"address_group_hdm_recovery", nil);

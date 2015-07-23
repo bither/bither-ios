@@ -23,8 +23,9 @@
 #import "DialogWithActions.h"
 
 @class BTHDAccount;
+@protocol ShowBannerDelegete;
 
 
 @interface DialogHDAccountOptions : DialogWithActions
-- (instancetype)initWithHDAccount:(BTHDAccount *)account;
+- (instancetype)initWithHDAccount:(BTHDAccount *)account andDelegate:(NSObject <ShowBannerDelegete> *)delegate;
 @end

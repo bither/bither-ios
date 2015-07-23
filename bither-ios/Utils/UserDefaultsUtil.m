@@ -205,6 +205,8 @@ NSUserDefaults *userDefaults;
     if ([userDefaults objectForKey:TRANSACTION_FEE_MODE]) {
         if ([userDefaults integerForKey:TRANSACTION_FEE_MODE] == Low) {
             return Low;
+        } else if ([userDefaults integerForKey:TRANSACTION_FEE_MODE] == High) {
+            return High;
         } else {
             return Normal;
         }
@@ -368,12 +370,12 @@ NSUserDefaults *userDefaults;
     return [userDefaults objectForKey:PAYMENT_ADDRESS];
 }
 
-- (void)setFirstRunDialogShown:(BOOL)shown{
+- (void)setFirstRunDialogShown:(BOOL)shown {
     [userDefaults setBool:shown forKey:FIRST_RUN_DIALOG_SHOWN];
     [userDefaults synchronize];
 }
 
-- (BOOL)firstRunDialogShown{
+- (BOOL)firstRunDialogShown {
     return [userDefaults boolForKey:FIRST_RUN_DIALOG_SHOWN];
 }
 

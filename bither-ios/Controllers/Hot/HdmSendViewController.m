@@ -126,7 +126,7 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    [BTSettings instance].feeBase = ([[UserDefaultsUtil instance] getTransactionFeeMode] == Low ? 1000 : 10000);
+    [BTSettings instance].feeBase = [[UserDefaultsUtil instance] getTransactionFeeMode];
     if (![[BTPeerManager instance] connected]) {
         [[PeerUtil instance] startPeer];
     }
@@ -522,7 +522,7 @@
 
 - (void)onSendTxConfirmed:(BTTx *)tx {
     QrCodeViewController *qr = [_controller.storyboard instantiateViewControllerWithIdentifier:@"QrCode"];
-    qr.qrCodeTitle = NSLocalizedString(@"Sign Trasaction", nil);
+    qr.qrCodeTitle = NSLocalizedString(@"Sign Transaction", nil);
     qr.qrCodeMsg = NSLocalizedString(@"Scan with Bither Cold", nil);
     qr.cancelWarning = NSLocalizedString(@"Give up signing?", nil);
     QRCodeTxTransport *txTrans = [[QRCodeTxTransport alloc] init];

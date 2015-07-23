@@ -22,10 +22,7 @@
 #import "UIViewController+PiShowBanner.h"
 #import "BTAddressManager.h"
 
-@interface ColdAddressAddViewController () <PiPageViewControllerDelegate> {
-    BOOL privateKeyLimited;
-    BOOL hdmLimited;
-}
+@interface ColdAddressAddViewController () <PiPageViewControllerDelegate>
 @property(weak, nonatomic) IBOutlet UIView *vTopBar;
 @property(weak, nonatomic) IBOutlet UISegmentedControl *vTab;
 @property(strong, nonatomic) PiPageViewController *page;
@@ -54,26 +51,19 @@
 }
 
 - (void)configurePage {
-    privateKeyLimited = [BTAddressManager instance].privKeyAddresses.count >= PRIVATE_KEY_OF_HOT_COUNT_LIMIT;
-    hdmLimited = [BTAddressManager instance].hasHDMKeychain;
     NSMutableArray *array = [NSMutableArray new];
-    if (!privateKeyLimited) {
-        [array addObject:@"HotAddressAddPrivateKey"];
+    if ([BTAddressManager instance].hasHDAccountCold) {
+        [array addObject:@"ColdAddressAddHDAccountView"];
+    }else{
+        [array addObject:@"ColdAddressAddHDAccount"];
     }
-    if (!hdmLimited) {
-        [array addObject:@"ColdAddressAddHDM"];
-    }
+    [array addObject:@"ColdAddressAddOther"];
     self.page = [[PiPageViewController alloc] initWithStoryboard:self.storyboard andViewControllerIdentifiers:array];
     self.page.pageDelegate = self;
     [self addChildViewController:self.page];
     self.page.view.frame = CGRectMake(0, CGRectGetMaxY(self.vTopBar.frame), self.view.frame.size.width, self.view.frame.size.height - CGRectGetMaxY(self.vTopBar.frame));
     [self.view insertSubview:self.page.view atIndex:0];
-    if (privateKeyLimited) {
-        self.vTab.selectedSegmentIndex = 1;
-    } else {
-        self.vTab.selectedSegmentIndex = 0;
-    }
-    self.vTab.enabled = !privateKeyLimited && !hdmLimited;
+    self.vTab.selectedSegmentIndex = 0;
 }
 
 - (void)pageIndexChanged:(int)index {

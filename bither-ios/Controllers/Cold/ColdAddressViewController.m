@@ -20,6 +20,7 @@
 #import "ColdAddressListCell.h"
 #import "ColdAddressListHDMCell.h"
 #import "UIViewController+PiShowBanner.h"
+#import "ColdAddressListHDCell.h"
 #import <Bitheri/BTAddressManager.h>
 
 @interface ColdAddressViewController () <UITableViewDataSource, UITableViewDelegate>
@@ -57,22 +58,33 @@
     [self.addresses removeAllObjects];
     [self.addresses addObjectsFromArray:[BTAddressManager instance].privKeyAddresses];
     [self.tableView reloadData];
-    self.ivNoAddress.hidden = !(self.addresses.count == 0 && ![BTAddressManager instance].hasHDMKeychain);
+    self.ivNoAddress.hidden = !(self.addresses.count == 0 && ![BTAddressManager instance].hasHDMKeychain && ![BTAddressManager instance].hasHDAccountCold);
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return [BTAddressManager instance].hasHDMKeychain ? 2 : 1;
+    return 3;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    if ([BTAddressManager instance].hasHDMKeychain && section == 0) {
-        return 1;
+    switch (section) {
+        case 0:
+            return [BTAddressManager instance].hasHDAccountCold ? 1 : 0;
+        case 1:
+            return [BTAddressManager instance].hasHDMKeychain ? 1 : 0;
+        case 2:
+            return self.addresses.count;
+        default:
+            return 0;
     }
-    return self.addresses.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    if ([BTAddressManager instance].hasHDMKeychain && indexPath.section == 0) {
+    if (indexPath.section == 0) {
+        ColdAddressListHDCell *cell = [tableView dequeueReusableCellWithIdentifier:@"HDCell" forIndexPath:indexPath];
+        cell.account = [BTAddressManager instance].hdAccountCold;
+        return cell;
+    }
+    if (indexPath.section == 1) {
         ColdAddressListHDMCell *cell = [tableView dequeueReusableCellWithIdentifier:@"HDMCell" forIndexPath:indexPath];
         cell.keychain = [BTAddressManager instance].hdmKeychain;
         return cell;
@@ -83,7 +95,7 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    if ([BTAddressManager instance].hasHDMKeychain && indexPath.section == 0) {
+    if (indexPath.section < 2) {
         return 80;
     }
     return 120;
@@ -96,6 +108,5 @@
 - (void)dealloc {
     [[NSNotificationCenter defaultCenter] removeObserver:self name:BTAddressManagerIsReady object:nil];
 }
-
 
 @end

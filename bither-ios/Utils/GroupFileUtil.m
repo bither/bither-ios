@@ -29,8 +29,8 @@
 
 @implementation GroupFileUtil
 
-+ (void)setTotalBalanceWithHD:(int64_t)hd HDM:(int64_t)hdm hot:(int64_t)hot andCold:(int64_t)cold {
-    NSDictionary *dict = @{@"hd" : @(hd), @"hdm" : @(hdm), @"hot" : @(hot), @"cold" : @(cold)};
++ (void)setTotalBalanceWithHD:(int64_t)hd hdMonitored:(int64_t)hdMonitored hot:(int64_t)hot andCold:(int64_t)cold HDM:(int64_t)hdm {
+    NSDictionary *dict = @{@"hd" : @(hd), @"hdMonitored" : @(hdMonitored), @"hdm" : @(hdm), @"hot" : @(hot), @"cold" : @(cold)};
 
     NSError *error = nil;
     NSData *data = [NSJSONSerialization dataWithJSONObject:dict options:0 error:&error];
@@ -48,12 +48,12 @@
         NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:[s dataUsingEncoding:NSUTF8StringEncoding] options:0 error:&error];
         if (error) {
             NSLog(@"JSON Parsing Error: %@", error);
-            return @{@"hd" : @(0), @"hdm" : @(0), @"hot" : @(0), @"cold" : @(0)};
+            return @{@"hd" : @(0), @"hdMonitored" : @(0), @"hdm" : @(0), @"hot" : @(0), @"cold" : @(0)};
         } else {
             return dict;
         }
     } else {
-        return @{@"hd" : @(0), @"hdm" : @(0), @"hot" : @(0), @"cold" : @(0)};
+        return @{@"hd" : @(0), @"hdMonitored" : @(0), @"hdm" : @(0), @"hot" : @(0), @"cold" : @(0)};
     }
 }
 

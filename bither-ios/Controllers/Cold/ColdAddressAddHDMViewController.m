@@ -28,6 +28,7 @@
 @property(weak, nonatomic) IBOutlet UITextView *tvNotice;
 @property(weak, nonatomic) IBOutlet UIView *vBottom;
 @property(weak, nonatomic) IBOutlet UIButton *btnXRandomCheck;
+@property (weak, nonatomic) IBOutlet UIView *topBar;
 
 @end
 
@@ -127,9 +128,9 @@
             dispatch_async(dispatch_get_main_queue(), ^{
                 [d dismissWithCompletion:^{
                     if (keychain) {
-                        [self.parentViewController dismissViewControllerAnimated:YES completion:nil];
+                        [self.presentingViewController.presentingViewController dismissViewControllerAnimated:YES completion:nil];
                     } else {
-                        [self showBannerWithMessage:NSLocalizedString(@"xrandom_generating_failed", nil) belowView:nil belowTop:0 autoHideIn:1 withCompletion:nil];
+                        [self showBannerWithMessage:NSLocalizedString(@"xrandom_generating_failed", nil) belowView:self.topBar];
                     }
                 }];
             });
@@ -175,7 +176,11 @@
     [controller onSuccess];
 }
 
+- (IBAction)backPressed:(id)sender {
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
 - (void)successFinish:(UEntropyViewController *)controller {
-    [controller.presentingViewController.presentingViewController dismissViewControllerAnimated:YES completion:nil];
+    [controller.presentingViewController.presentingViewController.presentingViewController dismissViewControllerAnimated:YES completion:nil];
 }
 @end

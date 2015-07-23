@@ -20,6 +20,7 @@
 #import "StringUtil.h"
 #import "NSString+Base58.h"
 #import "BTQRCodeUtil.h"
+#import "BTHDAccountAddress.h"
 
 @implementation QRCodeTxTransport
 
@@ -33,8 +34,17 @@
 
 + (QRCodeTxTransport *)formatQRCodeTransport:(NSString *)str {
     QRCodeTxTransport *qrCodeTx;
-    NSArray *strArray = [BTQRCodeUtil splitQRCode:str];;
+    TxTransportType txTransportType = -1;
+    NSArray *strArray = [BTQRCodeUtil splitQRCode:str];
     int hdmIndex = NO_HDM_INDEX;
+    NSString *str1 = strArray[0];
+    if ([QRCodeTxTransport hasVersion:str1]) {
+        NSString *versionStr = [str1 stringByReplacingOccurrencesOfString:TX_TRANSPORT_VERSION withString:@""];
+        int version = versionStr.intValue;
+        txTransportType = [QRCodeTxTransport getTxTransportType:version];
+        str = [str substringFromIndex:str1.length + 1];
+        strArray = [BTQRCodeUtil splitQRCode:str];
+    }
     BOOL isHDM = ![QRCodeTxTransport isAddressHex:strArray[0]];
     if (isHDM) {
         hdmIndex = (int) [StringUtil hexToLong:strArray[0]];
@@ -55,7 +65,33 @@
         }
     }
     qrCodeTx.hdmIndex = hdmIndex;
+    qrCodeTx.txTransportType = txTransportType;
+    if (txTransportType == TxTransportTypeColdHD) {
+        NSArray *strs = qrCodeTx.hashList;
+        NSMutableArray *hashes = [NSMutableArray new];
+        NSMutableArray *paths = [NSMutableArray new];
+        for (NSString *s in strs) {
+            NSArray *hs = [s componentsSeparatedByString:QR_CODE_SECONDARY_SPLIT];
+            PathTypeIndex *path = [PathTypeIndex new];
+            path.pathType = ((NSString *) hs[0]).intValue;
+            path.index = ((NSString *) hs[1]).intValue;
+            [paths addObject:path];
+            [hashes addObject:hs[2]];
+        }
+        qrCodeTx.hashList = hashes;
+        qrCodeTx.pathTypeIndexes = paths;
+    }
     return qrCodeTx;
+}
+
++ (BOOL)hasVersion:(NSString *)str {
+    NSString *regexStr = @"[V][\\d{1,3}]";
+    NSError *error;
+    NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:regexStr options:0 error:&error];
+    NSArray *matches = [regex matchesInString:str
+                                      options:0
+                                        range:NSMakeRange(0, [str length])];
+    return matches.count > 0;
 }
 
 + (BOOL)isAddressHex:(NSString *)str {
@@ -131,6 +167,10 @@
 
 + (NSString *)getPreSignString:(QRCodeTxTransport *)qrCodeTx {
     NSMutableArray *array = [NSMutableArray new];
+    if (qrCodeTx.txTransportType > 0 && qrCodeTx.txTransportType < 6) {
+        NSString *versionStr = [NSString stringWithFormat:@"%@%d", TX_TRANSPORT_VERSION, qrCodeTx.txTransportType];
+        [array addObject:versionStr];
+    }
     if (qrCodeTx.hdmIndex != NO_HDM_INDEX) {
         [array addObject:[StringUtil longToHex:qrCodeTx.hdmIndex]];
     }
@@ -142,8 +182,17 @@
     [array addObject:[StringUtil longToHex:[qrCodeTx fee]]];
     [array addObject:[[qrCodeTx toAddress] base58checkToHex]];
     [array addObject:[StringUtil longToHex:[qrCodeTx to]]];
-    for (NSString *hash in qrCodeTx.hashList) {
-        [array addObject:hash];
+    if (qrCodeTx.txTransportType == TxTransportTypeColdHD) {
+        assert(qrCodeTx.hashList.count == qrCodeTx.pathTypeIndexes.count);
+        for (NSUInteger i = 0; i < qrCodeTx.hashList.count; i++) {
+            PathTypeIndex *path = qrCodeTx.pathTypeIndexes[i];
+            NSString *hash = qrCodeTx.hashList[i];
+            [array addObject:[NSString stringWithFormat:@"%d%@%d%@%@", path.pathType, QR_CODE_SECONDARY_SPLIT, path.index, QR_CODE_SECONDARY_SPLIT, hash]];
+        }
+    } else {
+        for (NSString *hash in qrCodeTx.hashList) {
+            [array addObject:hash];
+        }
     }
     NSString *preSignString = [BTQRCodeUtil joinedQRCode:array];
     return preSignString;
@@ -183,19 +232,11 @@
     [qrCodeTx setHashList:array];
     return qrCodeTx;
 }
+
++ (TxTransportType)getTxTransportType:(int)type {
+    if (type > 0 && type < 6) {
+        return type;
+    }
+    return TxTransportTypeNormalPrivateKey;
+}
 @end
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

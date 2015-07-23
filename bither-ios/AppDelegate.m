@@ -283,10 +283,14 @@ static StatusBarNotificationWindow *notificationWindow;
             }
         }
         int64_t hd = 0;
-        if ([BTAddressManager instance].hasHDAccount) {
-            hd = [BTAddressManager instance].hdAccount.balance;
+        if ([BTAddressManager instance].hasHDAccountHot) {
+            hd = [BTAddressManager instance].hdAccountHot.balance;
         }
-        [GroupFileUtil setTotalBalanceWithHD:hd HDM:hdm hot:hot andCold:cold];
+        int64_t hdMonitored = 0;
+        if ([BTAddressManager instance].hasHDAccountMonitored) {
+            hdMonitored = [BTAddressManager instance].hdAccountMonitored.balance;
+        }
+        [GroupFileUtil setTotalBalanceWithHD:hd hdMonitored:hdMonitored hot:hot andCold:cold HDM:hdm];
     }
 }
 
@@ -320,26 +324,39 @@ static StatusBarNotificationWindow *notificationWindow;
 }
 
 - (void)hdAccountPaymentAddressChanged:(NSNotification *)notification {
-    if (![BTAddressManager instance].hasHDAccount) {
+    if (![BTAddressManager instance].hasHDAccountHot && ![BTAddressManager instance].hasHDAccountMonitored) {
         return;
     }
     UserDefaultsUtil *defaults = [UserDefaultsUtil instance];
-    BTHDAccount *account = [BTAddressManager instance].hdAccount;
+    BTHDAccount *accountHot = [BTAddressManager instance].hdAccountHot;
+    BTHDAccount *accountMonitored = [BTAddressManager instance].hdAccountMonitored;
     NSString *paymentAddress = defaults.paymentAddress;
     BOOL configured = paymentAddress != nil;
-    BOOL shouldChange;
+    BOOL shouldChange = NO;
+    BTHDAccount *targetAccount = nil;
     if (configured) {
         if ([BTUtils isEmpty:paymentAddress]) {
             shouldChange = NO;
         } else {
-            shouldChange = [account getBelongAccountAddressesFromAdresses:@[paymentAddress]].count > 0;
+            if (accountHot) {
+                shouldChange = [accountHot getBelongAccountAddressesFromAddresses:@[paymentAddress]].count > 0;
+                if (shouldChange) {
+                    targetAccount = accountHot;
+                }
+            }
+            if (!shouldChange && accountMonitored) {
+                shouldChange = [accountMonitored getBelongAccountAddressesFromAddresses:@[paymentAddress]].count > 0;
+                if (shouldChange) {
+                    targetAccount = accountMonitored;
+                }
+            }
         }
     } else {
         shouldChange = YES;
     }
-    if (shouldChange) {
-        if (![BTUtils compareString:account.address compare:paymentAddress]) {
-            [defaults setPaymentAddress:account.address];
+    if (shouldChange && targetAccount) {
+        if (![BTUtils compareString:targetAccount.address compare:paymentAddress]) {
+            [defaults setPaymentAddress:targetAccount.address];
         }
     }
 }

@@ -31,13 +31,14 @@
 #define kCircleMinRate (0.12f)
 #define RGBA(r, g, b, a) [UIColor colorWithRed:r/255.0 green:g/255.0 blue:b/255.0 alpha:a]
 #define kHDColor (RGBA(194, 253, 70, 1))
+#define kHdMonitoredColor (RGBA(100, 114, 253, 1))
 #define kHDMColor (RGBA(38, 230, 91, 1))
 #define kHotColor (RGBA(254, 39, 93, 1))
 #define kColdColor (RGBA(36, 182, 212, 1))
 
 @implementation TotalBalanceDrawer
 
-+ (void)showTotalBalanceOn:(WKInterfaceGroup*)group label:(WKInterfaceLabel*)label andImage:(WKInterfaceImage*)iv{
++ (void)showTotalBalanceOn:(WKInterfaceGroup *)group label:(WKInterfaceLabel *)label andImage:(WKInterfaceImage *)iv {
     WKInterfaceDevice *device = [WKInterfaceDevice currentDevice];
     if ([device.cachedImages.allKeys containsObject:kTotalBalanceCacheImage]) {
         [group setBackgroundImageNamed:kTotalBalanceCacheImage];
@@ -52,7 +53,7 @@
     [TotalBalanceDrawer refreshTotalBalanceOn:group label:label andImage:iv];
 }
 
-+ (void)refreshTotalBalanceOn:(WKInterfaceGroup *)group label:(WKInterfaceLabel*)label andImage:(WKInterfaceImage*)iv{
++ (void)refreshTotalBalanceOn:(WKInterfaceGroup *)group label:(WKInterfaceLabel *)label andImage:(WKInterfaceImage *)iv {
     TotalBalance *t = [[TotalBalance alloc] init];
     UIImage *image = [TotalBalanceDrawer imageForTotalBalance:t];
     WKInterfaceDevice *device = [WKInterfaceDevice currentDevice];
@@ -67,6 +68,9 @@
 + (UIImage *)imageForTotalBalance:(TotalBalance *)t {
     NSUInteger parts = 0;
     if (t.hd > 0) {
+        parts++;
+    }
+    if (t.hdMonitored > 0) {
         parts++;
     }
     if (t.hdm > 0) {
@@ -94,6 +98,8 @@
     if (parts == 1) {
         if (t.hd > 0) {
             bgColor = kHDColor;
+        } else if (t.hdMonitored > 0) {
+            bgColor = kHdMonitoredColor;
         } else if (t.hdm > 0) {
             bgColor = kHDMColor;
         } else if (t.hot > 0) {
@@ -110,11 +116,13 @@
     if (parts > 1) {
         double total = (double) t.total;
         double hdAmount = (double) t.hd;
+        double hdMonitoredAmount = (double) t.hdMonitored;
         double hdmAmount = (double) t.hdm;
         double hotAmount = (double) t.hot;
         double coldAmount = (double) t.cold;
 
         double hd = 0;
+        double hdMonitored = 0;
         double hdm = 0;
         double hot = 0;
         double cold = 0;
@@ -123,6 +131,12 @@
             double delta = total * kCircleMinRate - hdAmount;
             total += delta;
             hdAmount += delta;
+        }
+
+        if (hdMonitoredAmount > 0 && hdMonitoredAmount < total * kCircleMinRate) {
+            double delta = total * kCircleMinRate - hdMonitoredAmount;
+            total += delta;
+            hdMonitoredAmount += delta;
         }
 
         if (hdmAmount > 0 && hdmAmount < total * kCircleMinRate) {
@@ -145,6 +159,9 @@
         if (hdAmount > 0) {
             hd = hdAmount / total;
         }
+        if (hdMonitoredAmount > 0){
+            hdMonitored = hdMonitoredAmount / total;
+        }
         if (hdmAmount > 0) {
             hdm = hdmAmount / total;
         }
@@ -159,6 +176,10 @@
         if (hd > 0) {
             CGContextSetStrokeColorWithColor(context, [kHDColor CGColor]);
             start = [TotalBalanceDrawer drawArc:context rate:hd andStart:start];
+        }
+        if (hdMonitored > 0){
+            CGContextSetStrokeColorWithColor(context, [kHdMonitoredColor CGColor]);
+            start = [TotalBalanceDrawer drawArc:context rate:hdMonitored andStart:start];
         }
         if (hdm > 0) {
             CGContextSetStrokeColorWithColor(context, [kHDMColor CGColor]);
