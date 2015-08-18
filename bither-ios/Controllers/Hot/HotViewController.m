@@ -109,7 +109,7 @@
     if (![[BTPeerManager instance] connected]) {
         [[PeerUtil instance] startPeer];
     }
-
+    [self.tabAddress balanceChanged];
 }
 
 - (void)pageIndexChanged:(int)index {

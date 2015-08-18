@@ -19,6 +19,7 @@
 #import "StringUtil.h"
 #import "BitherSetting.h"
 #import "BTPasswordSeed.h"
+#import "TotalBalanceHideUtil.h"
 
 
 ///@description   UserDefaults相关
@@ -106,5 +107,9 @@
 - (void)setFirstRunDialogShown:(BOOL)shown;
 
 - (BOOL)firstRunDialogShown;
+
+- (TotalBalanceHide)getTotalBalanceHide;
+
+- (void)setTotalBalanceHide:(TotalBalanceHide)h;
 
 @end

@@ -668,6 +668,8 @@
 
 // show hd account
 "address_group_hd" = "HD 賬戶";
+"hd_account_request_new_receiving_address" = "生成新地址";
+"hd_account_request_new_receiving_address_failed" = "生成失敗, 您最多隻能生成20個未使用的新地址.";
 
 // bither team address
 "bither_team_address" = "開發者地址";
@@ -710,3 +712,8 @@
 "address_full_for_hd_type_sending" = "傳送";
 "address_full_for_hd_type_changing" = "找零";
 
+// Hide Total Balance
+"total_balance_hide_setting_name" = "總餘額";
+"total_balance_hide_show_all" = "顯示餘額和報表";
+"total_balance_hide_show_chart" = "只顯示報表";
+"total_balance_hide_hide_all" = "隱藏";
