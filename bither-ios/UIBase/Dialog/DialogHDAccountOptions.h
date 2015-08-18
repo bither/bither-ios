@@ -21,11 +21,14 @@
 
 #import <Foundation/Foundation.h>
 #import "DialogWithActions.h"
+#import "UIViewController+PiShowBanner.h"
 
 @class BTHDAccount;
-@protocol ShowBannerDelegete;
+@protocol DialogHDAccountOptionsDelegate <ShowBannerDelegete>
+-(void)refresh;
+@end
 
 
 @interface DialogHDAccountOptions : DialogWithActions
-- (instancetype)initWithHDAccount:(BTHDAccount *)account andDelegate:(NSObject <ShowBannerDelegete> *)delegate;
+- (instancetype)initWithHDAccount:(BTHDAccount *)account andDelegate:(NSObject <DialogHDAccountOptionsDelegate> *)delegate;
 @end
