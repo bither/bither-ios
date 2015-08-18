@@ -47,6 +47,9 @@
         BTHDMKeychain *keychain = [[BTAddressManager instance] hdmKeychain];
         [keys addObject:[keychain getFullEncryptPrivKeyWithHDMFlag]];
     }
+    if ([BTAddressManager instance].hasHDAccountCold){
+        [keys addObject:[BTAddressManager instance].hdAccountCold.getQRCodeFullEncryptPrivKey];
+    }
     QrCodeViewController *qrController = [self.controller.storyboard instantiateViewControllerWithIdentifier:@"QrCode"];
     qrController.content = [BTQRCodeUtil joinedQRCode:keys];
     qrController.qrCodeTitle = NSLocalizedString(@"Cold Wallet Clone QR Code", nil);
