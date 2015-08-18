@@ -285,7 +285,13 @@
                 [[[BTAddressManager instance] getHDAccountByHDAccountId:address.hdAccountId] supplyEnoughKeys:NO];
                 [[NSNotificationCenter defaultCenter] postNotificationName:kHDAccountPaymentAddressChangedNotification object:[[BTAddressManager instance] getHDAccountByHDAccountId:address.hdAccountId].address userInfo:@{kHDAccountPaymentAddressChangedNotificationFirstAdding : @(NO)}];
             } else {
-                [[BTHDAccountAddressProvider instance] updateSyncedByHDAccountId:address.hdAccountId pathType:address.pathType index:address.index];
+                int addressCount = 1;
+                if (address.pathType == EXTERNAL_ROOT_PATH) {
+                    addressCount = kHDAccountMaxUnusedNewAddressCount;
+                }
+                if (![[BTHDAccountAddressProvider instance] hasHDAccount:address.hdAccountId pathType:address.pathType receiveTxInAddressCount:addressCount]) {
+                    [[BTHDAccountAddressProvider instance] updateSyncedByHDAccountId:address.hdAccountId pathType:address.pathType index:address.index];
+                }
             }
 
             dispatch_async(dispatch_get_main_queue(), ^{
