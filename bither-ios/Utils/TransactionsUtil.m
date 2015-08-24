@@ -285,7 +285,7 @@
                 [[[BTAddressManager instance] getHDAccountByHDAccountId:address.hdAccountId] supplyEnoughKeys:NO];
                 [[NSNotificationCenter defaultCenter] postNotificationName:kHDAccountPaymentAddressChangedNotification object:[[BTAddressManager instance] getHDAccountByHDAccountId:address.hdAccountId].address userInfo:@{kHDAccountPaymentAddressChangedNotificationFirstAdding : @(NO)}];
             } else {
-                int addressCount = 1;
+                int addressCount = 0;
                 if (address.pathType == EXTERNAL_ROOT_PATH) {
                     addressCount = kHDAccountMaxUnusedNewAddressCount;
                 }
