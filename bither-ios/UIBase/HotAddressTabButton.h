@@ -12,4 +12,5 @@
 
 - (void)setAmount:(int64_t)amount;
 
+- (void)balanceChanged;
 @end

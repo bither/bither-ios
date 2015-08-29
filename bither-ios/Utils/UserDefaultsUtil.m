@@ -48,6 +48,8 @@
 
 #define FIRST_RUN_DIALOG_SHOWN @"first_run_dialog_shown"
 
+#define TOTAL_BALANCE_HIDE @"total_balance_hide"
+
 static UserDefaultsUtil *userDefaultsUtil;
 
 NSUserDefaults *userDefaults;
@@ -377,6 +379,15 @@ NSUserDefaults *userDefaults;
 
 - (BOOL)firstRunDialogShown {
     return [userDefaults boolForKey:FIRST_RUN_DIALOG_SHOWN];
+}
+
+- (TotalBalanceHide)getTotalBalanceHide {
+    return [userDefaults integerForKey:TOTAL_BALANCE_HIDE];
+}
+
+- (void)setTotalBalanceHide:(TotalBalanceHide)h {
+    [userDefaults setInteger:h forKey:TOTAL_BALANCE_HIDE];
+    [userDefaults synchronize];
 }
 
 @end

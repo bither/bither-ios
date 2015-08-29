@@ -264,10 +264,20 @@
             self.btnSend.enabled = NO;
             NSArray *strs = [BTQRCodeUtil splitQRCode:result];
             NSMutableArray *sigs = [[NSMutableArray alloc] init];
-            for (NSString *s in strs) {
-                [sigs addObject:[s hexToData]];
+            BOOL success = strs.count == self.tx.ins.count;
+            if(success){
+                for (NSString *s in strs) {
+                    NSData* d = [s hexToData];
+                    if(!d){
+                        success = NO;
+                        break;
+                    }
+                    [sigs addObject:d];
+                }
             }
-            BOOL success = [self.tx signWithSignatures:sigs];
+            if(success){
+                success = [self.tx signWithSignatures:sigs];
+            }
             if (success) {
                 [dp showInWindow:self.view.window completion:^{
                     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{

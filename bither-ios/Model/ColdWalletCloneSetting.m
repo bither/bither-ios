@@ -64,21 +64,33 @@ static Setting *CloneQrSetting;
             NSArray *commponent = [BTQRCodeUtil splitQRCode:self.scanContent];
             BTHDMKeychain *keychain = nil;
             NSMutableArray *keys = [[NSMutableArray alloc] init];
-            for (int i = 0; i < commponent.count; i += 3) {
-                if ([commponent[i] rangeOfString:HDM_QR_CODE_FLAG].location == 0) {
-                    NSString *s = [BTQRCodeUtil joinedQRCode:[commponent subarrayWithRange:NSMakeRange(i, 3)]];
-                    s = [s substringFromIndex:1];
-                    keychain = [[BTHDMKeychain alloc] initWithEncrypted:s password:password andFetchBlock:nil];
-                } else {
-                    NSString *s = [BTQRCodeUtil joinedQRCode:[commponent subarrayWithRange:NSMakeRange(i, 3)]];
-                    [keys addObject:s];
+            BOOL result = NO;
+            @try {
+                for (int i = 0; i < commponent.count; i += 3) {
+                    if ([commponent[i] rangeOfString:HDM_QR_CODE_FLAG].location == 0) {
+                        NSString *s = [BTQRCodeUtil joinedQRCode:[commponent subarrayWithRange:NSMakeRange(i, 3)]];
+                        s = [s substringFromIndex:1];
+                        keychain = [[BTHDMKeychain alloc] initWithEncrypted:s password:password andFetchBlock:nil];
+                    } else if([commponent[i] rangeOfString:HD_QR_CODE_FLAT].location == 0){
+                        NSString *s = [BTQRCodeUtil joinedQRCode:[commponent subarrayWithRange:NSMakeRange(i, 3)]];
+                        s = [s substringFromIndex:1];
+                        [[BTHDAccountCold alloc]initWithEncryptedMnemonicSeed:[[BTEncryptData alloc]initWithStr:s] andPassword:password];
+                    } else {
+                        NSString *s = [BTQRCodeUtil joinedQRCode:[commponent subarrayWithRange:NSMakeRange(i, 3)]];
+                        [keys addObject:s];
+                    }
                 }
+                result = YES;
             }
-            if (keychain) {
-                [KeyUtil setHDKeyChain:keychain];
+            @catch (NSException *exception) {
+                result = NO;
             }
-            BOOL result = [KeyUtil addBitcoinjKey:keys withPassphrase:password error:nil];
-
+            if(result){
+                if (keychain) {
+                    [KeyUtil setHDKeyChain:keychain];
+                }
+                result = [KeyUtil addBitcoinjKey:keys withPassphrase:password error:nil];
+            }
             dispatch_async(dispatch_get_main_queue(), ^{
                 if ([self.controller respondsToSelector:@selector(reload)]) {
                     [self.controller performSelector:@selector(reload)];
@@ -106,7 +118,7 @@ static Setting *CloneQrSetting;
 }
 
 + (Setting *)getCloneSetting {
-    if ([BTAddressManager instance].privKeyAddresses.count > 0 || [[BTAddressManager instance] hasHDMKeychain]) {
+    if ([BTAddressManager instance].privKeyAddresses.count > 0 || [[BTAddressManager instance] hasHDMKeychain] || [BTAddressManager instance].hasHDAccountCold) {
         if (!CloneQrSetting) {
             CloneQrSetting = [[CloneQrCodeSetting alloc] init];
         }

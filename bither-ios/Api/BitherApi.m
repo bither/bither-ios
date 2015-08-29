@@ -33,7 +33,7 @@ static BitherApi *piApi;
 }
 
 - (void)getSpvBlock:(DictResponseBlock)callback andErrorCallBack:(ErrorHandler)errorCallback {
-    [self          get:BITHER_GET_ONE_SPVBLOCK_API withParams:nil networkType:BitherBitcoin completed:^(MKNetworkOperation *completedOperation) {
+    [self          get:BITHER_GET_ONE_SPVBLOCK_API withParams:nil networkType:BitherBC completed:^(MKNetworkOperation *completedOperation) {
         if (![StringUtil isEmpty:completedOperation.responseString]) {
             NSLog(@"spv: %s", [completedOperation.responseString UTF8String]);
             NSDictionary *dict = [completedOperation responseJSON];

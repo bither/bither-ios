@@ -38,7 +38,7 @@
     [array addObject:[Setting getExchangeSetting]];
     [array addObject:[Setting getMarketSetting]];
     [array addObject:[Setting getTransactionFeeSetting]];
-    if ([BTAddressManager instance].allAddresses.count == 0 && [BTAddressManager instance].trashAddresses.count == 0 && ![BTAddressManager instance].hdmKeychain && ![BTAddressManager instance].hasHDAccountHot) {
+    if ([BTAddressManager instance].allAddresses.count == 0 && [BTAddressManager instance].trashAddresses.count == 0 && ![BTAddressManager instance].hdmKeychain && ![BTAddressManager instance].hasHDAccountHot && ![BTAddressManager instance].hasHDAccountMonitored) {
         [array addObject:[Setting getSwitchToColdSetting]];
     }
     [array addObject:[AvatarSetting getAvatarSetting]];

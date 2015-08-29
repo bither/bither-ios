@@ -66,16 +66,23 @@
 }
 
 - (void)configureViews {
+    BOOL shouldShowBalance = [TotalBalanceHideUtil shouldShowBalance:[UserDefaultsUtil instance].getTotalBalanceHide];
     [self.lbl sizeToFit];
     [self.iv sizeToFit];
     CGFloat lableWidth = self.lbl.frame.size.width;
     if (lableWidth + self.iv.frame.size.width + self.ivArrow.frame.size.width + kLabelLeftGap + kLabelRightGap + kHorizontalPadding * 2 - kIconLeftMinus > self.frame.size.width) {
         lableWidth = self.frame.size.width - (self.iv.frame.size.width + self.ivArrow.frame.size.width + kLabelLeftGap + kLabelRightGap + kHorizontalPadding * 2 - kIconLeftMinus);
     }
+    if(!shouldShowBalance){
+        lableWidth = 0 - (self.ivArrow.frame.size.width + kLabelLeftGap + kLabelRightGap + kIconLeftMinus / 2);
+    }
     CGRect frame = self.iv.frame;
     frame.origin.x = (self.frame.size.width - (self.iv.frame.size.width + self.ivArrow.frame.size.width + kLabelLeftGap + kLabelRightGap + lableWidth - kIconLeftMinus)) / 2 - kIconLeftMinus;
     frame.origin.y = (self.frame.size.height - self.iv.frame.size.height) / 2;
     self.iv.frame = frame;
+
+    self.lbl.hidden = !shouldShowBalance;
+    self.ivArrow.hidden = !shouldShowBalance;
 
     frame = self.lbl.frame;
     frame.origin.x = CGRectGetMaxX(self.iv.frame) + kLabelLeftGap;
@@ -137,6 +144,9 @@
 }
 
 - (void)showDialog {
+    if(![TotalBalanceHideUtil shouldShowChart:[UserDefaultsUtil instance].getTotalBalanceHide]){
+        return;
+    }
     self.isDialogShown = YES;
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         [[BTAddressManager instance] allAddresses];

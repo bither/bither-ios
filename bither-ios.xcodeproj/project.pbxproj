@@ -79,6 +79,7 @@
 		1BC273956C6D9E8D480F865A /* AddressAliasView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BC279D47F4CCF0091934456 /* AddressAliasView.m */; };
 		1BC27403EB7CEBFFDD178CF2 /* DialogHDAccountOptions.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BC27DB53D5E5AD5BA309DAB /* DialogHDAccountOptions.m */; };
 		1BC27499EE579986A1439709 /* DialogHDMInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BC27E22C25A90DF1E5DA1DC /* DialogHDMInfo.m */; };
+		1BC27545244A5FD35C694114 /* TotalBalanceHideUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BC27CB228C32AFF60875F67 /* TotalBalanceHideUtil.m */; };
 		1BC2754DD71C0DC8E65322FC /* DialogFirstRunWarning.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BC27C00DACC9C35CFA2C99A /* DialogFirstRunWarning.m */; };
 		1BC275ACC2D220D9CE5212D5 /* HDMResetServerPasswordUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BC27A0354887C3372BE01B1 /* HDMResetServerPasswordUtil.m */; };
 		1BC275F3608609D0E72BFBE7 /* HDMTriangleBgView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BC27C837F7819A54B0A2E37 /* HDMTriangleBgView.m */; };
@@ -510,7 +511,9 @@
 		1BC27C00DACC9C35CFA2C99A /* DialogFirstRunWarning.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DialogFirstRunWarning.m; sourceTree = "<group>"; };
 		1BC27C837F7819A54B0A2E37 /* HDMTriangleBgView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HDMTriangleBgView.m; sourceTree = "<group>"; };
 		1BC27C882946AB67434912E5 /* DialogHDMInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DialogHDMInfo.h; sourceTree = "<group>"; };
+		1BC27CB228C32AFF60875F67 /* TotalBalanceHideUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TotalBalanceHideUtil.m; sourceTree = "<group>"; };
 		1BC27D1407586D2FCB8F01AC /* DialogHDMAddressOptions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DialogHDMAddressOptions.m; sourceTree = "<group>"; };
+		1BC27DAB01DF55378286FEFD /* TotalBalanceHideUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TotalBalanceHideUtil.h; sourceTree = "<group>"; };
 		1BC27DB53D5E5AD5BA309DAB /* DialogHDAccountOptions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DialogHDAccountOptions.m; sourceTree = "<group>"; };
 		1BC27DE0604D8AD2A25328A6 /* HDAccountSendViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HDAccountSendViewController.h; sourceTree = "<group>"; };
 		1BC27E13FEFFBE4CF5CF0468 /* DialogHDAccountOptions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DialogHDAccountOptions.h; sourceTree = "<group>"; };
@@ -1251,6 +1254,8 @@
 				1BC272B77D3B4123842B7220 /* PasswordStrengthUtil.h */,
 				DC08C1C370321C08C785C9E1 /* GroupUtil.m */,
 				DC0C45B833B681E58F7812DB /* GroupUtil.h */,
+				1BC27CB228C32AFF60875F67 /* TotalBalanceHideUtil.m */,
+				1BC27DAB01DF55378286FEFD /* TotalBalanceHideUtil.h */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -2315,6 +2320,7 @@
 				1BC270C71B4F214F2FB09057 /* MonitorHDAccountSetting.m in Sources */,
 				1BC27A2AB7C4C12F353D0C28 /* DialogOldAddressesOfHDAccount.m in Sources */,
 				1BC27D872392C01E3F942EA5 /* HDAccountMonitoredSendViewController.m in Sources */,
+				1BC27545244A5FD35C694114 /* TotalBalanceHideUtil.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

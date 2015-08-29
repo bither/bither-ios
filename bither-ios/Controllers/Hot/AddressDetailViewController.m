@@ -41,7 +41,7 @@
 #import "DialogHDAccountOptions.h"
 
 @interface AddressDetailViewController () <UITableViewDataSource, UITableViewDelegate, DialogAddressOptionsDelegate
-        , DialogPasswordDelegate, DialogPrivateKeyOptionsDelegate, ShowBannerDelegete> {
+        , DialogPasswordDelegate, DialogPrivateKeyOptionsDelegate, DialogHDAccountOptionsDelegate> {
     NSMutableArray *_txs;
     PrivateKeyQrCodeType _qrcodeType;
     DialogHDAccountOptions *dialogHDAccountOptions;

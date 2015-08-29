@@ -33,18 +33,19 @@
     BTHDAccount *hdAccount;
     UIWindow *_window;
 }
-@property(weak) NSObject <ShowBannerDelegete> *delegate;
+@property(weak) NSObject <DialogHDAccountOptionsDelegate> *delegate;
 @end
 
 @implementation DialogHDAccountOptions
 
-- (instancetype)initWithHDAccount:(BTHDAccount *)account andDelegate:(NSObject <ShowBannerDelegete> *)delegate {
+- (instancetype)initWithHDAccount:(BTHDAccount *)account andDelegate:(NSObject <DialogHDAccountOptionsDelegate> *)delegate {
     NSMutableArray *actions = [NSMutableArray new];
     if (account.hasPrivKey) {
         [actions addObjectsFromArray:@[[[Action alloc] initWithName:NSLocalizedString(@"add_hd_account_seed_qr_code", nil) target:nil andSelector:@selector(qrPressed)],
                 [[Action alloc] initWithName:NSLocalizedString(@"add_hd_account_seed_qr_phrase", nil) target:nil andSelector:@selector(phrasePressed)]]];
     }
     if (delegate) {
+        [actions addObject:[[Action alloc] initWithName:NSLocalizedString(@"hd_account_request_new_receiving_address", nil) target:nil andSelector:@selector(requestNewReceivingAddress)]];
         [actions addObject:[[Action alloc] initWithName:NSLocalizedString(@"hd_account_old_addresses", nil) target:nil andSelector:@selector(showOldAddresses)]];
     }
     self = [super initWithActions:actions];
@@ -53,6 +54,26 @@
         self.delegate = delegate;
     }
     return self;
+}
+
+- (void)requestNewReceivingAddress {
+    __block DialogProgress *dp = [[DialogProgress alloc] initWithMessage:NSLocalizedString(@"Please wait…", nil)];
+    __block BTHDAccount *account = hdAccount;
+    __block NSObject <DialogHDAccountOptionsDelegate> *d = self.delegate;
+    [dp showInWindow:_window completion:^{
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+            __block BOOL result = account.requestNewReceivingAddress;
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [dp dismissWithCompletion:^{
+                    if (result) {
+                        [d refresh];
+                    } else {
+                        [d showBannerWithMessage:NSLocalizedString(@"hd_account_request_new_receiving_address_failed", nil)];
+                    }
+                }];
+            });
+        });
+    }];
 }
 
 - (void)showOldAddresses {

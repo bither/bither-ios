@@ -60,4 +60,6 @@
 + (Setting *)getSwitchToColdSetting;
 
 + (Setting *)getKeychainSetting;
+
++ (Setting *)getTotalBalanceHideSetting;
 @end

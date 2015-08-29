@@ -1,5 +1,5 @@
 //
-//  DialogHDAccountOptions.h
+//  TotalBalanceHideUtil.h
 //  bither-ios
 //
 //  Copyright 2014 http://Bither.net
@@ -16,19 +16,20 @@
 //  See the License for the specific language governing permissions and
 //  limitations under the License.
 //
-//  Created by songchenwen on 15/4/27.
+//  Created by songchenwen on 15/8/18.
 //
 
 #import <Foundation/Foundation.h>
-#import "DialogWithActions.h"
-#import "UIViewController+PiShowBanner.h"
 
-@class BTHDAccount;
-@protocol DialogHDAccountOptionsDelegate <ShowBannerDelegete>
--(void)refresh;
-@end
+typedef enum {
+    TotalBalanceShowAll = 0, TotalBalanceShowChart = 1, TotalBalanceHideAll = 2
+} TotalBalanceHide;
 
+@interface TotalBalanceHideUtil : NSObject
 
-@interface DialogHDAccountOptions : DialogWithActions
-- (instancetype)initWithHDAccount:(BTHDAccount *)account andDelegate:(NSObject <DialogHDAccountOptionsDelegate> *)delegate;
++ (NSString *)displayName:(TotalBalanceHide)h;
+
++ (BOOL)shouldShowBalance:(TotalBalanceHide)h;
+
++ (BOOL)shouldShowChart:(TotalBalanceHide)h;
 @end

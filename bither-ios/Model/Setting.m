@@ -62,6 +62,7 @@ static Setting *TrashCanSetting;
 static Setting *SwitchToColdSetting;
 static Setting *HDMServerPasswordResetSetting;
 static Setting *PasswordStrengthCheckSetting;
+static Setting *TotalBalanceHideSetting;
 
 - (instancetype)initWithName:(NSString *)name icon:(UIImage *)icon {
     self = [super init];
@@ -622,6 +623,39 @@ static Setting *PasswordStrengthCheckSetting;
     }
 }
 
++ (Setting *)getTotalBalanceHideSetting {
+    if (!TotalBalanceHideSetting) {
+        TotalBalanceHideSetting = [[Setting alloc] initWithName:NSLocalizedString(@"total_balance_hide_setting_name", nil) icon:nil];
+        [TotalBalanceHideSetting setGetValueBlock:^() {
+            return [TotalBalanceHideUtil displayName:[UserDefaultsUtil instance].getTotalBalanceHide];
+        }];
+        [TotalBalanceHideSetting setGetArrayBlock:^() {
+            TotalBalanceHide hide = [[UserDefaultsUtil instance] getTotalBalanceHide];
+            NSMutableArray *array = [NSMutableArray new];
+            for(TotalBalanceHide h = TotalBalanceShowAll; h <= TotalBalanceHideAll; h++){
+                NSMutableDictionary *dict = [NSMutableDictionary new];
+                [dict setObject:[NSNumber numberWithInt:h] forKey:SETTING_VALUE];
+                [dict setObject:[TotalBalanceHideUtil displayName:h] forKey:SETTING_KEY];
+                [dict setObject:[NSNumber numberWithBool:h == hide] forKey:SETTING_IS_DEFAULT];
+                [array addObject:dict];
+            }
+            return array;
+        }];
+        [TotalBalanceHideSetting setResult:^(NSDictionary *dict) {
+            TotalBalanceHide h = [dict getIntFromDict:SETTING_VALUE];
+            [[UserDefaultsUtil instance] setTotalBalanceHide:h];
+        }];
+        __block Setting *a = TotalBalanceHideSetting;
+        [TotalBalanceHideSetting setSelectBlock:^(UIViewController *controller) {
+            SelectViewController *selectController = [controller.storyboard instantiateViewControllerWithIdentifier:@"SelectViewController"];
+            UINavigationController *nav = controller.navigationController;
+            selectController.setting = a;
+            [nav pushViewController:selectController animated:YES];
+        }];
+    }
+    return TotalBalanceHideSetting;
+}
+
 + (NSArray *)advanceSettings {
     NSMutableArray *array = [NSMutableArray new];
     if ([[BTSettings instance] getAppMode] == HOT) {
@@ -640,6 +674,9 @@ static Setting *PasswordStrengthCheckSetting;
     }
     [array addObject:[MessageSigningSetting getMessageSigningSetting]];
     [array addObject:[Setting getPasswordStrengthSetting]];
+    if ([[BTSettings instance] getAppMode] == HOT){
+        [array addObject:[Setting getTotalBalanceHideSetting]];
+    }
     if ([[BTSettings instance] getAppMode] == HOT && ([BTAddressManager instance].allAddresses.count > 0 || [BTAddressManager instance].hasHDAccountHot)) {
         [array addObject:[PaymentAddressSetting setting]];
     }
