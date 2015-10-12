@@ -63,6 +63,7 @@ static Setting *SwitchToColdSetting;
 static Setting *HDMServerPasswordResetSetting;
 static Setting *PasswordStrengthCheckSetting;
 static Setting *TotalBalanceHideSetting;
+static Setting *NetworkMonitorSetting;
 
 - (instancetype)initWithName:(NSString *)name icon:(UIImage *)icon {
     self = [super init];
@@ -656,6 +657,18 @@ static Setting *TotalBalanceHideSetting;
     return TotalBalanceHideSetting;
 }
 
++ (Setting*)getNetworkMonitorSetting {
+    if (!NetworkMonitorSetting) {
+        NetworkMonitorSetting = [[Setting alloc]initWithName:NSLocalizedString(@"network_monitor_title", nil) icon:nil];
+        [NetworkMonitorSetting setSelectBlock:^(UIViewController *controller) {
+            UIViewController *c = [controller.storyboard instantiateViewControllerWithIdentifier:@"NetworkMonitorViewController"];
+            UINavigationController *nav = controller.navigationController;
+            [nav pushViewController:c animated:YES];
+        }];
+    }
+    return NetworkMonitorSetting;
+}
+
 + (NSArray *)advanceSettings {
     NSMutableArray *array = [NSMutableArray new];
     if ([[BTSettings instance] getAppMode] == HOT) {
@@ -683,6 +696,9 @@ static Setting *TotalBalanceHideSetting;
     [array addObject:[Setting getTrashCanSetting]];
     if ([[BTSettings instance] getAppMode] == HOT) {
         [array addObject:[ReloadTxSetting getReloadTxsSetting]];
+    }
+    if ([[BTSettings instance] getAppMode] == HOT) {
+        [array addObject:[Setting getNetworkMonitorSetting]];
     }
 //    if ([[BTSettings instance] getAppMode] == HOT) {
 //        [array addObject:[Setting getKeychainSetting]];
