@@ -346,7 +346,7 @@ NSUserDefaults *userDefaults;
 
 - (BOOL)getPasswordStrengthCheck {
     if (![userDefaults objectForKey:PASSWORD_STRENGTH_CHECK]) {
-        return YES;
+        return NO;
     }
     return [userDefaults boolForKey:PASSWORD_STRENGTH_CHECK];
 }
