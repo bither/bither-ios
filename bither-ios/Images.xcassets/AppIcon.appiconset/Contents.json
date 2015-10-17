@@ -1,67 +1,77 @@
 {
-  "images": [
+  "images" : [
     {
-      "size": "29x29",
-      "idiom": "iphone",
-      "filename": "bither_ios_58-1.png",
-      "scale": "2x"
+      "size" : "29x29",
+      "idiom" : "iphone",
+      "filename" : "bither_ios_58-1.png",
+      "scale" : "2x"
     },
     {
-      "size": "40x40",
-      "idiom": "iphone",
-      "filename": "bither_ios_80.png",
-      "scale": "2x"
+      "idiom" : "iphone",
+      "size" : "29x29",
+      "scale" : "3x"
     },
     {
-      "size": "60x60",
-      "idiom": "iphone",
-      "filename": "bither_ios_120.png",
-      "scale": "2x"
+      "size" : "40x40",
+      "idiom" : "iphone",
+      "filename" : "bither_ios_80.png",
+      "scale" : "2x"
     },
     {
-      "idiom": "iphone",
-      "size": "60x60",
-      "scale": "3x"
+      "idiom" : "iphone",
+      "size" : "40x40",
+      "scale" : "3x"
     },
     {
-      "size": "29x29",
-      "idiom": "ipad",
-      "filename": "bither_ios_29.png",
-      "scale": "1x"
+      "size" : "60x60",
+      "idiom" : "iphone",
+      "filename" : "bither_ios_120.png",
+      "scale" : "2x"
     },
     {
-      "size": "29x29",
-      "idiom": "ipad",
-      "filename": "bither_ios_58.png",
-      "scale": "2x"
+      "idiom" : "iphone",
+      "size" : "60x60",
+      "scale" : "3x"
     },
     {
-      "size": "40x40",
-      "idiom": "ipad",
-      "filename": "bither_ios_40.png",
-      "scale": "1x"
+      "size" : "29x29",
+      "idiom" : "ipad",
+      "filename" : "bither_ios_29.png",
+      "scale" : "1x"
     },
     {
-      "size": "40x40",
-      "idiom": "ipad",
-      "filename": "bither_ios_80-1.png",
-      "scale": "2x"
+      "size" : "29x29",
+      "idiom" : "ipad",
+      "filename" : "bither_ios_58.png",
+      "scale" : "2x"
     },
     {
-      "size": "76x76",
-      "idiom": "ipad",
-      "filename": "bither_ios_76.png",
-      "scale": "1x"
+      "size" : "40x40",
+      "idiom" : "ipad",
+      "filename" : "bither_ios_40.png",
+      "scale" : "1x"
     },
     {
-      "size": "76x76",
-      "idiom": "ipad",
-      "filename": "bither_ios_144.png",
-      "scale": "2x"
+      "size" : "40x40",
+      "idiom" : "ipad",
+      "filename" : "bither_ios_80-1.png",
+      "scale" : "2x"
+    },
+    {
+      "size" : "76x76",
+      "idiom" : "ipad",
+      "filename" : "bither_ios_76.png",
+      "scale" : "1x"
+    },
+    {
+      "size" : "76x76",
+      "idiom" : "ipad",
+      "filename" : "bither_ios_144.png",
+      "scale" : "2x"
     }
   ],
-  "info": {
-    "version": 1,
-    "author": "xcode"
+  "info" : {
+    "version" : 1,
+    "author" : "xcode"
   }
 }

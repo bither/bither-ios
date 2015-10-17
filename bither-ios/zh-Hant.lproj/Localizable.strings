@@ -510,6 +510,7 @@
 
 // Network Monitor Options
 "network_monitor_clear_peers" = "清空節點";
+"network_monitor_title" = "網路監控";
 
 // Manual Delete Transaction
 "manual_delete_transaction_warning" = "刪除此交易?";
