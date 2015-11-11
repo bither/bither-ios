@@ -252,6 +252,7 @@
         if (callback) {
             callback();
         }
+        return;
     }
     ErrorHandler errorHandler = ^(NSOperation *errorOp, NSError *error) {
         if (errorCallback) {
