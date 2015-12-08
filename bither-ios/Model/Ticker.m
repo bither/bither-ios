@@ -72,8 +72,10 @@
         NSString *key = [NSString stringWithFormat:@"%d", [GroupUtil getMarketValue:marketType]];
         if ([[dict allKeys] containsObject:key]) {
             NSDictionary *tickerDict = [dict objectForKey:key];
-            Ticker *ticker = [self formatTicker:tickerDict market:marketType];
-            [array addObject:ticker];
+            if(tickerDict && ![tickerDict isKindOfClass:[NSNull class]]){
+                Ticker *ticker = [self formatTicker:tickerDict market:marketType];
+                [array addObject:ticker];
+            }
         }
     }
     return array;
