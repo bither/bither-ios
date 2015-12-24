@@ -52,6 +52,23 @@ ErrorHandler errorHandler = ^(NSOperation *errorOp, NSError *error) {
     }
 
 }
+- (void)getBlockChainTx:(NSString *)url withParams:(NSDictionary *)params networkType:(BitherNetworkType)networkType
+              completed:(CompletedOperation)completedOperationParam andErrorCallback:(ErrorHandler)errorCallback ssl:(BOOL)ssl{
+    if (errorCallback == nil) {
+        errorCallback = errorHandler;
+    }
+    [self execGetBlockChain:url withParams:params networkType:networkType completed:completedOperationParam andErrorCallback:errorCallback ssl:ssl];
+    
+}
+- (void)getBlockChainBh:(NSString *)url withParams:(NSDictionary *)params networkType:(BitherNetworkType)networkType
+              completed:(CompletedOperation)completedOperationParam andErrorCallback:(ErrorHandler)errorCallback ssl:(BOOL)ssl{
+    if (errorCallback == nil) {
+        errorCallback = errorHandler;
+    }
+    [self execGetBlockChain:url withParams:params networkType:networkType completed:completedOperationParam andErrorCallback:errorCallback ssl:ssl];
+    
+    
+}
 
 - (void)get:(NSString *)url withParams:(NSDictionary *)params networkType:(BitherNetworkType)networkType
   completed:(CompletedOperation)completedOperationParam andErrorCallback:(ErrorHandler)errorCallback; {
@@ -91,6 +108,23 @@ ErrorHandler errorHandler = ^(NSOperation *errorOp, NSError *error) {
         }
     }];
     [mkNetworkEngine enqueueOperation:get];
+}
+#pragma mark - blockchain add queue
+- (void)execGetBlockChain:(NSString *)url withParams:(NSDictionary *)params networkType:(BitherNetworkType)networkType completed:(CompletedOperation)completedOperationParam andErrorCallback:(ErrorHandler)errorCallback ssl:(BOOL)ssl{
+    MKNetworkEngine *mkNetworkEngine = [self getNetworkEngine:networkType];
+    MKNetworkOperation *get = [mkNetworkEngine operationWithPath:url params:params httpMethod:HTTP_GET ssl:ssl];
+    [get addCompletionHandler:^(MKNetworkOperation *completedOperation) {
+        //DLog(@"%@", [completedOperation responseString]);
+        completedOperationParam(completedOperation);
+    }            errorHandler:^(MKNetworkOperation *completedOperation, NSError *error) {
+        NSLog(@"completedOperation:%@",completedOperation);
+        if (errorCallback != nil) {
+            errorCallback(completedOperation, error);
+        }
+    }];
+    [mkNetworkEngine enqueueOperation:get];
+    
+    
 }
 
 #pragma mark-post

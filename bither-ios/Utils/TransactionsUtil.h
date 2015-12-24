@@ -28,5 +28,7 @@
 
 + (void)syncWallet:(VoidBlock)voidBlock andErrorCallBack:(ErrorHandler)errorCallback;
 
++ (void)syncWalletFrom_blockChain:(VoidBlock)voidBlock andErrorCallBack:(ErrorHandler)errorCallback;
+
 + (NSString *)getCompleteTxForError:(NSError *)error;
 @end

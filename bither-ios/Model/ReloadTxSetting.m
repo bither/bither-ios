@@ -26,6 +26,8 @@
 #import "TransactionsUtil.h"
 #import "BTHDAccountProvider.h"
 #import "BTHDAccountAddressProvider.h"
+#import "DialogCentered.h"
+#import "DialogWithActions.h"
 
 
 static double reloadTime;
@@ -37,17 +39,73 @@ static Setting *reloadTxsSetting;
     DialogPassword *dialog = [[DialogPassword alloc] initWithDelegate:self];
     [dialog showInWindow:self.controller.view.window];
 }
-
+#pragma mark - 修改重载交易提示框
 - (void)onPasswordEntered:(NSString *)password {
+    NSMutableArray *actions = [NSMutableArray new];
+    [actions addObject:[[Action alloc]initWithName:NSLocalizedString(@"from_bither.net", nil) target:self andSelector:@selector(tapFrom_bither)]];
+    [actions addObject:[[Action alloc]initWithName:NSLocalizedString(@"from_btc.com", nil) target:self andSelector:@selector(tapFrom_blockMeta)]];
+    [actions addObject:[[Action alloc]initWithName:NSLocalizedString(@"from_blockChain.info", nil) target:self andSelector:@selector(tapFrom_blockChain)]];
+    [[[DialogWithActions alloc]initWithActions:actions]showInWindow:self.controller.view.window];
+}
+#pragma mark - from_bither的响应事件
+- (void)tapFrom_bither{
     DialogProgress *dialogProgrees = [[DialogProgress alloc] initWithMessage:NSLocalizedString(@"Please wait…", nil)];
     [dialogProgrees showInWindow:self.controller.view.window completion:^{
         [self reloadTx:dialogProgrees];
-
+        
     }];
-
-
+    
 }
-
+#pragma mark - from_blockMeta.com的响应事件
+- (void)tapFrom_blockMeta{
+    
+}
+#pragma mark - from_blockChain.info的响应事件
+- (void)tapFrom_blockChain{
+    DialogProgress *dialogProgrees = [[DialogProgress alloc] initWithMessage:NSLocalizedString(@"Please wait…", nil)];
+    [dialogProgrees showInWindow:self.controller.view.window completion:^{
+        [self reloadTxFrom_blockChain:dialogProgrees];
+        
+    }];
+    
+}
+#pragma mark - 重载交易数据从blockChain.info
+- (void)reloadTxFrom_blockChain:(DialogProgress *)dialogProgrees{
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        reloadTime = [[NSDate new] timeIntervalSince1970];
+        [[PeerUtil instance] stopPeer];
+        for (BTAddress *address in [[BTAddressManager instance] allAddresses]) {
+            [address setIsSyncComplete:NO];
+            [address updateSyncComplete];
+        }
+        [[BTTxProvider instance] clearAllTx];
+        [[BTHDAccountAddressProvider instance] setSyncedAllNotComplete];
+        [TransactionsUtil syncWalletFrom_blockChain:^{
+            [[PeerUtil instance] startPeer];
+            if (dialogProgrees) {
+                [dialogProgrees dismiss];
+            }
+            
+            if ([self.controller respondsToSelector:@selector(showMsg:)]) {
+                [self.controller performSelector:@selector(showMsg:) withObject:NSLocalizedString(@"Reload transactions data success", nil)];
+            }
+            
+        }           andErrorCallBack:^(NSOperation *errorOp, NSError *error) {
+            if (dialogProgrees) {
+                [dialogProgrees dismiss];
+            }
+            if ([self.controller respondsToSelector:@selector(showMsg:)]) {
+                [self.controller performSelector:@selector(showMsg:) withObject:NSLocalizedString(@"Network failure.", nil)];
+            }
+            
+        }];
+        
+        
+    });
+    
+    
+}
+#pragma mark - reloadTxFrom Bither.net
 - (void)reloadTx:(DialogProgress *)dialogProgrees {
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         reloadTime = [[NSDate new] timeIntervalSince1970];

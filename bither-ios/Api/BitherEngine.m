@@ -23,7 +23,8 @@ static MKNetworkEngine *statsNetworkEngine;
 static MKNetworkEngine *bitcoinNetworkEngine;
 static MKNetworkEngine *bcNetworkEngine;
 static MKNetworkEngine *hdmNetworkEngine;
-
+static MKNetworkEngine *blockChainEngine;
+static MKNetworkEngine *chainBtcComEngine;
 @implementation BitherEngine
 + (BitherEngine *)instance {
     @synchronized (self) {
@@ -34,8 +35,14 @@ static MKNetworkEngine *hdmNetworkEngine;
             userNetworkEngine = [[MKNetworkEngine alloc] initWithHostName:@"bu.getcai.com" customHeaderFields:headerFields];
             statsNetworkEngine = [[MKNetworkEngine alloc] initWithHostName:@"bs.getcai.com" customHeaderFields:headerFields];
             bitcoinNetworkEngine = [[MKNetworkEngine alloc] initWithHostName:@"b.getcai.com" customHeaderFields:headerFields];
-            bcNetworkEngine = [[MKNetworkEngine alloc] initWithHostName:@"bc.bither.net" customHeaderFields:headerFields];
+            bcNetworkEngine = [[MKNetworkEngine alloc]
+                initWithHostName:@"bc.bither.net" customHeaderFields:headerFields];
             hdmNetworkEngine = [[MKNetworkEngine alloc] initWithHostName:@"hdm.bither.net" customHeaderFields:headerFields];
+            blockChainEngine = [[MKNetworkEngine alloc]
+                initWithHostName:@"blockchain.info" customHeaderFields:headerFields];
+            chainBtcComEngine = [[MKNetworkEngine alloc]
+                initWithHostName:@"chain.btc.com" customHeaderFields:headerFields];
+            
         }
     }
     return bitherEngine;
@@ -60,7 +67,12 @@ static MKNetworkEngine *hdmNetworkEngine;
 - (MKNetworkEngine *)getHDMNetworkEngine {
     return hdmNetworkEngine;
 }
-
+- (MKNetworkEngine *)getBlockChainEngine{
+    return blockChainEngine;
+}
+- (MKNetworkEngine *)getChainBtcComEngine{
+    return chainBtcComEngine;
+}
 - (NSArray *)getCookies {
     NSArray *cookies = [[NSHTTPCookieStorage sharedHTTPCookieStorage] cookiesForURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://%@", userNetworkEngine.readonlyHostName]]];
     return cookies;
@@ -69,7 +81,7 @@ static MKNetworkEngine *hdmNetworkEngine;
 - (void)setEngineCookie {
     [self setCookieOfDomain:statsNetworkEngine.readonlyHostName];
     [self setCookieOfDomain:bitcoinNetworkEngine.readonlyHostName];
-
+    
 }
 
 - (void)setCookieOfDomain:(NSString *)domain {

@@ -37,6 +37,14 @@
 #define BC_ADDRESS_TX_URL @"api/v2/address/%@/transaction/p/%d"
 #define BC_ADDRESS_STAT_URL @"api/v2/address/%@/transaction/stat"
 
+//blockChain.info 交易API
+#define BLOCK_INFO_ADDRESS_TX_URL @"rawaddr/%@/?offset=%d"
+//blockChain.info 根据tx_index取hex
+#define BLOCK_INFO_TX_INDEX_URL @"https://blockchain.info/rawtx/%@?format=hex"
+//chain.Btc.com
+#define CHAIN_BTC_COM_ADDRESS_TX_URL @"api/v1/"
+
+
 
 @interface BaseApi : NSObject
 
@@ -46,6 +54,9 @@
 
 - (void)get:(NSString *)url withParams:(NSDictionary *)params networkType:(BitherNetworkType)networkType completed:(CompletedOperation)completedOperationParam andErrorCallback:(ErrorHandler)errorCallback ssl:(BOOL)ssl;
 
+- (void)getBlockChainBh:(NSString *)url withParams:(NSDictionary *)params networkType:(BitherNetworkType)networkType completed:(CompletedOperation)completedOperationParam andErrorCallback:(ErrorHandler)errorCallback ssl:(BOOL)ssl;
+
+- (void)getBlockChainTx:(NSString *)url withParams:(NSDictionary *)params networkType:(BitherNetworkType)networkType completed:(CompletedOperation)completedOperationParam andErrorCallback:(ErrorHandler)errorCallback ssl:(BOOL)ssl;
 
 #pragma mark-post
 
