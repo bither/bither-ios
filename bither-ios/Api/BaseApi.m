@@ -214,6 +214,12 @@ ErrorHandler errorHandler = ^(NSOperation *errorOp, NSError *error) {
         case BitherHDM:
             networkEngine = [bitherEngine getHDMNetworkEngine];
             break;
+        case BlockChain:
+            networkEngine = [bitherEngine getBlockChainEngine];
+            break;
+        case ChainBtcCom:
+            networkEngine = [bitherEngine getChainBtcComEngine];
+            break;
         default:
             networkEngine = [bitherEngine getUserNetworkEngine];
             break;

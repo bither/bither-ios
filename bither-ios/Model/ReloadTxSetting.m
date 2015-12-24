@@ -49,11 +49,11 @@ static Setting *reloadTxsSetting;
 }
 #pragma mark - from_bither的响应事件
 - (void)tapFrom_bither{
-    DialogProgress *dialogProgrees = [[DialogProgress alloc] initWithMessage:NSLocalizedString(@"Please wait…", nil)];
-    [dialogProgrees showInWindow:self.controller.view.window completion:^{
-        [self reloadTx:dialogProgrees];
-        
-    }];
+//    DialogProgress *dialogProgrees = [[DialogProgress alloc] initWithMessage:NSLocalizedString(@"Please wait…", nil)];
+//    [dialogProgrees showInWindow:self.controller.view.window completion:^{
+//        [self reloadTx:dialogProgrees];
+//        
+//    }];
     
 }
 #pragma mark - from_blockMeta.com的响应事件
@@ -147,7 +147,7 @@ static Setting *reloadTxsSetting;
         reloadTxsSetting = [[ReloadTxSetting alloc] initWithName:NSLocalizedString(@"Reload Transactions data", nil) icon:nil];
 
         [reloadTxsSetting setSelectBlock:^(UIViewController *controller) {
-            if (reloadTime > 0 && reloadTime + 60 * 60 > (double) [[NSDate new] timeIntervalSince1970]) {
+            if (reloadTime > 0 && reloadTime + 1 * 1 > (double) [[NSDate new] timeIntervalSince1970]) {
                 if ([controller respondsToSelector:@selector(showMsg:)]) {
                     [controller performSelector:@selector(showMsg:) withObject:NSLocalizedString(@"You can only reload transactions data in a hour..", nil)];
                 }

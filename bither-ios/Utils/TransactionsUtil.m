@@ -550,8 +550,8 @@
     [[BitherApi instance] getTransactionApi:address.address withPage:page callback:nextPageBlock andErrorCallBack:errorHandler];
 }
 
-#pragma mark - 得到交易数组
-+ (NSArray *)getTxsFromBlockChain:(NSDictionary *)dict{
+#pragma mark - 得到交易数组FromBlockchain.info
++ (NSMutableArray *)getTxsFromBlockChain:(NSDictionary *)dict{
     NSArray *array = [[BTBlockChain instance] getAllBlocks];
     NSMutableDictionary *dictionary = [NSMutableDictionary new];
     BTBlock *minBlock = array[array.count - 1];
@@ -566,26 +566,24 @@
     for (NSDictionary *each in dict[@"txs"]) {
         NSString * txIndex = each[@"tx_index"];
         NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:BLOCK_INFO_TX_INDEX_URL,txIndex]];
-        DDLogCDebug(@"txIndexUrl---%@",url);
         NSURLRequest *request = [NSURLRequest requestWithURL:url];
+        DDLogCDebug(@"txIndexUrl---%@",url);
         NSData *data = [NSURLConnection sendSynchronousRequest:request returningResponse:nil error:nil];
         NSString *aString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
         //NSLog(@"aString------ %@",aString);
-        BTTx *tx = [[BTTx alloc] initWithMessage:[aString hexToData]];
-        tx.blockNo = (uint32_t) [each[@"block_height"] intValue];
-        BTBlock *block;
+    BTTx *tx = [[BTTx alloc] initWithMessage:[aString hexToData]];
+    tx.blockNo = (uint32_t) [each[@"block_height"] intValue];
+    BTBlock *block;
         if (tx.blockNo < minBlockNo) {
             block = dictionary[@(minBlockNo)];
         } else {
-            block = dictionary[@(tx.blockNo)];
+        block = dictionary[@(tx.blockNo)];
         }
-        
         tx.txTime = (uint32_t)[each[@"time"]intValue];
         [txs addObject:tx];
+
     }
     return txs;
-    
-    
 }
 
 + (NSArray *)getTxs:(NSDictionary *)dict; {
