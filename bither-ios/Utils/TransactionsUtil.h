@@ -30,5 +30,7 @@
 
 + (void)syncWalletFrom_blockChain:(VoidBlock)voidBlock andErrorCallBack:(ErrorHandler)errorCallback;
 
++ (void)syncWalletFromBtcCom:(VoidBlock)voidBlock andErrorCallBack:(ErrorHandler)errorCallback;
+
 + (NSString *)getCompleteTxForError:(NSError *)error;
 @end

@@ -42,9 +42,9 @@
 //blockChain.info 根据tx_index取hex
 #define BLOCK_INFO_TX_INDEX_URL @"https://blockchain.info/rawtx/%@?format=hex"
 //chain.Btc.com
-#define CHAIN_BTC_COM_ADDRESS_TX_URL @"api/v1/"
-
-
+#define CHAIN_BTC_COM_ADDRESS_TX_URL @"api/v1/address/%@?offset=%d"
+#define CHAIN_BTC_COM_BLOCK_HEIGHT @"api/v1/%@"
+#define CHAIN_BTC_COM_TX_INDEX_URL @""
 
 @interface BaseApi : NSObject
 

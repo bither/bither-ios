@@ -66,13 +66,10 @@ ErrorHandler errorHandler = ^(NSOperation *errorOp, NSError *error) {
         errorCallback = errorHandler;
     }
     [self execGetBlockChain:url withParams:params networkType:networkType completed:completedOperationParam andErrorCallback:errorCallback ssl:ssl];
-    
-    
 }
 
 - (void)get:(NSString *)url withParams:(NSDictionary *)params networkType:(BitherNetworkType)networkType
   completed:(CompletedOperation)completedOperationParam andErrorCallback:(ErrorHandler)errorCallback; {
-    //NSLog(@"get 1:%@",url);
     [self get:url withParams:params networkType:networkType completed:completedOperationParam andErrorCallback:errorCallback ssl:NO];
 }
 
@@ -114,10 +111,8 @@ ErrorHandler errorHandler = ^(NSOperation *errorOp, NSError *error) {
     MKNetworkEngine *mkNetworkEngine = [self getNetworkEngine:networkType];
     MKNetworkOperation *get = [mkNetworkEngine operationWithPath:url params:params httpMethod:HTTP_GET ssl:ssl];
     [get addCompletionHandler:^(MKNetworkOperation *completedOperation) {
-        //DLog(@"%@", [completedOperation responseString]);
         completedOperationParam(completedOperation);
     }            errorHandler:^(MKNetworkOperation *completedOperation, NSError *error) {
-        NSLog(@"completedOperation:%@",completedOperation);
         if (errorCallback != nil) {
             errorCallback(completedOperation, error);
         }

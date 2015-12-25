@@ -56,9 +56,14 @@ static Setting *reloadTxsSetting;
 //    }];
     
 }
-#pragma mark - from_blockMeta.com的响应事件
+#pragma mark - from-Btc.com的响应事件
 - (void)tapFrom_blockMeta{
-    
+//    DialogProgress *dialogProgrees = [[DialogProgress alloc] initWithMessage:NSLocalizedString(@"Please wait…", nil)];
+//    [dialogProgrees showInWindow:self.controller.view.window completion:^{
+//        [self reloadTxFromBtcCom:dialogProgrees];
+//        
+//    }];
+
 }
 #pragma mark - from_blockChain.info的响应事件
 - (void)tapFrom_blockChain{
@@ -69,7 +74,43 @@ static Setting *reloadTxsSetting;
     }];
     
 }
-#pragma mark - 重载交易数据从blockChain.info
+
+#pragma reload data from btc.com
+- (void)reloadTxFromBtcCom:(DialogProgress *)dialogProgrees{
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        reloadTime = [[NSDate new] timeIntervalSince1970];
+        [[PeerUtil instance] stopPeer];
+        for (BTAddress *address in [[BTAddressManager instance] allAddresses]) {
+            [address setIsSyncComplete:NO];
+            [address updateSyncComplete];
+        }
+        [[BTTxProvider instance] clearAllTx];
+        [[BTHDAccountAddressProvider instance] setSyncedAllNotComplete];
+        [TransactionsUtil syncWalletFromBtcCom:^{
+            [[PeerUtil instance] startPeer];
+            if (dialogProgrees) {
+                [dialogProgrees dismiss];
+            }
+            
+            if ([self.controller respondsToSelector:@selector(showMsg:)]) {
+                [self.controller performSelector:@selector(showMsg:) withObject:NSLocalizedString(@"Reload transactions data success", nil)];
+            }
+            
+        }           andErrorCallBack:^(NSOperation *errorOp, NSError *error) {
+            if (dialogProgrees) {
+                [dialogProgrees dismiss];
+            }
+            if ([self.controller respondsToSelector:@selector(showMsg:)]) {
+                [self.controller performSelector:@selector(showMsg:) withObject:NSLocalizedString(@"Network failure.", nil)];
+            }
+            
+        }];
+        
+        
+    });
+
+}
+#pragma mark - reload data from blockchain.info
 - (void)reloadTxFrom_blockChain:(DialogProgress *)dialogProgrees{
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         reloadTime = [[NSDate new] timeIntervalSince1970];
