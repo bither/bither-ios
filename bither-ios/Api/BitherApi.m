@@ -35,7 +35,7 @@ static BitherApi *piApi;
 - (void)getSpvBlock:(DictResponseBlock)callback andErrorCallBack:(ErrorHandler)errorCallback {
     [self          get:BITHER_GET_ONE_SPVBLOCK_API withParams:nil networkType:BitherBC completed:^(MKNetworkOperation *completedOperation) {
         if (![StringUtil isEmpty:completedOperation.responseString]) {
-            NSLog(@"spv: %s", [completedOperation.responseString UTF8String]);
+            // NSLog(@"spv: %s", [completedOperation.responseString UTF8String]);
             NSDictionary *dict = [completedOperation responseJSON];
             if (callback) {
                 callback(dict);
@@ -57,7 +57,7 @@ static BitherApi *piApi;
 - (void)getSpvBlockImproved:(DictResponseBlock)callback andErrorCallBack:(ErrorHandler)errorCallback {
     [self get:BLOCKCHAIN_GET_LATEST_BLOCK withParams:nil networkType:BlockChain completed:^(MKNetworkOperation *completedOperation) {
         if (![StringUtil isEmpty:completedOperation.responseString]) {
-            NSLog(@"spv: %s", [completedOperation.responseString UTF8String]);
+            // NSLog(@"spv: %s", [completedOperation.responseString UTF8String]);
             NSDictionary *dictLatestBlock = [completedOperation responseJSON];
             NSUInteger latestBlockNumber = [dictLatestBlock[@"height"] intValue];
             unsigned long blockNumber = 0;
@@ -70,10 +70,12 @@ static BitherApi *piApi;
             NSString *url = [NSString stringWithFormat:BLOCKCHAIN_BLOCK_DETAIL, blockNumber];
             [self get:url withParams:nil networkType:BlockChain completed:^(MKNetworkOperation *completedOperation) {
                 if (![StringUtil isEmpty:completedOperation.responseString]) {
-                    NSLog(@"spv: %s", [completedOperation.responseString UTF8String]);
+                    // NSLog(@"spv: %s", [completedOperation.responseString UTF8String]);
                     NSDictionary *blockHeaderDetail = [completedOperation responseJSON];
+                    // change data needed for release the data of size
+                    NSDictionary *blockHeader = [NSDictionary dictionaryWithDictionary:[self resizeBlockHeader:blockHeaderDetail]];
                     if (callback) {
-                        callback(blockHeaderDetail);
+                        callback(blockHeader);
                     }
                 } else {
                     [self getSpvBlock:callback andErrorCallBack:errorCallback];
@@ -91,9 +93,28 @@ static BitherApi *piApi;
     }];
 }
 
+
+- (NSDictionary *)resizeBlockHeader:(NSDictionary *)dictIn {
+    NSMutableDictionary *newDict = [NSMutableDictionary new];
+    NSDictionary *dict = [NSDictionary dictionaryWithDictionary:[dictIn[@"blocks"] firstObject]];
+    if (dict[@"nonce"]) {
+        [newDict setObject:dict[@"nonce"] forKey:@"nonce"];
+        [newDict setObject:dict[@"prev_block"] forKey:@"prev_block"];
+        [newDict setObject:dict[@"ver"] forKey:@"ver"];
+        [newDict setObject:dict[@"height"] forKey:@"block_no"];
+        [newDict setObject:dict[@"mrkl_root"] forKey:@"mrkl_root"];
+        [newDict setObject:dict[@"time"] forKey:@"time"];
+        [newDict setObject:dict[@"bits"] forKey:@"bits"];
+    } else {
+        NSLog(@"dict---nonce is nil!!!!!!!!!!!!!!");
+    }
+    return newDict;
+}
+
 /**
  *
  */
+
 
 - (void)getInSignaturesApi:(NSString *)address fromBlock:(int)blockNo callback:(IdResponseBlock)callback andErrorCallBack:(ErrorHandler)errorCallback {
     NSString *url = [NSString stringWithFormat:BITHER_IN_SIGNATURES_API, address, blockNo];
