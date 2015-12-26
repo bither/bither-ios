@@ -23,6 +23,9 @@
 #define BITHER_GET_COOKIE_URL @"api/v1/cookie"
 #define BITHER_GET_ONE_SPVBLOCK_API @"api/v2/block/spv/one"
 #define BITHER_IN_SIGNATURES_API  @"api/v1/address/%@/insignature/%d"
+// BlockChain
+#define BLOCKCHAIN_GET_LATEST_BLOCK @"latestblock"
+#define BLOCKCHAIN_BLOCK_DETAIL @"block-height/%lu?format=json"
 
 
 #define BITHER_Q_MYTRANSACTIONS @"api/v1/address/%@/transaction"

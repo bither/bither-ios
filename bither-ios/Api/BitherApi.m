@@ -50,6 +50,51 @@ static BitherApi *piApi;
 
 }
 
+/**
+ *   If possible, get data from blockChain.info
+ *   else, get data from bither.net
+ */
+- (void)getSpvBlockImproved:(DictResponseBlock)callback andErrorCallBack:(ErrorHandler)errorCallback {
+    [self get:BLOCKCHAIN_GET_LATEST_BLOCK withParams:nil networkType:BlockChain completed:^(MKNetworkOperation *completedOperation) {
+        if (![StringUtil isEmpty:completedOperation.responseString]) {
+            NSLog(@"spv: %s", [completedOperation.responseString UTF8String]);
+            NSDictionary *dictLatestBlock = [completedOperation responseJSON];
+            NSUInteger latestBlockNumber = [dictLatestBlock[@"height"] intValue];
+            unsigned long blockNumber = 0;
+            if (latestBlockNumber % 2016 != 0) {
+                blockNumber = latestBlockNumber - (latestBlockNumber % 2016);
+            } else {
+                blockNumber = latestBlockNumber;
+            }
+            // get block header from blockChain
+            NSString *url = [NSString stringWithFormat:BLOCKCHAIN_BLOCK_DETAIL, blockNumber];
+            [self get:url withParams:nil networkType:BlockChain completed:^(MKNetworkOperation *completedOperation) {
+                if (![StringUtil isEmpty:completedOperation.responseString]) {
+                    NSLog(@"spv: %s", [completedOperation.responseString UTF8String]);
+                    NSDictionary *blockHeaderDetail = [completedOperation responseJSON];
+                    if (callback) {
+                        callback(blockHeaderDetail);
+                    }
+                } else {
+                    [self getSpvBlock:callback andErrorCallBack:errorCallback];
+                }
+            } andErrorCallback:^(NSOperation *errorOp, NSError *error) {
+                if (errorCallback) {
+                    errorCallback(errorOp, error);
+                }
+            }];
+        }
+    } andErrorCallback:^(NSOperation *errorOp, NSError *error) {
+        if (errorCallback) {
+            errorCallback(errorOp, error);
+        }
+    }];
+}
+
+/**
+ *
+ */
+
 - (void)getInSignaturesApi:(NSString *)address fromBlock:(int)blockNo callback:(IdResponseBlock)callback andErrorCallBack:(ErrorHandler)errorCallback {
     NSString *url = [NSString stringWithFormat:BITHER_IN_SIGNATURES_API, address, blockNo];
     [self          get:url withParams:nil networkType:BitherBitcoin completed:^(MKNetworkOperation *completedOperation) {

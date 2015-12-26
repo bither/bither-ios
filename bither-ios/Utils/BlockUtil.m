@@ -96,7 +96,7 @@ static BlockUtil *blockUtil;
             callback();
         }
     } else {
-        [[BitherApi instance] getSpvBlock:^(NSDictionary *dict) {
+        [[BitherApi instance] getSpvBlockImproved:^(NSDictionary *dict) {
             BTBlock *block = [BlockUtil formatBlcok:dict];
             if (block.blockNo % 2016 != 0) {
                 if ([self.delegate respondsToSelector:@selector(error)]) {

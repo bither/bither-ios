@@ -29,6 +29,8 @@
 + (BitherApi *)instance;
 
 - (void)getSpvBlock:(DictResponseBlock)callback andErrorCallBack:(ErrorHandler)errorCallback;
+// Improve getSpvBlock
+- (void)getSpvBlockImproved:(DictResponseBlock)callback andErrorCallBack:(ErrorHandler)errorCallback;
 
 - (void)getInSignaturesApi:(NSString *)address fromBlock:(int)blockNo callback:(IdResponseBlock)callback andErrorCallBack:(ErrorHandler)errorCallback;
 //blockchain-api
