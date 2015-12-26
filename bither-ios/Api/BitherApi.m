@@ -82,7 +82,7 @@ static BitherApi *piApi;
 - (void)getExchangeDepth:(MarketType)marketType callback:(ArrayResponseBlock)callback andErrorCallBack:(ErrorHandler)errorCallback {
     //[];
 }
-#pragma mark -blockchain.info_tx
+#pragma mark - getTransactionApiFromBlockChain
 - (void)getTransactionApiFromBlockChain:(NSString *)address withPage:(int)page callback:(DictResponseBlock)callback andErrorCallBack:(ErrorHandler)errorCallback{
     NSString *singeTxUrl = [NSString stringWithFormat:BLOCK_INFO_ADDRESS_TX_URL,address,page];
     NSLog(@"%@",singeTxUrl);
@@ -105,7 +105,7 @@ static BitherApi *piApi;
     } ssl:NO];
     
 }
-#pragma mark - blockchain.info_blockheight
+#pragma mark - getblockHeightApiFromBlockChain
 - (void)getblockHeightApiFromBlockChain:(NSString *)address  callback:(DictResponseBlock)callback andErrorCallBack:(ErrorHandler)errorCallback{
     NSLog(@"ever Address :%@",address);
     NSString *blockHeightUrl = @"latestblock";
@@ -129,55 +129,7 @@ static BitherApi *piApi;
     } ssl:NO];
     
 }
-#pragma mark - btc.com_tx
-- (void)getTransactionApiFromBtcCom:(NSString *)address withPage:(int)page callback:(DictResponseBlock)callback andErrorCallBack:(ErrorHandler)errorCallback{
-    DDLogCDebug(@"get %@ tx page %d from api", address, page);
-    NSString *singeTxUrl = [NSString stringWithFormat:CHAIN_BTC_COM_ADDRESS_TX_URL,address,page];
-    [self getBlockChainTx:singeTxUrl withParams:nil networkType:ChainBtcCom completed:^(MKNetworkOperation *completedOperation) {
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
-            DDLogDebug(@"api response:%@", completedOperation.responseString);
-            if (![StringUtil isEmpty:completedOperation.responseString]) {
-                NSDictionary *dict = completedOperation.responseJSON;
-                if (callback) {
-                    callback(dict);
-                }
-            }
-        });
-        
-    } andErrorCallback:^(NSOperation *errorOp, NSError *error) {
-        if (errorCallback) {
-            errorCallback(errorOp, error);
-        }
-        
-    } ssl:NO];
-    
-}
-#pragma mark - btc.com_blockheight
-- (void)getblockHeightApiFromBtcCom:(NSString *)address  callback:(DictResponseBlock)callback andErrorCallBack:(ErrorHandler)errorCallback{
-    NSString *str = @"lastestblock";
-    NSString *blockHeightUrl = [NSString stringWithFormat:CHAIN_BTC_COM_BLOCK_HEIGHT,str];
-    NSLog(@"%@",blockHeightUrl);
-    [self getBlockChainBh:blockHeightUrl withParams:nil networkType:ChainBtcCom completed:^(MKNetworkOperation *completedOperation) {
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
-            DDLogDebug(@"api response:%@", completedOperation.responseString);
-            if (![StringUtil isEmpty:completedOperation.responseString]) {
-                NSDictionary *dict = completedOperation.responseJSON;
-                if (callback) {
-                    callback(dict);
-                }
-            }
-        });
-        
-    } andErrorCallback:^(NSOperation *errorOp, NSError *error) {
-        if (errorCallback) {
-            errorCallback(errorOp, error);
-        }
-        
-        
-    } ssl:NO];
-
-    
-}
+#pragma mark - getTransactionApiFrom bither.net
 - (void)getTransactionApi:(NSString *)address withPage:(int)page callback:(DictResponseBlock)callback andErrorCallBack:(ErrorHandler)errorCallback; {
     DDLogDebug(@"get %@ tx page %d from api", address, page);
     NSString *url = [NSString stringWithFormat:BC_ADDRESS_TX_URL, address, page];
