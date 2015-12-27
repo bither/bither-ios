@@ -136,7 +136,7 @@ static Setting *reloadTxsSetting;
         reloadTxsSetting = [[ReloadTxSetting alloc] initWithName:NSLocalizedString(@"Reload Transactions data", nil) icon:nil];
 
         [reloadTxsSetting setSelectBlock:^(UIViewController *controller) {
-            if (reloadTime > 0 && reloadTime + 1 * 1 > (double) [[NSDate new] timeIntervalSince1970]) {
+            if (reloadTime > 0 && reloadTime + 60 * 60 > (double) [[NSDate new] timeIntervalSince1970]) {
                 if ([controller respondsToSelector:@selector(showMsg:)]) {
                     [controller performSelector:@selector(showMsg:) withObject:NSLocalizedString(@"You can only reload transactions data in a hour..", nil)];
                 }

@@ -553,7 +553,7 @@
         NSString * txIndex = each[@"tx_index"];
         NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:BLOCK_INFO_TX_INDEX_URL,txIndex]];
         NSURLRequest *request = [NSURLRequest requestWithURL:url];
-        NSLog(@"%@",url);
+        //NSLog(@"%@",url);
         NSData *data = [NSURLConnection sendSynchronousRequest:request returningResponse:nil error:nil];
         NSString *aString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
     BTTx *tx = [[BTTx alloc] initWithMessage:[aString hexToData]];

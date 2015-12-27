@@ -36,7 +36,7 @@
 
 #define BC_ADDRESS_TX_URL @"api/v2/address/%@/transaction/p/%d"
 #define BC_ADDRESS_STAT_URL @"api/v2/address/%@/transaction/stat"
-
+//limit=50 one Page can show 50 tx informations
 #define BLOCK_INFO_ADDRESS_TX_URL @"rawaddr/%@/?offset=%d"
 #define BLOCK_INFO_TX_INDEX_URL @"https://blockchain.info/rawtx/%@?format=hex"
 
