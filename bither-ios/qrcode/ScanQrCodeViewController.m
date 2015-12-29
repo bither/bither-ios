@@ -23,7 +23,9 @@
 #import "UIViewController+SwipeRightToPop.h"
 #import "DialogProgress.h"
 #import "UIViewController+PiShowBanner.h"
-
+#import "AppDelegate.h"
+#import "DialogCentered.h"
+#import "DialogWithActions.h"
 @interface ScanQrCodeViewController () {
     NSString *_scanTitle;
     NSString *_scanMessage;

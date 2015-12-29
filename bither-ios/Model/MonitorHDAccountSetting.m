@@ -27,9 +27,12 @@
 #import "StringUtil.h"
 #import "BTQRCodeUtil.h"
 #import "PeerUtil.h"
-
+#import "AppDelegate.h"
+#import "DialogWithActions.h"
+#import "DialogCentered.h"
 @interface MonitorHDAccountSetting () <ScanQrCodeDelegate>
 @property(weak) UIViewController *vc;
+@property (nonatomic,strong) NSString *senderResult;
 @end
 
 static Setting *monitorSetting;
@@ -63,18 +66,36 @@ static Setting *monitorSetting;
         [self.vc presentViewController:scan animated:YES completion:nil];
     }];
 }
-
+#pragma mark - import HDAccount
 - (void)handleResult:(NSString *)result byReader:(ScanQrCodeViewController *)reader {
+    _senderResult = result;
     [reader.presentingViewController dismissViewControllerAnimated:YES completion:^{
-        DialogProgress *dp = [[DialogProgress alloc] initWithMessage:NSLocalizedString(@"Please wait…", nil)];
-        [dp showInWindow:self.vc.view.window completion:^{
-            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
-                [self processQrCodeContent:result dp:dp];
-            });
-        }];
+        NSMutableArray *actions = [NSMutableArray new];
+        [actions addObject:[[Action alloc]initWithName:NSLocalizedString(@"get data from_blockChain.info", nil) target:self andSelector:@selector(tapFromBlockChainToGetTxDataForMonitorColdHDAccount)]];
+        [actions addObject:[[Action alloc]initWithName:NSLocalizedString(@"get data from_bither.net", nil) target:self andSelector:@selector(tapFromBitherToGetTxDataForMoitorColdHDAccount)]];
+        [[[DialogWithActions alloc]initWithActions:actions]showInWindow:self.vc.view.window];
     }];
 }
-
+- (void)tapFromBlockChainToGetTxDataForMonitorColdHDAccount{
+    AppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
+    appDelegate.importType = BLOCK_CHAIN_INFO;
+            DialogProgress *dp = [[DialogProgress alloc] initWithMessage:NSLocalizedString(@"Please wait…", nil)];
+            [dp showInWindow:self.vc.view.window completion:^{
+                dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+                    [self processQrCodeContent:_senderResult dp:dp];
+                });
+            }];
+}
+- (void)tapFromBitherToGetTxDataForMoitorColdHDAccount{
+    AppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
+    appDelegate.importType = BITHER_NET;
+            DialogProgress *dp = [[DialogProgress alloc] initWithMessage:NSLocalizedString(@"Please wait…", nil)];
+            [dp showInWindow:self.vc.view.window completion:^{
+                dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+                    [self processQrCodeContent:_senderResult dp:dp];
+                });
+            }];
+}
 - (void)showMsg:(NSString *)msg {
     if (self.vc && [self.vc respondsToSelector:@selector(showMsg:)]) {
         [self.vc performSelector:@selector(showMsg:) withObject:msg];

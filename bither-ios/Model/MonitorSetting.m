@@ -30,10 +30,13 @@
 #import "DialogProgress.h"
 #import "StringUtil.h"
 #import "KeyUtil.h"
-
+#import "DialogCentered.h"
+#import "DialogWithActions.h"
+#import "AppDelegate.h"
+#import "PeerUtil.h"
 @interface MonitorSetting () <ScanQrCodeDelegate>
 @property(weak) UIViewController *vc;
-
+@property (nonatomic,copy)NSString *senderResut;
 @end
 
 static Setting *monitorSetting;
@@ -68,24 +71,41 @@ static Setting *monitorSetting;
 }
 
 - (void)handleResult:(NSString *)result byReader:(ScanQrCodeViewController *)reader {
+    _senderResut = result;
     [reader.presentingViewController dismissViewControllerAnimated:YES completion:^{
-        if ([self checkQrCodeContent:result]) {
-            DialogProgress *dp = [[DialogProgress alloc] initWithMessage:NSLocalizedString(@"Please wait…", nil)];
-            [dp showInWindow:self.vc.view.window completion:^{
-                dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
-                    [self processQrCodeContent:result dp:dp];
-                });
-            }];
-        } else {
-            if (result.isValidBitcoinAddress || [StringUtil isValidBitcoinBIP21Address:result]) {
-                [self showMsg:NSLocalizedString(@"add_address_watch_only_scanned_address_warning", nil)];
-            } else {
-                [self showMsg:NSLocalizedString(@"Monitor Bither Cold failed.", nil)];
-            }
-        }
-    }];
+        NSMutableArray *actions = [NSMutableArray new];
+        [actions addObject:[[Action alloc]initWithName:NSLocalizedString(@"get data from_blockChain.info", nil) target:self andSelector:@selector(tapFromBlockChainToGetTxDataForMonitorBitherCold)]];
+        [actions addObject:[[Action alloc]initWithName:NSLocalizedString(@"get data from_bither.net", nil) target:self andSelector:@selector(tapFromBitherToGetTxDataForMonitorBitherCold)]];
+        [[[DialogWithActions alloc]initWithActions:actions]showInWindow:self.vc.view.window];
+        }];
 }
+- (void)handleResult{
+    if ([self checkQrCodeContent:_senderResut]) {
+        DialogProgress *dp = [[DialogProgress alloc] initWithMessage:NSLocalizedString(@"Please wait…", nil)];
+        [dp showInWindow:self.vc.view.window completion:^{
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+                [self processQrCodeContent:_senderResut dp:dp];
+            });
+        }];
+    } else {
+        if (_senderResut.isValidBitcoinAddress || [StringUtil isValidBitcoinBIP21Address:_senderResut]) {
+            [self showMsg:NSLocalizedString(@"add_address_watch_only_scanned_address_warning", nil)];
+        } else {
+            [self showMsg:NSLocalizedString(@"Monitor Bither Cold failed.", nil)];
+        }
+    }
 
+}
+- (void)tapFromBlockChainToGetTxDataForMonitorBitherCold{
+    AppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
+    appDelegate.importType = BLOCK_CHAIN_INFO;
+    [self handleResult];
+}
+- (void)tapFromBitherToGetTxDataForMonitorBitherCold{
+    AppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
+    appDelegate.importType = BITHER_NET;
+    [self handleResult];
+}
 - (void)showMsg:(NSString *)msg {
     if (self.vc && [self.vc respondsToSelector:@selector(showMsg:)]) {
         [self.vc performSelector:@selector(showMsg:) withObject:msg];
