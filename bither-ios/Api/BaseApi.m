@@ -52,10 +52,24 @@ ErrorHandler errorHandler = ^(NSOperation *errorOp, NSError *error) {
     }
 
 }
+- (void)getBlockChainTx:(NSString *)url withParams:(NSDictionary *)params networkType:(BitherNetworkType)networkType
+              completed:(CompletedOperation)completedOperationParam andErrorCallback:(ErrorHandler)errorCallback ssl:(BOOL)ssl{
+    if (errorCallback == nil) {
+        errorCallback = errorHandler;
+    }
+    [self execGetBlockChain:url withParams:params networkType:networkType completed:completedOperationParam andErrorCallback:errorCallback ssl:ssl];
+    
+}
+- (void)getBlockChainBh:(NSString *)url withParams:(NSDictionary *)params networkType:(BitherNetworkType)networkType
+              completed:(CompletedOperation)completedOperationParam andErrorCallback:(ErrorHandler)errorCallback ssl:(BOOL)ssl{
+    if (errorCallback == nil) {
+        errorCallback = errorHandler;
+    }
+    [self execGetBlockChain:url withParams:params networkType:networkType completed:completedOperationParam andErrorCallback:errorCallback ssl:ssl];
+}
 
 - (void)get:(NSString *)url withParams:(NSDictionary *)params networkType:(BitherNetworkType)networkType
   completed:(CompletedOperation)completedOperationParam andErrorCallback:(ErrorHandler)errorCallback; {
-    //NSLog(@"get 1:%@",url);
     [self get:url withParams:params networkType:networkType completed:completedOperationParam andErrorCallback:errorCallback ssl:NO];
 }
 
@@ -91,6 +105,21 @@ ErrorHandler errorHandler = ^(NSOperation *errorOp, NSError *error) {
         }
     }];
     [mkNetworkEngine enqueueOperation:get];
+}
+#pragma mark - blockchain add queue
+- (void)execGetBlockChain:(NSString *)url withParams:(NSDictionary *)params networkType:(BitherNetworkType)networkType completed:(CompletedOperation)completedOperationParam andErrorCallback:(ErrorHandler)errorCallback ssl:(BOOL)ssl{
+    MKNetworkEngine *mkNetworkEngine = [self getNetworkEngine:networkType];
+    MKNetworkOperation *get = [mkNetworkEngine operationWithPath:url params:params httpMethod:HTTP_GET ssl:ssl];
+    [get addCompletionHandler:^(MKNetworkOperation *completedOperation) {
+        completedOperationParam(completedOperation);
+    }            errorHandler:^(MKNetworkOperation *completedOperation, NSError *error) {
+        if (errorCallback != nil) {
+            errorCallback(completedOperation, error);
+        }
+    }];
+    [mkNetworkEngine enqueueOperation:get];
+    
+    
 }
 
 #pragma mark-post
@@ -179,6 +208,12 @@ ErrorHandler errorHandler = ^(NSOperation *errorOp, NSError *error) {
             break;
         case BitherHDM:
             networkEngine = [bitherEngine getHDMNetworkEngine];
+            break;
+        case BlockChain:
+            networkEngine = [bitherEngine getBlockChainEngine];
+            break;
+        case ChainBtcCom:
+            networkEngine = [bitherEngine getChainBtcComEngine];
             break;
         default:
             networkEngine = [bitherEngine getUserNetworkEngine];

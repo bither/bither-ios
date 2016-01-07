@@ -19,7 +19,6 @@
 #import <Foundation/Foundation.h>
 #import "Setting.h"
 #import "DialogPassword.h"
-
 @interface ReloadTxSetting : Setting <DialogPasswordDelegate>
 @property(weak) UIViewController *controller;
 

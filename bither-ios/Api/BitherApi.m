@@ -82,7 +82,54 @@ static BitherApi *piApi;
 - (void)getExchangeDepth:(MarketType)marketType callback:(ArrayResponseBlock)callback andErrorCallBack:(ErrorHandler)errorCallback {
     //[];
 }
-
+#pragma mark - getTransactionApiFromBlockChain
+- (void)getTransactionApiFromBlockChain:(NSString *)address withPage:(int)page callback:(DictResponseBlock)callback andErrorCallBack:(ErrorHandler)errorCallback{
+    NSString *singeTxUrl = [NSString stringWithFormat:BLOCK_INFO_ADDRESS_TX_URL,address,page];
+    //NSLog(@"%@",singeTxUrl);
+    [self getBlockChainTx:singeTxUrl withParams:nil networkType:BlockChain completed:^(MKNetworkOperation *completedOperation) {
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+            DDLogDebug(@"api response:%@", completedOperation.responseString);
+            if (![StringUtil isEmpty:completedOperation.responseString]) {
+                NSDictionary *dict = completedOperation.responseJSON;
+                if (callback) {
+                    callback(dict);
+                }
+            }
+        });
+        
+    } andErrorCallback:^(NSOperation *errorOp, NSError *error) {
+        if (errorCallback) {
+            errorCallback(errorOp, error);
+        }
+        
+    } ssl:NO];
+    
+}
+#pragma mark - getblockHeightApiFromBlockChain
+- (void)getblockHeightApiFromBlockChain:(NSString *)address  callback:(DictResponseBlock)callback andErrorCallBack:(ErrorHandler)errorCallback{
+    //NSLog(@"ever Address :%@",address);
+    NSString *blockHeightUrl = @"latestblock";
+    [self getBlockChainBh:blockHeightUrl withParams:@{@"address": address} networkType:BlockChain completed:^(MKNetworkOperation *completedOperation) {
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+            DDLogDebug(@"api response:%@", completedOperation.responseString);
+            if (![StringUtil isEmpty:completedOperation.responseString]) {
+                NSDictionary *dict = completedOperation.responseJSON;
+                if (callback) {
+                    callback(dict);
+                }
+            }
+        });
+        
+    } andErrorCallback:^(NSOperation *errorOp, NSError *error) {
+        if (errorCallback) {
+            errorCallback(errorOp, error);
+        }
+        
+        
+    } ssl:NO];
+    
+}
+#pragma mark - getTransactionApiFrom bither.net
 - (void)getTransactionApi:(NSString *)address withPage:(int)page callback:(DictResponseBlock)callback andErrorCallBack:(ErrorHandler)errorCallback; {
     DDLogDebug(@"get %@ tx page %d from api", address, page);
     NSString *url = [NSString stringWithFormat:BC_ADDRESS_TX_URL, address, page];

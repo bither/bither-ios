@@ -25,6 +25,7 @@
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 @property(strong, nonatomic) UIViewController *coldController;
 @property(strong, nonatomic) UIWindow *window;
+@property(strong,nonatomic) NSString *importType;
 
 + (StatusBarNotificationWindow *)notificationWindow;
 @end

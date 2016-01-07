@@ -25,18 +25,41 @@
 #import "ImportHDMColdSeedController.h"
 #import "ImportHDAccountSeedController.h"
 #import "PeerUtil.h"
+#import "DialogCentered.h"
+#import "DialogWithActions.h"
+#import "AppDelegate.h"
 
 @interface CheckPasswordDelegate : NSObject <DialogPasswordDelegate>
 @property(nonatomic, strong) UIViewController *controller;
 @property(nonatomic, strong) NSString *privateKeyStr;
+@property (nonatomic,strong) NSString *password;
 @end
 
 @implementation CheckPasswordDelegate
-
+#pragma mark - Get transactions data option phrase
 - (void)onPasswordEntered:(NSString *)password {
-    ImportPrivateKey *improtPrivateKey = [[ImportPrivateKey alloc] initWithController:self.controller content:self.privateKeyStr passwrod:password importPrivateKeyType:PrivateText];
+    self.password = password;
+    NSMutableArray *actions = [NSMutableArray new];
+    [actions addObject:[[Action alloc]initWithName:NSLocalizedString(@"get data from_blockChain.info", nil) target:self andSelector:@selector(tapFromBlockChainToGetTxData)]];
+    [actions addObject:[[Action alloc]initWithName:NSLocalizedString(@"get data from_bither.net", nil) target:self andSelector:@selector(tapFromBitherToGetTxData)]];
+    [[[DialogWithActions alloc]initWithActions:actions]showInWindow:self.controller.view.window];
+    
+}
+#pragma mark - tapFromBitherToGetTxData
+- (void)tapFromBitherToGetTxData{
+    AppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
+    appDelegate.importType = BITHER_NET;
+    ImportPrivateKey *improtPrivateKey = [[ImportPrivateKey alloc] initWithController:self.controller content:self.privateKeyStr passwrod:self.password importPrivateKeyType:PrivateText];
     [improtPrivateKey importPrivateKey];
 }
+#pragma mark - tapFromBlockChainToGetTxData
+- (void)tapFromBlockChainToGetTxData{
+    AppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
+    appDelegate.importType = BLOCK_CHAIN_INFO;
+    ImportPrivateKey *improtPrivateKey = [[ImportPrivateKey alloc] initWithController:self.controller content:self.privateKeyStr passwrod:self.password importPrivateKeyType:PrivateText];
+    [improtPrivateKey importPrivateKey];
+}
+
 @end
 
 
@@ -44,13 +67,13 @@
 @property(nonatomic, readwrite) BOOL isImportHDM;
 @property(nonatomic, readwrite) BOOL isImportHDAccount;
 @property NSArray *buttons;
+@property (nonatomic,strong)NSString *keyStr;
+@property (nonatomic,strong)NSString *password;
 @end
 
 @implementation ImportPrivateKeySetting
 
 static Setting *importPrivateKeySetting;
-
-
 + (Setting *)getImportPrivateKeySetting {
     if (!importPrivateKeySetting) {
         ImportPrivateKeySetting *scanPrivateKeySetting = [[ImportPrivateKeySetting alloc] initWithName:NSLocalizedString(@"Import Private Key", nil) icon:nil];
@@ -204,8 +227,8 @@ static Setting *importPrivateKeySetting;
     }
 
 }
-
-- (void)onPasswordEntered:(NSString *)password {
+#pragma mark - import HDAccount、 HDM、 privateKey Through key Qrcode settings
+- (void)importHDAccountAndHDMAccountAndPrivateKeyThroughQrcode:(NSString *)password{
     DialogProgress *dp = [[DialogProgress alloc] initWithMessage:NSLocalizedString(@"Please wait…", nil)];
     if (self.isImportHDAccount) {
         [dp showInWindow:self.controller.view.window completion:^{
@@ -294,15 +317,37 @@ static Setting *importPrivateKeySetting;
                             [self showMsg:NSLocalizedString(@"Password of the private key to import is different from ours. Import failed.", nil)];
                             [dp dismiss];
                         }
-
+                        
                     });
                 } else {
                     [self importKeyFormQrcode:_result password:password dp:dp];
                 }
             });
         }];
-
+        
     }
+
+}
+#pragma mark - tapFromBlockChainToGetTxDataThroughQrcode
+- (void)tapFromBlockChainToGetTxDataThroughQrcode{
+    AppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
+    appDelegate.importType = BLOCK_CHAIN_INFO;
+    [self importHDAccountAndHDMAccountAndPrivateKeyThroughQrcode:_password];
+}
+#pragma mark - tapFromBitherToGetTxDataThroughQrcode
+- (void)tapFromBitherToGetTxDataThroughQrcode{
+    AppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
+    appDelegate.importType = BITHER_NET;
+    [self importHDAccountAndHDMAccountAndPrivateKeyThroughQrcode:_password];
+}
+#pragma mark - import style chose
+- (void)onPasswordEntered:(NSString *)password {
+    _password = password;
+    NSMutableArray *actions = [NSMutableArray new];
+    [actions addObject:[[Action alloc]initWithName:NSLocalizedString(@"get data from_blockChain.info", nil) target:self andSelector:@selector(tapFromBlockChainToGetTxDataThroughQrcode)]];
+    [actions addObject:[[Action alloc]initWithName:NSLocalizedString(@"get data from_bither.net", nil) target:self andSelector:@selector(tapFromBitherToGetTxDataThroughQrcode)]];
+    [[[DialogWithActions alloc]initWithActions:actions]showInWindow:self.controller.view.window];
+
 }
 
 - (void)importHDMColdSeedFormQRCode:(NSString *)keyStr password:(NSString *)password dp:(DialogProgress *)dp {
@@ -310,13 +355,11 @@ static Setting *importPrivateKeySetting;
     ImportHDMCold *importPrivateKey = [[ImportHDMCold alloc] initWithController:self.controller content:keyStr worldList:nil passwrod:password importHDSeedType:HDMColdSeedQRCode];
     [importPrivateKey importHDSeed];
 }
-
 - (void)importKeyFormQrcode:(NSString *)keyStr password:(NSString *)password dp:(DialogProgress *)dp {
     [dp dismiss];
     ImportPrivateKey *importPrivateKey = [[ImportPrivateKey alloc] initWithController:self.controller content:keyStr passwrod:password importPrivateKeyType:BitherQrcode];
-    [importPrivateKey importPrivateKey];
+        [importPrivateKey importPrivateKey];
 }
-
 - (BOOL)checkPassword:(NSString *)password {
     NSString *checkKeyStr = _result;
     if (self.isImportHDM || self.isImportHDAccount) {
