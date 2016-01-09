@@ -42,8 +42,8 @@ static Setting *reloadTxsSetting;
 #pragma mark - reload data Prompt box
 - (void)onPasswordEntered:(NSString *)password {
     NSMutableArray *actions = [NSMutableArray new];
-    [actions addObject:[[Action alloc]initWithName:NSLocalizedString(@"from_bither.net", nil) target:self andSelector:@selector(tapFrom_bither)]];
-    [actions addObject:[[Action alloc]initWithName:NSLocalizedString(@"from_blockChain.info", nil) target:self andSelector:@selector(tapFrom_blockChain)]];
+    [actions addObject:[[Action alloc]initWithName:NSLocalizedString(@"reset_tx_from_bither", nil) target:self andSelector:@selector(tapFrom_bither)]];
+    [actions addObject:[[Action alloc]initWithName:NSLocalizedString(@"reset_tx_from_blockchain", nil) target:self andSelector:@selector(tapFrom_blockChain)]];
     [[[DialogWithActions alloc]initWithActions:actions]showInWindow:self.controller.view.window];
 }
 #pragma mark - from_bither Respond to events

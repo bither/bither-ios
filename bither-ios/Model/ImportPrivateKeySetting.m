@@ -40,8 +40,8 @@
 - (void)onPasswordEntered:(NSString *)password {
     self.password = password;
     NSMutableArray *actions = [NSMutableArray new];
-    [actions addObject:[[Action alloc]initWithName:NSLocalizedString(@"get data from_blockChain.info", nil) target:self andSelector:@selector(tapFromBlockChainToGetTxData)]];
-    [actions addObject:[[Action alloc]initWithName:NSLocalizedString(@"get data from_bither.net", nil) target:self andSelector:@selector(tapFromBitherToGetTxData)]];
+    [actions addObject:[[Action alloc]initWithName:NSLocalizedString(@"get_data_from_blockchain", nil) target:self andSelector:@selector(tapFromBlockChainToGetTxData)]];
+    [actions addObject:[[Action alloc]initWithName:NSLocalizedString(@"get_data_from_bither", nil) target:self andSelector:@selector(tapFromBitherToGetTxData)]];
     [[[DialogWithActions alloc]initWithActions:actions]showInWindow:self.controller.view.window];
     
 }
@@ -344,8 +344,8 @@ static Setting *importPrivateKeySetting;
 - (void)onPasswordEntered:(NSString *)password {
     _password = password;
     NSMutableArray *actions = [NSMutableArray new];
-    [actions addObject:[[Action alloc]initWithName:NSLocalizedString(@"get data from_blockChain.info", nil) target:self andSelector:@selector(tapFromBlockChainToGetTxDataThroughQrcode)]];
-    [actions addObject:[[Action alloc]initWithName:NSLocalizedString(@"get data from_bither.net", nil) target:self andSelector:@selector(tapFromBitherToGetTxDataThroughQrcode)]];
+    [actions addObject:[[Action alloc]initWithName:NSLocalizedString(@"get_data_from_blockchain", nil) target:self andSelector:@selector(tapFromBlockChainToGetTxDataThroughQrcode)]];
+    [actions addObject:[[Action alloc]initWithName:NSLocalizedString(@"get_data_from_bither", nil) target:self andSelector:@selector(tapFromBitherToGetTxDataThroughQrcode)]];
     [[[DialogWithActions alloc]initWithActions:actions]showInWindow:self.controller.view.window];
 
 }

@@ -71,8 +71,8 @@ static Setting *monitorSetting;
     _senderResult = result;
     [reader.presentingViewController dismissViewControllerAnimated:YES completion:^{
         NSMutableArray *actions = [NSMutableArray new];
-        [actions addObject:[[Action alloc]initWithName:NSLocalizedString(@"get data from_blockChain.info", nil) target:self andSelector:@selector(tapFromBlockChainToGetTxDataForMonitorColdHDAccount)]];
-        [actions addObject:[[Action alloc]initWithName:NSLocalizedString(@"get data from_bither.net", nil) target:self andSelector:@selector(tapFromBitherToGetTxDataForMoitorColdHDAccount)]];
+        [actions addObject:[[Action alloc]initWithName:NSLocalizedString(@"get_data_from_blockchain", nil) target:self andSelector:@selector(tapFromBlockChainToGetTxDataForMonitorColdHDAccount)]];
+        [actions addObject:[[Action alloc]initWithName:NSLocalizedString(@"get_data_from_bither", nil) target:self andSelector:@selector(tapFromBitherToGetTxDataForMoitorColdHDAccount)]];
         [[[DialogWithActions alloc]initWithActions:actions]showInWindow:self.vc.view.window];
     }];
 }
