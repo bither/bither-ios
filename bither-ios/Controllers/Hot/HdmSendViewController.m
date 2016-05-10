@@ -43,6 +43,7 @@
 #import "BTHDMBid+Api.h"
 #import "DialogAlert.h"
 #import "HDMResetServerPasswordUtil.h"
+#import "PushTxThirdParty.h"
 
 #define kBalanceFontSize (15)
 #define kSendButtonQrIconSize (20)
@@ -239,6 +240,7 @@
     }
     [dp changeToMessage:NSLocalizedString(@"Please wait…", nil)];
     [dp showInWindow:self.view.window completion:^{
+        [[PushTxThirdParty instance] pushTx:self.tx];
         [[BTPeerManager instance] publishTransaction:tx completion:^(NSError *error) {
             if (!error) {
                 dispatch_async(dispatch_get_main_queue(), ^{

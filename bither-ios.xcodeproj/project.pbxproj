@@ -48,6 +48,7 @@
 		0A93B6011A4A66080081D74D /* DialogSignMessageOutput.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A93B6001A4A66080081D74D /* DialogSignMessageOutput.m */; };
 		0A93B6061A4AA0520081D74D /* VerifyMessageSignatureViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A93B6051A4AA0520081D74D /* VerifyMessageSignatureViewController.m */; };
 		0A948DCA1AA080E600359F64 /* MarketInterfaceController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A948DC91AA080E600359F64 /* MarketInterfaceController.m */; };
+		0AA7F1191CE18BD600C46157 /* PushTxThirdPartyTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AA7F1181CE18BD600C46157 /* PushTxThirdPartyTest.m */; };
 		0AAAEE331AFC83EE00F6E3BB /* WatchPageConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AAAEE321AFC83EE00F6E3BB /* WatchPageConfiguration.m */; };
 		0AB63CB81ABD15C80018A546 /* RawPrivateKeyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AB63CB71ABD15C80018A546 /* RawPrivateKeyViewController.m */; };
 		0AB63CBD1ABD1C700018A546 /* RawPrivateKeyDiceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AB63CBC1ABD1C700018A546 /* RawPrivateKeyDiceViewController.m */; };
@@ -67,6 +68,7 @@
 		0AE142631B0094140070C580 /* QRCodeThemeUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = ACEE7D1C19D3F9F500932B39 /* QRCodeThemeUtil.m */; };
 		0AE142641B00941B0070C580 /* UIColor+Util.m in Sources */ = {isa = PBXBuildFile; fileRef = ACDDDC3519483A840008A79D /* UIColor+Util.m */; };
 		0AE142651B0094220070C580 /* UIImage+ImageWithColor.m in Sources */ = {isa = PBXBuildFile; fileRef = AC33089419556F7A00D8F621 /* UIImage+ImageWithColor.m */; };
+		0AF4B7BC1CE1794400F7F7D9 /* PushTxThirdParty.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AF4B7BB1CE1794400F7F7D9 /* PushTxThirdParty.m */; };
 		0AFBA9321AA01EF60059CB4B /* TotalBalance.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AFBA9311AA01EF60059CB4B /* TotalBalance.m */; };
 		0AFBA9351AA0275F0059CB4B /* WatchMarket.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AFBA9341AA0275F0059CB4B /* WatchMarket.m */; };
 		0AFBA9361AA028850059CB4B /* NSDictionary+Fromat.m in Sources */ = {isa = PBXBuildFile; fileRef = 4254086A1946CD17007AF99C /* NSDictionary+Fromat.m */; };
@@ -99,6 +101,7 @@
 		1BC27F74516BB973EA28A144 /* ImportHDAccountSeedController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BC27E40C2AFE8213E54D92E /* ImportHDAccountSeedController.m */; };
 		1BC27FE46C243D52B180F1C2 /* DialogAddressAlias.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BC27F75690D4B3C844742B2 /* DialogAddressAlias.m */; };
 		1BC27FE47C62F779EDE01FA5 /* HDAccountSendViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BC27B56B8528116430BB2D8 /* HDAccountSendViewController.m */; };
+		33D2A0F0C717C92D6E6334E1 /* libPods-bither-ios.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EF18CEBE7464423744DB1B96 /* libPods-bither-ios.a */; };
 		4217A3731951235D00063746 /* Depth.m in Sources */ = {isa = PBXBuildFile; fileRef = 4217A3721951235D00063746 /* Depth.m */; };
 		4217A39019512DC000063746 /* TransactionsUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 4217A38F19512DC000063746 /* TransactionsUtil.m */; };
 		421B037C19495315003A45F1 /* TabButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 421B037B19495315003A45F1 /* TabButton.m */; };
@@ -152,20 +155,12 @@
 		42E8161C19529B14005F16F7 /* KeyUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 42E8161B19529B14005F16F7 /* KeyUtil.m */; };
 		42E816251952DF43005F16F7 /* StringUtilTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 42E816241952DF43005F16F7 /* StringUtilTest.m */; };
 		42EFB54C1949C50900376888 /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 42EFB54E1949C50900376888 /* MainStoryboard.storyboard */; };
+		52749A354A9FC9C58FFAC0E3 /* libPods-bither-ios WatchKit App.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BFD6A0CB5CEE2F3F66448ABA /* libPods-bither-ios WatchKit App.a */; };
 		AC0135D0194ED8B800E3BB95 /* HotAddressAddViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AC0135CF194ED8B800E3BB95 /* HotAddressAddViewController.m */; };
 		AC0135D6194FDCCD00E3BB95 /* HotAddressAddWatchOnlyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AC0135D5194FDCCD00E3BB95 /* HotAddressAddWatchOnlyViewController.m */; };
 		AC0135D9194FDCDF00E3BB95 /* HotAddressAddPrivateKeyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AC0135D8194FDCDF00E3BB95 /* HotAddressAddPrivateKeyViewController.m */; };
 		AC0135DC19501D9400E3BB95 /* DialogPassword.m in Sources */ = {isa = PBXBuildFile; fileRef = AC0135DB19501D9400E3BB95 /* DialogPassword.m */; };
 		AC0135E0195056BE00E3BB95 /* KeyboardController.m in Sources */ = {isa = PBXBuildFile; fileRef = AC0135DF195056BE00E3BB95 /* KeyboardController.m */; };
-		AC026C8A19EE5FF500BC0152 /* libPods-Bitheri.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AC026C8019EE5FF500BC0152 /* libPods-Bitheri.a */; };
-		AC026C8B19EE5FF500BC0152 /* libPods-CocoaLumberjack.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AC026C8119EE5FF500BC0152 /* libPods-CocoaLumberjack.a */; };
-		AC026C8C19EE5FF500BC0152 /* libPods-FMDB.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AC026C8219EE5FF500BC0152 /* libPods-FMDB.a */; };
-		AC026C8D19EE5FF500BC0152 /* libPods-KSCrash.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AC026C8319EE5FF500BC0152 /* libPods-KSCrash.a */; };
-		AC026C8E19EE5FF500BC0152 /* libPods-MKNetworkKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AC026C8419EE5FF500BC0152 /* libPods-MKNetworkKit.a */; };
-		AC026C8F19EE5FF500BC0152 /* libPods-OpenSSL.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AC026C8519EE5FF500BC0152 /* libPods-OpenSSL.a */; };
-		AC026C9019EE5FF500BC0152 /* libPods-Reachability.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AC026C8619EE5FF500BC0152 /* libPods-Reachability.a */; };
-		AC026C9119EE5FF500BC0152 /* libPods-RegexKitLite.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AC026C8719EE5FF500BC0152 /* libPods-RegexKitLite.a */; };
-		AC026C9319EE5FF500BC0152 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AC026C8919EE5FF500BC0152 /* libPods.a */; };
 		AC1454A51A80D04D00E851B4 /* DialogOperationWorld.m in Sources */ = {isa = PBXBuildFile; fileRef = AC1454A41A80D04D00E851B4 /* DialogOperationWorld.m */; };
 		AC1454A81A80D30E00E851B4 /* DialogReplaceWorld.m in Sources */ = {isa = PBXBuildFile; fileRef = AC1454A71A80D30E00E851B4 /* DialogReplaceWorld.m */; };
 		AC1715871969213800337AB5 /* DialogAddressOptions.m in Sources */ = {isa = PBXBuildFile; fileRef = AC1715861969213800337AB5 /* DialogAddressOptions.m */; };
@@ -296,6 +291,9 @@
 		ACEEB8E419B46ED200F2789C /* BlockViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ACEEB8E319B46ED200F2789C /* BlockViewController.m */; };
 		ACF02FEB19D90899001AB701 /* DialogSwitchQRCode.m in Sources */ = {isa = PBXBuildFile; fileRef = ACF02FEA19D90899001AB701 /* DialogSwitchQRCode.m */; };
 		ACF4B17419668D5700CE24FD /* MarketListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = ACF4B17319668D5700CE24FD /* MarketListCell.m */; };
+		B5D39D82CA529FADFA3C6C02 /* libPods-bither-iosTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ADB6326C7376F8AC9D49EA25 /* libPods-bither-iosTests.a */; };
+		C0C7E0E8AFB572496B0FD34A /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FED7A4051DB45218112FAC0 /* libPods.a */; };
+		C62A658C4C39A4D1707A7448 /* libPods-bither-ios WatchKit Extension.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AAC0604FAFB5FF233B955772 /* libPods-bither-ios WatchKit Extension.a */; };
 		D607EF24F3CE4EBC82950BB4 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FED7A4051DB45218112FAC0 /* libPods.a */; };
 		D61D047B6D9BE30D5BED20E1 /* hdm.bither.net.cer in Resources */ = {isa = PBXBuildFile; fileRef = D61D0299B4CDCCFC6D0BA161 /* hdm.bither.net.cer */; };
 		D61D098FD091EB8752EF00A2 /* BTHDMBid+Api.m in Sources */ = {isa = PBXBuildFile; fileRef = D61D0F5AB509120289D32CE8 /* BTHDMBid+Api.m */; };
@@ -357,6 +355,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		04BF487E0DBB05CCFD28C183 /* Pods-bither-iosTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-bither-iosTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-bither-iosTests/Pods-bither-iosTests.debug.xcconfig"; sourceTree = "<group>"; };
 		0A0961361B5CBAD300D554A6 /* DialogShowAddressOnNet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DialogShowAddressOnNet.h; sourceTree = "<group>"; };
 		0A0961371B5CBAD300D554A6 /* DialogShowAddressOnNet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DialogShowAddressOnNet.m; sourceTree = "<group>"; };
 		0A0BA9B01B575D2400885812 /* ColdAddressListHDCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ColdAddressListHDCell.h; path = Cells/ColdAddressListHDCell.h; sourceTree = "<group>"; };
@@ -429,6 +428,7 @@
 		0A93B6051A4AA0520081D74D /* VerifyMessageSignatureViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VerifyMessageSignatureViewController.m; sourceTree = "<group>"; };
 		0A948DC81AA080E600359F64 /* MarketInterfaceController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MarketInterfaceController.h; sourceTree = "<group>"; };
 		0A948DC91AA080E600359F64 /* MarketInterfaceController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MarketInterfaceController.m; sourceTree = "<group>"; };
+		0AA7F1181CE18BD600C46157 /* PushTxThirdPartyTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PushTxThirdPartyTest.m; sourceTree = "<group>"; };
 		0AAAEE311AFC83EE00F6E3BB /* WatchPageConfiguration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WatchPageConfiguration.h; sourceTree = "<group>"; };
 		0AAAEE321AFC83EE00F6E3BB /* WatchPageConfiguration.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WatchPageConfiguration.m; sourceTree = "<group>"; };
 		0AB63CB61ABD15C80018A546 /* RawPrivateKeyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RawPrivateKeyViewController.h; sourceTree = "<group>"; };
@@ -460,6 +460,8 @@
 		0AD6749E1A7B9108007967DB /* DialogHDMSeedWordList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DialogHDMSeedWordList.m; sourceTree = "<group>"; };
 		0AE142601B00924C0070C580 /* PaymentInterfaceController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PaymentInterfaceController.h; sourceTree = "<group>"; };
 		0AE142611B00924C0070C580 /* PaymentInterfaceController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PaymentInterfaceController.m; sourceTree = "<group>"; };
+		0AF4B7BA1CE1794400F7F7D9 /* PushTxThirdParty.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PushTxThirdParty.h; sourceTree = "<group>"; };
+		0AF4B7BB1CE1794400F7F7D9 /* PushTxThirdParty.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PushTxThirdParty.m; sourceTree = "<group>"; };
 		0AFA757D1B58D9A400F58712 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/MainStoryboard.strings; sourceTree = "<group>"; };
 		0AFBA9301AA01EF60059CB4B /* TotalBalance.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TotalBalance.h; sourceTree = "<group>"; };
 		0AFBA9311AA01EF60059CB4B /* TotalBalance.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TotalBalance.m; sourceTree = "<group>"; };
@@ -472,6 +474,7 @@
 		0AFBA9431AA02C1E0059CB4B /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		0AFBA9441AA02C1F0059CB4B /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		0FED7A4051DB45218112FAC0 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		13EA42DC5725F20AA876797C /* Pods-bither-iosTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-bither-iosTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-bither-iosTests/Pods-bither-iosTests.release.xcconfig"; sourceTree = "<group>"; };
 		1BC27043CB19B6031727B679 /* DialogHDMSingularColdSeed.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DialogHDMSingularColdSeed.h; sourceTree = "<group>"; };
 		1BC270628E82FFBA24125AEB /* HDMResetServerPasswordUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HDMResetServerPasswordUtil.h; sourceTree = "<group>"; };
 		1BC272B77D3B4123842B7220 /* PasswordStrengthUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PasswordStrengthUtil.h; sourceTree = "<group>"; };
@@ -528,6 +531,8 @@
 		1BC27F75690D4B3C844742B2 /* DialogAddressAlias.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DialogAddressAlias.m; sourceTree = "<group>"; };
 		1BC27F93AA0BE5EBA695564A /* DialogHDMSingularColdSeedChildQrViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DialogHDMSingularColdSeedChildQrViewController.m; sourceTree = "<group>"; };
 		1BC27FD66F3376A2C68612DD /* AddHDMAddressViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddHDMAddressViewController.m; sourceTree = "<group>"; };
+		2BA3A718F90CE46B77E3C89C /* Pods-bither-ios WatchKit Extension.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-bither-ios WatchKit Extension.release.xcconfig"; path = "Pods/Target Support Files/Pods-bither-ios WatchKit Extension/Pods-bither-ios WatchKit Extension.release.xcconfig"; sourceTree = "<group>"; };
+		36D70D839B5065D88544E5B0 /* Pods-bither-ios WatchKit App.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-bither-ios WatchKit App.debug.xcconfig"; path = "Pods/Target Support Files/Pods-bither-ios WatchKit App/Pods-bither-ios WatchKit App.debug.xcconfig"; sourceTree = "<group>"; };
 		4217A3711951235D00063746 /* Depth.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Depth.h; sourceTree = "<group>"; };
 		4217A3721951235D00063746 /* Depth.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Depth.m; sourceTree = "<group>"; };
 		4217A38E19512DC000063746 /* TransactionsUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TransactionsUtil.h; sourceTree = "<group>"; };
@@ -628,6 +633,7 @@
 		42EFB54B1949978700376888 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		42EFB5511949C52100376888 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainStoryboard.storyboard; sourceTree = "<group>"; };
 		6A924775F78B472633EFD7CF /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		AAC0604FAFB5FF233B955772 /* libPods-bither-ios WatchKit Extension.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-bither-ios WatchKit Extension.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		AC0135CE194ED8B800E3BB95 /* HotAddressAddViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HotAddressAddViewController.h; sourceTree = "<group>"; };
 		AC0135CF194ED8B800E3BB95 /* HotAddressAddViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HotAddressAddViewController.m; sourceTree = "<group>"; };
 		AC0135D4194FDCCD00E3BB95 /* HotAddressAddWatchOnlyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HotAddressAddWatchOnlyViewController.h; sourceTree = "<group>"; };
@@ -902,6 +908,10 @@
 		ACF02FEA19D90899001AB701 /* DialogSwitchQRCode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DialogSwitchQRCode.m; sourceTree = "<group>"; };
 		ACF4B17219668D5700CE24FD /* MarketListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MarketListCell.h; path = Cells/MarketListCell.h; sourceTree = "<group>"; };
 		ACF4B17319668D5700CE24FD /* MarketListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MarketListCell.m; path = Cells/MarketListCell.m; sourceTree = "<group>"; };
+		ADB6326C7376F8AC9D49EA25 /* libPods-bither-iosTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-bither-iosTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		BFD6A0CB5CEE2F3F66448ABA /* libPods-bither-ios WatchKit App.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-bither-ios WatchKit App.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		CAC71EA10DA5D29AF94839F9 /* Pods-bither-ios.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-bither-ios.release.xcconfig"; path = "Pods/Target Support Files/Pods-bither-ios/Pods-bither-ios.release.xcconfig"; sourceTree = "<group>"; };
+		CFCD075FD8DDEA8F4BCB43C5 /* Pods-bither-ios WatchKit App.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-bither-ios WatchKit App.release.xcconfig"; path = "Pods/Target Support Files/Pods-bither-ios WatchKit App/Pods-bither-ios WatchKit App.release.xcconfig"; sourceTree = "<group>"; };
 		D61D00DE53941DC6062E1938 /* HDMApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HDMApi.h; sourceTree = "<group>"; };
 		D61D0299B4CDCCFC6D0BA161 /* hdm.bither.net.cer */ = {isa = PBXFileReference; lastKnownFileType = file.der; path = hdm.bither.net.cer; sourceTree = "<group>"; };
 		D61D07CCE58EB1B7FCA04677 /* PasswordGetter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PasswordGetter.h; sourceTree = "<group>"; };
@@ -919,6 +929,7 @@
 		DA641E87196E7BC20095DF42 /* GCCrashReportFilterTrim.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GCCrashReportFilterTrim.m; path = CrashLog/GCCrashReportFilterTrim.m; sourceTree = "<group>"; };
 		DA641E88196E7BC20095DF42 /* GCCrashReportSink.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GCCrashReportSink.h; path = CrashLog/GCCrashReportSink.h; sourceTree = "<group>"; };
 		DA641E89196E7BC20095DF42 /* GCCrashReportSink.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GCCrashReportSink.m; path = CrashLog/GCCrashReportSink.m; sourceTree = "<group>"; };
+		DA7E8C67A12F06D50CA0BF08 /* Pods-bither-ios.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-bither-ios.debug.xcconfig"; path = "Pods/Target Support Files/Pods-bither-ios/Pods-bither-ios.debug.xcconfig"; sourceTree = "<group>"; };
 		DAAF4EB01A7F7F6700933296 /* NSError+HDMHttpErrorMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSError+HDMHttpErrorMessage.m"; sourceTree = "<group>"; };
 		DAAF4EB11A7F7F6700933296 /* NSError+HDMHttpErrorMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSError+HDMHttpErrorMessage.h"; sourceTree = "<group>"; };
 		DAB2C8711A2038930011EE2F /* KeychainSetting.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeychainSetting.h; sourceTree = "<group>"; };
@@ -926,6 +937,7 @@
 		DAB2C8741A206F080011EE2F /* KeychainBackupUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeychainBackupUtil.h; sourceTree = "<group>"; };
 		DAB2C8751A206F080011EE2F /* KeychainBackupUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KeychainBackupUtil.m; sourceTree = "<group>"; };
 		DAD0FFF41A81D08D008AEAA2 /* HDMApiTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HDMApiTest.m; sourceTree = "<group>"; };
+		DB54A451688B8B104951D6A9 /* Pods-bither-ios WatchKit Extension.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-bither-ios WatchKit Extension.debug.xcconfig"; path = "Pods/Target Support Files/Pods-bither-ios WatchKit Extension/Pods-bither-ios WatchKit Extension.debug.xcconfig"; sourceTree = "<group>"; };
 		DC01B0277E3ECFEB18F87712 /* HDMRecoverSetting.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HDMRecoverSetting.h; sourceTree = "<group>"; };
 		DC03155DE24560F766E286C4 /* HDMKeychainRecoverUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HDMKeychainRecoverUtil.h; sourceTree = "<group>"; };
 		DC0769FAB5B4727E089E23CC /* HDMRecoverSetting.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HDMRecoverSetting.m; sourceTree = "<group>"; };
@@ -937,6 +949,7 @@
 		DC0D6773769B40A704B784B4 /* ImportHDMCold.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImportHDMCold.h; sourceTree = "<group>"; };
 		DC0E3B0A73BF05166C9733A1 /* ImportHDMColdSeedController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImportHDMColdSeedController.h; sourceTree = "<group>"; };
 		E7552F109D77434AC1A15A24 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		EF18CEBE7464423744DB1B96 /* libPods-bither-ios.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-bither-ios.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -945,6 +958,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0A637B171AA0419C00696260 /* libPods.a in Frameworks */,
+				C62A658C4C39A4D1707A7448 /* libPods-bither-ios WatchKit Extension.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -959,6 +973,7 @@
 				42D9B769193D6B5B00C85B89 /* UIKit.framework in Frameworks */,
 				42D9B765193D6B5B00C85B89 /* Foundation.framework in Frameworks */,
 				D607EF24F3CE4EBC82950BB4 /* libPods.a in Frameworks */,
+				33D2A0F0C717C92D6E6334E1 /* libPods-bither-ios.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -966,18 +981,19 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AC026C8A19EE5FF500BC0152 /* libPods-Bitheri.a in Frameworks */,
-				AC026C8B19EE5FF500BC0152 /* libPods-CocoaLumberjack.a in Frameworks */,
-				AC026C8C19EE5FF500BC0152 /* libPods-FMDB.a in Frameworks */,
-				AC026C8D19EE5FF500BC0152 /* libPods-KSCrash.a in Frameworks */,
-				AC026C8E19EE5FF500BC0152 /* libPods-MKNetworkKit.a in Frameworks */,
-				AC026C8F19EE5FF500BC0152 /* libPods-OpenSSL.a in Frameworks */,
-				AC026C9019EE5FF500BC0152 /* libPods-Reachability.a in Frameworks */,
-				AC026C9119EE5FF500BC0152 /* libPods-RegexKitLite.a in Frameworks */,
-				AC026C9319EE5FF500BC0152 /* libPods.a in Frameworks */,
 				42D9B77E193D6B5B00C85B89 /* XCTest.framework in Frameworks */,
 				42D9B780193D6B5B00C85B89 /* UIKit.framework in Frameworks */,
 				42D9B77F193D6B5B00C85B89 /* Foundation.framework in Frameworks */,
+				B5D39D82CA529FADFA3C6C02 /* libPods-bither-iosTests.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B8C9A7FD49BC255FF64BD729 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				52749A354A9FC9C58FFAC0E3 /* libPods-bither-ios WatchKit App.a in Frameworks */,
+				C0C7E0E8AFB572496B0FD34A /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1173,6 +1189,8 @@
 				D61D0E2B59DCC58D05F2CCE6 /* BTHDMBid+Api.h */,
 				D61D089EE8093848A924819C /* HDMApi.m */,
 				D61D00DE53941DC6062E1938 /* HDMApi.h */,
+				0AF4B7BA1CE1794400F7F7D9 /* PushTxThirdParty.h */,
+				0AF4B7BB1CE1794400F7F7D9 /* PushTxThirdParty.m */,
 			);
 			path = Api;
 			sourceTree = "<group>";
@@ -1334,6 +1352,10 @@
 				42D9B768193D6B5B00C85B89 /* UIKit.framework */,
 				42D9B77D193D6B5B00C85B89 /* XCTest.framework */,
 				0FED7A4051DB45218112FAC0 /* libPods.a */,
+				EF18CEBE7464423744DB1B96 /* libPods-bither-ios.a */,
+				ADB6326C7376F8AC9D49EA25 /* libPods-bither-iosTests.a */,
+				BFD6A0CB5CEE2F3F66448ABA /* libPods-bither-ios WatchKit App.a */,
+				AAC0604FAFB5FF233B955772 /* libPods-bither-ios WatchKit Extension.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -1390,6 +1412,7 @@
 				421D8A0219592BF20062FDAF /* WalletUtilTest.m */,
 				0AB8BCB01A7F8656003C07D8 /* NSConditionTest.m */,
 				DAD0FFF41A81D08D008AEAA2 /* HDMApiTest.m */,
+				0AA7F1181CE18BD600C46157 /* PushTxThirdPartyTest.m */,
 			);
 			path = "bither-iosTests";
 			sourceTree = "<group>";
@@ -1408,6 +1431,14 @@
 			children = (
 				E7552F109D77434AC1A15A24 /* Pods.debug.xcconfig */,
 				6A924775F78B472633EFD7CF /* Pods.release.xcconfig */,
+				04BF487E0DBB05CCFD28C183 /* Pods-bither-iosTests.debug.xcconfig */,
+				13EA42DC5725F20AA876797C /* Pods-bither-iosTests.release.xcconfig */,
+				DA7E8C67A12F06D50CA0BF08 /* Pods-bither-ios.debug.xcconfig */,
+				CAC71EA10DA5D29AF94839F9 /* Pods-bither-ios.release.xcconfig */,
+				36D70D839B5065D88544E5B0 /* Pods-bither-ios WatchKit App.debug.xcconfig */,
+				CFCD075FD8DDEA8F4BCB43C5 /* Pods-bither-ios WatchKit App.release.xcconfig */,
+				DB54A451688B8B104951D6A9 /* Pods-bither-ios WatchKit Extension.debug.xcconfig */,
+				2BA3A718F90CE46B77E3C89C /* Pods-bither-ios WatchKit Extension.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -1824,9 +1855,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 0A4749951A9D7F0B003684E2 /* Build configuration list for PBXNativeTarget "bither-ios WatchKit Extension" */;
 			buildPhases = (
+				F7F54085730FE63AD89CD0F7 /* Check Pods Manifest.lock */,
 				0A47496B1A9D7F0B003684E2 /* Sources */,
 				0A47496C1A9D7F0B003684E2 /* Frameworks */,
 				0A47496D1A9D7F0B003684E2 /* Resources */,
+				95E5084E790806830E3B4A80 /* Embed Pods Frameworks */,
+				DAB211067A7659123D301A5C /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -1842,7 +1876,10 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 0A4749941A9D7F0B003684E2 /* Build configuration list for PBXNativeTarget "bither-ios WatchKit App" */;
 			buildPhases = (
+				625F1B6A647A1233D8568D40 /* Check Pods Manifest.lock */,
 				0A47497F1A9D7F0B003684E2 /* Resources */,
+				B8C9A7FD49BC255FF64BD729 /* Frameworks */,
+				5DB80165293AB2CB52E33FC7 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -1864,6 +1901,7 @@
 				99CE7DFEA5194B3EB4289DD5 /* Copy Pods Resources */,
 				4268FE14194AA3FD007A4C30 /* ShellScript */,
 				0A4749961A9D7F0B003684E2 /* Embed App Extensions */,
+				1FE1ECF9E649A917E08711B7 /* Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -1879,9 +1917,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 42D9B790193D6B5B00C85B89 /* Build configuration list for PBXNativeTarget "bither-iosTests" */;
 			buildPhases = (
+				F70CE8264A735D903F105EB9 /* Check Pods Manifest.lock */,
 				42D9B778193D6B5B00C85B89 /* Sources */,
 				42D9B779193D6B5B00C85B89 /* Frameworks */,
 				42D9B77A193D6B5B00C85B89 /* Resources */,
+				DA07598F1BFFF8D5421D50D1 /* Embed Pods Frameworks */,
+				E664DEEF51ACE74E535DE497 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -2002,6 +2043,21 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		1FE1ECF9E649A917E08711B7 /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-bither-ios/Pods-bither-ios-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		4268FE14194AA3FD007A4C30 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -2015,6 +2071,51 @@
 			shellPath = /bin/sh;
 			shellScript = "";
 		};
+		5DB80165293AB2CB52E33FC7 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-bither-ios WatchKit App/Pods-bither-ios WatchKit App-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		625F1B6A647A1233D8568D40 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		95E5084E790806830E3B4A80 /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-bither-ios WatchKit Extension/Pods-bither-ios WatchKit Extension-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		99CE7DFEA5194B3EB4289DD5 /* Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -2027,10 +2128,85 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-bither-ios/Pods-bither-ios-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		DA07598F1BFFF8D5421D50D1 /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-bither-iosTests/Pods-bither-iosTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		DAB211067A7659123D301A5C /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-bither-ios WatchKit Extension/Pods-bither-ios WatchKit Extension-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		E664DEEF51ACE74E535DE497 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-bither-iosTests/Pods-bither-iosTests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		EB4305AED63F435A9851295D /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		F70CE8264A735D903F105EB9 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		F7F54085730FE63AD89CD0F7 /* Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -2150,6 +2326,7 @@
 				0A8853AD1AA8466E00760014 /* GroupUserDefaultUtil.m in Sources */,
 				0AB8BC9A1A7F3194003C07D8 /* HotAddressAddHDMViewController.m in Sources */,
 				0A515F7B1A36CAE3008292AF /* RawPrivateKeyBinaryViewController.m in Sources */,
+				0AF4B7BC1CE1794400F7F7D9 /* PushTxThirdParty.m in Sources */,
 				ACD6DFC9196B9367009D8031 /* ColdAddressListCell.m in Sources */,
 				AC0135E0195056BE00E3BB95 /* KeyboardController.m in Sources */,
 				4269FF84195AD81C001213B9 /* BitherTime.m in Sources */,
@@ -2328,6 +2505,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0AA7F1191CE18BD600C46157 /* PushTxThirdPartyTest.m in Sources */,
 				42D9B78A193D6B5B00C85B89 /* bither_iosTests.m in Sources */,
 				427CF4CA19540ED50081869C /* QRCodeTest.m in Sources */,
 				0AB8BCB11A7F8656003C07D8 /* NSConditionTest.m in Sources */,
@@ -2446,7 +2624,7 @@
 /* Begin XCBuildConfiguration section */
 		0A4749901A9D7F0B003684E2 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = E7552F109D77434AC1A15A24 /* Pods.debug.xcconfig */;
+			baseConfigurationReference = DB54A451688B8B104951D6A9 /* Pods-bither-ios WatchKit Extension.debug.xcconfig */;
 			buildSettings = {
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CODE_SIGN_ENTITLEMENTS = "bither-ios WatchKit Extension/bither-ios WatchKit Extension.entitlements";
@@ -2476,7 +2654,7 @@
 		};
 		0A4749911A9D7F0B003684E2 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 6A924775F78B472633EFD7CF /* Pods.release.xcconfig */;
+			baseConfigurationReference = 2BA3A718F90CE46B77E3C89C /* Pods-bither-ios WatchKit Extension.release.xcconfig */;
 			buildSettings = {
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CODE_SIGN_ENTITLEMENTS = "bither-ios WatchKit Extension/bither-ios WatchKit Extension.entitlements";
@@ -2503,6 +2681,7 @@
 		};
 		0A4749921A9D7F0B003684E2 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 36D70D839B5065D88544E5B0 /* Pods-bither-ios WatchKit App.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
@@ -2530,6 +2709,7 @@
 		};
 		0A4749931A9D7F0B003684E2 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = CFCD075FD8DDEA8F4BCB43C5 /* Pods-bither-ios WatchKit App.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
@@ -2627,7 +2807,7 @@
 		};
 		42D9B78E193D6B5B00C85B89 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = E7552F109D77434AC1A15A24 /* Pods.debug.xcconfig */;
+			baseConfigurationReference = DA7E8C67A12F06D50CA0BF08 /* Pods-bither-ios.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -2653,7 +2833,7 @@
 		};
 		42D9B78F193D6B5B00C85B89 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 6A924775F78B472633EFD7CF /* Pods.release.xcconfig */;
+			baseConfigurationReference = CAC71EA10DA5D29AF94839F9 /* Pods-bither-ios.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -2679,6 +2859,7 @@
 		};
 		42D9B791193D6B5B00C85B89 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 04BF487E0DBB05CCFD28C183 /* Pods-bither-iosTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/bither-ios.app/bither-ios";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -2707,6 +2888,7 @@
 		};
 		42D9B792193D6B5B00C85B89 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 13EA42DC5725F20AA876797C /* Pods-bither-iosTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/bither-ios.app/bither-ios";
 				FRAMEWORK_SEARCH_PATHS = (
