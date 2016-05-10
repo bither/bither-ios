@@ -240,7 +240,7 @@
     }
     [dp changeToMessage:NSLocalizedString(@"Please wait…", nil)];
     [dp showInWindow:self.view.window completion:^{
-        [[PushTxThirdParty instance] pushTx:self.tx];
+        [[PushTxThirdParty instance] pushTx:tx];
         [[BTPeerManager instance] publishTransaction:tx completion:^(NSError *error) {
             if (!error) {
                 dispatch_async(dispatch_get_main_queue(), ^{
