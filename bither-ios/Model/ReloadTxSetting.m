@@ -49,6 +49,7 @@ static Setting *reloadTxsSetting;
 #pragma mark - from_bither Respond to events
 - (void)tapFrom_bither{
     DialogProgress *dialogProgrees = [[DialogProgress alloc] initWithMessage:NSLocalizedString(@"Please wait…", nil)];
+    dialogProgrees.touchOutSideToDismiss = NO;
     [dialogProgrees showInWindow:self.controller.view.window completion:^{
         [self reloadTx:dialogProgrees];
         
@@ -58,6 +59,7 @@ static Setting *reloadTxsSetting;
 
 - (void)tapFrom_blockChain{
     DialogProgress *dialogProgrees = [[DialogProgress alloc] initWithMessage:NSLocalizedString(@"Please wait…", nil)];
+    dialogProgrees.touchOutSideToDismiss = NO;
     [dialogProgrees showInWindow:self.controller.view.window completion:^{
         [self reloadTxFrom_blockChain:dialogProgrees];
     }];
