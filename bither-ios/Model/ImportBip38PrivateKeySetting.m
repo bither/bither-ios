@@ -28,30 +28,12 @@
 @interface CheckPasswordBip38Delegate : NSObject <DialogPasswordDelegate>
 @property(nonatomic, strong) UIViewController *controller;
 @property(nonatomic, strong) NSString *privateKeyStr;
-@property(nonatomic, strong) NSString *password;
 @end
 
 @implementation CheckPasswordBip38Delegate
 
 - (void)onPasswordEntered:(NSString *)password {
-    self.password = password;
-    NSMutableArray *actions = [NSMutableArray new];
-    [actions addObject:[[Action alloc]initWithName:NSLocalizedString(@"get_data_from_blockchain", nil) target:self andSelector:@selector(tapFromBlockChainToGetTxData)]];
-    [actions addObject:[[Action alloc]initWithName:NSLocalizedString(@"get_data_from_bither", nil) target:self andSelector:@selector(tapFromBitherToGetTxData)]];
-    [[[DialogWithActions alloc]initWithActions:actions]showInWindow:self.controller.view.window];
-}
-#pragma mark - tapFromBitherToGetTxData
-- (void)tapFromBitherToGetTxData{
-    AppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
-    appDelegate.importType = BITHER_NET;
-    ImportPrivateKey *improtPrivateKey = [[ImportPrivateKey alloc] initWithController:self.controller content:self.privateKeyStr passwrod:self.password importPrivateKeyType:PrivateText];
-    [improtPrivateKey importPrivateKey];
-}
-#pragma mark - tapFromBlockChainToGetTxData
-- (void)tapFromBlockChainToGetTxData{
-    AppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
-    appDelegate.importType = BLOCK_CHAIN_INFO;
-    ImportPrivateKey *improtPrivateKey = [[ImportPrivateKey alloc] initWithController:self.controller content:self.privateKeyStr passwrod:self.password importPrivateKeyType:PrivateText];
+    ImportPrivateKey *improtPrivateKey = [[ImportPrivateKey alloc] initWithController:self.controller content:self.privateKeyStr passwrod:password importPrivateKeyType:PrivateText];
     [improtPrivateKey importPrivateKey];
 }
 

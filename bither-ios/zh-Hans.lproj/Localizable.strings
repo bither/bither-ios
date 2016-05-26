@@ -726,4 +726,9 @@
 "get_data_from_blockchain" = "从Blockchain.info获取信息";
 "get_data_from_bither" = "从比太获取信息";
 
+// API Config
+"setting_api_config" = "API 设置";
+"setting_name_api_config_bither" = "Bither";
+"setting_name_api_config_blockchain" = "Blockchain.info";
+
 

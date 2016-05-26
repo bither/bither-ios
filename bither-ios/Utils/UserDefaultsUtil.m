@@ -50,6 +50,8 @@
 
 #define TOTAL_BALANCE_HIDE @"total_balance_hide"
 
+#define API_CONFIG @"api_config"
+
 static UserDefaultsUtil *userDefaultsUtil;
 
 NSUserDefaults *userDefaults;
@@ -388,6 +390,18 @@ NSUserDefaults *userDefaults;
 - (void)setTotalBalanceHide:(TotalBalanceHide)h {
     [userDefaults setInteger:h forKey:TOTAL_BALANCE_HIDE];
     [userDefaults synchronize];
+}
+
+- (void)setApiConfig:(ApiConfig) config {
+    [userDefaults setInteger:config forKey:API_CONFIG];
+    [userDefaults synchronize];
+}
+
+- (ApiConfig)getApiConfig {
+    if ([userDefaults objectForKey:API_CONFIG]){
+        return [userDefaults integerForKey:API_CONFIG];
+    }
+    return ApiConfigBither;
 }
 
 @end

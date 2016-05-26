@@ -8,7 +8,7 @@ def shared_pods
     pod 'RegexKitLite', '~> 4.0'
     pod 'SimpleKeychain'
     pod 'FXBlurView'
-    pod 'OpenSSL', :git => 'https://github.com/bither/OpenSSL.git', :branch => 'master'
+    pod 'OpenSSL', :git => 'https://github.com/bither/OpenSSL.git'
     pod 'Bitheri', :git => 'https://github.com/bither/bitheri.git', :branch => 'develop'
 end
 

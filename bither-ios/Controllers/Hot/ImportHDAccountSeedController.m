@@ -54,7 +54,6 @@
 @property(weak, nonatomic) IBOutlet UIView *inputView;
 @property(weak, nonatomic) IBOutlet UIButton *btnDone;
 @property(weak, nonatomic) IBOutlet UITextField *tfKey;
-@property (nonatomic,strong) NSString *password;
 @property KeyboardController *kc;
 @end
 
@@ -156,14 +155,10 @@
 }
 #pragma mark - import HDAccount chose style
 - (void)onPasswordEntered:(NSString *)password {
-    self.password = password;
-    NSMutableArray *actions = [NSMutableArray new];
-    [actions addObject:[[Action alloc]initWithName:NSLocalizedString(@"get_data_from_blockchain", nil) target:self andSelector:@selector(tapFromBlockChainToGetTxData)]];
-    [actions addObject:[[Action alloc]initWithName:NSLocalizedString(@"get_data_from_bither", nil) target:self andSelector:@selector(tapFromBitherToGetTxData)]];
-    [[[DialogWithActions alloc]initWithActions:actions]showInWindow:self.view.window];
+    [self reloadHdAccountTransactionsData: password];
 }
 #pragma mark - reloadHdAccountTransactionsData
-- (void)reloadHdAccountTransactionsData{
+- (void)reloadHdAccountTransactionsData:(NSString*) password{
     __block DialogProgress *dp = [[DialogProgress alloc] initWithMessage:NSLocalizedString(@"Please wait…", nil)];
     __block ImportHDAccountSeedController *s = self;
     [dp showInWindow:self.view.window completion:^{
@@ -180,7 +175,7 @@
             if ([BTSettings instance].getAppMode == HOT) {
                 BTHDAccount *account;
                 @try {
-                    account = [[BTHDAccount alloc] initWithMnemonicSeed:mnemonicCodeSeed password:self.password fromXRandom:NO syncedComplete:NO andGenerationCallback:nil];
+                    account = [[BTHDAccount alloc] initWithMnemonicSeed:mnemonicCodeSeed password:password fromXRandom:NO syncedComplete:NO andGenerationCallback:nil];
                 } @catch (NSException *e) {
                     if ([e isKindOfClass:[DuplicatedHDAccountException class]]) {
                         dispatch_async(dispatch_get_main_queue(), ^{
@@ -200,7 +195,7 @@
                 [BTAddressManager instance].hdAccountHot = account;
                 [[PeerUtil instance] startPeer];
             } else {
-                BTHDAccountCold *account = [[BTHDAccountCold alloc] initWithMnemonicSeed:mnemonicCodeSeed andPassword:self.password];
+                BTHDAccountCold *account = [[BTHDAccountCold alloc] initWithMnemonicSeed:mnemonicCodeSeed andPassword:password];
                 if (!account) {
                     dispatch_async(dispatch_get_main_queue(), ^{
                         [self showMsg:NSLocalizedString(@"import_hdm_cold_seed_format_error", nil)];
@@ -216,18 +211,6 @@
         });
     }];
 
-}
-#pragma mark - tapFromBlockChainToGetTxData
-- (void)tapFromBlockChainToGetTxData{
-    AppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
-    appDelegate.importType = BLOCK_CHAIN_INFO;
-    [self reloadHdAccountTransactionsData];
-}
-#pragma mark - tapFromBitherToGetTxData
-- (void)tapFromBitherToGetTxData{
-    AppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
-    appDelegate.importType = BITHER_NET;
-    [self reloadHdAccountTransactionsData];
 }
 
 - (void)showMsg:(NSString *)msg {

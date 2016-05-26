@@ -102,7 +102,7 @@ DEPENDENCIES:
   - FXBlurView
   - KSCrash (~> 0.0.3)
   - MKNetworkKit (~> 0.87)
-  - OpenSSL (from `https://github.com/bither/OpenSSL.git`, branch `master`)
+  - OpenSSL (from `https://github.com/bither/OpenSSL.git`)
   - RegexKitLite (~> 4.0)
   - SimpleKeychain
 
@@ -111,7 +111,6 @@ EXTERNAL SOURCES:
     :branch: develop
     :git: https://github.com/bither/bitheri.git
   OpenSSL:
-    :branch: master
     :git: https://github.com/bither/OpenSSL.git
 
 CHECKOUT OPTIONS:
@@ -119,7 +118,7 @@ CHECKOUT OPTIONS:
     :commit: bd67682dfa591a7d0a8a6512b3e766abb9a36d9b
     :git: https://github.com/bither/bitheri.git
   OpenSSL:
-    :commit: af7a25d9934454dcff168241dc77a84cd463492d
+    :commit: b7ff9ed0245e2b5b1a212a1e86131487df4fc518
     :git: https://github.com/bither/OpenSSL.git
 
 SPEC CHECKSUMS:
@@ -135,4 +134,6 @@ SPEC CHECKSUMS:
   RegexKitLite: c0e4c12e6e7de0769f3a3ed679f0f61604170661
   SimpleKeychain: ae04c7ca6a960a146081010b412cf0ba2ecb10fe
 
-COCOAPODS: 0.39.0
+PODFILE CHECKSUM: 15d31a0ba2c5d53554fc7ba68ac747f9c67128e0
+
+COCOAPODS: 1.0.0

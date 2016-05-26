@@ -25,6 +25,7 @@
 #import "BlockUtil.h"
 #import "NetworkUtil.h"
 #import "AppDelegate.h"
+#import "UserDefaultsUtil.h"
 
 static BOOL isRunning = NO;
 static BOOL addObserver = NO;
@@ -71,9 +72,7 @@ static PeerUtil *peerUtil;
     if ([[BTPeerManager instance] connected]) {
         [[BTPeerManager instance] stop];
     }
-//AppDelegate chose get tx data style.
-    AppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
-    if ([appDelegate.importType isEqualToString:BLOCK_CHAIN_INFO]) {
+    if ([UserDefaultsUtil instance].getApiConfig == ApiConfigBlockchainInfo) {
         //NSLog(@"get Tx data from blockChain.info");
         if (!isRunning) {
             isRunning = YES;
@@ -84,18 +83,17 @@ static PeerUtil *peerUtil;
                 isRunning = NO;
             }];
         }
+        return;
     }
-    if ([appDelegate.importType isEqualToString:BITHER_NET]) {
-       // NSLog(@"get tx data from bither.net");
-        if (!isRunning) {
-            isRunning = YES;
-            [TransactionsUtil syncWallet:^{
-                [self connectPeer];
-                isRunning = NO;
-            }           andErrorCallBack:^(NSOperation *errorOp, NSError *error) {
-                isRunning = NO;
-            }];
-        }
+    // NSLog(@"get tx data from bither.net");
+    if (!isRunning) {
+        isRunning = YES;
+        [TransactionsUtil syncWallet:^{
+            [self connectPeer];
+            isRunning = NO;
+        }           andErrorCallBack:^(NSOperation *errorOp, NSError *error) {
+            isRunning = NO;
+        }];
     }
 }
 

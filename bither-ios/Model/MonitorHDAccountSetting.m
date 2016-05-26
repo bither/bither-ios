@@ -70,31 +70,13 @@ static Setting *monitorSetting;
 - (void)handleResult:(NSString *)result byReader:(ScanQrCodeViewController *)reader {
     _senderResult = result;
     [reader.presentingViewController dismissViewControllerAnimated:YES completion:^{
-        NSMutableArray *actions = [NSMutableArray new];
-        [actions addObject:[[Action alloc]initWithName:NSLocalizedString(@"get_data_from_blockchain", nil) target:self andSelector:@selector(tapFromBlockChainToGetTxDataForMonitorColdHDAccount)]];
-        [actions addObject:[[Action alloc]initWithName:NSLocalizedString(@"get_data_from_bither", nil) target:self andSelector:@selector(tapFromBitherToGetTxDataForMoitorColdHDAccount)]];
-        [[[DialogWithActions alloc]initWithActions:actions]showInWindow:self.vc.view.window];
+        DialogProgress *dp = [[DialogProgress alloc] initWithMessage:NSLocalizedString(@"Please wait…", nil)];
+        [dp showInWindow:self.vc.view.window completion:^{
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+                [self processQrCodeContent:_senderResult dp:dp];
+            });
+        }];
     }];
-}
-- (void)tapFromBlockChainToGetTxDataForMonitorColdHDAccount{
-    AppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
-    appDelegate.importType = BLOCK_CHAIN_INFO;
-            DialogProgress *dp = [[DialogProgress alloc] initWithMessage:NSLocalizedString(@"Please wait…", nil)];
-            [dp showInWindow:self.vc.view.window completion:^{
-                dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-                    [self processQrCodeContent:_senderResult dp:dp];
-                });
-            }];
-}
-- (void)tapFromBitherToGetTxDataForMoitorColdHDAccount{
-    AppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
-    appDelegate.importType = BITHER_NET;
-            DialogProgress *dp = [[DialogProgress alloc] initWithMessage:NSLocalizedString(@"Please wait…", nil)];
-            [dp showInWindow:self.vc.view.window completion:^{
-                dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-                    [self processQrCodeContent:_senderResult dp:dp];
-                });
-            }];
 }
 - (void)showMsg:(NSString *)msg {
     if (self.vc && [self.vc respondsToSelector:@selector(showMsg:)]) {

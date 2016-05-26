@@ -19,8 +19,6 @@
 #import <Foundation/Foundation.h>
 #import "BitherSetting.h"
 
-#define BLOCK_CHAIN_INFO @"blockChain.info"
-#define BITHER_NET @"bither.net"
 @interface PeerUtil : NSObject
 + (PeerUtil *)instance;
 
