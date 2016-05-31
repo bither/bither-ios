@@ -547,3 +547,7 @@
 
 /* Class = "UILabel"; text = "Balance:"; ObjectID = "3TU-hn-ytB"; */
 "3TU-hn-ytB.text" = "Balance:";
+
+"lQn-Ih-2qB.text" = "Normal private keys are not within HD Account.\nThey need separated back ups.";
+
+"huo-Ni-Mqw.text" = "Normal private keys are not within HD Account.\nThey need separated back ups.";
