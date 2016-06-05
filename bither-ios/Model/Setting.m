@@ -64,6 +64,7 @@ static Setting *HDMServerPasswordResetSetting;
 static Setting *PasswordStrengthCheckSetting;
 static Setting *TotalBalanceHideSetting;
 static Setting *NetworkMonitorSetting;
+static Setting *ApiConfigSetting;
 
 - (instancetype)initWithName:(NSString *)name icon:(UIImage *)icon {
     self = [super init];
@@ -695,6 +696,7 @@ static Setting *NetworkMonitorSetting;
     }
     [array addObject:[Setting getTrashCanSetting]];
     if ([[BTSettings instance] getAppMode] == HOT) {
+        [array addObject:[Setting getApiConfigSetting]];
         [array addObject:[ReloadTxSetting getReloadTxsSetting]];
     }
     if ([[BTSettings instance] getAppMode] == HOT) {
@@ -709,5 +711,51 @@ static Setting *NetworkMonitorSetting;
 + (Setting *)getKeychainSetting; {
     return [KeychainSetting getKeychainSetting];
 }
+
+
++ (Setting *)getApiConfigSetting {
+    if (!ApiConfigSetting) {
+        ApiConfigSetting = [[Setting alloc]initWithName:NSLocalizedString(@"setting_api_config", nil) icon:nil];
+        [ApiConfigSetting setGetValueBlock:^() {
+            ApiConfig config = [UserDefaultsUtil instance].getApiConfig;
+            return [self nameForApiConfig:config];
+        }];
+        [ApiConfigSetting setGetArrayBlock:^() {
+            ApiConfig config = [UserDefaultsUtil instance].getApiConfig;
+            NSMutableArray *array = [NSMutableArray new];
+            for(ApiConfig c = ApiConfigBither; c <= ApiConfigBlockchainInfo; c++){
+                NSMutableDictionary *dict = [NSMutableDictionary new];
+                [dict setObject:[NSNumber numberWithInt:c] forKey:SETTING_VALUE];
+                [dict setObject:[self nameForApiConfig:c] forKey:SETTING_KEY];
+                [dict setObject:[NSNumber numberWithBool:c == config] forKey:SETTING_IS_DEFAULT];
+                [array addObject:dict];
+            }
+            return array;
+        }];
+        [ApiConfigSetting setResult:^(NSDictionary *dict) {
+            ApiConfig c = [dict getIntFromDict:SETTING_VALUE];
+            [[UserDefaultsUtil instance] setApiConfig:c];
+        }];
+        __block Setting *a = ApiConfigSetting;
+        [ApiConfigSetting setSelectBlock:^(UIViewController *controller) {
+            SelectViewController *selectController = [controller.storyboard instantiateViewControllerWithIdentifier:@"SelectViewController"];
+            UINavigationController *nav = controller.navigationController;
+            selectController.setting = a;
+            [nav pushViewController:selectController animated:YES];
+        }];
+    }
+    return ApiConfigSetting;
+}
+
++ (NSString *)nameForApiConfig:(ApiConfig) config{
+    switch (config) {
+        case ApiConfigBlockchainInfo:
+            return NSLocalizedString(@"setting_name_api_config_blockchain", nil);
+        case ApiConfigBither:
+        default:
+            return NSLocalizedString(@"setting_name_api_config_bither", nil);
+    }
+}
+
 @end
 

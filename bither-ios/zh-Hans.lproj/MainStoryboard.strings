@@ -415,3 +415,7 @@
 
 /* Class = "UILabel"; text = "Balance:"; ObjectID = "3TU-hn-ytB"; */
 "3TU-hn-ytB.text" = "余额:";
+
+"lQn-Ih-2qB.text" = "普通私钥不属于 HD 账户.\n需要单独备份.";
+
+"huo-Ni-Mqw.text" = "普通私钥不属于 HD 账户.\n需要单独备份.";

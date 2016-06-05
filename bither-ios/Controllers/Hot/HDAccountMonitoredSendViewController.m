@@ -35,6 +35,7 @@
 #import "ScanQrCodeTransportViewController.h"
 #import "QrCodeViewController.h"
 #import "QRCodeTxTransport.h"
+#import "PushTxThirdParty.h"
 
 #define kBalanceFontSize (15)
 #define kSendButtonQrIconSize (20)
@@ -182,6 +183,7 @@
 - (void)finalSend {
     [dp changeToMessage:NSLocalizedString(@"Please wait…", nil) completion:^{
         [dp showInWindow:self.view.window completion:^{
+            [[PushTxThirdParty instance] pushTx:self.tx];
             [[BTPeerManager instance] publishTransaction:self.tx completion:^(NSError *error) {
                 if (!error) {
                     dispatch_async(dispatch_get_main_queue(), ^{

@@ -68,6 +68,11 @@
       "idiom" : "ipad",
       "filename" : "bither_ios_144.png",
       "scale" : "2x"
+    },
+    {
+      "idiom" : "ipad",
+      "size" : "83.5x83.5",
+      "scale" : "2x"
     }
   ],
   "info" : {

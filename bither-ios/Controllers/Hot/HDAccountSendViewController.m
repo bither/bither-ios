@@ -32,6 +32,7 @@
 #import "HDAccountSendViewController.h"
 #import "DialogSendTxConfirm.h"
 #import "DialogHDSendTxConfirm.h"
+#import "PushTxThirdParty.h"
 
 #define kBalanceFontSize (15)
 
@@ -136,6 +137,7 @@
     }
     [dp changeToMessage:NSLocalizedString(@"Please wait…", nil)];
     [dp showInWindow:self.view.window completion:^{
+        [[PushTxThirdParty instance] pushTx:tx];
         [[BTPeerManager instance] publishTransaction:tx completion:^(NSError *error) {
             if (!error) {
                 dispatch_async(dispatch_get_main_queue(), ^{

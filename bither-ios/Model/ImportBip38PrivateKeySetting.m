@@ -20,6 +20,10 @@
 #import "BTPasswordSeed.h"
 #import "DialogProgress.h"
 #import "BTKey+BIP38.h"
+#import "DialogCentered.h"
+#import "DialogWithActions.h"
+#import "AppDelegate.h"
+#import "PeerUtil.h"
 
 @interface CheckPasswordBip38Delegate : NSObject <DialogPasswordDelegate>
 @property(nonatomic, strong) UIViewController *controller;
@@ -32,6 +36,7 @@
     ImportPrivateKey *improtPrivateKey = [[ImportPrivateKey alloc] initWithController:self.controller content:self.privateKeyStr passwrod:password importPrivateKeyType:PrivateText];
     [improtPrivateKey importPrivateKey];
 }
+
 @end
 
 

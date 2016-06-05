@@ -20,6 +20,7 @@
 #import "BitherSetting.h"
 #import "BTPasswordSeed.h"
 #import "TotalBalanceHideUtil.h"
+#import "ApiConfig.h"
 
 
 ///@description   UserDefaults相关
@@ -111,5 +112,9 @@
 - (TotalBalanceHide)getTotalBalanceHide;
 
 - (void)setTotalBalanceHide:(TotalBalanceHide)h;
+
+- (void)setApiConfig:(ApiConfig) config;
+
+- (ApiConfig)getApiConfig;
 
 @end

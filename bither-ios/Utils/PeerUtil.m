@@ -24,7 +24,8 @@
 #import "BTPeerManager.h"
 #import "BlockUtil.h"
 #import "NetworkUtil.h"
-
+#import "AppDelegate.h"
+#import "UserDefaultsUtil.h"
 
 static BOOL isRunning = NO;
 static BOOL addObserver = NO;
@@ -71,6 +72,20 @@ static PeerUtil *peerUtil;
     if ([[BTPeerManager instance] connected]) {
         [[BTPeerManager instance] stop];
     }
+    if ([UserDefaultsUtil instance].getApiConfig == ApiConfigBlockchainInfo) {
+        //NSLog(@"get Tx data from blockChain.info");
+        if (!isRunning) {
+            isRunning = YES;
+            [TransactionsUtil syncWalletFrom_blockChain:^{
+                [self connectPeer];
+                isRunning = NO;
+            }           andErrorCallBack:^(NSOperation *errorOp, NSError *error) {
+                isRunning = NO;
+            }];
+        }
+        return;
+    }
+    // NSLog(@"get tx data from bither.net");
     if (!isRunning) {
         isRunning = YES;
         [TransactionsUtil syncWallet:^{

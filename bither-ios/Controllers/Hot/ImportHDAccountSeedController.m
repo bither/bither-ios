@@ -30,6 +30,9 @@
 #import "BTBIP39.h"
 #import "DialogProgress.h"
 #import "PeerUtil.h"
+#import "DialogCentered.h"
+#import "DialogWithActions.h"
+#import "AppDelegate.h"
 
 
 #define kTextFieldHorizontalMargin (10)
@@ -50,9 +53,7 @@
 @property(weak, nonatomic) IBOutlet UIButton *btnOk;
 @property(weak, nonatomic) IBOutlet UIView *inputView;
 @property(weak, nonatomic) IBOutlet UIButton *btnDone;
-
 @property(weak, nonatomic) IBOutlet UITextField *tfKey;
-
 @property KeyboardController *kc;
 @end
 
@@ -152,8 +153,12 @@
     DialogPassword *dialogPassword = [[DialogPassword alloc] initWithDelegate:self];
     [dialogPassword showInWindow:self.view.window];
 }
-
+#pragma mark - import HDAccount chose style
 - (void)onPasswordEntered:(NSString *)password {
+    [self reloadHdAccountTransactionsData: password];
+}
+#pragma mark - reloadHdAccountTransactionsData
+- (void)reloadHdAccountTransactionsData:(NSString*) password{
     __block DialogProgress *dp = [[DialogProgress alloc] initWithMessage:NSLocalizedString(@"Please wait…", nil)];
     __block ImportHDAccountSeedController *s = self;
     [dp showInWindow:self.view.window completion:^{
@@ -179,7 +184,7 @@
                         return;
                     }
                 }
-
+                
                 if (!account) {
                     dispatch_async(dispatch_get_main_queue(), ^{
                         [self showMsg:NSLocalizedString(@"import_hdm_cold_seed_format_error", nil)];
@@ -205,6 +210,7 @@
             });
         });
     }];
+
 }
 
 - (void)showMsg:(NSString *)msg {

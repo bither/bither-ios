@@ -62,4 +62,6 @@
 + (Setting *)getKeychainSetting;
 
 + (Setting *)getTotalBalanceHideSetting;
+
++ (Setting *)getApiConfigSetting;
 @end

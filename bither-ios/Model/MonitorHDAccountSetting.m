@@ -27,9 +27,12 @@
 #import "StringUtil.h"
 #import "BTQRCodeUtil.h"
 #import "PeerUtil.h"
-
+#import "AppDelegate.h"
+#import "DialogWithActions.h"
+#import "DialogCentered.h"
 @interface MonitorHDAccountSetting () <ScanQrCodeDelegate>
 @property(weak) UIViewController *vc;
+@property (nonatomic,strong) NSString *senderResult;
 @end
 
 static Setting *monitorSetting;
@@ -63,18 +66,18 @@ static Setting *monitorSetting;
         [self.vc presentViewController:scan animated:YES completion:nil];
     }];
 }
-
+#pragma mark - import HDAccount
 - (void)handleResult:(NSString *)result byReader:(ScanQrCodeViewController *)reader {
+    _senderResult = result;
     [reader.presentingViewController dismissViewControllerAnimated:YES completion:^{
         DialogProgress *dp = [[DialogProgress alloc] initWithMessage:NSLocalizedString(@"Please wait…", nil)];
         [dp showInWindow:self.vc.view.window completion:^{
-            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
-                [self processQrCodeContent:result dp:dp];
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+                [self processQrCodeContent:_senderResult dp:dp];
             });
         }];
     }];
 }
-
 - (void)showMsg:(NSString *)msg {
     if (self.vc && [self.vc respondsToSelector:@selector(showMsg:)]) {
         [self.vc performSelector:@selector(showMsg:) withObject:msg];
