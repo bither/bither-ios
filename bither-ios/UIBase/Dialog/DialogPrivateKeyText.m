@@ -38,7 +38,7 @@
 
 - (instancetype)initWithPrivateKeyStr:(NSString *)str {
     _privateKeyStr = [StringUtil formatAddress:str groupSize:4 lineSize:16];
-    _fontSize = [_privateKeyStr sizeWithRestrict:CGSizeMake(CGFLOAT_MAX, kButtonHeight) font:[UIFont fontWithName:@"Courier New" size:kFontSize]];
+    _fontSize = [_privateKeyStr sizeWithRestrict:CGSizeMake(CGFLOAT_MAX, CGFLOAT_MAX) font:[UIFont fontWithName:@"Courier New" size:kFontSize]];
     self = [super initWithFrame:CGRectMake(0, 0, _fontSize.width + kButtonEdgeInsets.left + kButtonEdgeInsets.right, kHeight)];
     if (self) {
         [self firstConfigure];
@@ -47,7 +47,7 @@
 }
 
 - (void)firstConfigure {
-    self.bgInsets = UIEdgeInsetsMake(4, 16, 4, 16);
+    self.bgInsets = UIEdgeInsetsMake(10, 16, 4, 16);
     CGFloat bottom = 0;
     bottom = [self createLabelWithText:_privateKeyStr top:bottom];
     UIView *seperator = [[UIView alloc] initWithFrame:CGRectMake(0, bottom, self.frame.size.width, 1)];
@@ -83,7 +83,7 @@
 
 
 - (CGFloat)createLabelWithText:(NSString *)text top:(CGFloat)top {
-    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, top, self.frame.size.width, _fontSize.height * 3)];
+    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, top, self.frame.size.width, _fontSize.height)];
     label.backgroundColor = [UIColor clearColor];
     label.autoresizingMask = UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleLeftMargin;
     label.textAlignment = NSTextAlignmentLeft;
@@ -92,7 +92,7 @@
     label.text = text;
     label.baselineAdjustment = UIBaselineAdjustmentAlignBaselines;
     label.lineBreakMode = NSLineBreakByTruncatingTail;
-    label.numberOfLines = 4;
+    label.numberOfLines = 0;
     [self addSubview:label];
     return CGRectGetMaxY(label.frame);
 }

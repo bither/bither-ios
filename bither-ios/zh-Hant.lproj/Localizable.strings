@@ -736,3 +736,4 @@
 // HD Account XPub
 "hd_account_cold_first_20_addresses" = "顯示前 20 個地址";
 "hd_account_monitor_xpub_need_to_upgrade" = "您需要把冷錢包升級到 v1.5.1";
+"hd_account_show_xpub" = "顯示 XPub";
