@@ -85,17 +85,25 @@ static Setting *monitorSetting;
 }
 
 - (void)processQrCodeContent:(NSString *)content dp:(DialogProgress *)dp {
-    BOOL isXRandom = [content characterAtIndex:0] == [XRANDOM_FLAG characterAtIndex:0];
-    NSData *bytes = isXRandom ? [content substringFromIndex:1].hexToData : content.hexToData;
-    if(bytes.length != 65){
-        [dp dismissWithCompletion:^{
-            [self showMsg:NSLocalizedString(@"monitor_cold_hd_account_failed_wrong_qr_code", nil)];
-        }];
-        return;
+    BTBIP32Key* key = [BTBIP32Key deserializeFromB58:content];
+    if (key == nil){
+        BOOL isXRandom = [content characterAtIndex:0] == [XRANDOM_FLAG characterAtIndex:0];
+        NSData *bytes = isXRandom ? [content substringFromIndex:1].hexToData : content.hexToData;
+        if(bytes.length != 65){
+            [dp dismissWithCompletion:^{
+                [self showMsg:NSLocalizedString(@"monitor_cold_hd_account_failed_wrong_qr_code", nil)];
+            }];
+            return;
+        }else {
+            [dp dismissWithCompletion:^{
+                [self showMsg:NSLocalizedString(@"hd_account_monitor_xpub_need_to_upgrade", nil)];
+            }];
+            return;
+        }
     }
     BTHDAccount *account = nil;
     @try {
-        account = [[BTHDAccount alloc] initWithAccountExtendedPub:bytes fromXRandom:isXRandom syncedComplete:NO andGenerationCallback:nil];
+        account = [[BTHDAccount alloc] initWithAccountExtendedPub:key.getPubKeyExtended fromXRandom:NO syncedComplete:NO andGenerationCallback:nil];
     } @catch (NSException *e) {
         if ([e isKindOfClass:[DuplicatedHDAccountException class]]) {
             dispatch_async(dispatch_get_main_queue(), ^{
