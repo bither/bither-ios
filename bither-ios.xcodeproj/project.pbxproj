@@ -47,6 +47,7 @@
 		0A93B6011A4A66080081D74D /* DialogSignMessageOutput.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A93B6001A4A66080081D74D /* DialogSignMessageOutput.m */; };
 		0A93B6061A4AA0520081D74D /* VerifyMessageSignatureViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A93B6051A4AA0520081D74D /* VerifyMessageSignatureViewController.m */; };
 		0A948DCA1AA080E600359F64 /* MarketInterfaceController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A948DC91AA080E600359F64 /* MarketInterfaceController.m */; };
+		0A94ED9F1D09879A00660929 /* DialogHDColdFirst20Addresses.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A94ED9E1D09879A00660929 /* DialogHDColdFirst20Addresses.m */; };
 		0AA7F1191CE18BD600C46157 /* PushTxThirdPartyTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AA7F1181CE18BD600C46157 /* PushTxThirdPartyTest.m */; };
 		0AAAEE331AFC83EE00F6E3BB /* WatchPageConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AAAEE321AFC83EE00F6E3BB /* WatchPageConfiguration.m */; };
 		0AB63CB81ABD15C80018A546 /* RawPrivateKeyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AB63CB71ABD15C80018A546 /* RawPrivateKeyViewController.m */; };
@@ -424,6 +425,8 @@
 		0A93B6051A4AA0520081D74D /* VerifyMessageSignatureViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VerifyMessageSignatureViewController.m; sourceTree = "<group>"; };
 		0A948DC81AA080E600359F64 /* MarketInterfaceController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MarketInterfaceController.h; sourceTree = "<group>"; };
 		0A948DC91AA080E600359F64 /* MarketInterfaceController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MarketInterfaceController.m; sourceTree = "<group>"; };
+		0A94ED9D1D09879A00660929 /* DialogHDColdFirst20Addresses.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DialogHDColdFirst20Addresses.h; sourceTree = "<group>"; };
+		0A94ED9E1D09879A00660929 /* DialogHDColdFirst20Addresses.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DialogHDColdFirst20Addresses.m; sourceTree = "<group>"; };
 		0AA7F1181CE18BD600C46157 /* PushTxThirdPartyTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PushTxThirdPartyTest.m; sourceTree = "<group>"; };
 		0AAAEE311AFC83EE00F6E3BB /* WatchPageConfiguration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WatchPageConfiguration.h; sourceTree = "<group>"; };
 		0AAAEE321AFC83EE00F6E3BB /* WatchPageConfiguration.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WatchPageConfiguration.m; sourceTree = "<group>"; };
@@ -1723,6 +1726,8 @@
 				1BC27B1C49FCCA6BDE3C42D3 /* DialogOldAddressesOfHDAccount.h */,
 				0A0961361B5CBAD300D554A6 /* DialogShowAddressOnNet.h */,
 				0A0961371B5CBAD300D554A6 /* DialogShowAddressOnNet.m */,
+				0A94ED9D1D09879A00660929 /* DialogHDColdFirst20Addresses.h */,
+				0A94ED9E1D09879A00660929 /* DialogHDColdFirst20Addresses.m */,
 			);
 			path = Dialog;
 			sourceTree = "<group>";
@@ -2377,6 +2382,7 @@
 				4254083B19469C9A007AF99C /* BaseApi.m in Sources */,
 				AC2F3295195C02C3001B7439 /* AmountButton.m in Sources */,
 				42E8161C19529B14005F16F7 /* KeyUtil.m in Sources */,
+				0A94ED9F1D09879A00660929 /* DialogHDColdFirst20Addresses.m in Sources */,
 				ACEE7D3619D3FC4B00932B39 /* ReloadTxSetting.m in Sources */,
 				AC454DE41A1F2518000AF4ED /* PinCodeChangeViewController.m in Sources */,
 				425408571946A219007AF99C /* DataCheckUtil.m in Sources */,

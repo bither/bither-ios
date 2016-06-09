@@ -14,6 +14,7 @@
 #import "DialogWithActions.h"
 #import "DialogBlackQrCode.h"
 #import "DialogHDMSeedWordList.h"
+#import "DialogHDColdFirst20Addresses.h"
 
 @interface ColdAddressListHDCell () <DialogPasswordDelegate> {
     BTHDAccountCold *_account;
@@ -57,7 +58,8 @@
 - (IBAction)seedPressed:(id)sender {
     [[[DialogWithActions alloc] initWithActions:@[
             [[Action alloc] initWithName:NSLocalizedString(@"add_hd_account_seed_qr_code", nil) target:self andSelector:@selector(showSeedQRCode)],
-            [[Action alloc] initWithName:NSLocalizedString(@"add_hd_account_seed_qr_phrase", nil) target:self andSelector:@selector(showPhrase)]
+            [[Action alloc] initWithName:NSLocalizedString(@"add_hd_account_seed_qr_phrase", nil) target:self andSelector:@selector(showPhrase)],
+            [[Action alloc] initWithName:NSLocalizedString(@"hd_account_cold_first_20_addresses", nil) target:self andSelector:@selector(showFirst20Addresses)]
     ]] showInWindow:self.window];
 }
 
@@ -79,7 +81,7 @@
     __weak __block DialogProgress *d = dp;
     [d showInWindow:self.window completion:^{
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
-            NSString *pub = [[self.account accountPubExtendedString:p] toUppercaseStringWithEn];
+            NSString *pub = [[self.account xPub:p] serializePubB58];
             dispatch_async(dispatch_get_main_queue(), ^{
                 [d dismissWithCompletion:^{
                     DialogBlackQrCode *d = [[DialogBlackQrCode alloc] initWithContent:pub andTitle:NSLocalizedString(@"add_cold_hd_account_monitor_qr", nil)];
@@ -109,6 +111,15 @@
             });
         });
     }];
+}
+
+- (void)showFirst20Addresses {
+    if (!password) {
+        passwordSelector = @selector(showFirst20Addresses);
+        [[[DialogPassword alloc] initWithDelegate:self] showInWindow:self.window];
+        return;
+    }
+    [[[DialogHDColdFirst20Addresses alloc]initWithAccount:self.account andPassword:password] showInWindow:self.window];
 }
 
 - (void)showSeedQRCode {
