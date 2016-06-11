@@ -14,7 +14,8 @@
 #import "DialogWithActions.h"
 #import "DialogBlackQrCode.h"
 #import "DialogHDMSeedWordList.h"
-#import "DialogHDColdFirst20Addresses.h"
+#import "DialogPrivateKeyText.h"
+#import <Bitheri/BTHDAccountAddress.h>
 
 @interface ColdAddressListHDCell () <DialogPasswordDelegate> {
     BTHDAccountCold *_account;
@@ -59,7 +60,7 @@
     [[[DialogWithActions alloc] initWithActions:@[
             [[Action alloc] initWithName:NSLocalizedString(@"add_hd_account_seed_qr_code", nil) target:self andSelector:@selector(showSeedQRCode)],
             [[Action alloc] initWithName:NSLocalizedString(@"add_hd_account_seed_qr_phrase", nil) target:self andSelector:@selector(showPhrase)],
-            [[Action alloc] initWithName:NSLocalizedString(@"hd_account_cold_first_20_addresses", nil) target:self andSelector:@selector(showFirst20Addresses)]
+            [[Action alloc] initWithName:NSLocalizedString(@"hd_account_cold_first_address", nil) target:self andSelector:@selector(showFirstAddress)]
     ]] showInWindow:self.window];
 }
 
@@ -113,13 +114,14 @@
     }];
 }
 
-- (void)showFirst20Addresses {
+- (void)showFirstAddress {
     if (!password) {
-        passwordSelector = @selector(showFirst20Addresses);
+        passwordSelector = @selector(showFirstAddress);
         [[[DialogPassword alloc] initWithDelegate:self] showInWindow:self.window];
         return;
     }
-    [[[DialogHDColdFirst20Addresses alloc]initWithAccount:self.account andPassword:password] showInWindow:self.window];
+    NSString* address = [[[_account xPub:password] deriveSoftened:EXTERNAL_ROOT_PATH] deriveSoftened:0].address;
+    [[[DialogPrivateKeyText alloc]initWithPrivateKeyStr:address]showInWindow:self.window];
 }
 
 - (void)showSeedQRCode {

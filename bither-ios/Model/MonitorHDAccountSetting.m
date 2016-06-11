@@ -30,6 +30,7 @@
 #import "AppDelegate.h"
 #import "DialogWithActions.h"
 #import "DialogCentered.h"
+#import "DialogHDMonitorFirstAddressValidation.h"
 @interface MonitorHDAccountSetting () <ScanQrCodeDelegate>
 @property(weak) UIViewController *vc;
 @property (nonatomic,strong) NSString *senderResult;
@@ -125,9 +126,11 @@ static Setting *monitorSetting;
     [[PeerUtil instance] stopPeer];
     [BTAddressManager instance].hdAccountMonitored = account;
     [[PeerUtil instance] startPeer];
+    __block NSString* firstAddress = [account addressForPath:EXTERNAL_ROOT_PATH atIndex:0].address;
     dispatch_async(dispatch_get_main_queue(), ^{
         [dp dismissWithCompletion:^{
             [self showMsg:NSLocalizedString(@"monitor_cold_hd_account_success", nil)];
+            [[[DialogHDMonitorFirstAddressValidation alloc]initWithAddress:firstAddress]showInWindow:self.vc.view.window];
             if (self.vc && [self.vc respondsToSelector:@selector(reload)]) {
                 [self.vc performSelector:@selector(reload)];
             }
