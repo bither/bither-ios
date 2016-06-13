@@ -64,6 +64,7 @@
 		0AD674971A7B4BDA007967DB /* ColdAddressListHDMCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AD674961A7B4BDA007967DB /* ColdAddressListHDMCell.m */; };
 		0AD6749C1A7B6229007967DB /* DialogWithActions.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AD6749B1A7B6229007967DB /* DialogWithActions.m */; };
 		0AD6749F1A7B9108007967DB /* DialogHDMSeedWordList.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AD6749E1A7B9108007967DB /* DialogHDMSeedWordList.m */; };
+		0AD849EB1D0E9B4C005FAF56 /* DialogMonitorAddressValidation.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AD849EA1D0E9B4C005FAF56 /* DialogMonitorAddressValidation.m */; };
 		0AE142621B00924C0070C580 /* PaymentInterfaceController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AE142611B00924C0070C580 /* PaymentInterfaceController.m */; };
 		0AE142631B0094140070C580 /* QRCodeThemeUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = ACEE7D1C19D3F9F500932B39 /* QRCodeThemeUtil.m */; };
 		0AE142641B00941B0070C580 /* UIColor+Util.m in Sources */ = {isa = PBXBuildFile; fileRef = ACDDDC3519483A840008A79D /* UIColor+Util.m */; };
@@ -459,6 +460,8 @@
 		0AD6749B1A7B6229007967DB /* DialogWithActions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DialogWithActions.m; sourceTree = "<group>"; };
 		0AD6749D1A7B9108007967DB /* DialogHDMSeedWordList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DialogHDMSeedWordList.h; sourceTree = "<group>"; };
 		0AD6749E1A7B9108007967DB /* DialogHDMSeedWordList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DialogHDMSeedWordList.m; sourceTree = "<group>"; };
+		0AD849E91D0E9B4C005FAF56 /* DialogMonitorAddressValidation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DialogMonitorAddressValidation.h; sourceTree = "<group>"; };
+		0AD849EA1D0E9B4C005FAF56 /* DialogMonitorAddressValidation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DialogMonitorAddressValidation.m; sourceTree = "<group>"; };
 		0AE142601B00924C0070C580 /* PaymentInterfaceController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PaymentInterfaceController.h; sourceTree = "<group>"; };
 		0AE142611B00924C0070C580 /* PaymentInterfaceController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PaymentInterfaceController.m; sourceTree = "<group>"; };
 		0AF4B7BA1CE1794400F7F7D9 /* PushTxThirdParty.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PushTxThirdParty.h; sourceTree = "<group>"; };
@@ -1728,6 +1731,8 @@
 				0A0961371B5CBAD300D554A6 /* DialogShowAddressOnNet.m */,
 				0A7F203B1D0BB0F900B4EAB1 /* DialogHDMonitorFirstAddressValidation.h */,
 				0A7F203C1D0BB0F900B4EAB1 /* DialogHDMonitorFirstAddressValidation.m */,
+				0AD849E91D0E9B4C005FAF56 /* DialogMonitorAddressValidation.h */,
+				0AD849EA1D0E9B4C005FAF56 /* DialogMonitorAddressValidation.m */,
 			);
 			path = Dialog;
 			sourceTree = "<group>";
@@ -2453,6 +2458,7 @@
 				ACCA274E198F2805000E6A32 /* DialogTotalBalance.m in Sources */,
 				ACDDDC2D19480ECF0008A79D /* DialogCentered.m in Sources */,
 				ACF02FEB19D90899001AB701 /* DialogSwitchQRCode.m in Sources */,
+				0AD849EB1D0E9B4C005FAF56 /* DialogMonitorAddressValidation.m in Sources */,
 				4268FE2B194ACD57007A4C30 /* CheckViewController.m in Sources */,
 				0A42062A1A494F1000562100 /* SignMessageViewController.m in Sources */,
 				DAB2C8761A206F080011EE2F /* KeychainBackupUtil.m in Sources */,

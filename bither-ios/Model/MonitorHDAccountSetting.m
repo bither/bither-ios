@@ -93,14 +93,18 @@ static Setting *monitorSetting;
         BOOL isXRandom = [content characterAtIndex:0] == [XRANDOM_FLAG characterAtIndex:0];
         NSData *bytes = isXRandom ? [content substringFromIndex:1].hexToData : content.hexToData;
         if(bytes.length != 65){
-            [dp dismissWithCompletion:^{
-                [self showMsg:NSLocalizedString(@"monitor_cold_hd_account_failed_wrong_qr_code", nil)];
-            }];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [dp dismissWithCompletion:^{
+                    [self showMsg:NSLocalizedString(@"monitor_cold_hd_account_failed_wrong_qr_code", nil)];
+                }];
+            });
             return;
         }else {
-            [dp dismissWithCompletion:^{
-                [self showMsg:NSLocalizedString(@"hd_account_monitor_xpub_need_to_upgrade", nil)];
-            }];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [dp dismissWithCompletion:^{
+                    [self showMsg:NSLocalizedString(@"hd_account_monitor_xpub_need_to_upgrade", nil)];
+                }];
+            });
             return;
         }
         return;
@@ -108,9 +112,11 @@ static Setting *monitorSetting;
     content = [content substringFromIndex:HD_MONITOR_QR_PREFIX.length];
     BTBIP32Key* key = [BTBIP32Key deserializeFromB58:content];
     if (key == nil){
-        [dp dismissWithCompletion:^{
-            [self showMsg:NSLocalizedString(@"monitor_cold_hd_account_failed_wrong_qr_code", nil)];
-        }];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [dp dismissWithCompletion:^{
+                [self showMsg:NSLocalizedString(@"monitor_cold_hd_account_failed_wrong_qr_code", nil)];
+            }];
+        });
     }
     self.xpub = key;
     __block NSString* firstAddress = [[key deriveSoftened:EXTERNAL_ROOT_PATH] deriveSoftened:0].address;
