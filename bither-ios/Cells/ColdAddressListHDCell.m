@@ -16,6 +16,8 @@
 #import "DialogHDMSeedWordList.h"
 #import "DialogPrivateKeyText.h"
 #import <Bitheri/BTHDAccountAddress.h>
+#import "StringUtil.h"
+#import <Bitheri/BTQRCodeUtil.h>
 
 @interface ColdAddressListHDCell () <DialogPasswordDelegate> {
     BTHDAccountCold *_account;
@@ -85,7 +87,7 @@
             NSString *pub = [[self.account xPub:p] serializePubB58];
             dispatch_async(dispatch_get_main_queue(), ^{
                 [d dismissWithCompletion:^{
-                    DialogBlackQrCode *d = [[DialogBlackQrCode alloc] initWithContent:pub andTitle:NSLocalizedString(@"add_cold_hd_account_monitor_qr", nil)];
+                    DialogBlackQrCode *d = [[DialogBlackQrCode alloc] initWithContent:[NSString stringWithFormat:@"%@%@", HD_MONITOR_QR_PREFIX, pub] title:NSLocalizedString(@"add_cold_hd_account_monitor_qr", nil) andSubtitle:[StringUtil formatAddress:pub groupSize:4 lineSize:24]];
                     [d showInWindow:self.window];
                 }];
             });

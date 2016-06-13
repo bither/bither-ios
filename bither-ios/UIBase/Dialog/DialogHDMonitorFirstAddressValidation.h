@@ -9,5 +9,5 @@
 #import "DialogCentered.h"
 
 @interface DialogHDMonitorFirstAddressValidation : DialogCentered
--(instancetype)initWithAddress:(NSString*)address;
+-(instancetype)initWithAddress:(NSString*)address target:(id)target okSelector:(SEL)okSelector cancelSelector:(SEL)cancelSelector;
 @end

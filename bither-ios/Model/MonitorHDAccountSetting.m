@@ -31,9 +31,12 @@
 #import "DialogWithActions.h"
 #import "DialogCentered.h"
 #import "DialogHDMonitorFirstAddressValidation.h"
+#import <Bitheri/BTQRCodeUtil.h>
+
 @interface MonitorHDAccountSetting () <ScanQrCodeDelegate>
 @property(weak) UIViewController *vc;
 @property (nonatomic,strong) NSString *senderResult;
+@property BTBIP32Key* xpub;
 @end
 
 static Setting *monitorSetting;
@@ -86,8 +89,7 @@ static Setting *monitorSetting;
 }
 
 - (void)processQrCodeContent:(NSString *)content dp:(DialogProgress *)dp {
-    BTBIP32Key* key = [BTBIP32Key deserializeFromB58:content];
-    if (key == nil){
+    if(![content hasPrefix:HD_MONITOR_QR_PREFIX]){
         BOOL isXRandom = [content characterAtIndex:0] == [XRANDOM_FLAG characterAtIndex:0];
         NSData *bytes = isXRandom ? [content substringFromIndex:1].hexToData : content.hexToData;
         if(bytes.length != 65){
@@ -101,41 +103,42 @@ static Setting *monitorSetting;
             }];
             return;
         }
-    }
-    BTHDAccount *account = nil;
-    @try {
-        account = [[BTHDAccount alloc] initWithAccountExtendedPub:key.getPubKeyExtended fromXRandom:NO syncedComplete:NO andGenerationCallback:nil];
-    } @catch (NSException *e) {
-        if ([e isKindOfClass:[DuplicatedHDAccountException class]]) {
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [dp dismissWithCompletion:^{
-                    [self showMsg:NSLocalizedString(@"monitor_cold_hd_account_failed_duplicated", nil)];
-                }];
-            });
-            return;
-        }
-    }
-    if (!account) {
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [dp dismissWithCompletion:^{
-                [self showMsg:NSLocalizedString(@"monitor_cold_hd_account_failed", nil)];
-            }];
-        });
         return;
     }
-    [[PeerUtil instance] stopPeer];
-    [BTAddressManager instance].hdAccountMonitored = account;
-    [[PeerUtil instance] startPeer];
-    __block NSString* firstAddress = [account addressForPath:EXTERNAL_ROOT_PATH atIndex:0].address;
+    content = [content substringFromIndex:HD_MONITOR_QR_PREFIX.length];
+    BTBIP32Key* key = [BTBIP32Key deserializeFromB58:content];
+    if (key == nil){
+        [dp dismissWithCompletion:^{
+            [self showMsg:NSLocalizedString(@"monitor_cold_hd_account_failed_wrong_qr_code", nil)];
+        }];
+    }
+    self.xpub = key;
+    __block NSString* firstAddress = [[key deriveSoftened:EXTERNAL_ROOT_PATH] deriveSoftened:0].address;
     dispatch_async(dispatch_get_main_queue(), ^{
         [dp dismissWithCompletion:^{
-            [self showMsg:NSLocalizedString(@"monitor_cold_hd_account_success", nil)];
-            [[[DialogHDMonitorFirstAddressValidation alloc]initWithAddress:firstAddress]showInWindow:self.vc.view.window];
-            if (self.vc && [self.vc respondsToSelector:@selector(reload)]) {
-                [self.vc performSelector:@selector(reload)];
-            }
+            [[[DialogHDMonitorFirstAddressValidation alloc]initWithAddress:firstAddress target:self okSelector:@selector(accountValidatedSuccess) cancelSelector:nil] showInWindow:self.vc.view.window];
         }];
     });
+}
+
+-(void)accountValidatedSuccess {
+    DialogProgress *dp = [[DialogProgress alloc] initWithMessage:NSLocalizedString(@"Please wait…", nil)];
+    [dp showInWindow:self.vc.view.window completion:^{
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+            [[PeerUtil instance] stopPeer];
+            [BTAddressManager instance].hdAccountMonitored = [[BTHDAccount alloc] initWithAccountExtendedPub:self.xpub.getPubKeyExtended fromXRandom:NO syncedComplete:NO andGenerationCallback:nil];
+            [[PeerUtil instance] startPeer];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [dp dismissWithCompletion:^{
+                    [self showMsg:NSLocalizedString(@"monitor_cold_hd_account_success", nil)];
+                    
+                    if (self.vc && [self.vc respondsToSelector:@selector(reload)]) {
+                        [self.vc performSelector:@selector(reload)];
+                    }
+                }];
+            });
+        });
+    }];
 }
 
 @end
