@@ -41,6 +41,7 @@
 		0A75FC351B5613DA00F062B0 /* ColdAddressAddHDAccountViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A75FC341B5613DA00F062B0 /* ColdAddressAddHDAccountViewController.m */; };
 		0A75FC381B5613FA00F062B0 /* ColdAddressAddOtherViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A75FC371B5613FA00F062B0 /* ColdAddressAddOtherViewController.m */; };
 		0A75FC3B1B5629E100F062B0 /* ColdAddressAddHDAccountViewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A75FC3A1B5629E100F062B0 /* ColdAddressAddHDAccountViewViewController.m */; };
+		0A7F203D1D0BB0F900B4EAB1 /* DialogHDMonitorFirstAddressValidation.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A7F203C1D0BB0F900B4EAB1 /* DialogHDMonitorFirstAddressValidation.m */; };
 		0A7F9D311AA83FA500D70BAC /* CacheUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 4269FF7A195A948A001213B9 /* CacheUtil.m */; };
 		0A8853AD1AA8466E00760014 /* GroupUserDefaultUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A8853AC1AA8466E00760014 /* GroupUserDefaultUtil.m */; };
 		0A8853AE1AA8466E00760014 /* GroupUserDefaultUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A8853AC1AA8466E00760014 /* GroupUserDefaultUtil.m */; };
@@ -63,6 +64,7 @@
 		0AD674971A7B4BDA007967DB /* ColdAddressListHDMCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AD674961A7B4BDA007967DB /* ColdAddressListHDMCell.m */; };
 		0AD6749C1A7B6229007967DB /* DialogWithActions.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AD6749B1A7B6229007967DB /* DialogWithActions.m */; };
 		0AD6749F1A7B9108007967DB /* DialogHDMSeedWordList.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AD6749E1A7B9108007967DB /* DialogHDMSeedWordList.m */; };
+		0AD849EB1D0E9B4C005FAF56 /* DialogMonitorAddressValidation.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AD849EA1D0E9B4C005FAF56 /* DialogMonitorAddressValidation.m */; };
 		0AE142621B00924C0070C580 /* PaymentInterfaceController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AE142611B00924C0070C580 /* PaymentInterfaceController.m */; };
 		0AE142631B0094140070C580 /* QRCodeThemeUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = ACEE7D1C19D3F9F500932B39 /* QRCodeThemeUtil.m */; };
 		0AE142641B00941B0070C580 /* UIColor+Util.m in Sources */ = {isa = PBXBuildFile; fileRef = ACDDDC3519483A840008A79D /* UIColor+Util.m */; };
@@ -416,6 +418,8 @@
 		0A75FC371B5613FA00F062B0 /* ColdAddressAddOtherViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ColdAddressAddOtherViewController.m; sourceTree = "<group>"; };
 		0A75FC391B5629E100F062B0 /* ColdAddressAddHDAccountViewViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ColdAddressAddHDAccountViewViewController.h; sourceTree = "<group>"; };
 		0A75FC3A1B5629E100F062B0 /* ColdAddressAddHDAccountViewViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ColdAddressAddHDAccountViewViewController.m; sourceTree = "<group>"; };
+		0A7F203B1D0BB0F900B4EAB1 /* DialogHDMonitorFirstAddressValidation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DialogHDMonitorFirstAddressValidation.h; sourceTree = "<group>"; };
+		0A7F203C1D0BB0F900B4EAB1 /* DialogHDMonitorFirstAddressValidation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DialogHDMonitorFirstAddressValidation.m; sourceTree = "<group>"; };
 		0A8853AB1AA8466E00760014 /* GroupUserDefaultUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GroupUserDefaultUtil.h; sourceTree = "<group>"; };
 		0A8853AC1AA8466E00760014 /* GroupUserDefaultUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GroupUserDefaultUtil.m; sourceTree = "<group>"; };
 		0A93B5FF1A4A66080081D74D /* DialogSignMessageOutput.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DialogSignMessageOutput.h; sourceTree = "<group>"; };
@@ -456,6 +460,8 @@
 		0AD6749B1A7B6229007967DB /* DialogWithActions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DialogWithActions.m; sourceTree = "<group>"; };
 		0AD6749D1A7B9108007967DB /* DialogHDMSeedWordList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DialogHDMSeedWordList.h; sourceTree = "<group>"; };
 		0AD6749E1A7B9108007967DB /* DialogHDMSeedWordList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DialogHDMSeedWordList.m; sourceTree = "<group>"; };
+		0AD849E91D0E9B4C005FAF56 /* DialogMonitorAddressValidation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DialogMonitorAddressValidation.h; sourceTree = "<group>"; };
+		0AD849EA1D0E9B4C005FAF56 /* DialogMonitorAddressValidation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DialogMonitorAddressValidation.m; sourceTree = "<group>"; };
 		0AE142601B00924C0070C580 /* PaymentInterfaceController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PaymentInterfaceController.h; sourceTree = "<group>"; };
 		0AE142611B00924C0070C580 /* PaymentInterfaceController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PaymentInterfaceController.m; sourceTree = "<group>"; };
 		0AF4B7BA1CE1794400F7F7D9 /* PushTxThirdParty.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PushTxThirdParty.h; sourceTree = "<group>"; };
@@ -1723,6 +1729,10 @@
 				1BC27B1C49FCCA6BDE3C42D3 /* DialogOldAddressesOfHDAccount.h */,
 				0A0961361B5CBAD300D554A6 /* DialogShowAddressOnNet.h */,
 				0A0961371B5CBAD300D554A6 /* DialogShowAddressOnNet.m */,
+				0A7F203B1D0BB0F900B4EAB1 /* DialogHDMonitorFirstAddressValidation.h */,
+				0A7F203C1D0BB0F900B4EAB1 /* DialogHDMonitorFirstAddressValidation.m */,
+				0AD849E91D0E9B4C005FAF56 /* DialogMonitorAddressValidation.h */,
+				0AD849EA1D0E9B4C005FAF56 /* DialogMonitorAddressValidation.m */,
 			);
 			path = Dialog;
 			sourceTree = "<group>";
@@ -2375,6 +2385,7 @@
 				ACBEC01B196E397E004301E0 /* CheckScoreAndBgAnimatableView.m in Sources */,
 				AC454DE71A1F252B000AF4ED /* PinCodeUtil.m in Sources */,
 				4254083B19469C9A007AF99C /* BaseApi.m in Sources */,
+				0A7F203D1D0BB0F900B4EAB1 /* DialogHDMonitorFirstAddressValidation.m in Sources */,
 				AC2F3295195C02C3001B7439 /* AmountButton.m in Sources */,
 				42E8161C19529B14005F16F7 /* KeyUtil.m in Sources */,
 				ACEE7D3619D3FC4B00932B39 /* ReloadTxSetting.m in Sources */,
@@ -2447,6 +2458,7 @@
 				ACCA274E198F2805000E6A32 /* DialogTotalBalance.m in Sources */,
 				ACDDDC2D19480ECF0008A79D /* DialogCentered.m in Sources */,
 				ACF02FEB19D90899001AB701 /* DialogSwitchQRCode.m in Sources */,
+				0AD849EB1D0E9B4C005FAF56 /* DialogMonitorAddressValidation.m in Sources */,
 				4268FE2B194ACD57007A4C30 /* CheckViewController.m in Sources */,
 				0A42062A1A494F1000562100 /* SignMessageViewController.m in Sources */,
 				DAB2C8761A206F080011EE2F /* KeychainBackupUtil.m in Sources */,

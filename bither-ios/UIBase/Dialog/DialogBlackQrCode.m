@@ -27,10 +27,18 @@
 
 @implementation DialogBlackQrCode
 
+- (instancetype)initWithContent:(NSString *)content title:(NSString *)title andSubtitle:(NSString *)subtitle {
+    self = [super initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.width)];
+    if (self) {
+        [self configureWithContent:content title:title andSubtitle:subtitle];
+    }
+    return self;
+}
+
 - (instancetype)initWithContent:(NSString *)content andTitle:(NSString *)title {
     self = [super initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.width)];
     if (self) {
-        [self configureWithContent:content andTitle:title];
+        [self configureWithContent:content title:title andSubtitle:nil];
     }
     return self;
 }
@@ -38,12 +46,12 @@
 - (instancetype)initWithContent:(NSString *)content {
     self = [super initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.width)];
     if (self) {
-        [self configureWithContent:content andTitle:nil];
+        [self configureWithContent:content title:nil andSubtitle:nil];
     }
     return self;
 }
 
-- (void)configureWithContent:(NSString *)content andTitle:(NSString *)title {
+- (void)configureWithContent:(NSString *)content title:(NSString *)title andSubtitle:(NSString *)subtitle {
     self.backgroundImage = [UIImage imageWithColor:[UIColor colorWithWhite:1 alpha:0]];
     self.bgInsets = UIEdgeInsetsMake(10, 0, 10, 0);
     self.dimAmount = 0.8f;
@@ -59,6 +67,17 @@
         lblTitle.font = [UIFont systemFontOfSize:kTitleFontSize];
         lblTitle.text = title;
         lblTitle.textAlignment = NSTextAlignmentCenter;
+        lblTitle.numberOfLines = 0;
+        [self addSubview:lblTitle];
+    }
+    if (![BTUtils isEmpty:subtitle]) {
+        CGSize titleSize = [subtitle sizeWithRestrict:CGSizeMake(self.frame.size.width - kTitleMargin * 2, CGFLOAT_MAX) font:[UIFont fontWithName:@"Courier New" size:kTitleFontSize]];
+        UILabel *lblTitle = [[UILabel alloc] initWithFrame:CGRectMake((self.frame.size.width - titleSize.width) / 2, iv.frame.size.height + (([UIScreen mainScreen].bounds.size.height - [UIApplication sharedApplication].statusBarFrame.size.height - iv.frame.size.height) / 2 - titleSize.height) / 2, titleSize.width, titleSize.height)];
+        lblTitle.backgroundColor = [UIColor clearColor];
+        lblTitle.textColor = [UIColor whiteColor];
+        lblTitle.font = [UIFont fontWithName:@"Courier New" size:kTitleFontSize];
+        lblTitle.text = subtitle;
+        lblTitle.textAlignment = NSTextAlignmentLeft;
         lblTitle.numberOfLines = 0;
         [self addSubview:lblTitle];
     }

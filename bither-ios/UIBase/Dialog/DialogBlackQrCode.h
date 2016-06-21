@@ -22,4 +22,6 @@
 - (instancetype)initWithContent:(NSString *)content;
 
 - (instancetype)initWithContent:(NSString *)content andTitle:(NSString *)title;
+
+- (instancetype)initWithContent:(NSString *)content title:(NSString *)title andSubtitle:(NSString *)subtitle;
 @end

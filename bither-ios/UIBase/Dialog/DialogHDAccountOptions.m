@@ -27,9 +27,10 @@
 #import "DialogHDMSeedWordList.h"
 #import "DialogOldAddressesOfHDAccount.h"
 #import "UIViewController+PiShowBanner.h"
+#import "DialogPrivateKeyText.h"
 
 @interface DialogHDAccountOptions () <DialogPasswordDelegate> {
-    BOOL qr;
+    SEL passwordSelector;
     BTHDAccount *hdAccount;
     UIWindow *_window;
 }
@@ -48,12 +49,20 @@
         [actions addObject:[[Action alloc] initWithName:NSLocalizedString(@"hd_account_request_new_receiving_address", nil) target:nil andSelector:@selector(requestNewReceivingAddress)]];
         [actions addObject:[[Action alloc] initWithName:NSLocalizedString(@"hd_account_old_addresses", nil) target:nil andSelector:@selector(showOldAddresses)]];
     }
+    if (account.hasPrivKey) {
+        [actions addObject:[[Action alloc] initWithName:NSLocalizedString(@"hd_account_show_xpub", nil) target:nil andSelector:@selector(xPubPressed)]];
+    }
     self = [super initWithActions:actions];
     if (self) {
         hdAccount = account;
         self.delegate = delegate;
     }
     return self;
+}
+
+- (void)dialogWillShow {
+    [super dialogWillShow];
+    passwordSelector = nil;
 }
 
 - (void)requestNewReceivingAddress {
@@ -86,13 +95,22 @@
 }
 
 - (void)qrPressed {
-    qr = YES;
+    passwordSelector = @selector(showHdAccountQr:);
     [[[DialogPassword alloc] initWithDelegate:self] showInWindow:_window];
 }
 
 - (void)phrasePressed {
-    qr = NO;
+    passwordSelector = @selector(showHDAccountPhrase:);
     [[[DialogPassword alloc] initWithDelegate:self] showInWindow:_window];
+}
+
+- (void)xPubPressed {
+    passwordSelector = @selector(showXPub:);
+    [[[DialogPassword alloc] initWithDelegate:self] showInWindow:_window];
+}
+
+- (void)showXPub:(NSString *) password{
+    [[[DialogPrivateKeyText alloc] initWithPrivateKeyStr:[[hdAccount xPub:password] serializePubB58]] showInWindow:_window];
 }
 
 - (void)showInWindow:(UIWindow *)window completion:(void (^)())completion {
@@ -100,22 +118,28 @@
     [super showInWindow:window completion:completion];
 }
 
-- (void)onPasswordEntered:(NSString *)password {
-    if (qr) {
-        [[[DialogBlackQrCode alloc] initWithContent:hdAccount.getQRCodeFullEncryptPrivKey andTitle:NSLocalizedString(@"add_hd_account_seed_qr_code", nil)] showInWindow:_window];
-    } else {
-        __block DialogProgress *dp = [[DialogProgress alloc] initWithMessage:NSLocalizedString(@"Please wait…", nil)];
-        dp.touchOutSideToDismiss = NO;
-        [dp showInWindow:_window completion:^{
-            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
-                __block NSArray *words = [hdAccount seedWords:password];
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    [dp dismissWithCompletion:^{
-                        [[[DialogHDMSeedWordList alloc] initWithWords:words] showInWindow:_window];
-                    }];
-                });
+- (void)showHdAccountQr:(NSString*)password{
+    [[[DialogBlackQrCode alloc] initWithContent:hdAccount.getQRCodeFullEncryptPrivKey andTitle:NSLocalizedString(@"add_hd_account_seed_qr_code", nil)] showInWindow:_window];
+}
+
+- (void)showHDAccountPhrase:(NSString*)password {
+    __block DialogProgress *dp = [[DialogProgress alloc] initWithMessage:NSLocalizedString(@"Please wait…", nil)];
+    dp.touchOutSideToDismiss = NO;
+    [dp showInWindow:_window completion:^{
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+            __block NSArray *words = [hdAccount seedWords:password];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [dp dismissWithCompletion:^{
+                    [[[DialogHDMSeedWordList alloc] initWithWords:words] showInWindow:_window];
+                }];
             });
-        }];
+        });
+    }];
+}
+
+- (void)onPasswordEntered:(NSString *)password {
+    if(passwordSelector){
+        [self performSelector:passwordSelector withObject:password];
     }
 }
 @end

@@ -34,9 +34,12 @@
 #import "DialogWithActions.h"
 #import "AppDelegate.h"
 #import "PeerUtil.h"
+#import "DialogMonitorAddressValidation.h"
+
 @interface MonitorSetting () <ScanQrCodeDelegate>
 @property(weak) UIViewController *vc;
 @property (nonatomic,copy)NSString *senderResut;
+@property NSArray* addressList;
 @end
 
 static Setting *monitorSetting;
@@ -72,6 +75,7 @@ static Setting *monitorSetting;
 
 - (void)handleResult:(NSString *)result byReader:(ScanQrCodeViewController *)reader {
     _senderResut = result;
+    self.addressList = nil;
     [reader.presentingViewController dismissViewControllerAnimated:YES completion:^{
         [self handleResult];
     }];
@@ -125,15 +129,29 @@ static Setting *monitorSetting;
         [addressList addObject:btAddress];
         [addressStrList addObject:key.address];
     }
-    [KeyUtil addAddressList:addressList];
+    self.addressList = addressList;
     dispatch_async(dispatch_get_main_queue(), ^{
         [dp dismissWithCompletion:^{
-            [self showMsg:NSLocalizedString(@"add_hd_account_monitor_success", nil)];
-            if (self.vc && [self.vc respondsToSelector:@selector(reload)]) {
-                [self.vc performSelector:@selector(reload)];
-            }
+            [[[DialogMonitorAddressValidation alloc]initWithAddresses:addressStrList target:self andOkSelector:@selector(monitorAddressValidationSuccess)] showInWindow:self.vc.view.window];
         }];
     });
+}
+
+- (void)monitorAddressValidationSuccess{
+    DialogProgress *dp = [[DialogProgress alloc] initWithMessage:NSLocalizedString(@"Please wait…", nil)];
+    [dp showInWindow:self.vc.view.window completion:^{
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+            [KeyUtil addAddressList:self.addressList];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [dp dismissWithCompletion:^{
+                    [self showMsg:NSLocalizedString(@"add_hd_account_monitor_success", nil)];
+                    if (self.vc && [self.vc respondsToSelector:@selector(reload)]) {
+                        [self.vc performSelector:@selector(reload)];
+                    }
+                }];
+            });
+        });
+    }];
 }
 
 - (BOOL)checkQrCodeContent:(NSString *)content {
