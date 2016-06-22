@@ -28,6 +28,7 @@
 #import "BTHDAccountAddressProvider.h"
 #import "DialogCentered.h"
 #import "DialogWithActions.h"
+#import "UserDefaultsUtil.h"
 
 
 static double reloadTime;
@@ -41,27 +42,19 @@ static Setting *reloadTxsSetting;
 }
 #pragma mark - reload data Prompt box
 - (void)onPasswordEntered:(NSString *)password {
-    NSMutableArray *actions = [NSMutableArray new];
-    [actions addObject:[[Action alloc]initWithName:NSLocalizedString(@"reset_tx_from_bither", nil) target:self andSelector:@selector(tapFrom_bither)]];
-    [actions addObject:[[Action alloc]initWithName:NSLocalizedString(@"reset_tx_from_blockchain", nil) target:self andSelector:@selector(tapFrom_blockChain)]];
-    [[[DialogWithActions alloc]initWithActions:actions]showInWindow:self.controller.view.window];
+    [self doAction];
 }
 #pragma mark - from_bither Respond to events
-- (void)tapFrom_bither{
+- (void) doAction {
     DialogProgress *dialogProgrees = [[DialogProgress alloc] initWithMessage:NSLocalizedString(@"Please wait…", nil)];
     dialogProgrees.touchOutSideToDismiss = NO;
     [dialogProgrees showInWindow:self.controller.view.window completion:^{
-        [self reloadTx:dialogProgrees];
+        if([[UserDefaultsUtil instance] getApiConfig] == ApiConfigBlockchainInfo){
+            [self reloadTxFrom_blockChain:dialogProgrees];
+        }else{
+            [self reloadTx:dialogProgrees];
+        }
         
-    }];
-}
-#pragma mark - from_blockChain.info Respond to events
-
-- (void)tapFrom_blockChain{
-    DialogProgress *dialogProgrees = [[DialogProgress alloc] initWithMessage:NSLocalizedString(@"Please wait…", nil)];
-    dialogProgrees.touchOutSideToDismiss = NO;
-    [dialogProgrees showInWindow:self.controller.view.window completion:^{
-        [self reloadTxFrom_blockChain:dialogProgrees];
     }];
 }
 
