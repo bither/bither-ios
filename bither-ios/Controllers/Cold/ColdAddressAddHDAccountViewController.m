@@ -112,7 +112,7 @@
 
 - (void)onUEntropyGeneratingWithController:(UEntropyViewController *)controller collector:(UEntropyCollector *)collector andPassword:(NSString *)password {
     float progress = kStartProgress;
-    float generationProgress = 1.0 - kStartProgress - kSaveProgress;
+//    float generationProgress = 1.0 - kStartProgress - kSaveProgress;
     NSTimeInterval startGeneratingTime = [[NSDate date] timeIntervalSince1970];
     [collector onResume];
     [collector start];

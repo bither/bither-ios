@@ -74,7 +74,7 @@
     lblAddress.font = [UIFont systemFontOfSize:kValueFontSize];
     lblAddress.textColor = [UIColor colorWithWhite:1 alpha:kValueAlpha];
     lblAddress.adjustsFontSizeToFitWidth = YES;
-    lblAddress.lineBreakMode = UILineBreakModeTailTruncation;
+    lblAddress.lineBreakMode = NSLineBreakByTruncatingTail;
     lblAddress.numberOfLines = 2;
     lblAddress.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleBottomMargin;
     lblAddress.text = [StringUtil formatAddress:toAddress groupSize:4 lineSize:24];

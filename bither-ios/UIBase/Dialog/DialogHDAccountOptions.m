@@ -139,7 +139,10 @@
 
 - (void)onPasswordEntered:(NSString *)password {
     if(passwordSelector){
-        [self performSelector:passwordSelector withObject:password];
+        IMP imp = [self methodForSelector:passwordSelector];
+        void (*func)(id, SEL, NSString *) = (void *)imp;
+        func(self, passwordSelector, password);
+//        [self performSelector:passwordSelector withObject:password];
     }
 }
 @end

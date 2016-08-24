@@ -53,12 +53,12 @@ static HDMApi *hdmApi;
 
 - (void)getHDMPasswordRandomWithHDMBid:(NSString *)hdmBid callback:(IdResponseBlock)callback andErrorCallBack:(ErrorHandler)errorCallback; {
     NSString *url = [NSString stringWithFormat:@"https://hdm.bither.net/api/v1/%@/hdm/password", hdmBid];
-    AFHTTPRequestOperation *op = [manager GET:url parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [manager GET:url parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSNumber *random = @([operation.responseString longLongValue]);
         if (callback != nil) {
             callback(random);
         }
-    }                                 failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         if (errorCallback) {
             NSError *e = [self formatHttpErrorWithOperation:operation];
             errorCallback(operation, e);

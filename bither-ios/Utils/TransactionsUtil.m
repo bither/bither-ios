@@ -556,17 +556,20 @@
         //NSLog(@"%@",url);
         NSData *data = [NSURLConnection sendSynchronousRequest:request returningResponse:nil error:nil];
         NSString *aString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-    BTTx *tx = [[BTTx alloc] initWithMessage:[aString hexToData]];
-    tx.blockNo = (uint32_t) [each[@"block_height"] intValue];
-    BTBlock *block;
+        BTTx *tx = [[BTTx alloc] initWithMessage:[aString hexToData]];
+        tx.blockNo = (uint32_t) [each[@"block_height"] intValue];
+        // I don't know what is the role
+        /*
+        BTBlock *block;
         if (tx.blockNo < minBlockNo) {
             block = dictionary[@(minBlockNo)];
         } else {
-        block = dictionary[@(tx.blockNo)];
+            block = dictionary[@(tx.blockNo)];
         }
+        */
         tx.txTime = (uint32_t)[each[@"time"]intValue];
         [txs addObject:tx];
-
+        
     }
     return txs;
 }

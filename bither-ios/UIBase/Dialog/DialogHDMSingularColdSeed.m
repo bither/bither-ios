@@ -130,7 +130,7 @@
 }
 
 - (void)tabChanged:(UISegmentedControl *)control {
-    [self.page setIndex:control.selectedSegmentIndex animated:YES];
+    [self.page setIndex:(int)control.selectedSegmentIndex animated:YES];
 }
 
 - (void)pageIndexChanged:(int)index {

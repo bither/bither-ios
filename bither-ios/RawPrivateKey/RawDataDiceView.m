@@ -40,14 +40,14 @@
 - (void)addData:(NSUInteger)d {
     if (self.filledDataLength < self.dataLength) {
         if (d > 5) {
-            [NSException raise:@"RawDataDiceView not accepted dice value" format:@"RawDataDiceView not accepted dice value %d", d];
+            [NSException raise:@"RawDataDiceView not accepted dice value" format:@"RawDataDiceView not accepted dice value %lu", (unsigned long)d];
         }
         NSUInteger index = data.length;
-        [data appendFormat:@"%d", d];
+        [data appendFormat:@"%lu", (unsigned long)d];
         UIView *v = ((UIView *) ((UIView *) self.subviews[1]).subviews[index]).subviews[0];
         UIImageView *iv = (UIImageView *) v.subviews[1];
         [v.layer removeAllAnimations];
-        iv.image = [UIImage imageNamed:[NSString stringWithFormat:@"dice_large_%d", d + 1]];
+        iv.image = [UIImage imageNamed:[NSString stringWithFormat:@"dice_large_%lu", d + 1]];
         CGPoint center = CGPointMake(CGRectGetMidX(v.frame), CGRectGetMidY(v.frame));
         v.layer.anchorPoint = CGPointMake(0.5, 0.5);
         v.layer.position = center;

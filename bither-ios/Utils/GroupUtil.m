@@ -124,7 +124,7 @@
 
 }
 
-+ (MarketType)getMarketType:(int)value {
++ (MarketType)getMarketType:(NSInteger)value {
 
     switch (value) {
         case 2:

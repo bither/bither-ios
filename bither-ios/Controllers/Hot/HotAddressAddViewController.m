@@ -79,7 +79,7 @@
 
 - (IBAction)tabChanged:(id)sender {
     if (self.vTab.selectedSegmentIndex != self.page.index) {
-        [self.page setIndex:self.vTab.selectedSegmentIndex animated:YES];
+        [self.page setIndex:(int)self.vTab.selectedSegmentIndex animated:YES];
     }
 }
 

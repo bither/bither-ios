@@ -253,21 +253,19 @@
     self.tfPassword.attributedPlaceholder = [[NSAttributedString alloc] initWithString:NSLocalizedString(@"Old Password", nil) attributes:@{NSForegroundColorAttributeName : [UIColor colorWithWhite:1 alpha:0.5]}];
     [self configureTextField:self.tfPassword];
     self.tfPassword.returnKeyType = UIReturnKeyNext;
-    CGFloat buttonTop = CGRectGetMaxY(self.tfPassword.frame) + kInnerMargin;
     [self.vContent addSubview:self.tfPassword];
 
     self.tfPasswordNew = [[UITextField alloc] initWithFrame:CGRectMake(kOuterPadding, CGRectGetMaxY(self.tfPassword.frame) + kInnerMargin, kWidth - kOuterPadding * 2, kTextFieldHeight)];
     self.tfPasswordNew.attributedPlaceholder = [[NSAttributedString alloc] initWithString:NSLocalizedString(@"New Password", nil) attributes:@{NSForegroundColorAttributeName : [UIColor colorWithWhite:1 alpha:0.5]}];
     [self configureTextField:self.tfPasswordNew];
     self.tfPasswordNew.returnKeyType = UIReturnKeyNext;
-    buttonTop = CGRectGetMaxY(self.tfPasswordNew.frame) + kInnerMargin;
     [self.vContent addSubview:self.tfPasswordNew];
 
     self.tfPasswordConfirm = [[UITextField alloc] initWithFrame:CGRectMake(kOuterPadding, CGRectGetMaxY(self.tfPasswordNew.frame) + kInnerMargin, kWidth - kOuterPadding * 2, kTextFieldHeight)];
     self.tfPasswordConfirm.attributedPlaceholder = [[NSAttributedString alloc] initWithString:NSLocalizedString(@"Confirm New Password", nil) attributes:@{NSForegroundColorAttributeName : [UIColor colorWithWhite:1 alpha:0.5]}];
     [self configureTextField:self.tfPasswordConfirm];
     self.tfPasswordConfirm.returnKeyType = UIReturnKeyDone;
-    buttonTop = CGRectGetMaxY(self.tfPasswordConfirm.frame) + kInnerMargin;
+    CGFloat buttonTop = CGRectGetMaxY(self.tfPasswordConfirm.frame) + kInnerMargin;
     [self.vContent addSubview:self.tfPasswordConfirm];
 
     self.btnCancel = [[UIButton alloc] initWithFrame:CGRectMake(kOuterPadding, buttonTop, (kWidth - kOuterPadding * 2 - kInnerMargin) / 2, kButtonHeight)];

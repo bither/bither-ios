@@ -26,7 +26,7 @@ static NSMutableArray *markets;
     if (markets && markets.count > 0) {
         return markets;
     }
-    @synchronized (markets) {
+    @synchronized (self) {
         if (markets.count == 0) {
             markets = [NSMutableArray new];
             for (MarketType marketType = BITSTAMP; marketType <= MARKET796; marketType++) {

@@ -74,7 +74,7 @@ static Setting *CloneQrSetting;
                     } else if([commponent[i] rangeOfString:HD_QR_CODE_FLAT].location == 0){
                         NSString *s = [BTQRCodeUtil joinedQRCode:[commponent subarrayWithRange:NSMakeRange(i, 3)]];
                         s = [s substringFromIndex:1];
-                        [[BTHDAccountCold alloc]initWithEncryptedMnemonicSeed:[[BTEncryptData alloc]initWithStr:s] andPassword:password];
+//                        [[BTHDAccountCold alloc] initWithEncryptedMnemonicSeed:[[BTEncryptData alloc]initWithStr:s] andPassword:password];
                     } else {
                         NSString *s = [BTQRCodeUtil joinedQRCode:[commponent subarrayWithRange:NSMakeRange(i, 3)]];
                         [keys addObject:s];

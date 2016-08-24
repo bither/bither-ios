@@ -360,7 +360,10 @@
     }
     [reader.presentingViewController dismissViewControllerAnimated:YES completion:^{
         if (afterQRScanSelector && [self respondsToSelector:afterQRScanSelector]) {
-            [self performSelector:afterQRScanSelector withObject:result];
+            IMP imp = [self methodForSelector:afterQRScanSelector];
+            void (*func)(id, SEL, NSString *) = (void *)imp;
+            func(self, afterQRScanSelector, result);
+//            [self performSelector:afterQRScanSelector withObject:result];
         }
         afterQRScanSelector = nil;
     }];

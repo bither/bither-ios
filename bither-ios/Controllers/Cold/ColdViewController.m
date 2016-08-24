@@ -99,14 +99,10 @@
 
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
-- (void)viewWillAppear:(BOOL)animated; {
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
     [self.navigationController setNavigationBarHidden:YES animated:NO];
-
 }
 
 - (void)pageIndexChanged:(int)index {
@@ -152,7 +148,7 @@
     } else {
         UIViewController *controller = [self.page viewControllerAtIndex:index];
         if ([controller respondsToSelector:@selector(refresh)]) {
-            // [controller refresh];
+//             [controller refresh];
         }
     }
 }

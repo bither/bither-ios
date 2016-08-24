@@ -41,7 +41,7 @@
 
     while ([xRandomData compare:[PARAMETERS_MIN_N hexToData]] == 0 || [xRandomData compare:[PARAMETERS_N hexToData]] >= 0) {
         while (uRandomData == nil) {
-            uRandomData = [NSData randomWithSize:size];
+            uRandomData = [NSData randomWithSize:(int)size];
         }
         if ([self.delegate respondsToSelector:@selector(randomWithSize:)]) {
             while (uEntropyData == nil) {

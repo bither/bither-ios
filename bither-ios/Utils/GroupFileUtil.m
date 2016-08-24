@@ -213,7 +213,6 @@
 
 
         NSError *error;
-        BOOL success = [data writeToURL:writingIntent.URL options:NSDataWritingAtomic error:&error];
 
         if (successfulSecurityScopedResourceAccess) {
             [url stopAccessingSecurityScopedResource];

@@ -47,7 +47,7 @@
 }
 
 - (IBAction)tabChanged:(UISegmentedControl *)sender {
-    [self.page setIndex:sender.selectedSegmentIndex animated:YES];
+    [self.page setIndex:(int)sender.selectedSegmentIndex animated:YES];
 }
 
 @end

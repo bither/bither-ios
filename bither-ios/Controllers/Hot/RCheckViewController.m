@@ -125,18 +125,16 @@
     if (checkingIndex >= addresses.count) {
         return;
     }
-    BTAddress *address = addresses[checkingIndex];
-    void(^check)() = ^{
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-            BOOL result = YES;
-            dispatch_sync(dispatch_get_main_queue(), ^{
-                if (completion) {
-                    completion(result);
-                    [self checkNextAddressWithcompletion:completion];
-                }
-            });
+    
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        BOOL result = YES;
+        dispatch_sync(dispatch_get_main_queue(), ^{
+            if (completion) {
+                completion(result);
+                [self checkNextAddressWithcompletion:completion];
+            }
         });
-    };
+    });
 }
 
 - (void)checkFinished {

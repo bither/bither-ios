@@ -50,7 +50,9 @@
         NSData *d = [[BTUtils formatMessageForSigning:message] SHA256_2];
         result = [NSString hexWithData:d];
     } else {
-        *err = e;
+        if (err != NULL) {
+            *err = e;
+        }
     }
     [condition unlock];
     return result;
@@ -60,11 +62,14 @@
     return [NSString stringWithFormat:@"bitid://hdm.bither.net/%@/password/%@/%lld", self.address, [[NSString hexWithData:self.password] toLowercaseStringWithEn], self.serviceRandom];
 }
 
-- (void)changeBidPasswordWithSignature:(NSString *)signature andPassword:(NSString *)password andHotAddress:(NSString *)hotFirstAddress andError:(NSError **)err; {
+- (NSString *)changeBidPasswordWithSignature:(NSString *)signature andPassword:(NSString *)password andHotAddress:(NSString *)hotFirstAddress andError:(NSError **)err; {
     NSString *message = [self getPreSignMessage];
     if (![self.address isEqualToString:[[BTKey signedMessageToKey:message andSignatureBase64:signature] address]]) {
-        *err = [[NSError alloc] initWithDomain:ERR_API_400_DOMAIN code:1002 userInfo:nil];
-        return;
+        if (err != NULL) {
+            *err = [[NSError alloc] initWithDomain:ERR_API_400_DOMAIN code:1002 userInfo:nil];
+            return @"error";
+        }
+        return @"no error";
     }
     NSString *hotAddress = hotFirstAddress ? hotFirstAddress : [BTAddressManager instance].hdmKeychain.firstAddressFromDb;
     __block NSCondition *condition = [NSCondition new];
@@ -87,15 +92,20 @@
         if (!hotFirstAddress) {
             [self save];
         }
+        return @"no error";
     } else {
-        *err = e;
+        if (err != NULL) {
+            *err = e;
+        }
+        return @"error";
     }
 
     [condition unlock];
 }
 
-- (void)changeBidPasswordWithSignature:(NSString *)signature andPassword:(NSString *)password andError:(NSError **)error {
+- (NSString *)changeBidPasswordWithSignature:(NSString *)signature andPassword:(NSString *)password andError:(NSError **)error {
     [self changeBidPasswordWithSignature:[[signature hexToData] base64EncodedStringWithOptions:0] andPassword:password andHotAddress:nil andError:error];
+    return @"changeBidPasswordWithSignature: andPassword: andError:";
 }
 
 - (void)save {
@@ -136,7 +146,9 @@
             pubs.remote = remotes[i];
         }
     } else {
-        *err = e;
+        if (err != NULL) {
+            *err = e;
+        }
     }
 
     [condition unlock];
@@ -145,10 +157,10 @@
 
 - (NSArray *)recoverHDMWithSignature:(NSString *)signature andPassword:(NSString *)password andError:(NSError **)err; {
     NSString *message = [self getPreSignMessage];
-    NSData *d = [[BTUtils formatMessageForSigning:message] SHA256_2];
     if (![self.address isEqualToString:[[BTKey signedMessageToKey:message andSignatureBase64:signature] address]]) {
-        //
-        *err = [[NSError alloc] initWithDomain:ERR_API_400_DOMAIN code:1002 userInfo:nil];
+        if (err != NULL) {
+            *err = [[NSError alloc] initWithDomain:ERR_API_400_DOMAIN code:1002 userInfo:nil];
+        }
         return nil;
     }
 
@@ -183,7 +195,9 @@
         self.encryptedBitherPassword = [[[BTEncryptData alloc] initWithData:self.password andPassowrd:password] toEncryptedString];
         [[BTAddressProvider instance] addHDMBid:self andAddressOfPS:[[[BTKey alloc] initWithSecret:self.password compressed:YES] address]];
     } else {
-        *err = e;
+        if (err != NULL) {
+            *err = e;
+        }
     }
 
     [condition unlock];
@@ -197,7 +211,7 @@
     __block NSError *e = nil;
     NSData *p = [[[BTEncryptData alloc] initWithStr:self.encryptedBitherPassword] decrypt:password];
     if (!p) {
-        [BTHDMPasswordWrongException raise:@"hdm server password decrypt error" format:nil];
+        [BTHDMPasswordWrongException raise:@"hdm server password decrypt error" format:@""];
     }
     [[HDMApi instance] signatureByRemoteWithHDMBid:self.address andPassword:p andUnsignHash:unsignHashes andIndex:index callback:^(NSArray *array) {
         [condition lock];
@@ -217,7 +231,9 @@
     if (e == nil && signatures != nil) {
         result = signatures;
     } else {
-        *err = e;
+        if (err != NULL) {
+            *err = e;
+        }
     }
     [condition unlock];
     return result;

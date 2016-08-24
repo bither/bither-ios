@@ -213,7 +213,7 @@
         index = 0;
     }
     if (index >= [QRCodeTheme themes].count) {
-        index = [QRCodeTheme themes].count - 1;
+        index = (int)[QRCodeTheme themes].count - 1;
     }
     return index;
 }

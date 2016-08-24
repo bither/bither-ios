@@ -151,7 +151,10 @@
 - (void)onPasswordEntered:(NSString *)p {
     password = p;
     if (passwordSelector && [self respondsToSelector:passwordSelector]) {
-        [self performSelector:passwordSelector];
+        IMP imp = [self methodForSelector:passwordSelector];
+        void (*func)(id, SEL) = (void *)imp;
+        func(self, passwordSelector);
+//        [self performSelector:passwordSelector];
     }
     passwordSelector = nil;
 }

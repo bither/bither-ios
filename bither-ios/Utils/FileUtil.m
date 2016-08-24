@@ -110,7 +110,7 @@
         }
         return [filesAndProperties keysSortedByValueUsingSelector:@selector(compare:)];
     }
-    return [NSArray arrayWithObjects:nil];
+    return [NSArray array];
 }
 
 + (void)deleteTmpImageForShareWithName:(NSString *)name {

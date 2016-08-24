@@ -42,7 +42,7 @@
 @property NSArray* addressList;
 @end
 
-static Setting *monitorSetting;
+static MonitorSetting *monitorSetting;
 
 @implementation MonitorSetting
 
@@ -62,14 +62,15 @@ static Setting *monitorSetting;
 }
 
 - (void)configureSetting {
+    __weak typeof(self) weakSelf = self;
     [self setSelectBlock:^(UIViewController *controller) {
-        self.vc = controller;
+        weakSelf.vc = controller;
         if ([BTAddressManager instance].watchOnlyAddresses.count >= WATCH_ONLY_COUNT_LIMIT) {
-            [self showMsg:NSLocalizedString(@"watch_only_address_count_limit", nil)];
+            [weakSelf showMsg:NSLocalizedString(@"watch_only_address_count_limit", nil)];
             return;
         }
-        ScanQrCodeTransportViewController *scan = [[ScanQrCodeTransportViewController alloc] initWithDelegate:self title:NSLocalizedString(@"Scan to watch Bither Cold", nil) pageName:NSLocalizedString(@"Bither Cold Watch Only QR Code", nil)];
-        [self.vc presentViewController:scan animated:YES completion:nil];
+        ScanQrCodeTransportViewController *scan = [[ScanQrCodeTransportViewController alloc] initWithDelegate:weakSelf title:NSLocalizedString(@"Scan to watch Bither Cold", nil) pageName:NSLocalizedString(@"Bither Cold Watch Only QR Code", nil)];
+        [weakSelf.vc presentViewController:scan animated:YES completion:nil];
     }];
 }
 

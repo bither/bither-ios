@@ -64,13 +64,14 @@
 }
 
 - (void)viewDidLoad {
+    [super viewDidLoad];
     if (_index == 0) {
         _index = -1;
         self.index = 0;
     }
     for (UIView *v in self.view.subviews) {
         if ([v isKindOfClass:[UIScrollView class]]) {
-            UIScrollView *s = v;
+            UIScrollView *s = (UIScrollView *)v;
             s.delaysContentTouches = NO;
             s.canCancelContentTouches = YES;
         }
@@ -78,7 +79,7 @@
 }
 
 - (void)pageViewController:(UIPageViewController *)pageViewController willTransitionToViewControllers:(NSArray *)pendingViewControllers {
-    _futureIndex = [self indexOfViewController:[pendingViewControllers objectAtIndex:pendingViewControllers.count - 1]];
+    _futureIndex = (int)[self indexOfViewController:[pendingViewControllers objectAtIndex:pendingViewControllers.count - 1]];
     [self onVisitedViewControllerAtIndex:_futureIndex];
     _inTransation = YES;
     [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(resetInTransationFlag) object:nil];
@@ -94,12 +95,12 @@
 }
 
 - (UIViewController *)pageViewController:(UIPageViewController *)pageViewController viewControllerBeforeViewController:(UIViewController *)viewController {
-    int index = [self indexOfViewController:viewController];
+    int index = (int)[self indexOfViewController:viewController];
     return [self loadViewControllerAtIndex:index - 1];
 }
 
 - (UIViewController *)pageViewController:(UIPageViewController *)pageViewController viewControllerAfterViewController:(UIViewController *)viewController {
-    int index = [self indexOfViewController:viewController];
+    int index = (int)[self indexOfViewController:viewController];
     return [self loadViewControllerAtIndex:index + 1];
 }
 

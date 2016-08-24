@@ -75,7 +75,7 @@
     self.ivBadgetBg.image = [UIImage imageNamed:@"new_message_bg"];
     self.lblBadget = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.vBadget.frame.size.width, self.vBadget.frame.size.height)];
     self.lblBadget.backgroundColor = [UIColor clearColor];
-    self.lblBadget.textAlignment = UITextAlignmentCenter;
+    self.lblBadget.textAlignment = NSTextAlignmentCenter;
     self.lblBadget.textColor = [UIColor whiteColor];
     self.lblBadget.font = [UIFont boldSystemFontOfSize:kTabButtonBadgetFontSize];
     [self.vBadget addSubview:self.ivBadgetBg];
@@ -91,7 +91,7 @@
         _badget = badget;
         self.vBadget.hidden = !(badget > 0);
         if (badget < 9) {
-            self.lblBadget.text = [NSString stringWithFormat:@"%d", badget];
+            self.lblBadget.text = [NSString stringWithFormat:@"%ld", (long)badget];
         } else {
             self.lblBadget.text = @"9+";
         }

@@ -7,7 +7,7 @@
 @property(strong, nonatomic) UILabel *labWorld;
 @property(strong, nonatomic) UIButton *btnBackground;
 @property(strong, nonatomic) NSString *world;
-@property(nonatomic, readwrite) int index;
+@property(nonatomic, readwrite) NSInteger index;
 @end
 
 @implementation WorldListCell
@@ -52,7 +52,7 @@
 - (void)setWorld:(NSString *)world index:(NSInteger)index {
     self.world = world;
     self.index = index;
-    self.labWorld.text = [NSString stringWithFormat:@"%d.%@", index + 1, world];
+    self.labWorld.text = [NSString stringWithFormat:@"%ld.%@", index + 1, world];
 
 }
 
@@ -60,7 +60,7 @@
     if ([self.delegate respondsToSelector:@selector(beginOperation)]) {
         [self.delegate beginOperation];
     }
-    DialogOperationWorld *dialogOperationWorld = [[DialogOperationWorld alloc] initWithDelegate:self.delegate world:self.world index:self.index];
+    DialogOperationWorld *dialogOperationWorld = [[DialogOperationWorld alloc] initWithDelegate:self.delegate world:self.world index:(int)self.index];
     [dialogOperationWorld showInWindow:self.window];
 }
 

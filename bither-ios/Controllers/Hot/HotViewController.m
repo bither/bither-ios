@@ -104,7 +104,9 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (void)viewWillAppear:(BOOL)animated; {
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
     [self.navigationController setNavigationBarHidden:YES animated:NO];
     if (![[BTPeerManager instance] connected]) {
         [[PeerUtil instance] startPeer];

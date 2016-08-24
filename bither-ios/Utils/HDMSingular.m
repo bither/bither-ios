@@ -39,7 +39,7 @@
 @interface HDMSingular () <UEntropyViewControllerDelegate> {
     BOOL running;
     BOOL isSingularMode;
-    NSString *password;
+    NSString *passwordHDMSinglar;
     NSData *hotMnemonicSeed;
     NSData *coldMnemonicSeed;
     BTEncryptData *encryptedColdMnemonicSeed;
@@ -92,19 +92,19 @@
 }
 
 - (void)setPassword:(NSString *)p {
-    password = p;
+    passwordHDMSinglar = p;
 }
 
 - (void)hot:(BOOL)xrandom {
-    if (!password) {
-        [NSException raise:@"hdm singular mode cannot run without password" format:nil];
+    if (!passwordHDMSinglar) {
+        [NSException raise:@"hdm singular mode cannot run without password" format:@""];
     }
     [UIApplication sharedApplication].idleTimerDisabled = YES;
     running = YES;
     isSingularMode = YES;
     if (xrandom) {
         [self.delegate onSingularModeBegin];
-        UEntropyViewController *uentropy = [[UEntropyViewController alloc] initWithPassword:password andDelegate:self];
+        UEntropyViewController *uentropy = [[UEntropyViewController alloc] initWithPassword:passwordHDMSinglar andDelegate:self];
         [self.controller presentViewController:uentropy animated:YES completion:nil];
     } else {
         dispatch_async(dispatch_get_main_queue(), ^{
@@ -121,19 +121,19 @@
 - (void)setSeed1:(NSData *)seed1 andSeed2:(NSData *)seed2 withXRandom:(BOOL)xrandom {
     if (seed1.length < 32 || seed2.length < 32) {
         [self finishCleanUp];
-        [NSException raise:@"hdm singular need 64 bytes entropy" format:nil];
+        [NSException raise:@"hdm singular need 64 bytes entropy" format:@""];
     }
     hotMnemonicSeed = seed1;
     coldMnemonicSeed = seed2;
     [self initHotFirst];
-    encryptedColdMnemonicSeed = [[BTEncryptData alloc] initWithData:coldMnemonicSeed andPassowrd:password andIsXRandom:xrandom];
+    encryptedColdMnemonicSeed = [[BTEncryptData alloc] initWithData:coldMnemonicSeed andPassowrd:passwordHDMSinglar andIsXRandom:xrandom];
     coldQr = [HDM_QR_CODE_FLAG stringByAppendingString:[BTEncryptData encryptedString:encryptedColdMnemonicSeed.toEncryptedString addIsCompressed:YES andIsXRandom:xrandom]];
 }
 
 - (void)cold {
-    if (!password) {
+    if (!passwordHDMSinglar) {
         [self finishCleanUp];
-        [NSException raise:@"hdm singular mode cannot run without password" format:nil];
+        [NSException raise:@"hdm singular mode cannot run without password" format:@""];
     }
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
         coldWords = [[BTBIP39 sharedInstance] toMnemonicArray:coldMnemonicSeed];
@@ -146,15 +146,15 @@
 }
 
 - (void)server {
-    if (!password) {
+    if (!passwordHDMSinglar) {
         [self finishCleanUp];
-        [NSException raise:@"hdm singular mode cannot run without password" format:nil];
+        [NSException raise:@"hdm singular mode cannot run without password" format:@""];
     }
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
         NSError *error;
         NSString *pre = [hdmBid getPreSignHashAndError:&error];
         if (error) {
-            NSLog(error.debugDescription);
+            NSLog(@"%@", error.debugDescription);
             dispatch_async(dispatch_get_main_queue(), ^{
                 [self.delegate singularShowNetworkFailure];
             });
@@ -162,16 +162,16 @@
             return;
         }
         NSData *sig = [coldFirst.key signHash:pre.hexToData];
-        [hdmBid changeBidPasswordWithSignature:[sig base64EncodedStringWithOptions:0] andPassword:password andHotAddress:hotFirstAddress andError:&error];
+        [hdmBid changeBidPasswordWithSignature:[sig base64EncodedStringWithOptions:0] andPassword:passwordHDMSinglar andHotAddress:hotFirstAddress andError:&error];
         if (error) {
-            NSLog(error.debugDescription);
+            NSLog(@"%@", error.debugDescription);
             dispatch_async(dispatch_get_main_queue(), ^{
                 [self.delegate singularShowNetworkFailure];
             });
             [self finishCleanUp];
             return;
         }
-        BTHDMKeychain *keychain = [[BTHDMKeychain alloc] initWithMnemonicSeed:hotMnemonicSeed password:password andXRandom:encryptedColdMnemonicSeed.isXRandom];
+        BTHDMKeychain *keychain = [[BTHDMKeychain alloc] initWithMnemonicSeed:hotMnemonicSeed password:passwordHDMSinglar andXRandom:encryptedColdMnemonicSeed.isXRandom];
         [keychain setSingularModeBackup:encryptedColdMnemonicSeed.toEncryptedString];
         [hdmBid save];
         [KeyUtil setHDKeyChain:keychain];
@@ -180,13 +180,14 @@
         __block BTHDMBid *bid = hdmBid;
         int count = HDM_ADDRESS_PER_SEED_PREPARE_COUNT - keychain.uncompletedAddressCount;
         if (count > 0) {
-            [keychain prepareAddressesWithCount:count password:password andColdExternalPub:coldRoot];
+            [keychain prepareAddressesWithCount:count password:passwordHDMSinglar andColdExternalPub:coldRoot];
         }
-        [keychain completeAddressesWithCount:1 password:password andFetchBlock:^(NSString *password, NSArray *partialPubs) {
+        
+        [keychain completeAddressesWithCount:1 password:passwordHDMSinglar andFetchBlock:^(NSString *password, NSArray *partialPubs) {
             NSError *e;
             [bid createHDMAddress:partialPubs andPassword:password andError:&e];
             if (e) {
-                NSLog(error.debugDescription);
+                NSLog(@"%@", error.debugDescription);
                 dispatch_async(dispatch_get_main_queue(), ^{
                     [s.delegate singularShowNetworkFailure];
                 });

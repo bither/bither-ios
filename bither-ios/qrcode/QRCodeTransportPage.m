@@ -71,7 +71,7 @@
         }
         NSString *splitStr = [str substringWithRange:NSMakeRange(start, end - start)];
         NSString *pageString = @"";
-        NSArray *a = [[NSArray alloc] initWithObjects:[NSString stringWithFormat:@"%d", num - 1], [NSString stringWithFormat:@"%d", i], @"", nil];
+        NSArray *a = [[NSArray alloc] initWithObjects:[NSString stringWithFormat:@"%ld", num - 1], [NSString stringWithFormat:@"%ld", (long)i], @"", nil];
         pageString = [BTQRCodeUtil joinedQRCode:a];
         [array addObject:[pageString stringByAppendingString:splitStr]];
     }
@@ -96,7 +96,7 @@
         NSString *splitStr = [str substringWithRange:NSMakeRange(start, end - start)];
         NSString *pageString = @"";
         if (num > 1) {
-            NSArray *array = [[NSArray alloc] initWithObjects:[NSString stringWithFormat:@"%d", num - 1], [NSString stringWithFormat:@"%d", i], @"", nil];
+            NSArray *array = [[NSArray alloc] initWithObjects:[NSString stringWithFormat:@"%ld", num - 1], [NSString stringWithFormat:@"%ld", (long)i], @"", nil];
             pageString = [BTQRCodeUtil oldJoinedQRCode:array];
         }
         [array addObject:[pageString stringByAppendingString:splitStr]];

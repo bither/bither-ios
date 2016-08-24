@@ -29,7 +29,10 @@
 
 - (void)perform {
     if (self.selector && self.target && [self.target respondsToSelector:self.selector]) {
-        [self.target performSelector:self.selector];
+        IMP imp = [self.target methodForSelector:self.selector];
+        void (*func)(id, SEL) = (void *)imp;
+        func(self.target, self.selector);
+//        [self.target performSelector:self.selector];
     }
 }
 

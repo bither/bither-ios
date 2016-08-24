@@ -94,7 +94,10 @@
 -(void)okPressed:(id)sender {
     [self dismissWithCompletion:^{
         if(self.target && self.okSelector && [self.target respondsToSelector:self.okSelector]){
-            [self.target performSelector:self.okSelector];
+            IMP imp = [self.target methodForSelector:self.okSelector];
+            void (*func)(id, SEL) = (void *)imp;
+            func(self.target, self.okSelector);
+//            [self.target performSelector:self.okSelector];
         }
     }];
 }
