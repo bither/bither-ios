@@ -286,7 +286,7 @@ NSUserDefaults *userDefaults;
 
     NSString *beforeHashStr = [NSString stringWithFormat:@"%@%lu", code, (unsigned long) salt];
 
-    [userDefaults setObject:[NSString stringWithFormat:@"%lu;%lu", salt, [beforeHashStr hash]] forKey:PIN_CODE];
+    [userDefaults setObject:[NSString stringWithFormat:@"%lu;%lu", (unsigned long)salt, (unsigned long)[beforeHashStr hash]] forKey:PIN_CODE];
     [userDefaults synchronize];
 }
 
@@ -315,7 +315,7 @@ NSUserDefaults *userDefaults;
         NSString *saltStr = strs[0];
         hash = strs[1];
         NSString *codeHash = [NSString stringWithFormat:@"%@%@", code, saltStr];
-        return [StringUtil compareString:hash compare:[NSString stringWithFormat:@"%lu", [codeHash hash]]];
+        return [StringUtil compareString:hash compare:[NSString stringWithFormat:@"%lu", (unsigned long)[codeHash hash]]];
     } else {
         return YES;
     }
