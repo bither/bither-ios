@@ -1862,7 +1862,6 @@
 				F9C2823DF7A28F952E1EF9F3 /* 📦 Embed Pods Frameworks */,
 				CF3DD64130EA83060E683705 /* 📦 Copy Pods Resources */,
 				0A3A69021D0401780033F42E /* ShellScript */,
-				C8865AC39E2D1BD65A587810 /* Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -1904,7 +1903,6 @@
 				0A4749961A9D7F0B003684E2 /* Embed App Extensions */,
 				CEAE2ACDDC013D2C5BF7AFE3 /* 📦 Embed Pods Frameworks */,
 				71CAA345256519772492378B /* 📦 Copy Pods Resources */,
-				329F72EABB1BFCD7851E6178 /* Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -1926,7 +1924,6 @@
 				42D9B77A193D6B5B00C85B89 /* Resources */,
 				A56CF35E58EA71A93B905DED /* 📦 Embed Pods Frameworks */,
 				875D8BC18186B6F64BFFA765 /* 📦 Copy Pods Resources */,
-				8A6F2F0C2CB7BB019359A85C /* Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -1961,7 +1958,7 @@
 						DevelopmentTeam = 6887Q2ZK67;
 					};
 					42D9B760193D6B5B00C85B89 = {
-						DevelopmentTeam = T5UF4UCGM5;
+						DevelopmentTeam = 6887Q2ZK67;
 						SystemCapabilities = {
 							com.apple.ApplicationGroups.iOS = {
 								enabled = 1;
@@ -2090,21 +2087,6 @@
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
-		329F72EABB1BFCD7851E6178 /* Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-bither-ios/Pods-bither-ios-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		4268FE14194AA3FD007A4C30 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -2178,21 +2160,6 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-bither-iosTests/Pods-bither-iosTests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		8A6F2F0C2CB7BB019359A85C /* Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-bither-iosTests/Pods-bither-iosTests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		A56CF35E58EA71A93B905DED /* 📦 Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -2221,21 +2188,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
-			showEnvVarsInLog = 0;
-		};
-		C8865AC39E2D1BD65A587810 /* Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-bither-ios WatchKit Extension/Pods-bither-ios WatchKit Extension-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		CEAE2ACDDC013D2C5BF7AFE3 /* 📦 Embed Pods Frameworks */ = {
@@ -2886,12 +2838,6 @@
 				GCC_PREFIX_HEADER = "bither-ios/bither-ios-Prefix.pch";
 				INFOPLIST_FILE = "bither-ios/bither-ios-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"${PODS_ROOT}/OpenSSL/lib-ios\"",
-					"\"${PODS_ROOT}/OpenSSL/lib-ios\"",
-					"$(inherited)",
-				);
 				PRODUCT_BUNDLE_IDENTIFIER = net.bither;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
@@ -2908,7 +2854,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_ENTITLEMENTS = "bither-ios/bither-ios.entitlements";
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2918,12 +2864,6 @@
 				GCC_PREFIX_HEADER = "bither-ios/bither-ios-Prefix.pch";
 				INFOPLIST_FILE = "bither-ios/bither-ios-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"${PODS_ROOT}/OpenSSL/lib-ios\"",
-					"\"${PODS_ROOT}/OpenSSL/lib-ios\"",
-					"$(inherited)",
-				);
 				PRODUCT_BUNDLE_IDENTIFIER = net.bither;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
