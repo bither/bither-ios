@@ -30,13 +30,10 @@
     NSString *address = [array objectAtIndex:0];
     long long diff = [[array objectAtIndex:1] longLongValue];
     NSString *typeString = diff < 0 ? NSLocalizedString(@"Send:", nil) : NSLocalizedString(@"Received:", nil);
-    // I don't know what role
-    /*
     long long diffValue = diff;
     if (diff < 0) {
         diffValue = 0 - diff;
     }
-     */
     NSString *balanceString = [[UnitUtil stringForAmount:diff] stringByAppendingString:[NSString stringWithFormat:@" %@", [UnitUtil unitName]]];
     NSString *msg = [NSString stringWithFormat:@"%@ %@%@", address, typeString, balanceString];
     if ([BTUtils compareString:address compare:kHDAccountPlaceHolder]) {

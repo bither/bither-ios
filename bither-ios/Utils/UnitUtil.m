@@ -25,8 +25,10 @@
 + (int64_t)amountForString:(NSString *)string unit:(BitcoinUnit)unit {
     string = [string stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
     NSRange minusRange = [string rangeOfString:@"-"];
+    BOOL negative = NO;
     if (minusRange.location == 0 && minusRange.length == 1) {
         string = [string substringFromIndex:minusRange.location + minusRange.length];
+        negative = YES;
     }
     NSRange pointRange = [string rangeOfString:@"."];
     int64_t satoshis = [UnitUtil satoshisForUnit:unit];
@@ -51,8 +53,11 @@
             part = partStr.integerValue * pow(10, lackLength);
         }
     }
-
-    return whole + part;
+    if (negative) {
+        return 0 - (whole + part);
+    } else {
+        return whole + part;
+    }
 }
 
 + (int64_t)amountForString:(NSString *)string {
