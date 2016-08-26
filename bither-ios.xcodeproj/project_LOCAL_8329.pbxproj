@@ -1949,7 +1949,7 @@
 				TargetAttributes = {
 					0A47496E1A9D7F0B003684E2 = {
 						CreatedOnToolsVersion = 6.3;
-						DevelopmentTeam = 3X35C63XX6;
+						DevelopmentTeam = 6887Q2ZK67;
 						SystemCapabilities = {
 							com.apple.ApplicationGroups.iOS = {
 								enabled = 1;
@@ -1958,10 +1958,10 @@
 					};
 					0A4749801A9D7F0B003684E2 = {
 						CreatedOnToolsVersion = 6.3;
-						DevelopmentTeam = 3X35C63XX6;
+						DevelopmentTeam = 6887Q2ZK67;
 					};
 					42D9B760193D6B5B00C85B89 = {
-						DevelopmentTeam = 3X35C63XX6;
+						DevelopmentTeam = T5UF4UCGM5;
 						SystemCapabilities = {
 							com.apple.ApplicationGroups.iOS = {
 								enabled = 1;
@@ -2692,8 +2692,8 @@
 			buildSettings = {
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CODE_SIGN_ENTITLEMENTS = "bither-ios WatchKit Extension/bither-ios WatchKit Extension.entitlements";
-				CODE_SIGN_IDENTITY = "iPhone Developer: 珍 韩 (GNKDSMCJ5L)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: 珍 韩 (GNKDSMCJ5L)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -2709,9 +2709,9 @@
 					"$(PROJECT_DIR)/Pods/build/Debug-iphoneos",
 				);
 				MTL_ENABLE_DEBUG_INFO = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = net.bither.ent.watchkitextension;
+				PRODUCT_BUNDLE_IDENTIFIER = net.bither.watchkitextension;
 				PRODUCT_NAME = "${TARGET_NAME}";
-				PROVISIONING_PROFILE = "2a25dd5d-4ad1-4460-809d-6cdea49319a7";
+				PROVISIONING_PROFILE = "";
 				SKIP_INSTALL = YES;
 			};
 			name = Debug;
@@ -2736,9 +2736,9 @@
 					"$(PROJECT_DIR)/Pods/build/Debug-iphoneos",
 				);
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_BUNDLE_IDENTIFIER = net.bither.ent.watchkitextension;
+				PRODUCT_BUNDLE_IDENTIFIER = net.bither.watchkitextension;
 				PRODUCT_NAME = "${TARGET_NAME}";
-				PROVISIONING_PROFILE = "2a25dd5d-4ad1-4460-809d-6cdea49319a7";
+				PROVISIONING_PROFILE = "";
 				SKIP_INSTALL = YES;
 			};
 			name = Release;
@@ -2749,8 +2749,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: 珍 韩 (GNKDSMCJ5L)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: 珍 韩 (GNKDSMCJ5L)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -2762,9 +2762,9 @@
 				INFOPLIST_FILE = "bither-ios WatchKit App/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
 				MTL_ENABLE_DEBUG_INFO = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = net.bither.ent.watchkitapp;
+				PRODUCT_BUNDLE_IDENTIFIER = net.bither.watchkitapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "d554b9c5-befb-424c-9a3d-19c39044d068";
+				PROVISIONING_PROFILE = "";
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = 4;
 				"TARGETED_DEVICE_FAMILY[sdk=iphonesimulator*]" = "1,4";
@@ -2787,9 +2787,9 @@
 				INFOPLIST_FILE = "bither-ios WatchKit App/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_BUNDLE_IDENTIFIER = net.bither.ent.watchkitapp;
+				PRODUCT_BUNDLE_IDENTIFIER = net.bither.watchkitapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "d554b9c5-befb-424c-9a3d-19c39044d068";
+				PROVISIONING_PROFILE = "";
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = 4;
 				"TARGETED_DEVICE_FAMILY[sdk=iphonesimulator*]" = "1,4";
@@ -2876,8 +2876,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_ENTITLEMENTS = "bither-ios/bither-ios.entitlements";
-				CODE_SIGN_IDENTITY = "iPhone Developer: 珍 韩 (GNKDSMCJ5L)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: 珍 韩 (GNKDSMCJ5L)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -2886,9 +2886,15 @@
 				GCC_PREFIX_HEADER = "bither-ios/bither-ios-Prefix.pch";
 				INFOPLIST_FILE = "bither-ios/bither-ios-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
-				PRODUCT_BUNDLE_IDENTIFIER = net.bither.ent;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"${PODS_ROOT}/OpenSSL/lib-ios\"",
+					"\"${PODS_ROOT}/OpenSSL/lib-ios\"",
+					"$(inherited)",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = net.bither;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "03a7e957-35df-41d9-a888-0dfab335b963";
+				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;
 				USER_HEADER_SEARCH_PATHS = "${SRCROOT}/**";
 				WRAPPER_EXTENSION = app;
@@ -2902,7 +2908,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_ENTITLEMENTS = "bither-ios/bither-ios.entitlements";
-				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2912,9 +2918,15 @@
 				GCC_PREFIX_HEADER = "bither-ios/bither-ios-Prefix.pch";
 				INFOPLIST_FILE = "bither-ios/bither-ios-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
-				PRODUCT_BUNDLE_IDENTIFIER = net.bither.ent;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"${PODS_ROOT}/OpenSSL/lib-ios\"",
+					"\"${PODS_ROOT}/OpenSSL/lib-ios\"",
+					"$(inherited)",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = net.bither;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "03a7e957-35df-41d9-a888-0dfab335b963";
+				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;
 				USER_HEADER_SEARCH_PATHS = "${SRCROOT}/**";
 				WRAPPER_EXTENSION = app;
