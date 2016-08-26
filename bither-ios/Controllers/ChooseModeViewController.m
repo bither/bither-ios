@@ -303,6 +303,7 @@
     frame.origin.y = y;
     view.frame = frame;
 }
+
 @end
 
 @implementation ChooseModeViewController (DowloadSpvDelegate)

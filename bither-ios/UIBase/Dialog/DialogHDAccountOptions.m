@@ -142,7 +142,6 @@
         IMP imp = [self methodForSelector:passwordSelector];
         void (*func)(id, SEL, NSString *) = (void *)imp;
         func(self, passwordSelector, password);
-//        [self performSelector:passwordSelector withObject:password];
     }
 }
 @end

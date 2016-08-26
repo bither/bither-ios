@@ -187,9 +187,13 @@
         topController = ((UIView *) self.delegate).getUIViewController;
     }
     [self dismissWithCompletion:^{
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wundeclared-selector"
         if (topController && [topController respondsToSelector:@selector(showMessage:)]) {
             [topController performSelector:@selector(showMessage:) withObject:NSLocalizedString(@"QR Code saved.", nil)];
         }
+#pragma clang diagnostic pop
+        
     }];
 }
 

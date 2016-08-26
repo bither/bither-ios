@@ -115,7 +115,7 @@ NSUserDefaults *userDefaults;
     if (type == -1) {
         [self setDefaultExchangeType];
     }
-    return [self getExchangeType];
+    return (Currency)[self getExchangeType];
 }
 
 - (void)setDefaultExchangeType {
@@ -270,7 +270,7 @@ NSUserDefaults *userDefaults;
 
 - (BitcoinUnit)getBitcoinUnit {
     if ([userDefaults objectForKey:BITCOIN_UNIT]) {
-        return [userDefaults integerForKey:BITCOIN_UNIT];
+        return (BitcoinUnit)[userDefaults integerForKey:BITCOIN_UNIT];
     }
     return UnitBTC;
 }
@@ -384,7 +384,24 @@ NSUserDefaults *userDefaults;
 }
 
 - (TotalBalanceHide)getTotalBalanceHide {
-    return [userDefaults integerForKey:TOTAL_BALANCE_HIDE];
+    NSInteger totalBalanceHideType = [userDefaults integerForKey:TOTAL_BALANCE_HIDE];
+    switch (totalBalanceHideType) {
+        case 0: {
+            return TotalBalanceShowAll;
+            break;
+        }
+        case 1: {
+            return TotalBalanceShowChart;
+            break;
+        }
+        case 2: {
+            return TotalBalanceHideAll;
+            break;
+        }
+        default:
+            return -1;
+            break;
+    }
 }
 
 - (void)setTotalBalanceHide:(TotalBalanceHide)h {
@@ -399,7 +416,7 @@ NSUserDefaults *userDefaults;
 
 - (ApiConfig)getApiConfig {
     if ([userDefaults objectForKey:API_CONFIG]){
-        return [userDefaults integerForKey:API_CONFIG];
+        return (ApiConfig)[userDefaults integerForKey:API_CONFIG];
     }
     return ApiConfigBither;
 }

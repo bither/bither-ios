@@ -189,7 +189,7 @@
         NSArray *pubRemotes = pubDict[@"pub_server"];
 
         for (NSUInteger index = 0; index < pubHots.count; index++) {
-            BTHDMPubs *pubs = [[BTHDMPubs alloc] initWithHot:pubHots[index] cold:pubColds[index] remote:pubRemotes[index] andIndex:index];
+            BTHDMPubs *pubs = [[BTHDMPubs alloc] initWithHot:pubHots[index] cold:pubColds[index] remote:pubRemotes[index] andIndex:(UInt32)index];
             [pubsList addObject:pubs];
         }
         self.encryptedBitherPassword = [[[BTEncryptData alloc] initWithData:self.password andPassowrd:password] toEncryptedString];

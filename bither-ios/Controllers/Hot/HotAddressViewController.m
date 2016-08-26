@@ -273,16 +273,20 @@ typedef enum {
 - (SectionType)sectionTypeForIndex:(NSUInteger)section {
     if (section == [self sectionIndexForType:SectionHD]) {
         return SectionHD;
-    } else if (section == [self sectionIndexForType:SectionHdMonitored]) {
+    }
+    if (section == [self sectionIndexForType:SectionHdMonitored]) {
         return SectionHdMonitored;
-    } else if (section == [self sectionIndexForType:SectionHDM]) {
+    }
+    if (section == [self sectionIndexForType:SectionHDM]) {
         return SectionHDM;
-    } else if (section == [self sectionIndexForType:SectionPrivate]) {
+    }
+    if (section == [self sectionIndexForType:SectionPrivate]) {
         return SectionPrivate;
-    } else if (section == [self sectionIndexForType:SectionWatchOnly]) {
+    }
+    if (section == [self sectionIndexForType:SectionWatchOnly]) {
         return SectionWatchOnly;
     }
-    return nil;
+    return -1;
 }
 
 - (NSUInteger)sectionIndexForType:(SectionType)type {
@@ -357,7 +361,9 @@ typedef enum {
 - (void)onPasswordEntered:(NSString *)p {
     password = p;
     if (passwordSelector && [self respondsToSelector:passwordSelector]) {
-        [self performSelector:passwordSelector];
+        IMP imp = [self methodForSelector:passwordSelector];
+        void (*func)(id, SEL) = (void *)imp;
+        func(self, passwordSelector);
     }
     passwordSelector = nil;
 }

@@ -95,15 +95,6 @@
     }
 }
 
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-
-}
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
@@ -124,11 +115,6 @@
 - (void)tabButtonPressed:(int)index {
     if (index != self.page.index) {
         [self.page setIndex:index animated:YES];
-    } else {
-        UIViewController *controller = [self.page viewControllerAtIndex:index];
-        if (controller) {
-            // [controller refresh];
-        }
     }
 }
 
@@ -145,30 +131,6 @@
 
 - (void)dealloc {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
-}
-
-- (void)fromPushNoification {
-    NSArray *viewControllers = self.navigationController.viewControllers;
-    if (viewControllers && viewControllers.count > 0) {
-        if (self != [viewControllers objectAtIndex:viewControllers.count - 1]) {
-            [self.navigationController popToViewController:self animated:NO];
-        }
-    }
-    int index = 3;
-    if (index != self.page.index) {
-        self.page.pageEnabled = NO;
-        [self performSelector:@selector(toMeViewController) withObject:self afterDelay:0.8];
-    } else {
-        UIViewController *controller = [self.page viewControllerAtIndex:index];
-        if ([controller respondsToSelector:@selector(refresh)]) {
-            // [controller refresh];
-        }
-    }
-}
-
-- (void)toMeViewController {
-    self.page.pageEnabled = YES;
-    [self.page setIndex:3 animated:YES];
 }
 
 - (IBAction)addPressed:(id)sender {

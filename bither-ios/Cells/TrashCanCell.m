@@ -64,7 +64,7 @@
 }
 
 - (void)alias {
-    [[[DialogAddressAlias alloc] initWithAddress:self.address andDelegate:self.btnAlias] showInWindow:self.window];
+    [[[DialogAddressAlias alloc] initWithAddress:self.address andDelegate:(NSObject <DialogAddressAliasDelegate> *)self.btnAlias] showInWindow:self.window];
 }
 
 - (IBAction)restorePressed:(id)sender {
@@ -77,9 +77,15 @@
                 [[PeerUtil instance] startPeer];
                 dispatch_async(dispatch_get_main_queue(), ^{
                     UIViewController *vc = self.getUIViewController;
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wundeclared-selector"
+                    
                     if ([vc respondsToSelector:@selector(refresh)]) {
                         [vc performSelector:@selector(refresh) withObject:nil];
                     }
+                    
+#pragma clang diagnostic pop
+                    
                     [dp dismiss];
                 });
             });
@@ -90,9 +96,14 @@
 - (IBAction)copyPressed:(id)sender {
     [UIPasteboard generalPasteboard].string = self.address.address;
     UIViewController *vc = self.getUIViewController;
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wundeclared-selector"
+    
     if ([vc respondsToSelector:@selector(showMsg:)]) {
         [vc performSelector:@selector(showMsg:) withObject:NSLocalizedString(@"Address copied.", nil) afterDelay:0];
     }
+    
+#pragma clang diagnostic pop
 }
 
 - (void)setAddress:(BTAddress *)address {

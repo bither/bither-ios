@@ -82,8 +82,8 @@
                 return;
             }
             @try {
-                NSUInteger prepared = [keychain prepareAddressesWithCount:count password:password andColdExternalPub:pub];
-                NSLog(@"HDM try to complete %d, completed %d", count, prepared);
+                NSUInteger prepared = [keychain prepareAddressesWithCount:(UInt32)count password:password andColdExternalPub:pub];
+                NSLog(@"HDM try to complete %lu, completed %lu", (unsigned long)count, (unsigned long)prepared);
                 dispatch_async(dispatch_get_main_queue(), ^{
                     [self performAdd:self.countToGenerate];
                 });

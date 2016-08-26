@@ -169,7 +169,7 @@
     }
     addresses = [addresses reverseObjectEnumerator].allObjects;
     __block int completeCount = 0;
-    int needCompleteCount = addresses.count + [[BTAddressManager instance] hasHDAccountHot] + [[BTAddressManager instance] hasHDAccountMonitored];
+    int needCompleteCount = (int)addresses.count + [[BTAddressManager instance] hasHDAccountHot] + [[BTAddressManager instance] hasHDAccountMonitored];
     //遍历所有的地址
     for (BTAddress *address in addresses) {
         //通过每个地址获取交易
@@ -193,7 +193,7 @@
         [hdAccounts addObject:[[BTAddressManager instance] hdAccountMonitored]];
     }
     for (BTHDAccount *account in hdAccounts) {
-        [TransactionsUtil getMyTxFromBlockChainForHDAccount:account.getHDAccountId callback:^{
+        [TransactionsUtil getMyTxFromBlockChainForHDAccount:(int)account.getHDAccountId callback:^{
             completeCount += 1;
             if (completeCount == needCompleteCount) {
                 if (voidBlock) {
@@ -216,7 +216,7 @@
     }
     addresses = [addresses reverseObjectEnumerator].allObjects;
     __block int completeCount = 0;
-    int needCompleteCount = addresses.count + [[BTAddressManager instance] hasHDAccountHot] + [[BTAddressManager instance] hasHDAccountMonitored];
+    int needCompleteCount = (int)addresses.count + [[BTAddressManager instance] hasHDAccountHot] + [[BTAddressManager instance] hasHDAccountMonitored];
     for (BTAddress *address in addresses) {
         [TransactionsUtil getTxs:address callback:^{
             completeCount += 1;
@@ -236,7 +236,7 @@
         [hdAccounts addObject:[[BTAddressManager instance] hdAccountMonitored]];
     }
     for (BTHDAccount *account in hdAccounts) {
-        [TransactionsUtil getMyTxForHDAccount:account.getHDAccountId callback:^{
+        [TransactionsUtil getMyTxForHDAccount:(int)account.getHDAccountId callback:^{
             completeCount += 1;
             if (completeCount == needCompleteCount) {
                 if (voidBlock) {
@@ -252,7 +252,7 @@
     [pathArray addObject:@(EXTERNAL_ROOT_PATH)];
     [pathArray addObject:@(INTERNAL_ROOT_PATH)];
     __block int completeCount = 0;
-    int needCompleteCount = pathArray.count;
+    int needCompleteCount = (int)pathArray.count;
     for (NSNumber *pathType in pathArray){
         __block int index = 0;
         [TransactionsUtil getMyTxFromBlockChainForHDAccount:hdAccountId pathType:(PathType) [pathType intValue] index:index callback:^{
@@ -351,7 +351,7 @@
     [pathArray addObject:@(EXTERNAL_ROOT_PATH)];
     [pathArray addObject:@(INTERNAL_ROOT_PATH)];
     __block int completeCount = 0;
-    int needCompleteCount = pathArray.count;
+    int needCompleteCount = (int)pathArray.count;
     for (NSNumber *pathType in pathArray){
         __block int index = 0;
         [TransactionsUtil getMyTxForHDAccount:hdAccountId pathType:(PathType) [pathType intValue] index:index callback:^{
