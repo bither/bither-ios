@@ -101,7 +101,7 @@ static NSArray *Colors;
         [Colors[Colors.count - 1] setFill];
         CGContextClosePath(context);
         CGContextDrawPath(context, kCGPathFill);
-        angle += sweepAngle;
+//        angle += sweepAngle;
     } else {
         if (self.amounts) {
             NSMutableArray *rates = [[NSMutableArray alloc] initWithCapacity:self.amounts.count];

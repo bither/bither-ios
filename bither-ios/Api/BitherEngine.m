@@ -94,7 +94,7 @@ static MKNetworkEngine *chainBtcComEngine;
         [cookieProperties setObject:domain forKey:NSHTTPCookieDomain];
         [cookieProperties setObject:domain forKey:NSHTTPCookieOriginURL];
         [cookieProperties setObject:cookie.path forKey:NSHTTPCookiePath];
-        [cookieProperties setObject:[NSNumber numberWithInt:cookie.version] forKey:NSHTTPCookieVersion];
+        [cookieProperties setObject:[NSNumber numberWithInt:(int)cookie.version] forKey:NSHTTPCookieVersion];
         [cookieProperties setObject:cookie.expiresDate forKey:NSHTTPCookieExpires];
         NSHTTPCookie *newCookie = [NSHTTPCookie cookieWithProperties:cookieProperties];
         [cookieStorage setCookie:newCookie];

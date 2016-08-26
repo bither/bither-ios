@@ -133,7 +133,7 @@
 
 - (void)convertAmount2Currency {
     if (self.delegate && [self.delegate respondsToSelector:@selector(textField:shouldChangeCharactersInRange:replacementString:)]) {
-        [self.delegate textField:self.tfBtc shouldChangeCharactersInRange:NSMakeRange(0, 0) replacementString:nil];
+        [self.delegate textField:self.tfBtc shouldChangeCharactersInRange:NSMakeRange(0, 0) replacementString:@""];
     }
     if (_amount > 0 || [StringUtil isEmpty:self.tfCurrency.text]) {
         self.tfCurrency.text = @"";
@@ -148,7 +148,7 @@
 
 - (void)convertCurrency2Amount:(double)currency {
     if (self.delegate && [self.delegate respondsToSelector:@selector(textField:shouldChangeCharactersInRange:replacementString:)]) {
-        [self.delegate textField:self.tfCurrency shouldChangeCharactersInRange:NSMakeRange(0, 0) replacementString:nil];
+        [self.delegate textField:self.tfCurrency shouldChangeCharactersInRange:NSMakeRange(0, 0) replacementString:@""];
     }
     if (currency > 0 || [StringUtil isEmpty:self.tfBtc.text]) {
         self.tfBtc.text = @"";

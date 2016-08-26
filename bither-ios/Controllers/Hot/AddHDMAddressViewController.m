@@ -106,8 +106,8 @@
         }
         [[PeerUtil instance] stopPeer];
         __block NSError *error;
-
-        NSArray *as = [keychain completeAddressesWithCount:count password:password andFetchBlock:^(NSString *p, NSArray *partialPubs) {
+        
+        [keychain completeAddressesWithCount:(UInt32)count password:password andFetchBlock:^(NSString *p, NSArray *partialPubs) {
             BTHDMBid *hdmBid = [BTHDMBid getHDMBidFromDb];
             [hdmBid createHDMAddress:partialPubs andPassword:p andError:&error];
         }];

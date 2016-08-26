@@ -40,6 +40,6 @@ typedef enum {
 
 + (int)getMarketValue:(MarketType)marketType;
 
-+ (MarketType)getMarketType:(int)value;
++ (MarketType)getMarketType:(NSInteger)value;
 
 @end

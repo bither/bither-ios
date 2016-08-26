@@ -191,7 +191,7 @@
         }
         if (cold > 0) {
             CGContextSetStrokeColorWithColor(context, [kColdColor CGColor]);
-            start = [TotalBalanceDrawer drawArc:context rate:cold andStart:start];
+            [TotalBalanceDrawer drawArc:context rate:cold andStart:start];
         }
     }
 

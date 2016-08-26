@@ -36,7 +36,8 @@
     self = [super init];
     if (self) {
         CGSize constrainedSize = CGSizeMake(kDialogProgressLabelMaxWidth, kDialogProgressLabelMaxHeight);
-        CGSize lableSize = [message sizeWithFont:[UIFont systemFontOfSize:kDialogProgressLabelFontSize] constrainedToSize:constrainedSize];
+        CGSize lableSize = [message boundingRectWithSize:constrainedSize options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading attributes:@{NSFontAttributeName : [UIFont systemFontOfSize:kDialogProgressLabelFontSize]} context:nil].size;
+
         self.riv = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
         self.frame = CGRectMake(0, 0, self.riv.frame.size.width + kDialogProgressMargin + lableSize.width + kDialogProgressHorizotalPadding * 2, fmaxf(lableSize.height + kDialogProgressVerticalPadding * 2, kDialogProgressMinHeight));
         self.riv.frame = CGRectMake(kDialogProgressHorizotalPadding, (self.frame.size.height - self.riv.frame.size.height) / 2, self.riv.frame.size.width, self.riv.frame.size.height);

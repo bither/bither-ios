@@ -83,7 +83,7 @@
     lblAddress.font = [UIFont systemFontOfSize:kValueFontSize];
     lblAddress.textColor = [UIColor colorWithWhite:1 alpha:kValueAlpha];
     lblAddress.adjustsFontSizeToFitWidth = YES;
-    lblAddress.lineBreakMode = UILineBreakModeTailTruncation;
+    lblAddress.lineBreakMode = NSLineBreakByTruncatingTail;
     lblAddress.numberOfLines = 2;
     lblAddress.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleBottomMargin;
     lblAddress.text = [StringUtil formatAddress:toAddress groupSize:4 lineSize:24];
@@ -114,7 +114,7 @@
         lblChangeAddress.font = [UIFont systemFontOfSize:kValueFontSize];
         lblChangeAddress.textColor = [UIColor colorWithWhite:1 alpha:kValueAlpha];
         lblChangeAddress.adjustsFontSizeToFitWidth = YES;
-        lblChangeAddress.lineBreakMode = UILineBreakModeTailTruncation;
+        lblChangeAddress.lineBreakMode = NSLineBreakByTruncatingTail;
         lblChangeAddress.numberOfLines = 2;
         lblChangeAddress.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleBottomMargin;
         lblChangeAddress.text = [StringUtil formatAddress:_changeAddress groupSize:4 lineSize:24];

@@ -39,7 +39,7 @@
 @property BTBIP32Key* xpub;
 @end
 
-static Setting *monitorSetting;
+static MonitorHDAccountSetting *monitorSetting;
 
 @implementation MonitorHDAccountSetting
 
@@ -60,14 +60,15 @@ static Setting *monitorSetting;
 }
 
 - (void)configureSetting {
+    __weak typeof(self) weakSelf = self;
     [self setSelectBlock:^(UIViewController *controller) {
-        self.vc = controller;
+        weakSelf.vc = controller;
         if ([BTAddressManager instance].hasHDAccountMonitored) {
-            [self showMsg:NSLocalizedString(@"monitor_cold_hd_account_limit", nil)];
+            [weakSelf showMsg:NSLocalizedString(@"monitor_cold_hd_account_limit", nil)];
             return;
         }
-        ScanQrCodeViewController *scan = [[ScanQrCodeViewController alloc] initWithDelegate:self title:nil message:nil];
-        [self.vc presentViewController:scan animated:YES completion:nil];
+        ScanQrCodeViewController *scan = [[ScanQrCodeViewController alloc] initWithDelegate:weakSelf title:nil message:nil];
+        [weakSelf.vc presentViewController:scan animated:YES completion:nil];
     }];
 }
 #pragma mark - import HDAccount

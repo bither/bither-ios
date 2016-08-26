@@ -53,8 +53,11 @@
             part = partStr.integerValue * pow(10, lackLength);
         }
     }
-
-    return whole + part;
+    if (negative) {
+        return 0 - (whole + part);
+    } else {
+        return whole + part;
+    }
 }
 
 + (int64_t)amountForString:(NSString *)string {

@@ -28,8 +28,8 @@
 
 @interface HDMResetServerPasswordUtil () <PasswordGetterDelegate, ScanQrCodeDelegate> {
     PasswordGetter *passwordGetter;
-    DialogProgress *dp;
-    UIViewController <ShowBannerDelegete> *vc;
+    DialogProgress *dialogProgress;
+    UIViewController <ShowBannerDelegete> *viewController;
     BTHDMBid *hdmBid;
     NSString *serverSignature;
     NSCondition *hdmIdCondition;
@@ -70,13 +70,13 @@
 }
 
 - (void)configureWithViewController:(UIViewController <ShowBannerDelegete> *)v dialogProgress:(DialogProgress *)d andPassword:(NSString *)p {
-    vc = v;
+    viewController = v;
     if (d) {
-        dp = d;
+        dialogProgress = d;
     } else {
-        dp = [[DialogProgress alloc] initWithMessage:NSLocalizedString(@"Please wait…", nil)];
+        dialogProgress = [[DialogProgress alloc] initWithMessage:NSLocalizedString(@"Please wait…", nil)];
     }
-    passwordGetter = [[PasswordGetter alloc] initWithWindow:vc.view.window andDelegate:self];
+    passwordGetter = [[PasswordGetter alloc] initWithWindow:viewController.view.window andDelegate:self];
     if (p) {
         [self setPassword:p];
     }
@@ -91,7 +91,7 @@
     hdmBid = [BTHDMBid getHDMBidFromDb];
     serverSignature = nil;
     dispatch_async(dispatch_get_main_queue(), ^{
-        [dp showInWindow:vc.view.window];
+        [dialogProgress showInWindow:viewController.view.window];
     });
     NSError *error;
     __block NSString *pre = [hdmBid getPreSignHashAndError:&error];
@@ -100,17 +100,17 @@
         return NO;
     }
     dispatch_sync(dispatch_get_main_queue(), ^{
-        [dp dismissWithCompletion:^{
+        [dialogProgress dismissWithCompletion:^{
             serverSignature = nil;
             [[[DialogHDMServerUnsignedQRCode alloc] initWithContent:pre action:^{
                 ScanQrCodeViewController *scan = [[ScanQrCodeViewController alloc] initWithDelegate:self];
-                [vc presentViewController:scan animated:YES completion:nil];
+                [viewController presentViewController:scan animated:YES completion:nil];
             }                                             andCancel:^{
                 serverSignature = nil;
                 [hdmIdCondition lock];
                 [hdmIdCondition signal];
                 [hdmIdCondition unlock];
-            }] showInWindow:vc.view.window];
+            }] showInWindow:viewController.view.window];
         }];
     });
     [hdmIdCondition lock];
@@ -124,7 +124,7 @@
         return NO;
     }
     dispatch_sync(dispatch_get_main_queue(), ^{
-        [dp showInWindow:vc.view.window];
+        [dialogProgress showInWindow:viewController.view.window];
     });
     [hdmBid changeBidPasswordWithSignature:serverSignature andPassword:password andError:&error];
     if (error) {
@@ -140,8 +140,8 @@
 
 
 - (void)showMsg:(NSString *)msg {
-    if ([vc respondsToSelector:@selector(showBannerWithMessage:)]) {
-        [vc showBannerWithMessage:msg];
+    if ([viewController respondsToSelector:@selector(showBannerWithMessage:)]) {
+        [viewController showBannerWithMessage:msg];
     }
 }
 
@@ -163,14 +163,14 @@
 }
 
 - (void)beforePasswordDialogShow {
-    if (dp.shown) {
-        [dp dismiss];
+    if (dialogProgress.shown) {
+        [dialogProgress dismiss];
     }
 }
 
 - (void)afterPasswordDialogDismiss {
-    if (!dp.shown) {
-        [dp showInWindow:vc.view.window];
+    if (!dialogProgress.shown) {
+        [dialogProgress showInWindow:viewController.view.window];
     }
 }
 @end

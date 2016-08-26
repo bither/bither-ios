@@ -176,7 +176,6 @@
         [[[DialogPassword alloc] initWithDelegate:self] showInWindow:self.window];
         return;
     }
-    NSString *p = password;
     password = nil;
     __weak __block DialogProgress *d = dp;
     [d showInWindow:self.window completion:^{
@@ -196,7 +195,10 @@
 - (void)onPasswordEntered:(NSString *)p {
     password = p;
     if (passwordSelector && [self respondsToSelector:passwordSelector]) {
-        [self performSelector:passwordSelector];
+        IMP imp = [self methodForSelector:passwordSelector];
+        void (*func)(id, SEL) = (void *)imp;
+        func(self, passwordSelector);
+//        [self performSelector:passwordSelector];
     }
     passwordSelector = nil;
 }

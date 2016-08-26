@@ -45,13 +45,14 @@ static PaymentAddressSetting *paymentAddressSetting;
 }
 
 - (void)firstConfigure {
+    __weak typeof(self) weakSelf = self;
     [self setGetValueBlock:^NSObject * {
         NSString *a = [UserDefaultsUtil instance].paymentAddress;
         if (![BTUtils isEmpty:a]) {
-            if ([self isHDAccountHotAddress:a]) {
+            if ([weakSelf isHDAccountHotAddress:a]) {
                 return NSLocalizedString(@"address_group_hd", nil);
             }
-            if ([self isHDAccountMonitoredAddress:a]){
+            if ([weakSelf isHDAccountMonitoredAddress:a]){
                 return NSLocalizedString(@"hd_account_cold_address_list_label", nil);
             }
             return [StringUtil shortenAddress:a];
@@ -61,22 +62,22 @@ static PaymentAddressSetting *paymentAddressSetting;
     }];
     [self setGetArrayBlock:^NSArray * {
         NSMutableArray *a = [NSMutableArray new];
-        [a addObject:[self dictForNone]];
+        [a addObject:[weakSelf dictForNone]];
         if ([BTAddressManager instance].hasHDAccountHot) {
-            [a addObject:[self dictForHDAccountHot]];
+            [a addObject:[weakSelf dictForHDAccountHot]];
         }
         if ([BTAddressManager instance].hasHDAccountMonitored) {
-            [a addObject:[self dictForHDAccountMonitored]];
+            [a addObject:[weakSelf dictForHDAccountMonitored]];
         }
         for (BTAddress *address in [BTAddressManager instance].allAddresses) {
-            [a addObject:[self dictForAddress:address.address]];
+            [a addObject:[weakSelf dictForAddress:address.address]];
         }
         return a;
     }];
     [self setResult:^(NSDictionary *dict) {
-        NSObject *o = [dict objectForKey:SETTING_VALUE];
-        if ([o isKindOfClass:[NSString class]]) {
-            [[UserDefaultsUtil instance] setPaymentAddress:o];
+        NSObject *object = [dict objectForKey:SETTING_VALUE];
+        if ([object isKindOfClass:[NSString class]]) {
+            [[UserDefaultsUtil instance] setPaymentAddress:(NSString *)object];
         }
     }];
     __block PaymentAddressSetting *s = self;

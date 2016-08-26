@@ -170,7 +170,7 @@
 - (void)confirmPressed:(id)sender {
     NSInteger length = [self lengthForPickerIndex:[self.pvLength selectedRowInComponent:0]];
     if (length > 0) {
-        [self.address updateVanityLen:length];
+        [self.address updateVanityLen:(int)length];
     } else {
         [self.address removeVanity];
     }

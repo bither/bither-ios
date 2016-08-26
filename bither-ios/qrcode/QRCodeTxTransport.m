@@ -187,7 +187,7 @@
         for (NSUInteger i = 0; i < qrCodeTx.hashList.count; i++) {
             PathTypeIndex *path = qrCodeTx.pathTypeIndexes[i];
             NSString *hash = qrCodeTx.hashList[i];
-            [array addObject:[NSString stringWithFormat:@"%d%@%d%@%@", path.pathType, QR_CODE_SECONDARY_SPLIT, path.index, QR_CODE_SECONDARY_SPLIT, hash]];
+            [array addObject:[NSString stringWithFormat:@"%d%@%lu%@%@", path.pathType, QR_CODE_SECONDARY_SPLIT, (unsigned long)path.index, QR_CODE_SECONDARY_SPLIT, hash]];
         }
     } else {
         for (NSString *hash in qrCodeTx.hashList) {

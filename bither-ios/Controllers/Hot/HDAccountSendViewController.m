@@ -27,7 +27,6 @@
 #import "PeerUtil.h"
 #import "TransactionsUtil.h"
 #import "CurrencyCalculatorLink.h"
-#import "DialogSendOption.h"
 #import "DialogSelectChangeAddress.h"
 #import "HDAccountSendViewController.h"
 #import "DialogSendTxConfirm.h"
@@ -36,7 +35,7 @@
 
 #define kBalanceFontSize (15)
 
-@interface HDAccountSendViewController () <UITextFieldDelegate, ScanQrCodeDelegate, DialogSendTxConfirmDelegate, DialogSendOptionDelegate> {
+@interface HDAccountSendViewController () <UITextFieldDelegate, ScanQrCodeDelegate, DialogSendTxConfirmDelegate> {
     DialogProgressChangable *dp;
 }
 @property(weak, nonatomic) IBOutlet UILabel *lblBalancePrefix;

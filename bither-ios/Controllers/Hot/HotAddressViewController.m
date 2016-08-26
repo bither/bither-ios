@@ -273,17 +273,13 @@ typedef enum {
 - (SectionType)sectionTypeForIndex:(NSUInteger)section {
     if (section == [self sectionIndexForType:SectionHD]) {
         return SectionHD;
-    }
-    if (section == [self sectionIndexForType:SectionHdMonitored]) {
+    } else if (section == [self sectionIndexForType:SectionHdMonitored]) {
         return SectionHdMonitored;
-    }
-    if (section == [self sectionIndexForType:SectionHDM]) {
+    } else if (section == [self sectionIndexForType:SectionHDM]) {
         return SectionHDM;
-    }
-    if (section == [self sectionIndexForType:SectionPrivate]) {
+    } else if (section == [self sectionIndexForType:SectionPrivate]) {
         return SectionPrivate;
-    }
-    if (section == [self sectionIndexForType:SectionWatchOnly]) {
+    } else if (section == [self sectionIndexForType:SectionWatchOnly]) {
         return SectionWatchOnly;
     }
     return nil;

@@ -83,7 +83,7 @@
     self.btnAmount.frameChangeListener = self;
 
     CGPoint sendOri = self.btnSend.frame.origin;
-    if (!address.hasPrivKey && !address.isHDM || (address.isHDM && ((BTHDMAddress *) address).isInRecovery) || (address.isHDAccount && !address.hasPrivKey)) {
+    if ((!address.hasPrivKey && !address.isHDM) || (address.isHDM && ((BTHDMAddress *) address).isInRecovery) || (address.isHDAccount && !address.hasPrivKey)) {
         UIImageView *iv = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"unsigned_transaction_button_icon"]];
         CGFloat margin = (self.btnSend.frame.size.height - kSendButtonQrIconSize) / 2;
         iv.frame = CGRectMake(self.btnSend.frame.size.width - kSendButtonQrIconSize - margin, margin, kSendButtonQrIconSize, kSendButtonQrIconSize);
