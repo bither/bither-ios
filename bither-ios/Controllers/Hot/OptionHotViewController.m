@@ -23,6 +23,7 @@
 #import "UIViewController+ConfigureTableView.h"
 #import "SettingUtil.h"
 
+#define kSettingChangedNotification @"SettingChangedNotification"
 
 @interface OptionHotViewController () <UITableViewDataSource, UITableViewDelegate>
 @property(weak, nonatomic) IBOutlet UITableView *tableView;
@@ -44,13 +45,21 @@
     NSString *version = [NSString stringWithFormat:@"Bither Hot %@", [[[NSBundle mainBundle] infoDictionary] objectForKey:CFBundleShortVersionString]];
     [self configureHeaderAndFooter:self.tableView background:ColorBg isHot:YES version:version];
     [self reload];
+    
+    [self setupNotification];
+}
+
+- (void)setupNotification
+{
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reload) name:kSettingChangedNotification object:nil];
 }
 
 - (void)reload {
+    __weak typeof(self) weakSelf = self;
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        self.settings = [SettingUtil hotSettings];
+        weakSelf.settings = [SettingUtil hotSettings];
         dispatch_async(dispatch_get_main_queue(), ^{
-            [self.tableView reloadData];
+            [weakSelf.tableView reloadData];
         });
     });
 }
@@ -60,20 +69,11 @@
     [self reload];
 }
 
-
-- (void)viewWillDisappear:(BOOL)animated {
-    [super viewWillDisappear:animated];
-}
-
-- (void)viewDidDisappear:(BOOL)animated {
-    [super viewDidDisappear:animated];
-}
-
 - (void)showMsg:(NSString *)msg {
     [self showBannerWithMessage:msg belowView:nil belowTop:0 autoHideIn:1 withCompletion:nil];
 }
 
-//tableview delgate
+#pragma mark ------ tableview delgate and datasource
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return self.settings.count;
@@ -85,10 +85,6 @@
     return cell;
 }
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 1;
-}
-
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     Setting *setting = [self.settings objectAtIndex:indexPath.row];
     if (setting.selectBlock) {
@@ -97,4 +93,8 @@
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
 }
 
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:kSettingChangedNotification object:nil];
+}
 @end

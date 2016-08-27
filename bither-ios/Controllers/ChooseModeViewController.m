@@ -111,10 +111,6 @@
     }
 }
 
-- (void)viewDidAppear:(BOOL)animated {
-    [super viewDidAppear:animated];
-}
-
 - (void)coldCheckWithoutAnimationAgain {
     [self.vColdNetCheck beginCheck:coldNetCheckCompletion];
 }
@@ -166,7 +162,7 @@
                 });
             }];
         }
-    }                                        cancel:nil] showInWindow:self.view.window];
+    } cancel:nil] showInWindow:self.view.window];
 }
 
 - (IBAction)hotRetryPressed:(id)sender {
@@ -232,7 +228,7 @@
     self.vColdIcon.autoresizingMask = UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleTopMargin;
     [UIView animateWithDuration:kChooseModeStateTransactionDuration animations:^{
         [self showColdIcon];
-    }                completion:^(BOOL finished) {
+    } completion:^(BOOL finished) {
         if (completion) {
             completion();
         }

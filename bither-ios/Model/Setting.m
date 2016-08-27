@@ -457,16 +457,17 @@ static Setting *ApiConfigSetting;
 }
 
 + (Setting *)getSwitchToColdSetting {
+#warning ----------- 
     if (!SwitchToColdSetting) {
         SwitchToColdSetting = [[Setting alloc] initWithName:NSLocalizedString(@"launch_sequence_switch_to_cold", nil) icon:nil];
         [SwitchToColdSetting setSelectBlock:^(UIViewController *controller) {
             if ([BTAddressManager instance].allAddresses.count == 0) {
                 [[[DialogAlert alloc] initWithMessage:NSLocalizedString(@"launch_sequence_switch_to_cold_warn", nil) confirm:^{
                     [[BTSettings instance] setAppMode:COLD];
-                    [controller presentViewController:[controller.storyboard instantiateViewControllerWithIdentifier:@"ChooseModeViewController"] animated:YES completion:^{
-
-                    }];
-                }                              cancel:nil] showInWindow:controller.view.window];
+                    AppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
+                    appDelegate.window.rootViewController = [controller.storyboard instantiateViewControllerWithIdentifier:@"ChooseModeViewController"];
+//                    [controller presentViewController:[controller.storyboard instantiateViewControllerWithIdentifier:@"ChooseModeViewController"] animated:YES completion:nil];
+                } cancel:nil] showInWindow:controller.view.window];
             }
         }];
     }

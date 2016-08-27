@@ -18,5 +18,7 @@
 #import <UIKit/UIKit.h>
 
 @interface BackgroundTransitionView : UIView
+
 - (void)setBackgroundColorWithoutTransition:(UIColor *)backgroundColor;
+
 @end

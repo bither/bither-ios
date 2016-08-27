@@ -72,7 +72,6 @@ static StatusBarNotificationWindow *notificationWindow;
                         [sslfDp dismissWithCompletion:^{
                             [self loadViewController];
                         }];
-
                     });
                 }
             });
@@ -101,6 +100,7 @@ static StatusBarNotificationWindow *notificationWindow;
             container.controller = [storyboard instantiateViewControllerWithIdentifier:@"BitherHot"];
             self.window.rootViewController = container;
         }
+        
         if ([[BTSettings instance] getAppMode] == COLD && ![NetworkUtil isEnableWIFI] && ![NetworkUtil isEnable3G]) {
             container.controller = [storyboard instantiateViewControllerWithIdentifier:@"BitherCold"];
             self.window.rootViewController = container;
@@ -113,6 +113,7 @@ static StatusBarNotificationWindow *notificationWindow;
         [[PeerUtil instance] startPeer];
         [[BitherTime instance] start];
     }];
+    
     [self callInCold:^{
         [[Reachability reachabilityForInternetConnection] startNotifier];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reachabilityChange) name:kReachabilityChangedNotification object:nil];
@@ -149,12 +150,11 @@ static StatusBarNotificationWindow *notificationWindow;
             [[PeerUtil instance] startPeer];
         }
     }];
+    
     [self callInCold:^{
         if ([NetworkUtil isEnable3G] || [NetworkUtil isEnableWIFI]) {
-            if ([NetworkUtil isEnable3G] || [NetworkUtil isEnableWIFI]) {
-                UIViewController *chooseModeViewController = [self.coldController.storyboard instantiateViewControllerWithIdentifier:@"ChooseModeViewController"];
-                [self.coldController presentViewController:chooseModeViewController animated:YES completion:nil];
-            }
+            UIViewController *chooseModeViewController = [self.coldController.storyboard instantiateViewControllerWithIdentifier:@"ChooseModeViewController"];
+            [self.coldController presentViewController:chooseModeViewController animated:YES completion:nil];
         }
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reachabilityChange) name:kReachabilityChangedNotification object:nil];
 

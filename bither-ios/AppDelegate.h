@@ -27,6 +27,7 @@
 @property(strong, nonatomic) UIWindow *window;
 
 + (StatusBarNotificationWindow *)notificationWindow;
+
 @end
 
 

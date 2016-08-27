@@ -43,6 +43,7 @@
 
 - (void)loadView {
     [super loadView];
+    
     [self initTabs];
     self.page = [[PiPageViewController alloc] initWithStoryboard:self.storyboard andViewControllerIdentifiers:[[NSArray alloc] initWithObjects:@"tab_market", @"tab_hot_address", @"tab_option_hot", nil]];
     self.page.pageDelegate = self;
@@ -73,13 +74,12 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
     isInit = YES;
     cnt = 4;
     self.dict = [[NSMutableDictionary alloc] init];
     [self.view bringSubviewToFront:self.addAddressBtn];
     [self initApp];
-
-
 }
 
 #pragma mark - TabBar delegate
@@ -127,10 +127,6 @@
     [self.page removeFromParentViewController];
     self.page = nil;
     [super viewDidUnload];
-}
-
-- (void)dealloc {
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 - (IBAction)addPressed:(id)sender {
@@ -181,6 +177,10 @@
         [uploadAndDowload uploadAvatar:nil andErrorCallBack:nil];
         [uploadAndDowload dowloadAvatar:nil andErrorCallBack:nil];
     });
+}
+
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 @end
