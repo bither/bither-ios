@@ -640,7 +640,7 @@
     if (!toChangePassword) {
         return NO;
     }
-    return [[[HDMResetServerPasswordUtil alloc] initWithViewController:vc dialogProgress:dp andPassword:_password] changeServerPassword];
+    return [[[HDMResetServerPasswordUtil alloc] initWithViewController:vc dialogProgress:(DialogProgress *)dp andPassword:_password] changeServerPassword];
 }
 
 @end

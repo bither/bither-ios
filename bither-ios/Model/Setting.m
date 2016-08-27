@@ -457,16 +457,17 @@ static Setting *ApiConfigSetting;
 }
 
 + (Setting *)getSwitchToColdSetting {
+#warning ----------- 
     if (!SwitchToColdSetting) {
         SwitchToColdSetting = [[Setting alloc] initWithName:NSLocalizedString(@"launch_sequence_switch_to_cold", nil) icon:nil];
         [SwitchToColdSetting setSelectBlock:^(UIViewController *controller) {
             if ([BTAddressManager instance].allAddresses.count == 0) {
                 [[[DialogAlert alloc] initWithMessage:NSLocalizedString(@"launch_sequence_switch_to_cold_warn", nil) confirm:^{
                     [[BTSettings instance] setAppMode:COLD];
-                    [controller presentViewController:[controller.storyboard instantiateViewControllerWithIdentifier:@"ChooseModeViewController"] animated:YES completion:^{
-
-                    }];
-                }                              cancel:nil] showInWindow:controller.view.window];
+                    AppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
+                    appDelegate.window.rootViewController = [controller.storyboard instantiateViewControllerWithIdentifier:@"ChooseModeViewController"];
+//                    [controller presentViewController:[controller.storyboard instantiateViewControllerWithIdentifier:@"ChooseModeViewController"] animated:YES completion:nil];
+                } cancel:nil] showInWindow:controller.view.window];
             }
         }];
     }
@@ -512,7 +513,7 @@ static Setting *ApiConfigSetting;
                 __block DialogProgress *dp = [[DialogProgress alloc] initWithMessage:NSLocalizedString(@"Please wait…", nil)];
                 [dp showInWindow:controller.view.window completion:^{
                     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
-                        __block BOOL result = [[[HDMResetServerPasswordUtil alloc] initWithViewController:controller andDialogProgress:dp] changeServerPassword];
+                        __block BOOL result = [[[HDMResetServerPasswordUtil alloc] initWithViewController:(UIViewController <ShowBannerDelegete> *)controller andDialogProgress:dp] changeServerPassword];
                         dispatch_sync(dispatch_get_main_queue(), ^{
                             [dp dismissWithCompletion:^{
                                 if (result) {
@@ -567,19 +568,19 @@ static Setting *ApiConfigSetting;
                 } else {
                     UIWindow *window = ApplicationDelegate.window;
                     __block AdvanceViewController *a = nil;
-                    UINavigationController *nav = nil;
+                    UINavigationController *navigation = nil;
                     if ([window.topViewController isKindOfClass:[UINavigationController class]]) {
-                        nav = window.topViewController;
+                        navigation = (UINavigationController *)window.topViewController;
                     } else if ([window.topViewController isKindOfClass:[IOS7ContainerViewController class]]) {
-                        IOS7ContainerViewController *c = window.topViewController;
-                        if ([c.controller isKindOfClass:[UINavigationController class]]) {
-                            nav = c.controller;
+                        IOS7ContainerViewController *containerViewController = (IOS7ContainerViewController *)window.topViewController;
+                        if ([containerViewController.controller isKindOfClass:[UINavigationController class]]) {
+                            navigation = (UINavigationController *)containerViewController.controller;
                         }
                     }
-                    if (nav) {
-                        for (NSUInteger index = nav.viewControllers.count - 1; index >= MAX(0, nav.viewControllers.count - 2); index--) {
-                            if ([nav.viewControllers[index] isKindOfClass:[AdvanceViewController class]]) {
-                                a = nav.viewControllers[index];
+                    if (navigation) {
+                        for (NSUInteger index = navigation.viewControllers.count - 1; index >= MAX(0, navigation.viewControllers.count - 2); index--) {
+                            if ([navigation.viewControllers[index] isKindOfClass:[AdvanceViewController class]]) {
+                                a = navigation.viewControllers[index];
                             }
                         }
                     }

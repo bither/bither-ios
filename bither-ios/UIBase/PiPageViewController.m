@@ -126,14 +126,14 @@
     if (index < _index) {
         direction = UIPageViewControllerNavigationDirectionReverse;
     }
-
+   
     int step = direction == UIPageViewControllerNavigationDirectionForward ? 1 : -1;
     for (int i = _index + step; (index - i) * step > 0; i += step) {
         NSArray *vcs = [[NSArray alloc] initWithObjects:[self loadViewControllerAtIndex:i], nil];
         [self onVisitedViewControllerAtIndex:i];
         [self setViewControllers:vcs direction:direction animated:animated completion:nil];
     }
-
+    
     NSArray *vcs = [[NSArray alloc] initWithObjects:[self loadViewControllerAtIndex:index], nil];
     __weak PiPageViewController *vc = self;
     [self onVisitedViewControllerAtIndex:index];
@@ -147,10 +147,6 @@
 
 - (void)resetInTransationFlag {
     _inTransation = NO;
-}
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
 }
 
 - (void)onIndexSet:(int)index {
@@ -211,7 +207,7 @@
     return self.pageDelegate && [self.pageDelegate respondsToSelector:@selector(loadViewControllerAtIndex:)];
 }
 
-- (NSUInteger)pageViewControllerSupportedInterfaceOrientations:(UIPageViewController *)pageViewController {
+- (UIInterfaceOrientationMask)pageViewControllerSupportedInterfaceOrientations:(UIPageViewController *)pageViewController {
     return UIInterfaceOrientationMaskPortrait;
 }
 

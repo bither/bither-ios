@@ -52,6 +52,7 @@
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
+    
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.6 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         [DialogFirstRunWarning show:self.view.window];
     });
@@ -95,14 +96,12 @@
     }
 }
 
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-
-}
-
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
-    [self.navigationController setNavigationBarHidden:YES animated:NO];
+    if (!self.navigationController.navigationBar.hidden) {
+        self.navigationController.navigationBar.hidden = YES;
+    }
 }
 
 - (void)pageIndexChanged:(int)index {
@@ -115,11 +114,6 @@
 - (void)tabButtonPressed:(int)index {
     if (index != self.page.index) {
         [self.page setIndex:index animated:YES];
-    } else {
-        UIViewController *controller = [self.page viewControllerAtIndex:index];
-        if (controller) {
-            // [controller refresh];
-        }
     }
 }
 
@@ -133,34 +127,6 @@
     self.page = nil;
     [super viewDidUnload];
 }
-
-- (void)fromPushNoification {
-    NSArray *viewControllers = self.navigationController.viewControllers;
-    if (viewControllers && viewControllers.count > 0) {
-        if (self != [viewControllers objectAtIndex:viewControllers.count - 1]) {
-            [self.navigationController popToViewController:self animated:NO];
-        }
-    }
-    int index = 3;
-    if (index != self.page.index) {
-        self.page.pageEnabled = NO;
-        [self performSelector:@selector(toMeViewController) withObject:self afterDelay:0.8];
-    } else {
-        UIViewController *controller = [self.page viewControllerAtIndex:index];
-        if ([controller respondsToSelector:@selector(refresh)]) {
-//             [controller refresh];
-        }
-    }
-}
-
-- (void)toMeViewController {
-    self.page.pageEnabled = YES;
-    [self.page setIndex:3 animated:YES];
-}
-
-- (void)showFeedCnt:(int)feedCnt {
-}
-
 
 - (IBAction)addPressed:(id)sender {
     if ([BTAddressManager instance].privKeyAddresses.count >= PRIVATE_KEY_OF_COLD_COUNT_LIMIT && [BTAddressManager instance].hasHDMKeychain) {

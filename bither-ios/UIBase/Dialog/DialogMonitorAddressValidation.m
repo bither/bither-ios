@@ -97,7 +97,6 @@
             IMP imp = [self.target methodForSelector:self.okSelector];
             void (*func)(id, SEL) = (void *)imp;
             func(self.target, self.okSelector);
-//            [self.target performSelector:self.okSelector];
         }
     }];
 }

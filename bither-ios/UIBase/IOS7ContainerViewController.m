@@ -50,10 +50,6 @@
     self.vContainer = container;
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-}
-
 - (UIViewController *)controller {
     if (self.childViewControllers.count > 0) {
         return [self.childViewControllers objectAtIndex:0];

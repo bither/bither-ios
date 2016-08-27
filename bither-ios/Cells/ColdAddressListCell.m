@@ -120,7 +120,7 @@
 
 - (void)handleTableviewCellLongPressed:(UILongPressGestureRecognizer *)gestureRecognizer {
     if (gestureRecognizer.state == UIGestureRecognizerStateBegan) {
-        DialogAddressLongPressOptions *dialogPrivateKeyOptons = [[DialogAddressLongPressOptions alloc] initWithAddress:_btAddress delegate:self andAliasDelegate:self.btnAlias];
+        DialogAddressLongPressOptions *dialogPrivateKeyOptons = [[DialogAddressLongPressOptions alloc] initWithAddress:_btAddress delegate:self andAliasDelegate:(NSObject <DialogAddressAliasDelegate> *)self.btnAlias];
         [dialogPrivateKeyOptons showInWindow:self.window];
     }
 }

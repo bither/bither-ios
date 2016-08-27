@@ -82,7 +82,7 @@
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
         NSError *error = nil;
         NSArray *files = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:path error:&error];
-        int sum = files.count - uploadCount;
+        int sum = (int)files.count - uploadCount;
         if (sum > 150) {
             NSArray *fileList = [FileUtil filesByModDate:path];
             for (int i = 0; i < sum - 50; i++) {

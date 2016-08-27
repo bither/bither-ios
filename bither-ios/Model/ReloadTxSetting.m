@@ -74,7 +74,8 @@ static Setting *reloadTxsSetting;
             if (dialogProgrees) {
                 [dialogProgrees dismiss];
             }
-            
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wundeclared-selector"
             if ([self.controller respondsToSelector:@selector(showMsg:)]) {
                 [self.controller performSelector:@selector(showMsg:) withObject:NSLocalizedString(@"Reload transactions data success", nil)];
             }
@@ -83,9 +84,13 @@ static Setting *reloadTxsSetting;
             if (dialogProgrees) {
                 [dialogProgrees dismiss];
             }
+
+            
             if ([self.controller respondsToSelector:@selector(showMsg:)]) {
                 [self.controller performSelector:@selector(showMsg:) withObject:NSLocalizedString(@"Network failure.", nil)];
             }
+#pragma clang diagnostic pop
+            
         }];
     });
     
@@ -106,10 +111,13 @@ static Setting *reloadTxsSetting;
             if (dialogProgrees) {
                 [dialogProgrees dismiss];
             }
-
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wundeclared-selector"
+            
             if ([self.controller respondsToSelector:@selector(showMsg:)]) {
                 [self.controller performSelector:@selector(showMsg:) withObject:NSLocalizedString(@"Reload transactions data success", nil)];
             }
+
 
         }           andErrorCallBack:^(NSOperation *errorOp, NSError *error) {
             if (dialogProgrees) {
@@ -118,6 +126,7 @@ static Setting *reloadTxsSetting;
             if ([self.controller respondsToSelector:@selector(showMsg:)]) {
                 [self.controller performSelector:@selector(showMsg:) withObject:NSLocalizedString(@"Network failure.", nil)];
             }
+#pragma clang diagnostic pop
 
         }];
 
@@ -132,10 +141,14 @@ static Setting *reloadTxsSetting;
 
         [reloadTxsSetting setSelectBlock:^(UIViewController *controller) {
             if (reloadTime > 0 && reloadTime + 60 * 60 > (double) [[NSDate new] timeIntervalSince1970]) {
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wundeclared-selector"
+                
                 if ([controller respondsToSelector:@selector(showMsg:)]) {
                     [controller performSelector:@selector(showMsg:) withObject:NSLocalizedString(@"You can only reload transactions data in a hour..", nil)];
                 }
-
+                
+#pragma clang diagnostic pop
             } else {
                 DialogAlert *dialogAlert = [[DialogAlert alloc] initWithMessage:NSLocalizedString(@"Reload Transactions data?\nNeed long time.\nConsume network data.\nRecommand trying only with wrong data.", nil) confirm:^{
                     __weak ReloadTxSetting *_sslf = (ReloadTxSetting *) reloadTxsSetting;
@@ -145,10 +158,10 @@ static Setting *reloadTxsSetting;
                     } else {
                         [_sslf reloadTx:nil];
                     }
-
-
+                    
+                    
                 }                                                        cancel:^{
-
+                    
                 }];
                 [dialogAlert showInWindow:controller.view.window];
             }

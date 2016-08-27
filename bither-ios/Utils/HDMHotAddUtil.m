@@ -363,7 +363,6 @@
             IMP imp = [self methodForSelector:afterQRScanSelector];
             void (*func)(id, SEL, NSString *) = (void *)imp;
             func(self, afterQRScanSelector, result);
-//            [self performSelector:afterQRScanSelector withObject:result];
         }
         afterQRScanSelector = nil;
     }];

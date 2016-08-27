@@ -60,29 +60,33 @@
     return self;
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    if (self.market.ticker == nil) {
+        [[BitherTime instance] resume];
+    }
+    [self reload];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    [self setupTableView];
+    self.market = [MarketUtil getDefaultMarket];
+    [self reload];
+    [self.vTrending setData:nil];
+    _isCheckAnimation = NO;
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(notificationReload) name:BitherMarketUpdateNotification object:nil];
+}
+
+- (void)setupTableView
+{
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
     if ([self.tableView respondsToSelector:@selector(setLayoutMargins:)]) {
         self.tableView.layoutMargins = UIEdgeInsetsZero;
     }
     self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
-    self.market = [MarketUtil getDefaultMarket];
-    [self reload];
-    [self.vTrending setData:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(notificationReload) name:BitherMarketUpdateNotification object:nil];
-    _isCheckAnimation = NO;
-
-}
-
-- (void)viewWillAppear:(BOOL)animated {
-    if (self.market.ticker == nil) {
-        [[BitherTime instance] resume];
-    }
-    [self reload];
-    [super viewWillAppear:animated];
-
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -171,18 +175,17 @@
 
 - (void)moveProgress {
     self.ivProgress.hidden = NO;
-    [UIView animateWithDuration:1.2f animations:^{
-        self.ivProgress.frame = CGRectMake(300 - 17, 0, self.ivProgress.frame.size.width, self.ivProgress.frame.size.height);
-    }                completion:^(BOOL finished) {
-        self.ivProgress.hidden = YES;
+    __weak typeof(self) weakSelf = self;
+     [UIView animateWithDuration:1.2f animations:^{
+        weakSelf.ivProgress.frame = CGRectMake(300 - 17, 0, weakSelf.ivProgress.frame.size.width, weakSelf.ivProgress.frame.size.height);
+    } completion:^(BOOL finished) {
+        weakSelf.ivProgress.hidden = YES;
         _isCheckAnimation = NO;
-        self.ivProgress.frame = CGRectMake(0, 0, self.ivProgress.frame.size.width, self.ivProgress.frame.size.height);
+        weakSelf.ivProgress.frame = CGRectMake(0, 0, weakSelf.ivProgress.frame.size.width, weakSelf.ivProgress.frame.size.height);
     }];
 }
 
-- (void)dealloc {
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:BitherMarketUpdateNotification object:nil];
-}
+#pragma mark ------ tableView delegate and datasource
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return [MarketUtil getMarkets].count;
@@ -194,13 +197,13 @@
     return cell;
 }
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 1;
-}
-
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     self.market = [[MarketUtil getMarkets] objectAtIndex:indexPath.row];
     [self reload];
+}
+
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:BitherMarketUpdateNotification object:nil];
 }
 
 @end

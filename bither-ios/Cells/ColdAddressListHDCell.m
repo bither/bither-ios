@@ -154,7 +154,6 @@
         IMP imp = [self methodForSelector:passwordSelector];
         void (*func)(id, SEL) = (void *)imp;
         func(self, passwordSelector);
-//        [self performSelector:passwordSelector];
     }
     passwordSelector = nil;
 }

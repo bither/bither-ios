@@ -139,9 +139,14 @@
                         [[[DialogBlackQrCode alloc] initWithContent:result andTitle:NSLocalizedString(@"hdm_keychain_add_signed_server_qr_code_title", nil)] showInWindow:self.window];
                     } else {
                         UIViewController *vc = self.getUIViewController;
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wundeclared-selector"
+                        
                         if (vc && [vc respondsToSelector:@selector(showMsg:)]) {
                             [vc performSelector:@selector(showMsg:) withObject:NSLocalizedString(@"hdm_keychain_add_sign_server_qr_code_error", nil)];
                         }
+                        
+#pragma clang diagnostic pop
                     }
                 }];
             });
@@ -198,7 +203,6 @@
         IMP imp = [self methodForSelector:passwordSelector];
         void (*func)(id, SEL) = (void *)imp;
         func(self, passwordSelector);
-//        [self performSelector:passwordSelector];
     }
     passwordSelector = nil;
 }

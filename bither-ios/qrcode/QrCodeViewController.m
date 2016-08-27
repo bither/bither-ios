@@ -171,7 +171,6 @@
         IMP imp = [finishTarget methodForSelector:finishSelector];
         void (*func)(id, SEL) = (void *)imp;
         func(finishTarget, finishSelector);
-//        [finishTarget performSelector:finishSelector];
     } else {
         [self.navigationController popViewControllerAnimated:YES];
     }
