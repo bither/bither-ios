@@ -457,7 +457,6 @@ static Setting *ApiConfigSetting;
 }
 
 + (Setting *)getSwitchToColdSetting {
-#warning ----------- 
     if (!SwitchToColdSetting) {
         SwitchToColdSetting = [[Setting alloc] initWithName:NSLocalizedString(@"launch_sequence_switch_to_cold", nil) icon:nil];
         [SwitchToColdSetting setSelectBlock:^(UIViewController *controller) {
