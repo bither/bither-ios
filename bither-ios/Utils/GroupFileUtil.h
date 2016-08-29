@@ -21,7 +21,7 @@
 
 #import <Foundation/Foundation.h>
 
-#define kBitherGroupName (@"group.net.bither.ent")
+#define kBitherGroupName (@"group.net.bither")
 
 @interface GroupFileUtil : NSObject
 
