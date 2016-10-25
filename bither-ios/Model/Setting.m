@@ -267,12 +267,21 @@ static Setting *ApiConfigSetting;
     TransactionFeeMode defaultTxFeeMode = [[UserDefaultsUtil instance] getTransactionFeeMode];
     NSMutableDictionary *dict = [NSMutableDictionary new];
     [dict setObject:[NSNumber numberWithInt:transcationFeeMode] forKey:SETTING_VALUE];
-    NSString *transactionFeeStr = [NSString stringWithFormat:@"%@ %@", [BitherSetting getTransactionFeeMode:transcationFeeMode], [BitherSetting getTransactionFee:transcationFeeMode]];
-    [dict setObject:transactionFeeStr forKey:SETTING_KEY];
+    [dict setObject:[Setting getTransactionFeeStr:transcationFeeMode] forKey:SETTING_KEY_ATTRIBUTED];
     if (defaultTxFeeMode == transcationFeeMode) {
         [dict setObject:[NSNumber numberWithBool:YES] forKey:SETTING_IS_DEFAULT];
     }
     return dict;
+}
+
++ (NSMutableAttributedString *)getTransactionFeeStr:(TransactionFeeMode)transcationFeeMode {
+    NSString *transactionFee = [BitherSetting getTransactionFee:transcationFeeMode];
+    NSString *transactionFeeStr = [NSString stringWithFormat:@"%@ %@", [BitherSetting getTransactionFeeMode:transcationFeeMode], transactionFee];
+    NSMutableAttributedString *transactionFeeAttributedStr = [[NSMutableAttributedString alloc] initWithString:transactionFeeStr];
+    NSRange range = NSMakeRange([[transactionFeeAttributedStr string] rangeOfString:[transactionFee substringToIndex:1]].location, transactionFee.length);
+    [transactionFeeAttributedStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:13.0] range:range];
+    [transactionFeeAttributedStr addAttribute:NSForegroundColorAttributeName value:[UIColor grayColor] range:range];
+    return transactionFeeAttributedStr;
 }
 
 + (Setting *)getNetworkSetting {
