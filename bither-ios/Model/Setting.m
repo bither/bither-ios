@@ -239,9 +239,9 @@ static Setting *ApiConfigSetting;
         }];
         [setting setGetArrayBlock:^() {
             NSMutableArray *array = [NSMutableArray new];
+            [array addObject:[self getTransactionFeeDict:Higher]];
             [array addObject:[self getTransactionFeeDict:High]];
             [array addObject:[self getTransactionFeeDict:Normal]];
-            [array addObject:[self getTransactionFeeDict:Low]];
             return array;
 
         }];
@@ -267,12 +267,21 @@ static Setting *ApiConfigSetting;
     TransactionFeeMode defaultTxFeeMode = [[UserDefaultsUtil instance] getTransactionFeeMode];
     NSMutableDictionary *dict = [NSMutableDictionary new];
     [dict setObject:[NSNumber numberWithInt:transcationFeeMode] forKey:SETTING_VALUE];
-    [dict setObject:[BitherSetting getTransactionFeeMode:transcationFeeMode] forKey:SETTING_KEY];
+    [dict setObject:[Setting getTransactionFeeStr:transcationFeeMode] forKey:SETTING_KEY_ATTRIBUTED];
     if (defaultTxFeeMode == transcationFeeMode) {
         [dict setObject:[NSNumber numberWithBool:YES] forKey:SETTING_IS_DEFAULT];
     }
     return dict;
+}
 
++ (NSMutableAttributedString *)getTransactionFeeStr:(TransactionFeeMode)transcationFeeMode {
+    NSString *transactionFee = [BitherSetting getTransactionFee:transcationFeeMode];
+    NSString *transactionFeeStr = [NSString stringWithFormat:@"%@ %@", [BitherSetting getTransactionFeeMode:transcationFeeMode], transactionFee];
+    NSMutableAttributedString *transactionFeeAttributedStr = [[NSMutableAttributedString alloc] initWithString:transactionFeeStr];
+    NSRange range = NSMakeRange([[transactionFeeAttributedStr string] rangeOfString:[transactionFee substringToIndex:1]].location, transactionFee.length);
+    [transactionFeeAttributedStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:13.0] range:range];
+    [transactionFeeAttributedStr addAttribute:NSForegroundColorAttributeName value:[UIColor grayColor] range:range];
+    return transactionFeeAttributedStr;
 }
 
 + (Setting *)getNetworkSetting {

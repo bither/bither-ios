@@ -307,9 +307,9 @@
 "Sync over wifi only"="只在wifi下同步";
 "Sync always"="一直同步";
 "Default Transaction Fee"="默认手续费";
-"Normal"="正常";
-"Low"="较低";
-"High" = "较高";
+"Normal"="标准";
+"High"="高";
+"Higher"="更高";
 "fast confirmation"="较快确认";
 "slow confirmation"="较慢确认";
 "Donate"="捐赠";

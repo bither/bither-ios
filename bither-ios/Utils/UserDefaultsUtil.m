@@ -207,8 +207,8 @@ NSUserDefaults *userDefaults;
 
 - (TransactionFeeMode)getTransactionFeeMode {
     if ([userDefaults objectForKey:TRANSACTION_FEE_MODE]) {
-        if ([userDefaults integerForKey:TRANSACTION_FEE_MODE] == Low) {
-            return Low;
+        if ([userDefaults integerForKey:TRANSACTION_FEE_MODE] == Higher) {
+            return Higher;
         } else if ([userDefaults integerForKey:TRANSACTION_FEE_MODE] == High) {
             return High;
         } else {
