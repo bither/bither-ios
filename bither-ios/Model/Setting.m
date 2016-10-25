@@ -239,9 +239,9 @@ static Setting *ApiConfigSetting;
         }];
         [setting setGetArrayBlock:^() {
             NSMutableArray *array = [NSMutableArray new];
+            [array addObject:[self getTransactionFeeDict:Higher]];
             [array addObject:[self getTransactionFeeDict:High]];
             [array addObject:[self getTransactionFeeDict:Normal]];
-            [array addObject:[self getTransactionFeeDict:Low]];
             return array;
 
         }];
@@ -267,12 +267,12 @@ static Setting *ApiConfigSetting;
     TransactionFeeMode defaultTxFeeMode = [[UserDefaultsUtil instance] getTransactionFeeMode];
     NSMutableDictionary *dict = [NSMutableDictionary new];
     [dict setObject:[NSNumber numberWithInt:transcationFeeMode] forKey:SETTING_VALUE];
-    [dict setObject:[BitherSetting getTransactionFeeMode:transcationFeeMode] forKey:SETTING_KEY];
+    NSString *transactionFeeStr = [NSString stringWithFormat:@"%@ %@", [BitherSetting getTransactionFeeMode:transcationFeeMode], [BitherSetting getTransactionFee:transcationFeeMode]];
+    [dict setObject:transactionFeeStr forKey:SETTING_KEY];
     if (defaultTxFeeMode == transcationFeeMode) {
         [dict setObject:[NSNumber numberWithBool:YES] forKey:SETTING_IS_DEFAULT];
     }
     return dict;
-
 }
 
 + (Setting *)getNetworkSetting {

@@ -125,7 +125,7 @@ typedef enum {
 } KLineTimeType;
 
 typedef enum {
-    Normal = 10000, Low = 1000, High = 20000
+    Normal = 10000, High = 20000, Higher = 50000
 } TransactionFeeMode;
 
 typedef enum {
@@ -166,6 +166,7 @@ typedef enum {
 
 + (NSString *)getTransactionFeeMode:(TransactionFeeMode)transactionFee;
 
++ (NSString *)getTransactionFee:(TransactionFeeMode)transactionFee;
 
 + (NSString *)getKeychainMode:(KeychainMode)keychainMode;
 
