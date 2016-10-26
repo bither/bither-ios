@@ -25,11 +25,14 @@
 #import "PeerUtil.h"
 #import "BitherTime.h"
 #import "DialogAlert.h"
+#import "AdView.h"
+#import "BitherApi.h"
 
 #define kChooseModeGradientCenterColor (0x8881a2)
 #define kChooseModeGradientColdColor (0x10a0df)
 #define kChooseModeGradientHotColor (0xfc6463)
 #define kChooseModeStateTransactionDuration (0.6)
+#define AD_DIC_NAME @"AdDic.txt"
 
 @interface ChooseModeViewController () {
     void(^coldNetCheckCompletion)(BOOL);
@@ -83,11 +86,10 @@
 
 @implementation ChooseModeViewController
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-    }
-    return self;
+- (void)awakeFromNib {
+    [super awakeFromNib];
+    
+    [self addAd];
 }
 
 - (void)viewDidLoad {
@@ -101,13 +103,27 @@
             self.vHotProgress.hidden = NO;
             self.vHotRetry.hidden = YES;
             [self showHotWait];
-
         }
         if ([[BTSettings instance] getAppMode] == COLD) {
             [self showColdCheckWithCompletion:^{
                 [self.vColdNetCheck beginCheck:coldNetCheckCompletion];
             }];
         }
+    }
+}
+
+- (void)addAd {
+    NSString * documentsPath = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES).lastObject;
+    NSString * dicPath = [documentsPath stringByAppendingPathComponent:AD_DIC_NAME];
+    NSString * imagePath = [documentsPath stringByAppendingPathComponent:NSLocalizedString(@"ad_image_name", nil)];
+    NSDictionary * dic = [NSDictionary dictionaryWithContentsOfFile:dicPath];
+    BOOL dicFlag = [[NSFileManager defaultManager] fileExistsAtPath:dicPath];
+    BOOL imageFlag = [[NSFileManager defaultManager] fileExistsAtPath:imagePath];
+    if (dicFlag && imageFlag) {
+        AdView *adView = [[AdView alloc] initWithFrame:[[UIScreen mainScreen] bounds] adDic:dic];
+        [self.view addSubview:adView];
+    } else {
+        [[BitherApi instance] getAdApi];
     }
 }
 

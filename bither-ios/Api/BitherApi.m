@@ -18,6 +18,7 @@
 #import "BitherApi.h"
 #import "MarketUtil.h"
 #import "GroupFileUtil.h"
+#import "AFNetworking.h"
 
 static BitherApi *piApi;
 
@@ -25,6 +26,7 @@ static BitherApi *piApi;
 
 + (BitherApi *)instance {
     @synchronized (self) {
+
         if (piApi == nil) {
             piApi = [[self alloc] init];
         }
@@ -205,6 +207,46 @@ static BitherApi *piApi;
             errorCallback(errorOp, error);
         }
     }];
+}
+
+#pragma mark - Ad api
+
+- (void)getAdApi {
+    NSString *url = @"https://github.com/bitpiedotcom/bitpiedotcom.github.com/raw/master/bither/bither_ad.json";
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    manager.responseSerializer = [AFHTTPResponseSerializer serializer];
+    [manager GET:url parameters:nil success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
+        NSDictionary *responseDic = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingAllowFragments error:nil];
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+            NSString * documentsPath = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES).lastObject;
+            NSString * path = [documentsPath stringByAppendingPathComponent:@"AdDic.txt"];
+            [responseDic writeToFile:path atomically:YES];
+            [[BitherApi instance] getAdImageWithResponseDic:responseDic imageKey:@"img_en"];
+            [[BitherApi instance] getAdImageWithResponseDic:responseDic imageKey:@"img_zh_CN"];
+            [[BitherApi instance] getAdImageWithResponseDic:responseDic imageKey:@"img_zh_TW"];
+        });
+    } failure:nil];
+}
+
+- (void)getAdImageWithResponseDic:(NSDictionary *)responseDic imageKey:(NSString *)imageKey {
+    NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
+    AFURLSessionManager *manager = [[AFURLSessionManager alloc] initWithSessionConfiguration:configuration];
+    NSURL *URL = [NSURL URLWithString:responseDic[imageKey]];
+    NSURLRequest *request = [NSURLRequest requestWithURL:URL];
+    NSString *imageName = [NSString stringWithFormat:@"%@.png", imageKey];
+    NSString * documentsPath = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES).lastObject;
+    NSString * path = [documentsPath stringByAppendingPathComponent:imageName];
+    BOOL flag = [[NSFileManager defaultManager] fileExistsAtPath:path];
+    if (flag) {
+        [[NSFileManager defaultManager] removeItemAtPath:path error:nil];
+    }
+    
+    NSURLSessionDownloadTask *downloadTask = [manager downloadTaskWithRequest:request progress:nil destination:^NSURL *(NSURL *targetPath, NSURLResponse *response) {
+        NSURL *documentsDirectoryURL = [[NSFileManager defaultManager] URLForDirectory:NSCachesDirectory inDomain:NSUserDomainMask appropriateForURL:nil create:NO error:nil];
+        return [documentsDirectoryURL URLByAppendingPathComponent:imageName];
+    } completionHandler:^(NSURLResponse *response, NSURL *filePath, NSError *error) {
+    }];
+    [downloadTask resume];
 }
 
 //#pragma mark - hdm api

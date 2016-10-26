@@ -34,10 +34,11 @@
 #import "TrendingGraphicData.h"
 #import "UpgradeUtil.h"
 #import "PinCodeUtil.h"
-
 #import "DialogProgress.h"
 #import "SystemUtil.h"
 #import "GroupFileUtil.h"
+#import "ChooseModeViewController.h"
+#import "AdView.h"
 
 @interface AppDelegate ()
 @end
@@ -60,6 +61,7 @@ static StatusBarNotificationWindow *notificationWindow;
     }
 
     [CrashLog initCrashLog];
+    
     if ([UpgradeUtil needUpgradeKeyFromFileToDB]) {
         DialogProgress *dp = [[DialogProgress alloc] initWithMessage:NSLocalizedString(@"Please wait…", nil)];
         __block  DialogProgress *sslfDp = dp;
@@ -93,6 +95,12 @@ static StatusBarNotificationWindow *notificationWindow;
 }
 
 - (void)loadViewController {
+    if (![self isAddAd]) {
+        [self continueToLoadViewController];
+    }
+}
+
+- (void)continueToLoadViewController {
     UIStoryboard *storyboard = self.window.rootViewController.storyboard;
     if (![[BTSettings instance] needChooseMode]) {
         IOS7ContainerViewController *container = [[IOS7ContainerViewController alloc] init];
@@ -107,7 +115,7 @@ static StatusBarNotificationWindow *notificationWindow;
         }
     }
     [self.window makeKeyAndVisible];
-
+    
     // NSLog(@"h %d",[[BTBlockChain instance] lastBlock].blockNo);
     [self callInHot:^{
         [[PeerUtil instance] startPeer];
@@ -117,12 +125,26 @@ static StatusBarNotificationWindow *notificationWindow;
     [self callInCold:^{
         [[Reachability reachabilityForInternetConnection] startNotifier];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reachabilityChange) name:kReachabilityChangedNotification object:nil];
-
+        
     }];
     notificationWindow = [[StatusBarNotificationWindow alloc] initWithOriWindow:self.window];
     [[PinCodeUtil instance] becomeActive];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(notification:) name:BitherBalanceChangedNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(hdAccountPaymentAddressChanged:) name:kHDAccountPaymentAddressChangedNotification object:nil];
+}
+
+- (BOOL)isAddAd {
+    ChooseModeViewController *chooseMode = (ChooseModeViewController *)self.window.rootViewController;
+    for (UIView *view in chooseMode.view.subviews) {
+        if ([view isMemberOfClass:[AdView class]]) {
+            AdView *adView = (AdView *)view;
+            adView.done = ^{
+                [self continueToLoadViewController];
+            };
+            return true;
+        }
+    }
+    return false;
 }
 
 - (void)notification:(NSNotification *)notification {

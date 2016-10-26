@@ -104,7 +104,8 @@
 		1BC27FE47C62F779EDE01FA5 /* HDAccountSendViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BC27B56B8528116430BB2D8 /* HDAccountSendViewController.m */; };
 		20F671F2466952F081445EFB /* libPods-bither-ios WatchKit App.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AC13478AA903687AA9ACD36 /* libPods-bither-ios WatchKit App.a */; };
 		35BD79D34EADBCE346458D94 /* libPods-bither-ios.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 46F4567F64E4C5EB9B650EE0 /* libPods-bither-ios.a */; };
-		401ED0FE1DBEF64C009A1725 /* AdViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 401ED0FD1DBEF64C009A1725 /* AdViewController.m */; };
+		403753071DBF429000F402A0 /* AdView.m in Sources */ = {isa = PBXBuildFile; fileRef = 403753061DBF429000F402A0 /* AdView.m */; };
+		403753131DC0503700F402A0 /* UIView+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 403753121DC0503700F402A0 /* UIView+Extension.m */; };
 		4217A3731951235D00063746 /* Depth.m in Sources */ = {isa = PBXBuildFile; fileRef = 4217A3721951235D00063746 /* Depth.m */; };
 		4217A39019512DC000063746 /* TransactionsUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 4217A38F19512DC000063746 /* TransactionsUtil.m */; };
 		421B037C19495315003A45F1 /* TabButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 421B037B19495315003A45F1 /* TabButton.m */; };
@@ -536,8 +537,10 @@
 		1BC27F93AA0BE5EBA695564A /* DialogHDMSingularColdSeedChildQrViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DialogHDMSingularColdSeedChildQrViewController.m; sourceTree = "<group>"; };
 		1BC27FD66F3376A2C68612DD /* AddHDMAddressViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddHDMAddressViewController.m; sourceTree = "<group>"; };
 		3F23197A13072D3472EE053F /* libPods-bither-ios WatchKit Extension.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-bither-ios WatchKit Extension.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		401ED0FC1DBEF64C009A1725 /* AdViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdViewController.h; sourceTree = "<group>"; };
-		401ED0FD1DBEF64C009A1725 /* AdViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AdViewController.m; sourceTree = "<group>"; };
+		403753051DBF429000F402A0 /* AdView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdView.h; sourceTree = "<group>"; };
+		403753061DBF429000F402A0 /* AdView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AdView.m; sourceTree = "<group>"; };
+		403753111DC0503700F402A0 /* UIView+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Extension.h"; sourceTree = "<group>"; };
+		403753121DC0503700F402A0 /* UIView+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Extension.m"; sourceTree = "<group>"; };
 		4217A3711951235D00063746 /* Depth.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Depth.h; sourceTree = "<group>"; };
 		4217A3721951235D00063746 /* Depth.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Depth.m; sourceTree = "<group>"; };
 		4217A38E19512DC000063746 /* TransactionsUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TransactionsUtil.h; sourceTree = "<group>"; };
@@ -1106,8 +1109,8 @@
 		401ED0F81DBEEC69009A1725 /* Ad */ = {
 			isa = PBXGroup;
 			children = (
-				401ED0FC1DBEF64C009A1725 /* AdViewController.h */,
-				401ED0FD1DBEF64C009A1725 /* AdViewController.m */,
+				403753051DBF429000F402A0 /* AdView.h */,
+				403753061DBF429000F402A0 /* AdView.m */,
 			);
 			path = Ad;
 			sourceTree = "<group>";
@@ -1213,8 +1216,8 @@
 				4254083819469C9A007AF99C /* BitherEngine.m */,
 				D61D0F5AB509120289D32CE8 /* BTHDMBid+Api.m */,
 				D61D0E2B59DCC58D05F2CCE6 /* BTHDMBid+Api.h */,
-				D61D089EE8093848A924819C /* HDMApi.m */,
 				D61D00DE53941DC6062E1938 /* HDMApi.h */,
+				D61D089EE8093848A924819C /* HDMApi.m */,
 				0AF4B7BA1CE1794400F7F7D9 /* PushTxThirdParty.h */,
 				0AF4B7BB1CE1794400F7F7D9 /* PushTxThirdParty.m */,
 			);
@@ -1300,6 +1303,8 @@
 				DC0C45B833B681E58F7812DB /* GroupUtil.h */,
 				1BC27CB228C32AFF60875F67 /* TotalBalanceHideUtil.m */,
 				1BC27DAB01DF55378286FEFD /* TotalBalanceHideUtil.h */,
+				403753111DC0503700F402A0 /* UIView+Extension.h */,
+				403753121DC0503700F402A0 /* UIView+Extension.m */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -2425,6 +2430,7 @@
 				421B03BD19495AEF003A45F1 /* MarketViewController.m in Sources */,
 				0AB63CB81ABD15C80018A546 /* RawPrivateKeyViewController.m in Sources */,
 				AC33088E1955668D00D8F621 /* HotAddressListCell.m in Sources */,
+				403753131DC0503700F402A0 /* UIView+Extension.m in Sources */,
 				4254085D1946A219007AF99C /* StringUtil.m in Sources */,
 				4254083C19469C9A007AF99C /* BitherApi.m in Sources */,
 				AC9BBCFE19D268AB00E58BA7 /* UpgradeUtil.m in Sources */,
@@ -2490,11 +2496,11 @@
 				ACDDDC2319480DE00008A79D /* UIViewController+PiShowBanner.m in Sources */,
 				ACCA274B1989FACC000E6A32 /* HotAddressTabButton.m in Sources */,
 				AC1715871969213800337AB5 /* DialogAddressOptions.m in Sources */,
+				403753071DBF429000F402A0 /* AdView.m in Sources */,
 				0A43F4401A81C6BF008171DB /* HdmSendViewController.m in Sources */,
 				4269FF7B195A948A001213B9 /* CacheUtil.m in Sources */,
 				ACEEB703199B40FE008E06AA /* CurrencyCalculatorLink.m in Sources */,
 				AC53ABB319D2CD80007C095C /* UEntropyCollector.m in Sources */,
-				401ED0FE1DBEF64C009A1725 /* AdViewController.m in Sources */,
 				ACD6DFD8196BF98B009D8031 /* DialogAddressFull.m in Sources */,
 				4254086B1946CD17007AF99C /* NSDictionary+Fromat.m in Sources */,
 				AC2F329B195D1930001B7439 /* UnsignedTransactionViewController.m in Sources */,
