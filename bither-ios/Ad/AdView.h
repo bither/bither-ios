@@ -8,11 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
-typedef void(^Done)();
-
 @interface AdView : UIView
 
-@property (nonatomic, copy) Done done;
+@property (nonatomic, copy) dispatch_block_t done;
 - (instancetype)initWithFrame:(CGRect)frame adDic:(NSDictionary *)adDic;
 
 @end

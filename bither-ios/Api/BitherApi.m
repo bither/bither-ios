@@ -19,8 +19,12 @@
 #import "MarketUtil.h"
 #import "GroupFileUtil.h"
 #import "AFNetworking.h"
+#import "AdUtil.h"
 
 static BitherApi *piApi;
+#define kImgEn @"img_en"
+#define kImgZhCN @"img_zh_CN"
+#define kImgZhTW @"img_zh_TW"
 
 @implementation BitherApi
 
@@ -218,12 +222,11 @@ static BitherApi *piApi;
     [manager GET:url parameters:nil success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
         NSDictionary *responseDic = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingAllowFragments error:nil];
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-            NSString * documentsPath = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES).lastObject;
-            NSString * path = [documentsPath stringByAppendingPathComponent:@"AdDic.txt"];
-            [responseDic writeToFile:path atomically:YES];
-            [[BitherApi instance] getAdImageWithResponseDic:responseDic imageKey:@"img_en"];
-            [[BitherApi instance] getAdImageWithResponseDic:responseDic imageKey:@"img_zh_CN"];
-            [[BitherApi instance] getAdImageWithResponseDic:responseDic imageKey:@"img_zh_TW"];
+            NSString *adPath = [AdUtil createCacheAdDicPath];
+            [responseDic writeToFile:adPath atomically:YES];
+            [[BitherApi instance] getAdImageWithResponseDic:responseDic imageKey:kImgEn];
+            [[BitherApi instance] getAdImageWithResponseDic:responseDic imageKey:kImgZhCN];
+            [[BitherApi instance] getAdImageWithResponseDic:responseDic imageKey:kImgZhTW];
         });
     } failure:nil];
 }
@@ -233,21 +236,22 @@ static BitherApi *piApi;
     AFURLSessionManager *manager = [[AFURLSessionManager alloc] initWithSessionConfiguration:configuration];
     NSURL *URL = [NSURL URLWithString:responseDic[imageKey]];
     NSURLRequest *request = [NSURLRequest requestWithURL:URL];
-    NSString *imageName = [NSString stringWithFormat:@"%@.png", imageKey];
-    NSString * documentsPath = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES).lastObject;
-    NSString * path = [documentsPath stringByAppendingPathComponent:imageName];
-    BOOL flag = [[NSFileManager defaultManager] fileExistsAtPath:path];
-    if (flag) {
-        [[NSFileManager defaultManager] removeItemAtPath:path error:nil];
-    }
-    
+    NSString *imageName = [NSString stringWithFormat:@"%@%@.png", imageKey, [self getNowTime]];
+    NSString *imgPath = [AdUtil createCacheImgPathForFileName:imageKey];
     NSURLSessionDownloadTask *downloadTask = [manager downloadTaskWithRequest:request progress:nil destination:^NSURL *(NSURL *targetPath, NSURLResponse *response) {
-        NSURL *documentsDirectoryURL = [[NSFileManager defaultManager] URLForDirectory:NSCachesDirectory inDomain:NSUserDomainMask appropriateForURL:nil create:NO error:nil];
+        NSURL *documentsDirectoryURL = [NSURL URLWithString:[NSString stringWithFormat:@"file://%@", imgPath]];
         return [documentsDirectoryURL URLByAppendingPathComponent:imageName];
     } completionHandler:^(NSURLResponse *response, NSURL *filePath, NSError *error) {
     }];
     [downloadTask resume];
 }
+
+- (NSString *)getNowTime {
+    NSDate *nowDate = [NSDate date];
+    NSString *timeSp = [NSString stringWithFormat:@"%d",(int)[nowDate timeIntervalSince1970]];
+    return timeSp;
+}
+
 
 //#pragma mark - hdm api
 //- (void)getHDMPasswordRandomWithHDMBid:(NSString *) hdmBid callback:(IdResponseBlock) callback andErrorCallBack:(ErrorHandler)errorCallback;{

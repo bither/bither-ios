@@ -9,6 +9,7 @@
 #import "AdView.h"
 #import "BitherApi.h"
 #import "UIView+Extension.h"
+#import "AdUtil.h"
 
 @interface AdView ()
 
@@ -80,14 +81,8 @@
 - (UIImageView *)adImage {
     if (!_adImage) {
         _adImage = [[UIImageView alloc] initWithFrame:self.frame];
-        NSString * documentsPath = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES).lastObject;
-        NSString * path = [documentsPath stringByAppendingPathComponent:NSLocalizedString(@"ad_image_name", nil)];
-        
-        BOOL flag = [[NSFileManager defaultManager] fileExistsAtPath:path];
-        if (flag) {
-            NSData * data = [NSData dataWithContentsOfFile:path];
-            _adImage.image = [UIImage imageWithData:data];
-        }
+        NSData * data = [NSData dataWithContentsOfFile:[AdUtil getAdImageFile]];
+        _adImage.image = [UIImage imageWithData:data];
     }
     return _adImage;
 }

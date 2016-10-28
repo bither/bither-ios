@@ -742,7 +742,7 @@
 
 // Ad
 "ad_go" = "前往";
-"ad_image_name" = "img_zh_TW.png";
+"ad_image_name" = "/img_zh_TW";
 "ad_skip" = "跳過";
 
 // Language

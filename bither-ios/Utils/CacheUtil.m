@@ -50,7 +50,7 @@
     return [cacheDir stringByAppendingPathComponent:EXCHANGERATE];
 }
 
-+ (NSString *)getCurrenciesRateFile; {
++ (NSString *)getCurrenciesRateFile {
     NSString *cacheDir = [CacheUtil cachePathForFileName:@""];
     return [cacheDir stringByAppendingPathComponent:CURRENCIES_RATE];
 }
@@ -81,4 +81,6 @@
     NSString *documentsPath = [paths objectAtIndex:0];
     return [documentsPath stringByAppendingPathComponent:fileName];
 }
+
+
 @end

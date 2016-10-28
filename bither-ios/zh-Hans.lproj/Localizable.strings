@@ -741,7 +741,7 @@
 
 // Ad
 "ad_go" = "前往";
-"ad_image_name" = "img_zh_CN.png";
+"ad_image_name" = "/img_zh_CN";
 "ad_skip" = "跳过";
 
 // Language

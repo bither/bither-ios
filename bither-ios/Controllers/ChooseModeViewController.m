@@ -27,6 +27,7 @@
 #import "DialogAlert.h"
 #import "AdView.h"
 #import "BitherApi.h"
+#import "AdUtil.h"
 
 #define kChooseModeGradientCenterColor (0x8881a2)
 #define kChooseModeGradientColdColor (0x10a0df)
@@ -89,7 +90,7 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
     
-    [self addAd];
+    [self isShowAd];
 }
 
 - (void)viewDidLoad {
@@ -112,12 +113,11 @@
     }
 }
 
-- (void)addAd {
-    NSString * documentsPath = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES).lastObject;
-    NSString * dicPath = [documentsPath stringByAppendingPathComponent:AD_DIC_NAME];
-    NSString * imagePath = [documentsPath stringByAppendingPathComponent:NSLocalizedString(@"ad_image_name", nil)];
-    NSDictionary * dic = [NSDictionary dictionaryWithContentsOfFile:dicPath];
-    BOOL dicFlag = [[NSFileManager defaultManager] fileExistsAtPath:dicPath];
+- (void)isShowAd {
+    NSString *adPath = [AdUtil getAdFile];
+    NSString *imagePath = [AdUtil getAdImageFile];
+    NSDictionary *dic = [NSDictionary dictionaryWithContentsOfFile:adPath];
+    BOOL dicFlag = [[NSFileManager defaultManager] fileExistsAtPath:adPath];
     BOOL imageFlag = [[NSFileManager defaultManager] fileExistsAtPath:imagePath];
     if (dicFlag && imageFlag) {
         AdView *adView = [[AdView alloc] initWithFrame:[[UIScreen mainScreen] bounds] adDic:dic];
