@@ -119,7 +119,8 @@
     NSDictionary *dic = [NSDictionary dictionaryWithContentsOfFile:adPath];
     BOOL dicFlag = [[NSFileManager defaultManager] fileExistsAtPath:adPath];
     BOOL imageFlag = [[NSFileManager defaultManager] fileExistsAtPath:imagePath];
-    if (dicFlag && imageFlag) {
+    BOOL showFlag = [[NSString stringWithFormat:@"%@", dic[@"timestamp"]] isEqualToString:@"0"];
+    if (dicFlag && imageFlag && !showFlag) {
         AdView *adView = [[AdView alloc] initWithFrame:[[UIScreen mainScreen] bounds] adDic:dic];
         [self.view addSubview:adView];
     } else {
