@@ -13,6 +13,7 @@
 #define kImgZhTW @"/img_zh_TW"
 #define kAdCacheName @"/AdDic.txt"
 #define kAdCacheFileName @"Ad"
+#define kTIME_STAMP @"timestamp"
 
 @implementation AdUtil
 
@@ -56,19 +57,42 @@
 
 #pragma mark - get
 
-+ (NSString *)getAdImageFile {
-    NSString *adImageDir = [AdUtil createCacheAdImagePathForFileName:NSLocalizedString(@"ad_image_name", nil)];
-    NSArray *files = [[NSFileManager defaultManager] subpathsAtPath: adImageDir];
-    if (files.count != 0) {
-        NSString *imgPath = [NSString stringWithFormat:@"%@/%@", adImageDir, files.firstObject];
-        return imgPath;
-    }
-    return nil;
++ (UIImage *)getAdImage {
+    NSData * data = [NSData dataWithContentsOfFile:[AdUtil getAdImageFile]];
+    return [UIImage imageWithData:data];
 }
 
-+ (NSString *)getAdFile {
-    NSString *adDir = [[AdUtil createCacheAdPath] stringByAppendingString:kAdCacheName];
-    return adDir;
++ (NSDictionary *)getAd {
+    NSString *adPath = [AdUtil getAdFile];
+    NSDictionary *dic = [NSDictionary dictionaryWithContentsOfFile:adPath];
+    return dic;
+}
+
++ (BOOL)isDownloadImageForNewAdDic:(NSDictionary *)adDic {
+    NSString *adPath = [AdUtil getAdFile];
+    BOOL dicFlag = [[NSFileManager defaultManager] fileExistsAtPath:adPath];
+    if (dicFlag) {
+        NSDictionary *dic = [NSDictionary dictionaryWithContentsOfFile:adPath];
+        if ([dic[kTIME_STAMP] isEqualToString:adDic[kTIME_STAMP]]) {
+            return false;
+        }
+    }
+    return true;
+}
+
++ (BOOL)isShowAd {
+    NSString *adPath = [AdUtil getAdFile];
+    NSString *imagePath = [AdUtil getAdImageFile];
+    BOOL dicFlag = [[NSFileManager defaultManager] fileExistsAtPath:adPath];
+    BOOL imageFlag = [[NSFileManager defaultManager] fileExistsAtPath:imagePath];
+    if (dicFlag && imageFlag) {
+        NSDictionary *dic = [NSDictionary dictionaryWithContentsOfFile:adPath];
+        BOOL showFlag = [[NSString stringWithFormat:@"%@", dic[kTIME_STAMP]] isEqualToString:@"0"];
+        if (!showFlag) {
+            return true;
+        }
+    }
+    return false;
 }
 
 #pragma mark - private
@@ -92,6 +116,21 @@
     if (!flag) {
         [[NSFileManager defaultManager] createDirectoryAtPath:path withIntermediateDirectories:YES attributes:nil error:nil];
     }
+}
+
++ (NSString *)getAdFile {
+    NSString *adDir = [[AdUtil createCacheAdPath] stringByAppendingString:kAdCacheName];
+    return adDir;
+}
+
++ (NSString *)getAdImageFile {
+    NSString *adImageDir = [AdUtil createCacheAdImagePathForFileName:NSLocalizedString(@"ad_image_name", nil)];
+    NSArray *files = [[NSFileManager defaultManager] subpathsAtPath: adImageDir];
+    if (files.count != 0) {
+        NSString *imgPath = [NSString stringWithFormat:@"%@/%@", adImageDir, files.firstObject];
+        return imgPath;
+    }
+    return nil;
 }
 
 + (void)clearUselessImageForPath:(NSString *)path {

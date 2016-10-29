@@ -220,13 +220,15 @@ static BitherApi *piApi;
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     manager.responseSerializer = [AFHTTPResponseSerializer serializer];
     [manager GET:url parameters:nil success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
-        NSDictionary *responseDic = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingAllowFragments error:nil];
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-            NSString *adPath = [AdUtil createCacheAdDicPath];
-            [responseDic writeToFile:adPath atomically:YES];
-            [[BitherApi instance] getAdImageWithResponseDic:responseDic imageKey:kImgEn];
-            [[BitherApi instance] getAdImageWithResponseDic:responseDic imageKey:kImgZhCN];
-            [[BitherApi instance] getAdImageWithResponseDic:responseDic imageKey:kImgZhTW];
+            NSDictionary *responseDic = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingAllowFragments error:nil];
+            if ([AdUtil isDownloadImageForNewAdDic:responseDic]) {
+                NSString *adPath = [AdUtil createCacheAdDicPath];
+                [responseDic writeToFile:adPath atomically:YES];
+                [[BitherApi instance] getAdImageWithResponseDic:responseDic imageKey:kImgEn];
+                [[BitherApi instance] getAdImageWithResponseDic:responseDic imageKey:kImgZhCN];
+                [[BitherApi instance] getAdImageWithResponseDic:responseDic imageKey:kImgZhTW];
+            }
         });
     } failure:nil];
 }

@@ -24,11 +24,11 @@
 
 @implementation AdView
 
-- (instancetype)initWithFrame:(CGRect)frame adDic:(NSDictionary *)adDic {
+- (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
         self.number = 3;
-        self.adDic = adDic;
+        self.adDic = [AdUtil getAd];
         [self addSubview:self.adImage];
         [self addSubview:self.adBtn];
         [self addSubview:self.countDown];
@@ -81,8 +81,7 @@
 - (UIImageView *)adImage {
     if (!_adImage) {
         _adImage = [[UIImageView alloc] initWithFrame:self.frame];
-        NSData * data = [NSData dataWithContentsOfFile:[AdUtil getAdImageFile]];
-        _adImage.image = [UIImage imageWithData:data];
+        _adImage.image = [AdUtil getAdImage];
     }
     return _adImage;
 }

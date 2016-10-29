@@ -14,8 +14,12 @@
 
 + (NSString *)createCacheImgPathForFileName:(NSString *)fileName;
 
-+ (NSString *)getAdFile;
++ (NSDictionary *)getAd;
 
-+ (NSString *)getAdImageFile;
++ (UIImage *)getAdImage;
+
++ (BOOL)isDownloadImageForNewAdDic:(NSDictionary *)adDic;
+
++ (BOOL)isShowAd;
 
 @end

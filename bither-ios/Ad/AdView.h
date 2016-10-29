@@ -11,6 +11,5 @@
 @interface AdView : UIView
 
 @property (nonatomic, copy) dispatch_block_t done;
-- (instancetype)initWithFrame:(CGRect)frame adDic:(NSDictionary *)adDic;
 
 @end

@@ -114,14 +114,8 @@
 }
 
 - (void)isShowAd {
-    NSString *adPath = [AdUtil getAdFile];
-    NSString *imagePath = [AdUtil getAdImageFile];
-    NSDictionary *dic = [NSDictionary dictionaryWithContentsOfFile:adPath];
-    BOOL dicFlag = [[NSFileManager defaultManager] fileExistsAtPath:adPath];
-    BOOL imageFlag = [[NSFileManager defaultManager] fileExistsAtPath:imagePath];
-    BOOL showFlag = [[NSString stringWithFormat:@"%@", dic[@"timestamp"]] isEqualToString:@"0"];
-    if (dicFlag && imageFlag && !showFlag) {
-        AdView *adView = [[AdView alloc] initWithFrame:[[UIScreen mainScreen] bounds] adDic:dic];
+    if ([AdUtil isShowAd]) {
+        AdView *adView = [[AdView alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
         [self.view addSubview:adView];
     } else {
         [[BitherApi instance] getAdApi];
