@@ -1,23 +1,23 @@
 PODS:
-  - AFNetworking (2.6.0):
-    - AFNetworking/NSURLConnection (= 2.6.0)
-    - AFNetworking/NSURLSession (= 2.6.0)
-    - AFNetworking/Reachability (= 2.6.0)
-    - AFNetworking/Security (= 2.6.0)
-    - AFNetworking/Serialization (= 2.6.0)
-    - AFNetworking/UIKit (= 2.6.0)
-  - AFNetworking/NSURLConnection (2.6.0):
+  - AFNetworking (2.6.3):
+    - AFNetworking/NSURLConnection (= 2.6.3)
+    - AFNetworking/NSURLSession (= 2.6.3)
+    - AFNetworking/Reachability (= 2.6.3)
+    - AFNetworking/Security (= 2.6.3)
+    - AFNetworking/Serialization (= 2.6.3)
+    - AFNetworking/UIKit (= 2.6.3)
+  - AFNetworking/NSURLConnection (2.6.3):
     - AFNetworking/Reachability
     - AFNetworking/Security
     - AFNetworking/Serialization
-  - AFNetworking/NSURLSession (2.6.0):
+  - AFNetworking/NSURLSession (2.6.3):
     - AFNetworking/Reachability
     - AFNetworking/Security
     - AFNetworking/Serialization
-  - AFNetworking/Reachability (2.6.0)
-  - AFNetworking/Security (2.6.0)
-  - AFNetworking/Serialization (2.6.0)
-  - AFNetworking/UIKit (2.6.0):
+  - AFNetworking/Reachability (2.6.3)
+  - AFNetworking/Security (2.6.3)
+  - AFNetworking/Serialization (2.6.3)
+  - AFNetworking/UIKit (2.6.3):
     - AFNetworking/NSURLConnection
     - AFNetworking/NSURLSession
   - Bitheri (1.6.2):
@@ -34,67 +34,67 @@ PODS:
     - FMDB/standard (= 2.6.2)
   - FMDB/standard (2.6.2)
   - FXBlurView (1.6.4)
-  - KSCrash (0.0.6):
-    - KSCrash/Installations (= 0.0.6)
-    - KSCrash/no-arc (= 0.0.6)
-    - KSCrash/Recording (= 0.0.6)
-    - KSCrash/Reporting (= 0.0.6)
-  - KSCrash/Installations (0.0.6):
+  - KSCrash (0.0.9):
+    - KSCrash/Installations (= 0.0.9)
+    - KSCrash/no-arc (= 0.0.9)
+    - KSCrash/Recording (= 0.0.9)
+    - KSCrash/Reporting (= 0.0.9)
+  - KSCrash/Installations (0.0.9):
     - KSCrash/Recording
     - KSCrash/Reporting
-  - KSCrash/no-arc (0.0.6)
-  - KSCrash/Recording (0.0.6):
+  - KSCrash/no-arc (0.0.9)
+  - KSCrash/Recording (0.0.9):
     - KSCrash/no-arc
-  - KSCrash/Reporting (0.0.6):
+  - KSCrash/Reporting (0.0.9):
     - KSCrash/Recording
-    - KSCrash/Reporting/Filters (= 0.0.6)
-    - KSCrash/Reporting/Sinks (= 0.0.6)
-    - KSCrash/Reporting/Tools (= 0.0.6)
-  - KSCrash/Reporting/Filters (0.0.6):
+    - KSCrash/Reporting/Filters (= 0.0.9)
+    - KSCrash/Reporting/Sinks (= 0.0.9)
+    - KSCrash/Reporting/Tools (= 0.0.9)
+  - KSCrash/Reporting/Filters (0.0.9):
     - KSCrash/Recording
-    - KSCrash/Reporting/Filters/Alert (= 0.0.6)
-    - KSCrash/Reporting/Filters/AppleFmt (= 0.0.6)
-    - KSCrash/Reporting/Filters/Base (= 0.0.6)
-    - KSCrash/Reporting/Filters/Basic (= 0.0.6)
-    - KSCrash/Reporting/Filters/GZip (= 0.0.6)
-    - KSCrash/Reporting/Filters/JSON (= 0.0.6)
-    - KSCrash/Reporting/Filters/Sets (= 0.0.6)
-  - KSCrash/Reporting/Filters/Alert (0.0.6):
-    - KSCrash/Recording
-    - KSCrash/Reporting/Filters/Base
-  - KSCrash/Reporting/Filters/AppleFmt (0.0.6):
+    - KSCrash/Reporting/Filters/Alert (= 0.0.9)
+    - KSCrash/Reporting/Filters/AppleFmt (= 0.0.9)
+    - KSCrash/Reporting/Filters/Base (= 0.0.9)
+    - KSCrash/Reporting/Filters/Basic (= 0.0.9)
+    - KSCrash/Reporting/Filters/GZip (= 0.0.9)
+    - KSCrash/Reporting/Filters/JSON (= 0.0.9)
+    - KSCrash/Reporting/Filters/Sets (= 0.0.9)
+  - KSCrash/Reporting/Filters/Alert (0.0.9):
     - KSCrash/Recording
     - KSCrash/Reporting/Filters/Base
-  - KSCrash/Reporting/Filters/Base (0.0.6):
-    - KSCrash/Recording
-  - KSCrash/Reporting/Filters/Basic (0.0.6):
+  - KSCrash/Reporting/Filters/AppleFmt (0.0.9):
     - KSCrash/Recording
     - KSCrash/Reporting/Filters/Base
-  - KSCrash/Reporting/Filters/GZip (0.0.6):
+  - KSCrash/Reporting/Filters/Base (0.0.9):
+    - KSCrash/Recording
+  - KSCrash/Reporting/Filters/Basic (0.0.9):
     - KSCrash/Recording
     - KSCrash/Reporting/Filters/Base
-  - KSCrash/Reporting/Filters/JSON (0.0.6):
+  - KSCrash/Reporting/Filters/GZip (0.0.9):
     - KSCrash/Recording
     - KSCrash/Reporting/Filters/Base
-  - KSCrash/Reporting/Filters/Sets (0.0.6):
+  - KSCrash/Reporting/Filters/JSON (0.0.9):
+    - KSCrash/Recording
+    - KSCrash/Reporting/Filters/Base
+  - KSCrash/Reporting/Filters/Sets (0.0.9):
     - KSCrash/Recording
     - KSCrash/Reporting/Filters/AppleFmt
     - KSCrash/Reporting/Filters/Base
     - KSCrash/Reporting/Filters/Basic
     - KSCrash/Reporting/Filters/GZip
     - KSCrash/Reporting/Filters/JSON
-  - KSCrash/Reporting/Sinks (0.0.6):
+  - KSCrash/Reporting/Sinks (0.0.9):
     - KSCrash/Recording
     - KSCrash/Reporting/Filters
     - KSCrash/Reporting/Tools
-  - KSCrash/Reporting/Tools (0.0.6):
+  - KSCrash/Reporting/Tools (0.0.9):
     - KSCrash/Recording
   - MKNetworkKit (0.87):
     - Reachability (~> 3.1.0)
   - OpenSSL (1.0.1j)
   - Reachability (3.1.1)
   - RegexKitLite (4.0)
-  - SimpleKeychain (0.5.0)
+  - SimpleKeychain (0.7.0)
 
 DEPENDENCIES:
   - AFNetworking (~> 2.0)
@@ -122,16 +122,18 @@ CHECKOUT OPTIONS:
     :git: https://github.com/bither/OpenSSL.git
 
 SPEC CHECKSUMS:
-  AFNetworking: 79f7eb1a0fcfa7beb409332b2ca49afe9ce53b05
+  AFNetworking: cb8d14a848e831097108418f5d49217339d4eb60
   Bitheri: 6cc95d9d040799e6309a299c3a2a2bb09b5b0633
   CocoaLumberjack: 628fca2e88ef06f7cf6817309aa405f325d9a6fa
   FMDB: 854a0341b4726e53276f2a8996f06f1b80f9259a
   FXBlurView: db786c2561cb49a09ae98407f52460096ab8a44f
-  KSCrash: c6ab634b7d7c63d6b9abc2ef00f995cbd9eead1e
+  KSCrash: 2ca11262cd88571992ada7861639a6eb224c6c2a
   MKNetworkKit: 60ad3c83b62183e40ba75ce772c9427c25b520de
   OpenSSL: 6cc604cf322dabb4695f3b7be882a47ed44a8146
   Reachability: dd9aa4fb6667b9f787690a74f53cb7634ce99893
   RegexKitLite: c0e4c12e6e7de0769f3a3ed679f0f61604170661
-  SimpleKeychain: ae04c7ca6a960a146081010b412cf0ba2ecb10fe
+  SimpleKeychain: b50cef3b87939d480ea1143425c00f5b4b70fe21
 
-COCOAPODS: 0.39.0
+PODFILE CHECKSUM: 15d31a0ba2c5d53554fc7ba68ac747f9c67128e0
+
+COCOAPODS: 1.1.0.rc.2
