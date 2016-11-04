@@ -81,6 +81,7 @@
 - (UIImageView *)adImage {
     if (!_adImage) {
         _adImage = [[UIImageView alloc] initWithFrame:self.frame];
+        _adImage.contentMode = UIViewContentModeScaleAspectFill;
         _adImage.image = [AdUtil getAdImage];
     }
     return _adImage;
