@@ -127,7 +127,7 @@
     NSString *adImageDir = [AdUtil createCacheAdImagePathForFileName:NSLocalizedString(@"ad_image_name", nil)];
     NSArray *files = [[NSFileManager defaultManager] subpathsAtPath: adImageDir];
     if (files.count != 0) {
-        NSString *imgPath = [NSString stringWithFormat:@"%@/%@", adImageDir, files.firstObject];
+        NSString *imgPath = [NSString stringWithFormat:@"%@/%@", adImageDir, files.lastObject];
         return imgPath;
     }
     return nil;
