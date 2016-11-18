@@ -9,7 +9,7 @@ def shared_pods
     pod 'SimpleKeychain'
     pod 'FXBlurView'
     pod 'OpenSSL', :git => 'https://github.com/bither/OpenSSL.git'
-    pod 'Bitheri', :git => 'https://github.com/bither/bitheri.git', :tag => 'v1.6.1'
+    pod 'Bitheri', :git => 'https://github.com/bither/bitheri.git', :branch => 'develop'
 end
 
 target 'bither-ios' do

@@ -19,7 +19,7 @@
 #import "SettingListCell.h"
 #import "DialogEditPassword.h"
 #import "UIViewController+ConfigureTableView.h"
-#import "DialogBlackQrCode.h"
+#import "DialogAddressQrCopy.h"
 
 @interface AdvanceViewController () <UITableViewDataSource, UITableViewDelegate, DialogEditPasswordDelegate>
 @property(weak, nonatomic) IBOutlet UIView *vTopBar;
@@ -108,7 +108,7 @@
     [btnCopy setBackgroundImage:nil forState:UIControlStateNormal];
     [btnCopy setBackgroundImage:[UIImage imageNamed:@"card_foreground_pressed"] forState:UIControlStateHighlighted];
     btnCopy.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
-    [btnCopy addTarget:self action:@selector(donateCopy:) forControlEvents:UIControlEventTouchUpInside];
+    [btnCopy addTarget:self action:@selector(donateQr:) forControlEvents:UIControlEventTouchUpInside];
     [v addSubview:btnCopy];
 
     UILabel *lbl = [[UILabel alloc] initWithFrame:CGRectMake(8, 0, v.frame.size.width - 8, rowHeight)];
@@ -146,13 +146,8 @@
     return v;
 }
 
-- (void)donateCopy:(id)sender {
-    [UIPasteboard generalPasteboard].string = DONATE_ADDRESS;
-    [self showMsg:NSLocalizedString(@"bither_team_address_copied", nil)];
-}
-
 - (void)donateQr:(id)sender {
-    [[[DialogBlackQrCode alloc] initWithContent:DONATE_ADDRESS andTitle:NSLocalizedString(@"bither_team_address", nil)] showInWindow:self.view.window];
+    [[[DialogAddressQrCopy alloc] initWithAddress:DONATE_ADDRESS andTitle:NSLocalizedString(@"bither_team_address", nil)] showInWindow:self.view.window];
 }
 
 - (void)toRawPrivateKey {

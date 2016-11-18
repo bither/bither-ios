@@ -103,12 +103,24 @@ static BOOL _isUnitTest = NO;
 }
 
 + (NSString *)getTransactionFeeMode:(TransactionFeeMode)transactionFee {
-    if (transactionFee == Normal) {
-        return NSLocalizedString(@"Normal", nil);
+    if (transactionFee == Higher) {
+        return NSLocalizedString(@"Higher", nil);
     } else if (transactionFee == High) {
         return NSLocalizedString(@"High", nil);
     } else {
-        return NSLocalizedString(@"Low", nil);
+        return NSLocalizedString(@"Normal", nil);
+    }
+}
+
++ (NSString *)getTransactionFee:(TransactionFeeMode)transactionFee {
+    CGFloat dividend = 100000;
+    NSString *unit = @"mBTC/kb";
+    if (transactionFee == Higher) {
+        return [NSString stringWithFormat:@"%.1f%@", Higher/dividend, unit];
+    } else if (transactionFee == High) {
+        return [NSString stringWithFormat:@"%.1f%@", High/dividend, unit];
+    } else {
+        return [NSString stringWithFormat:@"%.1f%@", Normal/dividend, unit];
     }
 }
 

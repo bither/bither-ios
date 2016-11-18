@@ -307,9 +307,9 @@
 "Sync over wifi only"="只在wifi下同步";
 "Sync always"="一直同步";
 "Default Transaction Fee"="默认手续费";
-"Normal"="正常";
-"Low"="较低";
-"High" = "较高";
+"Normal"="标准";
+"High"="高";
+"Higher"="更高";
 "fast confirmation"="较快确认";
 "slow confirmation"="较慢确认";
 "Donate"="捐赠";
@@ -738,3 +738,11 @@
 "hd_account_show_xpub" = "显示 XPub";
 "hd_account_monitor_check_first_address" = "请检查第 1 个地址";
 "monitor_addresses_validation" = "请检查所监控的地址";
+
+// Ad
+"ad_go" = "前往";
+"ad_image_name" = "/img_zh_CN";
+"ad_skip" = "跳过";
+
+// Language
+"localization.language.code" = "zh_CN";

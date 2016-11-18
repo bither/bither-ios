@@ -207,11 +207,17 @@
                 dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
                     [_address removeTx:_tx.txHash];
                     __weak __block UIViewController *vc = self.getUIViewController;
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wundeclared-selector"
+                    
                     if ([vc respondsToSelector:@selector(refresh)]) {
                         dispatch_async(dispatch_get_main_queue(), ^{
                             [vc performSelector:@selector(refresh)];
                         });
                     }
+                    
+#pragma clang diagnostic pop
+                    
                 });
             }                              cancel:nil] showInWindow:self.window];
         }
@@ -224,9 +230,14 @@
 
 - (void)showMsg:(NSString *)msg {
     UIViewController *ctr = self.getUIViewController;
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wundeclared-selector"
+    
     if ([ctr respondsToSelector:@selector(showMessage:)]) {
         [ctr performSelector:@selector(showMessage:) withObject:msg];
     }
+    
+#pragma clang diagnostic pop
 }
 
 @end

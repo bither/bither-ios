@@ -22,7 +22,7 @@
 
 @interface TransactionsUtil : NSObject
 
-+ (void)checkAddress:(NSArray *)addressList callback:(IdResponseBlock)callback andErrorCallback:(ErrorBlock)errorBlcok;
+//+ (void)checkAddress:(NSArray *)addressList callback:(IdResponseBlock)callback andErrorCallback:(ErrorBlock)errorBlcok;
 
 + (NSArray *)getTransactions:(NSDictionary *)dict storeBlockHeight:(uint32_t)storeBlockHeigth;
 

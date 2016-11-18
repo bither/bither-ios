@@ -61,9 +61,14 @@ static Setting *DonateSetting;
         }
     }
     if (self.addresses.count == 0) {
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wundeclared-selector"
+        
         if ([self.controller respondsToSelector:@selector(showMsg:)]) {
             [self.controller performSelector:@selector(showMsg:) withObject:NSLocalizedString(@"No bitcoins available for donation.", nil)];
         }
+        
+#pragma clang diagnostic pop
         return;
     }
     [self.addresses sortUsingComparator:^NSComparisonResult(BTAddress *obj1, BTAddress *obj2) {
@@ -118,9 +123,14 @@ static Setting *DonateSetting;
 }
 
 - (void)sendSuccessed:(BTTx *)tx {
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wundeclared-selector"
+    
     if ([self.controller respondsToSelector:@selector(showMsg:)]) {
         [self.controller performSelector:@selector(showMsg:) withObject:NSLocalizedString(@"Thank you for donating.", nil)];
     }
+    
+#pragma clang diagnostic pop
 }
 
 @end

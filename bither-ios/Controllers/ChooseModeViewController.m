@@ -25,11 +25,15 @@
 #import "PeerUtil.h"
 #import "BitherTime.h"
 #import "DialogAlert.h"
+#import "AdView.h"
+#import "BitherApi.h"
+#import "AdUtil.h"
 
 #define kChooseModeGradientCenterColor (0x8881a2)
 #define kChooseModeGradientColdColor (0x10a0df)
 #define kChooseModeGradientHotColor (0xfc6463)
 #define kChooseModeStateTransactionDuration (0.6)
+#define AD_DIC_NAME @"AdDic.txt"
 
 @interface ChooseModeViewController () {
     void(^coldNetCheckCompletion)(BOOL);
@@ -83,11 +87,10 @@
 
 @implementation ChooseModeViewController
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-    }
-    return self;
+- (void)awakeFromNib {
+    [super awakeFromNib];
+    
+    [self isShowAd];
 }
 
 - (void)viewDidLoad {
@@ -101,7 +104,6 @@
             self.vHotProgress.hidden = NO;
             self.vHotRetry.hidden = YES;
             [self showHotWait];
-
         }
         if ([[BTSettings instance] getAppMode] == COLD) {
             [self showColdCheckWithCompletion:^{
@@ -111,8 +113,13 @@
     }
 }
 
-- (void)viewDidAppear:(BOOL)animated {
-    [super viewDidAppear:animated];
+- (void)isShowAd {
+    if ([AdUtil isShowAd]) {
+        AdView *adView = [[AdView alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+        [self.view addSubview:adView];
+    } else {
+        [[BitherApi instance] getAdApi];
+    }
 }
 
 - (void)coldCheckWithoutAnimationAgain {
@@ -166,7 +173,7 @@
                 });
             }];
         }
-    }                                        cancel:nil] showInWindow:self.view.window];
+    } cancel:nil] showInWindow:self.view.window];
 }
 
 - (IBAction)hotRetryPressed:(id)sender {
@@ -232,7 +239,7 @@
     self.vColdIcon.autoresizingMask = UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleTopMargin;
     [UIView animateWithDuration:kChooseModeStateTransactionDuration animations:^{
         [self showColdIcon];
-    }                completion:^(BOOL finished) {
+    } completion:^(BOOL finished) {
         if (completion) {
             completion();
         }
@@ -303,6 +310,7 @@
     frame.origin.y = y;
     view.frame = frame;
 }
+
 @end
 
 @implementation ChooseModeViewController (DowloadSpvDelegate)

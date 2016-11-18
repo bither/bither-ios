@@ -193,12 +193,12 @@
 
 - (IBAction)optionPressed:(id)sender {
     if (self.address.isHDAccount) {
-        dialogHDAccountOptions = [[DialogHDAccountOptions alloc] initWithHDAccount:self.address andDelegate:self];
+        dialogHDAccountOptions = [[DialogHDAccountOptions alloc] initWithHDAccount:(BTHDAccount *)self.address andDelegate:self];
         [dialogHDAccountOptions showInWindow:self.view.window];
     } else if (self.address.isHDM) {
-        [[[DialogHDMAddressOptions alloc] initWithAddress:self.address andAddressAliasDelegate:self.btnAddressAlias] showInWindow:self.view.window];
+        [[[DialogHDMAddressOptions alloc] initWithAddress:self.address andAddressAliasDelegate:(NSObject <DialogAddressAliasDelegate> *)self.btnAddressAlias] showInWindow:self.view.window];
     } else {
-        DialogAddressOptions *dialog = [[DialogAddressOptions alloc] initWithAddress:self.address delegate:self andAliasDialog:self.btnAddressAlias];
+        DialogAddressOptions *dialog = [[DialogAddressOptions alloc] initWithAddress:self.address delegate:self andAliasDialog:(NSObject <DialogAddressAliasDelegate> *)self.btnAddressAlias];
         [dialog showInWindow:self.view.window];
     }
 }

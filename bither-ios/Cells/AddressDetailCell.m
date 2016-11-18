@@ -134,12 +134,12 @@
     if (self.address.isHDAccount) {
         if (self.address.hasPrivKey) {
             HDAccountSendViewController *send = [self.getUIViewController.storyboard instantiateViewControllerWithIdentifier:@"HDAccountSend"];
-            send.address = self.address;
+            send.address = (BTHDAccount *)self.address;
             send.sendDelegate = self;
             [self.getUIViewController.navigationController pushViewController:send animated:YES];
         } else {
             HDAccountMonitoredSendViewController *send = [self.getUIViewController.storyboard instantiateViewControllerWithIdentifier:@"HDAccountMonitoredSend"];
-            send.address = self.address;
+            send.address = (BTHDAccount *)self.address;
             send.sendDelegate = self;
             [self.getUIViewController.navigationController pushViewController:send animated:YES];
         }

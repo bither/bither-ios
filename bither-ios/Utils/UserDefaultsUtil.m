@@ -115,7 +115,7 @@ NSUserDefaults *userDefaults;
     if (type == -1) {
         [self setDefaultExchangeType];
     }
-    return [self getExchangeType];
+    return (Currency)[self getExchangeType];
 }
 
 - (void)setDefaultExchangeType {
@@ -207,8 +207,8 @@ NSUserDefaults *userDefaults;
 
 - (TransactionFeeMode)getTransactionFeeMode {
     if ([userDefaults objectForKey:TRANSACTION_FEE_MODE]) {
-        if ([userDefaults integerForKey:TRANSACTION_FEE_MODE] == Low) {
-            return Low;
+        if ([userDefaults integerForKey:TRANSACTION_FEE_MODE] == Higher) {
+            return Higher;
         } else if ([userDefaults integerForKey:TRANSACTION_FEE_MODE] == High) {
             return High;
         } else {
@@ -270,7 +270,7 @@ NSUserDefaults *userDefaults;
 
 - (BitcoinUnit)getBitcoinUnit {
     if ([userDefaults objectForKey:BITCOIN_UNIT]) {
-        return [userDefaults integerForKey:BITCOIN_UNIT];
+        return (BitcoinUnit)[userDefaults integerForKey:BITCOIN_UNIT];
     }
     return UnitBTC;
 }
@@ -286,7 +286,7 @@ NSUserDefaults *userDefaults;
 
     NSString *beforeHashStr = [NSString stringWithFormat:@"%@%lu", code, (unsigned long) salt];
 
-    [userDefaults setObject:[NSString stringWithFormat:@"%lu;%lu", salt, [beforeHashStr hash]] forKey:PIN_CODE];
+    [userDefaults setObject:[NSString stringWithFormat:@"%lu;%lu", (unsigned long)salt, (unsigned long)[beforeHashStr hash]] forKey:PIN_CODE];
     [userDefaults synchronize];
 }
 
@@ -315,7 +315,7 @@ NSUserDefaults *userDefaults;
         NSString *saltStr = strs[0];
         hash = strs[1];
         NSString *codeHash = [NSString stringWithFormat:@"%@%@", code, saltStr];
-        return [StringUtil compareString:hash compare:[NSString stringWithFormat:@"%lu", [codeHash hash]]];
+        return [StringUtil compareString:hash compare:[NSString stringWithFormat:@"%lu", (unsigned long)[codeHash hash]]];
     } else {
         return YES;
     }
@@ -384,7 +384,24 @@ NSUserDefaults *userDefaults;
 }
 
 - (TotalBalanceHide)getTotalBalanceHide {
-    return [userDefaults integerForKey:TOTAL_BALANCE_HIDE];
+    NSInteger totalBalanceHideType = [userDefaults integerForKey:TOTAL_BALANCE_HIDE];
+    switch (totalBalanceHideType) {
+        case 0: {
+            return TotalBalanceShowAll;
+            break;
+        }
+        case 1: {
+            return TotalBalanceShowChart;
+            break;
+        }
+        case 2: {
+            return TotalBalanceHideAll;
+            break;
+        }
+        default:
+            return -1;
+            break;
+    }
 }
 
 - (void)setTotalBalanceHide:(TotalBalanceHide)h {
@@ -399,7 +416,7 @@ NSUserDefaults *userDefaults;
 
 - (ApiConfig)getApiConfig {
     if ([userDefaults objectForKey:API_CONFIG]){
-        return [userDefaults integerForKey:API_CONFIG];
+        return (ApiConfig)[userDefaults integerForKey:API_CONFIG];
     }
     return ApiConfigBither;
 }

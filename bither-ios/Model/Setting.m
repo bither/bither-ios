@@ -239,9 +239,9 @@ static Setting *ApiConfigSetting;
         }];
         [setting setGetArrayBlock:^() {
             NSMutableArray *array = [NSMutableArray new];
+            [array addObject:[self getTransactionFeeDict:Higher]];
             [array addObject:[self getTransactionFeeDict:High]];
             [array addObject:[self getTransactionFeeDict:Normal]];
-            [array addObject:[self getTransactionFeeDict:Low]];
             return array;
 
         }];
@@ -267,12 +267,21 @@ static Setting *ApiConfigSetting;
     TransactionFeeMode defaultTxFeeMode = [[UserDefaultsUtil instance] getTransactionFeeMode];
     NSMutableDictionary *dict = [NSMutableDictionary new];
     [dict setObject:[NSNumber numberWithInt:transcationFeeMode] forKey:SETTING_VALUE];
-    [dict setObject:[BitherSetting getTransactionFeeMode:transcationFeeMode] forKey:SETTING_KEY];
+    [dict setObject:[Setting getTransactionFeeStr:transcationFeeMode] forKey:SETTING_KEY_ATTRIBUTED];
     if (defaultTxFeeMode == transcationFeeMode) {
         [dict setObject:[NSNumber numberWithBool:YES] forKey:SETTING_IS_DEFAULT];
     }
     return dict;
+}
 
++ (NSMutableAttributedString *)getTransactionFeeStr:(TransactionFeeMode)transcationFeeMode {
+    NSString *transactionFee = [BitherSetting getTransactionFee:transcationFeeMode];
+    NSString *transactionFeeStr = [NSString stringWithFormat:@"%@ %@", [BitherSetting getTransactionFeeMode:transcationFeeMode], transactionFee];
+    NSMutableAttributedString *transactionFeeAttributedStr = [[NSMutableAttributedString alloc] initWithString:transactionFeeStr];
+    NSRange range = NSMakeRange([[transactionFeeAttributedStr string] rangeOfString:[transactionFee substringToIndex:1]].location, transactionFee.length);
+    [transactionFeeAttributedStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:13.0] range:range];
+    [transactionFeeAttributedStr addAttribute:NSForegroundColorAttributeName value:[UIColor grayColor] range:range];
+    return transactionFeeAttributedStr;
 }
 
 + (Setting *)getNetworkSetting {
@@ -463,10 +472,10 @@ static Setting *ApiConfigSetting;
             if ([BTAddressManager instance].allAddresses.count == 0) {
                 [[[DialogAlert alloc] initWithMessage:NSLocalizedString(@"launch_sequence_switch_to_cold_warn", nil) confirm:^{
                     [[BTSettings instance] setAppMode:COLD];
-                    [controller presentViewController:[controller.storyboard instantiateViewControllerWithIdentifier:@"ChooseModeViewController"] animated:YES completion:^{
-
-                    }];
-                }                              cancel:nil] showInWindow:controller.view.window];
+                    AppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
+                    appDelegate.window.rootViewController = [controller.storyboard instantiateViewControllerWithIdentifier:@"ChooseModeViewController"];
+//                    [controller presentViewController:[controller.storyboard instantiateViewControllerWithIdentifier:@"ChooseModeViewController"] animated:YES completion:nil];
+                } cancel:nil] showInWindow:controller.view.window];
             }
         }];
     }
@@ -512,7 +521,7 @@ static Setting *ApiConfigSetting;
                 __block DialogProgress *dp = [[DialogProgress alloc] initWithMessage:NSLocalizedString(@"Please wait…", nil)];
                 [dp showInWindow:controller.view.window completion:^{
                     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
-                        __block BOOL result = [[[HDMResetServerPasswordUtil alloc] initWithViewController:controller andDialogProgress:dp] changeServerPassword];
+                        __block BOOL result = [[[HDMResetServerPasswordUtil alloc] initWithViewController:(UIViewController <ShowBannerDelegete> *)controller andDialogProgress:dp] changeServerPassword];
                         dispatch_sync(dispatch_get_main_queue(), ^{
                             [dp dismissWithCompletion:^{
                                 if (result) {
@@ -567,19 +576,19 @@ static Setting *ApiConfigSetting;
                 } else {
                     UIWindow *window = ApplicationDelegate.window;
                     __block AdvanceViewController *a = nil;
-                    UINavigationController *nav = nil;
+                    UINavigationController *navigation = nil;
                     if ([window.topViewController isKindOfClass:[UINavigationController class]]) {
-                        nav = window.topViewController;
+                        navigation = (UINavigationController *)window.topViewController;
                     } else if ([window.topViewController isKindOfClass:[IOS7ContainerViewController class]]) {
-                        IOS7ContainerViewController *c = window.topViewController;
-                        if ([c.controller isKindOfClass:[UINavigationController class]]) {
-                            nav = c.controller;
+                        IOS7ContainerViewController *containerViewController = (IOS7ContainerViewController *)window.topViewController;
+                        if ([containerViewController.controller isKindOfClass:[UINavigationController class]]) {
+                            navigation = (UINavigationController *)containerViewController.controller;
                         }
                     }
-                    if (nav) {
-                        for (NSUInteger index = nav.viewControllers.count - 1; index >= MAX(0, nav.viewControllers.count - 2); index--) {
-                            if ([nav.viewControllers[index] isKindOfClass:[AdvanceViewController class]]) {
-                                a = nav.viewControllers[index];
+                    if (navigation) {
+                        for (NSUInteger index = navigation.viewControllers.count - 1; index >= MAX(0, navigation.viewControllers.count - 2); index--) {
+                            if ([navigation.viewControllers[index] isKindOfClass:[AdvanceViewController class]]) {
+                                a = navigation.viewControllers[index];
                             }
                         }
                     }

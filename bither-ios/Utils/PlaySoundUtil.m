@@ -23,8 +23,8 @@ static void(^_callback)();
 
 static void SoundFinished(SystemSoundID soundID, void *sample) {
     /*播放全部结束，因此释放所有资源 */
-    AudioServicesDisposeSystemSoundID(sample);
-    CFRelease(sample);
+    
+    AudioServicesDisposeSystemSoundID(soundID);
     CFRunLoopStop(CFRunLoopGetCurrent());
     if (_callback) {
         _callback();

@@ -29,6 +29,7 @@
 		0A515F7B1A36CAE3008292AF /* RawPrivateKeyBinaryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A515F7A1A36CAE3008292AF /* RawPrivateKeyBinaryViewController.m */; };
 		0A52BDA51A9FFC6400BC8C3E /* GroupFileUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A52BDA41A9FFC6400BC8C3E /* GroupFileUtil.m */; };
 		0A52BDA61A9FFEB800BC8C3E /* GroupFileUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A52BDA41A9FFC6400BC8C3E /* GroupFileUtil.m */; };
+		0A55CD7A1DCB267E00F9DB31 /* DialogAddressQrCopy.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A55CD791DCB267E00F9DB31 /* DialogAddressQrCopy.m */; };
 		0A637B1B1AA0427200696260 /* WatchTrendingGraphicData.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A637B1A1AA0427200696260 /* WatchTrendingGraphicData.m */; };
 		0A637B1F1AA0443D00696260 /* BaseApi.m in Sources */ = {isa = PBXBuildFile; fileRef = 4254083419469C9A007AF99C /* BaseApi.m */; };
 		0A637B201AA0445F00696260 /* BitherEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = 4254083819469C9A007AF99C /* BitherEngine.m */; };
@@ -104,6 +105,9 @@
 		1BC27FE47C62F779EDE01FA5 /* HDAccountSendViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BC27B56B8528116430BB2D8 /* HDAccountSendViewController.m */; };
 		20F671F2466952F081445EFB /* libPods-bither-ios WatchKit App.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AC13478AA903687AA9ACD36 /* libPods-bither-ios WatchKit App.a */; };
 		35BD79D34EADBCE346458D94 /* libPods-bither-ios.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 46F4567F64E4C5EB9B650EE0 /* libPods-bither-ios.a */; };
+		401ABC921DC33E8F004611B7 /* AdUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 401ABC911DC33E8F004611B7 /* AdUtil.m */; };
+		403753071DBF429000F402A0 /* AdView.m in Sources */ = {isa = PBXBuildFile; fileRef = 403753061DBF429000F402A0 /* AdView.m */; };
+		403753131DC0503700F402A0 /* UIView+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 403753121DC0503700F402A0 /* UIView+Extension.m */; };
 		4217A3731951235D00063746 /* Depth.m in Sources */ = {isa = PBXBuildFile; fileRef = 4217A3721951235D00063746 /* Depth.m */; };
 		4217A39019512DC000063746 /* TransactionsUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 4217A38F19512DC000063746 /* TransactionsUtil.m */; };
 		421B037C19495315003A45F1 /* TabButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 421B037B19495315003A45F1 /* TabButton.m */; };
@@ -397,6 +401,8 @@
 		0A52BDA21A9FFC2B00BC8C3E /* bither-ios WatchKit Extension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "bither-ios WatchKit Extension.entitlements"; sourceTree = "<group>"; };
 		0A52BDA31A9FFC6400BC8C3E /* GroupFileUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GroupFileUtil.h; sourceTree = "<group>"; };
 		0A52BDA41A9FFC6400BC8C3E /* GroupFileUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GroupFileUtil.m; sourceTree = "<group>"; };
+		0A55CD781DCB267E00F9DB31 /* DialogAddressQrCopy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DialogAddressQrCopy.h; sourceTree = "<group>"; };
+		0A55CD791DCB267E00F9DB31 /* DialogAddressQrCopy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DialogAddressQrCopy.m; sourceTree = "<group>"; };
 		0A637B161AA0419C00696260 /* libPods.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libPods.a; path = "Pods/build/Debug-iphoneos/libPods.a"; sourceTree = "<group>"; };
 		0A637B191AA0427200696260 /* WatchTrendingGraphicData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WatchTrendingGraphicData.h; sourceTree = "<group>"; };
 		0A637B1A1AA0427200696260 /* WatchTrendingGraphicData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WatchTrendingGraphicData.m; sourceTree = "<group>"; };
@@ -535,6 +541,12 @@
 		1BC27F93AA0BE5EBA695564A /* DialogHDMSingularColdSeedChildQrViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DialogHDMSingularColdSeedChildQrViewController.m; sourceTree = "<group>"; };
 		1BC27FD66F3376A2C68612DD /* AddHDMAddressViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddHDMAddressViewController.m; sourceTree = "<group>"; };
 		3F23197A13072D3472EE053F /* libPods-bither-ios WatchKit Extension.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-bither-ios WatchKit Extension.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		401ABC901DC33E8F004611B7 /* AdUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdUtil.h; sourceTree = "<group>"; };
+		401ABC911DC33E8F004611B7 /* AdUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AdUtil.m; sourceTree = "<group>"; };
+		403753051DBF429000F402A0 /* AdView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdView.h; sourceTree = "<group>"; };
+		403753061DBF429000F402A0 /* AdView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AdView.m; sourceTree = "<group>"; };
+		403753111DC0503700F402A0 /* UIView+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Extension.h"; sourceTree = "<group>"; };
+		403753121DC0503700F402A0 /* UIView+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Extension.m"; sourceTree = "<group>"; };
 		4217A3711951235D00063746 /* Depth.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Depth.h; sourceTree = "<group>"; };
 		4217A3721951235D00063746 /* Depth.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Depth.m; sourceTree = "<group>"; };
 		4217A38E19512DC000063746 /* TransactionsUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TransactionsUtil.h; sourceTree = "<group>"; };
@@ -1100,6 +1112,15 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		401ED0F81DBEEC69009A1725 /* Ad */ = {
+			isa = PBXGroup;
+			children = (
+				403753051DBF429000F402A0 /* AdView.h */,
+				403753061DBF429000F402A0 /* AdView.m */,
+			);
+			path = Ad;
+			sourceTree = "<group>";
+		};
 		4217A36E1951233500063746 /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -1201,8 +1222,8 @@
 				4254083819469C9A007AF99C /* BitherEngine.m */,
 				D61D0F5AB509120289D32CE8 /* BTHDMBid+Api.m */,
 				D61D0E2B59DCC58D05F2CCE6 /* BTHDMBid+Api.h */,
-				D61D089EE8093848A924819C /* HDMApi.m */,
 				D61D00DE53941DC6062E1938 /* HDMApi.h */,
+				D61D089EE8093848A924819C /* HDMApi.m */,
 				0AF4B7BA1CE1794400F7F7D9 /* PushTxThirdParty.h */,
 				0AF4B7BB1CE1794400F7F7D9 /* PushTxThirdParty.m */,
 			);
@@ -1288,6 +1309,10 @@
 				DC0C45B833B681E58F7812DB /* GroupUtil.h */,
 				1BC27CB228C32AFF60875F67 /* TotalBalanceHideUtil.m */,
 				1BC27DAB01DF55378286FEFD /* TotalBalanceHideUtil.h */,
+				403753111DC0503700F402A0 /* UIView+Extension.h */,
+				403753121DC0503700F402A0 /* UIView+Extension.m */,
+				401ABC901DC33E8F004611B7 /* AdUtil.h */,
+				401ABC911DC33E8F004611B7 /* AdUtil.m */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -1397,6 +1422,7 @@
 				ACDDDC1119480DE00008A79D /* UIBase */,
 				425408441946A219007AF99C /* Utils */,
 				AC53ABA419D277C1007C095C /* XRandom */,
+				401ED0F81DBEEC69009A1725 /* Ad */,
 			);
 			path = "bither-ios";
 			sourceTree = "<group>";
@@ -1733,6 +1759,8 @@
 				0A7F203C1D0BB0F900B4EAB1 /* DialogHDMonitorFirstAddressValidation.m */,
 				0AD849E91D0E9B4C005FAF56 /* DialogMonitorAddressValidation.h */,
 				0AD849EA1D0E9B4C005FAF56 /* DialogMonitorAddressValidation.m */,
+				0A55CD781DCB267E00F9DB31 /* DialogAddressQrCopy.h */,
+				0A55CD791DCB267E00F9DB31 /* DialogAddressQrCopy.m */,
 			);
 			path = Dialog;
 			sourceTree = "<group>";
@@ -1855,12 +1883,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 0A4749951A9D7F0B003684E2 /* Build configuration list for PBXNativeTarget "bither-ios WatchKit Extension" */;
 			buildPhases = (
-				11163D07D9768F5EE594E31F /* 📦 Check Pods Manifest.lock */,
+				11163D07D9768F5EE594E31F /* [CP] Check Pods Manifest.lock */,
 				0A47496B1A9D7F0B003684E2 /* Sources */,
 				0A47496C1A9D7F0B003684E2 /* Frameworks */,
 				0A47496D1A9D7F0B003684E2 /* Resources */,
-				F9C2823DF7A28F952E1EF9F3 /* 📦 Embed Pods Frameworks */,
-				CF3DD64130EA83060E683705 /* 📦 Copy Pods Resources */,
+				CF3DD64130EA83060E683705 /* [CP] Copy Pods Resources */,
 				0A3A69021D0401780033F42E /* ShellScript */,
 			);
 			buildRules = (
@@ -1877,10 +1904,10 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 0A4749941A9D7F0B003684E2 /* Build configuration list for PBXNativeTarget "bither-ios WatchKit App" */;
 			buildPhases = (
-				2B9783C3E78BF3B7A4A784B1 /* 📦 Check Pods Manifest.lock */,
+				2B9783C3E78BF3B7A4A784B1 /* [CP] Check Pods Manifest.lock */,
 				0A47497F1A9D7F0B003684E2 /* Resources */,
 				B8C9A7FD49BC255FF64BD729 /* Frameworks */,
-				506E77C84528955384D5B0AA /* 📦 Copy Pods Resources */,
+				506E77C84528955384D5B0AA /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -1895,14 +1922,15 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 42D9B78D193D6B5B00C85B89 /* Build configuration list for PBXNativeTarget "bither-ios" */;
 			buildPhases = (
-				B29245A9BB8C54C810C26C54 /* 📦 Check Pods Manifest.lock */,
+				B29245A9BB8C54C810C26C54 /* [CP] Check Pods Manifest.lock */,
 				42D9B75D193D6B5B00C85B89 /* Sources */,
 				42D9B75E193D6B5B00C85B89 /* Frameworks */,
 				42D9B75F193D6B5B00C85B89 /* Resources */,
 				4268FE14194AA3FD007A4C30 /* ShellScript */,
 				0A4749961A9D7F0B003684E2 /* Embed App Extensions */,
-				CEAE2ACDDC013D2C5BF7AFE3 /* 📦 Embed Pods Frameworks */,
-				71CAA345256519772492378B /* 📦 Copy Pods Resources */,
+				CEAE2ACDDC013D2C5BF7AFE3 /* [CP] Embed Pods Frameworks */,
+				71CAA345256519772492378B /* [CP] Copy Pods Resources */,
+				57A3503155CC151F7E71D4E1 /* Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -1918,12 +1946,13 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 42D9B790193D6B5B00C85B89 /* Build configuration list for PBXNativeTarget "bither-iosTests" */;
 			buildPhases = (
-				6FBEFC40B430D5B7DFCD02B9 /* 📦 Check Pods Manifest.lock */,
+				6FBEFC40B430D5B7DFCD02B9 /* [CP] Check Pods Manifest.lock */,
 				42D9B778193D6B5B00C85B89 /* Sources */,
 				42D9B779193D6B5B00C85B89 /* Frameworks */,
 				42D9B77A193D6B5B00C85B89 /* Resources */,
-				A56CF35E58EA71A93B905DED /* 📦 Embed Pods Frameworks */,
-				875D8BC18186B6F64BFFA765 /* 📦 Copy Pods Resources */,
+				A56CF35E58EA71A93B905DED /* [CP] Embed Pods Frameworks */,
+				875D8BC18186B6F64BFFA765 /* [CP] Copy Pods Resources */,
+				A7DCEBD1D62E88E257233A8E /* Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -2057,34 +2086,34 @@
 			shellPath = /bin/sh;
 			shellScript = "cd \"${CONFIGURATION_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/\"\nif [[ -d \"Frameworks\" ]]; then\nrm -fr Frameworks\nfi";
 		};
-		11163D07D9768F5EE594E31F /* 📦 Check Pods Manifest.lock */ = {
+		11163D07D9768F5EE594E31F /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "📦 Check Pods Manifest.lock";
+			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
-		2B9783C3E78BF3B7A4A784B1 /* 📦 Check Pods Manifest.lock */ = {
+		2B9783C3E78BF3B7A4A784B1 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "📦 Check Pods Manifest.lock";
+			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		4268FE14194AA3FD007A4C30 /* ShellScript */ = {
@@ -2100,14 +2129,14 @@
 			shellPath = /bin/sh;
 			shellScript = "";
 		};
-		506E77C84528955384D5B0AA /* 📦 Copy Pods Resources */ = {
+		506E77C84528955384D5B0AA /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "📦 Copy Pods Resources";
+			name = "[CP] Copy Pods Resources";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2115,89 +2144,14 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-bither-ios WatchKit App/Pods-bither-ios WatchKit App-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		6FBEFC40B430D5B7DFCD02B9 /* 📦 Check Pods Manifest.lock */ = {
+		57A3503155CC151F7E71D4E1 /* Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "📦 Check Pods Manifest.lock";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
-			showEnvVarsInLog = 0;
-		};
-		71CAA345256519772492378B /* 📦 Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "📦 Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-bither-ios/Pods-bither-ios-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		875D8BC18186B6F64BFFA765 /* 📦 Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "📦 Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-bither-iosTests/Pods-bither-iosTests-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		A56CF35E58EA71A93B905DED /* 📦 Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "📦 Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-bither-iosTests/Pods-bither-iosTests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		B29245A9BB8C54C810C26C54 /* 📦 Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "📦 Check Pods Manifest.lock";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
-			showEnvVarsInLog = 0;
-		};
-		CEAE2ACDDC013D2C5BF7AFE3 /* 📦 Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "📦 Embed Pods Frameworks";
+			name = "Embed Pods Frameworks";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2205,34 +2159,124 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-bither-ios/Pods-bither-ios-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		CF3DD64130EA83060E683705 /* 📦 Copy Pods Resources */ = {
+		6FBEFC40B430D5B7DFCD02B9 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "📦 Copy Pods Resources";
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		71CAA345256519772492378B /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-bither-ios/Pods-bither-ios-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		875D8BC18186B6F64BFFA765 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-bither-iosTests/Pods-bither-iosTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		A56CF35E58EA71A93B905DED /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-bither-iosTests/Pods-bither-iosTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		A7DCEBD1D62E88E257233A8E /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-bither-iosTests/Pods-bither-iosTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		B29245A9BB8C54C810C26C54 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		CEAE2ACDDC013D2C5BF7AFE3 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-bither-ios/Pods-bither-ios-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		CF3DD64130EA83060E683705 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-bither-ios WatchKit Extension/Pods-bither-ios WatchKit Extension-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		F9C2823DF7A28F952E1EF9F3 /* 📦 Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "📦 Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-bither-ios WatchKit Extension/Pods-bither-ios WatchKit Extension-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -2364,6 +2408,7 @@
 				421B03BD19495AEF003A45F1 /* MarketViewController.m in Sources */,
 				0AB63CB81ABD15C80018A546 /* RawPrivateKeyViewController.m in Sources */,
 				AC33088E1955668D00D8F621 /* HotAddressListCell.m in Sources */,
+				403753131DC0503700F402A0 /* UIView+Extension.m in Sources */,
 				4254085D1946A219007AF99C /* StringUtil.m in Sources */,
 				4254083C19469C9A007AF99C /* BitherApi.m in Sources */,
 				AC9BBCFE19D268AB00E58BA7 /* UpgradeUtil.m in Sources */,
@@ -2381,6 +2426,7 @@
 				AC2F3298195C1D53001B7439 /* SendViewController.m in Sources */,
 				ACBEC01E196E87B9004301E0 /* CheckPrivateKeyCell.m in Sources */,
 				AC17158A1969249B00337AB5 /* NSString+Size.m in Sources */,
+				0A55CD7A1DCB267E00F9DB31 /* DialogAddressQrCopy.m in Sources */,
 				0AD6749F1A7B9108007967DB /* DialogHDMSeedWordList.m in Sources */,
 				ACBEC01B196E397E004301E0 /* CheckScoreAndBgAnimatableView.m in Sources */,
 				AC454DE71A1F252B000AF4ED /* PinCodeUtil.m in Sources */,
@@ -2410,6 +2456,7 @@
 				ACCA2751198F2A68000E6A32 /* PieChartView.m in Sources */,
 				AC454DC91A1C6E05000AF4ED /* TrashCanViewController.m in Sources */,
 				4269FF72195A885D001213B9 /* Ticker.m in Sources */,
+				401ABC921DC33E8F004611B7 /* AdUtil.m in Sources */,
 				AC33089519556F7A00D8F621 /* UIImage+ImageWithColor.m in Sources */,
 				AC8F0DCA196CF4E400CCD0F9 /* SelectViewController.m in Sources */,
 				ACE4ED5E198A3AE600C8862C /* AdvanceViewController.m in Sources */,
@@ -2429,6 +2476,7 @@
 				ACDDDC2319480DE00008A79D /* UIViewController+PiShowBanner.m in Sources */,
 				ACCA274B1989FACC000E6A32 /* HotAddressTabButton.m in Sources */,
 				AC1715871969213800337AB5 /* DialogAddressOptions.m in Sources */,
+				403753071DBF429000F402A0 /* AdView.m in Sources */,
 				0A43F4401A81C6BF008171DB /* HdmSendViewController.m in Sources */,
 				4269FF7B195A948A001213B9 /* CacheUtil.m in Sources */,
 				ACEEB703199B40FE008E06AA /* CurrencyCalculatorLink.m in Sources */,
@@ -2644,8 +2692,6 @@
 			buildSettings = {
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CODE_SIGN_ENTITLEMENTS = "bither-ios WatchKit Extension/bither-ios WatchKit Extension.entitlements";
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -2663,7 +2709,6 @@
 				MTL_ENABLE_DEBUG_INFO = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = net.bither.watchkitextension;
 				PRODUCT_NAME = "${TARGET_NAME}";
-				PROVISIONING_PROFILE = "";
 				SKIP_INSTALL = YES;
 			};
 			name = Debug;
@@ -2674,8 +2719,6 @@
 			buildSettings = {
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CODE_SIGN_ENTITLEMENTS = "bither-ios WatchKit Extension/bither-ios WatchKit Extension.entitlements";
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -2690,7 +2733,6 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = net.bither.watchkitextension;
 				PRODUCT_NAME = "${TARGET_NAME}";
-				PROVISIONING_PROFILE = "";
 				SKIP_INSTALL = YES;
 			};
 			name = Release;
@@ -2701,8 +2743,6 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -2716,7 +2756,6 @@
 				MTL_ENABLE_DEBUG_INFO = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = net.bither.watchkitapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = 4;
 				"TARGETED_DEVICE_FAMILY[sdk=iphonesimulator*]" = "1,4";
@@ -2729,8 +2768,6 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -2741,7 +2778,6 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = net.bither.watchkitapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = 4;
 				"TARGETED_DEVICE_FAMILY[sdk=iphonesimulator*]" = "1,4";
@@ -2828,8 +2864,6 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_ENTITLEMENTS = "bither-ios/bither-ios.entitlements";
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -2840,7 +2874,6 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				PRODUCT_BUNDLE_IDENTIFIER = net.bither;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;
 				USER_HEADER_SEARCH_PATHS = "${SRCROOT}/**";
 				WRAPPER_EXTENSION = app;
@@ -2854,8 +2887,6 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_ENTITLEMENTS = "bither-ios/bither-ios.entitlements";
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -2866,7 +2897,6 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				PRODUCT_BUNDLE_IDENTIFIER = net.bither;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;
 				USER_HEADER_SEARCH_PATHS = "${SRCROOT}/**";
 				WRAPPER_EXTENSION = app;

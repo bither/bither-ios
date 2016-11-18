@@ -55,9 +55,14 @@ static Setting *SignTransactionSetting;
     }
     [reader.presentingViewController dismissViewControllerAnimated:YES completion:^{
         if (!tx) {
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wundeclared-selector"
+            
             if ([self.controller respondsToSelector:@selector(showMsg:)]) {
                 [self.controller performSelector:@selector(showMsg:) withObject:NSLocalizedString(@"Scan unsigned transaction failed", nil)];
             }
+            
+#pragma clang diagnostic pop
         }
     }];
 }

@@ -308,9 +308,9 @@
 "Sync over wifi only"="只在wifi下同步";
 "Sync always"="一直同步";
 "Default Transaction Fee"="默認手續費";
-"Normal"="正常";
-"Low"="較低";
-"High" = "較高";
+"Normal"="標準";
+"High"="高";
+"Higher"="更高";
 "fast confirmation"="較快確認";
 "slow confirmation"="較慢確認";
 "Donate"="捐贈";
@@ -739,3 +739,11 @@
 "hd_account_show_xpub" = "顯示 XPub";
 "hd_account_monitor_check_first_address" = "請檢查第 1 個地址";
 "monitor_addresses_validation" = "請檢查所監控的地址";
+
+// Ad
+"ad_go" = "前往";
+"ad_image_name" = "/img_zh_TW";
+"ad_skip" = "跳過";
+
+// Language
+"localization.language.code" = "zh_TW";

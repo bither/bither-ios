@@ -82,7 +82,7 @@
     return self.passed && self.strength <= PasswordStrengthMedium;
 }
 
-+ (NSUInteger)getRating:(NSString *)password {
++ (PasswordStrength)getRating:(NSString *)password {
     if (!password || password.length < 6) {
         return 0;
     }
@@ -102,7 +102,7 @@
     if (upperAndLower) {
         strength++;
     }
-    return strength;
+    return (PasswordStrength)strength;
 }
 
 + (BOOL)bothUpperAndLower:(NSString *)password {

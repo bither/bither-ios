@@ -43,6 +43,7 @@
 
 - (void)loadView {
     [super loadView];
+    
     [self initTabs];
     self.page = [[PiPageViewController alloc] initWithStoryboard:self.storyboard andViewControllerIdentifiers:[[NSArray alloc] initWithObjects:@"tab_market", @"tab_hot_address", @"tab_option_hot", nil]];
     self.page.pageDelegate = self;
@@ -73,13 +74,12 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
     isInit = YES;
     cnt = 4;
     self.dict = [[NSMutableDictionary alloc] init];
     [self.view bringSubviewToFront:self.addAddressBtn];
     [self initApp];
-
-
 }
 
 #pragma mark - TabBar delegate
@@ -93,15 +93,6 @@
             tabButton.selected = NO;
         }
     }
-}
-
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-
-}
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -124,11 +115,6 @@
 - (void)tabButtonPressed:(int)index {
     if (index != self.page.index) {
         [self.page setIndex:index animated:YES];
-    } else {
-        UIViewController *controller = [self.page viewControllerAtIndex:index];
-        if (controller) {
-            // [controller refresh];
-        }
     }
 }
 
@@ -141,34 +127,6 @@
     [self.page removeFromParentViewController];
     self.page = nil;
     [super viewDidUnload];
-}
-
-- (void)dealloc {
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
-}
-
-- (void)fromPushNoification {
-    NSArray *viewControllers = self.navigationController.viewControllers;
-    if (viewControllers && viewControllers.count > 0) {
-        if (self != [viewControllers objectAtIndex:viewControllers.count - 1]) {
-            [self.navigationController popToViewController:self animated:NO];
-        }
-    }
-    int index = 3;
-    if (index != self.page.index) {
-        self.page.pageEnabled = NO;
-        [self performSelector:@selector(toMeViewController) withObject:self afterDelay:0.8];
-    } else {
-        UIViewController *controller = [self.page viewControllerAtIndex:index];
-        if ([controller respondsToSelector:@selector(refresh)]) {
-            // [controller refresh];
-        }
-    }
-}
-
-- (void)toMeViewController {
-    self.page.pageEnabled = YES;
-    [self.page setIndex:3 animated:YES];
 }
 
 - (IBAction)addPressed:(id)sender {
@@ -219,6 +177,10 @@
         [uploadAndDowload uploadAvatar:nil andErrorCallBack:nil];
         [uploadAndDowload dowloadAvatar:nil andErrorCallBack:nil];
     });
+}
+
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 @end

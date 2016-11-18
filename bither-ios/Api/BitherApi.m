@@ -18,13 +18,19 @@
 #import "BitherApi.h"
 #import "MarketUtil.h"
 #import "GroupFileUtil.h"
+#import "AFNetworking.h"
+#import "AdUtil.h"
 
 static BitherApi *piApi;
+#define kImgEn @"img_en"
+#define kImgZhCN @"img_zh_CN"
+#define kImgZhTW @"img_zh_TW"
 
 @implementation BitherApi
 
 + (BitherApi *)instance {
     @synchronized (self) {
+
         if (piApi == nil) {
             piApi = [[self alloc] init];
         }
@@ -206,6 +212,48 @@ static BitherApi *piApi;
         }
     }];
 }
+
+#pragma mark - Ad api
+
+- (void)getAdApi {
+    NSString *url = @"https://github.com/bitpiedotcom/bitpiedotcom.github.com/raw/master/bither/bither_ad.json";
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    manager.responseSerializer = [AFHTTPResponseSerializer serializer];
+    [manager GET:url parameters:nil success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+            NSDictionary *responseDic = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingAllowFragments error:nil];
+            if ([AdUtil isDownloadImageForNewAdDic:responseDic]) {
+                NSString *adPath = [AdUtil createCacheAdDicPath];
+                [responseDic writeToFile:adPath atomically:YES];
+                [[BitherApi instance] getAdImageWithResponseDic:responseDic imageKey:kImgEn];
+                [[BitherApi instance] getAdImageWithResponseDic:responseDic imageKey:kImgZhCN];
+                [[BitherApi instance] getAdImageWithResponseDic:responseDic imageKey:kImgZhTW];
+            }
+        });
+    } failure:nil];
+}
+
+- (void)getAdImageWithResponseDic:(NSDictionary *)responseDic imageKey:(NSString *)imageKey {
+    NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
+    AFURLSessionManager *manager = [[AFURLSessionManager alloc] initWithSessionConfiguration:configuration];
+    NSURL *URL = [NSURL URLWithString:responseDic[imageKey]];
+    NSURLRequest *request = [NSURLRequest requestWithURL:URL];
+    NSString *imageName = [NSString stringWithFormat:@"%@%@.png", imageKey, [self getNowTime]];
+    NSString *imgPath = [AdUtil createCacheImgPathForFileName:imageKey];
+    NSURLSessionDownloadTask *downloadTask = [manager downloadTaskWithRequest:request progress:nil destination:^NSURL *(NSURL *targetPath, NSURLResponse *response) {
+        NSURL *documentsDirectoryURL = [NSURL URLWithString:[NSString stringWithFormat:@"file://%@", imgPath]];
+        return [documentsDirectoryURL URLByAppendingPathComponent:imageName];
+    } completionHandler:^(NSURLResponse *response, NSURL *filePath, NSError *error) {
+    }];
+    [downloadTask resume];
+}
+
+- (NSString *)getNowTime {
+    NSDate *nowDate = [NSDate date];
+    NSString *timeSp = [NSString stringWithFormat:@"%d",(int)[nowDate timeIntervalSince1970]];
+    return timeSp;
+}
+
 
 //#pragma mark - hdm api
 //- (void)getHDMPasswordRandomWithHDMBid:(NSString *) hdmBid callback:(IdResponseBlock) callback andErrorCallBack:(ErrorHandler)errorCallback;{
