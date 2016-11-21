@@ -39,15 +39,17 @@
 }
 
 - (void)setupCountDownTimer {
-    __weak typeof(self) weakSelf = self;
-    self.timer = [NSTimer scheduledTimerWithTimeInterval:1.0 repeats:YES block:^(NSTimer * _Nonnull timer) {
-        weakSelf.number--;
-        if (weakSelf.number == 0) {
-            [self remove];
-        }
-        [weakSelf.countDown setAttributedTitle:[weakSelf setupCountDownAttribute:weakSelf.number] forState:UIControlStateNormal];
-    }];
+    self.timer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(setupCountDown) userInfo:nil repeats:YES];
 }
+    
+- (void)setupCountDown {
+    self.number--;
+    if (self.number == 0) {
+        [self remove];
+    }
+    [self.countDown setAttributedTitle:[self setupCountDownAttribute:self.number] forState:UIControlStateNormal];
+}
+
 
 - (NSMutableAttributedString *)setupCountDownAttribute:(int)number {
     NSString *skipStr = NSLocalizedString(@"ad_skip", nil);
