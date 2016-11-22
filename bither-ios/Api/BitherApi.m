@@ -26,6 +26,10 @@ static BitherApi *piApi;
 #define kImgZhCN @"img_zh_CN"
 #define kImgZhTW @"img_zh_TW"
 
+@interface BitherApi ()
+@property (nonatomic, assign) int isLoadImageNum;
+@end
+
 @implementation BitherApi
 
 + (BitherApi *)instance {
@@ -219,12 +223,11 @@ static BitherApi *piApi;
     NSString *url = @"https://github.com/bitpiedotcom/bitpiedotcom.github.com/raw/master/bither/bither_ad.json";
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     manager.responseSerializer = [AFHTTPResponseSerializer serializer];
+    self.isLoadImageNum = 0;
     [manager GET:url parameters:nil success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
             NSDictionary *responseDic = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingAllowFragments error:nil];
             if ([AdUtil isDownloadImageForNewAdDic:responseDic]) {
-                NSString *adPath = [AdUtil createCacheAdDicPath];
-                [responseDic writeToFile:adPath atomically:YES];
                 [[BitherApi instance] getAdImageWithResponseDic:responseDic imageKey:kImgEn];
                 [[BitherApi instance] getAdImageWithResponseDic:responseDic imageKey:kImgZhCN];
                 [[BitherApi instance] getAdImageWithResponseDic:responseDic imageKey:kImgZhTW];
@@ -244,6 +247,11 @@ static BitherApi *piApi;
         NSURL *documentsDirectoryURL = [NSURL URLWithString:[NSString stringWithFormat:@"file://%@", imgPath]];
         return [documentsDirectoryURL URLByAppendingPathComponent:imageName];
     } completionHandler:^(NSURLResponse *response, NSURL *filePath, NSError *error) {
+        self.isLoadImageNum += 1;
+        if (self.isLoadImageNum == 3) {
+            NSString *adPath = [AdUtil createCacheAdDicPath];
+            [responseDic writeToFile:adPath atomically:YES];
+        }
     }];
     [downloadTask resume];
 }
