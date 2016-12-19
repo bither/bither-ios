@@ -98,7 +98,7 @@ PODS:
 
 DEPENDENCIES:
   - AFNetworking (~> 2.0)
-  - Bitheri (from `https://github.com/bither/bitheri.git`, tag `v1.6.5`)
+  - Bitheri (from `https://github.com/bither/bitheri.git`, branch `develop`)
   - FXBlurView
   - KSCrash (~> 0.0.3)
   - MKNetworkKit (~> 0.87)
@@ -108,15 +108,15 @@ DEPENDENCIES:
 
 EXTERNAL SOURCES:
   Bitheri:
+    :branch: develop
     :git: https://github.com/bither/bitheri.git
-    :tag: v1.6.5
   OpenSSL:
     :git: https://github.com/bither/OpenSSL.git
 
 CHECKOUT OPTIONS:
   Bitheri:
+    :commit: edfc8de8b4d5a3339db6a1778865e94bb625186b
     :git: https://github.com/bither/bitheri.git
-    :tag: v1.6.5
   OpenSSL:
     :commit: b7ff9ed0245e2b5b1a212a1e86131487df4fc518
     :git: https://github.com/bither/OpenSSL.git
@@ -134,6 +134,6 @@ SPEC CHECKSUMS:
   RegexKitLite: c0e4c12e6e7de0769f3a3ed679f0f61604170661
   SimpleKeychain: b50cef3b87939d480ea1143425c00f5b4b70fe21
 
-PODFILE CHECKSUM: ae06cce03782e7ac039d3167b178460c2f3a8043
+PODFILE CHECKSUM: 15d31a0ba2c5d53554fc7ba68ac747f9c67128e0
 
 COCOAPODS: 1.1.0.rc.2

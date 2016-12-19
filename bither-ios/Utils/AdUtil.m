@@ -26,9 +26,9 @@
 
 + (NSString *)createCacheImgPathForFileName:(NSString *)fileName {
     NSString *imgPath = NULL;
-    if ([fileName containsString:@"en"]) {
+    if ([fileName isEqualToString:@"img_en"]) {
         imgPath = [AdUtil createCacheImgEnPath];
-    } else if ([fileName containsString:@"CN"]) {
+    } else if ([fileName isEqualToString:@"img_zh_CN"]) {
         imgPath = [AdUtil createCacheImgZhCNPath];
     } else {
         imgPath = [AdUtil createCacheImgZhTwPath];
