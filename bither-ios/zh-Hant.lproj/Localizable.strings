@@ -747,3 +747,5 @@
 
 // Language
 "localization.language.code" = "zh_TW";
+
+"setting.privacy.policy" = "隱私政策";
