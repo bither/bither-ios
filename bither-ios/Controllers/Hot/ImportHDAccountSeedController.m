@@ -55,12 +55,17 @@
 @property(weak, nonatomic) IBOutlet UIButton *btnDone;
 @property(weak, nonatomic) IBOutlet UITextField *tfKey;
 @property KeyboardController *kc;
+@property(nonatomic, strong) BTBIP39 *bTBIP39;
+
 @end
 
 @implementation ImportHDAccountSeedController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    [self.view bringSubviewToFront:self.topBar];
+//    self.tfKey.keyboardType = UIKeyboardTypeASCIICapable;
     UICollectionViewFlowLayout *layout = [UICollectionViewFlowLayout new];
     layout.sectionInset = UIEdgeInsetsMake(6, 4, 0, 4);
     layout.minimumInteritemSpacing = 0;
@@ -118,7 +123,7 @@
     tf.leftViewMode = UITextFieldViewModeAlways;
     tf.rightViewMode = UITextFieldViewModeAlways;
     tf.enablesReturnKeyAutomatically = YES;
-    tf.keyboardType = UIKeyboardTypeASCIICapable;
+    tf.keyboardType = UIKeyboardTypeDefault;
 }
 
 
@@ -128,7 +133,8 @@
 
 - (IBAction)addWorld:(id)sender {
     NSString *world = [self.tfKey.text toLowercaseStringWithEn];
-    if ([[[BTBIP39 sharedInstance] getWords] containsObject:world]) {
+    self.bTBIP39 = [BTBIP39 instanceForWord:world];
+    if ([[self.bTBIP39 getWords] containsObject:world]) {
         [self.worldListArray addObject:world];
         [self.collectionView reloadData];
 
@@ -163,12 +169,12 @@
     __block ImportHDAccountSeedController *s = self;
     [dp showInWindow:self.view.window completion:^{
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
-            BTBIP39 *bip39 = [BTBIP39 sharedInstance];
-            NSString *code = [bip39 toMnemonicWithArray:self.worldListArray];
-            NSData *mnemonicCodeSeed = [bip39 toEntropy:code];
+            NSString *code = [s.bTBIP39 toMnemonicWithArray:self.worldListArray];
+            NSData *mnemonicCodeSeed = [s.bTBIP39 toEntropy:code];
             if (!mnemonicCodeSeed) {
                 dispatch_async(dispatch_get_main_queue(), ^{
                     [self showMsg:NSLocalizedString(@"import_hdm_cold_seed_format_error", nil)];
+                    [dp dismiss];
                 });
                 return;
             }
@@ -181,6 +187,7 @@
                         dispatch_async(dispatch_get_main_queue(), ^{
                             [self showMsg:NSLocalizedString(@"import_hd_account_failed_duplicated", nil)];
                         });
+                        [dp dismiss];
                         return;
                     }
                 }
@@ -188,6 +195,7 @@
                 if (!account) {
                     dispatch_async(dispatch_get_main_queue(), ^{
                         [self showMsg:NSLocalizedString(@"import_hdm_cold_seed_format_error", nil)];
+                        [dp dismiss];
                     });
                     return;
                 }
@@ -199,6 +207,7 @@
                 if (!account) {
                     dispatch_async(dispatch_get_main_queue(), ^{
                         [self showMsg:NSLocalizedString(@"import_hdm_cold_seed_format_error", nil)];
+                        [dp dismiss];
                     });
                     return;
                 }

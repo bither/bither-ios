@@ -106,6 +106,8 @@
 		20F671F2466952F081445EFB /* libPods-bither-ios WatchKit App.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AC13478AA903687AA9ACD36 /* libPods-bither-ios WatchKit App.a */; };
 		35BD79D34EADBCE346458D94 /* libPods-bither-ios.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 46F4567F64E4C5EB9B650EE0 /* libPods-bither-ios.a */; };
 		401ABC921DC33E8F004611B7 /* AdUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 401ABC911DC33E8F004611B7 /* AdUtil.m */; };
+		402B83101E62B03200379C39 /* BIP39ZhCNWords.plist in Resources */ = {isa = PBXBuildFile; fileRef = 402B830E1E62B03200379C39 /* BIP39ZhCNWords.plist */; };
+		402B83111E62B03200379C39 /* BIP39ZhTWWords.plist in Resources */ = {isa = PBXBuildFile; fileRef = 402B830F1E62B03200379C39 /* BIP39ZhTWWords.plist */; };
 		403753071DBF429000F402A0 /* AdView.m in Sources */ = {isa = PBXBuildFile; fileRef = 403753061DBF429000F402A0 /* AdView.m */; };
 		403753131DC0503700F402A0 /* UIView+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 403753121DC0503700F402A0 /* UIView+Extension.m */; };
 		4217A3731951235D00063746 /* Depth.m in Sources */ = {isa = PBXBuildFile; fileRef = 4217A3721951235D00063746 /* Depth.m */; };
@@ -543,6 +545,8 @@
 		3F23197A13072D3472EE053F /* libPods-bither-ios WatchKit Extension.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-bither-ios WatchKit Extension.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		401ABC901DC33E8F004611B7 /* AdUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdUtil.h; sourceTree = "<group>"; };
 		401ABC911DC33E8F004611B7 /* AdUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AdUtil.m; sourceTree = "<group>"; };
+		402B830E1E62B03200379C39 /* BIP39ZhCNWords.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = BIP39ZhCNWords.plist; sourceTree = "<group>"; };
+		402B830F1E62B03200379C39 /* BIP39ZhTWWords.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = BIP39ZhTWWords.plist; sourceTree = "<group>"; };
 		403753051DBF429000F402A0 /* AdView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdView.h; sourceTree = "<group>"; };
 		403753061DBF429000F402A0 /* AdView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AdView.m; sourceTree = "<group>"; };
 		403753111DC0503700F402A0 /* UIView+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Extension.h"; sourceTree = "<group>"; };
@@ -1581,6 +1585,8 @@
 			isa = PBXGroup;
 			children = (
 				0AD674931A79F2B8007967DB /* BIP39EnglishWords.plist */,
+				402B830E1E62B03200379C39 /* BIP39ZhCNWords.plist */,
+				402B830F1E62B03200379C39 /* BIP39ZhTWWords.plist */,
 				ACA9D708195410FF002D1E3A /* Sound */,
 				D61D0299B4CDCCFC6D0BA161 /* hdm.bither.net.cer */,
 			);
@@ -2049,6 +2055,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				AC6163A01966524A0055C9D0 /* coins_received.wav in Resources */,
+				402B83111E62B03200379C39 /* BIP39ZhTWWords.plist in Resources */,
+				402B83101E62B03200379C39 /* BIP39ZhCNWords.plist in Resources */,
 				4276CEA4194C20810027D119 /* Localizable.strings in Resources */,
 				0AD674941A79F2B8007967DB /* BIP39EnglishWords.plist in Resources */,
 				AC53ABED19D94230007C095C /* xrandom_close_sound.mp3 in Resources */,
