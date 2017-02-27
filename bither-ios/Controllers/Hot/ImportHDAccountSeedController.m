@@ -41,6 +41,7 @@
 #define kTextFieldHeight (35)
 #define kTextFieldHorizontalMargin (10)
 #define WORD_COUNT 24
+#define kZHTW_WORDS @"BIP39ZhTWWords"
 
 
 @interface ImportHDAccountSeedController () <UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout
@@ -133,6 +134,7 @@
 
 - (IBAction)addWorld:(id)sender {
     NSString *world = [self.tfKey.text toLowercaseStringWithEn];
+    world = [world stringByReplacingOccurrencesOfString:@" " withString:@""];
     self.bTBIP39 = [BTBIP39 instanceForWord:world];
     if ([[self.bTBIP39 getWords] containsObject:world]) {
         [self.worldListArray addObject:world];
@@ -169,6 +171,9 @@
     __block ImportHDAccountSeedController *s = self;
     [dp showInWindow:self.view.window completion:^{
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+            if ([s isZhTw] && ![s.bTBIP39.wordList isEqualToString:kZHTW_WORDS]) {
+                s.bTBIP39.wordList = kZHTW_WORDS;
+            }
             NSString *code = [s.bTBIP39 toMnemonicWithArray:self.worldListArray];
             NSData *mnemonicCodeSeed = [s.bTBIP39 toEntropy:code];
             if (!mnemonicCodeSeed) {
@@ -220,6 +225,16 @@
         });
     }];
 
+}
+
+- (BOOL)isZhTw {
+    for (NSString *word in self.worldListArray) {
+        self.bTBIP39 = [BTBIP39 instanceForWord:word];
+        if ([_bTBIP39.wordList isEqualToString:kZHTW_WORDS]) {
+            return true;
+        }
+    }
+    return false;
 }
 
 - (void)showMsg:(NSString *)msg {
