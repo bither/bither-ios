@@ -33,6 +33,7 @@
 #import "DialogCentered.h"
 #import "DialogWithActions.h"
 #import "AppDelegate.h"
+#import "BTWordsTypeManager.h"
 
 
 #define kTextFieldHorizontalMargin (10)
@@ -186,7 +187,7 @@
             if ([BTSettings instance].getAppMode == HOT) {
                 BTHDAccount *account;
                 @try {
-                    account = [[BTHDAccount alloc] initWithMnemonicSeed:mnemonicCodeSeed password:password fromXRandom:NO syncedComplete:NO andGenerationCallback:nil];
+                    account = [[BTHDAccount alloc] initWithMnemonicSeed:mnemonicCodeSeed btBip39:s.bTBIP39 password:password fromXRandom:NO syncedComplete:NO andGenerationCallback:nil];
                 } @catch (NSException *e) {
                     if ([e isKindOfClass:[DuplicatedHDAccountException class]]) {
                         dispatch_async(dispatch_get_main_queue(), ^{
@@ -208,7 +209,7 @@
                 [BTAddressManager instance].hdAccountHot = account;
                 [[PeerUtil instance] startPeer];
             } else {
-                BTHDAccountCold *account = [[BTHDAccountCold alloc] initWithMnemonicSeed:mnemonicCodeSeed andPassword:password];
+                BTHDAccountCold *account = [[BTHDAccountCold alloc] initWithMnemonicSeed:mnemonicCodeSeed btBip39:s.bTBIP39 andPassword:password];
                 if (!account) {
                     dispatch_async(dispatch_get_main_queue(), ^{
                         [self showMsg:NSLocalizedString(@"import_hdm_cold_seed_format_error", nil)];
@@ -217,6 +218,8 @@
                     return;
                 }
             }
+            [[BTWordsTypeManager instance] saveWordsTypeValue:s.bTBIP39.wordList];
+            [BTBIP39 sharedInstance].wordList = s.bTBIP39.wordList;
             dispatch_async(dispatch_get_main_queue(), ^{
                 [dp dismissWithCompletion:^{
                     [s.navigationController popViewControllerAnimated:YES];

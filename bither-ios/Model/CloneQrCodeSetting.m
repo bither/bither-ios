@@ -22,6 +22,7 @@
 #import "BTAddress.h"
 #import "BTAddressManager.h"
 #import "BTQRCodeUtil.h"
+#import "BTWordsTypeManager.h"
 
 @implementation CloneQrCodeSetting
 
@@ -48,7 +49,7 @@
         [keys addObject:[keychain getFullEncryptPrivKeyWithHDMFlag]];
     }
     if ([BTAddressManager instance].hasHDAccountCold){
-        [keys addObject:[BTAddressManager instance].hdAccountCold.getQRCodeFullEncryptPrivKey];
+        [keys addObject:[[BTAddressManager instance].hdAccountCold getQRCodeFullEncryptPrivKeyWithHDQrCodeFlatType:[BTQRCodeUtil getHDQrCodeFlatForWordsTypeValue:[BTWordsTypeManager instance].getWordsTypeValueForUserDefaults]]];
     }
     QrCodeViewController *qrController = [self.controller.storyboard instantiateViewControllerWithIdentifier:@"QrCode"];
     qrController.content = [BTQRCodeUtil joinedQRCode:keys];

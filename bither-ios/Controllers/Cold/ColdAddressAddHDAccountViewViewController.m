@@ -12,6 +12,7 @@
 #import "DialogBlackQrCode.h"
 #import "DialogProgress.h"
 #import "DialogHDMSeedWordList.h"
+#import "BTWordsTypeManager.h"
 
 @interface ColdAddressAddHDAccountViewViewController () <DialogPasswordDelegate> {
     BOOL qr;
@@ -32,7 +33,7 @@
 
 - (void)onPasswordEntered:(NSString *)password {
     if (qr) {
-        [[[DialogBlackQrCode alloc] initWithContent:[BTAddressManager instance].hdAccountCold.getQRCodeFullEncryptPrivKey andTitle:NSLocalizedString(@"add_hd_account_seed_qr_code", nil)] showInWindow:self.view.window];
+        [[[DialogBlackQrCode alloc] initWithContent:[[BTAddressManager instance].hdAccountCold getQRCodeFullEncryptPrivKeyWithHDQrCodeFlatType:[BTQRCodeUtil getHDQrCodeFlatForWordsTypeValue:[BTWordsTypeManager instance].getWordsTypeValueForUserDefaults]] andTitle:NSLocalizedString(@"add_hd_account_seed_qr_code", nil)] showInWindow:self.view.window];
     } else {
         __block DialogProgress *dp = [[DialogProgress alloc] initWithMessage:NSLocalizedString(@"Please wait…", nil)];
         dp.touchOutSideToDismiss = NO;

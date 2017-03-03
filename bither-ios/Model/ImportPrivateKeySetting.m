@@ -28,6 +28,7 @@
 #import "DialogCentered.h"
 #import "DialogWithActions.h"
 #import "AppDelegate.h"
+#import "BTWordsTypeManager.h"
 
 @interface CheckPasswordDelegate : NSObject <DialogPasswordDelegate>
 @property(nonatomic, strong) UIViewController *controller;
@@ -147,8 +148,7 @@ static Setting *importPrivateKeySetting;
 
 - (void)handleResult:(NSString *)result byReader:(ScanQrCodeViewController *)reader {
     if (self.isImportHDAccount) {
-        NSRange range = [result rangeOfString:HD_QR_CODE_FLAT];
-        BOOL isHDSeed = range.location == 0 && range.length == HD_QR_CODE_FLAT.length;
+        BOOL isHDSeed = [self isHdSeedWithResult:result];
         if ([BTQRCodeUtil verifyQrcodeTransport:result]) {
             [reader playSuccessSound];
             [reader vibrate];
@@ -206,6 +206,48 @@ static Setting *importPrivateKeySetting;
     }
 
 }
+
+- (BOOL)isHdSeedWithResult:(NSString *)result {
+    BOOL isZhCNHDSeed = [self isHdSeedWithResult:result HDQrCodeFlat:ZHCN];
+    if (isZhCNHDSeed) {
+        return isZhCNHDSeed;
+    }
+    BOOL isZhTWHDSeed = [self isHdSeedWithResult:result HDQrCodeFlat:ZHTW];
+    if (isZhTWHDSeed) {
+        return isZhTWHDSeed;
+    }
+    BOOL isHDSeed = [self isHdSeedWithResult:result HDQrCodeFlat:EN];
+    return isHDSeed;
+}
+
+- (BOOL)isHdSeedWithResult:(NSString *)result HDQrCodeFlat:(HDQrCodeFlatType)qrCodeFlat {
+    NSRange range = [result rangeOfString:[BTQRCodeUtil getHDQrCodeFlat:qrCodeFlat]];
+    BOOL isHDSeed = range.location == 0 && range.length == [BTQRCodeUtil getHDQrCodeFlat:qrCodeFlat].length;
+    return isHDSeed;
+}
+
+- (NSString *)getHDAccountWordList:(NSString *)result {
+    BOOL isZhCNHDSeed = [self isHdSeedWithResult:result HDQrCodeFlat:ZHCN];
+    if (isZhCNHDSeed) {
+        return [BTWordsTypeManager getWordsTypeValue:ZHCN_WORDS];
+    }
+    BOOL isZhTWHDSeed = [self isHdSeedWithResult:result HDQrCodeFlat:ZHTW];
+    if (isZhTWHDSeed) {
+        return [BTWordsTypeManager getWordsTypeValue:ZHTW_WORDS];
+    }
+    
+    return [BTWordsTypeManager getWordsTypeValue:EN_WORDS];
+}
+
+- (NSString *)getHDAccountBTEncryptDataStr:(NSString *)result {
+    BOOL isZhCNHDSeed = [self isHdSeedWithResult:result HDQrCodeFlat:ZHCN];
+    BOOL isZhTWHDSeed = [self isHdSeedWithResult:result HDQrCodeFlat:ZHTW];
+    if (isZhCNHDSeed || isZhTWHDSeed) {
+        return [_result substringFromIndex:3];
+    }
+    return [_result substringFromIndex:1];
+}
+
 #pragma mark - import HDAccount、 HDM、 privateKey Through key Qrcode settings
 - (void)importHDAccountAndHDMAccountAndPrivateKeyThroughQrcode:(NSString *)password{
     DialogProgress *dp = [[DialogProgress alloc] initWithMessage:NSLocalizedString(@"Please wait…", nil)];
@@ -223,10 +265,11 @@ static Setting *importPrivateKeySetting;
                         return;
                     }
                 }
+                BTBIP39 *bip39 = [[BTBIP39 alloc] initWithWordList:[self getHDAccountWordList:_result]];
                 if ([BTSettings instance].getAppMode == HOT) {
                     BTHDAccount *account;
                     @try {
-                        account = [[BTHDAccount alloc] initWithEncryptedMnemonicSeed:[[BTEncryptData alloc] initWithStr:[_result substringFromIndex:1]] password:password syncedComplete:NO andGenerationCallback:nil];
+                        account = [[BTHDAccount alloc] initWithEncryptedMnemonicSeed:[[BTEncryptData alloc] initWithStr:[self getHDAccountBTEncryptDataStr:_result]] btBip39:bip39 password:password syncedComplete:NO andGenerationCallback:nil];
                     } @catch (NSException *e) {
                         if ([e isKindOfClass:[DuplicatedHDAccountException class]]) {
                             dispatch_async(dispatch_get_main_queue(), ^{
@@ -247,7 +290,7 @@ static Setting *importPrivateKeySetting;
                     [BTAddressManager instance].hdAccountHot = account;
                     [[PeerUtil instance] startPeer];
                 } else {
-                    BTHDAccountCold *account = [[BTHDAccountCold alloc] initWithEncryptedMnemonicSeed:[[BTEncryptData alloc] initWithStr:[_result substringFromIndex:1]] andPassword:password];
+                    BTHDAccountCold *account = [[BTHDAccountCold alloc] initWithEncryptedMnemonicSeed:[[BTEncryptData alloc] initWithStr:[self getHDAccountBTEncryptDataStr:_result]] btBip39:bip39 andPassword:password];
                     if (!account) {
                         dispatch_async(dispatch_get_main_queue(), ^{
                             [dp dismissWithCompletion:^{
@@ -257,6 +300,8 @@ static Setting *importPrivateKeySetting;
                         return;
                     }
                 }
+                [[BTWordsTypeManager instance] saveWordsTypeValue:bip39.wordList];
+                [BTBIP39 sharedInstance].wordList = bip39.wordList;
                 dispatch_async(dispatch_get_main_queue(), ^{
                     [dp dismissWithCompletion:^{
                         [self showMsg:NSLocalizedString(@"Import success.", nil)];
@@ -326,8 +371,10 @@ static Setting *importPrivateKeySetting;
 }
 - (BOOL)checkPassword:(NSString *)password {
     NSString *checkKeyStr = _result;
-    if (self.isImportHDM || self.isImportHDAccount) {
+    if (self.isImportHDM) {
         checkKeyStr = [checkKeyStr substringFromIndex:1];
+    } else if (self.isImportHDAccount) {
+        checkKeyStr = [self getHDAccountBTEncryptDataStr:_result];
     }
     BTEncryptData *encryptedData = [[BTEncryptData alloc] initWithStr:checkKeyStr];
     return [encryptedData decrypt:password] != nil;

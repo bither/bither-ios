@@ -18,6 +18,7 @@
 #import <Bitheri/BTHDAccountAddress.h>
 #import "StringUtil.h"
 #import <Bitheri/BTQRCodeUtil.h>
+#import "BTWordsTypeManager.h"
 
 @interface ColdAddressListHDCell () <DialogPasswordDelegate> {
     BTHDAccountCold *_account;
@@ -136,7 +137,7 @@
     __weak __block DialogProgress *d = dp;
     [d showInWindow:self.window completion:^{
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
-            __block NSString *pub = [self.account getQRCodeFullEncryptPrivKey];
+            __block NSString *pub = [self.account getQRCodeFullEncryptPrivKeyWithHDQrCodeFlatType:[BTQRCodeUtil getHDQrCodeFlatForWordsTypeValue:[BTWordsTypeManager instance].getWordsTypeValueForUserDefaults]];
             dispatch_async(dispatch_get_main_queue(), ^{
                 [d dismissWithCompletion:^{
                     DialogBlackQrCode *d = [[DialogBlackQrCode alloc] initWithContent:pub andTitle:NSLocalizedString(@"add_hd_account_seed_qr_code", nil)];

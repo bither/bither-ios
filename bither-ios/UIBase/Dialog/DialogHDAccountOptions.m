@@ -28,6 +28,7 @@
 #import "DialogOldAddressesOfHDAccount.h"
 #import "UIViewController+PiShowBanner.h"
 #import "DialogPrivateKeyText.h"
+#import "BTWordsTypeManager.h"
 
 @interface DialogHDAccountOptions () <DialogPasswordDelegate> {
     SEL passwordSelector;
@@ -119,7 +120,7 @@
 }
 
 - (void)showHdAccountQr:(NSString*)password{
-    [[[DialogBlackQrCode alloc] initWithContent:hdAccount.getQRCodeFullEncryptPrivKey andTitle:NSLocalizedString(@"add_hd_account_seed_qr_code", nil)] showInWindow:_window];
+    [[[DialogBlackQrCode alloc] initWithContent:[hdAccount getQRCodeFullEncryptPrivKeyWithHDQrCodeFlatType:[BTQRCodeUtil getHDQrCodeFlatForWordsTypeValue:[BTWordsTypeManager instance].getWordsTypeValueForUserDefaults]] andTitle:NSLocalizedString(@"add_hd_account_seed_qr_code", nil)] showInWindow:_window];
 }
 
 - (void)showHDAccountPhrase:(NSString*)password {

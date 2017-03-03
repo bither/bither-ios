@@ -85,7 +85,7 @@
             while (!account) {
                 @try {
                     NSData *seed = [xRandom randomWithSize:16];
-                    account = [[BTHDAccountCold alloc] initWithMnemonicSeed:seed password:password andFromXRandom:NO];
+                    account = [[BTHDAccountCold alloc] initWithMnemonicSeed:seed btBip39:[BTBIP39 sharedInstance] password:password andFromXRandom:NO];
                 }
                 @catch (NSException *exception) {
                     NSLog(@"generate HD Account error %@", exception.debugDescription);
@@ -97,7 +97,7 @@
                 [d dismissWithCompletion:^{
                     if (account) {
                         __block ColdAddressAddHDAccountViewController *s = self;
-                        [[[DialogHDMSingularColdSeed alloc] initWithWords:words qr:[BTAddressManager instance].hdAccountCold.getQRCodeFullEncryptPrivKey parent:self warn:NSLocalizedString(@"add_hd_account_show_seed_label", nil) button:NSLocalizedString(@"add_hd_account_show_seed_button", nil) andDismissAction:^{
+                        [[[DialogHDMSingularColdSeed alloc] initWithWords:words qr:[[BTAddressManager instance].hdAccountCold getQRCodeFullEncryptPrivKeyWithHDQrCodeFlatType:EN] parent:self warn:NSLocalizedString(@"add_hd_account_show_seed_label", nil) button:NSLocalizedString(@"add_hd_account_show_seed_button", nil) andDismissAction:^{
                             [s.parentViewController dismissViewControllerAnimated:YES completion:nil];
                         }] show];
                     } else {
@@ -127,7 +127,7 @@
     while (!account) {
         @try {
             NSData *seed = [xrandom randomWithSize:16];
-            account = [[BTHDAccountCold alloc] initWithMnemonicSeed:seed password:password andFromXRandom:YES];
+            account = [[BTHDAccountCold alloc] initWithMnemonicSeed:seed btBip39:[BTBIP39 sharedInstance] password:password andFromXRandom:YES];
         }
         @catch (NSException *exception) {
             NSLog(@"generate HD Account error %@", exception.debugDescription);
@@ -154,7 +154,7 @@
 
 - (void)successFinish:(UEntropyViewController *)controller {
     __block ColdAddressAddHDAccountViewController *s = self;
-    [[[DialogHDMSingularColdSeed alloc] initWithWords:words qr:[BTAddressManager instance].hdAccountCold.getQRCodeFullEncryptPrivKey parent:controller warn:NSLocalizedString(@"add_hd_account_show_seed_label", nil) button:NSLocalizedString(@"add_hd_account_show_seed_button", nil) andDismissAction:^{
+    [[[DialogHDMSingularColdSeed alloc] initWithWords:words qr:[[BTAddressManager instance].hdAccountCold getQRCodeFullEncryptPrivKeyWithHDQrCodeFlatType:EN] parent:controller warn:NSLocalizedString(@"add_hd_account_show_seed_label", nil) button:NSLocalizedString(@"add_hd_account_show_seed_button", nil) andDismissAction:^{
         [s.parentViewController.presentingViewController dismissViewControllerAnimated:YES completion:nil];
     }] show];
 

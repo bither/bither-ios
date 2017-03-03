@@ -39,6 +39,8 @@
 #import "GroupFileUtil.h"
 #import "ChooseModeViewController.h"
 #import "AdView.h"
+#import "BTWordsTypeManager.h"
+#import "BTBIP39.h"
 
 @interface AppDelegate ()
 @end
@@ -61,6 +63,8 @@ static StatusBarNotificationWindow *notificationWindow;
     }
 
     [CrashLog initCrashLog];
+    
+    [BTBIP39 sharedInstance].wordList = [BTWordsTypeManager instance].getWordsTypeValueForUserDefaults;
     
     if ([UpgradeUtil needUpgradeKeyFromFileToDB]) {
         DialogProgress *dp = [[DialogProgress alloc] initWithMessage:NSLocalizedString(@"Please wait…", nil)];
@@ -90,7 +94,7 @@ static StatusBarNotificationWindow *notificationWindow;
     [self updateGroupBalance];
 
     //   [[BTSettings instance] openBitheriConsole];
-
+    
     return YES;
 }
 
