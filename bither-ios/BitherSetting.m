@@ -103,7 +103,9 @@ static BOOL _isUnitTest = NO;
 }
 
 + (NSString *)getTransactionFeeMode:(TransactionFeeMode)transactionFee {
-    if (transactionFee == Higher) {
+    if (transactionFee == TenX) {
+        return NSLocalizedString(@"10x", nil);
+    } else if (transactionFee == Higher) {
         return NSLocalizedString(@"Higher", nil);
     } else if (transactionFee == High) {
         return NSLocalizedString(@"High", nil);
@@ -115,7 +117,9 @@ static BOOL _isUnitTest = NO;
 + (NSString *)getTransactionFee:(TransactionFeeMode)transactionFee {
     CGFloat dividend = 100000;
     NSString *unit = @"mBTC/kb";
-    if (transactionFee == Higher) {
+    if (transactionFee == TenX) {
+        return [NSString stringWithFormat:@"%.1f%@", TenX/dividend, unit];
+    } else if (transactionFee == Higher) {
         return [NSString stringWithFormat:@"%.1f%@", Higher/dividend, unit];
     } else if (transactionFee == High) {
         return [NSString stringWithFormat:@"%.1f%@", High/dividend, unit];
