@@ -273,7 +273,9 @@ static Setting *importPrivateKeySetting;
                     } @catch (NSException *e) {
                         if ([e isKindOfClass:[DuplicatedHDAccountException class]]) {
                             dispatch_async(dispatch_get_main_queue(), ^{
-                                [self showMsg:NSLocalizedString(@"import_hd_account_failed_duplicated", nil)];
+                                [dp dismissWithCompletion:^{
+                                    [self showMsg:NSLocalizedString(@"import_hd_account_failed_duplicated", nil)];
+                                }];
                             });
                             return;
                         }
@@ -286,6 +288,7 @@ static Setting *importPrivateKeySetting;
                         });
                         return;
                     }
+                    
                     [[PeerUtil instance] stopPeer];
                     [BTAddressManager instance].hdAccountHot = account;
                     [[PeerUtil instance] startPeer];
