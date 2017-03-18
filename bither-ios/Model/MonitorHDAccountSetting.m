@@ -32,6 +32,7 @@
 #import "DialogCentered.h"
 #import "DialogHDMonitorFirstAddressValidation.h"
 #import <Bitheri/BTQRCodeUtil.h>
+#import "BTHDAccount.h"
 
 @interface MonitorHDAccountSetting () <ScanQrCodeDelegate>
 @property(weak) UIViewController *vc;
@@ -121,11 +122,33 @@ static MonitorHDAccountSetting *monitorSetting;
     }
     self.xpub = key;
     __block NSString* firstAddress = [[key deriveSoftened:EXTERNAL_ROOT_PATH] deriveSoftened:0].address;
+    
+    if ([self isRepeatHD:firstAddress]) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [dp dismissWithCompletion:^{
+                [self showMsg:NSLocalizedString(@"monitor_cold_hd_account_failed_duplicated", nil)];
+            }];
+        });
+        return;
+    }
+    
     dispatch_async(dispatch_get_main_queue(), ^{
         [dp dismissWithCompletion:^{
             [[[DialogHDMonitorFirstAddressValidation alloc]initWithAddress:firstAddress target:self okSelector:@selector(accountValidatedSuccess) cancelSelector:nil] showInWindow:self.vc.view.window];
         }];
     });
+}
+
+- (BOOL)isRepeatHD:(NSString *)firstAddress {
+    BTHDAccount *hdAccountHot = [[BTAddressManager instance] hdAccountHot];
+    if (hdAccountHot == nil) {
+        return false;
+    }
+    BTHDAccountAddress *addressHot = [hdAccountHot addressForPath:EXTERNAL_ROOT_PATH atIndex:0];
+    if ([firstAddress isEqualToString:addressHot.address]) {
+        return true;
+    }
+    return false;
 }
 
 -(void)accountValidatedSuccess {

@@ -205,6 +205,17 @@
                     });
                     return;
                 }
+                
+                BTBIP32Key *key = [account xPub:password];
+                if ([s isRepeatHD:key]) {
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        [dp dismissWithCompletion:^{
+                            [self showMsg:NSLocalizedString(@"import_hd_account_failed_duplicated", nil)];
+                        }];
+                    });
+                    return;
+                }
+                
                 [[PeerUtil instance] stopPeer];
                 [BTAddressManager instance].hdAccountHot = account;
                 [[PeerUtil instance] startPeer];
@@ -236,6 +247,20 @@
         if ([_bTBIP39.wordList isEqualToString:kZHTW_WORDS]) {
             return true;
         }
+    }
+    return false;
+}
+
+- (BOOL)isRepeatHD:(BTBIP32Key *)key {
+    BTHDAccount *hdAccountMonitored = [[BTAddressManager instance] hdAccountMonitored];
+    if (hdAccountMonitored == nil) {
+        return false;
+    }
+    
+    NSString *firstAddress = [[key deriveSoftened:EXTERNAL_ROOT_PATH] deriveSoftened:0].address;
+    BTHDAccountAddress *addressMonitored = [hdAccountMonitored addressForPath:EXTERNAL_ROOT_PATH atIndex:0];
+    if ([firstAddress isEqualToString:addressMonitored.address]) {
+        return true;
     }
     return false;
 }
