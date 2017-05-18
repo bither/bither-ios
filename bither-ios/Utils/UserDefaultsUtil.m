@@ -217,7 +217,7 @@ NSUserDefaults *userDefaults;
             return Normal;
         }
     } else {
-        return Normal;
+        return TenX;
     }
 }
 
