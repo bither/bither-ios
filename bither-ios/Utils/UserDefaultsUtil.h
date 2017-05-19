@@ -117,4 +117,8 @@
 
 - (ApiConfig)getApiConfig;
 
+- (void)setUpdateCode:(NSInteger) updateCode;
+
+- (NSInteger)getUpdateCode;
+
 @end

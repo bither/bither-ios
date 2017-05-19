@@ -52,6 +52,8 @@
 
 #define API_CONFIG @"api_config"
 
+#define UPDATE_CODE @"update_code"
+
 static UserDefaultsUtil *userDefaultsUtil;
 
 NSUserDefaults *userDefaults;
@@ -421,6 +423,19 @@ NSUserDefaults *userDefaults;
         return (ApiConfig)[userDefaults integerForKey:API_CONFIG];
     }
     return ApiConfigBither;
+}
+
+- (void)setUpdateCode:(NSInteger) updateCode {
+    [userDefaults setInteger:updateCode forKey:UPDATE_CODE];
+    [userDefaults synchronize];
+}
+
+- (NSInteger)getUpdateCode {
+    if ([userDefaults objectForKey:UPDATE_CODE]) {
+        return [userDefaults integerForKey:UPDATE_CODE];
+    } else {
+        return -1;
+    }
 }
 
 @end
