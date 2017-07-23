@@ -10,9 +10,15 @@
 #import "BTAddressManager.h"
 #import "DialogSignMessageSelectAddress.h"
 #import "SignMessageViewController.h"
+#import "SignMessageSelectAddressViewController.h"
+#import "DialogPassword.h"
+#import "StringUtil.h"
 
-@interface MessageSigningSetting () <UIActionSheetDelegate, DialogSignMessageSelectAddressDelegate>
+@interface MessageSigningSetting () <UIActionSheetDelegate, DialogSignMessageSelectAddressDelegate, DialogPasswordDelegate>
+
 @property(weak) UIViewController *controller;
+@property PathType path;
+
 @end
 
 static MessageSigningSetting *S;
@@ -40,9 +46,11 @@ static MessageSigningSetting *S;
 
 - (void)show {
     UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:NSLocalizedString(@"sign_message_setting_name", nil) delegate:self cancelButtonTitle:nil destructiveButtonTitle:nil otherButtonTitles:nil];
-    if ([BTAddressManager instance].privKeyAddresses.count > 0) {
+    BTAddressManager *addressManager = [BTAddressManager instance];
+    if (addressManager.hasHDAccountHot || addressManager.hasHDAccountCold || addressManager.privKeyAddresses.count > 0) {
         [actionSheet addButtonWithTitle:NSLocalizedString(@"sign_message_activity_name", nil)];
     }
+
     [actionSheet addButtonWithTitle:NSLocalizedString(@"verify_message_signature_activity_name", nil)];
     [actionSheet addButtonWithTitle:NSLocalizedString(@"Cancel", nil)];
     actionSheet.cancelButtonIndex = actionSheet.numberOfButtons - 1;
@@ -66,10 +74,27 @@ static MessageSigningSetting *S;
     }
 }
 
-- (void)signMessageWithAddress:(BTAddress *)address {
-    SignMessageViewController *sign = [self.controller.storyboard instantiateViewControllerWithIdentifier:@"SignMessage"];
-    sign.address = address;
+- (void)signMessageWithSignAddressType:(SignAddressType)signAddressType {
+    if (signAddressType == Private) {
+        SignMessageSelectAddressViewController *sign = [self.controller.storyboard instantiateViewControllerWithIdentifier:@"SignMessageSelectAddress"];
+        [sign showAddresses:[BTAddressManager instance].privKeyAddresses];
+        [self.controller.navigationController pushViewController:sign animated:YES];
+        return;
+    }
+    
+    self.path = signAddressType == HDExternal ? EXTERNAL_ROOT_PATH : INTERNAL_ROOT_PATH;
+    [[[DialogPassword alloc] initWithDelegate:self] showInWindow:self.controller.view.window];
+}
+
+- (void)onPasswordEntered:(NSString *)password {
+    if ([StringUtil isEmpty:password]) {
+        return;
+    }
+    
+    SignMessageSelectAddressViewController *sign = [self.controller.storyboard instantiateViewControllerWithIdentifier:@"SignMessageSelectAddress"];
+    [sign showHdAddresses:_path password:password];
     [self.controller.navigationController pushViewController:sign animated:YES];
 }
+
 
 @end

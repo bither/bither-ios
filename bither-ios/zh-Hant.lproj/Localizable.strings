@@ -750,3 +750,7 @@
 "localization.language.code" = "zh_TW";
 
 "setting.privacy.policy" = "隱私政策";
+"address_receive" = "收款地址";
+"address_changed" = "找零地址";
+"address_balance" = "餘額 ";
+"address_index" = "序號: ";

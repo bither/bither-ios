@@ -8,9 +8,12 @@
 
 #import <UIKit/UIKit.h>
 #import "BTAddress.h"
+#import "BTHDAccountAddress.h"
 
 @interface SignMessageViewController : UIViewController
+
 @property BTAddress *address;
+@property BTHDAccountAddress *hdAccountAddress;
 
 - (void)showMsg:(NSString *)msg;
 @end

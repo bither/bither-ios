@@ -110,6 +110,8 @@
 		402B83111E62B03200379C39 /* BIP39ZhTWWords.plist in Resources */ = {isa = PBXBuildFile; fileRef = 402B830F1E62B03200379C39 /* BIP39ZhTWWords.plist */; };
 		403753071DBF429000F402A0 /* AdView.m in Sources */ = {isa = PBXBuildFile; fileRef = 403753061DBF429000F402A0 /* AdView.m */; };
 		403753131DC0503700F402A0 /* UIView+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 403753121DC0503700F402A0 /* UIView+Extension.m */; };
+		4040643F1F21B1FB00917F68 /* SignMessageSelectAddressViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4040643E1F21B1FB00917F68 /* SignMessageSelectAddressViewController.m */; };
+		404064421F21B71200917F68 /* SignMessageSelectAddressCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 404064411F21B71200917F68 /* SignMessageSelectAddressCell.m */; };
 		4217A3731951235D00063746 /* Depth.m in Sources */ = {isa = PBXBuildFile; fileRef = 4217A3721951235D00063746 /* Depth.m */; };
 		4217A39019512DC000063746 /* TransactionsUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 4217A38F19512DC000063746 /* TransactionsUtil.m */; };
 		421B037C19495315003A45F1 /* TabButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 421B037B19495315003A45F1 /* TabButton.m */; };
@@ -551,6 +553,10 @@
 		403753061DBF429000F402A0 /* AdView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AdView.m; sourceTree = "<group>"; };
 		403753111DC0503700F402A0 /* UIView+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Extension.h"; sourceTree = "<group>"; };
 		403753121DC0503700F402A0 /* UIView+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Extension.m"; sourceTree = "<group>"; };
+		4040643D1F21B1FB00917F68 /* SignMessageSelectAddressViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignMessageSelectAddressViewController.h; sourceTree = "<group>"; };
+		4040643E1F21B1FB00917F68 /* SignMessageSelectAddressViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignMessageSelectAddressViewController.m; sourceTree = "<group>"; };
+		404064401F21B71200917F68 /* SignMessageSelectAddressCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignMessageSelectAddressCell.h; sourceTree = "<group>"; };
+		404064411F21B71200917F68 /* SignMessageSelectAddressCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignMessageSelectAddressCell.m; sourceTree = "<group>"; };
 		4217A3711951235D00063746 /* Depth.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Depth.h; sourceTree = "<group>"; };
 		4217A3721951235D00063746 /* Depth.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Depth.m; sourceTree = "<group>"; };
 		4217A38E19512DC000063746 /* TransactionsUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TransactionsUtil.h; sourceTree = "<group>"; };
@@ -1157,6 +1163,8 @@
 				0A4206291A494F1000562100 /* SignMessageViewController.m */,
 				0A93B6041A4AA0520081D74D /* VerifyMessageSignatureViewController.h */,
 				0A93B6051A4AA0520081D74D /* VerifyMessageSignatureViewController.m */,
+				4040643D1F21B1FB00917F68 /* SignMessageSelectAddressViewController.h */,
+				4040643E1F21B1FB00917F68 /* SignMessageSelectAddressViewController.m */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -1422,7 +1430,6 @@
 				ACEE7D1A19D3F9F500932B39 /* QRCode */,
 				ACA9D707195410FF002D1E3A /* Resouces */,
 				AC229A6E196A40B500A7FB5E /* sh */,
-				42D9B76B193D6B5B00C85B89 /* Supporting Files */,
 				ACDDDC1119480DE00008A79D /* UIBase */,
 				425408441946A219007AF99C /* Utils */,
 				AC53ABA419D277C1007C095C /* XRandom */,
@@ -1442,6 +1449,7 @@
 				4276CEA6194C20810027D119 /* Localizable.strings */,
 			);
 			name = "Supporting Files";
+			path = ..;
 			sourceTree = "<group>";
 		};
 		42D9B783193D6B5B00C85B89 /* bither-iosTests */ = {
@@ -1481,6 +1489,7 @@
 		AC229A6E196A40B500A7FB5E /* sh */ = {
 			isa = PBXGroup;
 			children = (
+				42D9B76B193D6B5B00C85B89 /* Supporting Files */,
 			);
 			path = sh;
 			sourceTree = "<group>";
@@ -1507,6 +1516,8 @@
 				AC33088D1955668D00D8F621 /* HotAddressListCell.m */,
 				AC33088F19556AB800D8F621 /* HotAddressListSectionHeader.h */,
 				AC33089019556AB800D8F621 /* HotAddressListSectionHeader.m */,
+				404064401F21B71200917F68 /* SignMessageSelectAddressCell.h */,
+				404064411F21B71200917F68 /* SignMessageSelectAddressCell.m */,
 				ACB9B9C4195AD25800019216 /* AddressDetailCell.h */,
 				ACB9B9C5195AD25800019216 /* AddressDetailCell.m */,
 				ACB9B9C7195AD27300019216 /* TransactionCell.h */,
@@ -2106,7 +2117,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		2B9783C3E78BF3B7A4A784B1 /* [CP] Check Pods Manifest.lock */ = {
@@ -2121,7 +2132,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		4268FE14194AA3FD007A4C30 /* ShellScript */ = {
@@ -2179,7 +2190,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		71CAA345256519772492378B /* [CP] Copy Pods Resources */ = {
@@ -2254,7 +2265,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		CEAE2ACDDC013D2C5BF7AFE3 /* [CP] Embed Pods Frameworks */ = {
@@ -2403,6 +2414,7 @@
 				ACDDDC3619483A840008A79D /* UIColor+Util.m in Sources */,
 				AC275EE419B59B0100F1C02F /* BlockCell.m in Sources */,
 				AC454DD51A1DE602000AF4ED /* PinCodeEnterView.m in Sources */,
+				404064421F21B71200917F68 /* SignMessageSelectAddressCell.m in Sources */,
 				AC0135D6194FDCCD00E3BB95 /* HotAddressAddWatchOnlyViewController.m in Sources */,
 				ACB9B9C9195AD27300019216 /* TransactionCell.m in Sources */,
 				AC0135D0194ED8B800E3BB95 /* HotAddressAddViewController.m in Sources */,
@@ -2565,6 +2577,7 @@
 				1BC27056253378BF3E96EBA0 /* DialogEditVanityLength.m in Sources */,
 				DC02BC2D62776189E7335151 /* GroupUtil.m in Sources */,
 				1BC2705059CAA4F55CEFCADB /* PaymentAddressSetting.m in Sources */,
+				4040643F1F21B1FB00917F68 /* SignMessageSelectAddressViewController.m in Sources */,
 				1BC2754DD71C0DC8E65322FC /* DialogFirstRunWarning.m in Sources */,
 				1BC270C71B4F214F2FB09057 /* MonitorHDAccountSetting.m in Sources */,
 				1BC27A2AB7C4C12F353D0C28 /* DialogOldAddressesOfHDAccount.m in Sources */,

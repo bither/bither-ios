@@ -67,6 +67,20 @@
     return self;
 }
 
+- (instancetype)initWithHdAccountAddress:(NSString *)address delegate:(NSObject <DialogAddressQrCodeDelegate> *)delegate {
+    self = [super initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.width + (kButtonSize + kButtonBottomDistance) * 2)];
+    if (self) {
+        self.address = address;
+        self.delegate = delegate;
+        defaults = [UserDefaultsUtil instance];
+        _shareFileName = address;
+        _broderImage = [UIImage imageNamed:@"avatar_for_fancy_qr_code_overlay"];
+        vanityLength = 0;
+        [self firstConfigure];
+    }
+    return self;
+}
+
 - (void)firstConfigure {
     self.backgroundImage = [UIImage imageWithColor:[UIColor colorWithWhite:1 alpha:0]];
     self.bgInsets = UIEdgeInsetsMake(10, 0, 10, 0);

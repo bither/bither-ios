@@ -749,3 +749,8 @@
 "localization.language.code" = "zh_CN";
 
 "setting.privacy.policy" = "隐私政策";
+
+"address_receive" = "收款地址";
+"address_changed" = "找零地址";
+"address_balance" = "余额 ";
+"address_index" = "序号: ";

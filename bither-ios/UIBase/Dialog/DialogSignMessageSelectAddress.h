@@ -9,8 +9,14 @@
 #import "DialogCentered.h"
 #import "BTAddressManager.h"
 
+typedef enum {
+    HDExternal = 0, HDInternal = 1, Private = 2
+} SignAddressType;
+
 @protocol DialogSignMessageSelectAddressDelegate
-- (void)signMessageWithAddress:(BTAddress *)address;
+
+- (void)signMessageWithSignAddressType:(SignAddressType)signAddressType;
+
 @end
 
 @interface DialogSignMessageSelectAddress : DialogCentered
@@ -18,4 +24,5 @@
 - (instancetype)initWithDelegate:(NSObject <DialogSignMessageSelectAddressDelegate> *)delegate;
 
 @property(weak) NSObject <DialogSignMessageSelectAddressDelegate> *delegate;
+
 @end

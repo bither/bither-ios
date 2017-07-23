@@ -21,11 +21,17 @@
 #import "QRCodeThemeUtil.h"
 
 @protocol DialogAddressQrCodeDelegate <NSObject>
+
 - (void)qrCodeThemeChanged:(QRCodeTheme *)theme;
+
 @end
 
 @interface DialogAddressQrCode : DialogCentered
+
 - (instancetype)initWithAddress:(BTAddress *)address delegate:(NSObject <DialogAddressQrCodeDelegate> *)delegate;
 
+- (instancetype)initWithHdAccountAddress:(NSString *)address delegate:(NSObject <DialogAddressQrCodeDelegate> *)delegate;
+
 @property(weak) NSObject <DialogAddressQrCodeDelegate> *delegate;
+
 @end

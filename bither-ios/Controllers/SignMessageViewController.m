@@ -17,6 +17,7 @@
 #import "UserDefaultsUtil.h"
 #import "DialogAddressQrCode.h"
 #import "KeyboardController.h"
+#import "BTAddressManager.h"
 
 @interface SignMessageViewController () <UITextViewDelegate, DialogPasswordDelegate, DialogSignMessageOutputDelegate, ScanQrCodeDelegate, DialogAddressQrCodeDelegate, KeyboardControllerDelegate, UIScrollViewDelegate> {
     CGFloat _tvMinHeight;
@@ -49,11 +50,11 @@
     self.ivArrow.hidden = YES;
     self.ai.hidden = YES;
     self.vOutput.hidden = YES;
-    self.lblAddress.text = [StringUtil formatAddress:self.address.address groupSize:4 lineSize:12];
+    self.lblAddress.text = [StringUtil formatAddress:[self getAddress] groupSize:4 lineSize:12];
     self.sv.delegate = self;
     [self configureAddressFrame];
     [self configureOutputFrame];
-    self.ivQr.image = [QRCodeThemeUtil qrCodeOfContent:self.address.address andSize:self.ivQr.frame.size.width withTheme:[[QRCodeTheme themes] objectAtIndex:[[UserDefaultsUtil instance] getQrCodeTheme]]];
+    self.ivQr.image = [QRCodeThemeUtil qrCodeOfContent:[self getAddress] andSize:self.ivQr.frame.size.width withTheme:[[QRCodeTheme themes] objectAtIndex:[[UserDefaultsUtil instance] getQrCodeTheme]]];
     [self.tvInput becomeFirstResponder];
 }
 
@@ -110,7 +111,14 @@
     self.btnSign.hidden = YES;
     self.tvInput.editable = NO;
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
-        NSString *output = [self.address signMessage:input withPassphrase:password];
+        NSString *output;
+        if (self.hdAccountAddress) {
+            BTHDAccount *hdAccount = [[BTHDAccount alloc] initWithSeedId:self.hdAccountAddress.hdAccountId];
+            BTBIP32Key *key = [hdAccount privateKeyWithPath:self.hdAccountAddress.pathType index:self.hdAccountAddress.index password:password];
+            output = [key.key signMessage:input];
+        } else {
+            output = [self.address signMessage:input withPassphrase:password];
+        }
         dispatch_async(dispatch_get_main_queue(), ^{
             self.tvOutput.text = output;
             self.tvInput.editable = YES;
@@ -164,13 +172,18 @@
 }
 
 - (IBAction)addressPressed:(id)sender {
-    [UIPasteboard generalPasteboard].string = self.address.address;
+    [UIPasteboard generalPasteboard].string = [self getAddress];
     [self showMsg:NSLocalizedString(@"Address copied.", nil)];
 }
 
 - (IBAction)qrPressed:(id)sender {
     [self.view endEditing:YES];
-    DialogAddressQrCode *dialogQr = [[DialogAddressQrCode alloc] initWithAddress:self.address delegate:self];
+    DialogAddressQrCode *dialogQr;
+    if (self.address) {
+        dialogQr = [[DialogAddressQrCode alloc] initWithAddress:self.address delegate:self];
+    } else {
+        dialogQr = [[DialogAddressQrCode alloc] initWithHdAccountAddress:self.hdAccountAddress.address delegate:self];
+    }
     [dialogQr showInWindow:self.view.window];
 }
 
@@ -209,7 +222,7 @@
 }
 
 - (void)qrCodeThemeChanged:(QRCodeTheme *)theme {
-    self.ivQr.image = [QRCodeThemeUtil qrCodeOfContent:self.address.address andSize:self.ivQr.frame.size.width withTheme:theme];
+    self.ivQr.image = [QRCodeThemeUtil qrCodeOfContent:[self getAddress] andSize:self.ivQr.frame.size.width withTheme:theme];
 }
 
 - (IBAction)backPressed:(id)sender {
@@ -226,6 +239,10 @@
     UIEdgeInsets insets = self.sv.contentInset;
     insets.bottom = self.sv.frame.size.height - y;
     self.sv.contentInset = insets;
+}
+
+- (NSString *)getAddress {
+    return self.address ? self.address.address: self.hdAccountAddress.address;
 }
 
 @end
