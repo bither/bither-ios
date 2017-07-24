@@ -343,11 +343,20 @@
 /* Class = "UIButton"; normalTitle = "Generate"; ObjectID = "LrS-g8-zv9"; */
 "LrS-g8-zv9.normalTitle" = "生成";
 
+/* Class = "UIButton"; normalTitle = "Generate"; ObjectID = "rh0-oA-CdB"; */
+"rh0-oA-CdB.normalTitle" = "生成";
+
 /* Class = "UILabel"; text = "Generate New HD Account"; ObjectID = "bUN-jt-wO1"; */
 "bUN-jt-wO1.text" = "生成新的 HD 賬戶";
 
+/* Class = "UILabel"; text = "Generate New HD Account"; ObjectID = "Q9H-Yo-tpY"; */
+"Q9H-Yo-tpY.text" = "生成新的 HD 賬戶";
+
 /* Class = "UIButton"; normalTitle = "Generate Normal Private Keys"; ObjectID = "aa4-oP-TVf"; */
 "aa4-oP-TVf.normalTitle" = "生成普通私鑰";
+
+/* Class = "UIButton"; normalTitle = "Generate Normal Private Keys"; ObjectID = "9md-v4-VRM"; */
+"9md-v4-VRM.normalTitle" = "生成普通私鑰";
 
 /* Class = "UIButton"; normalTitle = "Generate HDM Account"; ObjectID = "tee-1q-g6I"; */
 "tee-1q-g6I.normalTitle" = "生成 HDM 賬戶";
@@ -355,11 +364,20 @@
 /* Class = "UILabel"; text = "You already have an HD account."; ObjectID = "nBS-fJ-qtL"; */
 "nBS-fJ-qtL.text" = "已有 HD 賬戶";
 
+/* Class = "UILabel"; text = "You already have an HD account."; ObjectID = "D7R-wZ-rcL"; */
+"D7R-wZ-rcL.text" = "已有 HD 賬戶";
+
 /* Class = "UIButton"; normalTitle = "HD Account Seed QR Code"; ObjectID = "5p5-q5-NIv"; */
 "5p5-q5-NIv.normalTitle" = "HD 賬戶種子二維碼";
 
+/* Class = "UIButton"; normalTitle = "HD Account Seed QR Code"; ObjectID = "YGh-vd-ka9"; */
+"YGh-vd-ka9.normalTitle" = "HD 賬戶種子二維碼";
+
 /* Class = "UIButton"; normalTitle = "HD Account Seed Phrase"; ObjectID = "Ces-kP-XIs"; */
 "Ces-kP-XIs.normalTitle" = "HD 賬戶密語";
+
+/* Class = "UIButton"; normalTitle = "HD Account Seed Phrase"; ObjectID = "DFM-n8-9tj"; */
+"DFM-n8-9tj.normalTitle" = "HD 賬戶密語";
 
 /* Class = "UILabel"; text = "Generate Normal Private Keys"; ObjectID = "R90-Bo-e0X"; */
 "R90-Bo-e0X.text" = "生成普通私鑰";
