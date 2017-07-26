@@ -1430,6 +1430,7 @@
 				ACEE7D1A19D3F9F500932B39 /* QRCode */,
 				ACA9D707195410FF002D1E3A /* Resouces */,
 				AC229A6E196A40B500A7FB5E /* sh */,
+				42D9B76B193D6B5B00C85B89 /* Supporting Files */,
 				ACDDDC1119480DE00008A79D /* UIBase */,
 				425408441946A219007AF99C /* Utils */,
 				AC53ABA419D277C1007C095C /* XRandom */,
@@ -1449,7 +1450,6 @@
 				4276CEA6194C20810027D119 /* Localizable.strings */,
 			);
 			name = "Supporting Files";
-			path = ..;
 			sourceTree = "<group>";
 		};
 		42D9B783193D6B5B00C85B89 /* bither-iosTests */ = {
@@ -1489,7 +1489,6 @@
 		AC229A6E196A40B500A7FB5E /* sh */ = {
 			isa = PBXGroup;
 			children = (
-				42D9B76B193D6B5B00C85B89 /* Supporting Files */,
 			);
 			path = sh;
 			sourceTree = "<group>";
