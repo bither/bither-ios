@@ -23,7 +23,8 @@
 #define BITHER_GET_COOKIE_URL @"api/v1/cookie"
 #define BITHER_GET_ONE_SPVBLOCK_API @"api/v2/block/spv/one"
 #define BITHER_IN_SIGNATURES_API  @"api/v1/address/%@/insignature/%d"
-
+#define BCC_BROADCAST @"https://bitpie.songchenwen.com/api/v1/bcc/broadcast"
+#define BCC_HAS_ADDRESS @"https://bitpie.songchenwen.com/api/v1/bcc/has/address/%@"
 
 #define BITHER_Q_MYTRANSACTIONS @"api/v1/address/%@/transaction"
 #define BITHER_ERROR_API  @"api/v1/error"
