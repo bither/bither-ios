@@ -18,17 +18,18 @@
 #import "BTTxBuilder.h"
 #import "BTTxProvider.h"
 #import "ObtainBccMonitoredDetailViewController.h"
+#import "UserDefaultsUtil.h"
 
 typedef enum {
-    SectionHD = 0, SectionHdMonitored = 1, SectionHDM = 2, SectionPrivate = 3, SectionWatchOnly = 4
+    SectionHD = 0, SectionHdMonitored = 1, SectionPrivate = 2, SectionWatchOnly = 3
 } SectionType;
 
 @interface ObtainBccViewController () <UITableViewDataSource, UITableViewDelegate, SectionHeaderPressedDelegate, SendDelegate> {
     NSMutableArray *_privateKeys;
     NSMutableArray *_watchOnlys;
-    NSMutableArray *_hdms;
     NSMutableIndexSet *_foldedSections;
     DialogProgress *dp;
+    NSUInteger _sections;
 }
 
 @property (weak, nonatomic) IBOutlet UIView *vTopBar;
@@ -46,12 +47,8 @@ typedef enum {
     dp = [[DialogProgress alloc] initWithMessage:NSLocalizedString(@"Please wait…", nil)];
     _privateKeys = [NSMutableArray new];
     _watchOnlys = [NSMutableArray new];
-    _hdms = [NSMutableArray new];
     _foldedSections = [NSMutableIndexSet indexSet];
     [self.tableView reloadData];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receivedNotifications) name:BitherBalanceChangedNotification object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receivedNotifications) name:BTPeerManagerLastBlockChangedNotification object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receivedNotifications) name:BitherMarketUpdateNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reload) name:BTAddressManagerIsReady object:nil];
 }
 
@@ -66,16 +63,8 @@ typedef enum {
     }
     [_privateKeys removeAllObjects];
     [_watchOnlys removeAllObjects];
-    [_hdms removeAllObjects];
     [_privateKeys addObjectsFromArray:[[BTAddressManager instance] privKeyAddresses]];
     [_watchOnlys addObjectsFromArray:[[BTAddressManager instance] watchOnlyAddresses]];
-    if ([BTAddressManager instance].hasHDMKeychain) {
-        [_hdms addObjectsFromArray:[BTAddressManager instance].hdmKeychain.addresses];
-    }
-    [self.tableView reloadData];
-}
-
-- (void)receivedNotifications {
     [self.tableView reloadData];
 }
 
@@ -88,28 +77,54 @@ typedef enum {
             return 1;
         case SectionHdMonitored:
             return 1;
-        case SectionHDM:
-            return _hdms.count;
         case SectionPrivate:
             return _privateKeys.count;
         case SectionWatchOnly:
             return _watchOnlys.count;
-        default:
-            return 0;
     }
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     ObtainBccCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ObtainBccCell" forIndexPath:indexPath];
-    BTAddress *address = [self getBTAddressForIndexPath:indexPath];
-    
-    if ([address isMemberOfClass:[BTHDAccount class]]) {
-        BTHDAccount *hdAccount = (BTHDAccount *) address;
-        [cell setAddress:address bccBalance:[BTTxBuilder getAmount:[[BTHDAccountAddressProvider instance] getPrevCanSplitOutsByHDAccount:(int)[hdAccount getHDAccountId]]] isShowLine:false];
-    } else {
-        [cell setAddress:address bccBalance:[BTTxBuilder getAmount:[[BTTxProvider instance] getPrevOutsWithAddress:address.address]] isShowLine:true];
+    BTAddress *address;
+    NSString *getIsObtainKey;
+    BOOL isShowLine;
+    BOOL isLastSection = indexPath.section == (_sections - 1);
+    switch ([self sectionTypeForIndex:indexPath.section]) {
+        case SectionHD:
+            address = [BTAddressManager instance].hdAccountHot;
+            getIsObtainKey = @"HDAccountHot";
+            isShowLine = isLastSection;
+            break;
+        case SectionHdMonitored:
+            getIsObtainKey = @"HDMonitored";
+            address = [BTAddressManager instance].hdAccountMonitored;
+            isShowLine = isLastSection;
+            break;
+        case SectionPrivate:
+            address = [_privateKeys objectAtIndex:indexPath.row];
+            getIsObtainKey = address.address;
+            isShowLine = isLastSection || indexPath.row != (_privateKeys.count - 1);
+            break;
+        case SectionWatchOnly:
+            address = [_watchOnlys objectAtIndex:indexPath.row];
+            getIsObtainKey = address.address;
+            isShowLine = isLastSection || indexPath.row != (_watchOnlys.count - 1);
+            break;
     }
     
+    if ([[UserDefaultsUtil instance] getIsObtainBccForKey:getIsObtainKey]) {
+        [cell setObtainedForAddress:address isShowLine:isShowLine];
+        cell.userInteractionEnabled = NO;
+    } else {
+        if ([address isMemberOfClass:[BTHDAccount class]]) {
+            BTHDAccount *hdAccount = (BTHDAccount *) address;
+            [cell setAddress:address bccBalance:[BTTxBuilder getAmount:[[BTHDAccountAddressProvider instance] getPrevCanSplitOutsByHDAccount:(int)[hdAccount getHDAccountId]]] isShowLine:isShowLine];
+        } else {
+            [cell setAddress:address bccBalance:[BTTxBuilder getAmount:[[BTTxProvider instance] getPrevOutsWithAddress:address.address]] isShowLine:isShowLine];
+        }
+        cell.userInteractionEnabled = YES;
+    }
     return cell;
 }
 
@@ -127,19 +142,22 @@ typedef enum {
     if (_watchOnlys.count > 0) {
         sections++;
     }
-    if (_hdms.count > 0) {
-        sections++;
-    }
+    _sections = sections;
     return sections;
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
     SectionType type = [self sectionTypeForIndex:section];
-    return [[HotAddressListSectionHeader alloc] initWithSize:CGSizeMake(tableView.frame.size.width, tableView.sectionHeaderHeight) isHD:type == SectionHD isHdMonitored:type == SectionHdMonitored isHDM:type == SectionHDM isPrivate:type == SectionPrivate section:section delegate:self];
+    return [[HotAddressListSectionHeader alloc] initWithSize:CGSizeMake(tableView.frame.size.width, tableView.sectionHeaderHeight) isHD:type == SectionHD isHdMonitored:type == SectionHdMonitored isHDM:false isPrivate:type == SectionPrivate section:section delegate:self];
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     BTAddress *address = [self getBTAddressForIndexPath:indexPath];
+    if (!address.isSyncComplete) {
+        [self showMsg:NSLocalizedString(@"no_sync_complete", nil)];
+        [tableView deselectRowAtIndexPath:indexPath animated:YES];
+        return;
+    }
     UIViewController *vc;
     SectionType sectionType = [self sectionTypeForIndex:indexPath.section];
     if (sectionType == SectionHdMonitored || sectionType == SectionWatchOnly) {
@@ -183,9 +201,6 @@ typedef enum {
         case SectionWatchOnly:
             address = [_watchOnlys objectAtIndex:indexPath.row];
             break;
-        case SectionHDM:
-            address = [_hdms objectAtIndex:indexPath.row];
-            break;
     }
     return address;
 }
@@ -210,9 +225,6 @@ typedef enum {
     }
     if (section == [self sectionIndexForType:SectionHdMonitored]) {
         return SectionHdMonitored;
-    }
-    if (section == [self sectionIndexForType:SectionHDM]) {
-        return SectionHDM;
     }
     if (section == [self sectionIndexForType:SectionPrivate]) {
         return SectionPrivate;
@@ -241,19 +253,6 @@ typedef enum {
         }
         return index;
     }
-    if (type == SectionHDM) {
-        if (_hdms.count == 0) {
-            return -1;
-        }
-        NSUInteger index = 0;
-        if ([BTAddressManager instance].hasHDAccountHot) {
-            index++;
-        }
-        if ([BTAddressManager instance].hasHDAccountMonitored) {
-            index++;
-        }
-        return index;
-    }
     if (type == SectionPrivate) {
         if (_privateKeys.count == 0) {
             return -1;
@@ -263,9 +262,6 @@ typedef enum {
             index++;
         }
         if ([BTAddressManager instance].hasHDAccountMonitored) {
-            index++;
-        }
-        if (_hdms.count > 0) {
             index++;
         }
         return index;
@@ -281,9 +277,6 @@ typedef enum {
         if ([BTAddressManager instance].hasHDAccountMonitored) {
             index++;
         }
-        if (_hdms.count > 0) {
-            index++;
-        }
         if (_privateKeys.count > 0) {
             index++;
         }
@@ -292,14 +285,21 @@ typedef enum {
     return -1;
 }
 
+- (void)sendSuccessed:(BTTx *)tx {
+    [self showMsg:NSLocalizedString(@"get_success", nil)];
+    [self.tableView reloadData];
+}
+
+- (void)showMsg:(NSString *)msg {
+    [self showBannerWithMessage:msg belowView:self.vTopBar];
+}
+
+
 - (IBAction)backPressed:(id)sender {
     [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void)dealloc {
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:BitherBalanceChangedNotification object:nil];
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:BTPeerManagerLastBlockChangedNotification object:nil];
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:BitherMarketUpdateNotification object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:BTAddressManagerIsReady object:nil];
 }
 

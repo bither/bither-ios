@@ -73,6 +73,7 @@
         return;
     }
     
+    self.btnObtain.enabled = NO;
     [dp showInWindow:self.view.window completion:^{
         [[BitherApi instance] getHasBccAddress:[self getToAddress] callback:^(NSDictionary *dict) {
             NSNumber *numResult = dict[@"result"];
@@ -107,22 +108,10 @@
                     }
                     
                     if ([self.btAddress isMemberOfClass:[BTHDAccount class]]) {
-                        __block NSString *addressBlock = toAddress;
-                        dispatch_async(dispatch_get_main_queue(), ^{
-                            [dp dismissWithCompletion:^{
-                                [dp changeToMessage:NSLocalizedString(@"Please wait…", nil)];
-                                [[[DialogHDSendTxConfirm alloc] initWithTx:tx to:addressBlock delegate:self unitName:@"BCC"] showInWindow:self.view.window];
-                            }];
-                        });
+                        [self showDialogHDSendTxConfirmForTx:tx];
                     } else {
                         if ([self.btAddress signTransaction:tx withPassphrase:self.tfPassword.text]) {
-                            __block NSString *addressBlock = toAddress;
-                            dispatch_async(dispatch_get_main_queue(), ^{
-                                [dp dismissWithCompletion:^{
-                                    [dp changeToMessage:NSLocalizedString(@"Please wait…", nil)];
-                                    [[[DialogHDSendTxConfirm alloc] initWithTx:tx to:addressBlock delegate:self unitName:@"BCC"] showInWindow:self.view.window];
-                                }];
-                            });
+                            [self showDialogHDSendTxConfirmForTx:tx];
                         } else {
                             [self showPasswordWrong];
                         }
@@ -136,12 +125,24 @@
     }];
 }
 
+- (void)showDialogHDSendTxConfirmForTx:(BTTx *)tx {
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [dp dismissWithCompletion:^{
+            [dp changeToMessage:NSLocalizedString(@"Please wait…", nil)];
+            DialogHDSendTxConfirm *dialogHDSendTxConfirm = [[DialogHDSendTxConfirm alloc] initWithTx:tx to:[self getToAddress] delegate:self unitName:@"BCC"];
+            dialogHDSendTxConfirm.touchOutSideToDismiss = false;
+            [dialogHDSendTxConfirm showInWindow:self.view.window];
+        }];
+    });
+}
+
 - (void)onSendTxConfirmed:(BTTx *)tx {
     [dp changeToMessage:NSLocalizedString(@"Please wait…", nil) completion:^{
         [dp showInWindow:self.view.window completion:^{
             [[BitherApi instance] postBccBroadcast:tx callback:^(NSDictionary *dict) {
                 NSNumber *numResult = dict[@"result"];
                 if (numResult.intValue > 0) {
+                    [self saveIsObtainBcc];
                     [dp dismissWithCompletion:^{
                         [self.navigationController popViewControllerAnimated:YES];
                         if (self.sendDelegate && [self.sendDelegate respondsToSelector:@selector(sendSuccessed:)]) {
@@ -161,6 +162,18 @@
     }];
 }
 
+- (void)onSendTxCanceled {
+    self.btnObtain.enabled = YES;
+}
+
+- (void)saveIsObtainBcc {
+    if ([self.btAddress isMemberOfClass:[BTHDAccount class]]) {
+        [[UserDefaultsUtil instance] setIsObtainBccKey:@"HDAccountHot" value:@"1"];
+    } else {
+        [[UserDefaultsUtil instance] setIsObtainBccKey:self.btAddress.address value:@"1"];
+    }
+}
+
 - (void)showSendFailed {
     [self showMsg:NSLocalizedString(@"Send failed.", nil)];
 }
@@ -173,11 +186,13 @@
     if ([NSThread isMainThread]) {
         [dp dismissWithCompletion:^{
             [self showBannerWithMessage:msg belowView:self.vTopBar];
+            self.btnObtain.enabled = YES;
         }];
     } else {
         dispatch_async(dispatch_get_main_queue(), ^{
             [dp dismissWithCompletion:^{
                 [self showBannerWithMessage:msg belowView:self.vTopBar];
+                self.btnObtain.enabled = YES;
             }];
         });
     }

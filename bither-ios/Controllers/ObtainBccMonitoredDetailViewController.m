@@ -68,7 +68,6 @@
     }
 }
 
-
 - (IBAction)obtainPressed:(id)sender {
     NSString *checkValues = [self checkValues];
     if (checkValues) {
@@ -76,38 +75,54 @@
         return;
     }
     
-    [self hideKeyboard];
+    self.btnObtain.enabled = NO;
     [dp showInWindow:self.view.window completion:^{
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
-            u_int64_t value = self.amount;
-            NSError *error;
-            NSString *toAddress = [self getToAddress];
-            BTTx *tx;
-            if ([self.btAddress isMemberOfClass:[BTHDAccount class]]) {
-                tx = [(BTHDAccount *)self.btAddress newTxToAddress:toAddress withAmount:value andError:&error andChangeAddress:toAddress coin:BCC];
-            } else {
-                tx = [self.btAddress txForAmounts:@[@(value)] andAddress:@[toAddress] andChangeAddress:toAddress andError:&error coin:BCC];
+        [[BitherApi instance] getHasBccAddress:[self getToAddress] callback:^(NSDictionary *dict) {
+            NSNumber *numResult = dict[@"result"];
+            BOOL result = numResult.intValue > 0;
+            if (!result) {
+                [self showMsg:NSLocalizedString(@"not_bitpie_bcc_address", nil)];
+                return;
             }
-
-            if (error) {
-                NSString *msg = [TransactionsUtil getCompleteTxForError:error];
-                [self showMsg:msg];
-            } else {
-                if (!tx) {
-                    [self showSendFailed];
-                    return;
-                }
-                self.tx = tx;
-                __block NSString *addressBlock = toAddress;
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    self.btnObtain.enabled = NO;
-                    [dp dismissWithCompletion:^{
-                        [dp changeToMessage:NSLocalizedString(@"Please wait…", nil)];
-                        [[[DialogHDSendTxConfirm alloc] initWithTx:tx to:addressBlock delegate:self unitName:@"BCC"] showInWindow:self.view.window];
-                    }];
+            
+            [self hideKeyboard];
+            [dp showInWindow:self.view.window completion:^{
+                dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+                    u_int64_t value = self.amount;
+                    NSError *error;
+                    NSString *toAddress = [self getToAddress];
+                    BTTx *tx;
+                    if ([self.btAddress isMemberOfClass:[BTHDAccount class]]) {
+                        tx = [(BTHDAccount *)self.btAddress newTxToAddress:toAddress withAmount:value andError:&error andChangeAddress:toAddress coin:BCC];
+                    } else {
+                        tx = [self.btAddress txForAmounts:@[@(value)] andAddress:@[toAddress] andChangeAddress:toAddress andError:&error coin:BCC];
+                    }
+                    
+                    if (error) {
+                        NSString *msg = [TransactionsUtil getCompleteTxForError:error];
+                        [self showMsg:msg];
+                    } else {
+                        if (!tx) {
+                            [self showSendFailed];
+                            return;
+                        }
+                        self.tx = tx;
+                        __block NSString *addressBlock = toAddress;
+                        dispatch_async(dispatch_get_main_queue(), ^{
+                            [dp dismissWithCompletion:^{
+                                [dp changeToMessage:NSLocalizedString(@"Please wait…", nil)];
+                                DialogHDSendTxConfirm *dialogHDSendTxConfirm = [[DialogHDSendTxConfirm alloc] initWithTx:tx to:addressBlock delegate:self unitName:@"BCC"];
+                                dialogHDSendTxConfirm.touchOutSideToDismiss = false;
+                                [dialogHDSendTxConfirm showInWindow:self.view.window];
+                            }];
+                        });
+                    }
                 });
-            }
-        });
+            }];
+        } andErrorCallBack:^(NSOperation *errorOp, NSError *error) {
+            [self showMsg:NSLocalizedString(@"Network failure.", nil)];
+            return;
+        }];
     }];
 }
 
@@ -172,6 +187,7 @@
             [[BitherApi instance] postBccBroadcast:self.tx callback:^(NSDictionary *dict) {
                 NSNumber *numResult = dict[@"result"];
                 if (numResult.intValue > 0) {
+                    [self saveIsObtainBcc];
                     [dp dismissWithCompletion:^{
                         [self.navigationController popViewControllerAnimated:YES];
                         if (self.sendDelegate && [self.sendDelegate respondsToSelector:@selector(sendSuccessed:)]) {
@@ -191,6 +207,14 @@
             }];
         }];
     }];
+}
+
+- (void)saveIsObtainBcc {
+    if ([self.btAddress isMemberOfClass:[BTHDAccount class]]) {
+        [[UserDefaultsUtil instance] setIsObtainBccKey:@"HDMonitored" value:@"1"];
+    } else {
+        [[UserDefaultsUtil instance] setIsObtainBccKey:self.btAddress.address value:@"1"];
+    }
 }
 
 - (IBAction)scanPressed:(id)sender {
@@ -261,11 +285,13 @@
     if ([NSThread isMainThread]) {
         [dp dismissWithCompletion:^{
             [self showBannerWithMessage:msg belowView:self.vTopBar];
+            self.btnObtain.enabled = YES;
         }];
     } else {
         dispatch_async(dispatch_get_main_queue(), ^{
             [dp dismissWithCompletion:^{
                 [self showBannerWithMessage:msg belowView:self.vTopBar];
+                self.btnObtain.enabled = YES;
             }];
         });
     }

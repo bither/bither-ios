@@ -11,6 +11,8 @@
 
 @interface ObtainBccCell : UITableViewCell
 
+- (void)setObtainedForAddress:(BTAddress *)address isShowLine:(BOOL)isShowLine;
+
 - (void)setAddress:(BTAddress *)address bccBalance:(uint64_t)balance isShowLine:(BOOL)isShowLine;
 
 @end

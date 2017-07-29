@@ -24,6 +24,12 @@
 
 @implementation ObtainBccCell
 
+- (void)setObtainedForAddress:(BTAddress *)address isShowLine:(BOOL)isShowLine {
+    self.lblAddress.text = [StringUtil formatAddress:address.address groupSize:4 lineSize:20];
+    self.lblBalance.text = NSLocalizedString(@"you_already_obtained_bcc", nil);
+    [self.lblLine setHidden:!isShowLine];
+}
+
 - (void)setAddress:(BTAddress *)address bccBalance:(uint64_t)balance isShowLine:(BOOL)isShowLine {
     self.lblAddress.text = [StringUtil formatAddress:address.address groupSize:4 lineSize:20];
     NSString *balanceTitleStr = NSLocalizedString(@"obtainable_bcc", nil);

@@ -762,3 +762,8 @@
 "obtainable_bcc" = "可獲得: ";
 "not_bitpie_bcc_address" = "不是比特派BCC地址";
 "you_do_not_have_obtainable_bcc" = "您沒有可獲得的BCC";
+"no_private_key"="請先導入私鑰";
+"you_already_obtained_bcc" = "您已经获得过BCC";
+"get_success" = "獲得成功";
+"please_firstly_sync_to_block_no" = "請先同步到塊%lu";
+"no_sync_complete" = "請稍候，交易暫未同步完成！";

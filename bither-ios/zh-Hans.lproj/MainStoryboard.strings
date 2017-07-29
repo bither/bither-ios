@@ -435,8 +435,8 @@
 /* Class = "UILabel"; text = "Balance:"; ObjectID = "3TU-hn-ytB"; */
 "3TU-hn-ytB.text" = "余额:";
 
-/* Class = "UILabel"; text = "Obtain to Bitpie BCC address"; ObjectID = "45g-ra-PPL"; */
-"45g-ra-PPL.text" = "获得到比特派BCC地址";
+/* Class = "UILabel"; text = "Bitpie BCC address"; ObjectID = "45g-ra-PPL"; */
+"45g-ra-PPL.text" = "比特派BCC地址";
 
 /* Class = "IBUITextField"; placeholder = "Bitpie BCC address"; ObjectID = "d0K-dD-qqM"; */
 "d0K-dD-qqM.placeholder" = "比特派BCC地址";
@@ -450,8 +450,8 @@
 /* Class = "UIButton"; normalTitle = "Obtain"; ObjectID = "Ydi-yn-JKG"; */
 "Ydi-yn-JKG.normalTitle" = "获得";
 
-/* Class = "UILabel"; text = "Obtain to Bitpie BCC address"; ObjectID = "Qjw-My-urU"; */
-"Qjw-My-urU.text" = "获得到比特派BCC地址";
+/* Class = "UILabel"; text = "Bitpie BCC address"; ObjectID = "Qjw-My-urU"; */
+"Qjw-My-urU.text" = "比特派BCC地址";
 
 /* Class = "IBUITextField"; placeholder = "Bitpie BCC address"; ObjectID = "LQc-Sd-WZK"; */
 "LQc-Sd-WZK.placeholder" = "比特派BCC地址";

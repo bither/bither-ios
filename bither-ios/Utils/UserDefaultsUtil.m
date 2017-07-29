@@ -54,6 +54,8 @@
 
 #define UPDATE_CODE @"update_code"
 
+#define IS_OBTAIN_BCC @"is_obtain_bcc"
+
 static UserDefaultsUtil *userDefaultsUtil;
 
 NSUserDefaults *userDefaults;
@@ -437,5 +439,29 @@ NSUserDefaults *userDefaults;
         return -1;
     }
 }
+
+- (void)setIsObtainBccKey:(NSString *)key value:(NSString *)value {
+    NSDictionary *oldDict = [userDefaults objectForKey:IS_OBTAIN_BCC];
+    NSMutableDictionary *newDict;
+    if (!oldDict) {
+        newDict = [NSMutableDictionary new];
+    } else {
+        newDict = [NSMutableDictionary dictionaryWithDictionary:oldDict];
+    }
+    [newDict setValue:value forKey:key];
+    [userDefaults setObject:newDict forKey:IS_OBTAIN_BCC];
+    [userDefaults synchronize];
+}
+
+- (BOOL)getIsObtainBccForKey:(NSString *)key {
+    NSDictionary *dict = [userDefaults objectForKey:IS_OBTAIN_BCC];
+    if (!dict || ![dict.allKeys containsObject:key]) {
+        return NO;
+    }
+    
+    NSString *value = dict[key];
+    return [value isEqualToString:@"1"];
+}
+
 
 @end
