@@ -64,4 +64,5 @@
 + (Setting *)getTotalBalanceHideSetting;
 
 + (Setting *)getApiConfigSetting;
+
 @end

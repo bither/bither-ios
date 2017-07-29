@@ -436,6 +436,30 @@
 /* Class = "UILabel"; text = "Balance:"; ObjectID = "3TU-hn-ytB"; */
 "3TU-hn-ytB.text" = "余额:";
 
+/* Class = "UILabel"; text = "Obtain to Bitpie BCC address"; ObjectID = "45g-ra-PPL"; */
+"45g-ra-PPL.text" = "獲得到比特派BCC地址";
+
+/* Class = "IBUITextField"; placeholder = "Bitpie BCC address"; ObjectID = "d0K-dD-qqM"; */
+"d0K-dD-qqM.placeholder" = "比特派BCC地址";
+
+/* Class = "IBUILabel"; text = "Password"; ObjectID = "HJ3-KO-3T0"; */
+"HJ3-KO-3T0.text" = "密碼";
+
+/* Class = "IBUITextField"; placeholder = "Password"; ObjectID = "4BE-Dt-Z9g"; */
+"4BE-Dt-Z9g.placeholder" = "密碼";
+
+/* Class = "UIButton"; normalTitle = "Obtain"; ObjectID = "Ydi-yn-JKG"; */
+"Ydi-yn-JKG.normalTitle" = "獲得";
+
+/* Class = "UILabel"; text = "Obtain to Bitpie BCC address"; ObjectID = "Qjw-My-urU"; */
+"Qjw-My-urU.text" = "獲得到比特派BCC地址";
+
+/* Class = "IBUITextField"; placeholder = "Bitpie BCC address"; ObjectID = "LQc-Sd-WZK"; */
+"LQc-Sd-WZK.placeholder" = "比特派BCC地址";
+
+/* Class = "UIButton"; normalTitle = "Obtain"; ObjectID = "k22-fr-QCR"; */
+"k22-fr-QCR.normalTitle" = "獲得";
+
 "lQn-Ih-2qB.text" = "普通私鑰不屬於 HD 賬戶.\n需要單獨備份.";
 
 "huo-Ni-Mqw.text" = "普通私鑰不屬於 HD 賬戶.\n需要單獨備份.";

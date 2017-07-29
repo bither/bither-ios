@@ -11,8 +11,6 @@
 #import "UnitUtil.h"
 #import "UIColor+Util.h"
 
-#define kPadding (5)
-#define kMargin (15)
 #define kBlackColor (0x333333)
 #define kRedColor (0xE13A41)
 
@@ -45,5 +43,7 @@
     self.lblAddress.text = [StringUtil formatAddress:address groupSize:4 lineSize:20];
     self.lblIndex.text = [NSString stringWithFormat:@"%@%ld", NSLocalizedString(@"address_index", nil), (long)index];
 }
+
+
 
 @end

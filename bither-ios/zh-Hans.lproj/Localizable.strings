@@ -181,6 +181,8 @@
 /* No comment provided by engineer. */
 "Scan Bitcoin Address" = "扫描比特币地址";
 
+"Scan Bitpie Bitcoin Cash Address" = "扫描比特派BCC地址";
+
 /* No comment provided by engineer. */
 "Scan Bither Cold to sign" = "扫描冷钱包完成签名";
 
@@ -754,3 +756,9 @@
 "address_changed" = "找零地址";
 "address_balance" = "余额 ";
 "address_index" = "序号: ";
+
+// Bcc Obtain
+"obtain_bcc_setting_name" = "获得 BCC";
+"obtainable_bcc" = "可获得: ";
+"not_bitpie_bcc_address" = "不是比特派BCC地址";
+"you_do_not_have_obtainable_bcc" = "您没有可获得的BCC";

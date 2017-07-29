@@ -42,6 +42,7 @@
 #import "UIBaseUtil.h"
 #import "IOS7ContainerViewController.h"
 #import "PaymentAddressSetting.h"
+#import "ObtainBccSetting.h"
 
 @implementation Setting
 
@@ -695,6 +696,10 @@ static Setting *ApiConfigSetting;
     }
     if ([[BTSettings instance] getAppMode] == HOT && [BTHDMBid getHDMBidFromDb]) {
         [array addObject:[Setting getHDMServerPasswordResetSetting]];
+    }
+    
+    if ([[BTSettings instance] getAppMode] == HOT) {
+        [array addObject:[ObtainBccSetting getObtainBccSetting]];
     }
     [array addObject:[MessageSigningSetting getMessageSigningSetting]];
     [array addObject:[Setting getPasswordStrengthSetting]];

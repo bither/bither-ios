@@ -115,7 +115,7 @@ EXTERNAL SOURCES:
 
 CHECKOUT OPTIONS:
   Bitheri:
-    :commit: 9433673c79314afb09923343a08179f8f6b7b1b7
+    :commit: 003b1570e85fe410782f63e2fbf2510345b1d800
     :git: https://github.com/bither/bitheri.git
   OpenSSL:
     :commit: b7ff9ed0245e2b5b1a212a1e86131487df4fc518
@@ -136,4 +136,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: 15d31a0ba2c5d53554fc7ba68ac747f9c67128e0
 
-COCOAPODS: 1.1.1
+COCOAPODS: 1.2.1
