@@ -70,6 +70,7 @@
     }
     
     self.btnObtain.enabled = NO;
+    [self hideKeyboard];
     [dp showInWindow:self.view.window completion:^{
         [[BitherApi instance] getHasBccAddress:[self getToAddress] callback:^(NSDictionary *dict) {
             NSNumber *numResult = dict[@"result"];
@@ -79,7 +80,6 @@
                 return;
             }
             
-            [self hideKeyboard];
             dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
                 if (![[BTPasswordSeed getPasswordSeed] checkPassword:self.tfPassword.text]) {
                     [self showPasswordWrong];
