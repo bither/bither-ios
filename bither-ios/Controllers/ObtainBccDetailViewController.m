@@ -226,6 +226,8 @@
         }
     } else {
         [reader vibrate];
+        [self dismissViewControllerAnimated:YES completion:nil];
+        [self showMsg:NSLocalizedString(@"not_bitpie_bcc_address", nil)];
     }
 }
 
