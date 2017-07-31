@@ -43,10 +43,6 @@
     self.lblTitle.text = [NSString stringWithFormat:@"%@%@BCC", NSLocalizedString(@"obtainable_bcc", nil), [UnitUtil stringForAmount:_amount unit:UnitBTC]];
     [self configureTextField:self.tfAddress];
     [self configureTextField:self.tfPassword];
-    UIImageView *ivSendQr = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"unsigned_transaction_button_icon"]];
-    CGFloat ivSendQrMargin = (self.btnObtain.frame.size.height - kSendButtonQrIconSize) / 2;
-    ivSendQr.frame = CGRectMake(self.btnObtain.frame.size.width - kSendButtonQrIconSize - ivSendQrMargin, ivSendQrMargin, kSendButtonQrIconSize, kSendButtonQrIconSize);
-    [self.btnObtain addSubview:ivSendQr];
     dp = [[DialogProgressChangable alloc] initWithMessage:NSLocalizedString(@"Please wait…", nil)];
     dp.touchOutSideToDismiss = NO;
 }
