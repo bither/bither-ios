@@ -67,9 +67,10 @@
 }
 
 - (void)firstConfigure {
+    BitcoinUnit unit = [_unitName isEqualToString:@"BCC"] ? UnitBTC : [UnitUtil unit];
     NSString *toAddress = _toAddress;
-    NSString *amountString = [UnitUtil stringForAmount:[_tx amountSentTo:_toAddress]];
-    NSString *feeString = [UnitUtil stringForAmount:_tx.feeForTransaction];
+    NSString *amountString = [UnitUtil stringForAmount:[_tx amountSentTo:_toAddress] unit:unit];
+    NSString *feeString = [UnitUtil stringForAmount:_tx.feeForTransaction unit:unit];
 
     UILabel *lblPayto = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, kLabelHeight)];
     lblPayto.font = [UIFont systemFontOfSize:kLabelFontSize];

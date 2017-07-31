@@ -33,7 +33,7 @@
 - (void)setAddress:(BTAddress *)address bccBalance:(uint64_t)balance isShowLine:(BOOL)isShowLine {
     self.lblAddress.text = [StringUtil formatAddress:address.address groupSize:4 lineSize:20];
     NSString *balanceTitleStr = NSLocalizedString(@"obtainable_bcc", nil);
-    NSString *balanceStr = [NSString stringWithFormat:@"%@%@BCC", balanceTitleStr, [UnitUtil stringForAmount:balance]];
+    NSString *balanceStr = [NSString stringWithFormat:@"%@%@BCC", balanceTitleStr, [UnitUtil stringForAmount:balance unit:UnitBTC]];
     NSMutableAttributedString *attrStr = [[NSMutableAttributedString alloc] initWithString:balanceStr];
     [attrStr addAttribute:NSForegroundColorAttributeName value:[UIColor parseColor:kRedColor] range:NSMakeRange(0, balanceStr.length)];
     [attrStr addAttribute:NSForegroundColorAttributeName value:[UIColor parseColor:kBlackColor] range:NSMakeRange(0, balanceTitleStr.length)];

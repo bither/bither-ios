@@ -40,7 +40,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.lblTitle.text = [NSString stringWithFormat:@"%@%@BCC", NSLocalizedString(@"obtainable_bcc", nil), [UnitUtil stringForAmount:_amount]];
+    self.lblTitle.text = [NSString stringWithFormat:@"%@%@BCC", NSLocalizedString(@"obtainable_bcc", nil), [UnitUtil stringForAmount:_amount unit:UnitBTC]];
     [self configureTextField:self.tfAddress];
     [self configureTextField:self.tfPassword];
     UIImageView *ivSendQr = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"unsigned_transaction_button_icon"]];

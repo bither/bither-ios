@@ -57,4 +57,6 @@
 
 + (void)stringWithSymbolForAmount:(int64_t)amount source:(NSMutableAttributedString *)str;
 
++ (BitcoinUnit)unit;
+
 @end
