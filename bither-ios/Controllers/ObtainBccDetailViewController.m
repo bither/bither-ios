@@ -258,7 +258,7 @@
     }
     
     if (_amount <= 0) {
-        return NSLocalizedString(@"you_do_not_have_obtainable_BBC", nil);
+        return NSLocalizedString(@"you_do_not_have_obtainable_bcc", nil);
     }
     return nil;
 }
