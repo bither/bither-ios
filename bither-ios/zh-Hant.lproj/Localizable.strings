@@ -760,7 +760,7 @@
 // Bcc Obtainable
 "obtain_bcc_setting_name" = "獲得 BCC";
 "obtainable_bcc" = "可獲得: ";
-"not_bitpie_bcc_address" = "不是比特派BCC地址";
+"not_bitpie_bcc_address" = "僅支持發往比特派BCC地址";
 "you_do_not_have_obtainable_bcc" = "您沒有可獲得的BCC";
 "no_private_key"="請先導入私鑰";
 "you_already_obtained_bcc" = "您已经获得过BCC";
