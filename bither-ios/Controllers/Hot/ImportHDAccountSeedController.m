@@ -33,6 +33,7 @@
 #import "DialogCentered.h"
 #import "DialogWithActions.h"
 #import "AppDelegate.h"
+#import "BTWordsTypeManager.h"
 
 
 #define kTextFieldHorizontalMargin (10)
@@ -41,6 +42,7 @@
 #define kTextFieldHeight (35)
 #define kTextFieldHorizontalMargin (10)
 #define WORD_COUNT 24
+#define kZHTW_WORDS @"BIP39ZhTWWords"
 
 
 @interface ImportHDAccountSeedController () <UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout
@@ -55,12 +57,17 @@
 @property(weak, nonatomic) IBOutlet UIButton *btnDone;
 @property(weak, nonatomic) IBOutlet UITextField *tfKey;
 @property KeyboardController *kc;
+@property(nonatomic, strong) BTBIP39 *bTBIP39;
+
 @end
 
 @implementation ImportHDAccountSeedController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    [self.view bringSubviewToFront:self.topBar];
+//    self.tfKey.keyboardType = UIKeyboardTypeASCIICapable;
     UICollectionViewFlowLayout *layout = [UICollectionViewFlowLayout new];
     layout.sectionInset = UIEdgeInsetsMake(6, 4, 0, 4);
     layout.minimumInteritemSpacing = 0;
@@ -118,7 +125,7 @@
     tf.leftViewMode = UITextFieldViewModeAlways;
     tf.rightViewMode = UITextFieldViewModeAlways;
     tf.enablesReturnKeyAutomatically = YES;
-    tf.keyboardType = UIKeyboardTypeASCIICapable;
+    tf.keyboardType = UIKeyboardTypeDefault;
 }
 
 
@@ -128,7 +135,9 @@
 
 - (IBAction)addWorld:(id)sender {
     NSString *world = [self.tfKey.text toLowercaseStringWithEn];
-    if ([[[BTBIP39 sharedInstance] getWords] containsObject:world]) {
+    world = [world stringByReplacingOccurrencesOfString:@" " withString:@""];
+    self.bTBIP39 = [BTBIP39 instanceForWord:world];
+    if ([[self.bTBIP39 getWords] containsObject:world]) {
         [self.worldListArray addObject:world];
         [self.collectionView reloadData];
 
@@ -163,23 +172,28 @@
     __block ImportHDAccountSeedController *s = self;
     [dp showInWindow:self.view.window completion:^{
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
-            BTBIP39 *bip39 = [BTBIP39 sharedInstance];
-            NSString *code = [bip39 toMnemonicWithArray:self.worldListArray];
-            NSData *mnemonicCodeSeed = [bip39 toEntropy:code];
+            if ([s isZhTw] && ![s.bTBIP39.wordList isEqualToString:kZHTW_WORDS]) {
+                s.bTBIP39.wordList = kZHTW_WORDS;
+            }
+            NSString *code = [s.bTBIP39 toMnemonicWithArray:self.worldListArray];
+            NSData *mnemonicCodeSeed = [s.bTBIP39 toEntropy:code];
             if (!mnemonicCodeSeed) {
                 dispatch_async(dispatch_get_main_queue(), ^{
                     [self showMsg:NSLocalizedString(@"import_hdm_cold_seed_format_error", nil)];
+                    [dp dismiss];
                 });
                 return;
             }
             if ([BTSettings instance].getAppMode == HOT) {
                 BTHDAccount *account;
                 @try {
-                    account = [[BTHDAccount alloc] initWithMnemonicSeed:mnemonicCodeSeed password:password fromXRandom:NO syncedComplete:NO andGenerationCallback:nil];
+                    account = [[BTHDAccount alloc] initWithMnemonicSeed:mnemonicCodeSeed btBip39:s.bTBIP39 password:password fromXRandom:NO syncedComplete:NO andGenerationCallback:nil];
                 } @catch (NSException *e) {
                     if ([e isKindOfClass:[DuplicatedHDAccountException class]]) {
                         dispatch_async(dispatch_get_main_queue(), ^{
-                            [self showMsg:NSLocalizedString(@"import_hd_account_failed_duplicated", nil)];
+                            [dp dismissWithCompletion:^{
+                                [self showMsg:NSLocalizedString(@"import_hd_account_failed_duplicated", nil)];
+                            }];
                         });
                         return;
                     }
@@ -188,21 +202,26 @@
                 if (!account) {
                     dispatch_async(dispatch_get_main_queue(), ^{
                         [self showMsg:NSLocalizedString(@"import_hdm_cold_seed_format_error", nil)];
+                        [dp dismiss];
                     });
                     return;
                 }
+                
                 [[PeerUtil instance] stopPeer];
                 [BTAddressManager instance].hdAccountHot = account;
                 [[PeerUtil instance] startPeer];
             } else {
-                BTHDAccountCold *account = [[BTHDAccountCold alloc] initWithMnemonicSeed:mnemonicCodeSeed andPassword:password];
+                BTHDAccountCold *account = [[BTHDAccountCold alloc] initWithMnemonicSeed:mnemonicCodeSeed btBip39:s.bTBIP39 andPassword:password];
                 if (!account) {
                     dispatch_async(dispatch_get_main_queue(), ^{
                         [self showMsg:NSLocalizedString(@"import_hdm_cold_seed_format_error", nil)];
+                        [dp dismiss];
                     });
                     return;
                 }
             }
+            [[BTWordsTypeManager instance] saveWordsTypeValue:s.bTBIP39.wordList];
+            [BTBIP39 sharedInstance].wordList = s.bTBIP39.wordList;
             dispatch_async(dispatch_get_main_queue(), ^{
                 [dp dismissWithCompletion:^{
                     [s.navigationController popViewControllerAnimated:YES];
@@ -211,6 +230,16 @@
         });
     }];
 
+}
+
+- (BOOL)isZhTw {
+    for (NSString *word in self.worldListArray) {
+        self.bTBIP39 = [BTBIP39 instanceForWord:word];
+        if ([_bTBIP39.wordList isEqualToString:kZHTW_WORDS]) {
+            return true;
+        }
+    }
+    return false;
 }
 
 - (void)showMsg:(NSString *)msg {

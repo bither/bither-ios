@@ -39,6 +39,10 @@
 #import "GroupFileUtil.h"
 #import "ChooseModeViewController.h"
 #import "AdView.h"
+#import "BTWordsTypeManager.h"
+#import "BTBIP39.h"
+
+#define FEE_UPDATE_CODE 0
 
 @interface AppDelegate ()
 @end
@@ -61,6 +65,8 @@ static StatusBarNotificationWindow *notificationWindow;
     }
 
     [CrashLog initCrashLog];
+    
+    [BTBIP39 sharedInstance].wordList = [BTWordsTypeManager instance].getWordsTypeValueForUserDefaults;
     
     if ([UpgradeUtil needUpgradeKeyFromFileToDB]) {
         DialogProgress *dp = [[DialogProgress alloc] initWithMessage:NSLocalizedString(@"Please wait…", nil)];
@@ -88,10 +94,24 @@ static StatusBarNotificationWindow *notificationWindow;
 
     [self hdAccountPaymentAddressChanged:nil];
     [self updateGroupBalance];
+    
+    [self upgrade];
 
     //   [[BTSettings instance] openBitheriConsole];
-
+    
     return YES;
+}
+
+- (void)upgrade {
+    UserDefaultsUtil *defaults = [UserDefaultsUtil instance];
+    
+    NSInteger updateCode = defaults.getUpdateCode;
+    
+    if (updateCode == -1) {
+        [defaults setTransactionFeeMode: TenX];
+        
+        [defaults setUpdateCode: FEE_UPDATE_CODE];
+    }
 }
 
 - (void)loadViewController {

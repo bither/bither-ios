@@ -277,9 +277,6 @@ typedef enum {
     if (section == [self sectionIndexForType:SectionHdMonitored]) {
         return SectionHdMonitored;
     }
-    if (section == [self sectionIndexForType:SectionHDM]) {
-        return SectionHDM;
-    }
     if (section == [self sectionIndexForType:SectionPrivate]) {
         return SectionPrivate;
     }

@@ -23,7 +23,11 @@
 #import "DialogSendTxConfirm.h"
 
 @interface DialogHDSendTxConfirm : DialogCentered
+
 - (instancetype)initWithTx:(BTTx *)tx to:(NSString *)toAddress delegate:(NSObject <DialogSendTxConfirmDelegate> *)delegate;
 
+- (instancetype)initWithTx:(BTTx *)tx to:(NSString *)toAddress delegate:(NSObject <DialogSendTxConfirmDelegate> *)delegate unitName:(NSString *)unitName;
+
 @property(weak) NSObject <DialogSendTxConfirmDelegate> *delegate;
+
 @end

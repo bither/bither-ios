@@ -19,6 +19,7 @@
 #import "BaseApi.h"
 #import "StringUtil.h"
 #import "UserDefaultsUtil.h"
+#import "BTTx.h"
 
 
 ///@description   API
@@ -54,6 +55,12 @@
 - (void)getExchangeTrend:(MarketType)marketType callback:(ArrayResponseBlock)callback andErrorCallBack:(ErrorHandler)errorCallback;
 
 - (void)getAdApi;
+
+- (void)getHasBccAddress:(NSString *)address callback:(DictResponseBlock)callback andErrorCallBack:(ErrorHandler)errorCallback;
+
+- (void)postBccBroadcast:(BTTx *)tx callback:(DictResponseBlock)callback andErrorCallBack:(ErrorHandler)errorCallback;
+
+
 
 //#pragma mark - hdm api
 //- (void)getHDMPasswordRandomWithHDMBid:(NSString *) hdmBid callback:(IdResponseBlock) callback andErrorCallBack:(ErrorHandler)errorCallback;

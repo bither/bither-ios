@@ -117,4 +117,12 @@
 
 - (ApiConfig)getApiConfig;
 
+- (void)setUpdateCode:(NSInteger) updateCode;
+
+- (NSInteger)getUpdateCode;
+
+- (void)setIsObtainBccKey:(NSString *)key value:(NSString *)value;
+
+- (BOOL)getIsObtainBccForKey:(NSString *)key;
+
 @end

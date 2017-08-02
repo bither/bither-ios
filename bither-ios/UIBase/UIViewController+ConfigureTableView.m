@@ -64,8 +64,17 @@
     [btnLink setTitle:@"http://Bither.net" forState:UIControlStateNormal];
     [btnLink sizeToFit];
     [btnLink addTarget:self action:@selector(toWebsite) forControlEvents:UIControlEventTouchUpInside];
+    
+    UIButton *btnPrivacyPolicy = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, tableView.frame.size.width, 0)];
+    btnPrivacyPolicy.titleLabel.textAlignment = NSTextAlignmentCenter;
+    [btnPrivacyPolicy setTitleColor:[UIColor colorWithWhite:1 alpha:0.6f] forState:UIControlStateNormal];
+    [btnPrivacyPolicy setTitleColor:[UIColor colorWithWhite:1 alpha:1] forState:UIControlStateHighlighted];
+    btnPrivacyPolicy.titleLabel.font = [UIFont systemFontOfSize:12];
+    [btnPrivacyPolicy setTitle:NSLocalizedString(@"setting.privacy.policy", nil) forState:UIControlStateNormal];
+    [btnPrivacyPolicy sizeToFit];
+    [btnPrivacyPolicy addTarget:self action:@selector(toPrivacyPolicy) forControlEvents:UIControlEventTouchUpInside];
 
-    UIView *footer = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.frame.size.width, ivBottom.frame.size.height + logoTopMargin + ivLogo.frame.size.height + logoBottomMargin + lblVersion.frame.size.height + (isHot ? btnLink.frame.size.height : 0))];
+    UIView *footer = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.frame.size.width, ivBottom.frame.size.height + logoTopMargin + ivLogo.frame.size.height + logoBottomMargin + lblVersion.frame.size.height + (isHot ? btnLink.frame.size.height : 0) + btnPrivacyPolicy.frame.size.height)];
     footer.backgroundColor = [UIColor clearColor];
     vBottomCover.backgroundColor = colorBg;
     [footer addSubview:vBottomCover];
@@ -90,6 +99,9 @@
         btnLink.frame = CGRectMake((footer.frame.size.width - btnLink.frame.size.width) / 2, CGRectGetMaxY(lblVersion.frame), btnLink.frame.size.width, btnLink.frame.size.height);
         [footer addSubview:btnLink];
     }
+    CGFloat btnPrivacyPolicyY = isHot ? CGRectGetMaxY(btnLink.frame) :CGRectGetMaxY(lblVersion.frame);
+    btnPrivacyPolicy.frame = CGRectMake((footer.frame.size.width - btnPrivacyPolicy.frame.size.width) / 2, btnPrivacyPolicyY, btnPrivacyPolicy.frame.size.width, btnPrivacyPolicy.frame.size.height);
+    [footer addSubview:btnPrivacyPolicy];
     tableView.tableFooterView = footer;
 }
 
@@ -101,6 +113,11 @@
 - (void)toWebsite {
     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://Bither.net"]];
 }
+    
+- (void)toPrivacyPolicy {
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"https://github.com/bither/bither-android/wiki/PrivacyPolicy"]];
+}
+
 
 - (void)configureHeaderAndFooterNoLogo:(UITableView *)tableView background:(UIColor *)colorBg {
     UIImageView *ivTop = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"list_item_card_shadow_top"]];

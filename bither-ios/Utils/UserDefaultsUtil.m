@@ -52,6 +52,10 @@
 
 #define API_CONFIG @"api_config"
 
+#define UPDATE_CODE @"update_code"
+
+#define IS_OBTAIN_BCC @"is_obtain_bcc"
+
 static UserDefaultsUtil *userDefaultsUtil;
 
 NSUserDefaults *userDefaults;
@@ -207,7 +211,9 @@ NSUserDefaults *userDefaults;
 
 - (TransactionFeeMode)getTransactionFeeMode {
     if ([userDefaults objectForKey:TRANSACTION_FEE_MODE]) {
-        if ([userDefaults integerForKey:TRANSACTION_FEE_MODE] == Higher) {
+        if ([userDefaults integerForKey:TRANSACTION_FEE_MODE] == TenX) {
+            return TenX;
+        } else if ([userDefaults integerForKey:TRANSACTION_FEE_MODE] == Higher) {
             return Higher;
         } else if ([userDefaults integerForKey:TRANSACTION_FEE_MODE] == High) {
             return High;
@@ -215,7 +221,7 @@ NSUserDefaults *userDefaults;
             return Normal;
         }
     } else {
-        return Normal;
+        return TenX;
     }
 }
 
@@ -420,5 +426,42 @@ NSUserDefaults *userDefaults;
     }
     return ApiConfigBither;
 }
+
+- (void)setUpdateCode:(NSInteger) updateCode {
+    [userDefaults setInteger:updateCode forKey:UPDATE_CODE];
+    [userDefaults synchronize];
+}
+
+- (NSInteger)getUpdateCode {
+    if ([userDefaults objectForKey:UPDATE_CODE]) {
+        return [userDefaults integerForKey:UPDATE_CODE];
+    } else {
+        return -1;
+    }
+}
+
+- (void)setIsObtainBccKey:(NSString *)key value:(NSString *)value {
+    NSDictionary *oldDict = [userDefaults objectForKey:IS_OBTAIN_BCC];
+    NSMutableDictionary *newDict;
+    if (!oldDict) {
+        newDict = [NSMutableDictionary new];
+    } else {
+        newDict = [NSMutableDictionary dictionaryWithDictionary:oldDict];
+    }
+    [newDict setValue:value forKey:key];
+    [userDefaults setObject:newDict forKey:IS_OBTAIN_BCC];
+    [userDefaults synchronize];
+}
+
+- (BOOL)getIsObtainBccForKey:(NSString *)key {
+    NSDictionary *dict = [userDefaults objectForKey:IS_OBTAIN_BCC];
+    if (!dict || ![dict.allKeys containsObject:key]) {
+        return NO;
+    }
+    
+    NSString *value = dict[key];
+    return [value isEqualToString:@"1"];
+}
+
 
 @end

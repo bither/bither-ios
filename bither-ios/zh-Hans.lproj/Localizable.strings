@@ -181,6 +181,8 @@
 /* No comment provided by engineer. */
 "Scan Bitcoin Address" = "扫描比特币地址";
 
+"Scan Bitpie Bitcoin Cash Address" = "扫描比特派BCC地址";
+
 /* No comment provided by engineer. */
 "Scan Bither Cold to sign" = "扫描冷钱包完成签名";
 
@@ -310,6 +312,7 @@
 "Normal"="标准";
 "High"="高";
 "Higher"="更高";
+"10x" = "10倍";
 "fast confirmation"="较快确认";
 "slow confirmation"="较慢确认";
 "Donate"="捐赠";
@@ -746,3 +749,21 @@
 
 // Language
 "localization.language.code" = "zh_CN";
+
+"setting.privacy.policy" = "隐私政策";
+
+"address_receive" = "收款地址";
+"address_changed" = "找零地址";
+"address_balance" = "余额 ";
+"address_index" = "序号: ";
+
+// Bcc Obtain
+"obtain_bcc_setting_name" = "获得 BCC";
+"obtainable_bcc" = "可获得: ";
+"not_bitpie_bcc_address" = "仅支持发往比特派BCC地址";
+"you_do_not_have_obtainable_bcc" = "您没有可获得的BCC";
+"no_private_key"="请先导入私钥";
+"you_already_obtained_bcc" = "您已经获得过BCC";
+"get_success" = "获得成功";
+"please_firstly_sync_to_block_no" = "请先同步到块%lu";
+"no_sync_complete" = "请稍候，交易暂未同步完成！";

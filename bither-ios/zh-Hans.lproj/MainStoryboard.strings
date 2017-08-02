@@ -341,11 +341,21 @@
 /* Class = "UIButton"; normalTitle = "Generate"; ObjectID = "LrS-g8-zv9"; */
 "LrS-g8-zv9.normalTitle" = "生成";
 
+/* Class = "UIButton"; normalTitle = "Generate"; ObjectID = "rh0-oA-CdB"; */
+"rh0-oA-CdB.normalTitle" = "生成";
+
 /* Class = "UILabel"; text = "Generate New HD Account"; ObjectID = "bUN-jt-wO1"; */
 "bUN-jt-wO1.text" = "生成新的 HD 账户";
 
+/* Class = "UILabel"; text = "Generate New HD Account"; ObjectID = "Q9H-Yo-tpY"; */
+"Q9H-Yo-tpY.text" = "生成新的 HD 账户";
+
 /* Class = "UIButton"; normalTitle = "Generate Normal Private Keys"; ObjectID = "aa4-oP-TVf"; */
 "aa4-oP-TVf.normalTitle" = "生成普通私钥";
+
+/* Class = "UIButton"; normalTitle = "Generate Normal Private Keys"; ObjectID = "9md-v4-VRM"; */
+"9md-v4-VRM.normalTitle" = "生成普通私钥";
+
 
 /* Class = "UIButton"; normalTitle = "Generate HDM Account"; ObjectID = "tee-1q-g6I"; */
 "tee-1q-g6I.normalTitle" = "生成 HDM 账户";
@@ -353,11 +363,20 @@
 /* Class = "UILabel"; text = "You already have an HD account."; ObjectID = "nBS-fJ-qtL"; */
 "nBS-fJ-qtL.text" = "已有 HD 账户";
 
+/* Class = "UILabel"; text = "You already have an HD account."; ObjectID = "D7R-wZ-rcL"; */
+"D7R-wZ-rcL.text" = "已有 HD 账户";
+
 /* Class = "UIButton"; normalTitle = "HD Account Seed QR Code"; ObjectID = "5p5-q5-NIv"; */
 "5p5-q5-NIv.normalTitle" = "HD 账户种子二维码";
 
+/* Class = "UIButton"; normalTitle = "HD Account Seed QR Code"; ObjectID = "YGh-vd-ka9"; */
+"YGh-vd-ka9.normalTitle" = "HD 账户种子二维码";
+
 /* Class = "UIButton"; normalTitle = "HD Account Seed Phrase"; ObjectID = "Ces-kP-XIs"; */
 "Ces-kP-XIs.normalTitle" = "HD 账户密语";
+
+/* Class = "UIButton"; normalTitle = "HD Account Seed Phrase"; ObjectID = "DFM-n8-9tj"; */
+"DFM-n8-9tj.normalTitle" = "HD 账户密语";
 
 /* Class = "UILabel"; text = "Generate Normal Private Keys"; ObjectID = "R90-Bo-e0X"; */
 "R90-Bo-e0X.text" = "生成普通私钥";
@@ -415,6 +434,30 @@
 
 /* Class = "UILabel"; text = "Balance:"; ObjectID = "3TU-hn-ytB"; */
 "3TU-hn-ytB.text" = "余额:";
+
+/* Class = "UILabel"; text = "Bitpie BCC address"; ObjectID = "45g-ra-PPL"; */
+"45g-ra-PPL.text" = "比特派BCC地址";
+
+/* Class = "IBUITextField"; placeholder = "Bitpie BCC address"; ObjectID = "d0K-dD-qqM"; */
+"d0K-dD-qqM.placeholder" = "比特派BCC地址";
+
+/* Class = "IBUILabel"; text = "Password"; ObjectID = "HJ3-KO-3T0"; */
+"HJ3-KO-3T0.text" = "密码";
+
+/* Class = "IBUITextField"; placeholder = "Password"; ObjectID = "4BE-Dt-Z9g"; */
+"4BE-Dt-Z9g.placeholder" = "密码";
+
+/* Class = "UIButton"; normalTitle = "Obtain"; ObjectID = "Ydi-yn-JKG"; */
+"Ydi-yn-JKG.normalTitle" = "获得";
+
+/* Class = "UILabel"; text = "Bitpie BCC address"; ObjectID = "Qjw-My-urU"; */
+"Qjw-My-urU.text" = "比特派BCC地址";
+
+/* Class = "IBUITextField"; placeholder = "Bitpie BCC address"; ObjectID = "LQc-Sd-WZK"; */
+"LQc-Sd-WZK.placeholder" = "比特派BCC地址";
+
+/* Class = "UIButton"; normalTitle = "Obtain"; ObjectID = "k22-fr-QCR"; */
+"k22-fr-QCR.normalTitle" = "获得";
 
 "lQn-Ih-2qB.text" = "普通私钥不属于 HD 账户.\n需要单独备份.";
 

@@ -44,15 +44,22 @@
 @interface DialogHDSendTxConfirm () {
     BTTx *_tx;
     NSString *_toAddress;
+    NSString *_unitName;
 }
 @end
 
 @implementation DialogHDSendTxConfirm
+
 - (instancetype)initWithTx:(BTTx *)tx to:(NSString *)toAddress delegate:(NSObject <DialogSendTxConfirmDelegate> *)delegate {
+    return [self initWithTx:tx to:toAddress delegate:delegate unitName:[UnitUtil unitName]];
+}
+
+- (instancetype)initWithTx:(BTTx *)tx to:(NSString *)toAddress delegate:(NSObject <DialogSendTxConfirmDelegate> *)delegate unitName:(NSString *)unitName {
     self = [super initWithFrame:CGRectMake(0, 0, kWidth, 200)];
     if (self) {
         _tx = tx;
         _toAddress = toAddress;
+        _unitName = unitName;
         self.delegate = delegate;
         [self firstConfigure];
     }
@@ -60,9 +67,10 @@
 }
 
 - (void)firstConfigure {
+    BitcoinUnit unit = [_unitName isEqualToString:@"BCC"] ? UnitBTC : [UnitUtil unit];
     NSString *toAddress = _toAddress;
-    NSString *amountString = [UnitUtil stringForAmount:[_tx amountSentTo:_toAddress]];
-    NSString *feeString = [UnitUtil stringForAmount:_tx.feeForTransaction];
+    NSString *amountString = [UnitUtil stringForAmount:[_tx amountSentTo:_toAddress] unit:unit];
+    NSString *feeString = [UnitUtil stringForAmount:_tx.feeForTransaction unit:unit];
 
     UILabel *lblPayto = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, kLabelHeight)];
     lblPayto.font = [UIFont systemFontOfSize:kLabelFontSize];
@@ -89,7 +97,7 @@
     lblAmountValue.font = [UIFont systemFontOfSize:kValueFontSize];
     lblAmountValue.textColor = [UIColor colorWithWhite:1 alpha:kValueAlpha];
     lblAmountValue.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleBottomMargin;
-    lblAmountValue.text = [NSString stringWithFormat:@"%@ %@", amountString, [UnitUtil unitName]];
+    lblAmountValue.text = [NSString stringWithFormat:@"%@ %@", amountString, _unitName];
 
     CGFloat bottom = CGRectGetMaxY(lblAmountValue.frame);
 
@@ -103,7 +111,7 @@
     lblFeeValue.font = [UIFont systemFontOfSize:kValueFontSize];
     lblFeeValue.textColor = [UIColor colorWithWhite:1 alpha:kValueAlpha];
     lblFeeValue.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleBottomMargin;
-    lblFeeValue.text = [NSString stringWithFormat:@"%@ %@", feeString, [UnitUtil unitName]];
+    lblFeeValue.text = [NSString stringWithFormat:@"%@ %@", feeString, _unitName];
 
     CGFloat buttonTop = CGRectGetMaxY(lblFeeValue.frame) + kButtonTopGap;
     CGFloat buttonWidth = (self.frame.size.width - kButtonGap) / 2;

@@ -548,6 +548,30 @@
 /* Class = "UILabel"; text = "Balance:"; ObjectID = "3TU-hn-ytB"; */
 "3TU-hn-ytB.text" = "Balance:";
 
+/* Class = "UILabel"; text = "Bitpie BCC address"; ObjectID = "45g-ra-PPL"; */
+"45g-ra-PPL.text" = "Bitpie BCC address";
+
+/* Class = "IBUITextField"; placeholder = "Bitpie BCC address"; ObjectID = "d0K-dD-qqM"; */
+"d0K-dD-qqM.placeholder" = "Bitpie BCC address";
+
+/* Class = "IBUILabel"; text = "Password"; ObjectID = "HJ3-KO-3T0"; */
+"HJ3-KO-3T0.text" = "Password";
+
+/* Class = "IBUITextField"; placeholder = "Password"; ObjectID = "4BE-Dt-Z9g"; */
+"4BE-Dt-Z9g.placeholder" = "Password";
+
+/* Class = "UIButton"; normalTitle = "Obtain"; ObjectID = "Ydi-yn-JKG"; */
+"Ydi-yn-JKG.normalTitle" = "Obtain";
+
+/* Class = "UILabel"; text = "Bitpie BCC address"; ObjectID = "Qjw-My-urU"; */
+"Qjw-My-urU.text" = "Bitpie BCC address";
+
+/* Class = "IBUITextField"; placeholder = "Bitpie BCC address"; ObjectID = "LQc-Sd-WZK"; */
+"LQc-Sd-WZK.placeholder" = "Bitpie BCC address";
+
+/* Class = "UIButton"; normalTitle = "Obtain"; ObjectID = "k22-fr-QCR"; */
+"k22-fr-QCR.normalTitle" = "Obtain";
+
 "lQn-Ih-2qB.text" = "Normal private keys are not within HD Account.\nThey need separated back ups.";
 
 "huo-Ni-Mqw.text" = "Normal private keys are not within HD Account.\nThey need separated back ups.";

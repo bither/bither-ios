@@ -42,6 +42,7 @@
 #import "UIBaseUtil.h"
 #import "IOS7ContainerViewController.h"
 #import "PaymentAddressSetting.h"
+#import "ObtainBccSetting.h"
 
 @implementation Setting
 
@@ -239,6 +240,7 @@ static Setting *ApiConfigSetting;
         }];
         [setting setGetArrayBlock:^() {
             NSMutableArray *array = [NSMutableArray new];
+            [array addObject:[self getTransactionFeeDict:TenX]];
             [array addObject:[self getTransactionFeeDict:Higher]];
             [array addObject:[self getTransactionFeeDict:High]];
             [array addObject:[self getTransactionFeeDict:Normal]];
@@ -278,7 +280,7 @@ static Setting *ApiConfigSetting;
     NSString *transactionFee = [BitherSetting getTransactionFee:transcationFeeMode];
     NSString *transactionFeeStr = [NSString stringWithFormat:@"%@ %@", [BitherSetting getTransactionFeeMode:transcationFeeMode], transactionFee];
     NSMutableAttributedString *transactionFeeAttributedStr = [[NSMutableAttributedString alloc] initWithString:transactionFeeStr];
-    NSRange range = NSMakeRange([[transactionFeeAttributedStr string] rangeOfString:[transactionFee substringToIndex:1]].location, transactionFee.length);
+    NSRange range = NSMakeRange([[transactionFeeAttributedStr string] rangeOfString:transactionFee].location, transactionFee.length);
     [transactionFeeAttributedStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:13.0] range:range];
     [transactionFeeAttributedStr addAttribute:NSForegroundColorAttributeName value:[UIColor grayColor] range:range];
     return transactionFeeAttributedStr;
@@ -694,6 +696,10 @@ static Setting *ApiConfigSetting;
     }
     if ([[BTSettings instance] getAppMode] == HOT && [BTHDMBid getHDMBidFromDb]) {
         [array addObject:[Setting getHDMServerPasswordResetSetting]];
+    }
+    
+    if ([[BTSettings instance] getAppMode] == HOT) {
+        [array addObject:[ObtainBccSetting getObtainBccSetting]];
     }
     [array addObject:[MessageSigningSetting getMessageSigningSetting]];
     [array addObject:[Setting getPasswordStrengthSetting]];

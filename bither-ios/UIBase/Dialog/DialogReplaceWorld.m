@@ -76,10 +76,10 @@
 }
 
 - (void)confirmPressed:(id)sender {
-    NSString *p = self.tfKey.text;
-
-    if ([[[BTBIP39 sharedInstance] getWords] containsObject:p]) {
-        [self dismissWithPassword:p];
+    NSString *world = [self.tfKey.text lowercaseString];
+    world = [world stringByReplacingOccurrencesOfString:@" " withString:@""];
+    if ([[[BTBIP39 instanceForWord:world] getWords] containsObject:world]) {
+        [self dismissWithPassword:world];
     } else {
         [self showError:NSLocalizedString(@"hdm_import_word_list_wrong_word_warn", nil)];
     }
@@ -236,7 +236,7 @@
     tf.leftViewMode = UITextFieldViewModeAlways;
     tf.rightViewMode = UITextFieldViewModeAlways;
     tf.enablesReturnKeyAutomatically = YES;
-    tf.keyboardType = UIKeyboardTypeASCIICapable;
+    tf.keyboardType = UIKeyboardTypeDefault;
 
 }
 

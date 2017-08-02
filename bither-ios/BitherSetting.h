@@ -125,7 +125,7 @@ typedef enum {
 } KLineTimeType;
 
 typedef enum {
-    Normal = 10000, High = 20000, Higher = 50000
+    Normal = 10000, High = 20000, Higher = 50000, TenX = 100000
 } TransactionFeeMode;
 
 typedef enum {
