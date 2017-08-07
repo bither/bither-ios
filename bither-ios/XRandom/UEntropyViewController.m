@@ -18,7 +18,6 @@
 
 #import "UEntropyViewController.h"
 #import "UEntropyCamera.h"
-#import "UEntropyMic.h"
 #import "UEntropySensor.h"
 #import "DialogAlert.h"
 #import "DialogProgress.h"
@@ -67,12 +66,11 @@
 
     SensorVisualizerView *vSensor = [[SensorVisualizerView alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height - kSensorVisualizerViewItemSize - 10, self.view.frame.size.width, kSensorVisualizerViewItemSize)];
     vSensor.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleTopMargin;
-    vSensor.showMic = [AVCaptureDevice authorizationStatusForMediaType:AVMediaTypeAudio] == AVAuthorizationStatusAuthorized;
+    vSensor.showMic = false;
     [self.view addSubview:vSensor];
 
     self.collector = [[UEntropyCollector alloc] initWithDelegate:self];
     [self.collector addSource:[[UEntropyCamera alloc] initWithViewController:self.view andCollector:self.collector],
-                              [[UEntropyMic alloc] initWithView:nil andCollector:self.collector],
                               [[UEntropySensor alloc] initWithView:vSensor andCollecor:self.collector],
                     nil];
     dpStopping = [[DialogProgress alloc] initWithMessage:NSLocalizedString(@"xrandom_stopping", nil)];

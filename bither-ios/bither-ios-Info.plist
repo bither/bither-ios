@@ -31,8 +31,6 @@
 	</dict>
 	<key>NSCameraUsageDescription</key>
 	<string>$(PRODUCT_NAME) uses camera</string>
-	<key>NSMicrophoneUsageDescription</key>
-	<string>$(PRODUCT_NAME) uses microphone</string>
 	<key>NSMotionUsageDescription</key>
 	<string>$(PRODUCT_NAME) uses motion data</string>
 	<key>NSPhotoLibraryUsageDescription</key>
