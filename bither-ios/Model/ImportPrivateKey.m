@@ -66,6 +66,10 @@
                 return;
             }
             if ([self checkKey:key]) {
+                if (_importPrivateKeyType != PrivateText) {
+                    [self addKey:key];
+                    return;
+                }
                 BTKey *uncompressedKey;
                 BTKey *compressedKey;
                 NSString *privateKey = key.privateKey;
