@@ -370,7 +370,7 @@ static Setting *importPrivateKeySetting;
 - (void)importKeyFormQrcode:(NSString *)keyStr password:(NSString *)password dp:(DialogProgress *)dp {
     [dp dismiss];
     ImportPrivateKey *importPrivateKey = [[ImportPrivateKey alloc] initWithController:self.controller content:keyStr passwrod:password importPrivateKeyType:BitherQrcode];
-        [importPrivateKey importPrivateKey];
+    [importPrivateKey importPrivateKey];
 }
 - (BOOL)checkPassword:(NSString *)password {
     NSString *checkKeyStr = _result;

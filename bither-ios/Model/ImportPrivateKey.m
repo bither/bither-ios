@@ -23,6 +23,10 @@
 #import "KeyUtil.h"
 #import "BTPrivateKeyUtil.h"
 #import "BTQRCodeUtil.h"
+#import "DialogImportPrivateKeyAddressValidation.h"
+
+#define kUncompressedPrivateKeyPrefix @"5"
+#define kCompressedHexSuffix @"01"
 
 @interface ImportPrivateKey ()
 @property(nonatomic, strong) NSString *passwrod;
@@ -62,12 +66,31 @@
                 return;
             }
             if ([self checkKey:key]) {
-                [self addKey:key];
+                BTKey *uncompressedKey;
+                BTKey *compressedKey;
+                NSString *privateKey = key.privateKey;
+                if ([privateKey hasPrefix:kUncompressedPrivateKeyPrefix]) {
+                    uncompressedKey = [BTKey keyWithPrivateKey:privateKey];
+                    NSString *compressedHex = [NSString stringWithFormat:@"%@%@", [privateKey base58checkToHex], kCompressedHexSuffix];
+                    compressedKey = [BTKey keyWithPrivateKey:[compressedHex hexToBase58check]];
+                } else {
+                    compressedKey = [BTKey keyWithPrivateKey:privateKey];
+                    NSString *compressedHex = [privateKey base58checkToHex];
+                    NSString *uncompressedHex = [compressedHex substringToIndex:compressedHex.length - kCompressedHexSuffix.length];
+                    uncompressedKey = [BTKey keyWithPrivateKey:[uncompressedHex hexToBase58check]];
+                }
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    if (_dp.shown) {
+                        [_dp dismiss];
+                        DialogImportPrivateKeyAddressValidation *dialogImportPrivateKeyAddressValidation = [[DialogImportPrivateKeyAddressValidation alloc] initWithCompressedKey:compressedKey uncompressedKey:uncompressedKey onImportEntered:^(BTKey *key) {
+                            [self addKey:key];
+                        }];
+                        [dialogImportPrivateKeyAddressValidation showInWindow:self.controller.view.window];
+                    }
+                });
             }
         });
-
     }];
-
 }
 
 - (BOOL)checkKey:(BTKey *)key {
