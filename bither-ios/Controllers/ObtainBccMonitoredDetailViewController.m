@@ -24,6 +24,9 @@
 #import "UnitUtil.h"
 
 #define kSendButtonQrIconSize (20)
+#define kSignTypeLength (2)
+#define kCompressPubKeyLength (68)
+#define kUncompressedPubKeyLength (132)
 
 @interface ObtainBccMonitoredDetailViewController () <UITextFieldDelegate, ScanQrCodeDelegate, DialogSendTxConfirmDelegate> {
     DialogProgressChangable *dp;
@@ -247,22 +250,28 @@
             self.btnObtain.enabled = NO;
             NSArray *strs = [BTQRCodeUtil splitQRCode:result];
             BOOL success = strs.count == self.tx.ins.count;
-            NSMutableArray *sigs = [[NSMutableArray alloc] init];
+            NSMutableArray *compressSigs = [[NSMutableArray alloc] init];
+            NSMutableArray *uncompressedSigs = [[NSMutableArray alloc] init];
             if(success){
                 for (NSString *s in strs) {
-                    NSUInteger signTypeLength = 2;
-                    NSUInteger pubKeyLength = 68;
-                    NSString *changeStr = s.length > signTypeLength + pubKeyLength ? [s stringByReplacingCharactersInRange:NSMakeRange(s.length - (signTypeLength + pubKeyLength), signTypeLength) withString:[NSString stringWithFormat:@"%0x", [self.tx getSigHashType]]] : s;
-                    NSData* d = [changeStr hexToData];
-                    if(!d){
+                    NSString *compressChangeStr = s.length > kSignTypeLength + kCompressPubKeyLength ? [s stringByReplacingCharactersInRange:NSMakeRange(s.length - (kSignTypeLength + kCompressPubKeyLength), kSignTypeLength) withString:[NSString stringWithFormat:@"%0x", [self.tx getSigHashType]]] : s;
+                    NSString *uncompressedChangeStr = s.length > kSignTypeLength + kUncompressedPubKeyLength ? [s stringByReplacingCharactersInRange:NSMakeRange(s.length - (kSignTypeLength + kUncompressedPubKeyLength), kSignTypeLength) withString:[NSString stringWithFormat:@"%0x", [self.tx getSigHashType]]] : s;
+                    NSData *compressData = [compressChangeStr hexToData];
+                    NSData *uncompressedData = [uncompressedChangeStr hexToData];
+                    if(!compressData || !uncompressedData){
                         success = NO;
                         break;
                     }
-                    [sigs addObject:d];
+                    [compressSigs addObject:compressData];
+                    [uncompressedSigs addObject:uncompressedData];
                 }
             }
-            if(success){
-                success = [self.tx signWithSignatures:sigs];
+            if (success) {
+                if ([self.tx signWithSignatures:compressSigs]) {
+                    success = YES;
+                } else {
+                    success = [self.tx signWithSignatures:uncompressedSigs];
+                }
             }
             if (success) {
                 [dp showInWindow:self.view.window completion:^{
