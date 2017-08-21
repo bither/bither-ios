@@ -30,7 +30,7 @@
 
 @implementation DialogImportPrivateKeyAddressValidation
 
-- (instancetype)initWithCompressedKey:(BTKey *)compressedKey uncompressedKey:(BTKey *)uncompressedKey onImportEntered:(OnImportEntered)onImportEntered {
+- (instancetype)initWithCompressedKey:(BTKey *)compressedKey uncompressedKey:(BTKey *)uncompressedKey isCompressedKeyRecommended:(BOOL)isCompressedKeyRecommended onImportEntered:(OnImportEntered)onImportEntered {
     NSString *compressedAddressFormat = [StringUtil formatAddress:compressedKey.address groupSize:4 lineSize:16];
     _addressSize = [compressedAddressFormat sizeWithRestrict:CGSizeMake(kWidth, CGFLOAT_MAX) font:[UIFont fontWithName:@"Courier New" size:kFontSize]];
     NSString *title = NSLocalizedString(@"private_key_import_title", nil);
@@ -42,12 +42,12 @@
         self.onImportEntered = [onImportEntered copy];
         _compressedKey = compressedKey;
         _uncompressedKey = uncompressedKey;
-        [self configure];
+        [self configureWithIsCompressedKeyRecommended: isCompressedKeyRecommended];
     }
     return self;
 }
 
-- (void)configure {
+- (void)configureWithIsCompressedKeyRecommended:(BOOL)isCompressedKeyRecommended {
     NSString *title = NSLocalizedString(@"private_key_import_title", nil);
     CGSize titleSize = [title sizeWithRestrict:CGSizeMake(kWidth, CGFLOAT_MAX) font:[UIFont systemFontOfSize:kTitleFontSize]];
     UILabel *lblTitle = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, kWidth, titleSize.height)];
@@ -58,8 +58,15 @@
     lblTitle.numberOfLines = 0;
     lblTitle.text = title;
     [self addSubview:lblTitle];
-    
-    UILabel *lblCompressedAddressTitle = [self setAddressTitleLabelWithFrame:CGRectMake(0, _titleHeight + kMargin, kWidth, _addressTitleHeight) text:NSLocalizedString(@"private_key_compressed_address", nil)];
+    if (isCompressedKeyRecommended) {
+        [self recommendCompressedAddress];
+    } else {
+        [self recommendUncompressedAddress];
+    }
+}
+
+- (void)recommendCompressedAddress {
+    UILabel *lblCompressedAddressTitle = [self setAddressTitleLabelWithFrame:CGRectMake(0, _titleHeight + kMargin, kWidth, _addressTitleHeight) text:[[NSString alloc] initWithFormat:@"%@%@", NSLocalizedString(@"private_key_compressed_address", nil), NSLocalizedString(@"private_key_recommend", nil)]];
     [self addSubview:lblCompressedAddressTitle];
     
     UILabel *lblCompressedAddress = [self setAddressLabelWithFrame:CGRectMake(0, CGRectGetMaxY(lblCompressedAddressTitle.frame) + kMargin, kWidth, _addressSize.height) address:_compressedKey.address];
@@ -78,6 +85,28 @@
     UIButton *btnImportUncompressed = [self setImportButtonWithFrame:CGRectMake(_addressSize.width + kMargin, CGRectGetMinY(lblUncompressedAddress.frame), kWidth - _addressSize.width - kMargin, kButtonHeight)];
     [btnImportUncompressed addTarget:self action:@selector(importUncompressedPressed:) forControlEvents: UIControlEventTouchUpInside];
     [self addSubview:btnImportUncompressed];
+}
+
+- (void)recommendUncompressedAddress {
+    UILabel *lblUncompressedAddressTitle = [self setAddressTitleLabelWithFrame:CGRectMake(0, _titleHeight + kMargin, kWidth, _addressTitleHeight) text:[[NSString alloc] initWithFormat:@"%@%@", NSLocalizedString(@"private_key_uncompressed_address", nil), NSLocalizedString(@"private_key_recommend", nil)]];
+    [self addSubview:lblUncompressedAddressTitle];
+    
+    UILabel *lblUncompressedAddress = [self setAddressLabelWithFrame:CGRectMake(0, CGRectGetMaxY(lblUncompressedAddressTitle.frame) + kMargin, kWidth, _addressSize.height) address:_uncompressedKey.address];
+    [self addSubview:lblUncompressedAddress];
+    
+    UIButton *btnImportUncompressed = [self setImportButtonWithFrame:CGRectMake(_addressSize.width + kMargin, CGRectGetMinY(lblUncompressedAddress.frame), kWidth - _addressSize.width - kMargin, kButtonHeight)];
+    [btnImportUncompressed addTarget:self action:@selector(importUncompressedPressed:) forControlEvents: UIControlEventTouchUpInside];
+    [self addSubview:btnImportUncompressed];
+    
+    UILabel *lblCompressedAddressTitle = [self setAddressTitleLabelWithFrame:CGRectMake(0, CGRectGetMaxY(lblUncompressedAddress.frame) + kMargin, kWidth, _addressTitleHeight) text:NSLocalizedString(@"private_key_compressed_address", nil)];
+    [self addSubview:lblCompressedAddressTitle];
+    
+    UILabel *lblCompressedAddress = [self setAddressLabelWithFrame:CGRectMake(0, CGRectGetMaxY(lblCompressedAddressTitle.frame) + kMargin, kWidth, _addressSize.height) address:_compressedKey.address];
+    [self addSubview:lblCompressedAddress];
+    
+    UIButton *btnImportCompressed = [self setImportButtonWithFrame:CGRectMake(_addressSize.width + kMargin, CGRectGetMinY(lblCompressedAddress.frame), kWidth - _addressSize.width - kMargin, kButtonHeight)];
+    [btnImportCompressed addTarget:self action:@selector(importCompressedPressed:) forControlEvents: UIControlEventTouchUpInside];
+    [self addSubview:btnImportCompressed];
 }
 
 - (void)importCompressedPressed:(id)sender {

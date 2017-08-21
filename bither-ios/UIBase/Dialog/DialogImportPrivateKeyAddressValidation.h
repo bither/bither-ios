@@ -13,6 +13,6 @@ typedef void (^OnImportEntered)(BTKey *key);
 
 @interface DialogImportPrivateKeyAddressValidation : DialogCentered
 
-- (instancetype)initWithCompressedKey:(BTKey *)compressedKey uncompressedKey:(BTKey *)uncompressedKey onImportEntered:(OnImportEntered)onImportEntered;
+- (instancetype)initWithCompressedKey:(BTKey *)compressedKey uncompressedKey:(BTKey *)uncompressedKey isCompressedKeyRecommended:(BOOL)isCompressedKeyRecommended onImportEntered:(OnImportEntered)onImportEntered;
 
 @end

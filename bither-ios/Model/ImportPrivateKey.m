@@ -86,7 +86,7 @@
                 dispatch_async(dispatch_get_main_queue(), ^{
                     if (_dp.shown) {
                         [_dp dismiss];
-                        DialogImportPrivateKeyAddressValidation *dialogImportPrivateKeyAddressValidation = [[DialogImportPrivateKeyAddressValidation alloc] initWithCompressedKey:compressedKey uncompressedKey:uncompressedKey onImportEntered:^(BTKey *key) {
+                        DialogImportPrivateKeyAddressValidation *dialogImportPrivateKeyAddressValidation = [[DialogImportPrivateKeyAddressValidation alloc] initWithCompressedKey:compressedKey uncompressedKey:uncompressedKey isCompressedKeyRecommended:[privateKey hasPrefix:kUncompressedPrivateKeyPrefix] == NO onImportEntered:^(BTKey *key) {
                             [self addKey:key];
                         }];
                         [dialogImportPrivateKeyAddressValidation showInWindow:self.controller.view.window];
