@@ -24,6 +24,8 @@
 @optional
 - (void)onSendTxConfirmed:(BTTx *)tx;
 
+- (void)onGetBccSendTxConfirmed:(NSArray *)txs;
+
 - (void)onSendTxCanceled;
 @end
 
