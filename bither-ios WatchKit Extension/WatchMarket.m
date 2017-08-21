@@ -207,7 +207,6 @@ static NSMutableArray *markets;
         case CHBTC:
         case BTCTRADE:
             return CNYG;
-        case BTCE:
         case BITSTAMP:
         case MARKET796:
         case BITFINEX:

@@ -34,9 +34,6 @@
         case BITSTAMP:
             name = NSLocalizedString(@"Bitstamp", nil);
             break;
-        case BTCE:
-            name = NSLocalizedString(@"BTC-E", nil);
-            break;
         case OKCOIN:
             name = NSLocalizedString(@"OKCoin.CN", nil);
             break;
@@ -72,8 +69,6 @@
             return @"huobi.com";
         case BITSTAMP:
             return @"bitstamp.net";
-        case BTCE:
-            return @"btc-e.com";
         case OKCOIN:
             return @"okcoin.cn";
         case CHBTC:
@@ -99,24 +94,22 @@
     switch (marketType) {
         case BITSTAMP:
             return 1;
-        case BTCE:
-            return 2;
         case HUOBI:
-            return 3;
+            return 2;
         case OKCOIN:
-            return 4;
+            return 3;
         case BTCCHINA:
-            return 5;
+            return 4;
         case CHBTC:
-            return 6;
+            return 5;
         case BITFINEX:
-            return 7;
+            return 6;
         case MARKET796:
-            return 8;
+            return 7;
         case COINBASE:
-            return 9;
+            return 8;
         case BTCTRADE:
-            return 10;
+            return 9;
 
 
     }
@@ -128,22 +121,20 @@
 
     switch (value) {
         case 2:
-            return BTCE;
-        case 3:
             return HUOBI;
-        case 4:
+        case 3:
             return OKCOIN;
-        case 5:
+        case 4:
             return BTCCHINA;
-        case 6:
+        case 5:
             return CHBTC;
-        case 7:
+        case 6:
             return BITFINEX;
-        case 8:
+        case 7:
             return MARKET796;
-        case 9:
+        case 8:
             return COINBASE;
-        case 10:
+        case 9:
             return BTCTRADE;
     }
     return BITSTAMP;
@@ -159,9 +150,6 @@
         case BITSTAMP:
             return RGBA(59, 191, 89, 1);
             //ff25bebc
-        case BTCE:
-            return RGBA(37, 190, 188, 1);
-            //ff1587c6
         case OKCOIN:
             return RGBA(21, 135, 198, 1);
             //ff5b469d
