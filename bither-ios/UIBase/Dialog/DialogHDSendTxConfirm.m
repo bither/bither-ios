@@ -43,6 +43,7 @@
 
 @interface DialogHDSendTxConfirm () {
     BTTx *_tx;
+    NSArray *_txs;
     NSString *_toAddress;
     NSString *_unitName;
 }
@@ -66,12 +67,37 @@
     return self;
 }
 
+- (instancetype)initWithTxs:(NSArray *)txs to:(NSString *)toAddress delegate:(NSObject <DialogSendTxConfirmDelegate> *)delegate unitName:(NSString *)unitName {
+    self = [super initWithFrame:CGRectMake(0, 0, kWidth, 200)];
+    if (self) {
+        _txs = txs;
+        _toAddress = toAddress;
+        _unitName = unitName;
+        self.delegate = delegate;
+        [self firstConfigure];
+    }
+    return self;
+}
+
 - (void)firstConfigure {
     BitcoinUnit unit = [_unitName isEqualToString:@"BCC"] ? UnitBTC : [UnitUtil unit];
     NSString *toAddress = _toAddress;
-    NSString *amountString = [UnitUtil stringForAmount:[_tx amountSentTo:_toAddress] unit:unit];
-    NSString *feeString = [UnitUtil stringForAmount:_tx.feeForTransaction unit:unit];
-
+    NSString *amountString;
+    NSString *feeString;
+    if (_tx) {
+        amountString = [UnitUtil stringForAmount:[_tx amountSentTo:_toAddress] unit:unit];
+        feeString = [UnitUtil stringForAmount:_tx.feeForTransaction unit:unit];
+    } else {
+        int64_t amount = 0;
+        int64_t fee = 0;
+        for (BTTx *tx in _txs) {
+            amount += [tx amountSentTo:_toAddress];
+            fee += tx.feeForTransaction;
+        }
+        amountString = [UnitUtil stringForAmount:amount unit:unit];
+        feeString = [UnitUtil stringForAmount:fee unit:unit];
+    }
+    
     UILabel *lblPayto = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, kLabelHeight)];
     lblPayto.font = [UIFont systemFontOfSize:kLabelFontSize];
     lblPayto.textColor = [UIColor colorWithWhite:1 alpha:kLabelAlpha];
@@ -144,6 +170,8 @@
     [self dismissWithCompletion:^{
         if (self.delegate && [self.delegate respondsToSelector:@selector(onSendTxConfirmed:)]) {
             [self.delegate onSendTxConfirmed:_tx];
+        } else if (self.delegate && [self.delegate respondsToSelector:@selector(onGetBccSendTxConfirmed:)]) {
+            [self.delegate onGetBccSendTxConfirmed:_txs];
         }
     }];
 }

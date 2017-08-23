@@ -414,7 +414,7 @@
 "xrandom_cancel_confirm"="停止生成?";
 "xrandom_final_confirm"="您已成功生成%lu个极随机私钥";
 "xrandom_stopping"="正在停止…";
-"xrandom_info_detail"="极随机通过采集数据源以增加随机性.\n\n数据源包括摄像头、麦克风、磁场感应器、重力感应器等设备内置传感器.";
+"xrandom_info_detail"="极随机通过采集数据源以增加随机性.\n\n数据源包括摄像头、磁场感应器、重力感应器等设备内置传感器.";
 "xrandom_info_guide"="\n\n采集过程中您可通过晃动设备等方式增加所采集数据的随机性.";
 "xrandom_info_get_permissions"="请求权限";
 "reach_address_count_limit"="已达地址数上限";
@@ -767,3 +767,10 @@
 "get_success" = "获得成功";
 "please_firstly_sync_to_block_no" = "请先同步到块%lu";
 "no_sync_complete" = "请稍候，交易暂未同步完成！";
+
+"private_key_import" = "导入";
+"private_key_import_title" = "请选择导入私钥对应的地址";
+"private_key_compressed_address" = "压缩私钥地址";
+"private_key_uncompressed_address" = "未压缩私钥地址";
+"private_key_recommend" = "(推荐)";
+

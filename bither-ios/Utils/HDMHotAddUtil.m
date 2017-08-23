@@ -123,8 +123,7 @@
 
 // MARK: hot xrandom
 - (void)hotWithXRandom {
-    if ([AVCaptureDevice authorizationStatusForMediaType:AVMediaTypeVideo] == AVAuthorizationStatusNotDetermined ||
-            [AVCaptureDevice authorizationStatusForMediaType:AVMediaTypeAudio] == AVAuthorizationStatusNotDetermined) {
+    if ([AVCaptureDevice authorizationStatusForMediaType:AVMediaTypeVideo] == AVAuthorizationStatusNotDetermined) {
         [self getPermissions:^{
             [self hotWithXRandom];
         }];
@@ -205,9 +204,7 @@
     __weak __block HDMHotAddUtil *s = self;
     [[[DialogXrandomInfo alloc] initWithPermission:^{
         [s getPermisionFor:AVMediaTypeVideo completion:^(BOOL result) {
-            [s getPermisionFor:AVMediaTypeAudio completion:^(BOOL result) {
-                dispatch_async(dispatch_get_main_queue(), completion);
-            }];
+            dispatch_async(dispatch_get_main_queue(), completion);
         }];
     }] showInWindow:self.window];
 }

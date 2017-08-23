@@ -104,7 +104,6 @@ static NSDictionary *_currenciesRate = nil;
         case CHBTC:
         case BTCTRADE:
             return CNY;
-        case BTCE:
         case BITSTAMP:
         case MARKET796:
         case BITFINEX:

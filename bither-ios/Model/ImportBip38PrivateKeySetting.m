@@ -33,7 +33,7 @@
 @implementation CheckPasswordBip38Delegate
 
 - (void)onPasswordEntered:(NSString *)password {
-    ImportPrivateKey *improtPrivateKey = [[ImportPrivateKey alloc] initWithController:self.controller content:self.privateKeyStr passwrod:password importPrivateKeyType:PrivateText];
+    ImportPrivateKey *improtPrivateKey = [[ImportPrivateKey alloc] initWithController:self.controller content:self.privateKeyStr passwrod:password importPrivateKeyType:Bip38];
     [improtPrivateKey importPrivateKey];
 }
 

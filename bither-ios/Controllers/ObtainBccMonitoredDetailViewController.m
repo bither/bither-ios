@@ -24,6 +24,9 @@
 #import "UnitUtil.h"
 
 #define kSendButtonQrIconSize (20)
+#define kSignTypeLength (2)
+#define kCompressPubKeyLength (68)
+#define kUncompressedPubKeyLength (132)
 
 @interface ObtainBccMonitoredDetailViewController () <UITextFieldDelegate, ScanQrCodeDelegate, DialogSendTxConfirmDelegate> {
     DialogProgressChangable *dp;
@@ -33,7 +36,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *lblTitle;
 @property(weak, nonatomic) IBOutlet UITextField *tfAddress;
 @property(weak, nonatomic) IBOutlet UIButton *btnObtain;
-@property BTTx *tx;
+@property NSArray *txs;
 
 @end
 
@@ -91,27 +94,27 @@
                     u_int64_t value = self.amount;
                     NSError *error;
                     NSString *toAddress = [self getToAddress];
-                    BTTx *tx;
+                    NSArray *txs;
                     if ([self.btAddress isMemberOfClass:[BTHDAccount class]]) {
-                        tx = [(BTHDAccount *)self.btAddress newTxToAddress:toAddress withAmount:value andError:&error andChangeAddress:toAddress coin:BCC];
+                        txs = [(BTHDAccount *)self.btAddress newBccTxsToAddresses:@[toAddress] withAmounts:@[@(value)] andError:&error andChangeAddress:toAddress];
                     } else {
-                        tx = [self.btAddress txForAmounts:@[@(value)] andAddress:@[toAddress] andChangeAddress:toAddress andError:&error coin:BCC];
+                        txs = [self.btAddress bccTxsForAmounts:@[@(value)] andAddress:@[toAddress] andChangeAddress:toAddress andError:&error];
                     }
                     
                     if (error) {
                         NSString *msg = [TransactionsUtil getCompleteTxForError:error];
                         [self showMsg:msg];
                     } else {
-                        if (!tx) {
+                        if (!txs) {
                             [self showSendFailed];
                             return;
                         }
-                        self.tx = tx;
+                        self.txs = txs;
                         __block NSString *addressBlock = toAddress;
                         dispatch_async(dispatch_get_main_queue(), ^{
                             [dp dismissWithCompletion:^{
                                 [dp changeToMessage:NSLocalizedString(@"Please wait…", nil)];
-                                DialogHDSendTxConfirm *dialogHDSendTxConfirm = [[DialogHDSendTxConfirm alloc] initWithTx:tx to:addressBlock delegate:self unitName:@"BCC"];
+                                DialogHDSendTxConfirm *dialogHDSendTxConfirm = [[DialogHDSendTxConfirm alloc] initWithTxs:txs to:addressBlock delegate:self unitName:@"BCC"];
                                 dialogHDSendTxConfirm.touchOutSideToDismiss = false;
                                 [dialogHDSendTxConfirm showInWindow:self.view.window];
                             }];
@@ -126,8 +129,8 @@
     }];
 }
 
-- (void)onSendTxConfirmed:(BTTx *)tx {
-    if (!tx) {
+- (void)onGetBccSendTxConfirmed:(NSArray *)txs {
+    if (!txs) {
         self.btnObtain.enabled = YES;
         return;
     }
@@ -136,29 +139,46 @@
     qr.qrCodeMsg = NSLocalizedString(@"Scan with Bither Cold", nil);
     qr.cancelWarning = NSLocalizedString(@"Give up signing?", nil);
     QRCodeTxTransport *txTrans = [[QRCodeTxTransport alloc] init];
-    txTrans.fee = self.tx.feeForTransaction;
-    txTrans.to = [tx amountSentTo:[self getToAddress]];
+    
+    int64_t amount = 0;
+    int64_t fee = 0;
+    for (BTTx *tx in txs) {
+        amount += [tx amountSentTo:[self getToAddress]];
+        fee += tx.feeForTransaction;
+    }
+    txTrans.fee = fee;
+    txTrans.to = amount;
+
     txTrans.myAddress = self.btAddress.address;
     txTrans.toAddress = self.tfAddress.text;
     NSMutableArray *array = [[NSMutableArray alloc] init];
-    NSArray *hashDataArray = tx.unsignedInHashes;
-    for (NSData *data in hashDataArray) {
-        [array addObject:[NSString hexWithData:data]];
-    }
-    txTrans.hashList = array;
     if ([self.btAddress isMemberOfClass:[BTHDAccount class]]) {
-        NSArray *addresses = [(BTHDAccount *)self.btAddress getSigningAddressesForInputs:self.tx.ins];
         NSMutableArray *paths = [NSMutableArray new];
-        for (BTHDAccountAddress *a in addresses) {
-            PathTypeIndex *path = [[PathTypeIndex alloc] init];
-            path.index = a.index;
-            path.pathType = a.pathType;
-            [paths addObject:path];
+        for (BTTx *tx in txs) {
+            NSArray *hashDataArray = tx.unsignedInHashes;
+            for (NSData *data in hashDataArray) {
+                [array addObject:[NSString hexWithData:data]];
+            }
+            NSArray *addresses = [(BTHDAccount *)self.btAddress getSigningAddressesForInputs:tx.ins];
+            for (BTHDAccountAddress *a in addresses) {
+                PathTypeIndex *path = [[PathTypeIndex alloc] init];
+                path.index = a.index;
+                path.pathType = a.pathType;
+                [paths addObject:path];
+            }
         }
+        txTrans.hashList = array;
         txTrans.pathTypeIndexes = paths;
         txTrans.txTransportType = TxTransportTypeColdHD;
         qr.content = [QRCodeTxTransport getPreSignString:txTrans];
     } else {
+        for (BTTx *tx in txs) {
+            NSArray *hashDataArray = tx.unsignedInHashes;
+            for (NSData *data in hashDataArray) {
+                [array addObject:[NSString hexWithData:data]];
+            }
+        }
+        txTrans.hashList = array;
         qr.content = [QRCodeTxTransport getPreSignString:txTrans];
         qr.oldContent = [QRCodeTxTransport oldGetPreSignString:txTrans];
         qr.hasChangeAddress = ![StringUtil compareString:[self getToAddress] compare:self.btAddress.address];
@@ -169,7 +189,7 @@
 
 - (void)onSendTxCanceled {
     self.btnObtain.enabled = YES;
-    self.tx = nil;
+    self.txs = nil;
 }
 
 - (void)scanBitherColdToSign {
@@ -184,27 +204,37 @@
 - (void)finalSend {
     [dp changeToMessage:NSLocalizedString(@"Please wait…", nil) completion:^{
         [dp showInWindow:self.view.window completion:^{
-            [[BitherApi instance] postBccBroadcast:self.tx callback:^(NSDictionary *dict) {
-                NSNumber *numResult = dict[@"result"];
-                if (numResult.intValue > 0) {
-                    [self saveIsObtainBcc];
-                    [dp dismissWithCompletion:^{
-                        [self.navigationController popViewControllerAnimated:YES];
-                        if (self.sendDelegate && [self.sendDelegate respondsToSelector:@selector(sendSuccessed:)]) {
-                            [self.sendDelegate sendSuccessed:self.tx];
-                        }
-                    }];
-                } else {
-                    NSDictionary *dicError = dict[@"error"];
-                    NSString *code = dicError[@"code"];
-                    NSString *message = dicError[@"message"];
-                    [self showMsg:[NSString stringWithFormat:@"%@: %@", code, message]];
-                    self.btnObtain.enabled = YES;
+            dispatch_group_t group = dispatch_group_create();
+            __block NSString *errorMsg;
+            for (BTTx *tx in self.txs) {
+                dispatch_group_enter(group);
+                [[BitherApi instance] postBccBroadcast:tx callback:^(NSDictionary *dict) {
+                    NSNumber *numResult = dict[@"result"];
+                    if (!(numResult.intValue > 0)) {
+                        NSDictionary *dicError = dict[@"error"];
+                        NSString *code = dicError[@"code"];
+                        NSString *message = dicError[@"message"];
+                        errorMsg = [NSString stringWithFormat:@"%@: %@", code, message];
+                    }
+                    dispatch_group_leave(group);
+                } andErrorCallBack:^(NSOperation *errorOp, NSError *error) {
+                    errorMsg = NSLocalizedString(@"Send failed.", nil);
+                    dispatch_group_leave(group);
+                }];
+            }
+            dispatch_group_notify(group, dispatch_get_main_queue(), ^{
+                if (errorMsg) {
+                    [self showMsg:errorMsg];
+                    return;
                 }
-            } andErrorCallBack:^(NSOperation *errorOp, NSError *error) {
-                [self showSendFailed];
-                self.btnObtain.enabled = YES;
-            }];
+                [self saveIsObtainBcc];
+                [dp dismissWithCompletion:^{
+                    [self.navigationController popViewControllerAnimated:YES];
+                    if (self.sendDelegate && [self.sendDelegate respondsToSelector:@selector(sendSuccessed:)]) {
+                        [self.sendDelegate sendSuccessed:nil];
+                    }
+                }];
+            });
         }];
     }];
 }
@@ -246,24 +276,46 @@
         [reader.presentingViewController dismissViewControllerAnimated:YES completion:^{
             self.btnObtain.enabled = NO;
             NSArray *strs = [BTQRCodeUtil splitQRCode:result];
-            BOOL success = strs.count == self.tx.ins.count;
-            NSMutableArray *sigs = [[NSMutableArray alloc] init];
-            if(success){
-                for (NSString *s in strs) {
-                    NSUInteger signTypeLength = 2;
-                    NSUInteger pubKeyLength = 68;
-                    NSString *changeStr = s.length > signTypeLength + pubKeyLength ? [s stringByReplacingCharactersInRange:NSMakeRange(s.length - (signTypeLength + pubKeyLength), signTypeLength) withString:[NSString stringWithFormat:@"%0x", [self.tx getSigHashType]]] : s;
-                    NSData* d = [changeStr hexToData];
-                    if(!d){
-                        success = NO;
+            NSUInteger insCount = 0;
+            for (BTTx *tx in self.txs) {
+                insCount += tx.ins.count;
+            }
+            BOOL success = strs.count == insCount;
+            if (success) {
+                int strIndex = 0;
+                for (int i = 0; i < self.txs.count; i++) {
+                    BTTx *tx = self.txs[i];
+                    NSMutableArray *compressSigs = [[NSMutableArray alloc] init];
+                    NSMutableArray *uncompressedSigs = [[NSMutableArray alloc] init];
+                    if (success) {
+                        for (int j = 0; j < tx.ins.count; j++) {
+                            NSString *s = strs[strIndex + j];
+                            NSString *compressChangeStr = s.length > kSignTypeLength + kCompressPubKeyLength ? [s stringByReplacingCharactersInRange:NSMakeRange(s.length - (kSignTypeLength + kCompressPubKeyLength), kSignTypeLength) withString:[NSString stringWithFormat:@"%0x", [tx getSigHashType]]] : s;
+                            NSString *uncompressedChangeStr = s.length > kSignTypeLength + kUncompressedPubKeyLength ? [s stringByReplacingCharactersInRange:NSMakeRange(s.length - (kSignTypeLength + kUncompressedPubKeyLength), kSignTypeLength) withString:[NSString stringWithFormat:@"%0x", [tx getSigHashType]]] : s;
+                            NSData *compressData = [compressChangeStr hexToData];
+                            NSData *uncompressedData = [uncompressedChangeStr hexToData];
+                            if(!compressData || !uncompressedData){
+                                success = NO;
+                                break;
+                            }
+                            [compressSigs addObject:compressData];
+                            [uncompressedSigs addObject:uncompressedData];
+                        }
+                    }
+                    if (success) {
+                        if ([tx signWithSignatures:compressSigs]) {
+                            success = YES;
+                        } else {
+                            success = [tx signWithSignatures:uncompressedSigs];
+                        }
+                    }
+                    if (!success) {
                         break;
                     }
-                    [sigs addObject:d];
+                    strIndex += tx.ins.count;
                 }
             }
-            if(success){
-                success = [self.tx signWithSignatures:sigs];
-            }
+            
             if (success) {
                 [dp showInWindow:self.view.window completion:^{
                     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
@@ -272,7 +324,7 @@
                 }];
             } else {
                 self.btnObtain.enabled = YES;
-                self.tx = nil;
+                self.txs = nil;
                 [self showSendFailed];
             }
         }];
@@ -280,7 +332,7 @@
 }
 
 - (void)handleScanCancelByReader:(ScanQrCodeViewController *)reader {
-    self.tx = nil;
+    self.txs = nil;
 }
 
 - (void)showMsg:(NSString *)msg {

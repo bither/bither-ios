@@ -87,29 +87,38 @@
                 }
                 NSError *error;
                 NSString *toAddress = [self getToAddress];
-                BTTx *tx;
+                NSArray *txs;
                 if ([self.btAddress isMemberOfClass:[BTHDAccount class]]) {
-                    tx = [(BTHDAccount *)self.btAddress newTxToAddress:toAddress withAmount:self.amount andChangeAddress:toAddress password:self.tfPassword.text andError:&error coin: BCC];
+                    txs = [(BTHDAccount *)self.btAddress newBccTxsToAddresses:@[toAddress] withAmounts:@[@(self.amount)] andChangeAddress:toAddress password:self.tfPassword.text andError:&error];
                 } else {
-                    tx = [self.btAddress txForAmounts:@[@(self.amount)] andAddress:@[toAddress] andChangeAddress:toAddress andError:&error coin:BCC];
+                    txs = [self.btAddress bccTxsForAmounts:@[@(self.amount)] andAddress:@[toAddress] andChangeAddress:toAddress andError:&error];
                 }
                 
                 if (error) {
                     NSString *msg = [TransactionsUtil getCompleteTxForError:error];
                     [self showMsg:msg];
                 } else {
-                    if (!tx) {
+                    if (!txs) {
                         [self showSendFailed];
                         return;
                     }
                     
                     if ([self.btAddress isMemberOfClass:[BTHDAccount class]]) {
-                        [self showDialogHDSendTxConfirmForTx:tx];
+                        [self showDialogHDSendTxConfirmForTx:txs];
                     } else {
-                        if ([self.btAddress signTransaction:tx withPassphrase:self.tfPassword.text]) {
-                            [self showDialogHDSendTxConfirmForTx:tx];
-                        } else {
+                        BOOL isPasswordWrong = NO;
+                        for (BTTx *tx in txs) {
+                            if ([self.btAddress signTransaction:tx withPassphrase:self.tfPassword.text]) {
+                                continue;
+                            } else {
+                                isPasswordWrong = YES;
+                                break;
+                            }
+                        }
+                        if (isPasswordWrong) {
                             [self showPasswordWrong];
+                        } else {
+                            [self showDialogHDSendTxConfirmForTx:txs];
                         }
                     }
                 }
@@ -121,39 +130,51 @@
     }];
 }
 
-- (void)showDialogHDSendTxConfirmForTx:(BTTx *)tx {
+- (void)showDialogHDSendTxConfirmForTx:(NSArray *)txs {
     dispatch_async(dispatch_get_main_queue(), ^{
         [dp dismissWithCompletion:^{
             [dp changeToMessage:NSLocalizedString(@"Please wait…", nil)];
-            DialogHDSendTxConfirm *dialogHDSendTxConfirm = [[DialogHDSendTxConfirm alloc] initWithTx:tx to:[self getToAddress] delegate:self unitName:@"BCC"];
+            DialogHDSendTxConfirm *dialogHDSendTxConfirm = [[DialogHDSendTxConfirm alloc] initWithTxs:txs to:[self getToAddress] delegate:self unitName:@"BCC"];
             dialogHDSendTxConfirm.touchOutSideToDismiss = false;
             [dialogHDSendTxConfirm showInWindow:self.view.window];
         }];
     });
 }
 
-- (void)onSendTxConfirmed:(BTTx *)tx {
+- (void)onGetBccSendTxConfirmed:(NSArray *)txs {
     [dp changeToMessage:NSLocalizedString(@"Please wait…", nil) completion:^{
         [dp showInWindow:self.view.window completion:^{
-            [[BitherApi instance] postBccBroadcast:tx callback:^(NSDictionary *dict) {
-                NSNumber *numResult = dict[@"result"];
-                if (numResult.intValue > 0) {
-                    [self saveIsObtainBcc];
-                    [dp dismissWithCompletion:^{
-                        [self.navigationController popViewControllerAnimated:YES];
-                        if (self.sendDelegate && [self.sendDelegate respondsToSelector:@selector(sendSuccessed:)]) {
-                            [self.sendDelegate sendSuccessed:tx];
-                        }
-                    }];
-                } else {
-                    NSDictionary *dicError = dict[@"error"];
-                    NSString *code = dicError[@"code"];
-                    NSString *message = dicError[@"message"];
-                    [self showMsg:[NSString stringWithFormat:@"%@: %@", code, message]];
+            dispatch_group_t group = dispatch_group_create();
+            __block NSString *errorMsg;
+            for (BTTx *tx in txs) {
+                dispatch_group_enter(group);
+                [[BitherApi instance] postBccBroadcast:tx callback:^(NSDictionary *dict) {
+                    NSNumber *numResult = dict[@"result"];
+                    if (!(numResult.intValue > 0)) {
+                        NSDictionary *dicError = dict[@"error"];
+                        NSString *code = dicError[@"code"];
+                        NSString *message = dicError[@"message"];
+                        errorMsg = [NSString stringWithFormat:@"%@: %@", code, message];
+                    }
+                    dispatch_group_leave(group);
+                } andErrorCallBack:^(NSOperation *errorOp, NSError *error) {
+                    errorMsg = NSLocalizedString(@"Send failed.", nil);
+                    dispatch_group_leave(group);
+                }];
+            }
+            dispatch_group_notify(group, dispatch_get_main_queue(), ^{
+                if (errorMsg) {
+                    [self showMsg:errorMsg];
+                    return;
                 }
-            } andErrorCallBack:^(NSOperation *errorOp, NSError *error) {
-                [self showSendFailed];
-            }];
+                [self saveIsObtainBcc];
+                [dp dismissWithCompletion:^{
+                    [self.navigationController popViewControllerAnimated:YES];
+                    if (self.sendDelegate && [self.sendDelegate respondsToSelector:@selector(sendSuccessed:)]) {
+                        [self.sendDelegate sendSuccessed:nil];
+                    }
+                }];
+            });
         }];
     }];
 }

@@ -86,8 +86,7 @@
 
 - (IBAction)generatePressed:(id)sender {
     if (self.btnXRandomCheck.selected && (
-            [AVCaptureDevice authorizationStatusForMediaType:AVMediaTypeVideo] == AVAuthorizationStatusNotDetermined ||
-                    [AVCaptureDevice authorizationStatusForMediaType:AVMediaTypeAudio] == AVAuthorizationStatusNotDetermined)
+            [AVCaptureDevice authorizationStatusForMediaType:AVMediaTypeVideo] == AVAuthorizationStatusNotDetermined)
             ) {
         [self getPermissions:^{
             DialogPassword *d = [[DialogPassword alloc] initWithDelegate:self];
@@ -131,9 +130,7 @@
     __weak __block HotAddressAddPrivateKeyViewController *c = self;
     [[[DialogXrandomInfo alloc] initWithPermission:^{
         [c getPermisionFor:AVMediaTypeVideo completion:^(BOOL result) {
-            [c getPermisionFor:AVMediaTypeAudio completion:^(BOOL result) {
-                dispatch_async(dispatch_get_main_queue(), completion);
-            }];
+            dispatch_async(dispatch_get_main_queue(), completion);
         }];
     }] showInWindow:self.view.window];
 }
