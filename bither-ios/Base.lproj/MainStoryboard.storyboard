@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="all" colorMatched="YES" initialViewController="kY0-Iw-Q6e">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" colorMatched="YES" initialViewController="kY0-Iw-Q6e">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -12,7 +12,7 @@
         <!--Choose Mode View Controller-->
         <scene sceneID="I1a-eD-HL9">
             <objects>
-                <viewController storyboardIdentifier="ChooseModeViewController" id="kY0-Iw-Q6e" customClass="ChooseModeViewController" propertyAccessControl="all" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ChooseModeViewController" id="kY0-Iw-Q6e" customClass="ChooseModeViewController" propertyAccessControl="none" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="QeP-sH-cEH">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -183,7 +183,7 @@
         <!--Hot View Controller-->
         <scene sceneID="WVt-6V-XdC">
             <objects>
-                <viewController storyboardIdentifier="HotViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="apG-h2-03F" customClass="HotViewController" propertyAccessControl="all" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="HotViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="apG-h2-03F" customClass="HotViewController" propertyAccessControl="none" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="nzh-Um-5HK">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -265,7 +265,7 @@
         <!--Network Monitor View Controller-->
         <scene sceneID="fbm-4R-Eo2">
             <objects>
-                <viewController storyboardIdentifier="NetworkMonitorViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="ZcG-XC-ngs" customClass="NetworkMonitorViewController" propertyAccessControl="all" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="NetworkMonitorViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="ZcG-XC-ngs" customClass="NetworkMonitorViewController" propertyAccessControl="none" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="VXp-3F-5un">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -340,7 +340,7 @@
         <!--Peer View Controller-->
         <scene sceneID="PzM-mL-N1T">
             <objects>
-                <viewController restorationIdentifier="PeerViewController" storyboardIdentifier="PeerViewController" id="2kL-5v-0aD" customClass="PeerViewController" propertyAccessControl="all" sceneMemberID="viewController">
+                <viewController restorationIdentifier="PeerViewController" storyboardIdentifier="PeerViewController" id="2kL-5v-0aD" customClass="PeerViewController" propertyAccessControl="none" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Edl-ck-7OX">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -359,7 +359,7 @@
                                         <rect key="frame" x="0.0" y="22" width="375" height="65"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="RkU-p3-A4X" id="66C-bR-IR3">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="64.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="64"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" id="boe-qP-OrR">
@@ -432,7 +432,7 @@
         <!--Block View Controller-->
         <scene sceneID="DbV-ca-h9O">
             <objects>
-                <viewController restorationIdentifier="BlockViewController" storyboardIdentifier="BlockViewController" id="2I8-p8-sHu" customClass="BlockViewController" propertyAccessControl="all" sceneMemberID="viewController">
+                <viewController restorationIdentifier="BlockViewController" storyboardIdentifier="BlockViewController" id="2I8-p8-sHu" customClass="BlockViewController" propertyAccessControl="none" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="IBE-a2-80v">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -451,7 +451,7 @@
                                         <rect key="frame" x="0.0" y="22" width="375" height="65"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="7B5-J1-ils" id="oj3-q3-NMl">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="64.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="64"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" id="GP7-hV-si8">
@@ -556,7 +556,7 @@
         <!--Hot Address Add Other View Controller-->
         <scene sceneID="zHH-LN-IF3">
             <objects>
-                <viewController storyboardIdentifier="HotAddressAddOther" useStoryboardIdentifierAsRestorationIdentifier="YES" id="xvs-oH-D5k" customClass="HotAddressAddOtherViewController" propertyAccessControl="all" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="HotAddressAddOther" useStoryboardIdentifierAsRestorationIdentifier="YES" id="xvs-oH-D5k" customClass="HotAddressAddOtherViewController" propertyAccessControl="none" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="1TF-KI-Yb2">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -662,7 +662,7 @@ They need separated back ups.</string>
         <!--Hot Address Add View Controller-->
         <scene sceneID="f24-aG-9de">
             <objects>
-                <viewController storyboardIdentifier="HotAddressAdd" useStoryboardIdentifierAsRestorationIdentifier="YES" id="ao7-9N-6vp" customClass="HotAddressAddViewController" propertyAccessControl="all" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="HotAddressAdd" useStoryboardIdentifierAsRestorationIdentifier="YES" id="ao7-9N-6vp" customClass="HotAddressAddViewController" propertyAccessControl="none" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="s9D-jC-ycb">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -695,7 +695,7 @@ They need separated back ups.</string>
                                             <action selector="cancelPressed:" destination="ao7-9N-6vp" eventType="touchUpInside" id="waI-zl-a1o"/>
                                         </connections>
                                     </button>
-                                    <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="0" id="oZb-Bk-280" propertyAccessControl="all">
+                                    <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="0" id="oZb-Bk-280" propertyAccessControl="none">
                                         <rect key="frame" x="97.5" y="8" width="180" height="29"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                         <segments>
@@ -725,7 +725,7 @@ They need separated back ups.</string>
         <!--Hot Address AddHDM View Controller-->
         <scene sceneID="iT4-MN-vCu">
             <objects>
-                <viewController storyboardIdentifier="HotAddressAddHDM" useStoryboardIdentifierAsRestorationIdentifier="YES" id="DVL-1f-gD0" customClass="HotAddressAddHDMViewController" propertyAccessControl="all" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="HotAddressAddHDM" useStoryboardIdentifierAsRestorationIdentifier="YES" id="DVL-1f-gD0" customClass="HotAddressAddHDMViewController" propertyAccessControl="none" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="kvd-4J-NtE">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -987,7 +987,7 @@ They need separated back ups.</string>
         <!--Hot Address Add Private Key View Controller-->
         <scene sceneID="15x-fd-pEi">
             <objects>
-                <viewController storyboardIdentifier="HotAddressAddPrivateKey" useStoryboardIdentifierAsRestorationIdentifier="YES" id="5gP-20-5H4" customClass="HotAddressAddPrivateKeyViewController" propertyAccessControl="all" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="HotAddressAddPrivateKey" useStoryboardIdentifierAsRestorationIdentifier="YES" id="5gP-20-5H4" customClass="HotAddressAddPrivateKeyViewController" propertyAccessControl="none" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="DGR-IR-09i">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -1101,7 +1101,7 @@ They need separated back ups.</string>
         <!--Hot Address Add Watch Only View Controller-->
         <scene sceneID="VHg-bC-3ub">
             <objects>
-                <viewController storyboardIdentifier="HotAddressAddWatchOnly" useStoryboardIdentifierAsRestorationIdentifier="YES" id="NH3-5p-UBE" customClass="HotAddressAddWatchOnlyViewController" propertyAccessControl="all" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="HotAddressAddWatchOnly" useStoryboardIdentifierAsRestorationIdentifier="YES" id="NH3-5p-UBE" customClass="HotAddressAddWatchOnlyViewController" propertyAccessControl="none" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Hxd-zD-Y7E">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -1130,7 +1130,7 @@ They need separated back ups.</string>
         <!--Navigation Controller-->
         <scene sceneID="6E1-0Q-Zv7">
             <objects>
-                <navigationController storyboardIdentifier="BitherHot" useStoryboardIdentifierAsRestorationIdentifier="YES" navigationBarHidden="YES" id="gbN-Sp-XBo" propertyAccessControl="all" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="BitherHot" useStoryboardIdentifierAsRestorationIdentifier="YES" navigationBarHidden="YES" id="gbN-Sp-XBo" propertyAccessControl="none" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationItem key="navigationItem" id="ctO-Ve-1Es"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="1QA-Pz-MWS">
@@ -1149,7 +1149,7 @@ They need separated back ups.</string>
         <!--Option Hot View Controller-->
         <scene sceneID="UcO-Un-N3V">
             <objects>
-                <viewController storyboardIdentifier="tab_option_hot" id="5qC-FM-9jy" customClass="OptionHotViewController" propertyAccessControl="all" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="tab_option_hot" id="5qC-FM-9jy" customClass="OptionHotViewController" propertyAccessControl="none" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="IM6-kN-MtU">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -1168,7 +1168,7 @@ They need separated back ups.</string>
                                         <rect key="frame" x="0.0" y="22" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="DFz-1F-dc1" id="Fd6-0L-x9k">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" id="hvg-6q-3rx">
@@ -1225,7 +1225,7 @@ They need separated back ups.</string>
         <!--Market View Controller-->
         <scene sceneID="BG9-lJ-VHB">
             <objects>
-                <viewController storyboardIdentifier="tab_market" id="HIC-Xg-iPf" customClass="MarketViewController" propertyAccessControl="all" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="tab_market" id="HIC-Xg-iPf" customClass="MarketViewController" propertyAccessControl="none" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="CAt-Zt-Agu">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -1354,7 +1354,7 @@ They need separated back ups.</string>
                                                 <rect key="frame" x="0.0" y="22" width="355" height="44"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="44b-Xp-tZi" id="nRU-E2-lOi">
-                                                    <rect key="frame" x="0.0" y="0.0" width="355" height="43.5"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="355" height="43"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
                                                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Plt-58-S4m">
@@ -1447,7 +1447,7 @@ They need separated back ups.</string>
         <!--AddHDM Address View Controller-->
         <scene sceneID="G78-xR-oMp">
             <objects>
-                <viewController storyboardIdentifier="AddHDMAddress" useStoryboardIdentifierAsRestorationIdentifier="YES" id="3Ag-pQ-2Pw" customClass="AddHDMAddressViewController" propertyAccessControl="all" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="AddHDMAddress" useStoryboardIdentifierAsRestorationIdentifier="YES" id="3Ag-pQ-2Pw" customClass="AddHDMAddressViewController" propertyAccessControl="none" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="4Wl-fp-YqK">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1530,7 +1530,7 @@ They need separated back ups.</string>
         <!--Qr Code View Controller-->
         <scene sceneID="Ej9-xI-rsK">
             <objects>
-                <viewController storyboardIdentifier="QrCode" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Ipx-4P-LPW" customClass="QrCodeViewController" propertyAccessControl="all" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="QrCode" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Ipx-4P-LPW" customClass="QrCodeViewController" propertyAccessControl="none" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="cUS-ui-K0K">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1621,7 +1621,7 @@ They need separated back ups.</string>
         <!--Hot Address View Controller-->
         <scene sceneID="NFh-bv-Tb8">
             <objects>
-                <viewController storyboardIdentifier="tab_hot_address" id="D40-nJ-Fe5" customClass="HotAddressViewController" propertyAccessControl="all" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="tab_hot_address" id="D40-nJ-Fe5" customClass="HotAddressViewController" propertyAccessControl="none" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="GoL-yb-jz7">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -1827,7 +1827,7 @@ They need separated back ups.</string>
         <!--Address Detail View Controller-->
         <scene sceneID="pSA-oq-eXi">
             <objects>
-                <viewController storyboardIdentifier="AddressDetail" useStoryboardIdentifierAsRestorationIdentifier="YES" id="B1F-tP-m9O" customClass="AddressDetailViewController" propertyAccessControl="all" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="AddressDetail" useStoryboardIdentifierAsRestorationIdentifier="YES" id="B1F-tP-m9O" customClass="AddressDetailViewController" propertyAccessControl="none" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="H5L-Q4-mLe">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -2086,7 +2086,7 @@ They need separated back ups.</string>
         <!--Select View Controller-->
         <scene sceneID="P5W-Rk-hY9">
             <objects>
-                <viewController storyboardIdentifier="SelectViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="y8U-d0-ypR" customClass="SelectViewController" propertyAccessControl="all" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SelectViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="y8U-d0-ypR" customClass="SelectViewController" propertyAccessControl="none" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="kKv-Zu-rx4">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -2196,7 +2196,7 @@ They need separated back ups.</string>
         <!--Send View Controller-->
         <scene sceneID="jpm-hl-i7g">
             <objects>
-                <viewController storyboardIdentifier="Send" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Xf8-za-YXH" customClass="SendViewController" propertyAccessControl="all" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Send" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Xf8-za-YXH" customClass="SendViewController" propertyAccessControl="none" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="t7S-9n-GdZ">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -2371,7 +2371,7 @@ They need separated back ups.</string>
         <!--Unsigned Transaction View Controller-->
         <scene sceneID="r5B-3W-MBS">
             <objects>
-                <viewController storyboardIdentifier="UnsignedTransaction" useStoryboardIdentifierAsRestorationIdentifier="YES" id="o0d-uZ-7EE" customClass="UnsignedTransactionViewController" propertyAccessControl="all" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="UnsignedTransaction" useStoryboardIdentifierAsRestorationIdentifier="YES" id="o0d-uZ-7EE" customClass="UnsignedTransactionViewController" propertyAccessControl="none" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="HrA-0e-gey">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -2532,7 +2532,7 @@ They need separated back ups.</string>
         <!--Navigation Controller-->
         <scene sceneID="DP0-Bl-vj6">
             <objects>
-                <navigationController storyboardIdentifier="BitherCold" useStoryboardIdentifierAsRestorationIdentifier="YES" navigationBarHidden="YES" id="llh-hu-XEa" propertyAccessControl="all" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="BitherCold" useStoryboardIdentifierAsRestorationIdentifier="YES" navigationBarHidden="YES" id="llh-hu-XEa" propertyAccessControl="none" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationItem key="navigationItem" id="Yhg-Vo-ITy"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="8ab-54-ANk">
@@ -2551,7 +2551,7 @@ They need separated back ups.</string>
         <!--Cold Address AddHDM View Controller-->
         <scene sceneID="iaL-0f-syZ">
             <objects>
-                <viewController storyboardIdentifier="ColdAddressAddHDM" useStoryboardIdentifierAsRestorationIdentifier="YES" id="YUD-Bb-Jl7" customClass="ColdAddressAddHDMViewController" propertyAccessControl="all" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ColdAddressAddHDM" useStoryboardIdentifierAsRestorationIdentifier="YES" id="YUD-Bb-Jl7" customClass="ColdAddressAddHDMViewController" propertyAccessControl="none" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="zHa-Oa-HtX">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -2761,7 +2761,7 @@ They need separated back ups.</string>
         <!--Cold Address Add View Controller-->
         <scene sceneID="QgX-k8-cLZ">
             <objects>
-                <viewController storyboardIdentifier="ColdAddressAdd" useStoryboardIdentifierAsRestorationIdentifier="YES" id="aJS-L3-J2s" customClass="ColdAddressAddViewController" propertyAccessControl="all" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ColdAddressAdd" useStoryboardIdentifierAsRestorationIdentifier="YES" id="aJS-L3-J2s" customClass="ColdAddressAddViewController" propertyAccessControl="none" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="5OF-U9-9qc">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -2824,7 +2824,7 @@ They need separated back ups.</string>
         <!--Cold View Controller-->
         <scene sceneID="ePZ-wt-crF">
             <objects>
-                <viewController storyboardIdentifier="ColdViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="ZJv-3l-W6L" customClass="ColdViewController" propertyAccessControl="all" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ColdViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="ZJv-3l-W6L" customClass="ColdViewController" propertyAccessControl="none" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="tXN-Ey-LbC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -2897,7 +2897,7 @@ They need separated back ups.</string>
         <!--Option Cold View Controller-->
         <scene sceneID="Hwj-im-7QG">
             <objects>
-                <viewController storyboardIdentifier="tab_option_cold" id="RIv-xz-BJ4" customClass="OptionColdViewController" propertyAccessControl="all" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="tab_option_cold" id="RIv-xz-BJ4" customClass="OptionColdViewController" propertyAccessControl="none" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="XcZ-B8-Jvz">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -2916,7 +2916,7 @@ They need separated back ups.</string>
                                         <rect key="frame" x="0.0" y="22" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="a9c-E5-Blu" id="H0r-y9-OTG">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" id="X1g-f9-XxK">
@@ -2973,7 +2973,7 @@ They need separated back ups.</string>
         <!--Sign Transaction View Controller-->
         <scene sceneID="c5V-os-hE3">
             <objects>
-                <viewController storyboardIdentifier="SignTransaction" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Xhm-nl-Fcp" customClass="SignTransactionViewController" propertyAccessControl="all" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SignTransaction" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Xhm-nl-Fcp" customClass="SignTransactionViewController" propertyAccessControl="none" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="4bf-UX-MP0">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -3148,7 +3148,7 @@ They need separated back ups.</string>
         <!--Cold Address View Controller-->
         <scene sceneID="baP-ZH-2Kv">
             <objects>
-                <viewController storyboardIdentifier="tab_cold_address" id="3hj-Y1-dpn" customClass="ColdAddressViewController" propertyAccessControl="all" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="tab_cold_address" id="3hj-Y1-dpn" customClass="ColdAddressViewController" propertyAccessControl="none" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="goV-jr-385">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -3538,7 +3538,7 @@ They need separated back ups.</string>
         <!--Check View Controller-->
         <scene sceneID="Xil-Kv-3A7">
             <objects>
-                <viewController storyboardIdentifier="tab_check" id="wg1-tw-lAU" customClass="CheckViewController" propertyAccessControl="all" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="tab_check" id="wg1-tw-lAU" customClass="CheckViewController" propertyAccessControl="none" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="bKy-hf-RFp">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -3615,7 +3615,7 @@ They need separated back ups.</string>
                                                         <rect key="frame" x="0.0" y="22" width="355" height="50"/>
                                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="q1c-TL-0om" id="XQ9-TP-O2z">
-                                                            <rect key="frame" x="0.0" y="0.0" width="355" height="49.5"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="355" height="49"/>
                                                             <autoresizingMask key="autoresizingMask"/>
                                                             <subviews>
                                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="QTh-Nu-yYh">
@@ -3721,7 +3721,7 @@ They need separated back ups.</string>
         <!--Hot Check Private Key View Controller-->
         <scene sceneID="uOO-wW-Er5">
             <objects>
-                <viewController storyboardIdentifier="HotCheckPrivateKeyViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="8tl-tH-nMI" customClass="HotCheckPrivateKeyViewController" propertyAccessControl="all" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="HotCheckPrivateKeyViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="8tl-tH-nMI" customClass="HotCheckPrivateKeyViewController" propertyAccessControl="none" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="1t3-g1-hN2">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -3775,7 +3775,7 @@ They need separated back ups.</string>
         <!--Obtain Bcc View Controller-->
         <scene sceneID="feZ-7p-zNW">
             <objects>
-                <viewController storyboardIdentifier="ObtainBccViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="syP-i3-JJn" customClass="ObtainBccViewController" propertyAccessControl="all" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ObtainBccViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="syP-i3-JJn" customClass="ObtainBccViewController" propertyAccessControl="none" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="IYV-lF-uTR">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -3879,7 +3879,7 @@ They need separated back ups.</string>
         <!--Obtain Bcc Detail View Controller-->
         <scene sceneID="cKl-tP-nvE">
             <objects>
-                <viewController storyboardIdentifier="ObtainBccDetailViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="vfc-gT-WN2" customClass="ObtainBccDetailViewController" propertyAccessControl="all" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ObtainBccDetailViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="vfc-gT-WN2" customClass="ObtainBccDetailViewController" propertyAccessControl="none" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="NOd-OJ-fVw">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -3998,7 +3998,7 @@ They need separated back ups.</string>
         <!--Obtain Bcc Monitored Detail View Controller-->
         <scene sceneID="mke-es-q9l">
             <objects>
-                <viewController storyboardIdentifier="ObtainBccMonitoredDetailViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="W5p-aN-uFL" customClass="ObtainBccMonitoredDetailViewController" propertyAccessControl="all" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ObtainBccMonitoredDetailViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="W5p-aN-uFL" customClass="ObtainBccMonitoredDetailViewController" propertyAccessControl="none" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="q9R-dq-VuV">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -4103,7 +4103,7 @@ They need separated back ups.</string>
         <!--Advance View Controller-->
         <scene sceneID="4yP-AU-Nza">
             <objects>
-                <viewController storyboardIdentifier="AdvanceViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="nHn-VR-JC7" customClass="AdvanceViewController" propertyAccessControl="all" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="AdvanceViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="nHn-VR-JC7" customClass="AdvanceViewController" propertyAccessControl="none" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="6zO-U4-SuX">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -4218,7 +4218,7 @@ They need separated back ups.</string>
         <!--Sign Message View Controller-->
         <scene sceneID="Zgl-V8-VdE">
             <objects>
-                <viewController storyboardIdentifier="SignMessage" useStoryboardIdentifierAsRestorationIdentifier="YES" id="tud-nR-ofb" customClass="SignMessageViewController" propertyAccessControl="all" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SignMessage" useStoryboardIdentifierAsRestorationIdentifier="YES" id="tud-nR-ofb" customClass="SignMessageViewController" propertyAccessControl="none" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Tem-ug-NaU">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -4450,7 +4450,7 @@ They need separated back ups.</string>
         <!--Verify Message Signature View Controller-->
         <scene sceneID="lej-6H-k5n">
             <objects>
-                <viewController storyboardIdentifier="VerifyMessageSignature" useStoryboardIdentifierAsRestorationIdentifier="YES" id="W6Z-3m-hO0" customClass="VerifyMessageSignatureViewController" propertyAccessControl="all" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="VerifyMessageSignature" useStoryboardIdentifierAsRestorationIdentifier="YES" id="W6Z-3m-hO0" customClass="VerifyMessageSignatureViewController" propertyAccessControl="none" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="EiJ-Z1-PfT">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -4660,7 +4660,7 @@ They need separated back ups.</string>
         <!--Sign Message Select Address View Controller-->
         <scene sceneID="CCa-sx-5Oi">
             <objects>
-                <viewController storyboardIdentifier="SignMessageSelectAddress" id="r7P-TT-QQc" customClass="SignMessageSelectAddressViewController" propertyAccessControl="all" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SignMessageSelectAddress" id="r7P-TT-QQc" customClass="SignMessageSelectAddressViewController" propertyAccessControl="none" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="tYl-TF-QdQ">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -4765,12 +4765,12 @@ They need separated back ups.</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Iyb-cT-rzk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2732.5" y="600.5"/>
+            <point key="canvasLocation" x="2772" y="601"/>
         </scene>
         <!--Trash Can View Controller-->
         <scene sceneID="9Zs-SR-RbI">
             <objects>
-                <viewController storyboardIdentifier="trash_can" useStoryboardIdentifierAsRestorationIdentifier="YES" id="in6-za-FFH" customClass="TrashCanViewController" propertyAccessControl="all" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="trash_can" useStoryboardIdentifierAsRestorationIdentifier="YES" id="in6-za-FFH" customClass="TrashCanViewController" propertyAccessControl="none" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Pco-LN-OZ6">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -4795,7 +4795,7 @@ They need separated back ups.</string>
                                         <rect key="frame" x="0.0" y="22" width="375" height="94"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="SML-Iv-N4f" id="q88-8F-v5x">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="93.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="93"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view clipsSubviews="YES" contentMode="scaleToFill" id="asI-xD-xar">
@@ -4922,7 +4922,7 @@ They need separated back ups.</string>
         <!--Pin Code View Controller-->
         <scene sceneID="im9-mr-aPB">
             <objects>
-                <viewController storyboardIdentifier="PinCode" useStoryboardIdentifierAsRestorationIdentifier="YES" id="xEk-gh-uah" customClass="PinCodeViewController" propertyAccessControl="all" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="PinCode" useStoryboardIdentifierAsRestorationIdentifier="YES" id="xEk-gh-uah" customClass="PinCodeViewController" propertyAccessControl="none" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="3Zx-j8-jeD">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -4946,7 +4946,7 @@ They need separated back ups.</string>
         <!--Pin Code Enable View Controller-->
         <scene sceneID="Qg3-jd-uLE">
             <objects>
-                <viewController storyboardIdentifier="PinCodeEnable" useStoryboardIdentifierAsRestorationIdentifier="YES" id="0fg-Dd-dZZ" customClass="PinCodeEnableViewController" propertyAccessControl="all" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="PinCodeEnable" useStoryboardIdentifierAsRestorationIdentifier="YES" id="0fg-Dd-dZZ" customClass="PinCodeEnableViewController" propertyAccessControl="none" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="3Cc-Vl-zPl">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -5007,7 +5007,7 @@ They need separated back ups.</string>
         <!--Raw Private Key View Controller-->
         <scene sceneID="ySz-2b-Yjf">
             <objects>
-                <viewController storyboardIdentifier="RawPrivateKey" useStoryboardIdentifierAsRestorationIdentifier="YES" id="e4z-zx-Kf5" customClass="RawPrivateKeyViewController" propertyAccessControl="all" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="RawPrivateKey" useStoryboardIdentifierAsRestorationIdentifier="YES" id="e4z-zx-Kf5" customClass="RawPrivateKeyViewController" propertyAccessControl="none" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="oCb-3S-Fil">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -5064,7 +5064,7 @@ They need separated back ups.</string>
         <!--Raw Private Key Binary View Controller-->
         <scene sceneID="l9g-Jj-umj">
             <objects>
-                <viewController storyboardIdentifier="RawPrivateKeyBinary" useStoryboardIdentifierAsRestorationIdentifier="YES" id="GLK-Cm-DMJ" customClass="RawPrivateKeyBinaryViewController" propertyAccessControl="all" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="RawPrivateKeyBinary" useStoryboardIdentifierAsRestorationIdentifier="YES" id="GLK-Cm-DMJ" customClass="RawPrivateKeyBinaryViewController" propertyAccessControl="none" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="LtY-FB-iN5">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -5251,7 +5251,7 @@ They need separated back ups.</string>
         <!--Raw Private Key Dice View Controller-->
         <scene sceneID="B09-Og-YeX">
             <objects>
-                <viewController storyboardIdentifier="RawPrivateKeyDice" useStoryboardIdentifierAsRestorationIdentifier="YES" id="LsC-vk-pC0" customClass="RawPrivateKeyDiceViewController" propertyAccessControl="all" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="RawPrivateKeyDice" useStoryboardIdentifierAsRestorationIdentifier="YES" id="LsC-vk-pC0" customClass="RawPrivateKeyDiceViewController" propertyAccessControl="none" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="dwn-hP-1eI">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -5485,7 +5485,7 @@ They need separated back ups.</string>
         <!--Pin Code Disable View Controller-->
         <scene sceneID="LZc-Ac-uVd">
             <objects>
-                <viewController storyboardIdentifier="PinCodeDisable" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Vpu-MO-0b8" customClass="PinCodeDisableViewController" propertyAccessControl="all" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="PinCodeDisable" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Vpu-MO-0b8" customClass="PinCodeDisableViewController" propertyAccessControl="none" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="exS-hS-e53">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -5546,7 +5546,7 @@ They need separated back ups.</string>
         <!--Pin Code Change View Controller-->
         <scene sceneID="a6X-mS-2Bd">
             <objects>
-                <viewController storyboardIdentifier="PinCodeChange" useStoryboardIdentifierAsRestorationIdentifier="YES" id="C5s-45-KLk" customClass="PinCodeChangeViewController" propertyAccessControl="all" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="PinCodeChange" useStoryboardIdentifierAsRestorationIdentifier="YES" id="C5s-45-KLk" customClass="PinCodeChangeViewController" propertyAccessControl="none" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="eax-au-A4u">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -5607,7 +5607,7 @@ They need separated back ups.</string>
         <!--DialogHDM Singular Cold Seed Child Qr View Controller-->
         <scene sceneID="72Y-u6-Oky">
             <objects>
-                <viewController storyboardIdentifier="DialogHDMSingularColdSeedChildQr" useStoryboardIdentifierAsRestorationIdentifier="YES" id="3iE-EB-ijc" customClass="DialogHDMSingularColdSeedChildQrViewController" propertyAccessControl="all" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="DialogHDMSingularColdSeedChildQr" useStoryboardIdentifierAsRestorationIdentifier="YES" id="3iE-EB-ijc" customClass="DialogHDMSingularColdSeedChildQrViewController" propertyAccessControl="none" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="OU4-rf-8MJ">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -5631,7 +5631,7 @@ They need separated back ups.</string>
         <!--DialogHDM Singular Cold Seed Child Words View Controller-->
         <scene sceneID="Rhb-PX-qVA">
             <objects>
-                <viewController storyboardIdentifier="DialogHDMSingularColdSeedChildWords" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Snd-IG-GF6" customClass="DialogHDMSingularColdSeedChildWordsViewController" propertyAccessControl="all" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="DialogHDMSingularColdSeedChildWords" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Snd-IG-GF6" customClass="DialogHDMSingularColdSeedChildWordsViewController" propertyAccessControl="none" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="LoQ-0S-Yhj">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -5666,7 +5666,7 @@ They need separated back ups.</string>
         <!--R Check View Controller-->
         <scene sceneID="LZ6-zZ-K31">
             <objects>
-                <viewController storyboardIdentifier="rcheck" useStoryboardIdentifierAsRestorationIdentifier="YES" id="1Za-zC-y7r" userLabel="R Check View Controller" customClass="RCheckViewController" propertyAccessControl="all" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="rcheck" useStoryboardIdentifierAsRestorationIdentifier="YES" id="1Za-zC-y7r" userLabel="R Check View Controller" customClass="RCheckViewController" propertyAccessControl="none" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="to4-J5-eKF">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -5761,7 +5761,7 @@ They need separated back ups.</string>
                                                         <rect key="frame" x="0.0" y="22" width="355" height="50"/>
                                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="rYi-Du-fec" id="j4g-83-Pq9">
-                                                            <rect key="frame" x="0.0" y="0.0" width="355" height="49.5"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="355" height="49"/>
                                                             <autoresizingMask key="autoresizingMask"/>
                                                             <subviews>
                                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="6Lu-ag-WB5">
@@ -5904,7 +5904,7 @@ They need separated back ups.</string>
         <!--Hdm Send View Controller-->
         <scene sceneID="79Q-7R-EJE">
             <objects>
-                <viewController storyboardIdentifier="HdmSend" useStoryboardIdentifierAsRestorationIdentifier="YES" id="0yP-DW-zbz" customClass="HdmSendViewController" propertyAccessControl="all" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="HdmSend" useStoryboardIdentifierAsRestorationIdentifier="YES" id="0yP-DW-zbz" customClass="HdmSendViewController" propertyAccessControl="none" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="cQc-BO-T08">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -6079,7 +6079,7 @@ They need separated back ups.</string>
         <!--Account Send View Controller-->
         <scene sceneID="oIT-ug-LqB">
             <objects>
-                <viewController storyboardIdentifier="HDAccountSend" useStoryboardIdentifierAsRestorationIdentifier="YES" id="kcd-mF-66F" customClass="HDAccountSendViewController" propertyAccessControl="all" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="HDAccountSend" useStoryboardIdentifierAsRestorationIdentifier="YES" id="kcd-mF-66F" customClass="HDAccountSendViewController" propertyAccessControl="none" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="GNr-CN-mnm">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -6239,7 +6239,7 @@ They need separated back ups.</string>
         <!--Account Monitored Send View Controller-->
         <scene sceneID="wpU-DN-Ma2">
             <objects>
-                <viewController storyboardIdentifier="HDAccountMonitoredSend" useStoryboardIdentifierAsRestorationIdentifier="YES" id="c81-vn-XUm" customClass="HDAccountMonitoredSendViewController" propertyAccessControl="all" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="HDAccountMonitoredSend" useStoryboardIdentifierAsRestorationIdentifier="YES" id="c81-vn-XUm" customClass="HDAccountMonitoredSendViewController" propertyAccessControl="none" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="7yW-0K-HjO">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -6385,7 +6385,7 @@ They need separated back ups.</string>
         <!--ImportHD Account Seed Controller-->
         <scene sceneID="hT9-78-EKG">
             <objects>
-                <viewController storyboardIdentifier="ImportHDAccountSeed" useStoryboardIdentifierAsRestorationIdentifier="YES" id="5Ka-5H-aY8" customClass="ImportHDAccountSeedController" propertyAccessControl="all" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ImportHDAccountSeed" useStoryboardIdentifierAsRestorationIdentifier="YES" id="5Ka-5H-aY8" customClass="ImportHDAccountSeedController" propertyAccessControl="none" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Tlx-1F-paJ">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -6530,7 +6530,7 @@ They need separated back ups.</string>
         <!--Cold Address Add Other View Controller-->
         <scene sceneID="9ca-XY-TJh">
             <objects>
-                <viewController storyboardIdentifier="ColdAddressAddOther" useStoryboardIdentifierAsRestorationIdentifier="YES" id="FY4-ky-kfn" customClass="ColdAddressAddOtherViewController" propertyAccessControl="all" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ColdAddressAddOther" useStoryboardIdentifierAsRestorationIdentifier="YES" id="FY4-ky-kfn" customClass="ColdAddressAddOtherViewController" propertyAccessControl="none" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="1qy-gK-5VY">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -6610,7 +6610,7 @@ They need separated back ups.</string>
                                     <action selector="xrandomInfoPressed:" destination="SuD-Kz-DId" eventType="touchUpInside" id="P4T-vq-pZO"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" id="rh0-oA-CdB" propertyAccessControl="all">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" id="rh0-oA-CdB" propertyAccessControl="none">
                                 <rect key="frame" x="20" y="137" width="335" height="42"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Generate" backgroundImage="button_lightblue">
@@ -6636,7 +6636,7 @@ They need separated back ups.</string>
         <!--Assets Detect Table View Controller-->
         <scene sceneID="DwL-BN-ysC">
             <objects>
-                <viewController storyboardIdentifier="BCCAssetsDetectTableViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="59J-Ux-Pgm" customClass="BCCAssetsDetectTableViewController" propertyAccessControl="all" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="BCCAssetsDetectTableViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="59J-Ux-Pgm" customClass="BCCAssetsDetectTableViewController" propertyAccessControl="none" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="nGH-An-aeR">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -6736,6 +6736,116 @@ They need separated back ups.</string>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Egs-pe-bAA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1152" y="4009"/>
+        </scene>
+        <!--Bcc Assets DetectHD View Controller-->
+        <scene sceneID="JBR-4u-liG">
+            <objects>
+                <viewController storyboardIdentifier="BccAssetsDetectHDViewController" id="wsV-My-yry" customClass="BccAssetsDetectHDViewController" propertyAccessControl="none" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="V0r-Al-Awj">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="6ie-El-RDH">
+                                <rect key="frame" x="0.0" y="44" width="375" height="623"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <color key="backgroundColor" red="1" green="0.9999405146" blue="0.99998033050000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="SignMessageSelectAddressCell" rowHeight="71" id="nnV-Cp-mSc" customClass="SignMessageSelectAddressCell">
+                                        <rect key="frame" x="0.0" y="28" width="375" height="71"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="nnV-Cp-mSc" id="Gwq-vJ-H4k">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="71"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="piF-Bb-OvT">
+                                                    <rect key="frame" x="17" y="15" width="339.5" height="40"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES"/>
+                                                    <fontDescription key="fontDescription" name="PingFangSC-Regular" family="PingFang SC" pointSize="14"/>
+                                                    <color key="textColor" red="0.1129601002" green="0.1129533798" blue="0.11295731370000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="6ZG-xi-ErW">
+                                                    <rect key="frame" x="17" y="16" width="339.5" height="20"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                    <color key="textColor" red="0.45518755910000003" green="0.45515722040000001" blue="0.45517498249999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <view contentMode="scaleToFill" id="YTv-ag-WHD" userLabel="line">
+                                                    <rect key="frame" x="17" y="70" width="339.5" height="0.0"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                                    <color key="backgroundColor" red="0.89607453349999999" green="0.89601361749999997" blue="0.89604926110000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                </view>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="jFM-ow-b1j">
+                                                    <rect key="frame" x="17" y="45.5" width="339.5" height="20.5"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                                    <color key="textColor" red="0.84281182290000001" green="0.13643713299999999" blue="0.1976401955" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="lblAddress" destination="piF-Bb-OvT" id="O5X-Su-llx"/>
+                                            <outlet property="lblBalance" destination="jFM-ow-b1j" id="5xN-ls-AEg"/>
+                                            <outlet property="lblIndex" destination="6ZG-xi-ErW" id="yk5-Da-cfK"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                                <sections/>
+                                <connections>
+                                    <outlet property="dataSource" destination="wsV-My-yry" id="7U6-l6-2X3"/>
+                                    <outlet property="delegate" destination="wsV-My-yry" id="pxG-Lh-b6D"/>
+                                </connections>
+                            </tableView>
+                            <view contentMode="scaleToFill" id="rT1-gd-Ekz" userLabel="TopBar">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="ui_topnav_titlebar_background.png" id="WrT-Nq-5fe">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="47"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    </imageView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="ucF-RR-DGg">
+                                        <rect key="frame" x="0.0" y="0.0" width="44" height="44"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" heightSizable="YES"/>
+                                        <state key="normal" image="title_bar_back">
+                                            <color key="titleShadowColor" red="0.2786488533" green="0.27861922979999998" blue="0.27863705160000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </state>
+                                        <state key="highlighted" backgroundImage="card_foreground_pressed"/>
+                                        <connections>
+                                            <action selector="backPressed:" destination="W6Z-3m-hO0" eventType="touchUpInside" id="PFf-k3-Iix"/>
+                                            <action selector="backPressed:" destination="wsV-My-yry" eventType="touchUpInside" id="Yub-VG-Hq4"/>
+                                        </connections>
+                                    </button>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="title_bar_seperator" id="fL6-Zr-8Tm">
+                                        <rect key="frame" x="44" y="0.0" width="3" height="44"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" heightSizable="YES"/>
+                                    </imageView>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Select address to detect BCC assets" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="dZl-bI-Hbg">
+                                        <rect key="frame" x="55" y="0.0" width="265" height="44"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" heightSizable="YES"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
+                                        <color key="textColor" red="1" green="0.99989593030000001" blue="0.99996638299999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                        <color key="shadowColor" red="0.0" green="0.0" blue="0.0" alpha="0.40000000000000002" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <size key="shadowOffset" width="1" height="1"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="0.9999405146" blue="0.99998033050000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    </view>
+                    <connections>
+                        <outlet property="lblTitle" destination="dZl-bI-Hbg" id="XzU-Wp-dBv"/>
+                        <outlet property="tableView" destination="6ie-El-RDH" id="Oty-u6-pVA"/>
+                        <outlet property="vTopBar" destination="rT1-gd-Ekz" id="Xxe-Wp-Qy6"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="9jZ-Lz-4lb" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1572" y="4009"/>
         </scene>
     </scenes>
     <resources>

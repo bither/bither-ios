@@ -13,7 +13,6 @@
 #import "BTOut.h"
 #import "DialogAlert.h"
 #import "UnitUtil.h"
-#import "BTHDAccountAddress.h"
 
 static DetectAnotherAssetsUtil *detectAnotherAssets;
 
@@ -48,7 +47,7 @@ static DetectAnotherAssetsUtil *detectAnotherAssets;
     }];
 }
 
--(void) getBCCHDUnspentOutputs:(NSString *)address andPathType:(PathTypeIndex*) pathTypeIndex andIsMonitored:(Boolean) isMonitored {
+-(void) getBCCHDUnspentOutputs:(NSString *)address andPathType:(PathTypeIndex*) pathTypeIndex andIsMonitored:(BOOL) isMonitored {
     DialogProgress *dp = [[DialogProgress alloc] initWithMessage:NSLocalizedString(@"Please wait…", nil)];
     [dp showInWindow:_controller.view.window];
     [[BitherApi instance]getBccUnspendOutput:address callback:^(NSArray *array) {
@@ -84,7 +83,7 @@ static DetectAnotherAssetsUtil *detectAnotherAssets;
     }
 }
 
--(void) extractHDBcc:(NSArray *) extractBccUtxos andPathType:(PathTypeIndex*) pathTypeIndex andIsMonitored:(Boolean) isMonitored{
+-(void) extractHDBcc:(NSArray *) extractBccUtxos andPathType:(PathTypeIndex*) pathTypeIndex andIsMonitored:(BOOL) isMonitored{
     DialogAlert *alert;
     if ([self getAmount:extractBccUtxos] > 0) {
         NSString * s= [UnitUtil stringForAmount:[self getAmount:extractBccUtxos] unit:UnitBTC];

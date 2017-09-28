@@ -21,12 +21,13 @@
 #import "UserDefaultsUtil.h"
 #import "DetectAnotherAssetsUtil.h"
 #import "DialogPassword.h"
-
+#import "DialogDetectBccSelecctAddress.h"
+#import "BccAssetsDetectHDViewController.h"
 typedef enum {
     SectionHD = 0, SectionHdMonitored = 1, SectionPrivate = 2, SectionWatchOnly = 3
 } SectionType;
 
-@interface BCCAssetsDetectTableViewController() <UITableViewDataSource, UITableViewDelegate, SectionHeaderPressedDelegate, SendDelegate, DialogPasswordDelegate>{
+@interface BCCAssetsDetectTableViewController() <UITableViewDataSource, UITableViewDelegate, SectionHeaderPressedDelegate, SendDelegate, DialogPasswordDelegate,DialogDetectBccSelectAddressDelegate,DialogPasswordDelegate>{
     NSMutableArray *_privateKeys;
     NSMutableArray *_watchOnlys;
     NSMutableIndexSet *_foldedSections;
@@ -38,6 +39,9 @@ typedef enum {
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UILabel *lblTitle;
 
+@property PathType path;
+@property BTAddress *btAddress;
+@property BOOL isMonitored;
 @end
 
 @implementation BCCAssetsDetectTableViewController
@@ -88,44 +92,31 @@ typedef enum {
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     ObtainBccCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ObtainBccCell" forIndexPath:indexPath];
     BTAddress *address;
-    NSString *getIsObtainKey;
     BOOL isShowLine;
     BOOL isLastSection = indexPath.section == (_sections - 1);
     switch ([self sectionTypeForIndex:indexPath.section]) {
         case SectionHD:
             address = [BTAddressManager instance].hdAccountHot;
-            getIsObtainKey = @"HDAccountHot";
             isShowLine = isLastSection;
             break;
         case SectionHdMonitored:
-            getIsObtainKey = @"HDMonitored";
             address = [BTAddressManager instance].hdAccountMonitored;
             isShowLine = isLastSection;
             break;
         case SectionPrivate:
             address = [_privateKeys objectAtIndex:indexPath.row];
-            getIsObtainKey = address.address;
             isShowLine = isLastSection || indexPath.row != (_privateKeys.count - 1);
             break;
         case SectionWatchOnly:
             address = [_watchOnlys objectAtIndex:indexPath.row];
-            getIsObtainKey = address.address;
             isShowLine = isLastSection || indexPath.row != (_watchOnlys.count - 1);
             break;
     }
     
-    if ([[UserDefaultsUtil instance] getIsObtainBccForKey:getIsObtainKey]) {
-        [cell setObtainedForAddress:address isShowLine:isShowLine];
-        cell.userInteractionEnabled = NO;
-    } else {
-        if ([address isMemberOfClass:[BTHDAccount class]]) {
-            BTHDAccount *hdAccount = (BTHDAccount *) address;
-            [cell setAddress:address bccBalance:[BTTxBuilder getAmount:[[BTHDAccountAddressProvider instance] getPrevCanSplitOutsByHDAccount:(int)[hdAccount getHDAccountId]]] isShowLine:isShowLine];
-        } else {
-            [cell setAddress:address bccBalance:[BTTxBuilder getAmount:[[BTTxProvider instance] getPrevOutsWithAddress:address.address]] isShowLine:isShowLine];
-        }
-        cell.userInteractionEnabled = YES;
-    }
+    
+    [cell setAddress:address isShowLine:isShowLine];
+    cell.userInteractionEnabled = YES;
+    
     return cell;
 }
 
@@ -154,41 +145,20 @@ typedef enum {
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     BTAddress *address = [self getBTAddressForIndexPath:indexPath];
-    UIViewController *vc;
+    _btAddress = address;
     SectionType sectionType = [self sectionTypeForIndex:indexPath.section];
     if (sectionType == SectionWatchOnly || sectionType == SectionPrivate) {
         [[DetectAnotherAssetsUtil instance]getBCCUnspentOutputs:address.address andPosition:(int)indexPath.row andIsPrivate:false];
         [DetectAnotherAssetsUtil instance].controller = self;
-        return;
     } else {
-        if ([address isMemberOfClass:[BTHDAccount class]]) {
-
+        if (sectionType == SectionHdMonitored) {
+            _isMonitored = true;
+        } else {
+            _isMonitored  = false;
         }
+        [[[DialogDetectBccSelecctAddress alloc] initWithDelegate:self] showInWindow:self.view.window];
     }
     
-    if (sectionType == SectionHdMonitored || sectionType == SectionWatchOnly) {
-        ObtainBccMonitoredDetailViewController *controller = [self.storyboard instantiateViewControllerWithIdentifier:@"ObtainBccMonitoredDetailViewController"];
-        controller.btAddress = address;
-        if ([address isMemberOfClass:[BTHDAccount class]]) {
-            controller.amount = [BTTxBuilder getAmount:[[BTHDAccountAddressProvider instance] getPrevCanSplitOutsByHDAccount:(int)[(BTHDAccount *) address getHDAccountId]]];
-        } else {
-            controller.amount = [BTTxBuilder getAmount:[[BTTxProvider instance] getPrevOutsWithAddress:address.address]];
-        }
-        controller.sendDelegate = self;
-        vc = controller;
-    } else {
-        ObtainBccDetailViewController *controller = [self.storyboard instantiateViewControllerWithIdentifier:@"ObtainBccDetailViewController"];
-        controller.btAddress = address;
-        if ([address isMemberOfClass:[BTHDAccount class]]) {
-            controller.amount = [BTTxBuilder getAmount:[[BTHDAccountAddressProvider instance] getPrevCanSplitOutsByHDAccount:(int)[(BTHDAccount *) address getHDAccountId]]];
-        } else {
-            controller.amount = [BTTxBuilder getAmount:[[BTTxProvider instance] getPrevOutsWithAddress:address.address]];
-        }
-        controller.sendDelegate = self;
-        vc = controller;
-    }
-    UINavigationController *nav = self.navigationController;
-    [nav pushViewController:vc animated:YES];
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
 }
 
@@ -309,14 +279,25 @@ typedef enum {
     [[NSNotificationCenter defaultCenter] removeObserver:self name:BTAddressManagerIsReady object:nil];
 }
 
+-(void)detectBccWithAddressType:(BccAddressType)bccAddressType {
+    _path = bccAddressType == HDExternal ? EXTERNAL_ROOT_PATH : INTERNAL_ROOT_PATH;
+    if (!_isMonitored) {
+        [[[DialogPassword alloc] initWithDelegate:self] showInWindow:self.view.window];
+    }else {
+        BccAssetsDetectHDViewController *bccDetectVc = [self.storyboard instantiateViewControllerWithIdentifier:@"BccAssetsDetectHDViewController"];
+        [bccDetectVc showHdAddresses:_path password:@"" isMonitored: _isMonitored];
+        [self.navigationController pushViewController:bccDetectVc animated:YES];
+    }
+}
+
 - (void)onPasswordEntered:(NSString *)password {
     if ([StringUtil isEmpty:password]) {
         return;
     }
     
-//    SignMessageSelectAddressViewController *sign = [self.controller.storyboard instantiateViewControllerWithIdentifier:@"SignMessageSelectAddress"];
-//    [sign showHdAddresses:_path password:password];
-//    [self.controller.navigationController pushViewController:sign animated:YES];
+    BccAssetsDetectHDViewController *bccDetectVc = [self.storyboard instantiateViewControllerWithIdentifier:@"BccAssetsDetectHDViewController"];
+    [bccDetectVc showHdAddresses:_path password:password isMonitored: _isMonitored];
+    [self.navigationController pushViewController:bccDetectVc animated:YES];
 }
 
 @end

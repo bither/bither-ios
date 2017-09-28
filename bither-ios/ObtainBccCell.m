@@ -41,4 +41,10 @@
     [self.lblLine setHidden:!isShowLine];
 }
 
+- (void)setAddress:(BTAddress *)address isShowLine:(BOOL)isShowLine {
+    self.lblAddress.text = [StringUtil formatAddress:address.address groupSize:4 lineSize:20];
+    [self.lblBalance setHidden:true];
+    [self.lblLine setHidden:!isShowLine];
+}
+
 @end
