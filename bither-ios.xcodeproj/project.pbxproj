@@ -104,6 +104,10 @@
 		1BC27FE46C243D52B180F1C2 /* DialogAddressAlias.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BC27F75690D4B3C844742B2 /* DialogAddressAlias.m */; };
 		1BC27FE47C62F779EDE01FA5 /* HDAccountSendViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BC27B56B8528116430BB2D8 /* HDAccountSendViewController.m */; };
 		20F671F2466952F081445EFB /* libPods-bither-ios WatchKit App.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AC13478AA903687AA9ACD36 /* libPods-bither-ios WatchKit App.a */; };
+		294650EB1F7B4272009A9112 /* DetectAnotherAssetsUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 294650EA1F7B4272009A9112 /* DetectAnotherAssetsUtil.m */; };
+		294650EE1F7B495D009A9112 /* BccUnspentOutput.m in Sources */ = {isa = PBXBuildFile; fileRef = 294650ED1F7B495D009A9112 /* BccUnspentOutput.m */; };
+		29D8A1B31F7A7590008D8D8C /* BCCAssetsDetectTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 29D8A1B21F7A7590008D8D8C /* BCCAssetsDetectTableViewController.m */; };
+		29D8A1B61F7A811C008D8D8C /* DetectBccSetting.m in Sources */ = {isa = PBXBuildFile; fileRef = 29D8A1B51F7A811C008D8D8C /* DetectBccSetting.m */; };
 		35BD79D34EADBCE346458D94 /* libPods-bither-ios.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 46F4567F64E4C5EB9B650EE0 /* libPods-bither-ios.a */; };
 		401ABC921DC33E8F004611B7 /* AdUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 401ABC911DC33E8F004611B7 /* AdUtil.m */; };
 		402A5CB81F28374F00B636FD /* ObtainBccSetting.m in Sources */ = {isa = PBXBuildFile; fileRef = 402A5CB71F28374F00B636FD /* ObtainBccSetting.m */; };
@@ -550,6 +554,14 @@
 		1BC27F75690D4B3C844742B2 /* DialogAddressAlias.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DialogAddressAlias.m; sourceTree = "<group>"; };
 		1BC27F93AA0BE5EBA695564A /* DialogHDMSingularColdSeedChildQrViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DialogHDMSingularColdSeedChildQrViewController.m; sourceTree = "<group>"; };
 		1BC27FD66F3376A2C68612DD /* AddHDMAddressViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddHDMAddressViewController.m; sourceTree = "<group>"; };
+		294650E91F7B4272009A9112 /* DetectAnotherAssetsUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetectAnotherAssetsUtil.h; sourceTree = "<group>"; };
+		294650EA1F7B4272009A9112 /* DetectAnotherAssetsUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetectAnotherAssetsUtil.m; sourceTree = "<group>"; };
+		294650EC1F7B495D009A9112 /* BccUnspentOutput.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BccUnspentOutput.h; sourceTree = "<group>"; };
+		294650ED1F7B495D009A9112 /* BccUnspentOutput.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BccUnspentOutput.m; sourceTree = "<group>"; };
+		29D8A1B11F7A7590008D8D8C /* BCCAssetsDetectTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BCCAssetsDetectTableViewController.h; sourceTree = "<group>"; };
+		29D8A1B21F7A7590008D8D8C /* BCCAssetsDetectTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BCCAssetsDetectTableViewController.m; sourceTree = "<group>"; };
+		29D8A1B41F7A811C008D8D8C /* DetectBccSetting.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetectBccSetting.h; sourceTree = "<group>"; };
+		29D8A1B51F7A811C008D8D8C /* DetectBccSetting.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetectBccSetting.m; sourceTree = "<group>"; };
 		3F23197A13072D3472EE053F /* libPods-bither-ios WatchKit Extension.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-bither-ios WatchKit Extension.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		401ABC901DC33E8F004611B7 /* AdUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdUtil.h; sourceTree = "<group>"; };
 		401ABC911DC33E8F004611B7 /* AdUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AdUtil.m; sourceTree = "<group>"; };
@@ -1161,6 +1173,8 @@
 				4269FF71195A885D001213B9 /* Ticker.m */,
 				4269FF73195A8872001213B9 /* Market.h */,
 				4269FF74195A8872001213B9 /* Market.m */,
+				294650EC1F7B495D009A9112 /* BccUnspentOutput.h */,
+				294650ED1F7B495D009A9112 /* BccUnspentOutput.m */,
 				0ACA344B1CF68FC600ADD73A /* ApiConfig.h */,
 			);
 			path = Model;
@@ -1189,6 +1203,8 @@
 				402A5CBD1F285BF500B636FD /* ObtainBccDetailViewController.m */,
 				40A51A5F1F2AF77D005CF531 /* ObtainBccMonitoredDetailViewController.h */,
 				40A51A601F2AF77E005CF531 /* ObtainBccMonitoredDetailViewController.m */,
+				29D8A1B11F7A7590008D8D8C /* BCCAssetsDetectTableViewController.h */,
+				29D8A1B21F7A7590008D8D8C /* BCCAssetsDetectTableViewController.m */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -1349,6 +1365,8 @@
 				403753121DC0503700F402A0 /* UIView+Extension.m */,
 				401ABC901DC33E8F004611B7 /* AdUtil.h */,
 				401ABC911DC33E8F004611B7 /* AdUtil.m */,
+				294650E91F7B4272009A9112 /* DetectAnotherAssetsUtil.h */,
+				294650EA1F7B4272009A9112 /* DetectAnotherAssetsUtil.m */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -1876,6 +1894,8 @@
 				0A6C0F5B1A4D548B00544B33 /* MessageSigningSetting.m */,
 				402A5CB61F28374F00B636FD /* ObtainBccSetting.h */,
 				402A5CB71F28374F00B636FD /* ObtainBccSetting.m */,
+				29D8A1B41F7A811C008D8D8C /* DetectBccSetting.h */,
+				29D8A1B51F7A811C008D8D8C /* DetectBccSetting.m */,
 				AC454DE81A1F3839000AF4ED /* PinCodeSetting.h */,
 				AC454DE91A1F3839000AF4ED /* PinCodeSetting.m */,
 				DAB2C8711A2038930011EE2F /* KeychainSetting.h */,
@@ -2379,6 +2399,7 @@
 				ACE3765F1A231C9200F66321 /* DialogKeychainBackupDiff.m in Sources */,
 				0AB8BCA51A7F445D003C07D8 /* DialogHDMKeychainAddHot.m in Sources */,
 				ACB9B9C3195AD1CC00019216 /* AddressDetailViewController.m in Sources */,
+				29D8A1B31F7A7590008D8D8C /* BCCAssetsDetectTableViewController.m in Sources */,
 				ACE7E70019EB6DE800F7AA3A /* AvatarSetting.m in Sources */,
 				4268FE2A194ACD57007A4C30 /* ColdViewController.m in Sources */,
 				ACEE7D2919D3F9F500932B39 /* QRCodeTxTransport.m in Sources */,
@@ -2416,9 +2437,11 @@
 				4268FE2C194ACD57007A4C30 /* OptionColdViewController.m in Sources */,
 				AC45D84119878BAB00AF5C2C /* DialogAddressLongPressOptions.m in Sources */,
 				4269FF75195A8872001213B9 /* Market.m in Sources */,
+				294650EE1F7B495D009A9112 /* BccUnspentOutput.m in Sources */,
 				0AD4EA711AEA308100DC8C0E /* HotAddressAddHDAccountViewController.m in Sources */,
 				40A51A5E1F2AED8E005CF531 /* ObtainBccCell.m in Sources */,
 				0AD674921A79E6E4007967DB /* ColdAddressAddHDMViewController.m in Sources */,
+				294650EB1F7B4272009A9112 /* DetectAnotherAssetsUtil.m in Sources */,
 				DA641E8B196E7BC20095DF42 /* GCCrashInstallation.m in Sources */,
 				0AD6749C1A7B6229007967DB /* DialogWithActions.m in Sources */,
 				0A93B6011A4A66080081D74D /* DialogSignMessageOutput.m in Sources */,
@@ -2563,6 +2586,7 @@
 				0AD849EB1D0E9B4C005FAF56 /* DialogMonitorAddressValidation.m in Sources */,
 				4268FE2B194ACD57007A4C30 /* CheckViewController.m in Sources */,
 				0A42062A1A494F1000562100 /* SignMessageViewController.m in Sources */,
+				29D8A1B61F7A811C008D8D8C /* DetectBccSetting.m in Sources */,
 				DAB2C8761A206F080011EE2F /* KeychainBackupUtil.m in Sources */,
 				0A259E251A47F19100D7F707 /* DialogSendOption.m in Sources */,
 				AC454DDE1A1F24FA000AF4ED /* PinCodeEnableViewController.m in Sources */,

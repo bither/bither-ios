@@ -273,6 +273,23 @@ static BitherApi *piApi;
     }];
 }
 
+- (void)getBccUnspendOutput:(NSString *)address callback:(ArrayResponseBlock)callback andErrorCallBack:(ErrorHandler)errorCallBack {
+    NSString *url = [NSString stringWithFormat:BCC_UNSPEND_OUTPUT, address];
+    AFHTTPRequestOperationManager *manger = [AFHTTPRequestOperationManager manager];
+    manger.responseSerializer = [AFHTTPResponseSerializer serializer];
+    [manger GET:url parameters:nil success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
+        NSArray *responseArr = [NSJSONSerialization JSONObjectWithData: responseObject options:NSJSONReadingAllowFragments error:nil];
+        if (callback) {
+            callback(responseArr);
+        }
+        
+    } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
+        if (errorCallBack) {
+            errorCallBack(operation,error);
+        }
+    }];
+}
+
 - (void)getAdImageWithResponseDic:(NSDictionary *)responseDic imageKey:(NSString *)imageKey {
     NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
     AFURLSessionManager *manager = [[AFURLSessionManager alloc] initWithSessionConfiguration:configuration];

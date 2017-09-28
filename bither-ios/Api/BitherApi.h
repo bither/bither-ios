@@ -60,6 +60,7 @@
 
 - (void)postBccBroadcast:(BTTx *)tx callback:(DictResponseBlock)callback andErrorCallBack:(ErrorHandler)errorCallback;
 
+- (void)getBccUnspendOutput:(NSString *)address callback:(ArrayResponseBlock)callback andErrorCallBack:(ErrorHandler)errorCallBack;
 
 
 //#pragma mark - hdm api
