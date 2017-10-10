@@ -46,6 +46,7 @@
     NSArray *_txs;
     NSString *_toAddress;
     NSString *_unitName;
+    BOOL isDetectBcc;
 }
 @end
 
@@ -79,6 +80,19 @@
     return self;
 }
 
+- (instancetype)initWithTxs:(NSArray *)txs to:(NSString *)toAddress delegate:(NSObject <DialogSendTxConfirmDelegate> *)delegate unitName:(NSString *)unitName andIsDetectBcc:(BOOL) detectBcc {
+    self = [super initWithFrame:CGRectMake(0, 0, kWidth, 200)];
+    if (self) {
+        _txs = txs;
+        _toAddress = toAddress;
+        _unitName = unitName;
+        self.delegate = delegate;
+        isDetectBcc = detectBcc;
+        [self firstConfigure];
+    }
+    return self;
+}
+
 - (void)firstConfigure {
     BitcoinUnit unit = [_unitName isEqualToString:@"BCC"] ? UnitBTC : [UnitUtil unit];
     NSString *toAddress = _toAddress;
@@ -92,7 +106,11 @@
         int64_t fee = 0;
         for (BTTx *tx in _txs) {
             amount += [tx amountSentTo:_toAddress];
-            fee += tx.feeForTransaction;
+            if (isDetectBcc) {
+                fee = [[BTSettings instance]feeBase];
+            } else{
+                fee += tx.feeForTransaction;
+            }
         }
         amountString = [UnitUtil stringForAmount:amount unit:unit];
         feeString = [UnitUtil stringForAmount:fee unit:unit];

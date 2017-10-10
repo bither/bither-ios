@@ -110,6 +110,8 @@
 		29D8A1B61F7A811C008D8D8C /* DetectBccSetting.m in Sources */ = {isa = PBXBuildFile; fileRef = 29D8A1B51F7A811C008D8D8C /* DetectBccSetting.m */; };
 		29DD18281F7CC6C6002D04E8 /* DialogDetectBccSelecctAddress.m in Sources */ = {isa = PBXBuildFile; fileRef = 29DD18271F7CC6C6002D04E8 /* DialogDetectBccSelecctAddress.m */; };
 		29DD182B1F7CD8ED002D04E8 /* BccAssetsDetectHDViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 29DD182A1F7CD8ED002D04E8 /* BccAssetsDetectHDViewController.m */; };
+		29DD182E1F7D1A4B002D04E8 /* BccDetectMonitoredDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 29DD182D1F7D1A4B002D04E8 /* BccDetectMonitoredDetailViewController.m */; };
+		29DD18311F7D22C5002D04E8 /* BccDetectDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 29DD18301F7D22C5002D04E8 /* BccDetectDetailViewController.m */; };
 		35BD79D34EADBCE346458D94 /* libPods-bither-ios.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 46F4567F64E4C5EB9B650EE0 /* libPods-bither-ios.a */; };
 		401ABC921DC33E8F004611B7 /* AdUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 401ABC911DC33E8F004611B7 /* AdUtil.m */; };
 		402A5CB81F28374F00B636FD /* ObtainBccSetting.m in Sources */ = {isa = PBXBuildFile; fileRef = 402A5CB71F28374F00B636FD /* ObtainBccSetting.m */; };
@@ -488,7 +490,6 @@
 		0AE142611B00924C0070C580 /* PaymentInterfaceController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PaymentInterfaceController.m; sourceTree = "<group>"; };
 		0AF4B7BA1CE1794400F7F7D9 /* PushTxThirdParty.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PushTxThirdParty.h; sourceTree = "<group>"; };
 		0AF4B7BB1CE1794400F7F7D9 /* PushTxThirdParty.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PushTxThirdParty.m; sourceTree = "<group>"; };
-		0AFA757D1B58D9A400F58712 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/MainStoryboard.strings; sourceTree = "<group>"; };
 		0AFBA9301AA01EF60059CB4B /* TotalBalance.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TotalBalance.h; sourceTree = "<group>"; };
 		0AFBA9311AA01EF60059CB4B /* TotalBalance.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TotalBalance.m; sourceTree = "<group>"; };
 		0AFBA9331AA0275F0059CB4B /* WatchMarket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WatchMarket.h; sourceTree = "<group>"; };
@@ -568,6 +569,11 @@
 		29DD18271F7CC6C6002D04E8 /* DialogDetectBccSelecctAddress.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DialogDetectBccSelecctAddress.m; sourceTree = "<group>"; };
 		29DD18291F7CD8ED002D04E8 /* BccAssetsDetectHDViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BccAssetsDetectHDViewController.h; sourceTree = "<group>"; };
 		29DD182A1F7CD8ED002D04E8 /* BccAssetsDetectHDViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BccAssetsDetectHDViewController.m; sourceTree = "<group>"; };
+		29DD182C1F7D1A4B002D04E8 /* BccDetectMonitoredDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BccDetectMonitoredDetailViewController.h; sourceTree = "<group>"; };
+		29DD182D1F7D1A4B002D04E8 /* BccDetectMonitoredDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BccDetectMonitoredDetailViewController.m; sourceTree = "<group>"; };
+		29DD182F1F7D22C5002D04E8 /* BccDetectDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BccDetectDetailViewController.h; sourceTree = "<group>"; };
+		29DD18301F7D22C5002D04E8 /* BccDetectDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BccDetectDetailViewController.m; sourceTree = "<group>"; };
+		29DD18351F7D2AFF002D04E8 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/MainStoryboard.strings; sourceTree = "<group>"; };
 		3F23197A13072D3472EE053F /* libPods-bither-ios WatchKit Extension.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-bither-ios WatchKit Extension.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		401ABC901DC33E8F004611B7 /* AdUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdUtil.h; sourceTree = "<group>"; };
 		401ABC911DC33E8F004611B7 /* AdUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AdUtil.m; sourceTree = "<group>"; };
@@ -1213,6 +1219,10 @@
 				29D8A1B21F7A7590008D8D8C /* BCCAssetsDetectTableViewController.m */,
 				29DD18291F7CD8ED002D04E8 /* BccAssetsDetectHDViewController.h */,
 				29DD182A1F7CD8ED002D04E8 /* BccAssetsDetectHDViewController.m */,
+				29DD182C1F7D1A4B002D04E8 /* BccDetectMonitoredDetailViewController.h */,
+				29DD182D1F7D1A4B002D04E8 /* BccDetectMonitoredDetailViewController.m */,
+				29DD182F1F7D22C5002D04E8 /* BccDetectDetailViewController.h */,
+				29DD18301F7D22C5002D04E8 /* BccDetectDetailViewController.m */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -2441,6 +2451,7 @@
 				0A75FC3B1B5629E100F062B0 /* ColdAddressAddHDAccountViewViewController.m in Sources */,
 				AC454DD81A1ED7E7000AF4ED /* PinCodeDotsView.m in Sources */,
 				ACF4B17419668D5700CE24FD /* MarketListCell.m in Sources */,
+				29DD18311F7D22C5002D04E8 /* BccDetectDetailViewController.m in Sources */,
 				ACD6DFD2196BA83B009D8031 /* ColdAddressAddViewController.m in Sources */,
 				ACEE7D3F19D4034D00932B39 /* CloneQrCodeSetting.m in Sources */,
 				425408581946A219007AF99C /* DateUtil.m in Sources */,
@@ -2523,6 +2534,7 @@
 				ACEE7D3619D3FC4B00932B39 /* ReloadTxSetting.m in Sources */,
 				AC454DE41A1F2518000AF4ED /* PinCodeChangeViewController.m in Sources */,
 				425408571946A219007AF99C /* DataCheckUtil.m in Sources */,
+				29DD182E1F7D1A4B002D04E8 /* BccDetectMonitoredDetailViewController.m in Sources */,
 				0A6C0F5F1A4D5E1900544B33 /* DialogSignMessageSelectAddress.m in Sources */,
 				AC6163941964ED2F0055C9D0 /* DialogWithArrow.m in Sources */,
 				0AD674971A7B4BDA007967DB /* ColdAddressListHDMCell.m in Sources */,
@@ -2770,7 +2782,7 @@
 				42EFB5511949C52100376888 /* Base */,
 				AC229A7A196A466400A7FB5E /* zh-Hans */,
 				AC229A7B196A466900A7FB5E /* zh-Hant */,
-				0AFA757D1B58D9A400F58712 /* en */,
+				29DD18351F7D2AFF002D04E8 /* en */,
 			);
 			name = MainStoryboard.storyboard;
 			sourceTree = "<group>";

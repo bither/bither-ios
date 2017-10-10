@@ -1,4 +1,7 @@
 
+/* Class = "UILabel"; text = "Obtain BCC"; ObjectID = "0j0-En-UAw"; */
+"0j0-En-UAw.text" = "Obtain BCC";
+
 /* Class = "UILabel"; text = "Label"; ObjectID = "0u9-oG-ULv"; */
 "0u9-oG-ULv.text" = "Label";
 
@@ -17,6 +20,9 @@
 /* Class = "UIButton"; normalTitle = "Generate"; ObjectID = "2fh-9Q-YV2"; */
 "2fh-9Q-YV2.normalTitle" = "Generate";
 
+/* Class = "UILabel"; text = "Detect BCC Assets"; ObjectID = "2sB-2h-NeN"; */
+"2sB-2h-NeN.text" = "Detect BCC Assets";
+
 /* Class = "UILabel"; text = "Label"; ObjectID = "38x-NI-gXk"; */
 "38x-NI-gXk.text" = "Label";
 
@@ -25,6 +31,12 @@
 
 /* Class = "UITextField"; placeholder = "Bitcoin address"; ObjectID = "3Xg-gQ-PrT"; */
 "3Xg-gQ-PrT.placeholder" = "Bitcoin address";
+
+/* Class = "UILabel"; text = "Bitpie BCC address"; ObjectID = "45g-ra-PPL"; */
+"45g-ra-PPL.text" = "Bitpie BCC address";
+
+/* Class = "UITextField"; placeholder = "Password"; ObjectID = "4BE-Dt-Z9g"; */
+"4BE-Dt-Z9g.placeholder" = "Password";
 
 /* Class = "UILabel"; text = "Pay to"; ObjectID = "4lI-QI-HQr"; */
 "4lI-QI-HQr.text" = "Pay to";
@@ -134,6 +146,9 @@
 /* Class = "UILabel"; text = "Balance:"; ObjectID = "GbZ-iW-rIX"; */
 "GbZ-iW-rIX.text" = "Balance:";
 
+/* Class = "UILabel"; text = "Password"; ObjectID = "HJ3-KO-3T0"; */
+"HJ3-KO-3T0.text" = "Password";
+
 /* Class = "UILabel"; text = "Amount"; ObjectID = "I3O-1Q-uKd"; */
 "I3O-1Q-uKd.text" = "Amount";
 
@@ -155,6 +170,9 @@
 /* Class = "UILabel"; text = "Add HDM Address"; ObjectID = "Kfd-Dg-pnE"; */
 "Kfd-Dg-pnE.text" = "Add HDM Address";
 
+/* Class = "UITextField"; placeholder = "Bitpie BCC address"; ObjectID = "LQc-Sd-WZK"; */
+"LQc-Sd-WZK.placeholder" = "Bitpie BCC address";
+
 /* Class = "UIButton"; normalTitle = "Next Word"; ObjectID = "LUd-2F-jCf"; */
 "LUd-2F-jCf.normalTitle" = "Next Word";
 
@@ -173,6 +191,9 @@
 /* Class = "UILabel"; text = "Label"; ObjectID = "Mcj-lw-QS2"; */
 "Mcj-lw-QS2.text" = "Label";
 
+/* Class = "UIButton"; normalTitle = "Extract Assets"; ObjectID = "NJB-bh-gjz"; */
+"NJB-bh-gjz.normalTitle" = "Extract Assets";
+
 /* Class = "UIButton"; normalTitle = "Check Private Keys"; ObjectID = "Np0-ig-4Cd"; */
 "Np0-ig-4Cd.normalTitle" = "Check Private Keys";
 
@@ -184,6 +205,9 @@
 
 /* Class = "UILabel"; text = "$1234.90"; ObjectID = "Onw-PZ-JGC"; */
 "Onw-PZ-JGC.text" = "$1234.90";
+
+/* Class = "UILabel"; text = "Select address to sign message"; ObjectID = "P0s-rD-bXi"; */
+"P0s-rD-bXi.text" = "Select address to sign message";
 
 /* Class = "UILabel"; text = "100"; ObjectID = "PJH-te-Brg"; */
 "PJH-te-Brg.text" = "100";
@@ -200,6 +224,9 @@
 /* Class = "UILabel"; text = "0000000000000000163440df04bc24eccb48a9d46c64dce3be979e2e6a35aa13"; ObjectID = "QaN-4R-hDw"; */
 "QaN-4R-hDw.text" = "0000000000000000163440df04bc24eccb48a9d46c64dce3be979e2e6a35aa13";
 
+/* Class = "UILabel"; text = "Bitpie BCC address"; ObjectID = "Qjw-My-urU"; */
+"Qjw-My-urU.text" = "Bitpie BCC address";
+
 /* Class = "UILabel"; text = "Pay to"; ObjectID = "QtW-gn-Bhz"; */
 "QtW-gn-Bhz.text" = "Pay to";
 
@@ -211,6 +238,9 @@
 
 /* Class = "UIButton"; normalTitle = "1"; ObjectID = "RIA-YK-ZlZ"; */
 "RIA-YK-ZlZ.normalTitle" = "1";
+
+/* Class = "UITextField"; placeholder = "Password"; ObjectID = "Rjw-Au-0b7"; */
+"Rjw-Au-0b7.placeholder" = "Password";
 
 /* Class = "UILabel"; text = "Label"; ObjectID = "SLL-YQ-ttn"; */
 "SLL-YQ-ttn.text" = "Label";
@@ -233,6 +263,9 @@
 /* Class = "UILabel"; text = "Amount"; ObjectID = "W4J-bu-8RU"; */
 "W4J-bu-8RU.text" = "Amount";
 
+/* Class = "UILabel"; text = "Obtain BCC"; ObjectID = "W4u-G4-L6X"; */
+"W4u-G4-L6X.text" = "Obtain BCC";
+
 /* Class = "UILabel"; text = "Trash Can"; ObjectID = "W7P-G2-qt2"; */
 "W7P-G2-qt2.text" = "Trash Can";
 
@@ -247,6 +280,9 @@
 
 /* Class = "UIButton"; normalTitle = "HD Account Seed QR Code"; ObjectID = "YGh-vd-ka9"; */
 "YGh-vd-ka9.normalTitle" = "HD Account Seed QR Code";
+
+/* Class = "UIButton"; normalTitle = "Obtain"; ObjectID = "Ydi-yn-JKG"; */
+"Ydi-yn-JKG.normalTitle" = "Obtain";
 
 /* Class = "UITextField"; placeholder = "0.00"; ObjectID = "Yo9-av-E4b"; */
 "Yo9-av-E4b.placeholder" = "0.00";
@@ -299,8 +335,17 @@
 /* Class = "UIButton"; normalTitle = "Add This Private Key"; ObjectID = "ckY-fV-MzW"; */
 "ckY-fV-MzW.normalTitle" = "Add This Private Key";
 
+/* Class = "UITextField"; placeholder = "Bitpie BCC address"; ObjectID = "d0K-dD-qqM"; */
+"d0K-dD-qqM.placeholder" = "Bitpie BCC address";
+
+/* Class = "UITextField"; placeholder = "Bitpie BCC address"; ObjectID = "d6f-Ui-nWA"; */
+"d6f-Ui-nWA.placeholder" = "Bitpie BCC address";
+
 /* Class = "UILabel"; text = "Cold HD Account"; ObjectID = "dU2-IG-q9c"; */
 "dU2-IG-q9c.text" = "Cold HD Account";
+
+/* Class = "UILabel"; text = "Select address to detect BCC assets"; ObjectID = "dZl-bI-Hbg"; */
+"dZl-bI-Hbg.text" = "Select address to detect BCC assets";
 
 /* Class = "UILabel"; text = "Can not find private key"; ObjectID = "eEx-7U-SVT"; */
 "eEx-7U-SVT.text" = "Can not find private key";
@@ -316,6 +361,9 @@
 
 /* Class = "UILabel"; text = "Pay to"; ObjectID = "g3O-Ch-Qm9"; */
 "g3O-Ch-Qm9.text" = "Pay to";
+
+/* Class = "UILabel"; text = "Password"; ObjectID = "g7W-R6-PUe"; */
+"g7W-R6-PUe.text" = "Password";
 
 /* Class = "UIButton"; normalTitle = "Generate"; ObjectID = "gHB-fo-cHb"; */
 "gHB-fo-cHb.normalTitle" = "Generate";
@@ -341,6 +389,9 @@
 /* Class = "UILabel"; text = "Balance:"; ObjectID = "hsE-yP-NwX"; */
 "hsE-yP-NwX.text" = "Balance:";
 
+/* Class = "UILabel"; text = "Normal private keys are not within HD Account.\nThey need separated back ups."; ObjectID = "huo-Ni-Mqw"; */
+"huo-Ni-Mqw.text" = "Normal private keys are not within HD Account.\nThey need separated back ups.";
+
 /* Class = "UIButton"; normalTitle = "Next Word"; ObjectID = "ifX-vq-zRq"; */
 "ifX-vq-zRq.normalTitle" = "Next Word";
 
@@ -356,6 +407,9 @@
 /* Class = "UILabel"; text = "Network failure."; ObjectID = "jQj-PR-DVU"; */
 "jQj-PR-DVU.text" = "Network failure.";
 
+/* Class = "UIButton"; normalTitle = "Obtain"; ObjectID = "k22-fr-QCR"; */
+"k22-fr-QCR.normalTitle" = "Obtain";
+
 /* Class = "UILabel"; text = "Label"; ObjectID = "kKw-54-5PB"; */
 "kKw-54-5PB.text" = "Label";
 
@@ -367,6 +421,9 @@
 
 /* Class = "UIButton"; normalTitle = "Monitor Bither Cold"; ObjectID = "kbG-t9-dEm"; */
 "kbG-t9-dEm.normalTitle" = "Monitor Bither Cold";
+
+/* Class = "UILabel"; text = "Normal private keys are not within HD Account.\nThey need separated back ups."; ObjectID = "lQn-Ih-2qB"; */
+"lQn-Ih-2qB.text" = "Normal private keys are not within HD Account.\nThey need separated back ups.";
 
 /* Class = "UILabel"; text = "HDM Cold"; ObjectID = "lUJ-Y1-VRb"; */
 "lUJ-Y1-VRb.text" = "HDM Cold";
@@ -388,6 +445,9 @@
 
 /* Class = "UILabel"; text = "Sign Transaction"; ObjectID = "mpu-26-YRO"; */
 "mpu-26-YRO.text" = "Sign Transaction";
+
+/* Class = "UILabel"; text = "Bitpie BCC address"; ObjectID = "mzW-11-kcC"; */
+"mzW-11-kcC.text" = "Bitpie BCC address";
 
 /* Class = "UILabel"; text = "You already have an HD account."; ObjectID = "nBS-fJ-qtL"; */
 "nBS-fJ-qtL.text" = "You already have an HD account.";
@@ -440,6 +500,12 @@
 /* Class = "UIButton"; normalTitle = "Send"; ObjectID = "rFx-au-8Hm"; */
 "rFx-au-8Hm.normalTitle" = "Send";
 
+/* Class = "UILabel"; text = "Bitpie BCC address"; ObjectID = "rML-Gs-Hkx"; */
+"rML-Gs-Hkx.text" = "Bitpie BCC address";
+
+/* Class = "UILabel"; text = "Obtain BCC"; ObjectID = "rPU-r8-QDl"; */
+"rPU-r8-QDl.text" = "Obtain BCC";
+
 /* Class = "UIButton"; normalTitle = "Generate"; ObjectID = "rh0-oA-CdB"; */
 "rh0-oA-CdB.normalTitle" = "Generate";
 
@@ -464,6 +530,9 @@
 /* Class = "UILabel"; text = "Balance:"; ObjectID = "uiN-WE-JlS"; */
 "uiN-WE-JlS.text" = "Balance:";
 
+/* Class = "UITextField"; placeholder = "Bitpie BCC address"; ObjectID = "unc-98-bgK"; */
+"unc-98-bgK.placeholder" = "Bitpie BCC address";
+
 /* Class = "UILabel"; text = "Import HD Seed Phrase"; ObjectID = "uoc-uG-k6M"; */
 "uoc-uG-k6M.text" = "Import HD Seed Phrase";
 
@@ -473,6 +542,9 @@
 /* Class = "UILabel"; text = "Password"; ObjectID = "v46-EP-4NU"; */
 "v46-EP-4NU.text" = "Password";
 
+/* Class = "UIButton"; normalTitle = "Extract Assets"; ObjectID = "vOE-6S-2NQ"; */
+"vOE-6S-2NQ.normalTitle" = "Extract Assets";
+
 /* Class = "UIButton"; normalTitle = "Generate"; ObjectID = "vhW-ec-Y0h"; */
 "vhW-ec-Y0h.normalTitle" = "Generate";
 
@@ -481,6 +553,9 @@
 
 /* Class = "UILabel"; text = "name"; ObjectID = "viE-UV-mZx"; */
 "viE-UV-mZx.text" = "name";
+
+/* Class = "UILabel"; text = "Can Extract"; ObjectID = "vjO-t2-imn"; */
+"vjO-t2-imn.text" = "Can Extract";
 
 /* Class = "UILabel"; text = "Address"; ObjectID = "wb7-kB-0ec"; */
 "wb7-kB-0ec.text" = "Address";
@@ -535,43 +610,3 @@
 
 /* Class = "UIButton"; normalTitle = "Add This Private Key"; ObjectID = "zjg-wy-EHw"; */
 "zjg-wy-EHw.normalTitle" = "Add This Private Key";
-
-/* Class = "UITextField"; placeholder = "Bitcoin address"; ObjectID = "8hY-cL-7RN"; */
-"8hY-cL-7RN.placeholder" = "Bitcoin address";
-
-/* Class = "UILabel"; text = "Amount"; ObjectID = "I3O-1Q-uKd"; */
-"I3O-1Q-uKd.text" = "Amount";
-
-/* Class = "UIButton"; normalTitle = "Send"; ObjectID = "x5l-Rf-4Wi"; */
-"x5l-Rf-4Wi.normalTitle" = "Send";
-
-/* Class = "UILabel"; text = "Balance:"; ObjectID = "3TU-hn-ytB"; */
-"3TU-hn-ytB.text" = "Balance:";
-
-/* Class = "UILabel"; text = "Bitpie BCC address"; ObjectID = "45g-ra-PPL"; */
-"45g-ra-PPL.text" = "Bitpie BCC address";
-
-/* Class = "IBUITextField"; placeholder = "Bitpie BCC address"; ObjectID = "d0K-dD-qqM"; */
-"d0K-dD-qqM.placeholder" = "Bitpie BCC address";
-
-/* Class = "IBUILabel"; text = "Password"; ObjectID = "HJ3-KO-3T0"; */
-"HJ3-KO-3T0.text" = "Password";
-
-/* Class = "IBUITextField"; placeholder = "Password"; ObjectID = "4BE-Dt-Z9g"; */
-"4BE-Dt-Z9g.placeholder" = "Password";
-
-/* Class = "UIButton"; normalTitle = "Obtain"; ObjectID = "Ydi-yn-JKG"; */
-"Ydi-yn-JKG.normalTitle" = "Obtain";
-
-/* Class = "UILabel"; text = "Bitpie BCC address"; ObjectID = "Qjw-My-urU"; */
-"Qjw-My-urU.text" = "Bitpie BCC address";
-
-/* Class = "IBUITextField"; placeholder = "Bitpie BCC address"; ObjectID = "LQc-Sd-WZK"; */
-"LQc-Sd-WZK.placeholder" = "Bitpie BCC address";
-
-/* Class = "UIButton"; normalTitle = "Obtain"; ObjectID = "k22-fr-QCR"; */
-"k22-fr-QCR.normalTitle" = "Obtain";
-
-"lQn-Ih-2qB.text" = "Normal private keys are not within HD Account.\nThey need separated back ups.";
-
-"huo-Ni-Mqw.text" = "Normal private keys are not within HD Account.\nThey need separated back ups.";

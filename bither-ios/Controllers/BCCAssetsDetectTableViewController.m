@@ -148,7 +148,12 @@ typedef enum {
     _btAddress = address;
     SectionType sectionType = [self sectionTypeForIndex:indexPath.section];
     if (sectionType == SectionWatchOnly || sectionType == SectionPrivate) {
-        [[DetectAnotherAssetsUtil instance]getBCCUnspentOutputs:address.address andPosition:(int)indexPath.row andIsPrivate:false];
+        if (sectionType == SectionWatchOnly) {
+            [[DetectAnotherAssetsUtil instance]getBCCUnspentOutputs:address.address andBTAddress:_btAddress andIsPrivate:false];
+            
+        } else {
+            [[DetectAnotherAssetsUtil instance]getBCCUnspentOutputs:address.address andBTAddress:_btAddress andIsPrivate:true];
+        }
         [DetectAnotherAssetsUtil instance].controller = self;
     } else {
         if (sectionType == SectionHdMonitored) {
@@ -262,7 +267,7 @@ typedef enum {
 }
 
 - (void)sendSuccessed:(BTTx *)tx {
-    [self showMsg:NSLocalizedString(@"get_success", nil)];
+    [self showMsg:NSLocalizedString(@"extract_success", nil)];
     [self.tableView reloadData];
 }
 

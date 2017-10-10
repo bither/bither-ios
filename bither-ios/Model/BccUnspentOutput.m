@@ -19,7 +19,13 @@
 - (instancetype)initWithDict:(NSDictionary *)dict {
     self = [super init];
     if (self) {
-        [self setValuesForKeysWithDictionary:dict];
+        @try {
+            [self setValuesForKeysWithDictionary:dict];
+        } @catch (NSException *exception) {
+            return nil;
+        } @finally {
+            return nil;
+        }
     }
     return self;
 }

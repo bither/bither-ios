@@ -30,6 +30,8 @@
 
 - (instancetype)initWithTxs:(NSArray *)txs to:(NSString *)toAddress delegate:(NSObject <DialogSendTxConfirmDelegate> *)delegate unitName:(NSString *)unitName;
 
+- (instancetype)initWithTxs:(NSArray *)txs to:(NSString *)toAddress delegate:(NSObject <DialogSendTxConfirmDelegate> *)delegate unitName:(NSString *)unitName andIsDetectBcc:(BOOL) detectBcc;
+
 @property(weak) NSObject <DialogSendTxConfirmDelegate> *delegate;
 
 @end

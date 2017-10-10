@@ -18,7 +18,7 @@
 @property(nonatomic, readwrite) double amount;
 @property(nonatomic, readwrite) long height;
 @property(nonatomic, readwrite) long confirmations;
-
+@property(nonatomic, readwrite) u_int64_t  ts;
 
 +(NSArray *)getBTOuts:(NSArray *)bccUnspentArr;
 +(NSArray *)getBccUnspentOuts:(NSArray *)array;

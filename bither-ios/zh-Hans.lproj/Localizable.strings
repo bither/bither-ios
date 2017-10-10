@@ -781,3 +781,4 @@
 "detect_no_assets_alert" = "该地址在区块浏览器上未查询到其他资产";
 "extract_assets" = "提取资产";
 "extract_assets_BCC_send_title" = "可提取";
+"extract_success" = "提取成功";
