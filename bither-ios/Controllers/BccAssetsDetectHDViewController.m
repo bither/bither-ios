@@ -12,8 +12,17 @@
 #import "SignMessageSelectAddressCell.h"
 #import "BTAddressManager.h"
 #import "DetectAnotherAssetsUtil.h"
+#import "UIViewController+PiShowBanner.h"
+#import "BCCAssetsDetectTableViewController.h"
+#import "HotAddressListSectionHeader.h"
+#import "DialogProgress.h"
+#import "BTAddressManager.h"
+#import "BitherSetting.h"
+#import "UIViewController+PiShowBanner.h"
+#import "SendViewController.h"
 
-@interface BccAssetsDetectHDViewController () <UITableViewDataSource, UITableViewDelegate> {
+
+@interface BccAssetsDetectHDViewController () <UITableViewDataSource, UITableViewDelegate, SendDelegate> {
     NSMutableArray *_addresses;
     int hdAccountId;
 }
@@ -97,6 +106,16 @@
         [detectUtil getBCCHDUnspentOutputs:[_hdAccountMonitored addressForPath: _pathType atIndex:indexPath.row].address andPathType:pathTypeIndex andIsMonitored:_isMonitored];
     }
 }
+
+- (void)sendSuccessed:(BTTx *)tx {
+    [self showMsg:NSLocalizedString(@"extract_success", nil)];
+    [self.tableView reloadData];
+}
+
+- (void)showMsg:(NSString *)msg {
+    [self showBannerWithMessage:msg belowView:self.vTopBar];
+}
+
 
 @end
 

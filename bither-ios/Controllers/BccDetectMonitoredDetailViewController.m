@@ -97,7 +97,7 @@
                     NSString *toAddress = [self getToAddress];
                     NSArray *txs;
                     if (self.isHDAccount) {
-                        BTHDAccount *account = [[BTAddressManager instance]hdAccountHot];
+                        BTHDAccount *account = [[BTAddressManager instance]hdAccountMonitored];
                         txs = [account newBccTxsToAddresses:@[toAddress] withAmounts:@[@(value)] andError:&error andChangeAddress:toAddress andUnspentOut:self.outs];
                     } else {
                         txs = [self.btAddress bccTxsForAmounts:@[@(value)] andAddress:@[toAddress]  andChangeAddress:toAddress andUnspentOuts:self.outs andError:&error];
@@ -316,7 +316,7 @@
             if (success) {
                 [dp showInWindow:self.view.window completion:^{
                     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
-//                        [self finalSend];
+                        [self finalSend];
                     });
                 }];
             } else {

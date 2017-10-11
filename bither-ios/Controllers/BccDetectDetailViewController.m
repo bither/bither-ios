@@ -74,65 +74,65 @@
     self.btnObtain.enabled = NO;
     [self hideKeyboard];
     [dp showInWindow:self.view.window completion:^{
-        //        [[BitherApi instance] getHasBccAddress:[self getToAddress] callback:^(NSDictionary *dict) {
-        //            NSNumber *numResult = dict[@"result"];
-        //            BOOL result = numResult.intValue > 0;
-        //            if (!result) {
-        //                [self showMsg:NSLocalizedString(@"not_bitpie_bcc_address", nil)];
-        //                return;
-        //            }
-        //
-        //            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
-        //
-        //            });
-        //        } andErrorCallBack:^(NSOperation *errorOp, NSError *error) {
-        //            [self showMsg:NSLocalizedString(@"Network failure.", nil)];
-        //            return;
-        //        }];
-        if (![[BTPasswordSeed getPasswordSeed] checkPassword:self.tfPassword.text]) {
-            [self showPasswordWrong];
-            return;
-        }
-        NSError *error;
-        NSString *toAddress = [self getToAddress];
-        NSArray *txs;
-        
-        if (self.isHDAccount) {
-            BTHDAccount *account = [BTAddressManager instance].hdAccountHot;
-           txs = [account extractBccToAddresses:@[toAddress] withAmounts:@[@(self.amount)] andChangeAddress:toAddress andUnspentOuts:self.outs andPathTypeIndex:self.pathTypeIndex password:self.tfPassword.text andError:&error];
-        } else {
-            txs = [self.btAddress bccTxsForAmounts:@[@(self.amount)] andAddress:@[toAddress] andChangeAddress:toAddress andUnspentOuts: self.outs andError:&error];
-        }
-        
-        if (error) {
-            NSString *msg = [TransactionsUtil getCompleteTxForError:error];
-            [self showMsg:msg];
-        } else {
-            if (!txs) {
-                [self showSendFailed];
-                return;
-            }
-            
-            if (self.isHDAccount) {
-                [self showDialogHDSendTxConfirmForTx:txs];
-            } else {
-                BOOL isPasswordWrong = NO;
-                for (BTTx *tx in txs) {
-                    tx.isDetectBcc = true;
-                    if ([self.btAddress signTransaction:tx withPassphrase:self.tfPassword.text andUnspentOuts: self.outs]) {
-                        continue;
-                    } else {
-                        isPasswordWrong = YES;
-                        break;
+                [[BitherApi instance] getHasBccAddress:[self getToAddress] callback:^(NSDictionary *dict) {
+                    NSNumber *numResult = dict[@"result"];
+                    BOOL result = numResult.intValue > 0;
+                    if (!result) {
+                        [self showMsg:NSLocalizedString(@"not_bitpie_bcc_address", nil)];
+                        return;
                     }
-                }
-                if (isPasswordWrong) {
-                    [self showPasswordWrong];
-                } else {
-                    [self showDialogHDSendTxConfirmForTx:txs];
-                }
-            }
-        }
+        
+                    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+                        if (![[BTPasswordSeed getPasswordSeed] checkPassword:self.tfPassword.text]) {
+                            [self showPasswordWrong];
+                            return;
+                        }
+                        NSError *error;
+                        NSString *toAddress = [self getToAddress];
+                        NSArray *txs;
+                        
+                        if (self.isHDAccount) {
+                            BTHDAccount *account = [BTAddressManager instance].hdAccountHot;
+                            txs = [account extractBccToAddresses:@[toAddress] withAmounts:@[@(self.amount)] andChangeAddress:toAddress andUnspentOuts:self.outs andPathTypeIndex:self.pathTypeIndex password:self.tfPassword.text andError:&error];
+                        } else {
+                            txs = [self.btAddress bccTxsForAmounts:@[@(self.amount)] andAddress:@[toAddress] andChangeAddress:toAddress andUnspentOuts: self.outs andError:&error];
+                        }
+                        
+                        if (error) {
+                            NSString *msg = [TransactionsUtil getCompleteTxForError:error];
+                            [self showMsg:msg];
+                        } else {
+                            if (!txs) {
+                                [self showSendFailed];
+                                return;
+                            }
+                            
+                            if (self.isHDAccount) {
+                                [self showDialogHDSendTxConfirmForTx:txs];
+                            } else {
+                                BOOL isPasswordWrong = NO;
+                                for (BTTx *tx in txs) {
+                                    tx.isDetectBcc = true;
+                                    if ([self.btAddress signTransaction:tx withPassphrase:self.tfPassword.text andUnspentOuts: self.outs]) {
+                                        continue;
+                                    } else {
+                                        isPasswordWrong = YES;
+                                        break;
+                                    }
+                                }
+                                if (isPasswordWrong) {
+                                    [self showPasswordWrong];
+                                } else {
+                                    [self showDialogHDSendTxConfirmForTx:txs];
+                                }
+                            }
+                        }
+                    });
+                } andErrorCallBack:^(NSOperation *errorOp, NSError *error) {
+                    [self showMsg:NSLocalizedString(@"Network failure.", nil)];
+                    return;
+                }];
+
     }];
 }
 

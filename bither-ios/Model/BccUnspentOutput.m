@@ -24,7 +24,7 @@
         } @catch (NSException *exception) {
             return nil;
         } @finally {
-            return nil;
+            
         }
     }
     return self;

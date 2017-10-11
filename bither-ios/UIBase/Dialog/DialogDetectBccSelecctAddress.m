@@ -56,7 +56,7 @@
         self.delegate = delegate;
         types = [NSMutableArray new];
         BTAddressManager *addressManager = [BTAddressManager instance];
-        if (addressManager.hasHDAccountHot || addressManager.hasHDAccountCold) {
+        if (addressManager.hasHDAccountHot || addressManager.hasHDAccountMonitored) {
             [types addObject:kHDExternalAddressesKey];
             [types addObject:kHDInternalAddressesKey];
         }
