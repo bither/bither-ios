@@ -31,7 +31,7 @@
 }
 
 +(NSArray *)getBccUnspentOuts:(NSArray *)array {
-    NSMutableArray  *nmArray = [NSMutableArray array];
+    NSMutableArray *nmArray = [NSMutableArray array];
     [array enumerateObjectsUsingBlock:^(NSDictionary *dict, NSUInteger idx, BOOL * _Nonnull stop) {
         BccUnspentOutput *outs = [BccUnspentOutput outsWithDict:dict];
         [nmArray addObject:outs];

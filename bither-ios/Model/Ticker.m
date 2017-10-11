@@ -68,7 +68,7 @@
 
 + (NSArray *)formatList:(NSDictionary *)dict {
     NSMutableArray *array = [NSMutableArray new];
-    for (MarketType marketType = BITSTAMP; marketType <= MARKET796; marketType++) {
+    for (MarketType marketType = BITSTAMP; marketType <= COINBASE; marketType++) {
         NSString *key = [NSString stringWithFormat:@"%d", [GroupUtil getMarketValue:marketType]];
         if ([[dict allKeys] containsObject:key]) {
             NSDictionary *tickerDict = [dict objectForKey:key];

@@ -115,7 +115,7 @@ EXTERNAL SOURCES:
 
 CHECKOUT OPTIONS:
   Bitheri:
-    :commit: 613a2f7f527a84c18bdc2103d335361bc37ecbd7
+    :commit: 423bd50b3d63cdbcbdc98ba8e0a45c3afe67ef1c
     :git: https://github.com/bither/bitheri.git
   OpenSSL:
     :commit: b7ff9ed0245e2b5b1a212a1e86131487df4fc518

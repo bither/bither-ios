@@ -69,7 +69,7 @@
 
 + (NSArray *)formatList:(NSDictionary *)dict {
     NSMutableArray *array = [NSMutableArray new];
-    for (MarketType marketType = BITSTAMP; marketType <= MARKET796; marketType++) {
+    for (MarketType marketType = BITSTAMP; marketType <= COINBASE; marketType++) {
         NSString *key = [NSString stringWithFormat:@"%d", [GroupUtil getMarketValue:marketType]];
         if ([[dict allKeys] containsObject:key]) {
             NSDictionary *tickerDict = [dict objectForKey:key];
@@ -152,7 +152,7 @@ static NSMutableArray *markets;
     }
     markets = [NSMutableArray new];
     NSArray *tickers = [WatchMarket readTickers];
-    for (MarketType marketType = BITSTAMP; marketType <= MARKET796; marketType++) {
+    for (MarketType marketType = BITSTAMP; marketType <= COINBASE; marketType++) {
         Ticker *t = nil;
         for (Ticker *ti in tickers) {
             if (ti.marketType == marketType) {
@@ -201,14 +201,7 @@ static NSMutableArray *markets;
 
 + (GroupCurrency)getCurrencyForMarket:(MarketType)marketType {
     switch (marketType) {
-        case HUOBI:
-        case OKCOIN:
-        case BTCCHINA:
-        case CHBTC:
-        case BTCTRADE:
-            return CNYG;
         case BITSTAMP:
-        case MARKET796:
         case BITFINEX:
         case COINBASE:
             return USDG;

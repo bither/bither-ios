@@ -29,7 +29,7 @@ static NSMutableArray *markets;
     @synchronized (self) {
         if (markets.count == 0) {
             markets = [NSMutableArray new];
-            for (MarketType marketType = BITSTAMP; marketType <= MARKET796; marketType++) {
+            for (MarketType marketType = BITSTAMP; marketType <= COINBASE; marketType++) {
                 [markets addObject:[[Market alloc] initWithMarketType:marketType]];
             }
         }

@@ -95,7 +95,7 @@ NSUserDefaults *userDefaults;
 
 - (void)setDefaultMarket {
     if ([self localeIsChina]) {
-        [self setMarket:BTCCHINA];
+        [self setMarket:BITSTAMP];
     } else {
         [self setMarket:BITSTAMP];
     }

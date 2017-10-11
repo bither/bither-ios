@@ -56,7 +56,7 @@ static GroupUserDefaultUtil *groupUserDefaultsUtil;
         }
     }
     if ([self localeIsChina]) {
-        return BTCCHINA;
+        return BITSTAMP;
     }
     return BITSTAMP;
 }
