@@ -8,11 +8,12 @@
 
 #import <UIKit/UIKit.h>
 #import "BTAddress.h"
+#import "SplitCoinUtil.h"
 
 @interface ObtainBccCell : UITableViewCell
 
-- (void)setObtainedForAddress:(BTAddress *)address isShowLine:(BOOL)isShowLine;
+- (void)setObtainedForAddress:(BTAddress *)address splitCoin:(SplitCoin)splitCoin isShowLine:(BOOL)isShowLine;
 
-- (void)setAddress:(BTAddress *)address bccBalance:(uint64_t)balance isShowLine:(BOOL)isShowLine;
+- (void)setAddress:(BTAddress *)address bccBalance:(uint64_t)balance splitCoin:(SplitCoin)splitCoin isShowLine:(BOOL)isShowLine;
 
 @end

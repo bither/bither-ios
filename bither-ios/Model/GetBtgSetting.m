@@ -1,42 +1,41 @@
 //
-//  ObtainBCCSetting.m
+//  GetBtgSetting.m
 //  bither-ios
 //
-//  Created by 韩珍 on 2017/7/26.
+//  Created by 韩珍 on 2017/11/15.
 //  Copyright © 2017年 Bither. All rights reserved.
 //
 
-#import "ObtainBccSetting.h"
+#import "GetBtgSetting.h"
 #import "BTAddressManager.h"
 #import "UIViewController+PiShowBanner.h"
 #import "BTOut.h"
 #import "BTBlockProvider.h"
 #import "BTPeerManager.h"
-#import "SplitCoinUtil.h"
 #import "ObtainBccViewController.h"
 
-static ObtainBccSetting *S;
+static GetBtgSetting *S;
 
-@interface ObtainBccSetting ()
+@interface GetBtgSetting ()
 
 @property(weak) UIViewController *controller;
 
 @end
 
 
-@implementation ObtainBccSetting
+@implementation GetBtgSetting
 
-+ (Setting *)getObtainBccSetting {
++ (Setting *)getBtgSetting {
     if (!S) {
-        S = [[ObtainBccSetting alloc] init];
+        S = [[GetBtgSetting alloc] init];
     }
     return S;
 }
 
 - (instancetype)init {
-    self = [super initWithName:[NSString stringWithFormat:NSLocalizedString(@"get_split_coin_setting_name", nil), [SplitCoinUtil getSplitCoinName:SplitBCC]] icon:nil];
+    self = [super initWithName:[NSString stringWithFormat:NSLocalizedString(@"get_split_coin_setting_name", nil), [SplitCoinUtil getSplitCoinName:SplitBTG]] icon:nil];
     if (self) {
-        __weak ObtainBccSetting *s = self;
+        __weak GetBtgSetting *s = self;
         [self setSelectBlock:^(UIViewController *controller) {
             
             u_int32_t lastBlockHeight = [BTPeerManager instance].lastBlockHeight;
@@ -60,7 +59,7 @@ static ObtainBccSetting *S;
 
 - (void)show {
     ObtainBccViewController *vc = [self.controller.storyboard instantiateViewControllerWithIdentifier:@"ObtainBccViewController"];
-    vc.splitCoin = SplitBCC;
+    vc.splitCoin = SplitBTG;
     [self.controller.navigationController pushViewController:vc animated:YES];
 }
 

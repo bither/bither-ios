@@ -43,7 +43,7 @@ typedef enum {
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.lblTitle.text = NSLocalizedString(@"obtain_bcc_setting_name", nil);
+    self.lblTitle.text = [NSString stringWithFormat:NSLocalizedString(@"get_split_coin_setting_name", nil), [SplitCoinUtil getSplitCoinName:self.splitCoin]];
     dp = [[DialogProgress alloc] initWithMessage:NSLocalizedString(@"Please wait…", nil)];
     _privateKeys = [NSMutableArray new];
     _watchOnlys = [NSMutableArray new];
@@ -88,40 +88,41 @@ typedef enum {
     ObtainBccCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ObtainBccCell" forIndexPath:indexPath];
     BTAddress *address;
     NSString *getIsObtainKey;
+    NSString *coinName = [SplitCoinUtil getSplitCoinName:self.splitCoin];
     BOOL isShowLine;
     BOOL isLastSection = indexPath.section == (_sections - 1);
     switch ([self sectionTypeForIndex:indexPath.section]) {
         case SectionHD:
             address = [BTAddressManager instance].hdAccountHot;
-            getIsObtainKey = @"HDAccountHot";
+            getIsObtainKey = [NSString stringWithFormat:@"HDAccountHot%@", coinName];
             isShowLine = isLastSection;
             break;
         case SectionHdMonitored:
-            getIsObtainKey = @"HDMonitored";
+            getIsObtainKey = [NSString stringWithFormat:@"HDMonitored%@", coinName];
             address = [BTAddressManager instance].hdAccountMonitored;
             isShowLine = isLastSection;
             break;
         case SectionPrivate:
             address = [_privateKeys objectAtIndex:indexPath.row];
-            getIsObtainKey = address.address;
+            getIsObtainKey = [NSString stringWithFormat:@"%@%@", address.address, coinName];
             isShowLine = isLastSection || indexPath.row != (_privateKeys.count - 1);
             break;
         case SectionWatchOnly:
             address = [_watchOnlys objectAtIndex:indexPath.row];
-            getIsObtainKey = address.address;
+            getIsObtainKey = [NSString stringWithFormat:@"%@%@", address.address, coinName];
             isShowLine = isLastSection || indexPath.row != (_watchOnlys.count - 1);
             break;
     }
     
     if ([[UserDefaultsUtil instance] getIsObtainBccForKey:getIsObtainKey]) {
-        [cell setObtainedForAddress:address isShowLine:isShowLine];
+        [cell setObtainedForAddress:address splitCoin: self.splitCoin isShowLine:isShowLine];
         cell.userInteractionEnabled = NO;
     } else {
         if ([address isMemberOfClass:[BTHDAccount class]]) {
             BTHDAccount *hdAccount = (BTHDAccount *) address;
-            [cell setAddress:address bccBalance:[BTTxBuilder getAmount:[[BTHDAccountAddressProvider instance] getPrevCanSplitOutsByHDAccount:(int)[hdAccount getHDAccountId]]] isShowLine:isShowLine];
+            [cell setAddress:address bccBalance:[BTTxBuilder getAmount:[[BTHDAccountAddressProvider instance] getPrevCanSplitOutsByHDAccount:(int)[hdAccount getHDAccountId] coin:[self getCoin]]] splitCoin: self.splitCoin isShowLine:isShowLine];
         } else {
-            [cell setAddress:address bccBalance:[BTTxBuilder getAmount:[[BTTxProvider instance] getPrevOutsWithAddress:address.address]] isShowLine:isShowLine];
+            [cell setAddress:address bccBalance:[BTTxBuilder getAmount:[[BTTxProvider instance] getPrevOutsWithAddress:address.address coin:[self getCoin]]] splitCoin: self.splitCoin isShowLine:isShowLine];
         }
         cell.userInteractionEnabled = YES;
     }
@@ -162,21 +163,23 @@ typedef enum {
     SectionType sectionType = [self sectionTypeForIndex:indexPath.section];
     if (sectionType == SectionHdMonitored || sectionType == SectionWatchOnly) {
         ObtainBccMonitoredDetailViewController *controller = [self.storyboard instantiateViewControllerWithIdentifier:@"ObtainBccMonitoredDetailViewController"];
+        controller.splitCoin = self.splitCoin;
         controller.btAddress = address;
         if ([address isMemberOfClass:[BTHDAccount class]]) {
-            controller.amount = [BTTxBuilder getAmount:[[BTHDAccountAddressProvider instance] getPrevCanSplitOutsByHDAccount:(int)[(BTHDAccount *) address getHDAccountId]]];
+            controller.amount = [BTTxBuilder getAmount:[[BTHDAccountAddressProvider instance] getPrevCanSplitOutsByHDAccount:(int)[(BTHDAccount *) address getHDAccountId] coin:[self getCoin]]];
         } else {
-            controller.amount = [BTTxBuilder getAmount:[[BTTxProvider instance] getPrevOutsWithAddress:address.address]];
+            controller.amount = [BTTxBuilder getAmount:[[BTTxProvider instance] getPrevOutsWithAddress:address.address coin:[self getCoin]]];
         }
         controller.sendDelegate = self;
         vc = controller;
     } else {
         ObtainBccDetailViewController *controller = [self.storyboard instantiateViewControllerWithIdentifier:@"ObtainBccDetailViewController"];
+        controller.splitCoin = self.splitCoin;
         controller.btAddress = address;
         if ([address isMemberOfClass:[BTHDAccount class]]) {
-            controller.amount = [BTTxBuilder getAmount:[[BTHDAccountAddressProvider instance] getPrevCanSplitOutsByHDAccount:(int)[(BTHDAccount *) address getHDAccountId]]];
+            controller.amount = [BTTxBuilder getAmount:[[BTHDAccountAddressProvider instance] getPrevCanSplitOutsByHDAccount:(int)[(BTHDAccount *) address getHDAccountId] coin:[self getCoin]]];
         } else {
-            controller.amount = [BTTxBuilder getAmount:[[BTTxProvider instance] getPrevOutsWithAddress:address.address]];
+            controller.amount = [BTTxBuilder getAmount:[[BTTxProvider instance] getPrevOutsWithAddress:address.address coin:[self getCoin]]];
         }
         controller.sendDelegate = self;
         vc = controller;
@@ -292,6 +295,10 @@ typedef enum {
 
 - (void)showMsg:(NSString *)msg {
     [self showBannerWithMessage:msg belowView:self.vTopBar];
+}
+
+- (Coin)getCoin {
+    return self.splitCoin == SplitBTG ? BTG : BCC;
 }
 
 

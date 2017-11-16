@@ -236,8 +236,8 @@ static BitherApi *piApi;
     } failure:nil];
 }
 
-- (void)getHasBccAddress:(NSString *)address callback:(DictResponseBlock)callback andErrorCallBack:(ErrorHandler)errorCallback {
-    NSString *url = [NSString stringWithFormat:BCC_HAS_ADDRESS, address];
+- (void)getHasSplitCoinAddress:(NSString *)address splitCoin:(SplitCoin)splitCoin callback:(DictResponseBlock)callback andErrorCallBack:(ErrorHandler)errorCallback {
+    NSString *url = [NSString stringWithFormat:splitCoin == SplitBTG ? BTG_HAS_ADDRESS : BCC_HAS_ADDRESS, address];
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     manager.responseSerializer = [AFHTTPResponseSerializer serializer];
     [manager GET:url parameters:nil success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
@@ -252,7 +252,7 @@ static BitherApi *piApi;
     }];
 }
 
-- (void)postBccBroadcast:(BTTx *)tx callback:(DictResponseBlock)callback andErrorCallBack:(ErrorHandler)errorCallback {
+- (void)postSplitCoinBroadcast:(BTTx *)tx splitCoin:(SplitCoin)splitCoin callback:(DictResponseBlock)callback andErrorCallBack:(ErrorHandler)errorCallback {
     NSDictionary *dict = @{@"raw_tx": [NSString hexWithData:tx.toData]};
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     manager.responseSerializer = [AFJSONResponseSerializer serializer];
@@ -261,7 +261,7 @@ static BitherApi *piApi;
     [manager.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Accept"];
     [manager.requestSerializer setValue:@"application/json; charset=utf-8" forHTTPHeaderField:@"Content-Type"];
     
-    [manager POST:BCC_BROADCAST parameters:dict success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
+    [manager POST:splitCoin == SplitBTG ? BTG_BROADCAST : BCC_BROADCAST parameters:dict success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
         NSDictionary *responseDic = responseObject;
         if (callback) {
             callback(responseDic);

@@ -115,6 +115,8 @@
 		403753131DC0503700F402A0 /* UIView+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 403753121DC0503700F402A0 /* UIView+Extension.m */; };
 		4040643F1F21B1FB00917F68 /* SignMessageSelectAddressViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4040643E1F21B1FB00917F68 /* SignMessageSelectAddressViewController.m */; };
 		404064421F21B71200917F68 /* SignMessageSelectAddressCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 404064411F21B71200917F68 /* SignMessageSelectAddressCell.m */; };
+		405AC4621FBC46CB00FB970C /* SplitCoinUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 405AC4611FBC46CB00FB970C /* SplitCoinUtil.m */; };
+		405AC4651FBC488900FB970C /* GetBtgSetting.m in Sources */ = {isa = PBXBuildFile; fileRef = 405AC4641FBC488900FB970C /* GetBtgSetting.m */; };
 		40A51A5E1F2AED8E005CF531 /* ObtainBccCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 40A51A5D1F2AED8E005CF531 /* ObtainBccCell.m */; };
 		40A51A611F2AF77E005CF531 /* ObtainBccMonitoredDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 40A51A601F2AF77E005CF531 /* ObtainBccMonitoredDetailViewController.m */; };
 		40D777081F41360E00121B90 /* DialogImportPrivateKeyAddressValidation.m in Sources */ = {isa = PBXBuildFile; fileRef = 40D777071F41360E00121B90 /* DialogImportPrivateKeyAddressValidation.m */; };
@@ -569,6 +571,10 @@
 		4040643E1F21B1FB00917F68 /* SignMessageSelectAddressViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignMessageSelectAddressViewController.m; sourceTree = "<group>"; };
 		404064401F21B71200917F68 /* SignMessageSelectAddressCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignMessageSelectAddressCell.h; sourceTree = "<group>"; };
 		404064411F21B71200917F68 /* SignMessageSelectAddressCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignMessageSelectAddressCell.m; sourceTree = "<group>"; };
+		405AC4601FBC46CB00FB970C /* SplitCoinUtil.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SplitCoinUtil.h; sourceTree = "<group>"; };
+		405AC4611FBC46CB00FB970C /* SplitCoinUtil.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SplitCoinUtil.m; sourceTree = "<group>"; };
+		405AC4631FBC488900FB970C /* GetBtgSetting.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GetBtgSetting.h; sourceTree = "<group>"; };
+		405AC4641FBC488900FB970C /* GetBtgSetting.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GetBtgSetting.m; sourceTree = "<group>"; };
 		40A51A5C1F2AED8E005CF531 /* ObtainBccCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ObtainBccCell.h; sourceTree = "<group>"; };
 		40A51A5D1F2AED8E005CF531 /* ObtainBccCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ObtainBccCell.m; sourceTree = "<group>"; };
 		40A51A5F1F2AF77D005CF531 /* ObtainBccMonitoredDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ObtainBccMonitoredDetailViewController.h; sourceTree = "<group>"; };
@@ -1349,6 +1355,8 @@
 				403753121DC0503700F402A0 /* UIView+Extension.m */,
 				401ABC901DC33E8F004611B7 /* AdUtil.h */,
 				401ABC911DC33E8F004611B7 /* AdUtil.m */,
+				405AC4601FBC46CB00FB970C /* SplitCoinUtil.h */,
+				405AC4611FBC46CB00FB970C /* SplitCoinUtil.m */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -1876,6 +1884,8 @@
 				0A6C0F5B1A4D548B00544B33 /* MessageSigningSetting.m */,
 				402A5CB61F28374F00B636FD /* ObtainBccSetting.h */,
 				402A5CB71F28374F00B636FD /* ObtainBccSetting.m */,
+				405AC4631FBC488900FB970C /* GetBtgSetting.h */,
+				405AC4641FBC488900FB970C /* GetBtgSetting.m */,
 				AC454DE81A1F3839000AF4ED /* PinCodeSetting.h */,
 				AC454DE91A1F3839000AF4ED /* PinCodeSetting.m */,
 				DAB2C8711A2038930011EE2F /* KeychainSetting.h */,
@@ -2140,13 +2150,16 @@
 			files = (
 			);
 			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
 			);
 			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-bither-ios WatchKit Extension-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 		2B9783C3E78BF3B7A4A784B1 /* [CP] Check Pods Manifest.lock */ = {
@@ -2155,13 +2168,16 @@
 			files = (
 			);
 			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
 			);
 			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-bither-ios WatchKit App-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 		4268FE14194AA3FD007A4C30 /* ShellScript */ = {
@@ -2213,13 +2229,16 @@
 			files = (
 			);
 			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
 			);
 			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-bither-iosTests-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 		71CAA345256519772492378B /* [CP] Copy Pods Resources */ = {
@@ -2288,13 +2307,16 @@
 			files = (
 			);
 			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
 			);
 			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-bither-ios-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 		CEAE2ACDDC013D2C5BF7AFE3 /* [CP] Embed Pods Frameworks */ = {
@@ -2555,11 +2577,13 @@
 				AC53ABCF19D52387007C095C /* UEntropySensor.m in Sources */,
 				ACDDDC2019480DE00008A79D /* PiPageViewController.m in Sources */,
 				AC0135D9194FDCDF00E3BB95 /* HotAddressAddPrivateKeyViewController.m in Sources */,
+				405AC4621FBC46CB00FB970C /* SplitCoinUtil.m in Sources */,
 				ACEE7D4219D403DC00932B39 /* DonationSetting.m in Sources */,
 				AC45D84219878BAB00AF5C2C /* DialogBalanceDetail.m in Sources */,
 				ACCA274E198F2805000E6A32 /* DialogTotalBalance.m in Sources */,
 				ACDDDC2D19480ECF0008A79D /* DialogCentered.m in Sources */,
 				ACF02FEB19D90899001AB701 /* DialogSwitchQRCode.m in Sources */,
+				405AC4651FBC488900FB970C /* GetBtgSetting.m in Sources */,
 				0AD849EB1D0E9B4C005FAF56 /* DialogMonitorAddressValidation.m in Sources */,
 				4268FE2B194ACD57007A4C30 /* CheckViewController.m in Sources */,
 				0A42062A1A494F1000562100 /* SignMessageViewController.m in Sources */,

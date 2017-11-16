@@ -20,7 +20,7 @@
 #import "StringUtil.h"
 #import "UserDefaultsUtil.h"
 #import "BTTx.h"
-
+#import "SplitCoinUtil.h"
 
 ///@description   API
 @interface BitherApi : BaseApi {
@@ -56,9 +56,9 @@
 
 - (void)getAdApi;
 
-- (void)getHasBccAddress:(NSString *)address callback:(DictResponseBlock)callback andErrorCallBack:(ErrorHandler)errorCallback;
+- (void)getHasSplitCoinAddress:(NSString *)address splitCoin:(SplitCoin)splitCoin callback:(DictResponseBlock)callback andErrorCallBack:(ErrorHandler)errorCallback;
 
-- (void)postBccBroadcast:(BTTx *)tx callback:(DictResponseBlock)callback andErrorCallBack:(ErrorHandler)errorCallback;
+- (void)postSplitCoinBroadcast:(BTTx *)tx splitCoin:(SplitCoin)splitCoin callback:(DictResponseBlock)callback andErrorCallBack:(ErrorHandler)errorCallback;
 
 
 

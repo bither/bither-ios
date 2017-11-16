@@ -24,7 +24,9 @@
 #define BITHER_GET_ONE_SPVBLOCK_API @"api/v2/block/spv/one"
 #define BITHER_IN_SIGNATURES_API  @"api/v1/address/%@/insignature/%d"
 #define BCC_BROADCAST @"https://bitpie.getcai.com/api/v1/bcc/broadcast"
+#define BTG_BROADCAST @"https://bitpie.getcai.com/api/v1/btg/broadcast"
 #define BCC_HAS_ADDRESS @"https://bitpie.getcai.com/api/v1/bcc/has/address/%@"
+#define BTG_HAS_ADDRESS @"https://bitpie.getcai.com/api/v1/btg/has/address/%@"
 
 #define BITHER_Q_MYTRANSACTIONS @"api/v1/address/%@/transaction"
 #define BITHER_ERROR_API  @"api/v1/error"

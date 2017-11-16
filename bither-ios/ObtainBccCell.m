@@ -24,16 +24,16 @@
 
 @implementation ObtainBccCell
 
-- (void)setObtainedForAddress:(BTAddress *)address isShowLine:(BOOL)isShowLine {
+- (void)setObtainedForAddress:(BTAddress *)address splitCoin:(SplitCoin)splitCoin isShowLine:(BOOL)isShowLine {
     self.lblAddress.text = [StringUtil formatAddress:address.address groupSize:4 lineSize:20];
-    self.lblBalance.text = NSLocalizedString(@"you_already_obtained_bcc", nil);
+    self.lblBalance.text = [[NSString alloc] initWithFormat:NSLocalizedString(@"you_already_get_split_coin", nil), [SplitCoinUtil getSplitCoinName:splitCoin]];
     [self.lblLine setHidden:!isShowLine];
 }
 
-- (void)setAddress:(BTAddress *)address bccBalance:(uint64_t)balance isShowLine:(BOOL)isShowLine {
+- (void)setAddress:(BTAddress *)address bccBalance:(uint64_t)balance splitCoin:(SplitCoin)splitCoin isShowLine:(BOOL)isShowLine {
     self.lblAddress.text = [StringUtil formatAddress:address.address groupSize:4 lineSize:20];
-    NSString *balanceTitleStr = NSLocalizedString(@"obtainable_bcc", nil);
-    NSString *balanceStr = [NSString stringWithFormat:@"%@%@BCC", balanceTitleStr, [UnitUtil stringForAmount:balance unit:UnitBTC]];
+    NSString *balanceTitleStr = NSLocalizedString(@"get_split_coin", nil);
+    NSString *balanceStr = [NSString stringWithFormat:@"%@%@%@", balanceTitleStr, [UnitUtil stringForAmount:balance unit:UnitBTC], [SplitCoinUtil getSplitCoinName:splitCoin]];
     NSMutableAttributedString *attrStr = [[NSMutableAttributedString alloc] initWithString:balanceStr];
     [attrStr addAttribute:NSForegroundColorAttributeName value:[UIColor parseColor:kRedColor] range:NSMakeRange(0, balanceStr.length)];
     [attrStr addAttribute:NSForegroundColorAttributeName value:[UIColor parseColor:kBlackColor] range:NSMakeRange(0, balanceTitleStr.length)];

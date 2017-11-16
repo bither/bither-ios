@@ -43,6 +43,7 @@
 #import "IOS7ContainerViewController.h"
 #import "PaymentAddressSetting.h"
 #import "ObtainBccSetting.h"
+#import "GetBtgSetting.h"
 
 @implementation Setting
 
@@ -700,6 +701,7 @@ static Setting *ApiConfigSetting;
     
     if ([[BTSettings instance] getAppMode] == HOT) {
         [array addObject:[ObtainBccSetting getObtainBccSetting]];
+        [array addObject:[GetBtgSetting getBtgSetting]];
     }
     [array addObject:[MessageSigningSetting getMessageSigningSetting]];
     [array addObject:[Setting getPasswordStrengthSetting]];

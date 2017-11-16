@@ -8,11 +8,13 @@
 
 #import <UIKit/UIKit.h>
 #import "SendViewController.h"
+#import "SplitCoinUtil.h"
 
 @interface ObtainBccDetailViewController : UIViewController
 
 @property BTAddress *btAddress;
 @property uint64_t amount;
 @property(weak) NSObject <SendDelegate> *sendDelegate;
+@property(nonatomic) SplitCoin splitCoin;
 
 @end
