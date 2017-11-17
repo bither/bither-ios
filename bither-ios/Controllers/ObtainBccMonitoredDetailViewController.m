@@ -244,10 +244,11 @@
 }
 
 - (void)saveIsObtainBcc {
+    NSString *coinName = self.splitCoin == SplitBCC ? @"" : [self getSplitCoinName];
     if ([self.btAddress isMemberOfClass:[BTHDAccount class]]) {
-        [[UserDefaultsUtil instance] setIsObtainBccKey:@"HDMonitored" value:@"1"];
+        [[UserDefaultsUtil instance] setIsObtainBccKey:[NSString stringWithFormat:@"HDMonitored%@", coinName] value:@"1"];
     } else {
-        [[UserDefaultsUtil instance] setIsObtainBccKey:self.btAddress.address value:@"1"];
+        [[UserDefaultsUtil instance] setIsObtainBccKey:[NSString stringWithFormat:@"%@%@", self.btAddress.address, coinName] value:@"1"];
     }
 }
 
