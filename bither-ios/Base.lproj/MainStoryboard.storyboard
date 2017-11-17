@@ -3979,6 +3979,7 @@ They need separated back ups.</string>
                     </view>
                     <connections>
                         <outlet property="btnObtain" destination="Ydi-yn-JKG" id="KsG-Qi-2hz"/>
+                        <outlet property="lblAddressTitle" destination="45g-ra-PPL" id="Ken-tq-DyZ"/>
                         <outlet property="lblTitle" destination="W4u-G4-L6X" id="5GV-Lm-FuL"/>
                         <outlet property="tfAddress" destination="d0K-dD-qqM" id="nTt-nf-3EB"/>
                         <outlet property="tfPassword" destination="4BE-Dt-Z9g" id="szI-bI-WVM"/>
@@ -4085,6 +4086,7 @@ They need separated back ups.</string>
                     </view>
                     <connections>
                         <outlet property="btnObtain" destination="k22-fr-QCR" id="DuS-fE-0Jf"/>
+                        <outlet property="lblAddressTitle" destination="Qjw-My-urU" id="kWj-b4-3VN"/>
                         <outlet property="lblTitle" destination="rPU-r8-QDl" id="IgB-Z6-Kb9"/>
                         <outlet property="tfAddress" destination="LQc-Sd-WZK" id="HLx-jN-tim"/>
                         <outlet property="vTopBar" destination="OSq-a4-fro" id="D9q-tr-I1S"/>
