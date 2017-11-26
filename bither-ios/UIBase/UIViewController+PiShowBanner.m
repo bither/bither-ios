@@ -29,6 +29,34 @@
 @implementation UIViewController (PiShowBanner)
 
 - (void)showBannerWithMessage:(NSString *)msg belowView:(UIView *)topView belowTop:(CGFloat)top autoHideIn:(NSTimeInterval)secs withCompletion:(void (^)())completion {
+    if ([NSThread isMainThread]) {
+        [self showBannerHandleWithMessage:msg belowView:topView belowTop:top autoHideIn:secs withCompletion:completion];
+    } else {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self showBannerHandleWithMessage:msg belowView:topView belowTop:top autoHideIn:secs withCompletion:completion];
+        });
+    }
+}
+
+- (void)showBannerWithMessage:(NSString *)msg belowView:(UIView *)topView autoHideIn:(NSTimeInterval)secs withCompletion:(void (^)())completion {
+    [self showBannerWithMessage:msg belowView:topView belowTop:kPiShowBannerTop autoHideIn:secs withCompletion:completion];
+}
+
+
+- (void)showBannerWithMessage:(NSString *)msg belowView:(UIView *)topView autoHideIn:(NSTimeInterval)secs {
+    [self showBannerWithMessage:msg belowView:topView belowTop:kPiShowBannerTop autoHideIn:secs withCompletion:nil];
+
+}
+
+- (void)showBannerWithMessage:(NSString *)msg belowView:(UIView *)topView withCompletion:(void (^)())completion {
+    [self showBannerWithMessage:msg belowView:topView belowTop:kPiShowBannerTop autoHideIn:kPiShowBannerShowDuration withCompletion:completion];
+}
+
+- (void)showBannerWithMessage:(NSString *)msg belowView:(UIView *)topView {
+    [self showBannerWithMessage:msg belowView:topView belowTop:kPiShowBannerTop autoHideIn:kPiShowBannerShowDuration withCompletion:nil];
+}
+
+- (void)showBannerHandleWithMessage:(NSString *)msg belowView:(UIView *)topView belowTop:(CGFloat)top autoHideIn:(NSTimeInterval)secs withCompletion:(void (^)())completion {
     UIView *banner = [self getBannerWithMessage:msg];
     UIView *container = [[UIView alloc] initWithFrame:CGRectMake(0, top, self.view.frame.size.width, banner.frame.size.height)];
     container.backgroundColor = [UIColor clearColor];
@@ -54,24 +82,6 @@
             }];
         });
     }];
-}
-
-- (void)showBannerWithMessage:(NSString *)msg belowView:(UIView *)topView autoHideIn:(NSTimeInterval)secs withCompletion:(void (^)())completion {
-    [self showBannerWithMessage:msg belowView:topView belowTop:kPiShowBannerTop autoHideIn:secs withCompletion:completion];
-}
-
-
-- (void)showBannerWithMessage:(NSString *)msg belowView:(UIView *)topView autoHideIn:(NSTimeInterval)secs {
-    [self showBannerWithMessage:msg belowView:topView belowTop:kPiShowBannerTop autoHideIn:secs withCompletion:nil];
-
-}
-
-- (void)showBannerWithMessage:(NSString *)msg belowView:(UIView *)topView withCompletion:(void (^)())completion {
-    [self showBannerWithMessage:msg belowView:topView belowTop:kPiShowBannerTop autoHideIn:kPiShowBannerShowDuration withCompletion:completion];
-}
-
-- (void)showBannerWithMessage:(NSString *)msg belowView:(UIView *)topView {
-    [self showBannerWithMessage:msg belowView:topView belowTop:kPiShowBannerTop autoHideIn:kPiShowBannerShowDuration withCompletion:nil];
 }
 
 - (UIView *)getBannerWithMessage:(NSString *)msg {
