@@ -19,6 +19,9 @@
         case SplitBTG:
             name = @"BTG";
             break;
+        case SplitSBTC:
+            name = @"SBTC";
+            break;
         default:
             name = @"BCH";
             break;

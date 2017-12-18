@@ -298,7 +298,14 @@ typedef enum {
 }
 
 - (Coin)getCoin {
-    return self.splitCoin == SplitBTG ? BTG : BCC;
+    switch (self.splitCoin) {
+        case SplitBTG:
+            return BTG;
+        case SplitSBTC:
+            return SBTC;
+        default:
+            return BCC;
+    }
 }
 
 

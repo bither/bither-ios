@@ -25,8 +25,10 @@
 #define BITHER_IN_SIGNATURES_API  @"api/v1/address/%@/insignature/%d"
 #define BCC_BROADCAST @"https://bitpie.getcai.com/api/v1/bcc/broadcast"
 #define BTG_BROADCAST @"https://bitpie.getcai.com/api/v1/btg/broadcast"
+#define SBTC_BROADCAST @"https://bitpie.getcai.com/api/v1/sbtc/broadcast"
 #define BCC_HAS_ADDRESS @"https://bitpie.getcai.com/api/v1/bcc/has/address/%@"
 #define BTG_HAS_ADDRESS @"https://bitpie.getcai.com/api/v1/btg/has/address/%@"
+#define SBTC_HAS_ADDRESS @"https://bitpie.getcai.com/api/v1/sbtc/has/address/%@"
 
 #define BITHER_Q_MYTRANSACTIONS @"api/v1/address/%@/transaction"
 #define BITHER_ERROR_API  @"api/v1/error"

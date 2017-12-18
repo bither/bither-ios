@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 
 typedef enum {
-    SplitBCC, SplitBTG
+    SplitBCC, SplitBTG, SplitSBTC
 } SplitCoin;
 
 @interface SplitCoinUtil : NSObject

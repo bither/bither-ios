@@ -237,7 +237,19 @@ static BitherApi *piApi;
 }
 
 - (void)getHasSplitCoinAddress:(NSString *)address splitCoin:(SplitCoin)splitCoin callback:(DictResponseBlock)callback andErrorCallBack:(ErrorHandler)errorCallback {
-    NSString *url = [NSString stringWithFormat:splitCoin == SplitBTG ? BTG_HAS_ADDRESS : BCC_HAS_ADDRESS, address];
+    NSString *urlStr = nil;
+    switch (splitCoin) {
+        case SplitBTG:
+            urlStr = BTG_HAS_ADDRESS;
+            break;
+        case SplitSBTC:
+            urlStr = SBTC_HAS_ADDRESS;
+            break;
+        default:
+             urlStr = BCC_HAS_ADDRESS;
+            break;
+    }
+    NSString *url = [NSString stringWithFormat:urlStr, address];
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     manager.responseSerializer = [AFHTTPResponseSerializer serializer];
     [manager GET:url parameters:nil success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
@@ -260,8 +272,19 @@ static BitherApi *piApi;
     manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json", @"text/json", @"text/javascript",@"text/html", @"text/plain", nil];
     [manager.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Accept"];
     [manager.requestSerializer setValue:@"application/json; charset=utf-8" forHTTPHeaderField:@"Content-Type"];
-    
-    [manager POST:splitCoin == SplitBTG ? BTG_BROADCAST : BCC_BROADCAST parameters:dict success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
+    NSString *urlStr = nil;
+    switch (splitCoin) {
+        case SplitBTG:
+            urlStr = BTG_BROADCAST;
+            break;
+        case SplitSBTC:
+            urlStr = SBTC_BROADCAST;
+            break;
+        default:
+            urlStr = BCC_BROADCAST;
+            break;
+    }
+    [manager POST:urlStr parameters:dict success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
         NSDictionary *responseDic = responseObject;
         if (callback) {
             callback(responseDic);

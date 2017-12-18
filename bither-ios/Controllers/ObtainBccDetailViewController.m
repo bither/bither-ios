@@ -213,7 +213,14 @@ static BTAddress * extracted(ObtainBccDetailViewController *object) {
 }
 
 - (Coin)getCoin {
-    return self.splitCoin == SplitBTG ? BTG : BCC;
+    switch (self.splitCoin) {
+        case SplitSBTC:
+            return SBTC;
+        case SplitBTG:
+            return BTG;
+        default:
+             return BCC;
+    }
 }
 
 - (void)showMsg:(NSString *)msg {
