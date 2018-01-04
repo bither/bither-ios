@@ -24,6 +24,7 @@
 #import "DialogPassword.h"
 #import "QrCodeViewController.h"
 #import "BTQRCodeUtil.h"
+#import "SplitCoinUtil.h"
 
 @interface SignTransactionViewController () <DialogPasswordDelegate> {
     BTAddress *address;
@@ -59,13 +60,14 @@
         self.lblFrom.text = self.tx.myAddress;
     }
     self.lblTo.text = self.tx.toAddress;
-    self.lblAmount.attributedText = [UnitUtil attributedStringWithSymbolForAmount:self.tx.to withFontSize:14 color:self.lblAmount.textColor];
-    self.lblFee.attributedText = [UnitUtil attributedStringWithSymbolForAmount:self.tx.fee withFontSize:14 color:self.lblAmount.textColor];
+    SplitCoin coin = [SplitCoinUtil getCoinByAddressFormat:self.tx.toAddress];
+    self.lblAmount.attributedText = [UnitUtil attributedStringWithSymbolForAmount:self.tx.to withFontSize:14 color:self.lblAmount.textColor coin:coin];
+    self.lblFee.attributedText = [UnitUtil attributedStringWithSymbolForAmount:self.tx.fee withFontSize:14 color:self.lblAmount.textColor coin:coin];
     
     if (self.tx.changeAmt > 0 && ![StringUtil isEmpty:self.tx.changeAddress]) {
         self.vChange.hidden = NO;
         self.lblChangeAddress.text = self.tx.changeAddress;
-        self.lblChangeAmount.attributedText = [UnitUtil attributedStringWithSymbolForAmount:self.tx.changeAmt withFontSize:14 color:self.lblChangeAmount.textColor];
+        self.lblChangeAmount.attributedText = [UnitUtil attributedStringWithSymbolForAmount:self.tx.changeAmt withFontSize:14 color:self.lblChangeAmount.textColor coin:coin];
     } else {
         self.vChange.hidden = YES;
     }
