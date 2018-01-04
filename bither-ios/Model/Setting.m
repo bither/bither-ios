@@ -45,6 +45,8 @@
 #import "ObtainBccSetting.h"
 #import "GetBtgSetting.h"
 #import "GetSBTCSetting.h"
+#import "GetBTWSetting.h"
+#import "GetBCDSetting.h"
 
 @implementation Setting
 
@@ -242,6 +244,7 @@ static Setting *ApiConfigSetting;
         }];
         [setting setGetArrayBlock:^() {
             NSMutableArray *array = [NSMutableArray new];
+            [array addObject:[self getTransactionFeeDict:TwentyX]];
             [array addObject:[self getTransactionFeeDict:TenX]];
             [array addObject:[self getTransactionFeeDict:Higher]];
             [array addObject:[self getTransactionFeeDict:High]];
@@ -704,6 +707,8 @@ static Setting *ApiConfigSetting;
         [array addObject:[ObtainBccSetting getObtainBccSetting]];
         [array addObject:[GetBtgSetting getBtgSetting]];
         [array addObject:[GetSBTCSetting getSBTCSetting]];
+         [array addObject:[GetBTWSetting getBTWSetting]];
+         [array addObject:[GetBCDSetting getBCDSetting]];
     }
     [array addObject:[MessageSigningSetting getMessageSigningSetting]];
     [array addObject:[Setting getPasswordStrengthSetting]];

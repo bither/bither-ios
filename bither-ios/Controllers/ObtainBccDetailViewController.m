@@ -41,7 +41,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.lblTitle.text = [NSString stringWithFormat:@"%@%@%@", NSLocalizedString(@"get_split_coin", nil), [UnitUtil stringForAmount:_amount unit:UnitBTC], [self getSplitCoinName]];
+    self.lblTitle.text = [NSString stringWithFormat:@"%@%@%@", NSLocalizedString(@"get_split_coin", nil), [UnitUtil stringForAmount:_amount unit:[self getBitcoinUnit]], [self getSplitCoinName]];
     NSString *addressTitle = [NSString stringWithFormat:NSLocalizedString(@"bitpie_split_coin_address", nil), [self getSplitCoinName]];
     self.lblAddressTitle.text = addressTitle;
     self.tfAddress.placeholder = addressTitle;
@@ -87,55 +87,78 @@ static BTAddress * extracted(ObtainBccDetailViewController *object) {
                 [self showMsg:[NSString stringWithFormat:NSLocalizedString(@"not_bitpie_split_coin_address", nil), [self getSplitCoinName]]];
                 return;
             }
-            
-            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
-                if (![[BTPasswordSeed getPasswordSeed] checkPassword:self.tfPassword.text]) {
-                    [self showPasswordWrong];
-                    return;
-                }
-                NSError *error;
-                NSString *toAddress = [self getToAddress];
-                NSArray *txs;
-                if ([self.btAddress isMemberOfClass:[BTHDAccount class]]) {
-                    txs = [(BTHDAccount *)extracted(self) newSplitCoinTxsToAddresses:@[toAddress] withAmounts:@[@(self.amount)] andChangeAddress:toAddress password:self.tfPassword.text andError:&error coin:[self getCoin]];
-                } else {
-                    txs = [self.btAddress splitCoinTxsForAmounts:@[@(self.amount)] andAddress:@[toAddress] andChangeAddress:toAddress andError:&error coin:[self getCoin]];
-                }
-                
-                if (error) {
-                    NSString *msg = [TransactionsUtil getCompleteTxForError:error];
-                    [self showMsg:msg];
-                } else {
-                    if (!txs) {
-                        [self showSendFailed];
-                        return;
-                    }
-                    
-                    if ([self.btAddress isMemberOfClass:[BTHDAccount class]]) {
-                        [self showDialogHDSendTxConfirmForTx:txs];
-                    } else {
-                        BOOL isPasswordWrong = NO;
-                        for (BTTx *tx in txs) {
-                            if ([self.btAddress signTransaction:tx withPassphrase:self.tfPassword.text]) {
-                                continue;
-                            } else {
-                                isPasswordWrong = YES;
-                                break;
-                            }
-                        }
-                        if (isPasswordWrong) {
-                            [self showPasswordWrong];
-                        } else {
-                            [self showDialogHDSendTxConfirmForTx:txs];
-                        }
-                    }
-                }
-            });
+            if(self.splitCoin == SplitBCD) {
+                [self getBcdPreBlockHash];
+            }else{
+                [self signTransactionPreBlockHash:NULL];
+            }
         } andErrorCallBack:^(NSOperation *errorOp, NSError *error) {
             [self showMsg:NSLocalizedString(@"Network failure.", nil)];
             return;
         }];
     }];
+}
+- (void) getBcdPreBlockHash{
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [[BitherApi instance] getBcdPreBlockHashCallback:^(NSDictionary *dict) {
+            NSString* preBlockHash = dict[@"current_block_hash"];
+            if(preBlockHash == NULL || [preBlockHash isEqualToString:@""]) {
+                [self showMsg:NSLocalizedString(@"get_bcd_block_hash_error", nil)];
+            }else{
+                    [self signTransactionPreBlockHash:preBlockHash];
+            }
+        } andErrorCallBack:^(NSOperation *errorOp, NSError *error) {
+            [self showMsg:NSLocalizedString(@"Network failure.", nil)];
+        }];
+    });
+}
+-(void)signTransactionPreBlockHash:(NSString*)hash{
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+        if (![[BTPasswordSeed getPasswordSeed] checkPassword:self.tfPassword.text]) {
+            [self showPasswordWrong];
+            return;
+        }
+        NSError *error;
+        NSString *toAddress = [self getToAddress];
+        NSArray *txs;
+        if ([self.btAddress isMemberOfClass:[BTHDAccount class]]) {
+            txs = [(BTHDAccount *)extracted(self) newSplitCoinTxsToAddresses:@[toAddress] withAmounts:@[@(self.amount)] andChangeAddress:toAddress password:self.tfPassword.text andError:&error coin:[self getCoin] blockHah:hash];
+        } else {
+            txs = [self.btAddress splitCoinTxsForAmounts:@[@(self.amount)] andAddress:@[toAddress] andChangeAddress:toAddress andError:&error coin:[self getCoin]];
+        }
+        
+        if (error) {
+            NSString *msg = [TransactionsUtil getCompleteTxForError:error];
+            [self showMsg:msg];
+        } else {
+            if (!txs) {
+                [self showSendFailed];
+                return;
+            }
+            if ([self.btAddress isMemberOfClass:[BTHDAccount class]]) {
+                [self showDialogHDSendTxConfirmForTx:txs];
+            } else {
+                BOOL isPasswordWrong = NO;
+                for (BTTx *tx in txs) {
+                    if(hash != NULL && ![hash isEqualToString:@""]) {
+                        tx.blockHash = [hash hexToData];
+                    }
+                    if ([self.btAddress signTransaction:tx withPassphrase:self.tfPassword.text]) {
+                        continue;
+                    } else {
+                        isPasswordWrong = YES;
+                        break;
+                    }
+                }
+                if (isPasswordWrong) {
+                    [self showPasswordWrong];
+                } else {
+                    [self showDialogHDSendTxConfirmForTx:txs];
+                }
+            }
+        }
+    });
+
 }
 
 - (void)showDialogHDSendTxConfirmForTx:(NSArray *)txs {
@@ -211,6 +234,9 @@ static BTAddress * extracted(ObtainBccDetailViewController *object) {
 - (NSString *)getSplitCoinName {
     return [SplitCoinUtil getSplitCoinName:self.splitCoin];
 }
+-(BitcoinUnit)getBitcoinUnit {
+    return [SplitCoinUtil getBitcoinUnit:self.splitCoin];
+}
 
 - (Coin)getCoin {
     switch (self.splitCoin) {
@@ -218,8 +244,12 @@ static BTAddress * extracted(ObtainBccDetailViewController *object) {
             return SBTC;
         case SplitBTG:
             return BTG;
+        case SplitBTW:
+            return BTW;
+        case SplitBCD:
+            return BCD;
         default:
-             return BCC;
+            return BCC;
     }
 }
 
@@ -296,9 +326,9 @@ static BTAddress * extracted(ObtainBccDetailViewController *object) {
     if (!validPassword) {
         return NSLocalizedString(@"Password wrong.", nil);
     }
-    BOOL validAddress = [[self getToAddress] isValidBitcoinAddress] || [[self getToAddress] isValidBitcoinGoldAddress];
+    BOOL validAddress = [[self getToAddress] isValidBitcoinAddress];
     if (!validAddress) {
-        return NSLocalizedString(@"not_bitpie_bcc_address", nil);
+        return  [NSString stringWithFormat:NSLocalizedString(@"not_bitpie_split_coin_address", nil), [self getSplitCoinName]];
     }
     
     if (_amount <= 0) {

@@ -34,7 +34,7 @@ static BitherApi *piApi;
 
 + (BitherApi *)instance {
     @synchronized (self) {
-
+        
         if (piApi == nil) {
             piApi = [[self alloc] init];
         }
@@ -55,9 +55,9 @@ static BitherApi *piApi;
         if (errorCallback) {
             errorCallback(errorOp, error);
         }
-
+        
     }];
-
+    
 }
 
 - (void)getInSignaturesApi:(NSString *)address fromBlock:(int)blockNo callback:(IdResponseBlock)callback andErrorCallBack:(ErrorHandler)errorCallback {
@@ -66,13 +66,13 @@ static BitherApi *piApi;
         if (callback) {
             callback(completedOperation.responseString);
         }
-
+        
     } andErrorCallback:^(NSOperation *errorOp, NSError *error) {
         if (errorCallback) {
             errorCallback(errorOp, error);
         }
     }];
-
+    
 }
 
 - (void)getExchangeTrend:(MarketType)marketType callback:(ArrayResponseBlock)callback andErrorCallBack:(ErrorHandler)errorCallback {
@@ -81,7 +81,7 @@ static BitherApi *piApi;
         if (callback) {
             callback(completedOperation.responseJSON);
         }
-
+        
     } andErrorCallback:^(NSOperation *errorOp, NSError *error) {
         if (errorCallback) {
             errorCallback(errorOp, error);
@@ -172,7 +172,7 @@ static BitherApi *piApi;
                 }
             }
         });
-
+        
     } andErrorCallback:^(NSOperation *errorOp, NSError *error) {
         if (errorCallback) {
             errorCallback(errorOp, error);
@@ -187,20 +187,20 @@ static BitherApi *piApi;
                 [GroupFileUtil setTicker:completedOperation.responseString];
                 NSDictionary *dict = completedOperation.responseJSON;
                 [MarketUtil handlerResult:dict];
-
+                
                 if (callback) {
                     callback();
                 }
             }
-
+            
         });
     } andErrorCallback:^(NSOperation *errorOp, NSError *error) {
         if (errorCallback) {
             errorCallback(errorOp, error);
         }
-
+        
     }];
-
+    
 }
 
 - (void)uploadCrash:(NSString *)data callback:(DictResponseBlock)callback andErrorCallBack:(ErrorHandler)errorCallback {
@@ -245,8 +245,14 @@ static BitherApi *piApi;
         case SplitSBTC:
             urlStr = SBTC_HAS_ADDRESS;
             break;
+        case SplitBTW:
+            urlStr = BTW_HAS_ADDRESS;
+            break;
+        case SplitBCD:
+            urlStr = BCD_HAS_ADDRESS;
+            break;
         default:
-             urlStr = BCC_HAS_ADDRESS;
+            urlStr = BCC_HAS_ADDRESS;
             break;
     }
     NSString *url = [NSString stringWithFormat:urlStr, address];
@@ -264,8 +270,30 @@ static BitherApi *piApi;
     }];
 }
 
+- (void)getBcdPreBlockHashCallback:(DictResponseBlock)callback andErrorCallBack:(ErrorHandler)errorCallback {
+    NSString *urlStr = BCD_PREBLOCKHASH;
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    manager.responseSerializer = [AFHTTPResponseSerializer serializer];
+    [manager GET:urlStr parameters:nil success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
+        NSDictionary *responseDic = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingAllowFragments error:nil];
+        if (callback) {
+            callback(responseDic);
+        }
+    } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
+        if (errorCallback) {
+            errorCallback(operation, error);
+        }
+    }];
+}
+
 - (void)postSplitCoinBroadcast:(BTTx *)tx splitCoin:(SplitCoin)splitCoin callback:(DictResponseBlock)callback andErrorCallBack:(ErrorHandler)errorCallback {
-    NSDictionary *dict = @{@"raw_tx": [NSString hexWithData:tx.toData]};
+    NSDictionary *dict;
+    if(splitCoin == SplitBCD) {
+        dict = @{@"raw_tx": [NSString hexWithData:tx.bcdToData]};
+    }else{
+        dict = @{@"raw_tx": [NSString hexWithData:tx.toData]};
+    }
+
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     manager.responseSerializer = [AFJSONResponseSerializer serializer];
     manager.requestSerializer = [AFJSONRequestSerializer serializer];
@@ -279,6 +307,12 @@ static BitherApi *piApi;
             break;
         case SplitSBTC:
             urlStr = SBTC_BROADCAST;
+            break;
+        case SplitBTW:
+            urlStr = BTW_BROADCAST;
+            break;
+        case SplitBCD:
+            urlStr = BCD_BROADCAST;
             break;
         default:
             urlStr = BCC_BROADCAST;

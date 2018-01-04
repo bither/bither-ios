@@ -303,6 +303,10 @@ typedef enum {
             return BTG;
         case SplitSBTC:
             return SBTC;
+        case SplitBTW:
+            return BTW;
+        case SplitBCD:
+            return BCD;
         default:
             return BCC;
     }

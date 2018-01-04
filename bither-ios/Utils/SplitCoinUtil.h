@@ -7,13 +7,15 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "BitherSetting.h"
 
 typedef enum {
-    SplitBCC, SplitBTG, SplitSBTC
+    SplitBCC, SplitBTG, SplitSBTC,SplitBTW, SplitBCD
 } SplitCoin;
 
 @interface SplitCoinUtil : NSObject
 
 + (NSString *)getSplitCoinName:(SplitCoin)splitCoin;
 
++ (BitcoinUnit)getBitcoinUnit:(SplitCoin)splitCoin;
 @end

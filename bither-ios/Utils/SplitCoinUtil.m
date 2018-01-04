@@ -22,11 +22,31 @@
         case SplitSBTC:
             name = @"SBTC";
             break;
+        case SplitBTW:
+            name = @"BTW";
+            break;
+        case SplitBCD:
+            name = @"BCD";
+            break;
         default:
             name = @"BCH";
             break;
     }
     return name;
 }
-
++ (BitcoinUnit)getBitcoinUnit:(SplitCoin)splitCoin {
+    BitcoinUnit unit = UnitBTC;
+    switch (splitCoin) {
+        case SplitBTW:
+            unit = UnitBTW;
+            break;
+        case SplitBCD:
+            unit = UnitBCD;
+            break;
+        default:
+            unit = UnitBCD;
+            break;
+    }
+    return unit;
+}
 @end

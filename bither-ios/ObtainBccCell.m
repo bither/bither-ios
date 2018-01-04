@@ -33,7 +33,7 @@
 - (void)setAddress:(BTAddress *)address bccBalance:(uint64_t)balance splitCoin:(SplitCoin)splitCoin isShowLine:(BOOL)isShowLine {
     self.lblAddress.text = [StringUtil formatAddress:address.address groupSize:4 lineSize:20];
     NSString *balanceTitleStr = NSLocalizedString(@"get_split_coin", nil);
-    NSString *balanceStr = [NSString stringWithFormat:@"%@%@%@", balanceTitleStr, [UnitUtil stringForAmount:balance unit:UnitBTC], [SplitCoinUtil getSplitCoinName:splitCoin]];
+    NSString *balanceStr = [NSString stringWithFormat:@"%@%@%@", balanceTitleStr, [UnitUtil stringForAmount:balance unit:[SplitCoinUtil getBitcoinUnit:splitCoin]], [SplitCoinUtil getSplitCoinName:splitCoin]];
     NSMutableAttributedString *attrStr = [[NSMutableAttributedString alloc] initWithString:balanceStr];
     [attrStr addAttribute:NSForegroundColorAttributeName value:[UIColor parseColor:kRedColor] range:NSMakeRange(0, balanceStr.length)];
     [attrStr addAttribute:NSForegroundColorAttributeName value:[UIColor parseColor:kBlackColor] range:NSMakeRange(0, balanceTitleStr.length)];

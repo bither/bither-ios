@@ -125,7 +125,7 @@ typedef enum {
 } KLineTimeType;
 
 typedef enum {
-    Normal = 10000, High = 20000, Higher = 50000, TenX = 100000
+    Normal = 10000, High = 20000, Higher = 50000, TenX = 100000, TwentyX = 200000
 } TransactionFeeMode;
 
 typedef enum {
@@ -133,7 +133,7 @@ typedef enum {
 } Currency;
 
 typedef enum {
-    UnitBTC, Unitbits
+    UnitBTC, Unitbits, UnitBTW, UnitBCD
 } BitcoinUnit;
 
 typedef enum {
