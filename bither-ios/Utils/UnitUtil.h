@@ -18,6 +18,7 @@
 
 #import <Foundation/Foundation.h>
 #import "BitherSetting.h"
+#import "SplitCoinUtil.h"
 
 @interface UnitUtil : NSObject
 
@@ -54,6 +55,8 @@
 + (NSMutableAttributedString *)attributedStringForAmount:(int64_t)amout withFontSize:(CGFloat)size unit:(BitcoinUnit)unit;
 
 + (NSMutableAttributedString *)attributedStringWithSymbolForAmount:(int64_t)amount withFontSize:(CGFloat)size color:(UIColor *)color;
+
++ (NSMutableAttributedString *)attributedStringWithSymbolForAmount:(int64_t)amount withFontSize:(CGFloat)size color:(UIColor *)color coin:(SplitCoin)coin;
 
 + (NSMutableAttributedString *)attributedStringWithSymbolForAmount:(int64_t)amount withFontSize:(CGFloat)size color:(UIColor *)color unit:(BitcoinUnit)unit;
 

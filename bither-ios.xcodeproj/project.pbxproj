@@ -75,9 +75,8 @@
 		0AFBA9351AA0275F0059CB4B /* WatchMarket.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AFBA9341AA0275F0059CB4B /* WatchMarket.m */; };
 		0AFBA9361AA028850059CB4B /* NSDictionary+Fromat.m in Sources */ = {isa = PBXBuildFile; fileRef = 4254086A1946CD17007AF99C /* NSDictionary+Fromat.m */; };
 		0AFBA93F1AA02C190059CB4B /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0AFBA9411AA02C190059CB4B /* Localizable.strings */; };
-		111E95701FFC70FA0095D847 /* GetBTWSetting.m in Sources */ = {isa = PBXBuildFile; fileRef = 111E956F1FFC70FA0095D847 /* GetBTWSetting.m */; };
-		111E95731FFC7D020095D847 /* GetBCDSetting.m in Sources */ = {isa = PBXBuildFile; fileRef = 111E95721FFC7D020095D847 /* GetBCDSetting.m */; };
-		11CB583B1FE67CCE00A7FCD9 /* GetSBTCSetting.m in Sources */ = {isa = PBXBuildFile; fileRef = 11CB583A1FE67CCE00A7FCD9 /* GetSBTCSetting.m */; };
+		112DED442010C3F100CE6998 /* GetSplitSetting.m in Sources */ = {isa = PBXBuildFile; fileRef = 112DED432010C3F100CE6998 /* GetSplitSetting.m */; };
+		117562FA2011C7FD00BEF7BA /* GetForkCoinsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 117562F92011C7FD00BEF7BA /* GetForkCoinsController.m */; };
 		1BC2705059CAA4F55CEFCADB /* PaymentAddressSetting.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BC275821CC95E0F138A889D /* PaymentAddressSetting.m */; };
 		1BC27056253378BF3E96EBA0 /* DialogEditVanityLength.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BC27877DFCC22281F0DEAD8 /* DialogEditVanityLength.m */; };
 		1BC270C71B4F214F2FB09057 /* MonitorHDAccountSetting.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BC273BD34F2497C13B90911 /* MonitorHDAccountSetting.m */; };
@@ -109,7 +108,6 @@
 		20F671F2466952F081445EFB /* libPods-bither-ios WatchKit App.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AC13478AA903687AA9ACD36 /* libPods-bither-ios WatchKit App.a */; };
 		35BD79D34EADBCE346458D94 /* libPods-bither-ios.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 46F4567F64E4C5EB9B650EE0 /* libPods-bither-ios.a */; };
 		401ABC921DC33E8F004611B7 /* AdUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 401ABC911DC33E8F004611B7 /* AdUtil.m */; };
-		402A5CB81F28374F00B636FD /* ObtainBccSetting.m in Sources */ = {isa = PBXBuildFile; fileRef = 402A5CB71F28374F00B636FD /* ObtainBccSetting.m */; };
 		402A5CBB1F28452E00B636FD /* ObtainBccViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 402A5CBA1F28452E00B636FD /* ObtainBccViewController.m */; };
 		402A5CBE1F285BF500B636FD /* ObtainBccDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 402A5CBD1F285BF500B636FD /* ObtainBccDetailViewController.m */; };
 		402B83101E62B03200379C39 /* BIP39ZhCNWords.plist in Resources */ = {isa = PBXBuildFile; fileRef = 402B830E1E62B03200379C39 /* BIP39ZhCNWords.plist */; };
@@ -119,7 +117,6 @@
 		4040643F1F21B1FB00917F68 /* SignMessageSelectAddressViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4040643E1F21B1FB00917F68 /* SignMessageSelectAddressViewController.m */; };
 		404064421F21B71200917F68 /* SignMessageSelectAddressCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 404064411F21B71200917F68 /* SignMessageSelectAddressCell.m */; };
 		405AC4621FBC46CB00FB970C /* SplitCoinUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 405AC4611FBC46CB00FB970C /* SplitCoinUtil.m */; };
-		405AC4651FBC488900FB970C /* GetBtgSetting.m in Sources */ = {isa = PBXBuildFile; fileRef = 405AC4641FBC488900FB970C /* GetBtgSetting.m */; };
 		40A51A5E1F2AED8E005CF531 /* ObtainBccCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 40A51A5D1F2AED8E005CF531 /* ObtainBccCell.m */; };
 		40A51A611F2AF77E005CF531 /* ObtainBccMonitoredDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 40A51A601F2AF77E005CF531 /* ObtainBccMonitoredDetailViewController.m */; };
 		40D777081F41360E00121B90 /* DialogImportPrivateKeyAddressValidation.m in Sources */ = {isa = PBXBuildFile; fileRef = 40D777071F41360E00121B90 /* DialogImportPrivateKeyAddressValidation.m */; };
@@ -498,12 +495,10 @@
 		0AFBA9401AA02C190059CB4B /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
 		0AFBA9431AA02C1E0059CB4B /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		0AFBA9441AA02C1F0059CB4B /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Localizable.strings"; sourceTree = "<group>"; };
-		111E956E1FFC70E10095D847 /* GetBTWSetting.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GetBTWSetting.h; sourceTree = "<group>"; };
-		111E956F1FFC70FA0095D847 /* GetBTWSetting.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GetBTWSetting.m; sourceTree = "<group>"; };
-		111E95711FFC7CEB0095D847 /* GetBCDSetting.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GetBCDSetting.h; sourceTree = "<group>"; };
-		111E95721FFC7D020095D847 /* GetBCDSetting.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GetBCDSetting.m; sourceTree = "<group>"; };
-		11CB58391FE67CAD00A7FCD9 /* GetSBTCSetting.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GetSBTCSetting.h; sourceTree = "<group>"; };
-		11CB583A1FE67CCE00A7FCD9 /* GetSBTCSetting.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GetSBTCSetting.m; sourceTree = "<group>"; };
+		112DED422010C3DD00CE6998 /* GetSplitSetting.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GetSplitSetting.h; sourceTree = "<group>"; };
+		112DED432010C3F100CE6998 /* GetSplitSetting.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GetSplitSetting.m; sourceTree = "<group>"; };
+		117562F82011C7EA00BEF7BA /* GetForkCoinsController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GetForkCoinsController.h; sourceTree = "<group>"; };
+		117562F92011C7FD00BEF7BA /* GetForkCoinsController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GetForkCoinsController.m; sourceTree = "<group>"; };
 		1B82ED165679F1FB126B6E9E /* Pods-bither-iosTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-bither-iosTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-bither-iosTests/Pods-bither-iosTests.release.xcconfig"; sourceTree = "<group>"; };
 		1BC27043CB19B6031727B679 /* DialogHDMSingularColdSeed.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DialogHDMSingularColdSeed.h; sourceTree = "<group>"; };
 		1BC270628E82FFBA24125AEB /* HDMResetServerPasswordUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HDMResetServerPasswordUtil.h; sourceTree = "<group>"; };
@@ -564,8 +559,6 @@
 		3F23197A13072D3472EE053F /* libPods-bither-ios WatchKit Extension.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-bither-ios WatchKit Extension.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		401ABC901DC33E8F004611B7 /* AdUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdUtil.h; sourceTree = "<group>"; };
 		401ABC911DC33E8F004611B7 /* AdUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AdUtil.m; sourceTree = "<group>"; };
-		402A5CB61F28374F00B636FD /* ObtainBccSetting.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ObtainBccSetting.h; sourceTree = "<group>"; };
-		402A5CB71F28374F00B636FD /* ObtainBccSetting.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ObtainBccSetting.m; sourceTree = "<group>"; };
 		402A5CB91F28452E00B636FD /* ObtainBccViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ObtainBccViewController.h; sourceTree = "<group>"; };
 		402A5CBA1F28452E00B636FD /* ObtainBccViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ObtainBccViewController.m; sourceTree = "<group>"; };
 		402A5CBC1F285BF400B636FD /* ObtainBccDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ObtainBccDetailViewController.h; sourceTree = "<group>"; };
@@ -582,8 +575,6 @@
 		404064411F21B71200917F68 /* SignMessageSelectAddressCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignMessageSelectAddressCell.m; sourceTree = "<group>"; };
 		405AC4601FBC46CB00FB970C /* SplitCoinUtil.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SplitCoinUtil.h; sourceTree = "<group>"; };
 		405AC4611FBC46CB00FB970C /* SplitCoinUtil.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SplitCoinUtil.m; sourceTree = "<group>"; };
-		405AC4631FBC488900FB970C /* GetBtgSetting.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GetBtgSetting.h; sourceTree = "<group>"; };
-		405AC4641FBC488900FB970C /* GetBtgSetting.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GetBtgSetting.m; sourceTree = "<group>"; };
 		40A51A5C1F2AED8E005CF531 /* ObtainBccCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ObtainBccCell.h; sourceTree = "<group>"; };
 		40A51A5D1F2AED8E005CF531 /* ObtainBccCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ObtainBccCell.m; sourceTree = "<group>"; };
 		40A51A5F1F2AF77D005CF531 /* ObtainBccMonitoredDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ObtainBccMonitoredDetailViewController.h; sourceTree = "<group>"; };
@@ -1190,6 +1181,8 @@
 				421B03B419495AEF003A45F1 /* Hot */,
 				ACE4ED5C198A3AE600C8862C /* AdvanceViewController.h */,
 				ACE4ED5D198A3AE600C8862C /* AdvanceViewController.m */,
+				117562F82011C7EA00BEF7BA /* GetForkCoinsController.h */,
+				117562F92011C7FD00BEF7BA /* GetForkCoinsController.m */,
 				AC454DC71A1C6E05000AF4ED /* TrashCanViewController.h */,
 				AC454DC81A1C6E05000AF4ED /* TrashCanViewController.m */,
 				0A4206281A494F1000562100 /* SignMessageViewController.h */,
@@ -1891,16 +1884,8 @@
 				ACE7E6FF19EB6DE800F7AA3A /* AvatarSetting.m */,
 				0A6C0F5A1A4D548B00544B33 /* MessageSigningSetting.h */,
 				0A6C0F5B1A4D548B00544B33 /* MessageSigningSetting.m */,
-				402A5CB61F28374F00B636FD /* ObtainBccSetting.h */,
-				402A5CB71F28374F00B636FD /* ObtainBccSetting.m */,
-				405AC4631FBC488900FB970C /* GetBtgSetting.h */,
-				405AC4641FBC488900FB970C /* GetBtgSetting.m */,
-				11CB58391FE67CAD00A7FCD9 /* GetSBTCSetting.h */,
-				11CB583A1FE67CCE00A7FCD9 /* GetSBTCSetting.m */,
-				111E956E1FFC70E10095D847 /* GetBTWSetting.h */,
-				111E956F1FFC70FA0095D847 /* GetBTWSetting.m */,
-				111E95711FFC7CEB0095D847 /* GetBCDSetting.h */,
-				111E95721FFC7D020095D847 /* GetBCDSetting.m */,
+				112DED422010C3DD00CE6998 /* GetSplitSetting.h */,
+				112DED432010C3F100CE6998 /* GetSplitSetting.m */,
 				AC454DE81A1F3839000AF4ED /* PinCodeSetting.h */,
 				AC454DE91A1F3839000AF4ED /* PinCodeSetting.m */,
 				DAB2C8711A2038930011EE2F /* KeychainSetting.h */,
@@ -2416,7 +2401,6 @@
 				ACE3765F1A231C9200F66321 /* DialogKeychainBackupDiff.m in Sources */,
 				0AB8BCA51A7F445D003C07D8 /* DialogHDMKeychainAddHot.m in Sources */,
 				ACB9B9C3195AD1CC00019216 /* AddressDetailViewController.m in Sources */,
-				111E95731FFC7D020095D847 /* GetBCDSetting.m in Sources */,
 				ACE7E70019EB6DE800F7AA3A /* AvatarSetting.m in Sources */,
 				4268FE2A194ACD57007A4C30 /* ColdViewController.m in Sources */,
 				ACEE7D2919D3F9F500932B39 /* QRCodeTxTransport.m in Sources */,
@@ -2514,6 +2498,7 @@
 				ACDDDC2119480DE00008A79D /* RotateImageView.m in Sources */,
 				421D8A01195921FC0062FDAF /* PeerUtil.m in Sources */,
 				AC2F3298195C1D53001B7439 /* SendViewController.m in Sources */,
+				117562FA2011C7FD00BEF7BA /* GetForkCoinsController.m in Sources */,
 				ACBEC01E196E87B9004301E0 /* CheckPrivateKeyCell.m in Sources */,
 				AC17158A1969249B00337AB5 /* NSString+Size.m in Sources */,
 				0A55CD7A1DCB267E00F9DB31 /* DialogAddressQrCopy.m in Sources */,
@@ -2537,7 +2522,6 @@
 				425408591946A219007AF99C /* FileUtil.m in Sources */,
 				ACDDDC2C19480ECF0008A79D /* DialogAlert.m in Sources */,
 				42D9B771193D6B5B00C85B89 /* main.m in Sources */,
-				402A5CB81F28374F00B636FD /* ObtainBccSetting.m in Sources */,
 				ACE7E71519EB7A5A00F7AA3A /* UIImage_Extensions.m in Sources */,
 				DA641E8A196E7BC20095DF42 /* CrashLog.m in Sources */,
 				AC45AA3519879C96006314D5 /* DialogPrivateKeyDecryptedQrCode.m in Sources */,
@@ -2553,7 +2537,6 @@
 				ACE4ED5E198A3AE600C8862C /* AdvanceViewController.m in Sources */,
 				AC9BC61019D18102003B88B5 /* SystemUtil.m in Sources */,
 				AC53ABDB19D7B657007C095C /* AudioVisualizerView.m in Sources */,
-				111E95701FFC70FA0095D847 /* GetBTWSetting.m in Sources */,
 				4269FF7E195AB6F9001213B9 /* MarketUtil.m in Sources */,
 				ACEEB8E119B46EC600F2789C /* PeerViewController.m in Sources */,
 				AC781B6019F9FF98003B5B87 /* DialogRCheckInfo.m in Sources */,
@@ -2566,7 +2549,6 @@
 				ACE7E71219EB78AE00F7AA3A /* ImageScrollView.m in Sources */,
 				DA641E8C196E7BC20095DF42 /* GCCrashReportFilterTrim.m in Sources */,
 				ACDDDC2319480DE00008A79D /* UIViewController+PiShowBanner.m in Sources */,
-				11CB583B1FE67CCE00A7FCD9 /* GetSBTCSetting.m in Sources */,
 				ACCA274B1989FACC000E6A32 /* HotAddressTabButton.m in Sources */,
 				AC1715871969213800337AB5 /* DialogAddressOptions.m in Sources */,
 				403753071DBF429000F402A0 /* AdView.m in Sources */,
@@ -2601,7 +2583,6 @@
 				ACCA274E198F2805000E6A32 /* DialogTotalBalance.m in Sources */,
 				ACDDDC2D19480ECF0008A79D /* DialogCentered.m in Sources */,
 				ACF02FEB19D90899001AB701 /* DialogSwitchQRCode.m in Sources */,
-				405AC4651FBC488900FB970C /* GetBtgSetting.m in Sources */,
 				0AD849EB1D0E9B4C005FAF56 /* DialogMonitorAddressValidation.m in Sources */,
 				4268FE2B194ACD57007A4C30 /* CheckViewController.m in Sources */,
 				0A42062A1A494F1000562100 /* SignMessageViewController.m in Sources */,
@@ -2659,6 +2640,7 @@
 				1BC27A2AB7C4C12F353D0C28 /* DialogOldAddressesOfHDAccount.m in Sources */,
 				1BC27D872392C01E3F942EA5 /* HDAccountMonitoredSendViewController.m in Sources */,
 				402A5CBE1F285BF500B636FD /* ObtainBccDetailViewController.m in Sources */,
+				112DED442010C3F100CE6998 /* GetSplitSetting.m in Sources */,
 				1BC27545244A5FD35C694114 /* TotalBalanceHideUtil.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

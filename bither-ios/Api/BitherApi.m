@@ -20,6 +20,7 @@
 #import "GroupFileUtil.h"
 #import "AFNetworking.h"
 #import "AdUtil.h"
+#import "SplitCoinUtil.h"
 
 static BitherApi *piApi;
 #define kImgEn @"img_en"
@@ -237,25 +238,7 @@ static BitherApi *piApi;
 }
 
 - (void)getHasSplitCoinAddress:(NSString *)address splitCoin:(SplitCoin)splitCoin callback:(DictResponseBlock)callback andErrorCallBack:(ErrorHandler)errorCallback {
-    NSString *urlStr = nil;
-    switch (splitCoin) {
-        case SplitBTG:
-            urlStr = BTG_HAS_ADDRESS;
-            break;
-        case SplitSBTC:
-            urlStr = SBTC_HAS_ADDRESS;
-            break;
-        case SplitBTW:
-            urlStr = BTW_HAS_ADDRESS;
-            break;
-        case SplitBCD:
-            urlStr = BCD_HAS_ADDRESS;
-            break;
-        default:
-            urlStr = BCC_HAS_ADDRESS;
-            break;
-    }
-    NSString *url = [NSString stringWithFormat:urlStr, address];
+    NSString *url = [NSString stringWithFormat:SPLIT_HAS_ADDRESS,[SplitCoinUtil getPathCoinCodee:splitCoin],address];
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     manager.responseSerializer = [AFHTTPResponseSerializer serializer];
     [manager GET:url parameters:nil success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
@@ -300,24 +283,7 @@ static BitherApi *piApi;
     manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json", @"text/json", @"text/javascript",@"text/html", @"text/plain", nil];
     [manager.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Accept"];
     [manager.requestSerializer setValue:@"application/json; charset=utf-8" forHTTPHeaderField:@"Content-Type"];
-    NSString *urlStr = nil;
-    switch (splitCoin) {
-        case SplitBTG:
-            urlStr = BTG_BROADCAST;
-            break;
-        case SplitSBTC:
-            urlStr = SBTC_BROADCAST;
-            break;
-        case SplitBTW:
-            urlStr = BTW_BROADCAST;
-            break;
-        case SplitBCD:
-            urlStr = BCD_BROADCAST;
-            break;
-        default:
-            urlStr = BCC_BROADCAST;
-            break;
-    }
+    NSString *urlStr = [NSString stringWithFormat:SPLIT_BROADCAST, [SplitCoinUtil getPathCoinCodee:splitCoin]];
     [manager POST:urlStr parameters:dict success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
         NSDictionary *responseDic = responseObject;
         if (callback) {

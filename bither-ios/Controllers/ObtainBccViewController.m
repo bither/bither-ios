@@ -120,9 +120,9 @@ typedef enum {
     } else {
         if ([address isMemberOfClass:[BTHDAccount class]]) {
             BTHDAccount *hdAccount = (BTHDAccount *) address;
-            [cell setAddress:address bccBalance:[BTTxBuilder getAmount:[[BTHDAccountAddressProvider instance] getPrevCanSplitOutsByHDAccount:(int)[hdAccount getHDAccountId] coin:[self getCoin]]] splitCoin: self.splitCoin isShowLine:isShowLine];
+            [cell setAddress:address bccBalance:[BTTxBuilder getAmount:[[BTHDAccountAddressProvider instance] getPrevCanSplitOutsByHDAccount:(int)[hdAccount getHDAccountId] coin:[SplitCoinUtil getCoin:self.splitCoin]]] splitCoin: self.splitCoin isShowLine:isShowLine];
         } else {
-            [cell setAddress:address bccBalance:[BTTxBuilder getAmount:[[BTTxProvider instance] getPrevOutsWithAddress:address.address coin:[self getCoin]]] splitCoin: self.splitCoin isShowLine:isShowLine];
+            [cell setAddress:address bccBalance:[BTTxBuilder getAmount:[[BTTxProvider instance] getPrevOutsWithAddress:address.address coin:[SplitCoinUtil getCoin:self.splitCoin]]] splitCoin: self.splitCoin isShowLine:isShowLine];
         }
         cell.userInteractionEnabled = YES;
     }
@@ -166,9 +166,9 @@ typedef enum {
         controller.splitCoin = self.splitCoin;
         controller.btAddress = address;
         if ([address isMemberOfClass:[BTHDAccount class]]) {
-            controller.amount = [BTTxBuilder getAmount:[[BTHDAccountAddressProvider instance] getPrevCanSplitOutsByHDAccount:(int)[(BTHDAccount *) address getHDAccountId] coin:[self getCoin]]];
+            controller.amount = [BTTxBuilder getAmount:[[BTHDAccountAddressProvider instance] getPrevCanSplitOutsByHDAccount:(int)[(BTHDAccount *) address getHDAccountId] coin:[SplitCoinUtil getCoin:self.splitCoin]]];
         } else {
-            controller.amount = [BTTxBuilder getAmount:[[BTTxProvider instance] getPrevOutsWithAddress:address.address coin:[self getCoin]]];
+            controller.amount = [BTTxBuilder getAmount:[[BTTxProvider instance] getPrevOutsWithAddress:address.address coin:[SplitCoinUtil getCoin:self.splitCoin]]];
         }
         controller.sendDelegate = self;
         vc = controller;
@@ -177,9 +177,9 @@ typedef enum {
         controller.splitCoin = self.splitCoin;
         controller.btAddress = address;
         if ([address isMemberOfClass:[BTHDAccount class]]) {
-            controller.amount = [BTTxBuilder getAmount:[[BTHDAccountAddressProvider instance] getPrevCanSplitOutsByHDAccount:(int)[(BTHDAccount *) address getHDAccountId] coin:[self getCoin]]];
+            controller.amount = [BTTxBuilder getAmount:[[BTHDAccountAddressProvider instance] getPrevCanSplitOutsByHDAccount:(int)[(BTHDAccount *) address getHDAccountId] coin:[SplitCoinUtil getCoin:self.splitCoin]]];
         } else {
-            controller.amount = [BTTxBuilder getAmount:[[BTTxProvider instance] getPrevOutsWithAddress:address.address coin:[self getCoin]]];
+            controller.amount = [BTTxBuilder getAmount:[[BTTxProvider instance] getPrevOutsWithAddress:address.address coin:[SplitCoinUtil getCoin:self.splitCoin]]];
         }
         controller.sendDelegate = self;
         vc = controller;
@@ -295,21 +295,6 @@ typedef enum {
 
 - (void)showMsg:(NSString *)msg {
     [self showBannerWithMessage:msg belowView:self.vTopBar];
-}
-
-- (Coin)getCoin {
-    switch (self.splitCoin) {
-        case SplitBTG:
-            return BTG;
-        case SplitSBTC:
-            return SBTC;
-        case SplitBTW:
-            return BTW;
-        case SplitBCD:
-            return BCD;
-        default:
-            return BCC;
-    }
 }
 
 

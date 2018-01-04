@@ -759,6 +759,7 @@
 "address_index" = "序号: ";
 
 // Get Split Coin
+"get_fork_coins" = "获得分叉币";
 "get_split_coin_setting_name" = "获得 %@";
 "get_split_coin" = "可获得: ";
 "not_bitpie_split_coin_address" = "仅支持发往比特派%@地址";

@@ -122,9 +122,9 @@ static BTAddress * extracted(ObtainBccDetailViewController *object) {
         NSString *toAddress = [self getToAddress];
         NSArray *txs;
         if ([self.btAddress isMemberOfClass:[BTHDAccount class]]) {
-            txs = [(BTHDAccount *)extracted(self) newSplitCoinTxsToAddresses:@[toAddress] withAmounts:@[@(self.amount)] andChangeAddress:toAddress password:self.tfPassword.text andError:&error coin:[self getCoin] blockHah:hash];
+            txs = [(BTHDAccount *)extracted(self) newSplitCoinTxsToAddresses:@[toAddress] withAmounts:@[@(self.amount)] andChangeAddress:toAddress password:self.tfPassword.text andError:&error coin:[SplitCoinUtil getCoin:self.splitCoin] blockHah:hash];
         } else {
-            txs = [self.btAddress splitCoinTxsForAmounts:@[@(self.amount)] andAddress:@[toAddress] andChangeAddress:toAddress andError:&error coin:[self getCoin]];
+            txs = [self.btAddress splitCoinTxsForAmounts:@[@(self.amount)] andAddress:@[toAddress] andChangeAddress:toAddress andError:&error coin:[SplitCoinUtil getCoin:self.splitCoin]];
         }
         
         if (error) {
@@ -238,21 +238,6 @@ static BTAddress * extracted(ObtainBccDetailViewController *object) {
     return [SplitCoinUtil getBitcoinUnit:self.splitCoin];
 }
 
-- (Coin)getCoin {
-    switch (self.splitCoin) {
-        case SplitSBTC:
-            return SBTC;
-        case SplitBTG:
-            return BTG;
-        case SplitBTW:
-            return BTW;
-        case SplitBCD:
-            return BCD;
-        default:
-            return BCC;
-    }
-}
-
 - (void)showMsg:(NSString *)msg {
     if ([NSThread isMainThread]) {
         [dp dismissWithCompletion:^{
@@ -279,23 +264,12 @@ static BTAddress * extracted(ObtainBccDetailViewController *object) {
 }
 
 - (void)handleResult:(NSString *)result byReader:(ScanQrCodeViewController *)reader {
-    BOOL isValidBitcoinAddress = result.isValidBitcoinAddress;
-    BOOL isValidBitcoinBIP21Address = [StringUtil isValidBitcoinBIP21Address:result];
-    BOOL isValidBitcoinGoldAddress = result.isValidBitcoinGoldAddress;
-    if (isValidBitcoinAddress || isValidBitcoinBIP21Address || isValidBitcoinGoldAddress) {
+    BOOL isValidBitcoinAddress = [SplitCoinUtil validSplitCoinAddress:self.splitCoin address:result];
+    if (isValidBitcoinAddress) {
         [reader playSuccessSound];
         [reader vibrate];
-        if (isValidBitcoinAddress || isValidBitcoinGoldAddress) {
-            self.tfAddress.text = result;
-            [self dismissViewControllerAnimated:YES completion:nil];
-        }
-        if (isValidBitcoinBIP21Address) {
-            self.tfAddress.text = [StringUtil getAddressFormBIP21Address:result];
-            uint64_t amt = [StringUtil getAmtFormBIP21Address:result];
-            if (amt != -1) {
-                [self.tfPassword becomeFirstResponder];
-            }
-        }
+        self.tfAddress.text = result;
+        [self dismissViewControllerAnimated:YES completion:nil];
     } else {
         [reader vibrate];
         [self dismissViewControllerAnimated:YES completion:nil];

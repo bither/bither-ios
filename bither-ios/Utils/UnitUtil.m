@@ -86,8 +86,26 @@
     return [UnitUtil stringForAmount:amount unit:[UnitUtil unit]];
 }
 
++ (NSString *)stringForAmount:(int64_t)amount coin:(SplitCoin)coin{
+    if(coin == None) {
+        return [UnitUtil stringForAmount:amount unit:[UnitUtil unit]];
+    }
+    return [UnitUtil stringForAmount:amount unit:[SplitCoinUtil getBitcoinUnit:coin]];
+}
+
 + (NSMutableAttributedString *)attributedStringForAmount:(int64_t)amout withFontSize:(CGFloat)size {
     NSString *str = [UnitUtil stringForAmount:amout];
+    NSUInteger pointLocation = [str rangeOfString:@"."].location;
+    NSMutableAttributedString *result = [[NSMutableAttributedString alloc] initWithString:str attributes:@{NSFontAttributeName : [UIFont boldSystemFontOfSize:size]}];
+    NSUInteger boldAfterDot = [UnitUtil boldAfterDot];
+    if (pointLocation + boldAfterDot + 1 < str.length) {
+        [result addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:size * 0.85f] range:NSMakeRange(pointLocation + boldAfterDot + 1, str.length - pointLocation - boldAfterDot - 1)];
+    }
+    return result;
+}
+
++ (NSMutableAttributedString *)attributedStringForAmount:(int64_t)amout withFontSize:(CGFloat)size coin:(SplitCoin)coin {
+    NSString *str = [UnitUtil stringForAmount:amout coin:coin];
     NSUInteger pointLocation = [str rangeOfString:@"."].location;
     NSMutableAttributedString *result = [[NSMutableAttributedString alloc] initWithString:str attributes:@{NSFontAttributeName : [UIFont boldSystemFontOfSize:size]}];
     NSUInteger boldAfterDot = [UnitUtil boldAfterDot];
@@ -111,6 +129,16 @@
 + (NSMutableAttributedString *)attributedStringWithSymbolForAmount:(int64_t)amount withFontSize:(CGFloat)size color:(UIColor *)color {
     NSMutableAttributedString *attr = [[NSMutableAttributedString alloc] initWithAttributedString:[UnitUtil attributedStringForAmount:amount withFontSize:size]];
     return [UnitUtil addSymbol:attr withFontSize:size color:color];
+}
+
++ (NSMutableAttributedString *)attributedStringWithSymbolForAmount:(int64_t)amount withFontSize:(CGFloat)size color:(UIColor *)color coin:(SplitCoin)coin {
+    NSMutableAttributedString *attr = [[NSMutableAttributedString alloc] initWithAttributedString:[UnitUtil attributedStringForAmount:amount withFontSize:size coin:coin]];
+    if(coin == None) {
+         return [UnitUtil addSymbol:attr withFontSize:size color:color];
+    }else{
+         return [UnitUtil addSymbol:attr withFontSize:size coinCode:[SplitCoinUtil getSplitCoinName:coin]];
+    }
+   
 }
 
 + (NSMutableAttributedString *)attributedStringWithSymbolForAmount:(int64_t)amount withFontSize:(CGFloat)size color:(UIColor *)color unit:(BitcoinUnit)unit {
@@ -140,6 +168,13 @@
     [attr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:size * 0.7f] range:NSMakeRange(0, 1)];
     [attr insertAttributedString:attachmentString atIndex:0];
     [attr addAttribute:NSBaselineOffsetAttributeName value:[NSNumber numberWithFloat:-size * 0.09f] range:NSMakeRange(0, 1)];
+    return attr;
+}
+
++ (NSMutableAttributedString *)addSymbol:(NSMutableAttributedString *)attr withFontSize:(CGFloat)size coinCode:(NSString *)code{
+    [attr insertAttributedString:[[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"  %@",code]] atIndex:attr.length];
+//    [attr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:size * 0.7f] range:NSMakeRange(0, 1)];
+//    [attr addAttribute:NSBaselineOffsetAttributeName value:[NSNumber numberWithFloat:-size * 0.09f] range:NSMakeRange(0, 1)];
     return attr;
 }
 

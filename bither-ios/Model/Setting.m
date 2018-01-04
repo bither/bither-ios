@@ -42,12 +42,8 @@
 #import "UIBaseUtil.h"
 #import "IOS7ContainerViewController.h"
 #import "PaymentAddressSetting.h"
-#import "ObtainBccSetting.h"
-#import "GetBtgSetting.h"
-#import "GetSBTCSetting.h"
-#import "GetBTWSetting.h"
-#import "GetBCDSetting.h"
-
+#import "GetSplitSetting.h"
+#import "GetForkCoinsController.h"
 @implementation Setting
 
 static Setting *ExchangeSetting;
@@ -60,6 +56,7 @@ static Setting *CheckSetting;
 static Setting *EditPasswordSetting;
 static Setting *ColdMonitorSetting;
 static Setting *AdvanceSetting;
+static Setting *GetForksSetting;
 static Setting *reloadTxsSetting;
 static Setting *RCheckSetting;
 static Setting *QrCodeQualitySetting;
@@ -361,6 +358,22 @@ static Setting *ApiConfigSetting;
     }
     return AdvanceSetting;
 
+}
+
++ (Setting *)getForkCoins {
+    if (!GetForksSetting) {
+        Setting *setting = [[Setting alloc] initWithName:NSLocalizedString(@"get_fork_coins", nil) icon:nil];
+        [setting setSelectBlock:^(UIViewController *controller) {
+            GetForkCoinsController *vController = [controller.storyboard instantiateViewControllerWithIdentifier:@"GetForkCoinsController"];
+            vController.settings = [Setting forkCoins];
+            UINavigationController *nav = controller.navigationController;
+            [nav pushViewController:vController animated:YES];
+            
+        }];
+        GetForksSetting = setting;
+    }
+    return GetForksSetting;
+    
 }
 
 + (Setting *)getAvatarSetting {
@@ -686,6 +699,19 @@ static Setting *ApiConfigSetting;
     return NetworkMonitorSetting;
 }
 
++ (NSArray *)forkCoins{
+    NSMutableArray *array = [NSMutableArray new];
+    [array addObject:[GetSplitSetting getSplitSetting:SplitBCC]];
+    [array addObject:[GetSplitSetting getSplitSetting:SplitBTG]];
+    [array addObject:[GetSplitSetting getSplitSetting:SplitSBTC]];
+    [array addObject:[GetSplitSetting getSplitSetting:SplitBTW]];
+    [array addObject:[GetSplitSetting getSplitSetting:SplitBCD]];
+    [array addObject:[GetSplitSetting getSplitSetting:SplitBTF]];
+    [array addObject:[GetSplitSetting getSplitSetting:SplitBTP]];
+    [array addObject:[GetSplitSetting getSplitSetting:SplitBTN]];
+    return array;
+}
+
 + (NSArray *)advanceSettings {
     NSMutableArray *array = [NSMutableArray new];
     if ([[BTSettings instance] getAppMode] == HOT) {
@@ -704,11 +730,7 @@ static Setting *ApiConfigSetting;
     }
     
     if ([[BTSettings instance] getAppMode] == HOT) {
-        [array addObject:[ObtainBccSetting getObtainBccSetting]];
-        [array addObject:[GetBtgSetting getBtgSetting]];
-        [array addObject:[GetSBTCSetting getSBTCSetting]];
-         [array addObject:[GetBTWSetting getBTWSetting]];
-         [array addObject:[GetBCDSetting getBCDSetting]];
+        [array addObject:[Setting getForkCoins]];
     }
     [array addObject:[MessageSigningSetting getMessageSigningSetting]];
     [array addObject:[Setting getPasswordStrengthSetting]];

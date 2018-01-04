@@ -286,20 +286,12 @@
 
 - (void)handleResult:(NSString *)result byReader:(ScanQrCodeViewController *)reader {
     if (![reader isKindOfClass:[ScanQrCodeTransportViewController class]]) {
-        BOOL isValidBitcoinAddress = result.isValidBitcoinAddress;
-        BOOL isValidBitcoinGoldAddress = result.isValidBitcoinGoldAddress;
-        BOOL isValidBitcoinBIP21Address = [StringUtil isValidBitcoinBIP21Address:result];
-        if (isValidBitcoinAddress || isValidBitcoinBIP21Address || isValidBitcoinGoldAddress) {
+        BOOL isValidBitcoinAddress = [SplitCoinUtil validSplitCoinAddress:self.splitCoin address:result];
+        if (isValidBitcoinAddress) {
             [reader playSuccessSound];
             [reader vibrate];
-            if (isValidBitcoinAddress || isValidBitcoinGoldAddress) {
-                self.tfAddress.text = result;
-                [self dismissViewControllerAnimated:YES completion:nil];
-            }
-            if (isValidBitcoinBIP21Address) {
-                self.tfAddress.text = [StringUtil getAddressFormBIP21Address:result];
-                [self dismissViewControllerAnimated:YES completion:nil];
-            }
+            self.tfAddress.text = result;
+            [self dismissViewControllerAnimated:YES completion:nil];
         } else {
             [reader vibrate];
             [self dismissViewControllerAnimated:YES completion:nil];
@@ -402,18 +394,7 @@
 }
 
 - (Coin)getCoin {
-    switch (self.splitCoin) {
-        case SplitBTG:
-            return BTG;
-        case SplitSBTC:
-            return SBTC;
-        case SplitBTW:
-            return BTW;
-        case SplitBCD:
-            return BCD;
-        default:
-            return BCC;
-    }
+    return [SplitCoinUtil getCoin:self.splitCoin];
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
