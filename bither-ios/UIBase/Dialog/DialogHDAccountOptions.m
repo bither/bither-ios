@@ -29,6 +29,7 @@
 #import "UIViewController+PiShowBanner.h"
 #import "DialogPrivateKeyText.h"
 #import "BTWordsTypeManager.h"
+#import "BTAddressManager.h"
 
 @interface DialogHDAccountOptions () <DialogPasswordDelegate> {
     SEL passwordSelector;
@@ -94,6 +95,30 @@
     }
     [[[DialogOldAddressesOfHDAccount alloc] initWithAccount:hdAccount andDeleget:self.delegate] showInWindow:_window];
 }
+
+- (void)switchAddressType {
+    NSUserDefaults *userDefault = [NSUserDefaults standardUserDefaults];
+    BTAddressManager *manager = [BTAddressManager instance];
+    __block DialogProgress *dp = [[DialogProgress alloc] initWithMessage:NSLocalizedString(@"Please wait…", nil)];
+    __block NSObject <DialogHDAccountOptionsDelegate> *d = self.delegate;
+    [dp showInWindow:_window completion:^{
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+            if ([userDefault boolForKey:CHOOSE_SEGWIT_ADDRESS]) {
+                manager.hdAccountHot.purposePathLevel = NormalAddress;
+                [userDefault setBool:NO forKey:CHOOSE_SEGWIT_ADDRESS];
+            } else {
+                manager.hdAccountHot.purposePathLevel = P2SHP2WPKH;
+                [userDefault setBool:YES forKey:CHOOSE_SEGWIT_ADDRESS];
+            }
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [dp dismissWithCompletion:^{
+                    [d refresh];
+                }];
+            });
+        });
+    }];
+}
+
 
 - (void)qrPressed {
     passwordSelector = @selector(showHdAccountQr:);

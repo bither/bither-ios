@@ -34,7 +34,7 @@
 #import "DialogWithActions.h"
 #import "AppDelegate.h"
 #import "BTWordsTypeManager.h"
-
+#import "UserDefaultsUtil.h"
 
 #define kTextFieldHorizontalMargin (10)
 
@@ -187,6 +187,7 @@
             if ([BTSettings instance].getAppMode == HOT) {
                 BTHDAccount *account;
                 @try {
+                    [[UserDefaultsUtil instance] setIsChooseSegwitAddress: YES];
                     account = [[BTHDAccount alloc] initWithMnemonicSeed:mnemonicCodeSeed btBip39:s.bTBIP39 password:password fromXRandom:NO syncedComplete:NO andGenerationCallback:nil];
                 } @catch (NSException *e) {
                     if ([e isKindOfClass:[DuplicatedHDAccountException class]]) {

@@ -93,14 +93,14 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     DialogOldAddressesOfHDAccountCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
-    [cell showAddress:[_account addressForPath:EXTERNAL_ROOT_PATH atIndex:indexPath.row].address];
+    [cell showAddress:[_account addressForPath: _account.getCurrentExternalPathType atIndex:indexPath.row].address];
     cell.vSeperator.hidden = indexPath.row == _account.issuedExternalIndex;
     cell.delegate = self;
     return cell;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    NSString *address = [_account addressForPath:EXTERNAL_ROOT_PATH atIndex:indexPath.row].address;
+    NSString *address = [_account addressForPath: _account.getCurrentExternalPathType atIndex:indexPath.row].address;
     if (address.length > 30) {
         address = [StringUtil formatAddress:address groupSize:kAddressGroupSize lineSize:kAddressLineSize];
     }
@@ -123,7 +123,7 @@
     NSUInteger columnCount = 2;
     CGFloat firstColumnWidth = 0;
     CGFloat secondColumnWidth = 30;
-    NSString *address = [account addressForPath:EXTERNAL_ROOT_PATH atIndex:0].address;
+    NSString *address = [account addressForPath: account.getCurrentExternalPathType atIndex:0].address;
     if (address.length > 30) {
         address = [StringUtil formatAddress:address groupSize:kAddressGroupSize lineSize:kAddressLineSize];
     }

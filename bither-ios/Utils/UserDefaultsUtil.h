@@ -125,4 +125,7 @@
 
 - (BOOL)getIsObtainBccForKey:(NSString *)key;
 
+-(void) setIsChooseSegwitAddress: (BOOL) chooseSegwit;
+
+- (BOOL) IsChooseSegwitAddress;
 @end

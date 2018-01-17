@@ -251,6 +251,9 @@
     NSMutableArray *pathArray = [NSMutableArray new];
     [pathArray addObject:@(EXTERNAL_ROOT_PATH)];
     [pathArray addObject:@(INTERNAL_ROOT_PATH)];
+    [pathArray addObject:@(EXTERNAL_BIP49_PATH)];
+    [pathArray addObject:@(INTERNAL_BIP49_PATH)];
+
     __block int completeCount = 0;
     int needCompleteCount = (int)pathArray.count;
     for (NSNumber *pathType in pathArray){
@@ -350,6 +353,8 @@
     NSMutableArray *pathArray = [NSMutableArray new];
     [pathArray addObject:@(EXTERNAL_ROOT_PATH)];
     [pathArray addObject:@(INTERNAL_ROOT_PATH)];
+    [pathArray addObject:@(EXTERNAL_BIP49_PATH)];
+    [pathArray addObject:@(INTERNAL_BIP49_PATH)];
     __block int completeCount = 0;
     int needCompleteCount = (int)pathArray.count;
     for (NSNumber *pathType in pathArray){

@@ -79,7 +79,7 @@
         __block NSMutableArray *newAddress = [NSMutableArray new];
         for (int i = (page - 1) * pageCount; i < page * pageCount; i++) {
             BTBIP32Key *pathKey = [self.bip32Key deriveSoftened:i];
-            BTHDAccountAddress *hdAccountAddress = [[BTHDAccountAddress alloc] initWithHDAccountId:hdAccountId address:pathKey.address pub:pathKey.pubKey path:_pathType index:i issued:NO andSyncedComplete:YES];
+            BTHDAccountAddress *hdAccountAddress = [[BTHDAccountAddress alloc] initWithHDAccountId:hdAccountId address:pathKey.toSegwitAddress pub:pathKey.key path:_pathType index:i issued:NO andSyncedComplete:YES];
             [newAddress addObject:hdAccountAddress];
         }
         

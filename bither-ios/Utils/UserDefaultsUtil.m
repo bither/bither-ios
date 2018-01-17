@@ -56,6 +56,10 @@
 
 #define IS_OBTAIN_BCC @"is_obtain_bcc"
 
+#define SEGWIT_OPEN_STATUS @"segwit_open_status"
+
+#define CHOOSE_SEGWIT_ADDRESS @"choose_segwit_address"
+
 static UserDefaultsUtil *userDefaultsUtil;
 
 NSUserDefaults *userDefaults;
@@ -465,5 +469,22 @@ NSUserDefaults *userDefaults;
     return [value isEqualToString:@"1"];
 }
 
+- (void)setSegwitOpenStatus:(BOOL) isOpen {
+    [userDefaults setBool:isOpen forKey:SEGWIT_OPEN_STATUS];
+    [userDefaults synchronize];
+}
+
+- (BOOL) getSegwitOpenStatus {
+    return [userDefaults boolForKey:SEGWIT_OPEN_STATUS];
+}
+
+-(void) setIsChooseSegwitAddress: (BOOL) chooseSegwit {
+    [userDefaults setBool:chooseSegwit forKey:CHOOSE_SEGWIT_ADDRESS];
+    [userDefaults synchronize];
+}
+
+- (BOOL) IsChooseSegwitAddress {
+    return [userDefaults boolForKey:CHOOSE_SEGWIT_ADDRESS];
+}
 
 @end
