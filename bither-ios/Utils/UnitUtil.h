@@ -51,7 +51,11 @@
 
 + (NSMutableAttributedString *)attributedStringForAmount:(int64_t)amout withFontSize:(CGFloat)size;
 
++ (NSMutableAttributedString *)attributedStringForAmount:(int64_t)amout withFontSize:(CGFloat)size unit:(BitcoinUnit)unit;
+
 + (NSMutableAttributedString *)attributedStringWithSymbolForAmount:(int64_t)amount withFontSize:(CGFloat)size color:(UIColor *)color;
+
++ (NSMutableAttributedString *)attributedStringWithSymbolForAmount:(int64_t)amount withFontSize:(CGFloat)size color:(UIColor *)color unit:(BitcoinUnit)unit;
 
 + (NSMutableAttributedString *)stringWithSymbolForAmount:(int64_t)amount withFontSize:(CGFloat)size color:(UIColor *)color;
 

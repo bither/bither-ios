@@ -213,6 +213,8 @@ NSUserDefaults *userDefaults;
     if ([userDefaults objectForKey:TRANSACTION_FEE_MODE]) {
         if ([userDefaults integerForKey:TRANSACTION_FEE_MODE] == TenX) {
             return TenX;
+        } else if ([userDefaults integerForKey:TRANSACTION_FEE_MODE] == TwentyX) {
+            return TwentyX;
         } else if ([userDefaults integerForKey:TRANSACTION_FEE_MODE] == Higher) {
             return Higher;
         } else if ([userDefaults integerForKey:TRANSACTION_FEE_MODE] == High) {

@@ -80,7 +80,16 @@
 }
 
 - (void)firstConfigure {
-    BitcoinUnit unit = [_unitName isEqualToString:@"BCH"] || [_unitName isEqualToString:@"BTG"] ? UnitBTC : [UnitUtil unit];
+    BitcoinUnit unit;
+    if([_unitName isEqualToString:@"BTW"]) {
+        unit = UnitBTW;
+    }else if([_unitName isEqualToString:@"BCD"]) {
+        unit = UnitBCD;
+    }else if([_unitName isEqualToString:@"BCH"] || [_unitName isEqualToString:@"BTG"] || [_unitName isEqualToString:@"SBTC"] || [_unitName isEqualToString:@"BCD"]){
+        unit = UnitBTC;
+    }else{
+         unit = [UnitUtil unit];
+    }
     NSString *toAddress = _toAddress;
     NSString *amountString;
     NSString *feeString;
