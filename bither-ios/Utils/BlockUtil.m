@@ -31,7 +31,7 @@
 #define BITS  @"bits"
 #define NONCE  @"nonce"
 #define BLOCK_NO  @"block_no"
-#define HEIGHT @"height"
+
 @interface BlockUtil ()
 
 @property(nonatomic, strong) BTBlockChain *blockChain;
@@ -75,20 +75,6 @@ static BlockUtil *blockUtil;
 
 }
 
-+ (BTBlock *)formatBlcokChainBlock:(NSDictionary *)dict {
-    uint32_t ver = [dict getIntFromDict:VER andDefault:1];
-    NSData *pevBlock = [[[dict getStringFromDict:PREV_BLOCK] hexToData] reverse];
-    NSLog(@"pevBlock : %s", [[NSString hexWithData:pevBlock] UTF8String]);
-    NSData *mrklRoot = [[[dict getStringFromDict:MRKL_ROOT] hexToData] reverse];
-    NSLog(@"mrklRoot : %s", [[NSString hexWithData:mrklRoot] UTF8String]);
-    uint32_t time = [dict getIntFromDict:TIME];
-    uint32_t bits = [dict getIntFromDict:BITS];
-    uint32_t nonce = [dict getIntFromDict:NONCE];
-    int blockNo = [dict getIntFromDict:HEIGHT];
-    BTBlock *block = [[BTBlock alloc] initWithVersion:ver prevBlock:pevBlock merkleRoot:mrklRoot timestamp:time target:bits nonce:nonce height:blockNo];
-    return block;
-}
-
 - (void)syncSpvBlock {
     [self dowloadSpvBlock:^{
         if ([[BTPeerManager instance] doneSyncFromSPV]) {
@@ -123,25 +109,10 @@ static BlockUtil *blockUtil;
                     callback();
                 }
             }
-        } andErrorCallBack:^(NSOperation *errorOp, NSError *error) {
-            [[BitherApi instance] getSpvBlockByBlockChain:^(NSDictionary *dict) {
-                BTBlock *block = [BlockUtil formatBlcokChainBlock:dict];
-                if (block.blockNo % 2016 != 0) {
-                    if ([self.delegate respondsToSelector:@selector(error)]) {
-                        [self.delegate error];
-                    }
-                } else {
-                    [[UserDefaultsUtil instance] setDownloadSpvFinish:true];
-                    [self.blockChain addSPVBlock:block];
-                    if (callback) {
-                        callback();
-                    }
-                }
-            } andErrorCallBack:^(NSOperation *errorOp, NSError *error) {
-                if ([self.delegate respondsToSelector:@selector(error)]) {
-                    [self.delegate error];
-                }
-            }];
+        }                andErrorCallBack:^(NSOperation *errorOp, NSError *error) {
+            if ([self.delegate respondsToSelector:@selector(error)]) {
+                [self.delegate error];
+            }
         }];
     }
 

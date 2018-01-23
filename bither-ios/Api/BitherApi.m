@@ -44,7 +44,7 @@ static BitherApi *piApi;
 }
 
 - (void)getSpvBlock:(DictResponseBlock)callback andErrorCallBack:(ErrorHandler)errorCallback {
-    [self  get:BITHER_GET_ONE_SPVBLOCK_API withParams:nil networkType:BitherBC completed:^(MKNetworkOperation *completedOperation) {
+    [self          get:BITHER_GET_ONE_SPVBLOCK_API withParams:nil networkType:BitherBC completed:^(MKNetworkOperation *completedOperation) {
         if (![StringUtil isEmpty:completedOperation.responseString]) {
             NSLog(@"spv: %s", [completedOperation.responseString UTF8String]);
             NSDictionary *dict = [completedOperation responseJSON];
@@ -56,39 +56,9 @@ static BitherApi *piApi;
         if (errorCallback) {
             errorCallback(errorOp, error);
         }
+        
     }];
     
-}
-
--(void)getSpvBlockByBlockChain:(DictResponseBlock)callback andErrorCallBack:(ErrorHandler)errorCallback {
-    [self execGetBlockChain:BLOCKCHAIN_INFO_GET_LASTST_BLOCK withParams:nil networkType:BlockChain completed:^(MKNetworkOperation *completedOperation) {
-        if (![StringUtil isEmpty:completedOperation.responseString]) {
-            NSDictionary *dict = [completedOperation responseJSON];
-            int latestHeight = [[dict objectForKey:@"height"] intValue];
-            int height = 0;
-            if (latestHeight % 2016 !=0){
-                height = latestHeight - (latestHeight%2016);
-            }else {
-                height = latestHeight;
-            }
-            [self execGetBlockChain:[NSString stringWithFormat:BLOCKCHAIN_GET_ONE_SPVBLOCK_API, height] withParams:nil networkType:BlockChain completed:^(MKNetworkOperation *completedOpera) {
-                NSLog(@"blockchain spv: %s", [completedOpera.responseString UTF8String]);
-                NSDictionary *dic = [completedOpera responseJSON];
-                NSDictionary * block = [[dic objectForKey:@"blocks"] objectAtIndex:0];
-                if (callback) {
-                    callback(block);
-                }
-            } andErrorCallback:^(NSOperation *errorOp, NSError *error) {
-                if (errorCallback) {
-                    errorCallback(errorOp, error);
-                }
-            } ssl:NO];
-        }
-    } andErrorCallback:^(NSOperation *errorOp, NSError *error) {
-        if (errorCallback) {
-            errorCallback(errorOp, error);
-        }
-    } ssl:NO];
 }
 
 - (void)getInSignaturesApi:(NSString *)address fromBlock:(int)blockNo callback:(IdResponseBlock)callback andErrorCallBack:(ErrorHandler)errorCallback {

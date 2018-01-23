@@ -38,7 +38,6 @@
 
 + (BTBlock *)formatBlcok:(NSDictionary *)dict;
 
-+ (BTBlock *)formatBlcokChainBlock:(NSDictionary *)dict;
 
 - (void)syncSpvBlock;
 
