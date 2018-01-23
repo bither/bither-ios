@@ -22,6 +22,8 @@
 
 #define BITHER_GET_COOKIE_URL @"api/v1/cookie"
 #define BITHER_GET_ONE_SPVBLOCK_API @"api/v2/block/spv/one"
+#define BLOCKCHAIN_INFO_GET_LASTST_BLOCK @"latestblock"
+#define BLOCKCHAIN_GET_ONE_SPVBLOCK_API @"block-height/%d?format=json"
 #define BITHER_IN_SIGNATURES_API  @"api/v1/address/%@/insignature/%d"
 #define SPLIT_BROADCAST @"https://bitpie.getcai.com/api/v1/%@/broadcast"
 
@@ -51,6 +53,8 @@
 - (void)get:(NSString *)url withParams:(NSDictionary *)params networkType:(BitherNetworkType)networkType completed:(CompletedOperation)completedOperationParam andErrorCallback:(ErrorHandler)errorCallback;
 
 - (void)get:(NSString *)url withParams:(NSDictionary *)params networkType:(BitherNetworkType)networkType completed:(CompletedOperation)completedOperationParam andErrorCallback:(ErrorHandler)errorCallback ssl:(BOOL)ssl;
+
+- (void)execGetBlockChain:(NSString *)url withParams:(NSDictionary *)params networkType:(BitherNetworkType)networkType completed:(CompletedOperation)completedOperationParam andErrorCallback:(ErrorHandler)errorCallback ssl:(BOOL)ssl;
 
 - (void)getBlockChainBh:(NSString *)url withParams:(NSDictionary *)params networkType:(BitherNetworkType)networkType completed:(CompletedOperation)completedOperationParam andErrorCallback:(ErrorHandler)errorCallback ssl:(BOOL)ssl;
 
