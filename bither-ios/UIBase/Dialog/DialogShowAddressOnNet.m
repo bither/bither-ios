@@ -20,7 +20,7 @@
     NSMutableArray *array = [NSMutableArray new];
     [array addObject:[[Action alloc] initWithName:NSLocalizedString(@"View on Blockchain.info", nil) target:nil andSelector:@selector(showOnBlockchain)]];
     if ([UserDefaultsUtil instance].localeIsChina || [[UserDefaultsUtil instance] localeIsZHHant]) {
-        [array addObject:[[Action alloc] initWithName:NSLocalizedString(@"address_option_view_on_blockmeta", nil) target:nil andSelector:@selector(showOnBlockMeta)]];
+        [array addObject:[[Action alloc] initWithName:NSLocalizedString(@"address_option_view_on_btc", nil) target:nil andSelector:@selector(showOnBlockMeta)]];
     }
     self = [super initWithActions:array];
     if (self) {
@@ -35,7 +35,7 @@
 }
 
 - (void)showOnBlockMeta {
-    NSString *url = [NSString stringWithFormat:@"http://www.blockmeta.com/address/%@", _address];
+    NSString *url = [NSString stringWithFormat:@"https://btc.com/%@", _address];
     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:url]];
 }
 

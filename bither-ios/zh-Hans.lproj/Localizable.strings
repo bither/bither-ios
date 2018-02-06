@@ -509,7 +509,7 @@
 "qr_code_quality_setting_low" = "较低";
 
 // Blockmeta
-"address_option_view_on_blockmeta" = "在BlockMeta.com上查看";
+"address_option_view_on_btc" = "在btc.com上查看";
 
 // Network Monitor Options
 "network_monitor_clear_peers" = "清空节点";

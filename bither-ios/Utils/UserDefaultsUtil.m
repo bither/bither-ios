@@ -133,12 +133,12 @@ NSUserDefaults *userDefaults;
 
 - (BOOL)localeIsChina {
     NSString *language = [[NSLocale preferredLanguages] objectAtIndex:0];
-    return [language isEqualToString:@"zh-Hans"];
+    return [language containsString:@"zh-Hans"];
 }
 
 - (BOOL)localeIsZHHant {
     NSString *language = [[NSLocale preferredLanguages] objectAtIndex:0];
-    return [language isEqualToString:@"zh-Hant"];
+    return [language containsString:@"zh-Hant"];
 }
 
 - (NSInteger)getExchangeType {

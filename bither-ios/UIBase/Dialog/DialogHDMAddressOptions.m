@@ -32,7 +32,7 @@
     NSMutableArray *actions = [NSMutableArray new];
     [actions addObject:[[Action alloc] initWithName:NSLocalizedString(@"View on Blockchain.info", nil) target:self andSelector:@selector(viewOnBlockchain)]];
     if ([UserDefaultsUtil instance].localeIsChina || [[UserDefaultsUtil instance] localeIsZHHant]) {
-        [actions addObject:[[Action alloc] initWithName:NSLocalizedString(@"address_option_view_on_blockmeta", nil) target:self andSelector:@selector(viewOnBlockmeta)]];
+        [actions addObject:[[Action alloc] initWithName:NSLocalizedString(@"address_option_view_on_btc", nil) target:self andSelector:@selector(viewOnBlockmeta)]];
     }
     if (aliasDelegate) {
         [actions addObject:[[Action alloc] initWithName:NSLocalizedString(@"address_alias_manage", nil) target:self andSelector:@selector(addressAlias)]];
@@ -55,7 +55,7 @@
 }
 
 - (void)viewOnBlockmeta {
-    NSString *url = [NSString stringWithFormat:@"http://www.blockmeta.com/address/%@", self.address.address];
+    NSString *url = [NSString stringWithFormat:@"https://btc.com/%@", self.address.address];
     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:url]];
 }
 
