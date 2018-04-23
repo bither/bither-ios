@@ -2031,7 +2031,7 @@
 				TargetAttributes = {
 					0A47496E1A9D7F0B003684E2 = {
 						CreatedOnToolsVersion = 6.3;
-						DevelopmentTeam = 6887Q2ZK67;
+						DevelopmentTeam = Z394U8QX8R;
 						SystemCapabilities = {
 							com.apple.ApplicationGroups.iOS = {
 								enabled = 1;
@@ -2040,10 +2040,10 @@
 					};
 					0A4749801A9D7F0B003684E2 = {
 						CreatedOnToolsVersion = 6.3;
-						DevelopmentTeam = 6887Q2ZK67;
+						DevelopmentTeam = Z394U8QX8R;
 					};
 					42D9B760193D6B5B00C85B89 = {
-						DevelopmentTeam = 6887Q2ZK67;
+						DevelopmentTeam = Z394U8QX8R;
 						SystemCapabilities = {
 							com.apple.ApplicationGroups.iOS = {
 								enabled = 1;
@@ -2773,6 +2773,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CODE_SIGN_ENTITLEMENTS = "bither-ios WatchKit Extension/bither-ios WatchKit Extension.entitlements";
 				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = Z394U8QX8R;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -2787,7 +2788,7 @@
 					"$(PROJECT_DIR)/Pods/build/Debug-iphoneos",
 				);
 				MTL_ENABLE_DEBUG_INFO = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = net.bither.watchkitextension;
+				PRODUCT_BUNDLE_IDENTIFIER = net.bither.wke;
 				PRODUCT_NAME = "${TARGET_NAME}";
 				SKIP_INSTALL = YES;
 			};
@@ -2801,6 +2802,7 @@
 				CODE_SIGN_ENTITLEMENTS = "bither-ios WatchKit Extension/bither-ios WatchKit Extension.entitlements";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = Z394U8QX8R;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_NO_COMMON_BLOCKS = YES;
 				INFOPLIST_FILE = "bither-ios WatchKit Extension/Info.plist";
@@ -2811,7 +2813,7 @@
 					"$(PROJECT_DIR)/Pods/build/Debug-iphoneos",
 				);
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_BUNDLE_IDENTIFIER = net.bither.watchkitextension;
+				PRODUCT_BUNDLE_IDENTIFIER = net.bither.wke;
 				PRODUCT_NAME = "${TARGET_NAME}";
 				SKIP_INSTALL = YES;
 			};
@@ -2824,6 +2826,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = Z394U8QX8R;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -2834,7 +2837,7 @@
 				INFOPLIST_FILE = "bither-ios WatchKit App/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
 				MTL_ENABLE_DEBUG_INFO = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = net.bither.watchkitapp;
+				PRODUCT_BUNDLE_IDENTIFIER = net.bither.wka;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = 4;
@@ -2850,13 +2853,14 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = Z394U8QX8R;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_NO_COMMON_BLOCKS = YES;
 				IBSC_MODULE = bither_ios_WatchKit_Extension;
 				INFOPLIST_FILE = "bither-ios WatchKit App/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_BUNDLE_IDENTIFIER = net.bither.watchkitapp;
+				PRODUCT_BUNDLE_IDENTIFIER = net.bither.wka;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = 4;
@@ -2944,6 +2948,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_ENTITLEMENTS = "bither-ios/bither-ios.entitlements";
+				DEVELOPMENT_TEAM = Z394U8QX8R;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -2967,6 +2972,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_ENTITLEMENTS = "bither-ios/bither-ios.entitlements";
+				DEVELOPMENT_TEAM = Z394U8QX8R;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
