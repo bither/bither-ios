@@ -11,49 +11,25 @@
 		0A0BA9B21B575D2400885812 /* ColdAddressListHDCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A0BA9B11B575D2400885812 /* ColdAddressListHDCell.m */; };
 		0A259E251A47F19100D7F707 /* DialogSendOption.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A259E241A47F19100D7F707 /* DialogSendOption.m */; };
 		0A259E281A47FDF600D7F707 /* DialogSelectChangeAddress.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A259E271A47FDF600D7F707 /* DialogSelectChangeAddress.m */; };
-		0A4182A31A9DB70500576A12 /* WatchUnitUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A4182A21A9DB70500576A12 /* WatchUnitUtil.m */; };
-		0A4182AE1A9DBB8600576A12 /* WatchStringUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A4182AD1A9DBB8600576A12 /* WatchStringUtil.m */; };
 		0A42062A1A494F1000562100 /* SignMessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A4206291A494F1000562100 /* SignMessageViewController.m */; };
-		0A4279471ACF74C300429EB2 /* infoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0A4279491ACF74C300429EB2 /* infoPlist.strings */; };
 		0A43F4401A81C6BF008171DB /* HdmSendViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A43F43F1A81C6BF008171DB /* HdmSendViewController.m */; };
 		0A446C151A441393000CD25A /* DialogNetworkMonitorOption.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A446C141A441393000CD25A /* DialogNetworkMonitorOption.m */; };
-		0A4749761A9D7F0B003684E2 /* InterfaceController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A4749751A9D7F0B003684E2 /* InterfaceController.m */; };
-		0A4749791A9D7F0B003684E2 /* NotificationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A4749781A9D7F0B003684E2 /* NotificationController.m */; };
-		0A47497C1A9D7F0B003684E2 /* GlanceController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A47497B1A9D7F0B003684E2 /* GlanceController.m */; };
-		0A47497E1A9D7F0B003684E2 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0A47497D1A9D7F0B003684E2 /* Images.xcassets */; };
-		0A4749821A9D7F0B003684E2 /* bither-ios WatchKit App.app in Resources */ = {isa = PBXBuildFile; fileRef = 0A4749811A9D7F0B003684E2 /* bither-ios WatchKit App.app */; };
-		0A47498A1A9D7F0B003684E2 /* Interface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0A4749881A9D7F0B003684E2 /* Interface.storyboard */; };
-		0A47498C1A9D7F0B003684E2 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0A47498B1A9D7F0B003684E2 /* Images.xcassets */; };
-		0A47498F1A9D7F0B003684E2 /* bither-ios WatchKit Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 0A47496F1A9D7F0B003684E2 /* bither-ios WatchKit Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		0A515F781A36A2C0008292AF /* RawDataBinaryView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A515F771A36A2C0008292AF /* RawDataBinaryView.m */; };
 		0A515F7B1A36CAE3008292AF /* RawPrivateKeyBinaryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A515F7A1A36CAE3008292AF /* RawPrivateKeyBinaryViewController.m */; };
 		0A52BDA51A9FFC6400BC8C3E /* GroupFileUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A52BDA41A9FFC6400BC8C3E /* GroupFileUtil.m */; };
-		0A52BDA61A9FFEB800BC8C3E /* GroupFileUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A52BDA41A9FFC6400BC8C3E /* GroupFileUtil.m */; };
 		0A55CD7A1DCB267E00F9DB31 /* DialogAddressQrCopy.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A55CD791DCB267E00F9DB31 /* DialogAddressQrCopy.m */; };
-		0A637B1B1AA0427200696260 /* WatchTrendingGraphicData.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A637B1A1AA0427200696260 /* WatchTrendingGraphicData.m */; };
-		0A637B1F1AA0443D00696260 /* BaseApi.m in Sources */ = {isa = PBXBuildFile; fileRef = 4254083419469C9A007AF99C /* BaseApi.m */; };
-		0A637B201AA0445F00696260 /* BitherEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = 4254083819469C9A007AF99C /* BitherEngine.m */; };
-		0A637B231AA044C600696260 /* WatchApi.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A637B221AA044C600696260 /* WatchApi.m */; };
-		0A637B261AA0486300696260 /* WatchTrendingGraphicDrawer.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A637B251AA0486300696260 /* WatchTrendingGraphicDrawer.m */; };
-		0A637B291AA0608600696260 /* TotalBalanceDrawer.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A637B281AA0608600696260 /* TotalBalanceDrawer.m */; };
 		0A6C0F5C1A4D548B00544B33 /* MessageSigningSetting.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A6C0F5B1A4D548B00544B33 /* MessageSigningSetting.m */; };
 		0A6C0F5F1A4D5E1900544B33 /* DialogSignMessageSelectAddress.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A6C0F5E1A4D5E1900544B33 /* DialogSignMessageSelectAddress.m */; };
-		0A6EB31D1AAE9DE200F59ED7 /* WatchMarketBgDrawer.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A6EB31C1AAE9DE200F59ED7 /* WatchMarketBgDrawer.m */; };
 		0A75FC351B5613DA00F062B0 /* ColdAddressAddHDAccountViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A75FC341B5613DA00F062B0 /* ColdAddressAddHDAccountViewController.m */; };
 		0A75FC381B5613FA00F062B0 /* ColdAddressAddOtherViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A75FC371B5613FA00F062B0 /* ColdAddressAddOtherViewController.m */; };
 		0A75FC3B1B5629E100F062B0 /* ColdAddressAddHDAccountViewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A75FC3A1B5629E100F062B0 /* ColdAddressAddHDAccountViewViewController.m */; };
 		0A7F203D1D0BB0F900B4EAB1 /* DialogHDMonitorFirstAddressValidation.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A7F203C1D0BB0F900B4EAB1 /* DialogHDMonitorFirstAddressValidation.m */; };
-		0A7F9D311AA83FA500D70BAC /* CacheUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 4269FF7A195A948A001213B9 /* CacheUtil.m */; };
 		0A8853AD1AA8466E00760014 /* GroupUserDefaultUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A8853AC1AA8466E00760014 /* GroupUserDefaultUtil.m */; };
-		0A8853AE1AA8466E00760014 /* GroupUserDefaultUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A8853AC1AA8466E00760014 /* GroupUserDefaultUtil.m */; };
 		0A93B6011A4A66080081D74D /* DialogSignMessageOutput.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A93B6001A4A66080081D74D /* DialogSignMessageOutput.m */; };
 		0A93B6061A4AA0520081D74D /* VerifyMessageSignatureViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A93B6051A4AA0520081D74D /* VerifyMessageSignatureViewController.m */; };
-		0A948DCA1AA080E600359F64 /* MarketInterfaceController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A948DC91AA080E600359F64 /* MarketInterfaceController.m */; };
 		0AA7F1191CE18BD600C46157 /* PushTxThirdPartyTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AA7F1181CE18BD600C46157 /* PushTxThirdPartyTest.m */; };
-		0AAAEE331AFC83EE00F6E3BB /* WatchPageConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AAAEE321AFC83EE00F6E3BB /* WatchPageConfiguration.m */; };
 		0AB63CB81ABD15C80018A546 /* RawPrivateKeyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AB63CB71ABD15C80018A546 /* RawPrivateKeyViewController.m */; };
 		0AB63CBD1ABD1C700018A546 /* RawPrivateKeyDiceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AB63CBC1ABD1C700018A546 /* RawPrivateKeyDiceViewController.m */; };
-		0AB7226F1ACF6F4500D4B4FB /* infoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0AB722711ACF6F4500D4B4FB /* infoPlist.strings */; };
 		0AB8BC9A1A7F3194003C07D8 /* HotAddressAddHDMViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AB8BC991A7F3194003C07D8 /* HotAddressAddHDMViewController.m */; };
 		0AB8BCA51A7F445D003C07D8 /* DialogHDMKeychainAddHot.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AB8BCA41A7F445D003C07D8 /* DialogHDMKeychainAddHot.m */; };
 		0AB8BCAB1A7F6DEE003C07D8 /* DialogHDMServerUnsignedQRCode.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AB8BCAA1A7F6DEE003C07D8 /* DialogHDMServerUnsignedQRCode.m */; };
@@ -66,15 +42,7 @@
 		0AD6749C1A7B6229007967DB /* DialogWithActions.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AD6749B1A7B6229007967DB /* DialogWithActions.m */; };
 		0AD6749F1A7B9108007967DB /* DialogHDMSeedWordList.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AD6749E1A7B9108007967DB /* DialogHDMSeedWordList.m */; };
 		0AD849EB1D0E9B4C005FAF56 /* DialogMonitorAddressValidation.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AD849EA1D0E9B4C005FAF56 /* DialogMonitorAddressValidation.m */; };
-		0AE142621B00924C0070C580 /* PaymentInterfaceController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AE142611B00924C0070C580 /* PaymentInterfaceController.m */; };
-		0AE142631B0094140070C580 /* QRCodeThemeUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = ACEE7D1C19D3F9F500932B39 /* QRCodeThemeUtil.m */; };
-		0AE142641B00941B0070C580 /* UIColor+Util.m in Sources */ = {isa = PBXBuildFile; fileRef = ACDDDC3519483A840008A79D /* UIColor+Util.m */; };
-		0AE142651B0094220070C580 /* UIImage+ImageWithColor.m in Sources */ = {isa = PBXBuildFile; fileRef = AC33089419556F7A00D8F621 /* UIImage+ImageWithColor.m */; };
 		0AF4B7BC1CE1794400F7F7D9 /* PushTxThirdParty.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AF4B7BB1CE1794400F7F7D9 /* PushTxThirdParty.m */; };
-		0AFBA9321AA01EF60059CB4B /* TotalBalance.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AFBA9311AA01EF60059CB4B /* TotalBalance.m */; };
-		0AFBA9351AA0275F0059CB4B /* WatchMarket.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AFBA9341AA0275F0059CB4B /* WatchMarket.m */; };
-		0AFBA9361AA028850059CB4B /* NSDictionary+Fromat.m in Sources */ = {isa = PBXBuildFile; fileRef = 4254086A1946CD17007AF99C /* NSDictionary+Fromat.m */; };
-		0AFBA93F1AA02C190059CB4B /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0AFBA9411AA02C190059CB4B /* Localizable.strings */; };
 		112DED442010C3F100CE6998 /* GetSplitSetting.m in Sources */ = {isa = PBXBuildFile; fileRef = 112DED432010C3F100CE6998 /* GetSplitSetting.m */; };
 		117562FA2011C7FD00BEF7BA /* GetForkCoinsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 117562F92011C7FD00BEF7BA /* GetForkCoinsController.m */; };
 		1BC2705059CAA4F55CEFCADB /* PaymentAddressSetting.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BC275821CC95E0F138A889D /* PaymentAddressSetting.m */; };
@@ -105,7 +73,6 @@
 		1BC27F74516BB973EA28A144 /* ImportHDAccountSeedController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BC27E40C2AFE8213E54D92E /* ImportHDAccountSeedController.m */; };
 		1BC27FE46C243D52B180F1C2 /* DialogAddressAlias.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BC27F75690D4B3C844742B2 /* DialogAddressAlias.m */; };
 		1BC27FE47C62F779EDE01FA5 /* HDAccountSendViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BC27B56B8528116430BB2D8 /* HDAccountSendViewController.m */; };
-		20F671F2466952F081445EFB /* libPods-bither-ios WatchKit App.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AC13478AA903687AA9ACD36 /* libPods-bither-ios WatchKit App.a */; };
 		35BD79D34EADBCE346458D94 /* libPods-bither-ios.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 46F4567F64E4C5EB9B650EE0 /* libPods-bither-ios.a */; };
 		401ABC921DC33E8F004611B7 /* AdUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 401ABC911DC33E8F004611B7 /* AdUtil.m */; };
 		402A5CBB1F28452E00B636FD /* ObtainBccViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 402A5CBA1F28452E00B636FD /* ObtainBccViewController.m */; };
@@ -239,7 +206,6 @@
 		AC8912F21A7F62FE003797C4 /* WorldListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AC8912F11A7F62FE003797C4 /* WorldListCell.m */; };
 		AC8F0DCA196CF4E400CCD0F9 /* SelectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AC8F0DC9196CF4E400CCD0F9 /* SelectViewController.m */; };
 		AC8F0DCD196D054A00CCD0F9 /* SelectListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AC8F0DCC196D054A00CCD0F9 /* SelectListCell.m */; };
-		AC9B35ED1AFF46BC004B10FD /* GroupUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = DC08C1C370321C08C785C9E1 /* GroupUtil.m */; };
 		AC9BBCFE19D268AB00E58BA7 /* UpgradeUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = AC9BBCFD19D268AB00E58BA7 /* UpgradeUtil.m */; };
 		AC9BC61019D18102003B88B5 /* SystemUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = AC9BC60F19D18102003B88B5 /* SystemUtil.m */; };
 		ACA11DCA19F64D560087D39C /* RCheckViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ACA11DC919F64D560087D39C /* RCheckViewController.m */; };
@@ -309,7 +275,6 @@
 		ACEEB8E419B46ED200F2789C /* BlockViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ACEEB8E319B46ED200F2789C /* BlockViewController.m */; };
 		ACF02FEB19D90899001AB701 /* DialogSwitchQRCode.m in Sources */ = {isa = PBXBuildFile; fileRef = ACF02FEA19D90899001AB701 /* DialogSwitchQRCode.m */; };
 		ACF4B17419668D5700CE24FD /* MarketListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = ACF4B17319668D5700CE24FD /* MarketListCell.m */; };
-		CF0F0775611181D491BC75F1 /* libPods-bither-ios WatchKit Extension.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F23197A13072D3472EE053F /* libPods-bither-ios WatchKit Extension.a */; };
 		D61D047B6D9BE30D5BED20E1 /* hdm.bither.net.cer in Resources */ = {isa = PBXBuildFile; fileRef = D61D0299B4CDCCFC6D0BA161 /* hdm.bither.net.cer */; };
 		D61D098FD091EB8752EF00A2 /* BTHDMBid+Api.m in Sources */ = {isa = PBXBuildFile; fileRef = D61D0F5AB509120289D32CE8 /* BTHDMBid+Api.m */; };
 		D61D0ACF2F75D62B878ADAEF /* HDMHotAddUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = D61D0EFD9890E54E56C5A21E /* HDMHotAddUtil.m */; };
@@ -332,20 +297,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		0A4749831A9D7F0B003684E2 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 42D9B759193D6B5B00C85B89 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 0A4749801A9D7F0B003684E2;
-			remoteInfo = "bither-ios WatchKit App";
-		};
-		0A47498D1A9D7F0B003684E2 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 42D9B759193D6B5B00C85B89 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 0A47496E1A9D7F0B003684E2;
-			remoteInfo = "bither-ios WatchKit Extension";
-		};
 		42D9B781193D6B5B00C85B89 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 42D9B759193D6B5B00C85B89 /* Project object */;
@@ -362,7 +313,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
-				0A47498F1A9D7F0B003684E2 /* bither-ios WatchKit Extension.appex in Embed App Extensions */,
 			);
 			name = "Embed App Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -391,7 +341,6 @@
 		0A43F43F1A81C6BF008171DB /* HdmSendViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HdmSendViewController.m; sourceTree = "<group>"; };
 		0A446C131A441393000CD25A /* DialogNetworkMonitorOption.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DialogNetworkMonitorOption.h; sourceTree = "<group>"; };
 		0A446C141A441393000CD25A /* DialogNetworkMonitorOption.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DialogNetworkMonitorOption.m; sourceTree = "<group>"; };
-		0A47496F1A9D7F0B003684E2 /* bither-ios WatchKit Extension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "bither-ios WatchKit Extension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
 		0A4749721A9D7F0B003684E2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0A4749731A9D7F0B003684E2 /* PushNotificationPayload.apns */ = {isa = PBXFileReference; lastKnownFileType = text; path = PushNotificationPayload.apns; sourceTree = "<group>"; };
 		0A4749741A9D7F0B003684E2 /* InterfaceController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = InterfaceController.h; sourceTree = "<group>"; };
@@ -401,7 +350,6 @@
 		0A47497A1A9D7F0B003684E2 /* GlanceController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GlanceController.h; sourceTree = "<group>"; };
 		0A47497B1A9D7F0B003684E2 /* GlanceController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GlanceController.m; sourceTree = "<group>"; };
 		0A47497D1A9D7F0B003684E2 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		0A4749811A9D7F0B003684E2 /* bither-ios WatchKit App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "bither-ios WatchKit App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		0A4749871A9D7F0B003684E2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0A4749891A9D7F0B003684E2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Interface.storyboard; sourceTree = "<group>"; };
 		0A47498B1A9D7F0B003684E2 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
@@ -1000,14 +948,6 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		0A47496C1A9D7F0B003684E2 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				CF0F0775611181D491BC75F1 /* libPods-bither-ios WatchKit Extension.a in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		42D9B75E193D6B5B00C85B89 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -1030,14 +970,6 @@
 				42D9B780193D6B5B00C85B89 /* UIKit.framework in Frameworks */,
 				42D9B77F193D6B5B00C85B89 /* Foundation.framework in Frameworks */,
 				9C344A05FE234090F3C15DB8 /* libPods-bither-iosTests.a in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		B8C9A7FD49BC255FF64BD729 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				20F671F2466952F081445EFB /* libPods-bither-ios WatchKit App.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1410,8 +1342,6 @@
 			children = (
 				42D9B761193D6B5B00C85B89 /* bither-ios.app */,
 				42D9B77C193D6B5B00C85B89 /* bither-iosTests.xctest */,
-				0A47496F1A9D7F0B003684E2 /* bither-ios WatchKit Extension.appex */,
-				0A4749811A9D7F0B003684E2 /* bither-ios WatchKit App.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1935,45 +1865,6 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		0A47496E1A9D7F0B003684E2 /* bither-ios WatchKit Extension */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 0A4749951A9D7F0B003684E2 /* Build configuration list for PBXNativeTarget "bither-ios WatchKit Extension" */;
-			buildPhases = (
-				11163D07D9768F5EE594E31F /* [CP] Check Pods Manifest.lock */,
-				0A47496B1A9D7F0B003684E2 /* Sources */,
-				0A47496C1A9D7F0B003684E2 /* Frameworks */,
-				0A47496D1A9D7F0B003684E2 /* Resources */,
-				CF3DD64130EA83060E683705 /* [CP] Copy Pods Resources */,
-				0A3A69021D0401780033F42E /* ShellScript */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				0A4749841A9D7F0B003684E2 /* PBXTargetDependency */,
-			);
-			name = "bither-ios WatchKit Extension";
-			productName = "bither-ios WatchKit Extension";
-			productReference = 0A47496F1A9D7F0B003684E2 /* bither-ios WatchKit Extension.appex */;
-			productType = "com.apple.product-type.watchkit-extension";
-		};
-		0A4749801A9D7F0B003684E2 /* bither-ios WatchKit App */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 0A4749941A9D7F0B003684E2 /* Build configuration list for PBXNativeTarget "bither-ios WatchKit App" */;
-			buildPhases = (
-				2B9783C3E78BF3B7A4A784B1 /* [CP] Check Pods Manifest.lock */,
-				0A47497F1A9D7F0B003684E2 /* Resources */,
-				B8C9A7FD49BC255FF64BD729 /* Frameworks */,
-				506E77C84528955384D5B0AA /* [CP] Copy Pods Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = "bither-ios WatchKit App";
-			productName = "bither-ios WatchKit App";
-			productReference = 0A4749811A9D7F0B003684E2 /* bither-ios WatchKit App.app */;
-			productType = "com.apple.product-type.application.watchapp";
-		};
 		42D9B760193D6B5B00C85B89 /* bither-ios */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 42D9B78D193D6B5B00C85B89 /* Build configuration list for PBXNativeTarget "bither-ios" */;
@@ -1991,7 +1882,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				0A47498E1A9D7F0B003684E2 /* PBXTargetDependency */,
 			);
 			name = "bither-ios";
 			productName = "bither-ios";
@@ -2029,19 +1919,6 @@
 				LastUpgradeCheck = 0700;
 				ORGANIZATIONNAME = Bither;
 				TargetAttributes = {
-					0A47496E1A9D7F0B003684E2 = {
-						CreatedOnToolsVersion = 6.3;
-						DevelopmentTeam = Z394U8QX8R;
-						SystemCapabilities = {
-							com.apple.ApplicationGroups.iOS = {
-								enabled = 1;
-							};
-						};
-					};
-					0A4749801A9D7F0B003684E2 = {
-						CreatedOnToolsVersion = 6.3;
-						DevelopmentTeam = Z394U8QX8R;
-					};
 					42D9B760193D6B5B00C85B89 = {
 						DevelopmentTeam = Z394U8QX8R;
 						SystemCapabilities = {
@@ -2072,34 +1949,11 @@
 			targets = (
 				42D9B760193D6B5B00C85B89 /* bither-ios */,
 				42D9B77B193D6B5B00C85B89 /* bither-iosTests */,
-				0A47496E1A9D7F0B003684E2 /* bither-ios WatchKit Extension */,
-				0A4749801A9D7F0B003684E2 /* bither-ios WatchKit App */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		0A47496D1A9D7F0B003684E2 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				0A4749821A9D7F0B003684E2 /* bither-ios WatchKit App.app in Resources */,
-				0A4279471ACF74C300429EB2 /* infoPlist.strings in Resources */,
-				0AFBA93F1AA02C190059CB4B /* Localizable.strings in Resources */,
-				0A47497E1A9D7F0B003684E2 /* Images.xcassets in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		0A47497F1A9D7F0B003684E2 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				0A47498A1A9D7F0B003684E2 /* Interface.storyboard in Resources */,
-				0A47498C1A9D7F0B003684E2 /* Images.xcassets in Resources */,
-				0AB7226F1ACF6F4500D4B4FB /* infoPlist.strings in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		42D9B75F193D6B5B00C85B89 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -2131,55 +1985,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		0A3A69021D0401780033F42E /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "cd \"${CONFIGURATION_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/\"\nif [[ -d \"Frameworks\" ]]; then\nrm -fr Frameworks\nfi";
-		};
-		11163D07D9768F5EE594E31F /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-bither-ios WatchKit Extension-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		2B9783C3E78BF3B7A4A784B1 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-bither-ios WatchKit App-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
 		4268FE14194AA3FD007A4C30 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -2192,21 +1997,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "";
-		};
-		506E77C84528955384D5B0AA /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-bither-ios WatchKit App/Pods-bither-ios WatchKit App-resources.sh\"\n";
-			showEnvVarsInLog = 0;
 		};
 		57A3503155CC151F7E71D4E1 /* Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -2334,56 +2124,9 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-bither-ios/Pods-bither-ios-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		CF3DD64130EA83060E683705 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-bither-ios WatchKit Extension/Pods-bither-ios WatchKit Extension-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		0A47496B1A9D7F0B003684E2 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				0AE142651B0094220070C580 /* UIImage+ImageWithColor.m in Sources */,
-				AC9B35ED1AFF46BC004B10FD /* GroupUtil.m in Sources */,
-				0A4182AE1A9DBB8600576A12 /* WatchStringUtil.m in Sources */,
-				0A6EB31D1AAE9DE200F59ED7 /* WatchMarketBgDrawer.m in Sources */,
-				0A52BDA61A9FFEB800BC8C3E /* GroupFileUtil.m in Sources */,
-				0A637B291AA0608600696260 /* TotalBalanceDrawer.m in Sources */,
-				0AFBA9361AA028850059CB4B /* NSDictionary+Fromat.m in Sources */,
-				0AE142621B00924C0070C580 /* PaymentInterfaceController.m in Sources */,
-				0AE142641B00941B0070C580 /* UIColor+Util.m in Sources */,
-				0A637B1B1AA0427200696260 /* WatchTrendingGraphicData.m in Sources */,
-				0A637B261AA0486300696260 /* WatchTrendingGraphicDrawer.m in Sources */,
-				0AAAEE331AFC83EE00F6E3BB /* WatchPageConfiguration.m in Sources */,
-				0A8853AE1AA8466E00760014 /* GroupUserDefaultUtil.m in Sources */,
-				0AE142631B0094140070C580 /* QRCodeThemeUtil.m in Sources */,
-				0A4182A31A9DB70500576A12 /* WatchUnitUtil.m in Sources */,
-				0A637B1F1AA0443D00696260 /* BaseApi.m in Sources */,
-				0A7F9D311AA83FA500D70BAC /* CacheUtil.m in Sources */,
-				0A637B231AA044C600696260 /* WatchApi.m in Sources */,
-				0AFBA9351AA0275F0059CB4B /* WatchMarket.m in Sources */,
-				0AFBA9321AA01EF60059CB4B /* TotalBalance.m in Sources */,
-				0A4749791A9D7F0B003684E2 /* NotificationController.m in Sources */,
-				0A637B201AA0445F00696260 /* BitherEngine.m in Sources */,
-				0A4749761A9D7F0B003684E2 /* InterfaceController.m in Sources */,
-				0A47497C1A9D7F0B003684E2 /* GlanceController.m in Sources */,
-				0A948DCA1AA080E600359F64 /* MarketInterfaceController.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		42D9B75D193D6B5B00C85B89 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -2663,16 +2406,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		0A4749841A9D7F0B003684E2 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 0A4749801A9D7F0B003684E2 /* bither-ios WatchKit App */;
-			targetProxy = 0A4749831A9D7F0B003684E2 /* PBXContainerItemProxy */;
-		};
-		0A47498E1A9D7F0B003684E2 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 0A47496E1A9D7F0B003684E2 /* bither-ios WatchKit Extension */;
-			targetProxy = 0A47498D1A9D7F0B003684E2 /* PBXContainerItemProxy */;
-		};
 		42D9B782193D6B5B00C85B89 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 42D9B760193D6B5B00C85B89 /* bither-ios */;
@@ -2766,112 +2499,6 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
-		0A4749901A9D7F0B003684E2 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = DB4EB6E1B448823B24933374 /* Pods-bither-ios WatchKit Extension.debug.xcconfig */;
-			buildSettings = {
-				CLANG_WARN_UNREACHABLE_CODE = YES;
-				CODE_SIGN_ENTITLEMENTS = "bither-ios WatchKit Extension/bither-ios WatchKit Extension.entitlements";
-				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEVELOPMENT_TEAM = Z394U8QX8R;
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = "bither-ios WatchKit Extension/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/Pods/build/Debug-iphoneos",
-				);
-				MTL_ENABLE_DEBUG_INFO = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = net.bither.wke;
-				PRODUCT_NAME = "${TARGET_NAME}";
-				SKIP_INSTALL = YES;
-				WATCHOS_DEPLOYMENT_TARGET = 2.0;
-			};
-			name = Debug;
-		};
-		0A4749911A9D7F0B003684E2 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 4CBD900EB9903F628A4F4E65 /* Pods-bither-ios WatchKit Extension.release.xcconfig */;
-			buildSettings = {
-				CLANG_WARN_UNREACHABLE_CODE = YES;
-				CODE_SIGN_ENTITLEMENTS = "bither-ios WatchKit Extension/bither-ios WatchKit Extension.entitlements";
-				COPY_PHASE_STRIP = NO;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = Z394U8QX8R;
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_NO_COMMON_BLOCKS = YES;
-				INFOPLIST_FILE = "bither-ios WatchKit Extension/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/Pods/build/Debug-iphoneos",
-				);
-				MTL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_BUNDLE_IDENTIFIER = net.bither.wke;
-				PRODUCT_NAME = "${TARGET_NAME}";
-				SKIP_INSTALL = YES;
-				WATCHOS_DEPLOYMENT_TARGET = 2.0;
-			};
-			name = Release;
-		};
-		0A4749921A9D7F0B003684E2 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 87EE176B8A05EC307AB3AAAF /* Pods-bither-ios WatchKit App.debug.xcconfig */;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CLANG_WARN_UNREACHABLE_CODE = YES;
-				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEVELOPMENT_TEAM = Z394U8QX8R;
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				IBSC_MODULE = bither_ios_WatchKit_Extension;
-				INFOPLIST_FILE = "bither-ios WatchKit App/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
-				MTL_ENABLE_DEBUG_INFO = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = net.bither.wka;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = 4;
-				"TARGETED_DEVICE_FAMILY[sdk=iphonesimulator*]" = "1,4";
-				WATCHOS_DEPLOYMENT_TARGET = 2.0;
-			};
-			name = Debug;
-		};
-		0A4749931A9D7F0B003684E2 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 943C08F77A6E63BB072E5275 /* Pods-bither-ios WatchKit App.release.xcconfig */;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CLANG_WARN_UNREACHABLE_CODE = YES;
-				COPY_PHASE_STRIP = NO;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = Z394U8QX8R;
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_NO_COMMON_BLOCKS = YES;
-				IBSC_MODULE = bither_ios_WatchKit_Extension;
-				INFOPLIST_FILE = "bither-ios WatchKit App/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
-				MTL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_BUNDLE_IDENTIFIER = net.bither.wka;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = 4;
-				"TARGETED_DEVICE_FAMILY[sdk=iphonesimulator*]" = "1,4";
-				WATCHOS_DEPLOYMENT_TARGET = 2.0;
-			};
-			name = Release;
-		};
 		42D9B78B193D6B5B00C85B89 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -2909,6 +2536,7 @@
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				WATCHOS_DEPLOYMENT_TARGET = 2.0;
 			};
 			name = Debug;
 		};
@@ -2942,6 +2570,7 @@
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
+				WATCHOS_DEPLOYMENT_TARGET = 2.0;
 			};
 			name = Release;
 		};
@@ -2965,7 +2594,6 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = 1;
 				USER_HEADER_SEARCH_PATHS = "${SRCROOT}/**";
-				WATCHOS_DEPLOYMENT_TARGET = 2.0;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -2990,7 +2618,6 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = 1;
 				USER_HEADER_SEARCH_PATHS = "${SRCROOT}/**";
-				WATCHOS_DEPLOYMENT_TARGET = 2.0;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
@@ -3020,6 +2647,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				USER_HEADER_SEARCH_PATHS = "${SRCROOT}/**";
+				WATCHOS_DEPLOYMENT_TARGET = 2.0;
 				WRAPPER_EXTENSION = xctest;
 			};
 			name = Debug;
@@ -3045,6 +2673,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				USER_HEADER_SEARCH_PATHS = "${SRCROOT}/**";
+				WATCHOS_DEPLOYMENT_TARGET = 2.0;
 				WRAPPER_EXTENSION = xctest;
 			};
 			name = Release;
@@ -3052,24 +2681,6 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		0A4749941A9D7F0B003684E2 /* Build configuration list for PBXNativeTarget "bither-ios WatchKit App" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				0A4749921A9D7F0B003684E2 /* Debug */,
-				0A4749931A9D7F0B003684E2 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		0A4749951A9D7F0B003684E2 /* Build configuration list for PBXNativeTarget "bither-ios WatchKit Extension" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				0A4749901A9D7F0B003684E2 /* Debug */,
-				0A4749911A9D7F0B003684E2 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
 		42D9B75C193D6B5B00C85B89 /* Build configuration list for PBXProject "bither-ios" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
