@@ -216,7 +216,7 @@
 }
 
 - (void)showAddressOnBlockMeta {
-    NSString *url = [NSString stringWithFormat:@"http://www.blockmeta.com/address/%@", self.address.address];
+    NSString *url = [NSString stringWithFormat:@"https://btc.com/%@", self.address.address];
     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:url]];
 }
 

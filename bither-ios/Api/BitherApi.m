@@ -20,6 +20,7 @@
 #import "GroupFileUtil.h"
 #import "AFNetworking.h"
 #import "AdUtil.h"
+#import "SplitCoinUtil.h"
 
 static BitherApi *piApi;
 #define kImgEn @"img_en"
@@ -34,7 +35,7 @@ static BitherApi *piApi;
 
 + (BitherApi *)instance {
     @synchronized (self) {
-
+        
         if (piApi == nil) {
             piApi = [[self alloc] init];
         }
@@ -43,7 +44,7 @@ static BitherApi *piApi;
 }
 
 - (void)getSpvBlock:(DictResponseBlock)callback andErrorCallBack:(ErrorHandler)errorCallback {
-    [self          get:BITHER_GET_ONE_SPVBLOCK_API withParams:nil networkType:BitherBC completed:^(MKNetworkOperation *completedOperation) {
+    [self  get:BITHER_GET_ONE_SPVBLOCK_API withParams:nil networkType:BitherBC completed:^(MKNetworkOperation *completedOperation) {
         if (![StringUtil isEmpty:completedOperation.responseString]) {
             NSLog(@"spv: %s", [completedOperation.responseString UTF8String]);
             NSDictionary *dict = [completedOperation responseJSON];
@@ -55,9 +56,39 @@ static BitherApi *piApi;
         if (errorCallback) {
             errorCallback(errorOp, error);
         }
-
     }];
+    
+}
 
+-(void)getSpvBlockByBlockChain:(DictResponseBlock)callback andErrorCallBack:(ErrorHandler)errorCallback {
+    [self execGetBlockChain:BLOCKCHAIN_INFO_GET_LASTST_BLOCK withParams:nil networkType:BlockChain completed:^(MKNetworkOperation *completedOperation) {
+        if (![StringUtil isEmpty:completedOperation.responseString]) {
+            NSDictionary *dict = [completedOperation responseJSON];
+            int latestHeight = [[dict objectForKey:@"height"] intValue];
+            int height = 0;
+            if (latestHeight % 2016 !=0){
+                height = latestHeight - (latestHeight%2016);
+            }else {
+                height = latestHeight;
+            }
+            [self execGetBlockChain:[NSString stringWithFormat:BLOCKCHAIN_GET_ONE_SPVBLOCK_API, height] withParams:nil networkType:BlockChain completed:^(MKNetworkOperation *completedOpera) {
+                NSLog(@"blockchain spv: %s", [completedOpera.responseString UTF8String]);
+                NSDictionary *dic = [completedOpera responseJSON];
+                NSDictionary * block = [[dic objectForKey:@"blocks"] objectAtIndex:0];
+                if (callback) {
+                    callback(block);
+                }
+            } andErrorCallback:^(NSOperation *errorOp, NSError *error) {
+                if (errorCallback) {
+                    errorCallback(errorOp, error);
+                }
+            } ssl:NO];
+        }
+    } andErrorCallback:^(NSOperation *errorOp, NSError *error) {
+        if (errorCallback) {
+            errorCallback(errorOp, error);
+        }
+    } ssl:NO];
 }
 
 - (void)getInSignaturesApi:(NSString *)address fromBlock:(int)blockNo callback:(IdResponseBlock)callback andErrorCallBack:(ErrorHandler)errorCallback {
@@ -66,13 +97,13 @@ static BitherApi *piApi;
         if (callback) {
             callback(completedOperation.responseString);
         }
-
+        
     } andErrorCallback:^(NSOperation *errorOp, NSError *error) {
         if (errorCallback) {
             errorCallback(errorOp, error);
         }
     }];
-
+    
 }
 
 - (void)getExchangeTrend:(MarketType)marketType callback:(ArrayResponseBlock)callback andErrorCallBack:(ErrorHandler)errorCallback {
@@ -81,7 +112,7 @@ static BitherApi *piApi;
         if (callback) {
             callback(completedOperation.responseJSON);
         }
-
+        
     } andErrorCallback:^(NSOperation *errorOp, NSError *error) {
         if (errorCallback) {
             errorCallback(errorOp, error);
@@ -172,7 +203,7 @@ static BitherApi *piApi;
                 }
             }
         });
-
+        
     } andErrorCallback:^(NSOperation *errorOp, NSError *error) {
         if (errorCallback) {
             errorCallback(errorOp, error);
@@ -187,20 +218,20 @@ static BitherApi *piApi;
                 [GroupFileUtil setTicker:completedOperation.responseString];
                 NSDictionary *dict = completedOperation.responseJSON;
                 [MarketUtil handlerResult:dict];
-
+                
                 if (callback) {
                     callback();
                 }
             }
-
+            
         });
     } andErrorCallback:^(NSOperation *errorOp, NSError *error) {
         if (errorCallback) {
             errorCallback(errorOp, error);
         }
-
+        
     }];
-
+    
 }
 
 - (void)uploadCrash:(NSString *)data callback:(DictResponseBlock)callback andErrorCallBack:(ErrorHandler)errorCallback {
@@ -236,8 +267,8 @@ static BitherApi *piApi;
     } failure:nil];
 }
 
-- (void)getHasBccAddress:(NSString *)address callback:(DictResponseBlock)callback andErrorCallBack:(ErrorHandler)errorCallback {
-    NSString *url = [NSString stringWithFormat:BCC_HAS_ADDRESS, address];
+- (void)getHasSplitCoinAddress:(NSString *)address splitCoin:(SplitCoin)splitCoin callback:(DictResponseBlock)callback andErrorCallBack:(ErrorHandler)errorCallback {
+    NSString *url = [NSString stringWithFormat:SPLIT_HAS_ADDRESS,[SplitCoinUtil getPathCoinCodee:splitCoin],address];
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     manager.responseSerializer = [AFHTTPResponseSerializer serializer];
     [manager GET:url parameters:nil success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
@@ -252,16 +283,38 @@ static BitherApi *piApi;
     }];
 }
 
-- (void)postBccBroadcast:(BTTx *)tx callback:(DictResponseBlock)callback andErrorCallBack:(ErrorHandler)errorCallback {
-    NSDictionary *dict = @{@"raw_tx": [NSString hexWithData:tx.toData]};
+- (void)getBcdPreBlockHashCallback:(DictResponseBlock)callback andErrorCallBack:(ErrorHandler)errorCallback {
+    NSString *urlStr = BCD_PREBLOCKHASH;
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    manager.responseSerializer = [AFHTTPResponseSerializer serializer];
+    [manager GET:urlStr parameters:nil success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
+        NSDictionary *responseDic = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingAllowFragments error:nil];
+        if (callback) {
+            callback(responseDic);
+        }
+    } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
+        if (errorCallback) {
+            errorCallback(operation, error);
+        }
+    }];
+}
+
+- (void)postSplitCoinBroadcast:(BTTx *)tx splitCoin:(SplitCoin)splitCoin callback:(DictResponseBlock)callback andErrorCallBack:(ErrorHandler)errorCallback {
+    NSDictionary *dict;
+    if(splitCoin == SplitBCD) {
+        dict = @{@"raw_tx": [NSString hexWithData:tx.bcdToData]};
+    }else{
+        dict = @{@"raw_tx": [NSString hexWithData:tx.toData]};
+    }
+
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     manager.responseSerializer = [AFJSONResponseSerializer serializer];
     manager.requestSerializer = [AFJSONRequestSerializer serializer];
     manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json", @"text/json", @"text/javascript",@"text/html", @"text/plain", nil];
     [manager.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Accept"];
     [manager.requestSerializer setValue:@"application/json; charset=utf-8" forHTTPHeaderField:@"Content-Type"];
-    
-    [manager POST:BCC_BROADCAST parameters:dict success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
+    NSString *urlStr = [NSString stringWithFormat:SPLIT_BROADCAST, [SplitCoinUtil getPathCoinCodee:splitCoin]];
+    [manager POST:urlStr parameters:dict success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
         NSDictionary *responseDic = responseObject;
         if (callback) {
             callback(responseDic);

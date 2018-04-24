@@ -89,7 +89,13 @@ typedef enum {
 }
 
 - (void)receivedNotifications {
-    [self.tableView reloadData];
+    if ([NSThread isMainThread]) {
+        [self.tableView reloadData];
+    } else {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.tableView reloadData];
+        });
+    }
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {

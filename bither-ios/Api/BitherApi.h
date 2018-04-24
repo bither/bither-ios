@@ -20,7 +20,7 @@
 #import "StringUtil.h"
 #import "UserDefaultsUtil.h"
 #import "BTTx.h"
-
+#import "SplitCoinUtil.h"
 
 ///@description   API
 @interface BitherApi : BaseApi {
@@ -30,6 +30,8 @@
 + (BitherApi *)instance;
 
 - (void)getSpvBlock:(DictResponseBlock)callback andErrorCallBack:(ErrorHandler)errorCallback;
+
+- (void)getSpvBlockByBlockChain:(DictResponseBlock)callback andErrorCallBack:(ErrorHandler)errorCallback;
 
 - (void)getInSignaturesApi:(NSString *)address fromBlock:(int)blockNo callback:(IdResponseBlock)callback andErrorCallBack:(ErrorHandler)errorCallback;
 //blockchain-api
@@ -56,9 +58,11 @@
 
 - (void)getAdApi;
 
-- (void)getHasBccAddress:(NSString *)address callback:(DictResponseBlock)callback andErrorCallBack:(ErrorHandler)errorCallback;
+- (void)getHasSplitCoinAddress:(NSString *)address splitCoin:(SplitCoin)splitCoin callback:(DictResponseBlock)callback andErrorCallBack:(ErrorHandler)errorCallback;
 
-- (void)postBccBroadcast:(BTTx *)tx callback:(DictResponseBlock)callback andErrorCallBack:(ErrorHandler)errorCallback;
+- (void)getBcdPreBlockHashCallback:(DictResponseBlock)callback andErrorCallBack:(ErrorHandler)errorCallback;
+
+- (void)postSplitCoinBroadcast:(BTTx *)tx splitCoin:(SplitCoin)splitCoin callback:(DictResponseBlock)callback andErrorCallBack:(ErrorHandler)errorCallback;
 
 - (void)getBccUnspendOutput:(NSString *)address callback:(ArrayResponseBlock)callback andErrorCallBack:(ErrorHandler)errorCallBack;
 

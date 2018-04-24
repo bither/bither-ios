@@ -42,9 +42,8 @@
 #import "UIBaseUtil.h"
 #import "IOS7ContainerViewController.h"
 #import "PaymentAddressSetting.h"
-#import "ObtainBccSetting.h"
-#import "DetectBccSetting.h"
-
+#import "GetSplitSetting.h"
+#import "GetForkCoinsController.h"
 @implementation Setting
 
 static Setting *ExchangeSetting;
@@ -57,6 +56,7 @@ static Setting *CheckSetting;
 static Setting *EditPasswordSetting;
 static Setting *ColdMonitorSetting;
 static Setting *AdvanceSetting;
+static Setting *GetForksSetting;
 static Setting *reloadTxsSetting;
 static Setting *RCheckSetting;
 static Setting *QrCodeQualitySetting;
@@ -203,7 +203,7 @@ static Setting *ApiConfigSetting;
         [setting setGetArrayBlock:^() {
             MarketType defaultMarket = [[UserDefaultsUtil instance] getDefaultMarket];
             NSMutableArray *array = [NSMutableArray new];
-            for (int i = BITSTAMP; i <= COINBASE; i++) {
+            for (int i = BITSTAMP; i <= MARKET796; i++) {
                 NSMutableDictionary *dict = [NSMutableDictionary new];
                 [dict setObject:[NSNumber numberWithInt:i] forKey:SETTING_VALUE];
                 [dict setObject:[GroupUtil getMarketName:i] forKey:SETTING_KEY];
@@ -241,6 +241,7 @@ static Setting *ApiConfigSetting;
         }];
         [setting setGetArrayBlock:^() {
             NSMutableArray *array = [NSMutableArray new];
+            [array addObject:[self getTransactionFeeDict:TwentyX]];
             [array addObject:[self getTransactionFeeDict:TenX]];
             [array addObject:[self getTransactionFeeDict:Higher]];
             [array addObject:[self getTransactionFeeDict:High]];
@@ -357,6 +358,22 @@ static Setting *ApiConfigSetting;
     }
     return AdvanceSetting;
 
+}
+
++ (Setting *)getForkCoins {
+    if (!GetForksSetting) {
+        Setting *setting = [[Setting alloc] initWithName:NSLocalizedString(@"get_fork_coins", nil) icon:nil];
+        [setting setSelectBlock:^(UIViewController *controller) {
+            GetForkCoinsController *vController = [controller.storyboard instantiateViewControllerWithIdentifier:@"GetForkCoinsController"];
+            vController.settings = [Setting forkCoins];
+            UINavigationController *nav = controller.navigationController;
+            [nav pushViewController:vController animated:YES];
+            
+        }];
+        GetForksSetting = setting;
+    }
+    return GetForksSetting;
+    
 }
 
 + (Setting *)getAvatarSetting {
@@ -682,6 +699,19 @@ static Setting *ApiConfigSetting;
     return NetworkMonitorSetting;
 }
 
++ (NSArray *)forkCoins{
+    NSMutableArray *array = [NSMutableArray new];
+    [array addObject:[GetSplitSetting getSplitSetting:SplitBCC]];
+    [array addObject:[GetSplitSetting getSplitSetting:SplitBTG]];
+    [array addObject:[GetSplitSetting getSplitSetting:SplitSBTC]];
+    [array addObject:[GetSplitSetting getSplitSetting:SplitBTW]];
+    [array addObject:[GetSplitSetting getSplitSetting:SplitBCD]];
+    [array addObject:[GetSplitSetting getSplitSetting:SplitBTF]];
+    [array addObject:[GetSplitSetting getSplitSetting:SplitBTP]];
+    [array addObject:[GetSplitSetting getSplitSetting:SplitBTN]];
+    return array;
+}
+
 + (NSArray *)advanceSettings {
     NSMutableArray *array = [NSMutableArray new];
     if ([[BTSettings instance] getAppMode] == HOT) {
@@ -700,13 +730,8 @@ static Setting *ApiConfigSetting;
     }
     
     if ([[BTSettings instance] getAppMode] == HOT) {
-        [array addObject:[ObtainBccSetting getObtainBccSetting]];
+        [array addObject:[Setting getForkCoins]];
     }
-    
-    if([[BTSettings instance] getAppMode] == HOT) {
-        [array addObject:[DetectBccSetting getDetectBccSetting]];
-    }
-    
     [array addObject:[MessageSigningSetting getMessageSigningSetting]];
     [array addObject:[Setting getPasswordStrengthSetting]];
     if ([[BTSettings instance] getAppMode] == HOT){

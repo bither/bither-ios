@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "SplitCoinUtil.h"
 
 @interface ObtainBccViewController : UIViewController
+
+@property(nonatomic) SplitCoin splitCoin;
 
 @end

@@ -133,12 +133,12 @@ NSUserDefaults *userDefaults;
 
 - (BOOL)localeIsChina {
     NSString *language = [[NSLocale preferredLanguages] objectAtIndex:0];
-    return [language isEqualToString:@"zh-Hans"];
+    return [language containsString:@"zh-Hans"];
 }
 
 - (BOOL)localeIsZHHant {
     NSString *language = [[NSLocale preferredLanguages] objectAtIndex:0];
-    return [language isEqualToString:@"zh-Hant"];
+    return [language containsString:@"zh-Hant"];
 }
 
 - (NSInteger)getExchangeType {
@@ -213,6 +213,8 @@ NSUserDefaults *userDefaults;
     if ([userDefaults objectForKey:TRANSACTION_FEE_MODE]) {
         if ([userDefaults integerForKey:TRANSACTION_FEE_MODE] == TenX) {
             return TenX;
+        } else if ([userDefaults integerForKey:TRANSACTION_FEE_MODE] == TwentyX) {
+            return TwentyX;
         } else if ([userDefaults integerForKey:TRANSACTION_FEE_MODE] == Higher) {
             return Higher;
         } else if ([userDefaults integerForKey:TRANSACTION_FEE_MODE] == High) {

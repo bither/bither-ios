@@ -93,6 +93,16 @@
 }
 
 - (void)dismissWithCompletion:(void (^)())completion {
+    if ([NSThread isMainThread]) {
+        [self dismissHandleWithCompletion:completion];
+    } else {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self dismissHandleWithCompletion:completion];
+        });
+    }
+}
+
+- (void)dismissHandleWithCompletion:(void (^)())completion {
     if (!self.shown) {
         if (completion) {
             completion();

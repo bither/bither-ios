@@ -327,7 +327,9 @@ static Setting *importPrivateKeySetting;
                         }
                     });
                 } else {
-                    [self importHDMColdSeedFormQRCode:_result password:password dp:dp];
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        [self importHDMColdSeedFormQRCode:_result password:password dp:dp];
+                    });
                 }
             });
         }];
@@ -344,10 +346,11 @@ static Setting *importPrivateKeySetting;
                             [self showMsg:NSLocalizedString(@"Password of the private key to import is different from ours. Import failed.", nil)];
                             [dp dismiss];
                         }
-                        
                     });
                 } else {
-                    [self importKeyFormQrcode:_result password:password dp:dp];
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        [self importKeyFormQrcode:_result password:password dp:dp];
+                    });
                 }
             });
         }];

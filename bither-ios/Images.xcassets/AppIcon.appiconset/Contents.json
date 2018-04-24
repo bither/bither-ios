@@ -95,6 +95,12 @@
       "idiom" : "ipad",
       "size" : "83.5x83.5",
       "scale" : "2x"
+    },
+    {
+      "size" : "1024x1024",
+      "idiom" : "ios-marketing",
+      "filename" : "bither_ios_app_store_1024.png",
+      "scale" : "1x"
     }
   ],
   "info" : {

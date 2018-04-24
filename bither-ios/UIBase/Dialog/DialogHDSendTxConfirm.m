@@ -22,7 +22,7 @@
 #import "DialogHDSendTxConfirm.h"
 #import "UnitUtil.h"
 #import "StringUtil.h"
-
+#import "SplitCoinUtil.h"
 #define kWidth (270)
 
 #define kVerticalGap (5)
@@ -94,7 +94,7 @@
 }
 
 - (void)firstConfigure {
-    BitcoinUnit unit = [_unitName isEqualToString:@"BCC"] ? UnitBTC : [UnitUtil unit];
+    BitcoinUnit unit = [SplitCoinUtil getUnit:_unitName];
     NSString *toAddress = _toAddress;
     NSString *amountString;
     NSString *feeString;

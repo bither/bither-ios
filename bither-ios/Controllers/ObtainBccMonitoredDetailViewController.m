@@ -37,6 +37,7 @@
 @property(weak, nonatomic) IBOutlet UITextField *tfAddress;
 @property(weak, nonatomic) IBOutlet UIButton *btnObtain;
 @property NSArray *txs;
+@property (weak, nonatomic) IBOutlet UILabel *lblAddressTitle;
 
 @end
 
@@ -45,7 +46,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.lblTitle.text = [NSString stringWithFormat:@"%@%@BCC", NSLocalizedString(@"obtainable_bcc", nil), [UnitUtil stringForAmount:_amount unit:UnitBTC]];
+    self.lblTitle.text = [NSString stringWithFormat:@"%@%@%@", NSLocalizedString(@"get_split_coin", nil), [UnitUtil stringForAmount:_amount unit:[self getBitcoinUnit]], [self getSplitCoinName]];
+    NSString *addressTitle = [NSString stringWithFormat:NSLocalizedString(@"bitpie_split_coin_address", nil), [self getSplitCoinName]];
+    self.lblAddressTitle.text = addressTitle;
+    self.tfAddress.placeholder = addressTitle;
     UIImageView *ivSendQr = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"unsigned_transaction_button_icon"]];
     CGFloat ivSendQrMargin = (self.btnObtain.frame.size.height - kSendButtonQrIconSize) / 2;
     ivSendQr.frame = CGRectMake(self.btnObtain.frame.size.width - kSendButtonQrIconSize - ivSendQrMargin, ivSendQrMargin, kSendButtonQrIconSize, kSendButtonQrIconSize);
@@ -81,52 +85,79 @@
     self.btnObtain.enabled = NO;
     [self hideKeyboard];
     [dp showInWindow:self.view.window completion:^{
-        [[BitherApi instance] getHasBccAddress:[self getToAddress] callback:^(NSDictionary *dict) {
+        [[BitherApi instance] getHasSplitCoinAddress:[self getToAddress] splitCoin:self.splitCoin callback:^(NSDictionary *dict) {
             NSNumber *numResult = dict[@"result"];
             BOOL result = numResult.intValue > 0;
             if (!result) {
-                [self showMsg:NSLocalizedString(@"not_bitpie_bcc_address", nil)];
+                [self showMsg:[NSString stringWithFormat:NSLocalizedString(@"not_bitpie_split_coin_address", nil), [self getSplitCoinName]]];
                 return;
             }
+            if(_splitCoin == SplitBCD) {
+                [self getBcdPreBlockHash];
+            }else{
+                [self signTransactionPreBlockHash:NULL];
+            }
             
-            [dp showInWindow:self.view.window completion:^{
-                dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
-                    u_int64_t value = self.amount;
-                    NSError *error;
-                    NSString *toAddress = [self getToAddress];
-                    NSArray *txs;
-                    if ([self.btAddress isMemberOfClass:[BTHDAccount class]]) {
-                        txs = [(BTHDAccount *)self.btAddress newBccTxsToAddresses:@[toAddress] withAmounts:@[@(value)] andError:&error andChangeAddress:toAddress];
-                    } else {
-                        txs = [self.btAddress bccTxsForAmounts:@[@(value)] andAddress:@[toAddress] andChangeAddress:toAddress andError:&error];
-                    }
-                    
-                    if (error) {
-                        NSString *msg = [TransactionsUtil getCompleteTxForError:error];
-                        [self showMsg:msg];
-                    } else {
-                        if (!txs) {
-                            [self showSendFailed];
-                            return;
-                        }
-                        self.txs = txs;
-                        __block NSString *addressBlock = toAddress;
-                        dispatch_async(dispatch_get_main_queue(), ^{
-                            [dp dismissWithCompletion:^{
-                                [dp changeToMessage:NSLocalizedString(@"Please wait…", nil)];
-                                DialogHDSendTxConfirm *dialogHDSendTxConfirm = [[DialogHDSendTxConfirm alloc] initWithTxs:txs to:addressBlock delegate:self unitName:@"BCC"];
-                                dialogHDSendTxConfirm.touchOutSideToDismiss = false;
-                                [dialogHDSendTxConfirm showInWindow:self.view.window];
-                            }];
-                        });
-                    }
-                });
-            }];
         } andErrorCallBack:^(NSOperation *errorOp, NSError *error) {
             [self showMsg:NSLocalizedString(@"Network failure.", nil)];
             return;
         }];
     }];
+}
+
+- (void) getBcdPreBlockHash{
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [[BitherApi instance] getBcdPreBlockHashCallback:^(NSDictionary *dict) {
+            NSString* preBlockHash = dict[@"current_block_hash"];
+            if(preBlockHash == NULL || [preBlockHash isEqualToString:@""]) {
+                [self showMsg:NSLocalizedString(@"get_bcd_block_hash_error", nil)];
+            }else{
+                [self signTransactionPreBlockHash:preBlockHash];
+            }
+        } andErrorCallBack:^(NSOperation *errorOp, NSError *error) {
+            [self showMsg:NSLocalizedString(@"Network failure.", nil)];
+        }];
+    });
+}
+-(void)signTransactionPreBlockHash:(NSString*)hash{
+    [dp showInWindow:self.view.window completion:^{
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+            u_int64_t value = self.amount;
+            NSError *error;
+            NSString *toAddress = [self getToAddress];
+            NSArray *txs;
+            if ([self.btAddress isMemberOfClass:[BTHDAccount class]]) {
+                txs = [(BTHDAccount *)self.btAddress newSplitCoinTxsToAddresses:@[toAddress] withAmounts:@[@(value)] andError:&error andChangeAddress:toAddress coin:[self getCoin]];
+            } else {
+                txs = [self.btAddress splitCoinTxsForAmounts:@[@(value)] andAddress:@[toAddress] andChangeAddress:toAddress andError:&error coin:[self getCoin]];
+            }
+            for (BTTx *tx in txs) {
+                if(hash != NULL && ![hash isEqualToString:@""]) {
+                    tx.blockHash = [hash hexToData];
+                }
+            }
+            if (error) {
+                NSString *msg = [TransactionsUtil getCompleteTxForError:error];
+                [self showMsg:msg];
+            } else {
+                if (!txs) {
+                    [self showSendFailed];
+                    return;
+                }
+                self.txs = txs;
+                __block NSString *addressBlock = toAddress;
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [dp dismissWithCompletion:^{
+                        [dp changeToMessage:NSLocalizedString(@"Please wait…", nil)];
+                        DialogHDSendTxConfirm *dialogHDSendTxConfirm = [[DialogHDSendTxConfirm alloc] initWithTxs:txs to:addressBlock delegate:self unitName:[self getSplitCoinName]];
+                        dialogHDSendTxConfirm.touchOutSideToDismiss = false;
+                        [dialogHDSendTxConfirm showInWindow:self.view.window];
+                    }];
+                });
+            }
+        });
+    }];
+    
 }
 
 - (void)onGetBccSendTxConfirmed:(NSArray *)txs {
@@ -148,7 +179,7 @@
     }
     txTrans.fee = fee;
     txTrans.to = amount;
-
+    
     txTrans.myAddress = self.btAddress.address;
     txTrans.toAddress = self.tfAddress.text;
     NSMutableArray *array = [[NSMutableArray alloc] init];
@@ -208,7 +239,7 @@
             __block NSString *errorMsg;
             for (BTTx *tx in self.txs) {
                 dispatch_group_enter(group);
-                [[BitherApi instance] postBccBroadcast:tx callback:^(NSDictionary *dict) {
+                [[BitherApi instance] postSplitCoinBroadcast:tx splitCoin:self.splitCoin callback:^(NSDictionary *dict) {
                     NSNumber *numResult = dict[@"result"];
                     if (!(numResult.intValue > 0)) {
                         NSDictionary *dicError = dict[@"error"];
@@ -240,37 +271,31 @@
 }
 
 - (void)saveIsObtainBcc {
+    NSString *coinName = self.splitCoin == SplitBCC ? @"" : [self getSplitCoinName];
     if ([self.btAddress isMemberOfClass:[BTHDAccount class]]) {
-        [[UserDefaultsUtil instance] setIsObtainBccKey:@"HDMonitored" value:@"1"];
+        [[UserDefaultsUtil instance] setIsObtainBccKey:[NSString stringWithFormat:@"HDMonitored%@", coinName] value:@"1"];
     } else {
-        [[UserDefaultsUtil instance] setIsObtainBccKey:self.btAddress.address value:@"1"];
+        [[UserDefaultsUtil instance] setIsObtainBccKey:[NSString stringWithFormat:@"%@%@", self.btAddress.address, coinName] value:@"1"];
     }
 }
 
 - (IBAction)scanPressed:(id)sender {
-    ScanQrCodeViewController *scan = [[ScanQrCodeViewController alloc] initWithDelegate:self title:NSLocalizedString(@"Scan Bitpie Bitcoin Cash Address", nil) message:NSLocalizedString(@"Scan QR Code for Bitcoin address", nil)];
+    ScanQrCodeViewController *scan = [[ScanQrCodeViewController alloc] initWithDelegate:self title:[NSString stringWithFormat:NSLocalizedString(@"Scan Bitpie Split Coin Address", nil), [SplitCoinUtil getSplitCoinName:self.splitCoin]] message:NSLocalizedString(@"Scan QR Code for Bitcoin address", nil)];
     [self presentViewController:scan animated:YES completion:nil];
 }
 
 - (void)handleResult:(NSString *)result byReader:(ScanQrCodeViewController *)reader {
     if (![reader isKindOfClass:[ScanQrCodeTransportViewController class]]) {
-        BOOL isValidBitcoinAddress = result.isValidBitcoinAddress;
-        BOOL isValidBitcoinBIP21Address = [StringUtil isValidBitcoinBIP21Address:result];
-        if (isValidBitcoinAddress || isValidBitcoinBIP21Address) {
+        BOOL isValidBitcoinAddress = [SplitCoinUtil validSplitCoinAddress:self.splitCoin address:result];
+        if (isValidBitcoinAddress) {
             [reader playSuccessSound];
             [reader vibrate];
-            if (isValidBitcoinAddress) {
-                self.tfAddress.text = result;
-                [self dismissViewControllerAnimated:YES completion:nil];
-            }
-            if (isValidBitcoinBIP21Address) {
-                self.tfAddress.text = [StringUtil getAddressFormBIP21Address:result];
-                [self dismissViewControllerAnimated:YES completion:nil];
-            }
+            self.tfAddress.text = result;
+            [self dismissViewControllerAnimated:YES completion:nil];
         } else {
             [reader vibrate];
             [self dismissViewControllerAnimated:YES completion:nil];
-            [self showMsg:NSLocalizedString(@"not_bitpie_bcc_address", nil)];
+            [self showMsg:[NSString stringWithFormat:NSLocalizedString(@"not_bitpie_split_coin_address", nil), [self getSplitCoinName]]];
         }
     } else {
         [reader.presentingViewController dismissViewControllerAnimated:YES completion:^{
@@ -290,16 +315,22 @@
                     if (success) {
                         for (int j = 0; j < tx.ins.count; j++) {
                             NSString *s = strs[strIndex + j];
-                            NSString *compressChangeStr = s.length > kSignTypeLength + kCompressPubKeyLength ? [s stringByReplacingCharactersInRange:NSMakeRange(s.length - (kSignTypeLength + kCompressPubKeyLength), kSignTypeLength) withString:[NSString stringWithFormat:@"%0x", [tx getSigHashType]]] : s;
-                            NSString *uncompressedChangeStr = s.length > kSignTypeLength + kUncompressedPubKeyLength ? [s stringByReplacingCharactersInRange:NSMakeRange(s.length - (kSignTypeLength + kUncompressedPubKeyLength), kSignTypeLength) withString:[NSString stringWithFormat:@"%0x", [tx getSigHashType]]] : s;
-                            NSData *compressData = [compressChangeStr hexToData];
-                            NSData *uncompressedData = [uncompressedChangeStr hexToData];
-                            if(!compressData || !uncompressedData){
-                                success = NO;
-                                break;
+                            if(_splitCoin != SplitBCD) {
+                                NSString *compressChangeStr = s.length > kSignTypeLength + kCompressPubKeyLength ? [s stringByReplacingCharactersInRange:NSMakeRange(s.length - (kSignTypeLength + kCompressPubKeyLength), kSignTypeLength) withString:[NSString stringWithFormat:@"%0x", [tx getSigHashType]]] : s;
+                                NSString *uncompressedChangeStr = s.length > kSignTypeLength + kUncompressedPubKeyLength ? [s stringByReplacingCharactersInRange:NSMakeRange(s.length - (kSignTypeLength + kUncompressedPubKeyLength), kSignTypeLength) withString:[NSString stringWithFormat:@"%0x", [tx getSigHashType]]] : s;
+                                NSData *compressData = [compressChangeStr hexToData];
+                                NSData *uncompressedData = [uncompressedChangeStr hexToData];
+                                if(!compressData || !uncompressedData){
+                                    success = NO;
+                                    break;
+                                }
+                                [compressSigs addObject:compressData];
+                                [uncompressedSigs addObject:uncompressedData];
+                            }else{
+                                [compressSigs addObject:[s hexToData]];
+                                [uncompressedSigs addObject:[s hexToData]];
                             }
-                            [compressSigs addObject:compressData];
-                            [uncompressedSigs addObject:uncompressedData];
+                            
                         }
                     }
                     if (success) {
@@ -355,6 +386,17 @@
     [self showMsg:NSLocalizedString(@"Send failed.", nil)];
 }
 
+- (NSString *)getSplitCoinName {
+    return [SplitCoinUtil getSplitCoinName:self.splitCoin];
+}
+-(BitcoinUnit)getBitcoinUnit {
+    return [SplitCoinUtil getBitcoinUnit:self.splitCoin];
+}
+
+- (Coin)getCoin {
+    return [SplitCoinUtil getCoin:self.splitCoin];
+}
+
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
     if (textField == self.tfAddress) {
         [self obtainPressed:self.btnObtain];
@@ -363,13 +405,13 @@
 }
 
 - (NSString *)checkValues {
-    BOOL validAddress = [[self getToAddress] isValidBitcoinAddress];
+    BOOL validAddress = [[self getToAddress] isValidBitcoinAddress] || [[self getToAddress] isValidBitcoinGoldAddress];
     if (!validAddress) {
         return NSLocalizedString(@"not_bitpie_bcc_address", nil);
     }
     
     if (_amount <= 0) {
-        return NSLocalizedString(@"you_do_not_have_obtainable_bcc", nil);
+        return [NSString stringWithFormat:NSLocalizedString(@"you_do_not_have_get_split_coin", nil), [self getSplitCoinName]];
     }
     return nil;
 }
