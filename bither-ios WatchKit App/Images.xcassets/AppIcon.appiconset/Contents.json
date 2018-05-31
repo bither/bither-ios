@@ -3,7 +3,7 @@
     {
       "size" : "24x24",
       "idiom" : "watch",
-      "filename" : "bither_ios_48.png",
+      "filename" : "bither_iwatch_24@2x.png",
       "scale" : "2x",
       "role" : "notificationCenter",
       "subtype" : "38mm"
@@ -11,7 +11,7 @@
     {
       "size" : "27.5x27.5",
       "idiom" : "watch",
-      "filename" : "bither_ios_55.png",
+      "filename" : "bither_iwatch_27.5@2x.png",
       "scale" : "2x",
       "role" : "notificationCenter",
       "subtype" : "42mm"
@@ -19,21 +19,21 @@
     {
       "size" : "29x29",
       "idiom" : "watch",
-      "filename" : "bither_ios_58.png",
+      "filename" : "bither_iwatch_29@2x.png",
       "role" : "companionSettings",
       "scale" : "2x"
     },
     {
       "size" : "29x29",
       "idiom" : "watch",
-      "filename" : "bither_ios_87.png",
+      "filename" : "bither_iwatch_29@3x.png",
       "role" : "companionSettings",
       "scale" : "3x"
     },
     {
       "size" : "40x40",
       "idiom" : "watch",
-      "filename" : "bither_ios_80.png",
+      "filename" : "bither_iwatch_40@2x.png",
       "scale" : "2x",
       "role" : "appLauncher",
       "subtype" : "38mm"
@@ -41,7 +41,7 @@
     {
       "size" : "44x44",
       "idiom" : "watch",
-      "filename" : "bither_ios_88.png",
+      "filename" : "bither_iwatch_44@2x.png",
       "scale" : "2x",
       "role" : "longLook",
       "subtype" : "42mm"
@@ -49,7 +49,7 @@
     {
       "size" : "86x86",
       "idiom" : "watch",
-      "filename" : "bither_ios_172.png",
+      "filename" : "bither_iwatch_86@2x.png",
       "scale" : "2x",
       "role" : "quickLook",
       "subtype" : "38mm"
@@ -57,7 +57,7 @@
     {
       "size" : "98x98",
       "idiom" : "watch",
-      "filename" : "bither_ios_196.png",
+      "filename" : "bither_iwatch_98@2x.png",
       "scale" : "2x",
       "role" : "quickLook",
       "subtype" : "42mm"
@@ -65,7 +65,7 @@
     {
       "size" : "1024x1024",
       "idiom" : "watch-marketing",
-      "filename" : "bither_ios_app_store_1024.png",
+      "filename" : "bither_iwatch_1024@1x.png",
       "scale" : "1x"
     }
   ],
