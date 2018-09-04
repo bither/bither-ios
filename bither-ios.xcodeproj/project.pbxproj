@@ -84,6 +84,13 @@
 		4040643F1F21B1FB00917F68 /* SignMessageSelectAddressViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4040643E1F21B1FB00917F68 /* SignMessageSelectAddressViewController.m */; };
 		404064421F21B71200917F68 /* SignMessageSelectAddressCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 404064411F21B71200917F68 /* SignMessageSelectAddressCell.m */; };
 		405AC4621FBC46CB00FB970C /* SplitCoinUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 405AC4611FBC46CB00FB970C /* SplitCoinUtil.m */; };
+		40A4E8582133D3DD00733DD8 /* MKNetworkOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 40A4E8492133D3DD00733DD8 /* MKNetworkOperation.m */; };
+		40A4E8592133D3DD00733DD8 /* MKNetworkEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = 40A4E84A2133D3DD00733DD8 /* MKNetworkEngine.m */; };
+		40A4E85A2133D3DD00733DD8 /* UIAlertView+MKNetworkKitAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 40A4E84C2133D3DD00733DD8 /* UIAlertView+MKNetworkKitAdditions.m */; };
+		40A4E85B2133D3DD00733DD8 /* NSData+MKBase64.m in Sources */ = {isa = PBXBuildFile; fileRef = 40A4E84D2133D3DD00733DD8 /* NSData+MKBase64.m */; };
+		40A4E85C2133D3DD00733DD8 /* NSString+MKNetworkKitAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 40A4E84F2133D3DD00733DD8 /* NSString+MKNetworkKitAdditions.m */; };
+		40A4E85D2133D3DD00733DD8 /* NSDictionary+RequestEncoding.m in Sources */ = {isa = PBXBuildFile; fileRef = 40A4E8522133D3DD00733DD8 /* NSDictionary+RequestEncoding.m */; };
+		40A4E85E2133D3DD00733DD8 /* NSDate+RFC1123.m in Sources */ = {isa = PBXBuildFile; fileRef = 40A4E8542133D3DD00733DD8 /* NSDate+RFC1123.m */; };
 		40A51A5E1F2AED8E005CF531 /* ObtainBccCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 40A51A5D1F2AED8E005CF531 /* ObtainBccCell.m */; };
 		40A51A611F2AF77E005CF531 /* ObtainBccMonitoredDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 40A51A601F2AF77E005CF531 /* ObtainBccMonitoredDetailViewController.m */; };
 		40D777081F41360E00121B90 /* DialogImportPrivateKeyAddressValidation.m in Sources */ = {isa = PBXBuildFile; fileRef = 40D777071F41360E00121B90 /* DialogImportPrivateKeyAddressValidation.m */; };
@@ -523,6 +530,21 @@
 		404064411F21B71200917F68 /* SignMessageSelectAddressCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignMessageSelectAddressCell.m; sourceTree = "<group>"; };
 		405AC4601FBC46CB00FB970C /* SplitCoinUtil.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SplitCoinUtil.h; sourceTree = "<group>"; };
 		405AC4611FBC46CB00FB970C /* SplitCoinUtil.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SplitCoinUtil.m; sourceTree = "<group>"; };
+		40A4E8472133D3DD00733DD8 /* MKNetworkEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKNetworkEngine.h; sourceTree = "<group>"; };
+		40A4E8482133D3DD00733DD8 /* MKNetworkKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKNetworkKit.h; sourceTree = "<group>"; };
+		40A4E8492133D3DD00733DD8 /* MKNetworkOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKNetworkOperation.m; sourceTree = "<group>"; };
+		40A4E84A2133D3DD00733DD8 /* MKNetworkEngine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKNetworkEngine.m; sourceTree = "<group>"; };
+		40A4E84C2133D3DD00733DD8 /* UIAlertView+MKNetworkKitAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIAlertView+MKNetworkKitAdditions.m"; sourceTree = "<group>"; };
+		40A4E84D2133D3DD00733DD8 /* NSData+MKBase64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+MKBase64.m"; sourceTree = "<group>"; };
+		40A4E84E2133D3DD00733DD8 /* NSDictionary+RequestEncoding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+RequestEncoding.h"; sourceTree = "<group>"; };
+		40A4E84F2133D3DD00733DD8 /* NSString+MKNetworkKitAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+MKNetworkKitAdditions.m"; sourceTree = "<group>"; };
+		40A4E8502133D3DD00733DD8 /* NSDate+RFC1123.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+RFC1123.h"; sourceTree = "<group>"; };
+		40A4E8512133D3DD00733DD8 /* UIAlertView+MKNetworkKitAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIAlertView+MKNetworkKitAdditions.h"; sourceTree = "<group>"; };
+		40A4E8522133D3DD00733DD8 /* NSDictionary+RequestEncoding.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+RequestEncoding.m"; sourceTree = "<group>"; };
+		40A4E8532133D3DD00733DD8 /* NSData+MKBase64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+MKBase64.h"; sourceTree = "<group>"; };
+		40A4E8542133D3DD00733DD8 /* NSDate+RFC1123.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+RFC1123.m"; sourceTree = "<group>"; };
+		40A4E8552133D3DD00733DD8 /* NSString+MKNetworkKitAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+MKNetworkKitAdditions.h"; sourceTree = "<group>"; };
+		40A4E8562133D3DD00733DD8 /* MKNetworkOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKNetworkOperation.h; sourceTree = "<group>"; };
 		40A51A5C1F2AED8E005CF531 /* ObtainBccCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ObtainBccCell.h; sourceTree = "<group>"; };
 		40A51A5D1F2AED8E005CF531 /* ObtainBccCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ObtainBccCell.m; sourceTree = "<group>"; };
 		40A51A5F1F2AF77D005CF531 /* ObtainBccMonitoredDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ObtainBccMonitoredDetailViewController.h; sourceTree = "<group>"; };
@@ -1087,6 +1109,52 @@
 			path = Ad;
 			sourceTree = "<group>";
 		};
+		40A4E8432133D3DD00733DD8 /* Lib */ = {
+			isa = PBXGroup;
+			children = (
+				40A4E8442133D3DD00733DD8 /* MKNetworkKit */,
+			);
+			path = Lib;
+			sourceTree = "<group>";
+		};
+		40A4E8442133D3DD00733DD8 /* MKNetworkKit */ = {
+			isa = PBXGroup;
+			children = (
+				40A4E8462133D3DD00733DD8 /* MKNetworkKit */,
+			);
+			path = MKNetworkKit;
+			sourceTree = "<group>";
+		};
+		40A4E8462133D3DD00733DD8 /* MKNetworkKit */ = {
+			isa = PBXGroup;
+			children = (
+				40A4E8472133D3DD00733DD8 /* MKNetworkEngine.h */,
+				40A4E8482133D3DD00733DD8 /* MKNetworkKit.h */,
+				40A4E8492133D3DD00733DD8 /* MKNetworkOperation.m */,
+				40A4E84A2133D3DD00733DD8 /* MKNetworkEngine.m */,
+				40A4E84B2133D3DD00733DD8 /* Categories */,
+				40A4E8562133D3DD00733DD8 /* MKNetworkOperation.h */,
+			);
+			path = MKNetworkKit;
+			sourceTree = "<group>";
+		};
+		40A4E84B2133D3DD00733DD8 /* Categories */ = {
+			isa = PBXGroup;
+			children = (
+				40A4E84C2133D3DD00733DD8 /* UIAlertView+MKNetworkKitAdditions.m */,
+				40A4E84D2133D3DD00733DD8 /* NSData+MKBase64.m */,
+				40A4E84E2133D3DD00733DD8 /* NSDictionary+RequestEncoding.h */,
+				40A4E84F2133D3DD00733DD8 /* NSString+MKNetworkKitAdditions.m */,
+				40A4E8502133D3DD00733DD8 /* NSDate+RFC1123.h */,
+				40A4E8512133D3DD00733DD8 /* UIAlertView+MKNetworkKitAdditions.h */,
+				40A4E8522133D3DD00733DD8 /* NSDictionary+RequestEncoding.m */,
+				40A4E8532133D3DD00733DD8 /* NSData+MKBase64.h */,
+				40A4E8542133D3DD00733DD8 /* NSDate+RFC1123.m */,
+				40A4E8552133D3DD00733DD8 /* NSString+MKNetworkKitAdditions.h */,
+			);
+			path = Categories;
+			sourceTree = "<group>";
+		};
 		4217A36E1951233500063746 /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -1382,6 +1450,7 @@
 				42D9B774193D6B5B00C85B89 /* AppDelegate.m */,
 				4254083F19469D5A007AF99C /* BitherSetting.h */,
 				4254084019469D5A007AF99C /* BitherSetting.m */,
+				40A4E8432133D3DD00733DD8 /* Lib */,
 				AC33088B1955665500D8F621 /* Cells */,
 				421B038D19495466003A45F1 /* Controllers */,
 				DA641E81196E7B750095DF42 /* CrashLog */,
@@ -1875,9 +1944,6 @@
 				42D9B75F193D6B5B00C85B89 /* Resources */,
 				4268FE14194AA3FD007A4C30 /* ShellScript */,
 				0A4749961A9D7F0B003684E2 /* Embed App Extensions */,
-				CEAE2ACDDC013D2C5BF7AFE3 /* [CP] Embed Pods Frameworks */,
-				71CAA345256519772492378B /* [CP] Copy Pods Resources */,
-				57A3503155CC151F7E71D4E1 /* Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -1896,9 +1962,6 @@
 				42D9B778193D6B5B00C85B89 /* Sources */,
 				42D9B779193D6B5B00C85B89 /* Frameworks */,
 				42D9B77A193D6B5B00C85B89 /* Resources */,
-				A56CF35E58EA71A93B905DED /* [CP] Embed Pods Frameworks */,
-				875D8BC18186B6F64BFFA765 /* [CP] Copy Pods Resources */,
-				A7DCEBD1D62E88E257233A8E /* Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -1998,21 +2061,6 @@
 			shellPath = /bin/sh;
 			shellScript = "";
 		};
-		57A3503155CC151F7E71D4E1 /* Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-bither-ios/Pods-bither-ios-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		6FBEFC40B430D5B7DFCD02B9 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -2029,66 +2077,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		71CAA345256519772492378B /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-bither-ios/Pods-bither-ios-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		875D8BC18186B6F64BFFA765 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-bither-iosTests/Pods-bither-iosTests-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		A56CF35E58EA71A93B905DED /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-bither-iosTests/Pods-bither-iosTests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		A7DCEBD1D62E88E257233A8E /* Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-bither-iosTests/Pods-bither-iosTests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		B29245A9BB8C54C810C26C54 /* [CP] Check Pods Manifest.lock */ = {
@@ -2109,21 +2097,6 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		CEAE2ACDDC013D2C5BF7AFE3 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-bither-ios/Pods-bither-ios-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -2137,6 +2110,7 @@
 				ACBB5F56198B468E00B19F4B /* UIViewController+ConfigureTableView.m in Sources */,
 				AC45AA381987A2F4006314D5 /* DialogPrivateKeyText.m in Sources */,
 				42D9B775193D6B5B00C85B89 /* AppDelegate.m in Sources */,
+				40A4E8582133D3DD00733DD8 /* MKNetworkOperation.m in Sources */,
 				421B037C19495315003A45F1 /* TabButton.m in Sources */,
 				AC5A916119ECDB5D00FFDB13 /* UploadAndDowloadFileFactory.m in Sources */,
 				AC1454A51A80D04D00E851B4 /* DialogOperationWorld.m in Sources */,
@@ -2162,6 +2136,7 @@
 				AC6BAC6F196FA3410013B9E8 /* HotCheckPrivateKeyViewController.m in Sources */,
 				ACDDDC2419480DE00008A79D /* UIViewController+SwipeRightToPop.m in Sources */,
 				0A515F781A36A2C0008292AF /* RawDataBinaryView.m in Sources */,
+				40A4E85A2133D3DD00733DD8 /* UIAlertView+MKNetworkKitAdditions.m in Sources */,
 				ACBEC018196D422D004301E0 /* BalanceButton.m in Sources */,
 				ACBEC021196FDC1E004301E0 /* DialogEditPassword.m in Sources */,
 				4254085F1946A219007AF99C /* UserDefaultsUtil.m in Sources */,
@@ -2194,6 +2169,7 @@
 				AC3CDB5B1962A3C800C74B4C /* TransactionConfidenceView.m in Sources */,
 				0A446C151A441393000CD25A /* DialogNetworkMonitorOption.m in Sources */,
 				0AD4EA741AEA30C600DC8C0E /* HotAddressAddOtherViewController.m in Sources */,
+				40A4E85E2133D3DD00733DD8 /* NSDate+RFC1123.m in Sources */,
 				AC8912F21A7F62FE003797C4 /* WorldListCell.m in Sources */,
 				0A8853AD1AA8466E00760014 /* GroupUserDefaultUtil.m in Sources */,
 				0AB8BC9A1A7F3194003C07D8 /* HotAddressAddHDMViewController.m in Sources */,
@@ -2262,6 +2238,7 @@
 				AC616397196507B40055C9D0 /* DialogTxConfirmation.m in Sources */,
 				ACE7E70F19EB78AE00F7AA3A /* CropImageViewController.m in Sources */,
 				AC6CB25619752CE400FA9D23 /* StatusBarNotificationWindow.m in Sources */,
+				40A4E8592133D3DD00733DD8 /* MKNetworkEngine.m in Sources */,
 				425408591946A219007AF99C /* FileUtil.m in Sources */,
 				ACDDDC2C19480ECF0008A79D /* DialogAlert.m in Sources */,
 				42D9B771193D6B5B00C85B89 /* main.m in Sources */,
@@ -2303,6 +2280,7 @@
 				ACD6DFD8196BF98B009D8031 /* DialogAddressFull.m in Sources */,
 				4254086B1946CD17007AF99C /* NSDictionary+Fromat.m in Sources */,
 				AC2F329B195D1930001B7439 /* UnsignedTransactionViewController.m in Sources */,
+				40A4E85D2133D3DD00733DD8 /* NSDictionary+RequestEncoding.m in Sources */,
 				ACDDDC2E19480ECF0008A79D /* DialogProgress.m in Sources */,
 				0AB8BCAB1A7F6DEE003C07D8 /* DialogHDMServerUnsignedQRCode.m in Sources */,
 				4254083D19469C9A007AF99C /* BitherEngine.m in Sources */,
@@ -2333,6 +2311,7 @@
 				0A259E251A47F19100D7F707 /* DialogSendOption.m in Sources */,
 				AC454DDE1A1F24FA000AF4ED /* PinCodeEnableViewController.m in Sources */,
 				ACDDDC2219480DE00008A79D /* UIBaseUtil.m in Sources */,
+				40A4E85C2133D3DD00733DD8 /* NSString+MKNetworkKitAdditions.m in Sources */,
 				AC31E93219B477E400EFDDF1 /* BackgroundTransitionView.m in Sources */,
 				AC202AD3196BD97A00033EC1 /* SettingListCell.m in Sources */,
 				0AB63CBD1ABD1C700018A546 /* RawPrivateKeyDiceViewController.m in Sources */,
@@ -2343,6 +2322,7 @@
 				421B03BC19495AEF003A45F1 /* OptionHotViewController.m in Sources */,
 				AC53ABCC19D40272007C095C /* UEntropyMic.m in Sources */,
 				AC53ABB019D27B74007C095C /* UEntropyCamera.m in Sources */,
+				40A4E85B2133D3DD00733DD8 /* NSData+MKBase64.m in Sources */,
 				AC53ABE119D7EAAE007C095C /* SensorVisualizerView.m in Sources */,
 				DC06422DA44A6DA77DCFBB2D /* ImportHDMCold.m in Sources */,
 				DC075758EE0F48911D8D4CE8 /* ImportHDMColdSeedController.m in Sources */,

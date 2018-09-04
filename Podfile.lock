@@ -89,8 +89,6 @@ PODS:
     - KSCrash/Reporting/Tools
   - KSCrash/Reporting/Tools (0.0.9):
     - KSCrash/Recording
-  - MKNetworkKit (0.87):
-    - Reachability (~> 3.1.0)
   - OpenSSL (1.0.1j)
   - Reachability (3.1.1)
   - RegexKitLite (4.0)
@@ -101,10 +99,20 @@ DEPENDENCIES:
   - Bitheri (from `https://github.com/bither/bitheri.git`, branch `develop`)
   - FXBlurView
   - KSCrash (~> 0.0.3)
-  - MKNetworkKit (~> 0.87)
   - OpenSSL (from `https://github.com/bither/OpenSSL.git`)
   - RegexKitLite (~> 4.0)
   - SimpleKeychain
+
+SPEC REPOS:
+  https://github.com/CocoaPods/Specs.git:
+    - AFNetworking
+    - CocoaLumberjack
+    - FMDB
+    - FXBlurView
+    - KSCrash
+    - Reachability
+    - RegexKitLite
+    - SimpleKeychain
 
 EXTERNAL SOURCES:
   Bitheri:
@@ -128,12 +136,11 @@ SPEC CHECKSUMS:
   FMDB: 854a0341b4726e53276f2a8996f06f1b80f9259a
   FXBlurView: db786c2561cb49a09ae98407f52460096ab8a44f
   KSCrash: 2ca11262cd88571992ada7861639a6eb224c6c2a
-  MKNetworkKit: 60ad3c83b62183e40ba75ce772c9427c25b520de
   OpenSSL: 6cc604cf322dabb4695f3b7be882a47ed44a8146
   Reachability: dd9aa4fb6667b9f787690a74f53cb7634ce99893
   RegexKitLite: c0e4c12e6e7de0769f3a3ed679f0f61604170661
   SimpleKeychain: b50cef3b87939d480ea1143425c00f5b4b70fe21
 
-PODFILE CHECKSUM: 15d31a0ba2c5d53554fc7ba68ac747f9c67128e0
+PODFILE CHECKSUM: a420d9a9a7c56c58630a3cd4148b88e3fbe46b38
 
-COCOAPODS: 1.3.1
+COCOAPODS: 1.5.0

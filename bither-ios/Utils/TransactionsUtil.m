@@ -215,19 +215,6 @@
         return;
     }
     addresses = [addresses reverseObjectEnumerator].allObjects;
-    __block int completeCount = 0;
-    int needCompleteCount = (int)addresses.count + [[BTAddressManager instance] hasHDAccountHot] + [[BTAddressManager instance] hasHDAccountMonitored];
-    for (BTAddress *address in addresses) {
-        [TransactionsUtil getTxs:address callback:^{
-            completeCount += 1;
-            if (completeCount == needCompleteCount) {
-                if (voidBlock) {
-                    voidBlock();
-                }
-            }
-        } andErrorCallBack:errorCallback];
-    }
-
     NSMutableArray *hdAccounts = [NSMutableArray new];
     if ([[BTAddressManager instance] hasHDAccountHot]) {
         [hdAccounts addObject:[[BTAddressManager instance] hdAccountHot]];
@@ -235,16 +222,30 @@
     if ([[BTAddressManager instance] hasHDAccountMonitored]) {
         [hdAccounts addObject:[[BTAddressManager instance] hdAccountMonitored]];
     }
-    for (BTHDAccount *account in hdAccounts) {
-        [TransactionsUtil getMyTxForHDAccount:(int)account.getHDAccountId callback:^{
-            completeCount += 1;
-            if (completeCount == needCompleteCount) {
+    if (addresses.count > 0) {
+        __block int txIndex = 0;
+        [TransactionsUtil getTxs:addresses index:txIndex callback:^{
+            if (hdAccounts.count > 0) {
+                __block int hdTxIndex = 0;
+                [TransactionsUtil getMyTxForHDAccounts:hdAccounts index:hdTxIndex callback:^{
+                    if (voidBlock) {
+                        voidBlock();
+                    }
+                } andErrorCallBack:errorCallback];
+            } else {
                 if (voidBlock) {
                     voidBlock();
                 }
             }
         } andErrorCallBack:errorCallback];
-    }
+    } else if (hdAccounts.count > 0) {
+        __block int txIndex = 0;
+        [TransactionsUtil getMyTxForHDAccounts:hdAccounts index:txIndex callback:^{
+            if (voidBlock) {
+                voidBlock();
+            }
+        } andErrorCallBack:errorCallback];
+    }    
 }
 #pragma mark - getMyTxFromBlockChainForHDAccount
 + (void)getMyTxFromBlockChainForHDAccount:(int)hdAccountId callback:(VoidBlock)callback andErrorCallBack:(ErrorHandler)errorCallback {
@@ -346,23 +347,41 @@
     [[BitherApi instance] getTransactionApiFromBlockChain:address.address withPage:page*50 callback:nextPageBlock andErrorCallBack:errorHandler];
 }
 #pragma mark - getMyTxFromBlockChainForHDAccount
++ (void)getMyTxForHDAccounts:(NSArray *)hdAccounts index:(int)index callback:(VoidBlock)callback andErrorCallBack:(ErrorHandler)errorCallback {
+    if (index >= hdAccounts.count) {
+        if (callback) {
+            callback();
+        }
+        return;
+    }
+    BTHDAccount *account = hdAccounts[index];
+    int hdAccountId = (int)account.getHDAccountId;
+    [TransactionsUtil getMyTxForHDAccount:hdAccountId callback:^{
+        [TransactionsUtil getMyTxForHDAccounts:hdAccounts index:index + 1 callback:callback andErrorCallBack:errorCallback];
+    } andErrorCallBack:errorCallback];
+}
+
 + (void)getMyTxForHDAccount:(int)hdAccountId callback:(VoidBlock)callback andErrorCallBack:(ErrorHandler)errorCallback {
     NSMutableArray *pathArray = [NSMutableArray new];
     [pathArray addObject:@(EXTERNAL_ROOT_PATH)];
     [pathArray addObject:@(INTERNAL_ROOT_PATH)];
-    __block int completeCount = 0;
-    int needCompleteCount = (int)pathArray.count;
-    for (NSNumber *pathType in pathArray){
-        __block int index = 0;
-        [TransactionsUtil getMyTxForHDAccount:hdAccountId pathType:(PathType) [pathType intValue] index:index callback:^{
-            completeCount += 1;
-            if (completeCount == needCompleteCount) {
-                if (callback) {
-                    callback();
-                }
-            }
-        } andErrorCallBack:errorCallback];
+    __block int txIndex = 0;
+    [TransactionsUtil getMyTxForHDAccount:hdAccountId pathArray:pathArray index:txIndex callback:callback andErrorCallBack:errorCallback];
+}
+
++ (void)getMyTxForHDAccount:(int)hdAccountId pathArray:(NSArray *)pathArray index:(int)index callback:(VoidBlock)callback andErrorCallBack:(ErrorHandler)errorCallback {
+    if (index >= pathArray.count) {
+        if (callback) {
+            callback();
+        }
+        return;
     }
+    NSNumber *pathTypeNumber = pathArray[index];
+    PathType pathType = (PathType) [pathTypeNumber intValue];
+    __block int txIndex = 0;
+    [TransactionsUtil getMyTxForHDAccount:hdAccountId pathType:pathType index:txIndex callback:^{
+        [TransactionsUtil getMyTxForHDAccount:hdAccountId pathArray:pathArray index:index + 1 callback:callback andErrorCallBack:errorCallback];
+    } andErrorCallBack:errorCallback];
 }
 
 + (void)getMyTxForHDAccount:(int)hdAccountId pathType:(PathType)pathType index:(int)index
@@ -494,6 +513,19 @@
     [[BitherApi instance] getTransactionApiFromBlockChain:address.address withPage:page*50 callback:nextPageBlock andErrorCallBack:errorHandler];
 }
 #pragma mark - getTxsFrom bither.net
++ (void)getTxs:(NSArray *)addresses index:(int)index callback:(VoidBlock)callback andErrorCallBack:(ErrorHandler)errorCallback {
+    if (index >= addresses.count) {
+        if (callback) {
+            callback();
+        }
+        return;
+    }
+    BTAddress *address = addresses[index];
+    [TransactionsUtil getTxs:address callback:^{
+        [TransactionsUtil getTxs:addresses index:index + 1 callback:callback andErrorCallBack:errorCallback];
+    } andErrorCallBack:errorCallback];
+}
+
 + (void)getTxs:(BTAddress *)address callback:(VoidBlock)callback andErrorCallBack:(ErrorHandler)errorCallback {
     __block int page = 1;
 
@@ -557,6 +589,9 @@
         NSData *data = [NSURLConnection sendSynchronousRequest:request returningResponse:nil error:nil];
         NSString *aString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
         BTTx *tx = [[BTTx alloc] initWithMessage:[aString hexToData]];
+        if (!tx) {
+            continue;
+        }
         tx.blockNo = (uint32_t) [each[@"block_height"] intValue];
         BTBlock *block;
         if (tx.blockNo < minBlockNo) {
