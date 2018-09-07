@@ -141,15 +141,12 @@ static Setting *reloadTxsSetting;
 
         [reloadTxsSetting setSelectBlock:^(UIViewController *controller) {
             if (reloadTime > 0 && reloadTime + 60 * 60 > (double) [[NSDate new] timeIntervalSince1970]) {
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wundeclared-selector"
-                
-                if ([controller respondsToSelector:@selector(showMsg:)]) {
-                    [controller performSelector:@selector(showMsg:) withObject:NSLocalizedString(@"You can only reload transactions data in a hour..", nil)];
-                }
-                
-#pragma clang diagnostic pop
+                [self showMessageWithController:controller msg:@"You can only reload transactions data in a hour.."];
             } else {
+                if (![[BTAddressManager instance] allSyncComplete]) {
+                    [self showMessageWithController:controller msg:@"no_sync_complete"];
+                    return;
+                }
                 DialogAlert *dialogAlert = [[DialogAlert alloc] initWithMessage:NSLocalizedString(@"Reload Transactions data?\nNeed long time.\nConsume network data.\nRecommand trying only with wrong data.", nil) confirm:^{
                     __weak ReloadTxSetting *_sslf = (ReloadTxSetting *) reloadTxsSetting;
                     _sslf.controller = controller;
@@ -158,8 +155,6 @@ static Setting *reloadTxsSetting;
                     } else {
                         [_sslf reloadTx:nil];
                     }
-                    
-                    
                 }                                                        cancel:^{
                     
                 }];
@@ -172,4 +167,14 @@ static Setting *reloadTxsSetting;
     }
     return reloadTxsSetting;
 }
+
++ (void)showMessageWithController:(UIViewController *)controller msg:(NSString *)msg {
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wundeclared-selector"
+    if ([controller respondsToSelector:@selector(showMsg:)]) {
+        [controller performSelector:@selector(showMsg:) withObject:NSLocalizedString(msg, nil)];
+    }
+#pragma clang diagnostic pop
+}
+
 @end

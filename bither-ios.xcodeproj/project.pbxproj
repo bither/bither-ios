@@ -1128,12 +1128,12 @@
 		40A4E8462133D3DD00733DD8 /* MKNetworkKit */ = {
 			isa = PBXGroup;
 			children = (
-				40A4E8472133D3DD00733DD8 /* MKNetworkEngine.h */,
 				40A4E8482133D3DD00733DD8 /* MKNetworkKit.h */,
-				40A4E8492133D3DD00733DD8 /* MKNetworkOperation.m */,
+				40A4E8472133D3DD00733DD8 /* MKNetworkEngine.h */,
 				40A4E84A2133D3DD00733DD8 /* MKNetworkEngine.m */,
-				40A4E84B2133D3DD00733DD8 /* Categories */,
 				40A4E8562133D3DD00733DD8 /* MKNetworkOperation.h */,
+				40A4E8492133D3DD00733DD8 /* MKNetworkOperation.m */,
+				40A4E84B2133D3DD00733DD8 /* Categories */,
 			);
 			path = MKNetworkKit;
 			sourceTree = "<group>";

@@ -620,6 +620,9 @@
     NSMutableArray *txs = [NSMutableArray new];
     for (NSArray *each in dict[@"tx"]) {
         BTTx *tx = [[BTTx alloc] initWithMessage:[NSData dataFromBase64String:each[1]]];
+        if (!tx) {
+            continue;
+        }
         tx.blockNo = (uint32_t) [each[0] intValue];
         BTBlock *block;
         if (tx.blockNo < minBlockNo) {
