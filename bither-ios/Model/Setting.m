@@ -246,6 +246,7 @@ static Setting *ApiConfigSetting;
             [array addObject:[self getTransactionFeeDict:Higher]];
             [array addObject:[self getTransactionFeeDict:High]];
             [array addObject:[self getTransactionFeeDict:Normal]];
+            [array addObject:[self getTransactionFeeDict:Low]];
             return array;
 
         }];

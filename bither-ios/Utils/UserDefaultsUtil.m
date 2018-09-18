@@ -219,6 +219,8 @@ NSUserDefaults *userDefaults;
             return Higher;
         } else if ([userDefaults integerForKey:TRANSACTION_FEE_MODE] == High) {
             return High;
+        } else if ([userDefaults integerForKey:TRANSACTION_FEE_MODE] == Low) {
+            return Low;
         } else {
             return Normal;
         }
