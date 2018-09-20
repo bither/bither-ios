@@ -56,6 +56,8 @@
 
 #define IS_OBTAIN_BCC @"is_obtain_bcc"
 
+#define IS_SEGWIT_ADDRESS_TYPE @"BTHDAccountIsSegwitAddressType"
+
 static UserDefaultsUtil *userDefaultsUtil;
 
 NSUserDefaults *userDefaults;
@@ -467,5 +469,13 @@ NSUserDefaults *userDefaults;
     return [value isEqualToString:@"1"];
 }
 
+- (void)setIsSegwitAddressType:(BOOL)isSegwit {
+    [userDefaults setBool:isSegwit forKey:IS_SEGWIT_ADDRESS_TYPE];
+    [userDefaults synchronize];
+}
+
+- (BOOL)isSegwitAddressType {
+    return [userDefaults boolForKey:IS_SEGWIT_ADDRESS_TYPE];
+}
 
 @end

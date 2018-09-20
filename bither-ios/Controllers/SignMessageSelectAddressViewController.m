@@ -55,7 +55,7 @@
         self.bip32Key = [[addressManager.hdAccountHot xPub:password] deriveSoftened:path];
         hdAccountId = (int)addressManager.hdAccountHot.getHDAccountId;
     } else {
-        self.bip32Key = [[addressManager.hdAccountCold xPub:password] deriveSoftened:path];
+        self.bip32Key = [[addressManager.hdAccountCold xPub:password withPurposePathLevel:NormalAddress] deriveSoftened:path];
         hdAccountId = (int)addressManager.hdAccountCold.getHDAccountId;
     }
     [self loadAddress];

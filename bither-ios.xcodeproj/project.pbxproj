@@ -84,6 +84,7 @@
 		4040643F1F21B1FB00917F68 /* SignMessageSelectAddressViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4040643E1F21B1FB00917F68 /* SignMessageSelectAddressViewController.m */; };
 		404064421F21B71200917F68 /* SignMessageSelectAddressCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 404064411F21B71200917F68 /* SignMessageSelectAddressCell.m */; };
 		405AC4621FBC46CB00FB970C /* SplitCoinUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 405AC4611FBC46CB00FB970C /* SplitCoinUtil.m */; };
+		4070603221512233000E38CD /* AddressTypeUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 4070603121512233000E38CD /* AddressTypeUtil.m */; };
 		40A4E8582133D3DD00733DD8 /* MKNetworkOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 40A4E8492133D3DD00733DD8 /* MKNetworkOperation.m */; };
 		40A4E8592133D3DD00733DD8 /* MKNetworkEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = 40A4E84A2133D3DD00733DD8 /* MKNetworkEngine.m */; };
 		40A4E85A2133D3DD00733DD8 /* UIAlertView+MKNetworkKitAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 40A4E84C2133D3DD00733DD8 /* UIAlertView+MKNetworkKitAdditions.m */; };
@@ -530,6 +531,8 @@
 		404064411F21B71200917F68 /* SignMessageSelectAddressCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignMessageSelectAddressCell.m; sourceTree = "<group>"; };
 		405AC4601FBC46CB00FB970C /* SplitCoinUtil.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SplitCoinUtil.h; sourceTree = "<group>"; };
 		405AC4611FBC46CB00FB970C /* SplitCoinUtil.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SplitCoinUtil.m; sourceTree = "<group>"; };
+		4070603021512233000E38CD /* AddressTypeUtil.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AddressTypeUtil.h; sourceTree = "<group>"; };
+		4070603121512233000E38CD /* AddressTypeUtil.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AddressTypeUtil.m; sourceTree = "<group>"; };
 		40A4E8472133D3DD00733DD8 /* MKNetworkEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKNetworkEngine.h; sourceTree = "<group>"; };
 		40A4E8482133D3DD00733DD8 /* MKNetworkKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKNetworkKit.h; sourceTree = "<group>"; };
 		40A4E8492133D3DD00733DD8 /* MKNetworkOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKNetworkOperation.m; sourceTree = "<group>"; };
@@ -1359,6 +1362,8 @@
 				401ABC911DC33E8F004611B7 /* AdUtil.m */,
 				405AC4601FBC46CB00FB970C /* SplitCoinUtil.h */,
 				405AC4611FBC46CB00FB970C /* SplitCoinUtil.m */,
+				4070603021512233000E38CD /* AddressTypeUtil.h */,
+				4070603121512233000E38CD /* AddressTypeUtil.m */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -2224,6 +2229,7 @@
 				0AD6749F1A7B9108007967DB /* DialogHDMSeedWordList.m in Sources */,
 				ACBEC01B196E397E004301E0 /* CheckScoreAndBgAnimatableView.m in Sources */,
 				AC454DE71A1F252B000AF4ED /* PinCodeUtil.m in Sources */,
+				4070603221512233000E38CD /* AddressTypeUtil.m in Sources */,
 				4254083B19469C9A007AF99C /* BaseApi.m in Sources */,
 				0A7F203D1D0BB0F900B4EAB1 /* DialogHDMonitorFirstAddressValidation.m in Sources */,
 				AC2F3295195C02C3001B7439 /* AmountButton.m in Sources */,

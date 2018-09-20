@@ -40,6 +40,7 @@ static Setting *reloadTxsSetting;
     DialogPassword *dialog = [[DialogPassword alloc] initWithDelegate:self];
     [dialog showInWindow:self.controller.view.window];
 }
+
 #pragma mark - reload data Prompt box
 - (void)onPasswordEntered:(NSString *)password {
     [self doAction];

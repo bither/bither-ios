@@ -29,6 +29,9 @@
 #import "UIViewController+PiShowBanner.h"
 #import "DialogPrivateKeyText.h"
 #import "BTWordsTypeManager.h"
+#import "AddressDetailViewController.h"
+#import "BTHDAccountProvider.h"
+#import "AddressTypeUtil.h"
 
 @interface DialogHDAccountOptions () <DialogPasswordDelegate> {
     SEL passwordSelector;
@@ -42,6 +45,13 @@
 
 - (instancetype)initWithHDAccount:(BTHDAccount *)account andDelegate:(NSObject <DialogHDAccountOptionsDelegate> *)delegate {
     NSMutableArray *actions = [NSMutableArray new];
+    if ([delegate isMemberOfClass:AddressDetailViewController.class]) {
+        AddressDetailViewController *vc = (AddressDetailViewController *) delegate;
+        BOOL isShowChangeAddressType = vc.isSegwit || [[BTHDAccountProvider instance] getSegwitExternalPub:(int) account.getHDAccountId] != nil;
+        if (isShowChangeAddressType) {
+            [actions addObject:[[Action alloc] initWithName:[AddressTypeUtil getAddressName:[AddressTypeUtil getSwitchAddressType:vc.isSegwit]] target:nil andSelector:@selector(changeAddressType)]];
+        }
+    }
     if (account.hasPrivKey) {
         [actions addObjectsFromArray:@[[[Action alloc] initWithName:NSLocalizedString(@"add_hd_account_seed_qr_code", nil) target:nil andSelector:@selector(qrPressed)],
                 [[Action alloc] initWithName:NSLocalizedString(@"add_hd_account_seed_qr_phrase", nil) target:nil andSelector:@selector(phrasePressed)]]];
@@ -72,7 +82,7 @@
     __block NSObject <DialogHDAccountOptionsDelegate> *d = self.delegate;
     [dp showInWindow:_window completion:^{
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
-            __block BOOL result = account.requestNewReceivingAddress;
+            __block BOOL result = [account requestNewReceivingAddressForPathType:EXTERNAL_ROOT_PATH];
             dispatch_async(dispatch_get_main_queue(), ^{
                 [dp dismissWithCompletion:^{
                     if (result) {
@@ -87,12 +97,30 @@
 }
 
 - (void)showOldAddresses {
-    if (hdAccount.issuedExternalIndex < 0) {
-        if (self.delegate) {
-            [self.delegate showBannerWithMessage:NSLocalizedString(@"hd_account_old_addresses_zero", nil)];
-        }
+    if (!self.delegate) {
+        return;
+    }
+    PathType pathType;
+    if ([self.delegate isMemberOfClass:AddressDetailViewController.class]) {
+        pathType = ((AddressDetailViewController *) self.delegate).isSegwit ? EXTERNAL_BIP49_PATH : EXTERNAL_ROOT_PATH;
+    } else {
+        pathType = EXTERNAL_ROOT_PATH;
+    }
+    if ([hdAccount issuedExternalIndexForPathType:pathType] < 0) {
+        [self.delegate showBannerWithMessage:NSLocalizedString(@"hd_account_old_addresses_zero", nil)];
     }
     [[[DialogOldAddressesOfHDAccount alloc] initWithAccount:hdAccount andDeleget:self.delegate] showInWindow:_window];
+}
+
+- (void)changeAddressType {
+    if (!self.delegate) {
+        return;
+    }
+    if ([self.delegate isMemberOfClass:AddressDetailViewController.class]) {
+        AddressDetailViewController *vc = (AddressDetailViewController *) self.delegate;
+        [vc setIsSegwit:!vc.isSegwit];
+        [self.delegate refresh];
+    }
 }
 
 - (void)qrPressed {

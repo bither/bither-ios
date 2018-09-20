@@ -85,10 +85,12 @@
     __weak __block DialogProgress *d = dp;
     [d showInWindow:self.window completion:^{
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
-            NSString *pub = [[self.account xPub:p] serializePubB58];
+            NSString *pub = [[self.account xPub:p withPurposePathLevel:NormalAddress] serializePubB58];
+            NSString *segwitPub = [[self.account xPub:p withPurposePathLevel:P2SHP2WPKH] serializePubB58];
+
             dispatch_async(dispatch_get_main_queue(), ^{
                 [d dismissWithCompletion:^{
-                    DialogBlackQrCode *d = [[DialogBlackQrCode alloc] initWithContent:[NSString stringWithFormat:@"%@%@", HD_MONITOR_QR_PREFIX, pub] title:NSLocalizedString(@"add_cold_hd_account_monitor_qr", nil) andSubtitle:[StringUtil formatAddress:pub groupSize:4 lineSize:24]];
+                    DialogBlackQrCode *d = [[DialogBlackQrCode alloc] initWithContent:[NSString stringWithFormat:@"%@%@%@%@", HD_MONITOR_QR_PREFIX, pub, HD_MONITOR_QR_SPLIT, segwitPub] title:NSLocalizedString(@"add_cold_hd_account_monitor_qr", nil) andSubtitle:[StringUtil formatAddress:pub groupSize:4 lineSize:24]];
                     [d showInWindow:self.window];
                 }];
             });
@@ -123,7 +125,7 @@
         [[[DialogPassword alloc] initWithDelegate:self] showInWindow:self.window];
         return;
     }
-    NSString* address = [[[_account xPub:password] deriveSoftened:EXTERNAL_ROOT_PATH] deriveSoftened:0].address;
+    NSString* address = [[[_account xPub:password withPurposePathLevel:NormalAddress] deriveSoftened:EXTERNAL_ROOT_PATH] deriveSoftened:0].address;
     [[[DialogPrivateKeyText alloc]initWithPrivateKeyStr:address]showInWindow:self.window];
 }
 

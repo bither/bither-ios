@@ -168,23 +168,6 @@
         return;
     }
     addresses = [addresses reverseObjectEnumerator].allObjects;
-    __block int completeCount = 0;
-    int needCompleteCount = (int)addresses.count + [[BTAddressManager instance] hasHDAccountHot] + [[BTAddressManager instance] hasHDAccountMonitored];
-    //遍历所有的地址
-    for (BTAddress *address in addresses) {
-        //通过每个地址获取交易
-        [TransactionsUtil getTxsFromBlockChain:address callback:^{
-            completeCount +=1;
-            if (completeCount == needCompleteCount) {
-                if (voidBlock) {
-                    voidBlock();
-                }
-            }
-        } andErrorCallBack:errorCallback];
-    }
-    
-    
-    
     NSMutableArray *hdAccounts = [NSMutableArray new];
     if ([[BTAddressManager instance] hasHDAccountHot]) {
         [hdAccounts addObject:[[BTAddressManager instance] hdAccountHot]];
@@ -192,19 +175,32 @@
     if ([[BTAddressManager instance] hasHDAccountMonitored]) {
         [hdAccounts addObject:[[BTAddressManager instance] hdAccountMonitored]];
     }
-    for (BTHDAccount *account in hdAccounts) {
-        [TransactionsUtil getMyTxFromBlockChainForHDAccount:(int)account.getHDAccountId callback:^{
-            completeCount += 1;
-            if (completeCount == needCompleteCount) {
+    if (addresses.count > 0) {
+        __block int txIndex = 0;
+        [TransactionsUtil getTxsFromBlockChain:addresses index:txIndex callback:^{
+            if (hdAccounts.count > 0) {
+                __block int hdTxIndex = 0;
+                [TransactionsUtil getMyTxFromBlockChainForHDAccounts:hdAccounts index:hdTxIndex callback:^{
+                    if (voidBlock) {
+                        voidBlock();
+                    }
+                } andErrorCallBack:errorCallback];
+            } else {
                 if (voidBlock) {
                     voidBlock();
                 }
             }
         } andErrorCallBack:errorCallback];
+    } else if (hdAccounts.count > 0) {
+        __block int txIndex = 0;
+        [TransactionsUtil getMyTxFromBlockChainForHDAccounts:hdAccounts index:txIndex callback:^{
+            if (voidBlock) {
+                voidBlock();
+            }
+        } andErrorCallBack:errorCallback];
     }
-    
-    
 }
+
 #pragma mark - syncwallet from bither.net
 + (void)syncWallet:(VoidBlock)voidBlock andErrorCallBack:(ErrorHandler)errorCallback {
     NSArray *addresses = [[BTAddressManager instance] allAddresses];
@@ -248,23 +244,43 @@
     }    
 }
 #pragma mark - getMyTxFromBlockChainForHDAccount
++ (void)getMyTxFromBlockChainForHDAccounts:(NSArray *)hdAccounts index:(int)index callback:(VoidBlock)callback andErrorCallBack:(ErrorHandler)errorCallback {
+    if (index >= hdAccounts.count) {
+        if (callback) {
+            callback();
+        }
+        return;
+    }
+    BTHDAccount *account = hdAccounts[index];
+    int hdAccountId = (int)account.getHDAccountId;
+    [TransactionsUtil getMyTxFromBlockChainForHDAccount:hdAccountId callback:^{
+        [TransactionsUtil getMyTxFromBlockChainForHDAccounts:hdAccounts index:index + 1 callback:callback andErrorCallBack:errorCallback];
+    } andErrorCallBack:errorCallback];
+}
+
 + (void)getMyTxFromBlockChainForHDAccount:(int)hdAccountId callback:(VoidBlock)callback andErrorCallBack:(ErrorHandler)errorCallback {
     NSMutableArray *pathArray = [NSMutableArray new];
     [pathArray addObject:@(EXTERNAL_ROOT_PATH)];
     [pathArray addObject:@(INTERNAL_ROOT_PATH)];
-    __block int completeCount = 0;
-    int needCompleteCount = (int)pathArray.count;
-    for (NSNumber *pathType in pathArray){
-        __block int index = 0;
-        [TransactionsUtil getMyTxFromBlockChainForHDAccount:hdAccountId pathType:(PathType) [pathType intValue] index:index callback:^{
-            completeCount += 1;
-            if (completeCount == needCompleteCount) {
-                if (callback) {
-                    callback();
-                }
-            }
-        } andErrorCallBack:errorCallback];
+    [pathArray addObject:@(EXTERNAL_BIP49_PATH)];
+    [pathArray addObject:@(INTERNAL_BIP49_PATH)];
+    __block int txIndex = 0;
+    [TransactionsUtil getMyTxFromBlockChainForHDAccount:hdAccountId pathArray:pathArray index:txIndex callback:callback andErrorCallBack:errorCallback];
+}
+
++ (void)getMyTxFromBlockChainForHDAccount:(int)hdAccountId pathArray:(NSArray *)pathArray index:(int)index callback:(VoidBlock)callback andErrorCallBack:(ErrorHandler)errorCallback {
+    if (index >= pathArray.count) {
+        if (callback) {
+            callback();
+        }
+        return;
     }
+    NSNumber *pathTypeNumber = pathArray[index];
+    PathType pathType = (PathType) [pathTypeNumber intValue];
+    __block int txIndex = 0;
+    [TransactionsUtil getMyTxFromBlockChainForHDAccount:hdAccountId pathType:pathType index:txIndex callback:^{
+        [TransactionsUtil getMyTxFromBlockChainForHDAccount:hdAccountId pathArray:pathArray index:index + 1 callback:callback andErrorCallBack:errorCallback];
+    } andErrorCallBack:errorCallback];
 }
 
 + (void)getMyTxFromBlockChainForHDAccount:(int)hdAccountId pathType:(PathType)pathType index:(int)index callback:(VoidBlock)callback andErrorCallBack:(ErrorHandler)errorCallback {
@@ -325,7 +341,7 @@
                 [[BTHDAccountAddressProvider instance] updateSyncedCompleteByHDAccountId:address.hdAccountId address:address];
                 
                 if (txCnt > 0) {
-                    [[[BTAddressManager instance] getHDAccountByHDAccountId:address.hdAccountId] updateIssuedIndex:address.pathType index:address.index - 1];
+                    [[[BTAddressManager instance] getHDAccountByHDAccountId:address.hdAccountId] updateIssuedIndex:address.index - 1 pathType:address.pathType];
                     [[[BTAddressManager instance] getHDAccountByHDAccountId:address.hdAccountId] supplyEnoughKeys:NO];
                     [[NSNotificationCenter defaultCenter] postNotificationName:kHDAccountPaymentAddressChangedNotification object:[[BTAddressManager instance] getHDAccountByHDAccountId:address.hdAccountId].address userInfo:@{kHDAccountPaymentAddressChangedNotificationFirstAdding : @(NO)}];
                 }
@@ -365,6 +381,8 @@
     NSMutableArray *pathArray = [NSMutableArray new];
     [pathArray addObject:@(EXTERNAL_ROOT_PATH)];
     [pathArray addObject:@(INTERNAL_ROOT_PATH)];
+    [pathArray addObject:@(EXTERNAL_BIP49_PATH)];
+    [pathArray addObject:@(INTERNAL_BIP49_PATH)];
     __block int txIndex = 0;
     [TransactionsUtil getMyTxForHDAccount:hdAccountId pathArray:pathArray index:txIndex callback:callback andErrorCallBack:errorCallback];
 }
@@ -447,7 +465,7 @@
             [[BTHDAccountAddressProvider instance] updateSyncedCompleteByHDAccountId:address.hdAccountId address:address];
 
             if (txCnt > 0) {
-                [[[BTAddressManager instance] getHDAccountByHDAccountId:address.hdAccountId] updateIssuedIndex:address.pathType index:address.index - 1];
+                [[[BTAddressManager instance] getHDAccountByHDAccountId:address.hdAccountId] updateIssuedIndex:address.index - 1 pathType:address.pathType];
                 [[[BTAddressManager instance] getHDAccountByHDAccountId:address.hdAccountId] supplyEnoughKeys:NO];
                 [[NSNotificationCenter defaultCenter] postNotificationName:kHDAccountPaymentAddressChangedNotification object:[[BTAddressManager instance] getHDAccountByHDAccountId:address.hdAccountId].address userInfo:@{kHDAccountPaymentAddressChangedNotificationFirstAdding : @(NO)}];
             } else {
@@ -468,6 +486,18 @@
     [[BitherApi instance] getTransactionApi:address.address withPage:page callback:nextPageBlock andErrorCallBack:errorHandler];
 }
 #pragma mark - getTx(from_blockChain.info)
++ (void)getTxsFromBlockChain:(NSArray *)addresses index:(int)index callback:(VoidBlock)callback andErrorCallBack:(ErrorHandler)errorCallback {
+    if (index >= addresses.count) {
+        if (callback) {
+            callback();
+        }
+        return;
+    }
+    BTAddress *address = addresses[index];
+    [TransactionsUtil getTxsFromBlockChain:address callback:^{
+        [TransactionsUtil getTxsFromBlockChain:addresses index:index + 1 callback:callback andErrorCallBack:errorCallback];
+    } andErrorCallBack:errorCallback];
+}
 
 + (void)getTxsFromBlockChain:(BTAddress *)address callback:(VoidBlock)callback andErrorCallBack:(ErrorHandler)errorCallback{
     __block int page = 0;

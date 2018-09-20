@@ -778,3 +778,19 @@
 "private_key_compressed_address" = "壓縮私鑰地址";
 "private_key_uncompressed_address" = "未壓縮私鑰地址";
 "private_key_recommend" = "(推薦)";
+
+// Segwit
+"address_normal" = "普通地址";
+"address_segwit" = "隔離驗證地址";
+"address_multisig" = "多重簽名地址";
+"address_normal_type" = "普通";
+"address_segwit_type" = "隔離驗證";
+"address_multisig_type" = "多重簽名";
+"address_type_switch_to_normal" = "切換到普通地址";
+"address_type_switch_to_segwit" = "切換到隔離驗證地址";
+"address_type_switch_tips" = "切換後默認使用%@地址，\n確認切換？";
+"address_type_switch_success_tips" = "切換成功";
+"address_type_switch_failure_tips" = "切換失敗";
+"address_segwit_alert" = "一定不要把BCC發到該地址上，發了將無法找回！";
+"open_segwit_only_support_hd_account" = "隔離驗證地址僅支持HD賬戶";
+"address_type_switch_hd_account_cold_no_segwit_pub_tips" = "如果您的冷HD賬戶需要使用隔離驗證地址需要將您的冷錢包升級到v1.8.3重新監控";

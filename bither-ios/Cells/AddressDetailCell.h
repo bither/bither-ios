@@ -20,5 +20,5 @@
 #import <Bitheri/BTAddress.h>
 
 @interface AddressDetailCell : UITableViewCell
-- (void)showAddress:(BTAddress *)address;
+- (void)showAddress:(BTAddress *)address isSegwit:(BOOL)isSegwit;
 @end

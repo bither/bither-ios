@@ -39,9 +39,10 @@
 #import "DialogHDMAddressOptions.h"
 #import "AddressAliasView.h"
 #import "DialogHDAccountOptions.h"
+#import "AddressTypeUtil.h"
 
 @interface AddressDetailViewController () <UITableViewDataSource, UITableViewDelegate, DialogAddressOptionsDelegate
-        , DialogPasswordDelegate, DialogPrivateKeyOptionsDelegate, DialogHDAccountOptionsDelegate> {
+, DialogPasswordDelegate, DialogPrivateKeyOptionsDelegate, DialogHDAccountOptionsDelegate> {
     NSMutableArray *_txs;
     PrivateKeyQrCodeType _qrcodeType;
     DialogHDAccountOptions *dialogHDAccountOptions;
@@ -49,6 +50,7 @@
     BOOL hasMore;
     BOOL isLoading;
     int page;
+    BOOL _isSegwit;
 }
 @property(weak, nonatomic) IBOutlet UIView *vTopBar;
 @property(weak, nonatomic) IBOutlet UITableView *tableView;
@@ -62,6 +64,7 @@
     [super viewDidLoad];
     hasMore = YES;
     isLoading = NO;
+    _isSegwit = [AddressTypeUtil isSegwitAddressType];
     page = 1;
     _txs = [[NSMutableArray alloc] init];
     [self.lblTitle sizeToFit];
@@ -101,6 +104,13 @@
     [self refresh];
 }
 
+- (void)setIsSegwit:(BOOL)isSegwit {
+    _isSegwit = isSegwit;
+}
+
+- (BOOL)isSegwit {
+    return _isSegwit;
+}
 
 - (void)lastBlockChanged {
     if (self.address.isSyncComplete) {
@@ -162,7 +172,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == 0) {
         AddressDetailCell *cell = [tableView dequeueReusableCellWithIdentifier:@"AddressDetailCell" forIndexPath:indexPath];
-        [cell showAddress:self.address];
+        [cell showAddress:self.address isSegwit:_isSegwit];
         return cell;
     } else if (indexPath.section == 1) {
         TransactionCell *cell = [tableView dequeueReusableCellWithIdentifier:@"TransactionCell" forIndexPath:indexPath];

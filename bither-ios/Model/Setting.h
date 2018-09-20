@@ -29,7 +29,6 @@
 @property(nonatomic, strong) NSString *settingName;
 @property(nonatomic, strong) UIImage *icon;
 
-
 @property(nonatomic, strong) GetValueBlock getValueBlock;
 @property(nonatomic, strong) GetArrayBlock getArrayBlock;
 @property(nonatomic, strong) DictResponseBlock result;
@@ -48,6 +47,8 @@
 + (Setting *)getBitcoinUnitSetting;
 
 + (Setting *)getTransactionFeeSetting;
+
++ (Setting *)getAddressTypeSetting;
 
 + (Setting *)getCheckSetting;
 

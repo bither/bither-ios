@@ -37,7 +37,8 @@
 @interface MonitorHDAccountSetting () <ScanQrCodeDelegate>
 @property(weak) UIViewController *vc;
 @property (nonatomic,strong) NSString *senderResult;
-@property BTBIP32Key* xpub;
+@property BTBIP32Key *xpub;
+@property BTBIP32Key *xpubSegwit;
 @end
 
 static MonitorHDAccountSetting *monitorSetting;
@@ -79,7 +80,7 @@ static MonitorHDAccountSetting *monitorSetting;
         DialogProgress *dp = [[DialogProgress alloc] initWithMessage:NSLocalizedString(@"Please wait…", nil)];
         [dp showInWindow:self.vc.view.window completion:^{
             dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-                [self processQrCodeContent:_senderResult dp:dp];
+                [self processQrCodeContent:self->_senderResult dp:dp];
             });
         }];
     }];
@@ -91,7 +92,7 @@ static MonitorHDAccountSetting *monitorSetting;
 }
 
 - (void)processQrCodeContent:(NSString *)content dp:(DialogProgress *)dp {
-    if(![content hasPrefix:HD_MONITOR_QR_PREFIX]){
+    if(![content hasPrefix:HD_MONITOR_QR_PREFIX] && ![content hasPrefix:OLD_HD_MONITOR_QR_PREFIX]){
         BOOL isXRandom = [content characterAtIndex:0] == [XRANDOM_FLAG characterAtIndex:0];
         NSData *bytes = isXRandom ? [content substringFromIndex:1].hexToData : content.hexToData;
         if(bytes.length != 65){
@@ -111,16 +112,36 @@ static MonitorHDAccountSetting *monitorSetting;
         }
         return;
     }
-    content = [content substringFromIndex:HD_MONITOR_QR_PREFIX.length];
-    BTBIP32Key* key = [BTBIP32Key deserializeFromB58:content];
-    if (key == nil){
+    BTBIP32Key *key;
+    BTBIP32Key *segwitKey;
+    if ([content hasPrefix:HD_MONITOR_QR_PREFIX]) {
+        content = [content substringFromIndex:HD_MONITOR_QR_PREFIX.length];
+        NSArray *pubs = [content componentsSeparatedByString:HD_MONITOR_QR_SPLIT];
+        if (pubs.count == 2) {
+            key = [BTBIP32Key deserializeFromB58:pubs[0]];
+            segwitKey = [BTBIP32Key deserializeFromB58:pubs[1]];
+        } else {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [dp dismissWithCompletion:^{
+                    [self showMsg:NSLocalizedString(@"monitor_cold_hd_account_failed_wrong_qr_code", nil)];
+                }];
+            });
+            return;
+        }
+    } else {
+        content = [content substringFromIndex:OLD_HD_MONITOR_QR_PREFIX.length];
+        key = [BTBIP32Key deserializeFromB58:content];
+    }
+    if (key == nil) {
         dispatch_async(dispatch_get_main_queue(), ^{
             [dp dismissWithCompletion:^{
                 [self showMsg:NSLocalizedString(@"monitor_cold_hd_account_failed_wrong_qr_code", nil)];
             }];
         });
+        return;
     }
     self.xpub = key;
+    self.xpubSegwit = segwitKey;
     __block NSString* firstAddress = [[key deriveSoftened:EXTERNAL_ROOT_PATH] deriveSoftened:0].address;
     
     if ([self isRepeatHD:firstAddress]) {
@@ -156,7 +177,7 @@ static MonitorHDAccountSetting *monitorSetting;
     [dp showInWindow:self.vc.view.window completion:^{
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
             [[PeerUtil instance] stopPeer];
-            [BTAddressManager instance].hdAccountMonitored = [[BTHDAccount alloc] initWithAccountExtendedPub:self.xpub.getPubKeyExtended fromXRandom:NO syncedComplete:NO andGenerationCallback:nil];
+            [BTAddressManager instance].hdAccountMonitored = [[BTHDAccount alloc] initWithAccountExtendedPub:self.xpub.getPubKeyExtended p2shp2wpkhAccountExtentedPub:self.xpubSegwit != nil ? self.xpubSegwit.getPubKeyExtended : nil fromXRandom:NO syncedComplete:NO andGenerationCallback:nil];
             [[PeerUtil instance] startPeer];
             dispatch_async(dispatch_get_main_queue(), ^{
                 [dp dismissWithCompletion:^{

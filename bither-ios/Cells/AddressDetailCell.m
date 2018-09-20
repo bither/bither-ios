@@ -31,6 +31,7 @@
 #import "HdmSendViewController.h"
 #import "HDAccountSendViewController.h"
 #import "HDAccountMonitoredSendViewController.h"
+#import "AddressTypeUtil.h"
 
 #define kAddressGroupSize (4)
 #define kAddressLineSize (12)
@@ -52,6 +53,7 @@
 @property(weak, nonatomic) IBOutlet UIButton *btnBalanceDetail;
 @property(weak, nonatomic) IBOutlet UILabel *lblBalance;
 @property BTAddress *address;
+@property NSString *addressStr;
 @end
 
 @implementation AddressDetailCell
@@ -74,11 +76,12 @@
     return self;
 }
 
-- (void)showAddress:(BTAddress *)address {
+- (void)showAddress:(BTAddress *)address isSegwit:(BOOL)isSegwit {
     self.address = address;
-    self.lblAddress.text = [StringUtil formatAddress:address.address groupSize:kAddressGroupSize lineSize:kAddressLineSize];
+    self.addressStr = [address addressForPath:[AddressTypeUtil getAddressExternalPathType:isSegwit]];
+    self.lblAddress.text = [StringUtil formatAddress:_addressStr groupSize:kAddressGroupSize lineSize:kAddressLineSize];
     [self configureAddressFrame];
-    self.ivQr.image = [QRCodeThemeUtil qrCodeOfContent:address.address andSize:self.ivQr.frame.size.width withTheme:[[QRCodeTheme themes] objectAtIndex:[[UserDefaultsUtil instance] getQrCodeTheme]]];
+    self.ivQr.image = [QRCodeThemeUtil qrCodeOfContent:_addressStr andSize:self.ivQr.frame.size.width withTheme:[[QRCodeTheme themes] objectAtIndex:[[UserDefaultsUtil instance] getQrCodeTheme]]];
     [self.btnAmount setAmount:address.balance];
     self.btnAmount.frameChangeListener = self;
 
@@ -127,7 +130,7 @@
 }
 
 - (void)qrCodeThemeChanged:(QRCodeTheme *)theme {
-    self.ivQr.image = [QRCodeThemeUtil qrCodeOfContent:self.address.address andSize:self.ivQr.frame.size.width withTheme:theme];
+    self.ivQr.image = [QRCodeThemeUtil qrCodeOfContent:_addressStr andSize:self.ivQr.frame.size.width withTheme:theme];
 }
 
 - (IBAction)sendPressed:(id)sender {
@@ -166,7 +169,12 @@
 }
 
 - (IBAction)qrPressed:(id)sender {
-    DialogAddressQrCode *dialogQr = [[DialogAddressQrCode alloc] initWithAddress:self.address delegate:self];
+    DialogAddressQrCode *dialogQr;
+    if ([self.address isHDAccount]) {
+        dialogQr = [[DialogAddressQrCode alloc] initWithHdAccountAddress:_addressStr delegate:self];
+    } else {
+        dialogQr = [[DialogAddressQrCode alloc] initWithAddress:self.address delegate:self];
+    }
     [dialogQr showInWindow:self.window];
 }
 
@@ -178,7 +186,7 @@
 }
 
 - (IBAction)copyPressed:(id)sender {
-    [UIPasteboard generalPasteboard].string = self.address.address;
+    [UIPasteboard generalPasteboard].string = _addressStr;
     if ([self.getUIViewController isKindOfClass:[AddressDetailViewController class]]) {
         AddressDetailViewController *controller = (AddressDetailViewController *) self.getUIViewController;
         [controller showMessage:NSLocalizedString(@"Address copied.", nil)];

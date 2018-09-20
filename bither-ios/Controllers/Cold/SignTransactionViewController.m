@@ -140,7 +140,7 @@
                     [strHashes addObject:[NSString hexWithData:[key.key sign:hash]]];
                 }
             } else {
-                NSArray *hashes = [address signHashes:hashesData withPassphrase:bpassword];
+                NSArray *hashes = [self->address signHashes:hashesData withPassphrase:bpassword];
                 for (NSData *hash in hashes) {
                     [strHashes addObject:[NSString hexWithData:hash]];
                 }

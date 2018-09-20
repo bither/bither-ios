@@ -36,6 +36,8 @@
 #import "QrCodeViewController.h"
 #import "QRCodeTxTransport.h"
 #import "PushTxThirdParty.h"
+#import "AddressTypeUtil.h"
+#import "BTHDAccountUtil.h"
 
 #define kBalanceFontSize (15)
 #define kSendButtonQrIconSize (20)
@@ -104,26 +106,27 @@
 - (IBAction)sendPressed:(id)sender {
     if ([self checkValues]) {
         [self hideKeyboard];
+        NSString *toAddress = [self getToAddress];
         [dp showInWindow:self.view.window completion:^{
             dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
                 u_int64_t value = self.amtLink.amount;
                 NSError *error;
-                NSString *toAddress = [self getToAddress];
-                BTTx *tx = [self.address newTxToAddress:toAddress withAmount:value andError:&error];
+                PathType path = [AddressTypeUtil getCurrentAddressInternalPathType];
+                BTTx *tx = [self.address newTxToAddress:toAddress withAmount:value pathType:path andError:&error];
                 if (error) {
                     NSString *msg = [TransactionsUtil getCompleteTxForError:error];
-                    [self showSendResult:msg dialog:dp];
+                    [self showSendResult:msg dialog:self->dp];
                 } else {
                     if (!tx) {
-                        [self showSendResult:NSLocalizedString(@"Send failed.", nil) dialog:dp];
+                        [self showSendResult:NSLocalizedString(@"Send failed.", nil) dialog:self->dp];
                         return;
                     }
                     self.tx = tx;
                     __block NSString *addressBlock = toAddress;
                     dispatch_async(dispatch_get_main_queue(), ^{
                         self.btnSend.enabled = NO;
-                        [dp dismissWithCompletion:^{
-                            [dp changeToMessage:NSLocalizedString(@"Please wait…", nil)];
+                        [self->dp dismissWithCompletion:^{
+                            [self->dp changeToMessage:NSLocalizedString(@"Please wait…", nil)];
                             [[[DialogHDSendTxConfirm alloc] initWithTx:tx to:addressBlock delegate:self] showInWindow:self.view.window];
                         }];
                     });
@@ -144,22 +147,30 @@
     QRCodeTxTransport *txTrans = [[QRCodeTxTransport alloc] init];
     txTrans.fee = self.tx.feeForTransaction;
     txTrans.to = [tx amountSentTo:[self getToAddress]];
-    txTrans.myAddress = self.address.address;
+    txTrans.myAddress = [self.address addressForPath:[AddressTypeUtil getCurrentAddressInternalPathType]];
     txTrans.toAddress = self.tfAddress.text;
     NSMutableArray *array = [[NSMutableArray alloc] init];
-    NSArray *hashDataArray = tx.unsignedInHashes;
-    for (NSData *data in hashDataArray) {
-        [array addObject:[NSString hexWithData:data]];
-    }
-    txTrans.hashList = array;
     NSArray *addresses = [self.address getSigningAddressesForInputs:self.tx.ins];
     NSMutableArray *paths = [NSMutableArray new];
-    for (BTHDAccountAddress *a in addresses) {
+    for (int i = 0; i < addresses.count; i++) {
+        BTHDAccountAddress *a = addresses[i];
         PathTypeIndex *path = [[PathTypeIndex alloc] init];
         path.index = a.index;
         path.pathType = a.pathType;
         [paths addObject:path];
+        BTIn *btIn = tx.ins[i];
+        if (path.isSegwit) {
+            BTBIP32Key *root = [[BTBIP32Key alloc] initWithMasterPubKey:[self.address getExternalPub:a.pathType]];
+            BTBIP32Key *key = [root deriveSoftened:a.index];
+            [array addObject:[NSString hexWithData:[tx getSegwitUnsignedInHashesForRedeemScript:key.getRedeemScript btIn:btIn]]];
+            if (!tx.isSegwitAddress) {
+                tx.isSegwitAddress = true;
+            }
+        } else {
+            [array addObject:[NSString hexWithData:[tx getUnsignedInHashesForIn:btIn]]];
+        }
     }
+    txTrans.hashList = array;
     txTrans.pathTypeIndexes = paths;
     txTrans.txTransportType = TxTransportTypeColdHD;
     qr.content = [QRCodeTxTransport getPreSignString:txTrans];
@@ -182,12 +193,12 @@
 
 - (void)finalSend {
     [dp changeToMessage:NSLocalizedString(@"Please wait…", nil) completion:^{
-        [dp showInWindow:self.view.window completion:^{
+        [self->dp showInWindow:self.view.window completion:^{
             [[PushTxThirdParty instance] pushTx:self.tx];
             [[BTPeerManager instance] publishTransaction:self.tx completion:^(NSError *error) {
                 if (!error) {
                     dispatch_async(dispatch_get_main_queue(), ^{
-                        [dp dismissWithCompletion:^{
+                        [self->dp dismissWithCompletion:^{
                             [self.navigationController popViewControllerAnimated:YES];
                             if (self.sendDelegate && [self.sendDelegate respondsToSelector:@selector(sendSuccessed:)]) {
                                 [self.sendDelegate sendSuccessed:self.tx];
@@ -195,7 +206,7 @@
                         }];
                     });
                 } else {
-                    [self showSendResult:NSLocalizedString(@"Send failed.", nil) dialog:dp];
+                    [self showSendResult:NSLocalizedString(@"Send failed.", nil) dialog:self->dp];
                 }
             }];
         }];
@@ -259,11 +270,33 @@
                     [sigs addObject:d];
                 }
             }
-            if(success){
-                success = [self.tx signWithSignatures:sigs];
+            if (success) {
+                if (self.tx.isSegwitAddress) {
+                    NSArray *signingAddresses = [self.address getSigningAddressesForInputs:self.tx.ins];
+                    NSMutableArray *signatures = [NSMutableArray arrayWithCapacity:signingAddresses.count];
+                    NSMutableArray *witnesses = [NSMutableArray arrayWithCapacity:signingAddresses.count];
+                    for (int i = 0; i < signingAddresses.count; i++) {
+                        BTHDAccountAddress *a = signingAddresses[i];
+                        if (a.isSegwit) {
+                            BTBIP32Key *root = [[BTBIP32Key alloc] initWithMasterPubKey:[self.address getExternalPub:a.pathType]];
+                            BTBIP32Key *key = [root deriveSoftened:a.index];
+                            [signatures addObject:[BTHDAccountUtil getRedeemScript:key.pubKey]];
+                            [witnesses addObject:sigs[i]];
+                        } else {
+                            [signatures addObject:sigs[i]];
+                            NSMutableData *witness = [NSMutableData secureData];
+                            [witness appendUInt8:0];
+                            [witnesses addObject:witness];
+                        }
+                    }
+                    self.tx.witnesses = witnesses;
+                    success = [self.tx signWithSignatures:signatures];
+                } else {
+                    success = [self.tx signWithSignatures:sigs];
+                }
             }
             if (success) {
-                [dp showInWindow:self.view.window completion:^{
+                [self->dp showInWindow:self.view.window completion:^{
                     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
                         [self finalSend];
                     });

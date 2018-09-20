@@ -27,6 +27,7 @@
 #import "DialogWithActions.h"
 #import "UserDefaultsUtil.h"
 #import "DialogShowAddressOnNet.h"
+#import "AddressDetailViewController.h"
 
 #define kAddressFontSize (16)
 #define kAddressButtonPadding (4)
@@ -58,6 +59,7 @@
 
 @interface DialogOldAddressesOfHDAccount () <UITableViewDataSource, UITableViewDelegate, CellDelegate> {
     BTHDAccount *_account;
+    PathType _pathType;
 }
 @property(weak) NSObject <ShowBannerDelegete> *delegate;
 @property UITableView *table;
@@ -66,11 +68,18 @@
 @implementation DialogOldAddressesOfHDAccount
 
 - (instancetype)initWithAccount:(BTHDAccount *)account andDeleget:(NSObject <ShowBannerDelegete> *)delegate {
-    CGSize size = [DialogOldAddressesOfHDAccount caculateSize:account];
+    PathType pathType;
+    if ([delegate isMemberOfClass:AddressDetailViewController.class]) {
+        pathType = ((AddressDetailViewController *) delegate).isSegwit ? EXTERNAL_BIP49_PATH : EXTERNAL_ROOT_PATH;
+    } else {
+        pathType = EXTERNAL_ROOT_PATH;
+    }
+    CGSize size = [DialogOldAddressesOfHDAccount caculateSize:account pathType:pathType];
     self = [super initWithFrame:CGRectMake(0, 0, size.width, size.height)];
     if (self) {
         _account = account;
         self.delegate = delegate;
+        _pathType = pathType;
         [self configureViews];
     }
     return self;
@@ -88,19 +97,19 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return _account.issuedExternalIndex + 1;
+    return [_account issuedExternalIndexForPathType:_pathType] + 1;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     DialogOldAddressesOfHDAccountCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
-    [cell showAddress:[_account addressForPath:EXTERNAL_ROOT_PATH atIndex:indexPath.row].address];
-    cell.vSeperator.hidden = indexPath.row == _account.issuedExternalIndex;
+    [cell showAddress:[_account addressForPath:_pathType atIndex:indexPath.row].address];
+    cell.vSeperator.hidden = indexPath.row == [_account issuedExternalIndexForPathType:_pathType];
     cell.delegate = self;
     return cell;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    NSString *address = [_account addressForPath:EXTERNAL_ROOT_PATH atIndex:indexPath.row].address;
+    NSString *address = [_account addressForPath:_pathType atIndex:indexPath.row].address;
     if (address.length > 30) {
         address = [StringUtil formatAddress:address groupSize:kAddressGroupSize lineSize:kAddressLineSize];
     }
@@ -116,14 +125,14 @@
     }
 }
 
-+ (CGSize)caculateSize:(BTHDAccount *)account {
++ (CGSize)caculateSize:(BTHDAccount *)account pathType:(PathType)pathType {
     CGFloat height = 0;
     CGFloat width = 0;
-    NSUInteger rowCount = account.issuedExternalIndex + 1;
+    NSUInteger rowCount = [account issuedExternalIndexForPathType:pathType] + 1;
     NSUInteger columnCount = 2;
     CGFloat firstColumnWidth = 0;
     CGFloat secondColumnWidth = 30;
-    NSString *address = [account addressForPath:EXTERNAL_ROOT_PATH atIndex:0].address;
+    NSString *address = [account addressForPath:pathType atIndex:0].address;
     if (address.length > 30) {
         address = [StringUtil formatAddress:address groupSize:kAddressGroupSize lineSize:kAddressLineSize];
     }

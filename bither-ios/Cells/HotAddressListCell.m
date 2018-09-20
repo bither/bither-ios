@@ -41,6 +41,7 @@
 #import "DialogHDMAddressOptions.h"
 #import "AddressAliasView.h"
 #import "DialogHDAccountOptions.h"
+#import "AddressTypeUtil.h"
 
 #define kUnconfirmedTxAmountLeftMargin (3)
 
@@ -84,7 +85,7 @@
 - (void)setAddress:(BTAddress *)address {
     _btAddress = address;
     self.vUnconfirmedTxAmount.alignLeft = YES;
-    self.lblAddress.text = [StringUtil shortenAddress:address.address];
+    self.lblAddress.text = [StringUtil shortenAddress:[address addressForPath:[AddressTypeUtil getCurrentAddressExternalPathType]]];
     CGFloat width = [self widthForLabel:self.lblAddress maxWidth:self.frame.size.width];
     self.lblAddress.frame = CGRectMake(self.lblAddress.frame.origin.x, self.lblAddress.frame.origin.y, width, self.lblAddress.frame.size.height);
     if (self.longPress == nil) {
@@ -165,7 +166,7 @@
 }
 
 - (NSString *)dialogAddressFullAddressForRow:(NSUInteger)row {
-    return _btAddress.address;
+    return [_btAddress addressForPath:[AddressTypeUtil getCurrentAddressExternalPathType]];
 }
 
 - (int64_t)dialogAddressFullAmountForRow:(NSUInteger)row {

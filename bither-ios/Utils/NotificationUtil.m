@@ -48,12 +48,24 @@
         txNotificationType = [[array objectAtIndex:3] intValue];
         [infoDic setValue:[array objectAtIndex:3] forKey:@"TxNotificationType"];
     }
-    UIApplicationState state = [UIApplication sharedApplication].applicationState;
-    [infoDic setValue:[NSNumber numberWithBool:state == UIApplicationStateActive] forKey:ApplicationForeground];
-    [infoDic setValue:[NSNumber numberWithLongLong:diff] forKey:@"diff"];
-    DDLogDebug(@"notify:%@", infoDic);
-    if (txNotificationType == txReceive || txNotificationType == txSend) {
-        [self notification:msg dict:infoDic];
+    if ([NSThread isMainThread]) {
+        UIApplicationState state = [UIApplication sharedApplication].applicationState;
+        [infoDic setValue:[NSNumber numberWithBool:state == UIApplicationStateActive] forKey:ApplicationForeground];
+        [infoDic setValue:[NSNumber numberWithLongLong:diff] forKey:@"diff"];
+        DDLogDebug(@"notify:%@", infoDic);
+        if (txNotificationType == txReceive || txNotificationType == txSend) {
+            [self notification:msg dict:infoDic];
+        }
+    } else {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            UIApplicationState state = [UIApplication sharedApplication].applicationState;
+            [infoDic setValue:[NSNumber numberWithBool:state == UIApplicationStateActive] forKey:ApplicationForeground];
+            [infoDic setValue:[NSNumber numberWithLongLong:diff] forKey:@"diff"];
+            DDLogDebug(@"notify:%@", infoDic);
+            if (txNotificationType == txReceive || txNotificationType == txSend) {
+                [self notification:msg dict:infoDic];
+            }
+        });
     }
 }
 

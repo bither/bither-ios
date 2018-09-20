@@ -23,4 +23,7 @@
 - (id)initWithAttributedMessage:(NSAttributedString *)message confirm:(void (^)())confirm cancel:(void (^)())cancel;
 
 - (id)initWithMessage:(NSString *)message confirm:(void (^)())confirm cancel:(void (^)())cancel;
+
+- (id)initWithConfirmMessage:(NSString *)message confirm:(void (^)())confirm;
+
 @end

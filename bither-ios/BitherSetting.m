@@ -130,7 +130,7 @@ static BOOL _isUnitTest = NO;
     } else if (transactionFee == High) {
         return [NSString stringWithFormat:@"%.1f%@", High/dividend, unit];
     } else if (transactionFee == Low) {
-        return [NSString stringWithFormat:@"%.2f%@", Low/dividend, unit];
+        return [NSString stringWithFormat:@"%f%@", Low/dividend, unit];
     } else {
         return [NSString stringWithFormat:@"%.1f%@", Normal/dividend, unit];
     }

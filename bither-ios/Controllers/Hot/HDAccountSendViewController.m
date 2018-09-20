@@ -32,6 +32,7 @@
 #import "DialogSendTxConfirm.h"
 #import "DialogHDSendTxConfirm.h"
 #import "PushTxThirdParty.h"
+#import "AddressTypeUtil.h"
 
 #define kBalanceFontSize (15)
 
@@ -98,28 +99,30 @@
 - (IBAction)sendPressed:(id)sender {
     if ([self checkValues]) {
         [self hideKeyboard];
+        NSString *password = self.tfPassword.text;
+        NSString *toAddress = [self getToAddress];
         [dp showInWindow:self.view.window completion:^{
             dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
-                if (![[BTPasswordSeed getPasswordSeed] checkPassword:self.tfPassword.text]) {
-                    [self showSendResult:NSLocalizedString(@"Password wrong.", nil) dialog:dp];
+                if (![[BTPasswordSeed getPasswordSeed] checkPassword:password]) {
+                    [self showSendResult:NSLocalizedString(@"Password wrong.", nil) dialog:self->dp];
                     return;
                 }
                 u_int64_t value = self.amtLink.amount;
                 NSError *error;
-                NSString *toAddress = [self getToAddress];
-                BTTx *tx = [self.address newTxToAddress:toAddress withAmount:value password:self.tfPassword.text andError:&error];
+                PathType path = [AddressTypeUtil getCurrentAddressInternalPathType];
+                BTTx *tx = [self.address newTxToAddress:toAddress withAmount:value pathType:path password:self.tfPassword.text andError:&error];
                 if (error) {
                     NSString *msg = [TransactionsUtil getCompleteTxForError:error];
-                    [self showSendResult:msg dialog:dp];
+                    [self showSendResult:msg dialog:self->dp];
                 } else {
                     if (!tx) {
-                        [self showSendResult:NSLocalizedString(@"Send failed.", nil) dialog:dp];
+                        [self showSendResult:NSLocalizedString(@"Send failed.", nil) dialog:self->dp];
                         return;
                     }
                     __block NSString *addressBlock = toAddress;
                     dispatch_async(dispatch_get_main_queue(), ^{
-                        [dp dismissWithCompletion:^{
-                            [dp changeToMessage:NSLocalizedString(@"Please wait…", nil)];
+                        [self->dp dismissWithCompletion:^{
+                            [self->dp changeToMessage:NSLocalizedString(@"Please wait…", nil)];
                             [[[DialogHDSendTxConfirm alloc] initWithTx:tx to:addressBlock delegate:self] showInWindow:self.view.window];
                         }];
                     });

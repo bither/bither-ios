@@ -44,6 +44,16 @@
 #import "PaymentAddressSetting.h"
 #import "GetSplitSetting.h"
 #import "GetForkCoinsController.h"
+#import "AddressTypeUtil.h"
+#import "BTHDAccountProvider.h"
+#import "DialogPassword.h"
+
+@interface Setting () <DialogPasswordDelegate>
+
+@property(weak) UIViewController *controller;
+
+@end
+
 @implementation Setting
 
 static Setting *ExchangeSetting;
@@ -52,6 +62,7 @@ static Setting *BitcoinUnitSetting;
 static Setting *TransactionFeeSetting;
 static Setting *NetworkSetting;
 static Setting *AvatarSetting;
+static Setting *AddressTypeSetting;
 static Setting *CheckSetting;
 static Setting *EditPasswordSetting;
 static Setting *ColdMonitorSetting;
@@ -387,6 +398,92 @@ static Setting *ApiConfigSetting;
     }
     return AvatarSetting;
 
+}
+
++ (Setting *)getAddressTypeSetting {
+    if (!AddressTypeSetting) {
+        AddrType switchAddressType = [AddressTypeUtil getSwitchAddressType:AddressTypeUtil.isSegwitAddressType];
+        Setting *setting = [[Setting alloc] initWithName:[AddressTypeUtil getSwitchAddressTypeName:switchAddressType] icon:nil];
+        AddressTypeSetting = setting;
+        [AddressTypeSetting setSelectBlock:^(UIViewController *controller) {
+            AddressTypeSetting.controller = controller;
+            if (AddressTypeUtil.isSegwitAddressType) {
+                [Setting changeAddressType:controller isOpenSegwit:false];
+                return;
+            }
+            BTAddressManager *addressManager = [BTAddressManager instance];
+            if (addressManager.hasHDAccountHot) {
+                if (addressManager.hasHDAccountMonitored && ![[BTHDAccountProvider instance] getSegwitExternalPub:(int) addressManager.hdAccountMonitored.getHDAccountId]) {
+                    DialogAlert *dialogAlert = [[DialogAlert alloc] initWithConfirmMessage:NSLocalizedString(@"address_type_switch_hd_account_cold_no_segwit_pub_tips", nil) confirm:^{
+                        [Setting changeAddressType:controller isOpenSegwit:false];
+                    }];
+                    dialogAlert.touchOutSideToDismiss = false;
+                    [dialogAlert showInWindow:controller.view.window];
+                } else {
+                    if (![[BTHDAccountProvider instance] getSegwitExternalPub:(int) addressManager.hdAccountHot.getHDAccountId]) {
+                        [Setting changeAddressType:controller isOpenSegwit:true];
+                    } else {
+                        [Setting changeAddressType:controller isOpenSegwit:false];
+                    }
+                }
+            } else if (addressManager.hasHDAccountMonitored) {
+                if (![[BTHDAccountProvider instance] getSegwitExternalPub:(int) addressManager.hdAccountMonitored.getHDAccountId]) {
+                    [Setting showMessage:controller msg:@"address_type_switch_hd_account_cold_no_segwit_pub_tips"];
+                } else {
+                    [Setting changeAddressType:controller isOpenSegwit:false];
+                }
+            } else {
+                [Setting showMessage:controller msg:@"open_segwit_only_support_hd_account"];
+            }
+        }];
+    }
+    return AddressTypeSetting;
+}
+
++ (void)changeAddressType:(UIViewController *)controller isOpenSegwit:(BOOL)isOpenSegwit {
+    NSString *msg = [AddressTypeUtil getSwitchAddressTypeTips:[AddressTypeUtil getSwitchAddressType:AddressTypeUtil.isSegwitAddressType]];
+    DialogAlert *dialogAlert = [[DialogAlert alloc] initWithMessage:msg confirm:^{
+        if (isOpenSegwit) {
+            DialogPassword *dialogPassword = [[DialogPassword alloc] initWithDelegate:AddressTypeSetting];
+            [dialogPassword showInWindow:controller.view.window];
+        } else {
+            [Setting changeAddressTypeSuccess:controller];
+        }
+    } cancel:^{ }];
+    dialogAlert.touchOutSideToDismiss = false;
+    [dialogAlert showInWindow:controller.view.window];
+}
+
++ (void)changeAddressTypeSuccess:(UIViewController *)controller {
+    [[UserDefaultsUtil instance] setIsSegwitAddressType:!AddressTypeUtil.isSegwitAddressType];
+    [AddressTypeSetting setSettingName:[AddressTypeUtil getSwitchAddressTypeName:[AddressTypeUtil getSwitchAddressType:AddressTypeUtil.isSegwitAddressType]]];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"SettingChangedNotification" object:nil];
+    [Setting showMessage:controller msg:NSLocalizedString(@"address_type_switch_success_tips", nil)];
+}
+
+- (void)onPasswordEntered:(NSString *)password {
+    DialogProgress *dialogProgrees = [[DialogProgress alloc] initWithMessage:NSLocalizedString(@"Please wait…", nil)];
+    dialogProgrees.touchOutSideToDismiss = NO;
+    [dialogProgrees showInWindow:self.controller.view.window completion:^{
+        [[[BTAddressManager instance] hdAccountHot] addSegwitPub:password complete:^(BOOL isSuccess) {
+            [dialogProgrees dismiss];
+            if (isSuccess) {
+                if (![[BTHDAccountProvider instance] getSegwitExternalPub:(int)[[BTAddressManager instance] hdAccountHot].getHDAccountId]) {
+                    [Setting showMessage:self.controller msg:NSLocalizedString(@"address_type_switch_failure_tips", nil)];
+                } else {
+                    [Setting changeAddressTypeSuccess:self.controller];
+                }
+            } else {
+                [Setting showMessage:self.controller msg:NSLocalizedString(@"address_type_switch_failure_tips", nil)];
+            }
+        }];
+    }];
+}
+
++ (void)showMessage:(UIViewController *)controller msg:(NSString *)msg {
+    if ([controller respondsToSelector:@selector(showMsg:)]) {
+        [controller performSelector:@selector(showMsg:) withObject:NSLocalizedString(msg, nil) afterDelay:0];
+    }
 }
 
 + (Setting *)getCheckSetting {

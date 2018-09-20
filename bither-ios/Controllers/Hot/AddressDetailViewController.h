@@ -23,4 +23,9 @@
 @property(strong) BTAddress *address;
 
 - (void)showMessage:(NSString *)msg;
+
+- (void)setIsSegwit:(BOOL)isSegwit;
+
+- (BOOL)isSegwit;
+
 @end
