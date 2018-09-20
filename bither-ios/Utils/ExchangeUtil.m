@@ -98,14 +98,7 @@ static NSDictionary *_currenciesRate = nil;
 
 + (Currency)getCurrencyForMarket:(MarketType)marketType {
     switch (marketType) {
-        case HUOBI:
-        case OKCOIN:
-        case BTCCHINA:
-        case CHBTC:
-        case BTCTRADE:
-            return CNY;
         case BITSTAMP:
-        case MARKET796:
         case BITFINEX:
         case COINBASE:
             return USD;

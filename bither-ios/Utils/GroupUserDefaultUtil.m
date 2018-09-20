@@ -55,9 +55,6 @@ static GroupUserDefaultUtil *groupUserDefaultsUtil;
             return [GroupUtil getMarketType:market];
         }
     }
-    if ([self localeIsChina]) {
-        return BTCCHINA;
-    }
     return BITSTAMP;
 }
 

@@ -214,7 +214,7 @@ static Setting *ApiConfigSetting;
         [setting setGetArrayBlock:^() {
             MarketType defaultMarket = [[UserDefaultsUtil instance] getDefaultMarket];
             NSMutableArray *array = [NSMutableArray new];
-            for (int i = BITSTAMP; i <= MARKET796; i++) {
+            for (int i = BITSTAMP; i <= COINBASE; i++) {
                 NSMutableDictionary *dict = [NSMutableDictionary new];
                 [dict setObject:[NSNumber numberWithInt:i] forKey:SETTING_VALUE];
                 [dict setObject:[GroupUtil getMarketName:i] forKey:SETTING_KEY];

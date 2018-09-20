@@ -96,12 +96,7 @@ NSUserDefaults *userDefaults;
 }
 
 - (void)setDefaultMarket {
-    if ([self localeIsChina]) {
-        [self setMarket:BTCCHINA];
-    } else {
-        [self setMarket:BITSTAMP];
-    }
-
+    [self setMarket:BITSTAMP];
 }
 
 - (void)setMarket:(MarketType)marketType {

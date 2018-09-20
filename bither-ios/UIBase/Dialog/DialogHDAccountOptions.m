@@ -80,9 +80,17 @@
     __block DialogProgress *dp = [[DialogProgress alloc] initWithMessage:NSLocalizedString(@"Please wait…", nil)];
     __block BTHDAccount *account = hdAccount;
     __block NSObject <DialogHDAccountOptionsDelegate> *d = self.delegate;
+    PathType pathType = EXTERNAL_ROOT_PATH;
+    if ([self.delegate isMemberOfClass:AddressDetailViewController.class]) {
+        AddressDetailViewController *vc = (AddressDetailViewController *) self.delegate;
+        if (vc.isSegwit) {
+            pathType = EXTERNAL_BIP49_PATH;
+        }
+    }
     [dp showInWindow:_window completion:^{
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
-            __block BOOL result = [account requestNewReceivingAddressForPathType:EXTERNAL_ROOT_PATH];
+            
+            __block BOOL result = [account requestNewReceivingAddress:pathType];
             dispatch_async(dispatch_get_main_queue(), ^{
                 [dp dismissWithCompletion:^{
                     if (result) {
