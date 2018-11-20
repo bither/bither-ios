@@ -110,7 +110,7 @@
                 u_int64_t value = self.amtLink.amount;
                 NSError *error;
                 PathType path = [AddressTypeUtil getCurrentAddressInternalPathType];
-                BTTx *tx = [self.address newTxToAddress:toAddress withAmount:value pathType:path password:self.tfPassword.text andError:&error];
+                BTTx *tx = [self.address newTxToAddress:toAddress withAmount:value pathType:path password:password andError:&error];
                 if (error) {
                     NSString *msg = [TransactionsUtil getCompleteTxForError:error];
                     [self showSendResult:msg dialog:self->dp];

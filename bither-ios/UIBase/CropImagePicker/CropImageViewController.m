@@ -65,8 +65,9 @@
 
 - (void)donePressed:(id)sender {
     [self dismissViewControllerAnimated:YES completion:^{
-        [self.info setValue:self.icv.croppedImage forKey:UIImagePickerControllerEditedImage];
-        [self.delegate imagePickerController:(UIImagePickerController *) self.navigationController didFinishPickingMediaWithInfo:self.info];
+        NSMutableDictionary *infoDic = [[NSMutableDictionary alloc] initWithDictionary:_info];
+        [infoDic setValue:self.icv.croppedImage forKey:UIImagePickerControllerEditedImage];
+        [self.delegate imagePickerController:(UIImagePickerController *) self.navigationController didFinishPickingMediaWithInfo:infoDic];
     }];
 }
 
