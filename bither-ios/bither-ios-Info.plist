@@ -37,6 +37,8 @@
 	<string>$(PRODUCT_NAME) uses photo library</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>$(PRODUCT_NAME) uses photos</string>
+	<key>NSFaceIDUsageDescription</key>
+	<string>$(PRODUCT_NAME) uses face id</string>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>fetch</string>
