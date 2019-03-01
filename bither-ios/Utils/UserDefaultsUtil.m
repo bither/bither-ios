@@ -422,9 +422,9 @@ NSUserDefaults *userDefaults;
 }
 
 - (ApiConfig)getApiConfig {
-    if ([userDefaults objectForKey:API_CONFIG]){
-        return (ApiConfig)[userDefaults integerForKey:API_CONFIG];
-    }
+//    if ([userDefaults objectForKey:API_CONFIG]){
+//        return (ApiConfig)[userDefaults integerForKey:API_CONFIG];
+//    }
     return ApiConfigBither;
 }
 

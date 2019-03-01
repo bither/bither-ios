@@ -840,7 +840,7 @@ static Setting *ApiConfigSetting;
     }
     [array addObject:[Setting getTrashCanSetting]];
     if ([[BTSettings instance] getAppMode] == HOT) {
-        [array addObject:[Setting getApiConfigSetting]];
+//        [array addObject:[Setting getApiConfigSetting]];
         [array addObject:[ReloadTxSetting getReloadTxsSetting]];
     }
     if ([[BTSettings instance] getAppMode] == HOT) {
