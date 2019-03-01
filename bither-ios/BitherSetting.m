@@ -113,6 +113,8 @@ static BOOL _isUnitTest = NO;
         return NSLocalizedString(@"High", nil);
     } else if (transactionFee == Low) {
         return NSLocalizedString(@"Low", nil);
+    } else if (transactionFee == Lower) {
+        return NSLocalizedString(@"Lower", nil);
     } else {
         return NSLocalizedString(@"Normal", nil);
     }
@@ -130,7 +132,9 @@ static BOOL _isUnitTest = NO;
     } else if (transactionFee == High) {
         return [NSString stringWithFormat:@"%.1f%@", High/dividend, unit];
     } else if (transactionFee == Low) {
-        return [NSString stringWithFormat:@"%f%@", Low/dividend, unit];
+        return [NSString stringWithFormat:@"%@%@", @(Low/dividend), unit];
+    } else if (transactionFee == Lower) {
+        return [NSString stringWithFormat:@"%@%@", @(Lower/dividend), unit];
     } else {
         return [NSString stringWithFormat:@"%.1f%@", Normal/dividend, unit];
     }

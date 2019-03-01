@@ -108,7 +108,7 @@ static StatusBarNotificationWindow *notificationWindow;
     NSInteger updateCode = defaults.getUpdateCode;
     
     if (updateCode == -1) {
-        [defaults setTransactionFeeMode: TwentyX];
+        [defaults setTransactionFeeMode: Normal];
         
         [defaults setUpdateCode: FEE_UPDATE_CODE];
     }

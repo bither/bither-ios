@@ -258,8 +258,8 @@ static Setting *ApiConfigSetting;
             [array addObject:[self getTransactionFeeDict:High]];
             [array addObject:[self getTransactionFeeDict:Normal]];
             [array addObject:[self getTransactionFeeDict:Low]];
+            [array addObject:[self getTransactionFeeDict:Lower]];
             return array;
-
         }];
         [setting setResult:^(NSDictionary *dict) {
             if ([[dict allKeys] containsObject:SETTING_VALUE]) {

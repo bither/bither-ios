@@ -218,11 +218,13 @@ NSUserDefaults *userDefaults;
             return High;
         } else if ([userDefaults integerForKey:TRANSACTION_FEE_MODE] == Low) {
             return Low;
+        } else if ([userDefaults integerForKey:TRANSACTION_FEE_MODE] == Lower) {
+            return Lower;
         } else {
             return Normal;
         }
     } else {
-        return TenX;
+        return Normal;
     }
 }
 
