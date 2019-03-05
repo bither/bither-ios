@@ -36,13 +36,12 @@ static MKNetworkEngine *chainBtcComEngine;
             statsNetworkEngine = [[MKNetworkEngine alloc] initWithHostName:@"bs.getcai.com" customHeaderFields:headerFields];
             bitcoinNetworkEngine = [[MKNetworkEngine alloc] initWithHostName:@"b.getcai.com" customHeaderFields:headerFields];
             bcNetworkEngine = [[MKNetworkEngine alloc]
-                initWithHostName:@"bc.bither.net" customHeaderFields:headerFields];
+                initWithHostName:@"bc1.bithernet.com" customHeaderFields:headerFields];
             hdmNetworkEngine = [[MKNetworkEngine alloc] initWithHostName:@"hdm.bither.net" customHeaderFields:headerFields];
             blockChainEngine = [[MKNetworkEngine alloc]
                 initWithHostName:@"blockchain.info" customHeaderFields:headerFields];
             chainBtcComEngine = [[MKNetworkEngine alloc]
                 initWithHostName:@"chain.btc.com" customHeaderFields:headerFields];
-            
         }
     }
     return bitherEngine;
@@ -67,21 +66,43 @@ static MKNetworkEngine *chainBtcComEngine;
 - (MKNetworkEngine *)getHDMNetworkEngine {
     return hdmNetworkEngine;
 }
+
 - (MKNetworkEngine *)getBlockChainEngine{
     return blockChainEngine;
 }
+
 - (MKNetworkEngine *)getChainBtcComEngine{
     return chainBtcComEngine;
 }
+
 - (NSArray *)getCookies {
     NSArray *cookies = [[NSHTTPCookieStorage sharedHTTPCookieStorage] cookiesForURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://%@", userNetworkEngine.readonlyHostName]]];
     return cookies;
 }
 
++ (MKNetworkEngine *)getNextBCNetworkEngineWithFirstBCNetworkEngine:(MKNetworkEngine *)first {
+    MKNetworkEngine *current = [BitherEngine instance].getBCNetworkEngine;
+    MKNetworkEngine *next;
+    NSMutableDictionary *headerFields = [NSMutableDictionary dictionary];
+    [headerFields setValue:@"application/json" forKey:@"Accept"];
+    if ([current.readonlyHostName isEqualToString:@"bc1.bithernet.com"]) {
+        next = [[MKNetworkEngine alloc] initWithHostName:@"bc2.bithernet.com" customHeaderFields:headerFields];
+    } else if ([current.readonlyHostName isEqualToString:@"bc2.bithernet.com"]) {
+        next = [[MKNetworkEngine alloc] initWithHostName:@"bc3.bithernet.com" customHeaderFields:headerFields];
+    } else {
+        next = [[MKNetworkEngine alloc] initWithHostName:@"bc1.bithernet.com" customHeaderFields:headerFields];
+    }
+    [[BitherEngine instance] setBCNetworkEngine:next];
+    return [next.readonlyHostName isEqualToString:first.readonlyHostName] ? NULL : next;
+}
+
+- (void)setBCNetworkEngine:(MKNetworkEngine *)engine {
+    bcNetworkEngine = engine;
+}
+
 - (void)setEngineCookie {
     [self setCookieOfDomain:statsNetworkEngine.readonlyHostName];
     [self setCookieOfDomain:bitcoinNetworkEngine.readonlyHostName];
-    
 }
 
 - (void)setCookieOfDomain:(NSString *)domain {

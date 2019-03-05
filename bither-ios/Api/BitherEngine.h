@@ -44,9 +44,10 @@ typedef enum {
 
 - (MKNetworkEngine *)getChainBtcComEngine;
 
-
 - (void)setEngineCookie;
 
 - (NSArray *)getCookies;
+
++ (MKNetworkEngine *)getNextBCNetworkEngineWithFirstBCNetworkEngine:(MKNetworkEngine *)first;
 
 @end

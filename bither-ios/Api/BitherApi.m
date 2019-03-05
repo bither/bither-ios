@@ -21,11 +21,14 @@
 #import "AFNetworking.h"
 #import "AdUtil.h"
 #import "SplitCoinUtil.h"
+#import "BitherEngine.h"
 
 static BitherApi *piApi;
 #define kImgEn @"img_en"
 #define kImgZhCN @"img_zh_CN"
 #define kImgZhTW @"img_zh_TW"
+#define kTIMEOUT_REREQUEST_DELAY 5
+#define kTIMEOUT_REREQUEST_CNT 3
 
 @interface BitherApi ()
 @property (nonatomic, assign) int isLoadImageNum;
@@ -211,6 +214,91 @@ static BitherApi *piApi;
     }];
 }
 
+- (void)queryAddress:(NSString *)addressesStr callback:(DictResponseBlock)callback andErrorCallBack:(ErrorHandler)errorCallback {
+    [self queryAddress:addressesStr firstEngine:[[BitherEngine instance] getBCNetworkEngine] requestCount:1 callback:callback andErrorCallBack:errorCallback];
+}
+
+- (void)queryAddress:(NSString *)addressesStr firstEngine:(MKNetworkEngine *)firstEngine requestCount:(int)requestCount callback:(DictResponseBlock)callback andErrorCallBack:(ErrorHandler)errorCallback {
+    NSString *url = [NSString stringWithFormat:BC_ADDRESSES_URL, addressesStr];
+    [self get:url withParams:nil networkType:BitherBC completed:^(MKNetworkOperation *completedOperation) {
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+            DDLogDebug(@"api response:%@", completedOperation.responseString);
+            if (![StringUtil isEmpty:completedOperation.responseString]) {
+                NSDictionary *dict = completedOperation.responseJSON;
+                if (callback) {
+                    callback(dict);
+                }
+            }
+        });
+    } andErrorCallback:^(NSOperation *errorOp, NSError *error) {
+        [self handleError:error firstEngine:firstEngine requestCount:requestCount retry:^(int requestCount) {
+            [self queryAddress:addressesStr firstEngine:firstEngine requestCount:requestCount callback:callback andErrorCallBack:errorCallback];
+        } andErrorCallBack:^{
+            if (errorCallback) {
+                errorCallback(errorOp, error);
+            }
+        }];
+    }];
+}
+
+- (void)queryAddressUnspent:(NSString *)address withPage:(int)page callback:(DictResponseBlock)callback andErrorCallBack:(ErrorHandler)errorCallback {
+    [self queryAddressUnspent:address withPage:page firstEngine:[[BitherEngine instance] getBCNetworkEngine] requestCount:1 callback:callback andErrorCallBack:errorCallback];
+}
+
+- (void)queryAddressUnspent:(NSString *)address withPage:(int)page firstEngine:(MKNetworkEngine *)firstEngine requestCount:(int)requestCount callback:(DictResponseBlock)callback andErrorCallBack:(ErrorHandler)errorCallback {
+    NSString *url = [NSString stringWithFormat:BC_ADDRESS_UNSPENT_URL, address];
+    NSMutableDictionary *dict = [NSMutableDictionary new];
+    dict[@"page"] = @(page);
+    [self get:url withParams:dict networkType:BitherBC completed:^(MKNetworkOperation *completedOperation) {
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+            DDLogDebug(@"api response:%@", completedOperation.responseString);
+            if (![StringUtil isEmpty:completedOperation.responseString]) {
+                NSDictionary *dict = completedOperation.responseJSON;
+                if (callback) {
+                    callback(dict);
+                }
+            }
+        });
+    } andErrorCallback:^(NSOperation *errorOp, NSError *error) {
+        [self handleError:error firstEngine:firstEngine requestCount:requestCount retry:^(int requestCount) {
+            [self queryAddressUnspent:address withPage:page firstEngine:firstEngine requestCount:requestCount callback:callback andErrorCallBack:errorCallback];
+        } andErrorCallBack:^{
+            if (errorCallback) {
+                errorCallback(errorOp, error);
+            }
+        }];
+    }];
+}
+
+- (void)getUnspentTxs:(NSString *)txHashs callback:(DictResponseBlock)callback andErrorCallBack:(ErrorHandler)errorCallback {
+    [self getUnspentTxs:txHashs firstEngine:[[BitherEngine instance] getBCNetworkEngine] requestCount:1 callback:callback andErrorCallBack:errorCallback];
+}
+
+- (void)getUnspentTxs:(NSString *)txHashs firstEngine:(MKNetworkEngine *)firstEngine requestCount:(int)requestCount callback:(DictResponseBlock)callback andErrorCallBack:(ErrorHandler)errorCallback {
+    NSString *url = [NSString stringWithFormat:BC_ADDRESS_UNSPENT_TXS_URL, txHashs];
+    NSMutableDictionary *dict = [NSMutableDictionary new];
+    dict[@"verbose"] = @(3);
+    [self get:url withParams:dict networkType:BitherBC completed:^(MKNetworkOperation *completedOperation) {
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+            DDLogDebug(@"api response:%@", completedOperation.responseString);
+            if (![StringUtil isEmpty:completedOperation.responseString]) {
+                NSDictionary *dict = completedOperation.responseJSON;
+                if (callback) {
+                    callback(dict);
+                }
+            }
+        });
+    } andErrorCallback:^(NSOperation *errorOp, NSError *error) {
+        [self handleError:error firstEngine:firstEngine requestCount:requestCount retry:^(int requestCount) {
+            [self getUnspentTxs:txHashs firstEngine:firstEngine requestCount:requestCount callback:callback andErrorCallBack:errorCallback];
+        } andErrorCallBack:^{
+            if (errorCallback) {
+                errorCallback(errorOp, error);
+            }
+        }];
+    }];
+}
+
 - (void)getExchangeTicker:(VoidBlock)callback andErrorCallBack:(ErrorHandler)errorCallback {
     [self          get:BITHER_EXCHANGE_TICKER withParams:nil networkType:BitherStats completed:^(MKNetworkOperation *completedOperation) {
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
@@ -246,6 +334,32 @@ static BitherApi *piApi;
             errorCallback(errorOp, error);
         }
     }];
+}
+
+- (void)handleError:(NSError *)error firstEngine:(MKNetworkEngine *)firstEngine requestCount:(int)requestCount retry:(RetryBlock)retry andErrorCallBack:(VoidBlock)errorCallback {
+    NSString *errStr = error.description;
+    if ([errStr containsString:@"Code=-1001"] || [errStr containsString:@"Code=-1009"]) {
+        if ([BitherEngine getNextBCNetworkEngineWithFirstBCNetworkEngine:firstEngine]) {
+            if (retry) {
+                retry(requestCount);
+            }
+        } else {
+            if (errorCallback) {
+                errorCallback();
+            }
+        }
+    } else {
+        if (requestCount > kTIMEOUT_REREQUEST_CNT) {
+            if (errorCallback) {
+                errorCallback();
+            }
+        } else {
+            [NSThread sleepForTimeInterval:kTIMEOUT_REREQUEST_DELAY * requestCount];
+            if (retry) {
+                retry(requestCount + 1);
+            }
+        }
+    }
 }
 
 #pragma mark - Ad api

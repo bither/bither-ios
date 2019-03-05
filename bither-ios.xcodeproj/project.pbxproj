@@ -118,7 +118,6 @@
 		4254085E1946A219007AF99C /* UIImageExt.m in Sources */ = {isa = PBXBuildFile; fileRef = 425408541946A219007AF99C /* UIImageExt.m */; };
 		4254085F1946A219007AF99C /* UserDefaultsUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 425408561946A219007AF99C /* UserDefaultsUtil.m */; };
 		425408681946BB7A007AF99C /* BlockUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 425408671946BB7A007AF99C /* BlockUtil.m */; };
-		4254086B1946CD17007AF99C /* NSDictionary+Fromat.m in Sources */ = {isa = PBXBuildFile; fileRef = 4254086A1946CD17007AF99C /* NSDictionary+Fromat.m */; };
 		4254086D1946E0FD007AF99C /* BlockUtilTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 4254086C1946E0FD007AF99C /* BlockUtilTest.m */; };
 		4268FE29194ACD57007A4C30 /* ColdAddressViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4268FE22194ACD57007A4C30 /* ColdAddressViewController.m */; };
 		4268FE2A194ACD57007A4C30 /* ColdViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4268FE24194ACD57007A4C30 /* ColdViewController.m */; };
@@ -600,8 +599,6 @@
 		425408561946A219007AF99C /* UserDefaultsUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserDefaultsUtil.m; sourceTree = "<group>"; };
 		425408661946BB7A007AF99C /* BlockUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BlockUtil.h; sourceTree = "<group>"; };
 		425408671946BB7A007AF99C /* BlockUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BlockUtil.m; sourceTree = "<group>"; };
-		425408691946CD17007AF99C /* NSDictionary+Fromat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+Fromat.h"; sourceTree = "<group>"; };
-		4254086A1946CD17007AF99C /* NSDictionary+Fromat.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+Fromat.m"; sourceTree = "<group>"; };
 		4254086C1946E0FD007AF99C /* BlockUtilTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BlockUtilTest.m; sourceTree = "<group>"; };
 		4268FE21194ACD57007A4C30 /* ColdAddressViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ColdAddressViewController.h; sourceTree = "<group>"; };
 		4268FE22194ACD57007A4C30 /* ColdAddressViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ColdAddressViewController.m; sourceTree = "<group>"; };
@@ -1302,8 +1299,6 @@
 				425408561946A219007AF99C /* UserDefaultsUtil.m */,
 				425408661946BB7A007AF99C /* BlockUtil.h */,
 				425408671946BB7A007AF99C /* BlockUtil.m */,
-				425408691946CD17007AF99C /* NSDictionary+Fromat.h */,
-				4254086A1946CD17007AF99C /* NSDictionary+Fromat.m */,
 				4276CE9F194BF4F70027D119 /* NetworkUtil.h */,
 				4276CEA0194BF4F70027D119 /* NetworkUtil.m */,
 				4217A38E19512DC000063746 /* TransactionsUtil.h */,
@@ -2284,7 +2279,6 @@
 				40A51A611F2AF77E005CF531 /* ObtainBccMonitoredDetailViewController.m in Sources */,
 				AC53ABB319D2CD80007C095C /* UEntropyCollector.m in Sources */,
 				ACD6DFD8196BF98B009D8031 /* DialogAddressFull.m in Sources */,
-				4254086B1946CD17007AF99C /* NSDictionary+Fromat.m in Sources */,
 				AC2F329B195D1930001B7439 /* UnsignedTransactionViewController.m in Sources */,
 				40A4E85D2133D3DD00733DD8 /* NSDictionary+RequestEncoding.m in Sources */,
 				ACDDDC2E19480ECF0008A79D /* DialogProgress.m in Sources */,

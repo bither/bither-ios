@@ -50,6 +50,12 @@
 
 - (void)getMyTransactionApi:(NSString *)address callback:(DictResponseBlock)callback andErrorCallBack:(ErrorHandler)errorCallback;
 
+- (void)queryAddress:(NSString *)addressesStr callback:(DictResponseBlock)callback andErrorCallBack:(ErrorHandler)errorCallback;
+
+- (void)queryAddressUnspent:(NSString *)address withPage:(int)page callback:(DictResponseBlock)callback andErrorCallBack:(ErrorHandler)errorCallback;
+
+- (void)getUnspentTxs:(NSString *)txHashs callback:(DictResponseBlock)callback andErrorCallBack:(ErrorHandler)errorCallback;
+
 - (void)getExchangeTicker:(VoidBlock)callback andErrorCallBack:(ErrorHandler)errorCallback;
 
 - (void)uploadCrash:(NSString *)data callback:(DictResponseBlock)callback andErrorCallBack:(ErrorHandler)errorCallback;

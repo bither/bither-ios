@@ -144,10 +144,6 @@ static Setting *reloadTxsSetting;
             if (reloadTime > 0 && reloadTime + 60 * 60 > (double) [[NSDate new] timeIntervalSince1970]) {
                 [self showMessageWithController:controller msg:@"You can only reload transactions data in a hour.."];
             } else {
-                if (![[BTAddressManager instance] allSyncComplete]) {
-                    [self showMessageWithController:controller msg:@"no_sync_complete"];
-                    return;
-                }
                 DialogAlert *dialogAlert = [[DialogAlert alloc] initWithMessage:NSLocalizedString(@"Reload Transactions data?\nNeed long time.\nConsume network data.\nRecommand trying only with wrong data.", nil) confirm:^{
                     __weak ReloadTxSetting *_sslf = (ReloadTxSetting *) reloadTxsSetting;
                     _sslf.controller = controller;
@@ -161,10 +157,7 @@ static Setting *reloadTxsSetting;
                 }];
                 [dialogAlert showInWindow:controller.view.window];
             }
-
         }];
-
-
     }
     return reloadTxsSetting;
 }

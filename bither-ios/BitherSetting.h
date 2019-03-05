@@ -119,6 +119,7 @@ typedef NSObject *(^GetValueBlock)(void);
 
 typedef NSArray *(^GetArrayBlock)(void);
 
+typedef void (^RetryBlock)(int requestCount);
 
 typedef enum {
     ONE_MINUTE = 1, FIVE_MINUTES = 5, ONE_HOUR = 60, ONE_DAY = 1440
