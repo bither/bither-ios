@@ -86,6 +86,7 @@
     [bottomView addSubview:self.dv];
 
     self.dvNew = [[PinCodeDotsView alloc] initWithFrame:CGRectMake(bottomView.frame.size.width, kBottomMargin, kDotsViewWidth, kDotsViewHeight)];
+    [self.dvNew setHidden:true];
     self.dvNew.backgroundColor = [UIColor clearColor];
     self.dvNew.autoresizingMask = UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin;
     [bottomView addSubview:self.dvNew];
@@ -96,11 +97,13 @@
     __block CGRect dvFrame = self.dv.frame;
     __block CGRect dvNewFrame = self.dvNew.frame;
     [UIView animateWithDuration:0.4f animations:^{
+        [self.dvNew setHidden:false];
         self.dv.frame = CGRectMake(-self.dv.frame.size.width, self.dv.frame.origin.y, self.dv.frame.size.width, self.dv.frame.size.height);
         self.dvNew.frame = dvFrame;
     }                completion:^(BOOL finished) {
         self.dv.frame = dvFrame;
         self.dvNew.frame = dvNewFrame;
+        [self.dvNew setHidden:true];
         [self clearText];
         self.enabled = YES;
     }];
