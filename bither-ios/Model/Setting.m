@@ -425,10 +425,12 @@ static Setting *ApiConfigSetting;
                     } else {
                         [Setting changeAddressType:controller isOpenSegwit:false];
                     }
-                }
+                 }
             } else if (addressManager.hasHDAccountMonitored) {
                 if (![[BTHDAccountProvider instance] getSegwitExternalPub:(int) addressManager.hdAccountMonitored.getHDAccountId]) {
-                    [Setting showMessage:controller msg:@"address_type_switch_hd_account_cold_no_segwit_pub_tips"];
+                    DialogAlert *dialogAlert = [[DialogAlert alloc] initWithConfirmMessage:NSLocalizedString(@"address_type_switch_hd_account_cold_no_segwit_pub_tips", nil) confirm:^{ }];
+                    dialogAlert.touchOutSideToDismiss = false;
+                    [dialogAlert showInWindow:controller.view.window];
                 } else {
                     [Setting changeAddressType:controller isOpenSegwit:false];
                 }

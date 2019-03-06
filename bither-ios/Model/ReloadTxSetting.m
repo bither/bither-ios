@@ -47,7 +47,7 @@ static Setting *reloadTxsSetting;
 }
 #pragma mark - from_bither Respond to events
 - (void) doAction {
-    DialogProgress *dialogProgrees = [[DialogProgress alloc] initWithMessage:NSLocalizedString(@"Please wait…", nil)];
+    DialogProgress *dialogProgrees = [[DialogProgress alloc] initWithMessage:NSLocalizedString(@"reload_tx_please_wait", nil)];
     dialogProgrees.touchOutSideToDismiss = NO;
     [dialogProgrees showInWindow:self.controller.view.window completion:^{
         if([[UserDefaultsUtil instance] getApiConfig] == ApiConfigBlockchainInfo){

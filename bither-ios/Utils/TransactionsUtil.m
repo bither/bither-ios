@@ -797,7 +797,7 @@
 }
 
 + (BOOL)getNeedGetTxsWithUnspentDict:(NSDictionary *)unspentDict page:(int)page txs:(NSArray *)txs {
-    if (!unspentDict || !unspentDict[DATA]) {
+    if (!unspentDict || !unspentDict[DATA] || ![unspentDict[DATA] isKindOfClass:[NSDictionary class]]) {
         return false;
     }
     NSDictionary *data = unspentDict[DATA];

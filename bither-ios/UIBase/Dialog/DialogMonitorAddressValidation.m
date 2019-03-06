@@ -29,18 +29,19 @@
     NSString* firstAddress = [StringUtil formatAddress:addresses[0] groupSize:4 lineSize:16] ;
     CGSize addressSize = [firstAddress sizeWithRestrict:CGSizeMake([UIScreen mainScreen].bounds.size.width, CGFLOAT_MAX) font:[UIFont fontWithName:@"Courier New" size:kFontSize]];
     CGFloat width = MAX(addressSize.width, kMinWidth);
-    CGFloat height = addressSize.height * addresses.count + kVerticalMargin * (addresses.count) + kButtonHeight + kTitleHeight;
+    CGSize tipSize = [NSLocalizedString(@"monitor_addresses_tip", nil) sizeWithRestrict:CGSizeMake(width, CGFLOAT_MAX) font:[UIFont systemFontOfSize:13]];
+    CGFloat height = addressSize.height * addresses.count + kVerticalMargin * (addresses.count) + kButtonHeight + kTitleHeight + tipSize.height + kVerticalMargin;
     height = MIN(MAX(height, kMinHeight), kMaxHeight);
     self = [super initWithFrame:CGRectMake(0, 0, width, height)];
     if (self){
-        [self configure:addresses];
+        [self configure:addresses tipSize:tipSize];
         self.target = target;
         self.okSelector = okSelector;
     }
     return self;
 }
 
-- (void)configure:(NSArray*)addresses{
+- (void)configure:(NSArray*)addresses tipSize:(CGSize)tipSize {
     UILabel* lblTitle = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, self.frame.size.width, kTitleHeight)];
     lblTitle.backgroundColor = [UIColor clearColor];
     lblTitle.textColor = [UIColor whiteColor];
@@ -48,6 +49,15 @@
     lblTitle.textAlignment = NSTextAlignmentCenter;
     lblTitle.text = NSLocalizedString(@"monitor_addresses_validation", nil);
     [self addSubview:lblTitle];
+    
+    UILabel *lblTip = [[UILabel alloc]initWithFrame:CGRectMake(0, kTitleHeight, self.frame.size.width, tipSize.height)];
+    lblTip.backgroundColor = [UIColor clearColor];
+    lblTip.font = [UIFont systemFontOfSize:13];
+    lblTip.numberOfLines = 0;
+    lblTip.textColor = [UIColor colorWithRed:238.0/250.0 green:95.0/250.0 blue:91.0/250.0 alpha:1];
+    lblTip.textAlignment = NSTextAlignmentCenter;
+    lblTip.text = NSLocalizedString(@"monitor_addresses_tip", nil);
+    [self addSubview:lblTip];
     
     UIButton* btnCancel = [[UIButton alloc] initWithFrame:CGRectMake(0, self.frame.size.height - kButtonHeight, self.frame.size.width / 2, kButtonHeight)];
     [btnCancel setBackgroundImage:nil forState:UIControlStateNormal];
@@ -75,7 +85,7 @@
     NSString* firstAddress = [StringUtil formatAddress:addresses[0] groupSize:4 lineSize:16] ;
     CGSize addressSize = [firstAddress sizeWithRestrict:CGSizeMake([UIScreen mainScreen].bounds.size.width, CGFLOAT_MAX) font:[UIFont fontWithName:@"Courier New" size:kFontSize]];
     
-    UIScrollView* scrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, kTitleHeight, self.frame.size.width, self.frame.size.height - kTitleHeight - kButtonHeight - kVerticalMargin)];
+    UIScrollView* scrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, kTitleHeight + tipSize.height + kVerticalMargin, self.frame.size.width, self.frame.size.height - kTitleHeight - tipSize.height - kButtonHeight - kVerticalMargin * 2)];
     scrollView.backgroundColor = [UIColor clearColor];
     scrollView.contentSize = CGSizeMake(self.frame.size.width, addressSize.height * addresses.count + kVerticalMargin * (addresses.count - 1));
     [self addSubview:scrollView];

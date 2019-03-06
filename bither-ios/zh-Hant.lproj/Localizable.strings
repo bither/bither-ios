@@ -335,6 +335,7 @@
 "Scan Private Key QR Code"="掃描私鑰二維碼";
 "Enter original password"="輸入原密碼";
 "Import success."="導入成功";
+"Import hot wallet success."="導入成功，只會加載未花費交易";
 "Import failed."="導入失敗";
 "Can\'t import Bither Cold private key."="不能導入冷錢包私鑰";
 "This private key already exists."="私鑰已存在";
@@ -393,7 +394,8 @@
 
 
 "Reload Transactions data"="重載交易數據";
-"Reload Transactions data?\nNeed long time.\nConsume network data.\nRecommand trying only with wrong data."="確認重載交易數據 ?\n需要較長時間\n消耗網絡流量\n建議只在數據出錯時嘗試";
+"Reload Transactions data?\nNeed long time.\nConsume network data.\nRecommand trying only with wrong data."="確認重載交易數據 ?\n只會加載未花費交易\n需要較長時間\n消耗網絡流量\n建議只在數據出錯時嘗試";
+"reload_tx_please_wait"="正在重載交易數據，只會加載未花費交易，請耐心等待...";
 "Reload transactions data failed , Please retry again."="重載交易數據失敗 , 請重試 .";
 "Reload transactions data success"="重載交易數據成功 ";
 "You can only reload transactions data in a hour.."="一個小時內只能重載交易數據一次.";
@@ -659,7 +661,7 @@
 "add_hd_account_other_hdm" = "生成 HDM 賬戶";
 "add_hd_account_other_private" = "生成普通私鑰";
 "add_hd_account_monitor" = "一鍵監控冷錢包";
-"add_hd_account_monitor_success" = "監控成功";
+"add_hd_account_monitor_success" = "監控成功，只會加載未花費交易";
 "add_hd_account_view_label" = "已有 HD 賬戶";
 "add_hd_account_seed_qr_code" = "HD 賬戶種子二維碼";
 "add_hd_account_seed_qr_phrase" = "HD 賬戶密語";
@@ -709,7 +711,7 @@
 "monitor_cold_hd_account_failed_duplicated" = "監控失敗. 這個賬戶已經存在.";
 "monitor_cold_hd_account_failed_wrong_qr_code" = "請掃描 HD 賬戶監控二維碼";
 "import_hd_account_failed_duplicated" = "匯入失敗. 這個賬戶已經存在.";
-"monitor_cold_hd_account_success" = "監控冷 HD 賬戶成功";
+"monitor_cold_hd_account_success" = "監控冷 HD 賬戶成功，只會加載未花費交易";
 "hd_account_old_addresses" = "舊地址列表";
 "hd_account_old_addresses_zero" = "目前還沒有使用過的地址";
 
@@ -745,6 +747,7 @@
 "hd_account_show_xpub" = "顯示 XPub";
 "hd_account_monitor_check_first_address" = "請檢查第 1 個地址";
 "monitor_addresses_validation" = "請檢查所監控的地址";
+"monitor_addresses_tip" = "請確保該監控地址所對應的比太冷錢包在您手中";
 
 // Ad
 "ad_go" = "前往";

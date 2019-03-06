@@ -145,7 +145,8 @@
             [KeyUtil addAddressList:[[NSArray alloc] initWithObjects:address, nil]];
             dispatch_async(dispatch_get_main_queue(), ^{
                 [self exit];
-                [self showMsg:NSLocalizedString(@"Import success.", nil)];
+                BOOL isHot = [[BTSettings instance] getAppMode] == HOT;
+                [self showMsg:NSLocalizedString(isHot ? @"Import hot wallet success." : @"Import success.", nil)];
 
             });
         } else {

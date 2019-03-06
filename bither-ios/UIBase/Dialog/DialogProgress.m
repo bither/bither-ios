@@ -46,6 +46,7 @@
         self.lbl.backgroundColor = [UIColor clearColor];
         self.lbl.font = [UIFont systemFontOfSize:kDialogProgressLabelFontSize];
         self.lbl.textColor = [UIColor whiteColor];
+        self.lbl.numberOfLines = 0;
         self.lbl.text = message;
         [self addSubview:self.lbl];
         [self.riv startAnimating];

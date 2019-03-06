@@ -334,6 +334,7 @@
 "Scan Private Key QR Code"="扫描私钥二维码";
 "Enter original password"="输入原密码";
 "Import success."="导入成功";
+"Import hot wallet success."="导入成功，只会加载未花费交易";
 "Import failed."="导入失败";
 "Can\'t import Bither Cold private key."="不能导入冷钱包私钥";
 "This private key already exists."="私钥已存在";
@@ -391,7 +392,8 @@
 
 
 "Reload Transactions data"="重载交易数据";
-"Reload Transactions data?\nNeed long time.\nConsume network data.\nRecommand trying only with wrong data."="确认重载交易数据 ?\n需要较长时间\n消耗网络流量\n建议只在数据出错时尝试";
+"Reload Transactions data?\nNeed long time.\nConsume network data.\nRecommand trying only with wrong data."="确认重载交易数据 ?\n只会加载未花费交易\n需要较长时间\n消耗网络流量\n建议只在数据出错时尝试";
+"reload_tx_please_wait"="正在重载交易数据，只会加载未花费交易，请耐心等待...";
 "Reload transactions data failed , Please retry again."="重载交易数据失败 , 请重试 .";
 "Reload transactions data success"="重载交易数据成功 ";
 "You can only reload transactions data in a hour.."="一个小时内只能重载交易数据一次.";
@@ -658,7 +660,7 @@
 "add_hd_account_other_hdm" = "生成 HDM 账户";
 "add_hd_account_other_private" = "生成普通私钥";
 "add_hd_account_monitor" = "一键监控冷钱包";
-"add_hd_account_monitor_success" = "监控成功";
+"add_hd_account_monitor_success" = "监控成功，只会加载未花费交易";
 "add_hd_account_view_label" = "已有 HD 账户";
 "add_hd_account_seed_qr_code" = "HD 账户种子二维码";
 "add_hd_account_seed_qr_phrase" = "HD 账户密语";
@@ -708,7 +710,7 @@
 "monitor_cold_hd_account_failed_duplicated" = "监控失败. 这个账户已经存在.";
 "monitor_cold_hd_account_failed_wrong_qr_code" = "请扫描 HD 账户监控二维码";
 "import_hd_account_failed_duplicated" = "导入失败. 这个账户已经存在.";
-"monitor_cold_hd_account_success" = "监控冷 HD 账户成功";
+"monitor_cold_hd_account_success" = "监控冷 HD 账户成功，只会加载未花费交易";
 "hd_account_old_addresses" = "旧地址列表";
 "hd_account_old_addresses_zero" = "目前还没有使用过的地址";
 
@@ -744,6 +746,7 @@
 "hd_account_show_xpub" = "显示 XPub";
 "hd_account_monitor_check_first_address" = "请检查第 1 个地址";
 "monitor_addresses_validation" = "请检查所监控的地址";
+"monitor_addresses_tip" = "请确保该监控地址所对应的比太冷钱包在您手中";
 
 // Ad
 "ad_go" = "前往";

@@ -307,7 +307,8 @@ static Setting *importPrivateKeySetting;
                 [BTBIP39 sharedInstance].wordList = bip39.wordList;
                 dispatch_async(dispatch_get_main_queue(), ^{
                     [dp dismissWithCompletion:^{
-                        [self showMsg:NSLocalizedString(@"Import success.", nil)];
+                        BOOL isHot = [[BTSettings instance] getAppMode] == HOT;
+                        [self showMsg:NSLocalizedString(isHot ? @"Import hot wallet success." : @"Import success.", nil)];
                     }];
                 });
             });

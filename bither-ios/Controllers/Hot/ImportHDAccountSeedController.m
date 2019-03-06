@@ -184,7 +184,8 @@
                 });
                 return;
             }
-            if ([BTSettings instance].getAppMode == HOT) {
+            BOOL isHot = [BTSettings instance].getAppMode == HOT;
+            if (isHot) {
                 BTHDAccount *account;
                 @try {
                     account = [[BTHDAccount alloc] initWithMnemonicSeed:mnemonicCodeSeed btBip39:s.bTBIP39 password:password fromXRandom:NO syncedComplete:NO andGenerationCallback:nil];
@@ -223,9 +224,12 @@
             [[BTWordsTypeManager instance] saveWordsTypeValue:s.bTBIP39.wordList];
             [BTBIP39 sharedInstance].wordList = s.bTBIP39.wordList;
             dispatch_async(dispatch_get_main_queue(), ^{
-                [dp dismissWithCompletion:^{
-                    [s.navigationController popViewControllerAnimated:YES];
-                }];
+                [dp dismiss];
+                [self showMsg:NSLocalizedString(isHot ? @"Import hot wallet success." : @"Import success.", nil)];
+                
+            });
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                [s.navigationController popViewControllerAnimated:YES];
             });
         });
     }];
