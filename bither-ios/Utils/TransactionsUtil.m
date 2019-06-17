@@ -547,7 +547,7 @@
     
     __block uint32_t blockCount = 0;
     __block DictResponseBlock nextPageBlock = ^(NSDictionary *dict) {
-        [TransactionsUtil getUnspentTransactions:dict callback:^(NSArray *txs) {
+        [TransactionsUtil getUnspentTransactions:dict address:address.address callback:^(NSArray *txs) {
             if (txs.count > 0) {
                 BTTx *tx = txs.lastObject;
                 if (tx.blockNo > blockCount) {
@@ -762,7 +762,7 @@
     
     __block uint32_t blockCount = 0;
     __block DictResponseBlock nextPageBlock = ^(NSDictionary *dict) {
-        [TransactionsUtil getUnspentTransactions:dict callback:^(NSArray *txs) {
+        [TransactionsUtil getUnspentTransactions:dict address:address.address callback:^(NSArray *txs) {
             if (txs.count > 0) {
                 BTTx *tx = txs.lastObject;
                 if (tx.blockNo > blockCount) {
@@ -808,7 +808,7 @@
     }
 }
 
-+ (void)getUnspentTransactions:(NSDictionary *)dict callback:(ArrayResponseBlock)callback andErrorCallBack:(ErrorHandler)errorCallback {
++ (void)getUnspentTransactions:(NSDictionary *)dict address:(NSString *)address callback:(ArrayResponseBlock)callback andErrorCallBack:(ErrorHandler)errorCallback {
     NSMutableArray *txs = [NSMutableArray new];
     if (!dict || [dict getIntFromDict:ERR_NO] != 0 || !dict[DATA] || !dict[DATA][@"list"] || ([dict[DATA] isKindOfClass:[NSString class]] && [dict[DATA] isEqualToString:@"null"])) {
         if (callback) {
@@ -858,19 +858,19 @@
             [jsonArray addObject:txsJson[DATA]];
         }
         if (callback) {
-            callback([TransactionsUtil getUnspentTxsFromBither:jsonArray]);
+            callback([TransactionsUtil getUnspentTxsFromBither:jsonArray address:address]);
         }
     } andErrorCallBack:errorCallback];
 }
 
-+ (NSArray *)getUnspentTxsFromBither:(NSArray *)jsonArray {
++ (NSArray *)getUnspentTxsFromBither:(NSArray *)jsonArray address:(NSString *)address {
     NSMutableArray *txs = [NSMutableArray new];
     for (int i = 0; i < jsonArray.count; i++) {
         NSDictionary *dict = jsonArray[i];
         if (!dict) {
             continue;
         }
-        BTTx *tx = [[BTTx alloc] initWithTxDict:dict];
+        BTTx *tx = [[BTTx alloc] initWithTxDict:dict unspentOutAddress:address];
         [txs addObject:tx];
     }
     return txs;
