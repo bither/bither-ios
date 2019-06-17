@@ -132,7 +132,7 @@
         frame.origin.x = CGRectGetMaxX(self.vUnconfirmedTxConfidence.frame) + kUnconfirmedTxAmountLeftMargin;
         self.vUnconfirmedTxAmount.frame = frame;
     } else {
-        self.lblTransactionCount.text = [NSString stringWithFormat:@"%u", txCount];
+//        self.lblTransactionCount.text = [NSString stringWithFormat:@"%u", txCount];
         self.vNoUnconfirmedTx.hidden = NO;
         self.vUnconfirmedTx.hidden = YES;
     }
