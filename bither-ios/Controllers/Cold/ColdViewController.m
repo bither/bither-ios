@@ -135,11 +135,13 @@
     }
     IOS7ContainerViewController *container = [[IOS7ContainerViewController alloc] init];
     container.controller = [self.storyboard instantiateViewControllerWithIdentifier:@"ColdAddressAdd"];
+    container.modalPresentationStyle = UIModalPresentationFullScreen;
     [self presentViewController:container animated:YES completion:nil];
 }
 
 - (void)toChooseModeViewController {
     UIViewController *chooseModeViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"ChooseModeViewController"];
+    chooseModeViewController.modalPresentationStyle = UIModalPresentationFullScreen;
     [self presentViewController:chooseModeViewController animated:YES completion:nil];
 }
 

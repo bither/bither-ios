@@ -76,6 +76,7 @@
         [[[DialogAlert alloc] initWithMessage:NSLocalizedString(@"hdm_keychain_add_scan_cold", nil) confirm:^{
             afterQRScanSelector = @selector(coldScanned:);
             ScanQrCodeViewController *scan = [[ScanQrCodeViewController alloc] initWithDelegate:self];
+            scan.modalPresentationStyle = UIModalPresentationFullScreen;
             [self.controller presentViewController:scan animated:YES completion:nil];
         }                              cancel:nil] showInWindow:self.controller.view.window];
 
@@ -134,6 +135,7 @@
                     [[[DialogHDMServerUnsignedQRCode alloc] initWithContent:preSign andAction:^{
                         afterQRScanSelector = @selector(serverScanned:);
                         ScanQrCodeViewController *scan = [[ScanQrCodeViewController alloc] initWithDelegate:self];
+                        scan.modalPresentationStyle = UIModalPresentationFullScreen;
                         [self.controller presentViewController:scan animated:YES completion:nil];
                     }] showInWindow:self.controller.view.window];
                 }];

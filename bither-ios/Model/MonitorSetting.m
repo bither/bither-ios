@@ -70,6 +70,7 @@ static MonitorSetting *monitorSetting;
             return;
         }
         ScanQrCodeTransportViewController *scan = [[ScanQrCodeTransportViewController alloc] initWithDelegate:weakSelf title:NSLocalizedString(@"Scan to watch Bither Cold", nil) pageName:NSLocalizedString(@"Bither Cold Watch Only QR Code", nil)];
+        scan.modalPresentationStyle = UIModalPresentationFullScreen;
         [weakSelf.vc presentViewController:scan animated:YES completion:nil];
     }];
 }

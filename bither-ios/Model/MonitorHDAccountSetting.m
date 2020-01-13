@@ -70,6 +70,7 @@ static MonitorHDAccountSetting *monitorSetting;
             return;
         }
         ScanQrCodeViewController *scan = [[ScanQrCodeViewController alloc] initWithDelegate:weakSelf title:nil message:nil];
+        scan.modalPresentationStyle = UIModalPresentationFullScreen;
         [weakSelf.vc presentViewController:scan animated:YES completion:nil];
     }];
 }

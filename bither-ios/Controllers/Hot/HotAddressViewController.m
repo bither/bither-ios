@@ -220,6 +220,7 @@ typedef enum {
     UIViewController *add = [self.storyboard instantiateViewControllerWithIdentifier:@"AddHDMAddress"];
     IOS7ContainerViewController *container = [[IOS7ContainerViewController alloc] init];
     container.controller = add;
+    container.modalPresentationStyle = UIModalPresentationFullScreen;
     [self presentViewController:container animated:YES completion:nil];
 }
 

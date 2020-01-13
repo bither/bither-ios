@@ -40,6 +40,7 @@ static Setting *CloneQrSetting;
             d.scanContent = nil;
             d.controller = controller;
             ScanQrCodeTransportViewController *scan = [[ScanQrCodeTransportViewController alloc] initWithDelegate:d title:NSLocalizedString(@"Scan The Clone Source", nil) pageName:NSLocalizedString(@"clone QR code", nil)];
+            scan.modalPresentationStyle = UIModalPresentationFullScreen;
             [controller presentViewController:scan animated:YES completion:nil];
         }];
     }

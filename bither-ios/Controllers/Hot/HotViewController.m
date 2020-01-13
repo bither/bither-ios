@@ -136,6 +136,7 @@
     }
     IOS7ContainerViewController *container = [[IOS7ContainerViewController alloc] init];
     container.controller = [self.storyboard instantiateViewControllerWithIdentifier:@"HotAddressAdd"];
+    container.modalPresentationStyle = UIModalPresentationFullScreen;
     [self presentViewController:container animated:YES completion:nil];
 }
 

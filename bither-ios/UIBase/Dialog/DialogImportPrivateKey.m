@@ -258,6 +258,7 @@
 
 - (void)scanPrivateText:(id)sender {
     ScanQrCodeViewController *scan = [[ScanQrCodeViewController alloc] initWithDelegate:self];
+    scan.modalPresentationStyle = UIModalPresentationFullScreen;
     [self.window.topViewController presentViewController:scan animated:YES completion:nil];
 }
 

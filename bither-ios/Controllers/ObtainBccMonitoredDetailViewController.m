@@ -226,6 +226,7 @@
 - (void)scanBitherColdToSign {
     self.btnObtain.enabled = NO;
     ScanQrCodeTransportViewController *scan = [[ScanQrCodeTransportViewController alloc] initWithDelegate:self title:NSLocalizedString(@"Scan Bither Cold to sign", nil) pageName:NSLocalizedString(@"Signed TX QR Code", nil)];
+    scan.modalPresentationStyle = UIModalPresentationFullScreen;
     [self presentViewController:scan animated:YES completion:^{
         [self.navigationController popToViewController:self animated:NO];
         self.btnObtain.enabled = YES;
@@ -281,6 +282,7 @@
 
 - (IBAction)scanPressed:(id)sender {
     ScanQrCodeViewController *scan = [[ScanQrCodeViewController alloc] initWithDelegate:self title:[NSString stringWithFormat:NSLocalizedString(@"Scan Bitpie Split Coin Address", nil), [SplitCoinUtil getSplitCoinName:self.splitCoin]] message:NSLocalizedString(@"Scan QR Code for Bitcoin address", nil)];
+    scan.modalPresentationStyle = UIModalPresentationFullScreen;
     [self presentViewController:scan animated:YES completion:nil];
 }
 

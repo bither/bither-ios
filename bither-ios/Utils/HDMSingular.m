@@ -105,6 +105,7 @@
     if (xrandom) {
         [self.delegate onSingularModeBegin];
         UEntropyViewController *uentropy = [[UEntropyViewController alloc] initWithPassword:passwordHDMSinglar andDelegate:self];
+        uentropy.modalPresentationStyle = UIModalPresentationFullScreen;
         [self.controller presentViewController:uentropy animated:YES completion:nil];
     } else {
         dispatch_async(dispatch_get_main_queue(), ^{

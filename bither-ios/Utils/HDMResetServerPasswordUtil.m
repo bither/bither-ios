@@ -104,6 +104,7 @@
             serverSignature = nil;
             [[[DialogHDMServerUnsignedQRCode alloc] initWithContent:pre action:^{
                 ScanQrCodeViewController *scan = [[ScanQrCodeViewController alloc] initWithDelegate:self];
+                scan.modalPresentationStyle = UIModalPresentationFullScreen;
                 [viewController presentViewController:scan animated:YES completion:nil];
             }                                             andCancel:^{
                 serverSignature = nil;

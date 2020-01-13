@@ -40,6 +40,7 @@ static Setting *SignTransactionSetting;
         [self setSelectBlock:^(UIViewController *controller) {
             d.controller = controller;
             ScanQrCodeTransportViewController *scan = [[ScanQrCodeTransportViewController alloc] initWithDelegate:d title:NSLocalizedString(@"Scan Unsigned TX", nil) pageName:NSLocalizedString(@"unsigned tx QR code", nil)];
+            scan.modalPresentationStyle = UIModalPresentationFullScreen;
             [controller presentViewController:scan animated:YES completion:nil];
         }];
     }

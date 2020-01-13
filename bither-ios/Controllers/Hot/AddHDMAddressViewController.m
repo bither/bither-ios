@@ -61,6 +61,7 @@
     if (keychain.uncompletedAddressCount < count) {
         [[[DialogAlert alloc] initWithMessage:NSLocalizedString(@"hdm_address_add_need_cold_pub", nil) confirm:^{
             ScanQrCodeViewController *scan = [[ScanQrCodeViewController alloc] initWithDelegate:self];
+            scan.modalPresentationStyle = UIModalPresentationFullScreen;
             [self presentViewController:scan animated:YES completion:nil];
         }                              cancel:nil] showInWindow:self.view.window];
         return;

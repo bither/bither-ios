@@ -68,6 +68,7 @@ static Setting *importPrivateKeySetting;
 - (void)actionSheet:(UIActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex {
     if (buttonIndex == 0) {
         ScanQrCodeViewController *scan = [[ScanQrCodeViewController alloc] initWithDelegate:self title:NSLocalizedString(@"Scan BIP38-private key QR Code", nil) message:@""];
+        scan.modalPresentationStyle = UIModalPresentationFullScreen;
         [self.controller presentViewController:scan animated:YES completion:nil];
     } else if (buttonIndex == 1) {
         DialogImportPrivateKey *dialogImportPrivateKey = [[DialogImportPrivateKey alloc] initWithDelegate:self importPrivateKeyType:Bip38];

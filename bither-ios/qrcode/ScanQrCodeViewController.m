@@ -313,6 +313,7 @@
     picker.delegate = self;
     picker.shouldSwipeRightToPop = NO;
     fromGallery = YES;
+    picker.modalPresentationStyle = UIModalPresentationFullScreen;
     [self presentViewController:picker animated:YES completion:nil];
 }
 

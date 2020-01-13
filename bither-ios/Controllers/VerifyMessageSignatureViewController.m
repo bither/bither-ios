@@ -177,7 +177,9 @@
 - (void)scanQrCodeFor:(NSObject <UITextInput> *)input {
     [self.view endEditing:YES];
     _qrWaitingInput = input;
-    [self presentViewController:[[ScanQrCodeViewController alloc] initWithDelegate:self] animated:YES completion:nil];
+    ScanQrCodeViewController *scanVc = [[ScanQrCodeViewController alloc] initWithDelegate:self];
+    scanVc.modalPresentationStyle = UIModalPresentationFullScreen;
+    [self presentViewController:scanVc animated:YES completion:nil];
 }
 
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {

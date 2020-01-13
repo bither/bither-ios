@@ -45,6 +45,7 @@
 
 - (IBAction)scanPressed:(id)sender {
     ScanQrCodeTransportViewController *scan = [[ScanQrCodeTransportViewController alloc] initWithDelegate:self title:NSLocalizedString(@"Scan to watch Bither Cold", nil) pageName:NSLocalizedString(@"Bither Cold Watch Only QR Code", nil)];
+    scan.modalPresentationStyle = UIModalPresentationFullScreen;
     [self presentViewController:scan animated:YES completion:nil];
 }
 

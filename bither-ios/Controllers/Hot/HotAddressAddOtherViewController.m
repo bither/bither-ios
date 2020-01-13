@@ -29,12 +29,14 @@
     }
     IOS7ContainerViewController *container = [[IOS7ContainerViewController alloc] init];
     container.controller = [self.storyboard instantiateViewControllerWithIdentifier:@"HotAddressAddPrivateKey"];
+    container.modalPresentationStyle = UIModalPresentationFullScreen;
     [self presentViewController:container animated:YES completion:nil];
 }
 
 - (IBAction)hdmPressed:(id)sender {
     IOS7ContainerViewController *container = [[IOS7ContainerViewController alloc] init];
     container.controller = [self.storyboard instantiateViewControllerWithIdentifier:@"HotAddressAddHDM"];
+    container.modalPresentationStyle = UIModalPresentationFullScreen;
     [self presentViewController:container animated:YES completion:nil];
 }
 

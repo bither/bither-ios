@@ -116,6 +116,7 @@ static Setting *importPrivateKeySetting;
 
 - (void)scanQRCodeWithHDAccount {
     ScanQrCodeViewController *scan = [[ScanQrCodeViewController alloc] initWithDelegate:self title:NSLocalizedString(@"import_hd_account_seed_qr_scan_title", nil) message:NSLocalizedString(@"import_hd_account_seed_qr_scan_message", nil)];
+    scan.modalPresentationStyle = UIModalPresentationFullScreen;
     [self.controller presentViewController:scan animated:YES completion:nil];
 }
 
@@ -126,6 +127,7 @@ static Setting *importPrivateKeySetting;
 
 - (void)scanQRCodeWithPrivateKey {
     ScanQrCodeViewController *scan = [[ScanQrCodeViewController alloc] initWithDelegate:self title:NSLocalizedString(@"Scan Private Key QR Code", nil) message:NSLocalizedString(@"Scan QR code No.1 provided by Bither", nil)];
+    scan.modalPresentationStyle = UIModalPresentationFullScreen;
     [self.controller presentViewController:scan animated:YES completion:nil];
 }
 
@@ -136,6 +138,7 @@ static Setting *importPrivateKeySetting;
 
 - (void)scanQRCodeWithHDMColdSeed {
     ScanQrCodeViewController *scan = [[ScanQrCodeViewController alloc] initWithDelegate:self title:NSLocalizedString(@"import_hdm_cold_seed_qr_code_scan_title", nil) message:NSLocalizedString(@"Scan QR code No.1 provided by Bither", nil)];
+    scan.modalPresentationStyle = UIModalPresentationFullScreen;
     [self.controller presentViewController:scan animated:YES completion:nil];
 
 }

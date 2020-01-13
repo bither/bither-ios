@@ -155,6 +155,7 @@
 - (IBAction)scanPressed:(id)sender {
     [self.view endEditing:YES];
     ScanQrCodeViewController *scan = [[ScanQrCodeViewController alloc] initWithDelegate:self];
+    scan.modalPresentationStyle = UIModalPresentationFullScreen;
     [self presentViewController:scan animated:YES completion:nil];
 }
 

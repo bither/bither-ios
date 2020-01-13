@@ -65,6 +65,7 @@ static PinCodeUtil *util;
                     UIViewController *pin = [self.rootVC.storyboard instantiateViewControllerWithIdentifier:@"PinCode"];
                     __block __weak UIView *pinView = pin.view;
                     pinView.alpha = 0;
+                    pin.modalPresentationStyle = UIModalPresentationFullScreen;
                     [vc presentViewController:pin animated:NO completion:^{
                         [blurView removeFromSuperview];
                         [pinView.window insertSubview:blurView atIndex:0];

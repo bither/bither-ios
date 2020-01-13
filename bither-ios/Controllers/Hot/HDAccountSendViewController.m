@@ -171,6 +171,7 @@
 
 - (IBAction)scanPressed:(id)sender {
     ScanQrCodeViewController *scan = [[ScanQrCodeViewController alloc] initWithDelegate:self title:NSLocalizedString(@"Scan Bitcoin Address", nil) message:NSLocalizedString(@"Scan QR Code for Bitcoin address", nil)];
+    scan.modalPresentationStyle = UIModalPresentationFullScreen;
     [self presentViewController:scan animated:YES completion:nil];
 }
 

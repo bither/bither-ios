@@ -75,17 +75,15 @@ static Setting *avatarSetting;
 - (void)startGallery {
     ImagePickerFromGalleryViewController *picker = [[ImagePickerFromGalleryViewController alloc] init];
     picker.cropDelegate = self;
+    picker.modalPresentationStyle = UIModalPresentationFullScreen;
     [self.controller presentViewController:picker animated:YES completion:nil];
 }
 
 - (void)startCamera {
-
     ImagePickerFromCameraViewController *picker = [[ImagePickerFromCameraViewController alloc] init];
-
     picker.cropDelegate = self;
-
+    picker.modalPresentationStyle = UIModalPresentationFullScreen;
     [self.controller presentViewController:picker animated:YES completion:nil];
-
 }
 
 #pragma mark - Process Album Photo from Image Pick

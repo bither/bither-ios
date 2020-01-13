@@ -97,6 +97,7 @@
 - (void)scanServerQrCode {
     hdmBidMessageHash = nil;
     ScanQrCodeViewController *scan = [[ScanQrCodeViewController alloc] initWithDelegate:self];
+    scan.modalPresentationStyle = UIModalPresentationFullScreen;
     [self.getUIViewController presentViewController:scan animated:YES completion:nil];
 }
 
