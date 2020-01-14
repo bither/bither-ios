@@ -32,6 +32,8 @@
 #import "HDAccountSendViewController.h"
 #import "HDAccountMonitoredSendViewController.h"
 #import "AddressTypeUtil.h"
+#import "SendUtil.h"
+#import "UIViewController+PiShowBanner.h"
 
 #define kAddressGroupSize (4)
 #define kAddressLineSize (12)
@@ -134,6 +136,11 @@
 }
 
 - (IBAction)sendPressed:(id)sender {
+    NSString *msg = [SendUtil isCanSend:self.address.isSyncComplete];
+    if (msg != NULL) {
+        [self.getUIViewController showBannerWithMessage:msg belowView:nil belowTop:0 autoHideIn:1 withCompletion:nil];
+        return;
+    }
     if (self.address.isHDAccount) {
         if (self.address.hasPrivKey) {
             HDAccountSendViewController *send = [self.getUIViewController.storyboard instantiateViewControllerWithIdentifier:@"HDAccountSend"];

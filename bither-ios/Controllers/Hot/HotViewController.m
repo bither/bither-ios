@@ -27,7 +27,7 @@
 #import "UIViewController+PiShowBanner.h"
 #import "UploadAndDowloadFileFactory.h"
 #import "DialogFirstRunWarning.h"
-
+#import "NetworkUtil.h"
 
 @interface HotViewController ()
 @property(strong, nonatomic) NSArray *tabButtons;
@@ -37,6 +37,10 @@
 @property(weak, nonatomic) IBOutlet UIView *vTabe;
 @property(weak, nonatomic) IBOutlet UIProgressView *pvSync;
 @property(strong, nonatomic) PiPageViewController *page;
+@property (weak, nonatomic) IBOutlet UIView *vAlert;
+@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *aivAlert;
+@property (weak, nonatomic) IBOutlet UILabel *lblAlert;
+
 @end
 
 @implementation HotViewController
@@ -54,6 +58,7 @@
     self.pvSync.hidden = YES;
     self.pvSync.progress = 0;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(syncProgress:) name:BTPeerManagerSyncProgressNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(addressTxLoading:) name:@"BTAddressTxLoadingNotification" object:nil];
 }
 
 - (void)initTabs {
@@ -157,13 +162,74 @@
             [UIView animateWithDuration:0.5 animations:^{
                 [self.pvSync setProgress:progress animated:YES];
             }];
-        }
-        if (progress < 0 || progress >= 1) {
+            BTPeerManager *peerManager = [BTPeerManager instance];
+            int32_t unsyncBlockNumber = peerManager.downloadPeer.versionLastBlock - peerManager.lastBlockHeight;
+            if (unsyncBlockNumber > 0) {
+                [self showAlert:[NSString stringWithFormat:NSLocalizedString(@"tip_sync_block_height", nil), @(unsyncBlockNumber)]];
+            } else {
+                [self showAlert:NULL];
+            }
+        } else {
             [self performSelector:@selector(delayHidePvSync) withObject:nil afterDelay:0.5];
+            [self showAlert:NULL];
         }
     } else {
         self.pvSync.hidden = YES;
+        [self showAlert:NULL];
     }
+}
+
+- (void)addressTxLoading:(NSNotification *)notification {
+    NSString *address;
+    if (notification && notification.object && [notification.object isKindOfClass:[NSString class]]) {
+        address = (NSString *) notification.object;
+    } else {
+        address = NULL;
+    }
+    if ([NSThread isMainThread]) {
+        [self showAddressTxLoading:address];
+    } else {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self showAddressTxLoading:address];
+        });
+    }
+}
+
+- (void)showAddressTxLoading:(NSString *)address {
+    if (address) {
+        [self showAlert:[NSString stringWithFormat:NSLocalizedString(@"tip_sync_address_tx", nil), address]];
+    } else{
+        [self showAlert:NULL];
+    }
+}
+
+- (void)showAlert:(NSString *)alert {
+    NSString *tAlert = alert;
+    if (tAlert == NULL) {
+        BOOL isNoNetwork = ![NetworkUtil isEnableWIFI] && ![NetworkUtil isEnable3G];
+        if (isNoNetwork) {
+            tAlert = NSLocalizedString(@"tip_network_error", nil);
+            [[Reachability reachabilityForInternetConnection] startNotifier];
+            [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reachabilityChange) name:kReachabilityChangedNotification object:nil];
+        } else {
+            [[NSNotificationCenter defaultCenter] removeObserver:self name:kReachabilityChangedNotification object:nil];
+        }
+    }
+    BOOL isHiddenAlert = tAlert == NULL;
+    if (!isHiddenAlert) {
+        self.lblAlert.text = tAlert;
+        CGSize lblSize = [alert boundingRectWithSize:CGSizeMake(self.view.frame.size.width - 48, CGFLOAT_MAX) options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading attributes:@{NSFontAttributeName : self.lblAlert.font, NSParagraphStyleAttributeName : [NSParagraphStyle defaultParagraphStyle]} context:nil].size;
+        self.vAlert.frame = CGRectMake(0, _vAlert.frame.origin.y, _vAlert.frame.size.width, MAX(lblSize.height + 24, 36));
+    }
+    CGFloat pageY = isHiddenAlert ? TabBarHeight : TabBarHeight + _vAlert.frame.size.height;
+    self.page.view.frame = CGRectMake(0, pageY, self.view.frame.size.width, self.view.frame.size.height - pageY);
+    [self.aivAlert setHidden:isHiddenAlert];
+    [self.lblAlert setHidden:isHiddenAlert];
+    [self.vAlert setHidden:isHiddenAlert];
+}
+
+- (void)reachabilityChange {
+    [self showAlert:NULL];
 }
 
 - (void)delayHidePvSync {

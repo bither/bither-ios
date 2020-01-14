@@ -206,7 +206,7 @@
 }
 
 #pragma mark - syncwallet from bither.net
-+ (void)syncWallet:(VoidBlock)voidBlock andErrorCallBack:(ErrorHandler)errorCallback {
++ (void)syncWallet:(VoidBlock)voidBlock andErrorCallBack:(ErrorHandler)errorCallback addressTxLoading:(StringBlock)addressCallback {
     NSArray *addresses = [[BTAddressManager instance] allAddresses];
     if ([[BTAddressManager instance] allSyncComplete]) {
         if (voidBlock) {
@@ -231,20 +231,20 @@
                     if (voidBlock) {
                         voidBlock();
                     }
-                } andErrorCallBack:errorCallback];
+                } andErrorCallBack:errorCallback addressTxLoading:addressCallback];
             } else {
                 if (voidBlock) {
                     voidBlock();
                 }
             }
-        } andErrorCallBack:errorCallback];
+        } andErrorCallBack:errorCallback addressTxLoading:addressCallback];
     } else if (hdAccounts.count > 0) {
         __block int txIndex = 0;
         [TransactionsUtil getMyTxForHDAccounts:hdAccounts index:txIndex callback:^{
             if (voidBlock) {
                 voidBlock();
             }
-        } andErrorCallBack:errorCallback];
+        } andErrorCallBack:errorCallback addressTxLoading:addressCallback];
     }    
 }
 #pragma mark - getMyTxFromBlockChainForHDAccount
@@ -367,7 +367,7 @@
     [[BitherApi instance] getTransactionApiFromBlockChain:address.address withPage:page*50 callback:nextPageBlock andErrorCallBack:errorHandler];
 }
 #pragma mark - getMyTxFromBlockChainForHDAccount
-+ (void)getMyTxForHDAccounts:(NSArray *)hdAccounts index:(int)index callback:(VoidBlock)callback andErrorCallBack:(ErrorHandler)errorCallback {
++ (void)getMyTxForHDAccounts:(NSArray *)hdAccounts index:(int)index callback:(VoidBlock)callback andErrorCallBack:(ErrorHandler)errorCallback addressTxLoading:(StringBlock)addressCallback {
     if (index >= hdAccounts.count) {
         if (callback) {
             callback();
@@ -377,8 +377,8 @@
     BTHDAccount *account = hdAccounts[index];
     int hdAccountId = (int)account.getHDAccountId;
     [TransactionsUtil getHDAccountUnspentAddresss:hdAccountId pathType:EXTERNAL_ROOT_PATH beginIndex:0 endIndex:kHDAccountMaxNoTxAddressCount lastTxIndex:-1 unusedAddressCnt:0 unspentAddresses:[NSMutableArray new] callback:^{
-        [TransactionsUtil getMyTxForHDAccounts:hdAccounts index:index + 1 callback:callback andErrorCallBack:errorCallback];
-    } andErrorCallBack:errorCallback];
+        [TransactionsUtil getMyTxForHDAccounts:hdAccounts index:index + 1 callback:callback andErrorCallBack:errorCallback addressTxLoading:addressCallback];
+    } andErrorCallBack:errorCallback addressTxLoading:addressCallback];
 }
 
 + (void)getMyTxForHDAccount:(int)hdAccountId callback:(VoidBlock)callback andErrorCallBack:(ErrorHandler)errorCallback {
@@ -406,7 +406,7 @@
     } andErrorCallBack:errorCallback];
 }
 
-+ (void)getHDAccountUnspentAddresss:(int)hdAccountId pathType:(PathType)pathType beginIndex:(int)beginIndex endIndex:(int)endIndex lastTxIndex:(int)lastTxIndex unusedAddressCnt:(int)unusedAddressCnt unspentAddresses:(NSMutableArray *)unspentAddresses callback:(VoidBlock)callback andErrorCallBack:(ErrorHandler)errorCallback {
++ (void)getHDAccountUnspentAddresss:(int)hdAccountId pathType:(PathType)pathType beginIndex:(int)beginIndex endIndex:(int)endIndex lastTxIndex:(int)lastTxIndex unusedAddressCnt:(int)unusedAddressCnt unspentAddresses:(NSMutableArray *)unspentAddresses callback:(VoidBlock)callback andErrorCallBack:(ErrorHandler)errorCallback addressTxLoading:(StringBlock)addressCallback {
     NSString *addressesStr = @"";
     NSMutableArray *queryAddresArray = [NSMutableArray new];
     for (int i = beginIndex; i < endIndex; i++) {
@@ -417,15 +417,16 @@
                 [[BTHDAccountAddressProvider instance] updateSyncedByHDAccountId:hdAccountId pathType:pathType index:endIndex - 1];
                 PathType nextPathType = [TransactionsUtil nextPathTypeWithCurrentPathType:pathType];
                 if (nextPathType != EXTERNAL_ROOT_PATH) {
-                    [TransactionsUtil getHDAccountUnspentAddresss:hdAccountId pathType:nextPathType beginIndex:0 endIndex:kHDAccountMaxNoTxAddressCount lastTxIndex:-1 unusedAddressCnt:0 unspentAddresses:unspentAddresses callback:callback andErrorCallBack:errorCallback];
+                    [TransactionsUtil getHDAccountUnspentAddresss:hdAccountId pathType:nextPathType beginIndex:0 endIndex:kHDAccountMaxNoTxAddressCount lastTxIndex:-1 unusedAddressCnt:0 unspentAddresses:unspentAddresses callback:callback andErrorCallBack:errorCallback addressTxLoading:addressCallback];
                 } else {
                     __block int txIndex = 0;
-                    [TransactionsUtil getHDAccountUnspentTxs:unspentAddresses index:txIndex callback:callback andErrorCallBack:errorCallback];
+                    [TransactionsUtil getHDAccountUnspentTxs:unspentAddresses index:txIndex callback:callback andErrorCallBack:errorCallback addressTxLoading:addressCallback];
                 }
                 return;
             }
             continue;
         }
+        addressCallback(address.address);
         if (address.isSyncedComplete) {
             continue;
         }
@@ -438,22 +439,22 @@
     }
 
     if ([addressesStr isEqualToString:@""]) {
-        [TransactionsUtil getHDAccountUnspentAddresss:hdAccountId pathType:pathType beginIndex:endIndex endIndex:endIndex + kHDAccountMaxNoTxAddressCount lastTxIndex:lastTxIndex unusedAddressCnt:unusedAddressCnt unspentAddresses:unspentAddresses callback:callback andErrorCallBack:errorCallback];
+        [TransactionsUtil getHDAccountUnspentAddresss:hdAccountId pathType:pathType beginIndex:endIndex endIndex:endIndex + kHDAccountMaxNoTxAddressCount lastTxIndex:lastTxIndex unusedAddressCnt:unusedAddressCnt unspentAddresses:unspentAddresses callback:callback andErrorCallBack:errorCallback addressTxLoading:addressCallback];
         return;
     }
     
     [[BitherApi instance] queryAddress:addressesStr callback:^(NSDictionary *dict) {
         if (!dict || [dict getIntFromDict:ERR_NO] != 0 || !dict[DATA] || ([dict[DATA] isKindOfClass:[NSString class]] && [dict[DATA] isEqualToString:@"null"])) {
             if (lastTxIndex + kHDAccountMaxNoTxAddressCount > endIndex) {
-                [TransactionsUtil getHDAccountUnspentAddresss:hdAccountId pathType:pathType beginIndex:endIndex endIndex:kHDAccountMaxNoTxAddressCount + lastTxIndex lastTxIndex:lastTxIndex unusedAddressCnt:unusedAddressCnt unspentAddresses:unspentAddresses callback:callback andErrorCallBack:errorCallback];
+                [TransactionsUtil getHDAccountUnspentAddresss:hdAccountId pathType:pathType beginIndex:endIndex endIndex:kHDAccountMaxNoTxAddressCount + lastTxIndex lastTxIndex:lastTxIndex unusedAddressCnt:unusedAddressCnt unspentAddresses:unspentAddresses callback:callback andErrorCallBack:errorCallback addressTxLoading:addressCallback];
             } else {
                 [[BTHDAccountAddressProvider instance] updateSyncedByHDAccountId:hdAccountId pathType:pathType index:endIndex - 1];
                 PathType nextPathType = [TransactionsUtil nextPathTypeWithCurrentPathType:pathType];
                 if (nextPathType != EXTERNAL_ROOT_PATH) {
-                    [TransactionsUtil getHDAccountUnspentAddresss:hdAccountId pathType:nextPathType beginIndex:0 endIndex:kHDAccountMaxNoTxAddressCount lastTxIndex:-1 unusedAddressCnt:0 unspentAddresses:unspentAddresses callback:callback andErrorCallBack:errorCallback];
+                    [TransactionsUtil getHDAccountUnspentAddresss:hdAccountId pathType:nextPathType beginIndex:0 endIndex:kHDAccountMaxNoTxAddressCount lastTxIndex:-1 unusedAddressCnt:0 unspentAddresses:unspentAddresses callback:callback andErrorCallBack:errorCallback addressTxLoading:addressCallback];
                 } else {
                     __block int txIndex = 0;
-                    [TransactionsUtil getHDAccountUnspentTxs:unspentAddresses index:txIndex callback:callback andErrorCallBack:errorCallback];
+                    [TransactionsUtil getHDAccountUnspentTxs:unspentAddresses index:txIndex callback:callback andErrorCallBack:errorCallback addressTxLoading:addressCallback];
                 }
             }
             return ;
@@ -498,15 +499,15 @@
         }
         
         if (newLastTxIndex + kHDAccountMaxNoTxAddressCount > endIndex) {
-            [TransactionsUtil getHDAccountUnspentAddresss:hdAccountId pathType:pathType beginIndex:endIndex endIndex:kHDAccountMaxNoTxAddressCount + newLastTxIndex lastTxIndex:newLastTxIndex unusedAddressCnt:unusedAddressCnt unspentAddresses:unspentAddresses callback:callback andErrorCallBack:errorCallback];
+            [TransactionsUtil getHDAccountUnspentAddresss:hdAccountId pathType:pathType beginIndex:endIndex endIndex:kHDAccountMaxNoTxAddressCount + newLastTxIndex lastTxIndex:newLastTxIndex unusedAddressCnt:unusedAddressCnt unspentAddresses:unspentAddresses callback:callback andErrorCallBack:errorCallback addressTxLoading:addressCallback];
         } else {
             [[BTHDAccountAddressProvider instance] updateSyncedByHDAccountId:hdAccountId pathType:pathType index:endIndex - 1];
             PathType nextPathType = [TransactionsUtil nextPathTypeWithCurrentPathType:pathType];
             if (nextPathType != EXTERNAL_ROOT_PATH) {
-                [TransactionsUtil getHDAccountUnspentAddresss:hdAccountId pathType:nextPathType beginIndex:0 endIndex:kHDAccountMaxNoTxAddressCount lastTxIndex:-1 unusedAddressCnt:0 unspentAddresses:unspentAddresses callback:callback andErrorCallBack:errorCallback];
+                [TransactionsUtil getHDAccountUnspentAddresss:hdAccountId pathType:nextPathType beginIndex:0 endIndex:kHDAccountMaxNoTxAddressCount lastTxIndex:-1 unusedAddressCnt:0 unspentAddresses:unspentAddresses callback:callback andErrorCallBack:errorCallback addressTxLoading:addressCallback];
             } else {
                 __block int txIndex = 0;
-                [TransactionsUtil getHDAccountUnspentTxs:unspentAddresses index:txIndex callback:callback andErrorCallBack:errorCallback];
+                [TransactionsUtil getHDAccountUnspentTxs:unspentAddresses index:txIndex callback:callback andErrorCallBack:errorCallback addressTxLoading:addressCallback];
             }
         }
         
@@ -522,7 +523,7 @@
     }
 }
 
-+ (void)getHDAccountUnspentTxs:(NSArray *)unspentAddresses index:(int)index callback:(VoidBlock)callback andErrorCallBack:(ErrorHandler)errorCallback {
++ (void)getHDAccountUnspentTxs:(NSArray *)unspentAddresses index:(int)index callback:(VoidBlock)callback andErrorCallBack:(ErrorHandler)errorCallback addressTxLoading:(StringBlock)addressCallback {
     if (index >= unspentAddresses.count) {
         if (callback) {
             callback();
@@ -530,9 +531,10 @@
         return;
     }
     BTHDAccountAddress *address = unspentAddresses[index];
+    addressCallback(address.address);
     index++;
     [TransactionsUtil getUnspentTxForHDAccountAddress:address callback:^{
-        [TransactionsUtil getHDAccountUnspentTxs:unspentAddresses index:index callback:callback andErrorCallBack:errorCallback];
+        [TransactionsUtil getHDAccountUnspentTxs:unspentAddresses index:index callback:callback andErrorCallBack:errorCallback addressTxLoading:addressCallback];
     } andErrorCallBack:errorCallback];
 }
 
@@ -737,7 +739,7 @@
     [[BitherApi instance] getTransactionApiFromBlockChain:address.address withPage:page*50 callback:nextPageBlock andErrorCallBack:errorHandler];
 }
 #pragma mark - getTxsFrom bither.net
-+ (void)getTxs:(NSArray *)addresses index:(int)index callback:(VoidBlock)callback andErrorCallBack:(ErrorHandler)errorCallback {
++ (void)getTxs:(NSArray *)addresses index:(int)index callback:(VoidBlock)callback andErrorCallBack:(ErrorHandler)errorCallback addressTxLoading:(StringBlock)addressCallback {
     if (index >= addresses.count) {
         if (callback) {
             callback();
@@ -745,8 +747,9 @@
         return;
     }
     BTAddress *address = addresses[index];
+    addressCallback(address.address);
     [TransactionsUtil getUnspentTxs:address callback:^{
-        [TransactionsUtil getTxs:addresses index:index + 1 callback:callback andErrorCallBack:errorCallback];
+        [TransactionsUtil getTxs:addresses index:index + 1 callback:callback andErrorCallBack:errorCallback addressTxLoading:addressCallback];
     } andErrorCallBack:errorCallback];
 }
 

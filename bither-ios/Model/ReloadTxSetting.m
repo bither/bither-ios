@@ -128,10 +128,9 @@ static Setting *reloadTxsSetting;
                 [self.controller performSelector:@selector(showMsg:) withObject:NSLocalizedString(@"Network failure.", nil)];
             }
 #pragma clang diagnostic pop
-
+        }           addressTxLoading:^(NSString *string) {
+            [dialogProgrees setMessage:[NSString stringWithFormat:NSLocalizedString(@"tip_sync_address_tx", nil), string]];
         }];
-
-
     });
 }
 

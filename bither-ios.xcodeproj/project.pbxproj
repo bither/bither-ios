@@ -85,6 +85,7 @@
 		404064421F21B71200917F68 /* SignMessageSelectAddressCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 404064411F21B71200917F68 /* SignMessageSelectAddressCell.m */; };
 		405AC4621FBC46CB00FB970C /* SplitCoinUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 405AC4611FBC46CB00FB970C /* SplitCoinUtil.m */; };
 		4070603221512233000E38CD /* AddressTypeUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 4070603121512233000E38CD /* AddressTypeUtil.m */; };
+		407BD21723CD6DFE000AA3DD /* SendUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 407BD21623CD6DFE000AA3DD /* SendUtil.m */; };
 		40A4E8582133D3DD00733DD8 /* MKNetworkOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 40A4E8492133D3DD00733DD8 /* MKNetworkOperation.m */; };
 		40A4E8592133D3DD00733DD8 /* MKNetworkEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = 40A4E84A2133D3DD00733DD8 /* MKNetworkEngine.m */; };
 		40A4E85A2133D3DD00733DD8 /* UIAlertView+MKNetworkKitAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 40A4E84C2133D3DD00733DD8 /* UIAlertView+MKNetworkKitAdditions.m */; };
@@ -532,6 +533,8 @@
 		405AC4611FBC46CB00FB970C /* SplitCoinUtil.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SplitCoinUtil.m; sourceTree = "<group>"; };
 		4070603021512233000E38CD /* AddressTypeUtil.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AddressTypeUtil.h; sourceTree = "<group>"; };
 		4070603121512233000E38CD /* AddressTypeUtil.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AddressTypeUtil.m; sourceTree = "<group>"; };
+		407BD21523CD6DFE000AA3DD /* SendUtil.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SendUtil.h; sourceTree = "<group>"; };
+		407BD21623CD6DFE000AA3DD /* SendUtil.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SendUtil.m; sourceTree = "<group>"; };
 		40A4E8472133D3DD00733DD8 /* MKNetworkEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKNetworkEngine.h; sourceTree = "<group>"; };
 		40A4E8482133D3DD00733DD8 /* MKNetworkKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKNetworkKit.h; sourceTree = "<group>"; };
 		40A4E8492133D3DD00733DD8 /* MKNetworkOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKNetworkOperation.m; sourceTree = "<group>"; };
@@ -1359,6 +1362,8 @@
 				405AC4611FBC46CB00FB970C /* SplitCoinUtil.m */,
 				4070603021512233000E38CD /* AddressTypeUtil.h */,
 				4070603121512233000E38CD /* AddressTypeUtil.m */,
+				407BD21523CD6DFE000AA3DD /* SendUtil.h */,
+				407BD21623CD6DFE000AA3DD /* SendUtil.m */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -2163,6 +2168,7 @@
 				0AD6749C1A7B6229007967DB /* DialogWithActions.m in Sources */,
 				0A93B6011A4A66080081D74D /* DialogSignMessageOutput.m in Sources */,
 				ACA11DCD19F74FA10087D39C /* RCheckCell.m in Sources */,
+				407BD21723CD6DFE000AA3DD /* SendUtil.m in Sources */,
 				ACE7E71819EB8DE100F7AA3A /* ImagePickerFromCameraViewController.m in Sources */,
 				AC808B8C19D56757004E78A3 /* XRandom.m in Sources */,
 				0A0961381B5CBAD300D554A6 /* DialogShowAddressOnNet.m in Sources */,

@@ -54,6 +54,26 @@
     return self;
 }
 
+- (void)setMessage:(NSString *)message {
+    if ([NSThread isMainThread]) {
+        [self setMessageFrame:message];
+    } else {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self setMessageFrame:message];
+        });
+    }
+}
+
+- (void)setMessageFrame:(NSString *)message {
+    CGSize constrainedSize = CGSizeMake(kDialogProgressLabelMaxWidth, kDialogProgressLabelMaxHeight);
+    CGSize lableSize = [message boundingRectWithSize:constrainedSize options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading attributes:@{NSFontAttributeName : [UIFont systemFontOfSize:kDialogProgressLabelFontSize]} context:nil].size;
+    self.frame = CGRectMake(0, 0, self.riv.frame.size.width + kDialogProgressMargin + lableSize.width + kDialogProgressHorizotalPadding * 2, fmaxf(lableSize.height + kDialogProgressVerticalPadding * 2, kDialogProgressMinHeight));
+    self.riv.frame = CGRectMake(kDialogProgressHorizotalPadding, (self.frame.size.height - self.riv.frame.size.height) / 2, self.riv.frame.size.width, self.riv.frame.size.height);
+    self.lbl.frame = CGRectMake(self.riv.frame.origin.x + self.riv.frame.size.width + kDialogProgressMargin, (self.frame.size.height - lableSize.height) / 2, lableSize.width, lableSize.height);
+    self.lbl.text = message;
+    [self resize];
+}
+
 - (void)dialogWillShow {
     [super dialogWillShow];
 }
