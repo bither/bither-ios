@@ -103,6 +103,8 @@
             [[BlockUtil instance] syncSpvBlock];
             self.vHotProgress.hidden = NO;
             self.vHotRetry.hidden = YES;
+            self.btnSwitchToCold.hidden = YES;
+            self.btnCold.hidden = YES;
             [self showHotWait];
         }
         if ([[BTSettings instance] getAppMode] == COLD) {

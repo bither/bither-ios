@@ -39,9 +39,9 @@
     [array addObject:[Setting getMarketSetting]];
     [array addObject:[Setting getTransactionFeeSetting]];
     [array addObject:[Setting getAddressTypeSetting]];
-    if ([BTAddressManager instance].allAddresses.count == 0 && [BTAddressManager instance].trashAddresses.count == 0 && ![BTAddressManager instance].hdmKeychain && ![BTAddressManager instance].hasHDAccountHot && ![BTAddressManager instance].hasHDAccountMonitored) {
-        [array addObject:[Setting getSwitchToColdSetting]];
-    }
+//    if ([BTAddressManager instance].allAddresses.count == 0 && [BTAddressManager instance].trashAddresses.count == 0 && ![BTAddressManager instance].hdmKeychain && ![BTAddressManager instance].hasHDAccountHot && ![BTAddressManager instance].hasHDAccountMonitored) {
+//        [array addObject:[Setting getSwitchToColdSetting]];
+//    }
     [array addObject:[AvatarSetting getAvatarSetting]];
     [array addObject:[Setting getCheckSetting]];
     //[array addObject:[DonationSetting getDonateSetting]];

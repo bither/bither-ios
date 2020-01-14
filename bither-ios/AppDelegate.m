@@ -124,12 +124,13 @@ static StatusBarNotificationWindow *notificationWindow;
     UIStoryboard *storyboard = self.window.rootViewController.storyboard;
     if (![[BTSettings instance] needChooseMode]) {
         IOS7ContainerViewController *container = [[IOS7ContainerViewController alloc] init];
-        if ([[BTSettings instance] getAppMode] == HOT && [[BlockUtil instance] syncSpvFinish]) {
+        BOOL isNoNetwork = ![NetworkUtil isEnableWIFI] && ![NetworkUtil isEnable3G];
+        if ([[BTSettings instance] getAppMode] == HOT && ([[BlockUtil instance] syncSpvFinish] || isNoNetwork)) {
             container.controller = [storyboard instantiateViewControllerWithIdentifier:@"BitherHot"];
             self.window.rootViewController = container;
         }
         
-        if ([[BTSettings instance] getAppMode] == COLD && ![NetworkUtil isEnableWIFI] && ![NetworkUtil isEnable3G]) {
+        if ([[BTSettings instance] getAppMode] == COLD && isNoNetwork) {
             container.controller = [storyboard instantiateViewControllerWithIdentifier:@"BitherCold"];
             self.window.rootViewController = container;
         }
