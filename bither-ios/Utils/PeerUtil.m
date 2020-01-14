@@ -48,7 +48,7 @@ static PeerUtil *peerUtil;
         if ([[BTSettings instance] getAppMode] != COLD) {
 
             if ([[BlockUtil instance] syncSpvFinish]) {
-                if ([[BTPeerManager instance] doneSyncFromSPV]) {
+                if ([[BTPeerManager instance] doneSyncFromSPV] && [BTPeerManager instance].connectedPeers.count > 0) {
                     [self syncSpvFromBitcoinDone];
                 } else {
                     if (![[BTPeerManager instance] connected]) {

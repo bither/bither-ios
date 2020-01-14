@@ -86,7 +86,7 @@
         for (int k = 0; k < count; k++) {
             NSObject *ai = inAddresses[k];
             if (ai == [NSNull null]) {
-                ai = @"Coinbase";
+                ai = NSLocalizedString(@"Unknown Address", nil);
             }
             if (![StringUtil compareString:address.address compare:(NSString *) ai] && a.length < 30) {
                 a = (NSString *) ai;
@@ -135,7 +135,7 @@
         }
         return NSOrderedSame;
     }];
-    if (a.length > 4 && ![StringUtil compareString:a compare:@"Coinbase"]) {
+    if (a.length > 4 && ![StringUtil compareString:a compare:NSLocalizedString(@"Unknown Address", nil)]) {
         a = [StringUtil shortenAddress:a];
     }
     [self.vTransactionConfidence showTransaction:tx withAddress:address];

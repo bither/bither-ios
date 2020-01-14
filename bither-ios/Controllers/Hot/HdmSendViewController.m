@@ -287,7 +287,11 @@
         [reader playSuccessSound];
         [reader vibrate];
         if (isValidBitcoinAddress) {
-            self.tfAddress.text = result;
+            if (result.isBitcoinNewAddressPrefix) {
+                self.tfAddress.text = [result lowercaseString];
+            } else {
+                self.tfAddress.text = result;
+            }
             [reader.presentingViewController dismissViewControllerAnimated:YES completion:^{
                 [self check];
                 [self.amtLink becomeFirstResponder];

@@ -240,8 +240,14 @@
             [reader playSuccessSound];
             [reader vibrate];
             if (isValidBitcoinAddress) {
-                self.tfAddress.text = result;
+                if (!result.isBitcoinNewAddressPrefix) {
+                    self.tfAddress.text = result;
+                }
                 [self dismissViewControllerAnimated:YES completion:^{
+                    if (result.isBitcoinNewAddressPrefix) {
+                        [self showBannerWithMessage:NSLocalizedString(@"cold_no_support_bc1_segwit_address", nil) belowView:self.vTopBar];
+                        return;
+                    }
                     [self check];
                     [self.amtLink becomeFirstResponder];
                 }];
@@ -335,7 +341,13 @@
 }
 
 - (BOOL)checkValues {
-    BOOL validAddress = [[self getToAddress] isValidBitcoinAddress];
+    NSString *toAddress = [self getToAddress];
+    BOOL validAddress = [toAddress isValidBitcoinAddress];
+    if ([toAddress isBitcoinNewAddressPrefix]) {
+        self.tfAddress.text = @"";
+        [self showBannerWithMessage:NSLocalizedString(@"cold_no_support_bc1_segwit_address", nil) belowView:self.vTopBar];
+        return false;
+    }
     int64_t amount = self.amtLink.amount;
     return validAddress && amount > 0;
 }

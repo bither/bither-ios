@@ -246,7 +246,12 @@
             [reader vibrate];
             [reader.presentingViewController dismissViewControllerAnimated:YES completion:^{
                 if (isValidBitcoinAddress) {
-                    self.tfAddress.text = result;
+                    if (result.isBitcoinNewAddressPrefix) {
+                        [self showBannerWithMessage:NSLocalizedString(@"cold_no_support_bc1_segwit_address", nil) belowView:self.vTopBar];
+                        return;
+                    } else {
+                        self.tfAddress.text = result;
+                    }
                     [self.amtLink becomeFirstResponder];
                 }
                 if (isValidBitcoinBIP21Address) {
@@ -259,7 +264,6 @@
                 }
                 [self check];
             }];
-
         } else {
             [reader vibrate];
         }
@@ -318,7 +322,13 @@
 }
 
 - (BOOL)checkValues {
-    BOOL validAddress = [[self getToAddress] isValidBitcoinAddress];
+    NSString *toAddress = [self getToAddress];
+    BOOL validAddress = [toAddress isValidBitcoinAddress];
+    if (validAddress && [toAddress isBitcoinNewAddressPrefix]) {
+        self.tfAddress.text = @"";
+        [self showBannerWithMessage:NSLocalizedString(@"cold_no_support_bc1_segwit_address", nil) belowView:self.vTopBar];
+        return false;
+    }
     int64_t amount = self.amtLink.amount;
     return validAddress && amount > 0;
 }

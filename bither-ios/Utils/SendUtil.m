@@ -17,9 +17,6 @@
     if (isNoNetwork) {
         return NSLocalizedString(@"tip_network_error", nil);
     }
-    if (!isSyncComplete) {
-        return NSLocalizedString(@"no_sync_complete", nil);
-    }
     BTPeerManager *peerManager = [BTPeerManager instance];
     if (peerManager.connectedPeers.count == 0) {
         return NSLocalizedString(@"tip_no_peers_connected", nil);
