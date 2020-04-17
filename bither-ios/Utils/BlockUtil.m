@@ -35,6 +35,7 @@
 @interface BlockUtil ()
 
 @property(nonatomic, strong) BTBlockChain *blockChain;
+@property(nonatomic, assign) BOOL isDowloadingSpv;
 
 @end
 
@@ -89,6 +90,21 @@ static BlockUtil *blockUtil;
     return block;
 }
 
++ (BTBlock *)formatBtcComBlock:(NSDictionary *)dict {
+    uint32_t ver = [dict getIntFromDict:@"version" andDefault:1];
+    NSData *pevBlock = [[[dict getStringFromDict:@"prev_block_hash"] hexToData] reverse];
+    NSLog(@"pevBlock : %s", [[NSString hexWithData:pevBlock] UTF8String]);
+    NSData *mrklRoot = [[[dict getStringFromDict:MRKL_ROOT] hexToData] reverse];
+    NSLog(@"mrklRoot : %s", [[NSString hexWithData:mrklRoot] UTF8String]);
+    uint32_t time = [dict getIntFromDict:@"timestamp"];
+    uint32_t bits = [dict getIntFromDict:BITS];
+    uint32_t nonce = [dict getIntFromDict:NONCE];
+    int blockNo = [dict getIntFromDict:HEIGHT];
+    BTBlock *block = [[BTBlock alloc] initWithVersion:ver prevBlock:pevBlock merkleRoot:mrklRoot timestamp:time target:bits nonce:nonce height:blockNo];
+    return block;
+}
+
+
 - (void)syncSpvBlock {
     [self dowloadSpvBlock:^{
         if ([[BTPeerManager instance] doneSyncFromSPV]) {
@@ -101,7 +117,6 @@ static BlockUtil *blockUtil;
             }
         }
     }];
-
 }
 
 - (void)dowloadSpvBlock:(VoidBlock)callback {
@@ -110,7 +125,12 @@ static BlockUtil *blockUtil;
             callback();
         }
     } else {
+        if (_isDowloadingSpv) {
+            return;
+        }
+        self.isDowloadingSpv = YES;
         [[BitherApi instance] getSpvBlock:^(NSDictionary *dict) {
+            self.isDowloadingSpv = NO;
             BTBlock *block = [BlockUtil formatBlcok:dict];
             if (block.blockNo % 2016 != 0) {
                 if ([self.delegate respondsToSelector:@selector(error)]) {
@@ -124,8 +144,9 @@ static BlockUtil *blockUtil;
                 }
             }
         } andErrorCallBack:^(NSOperation *errorOp, NSError *error) {
-            [[BitherApi instance] getSpvBlockByBlockChain:^(NSDictionary *dict) {
-                BTBlock *block = [BlockUtil formatBlcokChainBlock:dict];
+            [[BitherApi instance] getSpvBlockByBtcCom:^(NSDictionary *dict) {
+                self.isDowloadingSpv = NO;
+                BTBlock *block = [BlockUtil formatBtcComBlock:dict];
                 if (block.blockNo % 2016 != 0) {
                     if ([self.delegate respondsToSelector:@selector(error)]) {
                         [self.delegate error];
@@ -138,9 +159,26 @@ static BlockUtil *blockUtil;
                     }
                 }
             } andErrorCallBack:^(NSOperation *errorOp, NSError *error) {
-                if ([self.delegate respondsToSelector:@selector(error)]) {
-                    [self.delegate error];
-                }
+                [[BitherApi instance] getSpvBlockByBlockChain:^(NSDictionary *dict) {
+                    self.isDowloadingSpv = NO;
+                    BTBlock *block = [BlockUtil formatBlcokChainBlock:dict];
+                    if (block.blockNo % 2016 != 0) {
+                        if ([self.delegate respondsToSelector:@selector(error)]) {
+                            [self.delegate error];
+                        }
+                    } else {
+                        [[UserDefaultsUtil instance] setDownloadSpvFinish:true];
+                        [self.blockChain addSPVBlock:block];
+                        if (callback) {
+                            callback();
+                        }
+                    }
+                } andErrorCallBack:^(NSOperation *errorOp, NSError *error) {
+                    self.isDowloadingSpv = NO;
+                    if ([self.delegate respondsToSelector:@selector(error)]) {
+                        [self.delegate error];
+                    }
+                }];
             }];
         }];
     }

@@ -24,6 +24,8 @@
 #define BITHER_GET_ONE_SPVBLOCK_API @"api/v2/block/spv/one"
 #define BLOCKCHAIN_INFO_GET_LASTST_BLOCK @"latestblock"
 #define BLOCKCHAIN_GET_ONE_SPVBLOCK_API @"block-height/%d?format=json"
+#define BTC_COM_GET_LASTST_BLOCK @"v3/block/latest"
+#define BTC_COM_GET_ONE_SPVBLOCK_API @"v3/block/%d"
 #define BITHER_IN_SIGNATURES_API  @"api/v1/address/%@/insignature/%d"
 #define SPLIT_BROADCAST @"https://bitpie.getcai.com/api/v1/%@/broadcast"
 

@@ -94,6 +94,74 @@ static BitherApi *piApi;
     } ssl:NO];
 }
 
+-(void)getSpvBlockByBtcCom:(DictResponseBlock)callback andErrorCallBack:(ErrorHandler)errorCallback {
+    [self execGetBlockChain:BTC_COM_GET_LASTST_BLOCK withParams:nil networkType:ChainBtcCom completed:^(MKNetworkOperation *completedOperation) {
+        if (![StringUtil isEmpty:completedOperation.responseString]) {
+            NSDictionary *dict = [completedOperation responseJSON];
+            NSDictionary *data = [self getBtcComData:dict andErrorCallBack:errorCallback];
+            if (!data) {
+                return;
+            }
+            int latestHeight = [[data objectForKey:@"height"] intValue];
+            int height = 0;
+            if (latestHeight % 2016 !=0){
+                height = latestHeight - (latestHeight%2016);
+            }else {
+                height = latestHeight;
+            }
+            [self execGetBlockChain:[NSString stringWithFormat:BTC_COM_GET_ONE_SPVBLOCK_API, height] withParams:nil networkType:ChainBtcCom completed:^(MKNetworkOperation *completedOpera) {
+                NSLog(@"blockchain spv: %s", [completedOpera.responseString UTF8String]);
+                NSDictionary *dic = [completedOpera responseJSON];
+                NSDictionary *block = [self getBtcComData:dic andErrorCallBack:errorCallback];
+                if (!block) {
+                    return;
+                }
+                if (callback) {
+                    callback(block);
+                }
+            } andErrorCallback:^(NSOperation *errorOp, NSError *error) {
+                if (errorCallback) {
+                    errorCallback(errorOp, error);
+                }
+            } ssl:NO];
+        } else {
+            if (errorCallback) {
+                errorCallback([[NSOperation alloc] init], [[NSError alloc] initWithDomain:@"btc com response error" code:400 userInfo:NULL]);
+            }
+        }
+    } andErrorCallback:^(NSOperation *errorOp, NSError *error) {
+        if (errorCallback) {
+            errorCallback(errorOp, error);
+        }
+    } ssl:NO];
+}
+
+- (NSDictionary *)getBtcComData:(NSDictionary *)dict andErrorCallBack:(ErrorHandler)errorCallback {
+    if (!dict) {
+        if (errorCallback) {
+            errorCallback([[NSOperation alloc] init], [[NSError alloc] initWithDomain:@"btc com response error" code:400 userInfo:NULL]);
+        }
+        return NULL;
+    }
+    if ([dict[@"err_no"] intValue] != 0) {
+        NSString *errMsg = [dict[@"err_msg"] stringValue];
+        if (errMsg) {
+            errMsg = @"btc com response error";
+        }
+        if (errorCallback) {
+            errorCallback([[NSOperation alloc] init], [[NSError alloc] initWithDomain:errMsg code:400 userInfo:NULL]);
+        }
+        return NULL;
+    }
+    NSDictionary *dataDict = dict[@"data"];
+    if (!dataDict) {
+        if (errorCallback) {
+            errorCallback([[NSOperation alloc] init], [[NSError alloc] initWithDomain:@"btc com response error" code:400 userInfo:NULL]);
+        }
+    }
+    return dataDict;
+}
+
 - (void)getInSignaturesApi:(NSString *)address fromBlock:(int)blockNo callback:(IdResponseBlock)callback andErrorCallBack:(ErrorHandler)errorCallback {
     NSString *url = [NSString stringWithFormat:BITHER_IN_SIGNATURES_API, address, blockNo];
     [self          get:url withParams:nil networkType:BitherBitcoin completed:^(MKNetworkOperation *completedOperation) {

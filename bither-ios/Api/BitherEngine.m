@@ -41,7 +41,7 @@ static MKNetworkEngine *chainBtcComEngine;
             blockChainEngine = [[MKNetworkEngine alloc]
                 initWithHostName:@"blockchain.info" customHeaderFields:headerFields];
             chainBtcComEngine = [[MKNetworkEngine alloc]
-                initWithHostName:@"chain.btc.com" customHeaderFields:headerFields];
+                initWithHostName:@"chain.api.btc.com" customHeaderFields:headerFields];
         }
     }
     return bitherEngine;
