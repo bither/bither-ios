@@ -100,9 +100,7 @@
     self.preview.videoGravity = AVLayerVideoGravityResizeAspectFill;
     self.preview.frame = self.view.layer.bounds;
     [self.vCamera.layer addSublayer:self.preview];
-    dispatch_async(dispatch_queue_create("scan", NULL), ^{
-        [self.session startRunning];
-    });
+    [self sessionStartRunning];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -125,17 +123,18 @@
     return self;
 }
 
-- (void)viewWillDisappear:(BOOL)animated {
-    [super viewWillDisappear:animated];
+- (void)viewDidDisappear:(BOOL)animated {
+    [super viewDidDisappear:animated];
 }
 
-- (void)viewDidDisappear:(BOOL)animated {
-    [self.session removeOutput:self.session.outputs.firstObject];
-    [self.session stopRunning];
-    self.session = nil;
-    [self.preview removeFromSuperlayer];
-    self.preview = nil;
-    [super viewDidDisappear:animated];
+-(void)sessionStartRunning {
+    __weak typeof(self) weakSelf = self;
+    dispatch_async(dispatch_queue_create("scan", DISPATCH_QUEUE_SERIAL), ^{
+        __strong typeof(weakSelf) strongSelf = weakSelf;
+        if (!strongSelf.session.running) {
+            [strongSelf.session startRunning];
+        }
+    });
 }
 
 - (void)captureOutput:(AVCaptureOutput *)captureOutput didOutputMetadataObjects:(NSArray *)metadataObjects fromConnection:(AVCaptureConnection *)connection {
@@ -295,6 +294,13 @@
             [self.scanDelegate handleScanCancelByReader:self];
         }
     }];
+    [self.session removeOutput:self.session.outputs.firstObject];
+    [self.preview removeFromSuperlayer];
+    self.preview = nil;
+    if (self.session.running) {
+        [self.session stopRunning];
+    }
+    self.session = nil;
 }
 
 - (void)flashClick:(UIButton *)sender {
