@@ -62,9 +62,8 @@ static MKNetworkEngine *picNetworkEngine;
     }             errorHandler:^(MKNetworkOperation *errorOp, NSError *error) {
         NSLog(@" upload image error:%@", error);
         if (errorCallback) {
-            errorCallback(errorOp, error);
+            errorCallback(error);
         }
-
     }];
     [engine enqueueOperation:post];
 

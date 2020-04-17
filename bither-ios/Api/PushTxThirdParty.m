@@ -8,12 +8,12 @@
 
 #import "PushTxThirdParty.h"
 #import <Bitheri/NSString+Base58.h>
-#import "AFHTTPRequestOperationManager.h"
+#import "AFHTTPSessionManager.h"
 
 static PushTxThirdParty* instance;
 
-@implementation PushTxThirdParty{
-    AFHTTPRequestOperationManager* manager;
+@implementation PushTxThirdParty {
+    AFHTTPSessionManager* manager;
 }
 
 +(instancetype)instance{
@@ -25,7 +25,7 @@ static PushTxThirdParty* instance;
 
 -(instancetype)init{
     if (!(self = [super init])) return nil;
-    manager = [AFHTTPRequestOperationManager manager];
+    manager = [AFHTTPSessionManager manager];
     return self;
 }
 
@@ -40,9 +40,9 @@ static PushTxThirdParty* instance;
 
 -(void)pushToUrl:(NSString*)url key:(NSString*)key rawTx:(NSString*)rawTx tag:(NSString*)tag {
     NSLog(@"begin push tx to %@", tag);
-    [manager POST:url parameters:@{key: rawTx} success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
+    [manager POST:url parameters:@{key: rawTx} headers:NULL progress:NULL success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         NSLog(@"push tx to %@ success", tag);
-    } failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         NSLog(@"push tx to %@ failed", tag);
     }];
 }

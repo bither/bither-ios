@@ -55,9 +55,9 @@ static BitherApi *piApi;
                 callback(dict);
             }
         }
-    } andErrorCallback:^(NSOperation *errorOp, NSError *error) {
+    } andErrorCallback:^(NSError *error) {
         if (errorCallback) {
-            errorCallback(errorOp, error);
+            errorCallback(error);
         }
     }];
     
@@ -81,15 +81,15 @@ static BitherApi *piApi;
                 if (callback) {
                     callback(block);
                 }
-            } andErrorCallback:^(NSOperation *errorOp, NSError *error) {
+            } andErrorCallback:^(NSError *error) {
                 if (errorCallback) {
-                    errorCallback(errorOp, error);
+                    errorCallback(error);
                 }
             } ssl:NO];
         }
-    } andErrorCallback:^(NSOperation *errorOp, NSError *error) {
+    } andErrorCallback:^(NSError *error) {
         if (errorCallback) {
-            errorCallback(errorOp, error);
+            errorCallback(error);
         }
     } ssl:NO];
 }
@@ -119,19 +119,19 @@ static BitherApi *piApi;
                 if (callback) {
                     callback(block);
                 }
-            } andErrorCallback:^(NSOperation *errorOp, NSError *error) {
+            } andErrorCallback:^(NSError *error) {
                 if (errorCallback) {
-                    errorCallback(errorOp, error);
+                    errorCallback(error);
                 }
             } ssl:NO];
         } else {
             if (errorCallback) {
-                errorCallback([[NSOperation alloc] init], [[NSError alloc] initWithDomain:@"btc com response error" code:400 userInfo:NULL]);
+                errorCallback([[NSError alloc] initWithDomain:@"btc com response error" code:400 userInfo:NULL]);
             }
         }
-    } andErrorCallback:^(NSOperation *errorOp, NSError *error) {
+    } andErrorCallback:^(NSError *error) {
         if (errorCallback) {
-            errorCallback(errorOp, error);
+            errorCallback(error);
         }
     } ssl:NO];
 }
@@ -139,7 +139,7 @@ static BitherApi *piApi;
 - (NSDictionary *)getBtcComData:(NSDictionary *)dict andErrorCallBack:(ErrorHandler)errorCallback {
     if (!dict) {
         if (errorCallback) {
-            errorCallback([[NSOperation alloc] init], [[NSError alloc] initWithDomain:@"btc com response error" code:400 userInfo:NULL]);
+            errorCallback([[NSError alloc] initWithDomain:@"btc com response error" code:400 userInfo:NULL]);
         }
         return NULL;
     }
@@ -149,14 +149,14 @@ static BitherApi *piApi;
             errMsg = @"btc com response error";
         }
         if (errorCallback) {
-            errorCallback([[NSOperation alloc] init], [[NSError alloc] initWithDomain:errMsg code:400 userInfo:NULL]);
+            errorCallback([[NSError alloc] initWithDomain:errMsg code:400 userInfo:NULL]);
         }
         return NULL;
     }
     NSDictionary *dataDict = dict[@"data"];
     if (!dataDict) {
         if (errorCallback) {
-            errorCallback([[NSOperation alloc] init], [[NSError alloc] initWithDomain:@"btc com response error" code:400 userInfo:NULL]);
+            errorCallback([[NSError alloc] initWithDomain:@"btc com response error" code:400 userInfo:NULL]);
         }
     }
     return dataDict;
@@ -169,9 +169,9 @@ static BitherApi *piApi;
             callback(completedOperation.responseString);
         }
         
-    } andErrorCallback:^(NSOperation *errorOp, NSError *error) {
+    } andErrorCallback:^(NSError *error) {
         if (errorCallback) {
-            errorCallback(errorOp, error);
+            errorCallback(error);
         }
     }];
     
@@ -184,9 +184,9 @@ static BitherApi *piApi;
             callback(completedOperation.responseJSON);
         }
         
-    } andErrorCallback:^(NSOperation *errorOp, NSError *error) {
+    } andErrorCallback:^(NSError *error) {
         if (errorCallback) {
-            errorCallback(errorOp, error);
+            errorCallback(error);
         }
     }];
 }
@@ -209,9 +209,9 @@ static BitherApi *piApi;
             }
         });
         
-    } andErrorCallback:^(NSOperation *errorOp, NSError *error) {
+    } andErrorCallback:^(NSError *error) {
         if (errorCallback) {
-            errorCallback(errorOp, error);
+            errorCallback(error);
         }
         
     } ssl:NO];
@@ -232,9 +232,9 @@ static BitherApi *piApi;
             }
         });
         
-    } andErrorCallback:^(NSOperation *errorOp, NSError *error) {
+    } andErrorCallback:^(NSError *error) {
         if (errorCallback) {
-            errorCallback(errorOp, error);
+            errorCallback(error);
         }
         
         
@@ -255,9 +255,9 @@ static BitherApi *piApi;
                 }
             }
         });
-    } andErrorCallback:^(NSOperation *errorOp, NSError *error) {
+    } andErrorCallback:^(NSError *error) {
         if (errorCallback) {
-            errorCallback(errorOp, error);
+            errorCallback(error);
         }
     }];
 }
@@ -275,9 +275,9 @@ static BitherApi *piApi;
             }
         });
         
-    } andErrorCallback:^(NSOperation *errorOp, NSError *error) {
+    } andErrorCallback:^(NSError *error) {
         if (errorCallback) {
-            errorCallback(errorOp, error);
+            errorCallback(error);
         }
     }];
 }
@@ -298,12 +298,12 @@ static BitherApi *piApi;
                 }
             }
         });
-    } andErrorCallback:^(NSOperation *errorOp, NSError *error) {
+    } andErrorCallback:^(NSError *error) {
         [self handleError:error firstEngine:firstEngine requestCount:requestCount retry:^(int requestCount) {
             [self queryAddress:addressesStr firstEngine:firstEngine requestCount:requestCount callback:callback andErrorCallBack:errorCallback];
         } andErrorCallBack:^{
             if (errorCallback) {
-                errorCallback(errorOp, error);
+                errorCallback(error);
             }
         }];
     }];
@@ -327,12 +327,12 @@ static BitherApi *piApi;
                 }
             }
         });
-    } andErrorCallback:^(NSOperation *errorOp, NSError *error) {
+    } andErrorCallback:^(NSError *error) {
         [self handleError:error firstEngine:firstEngine requestCount:requestCount retry:^(int requestCount) {
             [self queryAddressUnspent:address withPage:page firstEngine:firstEngine requestCount:requestCount callback:callback andErrorCallBack:errorCallback];
         } andErrorCallBack:^{
             if (errorCallback) {
-                errorCallback(errorOp, error);
+                errorCallback(error);
             }
         }];
     }];
@@ -356,12 +356,12 @@ static BitherApi *piApi;
                 }
             }
         });
-    } andErrorCallback:^(NSOperation *errorOp, NSError *error) {
+    } andErrorCallback:^(NSError *error) {
         [self handleError:error firstEngine:firstEngine requestCount:requestCount retry:^(int requestCount) {
             [self getUnspentTxs:txHashs firstEngine:firstEngine requestCount:requestCount callback:callback andErrorCallBack:errorCallback];
         } andErrorCallBack:^{
             if (errorCallback) {
-                errorCallback(errorOp, error);
+                errorCallback(error);
             }
         }];
     }];
@@ -381,9 +381,9 @@ static BitherApi *piApi;
             }
             
         });
-    } andErrorCallback:^(NSOperation *errorOp, NSError *error) {
+    } andErrorCallback:^(NSError *error) {
         if (errorCallback) {
-            errorCallback(errorOp, error);
+            errorCallback(error);
         }
         
     }];
@@ -397,9 +397,9 @@ static BitherApi *piApi;
         if (callback) {
             callback(nil);
         }
-    } andErrorCallBack:^(NSOperation *errorOp, NSError *error) {
+    } andErrorCallBack:^(NSError *error) {
         if (errorCallback) {
-            errorCallback(errorOp, error);
+            errorCallback(error);
         }
     }];
 }
@@ -433,11 +433,13 @@ static BitherApi *piApi;
 #pragma mark - Ad api
 
 - (void)getAdApi {
-    NSString *url = @"https://github.com/bitpiedotcom/bitpiedotcom.github.com/raw/master/bither/bither_ad.json";
-    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    NSString *url = @"https://bitpie.com/bither/bither_ad.json";
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     manager.responseSerializer = [AFHTTPResponseSerializer serializer];
+    [manager.requestSerializer setCachePolicy:NSURLRequestReloadIgnoringLocalCacheData];
     self.isLoadImageNum = 0;
-    [manager GET:url parameters:nil success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
+    
+    [manager GET:url parameters:nil headers:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
             NSDictionary *responseDic = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingAllowFragments error:nil];
             if ([AdUtil isDownloadImageForNewAdDic:responseDic]) {
@@ -451,32 +453,32 @@ static BitherApi *piApi;
 
 - (void)getHasSplitCoinAddress:(NSString *)address splitCoin:(SplitCoin)splitCoin callback:(DictResponseBlock)callback andErrorCallBack:(ErrorHandler)errorCallback {
     NSString *url = [NSString stringWithFormat:SPLIT_HAS_ADDRESS,[SplitCoinUtil getPathCoinCodee:splitCoin],address];
-    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     manager.responseSerializer = [AFHTTPResponseSerializer serializer];
-    [manager GET:url parameters:nil success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
+    [manager GET:url parameters:nil headers:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         NSDictionary *responseDic = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingAllowFragments error:nil];
         if (callback) {
             callback(responseDic);
         }
-    } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         if (errorCallback) {
-            errorCallback(operation, error);
+            errorCallback(error);
         }
     }];
 }
 
 - (void)getBcdPreBlockHashCallback:(DictResponseBlock)callback andErrorCallBack:(ErrorHandler)errorCallback {
     NSString *urlStr = BCD_PREBLOCKHASH;
-    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     manager.responseSerializer = [AFHTTPResponseSerializer serializer];
-    [manager GET:urlStr parameters:nil success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
+    [manager GET:urlStr parameters:nil headers:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         NSDictionary *responseDic = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingAllowFragments error:nil];
         if (callback) {
             callback(responseDic);
         }
-    } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         if (errorCallback) {
-            errorCallback(operation, error);
+            errorCallback(error);
         }
     }];
 }
@@ -489,21 +491,21 @@ static BitherApi *piApi;
         dict = @{@"raw_tx": [NSString hexWithData:tx.toData]};
     }
 
-    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     manager.responseSerializer = [AFJSONResponseSerializer serializer];
     manager.requestSerializer = [AFJSONRequestSerializer serializer];
     manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json", @"text/json", @"text/javascript",@"text/html", @"text/plain", nil];
     [manager.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Accept"];
     [manager.requestSerializer setValue:@"application/json; charset=utf-8" forHTTPHeaderField:@"Content-Type"];
     NSString *urlStr = [NSString stringWithFormat:SPLIT_BROADCAST, [SplitCoinUtil getPathCoinCodee:splitCoin]];
-    [manager POST:urlStr parameters:dict success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
+    [manager POST:urlStr parameters:dict headers:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         NSDictionary *responseDic = responseObject;
         if (callback) {
             callback(responseDic);
         }
-    } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         if (errorCallback) {
-            errorCallback(operation, error);
+            errorCallback(error);
         }
     }];
 }

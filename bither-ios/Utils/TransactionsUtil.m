@@ -77,7 +77,7 @@
             } else {
                 [self getAddressState:addressList index:index callback:callback andErrorCallback:errorBlcok];
             }
-        }                        andErrorCallBack:^(NSOperation *errorOp, NSError *error) {
+        }                        andErrorCallBack:^(NSError *error) {
             if (errorBlcok) {
                 errorBlcok(error);
             }
@@ -318,11 +318,11 @@
         }
         return;
     }
-    ErrorHandler errorHandler = ^(NSOperation *errorOp, NSError *error) {
+    ErrorHandler errorHandler = ^(NSError *error) {
         if (errorCallback) {
-            errorCallback(errorOp, error);
+            errorCallback(error);
         }
-        NSLog(@"get my transcation api %@", errorOp);
+        NSLog(@"get my transcation api %@", error);
     };
     __block DictResponseBlock nextPageBlock = ^(NSDictionary *dict) {
         int txCnt = [dict[@"n_tx"] intValue];
@@ -540,11 +540,11 @@
 
 + (void)getUnspentTxForHDAccountAddress:(BTHDAccountAddress *)address callback:(VoidBlock)callback andErrorCallBack:(ErrorHandler)errorCallback {
     __block int page = 1;
-    ErrorHandler errorHandler = ^(NSOperation *errorOp, NSError *error) {
+    ErrorHandler errorHandler = ^(NSError *error) {
         if (errorCallback) {
-            errorCallback(errorOp, error);
+            errorCallback(error);
         }
-        NSLog(@"get my transcation api %@", errorOp);
+        NSLog(@"get my transcation api %@", error);
     };
     
     __block uint32_t blockCount = 0;
@@ -633,11 +633,11 @@
         }
         return;
     }
-    ErrorHandler errorHandler = ^(NSOperation *errorOp, NSError *error) {
+    ErrorHandler errorHandler = ^(NSError *error) {
         if (errorCallback) {
-            errorCallback(errorOp, error);
+            errorCallback(error);
         }
-        NSLog(@"get my transcation api %@", errorOp);
+        NSLog(@"get my transcation api %@", error);
     };
 
     __block DictResponseBlock nextPageBlock = ^(NSDictionary *dict) {
@@ -698,11 +698,11 @@
 + (void)getTxsFromBlockChain:(BTAddress *)address callback:(VoidBlock)callback andErrorCallBack:(ErrorHandler)errorCallback{
     __block int page = 0;
     
-    ErrorHandler errorHandler = ^(NSOperation *errOp,NSError *error){
+    ErrorHandler errorHandler = ^(NSError *error){
         if (errorCallback) {
-            errorCallback(errOp,error);
+            errorCallback(error);
         }
-        NSLog(@"get my transcation Api %@",errOp);
+        NSLog(@"get my transcation Api %@",error);
     };
     __block DictResponseBlock nextPageBlock = ^(NSDictionary *dict) {
         int txCnt = [dict[@"n_tx"] intValue];
@@ -756,11 +756,11 @@
 + (void)getUnspentTxs:(BTAddress *)address callback:(VoidBlock)callback andErrorCallBack:(ErrorHandler)errorCallback {
     __block int page = 1;
     
-    ErrorHandler errorHandler = ^(NSOperation *errorOp, NSError *error) {
+    ErrorHandler errorHandler = ^(NSError *error) {
         if (errorCallback) {
-            errorCallback(errorOp, error);
+            errorCallback(error);
         }
-        NSLog(@"get my transcation api %@", errorOp);
+        NSLog(@"get my transcation api %@", error);
     };
     
     __block uint32_t blockCount = 0;
@@ -882,11 +882,11 @@
 + (void)getTxs:(BTAddress *)address callback:(VoidBlock)callback andErrorCallBack:(ErrorHandler)errorCallback {
     __block int page = 1;
 
-    ErrorHandler errorHandler = ^(NSOperation *errorOp, NSError *error) {
+    ErrorHandler errorHandler = ^(NSError *error) {
         if (errorCallback) {
-            errorCallback(errorOp, error);
+            errorCallback(error);
         }
-        NSLog(@"get my transcation api %@", errorOp);
+        NSLog(@"get my transcation api %@", error);
     };
 
     __block DictResponseBlock nextPageBlock = ^(NSDictionary *dict) {
@@ -1033,11 +1033,10 @@
             [TransactionsUtil completeInputsForAddressForApi:address fromBlock:newFromBlock callback:callback andErrorCallBack:errorCallback];
         }
 
-    }                       andErrorCallBack:^(NSOperation *errorOp, NSError *error) {
+    }                       andErrorCallBack:^(NSError *error) {
         if (errorCallback) {
-            errorCallback(errorOp, error);
+            errorCallback(error);
         }
-
     }];
 
 }

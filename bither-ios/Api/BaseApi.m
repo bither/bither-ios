@@ -18,7 +18,7 @@
 #import "BaseApi.h"
 
 
-ErrorHandler errorHandler = ^(NSOperation *errorOp, NSError *error) {
+ErrorHandler errorHandler = ^(NSError *error) {
     DLog(@"%@", [error localizedDescription]);
 };
 
@@ -40,9 +40,9 @@ ErrorHandler errorHandler = ^(NSOperation *errorOp, NSError *error) {
             if (completedOperationParam) {
                 completedOperationParam(completedOperation);
             }
-        } andErrorCallBack:^(NSOperation *errorOp, NSError *error) {
+        } andErrorCallBack:^(NSError *error) {
             if (errorCallback) {
-                errorCallback(errorOp, error);
+                errorCallback(error);
             }
         }];
     } else {
@@ -80,9 +80,9 @@ ErrorHandler errorHandler = ^(NSOperation *errorOp, NSError *error) {
     }
     [self   initEngine:^(MKNetworkOperation *completedOperation) {
         [self execGet:url withParams:params networkType:networkType completed:completedOperationParam andErrorCallback:errorCallback ssl:ssl];
-    } andErrorCallback:^(NSOperation *errorOp, NSError *error) {
+    } andErrorCallback:^(NSError *error) {
         if (errorCallback) {
-            errorCallback(errorOp, error);
+            errorCallback(error);
         }
     }];
 }
@@ -97,11 +97,11 @@ ErrorHandler errorHandler = ^(NSOperation *errorOp, NSError *error) {
         // NSLog(@"completedOperation:%@",completedOperation);
         if (completedOperation.HTTPStatusCode == 403) {
             [self    getCookie:^(MKNetworkOperation *completedOperation) {
-            } andErrorCallBack:^(NSOperation *errorOp, NSError *error) {
+            } andErrorCallBack:^(NSError *error) {
             }];
         }
         if (errorCallback != nil) {
-            errorCallback(completedOperation, error);
+            errorCallback(error);
         }
     }];
     [mkNetworkEngine enqueueOperation:get];
@@ -114,7 +114,7 @@ ErrorHandler errorHandler = ^(NSOperation *errorOp, NSError *error) {
         completedOperationParam(completedOperation);
     }            errorHandler:^(MKNetworkOperation *completedOperation, NSError *error) {
         if (errorCallback != nil) {
-            errorCallback(completedOperation, error);
+            errorCallback(error);
         }
     }];
     [mkNetworkEngine enqueueOperation:get];
@@ -136,9 +136,9 @@ ErrorHandler errorHandler = ^(NSOperation *errorOp, NSError *error) {
     }
     [self   initEngine:^(MKNetworkOperation *completedOperation) {
         [self execPost:url withParams:params networkType:networkType completed:completedOperationParam andErrorCallBack:errorCallback ssl:ssl];
-    } andErrorCallback:^(NSOperation *errorOp, NSError *error) {
+    } andErrorCallback:^(NSError *error) {
         if (errorCallback) {
-            errorCallback(errorOp, error);
+            errorCallback(error);
         }
     }];
 }
@@ -151,11 +151,11 @@ ErrorHandler errorHandler = ^(NSOperation *errorOp, NSError *error) {
     }             errorHandler:^(MKNetworkOperation *completedOperation, NSError *error) {
         if (completedOperation.HTTPStatusCode == 403) {
             [self    getCookie:^(MKNetworkOperation *completedOperation) {
-            } andErrorCallBack:^(NSOperation *errorOp, NSError *error) {
+            } andErrorCallBack:^(NSError *error) {
             }];
         }
         if (errorCallback != nil) {
-            errorCallback(completedOperation, error);
+            errorCallback(error);
         }
 
     }];
@@ -181,7 +181,7 @@ ErrorHandler errorHandler = ^(NSOperation *errorOp, NSError *error) {
             }
         }             errorHandler:^(MKNetworkOperation *completedOperation, NSError *error) {
             if (errorCallback) {
-                errorCallback(completedOperation, error);
+                errorCallback(error);
             }
         }];
         [mkNetworkEngine enqueueOperation:post];

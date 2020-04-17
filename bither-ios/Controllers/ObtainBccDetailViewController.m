@@ -25,6 +25,7 @@
 
 @interface ObtainBccDetailViewController () <UITextFieldDelegate, ScanQrCodeDelegate, DialogSendTxConfirmDelegate> {
     DialogProgressChangable *dp;
+    NSString *_toAddress;
 }
 
 @property (weak, nonatomic) IBOutlet UIView *vTopBar;
@@ -71,6 +72,7 @@ static BTAddress * extracted(ObtainBccDetailViewController *object) {
 }
 
 - (IBAction)obtainPressed:(id)sender {
+    _toAddress = _tfAddress.text;
     NSString *checkValues = [self checkValues];
     if (checkValues) {
         [self showMsg:checkValues];
@@ -88,33 +90,35 @@ static BTAddress * extracted(ObtainBccDetailViewController *object) {
                 return;
             }
             if(self.splitCoin == SplitBCD) {
-                [self getBcdPreBlockHash];
-            }else{
-                [self signTransactionPreBlockHash:NULL];
+                [self getBcdPreBlockHash: _tfPassword.text];
+            } else {
+                [self signTransactionPreBlockHash:NULL passwordText:_tfPassword.text];
             }
-        } andErrorCallBack:^(NSOperation *errorOp, NSError *error) {
+        } andErrorCallBack:^(NSError *error) {
             [self showMsg:NSLocalizedString(@"Network failure.", nil)];
             return;
         }];
     }];
 }
-- (void) getBcdPreBlockHash{
+
+- (void) getBcdPreBlockHash:(NSString *)password {
     dispatch_async(dispatch_get_main_queue(), ^{
         [[BitherApi instance] getBcdPreBlockHashCallback:^(NSDictionary *dict) {
             NSString* preBlockHash = dict[@"current_block_hash"];
-            if(preBlockHash == NULL || [preBlockHash isEqualToString:@""]) {
+            if (preBlockHash == NULL || [preBlockHash isEqualToString:@""]) {
                 [self showMsg:NSLocalizedString(@"get_bcd_block_hash_error", nil)];
-            }else{
-                    [self signTransactionPreBlockHash:preBlockHash];
+            } else {
+                [self signTransactionPreBlockHash:preBlockHash passwordText:password];
             }
-        } andErrorCallBack:^(NSOperation *errorOp, NSError *error) {
+        } andErrorCallBack:^(NSError *error) {
             [self showMsg:NSLocalizedString(@"Network failure.", nil)];
         }];
     });
 }
--(void)signTransactionPreBlockHash:(NSString*)hash{
+
+-(void)signTransactionPreBlockHash:(NSString*)hash passwordText:(NSString *)password {
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
-        if (![[BTPasswordSeed getPasswordSeed] checkPassword:self.tfPassword.text]) {
+        if (![[BTPasswordSeed getPasswordSeed] checkPassword:password]) {
             [self showPasswordWrong];
             return;
         }
@@ -122,7 +126,7 @@ static BTAddress * extracted(ObtainBccDetailViewController *object) {
         NSString *toAddress = [self getToAddress];
         NSArray *txs;
         if ([self.btAddress isMemberOfClass:[BTHDAccount class]]) {
-            txs = [(BTHDAccount *)extracted(self) newSplitCoinTxsToAddresses:@[toAddress] withAmounts:@[@(self.amount)] andChangeAddress:toAddress password:self.tfPassword.text andError:&error coin:[SplitCoinUtil getCoin:self.splitCoin] blockHah:hash];
+            txs = [(BTHDAccount *)extracted(self) newSplitCoinTxsToAddresses:@[toAddress] withAmounts:@[@(self.amount)] andChangeAddress:toAddress password:password andError:&error coin:[SplitCoinUtil getCoin:self.splitCoin] blockHah:hash];
         } else {
             txs = [self.btAddress splitCoinTxsForAmounts:@[@(self.amount)] andAddress:@[toAddress] andChangeAddress:toAddress andError:&error coin:[SplitCoinUtil getCoin:self.splitCoin]];
         }
@@ -188,7 +192,7 @@ static BTAddress * extracted(ObtainBccDetailViewController *object) {
                         errorMsg = [NSString stringWithFormat:@"%@: %@", code, message];
                     }
                     dispatch_group_leave(group);
-                } andErrorCallBack:^(NSOperation *errorOp, NSError *error) {
+                } andErrorCallBack:^(NSError *error) {
                     errorMsg = NSLocalizedString(@"Send failed.", nil);
                     dispatch_group_leave(group);
                 }];
@@ -313,7 +317,7 @@ static BTAddress * extracted(ObtainBccDetailViewController *object) {
 }
 
 - (NSString *)getToAddress {
-    return [StringUtil removeBlankSpaceString:self.tfAddress.text];
+    return [StringUtil removeBlankSpaceString:_toAddress];
 }
 
 - (void)configureTextField:(UITextField *)tf {

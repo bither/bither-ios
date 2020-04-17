@@ -98,7 +98,7 @@
                 [self signTransactionPreBlockHash:NULL];
             }
             
-        } andErrorCallBack:^(NSOperation *errorOp, NSError *error) {
+        } andErrorCallBack:^(NSError *error) {
             [self showMsg:NSLocalizedString(@"Network failure.", nil)];
             return;
         }];
@@ -114,7 +114,7 @@
             }else{
                 [self signTransactionPreBlockHash:preBlockHash];
             }
-        } andErrorCallBack:^(NSOperation *errorOp, NSError *error) {
+        } andErrorCallBack:^(NSError *error) {
             [self showMsg:NSLocalizedString(@"Network failure.", nil)];
         }];
     });
@@ -249,7 +249,7 @@
                         errorMsg = [NSString stringWithFormat:@"%@: %@", code, message];
                     }
                     dispatch_group_leave(group);
-                } andErrorCallBack:^(NSOperation *errorOp, NSError *error) {
+                } andErrorCallBack:^(NSError *error) {
                     errorMsg = NSLocalizedString(@"Send failed.", nil);
                     dispatch_group_leave(group);
                 }];

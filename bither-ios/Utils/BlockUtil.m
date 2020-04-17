@@ -143,7 +143,7 @@ static BlockUtil *blockUtil;
                     callback();
                 }
             }
-        } andErrorCallBack:^(NSOperation *errorOp, NSError *error) {
+        } andErrorCallBack:^(NSError *error) {
             [[BitherApi instance] getSpvBlockByBtcCom:^(NSDictionary *dict) {
                 self.isDowloadingSpv = NO;
                 BTBlock *block = [BlockUtil formatBtcComBlock:dict];
@@ -158,7 +158,7 @@ static BlockUtil *blockUtil;
                         callback();
                     }
                 }
-            } andErrorCallBack:^(NSOperation *errorOp, NSError *error) {
+            } andErrorCallBack:^(NSError *error) {
                 [[BitherApi instance] getSpvBlockByBlockChain:^(NSDictionary *dict) {
                     self.isDowloadingSpv = NO;
                     BTBlock *block = [BlockUtil formatBlcokChainBlock:dict];
@@ -173,7 +173,7 @@ static BlockUtil *blockUtil;
                             callback();
                         }
                     }
-                } andErrorCallBack:^(NSOperation *errorOp, NSError *error) {
+                } andErrorCallBack:^(NSError *error) {
                     self.isDowloadingSpv = NO;
                     if ([self.delegate respondsToSelector:@selector(error)]) {
                         [self.delegate error];

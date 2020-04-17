@@ -13,7 +13,6 @@
 #import "NSString+Base58.h"
 #import "BTBIP32Key.h"
 #import "HDMApi.h"
-#import "AFHTTPRequestOperationManager.h"
 #import "HDMApi.h"
 #import "NSData+Hash.h"
 #import "BTHDMAddress.h"

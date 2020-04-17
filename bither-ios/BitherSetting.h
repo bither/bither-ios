@@ -99,7 +99,7 @@ typedef void (^ArrayResponseBlock)(NSArray *array);
 
 typedef void (^ImageResponseBlock)(UIImage *image, NSURL *url);
 
-typedef void (^ErrorHandler)(NSOperation *errorOp, NSError *error);
+typedef void (^ErrorHandler)(NSError *error);
 
 typedef void (^CompletedOperation)(MKNetworkOperation *completedOperation);
 

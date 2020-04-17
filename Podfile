@@ -1,9 +1,9 @@
 source 'https://github.com/CocoaPods/Specs.git'
-platform :ios, '7.0'
+platform :ios, '9.0'
 
 def shared_pods
     pod 'KSCrash', '~> 0.0.3'
-    pod 'AFNetworking', '~> 2.0'
+    pod 'AFNetworking', '~> 4.0'
     pod 'RegexKitLite', '~> 4.0'
     pod 'SimpleKeychain'
     pod 'FXBlurView'

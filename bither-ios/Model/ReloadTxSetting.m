@@ -81,7 +81,7 @@ static Setting *reloadTxsSetting;
                 [self.controller performSelector:@selector(showMsg:) withObject:NSLocalizedString(@"Reload transactions data success", nil)];
             }
             
-        }           andErrorCallBack:^(NSOperation *errorOp, NSError *error) {
+        }           andErrorCallBack:^(NSError *error) {
             if (dialogProgrees) {
                 [dialogProgrees dismiss];
             }
@@ -120,7 +120,7 @@ static Setting *reloadTxsSetting;
             }
 
 
-        }           andErrorCallBack:^(NSOperation *errorOp, NSError *error) {
+        }           andErrorCallBack:^(NSError *error) {
             if (dialogProgrees) {
                 [dialogProgrees dismiss];
             }

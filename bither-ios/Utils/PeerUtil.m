@@ -79,7 +79,7 @@ static PeerUtil *peerUtil;
             [TransactionsUtil syncWalletFrom_blockChain:^{
                 [self connectPeer];
                 isRunning = NO;
-            }           andErrorCallBack:^(NSOperation *errorOp, NSError *error) {
+            }           andErrorCallBack:^(NSError *error) {
                 isRunning = NO;
             }];
         }
@@ -92,7 +92,7 @@ static PeerUtil *peerUtil;
             [self connectPeer];
             isRunning = NO;
             [[NSNotificationCenter defaultCenter] postNotificationName:@"BTAddressTxLoadingNotification" object:NULL];
-        }           andErrorCallBack:^(NSOperation *errorOp, NSError *error) {
+        }           andErrorCallBack:^(NSError *error) {
             isRunning = NO;
             [[NSNotificationCenter defaultCenter] postNotificationName:@"BTAddressTxLoadingNotification" object:NULL];
         }           addressTxLoading:^(NSString *string) {

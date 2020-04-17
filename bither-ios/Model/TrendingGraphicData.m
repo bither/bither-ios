@@ -129,7 +129,7 @@ static NSMutableDictionary *tgds;
                 }
             });
 
-        }                     andErrorCallBack:^(NSOperation *errorOp, NSError *error) {
+        }                     andErrorCallBack:^(NSError *error) {
             dispatch_async(dispatch_get_main_queue(), ^{
                 if (errorCallback) {
                     errorCallback(error);

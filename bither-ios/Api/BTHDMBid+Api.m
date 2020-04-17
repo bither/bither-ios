@@ -34,7 +34,7 @@
         serviceRandom = [response longLongValue];
         [condition signal];
         [condition unlock];
-    }                                andErrorCallBack:^(NSOperation *errorOp, NSError *error) {
+    }                                andErrorCallBack:^(NSError *error) {
         [condition lock];
         e = error;
         [condition signal];
@@ -78,7 +78,7 @@
         [condition lock];
         [condition signal];
         [condition unlock];
-    }                             andErrorCallBack:^(NSOperation *errorOp, NSError *error) {
+    }                             andErrorCallBack:^(NSError *error) {
         [condition lock];
         e = error;
         [condition signal];
@@ -131,7 +131,7 @@
         remotes = array;
         [condition signal];
         [condition unlock];
-    }                            andErrorCallBack:^(NSOperation *errorOp, NSError *error) {
+    }                            andErrorCallBack:^(NSError *error) {
         [condition lock];
         e = error;
         [condition signal];
@@ -172,7 +172,7 @@
         pubDict = dict;
         [condition signal];
         [condition unlock];
-    }                             andErrorCallBack:^(NSOperation *errorOp, NSError *error) {
+    }                             andErrorCallBack:^(NSError *error) {
         [condition lock];
         e = error;
         [condition signal];
@@ -218,7 +218,7 @@
         signatures = array;
         [condition signal];
         [condition unlock];
-    }                             andErrorCallBack:^(NSOperation *errorOp, NSError *error) {
+    }                             andErrorCallBack:^(NSError *error) {
         [condition lock];
         e = error;
         [condition signal];
