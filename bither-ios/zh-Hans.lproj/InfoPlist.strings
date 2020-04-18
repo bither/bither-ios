@@ -3,4 +3,9 @@
 {
     CFBundleDisplayName = "比太";
     CFBundleName = "比太";
+    NSCameraUsageDescription = "用于扫描二维码或增加随机性";
+    NSFaceIDUsageDescription = "用于解锁比太";
+    NSMotionUsageDescription = "用于增加随机性";
+    NSPhotoLibraryAddUsageDescription = "用于保存到相册";
+    NSPhotoLibraryUsageDescription = "用于访问相册";
 }

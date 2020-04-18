@@ -3,4 +3,10 @@
 {
     CFBundleDisplayName = "Bither";
     CFBundleName = "Bither";
+    NSCameraUsageDescription = "Used to scan QR code or increase randomness";
+    NSFaceIDUsageDescription = "Used to unlock Bither";
+    NSMotionUsageDescription = "For increasing randomness";
+    NSPhotoLibraryAddUsageDescription = "For saving to album";
+    NSPhotoLibraryUsageDescription = "Used to access albums";
+
 }
