@@ -89,8 +89,6 @@
 
 - (void)awakeFromNib {
     [super awakeFromNib];
-    
-    [self isShowAd];
 }
 
 - (void)viewDidLoad {
