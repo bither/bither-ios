@@ -2275,7 +2275,7 @@ They need separated back ups.</string>
                                 <textInputTraits key="textInputTraits" keyboardType="alphabet" returnKeyType="send" enablesReturnKeyAutomatically="YES" secureTextEntry="YES"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" id="rFx-au-8Hm">
-                                <rect key="frame" x="20" y="262" width="280" height="40"/>
+                                <rect key="frame" x="20" y="300" width="280" height="40"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Send" backgroundImage="button_small_blue_normal">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -2359,12 +2359,36 @@ They need separated back ups.</string>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                             </view>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MzG-nR-7NO">
+                                <rect key="frame" x="294" y="248" width="24" height="24"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
+                                <inset key="contentEdgeInsets" minX="8" minY="8" maxX="8" maxY="8"/>
+                                <state key="normal" image="icon_question"/>
+                                <connections>
+                                    <action selector="btnDynamicMinerFeeQuestionClicked:" destination="Xf8-za-YXH" eventType="touchUpInside" id="ldf-u9-ev8"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nN5-IZ-kcG">
+                                <rect key="frame" x="134" y="252" width="160" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                <inset key="contentEdgeInsets" minX="8" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                <state key="normal" title="  Use Dynamic Miner Fee" image="icon_frame_normal">
+                                    <color key="titleColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <state key="selected" image="icon_frame_press"/>
+                                <connections>
+                                    <action selector="btnUseDynamicMinerFeeClicked:" destination="Xf8-za-YXH" eventType="touchUpInside" id="mQf-5o-PVN"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <connections>
                         <outlet property="amtLink" destination="SYZ-Ik-nmW" id="uZP-zh-ItX"/>
+                        <outlet property="btnDynamicMinerFeeQuestion" destination="MzG-nR-7NO" id="moO-Ah-KBy"/>
                         <outlet property="btnSend" destination="rFx-au-8Hm" id="4Vp-A3-NLv"/>
+                        <outlet property="btnUseDynamicMinerFee" destination="nN5-IZ-kcG" id="72E-NP-xfh"/>
                         <outlet property="lblBalance" destination="bq1-3M-RqW" id="6YX-yn-d8z"/>
                         <outlet property="lblBalancePrefix" destination="GbZ-iW-rIX" id="Cx6-Nr-X2T"/>
                         <outlet property="lblPayTo" destination="4lI-QI-HQr" id="j9L-uT-evY"/>
@@ -2437,7 +2461,7 @@ They need separated back ups.</string>
                                 <textInputTraits key="textInputTraits" keyboardType="decimalPad" returnKeyType="next" enablesReturnKeyAutomatically="YES"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" id="OlL-T9-SKL">
-                                <rect key="frame" x="20" y="192" width="280" height="40"/>
+                                <rect key="frame" x="20" y="230" width="280" height="40"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Send" backgroundImage="button_small_blue_normal">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -2521,12 +2545,36 @@ They need separated back ups.</string>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                             </view>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="m1d-7R-2gK">
+                                <rect key="frame" x="294" y="178" width="24" height="24"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
+                                <inset key="contentEdgeInsets" minX="8" minY="8" maxX="8" maxY="8"/>
+                                <state key="normal" image="icon_question"/>
+                                <connections>
+                                    <action selector="btnDynamicMinerFeeQuestionClicked:" destination="o0d-uZ-7EE" eventType="touchUpInside" id="Cvj-0P-mZk"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="g46-5T-WGR">
+                                <rect key="frame" x="134" y="182" width="160" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                <inset key="contentEdgeInsets" minX="8" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                <state key="normal" title="  Use Dynamic Miner Fee" image="icon_frame_normal">
+                                    <color key="titleColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <state key="selected" image="icon_frame_press"/>
+                                <connections>
+                                    <action selector="btnUseDynamicMinerFeeClicked:" destination="o0d-uZ-7EE" eventType="touchUpInside" id="BdZ-Aw-9xK"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <connections>
                         <outlet property="amtLink" destination="vGE-ge-Zvm" id="SXD-cd-awT"/>
+                        <outlet property="btnDynamicMinerFeeQuestion" destination="m1d-7R-2gK" id="8NM-3B-hCJ"/>
                         <outlet property="btnSend" destination="OlL-T9-SKL" id="riG-7y-tkD"/>
+                        <outlet property="btnUseDynamicMinerFee" destination="g46-5T-WGR" id="EL5-UT-tAj"/>
                         <outlet property="lblBalance" destination="bKW-aE-gcw" id="ksA-3h-B8q"/>
                         <outlet property="lblBalancePrefix" destination="uiN-WE-JlS" id="bHV-V4-poT"/>
                         <outlet property="lblPayTo" destination="F4n-lA-Ige" id="rl7-D1-BLd"/>
@@ -6101,7 +6149,7 @@ They need separated back ups.</string>
                                 <textInputTraits key="textInputTraits" keyboardType="alphabet" returnKeyType="send" enablesReturnKeyAutomatically="YES" secureTextEntry="YES"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" id="ygh-ls-Qes">
-                                <rect key="frame" x="20" y="262" width="280" height="40"/>
+                                <rect key="frame" x="20" y="300" width="280" height="40"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Send" backgroundImage="button_small_blue_normal">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -6185,12 +6233,36 @@ They need separated back ups.</string>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                             </view>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oAa-rV-vaO">
+                                <rect key="frame" x="294" y="248" width="24" height="24"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
+                                <inset key="contentEdgeInsets" minX="8" minY="8" maxX="8" maxY="8"/>
+                                <state key="normal" image="icon_question"/>
+                                <connections>
+                                    <action selector="btnDynamicMinerFeeQuestionClicked:" destination="0yP-DW-zbz" eventType="touchUpInside" id="Xb5-V9-UQM"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Umd-iL-i7K">
+                                <rect key="frame" x="134" y="252" width="160" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                <inset key="contentEdgeInsets" minX="8" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                <state key="normal" title="  Use Dynamic Miner Fee" image="icon_frame_normal">
+                                    <color key="titleColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <state key="selected" image="icon_frame_press"/>
+                                <connections>
+                                    <action selector="btnUseDynamicMinerFeeClicked:" destination="0yP-DW-zbz" eventType="touchUpInside" id="sWi-ZO-fa7"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <connections>
                         <outlet property="amtLink" destination="UHa-Vs-BiS" id="vRT-yt-vYr"/>
+                        <outlet property="btnDynamicMinerFeeQuestion" destination="oAa-rV-vaO" id="muD-gG-6O9"/>
                         <outlet property="btnSend" destination="ygh-ls-Qes" id="Zba-Y2-P72"/>
+                        <outlet property="btnUseDynamicMinerFee" destination="Umd-iL-i7K" id="9q7-fb-i9E"/>
                         <outlet property="lblBalance" destination="z1L-xS-51U" id="n2S-fO-cKK"/>
                         <outlet property="lblBalancePrefix" destination="hsE-yP-NwX" id="65N-Qr-ei7"/>
                         <outlet property="lblPayTo" destination="QtW-gn-Bhz" id="ia1-I0-aDO"/>
@@ -6276,7 +6348,7 @@ They need separated back ups.</string>
                                 <textInputTraits key="textInputTraits" keyboardType="alphabet" returnKeyType="send" enablesReturnKeyAutomatically="YES" secureTextEntry="YES"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" id="7HM-O3-12p">
-                                <rect key="frame" x="20" y="262" width="280" height="40"/>
+                                <rect key="frame" x="20" y="300" width="280" height="40"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Send" backgroundImage="button_small_blue_normal">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -6345,12 +6417,38 @@ They need separated back ups.</string>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                             </view>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Bzb-Ia-Igc">
+                                <rect key="frame" x="294" y="248" width="24" height="24"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
+                                <inset key="contentEdgeInsets" minX="8" minY="8" maxX="8" maxY="8"/>
+                                <state key="normal" image="icon_question"/>
+                                <connections>
+                                    <action selector="btnDynamicMinerFeeQuestionClicked:" destination="kcd-mF-66F" eventType="touchUpInside" id="OTE-Lc-qzq"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sXd-pQ-t9y">
+                                <rect key="frame" x="134" y="252" width="160" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                <inset key="contentEdgeInsets" minX="8" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                <state key="normal" title="  Use Dynamic Miner Fee" image="icon_frame_normal">
+                                    <color key="titleColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <state key="selected" image="icon_frame_press">
+                                    <color key="titleColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="btnUseDynamicMinerFeeClicked:" destination="kcd-mF-66F" eventType="touchUpInside" id="LGP-SX-jIY"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <connections>
                         <outlet property="amtLink" destination="THE-g5-WeH" id="exL-Ji-gAT"/>
+                        <outlet property="btnDynamicMinerFeeQuestion" destination="Bzb-Ia-Igc" id="gWt-0G-bhY"/>
                         <outlet property="btnSend" destination="7HM-O3-12p" id="6nt-5g-oFI"/>
+                        <outlet property="btnUseDynamicMinerFee" destination="sXd-pQ-t9y" id="82u-1V-lCG"/>
                         <outlet property="lblBalance" destination="hBl-Md-UWA" id="1Ge-LJ-AA7"/>
                         <outlet property="lblBalancePrefix" destination="ECV-qg-2mZ" id="Z4q-ia-H2h"/>
                         <outlet property="lblPayTo" destination="tBQ-pH-ztd" id="YNO-bc-hBP"/>
@@ -6423,7 +6521,7 @@ They need separated back ups.</string>
                                 <textInputTraits key="textInputTraits" keyboardType="decimalPad" returnKeyType="next" enablesReturnKeyAutomatically="YES"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" id="x5l-Rf-4Wi">
-                                <rect key="frame" x="20" y="188" width="280" height="40"/>
+                                <rect key="frame" x="20" y="230" width="280" height="40"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Send" backgroundImage="button_small_blue_normal">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -6492,12 +6590,36 @@ They need separated back ups.</string>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                             </view>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="80S-pw-5Fl">
+                                <rect key="frame" x="294" y="178" width="24" height="24"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
+                                <inset key="contentEdgeInsets" minX="8" minY="8" maxX="8" maxY="8"/>
+                                <state key="normal" image="icon_question"/>
+                                <connections>
+                                    <action selector="btnDynamicMinerFeeQuestionClicked:" destination="c81-vn-XUm" eventType="touchUpInside" id="li4-XI-79o"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TCh-WU-5xu">
+                                <rect key="frame" x="134" y="182" width="160" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                <inset key="contentEdgeInsets" minX="8" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                <state key="normal" title="  Use Dynamic Miner Fee" image="icon_frame_normal">
+                                    <color key="titleColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <state key="selected" image="icon_frame_press"/>
+                                <connections>
+                                    <action selector="btnUseDynamicMinerFeeClicked:" destination="c81-vn-XUm" eventType="touchUpInside" id="JuQ-N4-cHs"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <connections>
                         <outlet property="amtLink" destination="IfC-fp-rCA" id="lrV-G0-f45"/>
+                        <outlet property="btnDynamicMinerFeeQuestion" destination="80S-pw-5Fl" id="rA1-gc-Gva"/>
                         <outlet property="btnSend" destination="x5l-Rf-4Wi" id="PNf-Ek-L6G"/>
+                        <outlet property="btnUseDynamicMinerFee" destination="TCh-WU-5xu" id="hwy-3B-esp"/>
                         <outlet property="lblBalance" destination="yA2-xI-ef0" id="2ig-dr-DUe"/>
                         <outlet property="lblBalancePrefix" destination="3TU-hn-ytB" id="uey-XE-Djw"/>
                         <outlet property="lblPayTo" destination="cad-Yu-nIO" id="5Ys-tK-VPn"/>
@@ -6830,6 +6952,9 @@ They need separated back ups.</string>
         <image name="hdm_keychain_add_server_pressed" width="100" height="100"/>
         <image name="hdm_label" width="29" height="29"/>
         <image name="hdm_label_pressed" width="29" height="29"/>
+        <image name="icon_frame_normal" width="10" height="10"/>
+        <image name="icon_frame_press" width="10" height="10"/>
+        <image name="icon_question" width="8" height="8"/>
         <image name="list_item_card_corner_bottom_left" width="8" height="8"/>
         <image name="list_item_card_corner_bottom_right" width="8" height="8"/>
         <image name="list_item_card_corner_top_left" width="8" height="8"/>

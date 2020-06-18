@@ -44,6 +44,8 @@
 #import "DialogAlert.h"
 #import "HDMResetServerPasswordUtil.h"
 #import "PushTxThirdParty.h"
+#import "DialogAlert.h"
+#import "SendUtil.h"
 
 #define kBalanceFontSize (15)
 #define kSendButtonQrIconSize (20)
@@ -64,6 +66,9 @@
 @property(weak, nonatomic) IBOutlet UIButton *btnSend;
 @property(weak, nonatomic) IBOutlet UIView *vTopBar;
 @property DialogSelectChangeAddress *dialogSelectChangeAddress;
+@property (weak, nonatomic) IBOutlet UIButton *btnDynamicMinerFeeQuestion;
+@property (weak, nonatomic) IBOutlet UIButton *btnUseDynamicMinerFee;
+
 @end
 
 @interface ColdSigFetcher : NSObject <ScanQrCodeDelegate, DialogSendTxConfirmDelegate>
@@ -123,6 +128,8 @@
     self.dialogSelectChangeAddress = [[DialogSelectChangeAddress alloc] initWithFromAddress:self.address];
     [self configureForSigningPartner];
     [self check];
+    [self.btnUseDynamicMinerFee setSelected:[[UserDefaultsUtil instance] isUseDynamicMinerFee]];
+    [self.btnUseDynamicMinerFee setTitle:NSLocalizedString(@"dynamic_miner_fee_title", nil) forState:UIControlStateNormal];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -144,94 +151,117 @@
     }
 }
 
+- (IBAction)btnUseDynamicMinerFeeClicked:(UIButton *)sender {
+    [[UserDefaultsUtil instance] setIsUseDynamicMinerFee:!sender.isSelected];
+    [sender setSelected:!sender.isSelected];
+}
+
+- (IBAction)btnDynamicMinerFeeQuestionClicked:(UIButton *)sender {
+    [self hideKeyboard];
+    DialogAlert *dialogAlert = [[DialogAlert alloc] initWithConfirmMessage:NSLocalizedString(@"dynamic_miner_fee_des", nil) confirm:^{ }];
+    dialogAlert.touchOutSideToDismiss = false;
+    [dialogAlert showInWindow:self.view.window];
+}
+
 - (IBAction)sendPressed:(id)sender {
-    if ([self checkValues]) {
-        if ([StringUtil compareString:[self getToAddress] compare:self.dialogSelectChangeAddress.changeAddress.address]) {
-            [self showBannerWithMessage:NSLocalizedString(@"select_change_address_change_to_same_warn", nil) belowView:self.vTopBar];
+    if (![self checkValues]) {
+        return;
+    }
+    if ([StringUtil compareString:[self getToAddress] compare:self.dialogSelectChangeAddress.changeAddress.address]) {
+        [self showBannerWithMessage:NSLocalizedString(@"select_change_address_change_to_same_warn", nil) belowView:self.vTopBar];
+        return;
+    }
+    [self hideKeyboard];
+    BOOL isUseDynamicMinerFee = _btnUseDynamicMinerFee.isSelected;
+    [dp showInWindow:self.view.window completion:^{
+        [SendUtil sendWithDynamicFee:isUseDynamicMinerFee sendBlock:^(uint64_t dynamicFeeBase) {
+            [self beginSend:dynamicFeeBase];
+        } cancelBlock:^{
+            [self->dp dismiss];
+        }];
+    }];
+}
+
+-(void)beginSend:(u_int64_t)dynamicFeeBase {
+    NSString *password = self.tfPassword.text;
+    NSString *toAddress = [self getToAddress];
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+        if (![[BTPasswordSeed getPasswordSeed] checkPassword:password]) {
+            [self showSendResult:NSLocalizedString(@"Password wrong.", nil) dialog:self->dp];
             return;
         }
-        [self hideKeyboard];
-        [dp showInWindow:self.view.window completion:^{
-            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
-                if (![[BTPasswordSeed getPasswordSeed] checkPassword:self.tfPassword.text]) {
-                    [self showSendResult:NSLocalizedString(@"Password wrong.", nil) dialog:dp];
+        u_int64_t value = self.amtLink.amount;
+        NSError *error;
+        BTTx *tx = [self.address txForAmounts:@[@(value)] andAddress:@[toAddress] andChangeAddress:self.dialogSelectChangeAddress.changeAddress.address dynamicFeeBase:dynamicFeeBase andError:&error];
+        if (error) {
+            NSString *msg = [TransactionsUtil getCompleteTxForError:error];
+            [self showSendResult:msg dialog:self->dp];
+        } else {
+            if (!tx) {
+                [self showSendResult:NSLocalizedString(@"Send failed.", nil) dialog:self->dp];
+                return;
+            }
+            BOOL signResult;
+            __block NSString *errorMsg;
+            __block BOOL userCanceled = NO;
+            NSArray *(^coldFetcher)(UInt32 index, NSString *password, NSArray *unsignHashes, BTTx *tx) = ^NSArray *(UInt32 index, NSString *password, NSArray *unsignedHashes, BTTx *tx) {
+                ColdSigFetcher *f = [[ColdSigFetcher alloc] initWithIndex:index password:password unsignedHashes:unsignedHashes tx:tx from:self.address to:toAddress changeTo:self.dialogSelectChangeAddress.changeAddress.address controller:self andDialogProgress:self->dp];
+                preventKeyboardForSigning = YES;
+                NSArray *sigs = f.sigs;
+                userCanceled = f.userCancel;
+                errorMsg = f.errorMsg;
+                preventKeyboardForSigning = NO;
+                return sigs;
+            };
+            NSArray *(^remoteFetcher)(UInt32 index, NSString *password, NSArray *unsignHashes, BTTx *tx) = ^NSArray *(UInt32 index, NSString *password, NSArray *unsignedHashes, BTTx *tx) {
+                RemoteSigFetcher *f = [[RemoteSigFetcher alloc] initWithIndex:index password:password unsignedHashes:unsignedHashes tx:tx vc:self andDp:self->dp];
+                preventKeyboardForSigning = YES;
+                NSArray *sigs = f.sigs;
+                errorMsg = f.errorMsg;
+                userCanceled = f.userCancel;
+                preventKeyboardForSigning = NO;
+                return sigs;
+            };
+            @try {
+                if (isInRecovery) {
+                    signResult = [self.address signTx:tx withPassword:password coldBlock:coldFetcher andRemoteBlock:remoteFetcher];
+                } else if (signWithCold) {
+                    signResult = [self.address signTx:tx withPassword:password andFetchBlock:coldFetcher];
+                } else {
+                    signResult = [self.address signTx:tx withPassword:password andFetchBlock:remoteFetcher];
+                }
+            } @catch (BTHDMPasswordWrongException *e) {
+                signResult = NO;
+                errorMsg = NSLocalizedString(@"Password wrong.", nil);
+            }
+            if (signResult) {
+                __block NSString *addressBlock = toAddress;
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    if (!signWithCold && !isInRecovery) {
+                        [self->dp dismissWithCompletion:^{
+                            [self->dp changeToMessage:NSLocalizedString(@"Please wait…", nil)];
+                            DialogSendTxConfirm *dialog = [[DialogSendTxConfirm alloc] initWithTx:tx from:self.address to:addressBlock changeTo:self.dialogSelectChangeAddress.changeAddress.address delegate:self];
+                            [dialog showInWindow:self.view.window];
+                        }];
+                    } else {
+                        [self onSendTxConfirmed:tx];
+                    }
+                });
+            } else {
+                if (userCanceled) {
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        [self->dp dismissWithCompletion:nil];
+                    });
                     return;
                 }
-                u_int64_t value = self.amtLink.amount;
-                NSError *error;
-                NSString *toAddress = [self getToAddress];
-                BTTx *tx = [self.address txForAmounts:@[@(value)] andAddress:@[toAddress] andChangeAddress:self.dialogSelectChangeAddress.changeAddress.address andError:&error];
-                if (error) {
-                    NSString *msg = [TransactionsUtil getCompleteTxForError:error];
-                    [self showSendResult:msg dialog:dp];
+                if (errorMsg) {
+                    [self showSendResult:errorMsg dialog:self->dp];
                 } else {
-                    if (!tx) {
-                        [self showSendResult:NSLocalizedString(@"Send failed.", nil) dialog:dp];
-                        return;
-                    }
-                    BOOL signResult;
-                    __block NSString *errorMsg;
-                    __block BOOL userCanceled = NO;
-                    NSArray *(^coldFetcher)(UInt32 index, NSString *password, NSArray *unsignHashes, BTTx *tx) = ^NSArray *(UInt32 index, NSString *password, NSArray *unsignedHashes, BTTx *tx) {
-                        ColdSigFetcher *f = [[ColdSigFetcher alloc] initWithIndex:index password:password unsignedHashes:unsignedHashes tx:tx from:self.address to:toAddress changeTo:self.dialogSelectChangeAddress.changeAddress.address controller:self andDialogProgress:dp];
-                        preventKeyboardForSigning = YES;
-                        NSArray *sigs = f.sigs;
-                        userCanceled = f.userCancel;
-                        errorMsg = f.errorMsg;
-                        preventKeyboardForSigning = NO;
-                        return sigs;
-                    };
-                    NSArray *(^remoteFetcher)(UInt32 index, NSString *password, NSArray *unsignHashes, BTTx *tx) = ^NSArray *(UInt32 index, NSString *password, NSArray *unsignedHashes, BTTx *tx) {
-                        RemoteSigFetcher *f = [[RemoteSigFetcher alloc] initWithIndex:index password:password unsignedHashes:unsignedHashes tx:tx vc:self andDp:dp];
-                        preventKeyboardForSigning = YES;
-                        NSArray *sigs = f.sigs;
-                        errorMsg = f.errorMsg;
-                        userCanceled = f.userCancel;
-                        preventKeyboardForSigning = NO;
-                        return sigs;
-                    };
-                    @try {
-                        if (isInRecovery) {
-                            signResult = [self.address signTx:tx withPassword:self.tfPassword.text coldBlock:coldFetcher andRemoteBlock:remoteFetcher];
-                        } else if (signWithCold) {
-                            signResult = [self.address signTx:tx withPassword:self.tfPassword.text andFetchBlock:coldFetcher];
-                        } else {
-                            signResult = [self.address signTx:tx withPassword:self.tfPassword.text andFetchBlock:remoteFetcher];
-                        }
-                    } @catch (BTHDMPasswordWrongException *e) {
-                        signResult = NO;
-                        errorMsg = NSLocalizedString(@"Password wrong.", nil);
-                    }
-                    if (signResult) {
-                        __block NSString *addressBlock = toAddress;
-                        dispatch_async(dispatch_get_main_queue(), ^{
-                            if (!signWithCold && !isInRecovery) {
-                                [dp dismissWithCompletion:^{
-                                    [dp changeToMessage:NSLocalizedString(@"Please wait…", nil)];
-                                    DialogSendTxConfirm *dialog = [[DialogSendTxConfirm alloc] initWithTx:tx from:self.address to:addressBlock changeTo:self.dialogSelectChangeAddress.changeAddress.address delegate:self];
-                                    [dialog showInWindow:self.view.window];
-                                }];
-                            } else {
-                                [self onSendTxConfirmed:tx];
-                            }
-                        });
-                    } else {
-                        if (userCanceled) {
-                            dispatch_async(dispatch_get_main_queue(), ^{
-                                [dp dismissWithCompletion:nil];
-                            });
-                            return;
-                        }
-                        if (errorMsg) {
-                            [self showSendResult:errorMsg dialog:dp];
-                        } else {
-                            [self showSendResult:NSLocalizedString(@"Send failed.", nil) dialog:dp];
-                        }
-                    }
+                    [self showSendResult:NSLocalizedString(@"Send failed.", nil) dialog:self->dp];
                 }
-            });
-        }];
-    }
+            }
+        }
+    });
 }
 
 - (void)onSendTxConfirmed:(BTTx *)tx {

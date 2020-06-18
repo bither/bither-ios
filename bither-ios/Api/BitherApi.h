@@ -72,7 +72,7 @@
 
 - (void)postSplitCoinBroadcast:(BTTx *)tx splitCoin:(SplitCoin)splitCoin callback:(DictResponseBlock)callback andErrorCallBack:(ErrorHandler)errorCallback;
 
-
+- (void)queryStatsDynamicFeeBaseCallback:(UInt64ResponseBlock)callback andErrorCallBack:(ErrorHandler)errorCallback;
 
 //#pragma mark - hdm api
 //- (void)getHDMPasswordRandomWithHDMBid:(NSString *) hdmBid callback:(IdResponseBlock) callback andErrorCallBack:(ErrorHandler)errorCallback;

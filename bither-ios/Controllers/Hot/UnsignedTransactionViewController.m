@@ -35,6 +35,8 @@
 #import "DialogSendOption.h"
 #import "DialogSelectChangeAddress.h"
 #import "PushTxThirdParty.h"
+#import "DialogAlert.h"
+#import "SendUtil.h"
 
 #define kBalanceFontSize (15)
 #define kSendButtonQrIconSize (20)
@@ -51,6 +53,8 @@
 @property(weak, nonatomic) IBOutlet UIButton *btnSend;
 @property(weak, nonatomic) IBOutlet UIView *vTopBar;
 @property DialogSelectChangeAddress *dialogSelectChangeAddress;
+@property (weak, nonatomic) IBOutlet UIButton *btnDynamicMinerFeeQuestion;
+@property (weak, nonatomic) IBOutlet UIButton *btnUseDynamicMinerFee;
 
 @property BTTx *tx;
 @end
@@ -86,6 +90,8 @@
     needConfirm = YES;
     self.dialogSelectChangeAddress = [[DialogSelectChangeAddress alloc] initWithFromAddress:self.address];
     [self check];
+    [self.btnUseDynamicMinerFee setSelected:[[UserDefaultsUtil instance] isUseDynamicMinerFee]];
+    [self.btnUseDynamicMinerFee setTitle:NSLocalizedString(@"dynamic_miner_fee_title", nil) forState:UIControlStateNormal];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -113,44 +119,65 @@
     return [StringUtil removeBlankSpaceString:self.tfAddress.text];
 }
 
+- (IBAction)btnUseDynamicMinerFeeClicked:(UIButton *)sender {
+    [[UserDefaultsUtil instance] setIsUseDynamicMinerFee:!sender.isSelected];
+    [sender setSelected:!sender.isSelected];
+}
+
+- (IBAction)btnDynamicMinerFeeQuestionClicked:(UIButton *)sender {
+    [self hideKeyboard];
+    DialogAlert *dialogAlert = [[DialogAlert alloc] initWithConfirmMessage:NSLocalizedString(@"dynamic_miner_fee_des", nil) confirm:^{ }];
+    dialogAlert.touchOutSideToDismiss = false;
+    [dialogAlert showInWindow:self.view.window];
+}
+
 - (IBAction)sendPressed:(id)sender {
-    if ([self checkValues]) {
-        if ([StringUtil compareString:[self getToAddress] compare:self.dialogSelectChangeAddress.changeAddress.address]) {
-            [self showBannerWithMessage:NSLocalizedString(@"select_change_address_change_to_same_warn", nil) belowView:self.vTopBar];
-            return;
-        }
-        [self hideKeyboard];
-        self.btnSend.enabled = NO;
-        [dp showInWindow:self.view.window completion:^{
-            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
-                u_int64_t value = self.amtLink.amount;
-                NSError *error;
-                NSString *toAddress = [self getToAddress];
-                self.tx = [self.address txForAmounts:@[@(value)] andAddress:@[toAddress] andChangeAddress:self.dialogSelectChangeAddress.changeAddress.address andError:&error];
-                if (error) {
-                    NSString *msg = [TransactionsUtil getCompleteTxForError:error];
-                    [self showSendResult:msg dialog:dp];
-                } else {
-                    if (!self.tx) {
-                        [self showSendResult:NSLocalizedString(@"Send failed.", nil) dialog:dp];
-                        return;
-                    }
-                    dispatch_async(dispatch_get_main_queue(), ^{
-                        __block NSString *addressBlock = toAddress;
-                        [dp dismissWithCompletion:^{
-                            if (needConfirm) {
-                                DialogSendTxConfirm *dialog = [[DialogSendTxConfirm alloc] initWithTx:self.tx from:self.address to:addressBlock changeTo:self.dialogSelectChangeAddress.changeAddress.address delegate:self];
-                                [dialog showInWindow:self.view.window];
-                            } else {
-                                [self onSendTxConfirmed:self.tx];
-                                needConfirm = YES;
-                            }
-                        }];
-                    });
-                }
-            });
-        }];
+    if (![self checkValues]) {
+        return;
     }
+    if ([StringUtil compareString:[self getToAddress] compare:self.dialogSelectChangeAddress.changeAddress.address]) {
+        [self showBannerWithMessage:NSLocalizedString(@"select_change_address_change_to_same_warn", nil) belowView:self.vTopBar];
+        return;
+    }
+    [self hideKeyboard];
+    BOOL isUseDynamicMinerFee = _btnUseDynamicMinerFee.isSelected;
+    [dp showInWindow:self.view.window completion:^{
+        [SendUtil sendWithDynamicFee:isUseDynamicMinerFee sendBlock:^(uint64_t dynamicFeeBase) {
+            [self beginSend:dynamicFeeBase];
+        } cancelBlock:^{
+            [self->dp dismiss];
+        }];
+    }];
+}
+
+-(void)beginSend:(u_int64_t)dynamicFeeBase {
+    NSString *toAddress = [self getToAddress];
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+        u_int64_t value = self.amtLink.amount;
+        NSError *error;
+        self.tx = [self.address txForAmounts:@[@(value)] andAddress:@[toAddress] andChangeAddress:self.dialogSelectChangeAddress.changeAddress.address dynamicFeeBase:dynamicFeeBase andError:&error];
+        if (error) {
+            NSString *msg = [TransactionsUtil getCompleteTxForError:error];
+            [self showSendResult:msg dialog:self->dp];
+        } else {
+            if (!self.tx) {
+                [self showSendResult:NSLocalizedString(@"Send failed.", nil) dialog:self->dp];
+                return;
+            }
+            dispatch_async(dispatch_get_main_queue(), ^{
+                __block NSString *addressBlock = toAddress;
+                [self->dp dismissWithCompletion:^{
+                    if (needConfirm) {
+                        DialogSendTxConfirm *dialog = [[DialogSendTxConfirm alloc] initWithTx:self.tx from:self.address to:addressBlock changeTo:self.dialogSelectChangeAddress.changeAddress.address delegate:self];
+                        [dialog showInWindow:self.view.window];
+                    } else {
+                        [self onSendTxConfirmed:self.tx];
+                        needConfirm = YES;
+                    }
+                }];
+            });
+        }
+    });
 }
 
 

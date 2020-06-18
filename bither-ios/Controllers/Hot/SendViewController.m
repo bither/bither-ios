@@ -31,6 +31,9 @@
 #import "DialogSendOption.h"
 #import "DialogSelectChangeAddress.h"
 #import "PushTxThirdParty.h"
+#import "DialogAlert.h"
+#import "SendUtil.h"
+#import "UserDefaultsUtil.h"
 
 #define kBalanceFontSize (15)
 
@@ -46,6 +49,8 @@
 @property(weak, nonatomic) IBOutlet UIButton *btnSend;
 @property(weak, nonatomic) IBOutlet UIView *vTopBar;
 @property DialogSelectChangeAddress *dialogSelectChangeAddress;
+@property (weak, nonatomic) IBOutlet UIButton *btnDynamicMinerFeeQuestion;
+@property (weak, nonatomic) IBOutlet UIButton *btnUseDynamicMinerFee;
 
 @end
 
@@ -77,6 +82,8 @@
     dp.touchOutSideToDismiss = NO;
     self.dialogSelectChangeAddress = [[DialogSelectChangeAddress alloc] initWithFromAddress:self.address];
     [self check];
+    [self.btnUseDynamicMinerFee setSelected:[[UserDefaultsUtil instance] isUseDynamicMinerFee]];
+    [self.btnUseDynamicMinerFee setTitle:NSLocalizedString(@"dynamic_miner_fee_title", nil) forState:UIControlStateNormal];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -96,53 +103,75 @@
     }
 }
 
+- (IBAction)btnUseDynamicMinerFeeClicked:(UIButton *)sender {
+    [[UserDefaultsUtil instance] setIsUseDynamicMinerFee:!sender.isSelected];
+    [sender setSelected:!sender.isSelected];
+}
+
+- (IBAction)btnDynamicMinerFeeQuestionClicked:(UIButton *)sender {
+    [self hideKeyboard];
+    DialogAlert *dialogAlert = [[DialogAlert alloc] initWithConfirmMessage:NSLocalizedString(@"dynamic_miner_fee_des", nil) confirm:^{ }];
+    dialogAlert.touchOutSideToDismiss = false;
+    [dialogAlert showInWindow:self.view.window];
+}
+
 - (IBAction)sendPressed:(id)sender {
-    if ([self checkValues]) {
-        if ([StringUtil compareString:[self getToAddress] compare:self.dialogSelectChangeAddress.changeAddress.address]) {
-            [self showBannerWithMessage:NSLocalizedString(@"select_change_address_change_to_same_warn", nil) belowView:self.vTopBar];
+    if (![self checkValues]) {
+        return;
+    }
+    if ([StringUtil compareString:[self getToAddress] compare:self.dialogSelectChangeAddress.changeAddress.address]) {
+        [self showBannerWithMessage:NSLocalizedString(@"select_change_address_change_to_same_warn", nil) belowView:self.vTopBar];
+        return;
+    }
+    [self hideKeyboard];
+    BOOL isUseDynamicMinerFee = _btnUseDynamicMinerFee.isSelected;
+    [dp showInWindow:self.view.window completion:^{
+        [SendUtil sendWithDynamicFee:isUseDynamicMinerFee sendBlock:^(uint64_t dynamicFeeBase) {
+            [self beginSend:dynamicFeeBase];
+        } cancelBlock:^{
+            [self->dp dismiss];
+        }];
+    }];
+}
+
+-(void)beginSend:(u_int64_t)dynamicFeeBase {
+    NSString *password = self.tfPassword.text;
+    NSString *toAddress = [self getToAddress];
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+        if (![[BTPasswordSeed getPasswordSeed] checkPassword:password]) {
+            [self showSendResult:NSLocalizedString(@"Password wrong.", nil) dialog:self->dp];
             return;
         }
-        [self hideKeyboard];
-        [dp showInWindow:self.view.window completion:^{
-            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
-                if (![[BTPasswordSeed getPasswordSeed] checkPassword:self.tfPassword.text]) {
-                    [self showSendResult:NSLocalizedString(@"Password wrong.", nil) dialog:dp];
-                    return;
-                }
-                u_int64_t value = self.amtLink.amount;
-                NSError *error;
-                NSString *toAddress = [self getToAddress];
-                BTTx *tx = [self.address txForAmounts:@[@(value)] andAddress:@[toAddress] andChangeAddress:self.dialogSelectChangeAddress.changeAddress.address andError:&error];
-                if (error) {
-                    NSString *msg = [TransactionsUtil getCompleteTxForError:error];
-                    [self showSendResult:msg dialog:dp];
-                } else {
-                    if (!tx) {
-                        [self showSendResult:NSLocalizedString(@"Send failed.", nil) dialog:dp];
-                        return;
-                    }
-                    if ([self.address signTransaction:tx withPassphrase:self.tfPassword.text]) {
-                        __block NSString *addressBlock = toAddress;
-                        dispatch_async(dispatch_get_main_queue(), ^{
-                            [dp dismissWithCompletion:^{
-                                [dp changeToMessage:NSLocalizedString(@"Please wait…", nil)];
-                                DialogSendTxConfirm *dialog = [[DialogSendTxConfirm alloc] initWithTx:tx from:self.address to:addressBlock changeTo:self.dialogSelectChangeAddress.changeAddress.address delegate:self];
-                                [dialog showInWindow:self.view.window];
-                            }];
-                        });
-                    } else {
-                        [self showSendResult:NSLocalizedString(@"Password wrong.", nil) dialog:dp];
-                    }
-                }
-            });
-        }];
-    }
+        u_int64_t value = self.amtLink.amount;
+        NSError *error;
+        BTTx *tx = [self.address txForAmounts:@[@(value)] andAddress:@[toAddress] andChangeAddress:self.dialogSelectChangeAddress.changeAddress.address dynamicFeeBase:dynamicFeeBase andError:&error];
+        if (error) {
+            NSString *msg = [TransactionsUtil getCompleteTxForError:error];
+            [self showSendResult:msg dialog:self->dp];
+        } else {
+            if (!tx) {
+                [self showSendResult:NSLocalizedString(@"Send failed.", nil) dialog:dp];
+                return;
+            }
+            if ([self.address signTransaction:tx withPassphrase:password]) {
+                __block NSString *addressBlock = toAddress;
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [self->dp dismissWithCompletion:^{
+                        [self->dp changeToMessage:NSLocalizedString(@"Please wait…", nil)];
+                        DialogSendTxConfirm *dialog = [[DialogSendTxConfirm alloc] initWithTx:tx from:self.address to:addressBlock changeTo:self.dialogSelectChangeAddress.changeAddress.address delegate:self];
+                        [dialog showInWindow:self.view.window];
+                    }];
+                });
+            } else {
+                [self showSendResult:NSLocalizedString(@"Password wrong.", nil) dialog:self->dp];
+            }
+        }
+    });
 }
 
 - (NSString *)getToAddress {
     return [StringUtil removeBlankSpaceString:self.tfAddress.text];
 }
-
 
 - (void)onSendTxConfirmed:(BTTx *)tx {
     if (!tx) {

@@ -47,6 +47,8 @@
 #define BC_ADDRESS_UNSPENT_TXS_URL @"api/v3/tx/%@"
 #define BC_ADDRESS_TX_URL @"api/v2/address/%@/transaction/p/%d"
 #define BC_ADDRESS_STAT_URL @"api/v2/address/%@/transaction/stat"
+#define BC_Q_STATS_DYNAMIC_FEE @"api/v2/stats/dynamic/fee"
+
 //limit=50 one Page can show 50 tx informations
 #define BLOCK_INFO_ADDRESS_TX_URL @"rawaddr/%@?offset=%d"
 #define BLOCK_INFO_TX_INDEX_URL @"https://blockchain.info/rawtx/%@?format=hex"

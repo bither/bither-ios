@@ -805,3 +805,7 @@
 "tip_sync_block_height" = "本地塊高度落後於區塊最新高度 %@ 個塊，正在同步";
 "tip_network_error" = "網絡已斷開，請檢查網絡設置";
 "tip_no_peers_connected" = "暫無可連接的節點";
+
+"dynamic_miner_fee_title" = "  使用動態礦工費";
+"dynamic_miner_fee_des" = "開啓動態礦工費後，軟件將根據當前比特幣的網絡狀態自動計算實時最優費用；礦工費由比特幣網絡收取。";
+"dynamic_miner_fee_failure_title" = "計算動態礦工費失敗，是否使用默認礦工費？";

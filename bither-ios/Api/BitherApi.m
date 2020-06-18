@@ -430,6 +430,29 @@ static BitherApi *piApi;
     }
 }
 
+- (void)queryStatsDynamicFeeBaseCallback:(UInt64ResponseBlock)callback andErrorCallBack:(ErrorHandler)errorCallback {
+    NSString *url = BC_Q_STATS_DYNAMIC_FEE;
+    [self get:url withParams:nil networkType:BitherBC completed:^(MKNetworkOperation *completedOperation) {
+        if (![StringUtil isEmpty:completedOperation.responseString]) {
+            NSDictionary *dict = completedOperation.responseJSON;
+            if (dict && dict[@"fee_base"]) {
+                uint64_t feeBase = [[dict objectForKey:@"fee_base"] unsignedLongValue];
+                if (feeBase > 0 && callback) {
+                    callback(feeBase);
+                    return;
+                }
+            }
+        }
+        if (errorCallback) {
+            errorCallback([[NSError alloc] initWithDomain:@"data error" code:400 userInfo:NULL]);
+        }
+    } andErrorCallback:^(NSError *error) {
+        if (errorCallback) {
+            errorCallback(error);
+        }
+    }];
+}
+
 #pragma mark - Ad api
 
 - (void)getAdApi {

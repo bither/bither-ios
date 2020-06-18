@@ -149,7 +149,7 @@ static Setting *reloadTxsSetting;
                     if ([BTPasswordSeed getPasswordSeed]) {
                         [_sslf showDialogPassword];
                     } else {
-                        [_sslf reloadTx:nil];
+                        [_sslf doAction];
                     }
                 }                                                        cancel:^{
                     

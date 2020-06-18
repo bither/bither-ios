@@ -121,6 +121,8 @@ typedef NSArray *(^GetArrayBlock)(void);
 
 typedef void (^RetryBlock)(int requestCount);
 
+typedef void (^UInt64ResponseBlock)(uint64_t int64);
+
 typedef enum {
     ONE_MINUTE = 1, FIVE_MINUTES = 5, ONE_HOUR = 60, ONE_DAY = 1440
 } KLineTimeType;

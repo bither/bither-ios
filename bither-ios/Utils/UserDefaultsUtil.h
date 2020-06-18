@@ -129,4 +129,8 @@
 
 - (BOOL)isSegwitAddressType;
 
+- (void)setIsUseDynamicMinerFee:(BOOL)isUseDynamicMinerFee;
+
+- (BOOL)isUseDynamicMinerFee;
+
 @end

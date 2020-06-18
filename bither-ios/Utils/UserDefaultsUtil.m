@@ -58,6 +58,8 @@
 
 #define IS_SEGWIT_ADDRESS_TYPE @"BTHDAccountIsSegwitAddressType"
 
+#define IS_USE_DYNAMIC_MINER_FEE @"is_use_dynamic_miner_fee"
+
 static UserDefaultsUtil *userDefaultsUtil;
 
 NSUserDefaults *userDefaults;
@@ -473,6 +475,19 @@ NSUserDefaults *userDefaults;
 
 - (BOOL)isSegwitAddressType {
     return [userDefaults boolForKey:IS_SEGWIT_ADDRESS_TYPE];
+}
+
+- (void)setIsUseDynamicMinerFee:(BOOL)isUseDynamicMinerFee {
+    [userDefaults setObject:[NSString stringWithFormat:@"%d", isUseDynamicMinerFee ? 1 : 0] forKey:IS_USE_DYNAMIC_MINER_FEE];
+    [userDefaults synchronize];
+}
+
+- (BOOL)isUseDynamicMinerFee {
+    NSString *isUse = [userDefaults stringForKey:IS_USE_DYNAMIC_MINER_FEE];
+    if ([isUse isEqualToString:@"0"]) {
+        return NO;
+    }
+    return YES;
 }
 
 @end

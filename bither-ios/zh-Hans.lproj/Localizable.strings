@@ -805,3 +805,7 @@
 "tip_sync_block_height" = "本地块高度落后于区块最新高度 %@ 个块，正在同步";
 "tip_network_error" = "网络已断开，请检查网络设置";
 "tip_no_peers_connected" = "暂无可连接的节点";
+
+"dynamic_miner_fee_title" = "  使用动态矿工费";
+"dynamic_miner_fee_des" = "开启动态矿工费后，软件将根据当前比特币的网络状态自动计算实时最优费用；矿工费由比特币网络收取。";
+"dynamic_miner_fee_failure_title" = "计算动态矿工费失败，是否使用默认矿工费？";

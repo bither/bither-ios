@@ -38,6 +38,8 @@
 #import "PushTxThirdParty.h"
 #import "AddressTypeUtil.h"
 #import "BTHDAccountUtil.h"
+#import "DialogAlert.h"
+#import "SendUtil.h"
 
 #define kBalanceFontSize (15)
 #define kSendButtonQrIconSize (20)
@@ -52,7 +54,10 @@
 @property(weak, nonatomic) IBOutlet CurrencyCalculatorLink *amtLink;
 @property(weak, nonatomic) IBOutlet UIButton *btnSend;
 @property(weak, nonatomic) IBOutlet UIView *vTopBar;
+@property (weak, nonatomic) IBOutlet UIButton *btnDynamicMinerFeeQuestion;
+@property (weak, nonatomic) IBOutlet UIButton *btnUseDynamicMinerFee;
 @property BTTx *tx;
+
 @end
 
 @implementation HDAccountMonitoredSendViewController
@@ -84,6 +89,8 @@
     dp = [[DialogProgressChangable alloc] initWithMessage:NSLocalizedString(@"Please wait…", nil)];
     dp.touchOutSideToDismiss = NO;
     [self check];
+    [self.btnUseDynamicMinerFee setSelected:[[UserDefaultsUtil instance] isUseDynamicMinerFee]];
+    [self.btnUseDynamicMinerFee setTitle:NSLocalizedString(@"dynamic_miner_fee_title", nil) forState:UIControlStateNormal];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -103,37 +110,59 @@
     }
 }
 
+- (IBAction)btnUseDynamicMinerFeeClicked:(UIButton *)sender {
+    [[UserDefaultsUtil instance] setIsUseDynamicMinerFee:!sender.isSelected];
+    [sender setSelected:!sender.isSelected];
+}
+
+- (IBAction)btnDynamicMinerFeeQuestionClicked:(UIButton *)sender {
+    [self hideKeyboard];
+    DialogAlert *dialogAlert = [[DialogAlert alloc] initWithConfirmMessage:NSLocalizedString(@"dynamic_miner_fee_des", nil) confirm:^{ }];
+    dialogAlert.touchOutSideToDismiss = false;
+    [dialogAlert showInWindow:self.view.window];
+}
+
 - (IBAction)sendPressed:(id)sender {
-    if ([self checkValues]) {
-        [self hideKeyboard];
-        NSString *toAddress = [self getToAddress];
-        [dp showInWindow:self.view.window completion:^{
-            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
-                u_int64_t value = self.amtLink.amount;
-                NSError *error;
-                PathType path = [AddressTypeUtil getCurrentAddressInternalPathType];
-                BTTx *tx = [self.address newTxToAddress:toAddress withAmount:value pathType:path andError:&error];
-                if (error) {
-                    NSString *msg = [TransactionsUtil getCompleteTxForError:error];
-                    [self showSendResult:msg dialog:self->dp];
-                } else {
-                    if (!tx) {
-                        [self showSendResult:NSLocalizedString(@"Send failed.", nil) dialog:self->dp];
-                        return;
-                    }
-                    self.tx = tx;
-                    __block NSString *addressBlock = toAddress;
-                    dispatch_async(dispatch_get_main_queue(), ^{
-                        self.btnSend.enabled = NO;
-                        [self->dp dismissWithCompletion:^{
-                            [self->dp changeToMessage:NSLocalizedString(@"Please wait…", nil)];
-                            [[[DialogHDSendTxConfirm alloc] initWithTx:tx to:addressBlock delegate:self] showInWindow:self.view.window];
-                        }];
-                    });
-                }
-            });
-        }];
+    if (![self checkValues]) {
+        return;
     }
+    [self hideKeyboard];
+    BOOL isUseDynamicMinerFee = _btnUseDynamicMinerFee.isSelected;
+    [dp showInWindow:self.view.window completion:^{
+        [SendUtil sendWithDynamicFee:isUseDynamicMinerFee sendBlock:^(uint64_t dynamicFeeBase) {
+            [self beginSend:dynamicFeeBase];
+        } cancelBlock:^{
+            [self->dp dismiss];
+        }];
+    }];
+}
+
+-(void)beginSend:(u_int64_t)dynamicFeeBase {
+    NSString *toAddress = [self getToAddress];
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+        u_int64_t value = self.amtLink.amount;
+        NSError *error;
+        PathType path = [AddressTypeUtil getCurrentAddressInternalPathType];
+        BTTx *tx = [self.address newTxToAddress:toAddress withAmount:value pathType:path dynamicFeeBase:dynamicFeeBase andError:&error];
+        if (error) {
+            NSString *msg = [TransactionsUtil getCompleteTxForError:error];
+            [self showSendResult:msg dialog:self->dp];
+        } else {
+            if (!tx) {
+                [self showSendResult:NSLocalizedString(@"Send failed.", nil) dialog:self->dp];
+                return;
+            }
+            self.tx = tx;
+            __block NSString *addressBlock = toAddress;
+            dispatch_async(dispatch_get_main_queue(), ^{
+                self.btnSend.enabled = NO;
+                [self->dp dismissWithCompletion:^{
+                    [self->dp changeToMessage:NSLocalizedString(@"Please wait…", nil)];
+                    [[[DialogHDSendTxConfirm alloc] initWithTx:tx to:addressBlock delegate:self] showInWindow:self.view.window];
+                }];
+            });
+        }
+    });
 }
 
 - (void)onSendTxConfirmed:(BTTx *)tx {

@@ -7,12 +7,15 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "BitherApi.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface SendUtil : NSObject
 
 + (NSString *)isCanSend:(BOOL)isSyncComplete;
+
++ (void)sendWithDynamicFee:(BOOL)isUseDynamicFee sendBlock:(UInt64ResponseBlock)sendBlock cancelBlock:(VoidBlock)cancelBlock;
 
 @end
 
