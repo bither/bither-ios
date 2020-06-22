@@ -19,6 +19,8 @@
 #import "BitherEngine.h"
 
 #define kMKNetworkKitRequestTimeOutInSeconds 10
+#define kTIMEOUT_REREQUEST_DELAY 5
+#define kTIMEOUT_REREQUEST_CNT 3
 
 #define BITHER_GET_COOKIE_URL @"api/v1/cookie"
 #define BITHER_GET_ONE_SPVBLOCK_API @"api/v2/block/spv/one"
@@ -45,9 +47,17 @@
 #define BC_ADDRESSES_URL @"api/v3/address/%@"
 #define BC_ADDRESS_UNSPENT_URL @"api/v3/address/%@/unspent"
 #define BC_ADDRESS_UNSPENT_TXS_URL @"api/v3/tx/%@"
+
+#define BTC_COM_ADDRESSES_URL @"v3/address/%@"
+#define BTC_COM_ADDRESS_UNSPENT_URL @"v3/address/%@/unspent"
+#define BTC_COM_ADDRESS_UNSPENT_TXS_URL @"v3/tx/%@"
+
 #define BC_ADDRESS_TX_URL @"api/v2/address/%@/transaction/p/%d"
 #define BC_ADDRESS_STAT_URL @"api/v2/address/%@/transaction/stat"
 #define BC_Q_STATS_DYNAMIC_FEE @"api/v2/stats/dynamic/fee"
+
+#define BLOCKCHAIR_COM_Q_ADDRESSES_UNSPENT_URL @"bitcoin/dashboards/addresses/%@?limit=100&offset=%d"
+#define BLOCKCHAIR_COM_ADDRESS_UNSPENT_TXS_URL @"bitcoin/dashboards/transactions/%@"
 
 //limit=50 one Page can show 50 tx informations
 #define BLOCK_INFO_ADDRESS_TX_URL @"rawaddr/%@?offset=%d"

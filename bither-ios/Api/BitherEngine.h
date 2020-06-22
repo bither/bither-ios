@@ -23,7 +23,7 @@
 #define  HTTP_GET @"GET"
 #define  TIME_STRING  @"ts"
 typedef enum {
-    BitherUser = 1, BitherStats = 2, BitherBitcoin = 3, BitherBC = 4, BitherHDM = 5,BlockChain = 6, ChainBtcCom = 7
+    BitherUser = 1, BitherStats = 2, BitherBitcoin = 3, BitherBC = 4, BitherHDM = 5, BlockChain = 6, ChainBtcCom = 7, Blockchair = 8, BitherAndBtcCom = 9
 } BitherNetworkType;
 
 @interface BitherEngine : NSObject
@@ -44,10 +44,16 @@ typedef enum {
 
 - (MKNetworkEngine *)getChainBtcComEngine;
 
+- (MKNetworkEngine *)getBlockchairEngine;
+
+- (MKNetworkEngine *)getBitherAndBtcComEngine;
+
 - (void)setEngineCookie;
 
 - (NSArray *)getCookies;
 
-+ (MKNetworkEngine *)getNextBCNetworkEngineWithFirstBCNetworkEngine:(MKNetworkEngine *)first;
++ (MKNetworkEngine *)getNextBitherAndBtcComEngineWithFirstBitherAndBtcComEngine:(MKNetworkEngine *)first;
+
++ (BOOL)isBtcCom;
 
 @end

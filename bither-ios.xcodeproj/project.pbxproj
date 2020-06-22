@@ -95,6 +95,9 @@
 		40A4E85E2133D3DD00733DD8 /* NSDate+RFC1123.m in Sources */ = {isa = PBXBuildFile; fileRef = 40A4E8542133D3DD00733DD8 /* NSDate+RFC1123.m */; };
 		40A51A5E1F2AED8E005CF531 /* ObtainBccCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 40A51A5D1F2AED8E005CF531 /* ObtainBccCell.m */; };
 		40A51A611F2AF77E005CF531 /* ObtainBccMonitoredDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 40A51A601F2AF77E005CF531 /* ObtainBccMonitoredDetailViewController.m */; };
+		40A6531C249C6226001F2A57 /* BlockchairUnspentTxsApi.m in Sources */ = {isa = PBXBuildFile; fileRef = 40A6531B249C6226001F2A57 /* BlockchairUnspentTxsApi.m */; };
+		40C39E33249B6FD200AD2511 /* BlockchairQueryAddressUnspentApi.m in Sources */ = {isa = PBXBuildFile; fileRef = 40C39E32249B6FD200AD2511 /* BlockchairQueryAddressUnspentApi.m */; };
+		40C39E36249B741D00AD2511 /* BlockchairQueryApi.m in Sources */ = {isa = PBXBuildFile; fileRef = 40C39E35249B741D00AD2511 /* BlockchairQueryApi.m */; };
 		40D777081F41360E00121B90 /* DialogImportPrivateKeyAddressValidation.m in Sources */ = {isa = PBXBuildFile; fileRef = 40D777071F41360E00121B90 /* DialogImportPrivateKeyAddressValidation.m */; };
 		4217A3731951235D00063746 /* Depth.m in Sources */ = {isa = PBXBuildFile; fileRef = 4217A3721951235D00063746 /* Depth.m */; };
 		4217A39019512DC000063746 /* TransactionsUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 4217A38F19512DC000063746 /* TransactionsUtil.m */; };
@@ -554,6 +557,12 @@
 		40A51A5D1F2AED8E005CF531 /* ObtainBccCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ObtainBccCell.m; sourceTree = "<group>"; };
 		40A51A5F1F2AF77D005CF531 /* ObtainBccMonitoredDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ObtainBccMonitoredDetailViewController.h; sourceTree = "<group>"; };
 		40A51A601F2AF77E005CF531 /* ObtainBccMonitoredDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ObtainBccMonitoredDetailViewController.m; sourceTree = "<group>"; };
+		40A6531A249C6226001F2A57 /* BlockchairUnspentTxsApi.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BlockchairUnspentTxsApi.h; sourceTree = "<group>"; };
+		40A6531B249C6226001F2A57 /* BlockchairUnspentTxsApi.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BlockchairUnspentTxsApi.m; sourceTree = "<group>"; };
+		40C39E31249B6FD200AD2511 /* BlockchairQueryAddressUnspentApi.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BlockchairQueryAddressUnspentApi.h; sourceTree = "<group>"; };
+		40C39E32249B6FD200AD2511 /* BlockchairQueryAddressUnspentApi.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BlockchairQueryAddressUnspentApi.m; sourceTree = "<group>"; };
+		40C39E34249B741D00AD2511 /* BlockchairQueryApi.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BlockchairQueryApi.h; sourceTree = "<group>"; };
+		40C39E35249B741D00AD2511 /* BlockchairQueryApi.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BlockchairQueryApi.m; sourceTree = "<group>"; };
 		40D777061F41360E00121B90 /* DialogImportPrivateKeyAddressValidation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DialogImportPrivateKeyAddressValidation.h; sourceTree = "<group>"; };
 		40D777071F41360E00121B90 /* DialogImportPrivateKeyAddressValidation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DialogImportPrivateKeyAddressValidation.m; sourceTree = "<group>"; };
 		4217A3711951235D00063746 /* Depth.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Depth.h; sourceTree = "<group>"; };
@@ -1265,6 +1274,12 @@
 				4254083419469C9A007AF99C /* BaseApi.m */,
 				4254083519469C9A007AF99C /* BitherApi.h */,
 				4254083619469C9A007AF99C /* BitherApi.m */,
+				40C39E34249B741D00AD2511 /* BlockchairQueryApi.h */,
+				40C39E35249B741D00AD2511 /* BlockchairQueryApi.m */,
+				40C39E31249B6FD200AD2511 /* BlockchairQueryAddressUnspentApi.h */,
+				40C39E32249B6FD200AD2511 /* BlockchairQueryAddressUnspentApi.m */,
+				40A6531A249C6226001F2A57 /* BlockchairUnspentTxsApi.h */,
+				40A6531B249C6226001F2A57 /* BlockchairUnspentTxsApi.m */,
 				4254083719469C9A007AF99C /* BitherEngine.h */,
 				4254083819469C9A007AF99C /* BitherEngine.m */,
 				D61D0F5AB509120289D32CE8 /* BTHDMBid+Api.m */,
@@ -2167,6 +2182,7 @@
 				0AD674921A79E6E4007967DB /* ColdAddressAddHDMViewController.m in Sources */,
 				DA641E8B196E7BC20095DF42 /* GCCrashInstallation.m in Sources */,
 				0AD6749C1A7B6229007967DB /* DialogWithActions.m in Sources */,
+				40C39E36249B741D00AD2511 /* BlockchairQueryApi.m in Sources */,
 				0A93B6011A4A66080081D74D /* DialogSignMessageOutput.m in Sources */,
 				ACA11DCD19F74FA10087D39C /* RCheckCell.m in Sources */,
 				407BD21723CD6DFE000AA3DD /* SendUtil.m in Sources */,
@@ -2204,6 +2220,7 @@
 				ACEE7D2B19D3F9F500932B39 /* ScanQrCodeTransportViewController.m in Sources */,
 				40D777081F41360E00121B90 /* DialogImportPrivateKeyAddressValidation.m in Sources */,
 				4254084119469D5A007AF99C /* BitherSetting.m in Sources */,
+				40C39E33249B6FD200AD2511 /* BlockchairQueryAddressUnspentApi.m in Sources */,
 				ACEE7D2A19D3F9F500932B39 /* QrCodeViewController.m in Sources */,
 				421B03BD19495AEF003A45F1 /* MarketViewController.m in Sources */,
 				0AB63CB81ABD15C80018A546 /* RawPrivateKeyViewController.m in Sources */,
@@ -2260,6 +2277,7 @@
 				AC454DC91A1C6E05000AF4ED /* TrashCanViewController.m in Sources */,
 				4269FF72195A885D001213B9 /* Ticker.m in Sources */,
 				401ABC921DC33E8F004611B7 /* AdUtil.m in Sources */,
+				40A6531C249C6226001F2A57 /* BlockchairUnspentTxsApi.m in Sources */,
 				AC33089519556F7A00D8F621 /* UIImage+ImageWithColor.m in Sources */,
 				AC8F0DCA196CF4E400CCD0F9 /* SelectViewController.m in Sources */,
 				ACE4ED5E198A3AE600C8862C /* AdvanceViewController.m in Sources */,
@@ -2568,7 +2586,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_ENTITLEMENTS = "bither-ios/bither-ios.entitlements";
-				CURRENT_PROJECT_VERSION = 1.9.3;
+				CURRENT_PROJECT_VERSION = 1.9.4;
 				DEVELOPMENT_TEAM = 3JMKN3V45U;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2578,7 +2596,7 @@
 				GCC_PREFIX_HEADER = "bither-ios/bither-ios-Prefix.pch";
 				INFOPLIST_FILE = "bither-ios/bither-ios-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				MARKETING_VERSION = 1.9.3;
+				MARKETING_VERSION = 1.9.4;
 				PRODUCT_BUNDLE_IDENTIFIER = net.bither;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = 1;
@@ -2594,7 +2612,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_ENTITLEMENTS = "bither-ios/bither-ios.entitlements";
-				CURRENT_PROJECT_VERSION = 1.9.3;
+				CURRENT_PROJECT_VERSION = 1.9.4;
 				DEVELOPMENT_TEAM = 3JMKN3V45U;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2604,7 +2622,7 @@
 				GCC_PREFIX_HEADER = "bither-ios/bither-ios-Prefix.pch";
 				INFOPLIST_FILE = "bither-ios/bither-ios-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				MARKETING_VERSION = 1.9.3;
+				MARKETING_VERSION = 1.9.4;
 				PRODUCT_BUNDLE_IDENTIFIER = net.bither;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = 1;

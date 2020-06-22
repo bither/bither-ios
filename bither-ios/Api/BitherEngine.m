@@ -25,6 +25,9 @@ static MKNetworkEngine *bcNetworkEngine;
 static MKNetworkEngine *hdmNetworkEngine;
 static MKNetworkEngine *blockChainEngine;
 static MKNetworkEngine *chainBtcComEngine;
+static MKNetworkEngine *blockchairEngine;
+static MKNetworkEngine *bitherAndBtcComEngine;
+
 @implementation BitherEngine
 + (BitherEngine *)instance {
     @synchronized (self) {
@@ -42,6 +45,9 @@ static MKNetworkEngine *chainBtcComEngine;
                 initWithHostName:@"blockchain.info" customHeaderFields:headerFields];
             chainBtcComEngine = [[MKNetworkEngine alloc]
                 initWithHostName:@"chain.api.btc.com" customHeaderFields:headerFields];
+            blockchairEngine = [[MKNetworkEngine alloc]
+            initWithHostName:@"api.blockchair.com" customHeaderFields:headerFields];
+            bitherAndBtcComEngine = chainBtcComEngine;
         }
     }
     return bitherEngine;
@@ -67,12 +73,20 @@ static MKNetworkEngine *chainBtcComEngine;
     return hdmNetworkEngine;
 }
 
-- (MKNetworkEngine *)getBlockChainEngine{
+- (MKNetworkEngine *)getBlockChainEngine {
     return blockChainEngine;
 }
 
-- (MKNetworkEngine *)getChainBtcComEngine{
+- (MKNetworkEngine *)getChainBtcComEngine {
     return chainBtcComEngine;
+}
+
+- (MKNetworkEngine *)getBlockchairEngine {
+    return blockchairEngine;
+}
+
+- (MKNetworkEngine *)getBitherAndBtcComEngine {
+    return bitherAndBtcComEngine;
 }
 
 - (NSArray *)getCookies {
@@ -80,24 +94,30 @@ static MKNetworkEngine *chainBtcComEngine;
     return cookies;
 }
 
-+ (MKNetworkEngine *)getNextBCNetworkEngineWithFirstBCNetworkEngine:(MKNetworkEngine *)first {
-    MKNetworkEngine *current = [BitherEngine instance].getBCNetworkEngine;
++ (MKNetworkEngine *)getNextBitherAndBtcComEngineWithFirstBitherAndBtcComEngine:(MKNetworkEngine *)first {
+    MKNetworkEngine *current = [BitherEngine instance].getBitherAndBtcComEngine;
     MKNetworkEngine *next;
     NSMutableDictionary *headerFields = [NSMutableDictionary dictionary];
     [headerFields setValue:@"application/json" forKey:@"Accept"];
-    if ([current.readonlyHostName isEqualToString:@"bc1.bithernet.com"]) {
+    if ([current.readonlyHostName isEqualToString:@"chain.api.btc.com"]) {
+        next = [[MKNetworkEngine alloc] initWithHostName:@"bc1.bithernet.com" customHeaderFields:headerFields];
+    } else if ([current.readonlyHostName isEqualToString:@"bc1.bithernet.com"]) {
         next = [[MKNetworkEngine alloc] initWithHostName:@"bc2.bithernet.com" customHeaderFields:headerFields];
     } else if ([current.readonlyHostName isEqualToString:@"bc2.bithernet.com"]) {
         next = [[MKNetworkEngine alloc] initWithHostName:@"bc3.bithernet.com" customHeaderFields:headerFields];
     } else {
-        next = [[MKNetworkEngine alloc] initWithHostName:@"bc1.bithernet.com" customHeaderFields:headerFields];
+        next = [[MKNetworkEngine alloc] initWithHostName:@"chain.api.btc.com" customHeaderFields:headerFields];
     }
-    [[BitherEngine instance] setBCNetworkEngine:next];
+    [[BitherEngine instance] setBitherAndBtcComEngine:next];
     return [next.readonlyHostName isEqualToString:first.readonlyHostName] ? NULL : next;
 }
 
-- (void)setBCNetworkEngine:(MKNetworkEngine *)engine {
-    bcNetworkEngine = engine;
+- (void)setBitherAndBtcComEngine:(MKNetworkEngine *)engine {
+    bitherAndBtcComEngine = engine;
+}
+
++ (BOOL)isBtcCom {
+    return [[BitherEngine instance].getBitherAndBtcComEngine.readonlyHostName isEqualToString:@"chain.api.btc.com"];
 }
 
 - (void)setEngineCookie {

@@ -17,7 +17,6 @@
 
 #import "BaseApi.h"
 
-
 ErrorHandler errorHandler = ^(NSError *error) {
     DLog(@"%@", [error localizedDescription]);
 };
@@ -214,6 +213,12 @@ ErrorHandler errorHandler = ^(NSError *error) {
             break;
         case ChainBtcCom:
             networkEngine = [bitherEngine getChainBtcComEngine];
+            break;
+        case Blockchair:
+            networkEngine = [bitherEngine getBlockchairEngine];
+            break;
+        case BitherAndBtcCom:
+            networkEngine = [bitherEngine getBitherAndBtcComEngine];
             break;
         default:
             networkEngine = [bitherEngine getUserNetworkEngine];
