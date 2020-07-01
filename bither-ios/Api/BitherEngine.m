@@ -116,6 +116,24 @@ static MKNetworkEngine *bitherAndBtcComEngine;
     bitherAndBtcComEngine = engine;
 }
 
++ (MKNetworkEngine *)getNextBlockchairEngineWithFirstBlockchairEngine:(MKNetworkEngine *)first {
+    MKNetworkEngine *current = [BitherEngine instance].getBlockchairEngine;
+    MKNetworkEngine *next;
+    NSMutableDictionary *headerFields = [NSMutableDictionary dictionary];
+    [headerFields setValue:@"application/json" forKey:@"Accept"];
+    if ([current.readonlyHostName isEqualToString:@"api.blockchair.com"]) {
+        next = [[MKNetworkEngine alloc] initWithHostName:@"bc1.bithernet.com/blockchair" customHeaderFields:headerFields];
+    } else {
+        next = [[MKNetworkEngine alloc] initWithHostName:@"api.blockchair.com" customHeaderFields:headerFields];
+    }
+    [[BitherEngine instance] setBlockchairEngine:next];
+    return [next.readonlyHostName isEqualToString:first.readonlyHostName] ? NULL : next;
+}
+
+- (void)setBlockchairEngine:(MKNetworkEngine *)engine {
+    blockchairEngine = engine;
+}
+
 + (BOOL)isBtcCom {
     return [[BitherEngine instance].getBitherAndBtcComEngine.readonlyHostName isEqualToString:@"chain.api.btc.com"];
 }

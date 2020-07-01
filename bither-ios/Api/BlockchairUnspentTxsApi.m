@@ -16,16 +16,16 @@
 
 - (void)queryUnspentTxs:(NSString *)txHashs callback:(DictResponseBlock)callback andErrorCallBack:(ErrorHandler)errorCallback {
     NSString *url = [NSString stringWithFormat:BLOCKCHAIR_COM_ADDRESS_UNSPENT_TXS_URL, txHashs];
-    [self queryUnspentTxs:url requestCount:1 callback:callback andErrorCallBack:errorCallback];
+    [self queryUnspentTxs:url firstEngine:[[BitherEngine instance] getBlockchairEngine] requestCount:1 callback:callback andErrorCallBack:errorCallback];
 }
 
-- (void)queryUnspentTxs:(NSString *)url requestCount:(int)requestCount callback:(DictResponseBlock)callback andErrorCallBack:(ErrorHandler)errorCallback {
+- (void)queryUnspentTxs:(NSString *)url firstEngine:firstEngine requestCount:(int)requestCount callback:(DictResponseBlock)callback andErrorCallBack:(ErrorHandler)errorCallback {
     [self get:url withParams:nil networkType:Blockchair completed:^(MKNetworkOperation *completedOperation) {
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
             if ([self dataIsError:completedOperation]) {
                 NSError *error = [[NSError alloc] initWithDomain:@"blockchair data error" code:400 userInfo:NULL];
-                [self handleError:error requestCount:requestCount retry:^(int requestCount) {
-                    [self queryUnspentTxs:url requestCount:requestCount callback:callback andErrorCallBack:errorCallback];
+                [self handleError:error firstEngine:firstEngine requestCount:requestCount retry:^(int requestCount) {
+                    [self queryUnspentTxs:url firstEngine:firstEngine requestCount:requestCount callback:callback andErrorCallBack:errorCallback];
                 } andErrorCallBack:^{
                     if (errorCallback) {
                         errorCallback(error);
@@ -37,8 +37,8 @@
             NSDictionary *dataJson = [dict objectForKey:@"data"];
             if (!dataJson || dataJson.count == 0) {
                 NSError *error = [[NSError alloc] initWithDomain:@"blockchair data error" code:400 userInfo:NULL];
-                [self handleError:error requestCount:requestCount retry:^(int requestCount) {
-                    [self queryUnspentTxs:url requestCount:requestCount callback:callback andErrorCallBack:errorCallback];
+                [self handleError:error firstEngine:firstEngine requestCount:requestCount retry:^(int requestCount) {
+                    [self queryUnspentTxs:url firstEngine:firstEngine requestCount:requestCount callback:callback andErrorCallBack:errorCallback];
                 } andErrorCallBack:^{
                     if (errorCallback) {
                         errorCallback(error);
@@ -51,8 +51,8 @@
             }
         });
     } andErrorCallback:^(NSError *error) {
-        [self handleError:error requestCount:requestCount retry:^(int requestCount) {
-            [self queryUnspentTxs:url requestCount:requestCount callback:callback andErrorCallBack:errorCallback];
+        [self handleError:error firstEngine:firstEngine requestCount:requestCount retry:^(int requestCount) {
+            [self queryUnspentTxs:url firstEngine:firstEngine requestCount:requestCount callback:callback andErrorCallBack:errorCallback];
         } andErrorCallBack:^{
             if (errorCallback) {
                 errorCallback(error);

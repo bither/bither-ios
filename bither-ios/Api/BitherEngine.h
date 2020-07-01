@@ -54,6 +54,8 @@ typedef enum {
 
 + (MKNetworkEngine *)getNextBitherAndBtcComEngineWithFirstBitherAndBtcComEngine:(MKNetworkEngine *)first;
 
++ (MKNetworkEngine *)getNextBlockchairEngineWithFirstBlockchairEngine:(MKNetworkEngine *)first;
+
 + (BOOL)isBtcCom;
 
 @end

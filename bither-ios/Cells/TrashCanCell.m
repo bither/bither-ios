@@ -45,10 +45,7 @@
 
 - (IBAction)viewOnNetPressed:(id)sender {
     NSMutableArray *array = [NSMutableArray new];
-    [array addObject:[[Action alloc] initWithName:NSLocalizedString(@"View on Blockchain.info", nil) target:self andSelector:@selector(showOnBlockchain)]];
-    if ([UserDefaultsUtil instance].localeIsChina || [[UserDefaultsUtil instance] localeIsZHHant]) {
-        [array addObject:[[Action alloc] initWithName:NSLocalizedString(@"address_option_view_on_btc", nil) target:self andSelector:@selector(showOnBlockMeta)]];
-    }
+    [array addObject:[[Action alloc] initWithName:NSLocalizedString(@"address_option_view_on_blockchair", nil) target:self andSelector:@selector(showOnBlockchair)]];
     [array addObject:[[Action alloc] initWithName:NSLocalizedString(@"address_alias_manage", nil) target:self andSelector:@selector(alias)]];
     [[[DialogWithActions alloc] initWithActions:array] showInWindow:self.window];
 }
@@ -60,6 +57,11 @@
 
 - (void)showOnBlockMeta {
     NSString *url = [NSString stringWithFormat:@"https://btc.com/%@", self.address.address];
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:url]];
+}
+
+- (void)showOnBlockchair {
+    NSString *url = [NSString stringWithFormat:@"https://blockchair.com/bitcoin/address/%@?from=bither", self.address.address];
     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:url]];
 }
 

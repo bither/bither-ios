@@ -27,10 +27,16 @@
     return code != 200;
 }
 
-- (void)handleError:(NSError *)error requestCount:(int)requestCount retry:(RetryBlock)retry andErrorCallBack:(VoidBlock)errorCallback {
+- (void)handleError:(NSError *)error firstEngine:(MKNetworkEngine *)firstEngine requestCount:(int)requestCount retry:(RetryBlock)retry andErrorCallBack:(VoidBlock)errorCallback {
     if (requestCount > kTIMEOUT_REREQUEST_CNT) {
-        if (errorCallback) {
-            errorCallback();
+        if ([BitherEngine getNextBlockchairEngineWithFirstBlockchairEngine:firstEngine]) {
+            if (retry) {
+                retry(1);
+            }
+        } else{
+            if (errorCallback) {
+                errorCallback();
+            }
         }
     } else {
         [NSThread sleepForTimeInterval:kTIMEOUT_REREQUEST_DELAY * requestCount];

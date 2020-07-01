@@ -46,18 +46,18 @@ static PeerUtil *peerUtil;
 - (void)startPeer {
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
         if ([[BTSettings instance] getAppMode] != COLD) {
-
             if ([[BlockUtil instance] syncSpvFinish]) {
-                if ([[BTPeerManager instance] doneSyncFromSPV] && [BTPeerManager instance].connectedPeers.count > 0) {
+                if ([[BTPeerManager instance] doneSyncFromSPV]) {
                     [self syncSpvFromBitcoinDone];
                 } else {
                     if (![[BTPeerManager instance] connected]) {
                         [[BTPeerManager instance] start];
                     }
-                    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(syncSpvFromBitcoinDone) name:BTPeerManagerSyncFromSPVFinishedNotification object:nil];
-                    addObserver = YES;
+                    if (!addObserver) {
+                        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(syncSpvFromBitcoinDone) name:BTPeerManagerSyncFromSPVFinishedNotification object:nil];
+                        addObserver = YES;
+                    }
                 }
-
             } else {
                 [[BlockUtil instance] syncSpvBlock];
             }
@@ -111,7 +111,6 @@ static PeerUtil *peerUtil;
         if (![peerManager connected]) {
             [peerManager start];
         }
-
     } else {
         if ([peerManager connected]) {
             [peerManager stop];

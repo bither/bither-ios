@@ -230,6 +230,11 @@
     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:url]];
 }
 
+- (void)showAddressOnBlockchair {
+    NSString *url = [NSString stringWithFormat:@"https://blockchair.com/bitcoin/address/%@?from=bither", self.address.address];
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:url]];
+}
+
 - (void)showPrivateKeyQrCode {
     DialogPassword *dialog = [[DialogPassword alloc] initWithDelegate:self];
     [dialog showInWindow:self.view.window];

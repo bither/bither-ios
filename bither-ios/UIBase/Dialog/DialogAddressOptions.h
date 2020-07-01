@@ -28,6 +28,8 @@
 
 - (void)showAddressOnBlockMeta;
 
+- (void)showAddressOnBlockchair;
+
 - (void)showPrivateKeyQrCode;
 
 - (void)showPrivateKeyManagement;

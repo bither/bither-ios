@@ -211,13 +211,13 @@ typedef void (^TxResponseBlock)(NSArray *txs, uint32_t blockCount);
 
 #pragma mark - syncwallet from bither.net
 + (void)syncWallet:(VoidBlock)voidBlock andErrorCallBack:(ErrorHandler)errorCallback addressTxLoading:(StringBlock)addressCallback {
-    NSArray *addresses = [[BTAddressManager instance] allAddresses];
     if ([[BTAddressManager instance] allSyncComplete]) {
         if (voidBlock) {
             voidBlock();
         }
         return;
     }
+    NSArray *addresses = [[BTAddressManager instance] allAddresses];
     addresses = [addresses reverseObjectEnumerator].allObjects;
     NSMutableArray *hdAccounts = [NSMutableArray new];
     if ([[BTAddressManager instance] hasHDAccountHot]) {
@@ -619,10 +619,7 @@ typedef void (^TxResponseBlock)(NSArray *txs, uint32_t blockCount);
                     [[BTBlockChain instance] rollbackBlock:(uint32_t) blockCount];
                 }
                 
-                [address setIsSyncedComplete:YES];
-                [[BTHDAccountAddressProvider instance] updateSyncedCompleteByHDAccountId:address.hdAccountId address:address];
-                [[[BTAddressManager instance] getHDAccountByHDAccountId:address.hdAccountId] updateIssuedIndex:address.index - 1 pathType:address.pathType];
-                [[[BTAddressManager instance] getHDAccountByHDAccountId:address.hdAccountId] supplyEnoughKeys:NO];
+                [TransactionsUtil updateHdAccountAddress:address hasTx:true];
                 [[NSNotificationCenter defaultCenter] postNotificationName:kHDAccountPaymentAddressChangedNotification object:[[BTAddressManager instance] getHDAccountByHDAccountId:address.hdAccountId].address userInfo:@{kHDAccountPaymentAddressChangedNotificationFirstAdding : @(NO)}];
                 dispatch_async(dispatch_get_main_queue(), ^{
                     [[NSNotificationCenter defaultCenter] postNotificationName:BitherAddressNotification object:address.address];
@@ -638,6 +635,18 @@ typedef void (^TxResponseBlock)(NSArray *txs, uint32_t blockCount);
 }
 
 + (void)getUnspentTxForBlockchair:(NSArray *)blockchairUtxos address:(BTAddress *)address callback:(VoidBlock)callback andErrorCallBack:(ErrorHandler)errorCallback {
+    if (blockchairUtxos.count == 0) {
+        [address setIsSyncComplete:YES];
+        [address updateSyncComplete];
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [[NSNotificationCenter defaultCenter] postNotificationName:BitherAddressNotification object:address.address];
+        });
+        if (callback) {
+            callback();
+        }
+        return;
+    }
     __block NSUInteger beginIndex = 0;
     __block NSUInteger endIndex = blockchairUtxos.count > 10 ? 10 : blockchairUtxos.count;
     __block uint32_t blockCount = 0;
@@ -705,10 +714,7 @@ typedef void (^TxResponseBlock)(NSArray *txs, uint32_t blockCount);
             for (long i = unspentAddresses.count - 1; i >= 0; i--) {
                 BTHDAccountAddress *address = unspentAddresses[i];
                 if ([utxoAddresses containsObject:address.address]) {
-                    [address setIsSyncedComplete:YES];
-                    [[BTHDAccountAddressProvider instance] updateSyncedCompleteByHDAccountId:hdAccountId address:address];
-                    [[[BTAddressManager instance] getHDAccountByHDAccountId:hdAccountId] updateIssuedIndex:address.index - 1 pathType:address.pathType];
-                    [[[BTAddressManager instance] getHDAccountByHDAccountId:address.hdAccountId] supplyEnoughKeys:NO];
+                    [TransactionsUtil updateHdAccountAddress:address hasTx:true];
                     [[NSNotificationCenter defaultCenter] postNotificationName:kHDAccountPaymentAddressChangedNotification object:[[BTAddressManager instance] getHDAccountByHDAccountId:address.hdAccountId].address userInfo:@{kHDAccountPaymentAddressChangedNotificationFirstAdding : @(NO)}];
                     dispatch_async(dispatch_get_main_queue(), ^{
                         [[NSNotificationCenter defaultCenter] postNotificationName:BitherAddressNotification object:address.address];
@@ -899,13 +905,9 @@ typedef void (^TxResponseBlock)(NSArray *txs, uint32_t blockCount);
                 [blockchairUtxos addObject:utxoJson];
             }
         }
-        if (blockchairUtxos.count > 0) {
-            [TransactionsUtil getUnspentTxForBlockchair:blockchairUtxos address:address callback:^{
-                [TransactionsUtil getTxs:addresses index:index + 1 callback:callback andErrorCallBack:errorCallback addressTxLoading:addressCallback];
-            } andErrorCallBack:errorCallback];
-        } else {
+        [TransactionsUtil getUnspentTxForBlockchair:blockchairUtxos address:address callback:^{
             [TransactionsUtil getTxs:addresses index:index + 1 callback:callback andErrorCallBack:errorCallback addressTxLoading:addressCallback];
-        }
+        } andErrorCallBack:errorCallback];
     } andErrorCallBack:^(NSError *error) {
         [TransactionsUtil getUnspentTxs:address callback:^{
             [TransactionsUtil getTxs:addresses index:index + 1 callback:callback andErrorCallBack:errorCallback addressTxLoading:addressCallback];

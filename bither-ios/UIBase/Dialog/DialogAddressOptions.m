@@ -30,7 +30,7 @@
 #define kFontSize (16)
 
 @interface DialogAddressOptions () {
-    NSString *_viewOnBlockChainInfoStr;
+    NSString *_viewOnBlockchairStr;
     BTAddress *_address;
 }
 @property(weak) NSObject <DialogAddressAliasDelegate> *aliasDelegate;
@@ -39,15 +39,14 @@
 @implementation DialogAddressOptions
 
 - (instancetype)initWithAddress:(BTAddress *)address delegate:(NSObject <DialogAddressOptionsDelegate> *)delegate andAliasDialog:(NSObject <DialogAddressAliasDelegate> *)aliasDelegate {
-    NSString *viewStr = NSLocalizedString(@"View on Blockchain.info", nil);
+    NSString *viewStr = NSLocalizedString(@"address_option_view_on_blockchair", nil);
     NSString *manageStr = NSLocalizedString(@"private_key_management", nil);
-    CGFloat width = MAX(MAX([viewStr sizeWithRestrict:CGSizeMake(CGFLOAT_MAX, kButtonHeight) font:[UIFont systemFontOfSize:kFontSize]].width,
-            [manageStr sizeWithRestrict:CGSizeMake(CGFLOAT_MAX, kButtonHeight) font:[UIFont systemFontOfSize:kFontSize]].width),
-            [NSLocalizedString(@"address_option_view_on_btc", nil) sizeWithRestrict:CGSizeMake(CGFLOAT_MAX, kButtonHeight) font:[UIFont systemFontOfSize:kFontSize]].width) +
+    CGFloat width = MAX([viewStr sizeWithRestrict:CGSizeMake(CGFLOAT_MAX, kButtonHeight) font:[UIFont systemFontOfSize:kFontSize]].width,
+            [manageStr sizeWithRestrict:CGSizeMake(CGFLOAT_MAX, kButtonHeight) font:[UIFont systemFontOfSize:kFontSize]].width) +
             kButtonEdgeInsets.left + kButtonEdgeInsets.right;
     self = [super initWithFrame:CGRectMake(0, 0, width, kHeight)];
     if (self) {
-        _viewOnBlockChainInfoStr = viewStr;
+        _viewOnBlockchairStr = viewStr;
         _address = address;
         self.delegate = delegate;
         self.aliasDelegate = aliasDelegate;
@@ -59,20 +58,11 @@
 - (void)firstConfigureHasPrivateKey:(BOOL)hasPrivateKey {
     self.bgInsets = UIEdgeInsetsMake(4, 16, 4, 16);
     CGFloat bottom = 0;
-    bottom = [self createButtonWithText:_viewOnBlockChainInfoStr top:bottom action:@selector(viewOnBlockChainInfoPressed:)];
+    bottom = [self createButtonWithText:_viewOnBlockchairStr top:bottom action:@selector(viewOnBlockchairPressed:)];
     UIView *seperator = [[UIView alloc] initWithFrame:CGRectMake(0, bottom, self.frame.size.width, 1)];
     seperator.autoresizingMask = UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleWidth;
     seperator.backgroundColor = [UIColor colorWithWhite:1 alpha:0.5];
     [self addSubview:seperator];
-
-    if ([UserDefaultsUtil instance].localeIsChina || [[UserDefaultsUtil instance] localeIsZHHant]) {
-        bottom += 1;
-        bottom = [self createButtonWithText:NSLocalizedString(@"address_option_view_on_btc", nil) top:bottom action:@selector(viewOnBlockMetaPressed:)];
-        UIView *seperator = [[UIView alloc] initWithFrame:CGRectMake(0, bottom, self.frame.size.width, 1)];
-        seperator.autoresizingMask = UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleWidth;
-        seperator.backgroundColor = [UIColor colorWithWhite:1 alpha:0.5];
-        [self addSubview:seperator];
-    }
 
     if (hasPrivateKey) {
         bottom += 1;
@@ -164,6 +154,14 @@
     [self dismissWithCompletion:^{
         if (self.delegate && [self.delegate respondsToSelector:@selector(showAddressOnBlockMeta)]) {
             [self.delegate showAddressOnBlockMeta];
+        }
+    }];
+}
+
+- (void)viewOnBlockchairPressed:(id)sender {
+    [self dismissWithCompletion:^{
+        if (self.delegate && [self.delegate respondsToSelector:@selector(showAddressOnBlockchair)]) {
+            [self.delegate showAddressOnBlockchair];
         }
     }];
 }

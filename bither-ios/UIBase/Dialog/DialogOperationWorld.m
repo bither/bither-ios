@@ -27,7 +27,7 @@
 #define kFontSize (16)
 
 @interface DialogOperationWorld () {
-    NSString *_viewOnBlockChainInfoStr;
+    NSString *_viewOnBlockchairStr;
 }
 @property(nonatomic, strong) NSString *world;
 @property(nonatomic, readwrite) int index;
@@ -36,15 +36,14 @@
 @implementation DialogOperationWorld
 
 - (instancetype)initWithDelegate:(NSObject <DialogOperationDelegate> *)delegate world:(NSString *)world index:(int)index {
-    NSString *viewStr = NSLocalizedString(@"View on Blockchain.info", nil);
+    NSString *viewStr = NSLocalizedString(@"address_option_view_on_blockchair", nil);
     NSString *manageStr = NSLocalizedString(@"private_key_management", nil);
-    CGFloat width = MAX(MAX([viewStr sizeWithRestrict:CGSizeMake(CGFLOAT_MAX, kButtonHeight) font:[UIFont systemFontOfSize:kFontSize]].width,
-            [manageStr sizeWithRestrict:CGSizeMake(CGFLOAT_MAX, kButtonHeight) font:[UIFont systemFontOfSize:kFontSize]].width),
-            [NSLocalizedString(@"address_option_view_on_btc", nil) sizeWithRestrict:CGSizeMake(CGFLOAT_MAX, kButtonHeight) font:[UIFont systemFontOfSize:kFontSize]].width) +
+    CGFloat width = MAX([viewStr sizeWithRestrict:CGSizeMake(CGFLOAT_MAX, kButtonHeight) font:[UIFont systemFontOfSize:kFontSize]].width,
+            [manageStr sizeWithRestrict:CGSizeMake(CGFLOAT_MAX, kButtonHeight) font:[UIFont systemFontOfSize:kFontSize]].width) +
             kButtonEdgeInsets.left + kButtonEdgeInsets.right;
     self = [super initWithFrame:CGRectMake(0, 0, width, kHeight)];
     if (self) {
-        _viewOnBlockChainInfoStr = viewStr;
+        _viewOnBlockchairStr = viewStr;
         self.delegate = delegate;
         [self firstConfigureHasPrivateKey];
     }
