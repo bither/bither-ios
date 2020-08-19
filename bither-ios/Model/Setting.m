@@ -822,9 +822,9 @@ static Setting *ApiConfigSetting;
     [array addObject:[Setting getQrCodeQualitySetting]];
     [array addObject:[ImportPrivateKeySetting getImportPrivateKeySetting]];
     [array addObject:[ImportBip38PrivateKeySetting getImportBip38PrivateKeySetting]];
-    if ([[BTSettings instance] getAppMode] == HOT && [[BTAddressManager instance] hdmKeychain] == nil) {
-        [array addObject:[HDMRecoverSetting getHDMRecoverSetting]];
-    }
+//    if ([[BTSettings instance] getAppMode] == HOT && [[BTAddressManager instance] hdmKeychain] == nil) {
+//        [array addObject:[HDMRecoverSetting getHDMRecoverSetting]];
+//    }
     if ([[BTSettings instance] getAppMode] == HOT && [BTHDMBid getHDMBidFromDb]) {
         [array addObject:[Setting getHDMServerPasswordResetSetting]];
     }
