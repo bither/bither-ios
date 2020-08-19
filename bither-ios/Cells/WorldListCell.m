@@ -44,6 +44,7 @@
 
     self.labWorld = [[UILabel alloc] initWithFrame:ivRect];
     self.labWorld.font = [UIFont systemFontOfSize:14];
+    self.labWorld.textColor = [UIColor blackColor];
     [self addSubview:self.labWorld];
     [self setBackgroundColor:[UIColor clearColor]];
 
