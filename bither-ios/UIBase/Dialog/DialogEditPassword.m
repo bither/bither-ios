@@ -114,8 +114,8 @@
     self.vChecking.hidden = NO;
     self.vContent.hidden = YES;
     [self endEditing:YES];
+    [UIApplication sharedApplication].idleTimerDisabled = YES;
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
-        [UIApplication sharedApplication].idleTimerDisabled = YES;
         BOOL result = [self checkPassword:p];
         if (!result) {
             dispatch_async(dispatch_get_main_queue(), ^{
@@ -125,6 +125,7 @@
                     [self showError:NSLocalizedString(@"Password wrong.", nil)];
                     [self.tfPassword becomeFirstResponder];
                 }
+                [UIApplication sharedApplication].idleTimerDisabled = NO;
             });
         } else {
             BOOL success = NO;
@@ -137,9 +138,9 @@
                 } else {
                     [self dismissWithMsg:NSLocalizedString(@"Change password failed", nil)];
                 }
+                [UIApplication sharedApplication].idleTimerDisabled = NO;
             });
         }
-        [UIApplication sharedApplication].idleTimerDisabled = NO;
     });
 }
 
