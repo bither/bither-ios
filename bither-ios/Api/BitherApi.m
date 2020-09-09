@@ -337,14 +337,14 @@ static BitherApi *piApi;
 }
 
 - (void)getUnspentTxs:(NSString *)txHashs callback:(DictResponseBlock)callback andErrorCallBack:(ErrorHandler)errorCallback {
-    [self getUnspentTxs:txHashs firstEngine:[[BitherEngine instance] getBitherAndBtcComEngine] requestCount:1 callback:callback andErrorCallBack:errorCallback];
+    [self getUnspentTxs:txHashs firstEngine:[[BitherEngine instance] getBCNetworkEngine] requestCount:1 callback:callback andErrorCallBack:errorCallback];
 }
 
 - (void)getUnspentTxs:(NSString *)txHashs firstEngine:(MKNetworkEngine *)firstEngine requestCount:(int)requestCount callback:(DictResponseBlock)callback andErrorCallBack:(ErrorHandler)errorCallback {
-    NSString *url = [NSString stringWithFormat:BitherEngine.isBtcCom ? BTC_COM_ADDRESS_UNSPENT_TXS_URL : BC_ADDRESS_UNSPENT_TXS_URL, txHashs];
+    NSString *url = [NSString stringWithFormat:BC_ADDRESS_UNSPENT_TXS_URL, txHashs];
     NSMutableDictionary *dict = [NSMutableDictionary new];
     dict[@"verbose"] = @(3);
-    [self get:url withParams:dict networkType:BitherAndBtcCom completed:^(MKNetworkOperation *completedOperation) {
+    [self get:url withParams:dict networkType:BitherBC completed:^(MKNetworkOperation *completedOperation) {
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
             DDLogDebug(@"api response:%@", completedOperation.responseString);
             if (![StringUtil isEmpty:completedOperation.responseString]) {
@@ -355,7 +355,7 @@ static BitherApi *piApi;
             }
         });
     } andErrorCallback:^(NSError *error) {
-        [self handleError:error firstEngine:firstEngine requestCount:requestCount retry:^(int requestCount) {
+        [self handleBcError:error firstEngine:firstEngine requestCount:requestCount retry:^(int requestCount) {
             [self getUnspentTxs:txHashs firstEngine:firstEngine requestCount:requestCount callback:callback andErrorCallBack:errorCallback];
         } andErrorCallBack:^{
             if (errorCallback) {
@@ -400,6 +400,25 @@ static BitherApi *piApi;
             errorCallback(error);
         }
     }];
+}
+
+- (void)handleBcError:(NSError *)error firstEngine:(MKNetworkEngine *)firstEngine requestCount:(int)requestCount retry:(RetryBlock)retry andErrorCallBack:(VoidBlock)errorCallback {
+    if (requestCount > kTIMEOUT_REREQUEST_CNT) {
+        if ([BitherEngine getNextBitherEngineWithFirstBitherEngine:firstEngine]) {
+            if (retry) {
+                retry(requestCount);
+            }
+        } else{
+            if (errorCallback) {
+                errorCallback();
+            }
+        }
+    } else {
+        [NSThread sleepForTimeInterval:kTIMEOUT_REREQUEST_DELAY * requestCount];
+        if (retry) {
+            retry(requestCount + 1);
+        }
+    }
 }
 
 - (void)handleError:(NSError *)error firstEngine:(MKNetworkEngine *)firstEngine requestCount:(int)requestCount retry:(RetryBlock)retry andErrorCallBack:(VoidBlock)errorCallback {

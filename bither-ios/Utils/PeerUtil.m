@@ -91,12 +91,12 @@ static PeerUtil *peerUtil;
         [TransactionsUtil syncWallet:^{
             [self connectPeer];
             isRunning = NO;
-            [[NSNotificationCenter defaultCenter] postNotificationName:@"BTAddressTxLoadingNotification" object:NULL];
+            [[NSNotificationCenter defaultCenter] postNotificationName:BTAddressTxLoadingNotification object:NULL];
         }           andErrorCallBack:^(NSError *error) {
             isRunning = NO;
-            [[NSNotificationCenter defaultCenter] postNotificationName:@"BTAddressTxLoadingNotification" object:NULL];
+            [[NSNotificationCenter defaultCenter] postNotificationName:BTAddressTxLoadingNotification object:NULL];
         }           addressTxLoading:^(NSString *string) {
-            [[NSNotificationCenter defaultCenter] postNotificationName:@"BTAddressTxLoadingNotification" object:string];
+            [[NSNotificationCenter defaultCenter] postNotificationName:BTAddressTxLoadingNotification object:string];
         }];
     }
 }

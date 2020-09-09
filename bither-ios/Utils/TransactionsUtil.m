@@ -359,9 +359,7 @@ typedef void (^TxResponseBlock)(NSArray *txs, uint32_t blockCount);
                         [[BTHDAccountAddressProvider instance] updateSyncedByHDAccountId:address.hdAccountId pathType:address.pathType index:address.index];
                     }
                 }
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    [[NSNotificationCenter defaultCenter] postNotificationName:BitherAddressNotification object:address.address];
-                });
+                [[NSNotificationCenter defaultCenter] postNotificationName:BTAddressTxLoadingNotification object:address.address];
                 if (callback) {
                     callback();
                 }
@@ -419,11 +417,15 @@ typedef void (^TxResponseBlock)(NSArray *txs, uint32_t blockCount);
             unusedAddressCnt += 1;
             if (unusedAddressCnt > kHDAccountMaxUnusedNewAddressCount) {
                 [[BTHDAccountAddressProvider instance] updateSyncedByHDAccountId:hdAccountId pathType:pathType index:endIndex - 1];
-                PathType nextPathType = [TransactionsUtil nextPathTypeWithCurrentPathType:pathType];
-                if (nextPathType != EXTERNAL_ROOT_PATH) {
-                    [TransactionsUtil getHDAccountUnspentAddresss:hdAccountId pathType:nextPathType beginIndex:0 endIndex:kHDAccountMaxNoTxAddressCount lastTxIndex:-1 unusedAddressCnt:0 unspentAddresses:unspentAddresses blockchairUtxos:blockchairUtxos callback:callback andErrorCallBack:errorCallback addressTxLoading:addressCallback];
+                if ([addressesStr isEqualToString:@""]) {
+                    PathType nextPathType = [TransactionsUtil nextPathTypeWithCurrentPathType:pathType];
+                    if (nextPathType != EXTERNAL_ROOT_PATH) {
+                        [TransactionsUtil getHDAccountUnspentAddresss:hdAccountId pathType:nextPathType beginIndex:0 endIndex:kHDAccountMaxNoTxAddressCount lastTxIndex:-1 unusedAddressCnt:0 unspentAddresses:unspentAddresses blockchairUtxos:blockchairUtxos callback:callback andErrorCallBack:errorCallback addressTxLoading:addressCallback];
+                    } else {
+                        [TransactionsUtil getHDAccountUnspentTxs:unspentAddresses blockchairUtxos:blockchairUtxos hdAccountId:hdAccountId callback:callback andErrorCallBack:errorCallback addressTxLoading:addressCallback];
+                    }
                 } else {
-                    [TransactionsUtil getHDAccountUnspentTxs:unspentAddresses blockchairUtxos:blockchairUtxos hdAccountId:hdAccountId callback:callback andErrorCallBack:errorCallback addressTxLoading:addressCallback];
+                    [TransactionsUtil queryAddressUnspent:addressesStr queryAddresArray:queryAddresArray hdAccountId:hdAccountId pathType:pathType beginIndex:beginIndex endIndex:endIndex lastTxIndex:lastTxIndex unusedAddressCnt:unusedAddressCnt unspentAddresses:unspentAddresses blockchairUtxos:blockchairUtxos callback:callback andErrorCallBack:errorCallback addressTxLoading:addressCallback];
                 }
                 return;
             }
@@ -440,12 +442,16 @@ typedef void (^TxResponseBlock)(NSArray *txs, uint32_t blockCount);
             addressesStr = [NSString stringWithFormat:@"%@,%@", addressesStr, address.address];
         }
     }
-
+    
     if ([addressesStr isEqualToString:@""]) {
         [TransactionsUtil getHDAccountUnspentAddresss:hdAccountId pathType:pathType beginIndex:endIndex endIndex:endIndex + kHDAccountMaxNoTxAddressCount lastTxIndex:lastTxIndex unusedAddressCnt:unusedAddressCnt unspentAddresses:unspentAddresses blockchairUtxos:blockchairUtxos callback:callback andErrorCallBack:errorCallback addressTxLoading:addressCallback];
         return;
     }
     
+    [TransactionsUtil queryAddressUnspent:addressesStr queryAddresArray:queryAddresArray hdAccountId:hdAccountId pathType:pathType beginIndex:beginIndex endIndex:endIndex lastTxIndex:lastTxIndex unusedAddressCnt:unusedAddressCnt unspentAddresses:unspentAddresses blockchairUtxos:blockchairUtxos callback:callback andErrorCallBack:errorCallback addressTxLoading:addressCallback];
+}
+
++ (void)queryAddressUnspent:(NSString *)addressesStr queryAddresArray:(NSMutableArray *)queryAddresArray hdAccountId:(int)hdAccountId pathType:(PathType)pathType beginIndex:(int)beginIndex endIndex:(int)endIndex lastTxIndex:(int)lastTxIndex unusedAddressCnt:(int)unusedAddressCnt unspentAddresses:(NSMutableArray *)unspentAddresses blockchairUtxos:(NSMutableArray *)blockchairUtxos callback:(VoidBlock)callback andErrorCallBack:(ErrorHandler)errorCallback addressTxLoading:(StringBlock)addressCallback {
     [[BlockchairQueryAddressUnspentApi instance] queryAddressUnspent:addressesStr callback:^(NSDictionary *dict) {
         int newLastTxIndex = lastTxIndex;
         if ([[dict allKeys] containsObject:BLOCKCHAIR_UTXO]) {
@@ -621,9 +627,7 @@ typedef void (^TxResponseBlock)(NSArray *txs, uint32_t blockCount);
                 
                 [TransactionsUtil updateHdAccountAddress:address hasTx:true];
                 [[NSNotificationCenter defaultCenter] postNotificationName:kHDAccountPaymentAddressChangedNotification object:[[BTAddressManager instance] getHDAccountByHDAccountId:address.hdAccountId].address userInfo:@{kHDAccountPaymentAddressChangedNotificationFirstAdding : @(NO)}];
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    [[NSNotificationCenter defaultCenter] postNotificationName:BitherAddressNotification object:address.address];
-                });
+                [[NSNotificationCenter defaultCenter] postNotificationName:BTAddressTxLoadingNotification object:address.address];
                 if (callback) {
                     callback();
                 }
@@ -638,17 +642,14 @@ typedef void (^TxResponseBlock)(NSArray *txs, uint32_t blockCount);
     if (blockchairUtxos.count == 0) {
         [address setIsSyncComplete:YES];
         [address updateSyncComplete];
-        
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [[NSNotificationCenter defaultCenter] postNotificationName:BitherAddressNotification object:address.address];
-        });
+        [[NSNotificationCenter defaultCenter] postNotificationName:BTAddressTxLoadingNotification object:address.address];
         if (callback) {
             callback();
         }
         return;
     }
     __block NSUInteger beginIndex = 0;
-    __block NSUInteger endIndex = blockchairUtxos.count > 10 ? 10 : blockchairUtxos.count;
+    __block NSUInteger endIndex = blockchairUtxos.count > 1 ? 1 : blockchairUtxos.count;
     __block uint32_t blockCount = 0;
     NSMutableArray *utxoAddresses = [NSMutableArray array];
     
@@ -662,7 +663,7 @@ typedef void (^TxResponseBlock)(NSArray *txs, uint32_t blockCount);
         [address initTxs:[[BTAddressManager instance] compressTxsForApi:txs andAddress:address.address]];
         if (endIndex < blockchairUtxos.count) {
             beginIndex = endIndex;
-            endIndex = beginIndex + 10 < blockchairUtxos.count ? beginIndex + 10 : blockchairUtxos.count;
+            endIndex = beginIndex + 1 < blockchairUtxos.count ? beginIndex + 1 : blockchairUtxos.count;
             [TransactionsUtil getUnspentTransactionsForBlockchair:blockchairUtxos beginIndex:beginIndex endIndex:endIndex blockCount:blockCount utxoAddresses:utxoAddresses callback:nextPageBlock andErrorCallBack:errorHandler];
         } else {
             nextPageBlock = nil;
@@ -673,10 +674,7 @@ typedef void (^TxResponseBlock)(NSArray *txs, uint32_t blockCount);
             
             [address setIsSyncComplete:YES];
             [address updateSyncComplete];
-            
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [[NSNotificationCenter defaultCenter] postNotificationName:BitherAddressNotification object:address.address];
-            });
+            [[NSNotificationCenter defaultCenter] postNotificationName:BTAddressTxLoadingNotification object:address.address];
             if (callback) {
                 callback();
             }
@@ -688,7 +686,7 @@ typedef void (^TxResponseBlock)(NSArray *txs, uint32_t blockCount);
 
 + (void)getHDAccountUnspentTxForBlockchair:(NSMutableArray *)unspentAddresses blockchairUtxos:(NSArray *)blockchairUtxos hdAccountId:(int)hdAccountId callback:(VoidBlock)callback andErrorCallBack:(ErrorHandler)errorCallback {
     __block NSUInteger beginIndex = 0;
-    __block NSUInteger endIndex = blockchairUtxos.count > 10 ? 10 : blockchairUtxos.count;
+    __block NSUInteger endIndex = blockchairUtxos.count > 1 ? 1 : blockchairUtxos.count;
     __block uint32_t blockCount = 0;
     NSMutableArray *utxoAddresses = [NSMutableArray array];
     
@@ -702,7 +700,7 @@ typedef void (^TxResponseBlock)(NSArray *txs, uint32_t blockCount);
         [[[BTAddressManager instance] getHDAccountByHDAccountId:hdAccountId] initTxs:[[BTAddressManager instance] compressTxsForApi:txs andAddressArr:utxoAddresses]];
         if (endIndex < blockchairUtxos.count) {
             beginIndex = endIndex;
-            endIndex = beginIndex + 10 < blockchairUtxos.count ? beginIndex + 10 : blockchairUtxos.count;
+            endIndex = beginIndex + 1 < blockchairUtxos.count ? beginIndex + 1 : blockchairUtxos.count;
             [TransactionsUtil getUnspentTransactionsForBlockchair:blockchairUtxos beginIndex:beginIndex endIndex:endIndex blockCount:blockCount utxoAddresses:utxoAddresses callback:nextPageBlock andErrorCallBack:errorHandler];
         } else {
             nextPageBlock = nil;
@@ -716,9 +714,7 @@ typedef void (^TxResponseBlock)(NSArray *txs, uint32_t blockCount);
                 if ([utxoAddresses containsObject:address.address]) {
                     [TransactionsUtil updateHdAccountAddress:address hasTx:true];
                     [[NSNotificationCenter defaultCenter] postNotificationName:kHDAccountPaymentAddressChangedNotification object:[[BTAddressManager instance] getHDAccountByHDAccountId:address.hdAccountId].address userInfo:@{kHDAccountPaymentAddressChangedNotificationFirstAdding : @(NO)}];
-                    dispatch_async(dispatch_get_main_queue(), ^{
-                        [[NSNotificationCenter defaultCenter] postNotificationName:BitherAddressNotification object:address.address];
-                    });
+                    [[NSNotificationCenter defaultCenter] postNotificationName:BTAddressTxLoadingNotification object:address.address];
                     [unspentAddresses removeObject:address];
                 }
             }
@@ -817,9 +813,7 @@ typedef void (^TxResponseBlock)(NSArray *txs, uint32_t blockCount);
                 }
             }
 
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [[NSNotificationCenter defaultCenter] postNotificationName:BitherAddressNotification object:address.address];
-            });
+            [[NSNotificationCenter defaultCenter] postNotificationName:BTAddressTxLoadingNotification object:address.address];
             if (callback) {
                 callback();
             }
@@ -872,9 +866,7 @@ typedef void (^TxResponseBlock)(NSArray *txs, uint32_t blockCount);
                 [address setIsSyncComplete:YES];
                 [address updateSyncComplete];
                 
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    [[NSNotificationCenter defaultCenter] postNotificationName:BitherAddressNotification object:address.address];
-                });
+                [[NSNotificationCenter defaultCenter] postNotificationName:BTAddressTxLoadingNotification object:address.address];
                 if (callback) {
                     callback();
                 }
@@ -893,6 +885,7 @@ typedef void (^TxResponseBlock)(NSArray *txs, uint32_t blockCount);
         return;
     }
     BTAddress *address = addresses[index];
+    [[NSNotificationCenter defaultCenter] postNotificationName:BTAddressTxLoadingNotification object:address.address];
     addressCallback(address.address);
     [[BlockchairQueryAddressUnspentApi instance] queryAddressUnspent:address.address callback:^(NSDictionary *dict) {
         NSMutableArray *blockchairUtxos = [NSMutableArray array];
@@ -948,9 +941,6 @@ typedef void (^TxResponseBlock)(NSArray *txs, uint32_t blockCount);
                 [address setIsSyncComplete:YES];
                 [address updateSyncComplete];
                 
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    [[NSNotificationCenter defaultCenter] postNotificationName:BitherAddressNotification object:address.address];
-                });
                 if (callback) {
                     callback();
                 }
@@ -988,8 +978,17 @@ typedef void (^TxResponseBlock)(NSArray *txs, uint32_t blockCount);
             return ;
         }
     }
+    
+    [TransactionsUtil getUnspentTxForBtcCom:txs unspentJsonArray:unspentJsonArray beginIndex:0 endIndex:unspentJsonArray.count > 10 ? 10 : unspentJsonArray.count address:address callback:^{
+        if (callback) {
+            callback(txs);
+        }
+    } andErrorCallBack:errorCallback];
+}
+
++ (void)getUnspentTxForBtcCom:(NSMutableArray *)txs unspentJsonArray:(NSArray *)unspentJsonArray beginIndex:(NSUInteger)beginIndex endIndex:(NSUInteger)endIndex address:(NSString *)address callback:(VoidBlock)callback andErrorCallBack:(ErrorHandler)errorCallback {
     NSString *txHashs;
-    for (int i = 0; i < unspentJsonArray.count; i++) {
+    for (NSUInteger i = beginIndex; i < endIndex; i++) {
         NSDictionary *unspentJson = unspentJsonArray[i];
         if (!unspentJson || !unspentJson[TX_HASH] || unspentJson[@"value"] <= 0) {
             continue;
@@ -1003,27 +1002,22 @@ typedef void (^TxResponseBlock)(NSArray *txs, uint32_t blockCount);
             txHashs = txHash;
         }
     }
-    if (txHashs.length == 0) {
-        if (callback) {
-            callback(txs);
-            return ;
-        }
-    }
+    
     [[BitherApi instance] getUnspentTxs:txHashs callback:^(NSDictionary *txsJson) {
-        if (!txsJson || [TransactionsUtil dataIsError:dict]) {
-            if (callback) {
-                callback(txs);
-                return ;
+        if (txsJson) {
+            NSMutableArray *jsonArray = [NSMutableArray new];
+            if ([txHashs containsString:@","]) {
+                jsonArray = txsJson[DATA];
+            } else {
+                [jsonArray addObject:txsJson[DATA]];
             }
+            [txs addObjectsFromArray:[TransactionsUtil getUnspentTxsFromBither:jsonArray address:address]];
         }
-        NSMutableArray *jsonArray = [NSMutableArray new];
-        if ([txHashs containsString:@","]) {
-            jsonArray = txsJson[DATA];
+        if (endIndex == unspentJsonArray.count) {
+            callback();
         } else {
-            [jsonArray addObject:txsJson[DATA]];
-        }
-        if (callback) {
-            callback([TransactionsUtil getUnspentTxsFromBither:jsonArray address:address]);
+            NSUInteger index = endIndex + 10 > unspentJsonArray.count ? unspentJsonArray.count : endIndex + 10;
+            [TransactionsUtil getUnspentTxForBtcCom:txs unspentJsonArray:unspentJsonArray beginIndex:endIndex endIndex:index address:address callback:callback andErrorCallBack:errorCallback];
         }
     } andErrorCallBack:errorCallback];
 }
@@ -1156,10 +1150,7 @@ typedef void (^TxResponseBlock)(NSArray *txs, uint32_t blockCount);
 
             [address setIsSyncComplete:YES];
             [address updateSyncComplete];
-
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [[NSNotificationCenter defaultCenter] postNotificationName:BitherAddressNotification object:address.address];
-            });
+            [[NSNotificationCenter defaultCenter] postNotificationName:BTAddressTxLoadingNotification object:address.address];
             if (callback) {
                 callback();
             }

@@ -29,7 +29,7 @@
 
 - (void)handleError:(NSError *)error firstEngine:(MKNetworkEngine *)firstEngine requestCount:(int)requestCount retry:(RetryBlock)retry andErrorCallBack:(VoidBlock)errorCallback {
     if (requestCount > kTIMEOUT_REREQUEST_CNT) {
-        if ([BitherEngine getNextBlockchairEngineWithFirstBlockchairEngine:firstEngine]) {
+        if ([BitherEngine getNextBitherEngineWithFirstBitherEngine:firstEngine]) {
             if (retry) {
                 retry(1);
             }

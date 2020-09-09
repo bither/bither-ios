@@ -33,11 +33,11 @@
     _result[BLOCKCHAIR_HAS_TX_ADDRESSES] = @"";
     _result[BLOCKCHAIR_HAS_UTXO_ADDRESSES] = @"";
     NSString *url = [NSString stringWithFormat:BLOCKCHAIR_COM_Q_ADDRESSES_UNSPENT_URL, addressesStr, _offset];
-    [self queryAddressUnspent:url firstEngine:[[BitherEngine instance] getBlockchairEngine] requestCount:1 callback:callback andErrorCallBack:errorCallback];
+    [self queryAddressUnspent:url firstEngine:[[BitherEngine instance] getBCNetworkEngine] requestCount:1 callback:callback andErrorCallBack:errorCallback];
 }
 
 - (void)queryAddressUnspent:(NSString *)url firstEngine:(MKNetworkEngine *)firstEngine requestCount:(int)requestCount callback:(DictResponseBlock)callback andErrorCallBack:(ErrorHandler)errorCallback {
-    [self get:url withParams:nil networkType:Blockchair completed:^(MKNetworkOperation *completedOperation) {
+    [self get:url withParams:nil networkType:BitherBC completed:^(MKNetworkOperation *completedOperation) {
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
             if ([self dataIsError:completedOperation]) {
                 NSError *error = [[NSError alloc] initWithDomain:@"blockchair data error" code:400 userInfo:NULL];

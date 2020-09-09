@@ -22,7 +22,7 @@
 #import "GroupUtil.h"
 
 #define BitherMarketUpdateNotification  @"BitherMarketUpdateNotification"
-#define BitherAddressNotification  @"BitherAddressNotification"
+#define BTAddressTxLoadingNotification @"BTAddressTxLoadingNotification"
 #define DONATE_ADDRESS  @"1BitherUnNvB2NsfxMnbS35kS3DTPr7PW5"
 #define DONATE_AMOUNT (100000)
 

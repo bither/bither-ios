@@ -56,8 +56,8 @@
 #define BC_ADDRESS_STAT_URL @"api/v2/address/%@/transaction/stat"
 #define BC_Q_STATS_DYNAMIC_FEE @"api/v2/stats/dynamic/fee"
 
-#define BLOCKCHAIR_COM_Q_ADDRESSES_UNSPENT_URL @"bitcoin/dashboards/addresses/%@?limit=100&offset=%d"
-#define BLOCKCHAIR_COM_ADDRESS_UNSPENT_TXS_URL @"bitcoin/dashboards/transactions/%@"
+#define BLOCKCHAIR_COM_Q_ADDRESSES_UNSPENT_URL @"blockchair/bitcoin/dashboards/addresses/%@?limit=100&offset=%d"
+#define BLOCKCHAIR_COM_ADDRESS_UNSPENT_TXS_URL @"blockchair/bitcoin/dashboards/transactions/%@"
 
 //limit=50 one Page can show 50 tx informations
 #define BLOCK_INFO_ADDRESS_TX_URL @"rawaddr/%@?offset=%d"

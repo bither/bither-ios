@@ -139,7 +139,7 @@ static StatusBarNotificationWindow *notificationWindow;
     
     // NSLog(@"h %d",[[BTBlockChain instance] lastBlock].blockNo);
     [self callInHot:^{
-        [[PeerUtil instance] startPeer];
+//        [[PeerUtil instance] startPeer];
         [[BitherTime instance] start];
     }];
     

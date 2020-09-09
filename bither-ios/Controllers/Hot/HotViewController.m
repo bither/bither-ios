@@ -58,7 +58,7 @@
     self.pvSync.hidden = YES;
     self.pvSync.progress = 0;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(syncProgress:) name:BTPeerManagerSyncProgressNotification object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(addressTxLoading:) name:@"BTAddressTxLoadingNotification" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(addressTxLoading:) name:BTAddressTxLoadingNotification object:nil];
 }
 
 - (void)initTabs {
