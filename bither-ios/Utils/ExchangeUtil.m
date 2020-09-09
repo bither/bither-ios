@@ -100,7 +100,6 @@ static NSDictionary *_currenciesRate = nil;
     switch (marketType) {
         case BITSTAMP:
         case BITFINEX:
-        case COINBASE:
             return USD;
         default:
             return CNY;

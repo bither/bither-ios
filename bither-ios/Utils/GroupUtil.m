@@ -34,9 +34,6 @@
         case BITFINEX:
             name = NSLocalizedString(@"Bitfinex", nil);
             break;
-        case COINBASE:
-            name = NSLocalizedString(@"Coinbase", nil);
-            break;
     }
     return name;
 
@@ -48,8 +45,6 @@
             return @"bitstamp.net";
         case BITFINEX:
             return @"bitfinex.com";
-        case COINBASE:
-            return @"coinbase.com";
         default:
             return nil;
     }
@@ -62,8 +57,6 @@
             return 1;
         case BITFINEX:
             return 6;
-        case COINBASE:
-            return 8;
     }
     return 1;
 
@@ -73,8 +66,6 @@
     switch (value) {
         case 6:
             return BITFINEX;
-        case 8:
-            return COINBASE;
     }
     return BITSTAMP;
 
@@ -88,8 +79,6 @@
             //ffa3bd0b
         case BITFINEX:
             return RGBA(163, 189, 11, 1);
-        case COINBASE:
-            return RGBA(21, 103, 177, 1);
         default:
             return nil;
     }
