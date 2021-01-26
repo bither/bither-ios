@@ -93,7 +93,9 @@
                     return;
                 }
                 [singular runningWithoutSingularMode];
-                [UIApplication sharedApplication].idleTimerDisabled = YES;
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [UIApplication sharedApplication].idleTimerDisabled = YES;
+                });
                 XRandom *xRandom = [[XRandom alloc] initWithDelegate:nil];
                 BTHDMKeychain *keychain = nil;
                 while (!keychain) {
@@ -106,8 +108,8 @@
                     }
                 }
                 [BTAddressManager instance].hdmKeychain = keychain;
-                [UIApplication sharedApplication].idleTimerDisabled = NO;
                 dispatch_async(dispatch_get_main_queue(), ^{
+                    [UIApplication sharedApplication].idleTimerDisabled = NO;
                     [dp dismissWithCompletion:^{
                         if (keychain) {
                             [self.controller moveToCold:YES andCompletion:nil];

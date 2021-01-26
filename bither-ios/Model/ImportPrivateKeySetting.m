@@ -281,6 +281,13 @@ static Setting *importPrivateKeySetting;
                                 }];
                             });
                             return;
+                        } else {
+                            dispatch_async(dispatch_get_main_queue(), ^{
+                                [dp dismissWithCompletion:^{
+                                    [self showMsg:NSLocalizedString(@"Import failed.", nil)];
+                                }];
+                            });
+                            return;
                         }
                     }
                     if (!account) {
@@ -296,7 +303,17 @@ static Setting *importPrivateKeySetting;
                     [BTAddressManager instance].hdAccountHot = account;
                     [[PeerUtil instance] startPeer];
                 } else {
-                    BTHDAccountCold *account = [[BTHDAccountCold alloc] initWithEncryptedMnemonicSeed:[[BTEncryptData alloc] initWithStr:[self getHDAccountBTEncryptDataStr:_result]] btBip39:bip39 andPassword:password];
+                    BTHDAccountCold *account;
+                    @try {
+                        account = [[BTHDAccountCold alloc] initWithEncryptedMnemonicSeed:[[BTEncryptData alloc] initWithStr:[self getHDAccountBTEncryptDataStr:_result]] btBip39:bip39 andPassword:password];
+                    } @catch (NSException *e) {
+                        dispatch_async(dispatch_get_main_queue(), ^{
+                            [dp dismissWithCompletion:^{
+                                [self showMsg:NSLocalizedString(@"Import failed.", nil)];
+                            }];
+                        });
+                        return;
+                    }
                     if (!account) {
                         dispatch_async(dispatch_get_main_queue(), ^{
                             [dp dismissWithCompletion:^{

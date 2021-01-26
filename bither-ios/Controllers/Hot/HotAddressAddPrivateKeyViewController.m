@@ -148,12 +148,12 @@
         DialogProgress *d = [[DialogProgress alloc] initWithMessage:NSLocalizedString(@"Please wait…", nil)];
         d.touchOutSideToDismiss = NO;
         [d showInWindow:self.view.window];
+        [UIApplication sharedApplication].idleTimerDisabled = YES;
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
-            [UIApplication sharedApplication].idleTimerDisabled = YES;
             XRandom *xRandom = [[XRandom alloc] initWithDelegate:nil];
             BOOL result = [KeyUtil addPrivateKeyByRandom:xRandom passphras:password count:self.countToGenerate];
-            [UIApplication sharedApplication].idleTimerDisabled = NO;
             dispatch_async(dispatch_get_main_queue(), ^{
+                [UIApplication sharedApplication].idleTimerDisabled = NO;
                 [d dismissWithCompletion:^{
                     if (result) {
                         [self.successDismissingViewController dismissViewControllerAnimated:YES completion:nil];

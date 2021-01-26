@@ -240,7 +240,7 @@
 
 - (void)singularServerFinishWithWords:(NSArray *)words andColdQr:(NSString *)qr {
     __block HotAddressAddHDMViewController *s = self;
-    [[[DialogHDMSingularColdSeed alloc] initWithWords:words qr:qr parent:self andDismissAction:^{
+    [[[DialogHDMSingularColdSeed alloc] initWithWords:words parent:self andDismissAction:^{
         [s finalAnimation];
     }] show];
 }

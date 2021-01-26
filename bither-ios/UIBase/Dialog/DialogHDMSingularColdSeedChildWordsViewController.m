@@ -29,7 +29,7 @@
 @end
 
 @implementation DialogHDMSingularColdSeedChildWordsViewController
-- (void)setWords:(NSArray *)words andQr:(NSString *)qr {
+- (void)setWords:(NSArray *)words {
     [self loadView];
     NSString *str = CFBridgingRelease(CFStringCreateByCombiningStrings(NULL, (__bridge CFArrayRef) words, CFSTR("-")));
     self.lbl.text = str;

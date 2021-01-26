@@ -22,14 +22,14 @@
 #import <Foundation/Foundation.h>
 
 @protocol DialogHDMSingularColdSeedChildViewController
-- (void)setWords:(NSArray *)words andQr:(NSString *)qr;
+- (void)setWords:(NSArray *)words;
 @end
 
 
 @interface DialogHDMSingularColdSeed : UIViewController
-- (instancetype)initWithWords:(NSArray *)words qr:(NSString *)qr parent:(UIViewController *)parent andDismissAction:(void (^)())dismissed;
+- (instancetype)initWithWords:(NSArray *)words parent:(UIViewController *)parent andDismissAction:(void (^)())dismissed;
 
-- (instancetype)initWithWords:(NSArray *)words qr:(NSString *)qr parent:(UIViewController *)parent warn:(NSString *)warn button:(NSString *)button andDismissAction:(void (^)())dismissed;
+- (instancetype)initWithWords:(NSArray *)words parent:(UIViewController *)parent warn:(NSString *)warn button:(NSString *)button andDismissAction:(void (^)())dismissed;
 
 - (void)show;
 @end

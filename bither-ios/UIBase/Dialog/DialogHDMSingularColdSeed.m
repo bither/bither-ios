@@ -31,7 +31,6 @@
 #define kButtonHeight (36)
 
 @interface DialogHDMSingularColdSeed () <PiPageViewControllerDelegate> {
-    NSString *qr;
     NSArray *words;
     NSString *warn;
     NSString *button;
@@ -40,20 +39,18 @@
 }
 @property(weak) UIViewController *parent;
 @property PiPageViewController *page;
-@property UISegmentedControl *vTab;
 @end
 
 @implementation DialogHDMSingularColdSeed
-- (instancetype)initWithWords:(NSArray *)ws qr:(NSString *)q parent:(UIViewController *)parent andDismissAction:(void (^)())d {
-    return [self initWithWords:ws qr:q parent:parent warn:nil button:nil andDismissAction:d];
+- (instancetype)initWithWords:(NSArray *)ws parent:(UIViewController *)parent andDismissAction:(void (^)())d {
+    return [self initWithWords:ws parent:parent warn:nil button:nil andDismissAction:d];
 }
 
 
-- (instancetype)initWithWords:(NSArray *)ws qr:(NSString *)q parent:(UIViewController *)parent warn:(NSString *)w button:(NSString *)b andDismissAction:(void (^)())d {
+- (instancetype)initWithWords:(NSArray *)ws parent:(UIViewController *)parent warn:(NSString *)w button:(NSString *)b andDismissAction:(void (^)())d {
     self = [super init];
     if (self) {
         self.parent = parent;
-        qr = q;
         words = ws;
         dismissed = d;
         warn = w;
@@ -76,25 +73,27 @@
     self.view.frame = CGRectMake(0, 0, self.parent.view.frame.size.width, self.parent.view.frame.size.height);
     self.view.backgroundColor = [UIColor colorWithWhite:0 alpha:0.9];
 
-    self.vTab = [[UISegmentedControl alloc] initWithItems:@[NSLocalizedString(@"hdm_singular_cold_seed_tab_words", nil), NSLocalizedString(@"hdm_singular_cold_seed_tab_qr", nil)]];
-    self.vTab.frame = CGRectMake((self.view.frame.size.width - self.vTab.frame.size.width) / 2, (self.view.frame.size.height - self.view.frame.size.width - self.vTab.frame.size.height - 6) / 2, self.vTab.frame.size.width, self.vTab.frame.size.height);
-    self.vTab.autoresizingMask = UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin;
-    [self.vTab setTintColor:[UIColor whiteColor]];
-    [self.vTab setSelectedSegmentIndex:0];
-    [self.view addSubview:self.vTab];
-    [self.vTab addTarget:self action:@selector(tabChanged:) forControlEvents:UIControlEventValueChanged];
     UIStoryboard *storyboard = nil;
     if (ApplicationDelegate.window.rootViewController.storyboard) {
         storyboard = ApplicationDelegate.window.rootViewController.storyboard;
     } else if ([ApplicationDelegate.window.rootViewController isKindOfClass:[IOS7ContainerViewController class]]) {
         storyboard = ((IOS7ContainerViewController *) ApplicationDelegate.window.rootViewController).controller.storyboard;
     }
-    self.page = [[PiPageViewController alloc] initWithStoryboard:storyboard viewControllerIdentifiers:@[@"DialogHDMSingularColdSeedChildWords", @"DialogHDMSingularColdSeedChildQr"] andPageDelegate:self];
-    self.page.view.frame = CGRectMake(0, CGRectGetMaxY(self.vTab.frame) + 6, self.view.frame.size.width, self.view.frame.size.width);
+    
+    UILabel *lbl = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 100)];
+    lbl.textColor = [UIColor whiteColor];
+    lbl.font = [UIFont systemFontOfSize:kButtonFontSize];
+    lbl.contentMode = UIViewContentModeCenter;
+    lbl.textAlignment = NSTextAlignmentCenter;
+    lbl.numberOfLines = 0;
+    lbl.text = warn ? warn : NSLocalizedString(@"hdm_singular_cold_seed_remember_warn", nil);
+    [self.view addSubview:lbl];
+    
+    self.page = [[PiPageViewController alloc] initWithStoryboard:storyboard viewControllerIdentifiers:@[@"DialogHDMSingularColdSeedChildWords"] andPageDelegate:self];
+    self.page.view.frame = CGRectMake(0, CGRectGetMaxY(lbl.frame) + 6, self.view.frame.size.width, self.view.frame.size.width);
     self.page.view.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
     [self addChildViewController:self.page];
     [self.view addSubview:self.page.view];
-
 
     UIButton *btn = [[UIButton alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height - kButtonHeight - (self.view.frame.size.height - kButtonHeight - CGRectGetMaxY(self.page.view.frame)) / 2, self.view.frame.size.width, kButtonHeight)];
     [btn setBackgroundImage:[UIImage imageNamed:@"dialog_btn_bg_normal"] forState:UIControlStateNormal];
@@ -106,15 +105,6 @@
     [btn sizeToFit];
     btn.frame = CGRectMake((self.view.frame.size.width - btn.frame.size.width - kButtonPadding * 2) / 2, btn.frame.origin.y, btn.frame.size.width + kButtonPadding * 2, kButtonHeight);
     [self.view addSubview:btn];
-
-    UILabel *lbl = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, CGRectGetMinY(self.vTab.frame))];
-    lbl.textColor = [UIColor whiteColor];
-    lbl.font = [UIFont systemFontOfSize:kButtonFontSize];
-    lbl.contentMode = UIViewContentModeCenter;
-    lbl.textAlignment = NSTextAlignmentCenter;
-    lbl.numberOfLines = 0;
-    lbl.text = warn ? warn : NSLocalizedString(@"hdm_singular_cold_seed_remember_warn", nil);
-    [self.view addSubview:lbl];
 }
 
 - (void)dismiss:(id)sender {
@@ -134,12 +124,12 @@
 }
 
 - (void)pageIndexChanged:(int)index {
-    [self.vTab setSelectedSegmentIndex:index];
+
 }
 
 - (void)onViewController:(UIViewController *)controller loadedAtIndex:(int)index {
     if ([controller conformsToProtocol:@protocol(DialogHDMSingularColdSeedChildViewController)]) {
-        [((UIViewController <DialogHDMSingularColdSeedChildViewController> *) controller) setWords:words andQr:qr];
+        [((UIViewController <DialogHDMSingularColdSeedChildViewController> *) controller) setWords:words];
     }
 }
 @end

@@ -53,8 +53,7 @@
         }
     }
     if (account.hasPrivKey) {
-        [actions addObjectsFromArray:@[[[Action alloc] initWithName:NSLocalizedString(@"add_hd_account_seed_qr_code", nil) target:nil andSelector:@selector(qrPressed)],
-                [[Action alloc] initWithName:NSLocalizedString(@"add_hd_account_seed_qr_phrase", nil) target:nil andSelector:@selector(phrasePressed)]]];
+        [actions addObject:[[Action alloc] initWithName:NSLocalizedString(@"add_hd_account_seed_qr_phrase", nil) target:nil andSelector:@selector(phrasePressed)]];
     }
     if (delegate) {
         [actions addObject:[[Action alloc] initWithName:NSLocalizedString(@"hd_account_request_new_receiving_address", nil) target:nil andSelector:@selector(requestNewReceivingAddress)]];
@@ -131,11 +130,6 @@
     }
 }
 
-- (void)qrPressed {
-    passwordSelector = @selector(showHdAccountQr:);
-    [[[DialogPassword alloc] initWithDelegate:self] showInWindow:_window];
-}
-
 - (void)phrasePressed {
     passwordSelector = @selector(showHDAccountPhrase:);
     [[[DialogPassword alloc] initWithDelegate:self] showInWindow:_window];
@@ -153,10 +147,6 @@
 - (void)showInWindow:(UIWindow *)window completion:(void (^)())completion {
     _window = window;
     [super showInWindow:window completion:completion];
-}
-
-- (void)showHdAccountQr:(NSString*)password{
-    [[[DialogBlackQrCode alloc] initWithContent:[hdAccount getQRCodeFullEncryptPrivKeyWithHDQrCodeFlatType:[BTQRCodeUtil getHDQrCodeFlatForWordsTypeValue:[BTWordsTypeManager instance].getWordsTypeValueForUserDefaults]] andTitle:NSLocalizedString(@"add_hd_account_seed_qr_code", nil)] showInWindow:_window];
 }
 
 - (void)showHDAccountPhrase:(NSString*)password {

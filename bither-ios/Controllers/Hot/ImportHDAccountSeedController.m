@@ -197,6 +197,13 @@
                             }];
                         });
                         return;
+                    } else {
+                        dispatch_async(dispatch_get_main_queue(), ^{
+                            [dp dismissWithCompletion:^{
+                                [self showMsg:NSLocalizedString(@"Import failed.", nil)];
+                            }];
+                        });
+                        return;
                     }
                 }
                 
@@ -212,8 +219,10 @@
                 [BTAddressManager instance].hdAccountHot = account;
                 [[PeerUtil instance] startPeer];
             } else {
-                BTHDAccountCold *account = [[BTHDAccountCold alloc] initWithMnemonicSeed:mnemonicCodeSeed btBip39:s.bTBIP39 andPassword:password];
-                if (!account) {
+                BTHDAccountCold *account;
+                @try {
+                    account = [[BTHDAccountCold alloc] initWithMnemonicSeed:mnemonicCodeSeed btBip39:s.bTBIP39 andPassword:password];
+                } @catch (NSException *e) {
                     dispatch_async(dispatch_get_main_queue(), ^{
                         [self showMsg:NSLocalizedString(@"import_hdm_cold_seed_format_error", nil)];
                         [dp dismiss];

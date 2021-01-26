@@ -92,29 +92,36 @@
         DialogProgress *d = [[DialogProgress alloc] initWithMessage:NSLocalizedString(@"Please wait…", nil)];
         d.touchOutSideToDismiss = NO;
         [d showInWindow:self.view.window];
+        [UIApplication sharedApplication].idleTimerDisabled = YES;
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
-            [UIApplication sharedApplication].idleTimerDisabled = YES;
             XRandom *xRandom = [[XRandom alloc] initWithDelegate:nil];
-            BTHDAccount *account = nil;
-            while (!account) {
+            BTHDAccount *account = NULL;
+            @try {
+                NSData *seed = [xRandom randomWithSize:16];
+                account = [[BTHDAccount alloc] initWithMnemonicSeed:seed password:password fromXRandom:NO andGenerationCallback:nil];
+            }
+            @catch (NSException *exception) {
+                NSLog(@"generate HD Account error %@", exception.debugDescription);
+            }
+            if (account != NULL) {
                 @try {
-                    NSData *seed = [xRandom randomWithSize:16];
-                    account = [[BTHDAccount alloc] initWithMnemonicSeed:seed password:password fromXRandom:NO andGenerationCallback:nil];
+                    words = [account seedWords:password];
+                    [[PeerUtil instance] stopPeer];
+                    [BTAddressManager instance].hdAccountHot = account;
+                    [[PeerUtil instance] startPeer];
                 }
                 @catch (NSException *exception) {
+                    [account validFailedDelete:password];
+                    account = NULL;
                     NSLog(@"generate HD Account error %@", exception.debugDescription);
                 }
             }
-            words = [account seedWords:password];
-            [[PeerUtil instance] stopPeer];
-            [BTAddressManager instance].hdAccountHot = account;
-            [[PeerUtil instance] startPeer];
-            [UIApplication sharedApplication].idleTimerDisabled = NO;
             dispatch_async(dispatch_get_main_queue(), ^{
+                [UIApplication sharedApplication].idleTimerDisabled = NO;
                 [d dismissWithCompletion:^{
                     if (account) {
                         __block HotAddressAddHDAccountViewController *s = self;
-                        [[[DialogHDMSingularColdSeed alloc] initWithWords:words qr:[[BTAddressManager instance].hdAccountHot getQRCodeFullEncryptPrivKeyWithHDQrCodeFlatType:EN] parent:self warn:NSLocalizedString(@"add_hd_account_show_seed_label", nil) button:NSLocalizedString(@"add_hd_account_show_seed_button", nil) andDismissAction:^{
+                        [[[DialogHDMSingularColdSeed alloc] initWithWords:words parent:self warn:NSLocalizedString(@"add_hd_account_show_seed_label", nil) button:NSLocalizedString(@"add_hd_account_show_seed_button", nil) andDismissAction:^{
                             [s.parentViewController dismissViewControllerAnimated:YES completion:nil];
                         }] show];
                     } else {
@@ -141,33 +148,45 @@
     }
 
     BTHDAccount *account = nil;
-    while (!account) {
+    @try {
+        NSData *seed = [xrandom randomWithSize:16];
+        __block UEntropyViewController *c = controller;
+        account = [[BTHDAccount alloc] initWithMnemonicSeed:seed password:password fromXRandom:YES andGenerationCallback:^(CGFloat p) {
+            [c onProgress:kStartProgress + p * generationProgress];
+        }];
+    }
+    @catch (NSException *exception) {
+        NSLog(@"generate HD Account error %@", exception.debugDescription);
+    }
+    
+    progress = 1.0 - kSaveProgress;
+    [controller onProgress:progress];
+    
+    if (account != NULL) {
         @try {
-            NSData *seed = [xrandom randomWithSize:16];
-            __block UEntropyViewController *c = controller;
-            account = [[BTHDAccount alloc] initWithMnemonicSeed:seed password:password fromXRandom:YES andGenerationCallback:^(CGFloat p) {
-                [c onProgress:kStartProgress + p * generationProgress];
-            }];
+            words = [account seedWords:password];
         }
         @catch (NSException *exception) {
+            [account validFailedDelete:password];
+            account = NULL;
             NSLog(@"generate HD Account error %@", exception.debugDescription);
         }
     }
-
-    progress = 1.0 - kSaveProgress;
-    [controller onProgress:progress];
-
-    words = [account seedWords:password];
 
     if (controller.testShouldCancel) {
         return;
     }
 
     [collector stop];
-
-    [[PeerUtil instance] stopPeer];
-    [BTAddressManager instance].hdAccountHot = account;
-    [[PeerUtil instance] startPeer];
+    
+    if (account != NULL) {
+        [[PeerUtil instance] stopPeer];
+        [BTAddressManager instance].hdAccountHot = account;
+        [[PeerUtil instance] startPeer];
+    } else {
+        [controller onFailed];
+        return;
+    }
 
     while ([[NSDate new] timeIntervalSince1970] - startGeneratingTime < kMinGeneratingTime) {
 
@@ -178,10 +197,9 @@
 
 - (void)successFinish:(UEntropyViewController *)controller {
     __block HotAddressAddHDAccountViewController *s = self;
-    [[[DialogHDMSingularColdSeed alloc] initWithWords:words qr:[[BTAddressManager instance].hdAccountHot getQRCodeFullEncryptPrivKeyWithHDQrCodeFlatType:EN] parent:controller warn:NSLocalizedString(@"add_hd_account_show_seed_label", nil) button:NSLocalizedString(@"add_hd_account_show_seed_button", nil) andDismissAction:^{
+    [[[DialogHDMSingularColdSeed alloc] initWithWords:words parent:controller warn:NSLocalizedString(@"add_hd_account_show_seed_label", nil) button:NSLocalizedString(@"add_hd_account_show_seed_button", nil) andDismissAction:^{
         [s.parentViewController.presentingViewController dismissViewControllerAnimated:YES completion:nil];
     }] show];
-
 }
 
 - (void)getPermisionFor:(NSString *)mediaType completion:(void (^)(BOOL))completion {

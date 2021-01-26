@@ -61,7 +61,6 @@
 
 - (IBAction)seedPressed:(id)sender {
     [[[DialogWithActions alloc] initWithActions:@[
-            [[Action alloc] initWithName:NSLocalizedString(@"add_hd_account_seed_qr_code", nil) target:self andSelector:@selector(showSeedQRCode)],
             [[Action alloc] initWithName:NSLocalizedString(@"add_hd_account_seed_qr_phrase", nil) target:self andSelector:@selector(showPhrase)],
             [[Action alloc] initWithName:NSLocalizedString(@"hd_account_cold_first_address", nil) target:self andSelector:@selector(showFirstAddress)]
     ]] showInWindow:self.window];
@@ -128,28 +127,6 @@
     NSString* address = [[[_account xPub:password withPurposePathLevel:NormalAddress] deriveSoftened:EXTERNAL_ROOT_PATH] deriveSoftened:0].address;
     [[[DialogPrivateKeyText alloc]initWithPrivateKeyStr:address]showInWindow:self.window];
 }
-
-- (void)showSeedQRCode {
-    if (!password) {
-        passwordSelector = @selector(showSeedQRCode);
-        [[[DialogPassword alloc] initWithDelegate:self] showInWindow:self.window];
-        return;
-    }
-    password = nil;
-    __weak __block DialogProgress *d = dp;
-    [d showInWindow:self.window completion:^{
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
-            __block NSString *pub = [self.account getQRCodeFullEncryptPrivKeyWithHDQrCodeFlatType:[BTQRCodeUtil getHDQrCodeFlatForWordsTypeValue:[BTWordsTypeManager instance].getWordsTypeValueForUserDefaults]];
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [d dismissWithCompletion:^{
-                    DialogBlackQrCode *d = [[DialogBlackQrCode alloc] initWithContent:pub andTitle:NSLocalizedString(@"add_hd_account_seed_qr_code", nil)];
-                    [d showInWindow:self.window];
-                }];
-            });
-        });
-    }];
-}
-
 
 - (void)onPasswordEntered:(NSString *)p {
     password = p;
