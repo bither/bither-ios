@@ -85,7 +85,7 @@
     [d showInWindow:self.window completion:^{
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
             NSString *pub = [[self.account xPub:p withPurposePathLevel:NormalAddress] serializePubB58];
-            NSString *segwitPub = [[self.account xPub:p withPurposePathLevel:P2SHP2WPKH] serializePubB58];
+            NSString *segwitPub = [[self.account xPub:p withPurposePathLevel:NormalAddress] serializePubB58];
 
             dispatch_async(dispatch_get_main_queue(), ^{
                 [d dismissWithCompletion:^{
