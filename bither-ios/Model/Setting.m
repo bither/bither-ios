@@ -829,9 +829,9 @@ static Setting *ApiConfigSetting;
         [array addObject:[Setting getHDMServerPasswordResetSetting]];
     }
     
-    if ([[BTSettings instance] getAppMode] == HOT) {
-        [array addObject:[Setting getForkCoins]];
-    }
+//    if ([[BTSettings instance] getAppMode] == HOT) {
+//        [array addObject:[Setting getForkCoins]];
+//    }
     [array addObject:[MessageSigningSetting getMessageSigningSetting]];
     [array addObject:[Setting getPasswordStrengthSetting]];
     if ([[BTSettings instance] getAppMode] == HOT){

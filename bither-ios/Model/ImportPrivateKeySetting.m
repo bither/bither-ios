@@ -177,7 +177,7 @@ static Setting *importPrivateKeySetting;
             [reader vibrate];
             [reader.presentingViewController dismissViewControllerAnimated:YES completion:^{
                 if (!isHDMSeed || [[BTQRCodeUtil splitQRCode:result] count] != 3) {
-                    [self showMsg:NSLocalizedString(@"import_hdm_cold_seed_format_error", nil)];
+                    [self showMsg:NSLocalizedString(@"Import failed.", nil)];
                 } else {
                     _result = result;
                     DialogPassword *dialog = [[DialogPassword alloc] initWithDelegate:self];

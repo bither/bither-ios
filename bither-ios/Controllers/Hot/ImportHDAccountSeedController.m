@@ -179,7 +179,7 @@
             NSData *mnemonicCodeSeed = [s.bTBIP39 toEntropy:code];
             if (!mnemonicCodeSeed) {
                 dispatch_async(dispatch_get_main_queue(), ^{
-                    [self showMsg:NSLocalizedString(@"import_hdm_cold_seed_format_error", nil)];
+                    [self showMsg:NSLocalizedString(@"Import failed.", nil)];
                     [dp dismiss];
                 });
                 return;
@@ -209,7 +209,7 @@
                 
                 if (!account) {
                     dispatch_async(dispatch_get_main_queue(), ^{
-                        [self showMsg:NSLocalizedString(@"import_hdm_cold_seed_format_error", nil)];
+                        [self showMsg:NSLocalizedString(@"Import failed.", nil)];
                         [dp dismiss];
                     });
                     return;
@@ -224,7 +224,7 @@
                     account = [[BTHDAccountCold alloc] initWithMnemonicSeed:mnemonicCodeSeed btBip39:s.bTBIP39 andPassword:password];
                 } @catch (NSException *e) {
                     dispatch_async(dispatch_get_main_queue(), ^{
-                        [self showMsg:NSLocalizedString(@"import_hdm_cold_seed_format_error", nil)];
+                        [self showMsg:NSLocalizedString(@"Import failed.", nil)];
                         [dp dismiss];
                     });
                     return;

@@ -57,7 +57,7 @@
                     if (mnemonicCodeSeed == nil) {
                         dispatch_async(dispatch_get_main_queue(), ^{
                             [self exit];
-                            [self showMsg:NSLocalizedString(@"import_hdm_cold_seed_format_error", nil)];
+                            [self showMsg:NSLocalizedString(@"Import failed.", nil)];
                         });
                     } else {
                         BTHDMKeychain *keychain = [[BTHDMKeychain alloc] initWithMnemonicSeed:mnemonicCodeSeed password:self.passwrod andXRandom:NO];
