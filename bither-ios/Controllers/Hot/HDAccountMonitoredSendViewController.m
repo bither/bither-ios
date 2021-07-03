@@ -76,6 +76,9 @@
     ivSendQr.frame = CGRectMake(self.btnSend.frame.size.width - kSendButtonQrIconSize - ivSendQrMargin, ivSendQrMargin, kSendButtonQrIconSize, kSendButtonQrIconSize);
     [self.btnSend addSubview:ivSendQr];
     [self configureBalance];
+    self.tfAddress.background = [UIImage imageNamed:@"textfield_activated_holo_light"];
+    self.amtLink.tfBtc.background = [UIImage imageNamed:@"textfield_activated_holo_light"];
+    self.amtLink.tfCurrency.background = [UIImage imageNamed:@"textfield_activated_holo_light"];
     self.tfAddress.delegate = self;
     self.amtLink.delegate = self;
     [self configureTextField:self.tfAddress];

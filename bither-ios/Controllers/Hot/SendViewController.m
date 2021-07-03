@@ -66,6 +66,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self configureBalance];
+    self.tfAddress.background = [UIImage imageNamed:@"textfield_activated_holo_light"];
+    self.tfPassword.background = [UIImage imageNamed:@"textfield_activated_holo_light"];
+    self.amtLink.tfBtc.background = [UIImage imageNamed:@"textfield_activated_holo_light"];
+    self.amtLink.tfCurrency.background = [UIImage imageNamed:@"textfield_activated_holo_light"];
     self.tfAddress.delegate = self;
     self.tfPassword.delegate = self;
     self.amtLink.delegate = self;
