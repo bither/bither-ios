@@ -192,7 +192,7 @@
         }
         u_int64_t value = self.amtLink.amount;
         NSError *error;
-        BTTx *tx = [self.address txForAmounts:@[@(value)] andAddress:@[toAddress] andChangeAddress:self.dialogSelectChangeAddress.changeAddress.address dynamicFeeBase:dynamicFeeBase andError:&error];
+        BTTx *tx = [self.address txForAmounts:@[@(value)] andAddress:@[toAddress] andChangeAddress:self.dialogSelectChangeAddress.changeAddress.address dynamicFeeBase:dynamicFeeBase isNoPrivKey:false andError:&error];
         if (error) {
             NSString *msg = [TransactionsUtil getCompleteTxForError:error];
             [self showSendResult:msg dialog:self->dp];
