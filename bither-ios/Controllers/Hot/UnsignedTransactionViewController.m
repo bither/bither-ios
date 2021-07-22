@@ -138,10 +138,6 @@
     if (![self checkValues]) {
         return;
     }
-    if ([StringUtil compareString:[self getToAddress] compare:self.dialogSelectChangeAddress.changeAddress.address]) {
-        [self showBannerWithMessage:NSLocalizedString(@"select_change_address_change_to_same_warn", nil) belowView:self.vTopBar];
-        return;
-    }
     [self hideKeyboard];
     BOOL isUseDynamicMinerFee = _btnUseDynamicMinerFee.isSelected;
     [dp showInWindow:self.view.window completion:^{
