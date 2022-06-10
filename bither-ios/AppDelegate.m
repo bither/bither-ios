@@ -58,6 +58,10 @@ static StatusBarNotificationWindow *notificationWindow;
         [[UIApplication sharedApplication] setMinimumBackgroundFetchInterval:UIApplicationBackgroundFetchIntervalMinimum];
     }
 
+    NSString *customDnsOrIp = [[UserDefaultsUtil instance] getNetworkCustomPeerDnsOrIp];
+    if (customDnsOrIp != NULL) {
+        [[BTPeerManager instance] setCustomPeerDnsOrIp:customDnsOrIp port:[[UserDefaultsUtil instance] getNetworkCustomPeerPort]];
+    }
     [[BTPeerManager instance] initAddress];
 
     if ([[BTSettings instance] needChooseMode]) {

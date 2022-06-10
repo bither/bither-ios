@@ -25,8 +25,8 @@
 
 ///@description   UserDefaults相关
 @interface UserDefaultsUtil : NSObject
-+ (UserDefaultsUtil *)instance;
 
++ (UserDefaultsUtil *)instance;
 
 - (NSInteger)getLastVersion;
 
@@ -132,5 +132,13 @@
 - (void)setIsUseDynamicMinerFee:(BOOL)isUseDynamicMinerFee;
 
 - (BOOL)isUseDynamicMinerFee;
+
+- (void)setNetworkCustomPeer:(NSString *)dnsOrIp port:(int)port;
+
+- (NSString *)getNetworkCustomPeerDnsOrIp;
+
+- (uint16_t)getNetworkCustomPeerPort;
+
+- (void)removeNetworkCustomPeer;
 
 @end

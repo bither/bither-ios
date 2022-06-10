@@ -58,6 +58,11 @@ typedef enum {
     _watchOnlys = [NSMutableArray new];
     _hdms = [NSMutableArray new];
     _foldedSections = [NSMutableIndexSet indexSet];
+    if (@available(iOS 15.0, *)) {
+        _tableView.sectionHeaderTopPadding = 0;
+    } else {
+        // Fallback on earlier versions
+    }
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     [self.tableView reloadData];

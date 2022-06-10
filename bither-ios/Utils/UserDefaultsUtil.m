@@ -60,6 +60,9 @@
 
 #define IS_USE_DYNAMIC_MINER_FEE @"is_use_dynamic_miner_fee"
 
+#define NETWORK_CUSTOM_PEER_DNS_OR_IP @"network_custom_peer_dns_or_ip"
+#define NETWORK_CUSTOM_PEER_PORT @"network_custom_peer_port"
+
 static UserDefaultsUtil *userDefaultsUtil;
 
 NSUserDefaults *userDefaults;
@@ -488,6 +491,32 @@ NSUserDefaults *userDefaults;
         return NO;
     }
     return YES;
+}
+
+- (void)setNetworkCustomPeer:(NSString *)dnsOrIp port:(int)port {
+    [userDefaults setObject:dnsOrIp forKey:NETWORK_CUSTOM_PEER_DNS_OR_IP];
+    [userDefaults setInteger:port forKey:NETWORK_CUSTOM_PEER_PORT];
+    [userDefaults synchronize];
+}
+
+- (NSString *)getNetworkCustomPeerDnsOrIp {
+    NSString *dnsOrIp = [userDefaults stringForKey:NETWORK_CUSTOM_PEER_DNS_OR_IP];
+    return dnsOrIp;
+}
+
+- (uint16_t)getNetworkCustomPeerPort {
+    NSInteger port = [userDefaults integerForKey:NETWORK_CUSTOM_PEER_PORT];
+    if (port) {
+        return port;
+    } else {
+        return BITCOIN_STANDARD_PORT;
+    }
+}
+
+- (void)removeNetworkCustomPeer {
+    [userDefaults removeObjectForKey:NETWORK_CUSTOM_PEER_DNS_OR_IP];
+    [userDefaults removeObjectForKey:NETWORK_CUSTOM_PEER_PORT];
+    [userDefaults synchronize];
 }
 
 @end

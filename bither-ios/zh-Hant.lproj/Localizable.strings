@@ -520,6 +520,17 @@
 // Network Monitor Options
 "network_monitor_clear_peers" = "清空節點";
 "network_monitor_title" = "網路監控";
+"network_custom_peer_title" = "自定義節點";
+"network_custom_peer_clear" = "清空自定義節點";
+"network_custom_peer_used" = "當前自定義節點";
+"network_custom_peer_tips" = "如果您使用的是 bitcoin core 0.19.0.1 版本及以上，請確認配置了以下參數：\npeerbloomfilters=1\nblockfilterindex=1\npeerblockfilters=1";
+"network_custom_peer_dns_or_ip" = "域名或IP";
+"network_custom_peer_port" = "端口";
+"network_custom_peer_port_hint" = "默認%d";
+"network_custom_peer_dns_or_ip_empty" = "請輸入域名或IP";
+"network_custom_peer_port_invalid" = "無效的Port";
+"network_custom_peer_success" = "自定義節點完成";
+"network_custom_peer_failure" = "自定義節點無可用節點，請檢查輸入的域名或IP和Port輸入是否正確";
 
 // Manual Delete Transaction
 "manual_delete_transaction_warning" = "刪除此交易?";

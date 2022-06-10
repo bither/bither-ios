@@ -47,6 +47,7 @@
 #import "AddressTypeUtil.h"
 #import "BTHDAccountProvider.h"
 #import "DialogPassword.h"
+#import "NetworkCustomPeerViewController.h"
 
 @interface Setting () <DialogPasswordDelegate>
 
@@ -76,6 +77,7 @@ static Setting *SwitchToColdSetting;
 static Setting *HDMServerPasswordResetSetting;
 static Setting *PasswordStrengthCheckSetting;
 static Setting *TotalBalanceHideSetting;
+static Setting *NetworkCustomPeerSetting;
 static Setting *NetworkMonitorSetting;
 static Setting *ApiConfigSetting;
 
@@ -787,7 +789,19 @@ static Setting *ApiConfigSetting;
     return TotalBalanceHideSetting;
 }
 
-+ (Setting*)getNetworkMonitorSetting {
++ (Setting *)getNetworkCustomPeerSetting {
+    if (!NetworkCustomPeerSetting) {
+        NetworkCustomPeerSetting = [[Setting alloc]initWithName:NSLocalizedString(@"network_custom_peer_title", nil) icon:nil];
+        [NetworkCustomPeerSetting setSelectBlock:^(UIViewController *controller) {
+            UIViewController *c = [[NetworkCustomPeerViewController alloc] init];
+            UINavigationController *nav = controller.navigationController;
+            [nav pushViewController:c animated:YES];
+        }];
+    }
+    return NetworkCustomPeerSetting;
+}
+
++ (Setting *)getNetworkMonitorSetting {
     if (!NetworkMonitorSetting) {
         NetworkMonitorSetting = [[Setting alloc]initWithName:NSLocalizedString(@"network_monitor_title", nil) icon:nil];
         [NetworkMonitorSetting setSelectBlock:^(UIViewController *controller) {
@@ -846,6 +860,7 @@ static Setting *ApiConfigSetting;
         [array addObject:[ReloadTxSetting getReloadTxsSetting]];
     }
     if ([[BTSettings instance] getAppMode] == HOT) {
+        [array addObject:[Setting getNetworkCustomPeerSetting]];
         [array addObject:[Setting getNetworkMonitorSetting]];
     }
 //    if ([[BTSettings instance] getAppMode] == HOT) {

@@ -305,6 +305,9 @@
 		DC06422DA44A6DA77DCFBB2D /* ImportHDMCold.m in Sources */ = {isa = PBXBuildFile; fileRef = DC0A375AE83A8BA37F3FA65F /* ImportHDMCold.m */; };
 		DC075758EE0F48911D8D4CE8 /* ImportHDMColdSeedController.m in Sources */ = {isa = PBXBuildFile; fileRef = DC07A672CCAD76ED66B72B91 /* ImportHDMColdSeedController.m */; };
 		DC0C00F6FC8AA88E26580598 /* HDMRecoverSetting.m in Sources */ = {isa = PBXBuildFile; fileRef = DC0769FAB5B4727E089E23CC /* HDMRecoverSetting.m */; };
+		FF7F9A2A284865AA005207B7 /* NetworkCustomPeerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FF7F9A28284865AA005207B7 /* NetworkCustomPeerViewController.m */; };
+		FF7F9A2B284865AA005207B7 /* NetworkCustomPeerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FF7F9A29284865AA005207B7 /* NetworkCustomPeerViewController.xib */; };
+		FF7F9A2E2848BC97005207B7 /* DialogNetworkCustomPeerOption.m in Sources */ = {isa = PBXBuildFile; fileRef = FF7F9A2D2848BC97005207B7 /* DialogNetworkCustomPeerOption.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -979,6 +982,11 @@
 		DC0D6773769B40A704B784B4 /* ImportHDMCold.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImportHDMCold.h; sourceTree = "<group>"; };
 		DC0E3B0A73BF05166C9733A1 /* ImportHDMColdSeedController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImportHDMColdSeedController.h; sourceTree = "<group>"; };
 		E81D3024732350ACA5688F89 /* Pods-bither-ios.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-bither-ios.debug.xcconfig"; path = "Pods/Target Support Files/Pods-bither-ios/Pods-bither-ios.debug.xcconfig"; sourceTree = "<group>"; };
+		FF7F9A27284865AA005207B7 /* NetworkCustomPeerViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NetworkCustomPeerViewController.h; sourceTree = "<group>"; };
+		FF7F9A28284865AA005207B7 /* NetworkCustomPeerViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NetworkCustomPeerViewController.m; sourceTree = "<group>"; };
+		FF7F9A29284865AA005207B7 /* NetworkCustomPeerViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NetworkCustomPeerViewController.xib; sourceTree = "<group>"; };
+		FF7F9A2C2848BC97005207B7 /* DialogNetworkCustomPeerOption.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DialogNetworkCustomPeerOption.h; sourceTree = "<group>"; };
+		FF7F9A2D2848BC97005207B7 /* DialogNetworkCustomPeerOption.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DialogNetworkCustomPeerOption.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1217,6 +1225,9 @@
 			isa = PBXGroup;
 			children = (
 				ACEEB8DB19B46EB900F2789C /* NetworkMonitor */,
+				FF7F9A27284865AA005207B7 /* NetworkCustomPeerViewController.h */,
+				FF7F9A28284865AA005207B7 /* NetworkCustomPeerViewController.m */,
+				FF7F9A29284865AA005207B7 /* NetworkCustomPeerViewController.xib */,
 				421B03B519495AEF003A45F1 /* HotViewController.h */,
 				421B03B619495AEF003A45F1 /* HotViewController.m */,
 				421B03B719495AEF003A45F1 /* OptionHotViewController.h */,
@@ -1784,6 +1795,8 @@
 				ACE3765E1A231C9200F66321 /* DialogKeychainBackupDiff.m */,
 				0A446C131A441393000CD25A /* DialogNetworkMonitorOption.h */,
 				0A446C141A441393000CD25A /* DialogNetworkMonitorOption.m */,
+				FF7F9A2C2848BC97005207B7 /* DialogNetworkCustomPeerOption.h */,
+				FF7F9A2D2848BC97005207B7 /* DialogNetworkCustomPeerOption.m */,
 				0A259E231A47F19100D7F707 /* DialogSendOption.h */,
 				0A259E241A47F19100D7F707 /* DialogSendOption.m */,
 				0A259E261A47FDF600D7F707 /* DialogSelectChangeAddress.h */,
@@ -2049,6 +2062,7 @@
 				0AD674941A79F2B8007967DB /* BIP39EnglishWords.plist in Resources */,
 				AC53ABED19D94230007C095C /* xrandom_close_sound.mp3 in Resources */,
 				42D9B76F193D6B5B00C85B89 /* InfoPlist.strings in Resources */,
+				FF7F9A2B284865AA005207B7 /* NetworkCustomPeerViewController.xib in Resources */,
 				42EFB54C1949C50900376888 /* MainStoryboard.storyboard in Resources */,
 				ACA9D70A195410FF002D1E3A /* qr_code_scanned.mp3 in Resources */,
 				42D9B777193D6B5B00C85B89 /* Images.xcassets in Resources */,
@@ -2146,6 +2160,7 @@
 				0A93B6061A4AA0520081D74D /* VerifyMessageSignatureViewController.m in Sources */,
 				4268FE29194ACD57007A4C30 /* ColdAddressViewController.m in Sources */,
 				AC454DE11A1F250C000AF4ED /* PinCodeDisableViewController.m in Sources */,
+				FF7F9A2E2848BC97005207B7 /* DialogNetworkCustomPeerOption.m in Sources */,
 				AC202AD0196B8B7A00033EC1 /* Setting.m in Sources */,
 				ACE7E71019EB78AE00F7AA3A /* ImageCropView.m in Sources */,
 				0A259E281A47FDF600D7F707 /* DialogSelectChangeAddress.m in Sources */,
@@ -2251,6 +2266,7 @@
 				4070603221512233000E38CD /* AddressTypeUtil.m in Sources */,
 				4254083B19469C9A007AF99C /* BaseApi.m in Sources */,
 				0A7F203D1D0BB0F900B4EAB1 /* DialogHDMonitorFirstAddressValidation.m in Sources */,
+				FF7F9A2A284865AA005207B7 /* NetworkCustomPeerViewController.m in Sources */,
 				AC2F3295195C02C3001B7439 /* AmountButton.m in Sources */,
 				42E8161C19529B14005F16F7 /* KeyUtil.m in Sources */,
 				ACEE7D3619D3FC4B00932B39 /* ReloadTxSetting.m in Sources */,
