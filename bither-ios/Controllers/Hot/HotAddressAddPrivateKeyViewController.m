@@ -223,7 +223,7 @@
                 [controller onFailed];
                 return;
             }
-            BTAddress *btAddress = [[BTAddress alloc] initWithKey:key encryptPrivKey:privateKeyString isSyncComplete:YES isXRandom:YES];
+            BTAddress *btAddress = [[BTAddress alloc] initWithKey:key encryptPrivKey:privateKeyString isSyncComplete:YES isXRandom:YES addMode:Create];
             [addresses addObject:btAddress];
             progress += itemProgress * kProgressEncryptRate;
             [controller onProgress:progress];

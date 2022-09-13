@@ -305,7 +305,7 @@ static Setting *importPrivateKeySetting;
                 } else {
                     BTHDAccountCold *account;
                     @try {
-                        account = [[BTHDAccountCold alloc] initWithEncryptedMnemonicSeed:[[BTEncryptData alloc] initWithStr:[self getHDAccountBTEncryptDataStr:_result]] btBip39:bip39 andPassword:password];
+                        account = [[BTHDAccountCold alloc] initWithEncryptedMnemonicSeed:[[BTEncryptData alloc] initWithStr:[self getHDAccountBTEncryptDataStr:_result]] btBip39:bip39 andPassword:password addMode:Import];
                     } @catch (NSException *e) {
                         dispatch_async(dispatch_get_main_queue(), ^{
                             [dp dismissWithCompletion:^{

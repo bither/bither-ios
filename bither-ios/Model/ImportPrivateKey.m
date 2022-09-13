@@ -111,7 +111,7 @@
             }
         }
     }
-    BTAddress *address = [[BTAddress alloc] initWithKey:key encryptPrivKey:nil isSyncComplete:NO isXRandom:key.isFromXRandom];
+    BTAddress *address = [[BTAddress alloc] initWithKey:key encryptPrivKey:nil isSyncComplete:NO isXRandom:key.isFromXRandom addMode:Import];
     if ([[[BTAddressManager instance] privKeyAddresses] containsObject:address]) {
         dispatch_async(dispatch_get_main_queue(), ^{
             [self exit];
@@ -134,11 +134,11 @@
         BTAddress *address;
         if (self.importPrivateKeyType == BitherQrcode) {
             NSString *encryptKey = [BTQRCodeUtil replaceNewQRCode:self.content];
-            address = [[BTAddress alloc] initWithKey:key encryptPrivKey:encryptKey isSyncComplete:NO isXRandom:key.isFromXRandom];
+            address = [[BTAddress alloc] initWithKey:key encryptPrivKey:encryptKey isSyncComplete:NO isXRandom:key.isFromXRandom addMode:Import];
         } else {
             NSString *encryptKey = [BTPrivateKeyUtil getPrivateKeyString:key passphrase:self.passwrod];
             if (encryptKey != nil) {
-                address = [[BTAddress alloc] initWithKey:key encryptPrivKey:encryptKey isSyncComplete:NO isXRandom:key.isFromXRandom];;
+                address = [[BTAddress alloc] initWithKey:key encryptPrivKey:encryptKey isSyncComplete:NO isXRandom:key.isFromXRandom addMode:Import];;
             }
         }
         if (address) {

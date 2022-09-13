@@ -97,7 +97,7 @@
             });
             return;
         }
-        BTAddress *btAddress = [[BTAddress alloc] initWithKey:key encryptPrivKey:nil isSyncComplete:NO isXRandom:key.isFromXRandom];
+        BTAddress *btAddress = [[BTAddress alloc] initWithKey:key encryptPrivKey:nil isSyncComplete:NO isXRandom:key.isFromXRandom addMode:Other];
         [addressList addObject:btAddress];
         [addressStrList addObject:key.address];
     }

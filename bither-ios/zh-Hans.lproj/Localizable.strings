@@ -821,3 +821,10 @@
 "dynamic_miner_fee_title" = "  使用动态矿工费";
 "dynamic_miner_fee_des" = "开启动态矿工费后，软件将根据当前比特币的网络状态自动计算实时最优费用；矿工费由比特币网络收取。";
 "dynamic_miner_fee_failure_title" = "计算动态矿工费失败，是否使用默认矿工费？";
+
+"address_add_mode_create_des" = "通过创建添加";
+"address_add_mode_dice_create_des" = "通过骰子创建添加";
+"address_add_mode_binary_create_des" = "通过二进制创建添加";
+"address_add_mode_import_des" = "通过导入添加";
+"address_add_mode_clone_des" = "通过克隆添加";
+"address_add_mode_other_des" = "通过旧版本导入、克隆或非极随机方式创建添加";

@@ -82,11 +82,11 @@ static Setting *CloneQrSetting;
                         }
                         NSString *s = [BTQRCodeUtil joinedQRCode:[commponent subarrayWithRange:NSMakeRange(i, 3)]];
                         s = [s substringFromIndex:3];
-                        [[BTHDAccountCold alloc] initWithEncryptedMnemonicSeed:[[BTEncryptData alloc] initWithStr:s] btBip39:[[BTBIP39 alloc] initWithWordList:wordList] andPassword:password];
+                        [[BTHDAccountCold alloc] initWithEncryptedMnemonicSeed:[[BTEncryptData alloc] initWithStr:s] btBip39:[[BTBIP39 alloc] initWithWordList:wordList] andPassword:password addMode:Clone];
                     } else if([commponent[i] rangeOfString:[BTQRCodeUtil getHDQrCodeFlat:EN]].location == 0){
                         NSString *s = [BTQRCodeUtil joinedQRCode:[commponent subarrayWithRange:NSMakeRange(i, 3)]];
                         s = [s substringFromIndex:1];
-                        [[BTHDAccountCold alloc] initWithEncryptedMnemonicSeed:[[BTEncryptData alloc]initWithStr:s] btBip39:[BTBIP39 sharedInstance] andPassword:password];
+                        [[BTHDAccountCold alloc] initWithEncryptedMnemonicSeed:[[BTEncryptData alloc]initWithStr:s] btBip39:[BTBIP39 sharedInstance] andPassword:password addMode:Clone];
                     } else {
                         NSString *s = [BTQRCodeUtil joinedQRCode:[commponent subarrayWithRange:NSMakeRange(i, 3)]];
                         [keys addObject:s];

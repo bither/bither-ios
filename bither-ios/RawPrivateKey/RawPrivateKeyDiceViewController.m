@@ -133,7 +133,7 @@
             }
             BTKey *key = [[BTKey alloc] initWithSecret:data compressed:YES];
             NSString *privateKeyString = [BTPrivateKeyUtil getPrivateKeyString:key passphrase:password];
-            BTAddress *address = [[BTAddress alloc] initWithKey:key encryptPrivKey:privateKeyString isSyncComplete:NO isXRandom:NO];
+            BTAddress *address = [[BTAddress alloc] initWithKey:key encryptPrivKey:privateKeyString isSyncComplete:NO isXRandom:NO addMode:DiceCreate];
             [KeyUtil addAddressList:@[address]];
             dispatch_async(dispatch_get_main_queue(), ^{
                 [dpB dismissWithCompletion:^{

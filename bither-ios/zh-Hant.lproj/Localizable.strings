@@ -821,3 +821,10 @@
 "dynamic_miner_fee_title" = "  使用動態礦工費";
 "dynamic_miner_fee_des" = "開啓動態礦工費後，軟件將根據當前比特幣的網絡狀態自動計算實時最優費用；礦工費由比特幣網絡收取。";
 "dynamic_miner_fee_failure_title" = "計算動態礦工費失敗，是否使用默認礦工費？";
+
+"address_add_mode_create_des" = "通過創建添加";
+"address_add_mode_dice_create_des" = "通過骰子創建添加";
+"address_add_mode_binary_create_des" = "通過二進制創建添加";
+"address_add_mode_import_des" = "通過導入添加";
+"address_add_mode_clone_des" = "通過克隆添加";
+"address_add_mode_other_des" = "通過舊版本導入、克隆或非極隨機方式創建添加";

@@ -1793,6 +1793,17 @@ They need separated back ups.</string>
                                                                     <rect key="frame" x="0.0" y="65" width="394" height="41"/>
                                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                     <subviews>
+                                                                        <button hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CZW-Sw-Klf">
+                                                                            <rect key="frame" x="303" y="5" width="30" height="33"/>
+                                                                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                                                            <state key="normal" image="address_add_mode_bither_create">
+                                                                                <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                            </state>
+                                                                            <state key="highlighted" image="address_add_mode_bither_create_press"/>
+                                                                            <connections>
+                                                                                <action selector="btnAddModeClicked:" destination="yT2-Bw-ljg" eventType="touchUpInside" id="Q9O-cl-OSQ"/>
+                                                                            </connections>
+                                                                        </button>
                                                                         <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="xrandom_address_label_normal" highlightedImage="xrandom_address_label_pressed" translatesAutoresizingMaskIntoConstraints="NO" id="q0w-0Z-pP5">
                                                                             <rect key="frame" x="334" y="10" width="20" height="20"/>
                                                                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
@@ -1808,12 +1819,10 @@ They need separated back ups.</string>
                                                                                 <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2Lg-yC-wpv" customClass="TransactionConfidenceView">
                                                                                     <rect key="frame" x="0.0" y="6" width="30" height="30"/>
                                                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
-                                                                                    <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                                 </view>
                                                                                 <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="SJN-Br-sZe" customClass="AmountButton">
                                                                                     <rect key="frame" x="36" y="3" width="62" height="36"/>
                                                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
-                                                                                    <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                                 </view>
                                                                             </subviews>
                                                                             <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
@@ -1890,6 +1899,7 @@ They need separated back ups.</string>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                         <connections>
+                                            <outlet property="btnAddMode" destination="CZW-Sw-Klf" id="pmv-rh-DxA"/>
                                             <outlet property="btnAddressFull" destination="JHi-IQ-Uql" id="8qY-3Q-yDX"/>
                                             <outlet property="btnAlias" destination="sLp-Lc-uuW" id="rYK-OI-elF"/>
                                             <outlet property="ivHighlighted" destination="Mof-u2-DPq" id="T4O-Vs-cAF"/>
@@ -3385,6 +3395,17 @@ They need separated back ups.</string>
                                                             <rect key="frame" x="0.0" y="49" width="300" height="25"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                                             <subviews>
+                                                                <button hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Joh-TF-ZIR">
+                                                                    <rect key="frame" x="206" y="0.0" width="30" height="25"/>
+                                                                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                                                    <state key="normal" image="address_add_mode_bither_create">
+                                                                        <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                    </state>
+                                                                    <state key="highlighted" image="address_add_mode_bither_create_press"/>
+                                                                    <connections>
+                                                                        <action selector="btnAddModeClicked:" destination="YQA-oX-8JQ" eventType="touchUpInside" id="NTi-cc-tvg"/>
+                                                                    </connections>
+                                                                </button>
                                                                 <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="xrandom_address_label_normal" highlightedImage="xrandom_address_label_pressed" translatesAutoresizingMaskIntoConstraints="NO" id="7A4-Pw-vx1">
                                                                     <rect key="frame" x="240" y="2" width="20" height="20"/>
                                                                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
@@ -3474,6 +3495,7 @@ They need separated back ups.</string>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                         <connections>
+                                            <outlet property="btnAddMode" destination="Joh-TF-ZIR" id="178-5y-Bhc"/>
                                             <outlet property="ivType" destination="s2R-Kw-5T9" id="f6J-6o-8dF"/>
                                             <outlet property="ivXRandom" destination="7A4-Pw-vx1" id="m8Q-H1-JkP"/>
                                         </connections>
@@ -3613,6 +3635,17 @@ They need separated back ups.</string>
                                                                     <rect key="frame" x="334" y="2" width="20" height="20"/>
                                                                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                                                 </imageView>
+                                                                <button hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hYm-CE-fHT">
+                                                                    <rect key="frame" x="300" y="0.0" width="30" height="25"/>
+                                                                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                                                    <state key="normal" image="address_add_mode_bither_create">
+                                                                        <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                    </state>
+                                                                    <state key="highlighted" image="address_add_mode_bither_create_press"/>
+                                                                    <connections>
+                                                                        <action selector="btnAddModeClicked:" destination="xrq-p5-jGo" eventType="touchUpInside" id="Jnd-yF-acc"/>
+                                                                    </connections>
+                                                                </button>
                                                                 <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" fixedFrame="YES" image="address_type_private" translatesAutoresizingMaskIntoConstraints="NO" id="PGA-6T-JXp">
                                                                     <rect key="frame" x="360" y="1" width="24" height="24"/>
                                                                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
@@ -3718,6 +3751,7 @@ They need separated back ups.</string>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                         <connections>
+                                            <outlet property="btnAddMode" destination="hYm-CE-fHT" id="NPi-pn-4rd"/>
                                             <outlet property="btnAlias" destination="K1k-aI-kFj" id="Jhy-u5-N4T"/>
                                             <outlet property="ivQr" destination="JRm-fL-eya" id="gg5-Fz-LID"/>
                                             <outlet property="ivType" destination="PGA-6T-JXp" id="lF5-dF-XXc"/>
@@ -7188,6 +7222,8 @@ They need separated back ups.</string>
         <image name="add_address_button_icon" width="60" height="60"/>
         <image name="add_address_button_icon_pressed" width="60" height="60"/>
         <image name="add_finance_top_bar_cancel_button_pressed.png" width="1" height="47"/>
+        <image name="address_add_mode_bither_create" width="18" height="18"/>
+        <image name="address_add_mode_bither_create_press" width="18" height="18"/>
         <image name="address_balance_full_show_button" width="24" height="24"/>
         <image name="address_full_show_button" width="24" height="24"/>
         <image name="address_type_hd" width="24" height="24"/>

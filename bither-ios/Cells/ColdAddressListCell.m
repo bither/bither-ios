@@ -36,6 +36,8 @@
 #import "BTAddressManager.h"
 #import "SignMessageViewController.h"
 #import "AddressAliasView.h"
+#import "DialogAlert.h"
+#import "AddressAddModeUtil.h"
 
 #define kAddressGroupSize (4)
 #define kAddressLineSize (12)
@@ -54,6 +56,8 @@
 @property(weak, nonatomic) IBOutlet UIView *vQr;
 @property(weak, nonatomic) IBOutlet UIView *vContainer;
 @property(weak, nonatomic) IBOutlet AddressAliasView *btnAlias;
+@property (weak, nonatomic) IBOutlet UIButton *btnAddMode;
+
 @property(strong, nonatomic) UILongPressGestureRecognizer *longPress;
 @property(strong, nonatomic) UILongPressGestureRecognizer *xrandomLongPress;
 @end
@@ -83,6 +87,18 @@
         [self.ivXrandom addGestureRecognizer:self.xrandomLongPress];
     }
     self.ivXrandom.hidden = !address.isFromXRandom;
+    
+    CGFloat wScreen = [[UIScreen mainScreen] bounds].size.width;
+    if (address.isFromXRandom) {
+        _btnAddMode.frame = CGRectMake(wScreen - 110, _btnAddMode.frame.origin.y, _btnAddMode.frame.size.width, _btnAddMode.frame.size.height);
+    } else {
+        _btnAddMode.frame = CGRectMake(wScreen - 82, _btnAddMode.frame.origin.y, _btnAddMode.frame.size.width, _btnAddMode.frame.size.height);
+    }
+    
+    [_btnAddMode setImage:[UIImage imageNamed:[AddressAddModeUtil getImgRes:address.addMode isFromXRandom:address.isFromXRandom isNormal:true]] forState:UIControlStateNormal];
+    [_btnAddMode setImage:[UIImage imageNamed:[AddressAddModeUtil getImgRes:address.addMode isFromXRandom:address.isFromXRandom isNormal:false]] forState:UIControlStateHighlighted];
+    self.btnAddMode.hidden = false;
+    
     [self configureAddressFrame];
     self.ivQr.image = [QRCodeThemeUtil qrCodeOfContent:address.address andSize:self.ivQr.frame.size.width withTheme:[QRCodeTheme black]];
     self.btnAlias.address = address;
@@ -112,6 +128,12 @@
             [cctr showMsg:NSLocalizedString(@"Address copied.", nil)];
         }
     }
+}
+
+- (IBAction)btnAddModeClicked:(UIButton *)sender {
+    DialogAlert *dialogAlert = [[DialogAlert alloc] initWithConfirmMessage:NSLocalizedString([AddressAddModeUtil getDes:_btAddress.addMode isFromXRandom:_btAddress.isFromXRandom], nil) confirm:^{
+    }];
+    [dialogAlert showInWindow:self.window];
 }
 
 - (void)setHighlighted:(BOOL)highlighted animated:(BOOL)animated {

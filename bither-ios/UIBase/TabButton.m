@@ -51,26 +51,30 @@
 
 - (void)initConfigure {
     self.backgroundColor = [UIColor clearColor];
-
-    self.button = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height)];
+    
+    CGFloat width = self.frame.size.width;
+    if (width != 93) {
+        width = [[UIScreen mainScreen] bounds].size.width - 93 * 2;
+    }
+    self.button = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, width, self.frame.size.height)];
     UIImage *image = [UIImage imageNamed:@"topnav_overlay_pressed"];
     image = [image resizableImageWithCapInsets:UIEdgeInsetsMake(image.size.height / 2, 0, image.size.height / 2, 0)];
     [self.button setBackgroundImage:image forState:UIControlStateHighlighted];
     [self.button addTarget:self action:@selector(buttonPressed:) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:self.button];
 
-    self.iv = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height - kTabButtonBottomHeight)];
+    self.iv = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, width, self.frame.size.height - kTabButtonBottomHeight)];
     self.iv.contentMode = UIViewContentModeCenter;
     [self addSubview:self.iv];
 
-    self.ivBottom = [[UIImageView alloc] initWithFrame:CGRectMake(0, self.frame.size.height - kTabButtonBottomHeight, self.frame.size.width, kTabButtonBottomHeight)];
+    self.ivBottom = [[UIImageView alloc] initWithFrame:CGRectMake(0, self.frame.size.height - kTabButtonBottomHeight, width, kTabButtonBottomHeight)];
     image = [UIImage imageNamed:@"topnav_tab_bar"];
     image = [image resizableImageWithCapInsets:UIEdgeInsetsMake(image.size.height / 2, 0, image.size.height / 2, 0)];
     self.ivBottom.image = image;
     self.ivBottom.hidden = YES;
     [self addSubview:self.ivBottom];
 
-    self.vBadget = [[UIView alloc] initWithFrame:CGRectMake(self.frame.size.width / 2 + kTabButtonBadgetLeftOffset, kTabButtonBadgetTopOffset, kTabButtonBadgetSize, kTabButtonBadgetSize)];
+    self.vBadget = [[UIView alloc] initWithFrame:CGRectMake(width / 2 + kTabButtonBadgetLeftOffset, kTabButtonBadgetTopOffset, kTabButtonBadgetSize, kTabButtonBadgetSize)];
     self.ivBadgetBg = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.vBadget.frame.size.width, self.vBadget.frame.size.height)];
     self.ivBadgetBg.image = [UIImage imageNamed:@"new_message_bg"];
     self.lblBadget = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.vBadget.frame.size.width, self.vBadget.frame.size.height)];

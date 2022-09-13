@@ -188,7 +188,7 @@
             if (isHot) {
                 BTHDAccount *account;
                 @try {
-                    account = [[BTHDAccount alloc] initWithMnemonicSeed:mnemonicCodeSeed btBip39:s.bTBIP39 password:password fromXRandom:NO syncedComplete:NO andGenerationCallback:nil];
+                    account = [[BTHDAccount alloc] initWithMnemonicSeed:mnemonicCodeSeed btBip39:s.bTBIP39 password:password fromXRandom:NO syncedComplete:NO addMode:Import andGenerationCallback:nil];
                 } @catch (NSException *e) {
                     if ([e isKindOfClass:[DuplicatedHDAccountException class]]) {
                         dispatch_async(dispatch_get_main_queue(), ^{
@@ -221,7 +221,7 @@
             } else {
                 BTHDAccountCold *account;
                 @try {
-                    account = [[BTHDAccountCold alloc] initWithMnemonicSeed:mnemonicCodeSeed btBip39:s.bTBIP39 andPassword:password];
+                    account = [[BTHDAccountCold alloc] initWithMnemonicSeed:mnemonicCodeSeed btBip39:s.bTBIP39 andPassword:password addMode:Import];
                 } @catch (NSException *e) {
                     dispatch_async(dispatch_get_main_queue(), ^{
                         [self showMsg:NSLocalizedString(@"Import failed.", nil)];

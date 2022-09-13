@@ -42,6 +42,9 @@
 #import "AddressAliasView.h"
 #import "DialogHDAccountOptions.h"
 #import "AddressTypeUtil.h"
+#import "BTAddressProvider.h"
+#import "AddressAddModeUtil.h"
+#import "BTHDAccountProvider.h"
 
 #define kUnconfirmedTxAmountLeftMargin (3)
 
@@ -68,6 +71,8 @@
 @property(weak, nonatomic) IBOutlet UIButton *btnAddressFull;
 @property(weak, nonatomic) IBOutlet UIImageView *ivSymbolBtc;
 @property(weak, nonatomic) IBOutlet AddressAliasView *btnAlias;
+@property (weak, nonatomic) IBOutlet UIButton *btnAddMode;
+
 @property(strong, nonatomic) UILongPressGestureRecognizer *longPress;
 @property(strong, nonatomic) UILongPressGestureRecognizer *xrandomLongPress;
 
@@ -94,13 +99,18 @@
     if (![[self.ivType gestureRecognizers] containsObject:self.longPress]) {
         [self.ivType addGestureRecognizer:self.longPress];
     }
+    
+    BOOL isWatch = false;
     if (address.isHDAccount) {
+        BTHDAccount *hdAccount = (BTHDAccount *) address;
+        isWatch = ![[BTHDAccountProvider instance] hasMnemonicSeed:(int)[hdAccount getHDAccountId]];
         self.ivType.image = [UIImage imageNamed:@"address_type_hd"];
     } else if (address.isHDM) {
         self.ivType.image = [UIImage imageNamed:@"address_type_hdm"];
     } else if (address.hasPrivKey) {
         self.ivType.image = [UIImage imageNamed:@"address_type_private"];
     } else {
+        isWatch = true;
         self.ivType.image = [UIImage imageNamed:@"address_type_watchonly"];
     }
 
@@ -109,7 +119,21 @@
         [self.ivXrandom addGestureRecognizer:self.xrandomLongPress];
     }
     self.ivXrandom.hidden = !address.isFromXRandom;
-
+    CGFloat wScreen = [[UIScreen mainScreen] bounds].size.width;
+    if (address.isFromXRandom) {
+        _btnAddMode.frame = CGRectMake(wScreen - 110, _btnAddMode.frame.origin.y, _btnAddMode.frame.size.width, _btnAddMode.frame.size.height);
+    } else {
+        _btnAddMode.frame = CGRectMake(wScreen - 82, _btnAddMode.frame.origin.y, _btnAddMode.frame.size.width, _btnAddMode.frame.size.height);
+    }
+    
+    if (!isWatch) {
+        [_btnAddMode setImage:[UIImage imageNamed:[AddressAddModeUtil getImgRes:address.addMode isFromXRandom:address.isFromXRandom isNormal:true]] forState:UIControlStateNormal];
+        [_btnAddMode setImage:[UIImage imageNamed:[AddressAddModeUtil getImgRes:address.addMode isFromXRandom:address.isFromXRandom isNormal:false]] forState:UIControlStateHighlighted];
+        self.btnAddMode.hidden = false;
+    } else {
+        self.btnAddMode.hidden = true;
+    }
+    
     self.lblBalanceBtc.attributedText = [UnitUtil attributedStringForAmount:address.balance withFontSize:kBalanceFontSize];
 
     width = [self.lblBalanceBtc.attributedText sizeWithRestrict:CGSizeMake(CGFLOAT_MAX, self.lblBalanceBtc.frame.size.height)].width;
@@ -159,6 +183,12 @@
 
 - (IBAction)addressFullPressed:(id)sender {
     [[[DialogAddressFull alloc] initWithDelegate:self] showFromView:self.btnAddressFull];
+}
+
+- (IBAction)btnAddModeClicked:(UIButton *)sender {
+    DialogAlert *dialogAlert = [[DialogAlert alloc] initWithConfirmMessage:NSLocalizedString([AddressAddModeUtil getDes:_btAddress.addMode isFromXRandom:_btAddress.isFromXRandom], nil) confirm:^{
+    }];
+    [dialogAlert showInWindow:self.window];
 }
 
 - (NSUInteger)dialogAddressFullRowCount {

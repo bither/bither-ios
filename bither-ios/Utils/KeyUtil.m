@@ -34,7 +34,7 @@
         if (!privateKeyString) {
             return NO;
         }
-        BTAddress *btAddress = [[BTAddress alloc] initWithKey:key encryptPrivKey:privateKeyString isSyncComplete:YES isXRandom:NO];
+        BTAddress *btAddress = [[BTAddress alloc] initWithKey:key encryptPrivKey:privateKeyString isSyncComplete:YES isXRandom:NO addMode:Create];
         [addressList addObject:btAddress];
     }
     [KeyUtil addAddressList:addressList];
@@ -56,7 +56,7 @@
             }
 
         } else {
-            BTAddress *btAddress = [[BTAddress alloc] initWithBitcoinjKey:encryptPrivKey withPassphrase:passphrase isSyncComplete:NO];
+            BTAddress *btAddress = [[BTAddress alloc] initWithBitcoinjKey:encryptPrivKey withPassphrase:passphrase isSyncComplete:NO addMode:Clone];
             if (!btAddress) {
                 if (aError != NULL) {
                     *aError = [NSError errorWithDomain:CustomErrorDomain code:PasswordError userInfo:nil];

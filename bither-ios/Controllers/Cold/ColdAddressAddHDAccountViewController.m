@@ -85,7 +85,7 @@
             while (!account) {
                 @try {
                     NSData *seed = [xRandom randomWithSize:16];
-                    account = [[BTHDAccountCold alloc] initWithMnemonicSeed:seed btBip39:[BTBIP39 sharedInstance] password:password andFromXRandom:NO];
+                    account = [[BTHDAccountCold alloc] initWithMnemonicSeed:seed btBip39:[BTBIP39 sharedInstance] password:password andFromXRandom:NO addMode:Create];
                 }
                 @catch (NSException *exception) {
                     NSLog(@"generate HD Account error %@", exception.debugDescription);
@@ -127,7 +127,7 @@
     while (!account) {
         @try {
             NSData *seed = [xrandom randomWithSize:16];
-            account = [[BTHDAccountCold alloc] initWithMnemonicSeed:seed btBip39:[BTBIP39 sharedInstance] password:password andFromXRandom:YES];
+            account = [[BTHDAccountCold alloc] initWithMnemonicSeed:seed btBip39:[BTBIP39 sharedInstance] password:password andFromXRandom:YES addMode:Create];
         }
         @catch (NSException *exception) {
             NSLog(@"generate HD Account error %@", exception.debugDescription);

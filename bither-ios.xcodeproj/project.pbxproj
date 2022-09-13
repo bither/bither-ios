@@ -305,6 +305,7 @@
 		DC06422DA44A6DA77DCFBB2D /* ImportHDMCold.m in Sources */ = {isa = PBXBuildFile; fileRef = DC0A375AE83A8BA37F3FA65F /* ImportHDMCold.m */; };
 		DC075758EE0F48911D8D4CE8 /* ImportHDMColdSeedController.m in Sources */ = {isa = PBXBuildFile; fileRef = DC07A672CCAD76ED66B72B91 /* ImportHDMColdSeedController.m */; };
 		DC0C00F6FC8AA88E26580598 /* HDMRecoverSetting.m in Sources */ = {isa = PBXBuildFile; fileRef = DC0769FAB5B4727E089E23CC /* HDMRecoverSetting.m */; };
+		FF5922F428CB281200DB6D0F /* AddressAddModeUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = FF5922F328CB281200DB6D0F /* AddressAddModeUtil.m */; };
 		FF7F9A2A284865AA005207B7 /* NetworkCustomPeerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FF7F9A28284865AA005207B7 /* NetworkCustomPeerViewController.m */; };
 		FF7F9A2B284865AA005207B7 /* NetworkCustomPeerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FF7F9A29284865AA005207B7 /* NetworkCustomPeerViewController.xib */; };
 		FF7F9A2E2848BC97005207B7 /* DialogNetworkCustomPeerOption.m in Sources */ = {isa = PBXBuildFile; fileRef = FF7F9A2D2848BC97005207B7 /* DialogNetworkCustomPeerOption.m */; };
@@ -982,6 +983,8 @@
 		DC0D6773769B40A704B784B4 /* ImportHDMCold.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImportHDMCold.h; sourceTree = "<group>"; };
 		DC0E3B0A73BF05166C9733A1 /* ImportHDMColdSeedController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImportHDMColdSeedController.h; sourceTree = "<group>"; };
 		E81D3024732350ACA5688F89 /* Pods-bither-ios.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-bither-ios.debug.xcconfig"; path = "Pods/Target Support Files/Pods-bither-ios/Pods-bither-ios.debug.xcconfig"; sourceTree = "<group>"; };
+		FF5922F228CB281200DB6D0F /* AddressAddModeUtil.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AddressAddModeUtil.h; sourceTree = "<group>"; };
+		FF5922F328CB281200DB6D0F /* AddressAddModeUtil.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AddressAddModeUtil.m; sourceTree = "<group>"; };
 		FF7F9A27284865AA005207B7 /* NetworkCustomPeerViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NetworkCustomPeerViewController.h; sourceTree = "<group>"; };
 		FF7F9A28284865AA005207B7 /* NetworkCustomPeerViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NetworkCustomPeerViewController.m; sourceTree = "<group>"; };
 		FF7F9A29284865AA005207B7 /* NetworkCustomPeerViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NetworkCustomPeerViewController.xib; sourceTree = "<group>"; };
@@ -1390,6 +1393,8 @@
 				4070603121512233000E38CD /* AddressTypeUtil.m */,
 				407BD21523CD6DFE000AA3DD /* SendUtil.h */,
 				407BD21623CD6DFE000AA3DD /* SendUtil.m */,
+				FF5922F228CB281200DB6D0F /* AddressAddModeUtil.h */,
+				FF5922F328CB281200DB6D0F /* AddressAddModeUtil.m */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -2308,6 +2313,7 @@
 				AC3C2623199B58750055FF5E /* TrendingGraphicData.m in Sources */,
 				AC454DDB1A1F24E4000AF4ED /* PinCodeViewController.m in Sources */,
 				ACEE7D4519D40C1300932B39 /* ImportPrivateKeySetting.m in Sources */,
+				FF5922F428CB281200DB6D0F /* AddressAddModeUtil.m in Sources */,
 				ACE7E71219EB78AE00F7AA3A /* ImageScrollView.m in Sources */,
 				DA641E8C196E7BC20095DF42 /* GCCrashReportFilterTrim.m in Sources */,
 				ACDDDC2319480DE00008A79D /* UIViewController+PiShowBanner.m in Sources */,
