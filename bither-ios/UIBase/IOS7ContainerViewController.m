@@ -39,15 +39,34 @@
 - (void)loadView {
     [super loadView];
     self.view.backgroundColor = [UIColor clearColor];
-    UIView *container = [[UIView alloc] initWithFrame:CGRectMake(0, IOS7DeltaTopOffset, self.view.frame.size.width, self.view.frame.size.height - IOS7DeltaTopOffset)];
+    CGFloat defaultTopOffset = IOS7DeltaTopOffset;
+    if (@available(iOS 11.0, *)) {
+        CGFloat topOffset = [UIApplication sharedApplication].keyWindow.safeAreaInsets.top;
+        if (topOffset > 0) {
+            defaultTopOffset = topOffset;
+        }
+    }
+    UIView *container = [[UIView alloc] initWithFrame:CGRectMake(0, defaultTopOffset, self.view.frame.size.width, self.view.frame.size.height - defaultTopOffset)];
     container.backgroundColor = [UIColor clearColor];
-    UIView *statusBarBg = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, IOS7DeltaTopOffset)];
+    UIView *statusBarBg = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, defaultTopOffset)];
     statusBarBg.backgroundColor = [UIColor colorWithRed:56.0 / 255.0 green:61.0 / 255.0 blue:64.0 / 255.0 alpha:1];
     [self.view addSubview:statusBarBg];
     [self.view addSubview:container];
     container.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     self.vStatusBarBg = statusBarBg;
     self.vContainer = container;
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    CGFloat defaultTopOffset = IOS7DeltaTopOffset;
+    if (@available(iOS 11.0, *)) {
+        defaultTopOffset = [UIApplication sharedApplication].keyWindow.safeAreaInsets.top;
+        if (defaultTopOffset != _vContainer.frame.origin.y) {
+            self.vContainer.frame = CGRectMake(0, defaultTopOffset, self.view.frame.size.width, self.view.frame.size.height - defaultTopOffset);
+            self.vStatusBarBg.frame = CGRectMake(0, 0, self.view.frame.size.width, defaultTopOffset);
+        }
+    }
 }
 
 - (UIViewController *)controller {

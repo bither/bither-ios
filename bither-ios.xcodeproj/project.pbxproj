@@ -305,6 +305,7 @@
 		DC06422DA44A6DA77DCFBB2D /* ImportHDMCold.m in Sources */ = {isa = PBXBuildFile; fileRef = DC0A375AE83A8BA37F3FA65F /* ImportHDMCold.m */; };
 		DC075758EE0F48911D8D4CE8 /* ImportHDMColdSeedController.m in Sources */ = {isa = PBXBuildFile; fileRef = DC07A672CCAD76ED66B72B91 /* ImportHDMColdSeedController.m */; };
 		DC0C00F6FC8AA88E26580598 /* HDMRecoverSetting.m in Sources */ = {isa = PBXBuildFile; fileRef = DC0769FAB5B4727E089E23CC /* HDMRecoverSetting.m */; };
+		FF58691A28D057CE005BE499 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FF58691928D057CE005BE499 /* Launch Screen.storyboard */; };
 		FF5922F428CB281200DB6D0F /* AddressAddModeUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = FF5922F328CB281200DB6D0F /* AddressAddModeUtil.m */; };
 		FF7F9A2A284865AA005207B7 /* NetworkCustomPeerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FF7F9A28284865AA005207B7 /* NetworkCustomPeerViewController.m */; };
 		FF7F9A2B284865AA005207B7 /* NetworkCustomPeerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FF7F9A29284865AA005207B7 /* NetworkCustomPeerViewController.xib */; };
@@ -983,6 +984,7 @@
 		DC0D6773769B40A704B784B4 /* ImportHDMCold.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImportHDMCold.h; sourceTree = "<group>"; };
 		DC0E3B0A73BF05166C9733A1 /* ImportHDMColdSeedController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImportHDMColdSeedController.h; sourceTree = "<group>"; };
 		E81D3024732350ACA5688F89 /* Pods-bither-ios.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-bither-ios.debug.xcconfig"; path = "Pods/Target Support Files/Pods-bither-ios/Pods-bither-ios.debug.xcconfig"; sourceTree = "<group>"; };
+		FF58691928D057CE005BE499 /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		FF5922F228CB281200DB6D0F /* AddressAddModeUtil.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AddressAddModeUtil.h; sourceTree = "<group>"; };
 		FF5922F328CB281200DB6D0F /* AddressAddModeUtil.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AddressAddModeUtil.m; sourceTree = "<group>"; };
 		FF7F9A27284865AA005207B7 /* NetworkCustomPeerViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NetworkCustomPeerViewController.h; sourceTree = "<group>"; };
@@ -1493,6 +1495,7 @@
 				42D9B776193D6B5B00C85B89 /* Images.xcassets */,
 				AC0135DD195056BE00E3BB95 /* KeyboardControl */,
 				42EFB54E1949C50900376888 /* MainStoryboard.storyboard */,
+				FF58691928D057CE005BE499 /* Launch Screen.storyboard */,
 				4217A36E1951233500063746 /* Model */,
 				AC454DCF1A1DE5D4000AF4ED /* pin */,
 				0A515F721A36A293008292AF /* RawPrivateKey */,
@@ -2066,6 +2069,7 @@
 				4276CEA4194C20810027D119 /* Localizable.strings in Resources */,
 				0AD674941A79F2B8007967DB /* BIP39EnglishWords.plist in Resources */,
 				AC53ABED19D94230007C095C /* xrandom_close_sound.mp3 in Resources */,
+				FF58691A28D057CE005BE499 /* Launch Screen.storyboard in Resources */,
 				42D9B76F193D6B5B00C85B89 /* InfoPlist.strings in Resources */,
 				FF7F9A2B284865AA005207B7 /* NetworkCustomPeerViewController.xib in Resources */,
 				42EFB54C1949C50900376888 /* MainStoryboard.storyboard in Resources */,

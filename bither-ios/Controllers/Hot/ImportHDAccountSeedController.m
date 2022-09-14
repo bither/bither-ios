@@ -288,7 +288,7 @@
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath; {
-    return (CGSize) {100, 50};
+    return (CGSize) {([UIScreen mainScreen].bounds.size.width - 4 * 6) / 3, 50};
 }
 
 - (void)replaceWorld:(NSString *)newWorld index:(int)index {

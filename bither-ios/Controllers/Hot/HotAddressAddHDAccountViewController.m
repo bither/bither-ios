@@ -198,7 +198,7 @@
 - (void)successFinish:(UEntropyViewController *)controller {
     __block HotAddressAddHDAccountViewController *s = self;
     [[[DialogHDMSingularColdSeed alloc] initWithWords:words parent:controller warn:NSLocalizedString(@"add_hd_account_show_seed_label", nil) button:NSLocalizedString(@"add_hd_account_show_seed_button", nil) andDismissAction:^{
-        [s.parentViewController.presentingViewController dismissViewControllerAnimated:YES completion:nil];
+        [s.parentViewController.presentingViewController dismissViewControllerAnimated:NO completion:nil];
     }] show];
 }
 

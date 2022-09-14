@@ -172,10 +172,10 @@
     self.vSeperator.backgroundColor = [UIColor colorWithWhite:1 alpha:0.5f];
     self.vSeperator.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleTopMargin;
 
-    [self addSubview:self.vSeperator];
-    [self addSubview:self.lblAmount];
-    [self addSubview:self.btnAddress];
-    [self addSubview:self.lblAddress];
+    [self.contentView addSubview:self.vSeperator];
+    [self.contentView addSubview:self.lblAmount];
+    [self.contentView addSubview:self.btnAddress];
+    [self.contentView addSubview:self.lblAddress];
 }
 
 - (void)showAddress:(NSString *)address andAmount:(int64_t)amount {

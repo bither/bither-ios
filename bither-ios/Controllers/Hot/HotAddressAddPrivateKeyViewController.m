@@ -254,7 +254,7 @@
     UInt32 count = self.countToGenerate;
     __block UIWindow *window = controller.view.window;
     __block UIViewController *dismissingVc = self.successDismissingViewController;
-    [dismissingVc dismissViewControllerAnimated:YES completion:^{
+    [dismissingVc dismissViewControllerAnimated:NO completion:^{
         DialogAlert *alert = [[DialogAlert alloc] initWithMessage:[NSString stringWithFormat:NSLocalizedString(@"xrandom_final_confirm", nil), count] confirm:nil cancel:nil];
         [alert showInWindow:window];
     }];
