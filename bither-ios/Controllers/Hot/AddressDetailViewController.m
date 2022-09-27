@@ -106,6 +106,8 @@
 
 - (void)setIsSegwit:(BOOL)isSegwit {
     _isSegwit = isSegwit;
+
+    [_tableView reloadSections:[[NSIndexSet alloc] initWithIndex:0] withRowAnimation:UITableViewRowAnimationAutomatic];
 }
 
 - (BOOL)isSegwit {
@@ -131,8 +133,6 @@
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         __block NSArray *txs = [self.address txs:page];
         dispatch_async(dispatch_get_main_queue(), ^{
-
-
             if (txs && txs.count > 0) {
                 if (page == 1) {
                     [_txs removeAllObjects];

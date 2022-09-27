@@ -126,7 +126,6 @@
     if ([self.delegate isMemberOfClass:AddressDetailViewController.class]) {
         AddressDetailViewController *vc = (AddressDetailViewController *) self.delegate;
         [vc setIsSegwit:!vc.isSegwit];
-        [self.delegate refresh];
     }
 }
 

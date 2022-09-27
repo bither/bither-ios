@@ -154,7 +154,7 @@
 
 
     self.tfKey = [[UITextField alloc] initWithFrame:CGRectMake(kOuterPadding, CGRectGetMaxY(lblSubTitle.frame) + kInnerMargin, kWidth - kOuterPadding * 2, kTextFieldHeight)];
-    NSString *holderString = NSLocalizedString(@"hdm_import_word_list_empty_message", nil);
+    NSString *holderString = NSLocalizedString(@"hd_import_word_list_empty_message", nil);
 
     self.tfKey.attributedPlaceholder = [[NSAttributedString alloc] initWithString:holderString attributes:@{NSForegroundColorAttributeName : [UIColor colorWithWhite:1 alpha:0.5]}];
     [self configureTextField:self.tfKey];
@@ -216,7 +216,7 @@
 
 
 - (NSString *)subTitle {
-    NSString *subTitle = NSLocalizedString(@"import_hdm_cold_seed_phrase", nil);
+    NSString *subTitle = NSLocalizedString(@"import_cold_hd_account_seed_phrase", nil);
     return subTitle;
 }
 

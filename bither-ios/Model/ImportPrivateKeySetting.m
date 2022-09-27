@@ -29,10 +29,13 @@
 #import "DialogWithActions.h"
 #import "AppDelegate.h"
 #import "BTWordsTypeManager.h"
+#import "DialogImportHdAccountSeedQrCodeSelectLanguage.h"
 
-@interface CheckPasswordDelegate : NSObject <DialogPasswordDelegate>
+@interface CheckPasswordDelegate : NSObject <DialogPasswordDelegate, DialogImportHdAccountSeedQrCodeSelectLanguageDelegate>
+
 @property(nonatomic, strong) UIViewController *controller;
 @property(nonatomic, strong) NSString *privateKeyStr;
+
 @end
 
 @implementation CheckPasswordDelegate
@@ -45,10 +48,13 @@
 
 
 @interface ImportPrivateKeySetting ()
+
 @property(nonatomic, readwrite) BOOL isImportHDM;
 @property(nonatomic, readwrite) BOOL isImportHDAccount;
 @property NSArray *buttons;
 @property (nonatomic,strong)NSString *keyStr;
+@property(nonatomic, strong) NSString *selectHdWordList;
+
 @end
 
 @implementation ImportPrivateKeySetting
@@ -159,9 +165,16 @@ static Setting *importPrivateKeySetting;
                 if (!isHDSeed || [[BTQRCodeUtil splitQRCode:result] count] != 3) {
                     [self showMsg:NSLocalizedString(@"import_hd_account_seed_format_error", nil)];
                 } else {
+                    NSString *hdWordList = [self getHDAccountWordList:result];
                     _result = result;
-                    DialogPassword *dialog = [[DialogPassword alloc] initWithDelegate:self];
-                    [dialog showInWindow:self.controller.view.window];
+                    self.selectHdWordList = hdWordList;
+                    if ([hdWordList isEqualToString:[BTWordsTypeManager getWordsTypeValue:EN_WORDS]]) {
+                        DialogImportHdAccountSeedQrCodeSelectLanguage *dlSelectLanguage = [[DialogImportHdAccountSeedQrCodeSelectLanguage alloc] initWithDelegate:self];
+                        [dlSelectLanguage showInWindow:self.controller.view.window];
+                    } else {
+                        DialogPassword *dialog = [[DialogPassword alloc] initWithDelegate:self];
+                        [dialog showInWindow:self.controller.view.window];
+                    }
                 }
             }];
         } else {
@@ -207,7 +220,12 @@ static Setting *importPrivateKeySetting;
         }
 
     }
+}
 
+- (void)selectLanguage:(NSString *)hdWordList {
+    self.selectHdWordList = hdWordList;
+    DialogPassword *dialog = [[DialogPassword alloc] initWithDelegate:self];
+    [dialog showInWindow:self.controller.view.window];
 }
 
 - (BOOL)isHdSeedWithResult:(NSString *)result {
@@ -268,11 +286,12 @@ static Setting *importPrivateKeySetting;
                         return;
                     }
                 }
-                BTBIP39 *bip39 = [[BTBIP39 alloc] initWithWordList:[self getHDAccountWordList:_result]];
+    
+                BTBIP39 *selectBip39 = [[BTBIP39 alloc] initWithWordList:_selectHdWordList];
                 if ([BTSettings instance].getAppMode == HOT) {
                     BTHDAccount *account;
                     @try {
-                        account = [[BTHDAccount alloc] initWithEncryptedMnemonicSeed:[[BTEncryptData alloc] initWithStr:[self getHDAccountBTEncryptDataStr:_result]] btBip39:bip39 password:password syncedComplete:NO andGenerationCallback:nil];
+                        account = [[BTHDAccount alloc] initWithEncryptedMnemonicSeed:[[BTEncryptData alloc] initWithStr:[self getHDAccountBTEncryptDataStr:_result]] btBip39:selectBip39 password:password syncedComplete:NO andGenerationCallback:nil];
                     } @catch (NSException *e) {
                         if ([e isKindOfClass:[DuplicatedHDAccountException class]]) {
                             dispatch_async(dispatch_get_main_queue(), ^{
@@ -305,7 +324,7 @@ static Setting *importPrivateKeySetting;
                 } else {
                     BTHDAccountCold *account;
                     @try {
-                        account = [[BTHDAccountCold alloc] initWithEncryptedMnemonicSeed:[[BTEncryptData alloc] initWithStr:[self getHDAccountBTEncryptDataStr:_result]] btBip39:bip39 andPassword:password addMode:Import];
+                        account = [[BTHDAccountCold alloc] initWithEncryptedMnemonicSeed:[[BTEncryptData alloc] initWithStr:[self getHDAccountBTEncryptDataStr:_result]] btBip39:selectBip39 andPassword:password addMode:Import];
                     } @catch (NSException *e) {
                         dispatch_async(dispatch_get_main_queue(), ^{
                             [dp dismissWithCompletion:^{
@@ -323,8 +342,8 @@ static Setting *importPrivateKeySetting;
                         return;
                     }
                 }
-                [[BTWordsTypeManager instance] saveWordsTypeValue:bip39.wordList];
-                [BTBIP39 sharedInstance].wordList = bip39.wordList;
+                [[BTWordsTypeManager instance] saveWordsTypeValue:selectBip39.wordList];
+                [BTBIP39 sharedInstance].wordList = selectBip39.wordList;
                 dispatch_async(dispatch_get_main_queue(), ^{
                     [dp dismissWithCompletion:^{
                         BOOL isHot = [[BTSettings instance] getAppMode] == HOT;

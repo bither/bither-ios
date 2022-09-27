@@ -627,6 +627,8 @@
 "hdm_import_word_list_delete"="刪除";
 "hdm_import_word_list_replace"="替換";
 
+"hd_import_word_list_empty_message"="請輸入 HD 密語";
+
 "not_verify_bither_private_key_qrcode"="不是比太私鑰二維碼";
 
 // hdm reset server password
@@ -828,3 +830,8 @@
 "address_add_mode_import_des" = "通過導入添加";
 "address_add_mode_clone_des" = "通過克隆添加";
 "address_add_mode_other_des" = "通過舊版本導入、克隆或非極隨機方式創建添加";
+
+"hd_account_seed_language_select_title" = "選擇HD賬戶種子語言";
+"hd_account_seed_language_select_en" = "英文";
+"hd_account_seed_language_select_zh_cn" = "中文簡體";
+"hd_account_seed_language_select_zh_tw" = "中文繁體";

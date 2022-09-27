@@ -36,12 +36,6 @@
 @implementation DialogAddressLongPressOptions
 - (instancetype)initWithAddress:(BTAddress *)address delegate:(NSObject <DialogPrivateKeyOptionsDelegate> *)delegate andAliasDelegate:(NSObject <DialogAddressAliasDelegate> *)aliasDelegate {
     NSString *viewStr = NSLocalizedString(@"Private Key QR Code (Decrypted)", nil);
-    if (!address.hasPrivKey) {
-        viewStr = NSLocalizedString(@"Stop Monitoring", nil);
-    }
-    if (NSLocalizedString(@"address_detail_private_Key_qr_code_bip38", nil).length >= viewStr.length) {
-        viewStr = NSLocalizedString(@"address_detail_private_Key_qr_code_bip38", nil);
-    }
     self = [super initWithFrame:CGRectMake(0, 0, [viewStr sizeWithRestrict:CGSizeMake(CGFLOAT_MAX, kButtonHeight) font:[UIFont systemFontOfSize:kFontSize]].width + kButtonEdgeInsets.left + kButtonEdgeInsets.right, kHeight)];
     if (self) {
         _prirvateKeyQrCodeEncryptedStr = viewStr;
@@ -55,12 +49,6 @@
 
 - (instancetype)initWithAddress:(BTAddress *)address andDelegate:(NSObject <DialogPrivateKeyOptionsDelegate> *)delegate {
     NSString *viewStr = NSLocalizedString(@"Private Key QR Code (Decrypted)", nil);
-    if (!address.hasPrivKey) {
-        viewStr = NSLocalizedString(@"Stop Monitoring", nil);
-    }
-    if (NSLocalizedString(@"address_detail_private_Key_qr_code_bip38", nil).length >= viewStr.length) {
-        viewStr = NSLocalizedString(@"address_detail_private_Key_qr_code_bip38", nil);
-    }
     self = [super initWithFrame:CGRectMake(0, 0, [viewStr sizeWithRestrict:CGSizeMake(CGFLOAT_MAX, kButtonHeight) font:[UIFont systemFontOfSize:kFontSize]].width + kButtonEdgeInsets.left + kButtonEdgeInsets.right, kHeight)];
     if (self) {
         _prirvateKeyQrCodeEncryptedStr = viewStr;

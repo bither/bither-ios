@@ -310,6 +310,7 @@
 		FF7F9A2A284865AA005207B7 /* NetworkCustomPeerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FF7F9A28284865AA005207B7 /* NetworkCustomPeerViewController.m */; };
 		FF7F9A2B284865AA005207B7 /* NetworkCustomPeerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FF7F9A29284865AA005207B7 /* NetworkCustomPeerViewController.xib */; };
 		FF7F9A2E2848BC97005207B7 /* DialogNetworkCustomPeerOption.m in Sources */ = {isa = PBXBuildFile; fileRef = FF7F9A2D2848BC97005207B7 /* DialogNetworkCustomPeerOption.m */; };
+		FFEBBD9228E19206008780E7 /* DialogImportHdAccountSeedQrCodeSelectLanguage.m in Sources */ = {isa = PBXBuildFile; fileRef = FFEBBD9128E19206008780E7 /* DialogImportHdAccountSeedQrCodeSelectLanguage.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -992,6 +993,8 @@
 		FF7F9A29284865AA005207B7 /* NetworkCustomPeerViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NetworkCustomPeerViewController.xib; sourceTree = "<group>"; };
 		FF7F9A2C2848BC97005207B7 /* DialogNetworkCustomPeerOption.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DialogNetworkCustomPeerOption.h; sourceTree = "<group>"; };
 		FF7F9A2D2848BC97005207B7 /* DialogNetworkCustomPeerOption.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DialogNetworkCustomPeerOption.m; sourceTree = "<group>"; };
+		FFEBBD9028E19206008780E7 /* DialogImportHdAccountSeedQrCodeSelectLanguage.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DialogImportHdAccountSeedQrCodeSelectLanguage.h; sourceTree = "<group>"; };
+		FFEBBD9128E19206008780E7 /* DialogImportHdAccountSeedQrCodeSelectLanguage.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DialogImportHdAccountSeedQrCodeSelectLanguage.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1813,6 +1816,8 @@
 				0A93B6001A4A66080081D74D /* DialogSignMessageOutput.m */,
 				0A6C0F5D1A4D5E1900544B33 /* DialogSignMessageSelectAddress.h */,
 				0A6C0F5E1A4D5E1900544B33 /* DialogSignMessageSelectAddress.m */,
+				FFEBBD9028E19206008780E7 /* DialogImportHdAccountSeedQrCodeSelectLanguage.h */,
+				FFEBBD9128E19206008780E7 /* DialogImportHdAccountSeedQrCodeSelectLanguage.m */,
 				0AD6749A1A7B6229007967DB /* DialogWithActions.h */,
 				0AD6749B1A7B6229007967DB /* DialogWithActions.m */,
 				0AD6749D1A7B9108007967DB /* DialogHDMSeedWordList.h */,
@@ -2277,6 +2282,7 @@
 				0A7F203D1D0BB0F900B4EAB1 /* DialogHDMonitorFirstAddressValidation.m in Sources */,
 				FF7F9A2A284865AA005207B7 /* NetworkCustomPeerViewController.m in Sources */,
 				AC2F3295195C02C3001B7439 /* AmountButton.m in Sources */,
+				FFEBBD9228E19206008780E7 /* DialogImportHdAccountSeedQrCodeSelectLanguage.m in Sources */,
 				42E8161C19529B14005F16F7 /* KeyUtil.m in Sources */,
 				ACEE7D3619D3FC4B00932B39 /* ReloadTxSetting.m in Sources */,
 				AC454DE41A1F2518000AF4ED /* PinCodeChangeViewController.m in Sources */,
