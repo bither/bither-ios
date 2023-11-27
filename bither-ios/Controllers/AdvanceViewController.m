@@ -151,7 +151,7 @@
 }
 
 - (void)toRawPrivateKey {
-    [self.navigationController pushViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"RawPrivateKey"] animated:YES];
+//    [self.navigationController pushViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"RawPrivateKey"] animated:YES];
 }
 
 - (void)configureHeaderAndFooter {

@@ -136,10 +136,6 @@
     [[[DialogAddressQrCopy alloc] initWithAddress:DONATE_ADDRESS andTitle:NSLocalizedString(@"bither_team_address", nil)] showInWindow:self.view.window];
 }
 
-- (void)toRawPrivateKey {
-    [self.navigationController pushViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"RawPrivateKey"] animated:YES];
-}
-
 - (void)configureHeaderAndFooter {
     
     UIImageView *ivTop = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"list_item_card_shadow_top"]];
