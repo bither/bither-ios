@@ -1,0 +1,486 @@
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "0u9-oG-ULv"; */
+"0u9-oG-ULv.text" = "Etiqueta";
+
+/* Class = "UILabel"; text = "HDM = HD + Multisig"; ObjectID = "14f-Li-LUz"; */
+"14f-Li-LUz.text" = "HDM = HD + Multisig";
+
+/* Class = "UILabel"; text = "%"; ObjectID = "1MG-Ff-Ctm"; */
+"1MG-Ff-Ctm.text" = "%";
+
+/* Class = "UITextField"; placeholder = "0.00"; ObjectID = "1pu-fA-kTl"; */
+"1pu-fA-kTl.placeholder" = "0.00";
+
+/* Class = "UILabel"; text = "name"; ObjectID = "2Jh-dT-UDy"; */
+"2Jh-dT-UDy.text" = "nombre";
+
+/* Class = "UIButton"; normalTitle = "Generate"; ObjectID = "2fh-9Q-YV2"; */
+"2fh-9Q-YV2.normalTitle" = "Generar";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "38x-NI-gXk"; */
+"38x-NI-gXk.text" = "Etiqueta";
+
+/* Class = "UITextField"; placeholder = "Bitcoin address"; ObjectID = "3Xg-gQ-PrT"; */
+"3Xg-gQ-PrT.placeholder" = "Dirección de bitcoin";
+
+/* Class = "UILabel"; text = "Pay to"; ObjectID = "4lI-QI-HQr"; */
+"4lI-QI-HQr.text" = "Pagar a";
+
+/* Class = "UIButton"; normalTitle = "Switch to Bither Cold"; ObjectID = "4pa-hj-c7j"; */
+"4pa-hj-c7j.normalTitle" = "Cambiar a Bither frío";
+
+/* Class = "UILabel"; text = "HDM Hot"; ObjectID = "5Da-1U-rSQ"; */
+"5Da-1U-rSQ.text" = "HDM caliente";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "5Mm-vi-wGE"; */
+"5Mm-vi-wGE.text" = "Etiqueta";
+
+/* Class = "UIButton"; normalTitle = "HD Account Seed QR Code"; ObjectID = "5p5-q5-NIv"; */
+"5p5-q5-NIv.normalTitle" = "Código QR de la semilla de cuenta HD";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "6FL-zM-ekJ"; */
+"6FL-zM-ekJ.text" = "Etiqueta";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "6PV-kG-o95"; */
+"6PV-kG-o95.text" = "Etiqueta";
+
+/* Class = "UITextField"; placeholder = "Bitcoin address"; ObjectID = "6Td-u4-E0s"; */
+"6Td-u4-E0s.placeholder" = "Dirección de bitcoin";
+
+/* Class = "UIButton"; normalTitle = "Send"; ObjectID = "7HM-O3-12p"; */
+"7HM-O3-12p.normalTitle" = "Enviar";
+
+/* Class = "UITextField"; placeholder = "0.00"; ObjectID = "7XS-yb-Fb3"; */
+"7XS-yb-Fb3.placeholder" = "0.00";
+
+/* Class = "UITextField"; placeholder = "0.00"; ObjectID = "7Z6-U6-s2f"; */
+"7Z6-U6-s2f.placeholder" = "0.00";
+
+/* Class = "UITextField"; placeholder = "Bitcoin address"; ObjectID = "7eD-5T-1F7"; */
+"7eD-5T-1F7.placeholder" = "Dirección de bitcoin";
+
+/* Class = "UILabel"; text = "How many private keys to generate?"; ObjectID = "8Qe-tr-XPb"; */
+"8Qe-tr-XPb.text" = "¿Cuántas claves privadas para generar?";
+
+/* Class = "UILabel"; text = "3899.23"; ObjectID = "97C-RC-ZTW"; */
+"97C-RC-ZTW.text" = "3899.23";
+
+/* Class = "UILabel"; text = "3899.23"; ObjectID = "9UE-YF-ZPV"; */
+"9UE-YF-ZPV.text" = "3899.23";
+
+/* Class = "UILabel"; text = "Address"; ObjectID = "9VQ-qA-ave"; */
+"9VQ-qA-ave.text" = "Dirección";
+
+/* Class = "UILabel"; text = "From"; ObjectID = "BG3-vv-NOl"; */
+"BG3-vv-NOl.text" = "De";
+
+/* Class = "UILabel"; text = "Amount"; ObjectID = "BZZ-7d-0no"; */
+"BZZ-7d-0no.text" = "Cantidad";
+
+/* Class = "UILabel"; text = "Signature"; ObjectID = "CJp-QT-laa"; */
+"CJp-QT-laa.text" = "Firma";
+
+/* Class = "UIButton"; normalTitle = "HD Account Seed Phrase"; ObjectID = "Ces-kP-XIs"; */
+"Ces-kP-XIs.normalTitle" = "Frase semilla de cuenta HD";
+
+/* Class = "UISegmentedControl"; Cxt-9h-SUk.segmentTitles[0] = "Peers"; ObjectID = "Cxt-9h-SUk"; */
+"Cxt-9h-SUk.segmentTitles[0]" = "Pares";
+
+/* Class = "UISegmentedControl"; Cxt-9h-SUk.segmentTitles[1] = "Blocks"; ObjectID = "Cxt-9h-SUk"; */
+"Cxt-9h-SUk.segmentTitles[1]" = "Bloques";
+
+/* Class = "UILabel"; text = "Balance:"; ObjectID = "ECV-qg-2mZ"; */
+"ECV-qg-2mZ.text" = "Balance:";
+
+/* Class = "UIButton"; normalTitle = "Singular Mode"; ObjectID = "EXG-fG-TbM"; */
+"EXG-fG-TbM.normalTitle" = "Modo Singular";
+
+/* Class = "UILabel"; text = "Pay to"; ObjectID = "F4n-lA-Ige"; */
+"F4n-lA-Ige.text" = "Pagar a";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "FCX-7D-yfn"; */
+"FCX-7D-yfn.text" = "Etiqueta";
+
+/* Class = "UILabel"; text = "name"; ObjectID = "FGf-zH-Ia6"; */
+"FGf-zH-Ia6.text" = "nombre";
+
+/* Class = "UILabel"; text = "Advance Options"; ObjectID = "FzN-AZ-zUK"; */
+"FzN-AZ-zUK.text" = "Opciones avanzadas";
+
+/* Class = "UIButton"; normalTitle = "Sign"; ObjectID = "GHf-wI-Umw"; */
+"GHf-wI-Umw.normalTitle" = "Signo";
+
+/* Class = "UILabel"; text = "Balance:"; ObjectID = "GbZ-iW-rIX"; */
+"GbZ-iW-rIX.text" = "Balance:";
+
+/* Class = "UILabel"; text = "low"; ObjectID = "I5M-vR-w4V"; */
+"I5M-vR-w4V.text" = "bajo";
+
+/* Class = "UILabel"; text = "23451.23"; ObjectID = "IjU-Us-PGx"; */
+"IjU-Us-PGx.text" = "23451.23";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "Irv-YA-qKK"; */
+"Irv-YA-qKK.text" = "Etiqueta";
+
+/* Class = "UILabel"; text = "Singular Mode"; ObjectID = "IzA-vJ-Ad6"; */
+"IzA-vJ-Ad6.text" = "Modo Singular";
+
+/* Class = "UILabel"; text = "How many HDM addresses to add?"; ObjectID = "KSX-eO-Uwn"; */
+"KSX-eO-Uwn.text" = "¿Cuantas direcciones HDM para añadir?";
+
+/* Class = "UILabel"; text = "Add HDM Address"; ObjectID = "Kfd-Dg-pnE"; */
+"Kfd-Dg-pnE.text" = "Añadir dirección HDM";
+
+/* Class = "UIButton"; normalTitle = "Next Word"; ObjectID = "LUd-2F-jCf"; */
+"LUd-2F-jCf.normalTitle" = "Próxima palabra";
+
+/* Class = "UIButton"; normalTitle = "Generate"; ObjectID = "LrS-g8-zv9"; */
+"LrS-g8-zv9.normalTitle" = "Generar";
+
+/* Class = "UITextField"; placeholder = "0.00"; ObjectID = "MAT-xt-p4f"; */
+"MAT-xt-p4f.placeholder" = "0.00";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "MSV-4p-BLw"; */
+"MSV-4p-BLw.text" = "Etiqueta";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "Mcj-lw-QS2"; */
+"Mcj-lw-QS2.text" = "Etiqueta";
+
+/* Class = "UIButton"; normalTitle = "Check Private Keys"; ObjectID = "Np0-ig-4Cd"; */
+"Np0-ig-4Cd.normalTitle" = "Comprobar llaves privadas";
+
+/* Class = "UILabel"; text = "$0.00"; ObjectID = "Nzn-0V-cau"; */
+"Nzn-0V-cau.text" = "$0.00";
+
+/* Class = "UIButton"; normalTitle = "Send"; ObjectID = "OlL-T9-SKL"; */
+"OlL-T9-SKL.normalTitle" = "Enviar";
+
+/* Class = "UILabel"; text = "$1234.90"; ObjectID = "Onw-PZ-JGC"; */
+"Onw-PZ-JGC.text" = "$1234.90";
+
+/* Class = "UILabel"; text = "100"; ObjectID = "PJH-te-Brg"; */
+"PJH-te-Brg.text" = "100";
+
+/* Class = "UILabel"; text = "Generate HDM Account"; ObjectID = "Pgs-ev-QNu"; */
+"Pgs-ev-QNu.text" = "Generar cuenta HDM";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "Plt-58-S4m"; */
+"Plt-58-S4m.text" = "Etiqueta";
+
+/* Class = "UILabel"; text = "0000000000000000163440df04bc24eccb48a9d46c64dce3be979e2e6a35aa13"; ObjectID = "QaN-4R-hDw"; */
+"QaN-4R-hDw.text" = "0000000000000000163440df04bc24eccb48a9d46c64dce3be979e2e6a35aa13";
+
+/* Class = "UILabel"; text = "Pay to"; ObjectID = "QtW-gn-Bhz"; */
+"QtW-gn-Bhz.text" = "Pagar a";
+
+/* Class = "UILabel"; text = "Import HDM Phrase"; ObjectID = "Qwn-YF-uwn"; */
+"Qwn-YF-uwn.text" = "Importar frase HDM";
+
+/* Class = "UILabel"; text = "Generate Normal Private Keys"; ObjectID = "R90-Bo-e0X"; */
+"R90-Bo-e0X.text" = "Generar llaves privadas normales";
+
+/* Class = "UIButton"; normalTitle = "1"; ObjectID = "RIA-YK-ZlZ"; */
+"RIA-YK-ZlZ.normalTitle" = "1";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "SLL-YQ-ttn"; */
+"SLL-YQ-ttn.text" = "Etiqueta";
+
+/* Class = "UITextField"; placeholder = "0.00"; ObjectID = "Sdk-Mj-6QJ"; */
+"Sdk-Mj-6QJ.placeholder" = "0.00";
+
+/* Class = "UIButton"; normalTitle = "C"; ObjectID = "UPg-jL-w07"; */
+"UPg-jL-w07.normalTitle" = "C";
+
+/* Class = "UILabel"; text = "Bither Hot: Online & Simple."; ObjectID = "V5M-8Z-afm"; */
+"V5M-8Z-afm.text" = "Bither caliente: En linea & simple.";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "VrN-rd-ovc"; */
+"VrN-rd-ovc.text" = "Etiqueta";
+
+/* Class = "UILabel"; text = "Balance"; ObjectID = "W2y-ax-75E"; */
+"W2y-ax-75E.text" = "Balance";
+
+/* Class = "UILabel"; text = "Amount"; ObjectID = "W4J-bu-8RU"; */
+"W4J-bu-8RU.text" = "Cantidad";
+
+/* Class = "UILabel"; text = "Trash Can"; ObjectID = "W7P-G2-qt2"; */
+"W7P-G2-qt2.text" = "Basurero";
+
+/* Class = "UIButton"; normalTitle = "Retry"; ObjectID = "XCg-Ta-A0q"; */
+"XCg-Ta-A0q.normalTitle" = "Reintentar";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "XVA-OX-iFc"; */
+"XVA-OX-iFc.text" = "Etiqueta";
+
+/* Class = "UILabel"; text = "Building Wallet…"; ObjectID = "YDg-IR-7hP"; */
+"YDg-IR-7hP.text" = "Elaborando cartera…";
+
+/* Class = "UITextField"; placeholder = "0.00"; ObjectID = "Yo9-av-E4b"; */
+"Yo9-av-E4b.placeholder" = "0.00";
+
+/* Class = "UIButton"; normalTitle = "Send"; ObjectID = "Z5W-Ua-Lm5"; */
+"Z5W-Ua-Lm5.normalTitle" = "Enviar";
+
+/* Class = "UILabel"; text = "Amount"; ObjectID = "aHu-iQ-TCR"; */
+"aHu-iQ-TCR.text" = "Enviar";
+
+/* Class = "UISegmentedControl"; aLp-gS-meD.segmentTitles[0] = "Dice"; ObjectID = "aLp-gS-meD"; */
+"aLp-gS-meD.segmentTitles[0]" = "Dado";
+
+/* Class = "UISegmentedControl"; aLp-gS-meD.segmentTitles[1] = "Binary"; ObjectID = "aLp-gS-meD"; */
+"aLp-gS-meD.segmentTitles[1]" = "Binario";
+
+/* Class = "UIButton"; normalTitle = "Generate Normal Private Keys"; ObjectID = "aa4-oP-TVf"; */
+"aa4-oP-TVf.normalTitle" = "Generar llaves privadas normales";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "bKW-aE-gcw"; */
+"bKW-aE-gcw.text" = "Etiqueta";
+
+/* Class = "UILabel"; text = "R Value Check"; ObjectID = "bNn-8g-rmY"; */
+"bNn-8g-rmY.text" = "Verificación de valor R";
+
+/* Class = "UILabel"; text = "marketName"; ObjectID = "bOH-Sj-yMG"; */
+"bOH-Sj-yMG.text" = "mercadoNombre";
+
+/* Class = "UILabel"; text = "Generate New HD Account"; ObjectID = "bUN-jt-wO1"; */
+"bUN-jt-wO1.text" = "Generar nueva cuenta HD";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "bb9-gm-2j7"; */
+"bb9-gm-2j7.text" = "Etiqueta";
+
+/* Class = "UILabel"; text = "0.00"; ObjectID = "bfg-wv-lfB"; */
+"bfg-wv-lfB.text" = "0.00";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "bq1-3M-RqW"; */
+"bq1-3M-RqW.text" = "Etiqueta";
+
+/* Class = "UILabel"; text = "value"; ObjectID = "cAB-ok-gus"; */
+"cAB-ok-gus.text" = "valor";
+
+/* Class = "UILabel"; text = "1JT3"; ObjectID = "cdq-og-ME5"; */
+"cdq-og-ME5.text" = "1JT3";
+
+/* Class = "UIButton"; normalTitle = "Add This Private Key"; ObjectID = "ckY-fV-MzW"; */
+"ckY-fV-MzW.normalTitle" = "Añadir esta llave privada";
+
+/* Class = "UILabel"; text = "Can not find private key"; ObjectID = "eEx-7U-SVT"; */
+"eEx-7U-SVT.text" = "No se encuentra la llave privada";
+
+/* Class = "UITextField"; placeholder = "0.00"; ObjectID = "eP1-s3-zSH"; */
+"eP1-s3-zSH.placeholder" = "0.00";
+
+/* Class = "UITextField"; placeholder = "Bitcoin address"; ObjectID = "fCj-hW-RGp"; */
+"fCj-hW-RGp.placeholder" = "Dirección de bitcoin";
+
+/* Class = "UIButton"; normalTitle = "C"; ObjectID = "fhw-Xa-7ci"; */
+"fhw-Xa-7ci.normalTitle" = "C";
+
+/* Class = "UILabel"; text = "Pay to"; ObjectID = "g3O-Ch-Qm9"; */
+"g3O-Ch-Qm9.text" = "Pagar a";
+
+/* Class = "UIButton"; normalTitle = "Generate"; ObjectID = "gHB-fo-cHb"; */
+"gHB-fo-cHb.normalTitle" = "Generar";
+
+/* Class = "UILabel"; text = "Change to"; ObjectID = "gL9-bD-fq2"; */
+"gL9-bD-fq2.text" = "Cambiar a";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "gbe-Xl-yCZ"; */
+"gbe-Xl-yCZ.text" = "Etiqueta";
+
+/* Class = "UILabel"; text = "Verify Message Signature"; ObjectID = "gvK-WF-XJl"; */
+"gvK-WF-XJl.text" = "Verificar firma del mensaje";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "hBl-Md-UWA"; */
+"hBl-Md-UWA.text" = "Etiqueta";
+
+/* Class = "UIButton"; normalTitle = "0"; ObjectID = "hQL-T3-YNx"; */
+"hQL-T3-YNx.normalTitle" = "0";
+
+/* Class = "UILabel"; text = "Private Key"; ObjectID = "he8-50-11R"; */
+"he8-50-11R.text" = "LLave privada";
+
+/* Class = "UILabel"; text = "Balance:"; ObjectID = "hsE-yP-NwX"; */
+"hsE-yP-NwX.text" = "Balance:";
+
+/* Class = "UIButton"; normalTitle = "Next Word"; ObjectID = "ifX-vq-zRq"; */
+"ifX-vq-zRq.normalTitle" = "Próxima palabra";
+
+/* Class = "UILabel"; text = "Change Amount"; ObjectID = "ipI-cb-OYV"; */
+"ipI-cb-OYV.text" = "Cambiar cantidad";
+
+/* Class = "UILabel"; text = "Amount"; ObjectID = "jBb-nb-rnn"; */
+"jBb-nb-rnn.text" = "Cantidad";
+
+/* Class = "UILabel"; text = "%"; ObjectID = "jDX-wx-Vm4"; */
+"jDX-wx-Vm4.text" = "%";
+
+/* Class = "UILabel"; text = "Network failure."; ObjectID = "jQj-PR-DVU"; */
+"jQj-PR-DVU.text" = "Fallo en la red.";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "kKw-54-5PB"; */
+"kKw-54-5PB.text" = "Etiqueta";
+
+/* Class = "UILabel"; text = "24h"; ObjectID = "kS5-Zp-kQC"; */
+"kS5-Zp-kQC.text" = "24h";
+
+/* Class = "UILabel"; text = "HDM Cold"; ObjectID = "kSV-dE-lAl"; */
+"kSV-dE-lAl.text" = "HDM Frío";
+
+/* Class = "UIButton"; normalTitle = "Monitor Bither Cold"; ObjectID = "kbG-t9-dEm"; */
+"kbG-t9-dEm.normalTitle" = "Vigilar Bither Frío";
+
+/* Class = "UILabel"; text = "HDM Cold"; ObjectID = "lUJ-Y1-VRb"; */
+"lUJ-Y1-VRb.text" = "HDM Frío";
+
+/* Class = "UILabel"; text = "HDM Server"; ObjectID = "lnF-bS-z2z"; */
+"lnF-bS-z2z.text" = "Servidor HDM";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "mN2-wj-ee4"; */
+"mN2-wj-ee4.text" = "Etiqueta";
+
+/* Class = "UILabel"; text = "QR Code"; ObjectID = "mSg-tC-frD"; */
+"mSg-tC-frD.text" = "Código QR";
+
+/* Class = "UILabel"; text = "Password"; ObjectID = "mdF-6N-ecP"; */
+"mdF-6N-ecP.text" = "Contraseña";
+
+/* Class = "UILabel"; text = "100"; ObjectID = "mjb-dF-Wjb"; */
+"mjb-dF-Wjb.text" = "100";
+
+/* Class = "UILabel"; text = "Sign Transaction"; ObjectID = "mpu-26-YRO"; */
+"mpu-26-YRO.text" = "Firmar transacción";
+
+/* Class = "UILabel"; text = "You already have an HD account."; ObjectID = "nBS-fJ-qtL"; */
+"nBS-fJ-qtL.text" = "Ya tiene una cuenta HD.";
+
+/* Class = "UILabel"; text = "Password"; ObjectID = "nGP-EM-iOS"; */
+"nGP-EM-iOS.text" = "Contraseña";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "nbm-cb-0DV"; */
+"nbm-cb-0DV.text" = "Etiqueta";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "njo-BE-gGN"; */
+"njo-BE-gGN.text" = "Etiqueta";
+
+/* Class = "UILabel"; text = "Amount"; ObjectID = "nyJ-oV-7hM"; */
+"nyJ-oV-7hM.text" = "Cantidad";
+
+/* Class = "UISegmentedControl"; oZb-Bk-280.segmentTitles[0] = "HD Account"; ObjectID = "oZb-Bk-280"; */
+"oZb-Bk-280.segmentTitles[0]" = "Cuenta HD";
+
+/* Class = "UISegmentedControl"; oZb-Bk-280.segmentTitles[1] = "Others"; ObjectID = "oZb-Bk-280"; */
+"oZb-Bk-280.segmentTitles[1]" = "Otros";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "p9x-vk-IwH"; */
+"p9x-vk-IwH.text" = "Etiqueta";
+
+/* Class = "UISegmentedControl"; pIA-ee-e58.segmentTitles[0] = "Private"; ObjectID = "pIA-ee-e58"; */
+"pIA-ee-e58.segmentTitles[0]" = "Privado";
+
+/* Class = "UISegmentedControl"; pIA-ee-e58.segmentTitles[1] = "HDM"; ObjectID = "pIA-ee-e58"; */
+"pIA-ee-e58.segmentTitles[1]" = "HDM";
+
+/* Class = "UILabel"; text = "Detail"; ObjectID = "qNL-tR-Rjx"; */
+"qNL-tR-Rjx.text" = "Detalle";
+
+/* Class = "UILabel"; text = "Original Message"; ObjectID = "qRU-bn-bhg"; */
+"qRU-bn-bhg.text" = "Mensaje original";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "qga-CG-06M"; */
+"qga-CG-06M.text" = "Etiqueta";
+
+/* Class = "UILabel"; text = "123456.34"; ObjectID = "qge-A9-g1H"; */
+"qge-A9-g1H.text" = "123456.34";
+
+/* Class = "UITextField"; placeholder = "Password"; ObjectID = "qjQ-dU-y8s"; */
+"qjQ-dU-y8s.placeholder" = "Contraseña";
+
+/* Class = "UILabel"; text = "Check Private Keys"; ObjectID = "r4O-0V-IoA"; */
+"r4O-0V-IoA.text" = "Verificar llaves privadas";
+
+/* Class = "UIButton"; normalTitle = "Send"; ObjectID = "rFx-au-8Hm"; */
+"rFx-au-8Hm.normalTitle" = "Enviar";
+
+/* Class = "UILabel"; text = "Sign Message"; ObjectID = "sn3-Rm-dRd"; */
+"sn3-Rm-dRd.text" = "Firmar mensaje";
+
+/* Class = "UILabel"; text = "Pay to"; ObjectID = "tBQ-pH-ztd"; */
+"tBQ-pH-ztd.text" = "Pagar a";
+
+/* Class = "UIButton"; normalTitle = "Generate HDM Account"; ObjectID = "tee-1q-g6I"; */
+"tee-1q-g6I.normalTitle" = "Generar cuenta HDM";
+
+/* Class = "UILabel"; text = "Fee"; ObjectID = "uBs-uD-RbW"; */
+"uBs-uD-RbW.text" = "Tasa";
+
+/* Class = "UILabel"; text = "value"; ObjectID = "uZ8-dN-dTU"; */
+"uZ8-dN-dTU.text" = "valor";
+
+/* Class = "UIButton"; normalTitle = "Verify"; ObjectID = "ucz-yG-b5R"; */
+"ucz-yG-b5R.normalTitle" = "Verificar";
+
+/* Class = "UILabel"; text = "Balance:"; ObjectID = "uiN-WE-JlS"; */
+"uiN-WE-JlS.text" = "Balance:";
+
+/* Class = "UILabel"; text = "Import HD Seed Phrase"; ObjectID = "uoc-uG-k6M"; */
+"uoc-uG-k6M.text" = "Importar frase semilla HD";
+
+/* Class = "UIButton"; normalTitle = "Sign Transaction"; ObjectID = "v27-0r-WIj"; */
+"v27-0r-WIj.normalTitle" = "Firmar transacción";
+
+/* Class = "UILabel"; text = "Password"; ObjectID = "v46-EP-4NU"; */
+"v46-EP-4NU.text" = "Contraseña";
+
+/* Class = "UIButton"; normalTitle = "Generate"; ObjectID = "vhW-ec-Y0h"; */
+"vhW-ec-Y0h.normalTitle" = "Generar";
+
+/* Class = "UILabel"; text = "$"; ObjectID = "vi1-Kv-pOT"; */
+"vi1-Kv-pOT.text" = "$";
+
+/* Class = "UILabel"; text = "name"; ObjectID = "viE-UV-mZx"; */
+"viE-UV-mZx.text" = "nombre";
+
+/* Class = "UILabel"; text = "Address"; ObjectID = "wb7-kB-0ec"; */
+"wb7-kB-0ec.text" = "Dirección";
+
+/* Class = "UILabel"; text = "Private Key"; ObjectID = "x9d-Sc-rrj"; */
+"x9d-Sc-rrj.text" = "LLave privada";
+
+/* Class = "UITextField"; placeholder = "0.00"; ObjectID = "xBU-Zh-e2V"; */
+"xBU-Zh-e2V.placeholder" = "0.00";
+
+/* Class = "UILabel"; text = "Signing Address"; ObjectID = "xhb-O8-bSH"; */
+"xhb-O8-bSH.text" = "Firmando dirección";
+
+/* Class = "UITextField"; placeholder = "Password"; ObjectID = "xmE-uG-hIe"; */
+"xmE-uG-hIe.placeholder" = "Contraseña"
+
+/* Class = "UITextField"; placeholder = "Password"; ObjectID = "xmg-Xg-1Ns"; */
+"xmg-Xg-1Ns.placeholder" = "Contraseña";
+
+/* Class = "UILabel"; text = "Setting"; ObjectID = "yOF-tp-J78"; */
+"yOF-tp-J78.text" = "Ajuste";
+
+/* Class = "UIButton"; normalTitle = "Send"; ObjectID = "ygh-ls-Qes"; */
+"ygh-ls-Qes.normalTitle" = "Enviar";
+
+/* Class = "UILabel"; text = "Bither Cold: Offline & Secure."; ObjectID = "yu4-YT-Y6b"; */
+"yu4-YT-Y6b.text" = "Bither Frío: Desconectado & Seguro.";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "yx9-EY-UeR"; */
+"yx9-EY-UeR.text" = "Etiqueta";
+
+/* Class = "UILabel"; text = "3568.34"; ObjectID = "yz4-Gr-HYw"; */
+"yz4-Gr-HYw.text" = "3568.34";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "z1L-xS-51U"; */
+"z1L-xS-51U.text" = "Etiqueta";
+
+/* Class = "UILabel"; text = "value"; ObjectID = "zIR-6H-nG4"; */
+"zIR-6H-nG4.text" = "valor";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "zLo-PY-kep"; */
+"zLo-PY-kep.text" = "Etiqueta";
+
+/* Class = "UIButton"; normalTitle = "Add This Private Key"; ObjectID = "zjg-wy-EHw"; */
+"zjg-wy-EHw.normalTitle" = "Añadir esta llave privada";
