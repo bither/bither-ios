@@ -15,7 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 + (NSString *)isCanSend:(BOOL)isSyncComplete;
 
-+ (void)sendWithDynamicFee:(BOOL)isUseDynamicFee sendBlock:(UInt64ResponseBlock)sendBlock cancelBlock:(VoidBlock)cancelBlock;
++ (void)sendWithMinerFeeMode:(MinerFeeMode)minerFeeMode minerFeeBase:(uint64_t)minerFeeBase sendBlock:(UInt64ResponseBlock)sendBlock cancelBlock:(VoidBlock)cancelBlock;
 
 @end
 

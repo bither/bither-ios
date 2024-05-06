@@ -128,8 +128,12 @@ typedef enum {
 } KLineTimeType;
 
 typedef enum {
-    Normal = 10000, High = 20000, Higher = 50000, TenX = 100000, TwentyX = 200000, Low = 5000, Lower = 1000
+    Normal = 10000, High = 20000, Higher = 50000, Low = 5000
 } TransactionFeeMode;
+
+typedef enum {
+    DynamicFee, HigherFee, HighFee, NormalFee, LowFee, CustomFee
+} MinerFeeMode;
 
 typedef enum {
     USD, CNY, EUR, GBP, JPY, KRW, CAD, AUD
@@ -176,5 +180,11 @@ typedef enum {
 + (BOOL)isUnitTest;
 
 + (void)setIsUnitTest:(BOOL)isUnitTest;
+
++ (NSString *)getMinerFeeModeName:(MinerFeeMode)minerFeeMode;
+
++ (uint64_t)getMinerFeeBaseFromMinerFeeMode:(MinerFeeMode)minerFeeMode;
+
++ (MinerFeeMode)getMinerFeeMode;
 
 @end

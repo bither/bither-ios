@@ -19,6 +19,7 @@
 #define DEV_DEBUG TRUE
 
 #import "BitherSetting.h"
+#import "UserDefaultsUtil.h"
 
 static BOOL _isUnitTest = NO;
 
@@ -103,40 +104,28 @@ static BOOL _isUnitTest = NO;
 }
 
 + (NSString *)getTransactionFeeMode:(TransactionFeeMode)transactionFee {
-    if (transactionFee == TenX) {
-        return NSLocalizedString(@"10x", nil);
-    } else if (transactionFee == TwentyX) {
-        return NSLocalizedString(@"20x", nil);
-    } else if (transactionFee == Higher) {
+    if (transactionFee == Higher) {
         return NSLocalizedString(@"Higher", nil);
     } else if (transactionFee == High) {
         return NSLocalizedString(@"High", nil);
     } else if (transactionFee == Low) {
         return NSLocalizedString(@"Low", nil);
-    } else if (transactionFee == Lower) {
-        return NSLocalizedString(@"Lower", nil);
     } else {
         return NSLocalizedString(@"Normal", nil);
     }
 }
 
 + (NSString *)getTransactionFee:(TransactionFeeMode)transactionFee {
-    CGFloat dividend = 100000;
-    NSString *unit = @"mBTC/kb";
-    if (transactionFee == TenX) {
-        return [NSString stringWithFormat:@"%.1f%@", TenX/dividend, unit];
-    } else if (transactionFee == TwentyX) {
-        return [NSString stringWithFormat:@"%.1f%@", TwentyX/dividend, unit];
-    } else if (transactionFee == Higher) {
-        return [NSString stringWithFormat:@"%.1f%@", Higher/dividend, unit];
+    int dividend = 1000;
+    NSString *unit = @"sat/vB";
+    if (transactionFee == Higher) {
+        return [NSString stringWithFormat:@"%d%@", Higher/dividend, unit];
     } else if (transactionFee == High) {
-        return [NSString stringWithFormat:@"%.1f%@", High/dividend, unit];
+        return [NSString stringWithFormat:@"%d%@", High/dividend, unit];
     } else if (transactionFee == Low) {
-        return [NSString stringWithFormat:@"%@%@", @(Low/dividend), unit];
-    } else if (transactionFee == Lower) {
-        return [NSString stringWithFormat:@"%@%@", @(Lower/dividend), unit];
+        return [NSString stringWithFormat:@"%d%@", Low/dividend, unit];
     } else {
-        return [NSString stringWithFormat:@"%.1f%@", Normal/dividend, unit];
+        return [NSString stringWithFormat:@"%d%@", Normal/dividend, unit];
     }
 }
 
@@ -155,4 +144,55 @@ static BOOL _isUnitTest = NO;
 + (void)setIsUnitTest:(BOOL)isUnitTest; {
     _isUnitTest = isUnitTest;
 }
+
++ (NSString *)getMinerFeeModeName:(MinerFeeMode)minerFeeMode {
+    switch (minerFeeMode) {
+        case DynamicFee:
+            return NSLocalizedString(@"dynamic_miner_fee_title", nil);
+        case HigherFee:
+            return NSLocalizedString(@"Higher", nil);
+        case HighFee:
+            return NSLocalizedString(@"High", nil);
+        case NormalFee:
+            return NSLocalizedString(@"Normal", nil);
+        case LowFee:
+            return NSLocalizedString(@"Low", nil);
+        case CustomFee:
+            return NSLocalizedString(@"miner_fee_custom", nil);
+    }
+}
+
++ (uint64_t)getMinerFeeBaseFromMinerFeeMode:(MinerFeeMode)minerFeeMode {
+    switch (minerFeeMode) {
+        case HigherFee:
+            return Higher;
+        case HighFee:
+            return High;
+        case NormalFee:
+            return Normal;
+        case LowFee:
+            return Low;
+        default:
+            return 0;
+    }
+}
+
++ (MinerFeeMode)getMinerFeeMode {
+    if ([[UserDefaultsUtil instance] isUseDynamicMinerFee]) {
+        return DynamicFee;
+    }
+    switch ([[UserDefaultsUtil instance] getTransactionFeeMode]) {
+        case Higher:
+            return HigherFee;
+        case High:
+            return HighFee;
+        case Normal:
+            return NormalFee;
+        case Low:
+            return LowFee;
+        default:
+            return DynamicFee;
+    }
+}
+
 @end

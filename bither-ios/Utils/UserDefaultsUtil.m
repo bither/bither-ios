@@ -213,18 +213,12 @@ NSUserDefaults *userDefaults;
 
 - (TransactionFeeMode)getTransactionFeeMode {
     if ([userDefaults objectForKey:TRANSACTION_FEE_MODE]) {
-        if ([userDefaults integerForKey:TRANSACTION_FEE_MODE] == TenX) {
-            return TenX;
-        } else if ([userDefaults integerForKey:TRANSACTION_FEE_MODE] == TwentyX) {
-            return TwentyX;
-        } else if ([userDefaults integerForKey:TRANSACTION_FEE_MODE] == Higher) {
+        if ([userDefaults integerForKey:TRANSACTION_FEE_MODE] == Higher) {
             return Higher;
         } else if ([userDefaults integerForKey:TRANSACTION_FEE_MODE] == High) {
             return High;
         } else if ([userDefaults integerForKey:TRANSACTION_FEE_MODE] == Low) {
             return Low;
-        } else if ([userDefaults integerForKey:TRANSACTION_FEE_MODE] == Lower) {
-            return Lower;
         } else {
             return Normal;
         }

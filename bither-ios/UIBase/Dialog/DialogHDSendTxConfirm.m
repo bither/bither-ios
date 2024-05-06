@@ -84,19 +84,28 @@
     NSString *toAddress = _toAddress;
     NSString *amountString;
     NSString *feeString;
+    uint64_t fee;
+    uint estimationTxSize;
+    BOOL isBtc = [_unitName isEqualToString:@"BTC"];
     if (_tx) {
         amountString = [UnitUtil stringForAmount:[_tx amountSentTo:_toAddress] unit:unit];
-        feeString = [UnitUtil stringForAmount:_tx.feeForTransaction unit:unit];
+        fee = _tx.feeForTransaction;
+        if (isBtc) {
+            estimationTxSize = _tx.estimationTxSize;
+        }
     } else {
         int64_t amount = 0;
         int64_t fee = 0;
         for (BTTx *tx in _txs) {
             amount += [tx amountSentTo:_toAddress];
             fee += tx.feeForTransaction;
+            if (isBtc) {
+                estimationTxSize += tx.estimationTxSize;
+            }
         }
         amountString = [UnitUtil stringForAmount:amount unit:unit];
-        feeString = [UnitUtil stringForAmount:fee unit:unit];
     }
+    feeString = [UnitUtil stringForAmount:fee unit:unit];
     
     UILabel *lblPayto = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, kLabelHeight)];
     lblPayto.font = [UIFont systemFontOfSize:kLabelFontSize];
@@ -138,9 +147,36 @@
     lblFeeValue.textColor = [UIColor colorWithWhite:1 alpha:kValueAlpha];
     lblFeeValue.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleBottomMargin;
     lblFeeValue.text = [NSString stringWithFormat:@"%@ %@", feeString, _unitName];
+    
+    CGFloat buttonTop;
+    CGFloat buttonWidth;
+    
+    if (isBtc && estimationTxSize > 0) {
+        UILabel *lblFeeRate = [[UILabel alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(lblFeeValue.frame) + kVerticalGap, self.frame.size.width, kLabelHeight)];
+        lblFeeRate.font = [UIFont systemFontOfSize:kLabelFontSize];
+        lblFeeRate.textColor = [UIColor colorWithWhite:1 alpha:kLabelAlpha];
+        lblFeeRate.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleBottomMargin;
+        lblFeeRate.text = NSLocalizedString(@"Fee Rate:", nil);
 
-    CGFloat buttonTop = CGRectGetMaxY(lblFeeValue.frame) + kButtonTopGap;
-    CGFloat buttonWidth = (self.frame.size.width - kButtonGap) / 2;
+        UILabel *lblFeeRateValue = [[UILabel alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(lblFeeRate.frame), self.frame.size.width, kValueHeight)];
+        lblFeeRateValue.font = [UIFont systemFontOfSize:kValueFontSize];
+        lblFeeRateValue.textColor = [UIColor colorWithWhite:1 alpha:kValueAlpha];
+        lblFeeRateValue.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleBottomMargin;
+        if (fee % estimationTxSize == 0) {
+            lblFeeRateValue.text = [NSString stringWithFormat:@"≈ %llu sat/vB", fee / estimationTxSize];
+        } else {
+            lblFeeRateValue.text = [NSString stringWithFormat:@"≈ %.2f sat/vB", (float) fee / estimationTxSize];
+        }
+        
+        [self addSubview:lblFeeRate];
+        [self addSubview:lblFeeRateValue];
+        
+        buttonTop = CGRectGetMaxY(lblFeeRateValue.frame) + kButtonTopGap;
+        buttonWidth = (self.frame.size.width - kButtonGap) / 2;
+    } else {
+        buttonTop = CGRectGetMaxY(lblFeeValue.frame) + kButtonTopGap;
+        buttonWidth = (self.frame.size.width - kButtonGap) / 2;
+    }
 
     UIButton *btnCancel = [[UIButton alloc] initWithFrame:CGRectMake(0, buttonTop, buttonWidth, kButtonHeight)];
     [btnCancel setBackgroundImage:[UIImage imageNamed:@"dialog_btn_bg_normal"] forState:UIControlStateNormal];

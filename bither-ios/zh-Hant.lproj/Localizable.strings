@@ -80,7 +80,9 @@
 "Enter source password" = "請輸入克隆源的密碼";
 
 /* No comment provided by engineer. */
-"Fee:" = "手續費:";
+"Fee:" = "礦工費:";
+
+"Fee Rate:" = "礦工費率:";
 
 /* No comment provided by engineer. */
 "Finish" = "完成";
@@ -309,7 +311,7 @@
 "Network Setting"="網絡設置";
 "Sync over wifi only"="只在wifi下同步";
 "Sync always"="一直同步";
-"Default Transaction Fee"="默認手續費";
+"Miner Fee"="礦工費";
 "Normal"="標準";
 "High"="高";
 "Higher"="更高";
@@ -317,6 +319,7 @@
 "20x" = "20倍";
 "Low" = "低";
 "Lower" = "更低";
+"miner_fee_custom" = "自定義";
 "fast confirmation"="較快確認";
 "slow confirmation"="較慢確認";
 "Donate"="捐贈";
@@ -820,9 +823,13 @@
 "tip_network_error" = "網絡已斷開，請檢查網絡設置";
 "tip_no_peers_connected" = "暫無可連接的節點";
 
-"dynamic_miner_fee_title" = "  使用動態礦工費";
+"dynamic_miner_fee_title" = "動態礦工費";
 "dynamic_miner_fee_des" = "開啓動態礦工費後，軟件將根據當前比特幣的網絡狀態自動計算實時最優費用；礦工費由比特幣網絡收取。";
-"dynamic_miner_fee_failure_title" = "計算動態礦工費失敗，是否使用默認礦工費？";
+"dynamic_miner_fee_failure_title" = "計算動態礦工費失敗，請重試或選擇其它礦工費後重試。";
+
+"miner_fee_custom_warn" = "請您合理自定義sat/vB，過低您的交易可能長時間不會被確認！";
+"miner_fee_custom_high" = "您的sat/vB設置過高，將造成礦工費浪費，請合理設置sat/vB";
+"miner_fee_custom_empty" = "請輸入sat/vB";
 
 "address_add_mode_create_des" = "通過創建添加";
 "address_add_mode_dice_create_des" = "通過骰子創建添加";

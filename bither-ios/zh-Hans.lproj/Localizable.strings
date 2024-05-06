@@ -80,7 +80,9 @@
 "Enter source password" = "请输入克隆源的密码";
 
 /* No comment provided by engineer. */
-"Fee:" = "手续费:";
+"Fee:" = "矿工费:";
+
+"Fee Rate:" = "矿工费率:";
 
 /* No comment provided by engineer. */
 "Finish" = "完成";
@@ -308,7 +310,7 @@
 "Network Setting"="网络设置";
 "Sync over wifi only"="只在wifi下同步";
 "Sync always"="一直同步";
-"Default Transaction Fee"="默认手续费";
+"Miner Fee"="矿工费";
 "Normal"="标准";
 "High"="高";
 "Higher"="更高";
@@ -316,6 +318,7 @@
 "20x" = "20倍";
 "Low" = "低";
 "Lower" = "更低";
+"miner_fee_custom" = "自定义";
 "fast confirmation"="较快确认";
 "slow confirmation"="较慢确认";
 "Donate"="捐赠";
@@ -820,9 +823,13 @@
 "tip_network_error" = "网络已断开，请检查网络设置";
 "tip_no_peers_connected" = "暂无可连接的节点";
 
-"dynamic_miner_fee_title" = "  使用动态矿工费";
+"dynamic_miner_fee_title" = "动态矿工费";
 "dynamic_miner_fee_des" = "开启动态矿工费后，软件将根据当前比特币的网络状态自动计算实时最优费用；矿工费由比特币网络收取。";
-"dynamic_miner_fee_failure_title" = "计算动态矿工费失败，是否使用默认矿工费？";
+"dynamic_miner_fee_failure_title" = "计算动态矿工费失败，请重试或选择其它矿工费后重试。";
+
+"miner_fee_custom_warn" = "请您合理自定义sat/vB，过低您的交易可能长时间不会被确认！";
+"miner_fee_custom_high" = "您的sat/vB设置过高，将造成矿工费浪费，请合理设置sat/vB";
+"miner_fee_custom_empty" = "请输入sat/vB";
 
 "address_add_mode_create_des" = "通过创建添加";
 "address_add_mode_dice_create_des" = "通过骰子创建添加";

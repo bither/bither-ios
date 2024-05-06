@@ -156,13 +156,13 @@
     [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(delayHidePvSync) object:nil];
     if (notification && notification.object && [notification.object isKindOfClass:[NSNumber class]]) {
         double progress = ((NSNumber *) notification.object).doubleValue;
+        BTPeerManager *peerManager = [BTPeerManager instance];
         if (progress >= 0 && progress <= 1) {
             self.pvSync.hidden = NO;
             progress = MAX(0.2, progress);
             [UIView animateWithDuration:0.5 animations:^{
                 [self.pvSync setProgress:progress animated:YES];
             }];
-            BTPeerManager *peerManager = [BTPeerManager instance];
             int32_t unsyncBlockNumber = peerManager.downloadPeer.versionLastBlock - peerManager.lastBlockHeight;
             if (unsyncBlockNumber > 0) {
                 [self showAlert:[NSString stringWithFormat:NSLocalizedString(@"tip_sync_block_height", nil), @(unsyncBlockNumber)]];
@@ -170,8 +170,10 @@
                 [self showAlert:NULL];
             }
         } else {
-            [self performSelector:@selector(delayHidePvSync) withObject:nil afterDelay:0.5];
-            [self showAlert:NULL];
+            if (peerManager.downloadPeer == NULL || peerManager.downloadPeer.versionLastBlock - peerManager.lastBlockHeight <= 0) {
+                [self performSelector:@selector(delayHidePvSync) withObject:nil afterDelay:0.5];
+                [self showAlert:NULL];
+            }
         }
     } else {
         self.pvSync.hidden = YES;

@@ -32,20 +32,20 @@
     return NULL;
 }
 
-+ (void)sendWithDynamicFee:(BOOL)isUseDynamicFee sendBlock:(UInt64ResponseBlock)sendBlock cancelBlock:(VoidBlock)cancelBlock {
-    if (isUseDynamicFee) {
++ (void)sendWithMinerFeeMode:(MinerFeeMode)minerFeeMode minerFeeBase:(uint64_t)minerFeeBase sendBlock:(UInt64ResponseBlock)sendBlock cancelBlock:(VoidBlock)cancelBlock {
+    if (minerFeeMode == DynamicFee || minerFeeBase <= 0) {
         [[BitherApi instance] queryStatsDynamicFeeBaseCallback:sendBlock andErrorCallBack:^(NSError *error) {
-            DialogAlert *dialogAlert = [[DialogAlert alloc] initWithMessage:NSLocalizedString(@"dynamic_miner_fee_failure_title", nil) confirm:^{
-                if (sendBlock) {
-                    sendBlock(0);
+            DialogAlert *dialogAlert = [[DialogAlert alloc] initWithConfirmMessage:NSLocalizedString(@"dynamic_miner_fee_failure_title", nil) confirm:^{
+                if (cancelBlock) {
+                    cancelBlock();
                 }
-            } cancel:cancelBlock];
+            }];
             dialogAlert.touchOutSideToDismiss = false;
             [dialogAlert showInWindow:[UIApplication sharedApplication].keyWindow];
         }];
     } else {
         if (sendBlock) {
-            sendBlock(0);
+            sendBlock(minerFeeBase);
         }
     }
 }

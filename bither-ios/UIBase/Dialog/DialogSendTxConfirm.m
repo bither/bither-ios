@@ -67,7 +67,8 @@
 - (void)firstConfigure {
     NSString *toAddress = _toAddress;
     NSString *amountString = [UnitUtil stringForAmount:[_tx amountSentTo:_toAddress]];
-    NSString *feeString = [UnitUtil stringForAmount:[_fromAddress feeForTransaction:_tx]];
+    uint64_t fee = [_fromAddress feeForTransaction:_tx];
+    NSString *feeString = [UnitUtil stringForAmount:fee];
     NSString *changeAmountStr = nil;
     if (_changeAddress && ![StringUtil compareString:_fromAddress.address compare:_changeAddress] && [_tx amountSentTo:_changeAddress] > 0) {
         changeAmountStr = [UnitUtil stringForAmount:[_tx amountSentTo:_changeAddress]];
@@ -145,9 +146,35 @@
     lblFeeValue.textColor = [UIColor colorWithWhite:1 alpha:kValueAlpha];
     lblFeeValue.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleBottomMargin;
     lblFeeValue.text = [NSString stringWithFormat:@"%@ %@", feeString, [UnitUtil unitName]];
+    
+    CGFloat buttonTop;
+    CGFloat buttonWidth;
+    
+    if (_tx.coin == BTC && _tx.estimationTxSize > 0) {
+        UILabel *lblFeeRate = [[UILabel alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(lblFeeValue.frame) + kVerticalGap, self.frame.size.width, kLabelHeight)];
+        lblFeeRate.font = [UIFont systemFontOfSize:kLabelFontSize];
+        lblFeeRate.textColor = [UIColor colorWithWhite:1 alpha:kLabelAlpha];
+        lblFeeRate.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleBottomMargin;
+        lblFeeRate.text = NSLocalizedString(@"Fee Rate:", nil);
 
-    CGFloat buttonTop = CGRectGetMaxY(lblFeeValue.frame) + kButtonTopGap;
-    CGFloat buttonWidth = (self.frame.size.width - kButtonGap) / 2;
+        UILabel *lblFeeRateValue = [[UILabel alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(lblFeeRate.frame), self.frame.size.width, kValueHeight)];
+        lblFeeRateValue.font = [UIFont systemFontOfSize:kValueFontSize];
+        lblFeeRateValue.textColor = [UIColor colorWithWhite:1 alpha:kValueAlpha];
+        lblFeeRateValue.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleBottomMargin;
+        if (fee % _tx.estimationTxSize == 0) {
+            lblFeeRateValue.text = [NSString stringWithFormat:@"≈ %llu sat/vB", fee / _tx.estimationTxSize];
+        } else {
+            lblFeeRateValue.text = [NSString stringWithFormat:@"≈ %.2f sat/vB", (float) fee / _tx.estimationTxSize];
+        }
+        [self addSubview:lblFeeRate];
+        [self addSubview:lblFeeRateValue];
+        
+        buttonTop = CGRectGetMaxY(lblFeeRateValue.frame) + kButtonTopGap;
+        buttonWidth = (self.frame.size.width - kButtonGap) / 2;
+    } else {
+        buttonTop = CGRectGetMaxY(lblFeeValue.frame) + kButtonTopGap;
+        buttonWidth = (self.frame.size.width - kButtonGap) / 2;
+    }
 
     UIButton *btnCancel = [[UIButton alloc] initWithFrame:CGRectMake(0, buttonTop, buttonWidth, kButtonHeight)];
     [btnCancel setBackgroundImage:[UIImage imageNamed:@"dialog_btn_bg_normal"] forState:UIControlStateNormal];

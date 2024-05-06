@@ -34,10 +34,11 @@
 #import "DialogAlert.h"
 #import "SendUtil.h"
 #import "UserDefaultsUtil.h"
+#import "MinerFeeSettingViewController.h"
 
 #define kBalanceFontSize (15)
 
-@interface SendViewController () <UITextFieldDelegate, ScanQrCodeDelegate, DialogSendTxConfirmDelegate, DialogSendOptionDelegate> {
+@interface SendViewController () <UITextFieldDelegate, ScanQrCodeDelegate, DialogSendTxConfirmDelegate, DialogSendOptionDelegate, MinerFeeSettingViewControllerDelegate> {
     DialogProgressChangable *dp;
 }
 @property(weak, nonatomic) IBOutlet UILabel *lblBalancePrefix;
@@ -48,9 +49,14 @@
 @property(weak, nonatomic) IBOutlet UITextField *tfPassword;
 @property(weak, nonatomic) IBOutlet UIButton *btnSend;
 @property(weak, nonatomic) IBOutlet UIView *vTopBar;
+@property (weak, nonatomic) IBOutlet UIButton *btnMinerFeeQuestion;
+@property (weak, nonatomic) IBOutlet UIButton *btnMinerFee;
+@property (weak, nonatomic) IBOutlet UILabel *lblMinerFeeTitle;
+@property (weak, nonatomic) IBOutlet UILabel *lblMinerFee;
+
 @property DialogSelectChangeAddress *dialogSelectChangeAddress;
-@property (weak, nonatomic) IBOutlet UIButton *btnDynamicMinerFeeQuestion;
-@property (weak, nonatomic) IBOutlet UIButton *btnUseDynamicMinerFee;
+@property(assign, nonatomic) MinerFeeMode minerFeeMode;
+@property(assign, nonatomic) uint64_t minerFeeBase;
 
 @end
 
@@ -86,8 +92,19 @@
     dp.touchOutSideToDismiss = NO;
     self.dialogSelectChangeAddress = [[DialogSelectChangeAddress alloc] initWithFromAddress:self.address];
     [self check];
-    [self.btnUseDynamicMinerFee setSelected:[[UserDefaultsUtil instance] isUseDynamicMinerFee]];
-    [self.btnUseDynamicMinerFee setTitle:NSLocalizedString(@"dynamic_miner_fee_title", nil) forState:UIControlStateNormal];
+    self.lblMinerFeeTitle.text = NSLocalizedString(@"Miner Fee", nil);
+    self.minerFeeMode = [BitherSetting getMinerFeeMode];
+    self.minerFeeBase = [BitherSetting getMinerFeeBaseFromMinerFeeMode:_minerFeeMode];
+    [self showMinerFee];
+}
+
+- (void)showMinerFee {
+    NSString *minerFeeModeName = [BitherSetting getMinerFeeModeName:_minerFeeMode];
+    if (_minerFeeMode != DynamicFee) {
+        self.lblMinerFee.text = [[NSString alloc] initWithFormat:@"%@ %llusat/vB", minerFeeModeName, _minerFeeBase / 1000];
+    } else {
+        self.lblMinerFee.text = minerFeeModeName;
+    }
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -107,12 +124,13 @@
     }
 }
 
-- (IBAction)btnUseDynamicMinerFeeClicked:(UIButton *)sender {
-    [[UserDefaultsUtil instance] setIsUseDynamicMinerFee:!sender.isSelected];
-    [sender setSelected:!sender.isSelected];
+- (IBAction)btnMinerFeeClicked:(UIButton *)sender {
+    MinerFeeSettingViewController *vcMinerFeeSetting = [[MinerFeeSettingViewController alloc] initWithDelegate:self curMinerFeeMode:_minerFeeMode curMinerFeeBase:_minerFeeBase];
+    vcMinerFeeSetting.delegate = self;
+    [self.navigationController pushViewController:vcMinerFeeSetting animated:true];
 }
 
-- (IBAction)btnDynamicMinerFeeQuestionClicked:(UIButton *)sender {
+- (IBAction)btnMinerFeeQuestionClicked:(UIButton *)sender {
     [self hideKeyboard];
     DialogAlert *dialogAlert = [[DialogAlert alloc] initWithConfirmMessage:NSLocalizedString(@"dynamic_miner_fee_des", nil) confirm:^{ }];
     dialogAlert.touchOutSideToDismiss = false;
@@ -124,10 +142,10 @@
         return;
     }
     [self hideKeyboard];
-    BOOL isUseDynamicMinerFee = _btnUseDynamicMinerFee.isSelected;
+    __weak typeof(self) weakSelf = self;
     [dp showInWindow:self.view.window completion:^{
-        [SendUtil sendWithDynamicFee:isUseDynamicMinerFee sendBlock:^(uint64_t dynamicFeeBase) {
-            [self beginSend:dynamicFeeBase];
+        [SendUtil sendWithMinerFeeMode:_minerFeeMode minerFeeBase:_minerFeeBase sendBlock:^(uint64_t int64) {
+            [weakSelf beginSend:int64];
         } cancelBlock:^{
             [self->dp dismiss];
         }];
@@ -357,4 +375,11 @@
 - (IBAction)topBarPressed:(id)sender {
     self.amtLink.amount = self.address.balance;
 }
+
+- (void)changeMinerFeeMode:(MinerFeeMode)minerFeeMode minerFeeBase:(uint64_t)minerFeeBase {
+    self.minerFeeMode = minerFeeMode;
+    self.minerFeeBase = minerFeeBase;
+    [self showMinerFee];
+}
+
 @end

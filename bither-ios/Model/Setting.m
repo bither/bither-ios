@@ -248,19 +248,16 @@ static Setting *ApiConfigSetting;
 
 + (Setting *)getTransactionFeeSetting {
     if (!TransactionFeeSetting) {
-        Setting *setting = [[Setting alloc] initWithName:NSLocalizedString(@"Default Transaction Fee", nil) icon:nil];
+        Setting *setting = [[Setting alloc] initWithName:NSLocalizedString(@"Miner Fee", nil) icon:nil];
         [setting setGetValueBlock:^() {
             return [BitherSetting getTransactionFeeMode:[[UserDefaultsUtil instance] getTransactionFeeMode]];
         }];
         [setting setGetArrayBlock:^() {
             NSMutableArray *array = [NSMutableArray new];
-            [array addObject:[self getTransactionFeeDict:TwentyX]];
-            [array addObject:[self getTransactionFeeDict:TenX]];
             [array addObject:[self getTransactionFeeDict:Higher]];
             [array addObject:[self getTransactionFeeDict:High]];
             [array addObject:[self getTransactionFeeDict:Normal]];
             [array addObject:[self getTransactionFeeDict:Low]];
-            [array addObject:[self getTransactionFeeDict:Lower]];
             return array;
         }];
         [setting setResult:^(NSDictionary *dict) {

@@ -310,6 +310,11 @@
 		FF7F9A2A284865AA005207B7 /* NetworkCustomPeerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FF7F9A28284865AA005207B7 /* NetworkCustomPeerViewController.m */; };
 		FF7F9A2B284865AA005207B7 /* NetworkCustomPeerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FF7F9A29284865AA005207B7 /* NetworkCustomPeerViewController.xib */; };
 		FF7F9A2E2848BC97005207B7 /* DialogNetworkCustomPeerOption.m in Sources */ = {isa = PBXBuildFile; fileRef = FF7F9A2D2848BC97005207B7 /* DialogNetworkCustomPeerOption.m */; };
+		FFA728252BE0D3A200572D0A /* MinerFeeSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FFA728232BE0D3A200572D0A /* MinerFeeSettingViewController.m */; };
+		FFA728262BE0D3A200572D0A /* MinerFeeSettingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FFA728242BE0D3A200572D0A /* MinerFeeSettingViewController.xib */; };
+		FFA7282A2BE0DD3F00572D0A /* MinerFeeSettingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FFA728282BE0DD3F00572D0A /* MinerFeeSettingCell.m */; };
+		FFA7282B2BE0DD3F00572D0A /* MinerFeeSettingCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FFA728292BE0DD3F00572D0A /* MinerFeeSettingCell.xib */; };
+		FFA7282E2BE0F0C100572D0A /* MinerFeeModeModel.m in Sources */ = {isa = PBXBuildFile; fileRef = FFA7282D2BE0F0C100572D0A /* MinerFeeModeModel.m */; };
 		FFEBBD9228E19206008780E7 /* DialogImportHdAccountSeedQrCodeSelectLanguage.m in Sources */ = {isa = PBXBuildFile; fileRef = FFEBBD9128E19206008780E7 /* DialogImportHdAccountSeedQrCodeSelectLanguage.m */; };
 /* End PBXBuildFile section */
 
@@ -993,6 +998,14 @@
 		FF7F9A29284865AA005207B7 /* NetworkCustomPeerViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NetworkCustomPeerViewController.xib; sourceTree = "<group>"; };
 		FF7F9A2C2848BC97005207B7 /* DialogNetworkCustomPeerOption.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DialogNetworkCustomPeerOption.h; sourceTree = "<group>"; };
 		FF7F9A2D2848BC97005207B7 /* DialogNetworkCustomPeerOption.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DialogNetworkCustomPeerOption.m; sourceTree = "<group>"; };
+		FFA728222BE0D3A200572D0A /* MinerFeeSettingViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MinerFeeSettingViewController.h; sourceTree = "<group>"; };
+		FFA728232BE0D3A200572D0A /* MinerFeeSettingViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MinerFeeSettingViewController.m; sourceTree = "<group>"; };
+		FFA728242BE0D3A200572D0A /* MinerFeeSettingViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MinerFeeSettingViewController.xib; sourceTree = "<group>"; };
+		FFA728272BE0DD3F00572D0A /* MinerFeeSettingCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MinerFeeSettingCell.h; sourceTree = "<group>"; };
+		FFA728282BE0DD3F00572D0A /* MinerFeeSettingCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MinerFeeSettingCell.m; sourceTree = "<group>"; };
+		FFA728292BE0DD3F00572D0A /* MinerFeeSettingCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MinerFeeSettingCell.xib; sourceTree = "<group>"; };
+		FFA7282C2BE0F0C100572D0A /* MinerFeeModeModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MinerFeeModeModel.h; sourceTree = "<group>"; };
+		FFA7282D2BE0F0C100572D0A /* MinerFeeModeModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MinerFeeModeModel.m; sourceTree = "<group>"; };
 		FFEBBD9028E19206008780E7 /* DialogImportHdAccountSeedQrCodeSelectLanguage.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DialogImportHdAccountSeedQrCodeSelectLanguage.h; sourceTree = "<group>"; };
 		FFEBBD9128E19206008780E7 /* DialogImportHdAccountSeedQrCodeSelectLanguage.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DialogImportHdAccountSeedQrCodeSelectLanguage.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -1195,6 +1208,8 @@
 				4269FF71195A885D001213B9 /* Ticker.m */,
 				4269FF73195A8872001213B9 /* Market.h */,
 				4269FF74195A8872001213B9 /* Market.m */,
+				FFA7282C2BE0F0C100572D0A /* MinerFeeModeModel.h */,
+				FFA7282D2BE0F0C100572D0A /* MinerFeeModeModel.m */,
 				0ACA344B1CF68FC600ADD73A /* ApiConfig.h */,
 			);
 			path = Model;
@@ -1254,6 +1269,9 @@
 				ACB9B9C2195AD1CC00019216 /* AddressDetailViewController.m */,
 				AC2F3296195C1D53001B7439 /* SendViewController.h */,
 				AC2F3297195C1D53001B7439 /* SendViewController.m */,
+				FFA728222BE0D3A200572D0A /* MinerFeeSettingViewController.h */,
+				FFA728232BE0D3A200572D0A /* MinerFeeSettingViewController.m */,
+				FFA728242BE0D3A200572D0A /* MinerFeeSettingViewController.xib */,
 				AC2F3299195D1930001B7439 /* UnsignedTransactionViewController.h */,
 				AC2F329A195D1930001B7439 /* UnsignedTransactionViewController.m */,
 				AC8F0DC8196CF4E400CCD0F9 /* SelectViewController.h */,
@@ -1616,6 +1634,9 @@
 				0A0BA9B11B575D2400885812 /* ColdAddressListHDCell.m */,
 				AC8912F01A7F62FE003797C4 /* WorldListCell.h */,
 				AC8912F11A7F62FE003797C4 /* WorldListCell.m */,
+				FFA728272BE0DD3F00572D0A /* MinerFeeSettingCell.h */,
+				FFA728282BE0DD3F00572D0A /* MinerFeeSettingCell.m */,
+				FFA728292BE0DD3F00572D0A /* MinerFeeSettingCell.xib */,
 			);
 			name = Cells;
 			sourceTree = "<group>";
@@ -2069,6 +2090,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				AC6163A01966524A0055C9D0 /* coins_received.wav in Resources */,
+				FFA7282B2BE0DD3F00572D0A /* MinerFeeSettingCell.xib in Resources */,
 				402B83111E62B03200379C39 /* BIP39ZhTWWords.plist in Resources */,
 				402B83101E62B03200379C39 /* BIP39ZhCNWords.plist in Resources */,
 				4276CEA4194C20810027D119 /* Localizable.strings in Resources */,
@@ -2082,6 +2104,7 @@
 				42D9B777193D6B5B00C85B89 /* Images.xcassets in Resources */,
 				AC53ABEE19D94230007C095C /* xrandom_open_sound.mp3 in Resources */,
 				D61D047B6D9BE30D5BED20E1 /* hdm.bither.net.cer in Resources */,
+				FFA728262BE0D3A200572D0A /* MinerFeeSettingViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2162,6 +2185,7 @@
 				40A4E8582133D3DD00733DD8 /* MKNetworkOperation.m in Sources */,
 				421B037C19495315003A45F1 /* TabButton.m in Sources */,
 				AC5A916119ECDB5D00FFDB13 /* UploadAndDowloadFileFactory.m in Sources */,
+				FFA7282E2BE0F0C100572D0A /* MinerFeeModeModel.m in Sources */,
 				AC1454A51A80D04D00E851B4 /* DialogOperationWorld.m in Sources */,
 				0A52BDA51A9FFC6400BC8C3E /* GroupFileUtil.m in Sources */,
 				ACE3765F1A231C9200F66321 /* DialogKeychainBackupDiff.m in Sources */,
@@ -2303,6 +2327,7 @@
 				AC45AA3519879C96006314D5 /* DialogPrivateKeyDecryptedQrCode.m in Sources */,
 				ACEE7D2819D3F9F500932B39 /* QRCodeTransportPage.m in Sources */,
 				421B03BB19495AEF003A45F1 /* HotViewController.m in Sources */,
+				FFA728252BE0D3A200572D0A /* MinerFeeSettingViewController.m in Sources */,
 				AC454DEA1A1F3839000AF4ED /* PinCodeSetting.m in Sources */,
 				ACCA2751198F2A68000E6A32 /* PieChartView.m in Sources */,
 				AC454DC91A1C6E05000AF4ED /* TrashCanViewController.m in Sources */,
@@ -2399,6 +2424,7 @@
 				1BC27F4819B6A68B81A47579 /* DialogHDMSingularColdSeed.m in Sources */,
 				1BC27DE93F1FECC0283202C2 /* DialogHDMSingularColdSeedChildWordsViewController.m in Sources */,
 				1BC27F0F16D3294B59AF9604 /* DialogHDMSingularColdSeedChildQrViewController.m in Sources */,
+				FFA7282A2BE0DD3F00572D0A /* MinerFeeSettingCell.m in Sources */,
 				1BC27B4D826CA122FC56ADD2 /* DialogHDMSingularModeInfo.m in Sources */,
 				1BC27FE46C243D52B180F1C2 /* DialogAddressAlias.m in Sources */,
 				1BC27D87BF2AC41578912E98 /* DialogAddressAliasInput.m in Sources */,
