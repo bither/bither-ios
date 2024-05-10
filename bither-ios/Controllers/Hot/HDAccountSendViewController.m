@@ -215,9 +215,15 @@
 - (void)showSendResult:(NSString *)msg dialog:(DialogProgressChangable *)dpc {
     dispatch_async(dispatch_get_main_queue(), ^{
         [dpc dismissWithCompletion:^{
-            [self showBannerWithMessage:msg belowView:self.vTopBar];
+            [self showAlertWithMessage:msg];
         }];
     });
+}
+
+- (void)showAlertWithMessage:(NSString *)msg {
+    DialogAlert *dialogAlert = [[DialogAlert alloc] initWithConfirmMessage:msg confirm:^{ }];
+    dialogAlert.touchOutSideToDismiss = false;
+    [dialogAlert showInWindow:self.view.window];
 }
 
 - (NSString *)getToAddress {
@@ -312,9 +318,6 @@
 
 - (void)configureBalance {
     self.lblBalance.attributedText = [UnitUtil stringWithSymbolForAmount:self.address.balance withFontSize:kBalanceFontSize color:self.lblBalance.textColor];
-    [self configureBalanceLabelWidth:self.lblBalance];
-    [self configureBalanceLabelWidth:self.lblBalancePrefix];
-    self.lblBalance.frame = CGRectMake(CGRectGetMaxX(self.lblBalancePrefix.frame) + 5, self.lblBalance.frame.origin.y, self.lblBalance.frame.size.width, self.lblBalance.frame.size.height);
 }
 
 - (void)hideKeyboard {

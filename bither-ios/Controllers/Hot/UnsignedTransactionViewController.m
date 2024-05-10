@@ -76,10 +76,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    UIImageView *ivSendQr = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"unsigned_transaction_button_icon"]];
-    CGFloat ivSendQrMargin = (self.btnSend.frame.size.height - kSendButtonQrIconSize) / 2;
-    ivSendQr.frame = CGRectMake(self.btnSend.frame.size.width - kSendButtonQrIconSize - ivSendQrMargin, ivSendQrMargin, kSendButtonQrIconSize, kSendButtonQrIconSize);
-    [self.btnSend addSubview:ivSendQr];
     [self configureBalance];
     self.tfAddress.background = [UIImage imageNamed:@"textfield_activated_holo_light"];
     self.amtLink.tfBtc.background = [UIImage imageNamed:@"textfield_activated_holo_light"];
@@ -274,10 +270,16 @@
 - (void)showSendResult:(NSString *)msg dialog:(DialogProgressChangable *)dpc {
     dispatch_async(dispatch_get_main_queue(), ^{
         [dpc dismissWithCompletion:^{
-            [self showBannerWithMessage:msg belowView:self.vTopBar];
+            [self showAlertWithMessage:msg];
             [dpc changeToMessage:NSLocalizedString(@"Please wait…", nil)];
         }];
     });
+}
+
+- (void)showAlertWithMessage:(NSString *)msg {
+    DialogAlert *dialogAlert = [[DialogAlert alloc] initWithConfirmMessage:msg confirm:^{ }];
+    dialogAlert.touchOutSideToDismiss = false;
+    [dialogAlert showInWindow:self.view.window];
 }
 
 - (IBAction)scanPressed:(id)sender {
@@ -287,7 +289,6 @@
 }
 
 - (void)handleResult:(NSString *)result byReader:(ScanQrCodeViewController *)reader {
-
     if (![reader isKindOfClass:[ScanQrCodeTransportViewController class]]) {
         BOOL isValidBitcoinAddress = result.isValidBitcoinAddress;
         BOOL isValidBitcoinBIP21Address = [StringUtil isValidBitcoinBIP21Address:result];
@@ -297,7 +298,7 @@
             [reader.presentingViewController dismissViewControllerAnimated:YES completion:^{
                 if (isValidBitcoinAddress) {
                     if (result.isBitcoinNewAddressPrefix) {
-                        [self showBannerWithMessage:NSLocalizedString(@"cold_no_support_bc1_segwit_address", nil) belowView:self.vTopBar];
+                        [self showAlertWithMessage:NSLocalizedString(@"cold_no_support_bc1_segwit_address", nil)];
                         return;
                     } else {
                         self.tfAddress.text = result;
@@ -345,11 +346,9 @@
             } else {
                 self.btnSend.enabled = YES;
                 self.tx = nil;
-                [self showBannerWithMessage:NSLocalizedString(@"Send failed.", nil) belowView:self.vTopBar];
+                [self showAlertWithMessage:NSLocalizedString(@"Send failed.", nil)];
             }
         }];
-
-
     }
 
 }
@@ -376,7 +375,7 @@
     BOOL validAddress = [toAddress isValidBitcoinAddress];
     if (validAddress && [toAddress isBitcoinNewAddressPrefix]) {
         self.tfAddress.text = @"";
-        [self showBannerWithMessage:NSLocalizedString(@"cold_no_support_bc1_segwit_address", nil) belowView:self.vTopBar];
+        [self showAlertWithMessage:NSLocalizedString(@"cold_no_support_bc1_segwit_address", nil)];
         return false;
     }
     int64_t amount = self.amtLink.amount;
@@ -405,9 +404,6 @@
 
 - (void)configureBalance {
     self.lblBalance.attributedText = [UnitUtil stringWithSymbolForAmount:self.address.balance withFontSize:kBalanceFontSize color:self.lblBalance.textColor];
-    [self configureBalanceLabelWidth:self.lblBalance];
-    [self configureBalanceLabelWidth:self.lblBalancePrefix];
-    self.lblBalance.frame = CGRectMake(CGRectGetMaxX(self.lblBalancePrefix.frame) + 5, self.lblBalance.frame.origin.y, self.lblBalance.frame.size.width, self.lblBalance.frame.size.height);
 }
 
 - (void)hideKeyboard {

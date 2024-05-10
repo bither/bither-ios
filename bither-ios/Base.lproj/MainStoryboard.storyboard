@@ -2640,6 +2640,13 @@ They need separated back ups.</string>
                                     <action selector="sendPressed:" destination="o0d-uZ-7EE" eventType="touchUpInside" id="Szq-hN-Nxd"/>
                                 </connections>
                             </button>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="unsigned_transaction_button_icon" translatesAutoresizingMaskIntoConstraints="NO" id="Zkj-Xp-y0n">
+                                <rect key="frame" x="364" y="291" width="20" height="20"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="20" id="MX9-n6-QZQ"/>
+                                    <constraint firstAttribute="width" secondItem="Zkj-Xp-y0n" secondAttribute="height" id="c0f-r0-4EM"/>
+                                </constraints>
+                            </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wVS-Li-HQH">
                                 <rect key="frame" x="0.0" y="48" width="414" height="44"/>
                                 <subviews>
@@ -2686,8 +2693,8 @@ They need separated back ups.</string>
                                         <color key="shadowColor" red="0.0" green="0.0" blue="0.0" alpha="0.40000000000000002" colorSpace="custom" customColorSpace="sRGB"/>
                                         <size key="shadowOffset" width="1" height="1"/>
                                     </label>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bKW-aE-gcw">
-                                        <rect key="frame" x="125" y="0.0" width="39" height="44"/>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" " lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bKW-aE-gcw">
+                                        <rect key="frame" x="125" y="0.0" width="5" height="44"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
@@ -2790,6 +2797,7 @@ They need separated back ups.</string>
                             <constraint firstItem="InV-bA-bzj" firstAttribute="centerY" secondItem="rbJ-yZ-uxT" secondAttribute="centerY" id="0Zk-bg-Zl1"/>
                             <constraint firstItem="xBU-Zh-e2V" firstAttribute="height" secondItem="MAT-xt-p4f" secondAttribute="height" id="1oj-h6-570"/>
                             <constraint firstItem="wVS-Li-HQH" firstAttribute="top" secondItem="avs-D9-uxB" secondAttribute="top" id="6SK-Ls-ylY"/>
+                            <constraint firstItem="Zkj-Xp-y0n" firstAttribute="centerY" secondItem="OlL-T9-SKL" secondAttribute="centerY" id="AJB-Nw-n12"/>
                             <constraint firstItem="avs-D9-uxB" firstAttribute="trailing" secondItem="BZZ-7d-0no" secondAttribute="trailing" constant="10" id="Bdi-iv-tfp"/>
                             <constraint firstItem="MAT-xt-p4f" firstAttribute="top" secondItem="BZZ-7d-0no" secondAttribute="bottom" constant="-4" id="Bfb-tM-UxR"/>
                             <constraint firstItem="rbJ-yZ-uxT" firstAttribute="top" secondItem="MAT-xt-p4f" secondAttribute="bottom" constant="5" id="FOI-d0-jTu"/>
@@ -2799,6 +2807,7 @@ They need separated back ups.</string>
                             <constraint firstItem="BZZ-7d-0no" firstAttribute="leading" secondItem="avs-D9-uxB" secondAttribute="leading" constant="10" id="TjX-ya-hLu"/>
                             <constraint firstItem="BZZ-7d-0no" firstAttribute="top" secondItem="7eD-5T-1F7" secondAttribute="bottom" constant="15" id="TjX-zc-SVG"/>
                             <constraint firstItem="avs-D9-uxB" firstAttribute="trailing" secondItem="OlL-T9-SKL" secondAttribute="trailing" constant="20" id="UGk-UY-6iY"/>
+                            <constraint firstItem="Zkj-Xp-y0n" firstAttribute="width" secondItem="Zkj-Xp-y0n" secondAttribute="height" id="Y1V-7q-ixS"/>
                             <constraint firstItem="wVS-Li-HQH" firstAttribute="leading" secondItem="HrA-0e-gey" secondAttribute="leading" id="YDq-bM-DpD"/>
                             <constraint firstItem="BmE-py-JVb" firstAttribute="trailing" secondItem="n94-o7-TIK" secondAttribute="leading" constant="5" id="dIk-Lp-UGt"/>
                             <constraint firstItem="BmE-py-JVb" firstAttribute="leading" secondItem="rbJ-yZ-uxT" secondAttribute="leading" constant="10" id="dsM-v9-iYK"/>
@@ -2815,6 +2824,7 @@ They need separated back ups.</string>
                             <constraint firstItem="n94-o7-TIK" firstAttribute="top" secondItem="rbJ-yZ-uxT" secondAttribute="top" constant="-5" id="nkL-7E-r6r"/>
                             <constraint firstItem="OlL-T9-SKL" firstAttribute="leading" secondItem="avs-D9-uxB" secondAttribute="leading" constant="20" id="oi2-qf-qtN"/>
                             <constraint firstItem="BmE-py-JVb" firstAttribute="centerY" secondItem="rbJ-yZ-uxT" secondAttribute="centerY" id="rl1-am-UZY"/>
+                            <constraint firstItem="Zkj-Xp-y0n" firstAttribute="trailing" secondItem="OlL-T9-SKL" secondAttribute="trailing" constant="-10" id="uTc-BX-rEd"/>
                             <constraint firstItem="InV-bA-bzj" firstAttribute="trailing" secondItem="rbJ-yZ-uxT" secondAttribute="trailing" constant="-25" id="uzb-R3-IEu"/>
                             <constraint firstItem="OlL-T9-SKL" firstAttribute="top" secondItem="rbJ-yZ-uxT" secondAttribute="bottom" constant="15" id="vaN-b2-rBf"/>
                             <constraint firstItem="avs-D9-uxB" firstAttribute="trailing" secondItem="F4n-lA-Ige" secondAttribute="trailing" constant="10" id="wNV-kg-HH9"/>
@@ -6504,6 +6514,13 @@ They need separated back ups.</string>
                                     <action selector="sendPressed:" destination="0yP-DW-zbz" eventType="touchUpInside" id="15P-ey-2S9"/>
                                 </connections>
                             </button>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="unsigned_transaction_button_icon" translatesAutoresizingMaskIntoConstraints="NO" id="dko-be-rXZ">
+                                <rect key="frame" x="364" y="361" width="20" height="20"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="dko-be-rXZ" secondAttribute="height" id="Ezf-R0-65T"/>
+                                    <constraint firstAttribute="width" constant="20" id="QhT-x4-29J"/>
+                                </constraints>
+                            </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oUs-Xe-2yJ">
                                 <rect key="frame" x="0.0" y="48" width="414" height="44"/>
                                 <subviews>
@@ -6551,8 +6568,8 @@ They need separated back ups.</string>
                                         <color key="shadowColor" red="0.0" green="0.0" blue="0.0" alpha="0.40000000000000002" colorSpace="custom" customColorSpace="sRGB"/>
                                         <size key="shadowOffset" width="1" height="1"/>
                                     </label>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="z1L-xS-51U">
-                                        <rect key="frame" x="125" y="0.0" width="39" height="44"/>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" " lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="z1L-xS-51U">
+                                        <rect key="frame" x="125" y="0.0" width="5" height="44"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
@@ -6653,6 +6670,7 @@ They need separated back ups.</string>
                         <viewLayoutGuide key="safeArea" id="dma-Xl-Ik6"/>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="dko-be-rXZ" firstAttribute="centerY" secondItem="ygh-ls-Qes" secondAttribute="centerY" id="0Kn-PL-bOl"/>
                             <constraint firstItem="QtW-gn-Bhz" firstAttribute="top" secondItem="oUs-Xe-2yJ" secondAttribute="bottom" constant="8" id="1jC-az-ING"/>
                             <constraint firstItem="ygh-ls-Qes" firstAttribute="leading" secondItem="dma-Xl-Ik6" secondAttribute="leading" constant="20" id="2ji-Es-eZY"/>
                             <constraint firstItem="7XS-yb-Fb3" firstAttribute="width" secondItem="eP1-s3-zSH" secondAttribute="width" id="2tQ-D5-4mu"/>
@@ -6686,10 +6704,12 @@ They need separated back ups.</string>
                             <constraint firstItem="dma-Xl-Ik6" firstAttribute="trailing" secondItem="QtW-gn-Bhz" secondAttribute="trailing" constant="10" id="uRv-a3-feT"/>
                             <constraint firstItem="dma-Xl-Ik6" firstAttribute="trailing" secondItem="ygh-ls-Qes" secondAttribute="trailing" constant="20" id="vrV-pC-Nb7"/>
                             <constraint firstItem="eP1-s3-zSH" firstAttribute="top" secondItem="aHu-iQ-TCR" secondAttribute="bottom" constant="-4" id="w5a-w3-Vxg"/>
+                            <constraint firstItem="dko-be-rXZ" firstAttribute="trailing" secondItem="ygh-ls-Qes" secondAttribute="trailing" constant="-10" id="wV8-2s-9bE"/>
                             <constraint firstItem="mdF-6N-ecP" firstAttribute="leading" secondItem="dma-Xl-Ik6" secondAttribute="leading" constant="10" id="wZo-9F-Pqs"/>
                             <constraint firstItem="QmM-MV-6jj" firstAttribute="trailing" secondItem="3aP-7N-0ya" secondAttribute="leading" constant="5" id="xLJ-5P-KKA"/>
                             <constraint firstItem="dma-Xl-Ik6" firstAttribute="trailing" secondItem="mdF-6N-ecP" secondAttribute="trailing" constant="10" id="xOh-RY-wZZ"/>
                             <constraint firstItem="7XS-yb-Fb3" firstAttribute="height" secondItem="eP1-s3-zSH" secondAttribute="height" id="xdS-GU-aWw"/>
+                            <constraint firstItem="dko-be-rXZ" firstAttribute="width" secondItem="dko-be-rXZ" secondAttribute="height" id="xeT-BU-k2i"/>
                             <constraint firstItem="ygh-ls-Qes" firstAttribute="top" secondItem="URn-vY-cY0" secondAttribute="bottom" constant="15" id="xy7-dA-DPM"/>
                             <constraint firstItem="dma-Xl-Ik6" firstAttribute="trailing" secondItem="aHu-iQ-TCR" secondAttribute="trailing" constant="10" id="yRh-5r-iOl"/>
                         </constraints>
@@ -6699,6 +6719,7 @@ They need separated back ups.</string>
                         <outlet property="btnMinerFee" destination="URn-vY-cY0" id="BRu-V8-vDh"/>
                         <outlet property="btnMinerFeeQuestion" destination="3aP-7N-0ya" id="HMk-eh-F3w"/>
                         <outlet property="btnSend" destination="ygh-ls-Qes" id="Zba-Y2-P72"/>
+                        <outlet property="ivSendQr" destination="dko-be-rXZ" id="Z13-5H-mDs"/>
                         <outlet property="lblBalance" destination="z1L-xS-51U" id="n2S-fO-cKK"/>
                         <outlet property="lblBalancePrefix" destination="hsE-yP-NwX" id="65N-Qr-ei7"/>
                         <outlet property="lblMinerFee" destination="d2E-uO-Xhg" id="W57-GO-1U2"/>
@@ -6864,8 +6885,8 @@ They need separated back ups.</string>
                                         <color key="shadowColor" red="0.0" green="0.0" blue="0.0" alpha="0.40000000000000002" colorSpace="custom" customColorSpace="sRGB"/>
                                         <size key="shadowOffset" width="1" height="1"/>
                                     </label>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hBl-Md-UWA">
-                                        <rect key="frame" x="125" y="0.0" width="39" height="44"/>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" " lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hBl-Md-UWA">
+                                        <rect key="frame" x="125" y="0.0" width="5" height="44"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
@@ -7134,8 +7155,8 @@ They need separated back ups.</string>
                                         <color key="shadowColor" red="0.0" green="0.0" blue="0.0" alpha="0.40000000000000002" colorSpace="custom" customColorSpace="sRGB"/>
                                         <size key="shadowOffset" width="1" height="1"/>
                                     </label>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yA2-xI-ef0">
-                                        <rect key="frame" x="125" y="0.0" width="39" height="44"/>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" " lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yA2-xI-ef0">
+                                        <rect key="frame" x="125" y="0.0" width="5" height="44"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
@@ -7153,32 +7174,19 @@ They need separated back ups.</string>
                                     <constraint firstItem="yA2-xI-ef0" firstAttribute="leading" secondItem="3TU-hn-ytB" secondAttribute="trailing" constant="12" id="Aau-wz-PZ0"/>
                                     <constraint firstItem="3TU-hn-ytB" firstAttribute="leading" secondItem="Eyb-eC-3dn" secondAttribute="leading" constant="53" id="BLs-fU-c3Z"/>
                                     <constraint firstItem="Paj-6y-HXC" firstAttribute="top" secondItem="Eyb-eC-3dn" secondAttribute="top" id="Bjb-lX-4FF"/>
-                                    <constraint firstItem="3TU-hn-ytB" firstAttribute="top" secondItem="Eyb-eC-3dn" secondAttribute="top" id="DiX-7S-wKd"/>
                                     <constraint firstAttribute="height" constant="44" id="ERe-ct-xmt"/>
                                     <constraint firstItem="aoh-Fe-cnF" firstAttribute="top" secondItem="Eyb-eC-3dn" secondAttribute="top" id="GvZ-C4-Trh"/>
-                                    <constraint firstItem="3TU-hn-ytB" firstAttribute="baseline" secondItem="yA2-xI-ef0" secondAttribute="baseline" id="HAQ-kd-KC5"/>
-                                    <constraint firstItem="3TU-hn-ytB" firstAttribute="bottom" secondItem="Pzd-SF-ilU" secondAttribute="bottom" id="HtX-Ya-3Rt"/>
                                     <constraint firstItem="yA2-xI-ef0" firstAttribute="top" secondItem="Eyb-eC-3dn" secondAttribute="top" id="LKQ-8g-9He"/>
-                                    <constraint firstItem="3TU-hn-ytB" firstAttribute="firstBaseline" secondItem="yA2-xI-ef0" secondAttribute="firstBaseline" id="NOe-I0-Okd"/>
                                     <constraint firstItem="aoh-Fe-cnF" firstAttribute="leading" secondItem="Eyb-eC-3dn" secondAttribute="leading" id="R9c-kK-Pbr"/>
-                                    <constraint firstItem="3TU-hn-ytB" firstAttribute="bottom" secondItem="6Cc-1v-cmf" secondAttribute="bottom" id="X1J-7b-1pz"/>
                                     <constraint firstAttribute="bottom" secondItem="6Cc-1v-cmf" secondAttribute="bottom" id="Y3Z-Yy-pmr"/>
-                                    <constraint firstAttribute="bottom" secondItem="3TU-hn-ytB" secondAttribute="bottom" id="YZB-Lz-Ihp"/>
-                                    <constraint firstItem="3TU-hn-ytB" firstAttribute="top" secondItem="Pzd-SF-ilU" secondAttribute="top" id="Z6e-lU-NgJ"/>
                                     <constraint firstAttribute="trailing" secondItem="aoh-Fe-cnF" secondAttribute="trailing" id="bQF-ye-aDb"/>
-                                    <constraint firstItem="3TU-hn-ytB" firstAttribute="bottom" secondItem="Paj-6y-HXC" secondAttribute="bottom" id="cOx-oc-ekU"/>
                                     <constraint firstAttribute="bottom" secondItem="Pzd-SF-ilU" secondAttribute="bottom" id="dv2-Gh-wZW"/>
                                     <constraint firstAttribute="bottom" secondItem="aoh-Fe-cnF" secondAttribute="bottom" id="fbo-th-4rO"/>
                                     <constraint firstAttribute="bottom" secondItem="3TU-hn-ytB" secondAttribute="bottom" id="gPJ-Ff-y6O"/>
                                     <constraint firstAttribute="bottom" secondItem="Paj-6y-HXC" secondAttribute="bottom" id="ihF-9E-Hlo"/>
-                                    <constraint firstItem="3TU-hn-ytB" firstAttribute="top" secondItem="6Cc-1v-cmf" secondAttribute="top" id="lCe-Fx-iiI"/>
-                                    <constraint firstItem="3TU-hn-ytB" firstAttribute="top" secondItem="aoh-Fe-cnF" secondAttribute="top" id="q9P-aJ-LPq"/>
                                     <constraint firstItem="Pzd-SF-ilU" firstAttribute="leading" secondItem="Eyb-eC-3dn" secondAttribute="leading" id="rFX-ER-l7V"/>
                                     <constraint firstItem="3TU-hn-ytB" firstAttribute="leading" secondItem="Paj-6y-HXC" secondAttribute="trailing" constant="6" id="sot-dd-xdx"/>
-                                    <constraint firstItem="3TU-hn-ytB" firstAttribute="leading" secondItem="Paj-6y-HXC" secondAttribute="trailing" constant="6" id="t0A-im-O3g"/>
                                     <constraint firstAttribute="bottom" secondItem="yA2-xI-ef0" secondAttribute="bottom" id="tOx-6W-hEC"/>
-                                    <constraint firstItem="3TU-hn-ytB" firstAttribute="bottom" secondItem="aoh-Fe-cnF" secondAttribute="bottom" id="tz9-W4-JvQ"/>
-                                    <constraint firstItem="3TU-hn-ytB" firstAttribute="top" secondItem="Paj-6y-HXC" secondAttribute="top" id="uJH-Ab-p9e"/>
                                     <constraint firstItem="Pzd-SF-ilU" firstAttribute="top" secondItem="Eyb-eC-3dn" secondAttribute="top" id="vBo-Zo-TFF"/>
                                 </constraints>
                             </view>
@@ -7222,6 +7230,13 @@ They need separated back ups.</string>
                                     <action selector="btnMinerFeeQuestionClicked:" destination="c81-vn-XUm" eventType="touchUpInside" id="S68-JA-nLc"/>
                                 </connections>
                             </button>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="unsigned_transaction_button_icon" translatesAutoresizingMaskIntoConstraints="NO" id="4x9-1T-IZX">
+                                <rect key="frame" x="364" y="291" width="20" height="20"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="20" id="KkD-Qg-Sr7"/>
+                                    <constraint firstAttribute="width" secondItem="4x9-1T-IZX" secondAttribute="height" id="ocU-J0-Ywr"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="8Cm-WM-g6s"/>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -7237,6 +7252,7 @@ They need separated back ups.</string>
                             <constraint firstItem="tBr-b2-p30" firstAttribute="leading" secondItem="8hY-cL-7RN" secondAttribute="trailing" constant="10" id="CAf-fe-kJG"/>
                             <constraint firstItem="e8g-6V-eVv" firstAttribute="trailing" secondItem="biZ-bl-Y06" secondAttribute="leading" constant="5" id="CIi-uj-jMx"/>
                             <constraint firstItem="tBr-b2-p30" firstAttribute="centerY" secondItem="8hY-cL-7RN" secondAttribute="centerY" id="GDD-tC-Ash"/>
+                            <constraint firstItem="4x9-1T-IZX" firstAttribute="centerY" secondItem="x5l-Rf-4Wi" secondAttribute="centerY" id="Jg9-bG-tIE"/>
                             <constraint firstItem="8Cm-WM-g6s" firstAttribute="trailing" secondItem="I3O-1Q-uKd" secondAttribute="trailing" constant="10" id="KY3-J4-cdu"/>
                             <constraint firstItem="x5l-Rf-4Wi" firstAttribute="top" secondItem="48p-G1-KAk" secondAttribute="bottom" constant="15" id="M36-cz-3jy"/>
                             <constraint firstItem="I3O-1Q-uKd" firstAttribute="top" secondItem="8hY-cL-7RN" secondAttribute="bottom" constant="15" id="M4V-lB-F8v"/>
@@ -7257,6 +7273,7 @@ They need separated back ups.</string>
                             <constraint firstItem="MIP-Nt-FOw" firstAttribute="height" secondItem="GVX-sd-NfW" secondAttribute="height" id="nOn-rS-dg6"/>
                             <constraint firstItem="e8g-6V-eVv" firstAttribute="leading" secondItem="48p-G1-KAk" secondAttribute="leading" constant="10" id="pSM-bG-YZt"/>
                             <constraint firstItem="MIP-Nt-FOw" firstAttribute="width" secondItem="GVX-sd-NfW" secondAttribute="width" id="q3U-pc-g5y"/>
+                            <constraint firstItem="4x9-1T-IZX" firstAttribute="trailing" secondItem="x5l-Rf-4Wi" secondAttribute="trailing" constant="-10" id="v1n-Yt-XuD"/>
                             <constraint firstItem="48p-G1-KAk" firstAttribute="leading" secondItem="7yW-0K-HjO" secondAttribute="leading" id="vpM-to-3FS"/>
                             <constraint firstItem="GVX-sd-NfW" firstAttribute="leading" secondItem="8Cm-WM-g6s" secondAttribute="leading" constant="10" id="xvc-or-Or5"/>
                         </constraints>
@@ -7638,6 +7655,7 @@ They need separated back ups.</string>
         <image name="transaction_icon_small" width="12" height="12"/>
         <image name="trash_can_restore" width="24" height="24"/>
         <image name="ui_topnav_titlebar_background.png" width="1" height="47"/>
+        <image name="unsigned_transaction_button_icon" width="25" height="25"/>
         <image name="xrandom_address_label_normal" width="18" height="18"/>
         <image name="xrandom_address_label_pressed" width="18" height="18"/>
         <image name="xrandom_checkbox_checked" width="105" height="30"/>

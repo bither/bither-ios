@@ -55,7 +55,6 @@
     DialogProgressChangable *dp;
     BOOL signWithCold;
     BOOL isInRecovery;
-    UIImageView *ivSendQr;
     BOOL preventKeyboardForSigning;
 }
 @property(weak, nonatomic) IBOutlet UILabel *lblBalancePrefix;
@@ -70,6 +69,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *btnMinerFee;
 @property (weak, nonatomic) IBOutlet UILabel *lblMinerFeeTitle;
 @property (weak, nonatomic) IBOutlet UILabel *lblMinerFee;
+@property (weak, nonatomic) IBOutlet UIImageView *ivSendQr;
 
 @property DialogSelectChangeAddress *dialogSelectChangeAddress;
 @property(assign, nonatomic) MinerFeeMode minerFeeMode;
@@ -127,10 +127,6 @@
     }
     dp = [[DialogProgressChangable alloc] initWithMessage:NSLocalizedString(@"Please wait…", nil)];
     dp.touchOutSideToDismiss = NO;
-    ivSendQr = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"unsigned_transaction_button_icon"]];
-    CGFloat ivSendQrMargin = (self.btnSend.frame.size.height - kSendButtonQrIconSize) / 2;
-    ivSendQr.frame = CGRectMake(self.btnSend.frame.size.width - kSendButtonQrIconSize - ivSendQrMargin, ivSendQrMargin, kSendButtonQrIconSize, kSendButtonQrIconSize);
-    [self.btnSend addSubview:ivSendQr];
     self.dialogSelectChangeAddress = [[DialogSelectChangeAddress alloc] initWithFromAddress:self.address];
     [self configureForSigningPartner];
     [self check];
@@ -311,17 +307,19 @@
 - (void)showSendResult:(NSString *)msg dialog:(DialogProgressChangable *)dpc {
     dispatch_async(dispatch_get_main_queue(), ^{
         [dpc dismissWithCompletion:^{
-            [self showBannerWithMessage:msg belowView:self.vTopBar];
+            [self showAlertWithMessage:msg];
         }];
     });
 }
 
-- (NSString *)getToAddress {
-    return [StringUtil removeBlankSpaceString:self.tfAddress.text];
+- (void)showAlertWithMessage:(NSString *)msg {
+    DialogAlert *dialogAlert = [[DialogAlert alloc] initWithConfirmMessage:msg confirm:^{ }];
+    dialogAlert.touchOutSideToDismiss = false;
+    [dialogAlert showInWindow:self.view.window];
 }
 
-- (void)showBannerWithMessage:(NSString *)msg {
-    [self showBannerWithMessage:msg belowView:self.vTopBar];
+- (NSString *)getToAddress {
+    return [StringUtil removeBlankSpaceString:self.tfAddress.text];
 }
 
 - (IBAction)scanPressed:(id)sender {
@@ -439,17 +437,14 @@
 
 - (void)configureForSigningPartner {
     if (signWithCold || isInRecovery) {
-        ivSendQr.hidden = NO;
+        _ivSendQr.hidden = NO;
     } else {
-        ivSendQr.hidden = YES;
+        _ivSendQr.hidden = YES;
     }
 }
 
 - (void)configureBalance {
     self.lblBalance.attributedText = [UnitUtil stringWithSymbolForAmount:self.address.balance withFontSize:kBalanceFontSize color:self.lblBalance.textColor];
-    [self configureBalanceLabelWidth:self.lblBalance];
-    [self configureBalanceLabelWidth:self.lblBalancePrefix];
-    self.lblBalance.frame = CGRectMake(CGRectGetMaxX(self.lblBalancePrefix.frame) + 5, self.lblBalance.frame.origin.y, self.lblBalance.frame.size.width, self.lblBalance.frame.size.height);
 }
 
 - (void)hideKeyboard {

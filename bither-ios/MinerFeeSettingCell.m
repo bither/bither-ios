@@ -26,7 +26,6 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
     // Initialization code
-    _tfCustom.delegate = self;
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
@@ -60,6 +59,11 @@
 }
 
 - (void)showCustom:(BOOL)isShow {
+    if (isShow) {
+        _tfCustom.delegate = self;
+        _tfCustom.background = [UIImage imageNamed:@"textfield_activated_holo_light"];
+        [self configureTextField:_tfCustom];
+    }
     [_tfCustom setHidden:!isShow];
     [_lblCustomUnit setHidden:!isShow];
     [_btnCustomConfirm setHidden:!isShow];
@@ -89,6 +93,17 @@
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
     [self btnCustomConfirmClicked:_btnCustomConfirm];
     return YES;
+}
+
+
+- (void)configureTextField:(UITextField *)tf {
+    UIView *leftView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 10, tf.frame.size.height)];
+    leftView.backgroundColor = [UIColor clearColor];
+    UIView *rightView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 10, tf.frame.size.height)];
+    rightView.backgroundColor = [UIColor clearColor];
+    tf.leftView = leftView;
+    tf.rightView = rightView;
+    tf.leftViewMode = UITextFieldViewModeAlways;
 }
 
 @end
