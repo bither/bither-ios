@@ -28,7 +28,8 @@
 
 + (void)syncWallet:(VoidBlock)voidBlock andErrorCallBack:(ErrorHandler)errorCallback addressTxLoading:(StringBlock)addressCallback;
 
-+ (void)syncWalletFrom_blockChain:(VoidBlock)voidBlock andErrorCallBack:(ErrorHandler)errorCallback;
-
 + (NSString *)getCompleteTxForError:(NSError *)error;
+
++ (BOOL)getIsReloading;
+
 @end

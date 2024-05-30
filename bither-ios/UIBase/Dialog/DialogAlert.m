@@ -46,21 +46,26 @@
 
 
 - (id)initWithAttributedMessage:(NSAttributedString *)message confirm:(void (^)())confirm cancel:(void (^)())cancel {
-    self = [self initWithMessage:nil orAttributedString:message confirm:confirm cancel:cancel isShowCancel:true];
+    self = [self initWithMessage:nil orAttributedString:message confirmStr:nil confirm:confirm cancel:cancel isShowCancel:true];
     return self;
 }
 
 - (id)initWithMessage:(NSString *)message confirm:(void (^)())confirm cancel:(void (^)())cancel {
-    self = [self initWithMessage:message orAttributedString:nil confirm:confirm cancel:cancel isShowCancel:true];
+    self = [self initWithMessage:message orAttributedString:nil confirmStr:nil confirm:confirm cancel:cancel isShowCancel:true];
     return self;
 }
 
 - (id)initWithConfirmMessage:(NSString *)message confirm:(void (^)())confirm {
-    self = [self initWithMessage:message orAttributedString:nil confirm:confirm cancel:nil isShowCancel:false];
+    self = [self initWithConfirmMessage:message confirmStr:nil confirm:confirm];
     return self;
 }
 
-- (id)initWithMessage:(NSString *)message orAttributedString:(NSAttributedString *)attributedStr confirm:(void (^)())confirm cancel:(void (^)())cancel isShowCancel:(BOOL)isShowCancel {
+- (id)initWithConfirmMessage:(NSString *)message confirmStr:(NSString *)confirmStr confirm:(void (^)())confirm {
+    self = [self initWithMessage:message orAttributedString:nil confirmStr:confirmStr confirm:confirm cancel:nil isShowCancel:false];
+    return self;
+}
+
+- (id)initWithMessage:(NSString *)message orAttributedString:(NSAttributedString *)attributedStr confirmStr:(NSString *)confirmStr confirm:(void (^)())confirm cancel:(void (^)())cancel isShowCancel:(BOOL)isShowCancel {
     self = [super init];
     if (self) {
         CGSize constrainedSize = CGSizeMake(kDialogAlertLabelMaxWidth, kDialogAlertLabelMaxHeight);
@@ -106,7 +111,11 @@
         self.btnConfirm = [[UIButton alloc] initWithFrame:CGRectMake(isShowCancel ? self.btnCancel.frame.origin.x + kDialogAlertBtnDistance + self.btnCancel.frame.size.width : kDialogAlertHorizotalPadding, isShowCancel ? self.btnCancel.frame.origin.y : kDialogAlertVerticalPadding + self.lbl.frame.size.height + kDialogAlertLabelAndBtnDistance, btnWidth, kDialogAlertBtnHeightMin)];
 
         [self.btnConfirm setBackgroundImage:imageNormal forState:UIControlStateNormal];
-        [self.btnConfirm setTitle:NSLocalizedString(@"OK", @"dialogAlertConfirm") forState:UIControlStateNormal];
+        if (confirmStr && confirmStr.length > 0) {
+            [self.btnConfirm setTitle:confirmStr forState:UIControlStateNormal];
+        } else {
+            [self.btnConfirm setTitle:NSLocalizedString(@"OK", @"dialogAlertConfirm") forState:UIControlStateNormal];
+        }
         [self.btnConfirm setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         [self.btnConfirm setTitleColor:[UIColor whiteColor] forState:UIControlStateHighlighted];
         self.btnConfirm.adjustsImageWhenDisabled = YES;

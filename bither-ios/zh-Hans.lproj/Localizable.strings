@@ -120,6 +120,8 @@
 /* dialogAlertConfirm */
 "OK" = "确认";
 
+"Retry" = "重试";
+
 /* No comment provided by engineer. */
 "Old Password" = "原密码";
 

@@ -72,29 +72,20 @@ static PeerUtil *peerUtil;
     if ([[BTPeerManager instance] connected]) {
         [[BTPeerManager instance] stop];
     }
-    if ([UserDefaultsUtil instance].getApiConfig == ApiConfigBlockchainInfo) {
-        //NSLog(@"get Tx data from blockChain.info");
-        if (!isRunning) {
-            isRunning = YES;
-            [TransactionsUtil syncWalletFrom_blockChain:^{
-                [self connectPeer];
-                isRunning = NO;
-            }           andErrorCallBack:^(NSError *error) {
-                isRunning = NO;
-            }];
-        }
+    if ([[BTAddressManager instance] allSyncComplete]) {
+        [self connectPeer];
         return;
     }
     // NSLog(@"get tx data from bither.net");
     if (!isRunning) {
         isRunning = YES;
         [TransactionsUtil syncWallet:^{
-            [self connectPeer];
             isRunning = NO;
             [[NSNotificationCenter defaultCenter] postNotificationName:BTAddressTxLoadingNotification object:NULL];
+            [self syncSpvFromBitcoinDone];
         }           andErrorCallBack:^(NSError *error) {
             isRunning = NO;
-            [[NSNotificationCenter defaultCenter] postNotificationName:BTAddressTxLoadingNotification object:NULL];
+            [[NSNotificationCenter defaultCenter] postNotificationName:BTAddressTxLoadingNotification object:@"ERROR"];
         }           addressTxLoading:^(NSString *string) {
             [[NSNotificationCenter defaultCenter] postNotificationName:BTAddressTxLoadingNotification object:string];
         }];

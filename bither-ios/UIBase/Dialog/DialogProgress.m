@@ -50,6 +50,7 @@
         self.lbl.text = message;
         [self addSubview:self.lbl];
         [self.riv startAnimating];
+        self.touchOutSideToDismiss = NO;
     }
     return self;
 }

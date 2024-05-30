@@ -26,4 +26,6 @@
 
 - (id)initWithConfirmMessage:(NSString *)message confirm:(void (^)())confirm;
 
+- (id)initWithConfirmMessage:(NSString *)message confirmStr:(NSString *)confirmStr confirm:(void (^)())confirm;
+
 @end

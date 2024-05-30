@@ -28,6 +28,7 @@
 #import "UploadAndDowloadFileFactory.h"
 #import "DialogFirstRunWarning.h"
 #import "NetworkUtil.h"
+#import "DialogAlert.h"
 
 @interface HotViewController ()
 @property(strong, nonatomic) NSArray *tabButtons;
@@ -170,10 +171,8 @@
                 [self showAlert:NULL];
             }
         } else {
-            if (peerManager.downloadPeer == NULL || peerManager.downloadPeer.versionLastBlock - peerManager.lastBlockHeight <= 0) {
-                [self performSelector:@selector(delayHidePvSync) withObject:nil afterDelay:0.5];
-                [self showAlert:NULL];
-            }
+            [self performSelector:@selector(delayHidePvSync) withObject:nil afterDelay:0.5];
+            [self showAlert:NULL];
         }
     } else {
         self.pvSync.hidden = YES;
@@ -199,7 +198,15 @@
 
 - (void)showAddressTxLoading:(NSString *)address {
     if (address) {
-        [self showAlert:[NSString stringWithFormat:NSLocalizedString(@"tip_sync_address_tx", nil), address]];
+        if ([address isEqual:@"ERROR"]) {
+            DialogAlert *dialogAlert = [[DialogAlert alloc] initWithConfirmMessage:NSLocalizedString(@"Reload transactions data failed , Please retry again.", nil) confirmStr:NSLocalizedString(@"Retry", nil) confirm:^{
+                [[PeerUtil instance] startPeer];
+            }];
+            dialogAlert.touchOutSideToDismiss = false;
+            [dialogAlert showInWindow:self.view.window];
+        } else {
+            [self showAlert:[NSString stringWithFormat:NSLocalizedString(@"tip_sync_address_tx", nil), address]];
+        }
     } else{
         [self showAlert:NULL];
     }

@@ -346,12 +346,9 @@
 - (void)toViewWithIdentifier:(NSString *)identifier zoomView:(UIView *)zoom {
     IOS7ContainerViewController *container = [[IOS7ContainerViewController alloc] init];
     container.controller = [self.storyboard instantiateViewControllerWithIdentifier:identifier];
-    [[UIApplication sharedApplication].keyWindow insertSubview:container.view atIndex:0];
     [UIView animateWithDuration:kChooseModeStateTransactionDuration animations:^{
         zoom.transform = CGAffineTransformMakeScale(2, 2);
-        self.view.alpha = 0;
     }                completion:^(BOOL finished) {
-        [container.view removeFromSuperview];
         [UIApplication sharedApplication].keyWindow.rootViewController = container;
     }];
 }
