@@ -133,13 +133,24 @@
     } else {
         self.btnAddMode.hidden = true;
     }
-    
-    self.lblBalanceBtc.attributedText = [UnitUtil attributedStringForAmount:address.balance withFontSize:kBalanceFontSize];
-
-    width = [self.lblBalanceBtc.attributedText sizeWithRestrict:CGSizeMake(CGFLOAT_MAX, self.lblBalanceBtc.frame.size.height)].width;
-    self.lblBalanceBtc.frame = CGRectMake(CGRectGetMaxX(self.lblBalanceBtc.frame) - width, self.lblBalanceBtc.frame.origin.y, width, self.lblBalanceBtc.frame.size.height);
-    self.ivSymbolBtc.frame = CGRectMake(CGRectGetMinX(self.lblBalanceBtc.frame) - self.ivSymbolBtc.frame.size.width - 2, self.ivSymbolBtc.frame.origin.y, self.ivSymbolBtc.frame.size.width, self.ivSymbolBtc.frame.size.height);
-    self.ivSymbolBtc.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@_black", [UnitUtil imageNameSlim]]];
+    if (address.isSyncComplete) {
+        self.lblBalanceBtc.attributedText = [UnitUtil attributedStringForAmount:address.balance withFontSize:kBalanceFontSize];
+        width = [self.lblBalanceBtc.attributedText sizeWithRestrict:CGSizeMake(CGFLOAT_MAX, self.lblBalanceBtc.frame.size.height)].width;
+        self.lblBalanceBtc.frame = CGRectMake(CGRectGetMaxX(self.lblBalanceBtc.frame) - width, self.lblBalanceBtc.frame.origin.y, width, self.lblBalanceBtc.frame.size.height);
+        self.ivSymbolBtc.frame = CGRectMake(CGRectGetMinX(self.lblBalanceBtc.frame) - self.ivSymbolBtc.frame.size.width - 2, self.ivSymbolBtc.frame.origin.y, self.ivSymbolBtc.frame.size.width, self.ivSymbolBtc.frame.size.height);
+        self.ivSymbolBtc.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@_black", [UnitUtil imageNameSlim]]];
+        [self.ivSymbolBtc setHidden:NO];
+        if ([MarketUtil getDefaultNewPrice] > 0) {
+            double balanceMoney = ([MarketUtil getDefaultNewPrice] * address.balance) / pow(10, 8);
+            self.lblBalanceMoney.text = [StringUtil formatPrice:balanceMoney];
+        } else {
+            self.lblBalanceMoney.text = @"--";
+        }
+    } else {
+        [self.ivSymbolBtc setHidden:YES];
+        self.lblBalanceBtc.text = @"--";
+        self.lblBalanceMoney.text = @"--";
+    }
 //    if (![_btAddress.address isEqualToString:address.address])
 //        self.lblTransactionCount.text = [NSString string];
     self.vNoUnconfirmedTx.hidden = NO;
@@ -164,13 +175,6 @@
     CGRect frame = self.btnAddressFull.frame;
     frame.origin.x = CGRectGetMaxX(self.lblAddress.frame) + 5;
     self.btnAddressFull.frame = frame;
-    if ([MarketUtil getDefaultNewPrice] > 0) {
-        double balanceMoney = ([MarketUtil getDefaultNewPrice] * address.balance) / pow(10, 8);
-        self.lblBalanceMoney.text = [StringUtil formatPrice:balanceMoney];
-    } else {
-        self.lblBalanceMoney.text = @"--";
-    }
-
     self.btnAlias.address = address;
     isMovingToTrash = NO;
 }
