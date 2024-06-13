@@ -19,8 +19,10 @@
 
 @implementation UIImage (UIImageExt)
 - (UIImage *)scaleToSize:(CGSize)size {
-    // NSLog(@"w:%f,s:%f",self.size.width,self.scale);
     if (self.size.width * self.scale > size.width && self.size.height * self.scale > size.height) {
+        if (isnan(size.width) || isnan(size.height) || size.width <= 0 || size.height <= 0) {
+            return self;
+        }
         UIGraphicsBeginImageContext(size);
         [self drawInRect:CGRectMake(0, 0, size.width, size.height)];
         UIImage *scaledImage = UIGraphicsGetImageFromCurrentImageContext();

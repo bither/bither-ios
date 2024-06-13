@@ -190,7 +190,7 @@
 }
 
 - (NSArray *)currentRates {
-    if ([startRates isEqualToArray:endRates]) {
+    if ([startRates isEqualToArray:endRates] || startRates.count != endRates.count) {
         if (displayLink) {
             [displayLink invalidate];
             displayLink = nil;

@@ -209,8 +209,10 @@ typedef enum {
     } else {
         [_foldedSections addIndex:section];
     }
+    [self.tableView beginUpdates];
     NSIndexSet *set = [[NSIndexSet alloc] initWithIndex:section];
     [self.tableView reloadSections:set withRowAnimation:UITableViewRowAnimationAutomatic];
+    [self.tableView endUpdates];
 }
 
 - (void)hdmAddPressed {

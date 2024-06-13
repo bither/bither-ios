@@ -156,6 +156,9 @@ CGFloat RadiansOfDegrees(CGFloat degrees) {
 }
 
 - (UIImage *)imageRotatedByDegrees:(CGFloat)degrees {
+    if (isnan(self.size.width) || isnan(self.size.height) || self.size.width <= 0 || self.size.height <= 0) {
+        return self;
+    }
     UIView *rotatedViewBox = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.size.width, self.size.height)];
     CGAffineTransform t = CGAffineTransformMakeRotation(RadiansOfDegrees(degrees));
     rotatedViewBox.transform = t;
@@ -179,6 +182,9 @@ CGFloat RadiansOfDegrees(CGFloat degrees) {
 
 - (UIImage *)imageRotatedByRadians:(CGFloat)radians {
     if (radians == 0 || radians == M_PI * 2) {
+        return self;
+    }
+    if (isnan(self.size.width) || isnan(self.size.height) || self.size.width <= 0 || self.size.height <= 0) {
         return self;
     }
     UIView *rotatedViewBox = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.size.width, self.size.height)];
