@@ -13,12 +13,6 @@ There is also an [android version](https://github.com/bither/bither-android).
 * Both android and iOS are supported
 * Nice designed UI
 
-## Demo video
-
-[Youtube](http://youtu.be/Q1DSrc7qkrs)
-
-[Youku](http://v.youku.com/v_show/id_XNzQ1NTE5MTgw.html)
-
 ## Donation
 
 Donate : 1BitherUnNvB2NsfxMnbS35kS3DTPr7PW5
@@ -26,3 +20,7 @@ Donate : 1BitherUnNvB2NsfxMnbS35kS3DTPr7PW5
 ## Website
 
 [Bither.net](http://bither.net)
+
+## Support Email
+
+support@bither.net
