@@ -1,5 +1,6 @@
 bither-ios
 ==========
+[![BuddyBuild](https://dashboard.buddybuild.com/api/statusImage?appID=5657864828898101003ae8da&branch=master&build=latest)](https://dashboard.buddybuild.com/apps/5657864828898101003ae8da/build/latest)
 
 Bither is a simple and secure Bitcoin wallet! You can find Bither on [App Store](https://itunes.apple.com/app/bither/id899478936).
 
