@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C0D3A0012D91000100000001 /* BitherActionSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = C0D3A0012D91000100000003 /* BitherActionSheet.m */; };
 		0A0961381B5CBAD300D554A6 /* DialogShowAddressOnNet.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A0961371B5CBAD300D554A6 /* DialogShowAddressOnNet.m */; };
 		0A0BA9B21B575D2400885812 /* ColdAddressListHDCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A0BA9B11B575D2400885812 /* ColdAddressListHDCell.m */; };
 		0A259E251A47F19100D7F707 /* DialogSendOption.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A259E241A47F19100D7F707 /* DialogSendOption.m */; };
@@ -342,6 +343,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		C0D3A0012D91000100000002 /* BitherActionSheet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BitherActionSheet.h; sourceTree = "<group>"; };
+		C0D3A0012D91000100000003 /* BitherActionSheet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BitherActionSheet.m; sourceTree = "<group>"; };
 		0A0961361B5CBAD300D554A6 /* DialogShowAddressOnNet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DialogShowAddressOnNet.h; sourceTree = "<group>"; };
 		0A0961371B5CBAD300D554A6 /* DialogShowAddressOnNet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DialogShowAddressOnNet.m; sourceTree = "<group>"; };
 		0A0BA9B01B575D2400885812 /* ColdAddressListHDCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ColdAddressListHDCell.h; path = Cells/ColdAddressListHDCell.h; sourceTree = "<group>"; };
@@ -1770,6 +1773,8 @@
 		ACDDDC2519480ECE0008A79D /* Dialog */ = {
 			isa = PBXGroup;
 			children = (
+				C0D3A0012D91000100000002 /* BitherActionSheet.h */,
+				C0D3A0012D91000100000003 /* BitherActionSheet.m */,
 				AC1454A61A80D30E00E851B4 /* DialogReplaceWorld.h */,
 				AC1454A71A80D30E00E851B4 /* DialogReplaceWorld.m */,
 				AC1454A31A80D04D00E851B4 /* DialogOperationWorld.h */,
@@ -2176,6 +2181,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C0D3A0012D91000100000001 /* BitherActionSheet.m in Sources */,
 				4217A3731951235D00063746 /* Depth.m in Sources */,
 				ACEE7D4819D417E400932B39 /* ImportPrivateKey.m in Sources */,
 				AC454DC61A19D981000AF4ED /* UnitUtil.m in Sources */,

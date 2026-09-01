@@ -18,6 +18,6 @@
 
 #import "Setting.h"
 
-@interface PinCodeSetting : Setting <UIActionSheetDelegate, UIImagePickerControllerDelegate>
+@interface PinCodeSetting : Setting <UIImagePickerControllerDelegate>
 + (PinCodeSetting *)getPinCodeSetting;
 @end

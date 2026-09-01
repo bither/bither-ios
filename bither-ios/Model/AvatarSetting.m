@@ -23,6 +23,7 @@
 #import "UIImageExt.h"
 #import "UIViewController+SwipeRightToPop.h"
 #import "UploadAndDowloadFileFactory.h"
+#import "BitherActionSheet.h"
 
 static Setting *avatarSetting;
 
@@ -36,40 +37,25 @@ static Setting *avatarSetting;
         __weak AvatarSetting *sself = sAvatarSetting;
         [sAvatarSetting setSelectBlock:^(UIViewController *controller) {
             sself.controller = controller;
-            UIActionSheet *actionSheet = nil;
-            if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
-
-                actionSheet = [[UIActionSheet alloc] initWithTitle:NSLocalizedString(@"Set Avatar", nil)
-                                                          delegate:sself cancelButtonTitle:NSLocalizedString(@"Cancel", nil)
-                                            destructiveButtonTitle:nil
-                                                 otherButtonTitles:NSLocalizedString(@"From Camera", nil), NSLocalizedString(@"From Gallery", nil), nil];
-            } else {
-                actionSheet = [[UIActionSheet alloc] initWithTitle:NSLocalizedString(@"Set Avatar", nil)
-                                                          delegate:sself cancelButtonTitle:NSLocalizedString(@"Cancel", nil)
-                                            destructiveButtonTitle:nil
-                                                 otherButtonTitles:NSLocalizedString(@"From Gallery", nil), nil];
-            }
-
-            actionSheet.actionSheetStyle = UIActionSheetStyleDefault;
-            [actionSheet showInView:controller.navigationController.view];
+            BOOL hasCamera = [UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera];
+            NSArray *titles = hasCamera
+                ? @[NSLocalizedString(@"From Camera", nil), NSLocalizedString(@"From Gallery", nil)]
+                : @[NSLocalizedString(@"From Gallery", nil)];
+            BitherActionSheet *sheet = [[BitherActionSheet alloc] initWithTitle:NSLocalizedString(@"Set Avatar", nil)
+                                                                   buttonTitles:titles
+                                                               cancelButtonTitle:NSLocalizedString(@"Cancel", nil)
+                                                                         handler:^(NSInteger buttonIndex) {
+                if (hasCamera && buttonIndex == 0) {
+                    [sself startCamera];
+                } else {
+                    [sself startGallery];
+                }
+            }];
+            [sheet showInViewController:controller];
         }];
         avatarSetting = sAvatarSetting;
     }
     return avatarSetting;
-}
-
-- (void)actionSheet:(UIActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex {
-    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
-        if (buttonIndex == 0) {
-            [self startCamera];
-        } else if (buttonIndex == 1) {
-            [self startGallery];
-        }
-    } else {
-        if (buttonIndex == 0) {
-            [self startGallery];
-        }
-    }
 }
 
 - (void)startGallery {

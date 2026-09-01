@@ -18,6 +18,7 @@
 
 #import "PinCodeSetting.h"
 #import "UserDefaultsUtil.h"
+#import "BitherActionSheet.h"
 
 @interface PinCodeSetting () {
 
@@ -49,49 +50,26 @@ static PinCodeSetting *S;
 }
 
 - (void)show {
-    UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:NSLocalizedString(@"pin_code_setting_name", nil) delegate:self cancelButtonTitle:nil destructiveButtonTitle:nil otherButtonTitles:nil];
-    if ([[UserDefaultsUtil instance] hasPinCode]) {
-        [actionSheet addButtonWithTitle:NSLocalizedString(@"pin_code_setting_close", nil)];
-        [actionSheet addButtonWithTitle:NSLocalizedString(@"pin_code_setting_change", nil)];
-        [actionSheet addButtonWithTitle:NSLocalizedString(@"Cancel", nil)];
-        actionSheet.cancelButtonIndex = 2;
-    } else {
-        [actionSheet addButtonWithTitle:NSLocalizedString(@"pin_code_setting_open", nil)];
-        [actionSheet addButtonWithTitle:NSLocalizedString(@"Cancel", nil)];
-        actionSheet.cancelButtonIndex = 1;
-    }
-    [actionSheet showInView:self.controller.view.window];
+    BOOL hasPinCode = [[UserDefaultsUtil instance] hasPinCode];
+    NSArray *titles = hasPinCode
+        ? @[NSLocalizedString(@"pin_code_setting_close", nil), NSLocalizedString(@"pin_code_setting_change", nil)]
+        : @[NSLocalizedString(@"pin_code_setting_open", nil)];
+    BitherActionSheet *sheet = [[BitherActionSheet alloc] initWithTitle:NSLocalizedString(@"pin_code_setting_name", nil)
+                                                           buttonTitles:titles
+                                                       cancelButtonTitle:NSLocalizedString(@"Cancel", nil)
+                                                                 handler:^(NSInteger buttonIndex) {
+        if (hasPinCode) {
+            [self showPinCodeController:buttonIndex == 0 ? @"PinCodeDisable" : @"PinCodeChange"];
+        } else if (buttonIndex == 0) {
+            [self showPinCodeController:@"PinCodeEnable"];
+        }
+    }];
+    [sheet showInViewController:self.controller];
 }
 
-
-- (void)actionSheet:(UIActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex {
-    if (buttonIndex < 0) {
-        return;
-    }
-    UIViewController *vc;
-    if ([[UserDefaultsUtil instance] hasPinCode]) {
-        switch (buttonIndex) {
-            case 0:
-                vc = [self.controller.storyboard instantiateViewControllerWithIdentifier:@"PinCodeDisable"];
-                break;
-            case 1:
-                vc = [self.controller.storyboard instantiateViewControllerWithIdentifier:@"PinCodeChange"];
-                break;
-            default:
-                break;
-        }
-    } else {
-        switch (buttonIndex) {
-            case 0:
-                vc = [self.controller.storyboard instantiateViewControllerWithIdentifier:@"PinCodeEnable"];
-                break;
-            default:
-                break;
-        }
-    }
-    if (vc) {
-        [self.controller.navigationController pushViewController:vc animated:YES];
-    }
+- (void)showPinCodeController:(NSString *)identifier {
+    UIViewController *vc = [self.controller.storyboard instantiateViewControllerWithIdentifier:identifier];
+    [self.controller.navigationController pushViewController:vc animated:YES];
 }
 
 @end

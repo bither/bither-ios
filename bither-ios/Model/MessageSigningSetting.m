@@ -13,8 +13,9 @@
 #import "SignMessageSelectAddressViewController.h"
 #import "DialogPassword.h"
 #import "StringUtil.h"
+#import "BitherActionSheet.h"
 
-@interface MessageSigningSetting () <UIActionSheetDelegate, DialogSignMessageSelectAddressDelegate, DialogPasswordDelegate>
+@interface MessageSigningSetting () <DialogSignMessageSelectAddressDelegate, DialogPasswordDelegate>
 
 @property(weak) UIViewController *controller;
 @property PathType path;
@@ -45,33 +46,22 @@ static MessageSigningSetting *S;
 }
 
 - (void)show {
-    UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:NSLocalizedString(@"sign_message_setting_name", nil) delegate:self cancelButtonTitle:nil destructiveButtonTitle:nil otherButtonTitles:nil];
     BTAddressManager *addressManager = [BTAddressManager instance];
-    if (addressManager.hasHDAccountHot || addressManager.hasHDAccountCold || addressManager.privKeyAddresses.count > 0) {
-        [actionSheet addButtonWithTitle:NSLocalizedString(@"sign_message_activity_name", nil)];
-    }
-
-    [actionSheet addButtonWithTitle:NSLocalizedString(@"verify_message_signature_activity_name", nil)];
-    [actionSheet addButtonWithTitle:NSLocalizedString(@"Cancel", nil)];
-    actionSheet.cancelButtonIndex = actionSheet.numberOfButtons - 1;
-    [actionSheet showInView:self.controller.view.window];
-}
-
-
-- (void)actionSheet:(UIActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex {
-    if (buttonIndex < 0) {
-        return;
-    }
-    NSInteger reverseIndex = actionSheet.numberOfButtons - 2 - buttonIndex;
-    switch (reverseIndex) {
-        case 0:
-            [self.controller.navigationController pushViewController:[self.controller.storyboard instantiateViewControllerWithIdentifier:@"VerifyMessageSignature"] animated:YES];
-            break;
-        case 1:
+    BOOL canSign = addressManager.hasHDAccountHot || addressManager.hasHDAccountCold || addressManager.privKeyAddresses.count > 0;
+    NSArray *titles = canSign
+        ? @[NSLocalizedString(@"sign_message_activity_name", nil), NSLocalizedString(@"verify_message_signature_activity_name", nil)]
+        : @[NSLocalizedString(@"verify_message_signature_activity_name", nil)];
+    BitherActionSheet *sheet = [[BitherActionSheet alloc] initWithTitle:NSLocalizedString(@"sign_message_setting_name", nil)
+                                                           buttonTitles:titles
+                                                       cancelButtonTitle:NSLocalizedString(@"Cancel", nil)
+                                                                 handler:^(NSInteger buttonIndex) {
+        if (canSign && buttonIndex == 0) {
             [[[DialogSignMessageSelectAddress alloc] initWithDelegate:self] showInWindow:self.controller.view.window];
-        default:
-            break;
-    }
+        } else {
+            [self.controller.navigationController pushViewController:[self.controller.storyboard instantiateViewControllerWithIdentifier:@"VerifyMessageSignature"] animated:YES];
+        }
+    }];
+    [sheet showInViewController:self.controller];
 }
 
 - (void)signMessageWithSignAddressType:(SignAddressType)signAddressType {

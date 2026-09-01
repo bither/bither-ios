@@ -27,7 +27,7 @@
 #import "Setting.h"
 
 
-@interface ImportBip38PrivateKeySetting : Setting <UIActionSheetDelegate, ScanQrCodeDelegate, DialogPasswordDelegate, DialogImportKeyDelegate> {
+@interface ImportBip38PrivateKeySetting : Setting <ScanQrCodeDelegate, DialogPasswordDelegate, DialogImportKeyDelegate> {
     NSString *_result;
     BTKey *_key;
 }

@@ -24,6 +24,7 @@
 #import "DialogWithActions.h"
 #import "AppDelegate.h"
 #import "PeerUtil.h"
+#import "BitherActionSheet.h"
 
 @interface CheckPasswordBip38Delegate : NSObject <DialogPasswordDelegate>
 @property(nonatomic, strong) UIViewController *controller;
@@ -51,13 +52,18 @@ static Setting *importPrivateKeySetting;
         __weak ImportBip38PrivateKeySetting *sself = scanPrivateKeySetting;
         [scanPrivateKeySetting setSelectBlock:^(UIViewController *controller) {
             sself.controller = controller;
-            UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:NSLocalizedString(@"Import BIP38-private key", nil)
-                                                                     delegate:sself cancelButtonTitle:NSLocalizedString(@"Cancel", nil)
-                                                       destructiveButtonTitle:nil
-                                                            otherButtonTitles:NSLocalizedString(@"From BIP38-private key QR Code", nil), NSLocalizedString(@"From BIP38-private key text", nil), nil];
-
-            actionSheet.actionSheetStyle = UIActionSheetStyleDefault;
-            [actionSheet showInView:controller.navigationController.view];
+            NSArray *titles = @[NSLocalizedString(@"From BIP38-private key QR Code", nil), NSLocalizedString(@"From BIP38-private key text", nil)];
+            BitherActionSheet *sheet = [[BitherActionSheet alloc] initWithTitle:NSLocalizedString(@"Import BIP38-private key", nil)
+                                                                   buttonTitles:titles
+                                                               cancelButtonTitle:NSLocalizedString(@"Cancel", nil)
+                                                                         handler:^(NSInteger buttonIndex) {
+                if (buttonIndex == 0) {
+                    [sself scanBip38PrivateKey];
+                } else if (buttonIndex == 1) {
+                    [sself importBip38PrivateKey];
+                }
+            }];
+            [sheet showInViewController:controller];
         }];
         importPrivateKeySetting = scanPrivateKeySetting;
     }
@@ -65,15 +71,15 @@ static Setting *importPrivateKeySetting;
 }
 
 
-- (void)actionSheet:(UIActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex {
-    if (buttonIndex == 0) {
-        ScanQrCodeViewController *scan = [[ScanQrCodeViewController alloc] initWithDelegate:self title:NSLocalizedString(@"Scan BIP38-private key QR Code", nil) message:@""];
-        scan.modalPresentationStyle = UIModalPresentationFullScreen;
-        [self.controller presentViewController:scan animated:YES completion:nil];
-    } else if (buttonIndex == 1) {
-        DialogImportPrivateKey *dialogImportPrivateKey = [[DialogImportPrivateKey alloc] initWithDelegate:self importPrivateKeyType:Bip38];
-        [dialogImportPrivateKey showInWindow:self.controller.view.window];
-    }
+- (void)scanBip38PrivateKey {
+    ScanQrCodeViewController *scan = [[ScanQrCodeViewController alloc] initWithDelegate:self title:NSLocalizedString(@"Scan BIP38-private key QR Code", nil) message:@""];
+    scan.modalPresentationStyle = UIModalPresentationFullScreen;
+    [self.controller presentViewController:scan animated:YES completion:nil];
+}
+
+- (void)importBip38PrivateKey {
+    DialogImportPrivateKey *dialogImportPrivateKey = [[DialogImportPrivateKey alloc] initWithDelegate:self importPrivateKeyType:Bip38];
+    [dialogImportPrivateKey showInWindow:self.controller.view.window];
 }
 
 - (void)handleResult:(NSString *)result byReader:(ScanQrCodeViewController *)reader {

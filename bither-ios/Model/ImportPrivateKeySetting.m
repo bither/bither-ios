@@ -30,6 +30,7 @@
 #import "AppDelegate.h"
 #import "BTWordsTypeManager.h"
 #import "DialogImportHdAccountSeedQrCodeSelectLanguage.h"
+#import "BitherActionSheet.h"
 
 @interface CheckPasswordDelegate : NSObject <DialogPasswordDelegate, DialogImportHdAccountSeedQrCodeSelectLanguageDelegate>
 
@@ -51,7 +52,6 @@
 
 @property(nonatomic, readwrite) BOOL isImportHDM;
 @property(nonatomic, readwrite) BOOL isImportHDAccount;
-@property NSArray *buttons;
 @property (nonatomic,strong)NSString *keyStr;
 @property(nonatomic, strong) NSString *selectHdWordList;
 
@@ -67,7 +67,6 @@ static Setting *importPrivateKeySetting;
         [scanPrivateKeySetting setSelectBlock:^(UIViewController *controller) {
             sself.controller = controller;
             NSMutableArray *buttons = [NSMutableArray new];
-            UIActionSheet *actionSheet = nil;
             [buttons addObjectsFromArray:@[NSLocalizedString(@"From Bither Private Key QR Code", nil), NSLocalizedString(@"From Private Key Text", nil)]];
             if ([[BTSettings instance] getAppMode] == COLD && ![[BTAddressManager instance] hasHDMKeychain]) {
                 [buttons addObjectsFromArray:@[NSLocalizedString(@"import_hdm_cold_seed_qr_code", nil), NSLocalizedString(@"import_hdm_cold_seed_phrase", nil)]];
@@ -75,15 +74,15 @@ static Setting *importPrivateKeySetting;
             if (([BTSettings instance].getAppMode == COLD && ![BTAddressManager instance].hasHDAccountCold) || ([BTSettings instance].getAppMode == HOT && ![BTAddressManager instance].hasHDAccountHot)) {
                 [buttons addObjectsFromArray:@[NSLocalizedString(@"import_hd_account_seed_qr_code", nil), NSLocalizedString(@"import_hd_account_seed_phrase", nil)]];
             }
-            actionSheet = [[UIActionSheet alloc] initWithTitle:NSLocalizedString(@"Import Private Key", nil) delegate:sself cancelButtonTitle:nil destructiveButtonTitle:nil otherButtonTitles:nil];
-            for (NSString *title in buttons) {
-                [actionSheet addButtonWithTitle:title];
-            }
-            [actionSheet addButtonWithTitle:NSLocalizedString(@"Cancel", nil)];
-            actionSheet.cancelButtonIndex = buttons.count;
-            sself.buttons = buttons;
-            actionSheet.actionSheetStyle = UIActionSheetStyleDefault;
-            [actionSheet showInView:controller.navigationController.view];
+            BitherActionSheet *sheet = [[BitherActionSheet alloc] initWithTitle:NSLocalizedString(@"Import Private Key", nil)
+                                                                   buttonTitles:buttons
+                                                               cancelButtonTitle:NSLocalizedString(@"Cancel", nil)
+                                                                         handler:^(NSInteger buttonIndex) {
+                if (buttonIndex >= 0 && buttonIndex < buttons.count) {
+                    [sself selectImportOption:buttons[buttonIndex]];
+                }
+            }];
+            [sheet showInViewController:controller];
         }];
         importPrivateKeySetting = scanPrivateKeySetting;
     }
@@ -91,11 +90,7 @@ static Setting *importPrivateKeySetting;
 }
 
 
-- (void)actionSheet:(UIActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex {
-    if(buttonIndex < 0 || buttonIndex >= self.buttons.count || buttonIndex == actionSheet.cancelButtonIndex){
-        return;
-    }
-    NSString *button = [self.buttons objectAtIndex:buttonIndex];
+- (void)selectImportOption:(NSString *)button {
     if ([StringUtil isEmpty:button]) {
         return;
     }
@@ -453,5 +448,3 @@ static CheckPasswordDelegate *checkPasswordDelegate;
 
 }
 @end
-
-

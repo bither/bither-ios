@@ -21,7 +21,7 @@
 #import "Setting.h"
 #import "SendViewController.h"
 
-@interface DonationSetting : Setting <UIActionSheetDelegate, SendDelegate>
+@interface DonationSetting : Setting <SendDelegate>
 - (instancetype)init;
 
 @property(weak) UIViewController *controller;

@@ -21,6 +21,7 @@
 #import "StringUtil.h"
 #import "UnitUtil.h"
 #import "UnsignedTransactionViewController.h"
+#import "BitherActionSheet.h"
 
 static Setting *DonateSetting;
 
@@ -75,13 +76,19 @@ static Setting *DonateSetting;
         return [self compare:obj1 and:obj2];
     }];
 
-    UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:NSLocalizedString(@"Select an address to donate", nil) delegate:self cancelButtonTitle:nil destructiveButtonTitle:nil otherButtonTitles:nil];
+    NSMutableArray *titles = [NSMutableArray arrayWithCapacity:self.addresses.count];
     for (BTAddress *a in self.addresses) {
-        [actionSheet addButtonWithTitle:[NSString stringWithFormat:@"%@ (%@%@)", [StringUtil shortenAddress:a.address], [UnitUtil stringForAmount:a.balance], [UnitUtil unitName]]];
+        [titles addObject:[NSString stringWithFormat:@"%@ (%@%@)", [StringUtil shortenAddress:a.address], [UnitUtil stringForAmount:a.balance], [UnitUtil unitName]]];
     }
-    [actionSheet addButtonWithTitle:NSLocalizedString(@"Cancel", nil)];
-    actionSheet.cancelButtonIndex = self.addresses.count;
-    [actionSheet showInView:self.controller.navigationController.view];
+    BitherActionSheet *sheet = [[BitherActionSheet alloc] initWithTitle:NSLocalizedString(@"Select an address to donate", nil)
+                                                           buttonTitles:titles
+                                                       cancelButtonTitle:NSLocalizedString(@"Cancel", nil)
+                                                                 handler:^(NSInteger buttonIndex) {
+        if (buttonIndex >= 0 && buttonIndex < self.addresses.count) {
+            [self donateFromAddress:self.addresses[buttonIndex]];
+        }
+    }];
+    [sheet showInViewController:self.controller];
 }
 
 - (NSComparisonResult)compare:(BTAddress *)obj1 and:(BTAddress *)obj2 {
@@ -101,24 +108,21 @@ static Setting *DonateSetting;
     }
 }
 
-- (void)actionSheet:(UIActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex {
-    if (buttonIndex >= 0 && buttonIndex < self.addresses.count) {
-        BTAddress *a = self.addresses[buttonIndex];
-        if (a.hasPrivKey) {
-            SendViewController *send = [self.controller.storyboard instantiateViewControllerWithIdentifier:@"Send"];
-            send.address = a;
-            send.toAddress = DONATE_ADDRESS;
-            send.amount = DONATE_AMOUNT < a.balance ? DONATE_AMOUNT : a.balance;
-            send.sendDelegate = self;
-            [self.controller.navigationController pushViewController:send animated:YES];
-        } else {
-            UnsignedTransactionViewController *unsignedTx = [self.controller.storyboard instantiateViewControllerWithIdentifier:@"UnsignedTransaction"];
-            unsignedTx.address = a;
-            unsignedTx.toAddress = DONATE_ADDRESS;
-            unsignedTx.amount = DONATE_AMOUNT < a.balance ? DONATE_AMOUNT : a.balance;
-            unsignedTx.sendDelegate = self;
-            [self.controller.navigationController pushViewController:unsignedTx animated:YES];
-        }
+- (void)donateFromAddress:(BTAddress *)a {
+    if (a.hasPrivKey) {
+        SendViewController *send = [self.controller.storyboard instantiateViewControllerWithIdentifier:@"Send"];
+        send.address = a;
+        send.toAddress = DONATE_ADDRESS;
+        send.amount = DONATE_AMOUNT < a.balance ? DONATE_AMOUNT : a.balance;
+        send.sendDelegate = self;
+        [self.controller.navigationController pushViewController:send animated:YES];
+    } else {
+        UnsignedTransactionViewController *unsignedTx = [self.controller.storyboard instantiateViewControllerWithIdentifier:@"UnsignedTransaction"];
+        unsignedTx.address = a;
+        unsignedTx.toAddress = DONATE_ADDRESS;
+        unsignedTx.amount = DONATE_AMOUNT < a.balance ? DONATE_AMOUNT : a.balance;
+        unsignedTx.sendDelegate = self;
+        [self.controller.navigationController pushViewController:unsignedTx animated:YES];
     }
 }
 
