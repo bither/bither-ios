@@ -19,7 +19,24 @@ target 'bither-iosTests' do
     shared_pods
 end
 
+def patch_private_headers(installer)
+  source_pattern = File.join(installer.sandbox.root.to_s, '**', '*.{h,m,mm}')
+  private_header = /^[ \t]*#[ \t]*(?:import|include)[ \t]+[<"]netinet6\/in6\.h[>"][ \t]*(?:\r?\n|\z)/
+
+  Dir.glob(source_pattern).each do |file|
+    next unless File.file?(file)
+
+    content = File.read(file)
+    patched_content = content.gsub(private_header, '')
+    next if patched_content == content
+
+    File.chmod(File.stat(file).mode | 0200, file)
+    File.write(file, patched_content)
+  end
+end
+
 post_install do |installer|
+    patch_private_headers(installer)
     installer.pods_project.targets.each do |target|
         target.build_configurations.each do |config|
             config.build_settings['APPLICATION_EXTENSION_API_ONLY'] = 'NO'

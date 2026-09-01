@@ -1920,7 +1920,7 @@
 				ACEE7D2319D3F9F500932B39 /* ScanQrCodeTransportViewController.h */,
 				ACEE7D2419D3F9F500932B39 /* ScanQrCodeTransportViewController.m */,
 			);
-			path = QRCode;
+			path = qrcode;
 			sourceTree = "<group>";
 		};
 		ACEE7D3019D3FBA000932B39 /* Setting */ = {
