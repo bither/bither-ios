@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		C0D3A0012D91000100000001 /* BitherActionSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = C0D3A0012D91000100000003 /* BitherActionSheet.m */; };
 		0A0961381B5CBAD300D554A6 /* DialogShowAddressOnNet.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A0961371B5CBAD300D554A6 /* DialogShowAddressOnNet.m */; };
 		0A0BA9B21B575D2400885812 /* ColdAddressListHDCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A0BA9B11B575D2400885812 /* ColdAddressListHDCell.m */; };
 		0A259E251A47F19100D7F707 /* DialogSendOption.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A259E241A47F19100D7F707 /* DialogSendOption.m */; };
@@ -287,6 +286,7 @@
 		ACEEB8E419B46ED200F2789C /* BlockViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ACEEB8E319B46ED200F2789C /* BlockViewController.m */; };
 		ACF02FEB19D90899001AB701 /* DialogSwitchQRCode.m in Sources */ = {isa = PBXBuildFile; fileRef = ACF02FEA19D90899001AB701 /* DialogSwitchQRCode.m */; };
 		ACF4B17419668D5700CE24FD /* MarketListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = ACF4B17319668D5700CE24FD /* MarketListCell.m */; };
+		C0D3A0012D91000100000001 /* BitherActionSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = C0D3A0012D91000100000003 /* BitherActionSheet.m */; };
 		D61D047B6D9BE30D5BED20E1 /* hdm.bither.net.cer in Resources */ = {isa = PBXBuildFile; fileRef = D61D0299B4CDCCFC6D0BA161 /* hdm.bither.net.cer */; };
 		D61D098FD091EB8752EF00A2 /* BTHDMBid+Api.m in Sources */ = {isa = PBXBuildFile; fileRef = D61D0F5AB509120289D32CE8 /* BTHDMBid+Api.m */; };
 		D61D0ACF2F75D62B878ADAEF /* HDMHotAddUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = D61D0EFD9890E54E56C5A21E /* HDMHotAddUtil.m */; };
@@ -343,8 +343,6 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		C0D3A0012D91000100000002 /* BitherActionSheet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BitherActionSheet.h; sourceTree = "<group>"; };
-		C0D3A0012D91000100000003 /* BitherActionSheet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BitherActionSheet.m; sourceTree = "<group>"; };
 		0A0961361B5CBAD300D554A6 /* DialogShowAddressOnNet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DialogShowAddressOnNet.h; sourceTree = "<group>"; };
 		0A0961371B5CBAD300D554A6 /* DialogShowAddressOnNet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DialogShowAddressOnNet.m; sourceTree = "<group>"; };
 		0A0BA9B01B575D2400885812 /* ColdAddressListHDCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ColdAddressListHDCell.h; path = Cells/ColdAddressListHDCell.h; sourceTree = "<group>"; };
@@ -957,6 +955,8 @@
 		ACF4B17219668D5700CE24FD /* MarketListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MarketListCell.h; path = Cells/MarketListCell.h; sourceTree = "<group>"; };
 		ACF4B17319668D5700CE24FD /* MarketListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MarketListCell.m; path = Cells/MarketListCell.m; sourceTree = "<group>"; };
 		BDE877D55BFB486FD0A9E0FB /* Pods-bither-iosTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-bither-iosTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-bither-iosTests/Pods-bither-iosTests.debug.xcconfig"; sourceTree = "<group>"; };
+		C0D3A0012D91000100000002 /* BitherActionSheet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BitherActionSheet.h; sourceTree = "<group>"; };
+		C0D3A0012D91000100000003 /* BitherActionSheet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BitherActionSheet.m; sourceTree = "<group>"; };
 		D61D00DE53941DC6062E1938 /* HDMApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HDMApi.h; sourceTree = "<group>"; };
 		D61D0299B4CDCCFC6D0BA161 /* hdm.bither.net.cer */ = {isa = PBXFileReference; lastKnownFileType = file.der; path = hdm.bither.net.cer; sourceTree = "<group>"; };
 		D61D07CCE58EB1B7FCA04677 /* PasswordGetter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PasswordGetter.h; sourceTree = "<group>"; };
@@ -1523,7 +1523,7 @@
 				4217A36E1951233500063746 /* Model */,
 				AC454DCF1A1DE5D4000AF4ED /* pin */,
 				0A515F721A36A293008292AF /* RawPrivateKey */,
-				ACEE7D1A19D3F9F500932B39 /* QRCode */,
+				ACEE7D1A19D3F9F500932B39 /* qrcode */,
 				ACA9D707195410FF002D1E3A /* Resouces */,
 				AC229A6E196A40B500A7FB5E /* sh */,
 				42D9B76B193D6B5B00C85B89 /* Supporting Files */,
@@ -1909,7 +1909,7 @@
 			path = CropImagePicker;
 			sourceTree = "<group>";
 		};
-		ACEE7D1A19D3F9F500932B39 /* QRCode */ = {
+		ACEE7D1A19D3F9F500932B39 /* qrcode */ = {
 			isa = PBXGroup;
 			children = (
 				ACEE7D1B19D3F9F500932B39 /* QRCodeThemeUtil.h */,
