@@ -1525,7 +1525,6 @@
 				0A515F721A36A293008292AF /* RawPrivateKey */,
 				ACEE7D1A19D3F9F500932B39 /* qrcode */,
 				ACA9D707195410FF002D1E3A /* Resouces */,
-				AC229A6E196A40B500A7FB5E /* sh */,
 				42D9B76B193D6B5B00C85B89 /* Supporting Files */,
 				ACDDDC1119480DE00008A79D /* UIBase */,
 				425408441946A219007AF99C /* Utils */,
@@ -1580,13 +1579,6 @@
 				AC0135DF195056BE00E3BB95 /* KeyboardController.m */,
 			);
 			path = KeyboardControl;
-			sourceTree = "<group>";
-		};
-		AC229A6E196A40B500A7FB5E /* sh */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = sh;
 			sourceTree = "<group>";
 		};
 		AC275EE119B59B0100F1C02F /* NetworkMonitor */ = {
@@ -2016,6 +2008,7 @@
 				42D9B75F193D6B5B00C85B89 /* Resources */,
 				4268FE14194AA3FD007A4C30 /* ShellScript */,
 				0A4749961A9D7F0B003684E2 /* Embed App Extensions */,
+				50C4E36384021429678919B8 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -2034,6 +2027,7 @@
 				42D9B778193D6B5B00C85B89 /* Sources */,
 				42D9B779193D6B5B00C85B89 /* Frameworks */,
 				42D9B77A193D6B5B00C85B89 /* Resources */,
+				7334468E5A0C0BB3F9D9AE1B /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -2063,6 +2057,8 @@
 						};
 					};
 					42D9B77B193D6B5B00C85B89 = {
+						DevelopmentTeam = 3JMKN3V45U;
+						ProvisioningStyle = Automatic;
 						TestTargetID = 42D9B760193D6B5B00C85B89;
 					};
 				};
@@ -2138,6 +2134,24 @@
 			shellPath = /bin/sh;
 			shellScript = "";
 		};
+		50C4E36384021429678919B8 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-bither-ios/Pods-bither-ios-resources.sh",
+				"${PODS_CONFIGURATION_BUILD_DIR}/Reachability/Reachability_Privacy.bundle",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Reachability_Privacy.bundle",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-bither-ios/Pods-bither-ios-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		6FBEFC40B430D5B7DFCD02B9 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -2154,6 +2168,24 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		7334468E5A0C0BB3F9D9AE1B /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-bither-iosTests/Pods-bither-iosTests-resources.sh",
+				"${PODS_CONFIGURATION_BUILD_DIR}/Reachability/Reachability_Privacy.bundle",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Reachability_Privacy.bundle",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-bither-iosTests/Pods-bither-iosTests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		B29245A9BB8C54C810C26C54 /* [CP] Check Pods Manifest.lock */ = {
@@ -2700,6 +2732,8 @@
 			baseConfigurationReference = BDE877D55BFB486FD0A9E0FB /* Pods-bither-iosTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/bither-ios.app/bither-ios";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 3JMKN3V45U;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
@@ -2712,11 +2746,12 @@
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = "bither-iosTests/bither-iosTests-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.6;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Pods/build/Debug-iphoneos/**",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "bither.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.bither.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				USER_HEADER_SEARCH_PATHS = "${SRCROOT}/**";
@@ -2730,6 +2765,8 @@
 			baseConfigurationReference = 1B82ED165679F1FB126B6E9E /* Pods-bither-iosTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/bither-ios.app/bither-ios";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 3JMKN3V45U;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
@@ -2738,11 +2775,12 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "bither-ios/bither-ios-Prefix.pch";
 				INFOPLIST_FILE = "bither-iosTests/bither-iosTests-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.6;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Pods/build/Debug-iphoneos/**",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "bither.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_BUNDLE_IDENTIFIER = "net.bither.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				USER_HEADER_SEARCH_PATHS = "${SRCROOT}/**";
