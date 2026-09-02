@@ -22,7 +22,6 @@
 #import <Bitheri/BTHDAccount.h>
 #import <Bitheri/BTAddressManager.h>
 #import "ImportHDAccountSeedController.h"
-#import "KeyboardController.h"
 #import "DialogPassword.h"
 #import "DialogReplaceWorld.h"
 #import "WorldListCell.h"
@@ -46,7 +45,7 @@
 
 
 @interface ImportHDAccountSeedController () <UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout
-        , UITextFieldDelegate, KeyboardControllerDelegate, DialogPasswordDelegate, DialogOperationDelegate>
+        , UITextFieldDelegate, DialogPasswordDelegate, DialogOperationDelegate>
 
 @property(nonatomic, strong) UICollectionView *collectionView;
 @property(nonatomic, strong) NSMutableArray *worldListArray;
@@ -56,7 +55,6 @@
 @property(weak, nonatomic) IBOutlet UIView *inputView;
 @property(weak, nonatomic) IBOutlet UIButton *btnDone;
 @property(weak, nonatomic) IBOutlet UITextField *tfKey;
-@property KeyboardController *kc;
 @property(nonatomic, strong) BTBIP39 *bTBIP39;
 
 @end
@@ -86,8 +84,12 @@
     [self configureTextField:self.tfKey];
     self.tfKey.returnKeyType = UIReturnKeyDone;
     self.collectionView.alwaysBounceVertical = YES;
-    self.kc = [[KeyboardController alloc] initWithDelegate:self];
     self.btnDone.enabled = NO;
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillChangeFrame:) name:UIKeyboardWillChangeFrameNotification object:nil];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -97,12 +99,27 @@
     }
 }
 
-- (void)keyboardFrameChanged:(CGRect)frame {
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillChangeFrameNotification object:nil];
+}
+
+- (void)keyboardWillChangeFrame:(NSNotification *)notification {
+    CGRect keyboardFrameInScreen = [notification.userInfo[UIKeyboardFrameEndUserInfoKey] CGRectValue];
+    CGRect keyboardFrameInView = [self.view convertRect:keyboardFrameInScreen fromView:nil];
     CGRect toolBarFrame = self.inputView.frame;
-    CGFloat totalHeight = frame.origin.y;
-    CGFloat top = totalHeight - toolBarFrame.size.height;
-    self.inputView.frame = CGRectMake(toolBarFrame.origin.x, top, toolBarFrame.size.width, toolBarFrame.size.height);
-    self.collectionView.frame = CGRectMake(self.collectionView.frame.origin.x, self.collectionView.frame.origin.y, self.collectionView.frame.size.width, top - self.collectionView.frame.origin.y - self.topBar.frame.size.height);
+    CGFloat keyboardTop = CGRectGetMinY(keyboardFrameInView);
+    CGFloat hiddenInputTop = CGRectGetHeight(self.view.bounds) - CGRectGetHeight(toolBarFrame);
+    CGFloat top = MIN(hiddenInputTop, keyboardTop - CGRectGetHeight(toolBarFrame));
+    top = MAX(CGRectGetMaxY(self.topBar.frame), top);
+
+    NSTimeInterval duration = [notification.userInfo[UIKeyboardAnimationDurationUserInfoKey] doubleValue];
+    UIViewAnimationCurve curve = [notification.userInfo[UIKeyboardAnimationCurveUserInfoKey] integerValue];
+    [UIView animateWithDuration:duration delay:0 options:(UIViewAnimationOptions)(curve << 16) animations:^{
+        self.inputView.frame = CGRectMake(toolBarFrame.origin.x, top, toolBarFrame.size.width, toolBarFrame.size.height);
+        self.collectionView.frame = CGRectMake(0, 0, self.worldListView.bounds.size.width, MAX(0, top - CGRectGetMaxY(self.topBar.frame)));
+    } completion:nil];
+
     if (self.worldListArray.count > 3) {
         [self.collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:self.worldListArray.count - 1 inSection:0] atScrollPosition:UICollectionViewScrollPositionBottom animated:YES];
     }

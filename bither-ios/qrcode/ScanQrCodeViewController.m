@@ -43,6 +43,8 @@
 @interface ScanQrCodeViewController (CameraOverlay) <UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 - (void)configureCameraOverlay;
 
+- (void)layoutCameraOverlay;
+
 - (void)updateOverlay;
 
 - (void)messageBreath;
@@ -53,12 +55,24 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor blackColor];
-    self.vCamera = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
+    self.vCamera = [[UIView alloc] initWithFrame:CGRectZero];
     self.vCamera.backgroundColor = [UIColor clearColor];
-    self.vCamera.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
     [self.view addSubview:self.vCamera];
     [self configureCameraOverlay];
     fromGallery = NO;
+}
+
+- (void)viewDidLayoutSubviews {
+    [super viewDidLayoutSubviews];
+
+    CGRect safeAreaFrame = self.view.bounds;
+    if (@available(iOS 11.0, *)) {
+        safeAreaFrame = UIEdgeInsetsInsetRect(self.view.bounds, self.view.safeAreaInsets);
+    }
+    self.vCamera.frame = safeAreaFrame;
+    self.cameraOverlayView.frame = safeAreaFrame;
+    self.preview.frame = self.vCamera.bounds;
+    [self layoutCameraOverlay];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -98,7 +112,7 @@
 
     self.preview = [[AVCaptureVideoPreviewLayer alloc] initWithSession:self.session];
     self.preview.videoGravity = AVLayerVideoGravityResizeAspectFill;
-    self.preview.frame = self.view.layer.bounds;
+    self.preview.frame = self.vCamera.bounds;
     [self.vCamera.layer addSublayer:self.preview];
     [self sessionStartRunning];
 }
@@ -196,20 +210,19 @@
 @implementation ScanQrCodeViewController (CameraOverlay)
 
 - (void)configureCameraOverlay {
-    self.cameraOverlayView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
+    self.cameraOverlayView = [[UIView alloc] initWithFrame:CGRectZero];
     self.cameraOverlayView.backgroundColor = [UIColor clearColor];
-    self.cameraOverlayView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
     [self.view addSubview:self.cameraOverlayView];
 
-    UIButton *btnCancel = [[UIButton alloc] initWithFrame:CGRectMake(kCancelButtonOffset, kCancelButtonOffset, kCancelButtonWidth, kCancelButtonHeight)];
-    btnCancel.autoresizingMask = UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleRightMargin;
+    UIButton *btnCancel = [[UIButton alloc] initWithFrame:CGRectZero];
+    btnCancel.tag = 1;
     [btnCancel addTarget:self action:@selector(cancelClick:) forControlEvents:UIControlEventTouchUpInside];
     [btnCancel setImage:[UIImage imageNamed:@"scan_cancel"] forState:UIControlStateNormal];
     [btnCancel setImage:[UIImage imageNamed:@"scan_cancel_pressed"] forState:UIControlStateHighlighted];
     [self.cameraOverlayView addSubview:btnCancel];
 
-    UIButton *btnFlash = [[UIButton alloc] initWithFrame:CGRectMake(self.view.frame.size.width - kCancelButtonWidth - kCancelButtonOffset, kCancelButtonOffset, kCancelButtonWidth, kCancelButtonHeight)];
-    btnFlash.autoresizingMask = UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleLeftMargin;
+    UIButton *btnFlash = [[UIButton alloc] initWithFrame:CGRectZero];
+    btnFlash.tag = 2;
     [btnFlash addTarget:self action:@selector(flashClick:) forControlEvents:UIControlEventTouchUpInside];
     [btnFlash setImage:[UIImage imageNamed:@"flash_on"] forState:UIControlStateSelected];
     [btnFlash setImage:[UIImage imageNamed:@"flash_off"] forState:UIControlStateNormal];
@@ -218,34 +231,45 @@
     [self.cameraOverlayView addSubview:btnFlash];
 
     UIImage *galleryImage = [UIImage imageNamed:@"scan_from_gallery"];
-    self.btnGallery = [[UIButton alloc] initWithFrame:CGRectMake(kCancelButtonOffset, self.cameraOverlayView.frame.size.height - kCancelButtonOffset - galleryImage.size.height, galleryImage.size.width, galleryImage.size.height)];
+    self.btnGallery = [[UIButton alloc] initWithFrame:CGRectZero];
     [self.btnGallery setImage:galleryImage forState:UIControlStateNormal];
-    self.btnGallery.autoresizingMask = UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleRightMargin;
     [self.btnGallery addTarget:self action:@selector(fromGalleryClick:) forControlEvents:UIControlEventTouchUpInside];
     self.btnGallery.hidden = [[UIDevice currentDevice].systemVersion floatValue] < 8;
     [self.cameraOverlayView addSubview:self.btnGallery];
 
-    self.lblTitle = [[UILabel alloc] initWithFrame:CGRectMake(kHorizontalMargin, kTitleFromTop, self.cameraOverlayView.frame.size.width - 2 * kHorizontalMargin, 0)];
+    self.lblTitle = [[UILabel alloc] initWithFrame:CGRectZero];
     self.lblTitle.font = [UIFont boldSystemFontOfSize:kTitleFontSize];
     self.lblTitle.textColor = [UIColor colorWithWhite:1 alpha:kTitleAlpha];
     self.lblTitle.backgroundColor = [UIColor clearColor];
-    self.lblTitle.autoresizingMask = UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleWidth;
     self.lblTitle.textAlignment = NSTextAlignmentCenter;
     self.lblTitle.numberOfLines = 0;
     self.lblTitle.shadowColor = [UIColor colorWithWhite:0 alpha:0.9];
     self.lblTitle.shadowOffset = CGSizeMake(1, 1);
     [self.cameraOverlayView addSubview:self.lblTitle];
 
-    self.lblMessage = [[UILabel alloc] initWithFrame:CGRectMake(kHorizontalMargin, self.cameraOverlayView.frame.size.height - kMessageFromBottom, self.view.frame.size.width - 2 * kHorizontalMargin, 0)];
+    self.lblMessage = [[UILabel alloc] initWithFrame:CGRectZero];
     self.lblMessage.font = [UIFont systemFontOfSize:kMessageFontSize];
     self.lblMessage.textColor = [UIColor colorWithWhite:1 alpha:kMessageAlpha];
     self.lblMessage.backgroundColor = [UIColor clearColor];
-    self.lblMessage.autoresizingMask = UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleWidth;
     self.lblMessage.textAlignment = NSTextAlignmentCenter;
     self.lblMessage.numberOfLines = 0;
     self.lblMessage.shadowColor = [UIColor colorWithWhite:0 alpha:0.9];
     self.lblMessage.shadowOffset = CGSizeMake(1, 1);
     [self.cameraOverlayView addSubview:self.lblMessage];
+    [self updateOverlay];
+}
+
+- (void)layoutCameraOverlay {
+    CGSize overlaySize = self.cameraOverlayView.bounds.size;
+    UIButton *btnCancel = (UIButton *)[self.cameraOverlayView viewWithTag:1];
+    UIButton *btnFlash = (UIButton *)[self.cameraOverlayView viewWithTag:2];
+    btnCancel.frame = CGRectMake(kCancelButtonOffset, kCancelButtonOffset, kCancelButtonWidth, kCancelButtonHeight);
+    btnFlash.frame = CGRectMake(overlaySize.width - kCancelButtonWidth - kCancelButtonOffset, kCancelButtonOffset, kCancelButtonWidth, kCancelButtonHeight);
+
+    UIImage *galleryImage = [UIImage imageNamed:@"scan_from_gallery"];
+    self.btnGallery.frame = CGRectMake(kCancelButtonOffset, overlaySize.height - kCancelButtonOffset - galleryImage.size.height, galleryImage.size.width, galleryImage.size.height);
+    self.lblTitle.frame = CGRectMake(kHorizontalMargin, kTitleFromTop, overlaySize.width - 2 * kHorizontalMargin, 0);
+    self.lblMessage.frame = CGRectMake(kHorizontalMargin, overlaySize.height - kMessageFromBottom, overlaySize.width - 2 * kHorizontalMargin, 0);
     [self updateOverlay];
 }
 
