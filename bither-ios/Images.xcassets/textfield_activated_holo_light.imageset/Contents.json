@@ -40,6 +40,21 @@
     },
     {
       "idiom": "universal",
+      "resizing": {
+        "mode": "9-part",
+        "center": {
+          "mode": "fill",
+          "width": 1,
+          "height": 1
+        },
+        "capInsets": {
+          "bottom": 48,
+          "top": 47,
+          "right": 18,
+          "left": 18
+        }
+      },
+      "filename": "textfield_activated_holo_light@3x.png",
       "scale": "3x"
     }
   ],

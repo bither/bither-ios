@@ -40,6 +40,21 @@
     },
     {
       "idiom": "universal",
+      "resizing": {
+        "mode": "9-part",
+        "center": {
+          "mode": "stretch",
+          "width": 1,
+          "height": 1
+        },
+        "capInsets": {
+          "bottom": 60,
+          "top": 59,
+          "right": 60,
+          "left": 60
+        }
+      },
+      "filename": "button_lightblue@3x.png",
       "scale": "3x"
     }
   ],

@@ -40,6 +40,21 @@
     },
     {
       "idiom": "universal",
+      "resizing": {
+        "mode": "9-part",
+        "center": {
+          "mode": "fill",
+          "width": 1,
+          "height": 1
+        },
+        "capInsets": {
+          "bottom": 63,
+          "top": 62,
+          "right": 68,
+          "left": 66
+        }
+      },
+      "filename": "button_check_bg_normal@3x.png",
       "scale": "3x"
     }
   ],

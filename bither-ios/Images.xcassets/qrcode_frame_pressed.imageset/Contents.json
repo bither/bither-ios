@@ -40,6 +40,21 @@
     },
     {
       "idiom": "universal",
+      "resizing": {
+        "mode": "9-part",
+        "center": {
+          "mode": "stretch",
+          "width": 1,
+          "height": 1
+        },
+        "capInsets": {
+          "bottom": 107,
+          "top": 105,
+          "right": 108,
+          "left": 104
+        }
+      },
+      "filename": "qrcode_frame_pressed@3x.png",
       "scale": "3x"
     }
   ],

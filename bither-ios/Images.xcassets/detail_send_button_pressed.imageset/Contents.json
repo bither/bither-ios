@@ -40,6 +40,21 @@
     },
     {
       "idiom": "universal",
+      "resizing": {
+        "mode": "9-part",
+        "center": {
+          "mode": "stretch",
+          "width": 1,
+          "height": 1
+        },
+        "capInsets": {
+          "bottom": 54,
+          "top": 53,
+          "right": 29,
+          "left": 30
+        }
+      },
+      "filename": "detail_send_button_pressed@3x.png",
       "scale": "3x"
     }
   ],

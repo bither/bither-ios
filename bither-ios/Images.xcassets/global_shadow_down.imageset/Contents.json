@@ -34,6 +34,18 @@
     },
     {
       "idiom": "universal",
+      "resizing": {
+        "mode": "3-part-horizontal",
+        "center": {
+          "mode": "fill",
+          "width": 1
+        },
+        "capInsets": {
+          "right": 12,
+          "left": 11
+        }
+      },
+      "filename": "global_shadow_down@3x.png",
       "scale": "3x"
     }
   ],

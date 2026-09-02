@@ -40,6 +40,21 @@
     },
     {
       "idiom": "universal",
+      "resizing": {
+        "mode": "9-part",
+        "center": {
+          "mode": "fill",
+          "width": 1,
+          "height": 1
+        },
+        "capInsets": {
+          "bottom": 53,
+          "top": 54,
+          "right": 30,
+          "left": 29
+        }
+      },
+      "filename": "button_small_blue_normal@3x.png",
       "scale": "3x"
     }
   ],

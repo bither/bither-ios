@@ -40,6 +40,21 @@
     },
     {
       "idiom": "universal",
+      "resizing": {
+        "mode": "9-part",
+        "center": {
+          "mode": "stretch",
+          "width": 1,
+          "height": 1
+        },
+        "capInsets": {
+          "bottom": 72,
+          "top": 74,
+          "right": 30,
+          "left": 29
+        }
+      },
+      "filename": "btn_keyboard_key_white_pressed@3x.png",
       "scale": "3x"
     }
   ],

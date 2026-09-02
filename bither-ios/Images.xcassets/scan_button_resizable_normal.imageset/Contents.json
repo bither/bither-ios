@@ -34,6 +34,18 @@
     },
     {
       "idiom": "universal",
+      "resizing": {
+        "mode": "3-part-horizontal",
+        "center": {
+          "mode": "stretch",
+          "width": 1
+        },
+        "capInsets": {
+          "right": 23,
+          "left": 111
+        }
+      },
+      "filename": "scan_button_resizable_normal@3x.png",
       "scale": "3x"
     }
   ],
