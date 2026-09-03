@@ -316,6 +316,7 @@
     DialogAlert *dialogAlert = [[DialogAlert alloc] initWithConfirmMessage:msg confirm:^{ }];
     dialogAlert.touchOutSideToDismiss = false;
     [dialogAlert showInWindow:self.view.window];
+    [self.view endEditing:true];
 }
 
 - (NSString *)getToAddress {
@@ -329,6 +330,13 @@
 }
 
 - (void)handleResult:(NSString *)result byReader:(ScanQrCodeViewController *)reader {
+    if ([StringUtil isTaprootAddressPrefix:result]) {
+        [reader vibrate];
+        [reader.presentingViewController dismissViewControllerAnimated:YES completion:^{
+            [self showAlertWithMessage:NSLocalizedString(@"no_support_taproot_segwit_address", nil)];
+        }];
+        return;
+    }
     BOOL isValidBitcoinAddress = result.isValidBitcoinAddress;
     BOOL isValidBitcoinBIP21Address = [StringUtil isValidBitcoinBIP21Address:result];
     if (isValidBitcoinAddress || isValidBitcoinBIP21Address) {
@@ -391,6 +399,11 @@
 }
 
 - (BOOL)checkValues {
+    if ([StringUtil isTaprootAddressPrefix:[self getToAddress]]) {
+        self.tfAddress.text = @"";
+        [self showAlertWithMessage:NSLocalizedString(@"no_support_taproot_segwit_address", nil)];
+        return NO;
+    }
     BOOL validPassword = [StringUtil validPassword:self.tfPassword.text];
     BOOL validAddress = [[self getToAddress] isValidBitcoinAddress];
     int64_t amount = self.amtLink.amount;

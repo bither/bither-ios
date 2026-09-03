@@ -83,6 +83,9 @@
     NSString * formatAddress=[StringUtil formatAddress:address groupSize:4 lineSize:12];
     XCTAssertTrue(formatAddress.length==43, @"format hash");
     XCTAssertTrue([StringUtil isValidBitcoinBIP21Address:@"bitcoin:1N9RQVmxewa2sEVDvmnsj9NgLHJ3dUjitz?amount=0.00040845"],@"bip21");
+    XCTAssertTrue([StringUtil isTaprootAddressPrefix:@"bc1p5cyxnuxmeuwuvkwfem96llyxf8pw2fls0d5v0"], @"taproot address");
+    XCTAssertTrue([StringUtil isTaprootAddressPrefix:@"BITCOIN:BC1P5CYXNUXMEUWUVKWFEM96LLYXF8PW2FLS0D5V0"], @"taproot BIP21 URI");
+    XCTAssertFalse([StringUtil isTaprootAddressPrefix:@"bc1q5cyxnuxmeuwuvkwfem96llyxf8pw2fls0d5v0"], @"SegWit v0 address");
     XCTAssert([StringUtil validPassword:@"0aA`~!@#$%^&*()_-+={}[]|:;\\\"'<>,.?/"]);//"]);
     XCTAssertFalse([StringUtil validPassword:@"ASDF简繁"]);
     XCTAssert([StringUtil validPartialPassword:@"0aA`~!@#$%^&*()_-+={}[]|:;\\\"'<>,.?/"]);//"]);

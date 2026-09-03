@@ -63,4 +63,6 @@
 
 + (NSString *)removeBlankSpaceString:(NSString *)str;
 
++ (BOOL)isTaprootAddressPrefix:(NSString *)address;
+
 @end

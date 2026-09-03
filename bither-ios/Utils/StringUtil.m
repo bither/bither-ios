@@ -194,8 +194,12 @@
     return [str stringByReplacingOccurrencesOfString:@" " withString:@""];
 }
 
-@end
++ (BOOL)isTaprootAddressPrefix:(NSString *)address {
+    NSString *normalizedAddress = [[address stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]] lowercaseString];
+    return [normalizedAddress hasPrefix:@"bc1p"] || [normalizedAddress hasPrefix:@"bitcoin:bc1p"];
+}
 
+@end
 
 
 

@@ -278,6 +278,7 @@
     DialogAlert *dialogAlert = [[DialogAlert alloc] initWithConfirmMessage:msg confirm:^{ }];
     dialogAlert.touchOutSideToDismiss = false;
     [dialogAlert showInWindow:self.view.window];
+    [self.view endEditing:true];
 }
 
 - (NSString *)getToAddress {
@@ -292,6 +293,13 @@
 
 - (void)handleResult:(NSString *)result byReader:(ScanQrCodeViewController *)reader {
     if (![reader isKindOfClass:[ScanQrCodeTransportViewController class]]) {
+        if ([StringUtil isTaprootAddressPrefix:result]) {
+            [reader vibrate];
+            [self dismissViewControllerAnimated:YES completion:^{
+                [self showAlertWithMessage:NSLocalizedString(@"no_support_taproot_segwit_address", nil)];
+            }];
+            return;
+        }
         BOOL isValidBitcoinAddress = result.isValidBitcoinAddress;
         BOOL isValidBitcoinBIP21Address = [StringUtil isValidBitcoinBIP21Address:result];
         if (isValidBitcoinAddress || isValidBitcoinBIP21Address) {
@@ -400,6 +408,11 @@
 
 - (BOOL)checkValues {
     NSString *toAddress = [self getToAddress];
+    if ([StringUtil isTaprootAddressPrefix:toAddress]) {
+        self.tfAddress.text = @"";
+        [self showAlertWithMessage:NSLocalizedString(@"no_support_taproot_segwit_address", nil)];
+        return NO;
+    }
     BOOL validAddress = [toAddress isValidBitcoinAddress];
     if ([toAddress isBitcoinNewAddressPrefix]) {
         self.tfAddress.text = @"";
